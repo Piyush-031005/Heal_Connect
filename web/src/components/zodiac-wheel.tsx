@@ -108,7 +108,7 @@ export default function ZodiacWheel() {
                       y="-80" 
                       width="160" 
                       height="160" 
-                      className="transition-all duration-500" 
+                      className="transition-all duration-500 mix-blend-screen" 
                       style={{ 
                         filter: isHovered ? 'drop-shadow(0 0 12px rgba(214,180,107,0.8)) brightness(1.2)' : 'none' 
                       }} 
@@ -144,7 +144,7 @@ export default function ZodiacWheel() {
           {/* Magical center sunburst */}
           <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(214,180,107,0.15)_0%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(214,180,107,0.3)_0%,transparent_70%)] animate-pulse" style={{ animationDuration: '4s' }} />
           
-          <Image src="/logo.png" alt="HealConnect" width={140} height={140} quality={100} unoptimized className="rounded-full animate-pulse drop-shadow-[0_0_20px_rgba(214,180,107,0.9)]" style={{ animationDuration: '3s' }} />
+          <Image src="/logo.png" alt="HealConnect" width={140} height={140} quality={100} unoptimized className="rounded-full animate-pulse mix-blend-screen drop-shadow-[0_0_20px_rgba(214,180,107,0.9)]" style={{ animationDuration: '3s' }} />
           
           {/* Intricate counter-spinning rings in the center */}
           <div className="absolute inset-0 border-[1px] border-primary/40 rounded-full animate-[spin_40s_linear_infinite_reverse]" />
