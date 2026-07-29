@@ -121,8 +121,7 @@ export default function ZodiacWheel() {
                     y="22"
                     textAnchor="middle"
                     dominantBaseline="middle"
-                    className="fill-primary"
-                    className="font-sans tracking-widest uppercase pointer-events-none transition-all duration-300"
+                    className="fill-primary font-sans tracking-widest uppercase pointer-events-none transition-all duration-300"
                     style={{ 
                       fontSize: '10px',
                       fontWeight: 600,
