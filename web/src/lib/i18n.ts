@@ -199,8 +199,8 @@ export const translations = {
       { q: 'Why Should You Choose HealConnect For An Astrology Horoscope?', a: 'HealConnect offers verified astrologers, transparent pricing, and instant consultations via chat or call. Every expert undergoes a rigorous 4-step verification process.' },
       { q: 'Is Astrology Prediction True?', a: 'Astrology offers guidance based on planetary positions and their influences. While it provides valuable insights, it\'s a tool for self-reflection and guidance rather than absolute prediction.' },
       { q: 'How Can Online Astrology Help Me In Predicting The Future?', a: 'Online astrology connects you with expert astrologers who analyze your birth chart and current planetary transits to provide personalized guidance for life decisions.' },
-      { q: 'How reliable is the Astrotalk app?', a: 'The app is built with enterprise-grade security, verified practitioners, and transparent user reviews to ensure a reliable and trustworthy experience.' },
-      { q: 'How much does Astrotalk cost?', a: 'Prices start from just ₹10/min for chat consultations. We offer transparent pricing with no hidden charges. Your first consultation is absolutely free.' },
+      { q: 'How reliable is the HealConnect app?', a: 'The app is built with enterprise-grade security, verified practitioners, and transparent user reviews to ensure a reliable and trustworthy experience.' },
+      { q: 'How much does HealConnect cost?', a: 'Prices start from just ₹10/min for chat consultations. We offer transparent pricing with no hidden charges. Your first consultation is absolutely free.' },
     ],
 
     // ─── Footer ───
@@ -413,8 +413,8 @@ export const translations = {
       { q: 'आपको HealConnect क्यों चुनना चाहिए?', a: 'HealConnect सत्यापित ज्योतिषी, पारदर्शी मूल्य निर्धारण और चैट या कॉल के माध्यम से तत्काल परामर्श प्रदान करता है। प्रत्येक विशेषज्ञ कठोर 4-चरणीय सत्यापन प्रक्रिया से गुज़रता है।' },
       { q: 'क्या ज्योतिष भविष्यवाणी सच है?', a: 'ज्योतिष ग्रहों की स्थिति और उनके प्रभावों के आधार पर मार्गदर्शन प्रदान करता है। यह मूल्यवान अंतर्दृष्टि प्रदान करता है, लेकिन यह पूर्ण भविष्यवाणी के बजाय आत्म-चिंतन और मार्गदर्शन का एक उपकरण है।' },
       { q: 'ऑनलाइन ज्योतिष भविष्य की भविष्यवाणी में कैसे मदद कर सकता है?', a: 'ऑनलाइन ज्योतिष आपको विशेषज्ञ ज्योतिषियों से जोड़ता है जो जीवन के निर्णयों के लिए व्यक्तिगत मार्गदर्शन प्रदान करने के लिए आपकी जन्म कुंडली और वर्तमान ग्रह गोचर का विश्लेषण करते हैं।' },
-      { q: 'Astrotalk ऐप कितना विश्वसनीय है?', a: 'ऐप एंटरप्राइज़-ग्रेड सुरक्षा, सत्यापित प्रैक्टिशनर और पारदर्शी उपयोगकर्ता समीक्षाओं के साथ बनाया गया है ताकि एक विश्वसनीय और भरोसेमंद अनुभव सुनिश्चित हो सके।' },
-      { q: 'Astrotalk की लागत कितनी है?', a: 'चैट परामर्श के लिए कीमतें सिर्फ ₹10/मिनट से शुरू होती हैं। हम बिना किसी छिपे शुल्क के पारदर्शी मूल्य निर्धारण प्रदान करते हैं। आपका पहला परामर्श पूरी तरह से मुफ़्त है।' },
+      { q: 'HealConnect ऐप कितना विश्वसनीय है?', a: 'ऐप एंटरप्राइज़-ग्रेड सुरक्षा, सत्यापित प्रैक्टिशनर और पारदर्शी उपयोगकर्ता समीक्षाओं के साथ बनाया गया है ताकि एक विश्वसनीय और भरोसेमंद अनुभव सुनिश्चित हो सके।' },
+      { q: 'HealConnect की लागत कितनी है?', a: 'चैट परामर्श के लिए कीमतें सिर्फ ₹10/मिनट से शुरू होती हैं। हम बिना किसी छिपे शुल्क के पारदर्शी मूल्य निर्धारण प्रदान करते हैं। आपका पहला परामर्श पूरी तरह से मुफ़्त है।' },
     ],
 
     // ─── Footer ───
