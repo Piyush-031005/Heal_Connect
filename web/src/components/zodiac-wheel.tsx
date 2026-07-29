@@ -108,9 +108,9 @@ export default function ZodiacWheel() {
                       y="-80" 
                       width="160" 
                       height="160" 
-                      className="transition-all duration-500 dark:mix-blend-screen mix-blend-multiply dark:invert-0 invert dark:grayscale-0 grayscale dark:contrast-100 contrast-[2]" 
+                      className="transition-all duration-500 dark:filter-none filter invert hue-rotate-[180deg]" 
                       style={{ 
-                        filter: isHovered ? 'drop-shadow(0 0 12px rgba(230,0,0,0.4))' : 'none' 
+                        filter: isHovered ? 'drop-shadow(0 0 12px rgba(214,180,107,0.8)) brightness(1.2)' : 'none' 
                       }} 
                     />
                   </g>
@@ -144,7 +144,7 @@ export default function ZodiacWheel() {
           {/* Magical center sunburst */}
           <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(214,180,107,0.15)_0%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(214,180,107,0.3)_0%,transparent_70%)] animate-pulse" style={{ animationDuration: '4s' }} />
           
-          <Image src="/logo.png" alt="HealConnect" width={140} height={140} quality={100} unoptimized className="rounded-full animate-pulse dark:mix-blend-screen mix-blend-multiply dark:invert-0 invert dark:grayscale-0 grayscale dark:contrast-100 contrast-[2] drop-shadow-[0_0_20px_rgba(230,0,0,0.5)]" style={{ animationDuration: '3s' }} />
+          <Image src="/logo.png" alt="HealConnect" width={140} height={140} quality={100} unoptimized className="rounded-full animate-pulse dark:filter-none filter invert hue-rotate-[180deg] drop-shadow-[0_0_20px_rgba(214,180,107,0.9)]" style={{ animationDuration: '3s' }} />
           
           {/* Intricate counter-spinning rings in the center */}
           <div className="absolute inset-0 border-[1px] border-primary/40 rounded-full animate-[spin_40s_linear_infinite_reverse]" />

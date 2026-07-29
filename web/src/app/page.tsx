@@ -128,7 +128,7 @@ export default function LandingPage() {
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold tracking-tight leading-tight mb-8 animate-in slide-in-from-left duration-1000">
                 <span className="text-foreground drop-shadow-md">Guidance.</span><br />
                 <span className="text-foreground drop-shadow-md">Clarity.</span><br />
-                <span className="bg-gradient-to-r from-primary via-red-500 to-primary bg-clip-text text-transparent drop-shadow-lg">Confidence.</span>
+                <span className="bg-gradient-to-r from-primary via-amber-200 to-primary bg-clip-text text-transparent drop-shadow-lg">Confidence.</span>
               </h1>
               
               <p className="text-xl lg:text-2xl text-foreground/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-light">
@@ -137,7 +137,7 @@ export default function LandingPage() {
 
               <div className="flex flex-col sm:flex-row gap-4 mb-10 animate-in slide-in-from-left duration-1000 delay-300">
                 <Link href="/practitioners">
-                  <Button size="lg" className="bg-gradient-to-r from-primary to-red-600 hover:from-red-600 hover:to-red-700 text-white px-10 h-14 text-lg rounded-full font-bold shadow-[0_0_30px_rgba(230,0,0,0.4)] group border-none transition-all">
+                  <Button size="lg" className="bg-gradient-to-r from-primary to-amber-500 hover:from-amber-500 hover:to-amber-600 text-[#0B1020] px-10 h-14 text-lg rounded-full font-bold shadow-[0_0_30px_rgba(214,180,107,0.3)] group border-none transition-all">
                     Book Consultation <ArrowRight className="w-5 h-5 ml-2 inline group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
