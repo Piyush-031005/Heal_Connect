@@ -143,7 +143,7 @@ export default function DashboardPage() {
       <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <Image src="/logo.png" alt="HealConnect" width={48} height={48} className="rounded-full animate-pulse" />
-          <p className="text-gray-500">Loading your dashboard...</p>
+          <p className="text-muted-foreground">Loading your dashboard...</p>
         </div>
       </div>
     );
@@ -164,15 +164,15 @@ export default function DashboardPage() {
 
           <div className="hidden md:flex items-center gap-2 flex-1 max-w-md mx-8">
             <div className="relative w-full">
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
-              <input type="text" placeholder="Search experts, specialties..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} onKeyDown={handleSearchKeyDown} className="w-full pl-9 pr-4 py-2 text-sm rounded-full bg-amber-50 border border-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-400/40 text-[#1a1a1a] placeholder:text-gray-400" />
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+              <input type="text" placeholder="Search experts, specialties..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} onKeyDown={handleSearchKeyDown} className="w-full pl-9 pr-4 py-2 text-sm rounded-full bg-amber-50 border border-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-400/40 text-[#1a1a1a] placeholder:text-muted-foreground" />
             </div>
           </div>
 
           <div className="flex items-center gap-3">
             <div className="relative" ref={notificationRef}>
               <Button variant="ghost" size="icon" className="relative rounded-full hover:bg-amber-50" onClick={() => setShowNotification(!showNotification)}>
-                <Bell className="h-5 w-5 text-gray-500" />
+                <Bell className="h-5 w-5 text-muted-foreground" />
                 <span className="absolute top-1 right-1 w-2 h-2 bg-amber-500 rounded-full" />
               </Button>
               {showNotification && (
@@ -180,7 +180,7 @@ export default function DashboardPage() {
                   <div className="p-4 border-b border-gray-100">
                     <p className="font-semibold text-gray-900 text-sm">Notifications</p>
                   </div>
-                  <div className="p-4 text-center text-gray-400 text-sm py-8">
+                  <div className="p-4 text-center text-muted-foreground text-sm py-8">
                     <Bell className="w-8 h-8 mx-auto mb-2 opacity-40" />
                     No new notifications
                   </div>
@@ -196,7 +196,7 @@ export default function DashboardPage() {
               </div>
             </Link>
             <div className="relative" ref={profileMenuRef}>
-              <button onClick={() => setShowProfileMenu(!showProfileMenu)} className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white text-sm font-bold hover:opacity-90 transition-opacity overflow-hidden" title="My Profile">
+              <button onClick={() => setShowProfileMenu(!showProfileMenu)} className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-foreground text-sm font-bold hover:opacity-90 transition-opacity overflow-hidden" title="My Profile">
                 {user?.photoUrl ? (
                   <img src={user.photoUrl} alt={user.name || 'Profile'} className="w-full h-full object-cover" />
                 ) : user?.name ? (
@@ -236,13 +236,13 @@ export default function DashboardPage() {
                 <HeartHandshake className="w-4 h-4" />
                 <span>Welcome back</span>
               </div>
-              <h1 className="text-2xl md:text-3xl font-extrabold text-white mb-2">Hello, {firstName}!</h1>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-foreground mb-2">Hello, {firstName}!</h1>
               <p className="text-amber-100 max-w-md flex items-start gap-2">
                 <Sparkles className="w-4 h-4 mt-0.5 shrink-0" />
                 <span>Your first session is free. Connect with a verified expert and start your healing journey today.</span>
               </p>
               {!user?.isEmailVerified && (
-                <div className="mt-3 flex items-center gap-2 text-white text-sm bg-white/20 border border-white/30 rounded-lg px-3 py-2 w-fit">
+                <div className="mt-3 flex items-center gap-2 text-foreground text-sm bg-white/20 border border-border rounded-lg px-3 py-2 w-fit">
                   <Shield className="h-4 w-4 flex-shrink-0" />
                   Please verify your email to unlock all features.
                 </div>
@@ -271,7 +271,7 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <p className="text-xl font-bold text-gray-900">{stat.value}</p>
-                  <p className="text-xs text-gray-500">{stat.label}</p>
+                  <p className="text-xs text-muted-foreground">{stat.label}</p>
                 </div>
               </CardContent>
             </Card>
@@ -292,9 +292,9 @@ export default function DashboardPage() {
                 </div>
                 <div className="flex-1">
                   <p className="font-semibold text-gray-900">{item.label}</p>
-                  <p className="text-sm text-gray-500">{item.desc}</p>
+                  <p className="text-sm text-muted-foreground">{item.desc}</p>
                 </div>
-                <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-amber-500 transition-colors" />
+                <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-amber-500 transition-colors" />
               </CardContent>
             </Card>
           ))}
@@ -306,7 +306,7 @@ export default function DashboardPage() {
             <div>
               <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1">Browse Experts</p>
               <h2 className="text-2xl font-extrabold text-gray-900">Find Your Healer</h2>
-              <p className="text-sm text-gray-500">500+ verified practitioners online</p>
+              <p className="text-sm text-muted-foreground">500+ verified practitioners online</p>
             </div>
             <Link href="/practitioners">
               <Button variant="ghost" className="text-amber-600 hover:text-amber-700 text-sm font-semibold">
@@ -318,14 +318,14 @@ export default function DashboardPage() {
           {/* Tabs */}
           <div className="flex gap-2 mb-6 overflow-x-auto pb-1">
             {(['all', 'astrology', 'tarot', 'vastu', 'numerology'] as const).map((tab) => (
-              <button key={tab} onClick={() => handleTabChange(tab)} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${activeTab === tab ? 'bg-amber-500 text-white shadow-sm' : 'bg-white text-gray-600 hover:text-gray-900 border border-gray-200 hover:border-amber-200'}`}>
+              <button key={tab} onClick={() => handleTabChange(tab)} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${activeTab === tab ? 'bg-amber-500 text-foreground shadow-sm' : 'bg-white text-muted-foreground hover:text-gray-900 border border-gray-200 hover:border-amber-200'}`}>
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
               </button>
             ))}
           </div>
 
           {experts.length === 0 ? (
-            <div className="text-center py-16 text-gray-400">
+            <div className="text-center py-16 text-muted-foreground">
               <Image src="/logo.png" alt="" width={48} height={48} className="mx-auto mb-3 opacity-30 rounded-full" />
               <p className="text-lg font-medium">No practitioners found</p>
               <p className="text-sm mt-1">Check back soon or try adjusting your filters</p>
@@ -345,7 +345,7 @@ export default function DashboardPage() {
                           </div>
                           <div className="absolute top-3 right-4">
                             <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
-                              expert.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'
+                              expert.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-muted-foreground'
                             }`}>
                               <span className={`w-1.5 h-1.5 rounded-full ${expert.isOnline ? 'bg-emerald-500' : 'bg-gray-400'}`} />
                               {expert.isOnline ? 'Online' : 'Offline'}
@@ -366,24 +366,24 @@ export default function DashboardPage() {
                             <div className="flex items-center gap-1">
                               <Star className="w-3.5 h-3.5 text-amber-400 fill-current" />
                               <span className="text-sm font-semibold text-gray-900">{expert.avgRating || '—'}</span>
-                              <span className="text-xs text-gray-400">({expert.reviewCount})</span>
+                              <span className="text-xs text-muted-foreground">({expert.reviewCount})</span>
                             </div>
                             <span className="text-gray-200">|</span>
-                            <span className="text-xs text-gray-500">{expert.experienceYrs} yrs exp</span>
+                            <span className="text-xs text-muted-foreground">{expert.experienceYrs} yrs exp</span>
                           </div>
 
-                          <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed flex-1">{expert.bio || ''}</p>
+                          <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed flex-1">{expert.bio || ''}</p>
 
                           <div className="flex items-center justify-between pt-3 mt-3 border-t border-gray-100">
                             <div>
                               <span className="text-lg font-bold text-gray-900">₹{expert.perMinuteRate}</span>
-                              <span className="text-xs text-gray-400">/min</span>
+                              <span className="text-xs text-muted-foreground">/min</span>
                             </div>
                             <div className="flex gap-2">
                               <Button size="sm" variant="outline" className="h-8 px-3 border-gray-200 hover:border-amber-300 hover:text-amber-700 text-xs gap-1" onClick={(e) => { e.preventDefault(); startChatSession(expert.id, e); }} disabled={startingSession === expert.id}>
                                 <MessageCircle className="h-3.5 w-3.5" /> Chat
                               </Button>
-                              <Button size="sm" disabled={!expert.isOnline} className="h-8 px-3 bg-amber-500 hover:bg-amber-600 text-white border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => e.preventDefault()}>
+                              <Button size="sm" disabled={!expert.isOnline} className="h-8 px-3 bg-amber-500 hover:bg-amber-600 text-foreground border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => e.preventDefault()}>
                                 <Phone className="h-3.5 w-3.5" /> Call
                               </Button>
                             </div>
@@ -404,10 +404,10 @@ export default function DashboardPage() {
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-start gap-4">
               <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center shrink-0">
-                <Wallet className="w-7 h-7 text-white" />
+                <Wallet className="w-7 h-7 text-foreground" />
               </div>
               <div>
-                <h3 className="text-xl font-extrabold text-white mb-1">Top up your wallet</h3>
+                <h3 className="text-xl font-extrabold text-foreground mb-1">Top up your wallet</h3>
                 <p className="text-amber-100 text-sm max-w-md">Add money and start connecting with experts instantly. No hidden fees.</p>
                 <div className="flex items-center gap-4 mt-3">
                   <div className="flex items-center gap-1.5 text-amber-100 text-xs">

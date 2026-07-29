@@ -295,8 +295,8 @@ export default function Navbar() {
               </svg>
             </button>
             <Link href="/" className="flex items-center gap-2">
-              <Image src="/logo.png" alt="HealConnect" width={30} height={30} className="rounded-full shadow-sm" />
-              <span className={`text-lg font-extrabold transition-colors ${isDark ? 'text-white' : 'text-black'}`}>HealConnect</span>
+              <Image src="/logo.png?v=3" alt="HealConnect" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
+              <span className="text-lg font-extrabold transition-colors text-foreground">HealConnect</span>
             </Link>
           </div>
 
@@ -317,8 +317,18 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Right: lang dropdown + profile */}
+          {/* Right: theme toggle + lang dropdown + profile */}
           <div className="flex items-center gap-2">
+            {/* Theme Toggle */}
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className={`hidden md:flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
+                isDark ? 'border-white/20 hover:bg-white/10 hover:text-white' : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-600'
+              }`}
+            >
+              {mounted && theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+
             {/* Language dropdown */}
             <div className="relative" ref={langRef}>
               <button

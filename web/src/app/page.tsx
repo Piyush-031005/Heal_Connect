@@ -147,7 +147,7 @@ export default function LandingPage() {
         </section>
 
         {/* ═══ TRUST LAYER ═══ */}
-        <section className="relative z-20 py-8 border-y border-white/5 bg-card/50">
+        <section className="relative z-20 py-8 border-y border-border bg-card/50">
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap justify-center lg:justify-between items-center gap-6">
               {[
@@ -193,13 +193,13 @@ export default function LandingPage() {
                     <span><strong>Priya from Mumbai</strong> {t.marqueeItems[0]}</span>
                     <span className="text-muted-foreground/60 text-xs">· 2 min ago</span>
                   </div>
-                  <span className="text-gray-300">|</span>
+                  <span className="text-muted-foreground">|</span>
                   <div className="inline-flex items-center gap-2.5 text-sm text-muted-foreground">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                     <span><strong>Rahul from Mumbai</strong> {t.marqueeItems[1]}</span>
                     <span className="text-muted-foreground/60 text-xs">· just now</span>
                   </div>
-                  <span className="text-gray-300">|</span>
+                  <span className="text-muted-foreground">|</span>
                   <div className="inline-flex items-center gap-2.5 text-sm text-muted-foreground">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                     <span><strong>Neha from Hyderabad</strong> {t.marqueeItems[2]}</span>
@@ -213,13 +213,13 @@ export default function LandingPage() {
                     <span><strong>Priya from Mumbai</strong> {t.marqueeItems[0]}</span>
                     <span className="text-muted-foreground/60 text-xs">· 2 min ago</span>
                   </div>
-                  <span className="text-gray-300">|</span>
+                  <span className="text-muted-foreground">|</span>
                   <div className="inline-flex items-center gap-2.5 text-sm text-muted-foreground">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                     <span><strong>Rahul from Mumbai</strong> {t.marqueeItems[1]}</span>
                     <span className="text-muted-foreground/60 text-xs">· just now</span>
                   </div>
-                  <span className="text-gray-300">|</span>
+                  <span className="text-muted-foreground">|</span>
                   <div className="inline-flex items-center gap-2.5 text-sm text-muted-foreground">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                     <span><strong>Neha from Hyderabad</strong> {t.marqueeItems[2]}</span>
@@ -236,7 +236,7 @@ export default function LandingPage() {
                 { icon: Gift, title: t.serviceCards[3].title, desc: t.serviceCards[3].desc, color: 'text-green-400', bg: 'bg-green-400/10' },
               ].map((s) => (
                 <Link key={s.title} href="/signup" className="group">
-                  <div className={`flex flex-col p-5 bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_20px_rgba(214,180,107,0.15)] transition-all duration-500 group-hover:-translate-y-1 rounded-2xl overflow-hidden`}>
+                  <div className={`flex flex-col p-5 bg-secondary backdrop-blur-xl border border-border hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_20px_rgba(214,180,107,0.15)] transition-all duration-500 group-hover:-translate-y-1 rounded-2xl overflow-hidden`}>
                     <div className={`w-12 h-12 rounded-2xl ${s.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
                       <s.icon className={`w-6 h-6 ${s.color}`} />
                     </div>
@@ -258,7 +258,7 @@ export default function LandingPage() {
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {TOP_ASTROLOGERS.map((a) => (
-                <div key={a.name} className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_30px_rgba(214,180,107,0.15)] hover:-translate-y-1 transition-all duration-500 rounded-3xl overflow-hidden group">
+                <div key={a.name} className="bg-secondary backdrop-blur-xl border border-border shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_30px_rgba(214,180,107,0.15)] hover:-translate-y-1 transition-all duration-500 rounded-3xl overflow-hidden group">
                   <div className="p-6">
                     {/* Top: image circle left + badge + name right */}
                     <div className="flex gap-4 mb-4">
@@ -276,7 +276,7 @@ export default function LandingPage() {
                               <Badge className="bg-primary text-primary-foreground border-0 text-[10px] px-2 py-0.5 rounded-full">{t.topChoice}</Badge>
                             )}
                             {a.tags.includes('Celebrity') && (
-                              <Badge className="bg-purple-500 text-white border-0 text-[10px] px-2 py-0.5 rounded-full">{t.celebrity}</Badge>
+                              <Badge className="bg-purple-500 text-foreground border-0 text-[10px] px-2 py-0.5 rounded-full">{t.celebrity}</Badge>
                             )}
                           </div>
                         </div>
@@ -293,7 +293,7 @@ export default function LandingPage() {
                     </div>
 
                     {/* Rating + Details */}
-                    <div className="flex items-center justify-between text-sm mb-4 px-3 py-2 bg-black/20 rounded-xl border border-white/5">
+                    <div className="flex items-center justify-between text-sm mb-4 px-3 py-2 bg-white/20 dark:bg-black/20 rounded-xl border border-border">
                       <div className="flex items-center gap-1.5">
                         <Star className="w-4 h-4 text-primary fill-current" />
                         <span className="font-bold text-foreground">{a.rating}</span>
@@ -358,7 +358,7 @@ export default function LandingPage() {
                 const catData = t.categories[idx] || { name: cat.name, count: cat.count };
                 return (
                 <Link key={cat.name} href="/signup" className="group">
-                  <div className="flex items-center gap-4 p-5 rounded-2xl bg-white/5 backdrop-blur-lg border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_20px_rgba(214,180,107,0.15)] transition-all group-hover:-translate-y-1 duration-500">
+                  <div className="flex items-center gap-4 p-5 rounded-2xl bg-secondary backdrop-blur-lg border border-border shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_20px_rgba(214,180,107,0.15)] transition-all group-hover:-translate-y-1 duration-500">
                     <div className={`w-12 h-12 rounded-xl ${cat.bg} ${cat.color} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
                       <cat.icon className="w-6 h-6" />
                     </div>
@@ -366,7 +366,7 @@ export default function LandingPage() {
                       <h3 className="font-semibold text-foreground text-base truncate">{catData.name}</h3>
                       <p className="text-sm text-muted-foreground/60 truncate">{catData.count} {t.browseSubtitleEm === 'astrologer' ? 'astrologers' : 'ज्योतिषी'}</p>
                     </div>
-                    <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-amber-500 transition-colors shrink-0" />
+                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-amber-500 transition-colors shrink-0" />
                   </div>
                 </Link>
                 );
@@ -394,7 +394,7 @@ export default function LandingPage() {
             <div className="grid grid-cols-5 gap-4 max-w-5xl mx-auto">
               {t.servicesList.slice(0, 10).map((svc: { name: string; desc: string }, idx: number) => (
                 <Link key={idx} href="/signup" className="group">
-                  <div className="flex flex-col items-center text-center p-4 rounded-2xl bg-white/5 backdrop-blur-lg border border-white/10 shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_15px_rgba(214,180,107,0.15)] transition-all group-hover:-translate-y-1 duration-500">
+                  <div className="flex flex-col items-center text-center p-4 rounded-2xl bg-secondary backdrop-blur-lg border border-border shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_15px_rgba(214,180,107,0.15)] transition-all group-hover:-translate-y-1 duration-500">
                     <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                       <Zap className="w-5 h-5 text-amber-600" />
                     </div>
@@ -408,7 +408,7 @@ export default function LandingPage() {
         </section>
 
 {/* ═══ DAILY HOROSCOPE ═══ */}
-        <section className="py-16 bg-black/10 border-y border-white/5 relative">
+        <section className="py-16 bg-black/10 border-y border-border relative">
           <div className="container mx-auto px-4">
             {/* Header: left aligned */}
             <div className="mb-6">
@@ -425,7 +425,7 @@ export default function LandingPage() {
 
             {/* Tabs: right aligned */}
             <div className="flex justify-end mb-8">
-              <div className="flex items-center gap-1 bg-black/40 border border-white/10 rounded-full p-1 shadow-inner">
+              <div className="flex items-center gap-1 bg-white/40 dark:bg-black/40 border border-border rounded-full p-1 shadow-inner">
                 {t.horoscopeTabs.map((tab: string, idx: number) => (
                   <button
                     key={idx}
@@ -435,7 +435,7 @@ export default function LandingPage() {
                       else router.push('/signup');
                     }}
                     className={`px-6 py-2 rounded-full text-sm font-semibold transition-all capitalize ${
-                      horoscopeTab === ['today', 'tomorrow', 'week', 'month'][idx] ? 'bg-amber-100 text-amber-800 shadow-sm' : 'text-gray-600 hover:text-foreground'
+                      horoscopeTab === ['today', 'tomorrow', 'week', 'month'][idx] ? 'bg-amber-100 text-amber-800 shadow-sm' : 'text-muted-foreground hover:text-foreground'
                     }`}
                   >
                     {tab}
@@ -496,7 +496,7 @@ export default function LandingPage() {
                 { label: t.horoscopeAreaLabels[3], value: hData.money, color: 'bg-amber-400', textColor: 'text-amber-600' },
               ];
               return (
-              <div className="max-w-5xl mx-auto bg-white/5 backdrop-blur-2xl rounded-3xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] p-6 md:p-8">
+              <div className="max-w-5xl mx-auto bg-secondary backdrop-blur-2xl rounded-3xl border border-border shadow-[0_0_40px_rgba(0,0,0,0.5)] p-6 md:p-8">
                 {/* Top: emoji + name + divider */}
                 <div className="flex items-center gap-4 mb-4">
                   <div className="text-5xl">{selected.emoji}</div>
@@ -522,7 +522,7 @@ export default function LandingPage() {
                   {/* Right: bar chart */}
                   <div className="lg:w-72 space-y-3">
                     {areas.map(({ label, value, color, textColor }) => (
-                      <div key={label} className="bg-white/5 rounded-xl px-4 py-3 flex items-center justify-between border border-white/5">
+                      <div key={label} className="bg-secondary rounded-xl px-4 py-3 flex items-center justify-between border border-border">
                         <span className="text-sm text-foreground/80 font-medium">{label}</span>
                         <div className="flex items-center gap-2">
                           <div className="w-20 h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -536,9 +536,9 @@ export default function LandingPage() {
                 </div>
 
                 {/* Buttons */}
-                <div className="flex items-center gap-3 mt-8 pt-6 border-t border-white/10">
+                <div className="flex items-center gap-3 mt-8 pt-6 border-t border-border">
                   <Link href="/signup">
-                    <Button className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-xl border-0 text-sm font-semibold px-6 h-11 shadow-sm shadow-amber-500/30">
+                    <Button className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-foreground rounded-xl border-0 text-sm font-semibold px-6 h-11 shadow-sm shadow-amber-500/30">
                       {t.horoscopeDetailBtn}
                     </Button>
                   </Link>
@@ -578,7 +578,7 @@ export default function LandingPage() {
               {/* Right: Testimonial card with navigation */}
               <div className="flex-1 max-w-2xl">
                 <div className="relative">
-                  <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl relative">
+                  <div className="overflow-hidden rounded-3xl border border-border bg-secondary backdrop-blur-xl shadow-2xl relative">
                     <div
                       className="flex transition-transform duration-500 ease-in-out"
                       style={{ transform: `translateX(-${testimonialIdx * 100}%)` }}
@@ -590,7 +590,7 @@ export default function LandingPage() {
                           </p>
                           <div className="border-t border-border/50 my-4" />
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 flex items-center justify-center text-white font-bold text-sm shrink-0">
+                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 flex items-center justify-center text-foreground font-bold text-sm shrink-0">
                               {testimonial.name.charAt(0)}
                             </div>
                             <div>
@@ -614,7 +614,7 @@ export default function LandingPage() {
                         className="w-9 h-9 rounded-full bg-background border border-border hover:border-amber-300 hover:bg-amber-50 flex items-center justify-center transition-all shadow-sm"
                         aria-label="Previous"
                       >
-                        <svg className="w-4 h-4 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+                        <svg className="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                           <path d="M15 18l-6-6 6-6" />
                         </svg>
                       </button>
@@ -623,7 +623,7 @@ export default function LandingPage() {
                         className="w-9 h-9 rounded-full bg-background border border-border hover:border-amber-300 hover:bg-amber-50 flex items-center justify-center transition-all shadow-sm"
                         aria-label="Next"
                       >
-                        <svg className="w-4 h-4 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+                        <svg className="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                           <path d="M9 18l6-6-6-6" />
                         </svg>
                       </button>
@@ -643,18 +643,18 @@ export default function LandingPage() {
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {(t.pricingPlans as unknown as Array<{name: string; price: string; popular: boolean; features: string[]}>).map((plan) => (
                 <div key={plan.name} className={`p-6 rounded-2xl border transition-all ${plan.popular ? 'bg-amber-50 border-amber-400 shadow-lg -translate-y-2' : 'bg-background border-border/50 hover:border-amber-200 hover:shadow-md'}`}>
-                  {plan.popular && <Badge className="bg-amber-500 text-white border-0 mb-3">{t.mostPopular}</Badge>}
+                  {plan.popular && <Badge className="bg-amber-500 text-foreground border-0 mb-3">{t.mostPopular}</Badge>}
                   <h3 className="font-bold text-foreground text-lg">{plan.name}</h3>
                   <p className="text-3xl font-extrabold text-amber-600 my-3">{plan.price}</p>
                   <ul className="space-y-2 mb-6 text-left">
                     {plan.features.map((f) => (
-                      <li key={f} className="flex items-center gap-2 text-sm text-gray-600">
+                      <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Check className="w-4 h-4 text-amber-500" /> {f}
                       </li>
                     ))}
                   </ul>
                   <Link href="/signup">
-                    <Button className={`w-full rounded-full border-0 font-semibold ${plan.popular ? 'bg-amber-500 hover:bg-amber-600 text-white' : 'bg-gray-100 hover:bg-gray-200 text-muted-foreground'}`}>
+                    <Button className={`w-full rounded-full border-0 font-semibold ${plan.popular ? 'bg-amber-500 hover:bg-amber-600 text-foreground' : 'bg-gray-100 hover:bg-gray-200 text-muted-foreground'}`}>
                       {t.pricingGetStarted}
                     </Button>
                   </Link>
@@ -670,16 +670,16 @@ export default function LandingPage() {
             <div className="flex flex-col md:flex-row items-center gap-10">
 <div className="flex-1">
 <p className="text-xs font-bold uppercase tracking-widest text-amber-800 mb-2">{t.appBadge}</p>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4 leading-tight">
                   {t.appTitle} <span className="text-yellow-200">{t.appTitleEm}</span>.
                 </h2>
-                <p className="text-white/90 mb-8 max-w-lg leading-relaxed">
+                <p className="text-foreground/90 mb-8 max-w-lg leading-relaxed">
                   {t.appDesc}
                 </p>
                 <ul className="space-y-3 mb-8">
                   {t.appFeatures.map((feature: string) => (
-                    <li key={feature} className="flex items-center gap-3 text-white text-sm">
-                      <Check className="w-5 h-5 text-white shrink-0" />
+                    <li key={feature} className="flex items-center gap-3 text-foreground text-sm">
+                      <Check className="w-5 h-5 text-foreground shrink-0" />
                       {feature}
                     </li>
                   ))}
@@ -694,7 +694,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="flex-1 flex items-center justify-center">
-                <div className="w-80 min-h-[540px] bg-background rounded-3xl border border-white/30 shadow-2xl overflow-hidden flex flex-col">
+                <div className="w-80 min-h-[540px] bg-background rounded-3xl border border-border shadow-2xl overflow-hidden flex flex-col">
                   {/* Status bar */}
                   <div className="px-4 pt-3 pb-1 flex items-center justify-between text-[10px] text-muted-foreground shrink-0">
                     <span>9:41</span>
@@ -749,8 +749,8 @@ export default function LandingPage() {
                     {/* Sent message */}
                     <div className="flex justify-end max-w-[80%] self-end">
                       <div className="bg-gradient-to-r from-amber-400 to-orange-400 rounded-2xl rounded-tr-sm px-3 py-2">
-                        <p className="text-white text-[11px] leading-relaxed">{t.phoneMockup.sentMsg}</p>
-                        <p className="text-white/60 text-[9px] mt-1 text-right">9:42 AM ✓</p>
+                        <p className="text-foreground text-[11px] leading-relaxed">{t.phoneMockup.sentMsg}</p>
+                        <p className="text-foreground/60 text-[9px] mt-1 text-right">9:42 AM ✓</p>
                       </div>
                     </div>
 
@@ -780,7 +780,7 @@ export default function LandingPage() {
                       {t.phoneMockup.placeholder}
                     </div>
                     <button className="w-7 h-7 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 flex items-center justify-center shrink-0 shadow-lg shadow-amber-500/30">
-                      <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <svg className="w-3.5 h-3.5 text-foreground" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
                       </svg>
                     </button>
@@ -838,7 +838,7 @@ export default function LandingPage() {
                     </button>
                     {openFaq === i && (
                       <div className="px-5 pb-5">
-                        <p className="text-sm text-gray-600 leading-relaxed">{faq.a}</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
                       </div>
                     )}
                   </div>

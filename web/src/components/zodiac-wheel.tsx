@@ -145,7 +145,7 @@ export default function ZodiacWheel() {
           {/* Magical center sunburst */}
           <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(214,180,107,0.3)_0%,transparent_70%)] animate-pulse" style={{ animationDuration: '4s' }} />
           
-          <Sparkles className="w-12 h-12 text-primary animate-pulse drop-shadow-[0_0_15px_rgba(214,180,107,0.8)]" style={{ animationDuration: '3s' }} />
+          <Image src="/logo.png" alt="HealConnect" width={140} height={140} quality={100} unoptimized className="rounded-full animate-pulse drop-shadow-[0_0_20px_rgba(214,180,107,0.9)]" style={{ animationDuration: '3s' }} />
           
           {/* Intricate counter-spinning rings in the center */}
           <div className="absolute inset-0 border-[1px] border-primary/40 rounded-full animate-[spin_40s_linear_infinite_reverse]" />
