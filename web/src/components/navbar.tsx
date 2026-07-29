@@ -51,16 +51,18 @@ const MENU_SECTIONS: { title: string; items: MenuItem[] }[] = [
 ];
 
 const NAV_SECTIONS = [
-  { id: 'features', label: 'Features' },
-  { id: 'experts', label: 'Our Experts' },
-  { id: 'pricing', label: 'Pricing' },
-] as const;
+  { id: 'find-expert', label: 'Find Expert', href: '/practitioners' },
+  { id: 'horoscope', label: 'Horoscope', href: '#horoscope' },
+  { id: 'pricing', label: 'Pricing', href: '#pricing' },
+  { id: 'about', label: 'About', href: '#about' },
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('');
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const { theme, setTheme } = useTheme();
   const { lang, setLang } = useLang();
@@ -96,6 +98,10 @@ export default function Navbar() {
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    setMounted(true);
   }, []);
 
   // IntersectionObserver for active section tracking
@@ -261,7 +267,7 @@ export default function Navbar() {
                   key={val}
                   onClick={() => setTheme(val)}
                   className={`flex-1 py-2 rounded-xl text-xs font-semibold border transition-all flex items-center justify-center gap-1 ${
-                    theme === val ? 'bg-amber-500 text-white border-amber-500 shadow-sm' : 'bg-gray-50 text-gray-600 border-gray-200 hover:border-amber-300 hover:bg-amber-50'
+                    (mounted && theme === val) ? 'bg-amber-500 text-white border-amber-500 shadow-sm' : 'bg-gray-50 text-gray-600 border-gray-200 hover:border-amber-300 hover:bg-amber-50'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
@@ -274,9 +280,9 @@ export default function Navbar() {
       </aside>
 
       {/* Navbar */}
-      <div className="fixed top-0 left-0 right-0 z-30 px-4 pt-3">
-        <header className={`mx-auto max-w-6xl transition-all duration-500 flex items-center justify-between px-4 h-14 ${
-          isDark ? 'bg-[#0f0f0f] rounded-full shadow-2xl border border-white/10' : 'bg-white/80 backdrop-blur-md rounded-2xl shadow-sm border border-yellow-100'
+      <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-sm py-2' : 'pt-4'}`}>
+        <header className={`mx-auto transition-all duration-300 flex items-center justify-between px-4 h-14 ${
+          !scrolled ? 'bg-surface/80 backdrop-blur-md rounded-full border border-border shadow-sm max-w-6xl' : 'max-w-7xl px-4 sm:px-6 lg:px-8'
         }`}>
           {/* Left: hamburger + logo */}
           <div className="flex items-center gap-3">
@@ -295,27 +301,17 @@ export default function Navbar() {
           </div>
 
           {/* Center nav */}
-          <nav className="hidden md:flex items-center gap-1 bg-white/95 backdrop-blur-sm rounded-full border border-gray-200 px-1.5 py-1 shadow-sm">
-            <Link
-              href="/practitioners"
-              className="text-sm font-extrabold transition-colors px-4 py-1.5 rounded-full flex items-center gap-1.5 bg-amber-100/80 text-[#d97706] border border-amber-300/60"
-            >
-              <Star className="w-3.5 h-3.5" />
-              Find Astrologers
-            </Link>
-            {NAV_SECTIONS.map(({ id, label }) => (
+          <nav className="hidden md:flex items-center gap-1 bg-surface backdrop-blur-md rounded-full border border-border px-1.5 py-1 shadow-sm">
+            {NAV_SECTIONS.map(({ id, label, href }) => (
               <Link
                 key={id}
-                href={`#${id}`}
+                href={href}
                 className={`relative text-sm font-medium transition-all px-4 py-1.5 rounded-full flex items-center gap-1.5 ${
                   activeSection === id
-                    ? 'bg-amber-500 text-white shadow-sm'
-                    : 'text-gray-800 hover:text-amber-700'
+                    ? 'bg-primary/10 text-primary shadow-sm'
+                    : 'text-foreground/80 hover:text-primary hover:bg-white/5'
                 }`}
               >
-                {id === 'features' && <Zap className="w-3.5 h-3.5" />}
-                {id === 'pricing' && <Gem className="w-3.5 h-3.5" />}
-                {id === 'experts' && <Users className="w-3.5 h-3.5" />}
                 {label}
               </Link>
             ))}
@@ -364,21 +360,29 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Profile icon */}
-            <Link href={userProfile ? (userProfile.role === 'practitioner' ? '/expert/dashboard' : '/dashboard') : '/login'}>
-              <div className={`w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer overflow-hidden border-2 ${isDark ? 'border-white/20 hover:border-amber-400' : 'border-gray-200 hover:border-amber-400'}`}>
-                {userProfile ? (
+            {/* Login / Profile */}
+            {userProfile ? (
+              <Link href={userProfile.role === 'practitioner' ? '/expert/dashboard' : '/dashboard'}>
+                <div className="w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer overflow-hidden border-2 border-border hover:border-primary">
                   <img
                     src={userProfile.role === 'practitioner' ? getPractitionerAvatar(userProfile.photoUrl, userProfile.id) : getAvatarUrl(userProfile.name, userProfile.photoUrl)}
                     alt="Profile"
                     className="w-full h-full object-cover"
                   />
-                ) : (
-                  <svg className={`w-5 h-5 ${isDark ? 'text-gray-300' : 'text-gray-600'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                )}
-              </div>
+                </div>
+              </Link>
+            ) : (
+              <Link href="/login" className="hidden md:block text-sm font-medium text-foreground hover:text-primary transition-colors px-2">
+                Login
+              </Link>
+            )}
+
+            {/* Primary CTA */}
+            <Link
+              href="/practitioners"
+              className="bg-accent text-accent-foreground px-4 py-2 rounded-full text-sm font-medium shadow-sm hover:brightness-110 transition-all ml-2"
+            >
+              Book Consultation
             </Link>
           </div>
         </header>

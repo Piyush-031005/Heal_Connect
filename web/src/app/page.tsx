@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/navbar';
-import HeroAnimation from '@/components/hero-animation';
+import ZodiacWheel from '@/components/zodiac-wheel';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -26,12 +26,12 @@ const TOP_ASTROLOGERS = [
 ];
 
 const CATEGORIES = [
-  { name: 'Love', count: '4,280+', icon: Heart, color: 'text-rose-500', bg: 'bg-rose-50' },
-  { name: 'Marriage & Kundli', count: '6,120+', icon: Gem, color: 'text-purple-500', bg: 'bg-purple-50' },
-  { name: 'Career', count: '5,840+', icon: Briefcase, color: 'text-blue-500', bg: 'bg-blue-50' },
-  { name: 'Women astrologers', count: '9,210+', icon: UserCheck, color: 'text-pink-500', bg: 'bg-pink-50' },
-  { name: 'Business & Money', count: '3,760+', icon: DollarSign, color: 'text-green-500', bg: 'bg-green-50' },
-  { name: 'Health & Family', count: '2,480+', icon: Activity, color: 'text-teal-500', bg: 'bg-teal-50' },
+  { name: 'Love', count: '4,280+', icon: Heart, color: 'text-rose-500', bg: 'bg-rose-500/10' },
+  { name: 'Marriage & Kundli', count: '6,120+', icon: Gem, color: 'text-purple-500', bg: 'bg-purple-500/10' },
+  { name: 'Career', count: '5,840+', icon: Briefcase, color: 'text-blue-500', bg: 'bg-blue-500/10' },
+  { name: 'Women astrologers', count: '9,210+', icon: UserCheck, color: 'text-pink-500', bg: 'bg-pink-500/10' },
+  { name: 'Business & Money', count: '3,760+', icon: DollarSign, color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
+  { name: 'Health & Family', count: '2,480+', icon: Activity, color: 'text-teal-500', bg: 'bg-teal-500/10' },
 ];
 
 const ZODIAC_SIGNS = [
@@ -50,7 +50,7 @@ const ZODIAC_SIGNS = [
 ];
 
 const TESTIMONIALS = [
-  { name: 'Amar Thakur', loc: 'Pune · India', text: 'This app helped me to get a job in my dream company. I was stressed about not getting a career opportunity after my graduation. One prediction from an astrologer gave me a ray of hope and within a few months, I had a job offer in hand. Thank you so much AstroTalk for helping me out.' },
+  { name: 'Amar Thakur', loc: 'Pune · India', text: 'This app helped me to get a job in my dream company. I was stressed about not getting a career opportunity after my graduation. One prediction from an astrologer gave me a ray of hope and within a few months, I had a job offer in hand. Thank you so much HealConnect for helping me out.' },
   { name: 'Sneha Patel', loc: 'Mumbai · India', text: 'I was going through a tough phase in my marriage. The tarot reading session gave me clarity and helped me understand my partner better. Highly recommend!' },
   { name: 'Rahul Verma', loc: 'Delhi · India', text: 'The Kundli matching feature helped me find the perfect match for my son. The astrologers were very detailed and professional in their analysis.' },
   { name: 'Priya Sharma', loc: 'Bangalore · India', text: 'My career horoscope reading was spot on. I got the guidance I needed to make a major career transition. The astrologer understood my situation perfectly and gave me actionable advice.' },
@@ -108,74 +108,71 @@ export default function LandingPage() {
   const selected = ZODIAC_SIGNS[activeZodiac];
 
   return (
-    <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
+    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
       <Navbar />
 
       <main className="flex-1">
 
         {/* ═══ HERO ═══ */}
-        <section className="relative overflow-hidden pt-28 pb-16 lg:pt-36 lg:pb-24 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-200/30 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-yellow-200/30 rounded-full blur-3xl pointer-events-none" />
+        <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-background min-h-[90vh] flex items-center">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/10 rounded-full blur-3xl pointer-events-none" />
+
+          {/* Majestic overflowing background wheel */}
+          <div className="absolute top-1/2 -translate-y-1/2 right-[-50%] md:right-[-30%] lg:right-[-15%] opacity-30 lg:opacity-100 pointer-events-none lg:pointer-events-auto">
+            <ZodiacWheel />
+          </div>
 
           <div className="container mx-auto px-4 relative z-10">
-            <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-12">
-              <div className="flex-1">
-<div className="mb-6 bg-white border border-gray-200 shadow-sm px-5 py-2.5 rounded-full text-sm font-semibold inline-flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-green-500" />
-                  <span className="text-gray-800">{t.heroBadge}</span>
-                </div>
+            <div className="max-w-3xl">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold tracking-tight leading-tight mb-8 animate-in slide-in-from-left duration-1000">
+                <span className="text-foreground drop-shadow-md">Guidance.</span><br />
+                <span className="text-foreground drop-shadow-md">Clarity.</span><br />
+                <span className="bg-gradient-to-r from-primary via-amber-200 to-primary bg-clip-text text-transparent drop-shadow-lg">Confidence.</span>
+              </h1>
+              
+              <p className="text-xl lg:text-2xl text-foreground/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-light">
+                Find trusted guidance for every stage of life. Connect with verified experts instantly.
+              </p>
 
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 leading-tight mb-4 whitespace-pre-line">
-                  {t.heroTitle}
-                </h1>
-
-                <p className="text-lg text-gray-800 mb-3 flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center shrink-0">
-                    <Check className="w-3.5 h-3.5 text-green-600" />
-                  </span>
-                  {t.heroKundliText}
-                </p>
-                <p className="text-lg text-gray-800 font-medium flex items-center gap-2 mb-8">
-                  <span className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center shrink-0">
-                    <Check className="w-3.5 h-3.5 text-green-600" />
-                  </span>
-                  {t.heroAvgReply}
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                  <Link href="/signup">
-                    <Button size="lg" className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-10 h-14 text-lg rounded-full shadow-lg border-0 font-bold shadow-amber-500/25 group">
-                      {t.heroCta} <ArrowRight className="w-5 h-5 ml-2 inline group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </Link>
-                </div>
-
-{/* Stats */}
-                <div className="flex flex-wrap gap-8 w-full pl-2 lg:pl-6">
-                  {t.heroStats.map((s: { value: string; label: string }, idx: number) => {
-                    const icons = [Users, Shield, Globe, Languages];
-                    const IconComponent = icons[idx] || Users;
-                    return (
-                    <div key={s.label} className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
-                        <IconComponent className="w-5 h-5 text-amber-600" />
-                      </div>
-                      <div>
-                        <p className="text-xl font-extrabold text-gray-900">{s.value}</p>
-                        <p className="text-xs text-gray-500">{s.label}</p>
-                      </div>
-                    </div>
-                    );
-                  })}
-                </div>
+              <div className="flex flex-col sm:flex-row gap-4 mb-10 animate-in slide-in-from-left duration-1000 delay-300">
+                <Link href="/practitioners">
+                  <Button size="lg" className="bg-gradient-to-r from-primary to-amber-500 hover:from-amber-500 hover:to-amber-600 text-[#0B1020] px-10 h-14 text-lg rounded-full font-bold shadow-[0_0_30px_rgba(214,180,107,0.3)] group border-none transition-all">
+                    Book Consultation <ArrowRight className="w-5 h-5 ml-2 inline group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
               </div>
+            </div>
+          </div>
+        </section>
 
-              <div className="flex-1 flex items-start justify-center lg:pt-0 -mt-28 lg:-mt-36 -ml-8 lg:-ml-16">
-                <div className="scale-90 lg:scale-100 origin-top">
-                  <HeroAnimation />
+        {/* ═══ TRUST LAYER ═══ */}
+        <section className="relative z-20 py-8 border-y border-white/5 bg-card/50">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-wrap justify-center lg:justify-between items-center gap-6">
+              {[
+                { label: 'Rating', value: '4.9 ★', icon: Star },
+                { label: 'Consultations', value: '100k+', icon: MessageCircle },
+                { label: 'Verified Experts', value: '500+', icon: Shield },
+                { label: 'Availability', value: '24x7', icon: Globe },
+              ].map((stat, idx) => (
+                <div key={idx} className="flex flex-col items-center lg:items-start">
+                  <div className="flex items-center gap-2 mb-1">
+                    <stat.icon className="w-5 h-5 text-primary" />
+                    <span className="text-2xl font-bold text-foreground">{stat.value}</span>
+                  </div>
+                  <span className="text-sm text-muted-foreground font-medium uppercase tracking-wider">{stat.label}</span>
                 </div>
-              </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-wrap justify-center gap-3 lg:gap-6">
+              {['Verified Experts', 'Secure Payments', 'Private Consultations', 'Encrypted Chat', 'Transparent Pricing'].map((badge, idx) => (
+                <Badge key={idx} variant="outline" className="bg-background border-border text-foreground py-1.5 px-4 rounded-full text-xs font-semibold">
+                  <Check className="w-3 h-3 mr-2 text-success" />
+                  {badge}
+                </Badge>
+              ))}
             </div>
           </div>
         </section>
@@ -191,63 +188,61 @@ export default function LandingPage() {
               <div className="flex whitespace-nowrap animate-marquee gap-4">
                 {/* First set */}
                 <div className="flex items-center gap-4 mx-2">
-                  <div className="inline-flex items-center gap-2.5 text-sm text-gray-700">
+                  <div className="inline-flex items-center gap-2.5 text-sm text-muted-foreground">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                     <span><strong>Priya from Mumbai</strong> {t.marqueeItems[0]}</span>
-                    <span className="text-gray-400 text-xs">· 2 min ago</span>
+                    <span className="text-muted-foreground/60 text-xs">· 2 min ago</span>
                   </div>
                   <span className="text-gray-300">|</span>
-                  <div className="inline-flex items-center gap-2.5 text-sm text-gray-700">
+                  <div className="inline-flex items-center gap-2.5 text-sm text-muted-foreground">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                     <span><strong>Rahul from Mumbai</strong> {t.marqueeItems[1]}</span>
-                    <span className="text-gray-400 text-xs">· just now</span>
+                    <span className="text-muted-foreground/60 text-xs">· just now</span>
                   </div>
                   <span className="text-gray-300">|</span>
-                  <div className="inline-flex items-center gap-2.5 text-sm text-gray-700">
+                  <div className="inline-flex items-center gap-2.5 text-sm text-muted-foreground">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                     <span><strong>Neha from Hyderabad</strong> {t.marqueeItems[2]}</span>
-                    <span className="text-gray-400 text-xs">· 5 min ago</span>
+                    <span className="text-muted-foreground/60 text-xs">· 5 min ago</span>
                   </div>
                 </div>
                 {/* Duplicate */}
                 <div className="flex items-center gap-4 mx-2">
-                  <div className="inline-flex items-center gap-2.5 text-sm text-gray-700">
+                  <div className="inline-flex items-center gap-2.5 text-sm text-muted-foreground">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                     <span><strong>Priya from Mumbai</strong> {t.marqueeItems[0]}</span>
-                    <span className="text-gray-400 text-xs">· 2 min ago</span>
+                    <span className="text-muted-foreground/60 text-xs">· 2 min ago</span>
                   </div>
                   <span className="text-gray-300">|</span>
-                  <div className="inline-flex items-center gap-2.5 text-sm text-gray-700">
+                  <div className="inline-flex items-center gap-2.5 text-sm text-muted-foreground">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                     <span><strong>Rahul from Mumbai</strong> {t.marqueeItems[1]}</span>
-                    <span className="text-gray-400 text-xs">· just now</span>
+                    <span className="text-muted-foreground/60 text-xs">· just now</span>
                   </div>
                   <span className="text-gray-300">|</span>
-                  <div className="inline-flex items-center gap-2.5 text-sm text-gray-700">
+                  <div className="inline-flex items-center gap-2.5 text-sm text-muted-foreground">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                     <span><strong>Neha from Hyderabad</strong> {t.marqueeItems[2]}</span>
-                    <span className="text-gray-400 text-xs">· 5 min ago</span>
+                    <span className="text-muted-foreground/60 text-xs">· 5 min ago</span>
                   </div>
                 </div>
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { icon: MessageCircle, title: t.serviceCards[0].title, desc: t.serviceCards[0].desc, color: 'text-amber-500', bg: 'bg-amber-50', shadow: 'shadow-amber-200/30' },
-                { icon: Phone, title: t.serviceCards[1].title, desc: t.serviceCards[1].desc, color: 'text-orange-500', bg: 'bg-orange-50', shadow: 'shadow-orange-200/30' },
-                { icon: Star, title: t.serviceCards[2].title, desc: t.serviceCards[2].desc, color: 'text-purple-500', bg: 'bg-purple-50', shadow: 'shadow-purple-200/30' },
-                { icon: Gift, title: t.serviceCards[3].title, desc: t.serviceCards[3].desc, color: 'text-green-500', bg: 'bg-green-50', shadow: 'shadow-green-200/30' },
+                { icon: MessageCircle, title: t.serviceCards[0].title, desc: t.serviceCards[0].desc, color: 'text-amber-400', bg: 'bg-amber-400/10' },
+                { icon: Phone, title: t.serviceCards[1].title, desc: t.serviceCards[1].desc, color: 'text-orange-400', bg: 'bg-orange-400/10' },
+                { icon: Star, title: t.serviceCards[2].title, desc: t.serviceCards[2].desc, color: 'text-purple-400', bg: 'bg-purple-400/10' },
+                { icon: Gift, title: t.serviceCards[3].title, desc: t.serviceCards[3].desc, color: 'text-green-400', bg: 'bg-green-400/10' },
               ].map((s) => (
                 <Link key={s.title} href="/signup" className="group">
-                  <Card className={`bg-white border-0 ${s.shadow} shadow-lg hover:shadow-xl transition-all duration-300 group-hover:-translate-y-1 rounded-2xl overflow-hidden`}>
-                    <CardContent className="p-5">
-                      <div className={`w-12 h-12 rounded-2xl ${s.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-                        <s.icon className={`w-6 h-6 ${s.color}`} />
-                      </div>
-                      <h3 className="font-bold text-gray-900 text-sm mb-1">{s.title}</h3>
-                      <p className="text-xs text-gray-500">{s.desc}</p>
-                    </CardContent>
-                  </Card>
+                  <div className={`flex flex-col p-5 bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_20px_rgba(214,180,107,0.15)] transition-all duration-500 group-hover:-translate-y-1 rounded-2xl overflow-hidden`}>
+                    <div className={`w-12 h-12 rounded-2xl ${s.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+                      <s.icon className={`w-6 h-6 ${s.color}`} />
+                    </div>
+                    <h3 className="font-bold text-foreground text-sm mb-1">{s.title}</h3>
+                    <p className="text-xs text-muted-foreground">{s.desc}</p>
+                  </div>
                 </Link>
               ))}
             </div>
@@ -256,121 +251,99 @@ export default function LandingPage() {
 
 
 
-        {/* ═══ LIVE COUNT + SUBTITLE ═══ */}
-        <section className="py-12 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
-              </span>
-              <span className="text-sm font-semibold text-amber-700">
-                {t.liveLabel} · <span className="font-bold">{t.liveCount}</span>
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-3 leading-tight">
-              {t.liveTitle1}<br />
-              <span className="text-gray-900">{t.liveTitle2}</span>
-            </h2>
-            <div className="flex items-start justify-between max-w-5xl">
-              <p className="text-gray-700 text-sm max-w-xl">
-                {t.liveDesc}
-              </p>
-              <Link href="/login" className="ml-auto">
-                <Button className="bg-amber-100 text-gray-900 hover:bg-amber-200 font-semibold text-sm rounded-full px-6 h-10 border-0 shadow-sm whitespace-nowrap">
-                  {t.viewAllBtn} <ArrowRight className="w-4 h-4 ml-1" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
+
 
         {/* ═══ TOP ASTROLOGERS ═══ */}
-        <section className="pb-16 bg-white">
+        <section className="pb-16 bg-background">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-{TOP_ASTROLOGERS.map((a) => (
-                <Card key={a.name} className="bg-white border border-gray-100 hover:border-amber-200 hover:shadow-lg transition-all rounded-2xl overflow-hidden group">
-                  <CardContent className="p-5">
+              {TOP_ASTROLOGERS.map((a) => (
+                <div key={a.name} className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_30px_rgba(214,180,107,0.15)] hover:-translate-y-1 transition-all duration-500 rounded-3xl overflow-hidden group">
+                  <div className="p-6">
                     {/* Top: image circle left + badge + name right */}
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="relative shrink-0">
-                        <img src={a.img} alt={a.name} className="w-16 h-16 rounded-full object-cover ring-2 ring-amber-100 shadow-sm" />
+                    <div className="flex gap-4 mb-4">
+                      <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-primary/20 shrink-0">
+                        <img src={a.img} alt={a.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                         {a.online && (
-                          <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-green-500 border-2 border-white rounded-full" />
+                          <span className="absolute bottom-0 right-0 w-4 h-4 bg-success border-2 border-surface rounded-full shadow-sm" />
                         )}
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-start justify-between gap-2">
-                          <h3 className="font-bold text-gray-900 text-base">{a.name}</h3>
+                          <h3 className="font-bold text-foreground text-lg">{a.name}</h3>
                           <div className="flex items-center gap-1 shrink-0">
                             {a.tags.includes('Top Choice') && (
-                              <Badge className="bg-amber-500 text-white border-0 text-[10px] px-2 py-0.5 rounded-full">{t.topChoice}</Badge>
+                              <Badge className="bg-primary text-primary-foreground border-0 text-[10px] px-2 py-0.5 rounded-full">{t.topChoice}</Badge>
                             )}
                             {a.tags.includes('Celebrity') && (
                               <Badge className="bg-purple-500 text-white border-0 text-[10px] px-2 py-0.5 rounded-full">{t.celebrity}</Badge>
                             )}
                           </div>
                         </div>
+                        <p className="text-xs text-muted-foreground mt-0.5">Exp: {a.exp}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5 truncate">{a.langs}</p>
                       </div>
                     </div>
 
                     {/* Tags */}
-                    <div className="flex flex-wrap gap-1.5 mb-3">
+                    <div className="flex flex-wrap gap-1.5 mb-4">
                       {a.tags.filter(tag => tag !== 'Top Choice' && tag !== 'Celebrity').map((tag) => (
-                        <span key={tag} className="text-[11px] bg-amber-50 text-amber-700 px-2.5 py-0.5 rounded-md font-medium">{tag}</span>
+                        <span key={tag} className="text-[10px] bg-primary/10 text-primary px-2.5 py-0.5 rounded-md font-medium border border-primary/20">{tag}</span>
                       ))}
                     </div>
 
-                    {/* Lang · Exp */}
-                    <p className="text-xs text-gray-500 mb-1">{a.langs}</p>
-                    <p className="text-xs text-gray-500 mb-3">{a.exp}</p>
-
-                    {/* Rating + Orders */}
-                    <div className="flex items-center gap-1 text-yellow-500 mb-3">
-                      <Star className="w-3.5 h-3.5 fill-current" />
-                      <span className="text-xs font-bold text-gray-900">{a.rating}</span>
-                      <span className="text-[10px] text-gray-400">· {a.orders} {t.orders}</span>
+                    {/* Rating + Details */}
+                    <div className="flex items-center justify-between text-sm mb-4 px-3 py-2 bg-black/20 rounded-xl border border-white/5">
+                      <div className="flex items-center gap-1.5">
+                        <Star className="w-4 h-4 text-primary fill-current" />
+                        <span className="font-bold text-foreground">{a.rating}</span>
+                        <span className="text-xs text-muted-foreground">({a.orders})</span>
+                      </div>
+                      <div className="w-px h-4 bg-border" />
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+                        <MessageCircle className="w-3.5 h-3.5" />
+                        ~2 min
+                      </div>
                     </div>
 
                     {/* Online + Price */}
-                    <div className="flex items-center justify-between pt-3 border-t border-gray-50">
-                      <span className="flex items-center gap-1 text-[11px] text-green-600 font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-500" /> {t.online}
+                    <div className="flex items-center justify-between mb-4 px-2">
+                      <span className="flex items-center gap-1.5 text-[11px] text-success font-medium">
+                        <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" /> {t.online}
                       </span>
                       <div className="flex items-center gap-1">
-                        <span className="text-xs font-bold text-gray-900">₹{a.price}</span>
-                        <span className="text-[10px] text-gray-400">{t.perMinAstro}</span>
+                        <span className="text-sm font-extrabold text-foreground">₹{a.price}</span>
+                        <span className="text-[10px] text-muted-foreground">{t.perMinAstro}</span>
                       </div>
                     </div>
 
                     {/* Buttons */}
-                    <div className="flex gap-2 mt-4">
+                    <div className="flex gap-3">
                       <Link href="/login" className="flex-1">
-                        <Button className="w-full h-9 text-xs rounded-lg bg-amber-500 hover:bg-amber-600 text-white border-0 font-semibold">
+                        <Button className="w-full h-10 text-sm rounded-xl bg-accent hover:bg-accent/90 text-accent-foreground font-semibold shadow-sm transition-all">
                           {t.chatBtn}
                         </Button>
                       </Link>
                       <Link href="/login" className="flex-1">
-                        <Button className="w-full h-9 text-xs rounded-lg bg-white text-gray-700 border border-gray-200 hover:border-amber-300 hover:text-amber-700 font-semibold">
+                        <Button variant="outline" className="w-full h-10 text-sm rounded-xl border-primary text-primary hover:bg-primary/10 font-semibold transition-all">
                           {t.callBtn}
                         </Button>
                       </Link>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
 {/* ═══ BROWSE BY CATEGORY ═══ */}
-        <section className="py-12 bg-gray-50/50">
+        <section className="py-12 bg-card/20">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h2 className="text-sm font-bold text-amber-700 uppercase tracking-wider">{t.browseTitle}</h2>
-                <p className="text-gray-900 text-3xl font-extrabold mt-1">
+                <p className="text-foreground text-3xl font-extrabold mt-1">
                   {t.browseSubtitle} <span className="text-amber-700">{t.browseSubtitleEm}</span>, {t.browseSubtitleFor} <span className="text-amber-700">{t.browseSubtitleYou}</span>
                 </p>
               </div>
@@ -385,13 +358,13 @@ export default function LandingPage() {
                 const catData = t.categories[idx] || { name: cat.name, count: cat.count };
                 return (
                 <Link key={cat.name} href="/signup" className="group">
-                  <div className="flex items-center gap-4 p-5 rounded-xl bg-white border border-gray-100 hover:border-amber-200 hover:shadow-md transition-all group-hover:-translate-y-0.5 duration-300">
+                  <div className="flex items-center gap-4 p-5 rounded-2xl bg-white/5 backdrop-blur-lg border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_20px_rgba(214,180,107,0.15)] transition-all group-hover:-translate-y-1 duration-500">
                     <div className={`w-12 h-12 rounded-xl ${cat.bg} ${cat.color} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
                       <cat.icon className="w-6 h-6" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 text-base truncate">{catData.name}</h3>
-                      <p className="text-sm text-gray-400 truncate">{catData.count} {t.browseSubtitleEm === 'astrologer' ? 'astrologers' : 'ज्योतिषी'}</p>
+                      <h3 className="font-semibold text-foreground text-base truncate">{catData.name}</h3>
+                      <p className="text-sm text-muted-foreground/60 truncate">{catData.count} {t.browseSubtitleEm === 'astrologer' ? 'astrologers' : 'ज्योतिषी'}</p>
                     </div>
                     <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-amber-500 transition-colors shrink-0" />
                   </div>
@@ -403,13 +376,13 @@ export default function LandingPage() {
         </section>
 
 {/* ═══ OUR SERVICES ═══ */}
-        <section id="features" className="py-12 bg-white" data-animate>
+        <section id="features" className="py-12 bg-background" data-animate>
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1">{t.servicesTitle}</p>
                 <h2 className="text-3xl font-extrabold">
-                  <span className="text-gray-900">{t.servicesHeading}</span> <span className="text-amber-700">{t.servicesHeadingEm}</span>
+                  <span className="text-foreground">{t.servicesHeading}</span> <span className="text-amber-700">{t.servicesHeadingEm}</span>
                 </h2>
               </div>
               <Link href="/signup">
@@ -421,12 +394,12 @@ export default function LandingPage() {
             <div className="grid grid-cols-5 gap-4 max-w-5xl mx-auto">
               {t.servicesList.slice(0, 10).map((svc: { name: string; desc: string }, idx: number) => (
                 <Link key={idx} href="/signup" className="group">
-                  <div className="flex flex-col items-center text-center p-4 rounded-xl bg-amber-50/60 border border-amber-100/50 hover:bg-amber-100 hover:border-amber-200 transition-all group-hover:-translate-y-0.5 duration-300">
-                    <div className="w-9 h-9 rounded-lg bg-amber-100 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                  <div className="flex flex-col items-center text-center p-4 rounded-2xl bg-white/5 backdrop-blur-lg border border-white/10 shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_15px_rgba(214,180,107,0.15)] transition-all group-hover:-translate-y-1 duration-500">
+                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                       <Zap className="w-5 h-5 text-amber-600" />
                     </div>
-                    <p className="font-semibold text-gray-900 text-sm leading-tight">{svc.name}</p>
-                    <p className="text-xs text-gray-500 mt-0.5 leading-tight">{svc.desc}</p>
+                    <p className="font-semibold text-foreground text-sm leading-tight">{svc.name}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5 leading-tight">{svc.desc}</p>
                   </div>
                 </Link>
               ))}
@@ -435,24 +408,24 @@ export default function LandingPage() {
         </section>
 
 {/* ═══ DAILY HOROSCOPE ═══ */}
-        <section className="py-16 bg-gradient-to-br from-amber-50 via-white to-orange-50">
+        <section className="py-16 bg-black/10 border-y border-white/5 relative">
           <div className="container mx-auto px-4">
             {/* Header: left aligned */}
             <div className="mb-6">
               <p className="text-sm font-semibold text-amber-700 mb-1">{t.horoscopeLabel}</p>
               <div className="text-left">
                 <p className="text-3xl md:text-4xl font-extrabold leading-tight">
-                  <span className="text-gray-900">{t.horoscopeTitle}</span>{' '}
+                  <span className="text-foreground">{t.horoscopeTitle}</span>{' '}
                   <span className="text-amber-700">{t.horoscopeTitleEm}</span>{' '}
-                  <span className="text-gray-900">{t.horoscopeTitleRest}</span>
+                  <span className="text-foreground">{t.horoscopeTitleRest}</span>
                 </p>
-                <p className="text-gray-700 text-sm mt-1">{t.horoscopePick}</p>
+                <p className="text-muted-foreground text-sm mt-1">{t.horoscopePick}</p>
               </div>
             </div>
 
             {/* Tabs: right aligned */}
             <div className="flex justify-end mb-8">
-              <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-full p-0.5 shadow-sm">
+              <div className="flex items-center gap-1 bg-black/40 border border-white/10 rounded-full p-1 shadow-inner">
                 {t.horoscopeTabs.map((tab: string, idx: number) => (
                   <button
                     key={idx}
@@ -462,7 +435,7 @@ export default function LandingPage() {
                       else router.push('/signup');
                     }}
                     className={`px-6 py-2 rounded-full text-sm font-semibold transition-all capitalize ${
-                      horoscopeTab === ['today', 'tomorrow', 'week', 'month'][idx] ? 'bg-amber-100 text-amber-800 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+                      horoscopeTab === ['today', 'tomorrow', 'week', 'month'][idx] ? 'bg-amber-100 text-amber-800 shadow-sm' : 'text-gray-600 hover:text-foreground'
                     }`}
                   >
                     {tab}
@@ -483,12 +456,12 @@ export default function LandingPage() {
                       className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-center transition-all border ${
                         activeZodiac === ZODIAC_SIGNS.indexOf(z)
                           ? 'bg-amber-100 text-amber-800 border-amber-300 shadow-sm'
-                          : 'bg-white text-gray-700 border-gray-100 hover:bg-amber-50 hover:border-amber-200 hover:shadow-sm'
+                          : 'bg-background text-muted-foreground border-border/50 hover:bg-amber-50 hover:border-amber-200 hover:shadow-sm'
                       }`}
                     >
                       <span className="text-base">{z.emoji}</span>
                       <span className="text-xs font-bold">{z.name}</span>
-                      <span className="text-[10px] text-gray-400">{z.alt}</span>
+                      <span className="text-[10px] text-muted-foreground/60">{z.alt}</span>
                     </button>
                   ))}
                 </div>
@@ -501,12 +474,12 @@ export default function LandingPage() {
                       className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-center transition-all border ${
                         activeZodiac === ZODIAC_SIGNS.indexOf(z)
                           ? 'bg-amber-100 text-amber-800 border-amber-300 shadow-sm'
-                          : 'bg-white text-gray-700 border-gray-100 hover:bg-amber-50 hover:border-amber-200 hover:shadow-sm'
+                          : 'bg-background text-muted-foreground border-border/50 hover:bg-amber-50 hover:border-amber-200 hover:shadow-sm'
                       }`}
                     >
                       <span className="text-base">{z.emoji}</span>
                       <span className="text-xs font-bold">{z.name}</span>
-                      <span className="text-[10px] text-gray-400">{z.alt}</span>
+                      <span className="text-[10px] text-muted-foreground/60">{z.alt}</span>
                     </button>
                   ))}
                 </div>
@@ -523,34 +496,34 @@ export default function LandingPage() {
                 { label: t.horoscopeAreaLabels[3], value: hData.money, color: 'bg-amber-400', textColor: 'text-amber-600' },
               ];
               return (
-              <div className="max-w-5xl mx-auto bg-white rounded-3xl border border-amber-100 shadow-xl p-6 md:p-8">
+              <div className="max-w-5xl mx-auto bg-white/5 backdrop-blur-2xl rounded-3xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] p-6 md:p-8">
                 {/* Top: emoji + name + divider */}
                 <div className="flex items-center gap-4 mb-4">
                   <div className="text-5xl">{selected.emoji}</div>
                   <div>
-                    <h3 className="text-2xl font-extrabold text-gray-900">{selected.name}</h3>
-                    <p className="text-sm text-gray-500">{selected.alt} · {hData.dateRange}</p>
+                    <h3 className="text-2xl font-extrabold text-foreground">{selected.name}</h3>
+                    <p className="text-sm text-muted-foreground">{selected.alt} · {hData.dateRange}</p>
                     <p className="text-xs text-amber-600 font-medium mt-1">{t.horoscopeTodayDate} · 24 Jul 2026</p>
                   </div>
                 </div>
-                <div className="border-t border-gray-100 mb-6" />
+                <div className="border-t border-border/50 mb-6" />
 
                 {/* Content: left text + right bar chart */}
                 <div className="flex flex-col lg:flex-row gap-8">
                   {/* Left: text + mood/lucky/color */}
                   <div className="flex-1">
-                    <p className="text-gray-700 leading-relaxed text-sm mb-6">{hData.text}</p>
+                    <p className="text-muted-foreground leading-relaxed text-sm mb-6">{hData.text}</p>
                     <div className="space-y-2 text-sm">
-                      <div><span className="text-gray-400">{t.horoscopeMoodLabel} </span><span className="font-medium">{hData.mood}</span></div>
-                      <div><span className="text-gray-400">{t.horoscopeLuckyLabel} </span><span className="font-medium text-amber-600">{hData.luckyNum}</span></div>
-                      <div className="flex items-center gap-2"><span className="text-gray-400">{t.horoscopeColorLabel} </span><span className={`w-5 h-5 rounded-full ${hData.colorClass} inline-block border`} /></div>
+                      <div><span className="text-muted-foreground/60">{t.horoscopeMoodLabel} </span><span className="font-medium">{hData.mood}</span></div>
+                      <div><span className="text-muted-foreground/60">{t.horoscopeLuckyLabel} </span><span className="font-medium text-amber-600">{hData.luckyNum}</span></div>
+                      <div className="flex items-center gap-2"><span className="text-muted-foreground/60">{t.horoscopeColorLabel} </span><span className={`w-5 h-5 rounded-full ${hData.colorClass} inline-block border`} /></div>
                     </div>
                   </div>
                   {/* Right: bar chart */}
                   <div className="lg:w-72 space-y-3">
                     {areas.map(({ label, value, color, textColor }) => (
-                      <div key={label} className="bg-gray-50 rounded-xl px-4 py-3 flex items-center justify-between">
-                        <span className="text-sm text-gray-600 font-medium">{label}</span>
+                      <div key={label} className="bg-white/5 rounded-xl px-4 py-3 flex items-center justify-between border border-white/5">
+                        <span className="text-sm text-foreground/80 font-medium">{label}</span>
                         <div className="flex items-center gap-2">
                           <div className="w-20 h-2 bg-gray-200 rounded-full overflow-hidden">
                             <div className={`h-full ${color} rounded-full`} style={{ width: `${value}%` }} />
@@ -563,7 +536,7 @@ export default function LandingPage() {
                 </div>
 
                 {/* Buttons */}
-                <div className="flex items-center gap-3 mt-8 pt-6 border-t border-gray-50">
+                <div className="flex items-center gap-3 mt-8 pt-6 border-t border-white/10">
                   <Link href="/signup">
                     <Button className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-xl border-0 text-sm font-semibold px-6 h-11 shadow-sm shadow-amber-500/30">
                       {t.horoscopeDetailBtn}
@@ -582,22 +555,22 @@ export default function LandingPage() {
         </section>
 
         {/* ═══ TESTIMONIALS / EXPERTS ═══ */}
-        <section id="experts" className="py-16 bg-white" data-animate>
+        <section id="experts" className="py-16 bg-background" data-animate>
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
               {/* Left: Testimonial heading + rating + description */}
               <div className="lg:w-80 shrink-0 text-left">
                 <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1">{t.testimonialBadge}</p>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight mb-6">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-foreground leading-tight mb-6">
                   {t.testimonialTitle}
                 </h2>
 
                 <div className="flex items-center gap-2 mb-2">
                   <Star className="w-6 h-6 fill-amber-400 text-amber-400" />
-                  <span className="text-3xl font-extrabold text-gray-900">4.8</span>
+                  <span className="text-3xl font-extrabold text-foreground">4.8</span>
                 </div>
-                <p className="text-sm font-semibold text-gray-700 mb-1">{t.testimonialRating}</p>
-                <p className="text-sm text-gray-500 leading-relaxed">
+                <p className="text-sm font-semibold text-muted-foreground mb-1">{t.testimonialRating}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {t.testimonialSubtext}
                 </p>
               </div>
@@ -605,24 +578,24 @@ export default function LandingPage() {
               {/* Right: Testimonial card with navigation */}
               <div className="flex-1 max-w-2xl">
                 <div className="relative">
-                  <div className="overflow-hidden rounded-2xl border border-amber-100 bg-amber-50/50">
+                  <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl relative">
                     <div
                       className="flex transition-transform duration-500 ease-in-out"
                       style={{ transform: `translateX(-${testimonialIdx * 100}%)` }}
                     >
                       {TESTIMONIALS.map((testimonial, i) => (
                         <div key={i} className="w-full shrink-0 px-8 py-8">
-                          <p className="text-gray-700 leading-relaxed text-sm mb-6 italic">
+                          <p className="text-muted-foreground leading-relaxed text-sm mb-6 italic">
                             &ldquo;{testimonial.text}&rdquo;
                           </p>
-                          <div className="border-t border-amber-200/60 my-4" />
+                          <div className="border-t border-border/50 my-4" />
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 flex items-center justify-center text-white font-bold text-sm shrink-0">
                               {testimonial.name.charAt(0)}
                             </div>
                             <div>
-                              <p className="font-bold text-gray-900 text-sm">{testimonial.name}</p>
-                              <p className="text-xs text-gray-500">{testimonial.loc}</p>
+                              <p className="font-bold text-foreground text-sm">{testimonial.name}</p>
+                              <p className="text-xs text-muted-foreground">{testimonial.loc}</p>
                             </div>
                           </div>
                         </div>
@@ -632,13 +605,13 @@ export default function LandingPage() {
 
                   {/* Navigation: counter + arrows below the card */}
                   <div className="flex items-center justify-between mt-5">
-                    <span className="text-sm text-gray-500 font-medium">
+                    <span className="text-sm text-muted-foreground font-medium">
                       {testimonialIdx + 1} / {TESTIMONIALS.length}
                     </span>
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => setTestimonialIdx((i) => (i - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
-                        className="w-9 h-9 rounded-full bg-white border border-gray-200 hover:border-amber-300 hover:bg-amber-50 flex items-center justify-center transition-all shadow-sm"
+                        className="w-9 h-9 rounded-full bg-background border border-border hover:border-amber-300 hover:bg-amber-50 flex items-center justify-center transition-all shadow-sm"
                         aria-label="Previous"
                       >
                         <svg className="w-4 h-4 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
@@ -647,7 +620,7 @@ export default function LandingPage() {
                       </button>
                       <button
                         onClick={() => setTestimonialIdx((i) => (i + 1) % TESTIMONIALS.length)}
-                        className="w-9 h-9 rounded-full bg-white border border-gray-200 hover:border-amber-300 hover:bg-amber-50 flex items-center justify-center transition-all shadow-sm"
+                        className="w-9 h-9 rounded-full bg-background border border-border hover:border-amber-300 hover:bg-amber-50 flex items-center justify-center transition-all shadow-sm"
                         aria-label="Next"
                       >
                         <svg className="w-4 h-4 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
@@ -663,15 +636,15 @@ export default function LandingPage() {
         </section>
 
 {/* ═══ PRICING ═══ */}
-        <section id="pricing" className="py-16 bg-white" data-animate>
+        <section id="pricing" className="py-16 bg-background" data-animate>
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-3">{t.pricingHeading}</h2>
-            <p className="text-gray-500 text-sm mb-10 max-w-xl mx-auto">{t.pricingSubtext}</p>
+            <h2 className="text-3xl font-extrabold text-foreground mb-3">{t.pricingHeading}</h2>
+            <p className="text-muted-foreground text-sm mb-10 max-w-xl mx-auto">{t.pricingSubtext}</p>
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {(t.pricingPlans as unknown as Array<{name: string; price: string; popular: boolean; features: string[]}>).map((plan) => (
-                <div key={plan.name} className={`p-6 rounded-2xl border transition-all ${plan.popular ? 'bg-amber-50 border-amber-400 shadow-lg -translate-y-2' : 'bg-white border-gray-100 hover:border-amber-200 hover:shadow-md'}`}>
+                <div key={plan.name} className={`p-6 rounded-2xl border transition-all ${plan.popular ? 'bg-amber-50 border-amber-400 shadow-lg -translate-y-2' : 'bg-background border-border/50 hover:border-amber-200 hover:shadow-md'}`}>
                   {plan.popular && <Badge className="bg-amber-500 text-white border-0 mb-3">{t.mostPopular}</Badge>}
-                  <h3 className="font-bold text-gray-900 text-lg">{plan.name}</h3>
+                  <h3 className="font-bold text-foreground text-lg">{plan.name}</h3>
                   <p className="text-3xl font-extrabold text-amber-600 my-3">{plan.price}</p>
                   <ul className="space-y-2 mb-6 text-left">
                     {plan.features.map((f) => (
@@ -681,7 +654,7 @@ export default function LandingPage() {
                     ))}
                   </ul>
                   <Link href="/signup">
-                    <Button className={`w-full rounded-full border-0 font-semibold ${plan.popular ? 'bg-amber-500 hover:bg-amber-600 text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}>
+                    <Button className={`w-full rounded-full border-0 font-semibold ${plan.popular ? 'bg-amber-500 hover:bg-amber-600 text-white' : 'bg-gray-100 hover:bg-gray-200 text-muted-foreground'}`}>
                       {t.pricingGetStarted}
                     </Button>
                   </Link>
@@ -712,18 +685,18 @@ export default function LandingPage() {
                   ))}
                 </ul>
                 <div className="flex flex-wrap gap-4">
-                  <Button className="bg-white text-amber-700 hover:bg-yellow-50 rounded-xl px-6 h-12 font-semibold flex items-center gap-2">
+                  <Button className="bg-background text-amber-700 hover:bg-yellow-50 rounded-xl px-6 h-12 font-semibold flex items-center gap-2">
                     <Download className="w-5 h-5" /> {t.appStore}
                   </Button>
-                  <Button className="bg-white text-amber-700 hover:bg-yellow-50 rounded-xl px-6 h-12 font-semibold flex items-center gap-2">
+                  <Button className="bg-background text-amber-700 hover:bg-yellow-50 rounded-xl px-6 h-12 font-semibold flex items-center gap-2">
                     <Play className="w-5 h-5" /> {t.googlePlay}
                   </Button>
                 </div>
               </div>
               <div className="flex-1 flex items-center justify-center">
-                <div className="w-80 min-h-[540px] bg-white rounded-3xl border border-white/30 shadow-2xl overflow-hidden flex flex-col">
+                <div className="w-80 min-h-[540px] bg-background rounded-3xl border border-white/30 shadow-2xl overflow-hidden flex flex-col">
                   {/* Status bar */}
-                  <div className="px-4 pt-3 pb-1 flex items-center justify-between text-[10px] text-gray-500 shrink-0">
+                  <div className="px-4 pt-3 pb-1 flex items-center justify-between text-[10px] text-muted-foreground shrink-0">
                     <span>9:41</span>
                     <div className="flex items-center gap-1">
                       <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
@@ -739,21 +712,21 @@ export default function LandingPage() {
                   </div>
 
                   {/* Chat header */}
-                  <div className="px-3 py-2.5 flex items-center gap-2 border-b border-gray-100 shrink-0">
+                  <div className="px-3 py-2.5 flex items-center gap-2 border-b border-border/50 shrink-0">
                     <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center shrink-0 overflow-hidden">
                       <img src="/avatars/astrologer_1.jpg" alt="" className="w-full h-full object-cover" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-gray-900 text-xs font-bold truncate">{t.phoneMockup.name}</p>
+                      <p className="text-foreground text-xs font-bold truncate">{t.phoneMockup.name}</p>
                       <p className="text-green-500 text-[10px]">{t.phoneMockup.status}</p>
                     </div>
-                    <button className="w-7 h-7 rounded-full bg-gray-50 hover:bg-gray-100 flex items-center justify-center">
-                      <svg className="w-3.5 h-3.5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                    <button className="w-7 h-7 rounded-full bg-card/20 hover:bg-gray-100 flex items-center justify-center">
+                      <svg className="w-3.5 h-3.5 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                       </svg>
                     </button>
-                    <button className="w-7 h-7 rounded-full bg-gray-50 hover:bg-gray-100 flex items-center justify-center">
-                      <svg className="w-3.5 h-3.5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                    <button className="w-7 h-7 rounded-full bg-card/20 hover:bg-gray-100 flex items-center justify-center">
+                      <svg className="w-3.5 h-3.5 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                         <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
                         <path d="M12 18h.01" />
                       </svg>
@@ -768,8 +741,8 @@ export default function LandingPage() {
                         <img src="/avatars/astrologer_1.jpg" alt="" className="w-full h-full object-cover" />
                       </div>
                       <div className="bg-gray-100 rounded-2xl rounded-tl-sm px-3 py-2">
-                        <p className="text-gray-800 text-[11px] leading-relaxed">{t.phoneMockup.receivedMsg}</p>
-                        <p className="text-gray-400 text-[9px] mt-1 text-right">9:41 AM</p>
+                        <p className="text-muted-foreground text-[11px] leading-relaxed">{t.phoneMockup.receivedMsg}</p>
+                        <p className="text-muted-foreground/60 text-[9px] mt-1 text-right">9:41 AM</p>
                       </div>
                     </div>
 
@@ -797,13 +770,13 @@ export default function LandingPage() {
                   </div>
 
                   {/* Input bar - stuck to bottom */}
-                  <div className="px-3 py-2 border-t border-gray-100 flex items-center gap-2 shrink-0">
-                    <button className="w-7 h-7 rounded-full bg-gray-50 hover:bg-gray-100 flex items-center justify-center shrink-0">
-                      <svg className="w-3.5 h-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <div className="px-3 py-2 border-t border-border/50 flex items-center gap-2 shrink-0">
+                    <button className="w-7 h-7 rounded-full bg-card/20 hover:bg-gray-100 flex items-center justify-center shrink-0">
+                      <svg className="w-3.5 h-3.5 text-muted-foreground/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                       </svg>
                     </button>
-                    <div className="flex-1 bg-gray-50 rounded-full px-3 py-1.5 text-[11px] text-gray-400">
+                    <div className="flex-1 bg-card/20 rounded-full px-3 py-1.5 text-[11px] text-muted-foreground/60">
                       {t.phoneMockup.placeholder}
                     </div>
                     <button className="w-7 h-7 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 flex items-center justify-center shrink-0 shadow-lg shadow-amber-500/30">
@@ -819,17 +792,17 @@ export default function LandingPage() {
         </section>
 
         {/* ═══ UNDERSTAND ASTROLOGY ═══ */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-4 max-w-5xl">
             <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">{t.astrologyLabel}</p>
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-8 text-left">
+            <h2 className="text-3xl font-extrabold text-foreground mb-8 text-left">
               {t.astrologyTitle} <span className="text-amber-700">{t.astrologyTitleEm}</span> {t.astrologyTitleRest}
             </h2>
-            <div className="bg-white border border-amber-100 rounded-2xl p-8 shadow-sm">
-              <p className="leading-relaxed text-sm text-gray-800 mb-4">
+            <div className="bg-background border border-amber-100 rounded-2xl p-8 shadow-sm">
+              <p className="leading-relaxed text-sm text-muted-foreground mb-4">
                 {t.astrologyPara1}
               </p>
-              <p className="leading-relaxed text-sm text-gray-800">
+              <p className="leading-relaxed text-sm text-muted-foreground">
                 {t.astrologyPara2}
               </p>
             </div>
@@ -837,13 +810,13 @@ export default function LandingPage() {
         </section>
 
         {/* ═══ FAQ ═══ */}
-        <section className="py-16 bg-gray-50/50">
+        <section className="py-16 bg-card/20">
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="flex flex-col lg:flex-row gap-10">
               {/* Left: Titles */}
               <div className="lg:w-72 shrink-0 text-left">
                 <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">{t.faqLabel}</p>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-foreground leading-tight">
                   {t.faqTitle}<br />
                   <span className="text-amber-700">{t.faqTitleEm}</span> {t.faqTitleRest}
                 </h2>
@@ -851,16 +824,16 @@ export default function LandingPage() {
               {/* Right: FAQ list */}
               <div className="flex-1 space-y-3">
                 {t.faqs.map((faq: { q: string; a: string }, i: number) => (
-                  <div key={i} className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:border-amber-100 transition-all">
+                  <div key={i} className="bg-background rounded-2xl border border-border/50 overflow-hidden hover:border-amber-100 transition-all">
                     <button
                       onClick={() => setOpenFaq(openFaq === i ? null : i)}
                       className="w-full flex items-center justify-between p-5 text-left"
                     >
-                      <span className="font-semibold text-gray-900 text-sm">{faq.q}</span>
+                      <span className="font-semibold text-foreground text-sm">{faq.q}</span>
                       {openFaq === i ? (
                         <ChevronUp className="w-4 h-4 text-amber-500 shrink-0 ml-2" />
                       ) : (
-                        <ChevronDown className="w-4 h-4 text-gray-400 shrink-0 ml-2" />
+                        <ChevronDown className="w-4 h-4 text-muted-foreground/60 shrink-0 ml-2" />
                       )}
                     </button>
                     {openFaq === i && (
@@ -876,7 +849,7 @@ export default function LandingPage() {
         </section>
 
         {/* ═══ FOOTER ═══ */}
-        <footer className="bg-gradient-to-b from-amber-50 to-yellow-50 text-gray-700 pt-12 pb-6 border-t border-amber-100">
+        <footer className="bg-gradient-to-b from-amber-50 to-yellow-50 text-muted-foreground pt-12 pb-6 border-t border-amber-100">
           <div className="container mx-auto px-4">
             {/* Top: Brand + Links */}
             <div className="flex flex-wrap gap-8 mb-10">
@@ -886,7 +859,7 @@ export default function LandingPage() {
                   <Image src="/logo.png" alt="HealConnect" width={28} height={28} className="rounded-full" />
                   <span className="text-lg font-extrabold text-amber-600">HealConnect</span>
                 </div>
-                <p className="text-xs text-gray-500 leading-relaxed mb-4">
+                <p className="text-xs text-muted-foreground leading-relaxed mb-4">
                   {t.footerBrandDesc}
                 </p>
                 <div className="flex gap-2">
@@ -907,7 +880,7 @@ export default function LandingPage() {
                     <ul className="space-y-1.5">
                       {col.links.map((link) => (
                         <li key={link}>
-                          <Link href={link.toLowerCase().includes('chat') || link.toLowerCase().includes('talk') || link.toLowerCase().includes('horoscope') || link.toLowerCase().includes('kundli') || link.toLowerCase().includes('calculator') ? '/signup' : '#'} className="text-xs text-gray-500 hover:text-amber-600 transition-colors">{link}</Link>
+                          <Link href={link.toLowerCase().includes('chat') || link.toLowerCase().includes('talk') || link.toLowerCase().includes('horoscope') || link.toLowerCase().includes('kundli') || link.toLowerCase().includes('calculator') ? '/signup' : '#'} className="text-xs text-muted-foreground hover:text-amber-600 transition-colors">{link}</Link>
                         </li>
                       ))}
                     </ul>
@@ -917,7 +890,7 @@ export default function LandingPage() {
             </div>
 
             {/* Bottom bar - centered */}
-            <div className="border-t border-amber-200 pt-6 text-center text-xs text-gray-500">
+            <div className="border-t border-amber-200 pt-6 text-center text-xs text-muted-foreground">
               <p>{t.footerCopyright}</p>
             </div>
           </div>
