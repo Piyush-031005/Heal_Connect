@@ -341,11 +341,11 @@ export default function Navbar() {
                     { code: 'dark', label: 'Navy (Dark)' },
                     { code: 'chestnut', label: 'Chestnut' },
                     { code: 'cosmic', label: 'Cosmic' },
-                    { code: 'purple', label: 'Purple / Yellow' },
-                    { code: 'aqua-yellow', label: 'Aqua / Yellow' },
-                    { code: 'orange-yellow', label: 'Orange / Yellow' },
-                    { code: 'turquoise-coral', label: 'Turquoise / Coral' },
-                    { code: 'red-yellow', label: 'Red / Yellow' }
+                    { code: 'purple', label: 'Amethyst / Yellow' },
+                    { code: 'obsidian', label: 'Obsidian / Yellow' },
+                    { code: 'black-pink', label: 'Black / Pink' },
+                    { code: 'green-apricot', label: 'Green / Apricot' },
+                    { code: 'dark-coral', label: 'Black / Coral' }
                   ]).map((t) => (
                     <button
                       key={t.code}
@@ -362,10 +362,10 @@ export default function Navbar() {
                         t.code === 'chestnut' ? 'bg-[#2D0502]' :
                         t.code === 'cosmic' ? 'bg-[#1B0B2A]' :
                         t.code === 'purple' ? 'bg-[#8E44AD]' :
-                        t.code === 'aqua-yellow' ? 'bg-[#29B6F6]' :
-                        t.code === 'orange-yellow' ? 'bg-[#F57C00]' :
-                        t.code === 'turquoise-coral' ? 'bg-[#009688]' :
-                        'bg-[#E53935]'
+                        t.code === 'obsidian' ? 'bg-[#240E4E]' :
+                        t.code === 'black-pink' ? 'bg-[#000000]' :
+                        t.code === 'green-apricot' ? 'bg-[#0F8C43]' :
+                        'bg-[#111111]'
                       } border border-white/20`} />
                       {t.label}
                       {theme === t.code && (
