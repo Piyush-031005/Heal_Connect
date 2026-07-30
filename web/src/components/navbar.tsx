@@ -341,10 +341,7 @@ export default function Navbar() {
                     { code: 'dark', label: 'Navy (Dark)' },
                     { code: 'chestnut', label: 'Chestnut' },
                     { code: 'cosmic', label: 'Cosmic' },
-                    { code: 'aqua', label: 'Aqua / Orange' },
                     { code: 'purple', label: 'Purple / Yellow' },
-                    { code: 'lavender', label: 'Lavender' },
-                    { code: 'green', label: 'Green / Yellow' },
                     { code: 'aqua-yellow', label: 'Aqua / Yellow' },
                     { code: 'orange-yellow', label: 'Orange / Yellow' },
                     { code: 'turquoise-coral', label: 'Turquoise / Coral' },
@@ -364,10 +361,7 @@ export default function Navbar() {
                         t.code === 'dark' ? 'bg-[#0B0D17]' :
                         t.code === 'chestnut' ? 'bg-[#2D0502]' :
                         t.code === 'cosmic' ? 'bg-[#1B0B2A]' :
-                        t.code === 'aqua' ? 'bg-[#2CB3C4]' :
                         t.code === 'purple' ? 'bg-[#8E44AD]' :
-                        t.code === 'lavender' ? 'bg-[#A89FDF]' :
-                        t.code === 'green' ? 'bg-[#009A44]' :
                         t.code === 'aqua-yellow' ? 'bg-[#29B6F6]' :
                         t.code === 'orange-yellow' ? 'bg-[#F57C00]' :
                         t.code === 'turquoise-coral' ? 'bg-[#009688]' :
