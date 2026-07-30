@@ -145,6 +145,106 @@
     --ring: #D6B46B;
     --radius: 0.625rem;
   }
+  .aqua {
+    --background: #2CB3C4;
+    --foreground: #FFFFFF;
+    --card: #2394A3;
+    --card-foreground: #FFFFFF;
+    --popover: #2394A3;
+    --popover-foreground: #FFFFFF;
+    --primary: #FF6B35;
+    --primary-foreground: #FFFFFF;
+    --secondary: #1F8291;
+    --secondary-foreground: #FFFFFF;
+    --muted: #1F8291;
+    --muted-foreground: #BCE7ED;
+    --accent: #FF6B35;
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #1F8291;
+    --input: #1F8291;
+    --ring: #FF6B35;
+    --radius: 0.625rem;
+  }
+
+  .purple {
+    --background: #662C91;
+    --foreground: #FFFFFF;
+    --card: #4F2273;
+    --card-foreground: #FFFFFF;
+    --popover: #4F2273;
+    --popover-foreground: #FFFFFF;
+    --primary: #FFE200;
+    --primary-foreground: #662C91;
+    --secondary: #3D1959;
+    --secondary-foreground: #FFFFFF;
+    --muted: #3D1959;
+    --muted-foreground: #C9B2D9;
+    --accent: #FFE200;
+    --accent-foreground: #662C91;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #3D1959;
+    --input: #3D1959;
+    --ring: #FFE200;
+    --radius: 0.625rem;
+  }
+
+  .lavender {
+    --background: #A89FDF;
+    --foreground: #FFFFFF;
+    --card: #887DC7;
+    --card-foreground: #FFFFFF;
+    --popover: #887DC7;
+    --popover-foreground: #FFFFFF;
+    --primary: #FFE65C;
+    --primary-foreground: #662C91;
+    --secondary: #7468B3;
+    --secondary-foreground: #FFFFFF;
+    --muted: #7468B3;
+    --muted-foreground: #E3E0F2;
+    --accent: #FFE65C;
+    --accent-foreground: #662C91;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #7468B3;
+    --input: #7468B3;
+    --ring: #FFE65C;
+    --radius: 0.625rem;
+  }
+
+  .green {
+    --background: #009A44;
+    --foreground: #FFFFFF;
+    --card: #007A36;
+    --card-foreground: #FFFFFF;
+    --popover: #007A36;
+    --popover-foreground: #FFFFFF;
+    --primary: #FFCC00;
+    --primary-foreground: #004D22;
+    --secondary: #00662D;
+    --secondary-foreground: #FFFFFF;
+    --muted: #00662D;
+    --muted-foreground: #A6DEBE;
+    --accent: #FFCC00;
+    --accent-foreground: #004D22;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #00662D;
+    --input: #00662D;
+    --ring: #FFCC00;
+    --radius: 0.625rem;
+  }
+  
   * {
     @apply border-border;
   }
