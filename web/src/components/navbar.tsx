@@ -335,27 +335,35 @@ export default function Navbar() {
               </button>
 
               {themeOpen && (
-                <div className={`absolute right-0 mt-2 w-44 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
+                <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
                     { code: 'light', label: 'Emerald (Light)' },
                     { code: 'dark', label: 'Navy (Dark)' },
                     { code: 'chestnut', label: 'Chestnut' },
-                    { code: 'cosmic', label: 'Cosmic' }
+                    { code: 'cosmic', label: 'Cosmic' },
+                    { code: 'aqua', label: 'Aqua / Orange' },
+                    { code: 'purple', label: 'Purple / Yellow' },
+                    { code: 'lavender', label: 'Lavender' },
+                    { code: 'green', label: 'Green / Yellow' }
                   ]).map((t) => (
                     <button
                       key={t.code}
                       onClick={() => { setTheme(t.code); setThemeOpen(false); }}
-                      className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
+                      className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-[13px] transition-colors ${
                         theme === t.code
                           ? 'bg-primary/20 text-primary font-semibold'
                           : isDark ? 'text-gray-300 hover:bg-white/10' : 'text-gray-700 hover:bg-gray-50'
                       }`}
                     >
-                      <div className={`w-3 h-3 rounded-full ${
+                      <div className={`w-3.5 h-3.5 rounded-full ${
                         t.code === 'light' ? 'bg-[#083D31]' :
                         t.code === 'dark' ? 'bg-[#0B0D17]' :
                         t.code === 'chestnut' ? 'bg-[#2D0502]' :
-                        'bg-[#1B0B2A]'
+                        t.code === 'cosmic' ? 'bg-[#1B0B2A]' :
+                        t.code === 'aqua' ? 'bg-[#2CB3C4]' :
+                        t.code === 'purple' ? 'bg-[#662C91]' :
+                        t.code === 'lavender' ? 'bg-[#A89FDF]' :
+                        'bg-[#009A44]'
                       } border border-white/20`} />
                       {t.label}
                       {theme === t.code && (
