@@ -335,7 +335,7 @@ export default function Navbar() {
               </button>
 
               {themeOpen && (
-                <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
+                <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
                     { code: 'light', label: 'Emerald (Light)' },
                     { code: 'dark', label: 'Navy (Dark)' },
@@ -344,7 +344,11 @@ export default function Navbar() {
                     { code: 'aqua', label: 'Aqua / Orange' },
                     { code: 'purple', label: 'Purple / Yellow' },
                     { code: 'lavender', label: 'Lavender' },
-                    { code: 'green', label: 'Green / Yellow' }
+                    { code: 'green', label: 'Green / Yellow' },
+                    { code: 'aqua-yellow', label: 'Aqua / Yellow' },
+                    { code: 'orange-yellow', label: 'Orange / Yellow' },
+                    { code: 'turquoise-coral', label: 'Turquoise / Coral' },
+                    { code: 'red-yellow', label: 'Red / Yellow' }
                   ]).map((t) => (
                     <button
                       key={t.code}
@@ -361,9 +365,13 @@ export default function Navbar() {
                         t.code === 'chestnut' ? 'bg-[#2D0502]' :
                         t.code === 'cosmic' ? 'bg-[#1B0B2A]' :
                         t.code === 'aqua' ? 'bg-[#2CB3C4]' :
-                        t.code === 'purple' ? 'bg-[#662C91]' :
+                        t.code === 'purple' ? 'bg-[#8E44AD]' :
                         t.code === 'lavender' ? 'bg-[#A89FDF]' :
-                        'bg-[#009A44]'
+                        t.code === 'green' ? 'bg-[#009A44]' :
+                        t.code === 'aqua-yellow' ? 'bg-[#29B6F6]' :
+                        t.code === 'orange-yellow' ? 'bg-[#F57C00]' :
+                        t.code === 'turquoise-coral' ? 'bg-[#009688]' :
+                        'bg-[#E53935]'
                       } border border-white/20`} />
                       {t.label}
                       {theme === t.code && (
