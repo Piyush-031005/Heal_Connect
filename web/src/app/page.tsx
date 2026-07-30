@@ -72,6 +72,27 @@ const HOROSCOPE_DATA: Record<number, { text: string; mood: string; luckyNum: num
   11: { text: "Pisces, your creativity flows freely today. Artistic pursuits and spiritual practices bring peace. Be careful with boundaries as your empathy may overwhelm you.", mood: "Dreamy", luckyNum: 12, color: "Lavender", colorClass: "bg-purple-300", love: 85, career: 70, health: 80, money: 65, dateRange: "Feb 19 – Mar 20" },
 };
 
+// Highly professional animated StarField for background
+const StarField = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-40">
+    {[...Array(30)].map((_, i) => (
+      <div 
+        key={i} 
+        className="absolute rounded-full bg-primary animate-pulse" 
+        style={{
+          top: `${Math.random() * 100}%`,
+          left: `${Math.random() * 100}%`,
+          width: `${Math.random() * 3 + 1}px`,
+          height: `${Math.random() * 3 + 1}px`,
+          animationDelay: `${Math.random() * 5}s`,
+          animationDuration: `${Math.random() * 3 + 2}s`,
+          boxShadow: '0 0 10px rgba(214,180,107,0.8)'
+        }}
+      />
+    ))}
+  </div>
+);
+
 export default function LandingPage() {
   const { t } = useLang();
   const router = useRouter();
@@ -115,6 +136,7 @@ export default function LandingPage() {
 
         {/* ═══ HERO ═══ */}
         <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-background min-h-[90vh] flex items-center">
+          <StarField />
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/10 rounded-full blur-3xl pointer-events-none" />
 
