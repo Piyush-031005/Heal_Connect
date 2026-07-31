@@ -1,68 +1,123 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
-export default function SacredGeometryHero() {
+// ── Layout 3: "Dark Tarot" ──────────────────────────────────────────────────
+// Inspired by: Black zodiac tarot card image — dark/black, dramatic white line
+// art zodiac illustrations in card format. Full dark luxury editorial energy.
+// Interactive: hover a card to "select" your sign and get a one-liner reading.
+
+const ZODIAC_CARDS = [
+  { sign: 'Aries', symbol: '♈', element: 'FIRE', date: 'Mar 21 – Apr 19', reading: 'Bold moves pay off. Trust your instincts this season.' },
+  { sign: 'Taurus', symbol: '♉', element: 'EARTH', date: 'Apr 20 – May 20', reading: 'Abundance is yours. Stay grounded and patient.' },
+  { sign: 'Gemini', symbol: '♊', element: 'AIR', date: 'May 21 – Jun 20', reading: 'Connections are your superpower. Speak your truth.' },
+  { sign: 'Cancer', symbol: '♋', element: 'WATER', date: 'Jun 21 – Jul 22', reading: 'Your intuition is sharper than ever. Listen to it.' },
+  { sign: 'Leo', symbol: '♌', element: 'FIRE', date: 'Jul 23 – Aug 22', reading: 'You were born to lead. Step into the spotlight.' },
+  { sign: 'Virgo', symbol: '♍', element: 'EARTH', date: 'Aug 23 – Sep 22', reading: 'Precision creates magic. Your plan is working.' },
+  { sign: 'Libra', symbol: '♎', element: 'AIR', date: 'Sep 23 – Oct 22', reading: 'Harmony is coming. Your diplomacy opens doors.' },
+  { sign: 'Scorpio', symbol: '♏', element: 'WATER', date: 'Oct 23 – Nov 21', reading: 'Transformation is your gift. Embrace the change.' },
+  { sign: 'Sagittarius', symbol: '♐', element: 'FIRE', date: 'Nov 22 – Dec 21', reading: 'Adventure awaits. Your vision is expanding.' },
+  { sign: 'Capricorn', symbol: '♑', element: 'EARTH', date: 'Dec 22 – Jan 19', reading: 'Your discipline is building an empire. Keep going.' },
+  { sign: 'Aquarius', symbol: '♒', element: 'AIR', date: 'Jan 20 – Feb 18', reading: 'You see the future. Share your vision boldly.' },
+  { sign: 'Pisces', symbol: '♓', element: 'WATER', date: 'Feb 19 – Mar 20', reading: 'Your creativity knows no limits. Dive deep.' },
+];
+
+const ELEMENT_COLORS: Record<string, string> = {
+  FIRE: '#FF6B35',
+  EARTH: '#8B7355',
+  AIR: '#87CEEB',
+  WATER: '#4682B4',
+};
+
+export default function DarkTarotHero() {
+  const [selected, setSelected] = useState<number | null>(null);
+  const selectedCard = selected !== null ? ZODIAC_CARDS[selected] : null;
+
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-stone-50 dark:bg-stone-950 min-h-[90vh] flex items-center">
-      
-      {/* Sacred Geometry SVG Background */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] dark:opacity-[0.05] pointer-events-none">
-        <svg className="w-[150vw] h-[150vw] md:w-[100vw] md:h-[100vw] animate-[spin_240s_linear_infinite]" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <g stroke="currentColor" strokeWidth="0.1" fill="none">
-            {/* Metatron's Cube / Flower of Life approximation elements */}
-            <circle cx="50" cy="50" r="40" />
-            <circle cx="50" cy="50" r="30" />
-            <circle cx="50" cy="50" r="20" />
-            
-            <circle cx="50" cy="10" r="10" />
-            <circle cx="84.6" cy="30" r="10" />
-            <circle cx="84.6" cy="70" r="10" />
-            <circle cx="50" cy="90" r="10" />
-            <circle cx="15.4" cy="70" r="10" />
-            <circle cx="15.4" cy="30" r="10" />
-            
-            {/* Connecting Lines */}
-            <path d="M 50 10 L 84.6 30 L 84.6 70 L 50 90 L 15.4 70 L 15.4 30 Z" />
-            <path d="M 50 10 L 84.6 70 L 15.4 70 Z" />
-            <path d="M 50 90 L 84.6 30 L 15.4 30 Z" />
-          </g>
-        </svg>
+    <section className="relative overflow-hidden pt-20 pb-16 min-h-screen flex flex-col items-center justify-center"
+      style={{ background: 'linear-gradient(180deg, #0A0A0A 0%, #111111 50%, #0D0D0D 100%)' }}>
+
+      {/* Top ambient glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full opacity-20 blur-[100px] pointer-events-none"
+        style={{ background: 'radial-gradient(circle, #8B6914 0%, transparent 70%)' }} />
+
+      {/* Hero headline */}
+      <div className="relative z-10 text-center mb-12 px-4">
+        <p className="text-xs tracking-[0.35em] uppercase text-amber-400/70 mb-3 font-medium">✦ Select Your Sign ✦</p>
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-tight leading-tight mb-4">
+          What Do The Stars<br />
+          <span className="italic font-light text-amber-300">Hold For You?</span>
+        </h1>
+        <p className="text-white/50 text-lg max-w-lg mx-auto font-light">
+          Choose your sign and connect with a verified expert for a personalized reading.
+        </p>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10 flex flex-col lg:flex-row items-center gap-12">
-        <div className="max-w-2xl lg:w-1/2">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="h-px bg-primary/40 w-12" />
-            <span className="text-sm font-semibold tracking-[0.2em] text-primary uppercase">Divine Proportion</span>
-          </div>
-          
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-medium tracking-tight leading-[1.1] mb-8 text-stone-900 dark:text-stone-100">
-            Harmonize Your Life's <br/>
-            <span className="italic font-light text-stone-500 dark:text-stone-400">Architecture</span>
-          </h1>
-          
-          <p className="text-lg text-stone-600 dark:text-stone-400 mb-10 max-w-xl font-light leading-relaxed">
-            Ancient wisdom meets modern insight. Our certified spiritual architects provide deep clarity using the sacred laws of the universe.
+      {/* Reading banner */}
+      {selectedCard && (
+        <div className="relative z-10 mb-8 px-6 py-4 rounded-2xl border text-center max-w-md mx-4 animate-in fade-in duration-500"
+          style={{ borderColor: `${ELEMENT_COLORS[selectedCard.element]}40`, background: `${ELEMENT_COLORS[selectedCard.element]}15`, backdropFilter: 'blur(10px)' }}>
+          <p className="text-xs tracking-widest uppercase mb-1 font-bold" style={{ color: ELEMENT_COLORS[selectedCard.element] }}>
+            {selectedCard.sign} · {selectedCard.element} · {selectedCard.date}
           </p>
+          <p className="text-white text-sm font-light leading-relaxed">{selectedCard.reading}</p>
+        </div>
+      )}
 
-          <Link href="/practitioners">
-            <Button size="lg" className="bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 text-stone-100 dark:text-stone-900 px-8 h-12 text-base rounded-none tracking-widest uppercase font-semibold transition-all">
-              Seek Balance <ArrowRight className="w-4 h-4 ml-3 inline" />
-            </Button>
-          </Link>
+      {/* Zodiac card grid */}
+      <div className="relative z-10 w-full max-w-5xl px-4">
+        <div className="grid grid-cols-4 md:grid-cols-6 gap-3">
+          {ZODIAC_CARDS.map((card, i) => (
+            <button
+              key={card.sign}
+              onClick={() => setSelected(i === selected ? null : i)}
+              className="group relative rounded-2xl border transition-all duration-300 overflow-hidden aspect-[2/3] flex flex-col items-center justify-center gap-2 cursor-pointer hover:scale-105"
+              style={{
+                borderColor: selected === i ? ELEMENT_COLORS[card.element] : 'rgba(255,255,255,0.08)',
+                background: selected === i
+                  ? `linear-gradient(135deg, ${ELEMENT_COLORS[card.element]}20, rgba(0,0,0,0.8))`
+                  : 'linear-gradient(135deg, rgba(255,255,255,0.04), rgba(0,0,0,0.8))',
+                boxShadow: selected === i ? `0 0 20px ${ELEMENT_COLORS[card.element]}40` : 'none',
+              }}
+            >
+              {/* Decorative corner lines (tarot card border) */}
+              <div className="absolute top-1.5 left-1.5 w-4 h-4 border-t border-l opacity-40" style={{ borderColor: ELEMENT_COLORS[card.element] }} />
+              <div className="absolute top-1.5 right-1.5 w-4 h-4 border-t border-r opacity-40" style={{ borderColor: ELEMENT_COLORS[card.element] }} />
+              <div className="absolute bottom-1.5 left-1.5 w-4 h-4 border-b border-l opacity-40" style={{ borderColor: ELEMENT_COLORS[card.element] }} />
+              <div className="absolute bottom-1.5 right-1.5 w-4 h-4 border-b border-r opacity-40" style={{ borderColor: ELEMENT_COLORS[card.element] }} />
+
+              {/* Element badge */}
+              <span className="text-[8px] tracking-[0.2em] uppercase font-bold px-1.5 py-0.5 rounded-sm"
+                style={{ color: ELEMENT_COLORS[card.element], background: `${ELEMENT_COLORS[card.element]}20` }}>
+                {card.element}
+              </span>
+
+              {/* Big symbol */}
+              <span className="text-3xl" style={{ color: selected === i ? ELEMENT_COLORS[card.element] : 'rgba(255,255,255,0.5)' }}>
+                {card.symbol}
+              </span>
+
+              {/* Sign name */}
+              <span className="text-[10px] tracking-widest uppercase font-bold text-white/70 group-hover:text-white transition-colors">
+                {card.sign}
+              </span>
+            </button>
+          ))}
         </div>
-        
-        {/* Abstract Geometrics Side visual */}
-        <div className="lg:w-1/2 relative hidden lg:flex items-center justify-center pointer-events-none">
-           <div className="w-[400px] h-[400px] border border-primary/20 rotate-45 flex items-center justify-center p-8 transition-transform duration-[10s] hover:rotate-90">
-             <div className="w-full h-full border border-primary/40 -rotate-12 flex items-center justify-center p-8">
-               <div className="w-full h-full border border-primary/60 rotate-45 rounded-full" />
-             </div>
-           </div>
-        </div>
+      </div>
+
+      {/* CTA */}
+      <div className="relative z-10 mt-10 flex flex-col sm:flex-row gap-4 items-center px-4">
+        <Link href="/practitioners">
+          <Button size="lg" className="rounded-full px-10 h-14 text-base font-bold border-none text-black shadow-xl transition-all hover:scale-105"
+            style={{ background: 'linear-gradient(135deg, #D4A843, #F5C842)' }}>
+            Book a Reading <ArrowRight className="w-4 h-4 ml-2 inline" />
+          </Button>
+        </Link>
+        <span className="text-white/30 text-sm">No credit card needed for first session</span>
       </div>
     </section>
   );
