@@ -333,7 +333,7 @@ export default function Navbar() {
             <div className="relative" ref={themeRef}>
               <button
                 onClick={() => setThemeOpen((p) => !p)}
-                className={`hidden md:flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
+                className={`flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
                   isDark ? 'border-white/20 hover:bg-white/10 hover:text-white' : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-600'
                 }`}
               >
@@ -349,7 +349,9 @@ export default function Navbar() {
                     { code: 'cosmic', label: 'Cosmic' },
                     { code: 'obsidian', label: 'Obsidian / Yellow' },
                     { code: 'black-pink', label: 'Black / Pink' },
-                    { code: 'dark-coral', label: 'Black / Coral' }
+                    { code: 'dark-coral', label: 'Black / Coral' },
+                    { code: 'mystic-amethyst', label: 'Mystic Amethyst' },
+                    { code: 'ocean-breeze', label: 'Ocean Breeze' }
                   ]).map((t) => (
                     <button
                       key={t.code}
@@ -367,7 +369,9 @@ export default function Navbar() {
                         t.code === 'cosmic' ? 'bg-[#1B0B2A]' :
                         t.code === 'obsidian' ? 'bg-[#240E4E]' :
                         t.code === 'black-pink' ? 'bg-[#000000]' :
-                        'bg-[#111111]'
+                        t.code === 'dark-coral' ? 'bg-[#111111]' :
+                        t.code === 'mystic-amethyst' ? 'bg-[#1C0A33]' :
+                        'bg-[#022C3A]'
                       } border border-white/20`} />
                       {t.label}
                       {theme === t.code && (
@@ -385,7 +389,7 @@ export default function Navbar() {
             <div className="relative" ref={layoutRef}>
               <button
                 onClick={() => setLayoutOpen((p) => !p)}
-                className={`hidden md:flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
+                className={`flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
                   isDark ? 'border-white/20 hover:bg-white/10 hover:text-white' : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-600'
                 }`}
               >

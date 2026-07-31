@@ -67,26 +67,26 @@ export default function SplitAstrologerHero() {
       <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center hidden md:flex">
         <div className="relative">
           {/* Spinning circle chart at center */}
-          <svg className="animate-[spin_60s_linear_infinite] drop-shadow-2xl" width="220" height="220" viewBox="0 0 220 220">
-            <circle cx="110" cy="110" r="106" fill="rgba(18,18,30,0.9)" stroke="#D4A843" strokeWidth="2" />
-            <circle cx="110" cy="110" r="80" fill="none" stroke="#D4A843" strokeWidth="0.8" opacity="0.5" />
-            <circle cx="110" cy="110" r="55" fill="none" stroke="#D4A843" strokeWidth="0.5" opacity="0.4" />
-            <circle cx="110" cy="110" r="28" fill="#D4A843" opacity="0.15" />
-            <circle cx="110" cy="110" r="14" fill="#D4A843" opacity="0.8" />
-            <text x="110" y="115" textAnchor="middle" fontSize="14" fill="#1C1208" fontFamily="serif">☀</text>
+          <svg className="animate-[spin_60s_linear_infinite] drop-shadow-2xl" width="320" height="320" viewBox="0 0 320 320">
+            <circle cx="160" cy="160" r="150" fill="rgba(18,18,30,0.95)" stroke="#D4A843" strokeWidth="2" />
+            <circle cx="160" cy="160" r="115" fill="none" stroke="#D4A843" strokeWidth="1" opacity="0.6" />
+            <circle cx="160" cy="160" r="80" fill="none" stroke="#D4A843" strokeWidth="0.8" opacity="0.4" />
+            <circle cx="160" cy="160" r="40" fill="#D4A843" opacity="0.15" />
+            <circle cx="160" cy="160" r="20" fill="#D4A843" opacity="0.9" />
+            <text x="160" y="167" textAnchor="middle" fontSize="20" fill="#1C1208" fontFamily="serif">☀</text>
             {SPLIT_SIGNS.map((sign, i) => {
               const a = ((i * 30 - 90) * Math.PI) / 180;
-              const sr = 92;
+              const sr = 132;
               return (
-                <text key={i} x={110 + sr * Math.cos(a)} y={110 + sr * Math.sin(a)}
-                  textAnchor="middle" dominantBaseline="middle" fontSize="13" fill="#D4A843" opacity="0.9" fontFamily="serif">
+                <text key={i} x={160 + sr * Math.cos(a)} y={160 + sr * Math.sin(a)}
+                  textAnchor="middle" dominantBaseline="middle" fontSize="18" fill="#D4A843" opacity="0.95" fontFamily="serif">
                   {sign}
                 </text>
               );
             })}
             {Array.from({ length: 12 }, (_, i) => {
               const a = ((i * 30 - 90) * Math.PI) / 180;
-              return <line key={i} x1={110 + 28 * Math.cos(a)} y1={110 + 28 * Math.sin(a)} x2={110 + 106 * Math.cos(a)} y2={110 + 106 * Math.sin(a)} stroke="#D4A843" strokeWidth="0.5" opacity="0.3" />;
+              return <line key={i} x1={160 + 40 * Math.cos(a)} y1={160 + 40 * Math.sin(a)} x2={160 + 150 * Math.cos(a)} y2={160 + 150 * Math.sin(a)} stroke="#D4A843" strokeWidth="0.8" opacity="0.4" />;
             })}
           </svg>
         </div>

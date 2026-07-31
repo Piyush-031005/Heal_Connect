@@ -221,6 +221,55 @@
     --radius: 0.625rem;
   }
 
+  .mystic-amethyst {
+    --background: #1C0A33;
+    --foreground: #F8FAFC;
+    --card: #28104A;
+    --card-foreground: #F8FAFC;
+    --popover: #28104A;
+    --popover-foreground: #F8FAFC;
+    --primary: #E9D5FF;
+    --primary-foreground: #1C0A33;
+    --secondary: #3B176B;
+    --secondary-foreground: #F8FAFC;
+    --muted: #3B176B;
+    --muted-foreground: #D8B4E2;
+    --accent: #E9D5FF;
+    --accent-foreground: #1C0A33;
+    --destructive: #EF4444;
+    --destructive-foreground: #F8FAFC;
+    --success: #22C55E;
+    --success-foreground: #F8FAFC;
+    --border: #3B176B;
+    --input: #3B176B;
+    --ring: #E9D5FF;
+    --radius: 0.625rem;
+  }
+
+  .ocean-breeze {
+    --background: #022C3A;
+    --foreground: #F8FAFC;
+    --card: #044256;
+    --card-foreground: #F8FAFC;
+    --popover: #044256;
+    --popover-foreground: #F8FAFC;
+    --primary: #99F6E4;
+    --primary-foreground: #022C3A;
+    --secondary: #075E79;
+    --secondary-foreground: #F8FAFC;
+    --muted: #075E79;
+    --muted-foreground: #8BD2E3;
+    --accent: #99F6E4;
+    --accent-foreground: #022C3A;
+    --destructive: #EF4444;
+    --destructive-foreground: #F8FAFC;
+    --success: #22C55E;
+    --success-foreground: #F8FAFC;
+    --border: #075E79;
+    --input: #075E79;
+    --ring: #99F6E4;
+    --radius: 0.625rem;
+  }
   
   * {
     @apply border-border;
