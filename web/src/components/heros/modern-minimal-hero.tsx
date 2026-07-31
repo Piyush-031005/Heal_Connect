@@ -14,15 +14,13 @@ export default function ModernMinimalHero() {
       
       {/* Cinematic Soft Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Extremely slow, massive, soft glowing orbs */}
         <div className="absolute top-[-20%] right-[-10%] w-[80vw] h-[80vw] bg-[radial-gradient(circle,rgba(50,205,50,0.15)_0%,transparent_60%)] blur-[120px] animate-[cinematicPan_25s_ease-in-out_infinite_alternate-reverse]" />
         <div className="absolute bottom-[-10%] left-[-20%] w-[90vw] h-[90vw] bg-[radial-gradient(circle,rgba(255,195,0,0.12)_0%,transparent_60%)] blur-[150px] animate-[cinematicPan_30s_ease-in-out_infinite_alternate]" />
         
-        {/* Subtle noise texture to make it feel like film */}
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }} />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 w-full">
+      <div className="container mx-auto px-6 relative z-10 w-full h-full flex flex-col justify-center">
         <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-16">
           
           {/* Main Hero Text (Right) */}
@@ -32,10 +30,10 @@ export default function ModernMinimalHero() {
               <span className="text-[12px] uppercase tracking-[0.4em] font-semibold text-[#FFC300]">Pure Harmony</span>
             </div>
             
-            <h1 className="text-6xl md:text-8xl lg:text-[7.5rem] font-serif leading-[0.95] tracking-tight text-[#1A1A1A] mb-8">
-              Inner <br />
-              <span className="italic text-transparent bg-clip-text bg-gradient-to-br from-[#FFC300] to-[#32CD32] pr-4">
-                Balance
+            <h1 className="text-6xl md:text-8xl lg:text-[7.5rem] font-serif leading-[0.95] tracking-tight text-[#1A1A1A] mb-8 font-black">
+              Heal <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#FFC300] to-[#32CD32]">
+                Connect
               </span>
             </h1>
             
@@ -52,32 +50,23 @@ export default function ModernMinimalHero() {
             </div>
           </div>
           
-          {/* Cinematic Gallery (Left) */}
-          <div className="w-full lg:w-1/2 relative h-[700px] hidden md:block">
+          {/* Pure Levitating Art (Left) */}
+          <div className="w-full lg:w-1/2 relative h-[800px] hidden md:flex items-center justify-center">
             {mounted && (
               <div className="absolute inset-0 flex items-center justify-center">
-                {/* Center Image - Massive, slow floating */}
-                <div className="absolute top-[15%] right-[20%] w-[340px] h-[480px] bg-white rounded-[2rem] p-3 shadow-[0_30px_60px_rgba(0,0,0,0.08)] transform rotate-[4deg] transition-all duration-1000 ease-out hover:rotate-0 hover:scale-105 z-30" style={{ animation: 'cinematicFloat 15s ease-in-out infinite' }}>
-                  <img src="/zodiacs/zodiac_9.jpg" alt="Sagittarius" className="w-full h-full object-cover rounded-3xl" />
-                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-xl px-8 py-3 rounded-full shadow-[0_10px_30px_rgba(255,195,0,0.15)] font-bold text-[#1A1A1A] text-sm whitespace-nowrap uppercase tracking-widest border border-[#FFC300]/20">
-                    Cosmic Balance
-                  </div>
+                {/* Central Sagittarius - Glowing and Levitating */}
+                <div className="absolute z-30 transform-gpu transition-transform" style={{ animation: 'levitateSlow 14s ease-in-out infinite' }}>
+                  <div className="absolute inset-0 bg-[#32CD32] blur-[120px] opacity-20 animate-pulse" />
+                  <img src="/custom/sagittarius.png" alt="Sagittarius" className="w-[450px] h-auto object-contain drop-shadow-[0_20px_50px_rgba(255,195,0,0.2)]" />
                 </div>
                 
-                {/* Top Left Image - Pushed back in Z space */}
-                <div className="absolute top-[5%] left-[5%] w-[240px] h-[320px] bg-white rounded-[2rem] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.05)] transform rotate-[-8deg] translate-z-[-100px] transition-all duration-1000 ease-out hover:rotate-0 hover:scale-105 hover:translate-z-0 z-20" style={{ animation: 'cinematicFloat 20s ease-in-out infinite reverse' }}>
-                  <img src="/zodiacs/zodiac_12.jpg" alt="Pisces" className="w-full h-full object-cover rounded-[1.5rem]" />
-                  <div className="absolute top-6 -right-6 bg-[#32CD32] text-white px-4 py-2 rounded-full shadow-lg font-bold text-[10px] uppercase tracking-widest">
-                    Clarity
-                  </div>
+                {/* Floating Elements Around */}
+                <div className="absolute top-[5%] left-[5%] z-20 transform-gpu" style={{ animation: 'levitateMedium 18s ease-in-out infinite reverse' }}>
+                  <img src="/custom/mystic_hand.png" alt="Mystic" className="w-[220px] h-auto object-contain opacity-70 drop-shadow-2xl" />
                 </div>
-                
-                {/* Bottom Right Image - Pushed forward */}
-                <div className="absolute bottom-[10%] right-[5%] w-[220px] h-[280px] bg-white rounded-[1.5rem] p-2 shadow-[0_40px_80px_rgba(0,0,0,0.12)] transform rotate-[12deg] translate-z-[100px] transition-all duration-1000 ease-out hover:rotate-0 hover:scale-105 z-40" style={{ animation: 'cinematicFloat 18s ease-in-out infinite 2s' }}>
-                  <img src="/zodiacs/zodiac_2.jpg" alt="Taurus" className="w-full h-full object-cover rounded-xl" />
-                  <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-lg shadow-sm font-bold text-[#FFC300] text-xs">
-                    ★ 5.0
-                  </div>
+
+                <div className="absolute bottom-[10%] right-[0%] z-40 transform-gpu" style={{ animation: 'levitateFast 12s ease-in-out infinite 1s' }}>
+                  <img src="/custom/virgo.png" alt="Virgo" className="w-[280px] h-auto object-contain opacity-60 drop-shadow-2xl" />
                 </div>
               </div>
             )}
@@ -91,10 +80,17 @@ export default function ModernMinimalHero() {
           0% { transform: translate(0, 0) scale(1); }
           100% { transform: translate(-100px, -50px) scale(1.1); }
         }
-        @keyframes cinematicFloat {
-          0% { transform: translateY(0px) rotate(var(--tw-rotate)); }
-          50% { transform: translateY(-30px) rotate(calc(var(--tw-rotate) + 2deg)); }
-          100% { transform: translateY(0px) rotate(var(--tw-rotate)); }
+        @keyframes levitateSlow {
+          0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+          50% { transform: translateY(-40px) scale(1.02) rotate(-1deg); }
+        }
+        @keyframes levitateMedium {
+          0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+          50% { transform: translateY(30px) scale(0.95) rotate(2deg); }
+        }
+        @keyframes levitateFast {
+          0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+          50% { transform: translateY(-20px) scale(1.05) rotate(-3deg); }
         }
       `}} />
     </section>

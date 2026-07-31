@@ -46,10 +46,9 @@ export default function MysticWheelHero() {
             <div className="h-px w-10 bg-primary/60" />
             <span className="text-xs tracking-[0.25em] uppercase text-primary/80 font-medium">HealConnect — Est. 2024</span>
           </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold tracking-tight leading-[0.95] mb-8 animate-in slide-in-from-left duration-1000">
-            <span className="text-foreground drop-shadow-md">Guidance.</span><br />
-            <span className="text-foreground drop-shadow-md">Clarity.</span><br />
-            <span className="bg-gradient-to-r from-primary via-amber-200 to-primary bg-clip-text text-transparent drop-shadow-lg">Confidence.</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-black tracking-tight leading-[0.95] mb-8 animate-in slide-in-from-left duration-1000">
+            <span className="text-foreground drop-shadow-md">Heal</span><br />
+            <span className="bg-gradient-to-r from-primary via-amber-200 to-primary bg-clip-text text-transparent drop-shadow-lg">Connect.</span>
           </h1>
           <p className="text-xl lg:text-2xl text-foreground/70 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-light leading-relaxed">
             Find trusted guidance for every stage of life. Connect with verified experts instantly.

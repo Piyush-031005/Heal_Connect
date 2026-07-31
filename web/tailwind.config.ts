@@ -64,7 +64,7 @@ const config = {
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
         heading: ["var(--font-playfair)", "serif"],
-        serif: ["var(--font-playfair)", "serif"],
+        serif: ["var(--font-cinzel)", "serif"],
       },
     },
   },

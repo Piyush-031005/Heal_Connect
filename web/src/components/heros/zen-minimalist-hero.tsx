@@ -62,9 +62,9 @@ export default function ZenMinimalistHero() {
           The Crimson Wheel
         </span>
         
-        <h1 className="text-6xl md:text-8xl font-serif text-[#1A0B0F] tracking-tight leading-[1.05] mb-8 drop-shadow-sm">
-          Destiny <br />
-          <span className="italic font-light text-red-700">Unveiled.</span>
+        <h1 className="text-6xl md:text-8xl font-serif text-[#1A0B0F] tracking-tight leading-[1.05] mb-8 drop-shadow-sm font-black">
+          Heal <br />
+          <span className="italic font-light text-red-700">Connect.</span>
         </h1>
         
         <p className="text-xl md:text-2xl text-[#4A3B3F] mb-12 font-medium leading-relaxed max-w-2xl mx-auto">

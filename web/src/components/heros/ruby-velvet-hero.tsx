@@ -29,9 +29,9 @@ export default function RubyVelvetHero() {
             Ancient Wisdom, Modern Clarity
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-serif font-bold text-[#2C1810] leading-[1.1] mb-6">
-            Illuminate Your <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B0000] to-[#DAA520] italic font-light">Destiny</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-black text-[#2C1810] leading-[1.1] mb-6">
+            Heal <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B0000] to-[#DAA520] italic font-light">Connect.</span>
           </h1>
           
           <p className="text-lg md:text-xl text-[#5C4033] mb-10 max-w-xl mx-auto md:mx-0 font-light leading-relaxed">

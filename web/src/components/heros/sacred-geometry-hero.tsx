@@ -71,10 +71,10 @@ export default function SacredGeometryHero() {
         </div>
 
         <h1 className="text-6xl md:text-8xl lg:text-[8rem] font-serif font-black tracking-tight leading-[0.95] text-[#1A0B0F] mb-6 max-w-5xl animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200 drop-shadow-2xl">
-          Astrology <br />
+          Heal <br />
           <span className="relative inline-block">
             <span className="absolute -inset-2 bg-red-600/10 blur-xl rounded-full" />
-            <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-red-700 via-red-600 to-red-900 italic font-light">Elevated.</span>
+            <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-red-700 via-red-600 to-red-900 italic font-light">Connect.</span>
           </span>
         </h1>
 
