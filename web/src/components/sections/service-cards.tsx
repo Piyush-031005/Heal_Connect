@@ -18,16 +18,19 @@ export function ServiceCards({ variant }: { variant: 'mystic' | 'golden' | 'cosm
             <h2 className="text-4xl md:text-5xl font-black text-white mb-4">Our Services</h2>
             <p className="text-white/60">Explore spiritual connections in a new dimension.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {t.servicesList.slice(0, 4).map((svc: any, idx: number) => (
-              <div key={idx} className="group relative p-1 rounded-3xl bg-gradient-to-br from-white/10 to-transparent hover:from-pink-500/30 hover:to-purple-500/30 transition-all duration-700">
-                <div className="absolute inset-0 bg-black/80 rounded-3xl" />
-                <div className="relative p-8 h-full flex flex-col items-center text-center bg-black/40 backdrop-blur-xl rounded-3xl">
-                  <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-white/10 transition-all shadow-[0_0_20px_rgba(255,255,255,0.05)] group-hover:shadow-[0_0_40px_rgba(236,72,153,0.3)]">
-                    <Zap className="w-8 h-8 text-pink-400" />
+              <div key={idx} className="group relative rounded-[2.5rem] overflow-hidden aspect-[4/5] cursor-pointer border border-white/10 hover:border-pink-500/50 hover:shadow-[0_0_50px_rgba(236,72,153,0.3)] transition-all duration-700">
+                <img src={`/zodiacs/zodiac_${idx + 13}.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" alt="Service" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20 opacity-90 group-hover:opacity-70 transition-opacity duration-700" />
+                <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col items-center text-center transform transition-transform duration-700 group-hover:-translate-y-4">
+                  <div className="w-16 h-16 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(255,255,255,0.1)] group-hover:bg-pink-500/20 group-hover:border-pink-500/50 group-hover:shadow-[0_0_40px_rgba(236,72,153,0.4)] group-hover:scale-110 transition-all duration-500">
+                     <Sparkles className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">{svc.name}</h3>
-                  <p className="text-sm text-white/50">{svc.desc}</p>
+                  <h3 className="text-2xl font-black text-white mb-4 group-hover:text-pink-300 transition-colors drop-shadow-md">{svc.name}</h3>
+                  <div className="h-0 group-hover:h-20 overflow-hidden transition-all duration-700">
+                    <p className="text-sm text-white/70 leading-relaxed font-light">{svc.desc}</p>
+                  </div>
                 </div>
               </div>
             ))}

@@ -8,6 +8,8 @@ import MysticWheelHero from '@/components/heros/mystic-wheel-hero';
 import CelestialMapHero from '@/components/heros/celestial-map-hero';
 import SacredGeometryHero from '@/components/heros/sacred-geometry-hero';
 import ModernMinimalHero from '@/components/heros/modern-minimal-hero';
+import RubyVelvetHero from '@/components/heros/ruby-velvet-hero';
+import ZenMinimalistHero from '@/components/heros/zen-minimalist-hero';
 
 import { TrustLayer } from '@/components/sections/trust-layer';
 import { ServiceCards } from '@/components/sections/service-cards';
@@ -28,9 +30,9 @@ export default function LandingPage() {
 
   // Determine variant string based on layout context
   let variant: 'mystic' | 'golden' | 'cosmic' | 'split' = 'mystic';
-  if (layout === 'celestial-map') variant = 'golden';
+  if (layout === 'celestial-map' || layout === 'ruby-velvet') variant = 'golden';
   if (layout === 'sacred-geometry') variant = 'cosmic';
-  if (layout === 'modern-minimal') variant = 'split';
+  if (layout === 'modern-minimal' || layout === 'zen-minimalist') variant = 'split';
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
@@ -42,6 +44,8 @@ export default function LandingPage() {
         {layout === 'celestial-map' && <CelestialMapHero />}
         {layout === 'sacred-geometry' && <SacredGeometryHero />}
         {layout === 'modern-minimal' && <ModernMinimalHero />}
+        {layout === 'ruby-velvet' && <RubyVelvetHero />}
+        {layout === 'zen-minimalist' && <ZenMinimalistHero />}
 
         {/* ═══ FULL PAGE LAYOUT SECTIONS ═══ */}
         <TrustLayer variant={variant} />

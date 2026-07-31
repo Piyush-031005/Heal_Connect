@@ -399,6 +399,8 @@ export default function Navbar() {
               {layoutOpen && (
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
+                    { code: 'ruby-velvet', label: '✦ Ruby Velvet' },
+                    { code: 'zen-minimalist', label: '○ Zen Minimalist' },
                     { code: 'mystic-wheel', label: '✦ Ethereal Zodiac' },
                     { code: 'celestial-map', label: '☀ Golden Destiny' },
                     { code: 'sacred-geometry', label: '✦ Cosmic Aura' },

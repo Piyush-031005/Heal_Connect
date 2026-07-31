@@ -9,39 +9,43 @@ export default function CosmicAuraHero() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  // Floating animation styles for background cards
-  const floatingCards = [
-    { id: 21, top: '10%', left: '5%', size: 'w-48 h-64', delay: '0s', duration: '15s', rot: '-10deg' },
-    { id: 22, top: '15%', right: '10%', size: 'w-56 h-72', delay: '2s', duration: '18s', rot: '15deg' },
-    { id: 23, bottom: '15%', left: '15%', size: 'w-52 h-64', delay: '4s', duration: '20s', rot: '-5deg' },
-    { id: 24, bottom: '10%', right: '5%', size: 'w-64 h-80', delay: '1s', duration: '17s', rot: '12deg' },
-    { id: 25, top: '40%', left: '80%', size: 'w-40 h-56', delay: '3s', duration: '16s', rot: '-20deg' },
-    { id: 26, top: '50%', left: '2%', size: 'w-44 h-60', delay: '5s', duration: '19s', rot: '8deg' },
-  ];
+  // Create 12 cards for a full circle
+  const orbitCards = Array.from({ length: 12 }, (_, i) => ({
+    id: i + 1,
+    angle: (i * 360) / 12,
+  }));
 
   return (
     <section className="relative overflow-hidden min-h-screen flex items-center justify-center bg-[#05050A]">
       
-      {/* Immersive Floating Zodiac Background */}
+      {/* Immersive Orbital Zodiac Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-auto z-0 perspective-1000">
-        {floatingCards.map((card) => (
-          <div
-            key={card.id}
-            className={`absolute ${card.size} rounded-3xl overflow-hidden border border-white/5 cursor-crosshair transition-all duration-700 hover:scale-[1.15] hover:z-50 hover:shadow-[0_0_80px_rgba(245,158,11,0.6)] group`}
-            style={{
-              top: card.top,
-              left: card.left,
-              right: card.right,
-              bottom: card.bottom,
-              transform: `rotate(${card.rot}) translateZ(0)`,
-              animation: `float ${card.duration} ease-in-out infinite alternate ${card.delay}`,
-            }}
-          >
-            {/* Dark overlay for contrast, removed on hover */}
-            <div className="absolute inset-0 bg-black/60 group-hover:bg-transparent transition-colors duration-500 z-10" />
-            <img src={`/zodiacs/zodiac_${card.id}.jpg`} alt="Zodiac" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]" />
-          </div>
-        ))}
+        <div className="absolute top-1/2 left-1/2 w-[80vw] h-[80vw] max-w-[1200px] max-h-[1200px] -ml-[40vw] -mt-[40vw] sm:-ml-[600px] sm:-mt-[600px] animate-[spin_120s_linear_infinite]">
+          {orbitCards.map((card) => {
+            // Calculate fixed position on the circle boundary
+            const rad = (card.angle * Math.PI) / 180;
+            const radius = 50; // percentage
+            const top = 50 + Math.sin(rad) * radius;
+            const left = 50 + Math.cos(rad) * radius;
+            
+            return (
+              <div
+                key={card.id}
+                className="absolute w-32 h-48 sm:w-48 sm:h-64 -ml-16 -mt-24 sm:-ml-24 sm:-mt-32 group"
+                style={{
+                  top: `${top}%`,
+                  left: `${left}%`,
+                }}
+              >
+                {/* Counter-spin so cards remain upright */}
+                <div className="w-full h-full animate-[spin_120s_linear_infinite_reverse] rounded-3xl overflow-hidden border border-white/10 shadow-2xl transition-all duration-700 hover:scale-125 hover:z-50 hover:shadow-[0_0_80px_rgba(236,72,153,0.8)] cursor-crosshair">
+                  <div className="absolute inset-0 bg-black/60 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                  <img src={`/zodiacs/zodiac_${card.id}.jpg`} alt="Zodiac" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-[1.5s]" />
+                </div>
+              </div>
+            );
+          })}
+        </div>
         
         {/* Core glow behind text */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] rounded-full opacity-50 mix-blend-screen blur-[120px] pointer-events-none"

@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export type LayoutMode = 'mystic-wheel' | 'celestial-map' | 'sacred-geometry' | 'modern-minimal';
+export type LayoutMode = 'mystic-wheel' | 'celestial-map' | 'sacred-geometry' | 'modern-minimal' | 'ruby-velvet' | 'zen-minimalist';
 
 interface LayoutContextType {
   layout: LayoutMode;
