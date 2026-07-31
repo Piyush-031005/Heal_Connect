@@ -182,7 +182,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
               <Image src="/logo.png" alt="HealConnect" width={32} height={32} className="rounded-full border-2 border-white/40" />
-              <span className="text-lg font-extrabold text-white">HealConnect</span>
+              <span className="text-xl font-serif font-bold text-white">HealConnect</span>
             </div>
             <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
@@ -306,7 +306,7 @@ export default function Navbar() {
             </button>
             <Link href="/" className="flex items-center gap-2">
               <Image src="/logo.png?v=3" alt="HealConnect" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
-              <span className="text-lg font-extrabold transition-colors text-foreground">HealConnect</span>
+              <span className="text-xl font-serif font-bold transition-colors text-foreground">HealConnect</span>
             </Link>
           </div>
 
