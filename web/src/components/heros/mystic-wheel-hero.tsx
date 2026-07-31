@@ -2,76 +2,78 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
-import ZodiacWheel from '@/components/zodiac-wheel';
+import { ArrowRight, Sparkles } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
-// Beautiful twinkle starfield component reused here
-export function StarField() {
-  const stars = Array.from({ length: 80 }, (_, i) => ({
-    id: i,
-    top: `${Math.random() * 100}%`,
-    left: `${Math.random() * 100}%`,
-    size: `${Math.random() * 2.5 + 0.5}px`,
-    delay: `${Math.random() * 5}s`,
-    duration: `${Math.random() * 3 + 2}s`,
-  }));
+// ── Layout 1: "Ethereal Zodiac" ───────────────────────────────────────────
+// A highly premium, light-themed, ethereal layout with positive energy.
+// Inspired by high-end luxury wellness brands.
+
+export default function EtherealZodiacHero() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {stars.map((s) => (
-        <div
-          key={s.id}
-          className="absolute rounded-full bg-white animate-pulse"
-          style={{ top: s.top, left: s.left, width: s.size, height: s.size, animationDelay: s.delay, animationDuration: s.duration, opacity: 0.6 }}
-        />
-      ))}
-    </div>
-  );
-}
+    <section className="relative overflow-hidden pt-28 pb-20 lg:pt-40 lg:pb-32 min-h-[95vh] flex items-center justify-center"
+      style={{ 
+        background: 'linear-gradient(180deg, #FFFAF0 0%, #FDF4E3 50%, #F8E8C7 100%)' 
+      }}>
 
-export default function MysticWheelHero() {
-  return (
-    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-background min-h-[90vh] flex items-center">
-      <StarField />
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Large Glowing Aura Background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[120px] pointer-events-none opacity-60"
+        style={{ background: 'radial-gradient(circle, #FDE68A 0%, #FBCFE8 50%, transparent 80%)' }} />
 
-      {/* Big zodiac wheel overflowing on right */}
-      <div className="absolute top-1/2 -translate-y-1/2 right-[-50%] md:right-[-30%] lg:right-[-15%] opacity-30 lg:opacity-100 pointer-events-none lg:pointer-events-auto">
-        <ZodiacWheel />
-      </div>
+      {/* Intricate Mandala / Astrolabe SVG */}
+      <svg className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] min-w-[800px] max-w-[1400px] opacity-[0.04] pointer-events-none animate-[spin_120s_linear_infinite]" viewBox="0 0 1000 1000">
+        <circle cx="500" cy="500" r="480" fill="none" stroke="#8B6914" strokeWidth="2" />
+        <circle cx="500" cy="500" r="400" fill="none" stroke="#8B6914" strokeWidth="1" />
+        <circle cx="500" cy="500" r="320" fill="none" stroke="#8B6914" strokeWidth="0.5" strokeDasharray="5,5" />
+        {Array.from({ length: 24 }).map((_, i) => {
+          const angle = (i * 15 * Math.PI) / 180;
+          return (
+            <line key={i} x1={500 + 320 * Math.cos(angle)} y1={500 + 320 * Math.sin(angle)} 
+                  x2={500 + 480 * Math.cos(angle)} y2={500 + 480 * Math.sin(angle)} 
+                  stroke="#8B6914" strokeWidth="0.5" />
+          );
+        })}
+      </svg>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="h-px w-10 bg-primary/60" />
-            <span className="text-xs tracking-[0.25em] uppercase text-primary/80 font-medium">HealConnect — Est. 2024</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold tracking-tight leading-[0.95] mb-8 animate-in slide-in-from-left duration-1000">
-            <span className="text-foreground drop-shadow-md">Guidance.</span><br />
-            <span className="text-foreground drop-shadow-md">Clarity.</span><br />
-            <span className="bg-gradient-to-r from-primary via-amber-200 to-primary bg-clip-text text-transparent drop-shadow-lg">Confidence.</span>
-          </h1>
-          <p className="text-xl lg:text-2xl text-foreground/70 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-light leading-relaxed">
-            Find trusted guidance for every stage of life. Connect with verified experts instantly.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 mb-10 animate-in slide-in-from-left duration-1000 delay-300">
-            <Link href="/practitioners">
-              <Button size="lg" className="bg-gradient-to-r from-primary to-amber-500 hover:from-amber-500 hover:to-amber-600 text-[#0B1020] px-10 h-14 text-lg rounded-full font-bold shadow-[0_0_30px_rgba(214,180,107,0.3)] group border-none transition-all">
-                Book Consultation <ArrowRight className="w-5 h-5 ml-2 inline group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-            <Link href="#horoscope">
-              <Button size="lg" variant="outline" className="border-primary/40 text-primary hover:bg-primary/10 px-10 h-14 text-lg rounded-full font-medium transition-all">
-                Today's Horoscope
-              </Button>
-            </Link>
-          </div>
-          {/* Trust badges */}
-          <div className="flex flex-wrap gap-6 animate-in fade-in duration-1000 delay-500">
-            {[['4.9★', 'Rating'], ['100k+', 'Sessions'], ['500+', 'Experts'], ['24x7', 'Available']].map(([v, l]) => (
-              <div key={l} className="flex flex-col">
-                <span className="text-2xl font-bold text-foreground">{v}</span>
-                <span className="text-xs text-muted-foreground uppercase tracking-widest">{l}</span>
+      <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-200 bg-white/50 backdrop-blur-md text-amber-700 text-xs font-bold uppercase tracking-[0.2em] mb-8 animate-in slide-in-from-bottom-4 duration-700">
+          <Sparkles className="w-3.5 h-3.5" /> Awaken Your Destiny
+        </div>
+
+        <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-serif font-black tracking-tighter leading-[1.05] text-[#1A150C] mb-8 animate-in slide-in-from-bottom-8 duration-700 delay-150">
+          Unveil the Secrets of <br />
+          <span className="italic font-light bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 bg-clip-text text-transparent">the Cosmos</span>
+        </h1>
+
+        <p className="text-lg md:text-xl text-[#5A4A2E] mb-12 max-w-2xl mx-auto font-light leading-relaxed animate-in slide-in-from-bottom-8 duration-700 delay-300">
+          Experience profound clarity and direction with India's most verified spiritual guides. 
+          Your journey to inner peace begins here.
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-in slide-in-from-bottom-8 duration-700 delay-500">
+          <Link href="/practitioners">
+            <Button size="lg" className="rounded-full px-10 h-14 text-base font-bold text-white shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all border-0"
+              style={{ background: 'linear-gradient(135deg, #E69538, #F5B942)' }}>
+              Consult an Expert <ArrowRight className="w-4 h-4 ml-2 inline" />
+            </Button>
+          </Link>
+          <Link href="#horoscope">
+            <Button size="lg" variant="outline" className="rounded-full px-10 h-14 text-base border-amber-200 text-amber-800 bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all font-medium">
+              Daily Horoscope
+            </Button>
+          </Link>
+        </div>
+
+        {/* Premium Zodiac Strip */}
+        <div className="mt-20 pt-10 border-t border-amber-900/10 animate-in fade-in duration-1000 delay-700">
+          <p className="text-xs uppercase tracking-[0.25em] text-amber-700/60 font-bold mb-6">Explore Your Sign</p>
+          <div className="flex justify-center gap-4 md:gap-8 flex-wrap">
+            {['♈', '♉', '♊', '♋', '♌', '♍', '♎'].map((symbol, i) => (
+              <div key={i} className="w-12 h-12 rounded-full border border-amber-200 bg-white shadow-sm flex items-center justify-center text-xl text-amber-600 hover:scale-110 hover:border-amber-400 hover:bg-amber-50 transition-all cursor-pointer">
+                {symbol}
               </div>
             ))}
           </div>

@@ -30,12 +30,12 @@ const TOP_ASTROLOGERS = [
 ];
 
 const CATEGORIES = [
-  { name: 'Love', count: '4,280+', icon: Heart, color: 'text-rose-500', bg: 'bg-rose-500/10' },
-  { name: 'Marriage & Kundli', count: '6,120+', icon: Gem, color: 'text-purple-500', bg: 'bg-purple-500/10' },
-  { name: 'Career', count: '5,840+', icon: Briefcase, color: 'text-blue-500', bg: 'bg-blue-500/10' },
-  { name: 'Women astrologers', count: '9,210+', icon: UserCheck, color: 'text-pink-500', bg: 'bg-pink-500/10' },
-  { name: 'Business & Money', count: '3,760+', icon: DollarSign, color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
-  { name: 'Health & Family', count: '2,480+', icon: Activity, color: 'text-teal-500', bg: 'bg-teal-500/10' },
+  { name: 'Love', count: '4,280+', icon: Heart, color: 'text-amber-500', bg: 'bg-gradient-to-br from-amber-500/20 to-orange-500/5' },
+  { name: 'Marriage & Kundli', count: '6,120+', icon: Gem, color: 'text-indigo-400', bg: 'bg-gradient-to-br from-indigo-500/20 to-purple-500/5' },
+  { name: 'Career', count: '5,840+', icon: Briefcase, color: 'text-blue-400', bg: 'bg-gradient-to-br from-blue-500/20 to-cyan-500/5' },
+  { name: 'Women astrologers', count: '9,210+', icon: UserCheck, color: 'text-rose-400', bg: 'bg-gradient-to-br from-rose-500/20 to-pink-500/5' },
+  { name: 'Business & Money', count: '3,760+', icon: DollarSign, color: 'text-emerald-400', bg: 'bg-gradient-to-br from-emerald-500/20 to-teal-500/5' },
+  { name: 'Health & Family', count: '2,480+', icon: Activity, color: 'text-teal-400', bg: 'bg-gradient-to-br from-teal-500/20 to-cyan-500/5' },
 ];
 
 const ZODIAC_SIGNS = [
@@ -229,18 +229,21 @@ export default function LandingPage() {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { icon: MessageCircle, title: t.serviceCards[0].title, desc: t.serviceCards[0].desc, color: 'text-amber-400', bg: 'bg-amber-400/10' },
-                { icon: Phone, title: t.serviceCards[1].title, desc: t.serviceCards[1].desc, color: 'text-orange-400', bg: 'bg-orange-400/10' },
-                { icon: Star, title: t.serviceCards[2].title, desc: t.serviceCards[2].desc, color: 'text-purple-400', bg: 'bg-purple-400/10' },
-                { icon: Gift, title: t.serviceCards[3].title, desc: t.serviceCards[3].desc, color: 'text-green-400', bg: 'bg-green-400/10' },
+                { icon: MessageCircle, title: t.serviceCards[0].title, desc: t.serviceCards[0].desc, color: 'text-amber-500', glow: 'shadow-[0_0_20px_rgba(245,158,11,0.2)]' },
+                { icon: Phone, title: t.serviceCards[1].title, desc: t.serviceCards[1].desc, color: 'text-indigo-400', glow: 'shadow-[0_0_20px_rgba(99,102,241,0.2)]' },
+                { icon: Star, title: t.serviceCards[2].title, desc: t.serviceCards[2].desc, color: 'text-pink-400', glow: 'shadow-[0_0_20px_rgba(236,72,153,0.2)]' },
+                { icon: Gift, title: t.serviceCards[3].title, desc: t.serviceCards[3].desc, color: 'text-emerald-400', glow: 'shadow-[0_0_20px_rgba(16,185,129,0.2)]' },
               ].map((s) => (
                 <Link key={s.title} href="/signup" className="group">
-                  <div className={`flex flex-col p-5 bg-secondary backdrop-blur-xl border border-border hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_20px_rgba(214,180,107,0.15)] transition-all duration-500 group-hover:-translate-y-1 rounded-2xl overflow-hidden`}>
-                    <div className={`w-12 h-12 rounded-2xl ${s.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-                      <s.icon className={`w-6 h-6 ${s.color}`} />
+                  <div className={`flex flex-col p-6 rounded-3xl bg-gradient-to-br from-white/[0.08] to-transparent backdrop-blur-xl border border-white/10 hover:border-white/30 hover:bg-white/[0.12] transition-all duration-500 group-hover:-translate-y-2 overflow-hidden relative shadow-lg`}>
+                    {/* Background glowing orb */}
+                    <div className={`absolute -top-10 -right-10 w-32 h-32 rounded-full ${s.glow} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
+                    
+                    <div className={`w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-inner`}>
+                      <s.icon className={`w-7 h-7 ${s.color}`} />
                     </div>
-                    <h3 className="font-bold text-foreground text-sm mb-1">{s.title}</h3>
-                    <p className="text-xs text-muted-foreground">{s.desc}</p>
+                    <h3 className="font-bold text-foreground text-lg mb-2">{s.title}</h3>
+                    <p className="text-sm text-muted-foreground font-light leading-relaxed">{s.desc}</p>
                   </div>
                 </Link>
               ))}
@@ -357,15 +360,17 @@ export default function LandingPage() {
                 const catData = t.categories[idx] || { name: cat.name, count: cat.count };
                 return (
                 <Link key={cat.name} href="/signup" className="group">
-                  <div className="flex items-center gap-4 p-5 rounded-2xl bg-secondary backdrop-blur-lg border border-border shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_20px_rgba(214,180,107,0.15)] transition-all group-hover:-translate-y-1 duration-500">
-                    <div className={`w-12 h-12 rounded-xl ${cat.bg} ${cat.color} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
-                      <cat.icon className="w-6 h-6" />
+                  <div className="flex items-center gap-4 p-5 rounded-3xl bg-gradient-to-r from-white/[0.05] to-transparent backdrop-blur-xl border border-white/10 shadow-lg hover:bg-white/[0.08] hover:border-white/30 hover:shadow-[0_0_20px_rgba(245,158,11,0.1)] transition-all group-hover:-translate-y-1 duration-500">
+                    <div className={`w-14 h-14 rounded-2xl ${cat.bg} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-inner`}>
+                      <cat.icon className={`w-7 h-7 ${cat.color}`} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-foreground text-base truncate">{catData.name}</h3>
-                      <p className="text-sm text-muted-foreground/60 truncate">{catData.count} {t.browseSubtitleEm === 'astrologer' ? 'astrologers' : 'ज्योतिषी'}</p>
+                      <h3 className="font-bold text-foreground text-base truncate">{catData.name}</h3>
+                      <p className="text-sm text-muted-foreground/80 font-light truncate">{catData.count} {t.browseSubtitleEm === 'astrologer' ? 'astrologers' : 'ज्योतिषी'}</p>
                     </div>
-                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-amber-500 transition-colors shrink-0" />
+                    <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-amber-500/10 group-hover:border-amber-500/30 transition-colors shrink-0">
+                      <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-amber-500 transition-colors" />
+                    </div>
                   </div>
                 </Link>
                 );
@@ -521,10 +526,10 @@ export default function LandingPage() {
                   {/* Right: bar chart */}
                   <div className="lg:w-72 space-y-3">
                     {areas.map(({ label, value, color, textColor }) => (
-                      <div key={label} className="bg-secondary rounded-xl px-4 py-3 flex items-center justify-between border border-border">
+                      <div key={label} className="bg-secondary/50 rounded-xl px-4 py-3 flex items-center justify-between border border-border shadow-sm">
                         <span className="text-sm text-foreground/80 font-medium">{label}</span>
-                        <div className="flex items-center gap-2">
-                          <div className="w-20 h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div className="flex items-center gap-3">
+                          <div className="w-24 h-1.5 bg-foreground/10 rounded-full overflow-hidden">
                             <div className={`h-full ${color} rounded-full`} style={{ width: `${value}%` }} />
                           </div>
                           <span className={`text-xs font-semibold ${textColor}`}>{value >= 80 ? t.horoscopeLevels.strong : value >= 60 ? t.horoscopeLevels.good : t.horoscopeLevels.fair}</span>
