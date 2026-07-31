@@ -17,23 +17,26 @@ export default function ZenMinimalistHero() {
   return (
     <section className="relative min-h-[100vh] flex flex-col items-center justify-center bg-[#FDFBF7] overflow-hidden">
       
-      {/* Huge Rotating 2D Wheel Background */}
+      {/* Huge Orbiting 2D Wheel Background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
         {mounted && (
-          <div className="relative w-[150vw] h-[150vw] md:w-[1200px] md:h-[1200px] animate-[spin_60s_linear_infinite] opacity-15">
+          <div className="relative w-[150vw] h-[150vw] md:w-[1200px] md:h-[1200px] opacity-20" style={{ animation: 'crimsonSpin 90s linear infinite' }}>
             {cards.map((card) => (
               <div
                 key={card.id}
-                className="absolute top-1/2 left-1/2 w-40 h-60 md:w-56 md:h-80 -ml-20 -mt-30 md:-ml-28 md:-mt-40"
+                className="absolute top-1/2 left-1/2 w-40 h-60 md:w-56 md:h-80 -ml-20 -mt-30 md:-ml-28 md:-mt-40 origin-center"
                 style={{
-                  transform: `rotate(${card.angle}deg) translateY(-35vw) md:translateY(-450px)`,
+                  transform: `rotate(${card.angle}deg) translateY(-35vw) md:translateY(-480px)`,
                 }}
               >
-                <img 
-                  src={`/zodiacs/red/red_${card.id}.png`} 
-                  alt="Zodiac" 
-                  className="w-full h-full object-contain" 
-                />
+                {/* Counter-rotating container keeps the card upright */}
+                <div className="w-full h-full" style={{ animation: 'crimsonCounterSpin 90s linear infinite' }}>
+                  <img 
+                    src={`/zodiacs/red/red_${card.id}.png`} 
+                    alt="Zodiac" 
+                    className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(220,38,38,0.3)]" 
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -69,6 +72,15 @@ export default function ZenMinimalistHero() {
           </Link>
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes crimsonSpin {
+          100% { transform: rotate(360deg); }
+        }
+        @keyframes crimsonCounterSpin {
+          100% { transform: rotate(-360deg); }
+        }
+      `}} />
     </section>
   );
 }
