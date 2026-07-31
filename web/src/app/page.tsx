@@ -360,16 +360,21 @@ export default function LandingPage() {
                 const catData = t.categories[idx] || { name: cat.name, count: cat.count };
                 return (
                 <Link key={cat.name} href="/signup" className="group">
-                  <div className="flex items-center gap-4 p-5 rounded-3xl bg-gradient-to-r from-white/[0.05] to-transparent backdrop-blur-xl border border-white/10 shadow-lg hover:bg-white/[0.08] hover:border-white/30 hover:shadow-[0_0_20px_rgba(245,158,11,0.1)] transition-all group-hover:-translate-y-1 duration-500">
-                    <div className={`w-14 h-14 rounded-2xl ${cat.bg} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-inner`}>
-                      <cat.icon className={`w-7 h-7 ${cat.color}`} />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-foreground text-base truncate">{catData.name}</h3>
-                      <p className="text-sm text-muted-foreground/80 font-light truncate">{catData.count} {t.browseSubtitleEm === 'astrologer' ? 'astrologers' : 'ज्योतिषी'}</p>
-                    </div>
-                    <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-amber-500/10 group-hover:border-amber-500/30 transition-colors shrink-0">
-                      <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-amber-500 transition-colors" />
+                  <div className="relative flex flex-col justify-end p-5 rounded-3xl overflow-hidden aspect-[16/9] border border-white/10 shadow-lg hover:shadow-[0_0_30px_rgba(245,158,11,0.2)] transition-all group-hover:-translate-y-1 duration-500">
+                    <img src={`/zodiacs/zodiac_${idx + 1}.jpg`} alt={catData.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                    
+                    <div className="relative z-10 flex items-end justify-between">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <cat.icon className={`w-4 h-4 ${cat.color}`} />
+                          <h3 className="font-bold text-white text-base truncate">{catData.name}</h3>
+                        </div>
+                        <p className="text-xs text-white/70 font-light truncate">{catData.count} {t.browseSubtitleEm === 'astrologer' ? 'astrologers' : 'ज्योतिषी'}</p>
+                      </div>
+                      <div className="w-8 h-8 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm flex items-center justify-center group-hover:bg-amber-500 group-hover:border-amber-500 transition-colors shrink-0">
+                        <ArrowRight className="w-4 h-4 text-white group-hover:text-black transition-colors" />
+                      </div>
                     </div>
                   </div>
                 </Link>
@@ -395,15 +400,17 @@ export default function LandingPage() {
                 </Button>
               </Link>
             </div>
-            <div className="grid grid-cols-5 gap-4 max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-6xl mx-auto mt-10">
               {t.servicesList.slice(0, 10).map((svc: { name: string; desc: string }, idx: number) => (
-                <Link key={idx} href="/signup" className="group">
-                  <div className="flex flex-col items-center text-center p-4 rounded-2xl bg-secondary backdrop-blur-lg border border-border shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:bg-white/10 hover:border-primary/40 hover:shadow-[0_0_15px_rgba(214,180,107,0.15)] transition-all group-hover:-translate-y-1 duration-500">
-                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                      <Zap className="w-5 h-5 text-amber-600" />
+                <Link key={idx} href="/signup" className="group relative">
+                  <div className="flex flex-col items-center text-center p-6 rounded-3xl bg-gradient-to-b from-white/[0.08] to-transparent backdrop-blur-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-white/[0.12] hover:border-white/30 hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] transition-all group-hover:-translate-y-2 duration-500 h-full">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-3xl pointer-events-none" />
+                    
+                    <div className="relative w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-amber-500/10 transition-all duration-500 shadow-inner">
+                      <Zap className="w-6 h-6 text-amber-500 group-hover:text-amber-400" />
                     </div>
-                    <p className="font-semibold text-foreground text-sm leading-tight">{svc.name}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5 leading-tight">{svc.desc}</p>
+                    <p className="relative font-bold text-foreground text-sm leading-tight mb-2">{svc.name}</p>
+                    <p className="relative text-xs text-muted-foreground font-light leading-relaxed">{svc.desc}</p>
                   </div>
                 </Link>
               ))}

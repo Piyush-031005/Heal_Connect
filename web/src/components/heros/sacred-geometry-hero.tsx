@@ -74,15 +74,23 @@ export default function CosmicAuraHero() {
           </Link>
         </div>
 
-        {/* Minimalist 3D-ish Zodiac Icons row */}
-        <div className="mt-16 w-full max-w-3xl flex justify-between animate-in fade-in duration-1000 delay-700">
-          {['♈', '♋', '♎', '♑'].map((sign, i) => (
-            <div key={i} className="flex flex-col items-center gap-2 group cursor-pointer">
-              <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-2xl text-white/50 group-hover:text-white group-hover:bg-white/10 group-hover:border-white/30 transition-all group-hover:-translate-y-2 shadow-lg">
-                {sign}
+        {/* Premium Image Zodiac Row */}
+        <div className="mt-16 w-full max-w-5xl animate-in fade-in duration-1000 delay-700">
+          <p className="text-xs uppercase tracking-widest text-white/40 mb-6 font-semibold">Explore The Zodiac</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[1, 2, 3, 4].map((num) => (
+              <div key={num} className="group relative rounded-3xl overflow-hidden aspect-[4/5] border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.5)] cursor-pointer">
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500 z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0C0F1A] via-transparent to-transparent z-10" />
+                <img src={`/zodiacs/zodiac_${num + 20}.jpg`} alt="Zodiac Sign" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute bottom-4 left-0 w-full text-center z-20 opacity-80 group-hover:opacity-100 transition-opacity">
+                  <span className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-widest">
+                    Discover
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
       </div>
