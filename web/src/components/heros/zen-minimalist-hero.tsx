@@ -27,7 +27,7 @@ export default function ZenMinimalistHero() {
             
             {cards.map((card, index) => {
               // Calculate exact x,y positions on the circle
-              const radius = 50; // percentage
+              const radius = 45; // percentage (pull slightly in so they don't get cut off)
               const angleInRads = (card.angle - 90) * (Math.PI / 180);
               const x = 50 + radius * Math.cos(angleInRads);
               const y = 50 + radius * Math.sin(angleInRads);
@@ -42,11 +42,11 @@ export default function ZenMinimalistHero() {
                   }}
                 >
                   {/* Counter-rotating container keeps the card upright */}
-                  <div className="w-full h-full" style={{ animation: 'crimsonCounterSpin 90s linear infinite' }}>
+                  <div className="w-full h-full p-2 bg-white/80 rounded-2xl shadow-xl border border-red-900/10" style={{ animation: 'crimsonCounterSpin 90s linear infinite' }}>
                     <img 
-                      src={`/zodiacs/red/red_${card.id}.png`} 
+                      src={`/zodiacs/zodiac_${card.id}.jpg`} 
                       alt="Zodiac" 
-                      className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(220,38,38,0.3)] opacity-40" 
+                      className="w-full h-full object-cover rounded-xl drop-shadow-[0_0_15px_rgba(220,38,38,0.3)] opacity-90" 
                     />
                   </div>
                 </div>
@@ -55,9 +55,6 @@ export default function ZenMinimalistHero() {
           </div>
         )}
       </div>
-      
-      {/* Gradient overlay to fade the edges of the wheel */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle,transparent_20%,#FDFBF7_70%)] pointer-events-none z-0" />
 
       {/* Central Content */}
       <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">

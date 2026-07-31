@@ -10,30 +10,29 @@ export function ServiceCards({ variant }: { variant: string }) {
 
   if (variant === 'constellation') {
     return (
-      <section className="py-24 relative z-10 bg-[#05050A] overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(212,168,67,0.05)_0%,transparent_70%)] pointer-events-none" />
-        <div className="container mx-auto px-6 relative z-10 border-t border-[#D4A843]/10 pt-20">
+      <section className="py-24 relative z-10 bg-[#FAFAFA] overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(50,205,50,0.05)_0%,transparent_70%)] pointer-events-none" />
+        <div className="container mx-auto px-6 relative z-10 border-t border-[#32CD32]/10 pt-20">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div>
-              <span className="text-[#D4A843] text-xs uppercase tracking-[0.4em] font-semibold mb-4 block">Universal Access</span>
-              <h2 className="text-4xl md:text-5xl font-serif text-white tracking-tight">Cosmic Disciplines</h2>
+              <span className="text-[#32CD32] text-sm uppercase tracking-[0.3em] font-bold mb-3 block">Discover Your Path</span>
+              <h2 className="text-4xl md:text-5xl font-sans font-black text-[#1A1A1A] tracking-tight">Cosmic Disciplines</h2>
             </div>
-            <Link href="/services" className="text-[#D4A843] hover:text-white transition-colors flex items-center gap-2 text-sm uppercase tracking-widest font-mono">
-              Initialize Directory <Sparkles className="w-4 h-4" />
+            <Link href="/services" className="text-[#FF8C00] hover:text-[#e67e00] transition-colors flex items-center gap-2 text-sm uppercase tracking-widest font-bold">
+              View All Services <Sparkles className="w-4 h-4" />
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {t.servicesList.slice(0, 4).map((svc: any, idx: number) => (
-              <div key={idx} className="group p-8 border border-white/5 bg-white/5 backdrop-blur-xl hover:bg-[#D4A843]/5 hover:border-[#D4A843]/30 transition-all duration-700 cursor-pointer flex flex-col relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4A843]/50 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                <div className="w-12 h-12 rounded-none border border-[#D4A843]/20 bg-[#05050A] flex items-center justify-center mb-8 group-hover:rotate-12 transition-all duration-500">
-                  <Zap className="w-5 h-5 text-[#D4A843]" />
+              <div key={idx} className="group p-8 rounded-3xl border border-gray-100 bg-white shadow-lg shadow-gray-200/40 hover:shadow-2xl hover:shadow-[#32CD32]/20 hover:-translate-y-2 transition-all duration-500 cursor-pointer flex flex-col relative overflow-hidden">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#32CD32]/10 to-[#FF8C00]/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                  <Zap className="w-6 h-6 text-[#32CD32]" />
                 </div>
-                <h3 className="text-xl font-serif text-white mb-3 group-hover:text-[#D4A843] transition-colors">{svc.name}</h3>
-                <p className="text-white/40 leading-relaxed text-sm font-light">{svc.desc}</p>
-                <div className="mt-8 pt-4 border-t border-white/10 flex justify-between items-center text-xs font-mono text-white/30 uppercase">
-                  <span>Status: Active</span>
-                  <span className="group-hover:text-[#D4A843] transition-colors">Connect →</span>
+                <h3 className="text-xl font-bold text-[#1A1A1A] mb-3 group-hover:text-[#32CD32] transition-colors">{svc.name}</h3>
+                <p className="text-gray-500 leading-relaxed text-sm font-medium">{svc.desc}</p>
+                <div className="mt-8 pt-4 border-t border-gray-100 flex justify-between items-center text-xs font-bold text-gray-400 uppercase">
+                  <span>Available 24/7</span>
+                  <span className="text-[#FF8C00] group-hover:translate-x-1 transition-transform">Explore →</span>
                 </div>
               </div>
             ))}
@@ -45,21 +44,21 @@ export function ServiceCards({ variant }: { variant: string }) {
 
   if (variant === 'aurora') {
     return (
-      <section className="py-24 relative z-10 bg-[#020202] overflow-hidden">
-        <div className="absolute top-[-20%] left-[20%] w-[50vw] h-[50vw] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.1)_0%,transparent_60%)] blur-[80px] pointer-events-none" />
+      <section className="py-24 relative z-10 bg-white overflow-hidden">
+        <div className="absolute top-[-20%] left-[20%] w-[50vw] h-[50vw] bg-[radial-gradient(ellipse_at_center,rgba(255,140,0,0.08)_0%,transparent_60%)] blur-[80px] pointer-events-none" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-20">
-            <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest mb-3 block">Protocols</span>
-            <h2 className="text-4xl md:text-5xl font-sans font-black text-white tracking-tighter">Available Services</h2>
+            <span className="text-[#FF8C00] text-sm font-bold uppercase tracking-widest mb-3 block">Expert Readings</span>
+            <h2 className="text-4xl md:text-5xl font-sans font-black text-gray-900 tracking-tighter">Choose Your Service</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {t.servicesList.slice(0, 4).map((svc: any, idx: number) => (
-              <div key={idx} className="group p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl hover:bg-white/10 hover:border-cyan-400/30 hover:shadow-[0_0_30px_rgba(56,189,248,0.15)] transition-all duration-500 cursor-pointer flex flex-col items-center text-center relative overflow-hidden">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500/20 to-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                  <Zap className="w-6 h-6 text-cyan-300" />
+              <div key={idx} className="group p-8 rounded-3xl border border-[#32CD32]/20 bg-gradient-to-br from-white to-[#FAFAFA] hover:border-[#FF8C00]/40 hover:shadow-xl hover:shadow-[#FF8C00]/10 transition-all duration-500 cursor-pointer flex flex-col items-center text-center relative overflow-hidden">
+                <div className="w-16 h-16 rounded-full bg-[#FF8C00]/10 flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-500">
+                  <Zap className="w-6 h-6 text-[#FF8C00]" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{svc.name}</h3>
-                <p className="text-white/50 leading-relaxed text-sm font-light">{svc.desc}</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{svc.name}</h3>
+                <p className="text-gray-500 leading-relaxed text-sm font-medium">{svc.desc}</p>
               </div>
             ))}
           </div>
