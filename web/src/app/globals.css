@@ -147,30 +147,6 @@
   }
 
   .purple {
-    --background: #8E44AD;
-    --foreground: #FFFFFF;
-    --card: #732D91;
-    --card-foreground: #FFFFFF;
-    --popover: #732D91;
-    --popover-foreground: #FFFFFF;
-    --primary: #FFE200;
-    --primary-foreground: #8E44AD;
-    --secondary: #5B2C6F;
-    --secondary-foreground: #FFFFFF;
-    --muted: #5B2C6F;
-    --muted-foreground: #D7BDE2;
-    --accent: #FFE200;
-    --accent-foreground: #8E44AD;
-    --destructive: #EF4444;
-    --destructive-foreground: #FFFFFF;
-    --success: #22C55E;
-    --success-foreground: #FFFFFF;
-    --border: #5B2C6F;
-    --input: #5B2C6F;
-    --ring: #FFE200;
-    --radius: 0.625rem;
-  }
-
   .obsidian {
     --background: #240E4E;
     --foreground: #FFFFFF;
@@ -218,31 +194,6 @@
     --border: #1A1A1A;
     --input: #1A1A1A;
     --ring: #FFB6C1;
-    --radius: 0.625rem;
-  }
-
-  .green-apricot {
-    --background: #0F8C43;
-    --foreground: #FFFFFF;
-    --card: #0C6E35;
-    --card-foreground: #FFFFFF;
-    --popover: #0C6E35;
-    --popover-foreground: #FFFFFF;
-    --primary: #FBB178;
-    --primary-foreground: #0F8C43;
-    --secondary: #0A5A2B;
-    --secondary-foreground: #FFFFFF;
-    --muted: #0A5A2B;
-    --muted-foreground: #A6DDBB;
-    --accent: #FBB178;
-    --accent-foreground: #0F8C43;
-    --destructive: #EF4444;
-    --destructive-foreground: #FFFFFF;
-    --success: #22C55E;
-    --success-foreground: #FFFFFF;
-    --border: #0A5A2B;
-    --input: #0A5A2B;
-    --ring: #FBB178;
     --radius: 0.625rem;
   }
 

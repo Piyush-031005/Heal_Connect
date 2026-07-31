@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LangProvider } from "@/lib/lang-context";
+import { LayoutProvider } from "@/lib/layout-context";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
@@ -23,12 +24,14 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          themes={['light', 'dark', 'chestnut', 'cosmic', 'purple', 'obsidian', 'black-pink', 'green-apricot', 'dark-coral']}
+          themes={['light', 'dark', 'chestnut', 'cosmic', 'obsidian', 'black-pink', 'dark-coral']}
           enableSystem={false}
           disableTransitionOnChange
         >
           <LangProvider>
-            {children}
+            <LayoutProvider>
+              {children}
+            </LayoutProvider>
           </LangProvider>
         </ThemeProvider>
       </body>
