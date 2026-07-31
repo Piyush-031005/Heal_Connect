@@ -347,10 +347,8 @@ export default function Navbar() {
                     { code: 'dark', label: 'Navy (Dark)' },
                     { code: 'chestnut', label: 'Chestnut' },
                     { code: 'cosmic', label: 'Cosmic' },
-                    { code: 'purple', label: 'Amethyst / Yellow' },
                     { code: 'obsidian', label: 'Obsidian / Yellow' },
                     { code: 'black-pink', label: 'Black / Pink' },
-                    { code: 'green-apricot', label: 'Green / Apricot' },
                     { code: 'dark-coral', label: 'Black / Coral' }
                   ]).map((t) => (
                     <button
