@@ -30,10 +30,9 @@ export default function LandingPage() {
 
   // Determine variant string based on layout context
   let variant: string = 'mystic';
-  if (layout === 'celestial-map') variant = 'constellation';
+  if (layout === 'celestial-map' || layout === 'modern-minimal') variant = 'cinematic-nature';
   if (layout === 'ruby-velvet') variant = 'golden';
   if (layout === 'sacred-geometry') variant = 'cosmic';
-  if (layout === 'modern-minimal') variant = 'aurora';
   if (layout === 'zen-minimalist') variant = 'split';
 
   return (

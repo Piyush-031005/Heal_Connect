@@ -10,84 +10,46 @@ import { TOP_ASTROLOGERS } from '@/lib/constants';
 export function TopAstrologers({ variant }: { variant: string }) {
   const { t } = useLang();
 
-  if (variant === 'constellation') {
+  if (variant === 'cinematic-nature') {
     return (
-      <section className="py-24 relative z-10 bg-[#FAFAFA] overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(255,140,0,0.05)_0%,transparent_60%)] pointer-events-none" />
+      <section className="py-24 relative z-10 bg-[#FDFCF8] overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(255,195,0,0.03)_0%,transparent_60%)] pointer-events-none" />
         <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
             <div>
-              <span className="text-[#FF8C00] text-sm uppercase tracking-[0.3em] font-bold mb-3 block">Top Verified Experts</span>
-              <h2 className="text-4xl md:text-5xl font-sans font-black text-[#1A1A1A] tracking-tight">Active Seers</h2>
+              <span className="text-[#FFC300] text-sm uppercase tracking-[0.4em] font-bold mb-4 block">Premium Network</span>
+              <h2 className="text-5xl md:text-6xl font-serif text-[#1A1A1A] tracking-tight">Verified Masters</h2>
             </div>
-            <Link href="/practitioners" className="text-[#32CD32] hover:text-[#2E8B57] transition-colors flex items-center gap-2 text-sm uppercase tracking-widest font-bold">
+            <Link href="/practitioners" className="text-[#32CD32] hover:text-[#28A428] transition-colors flex items-center gap-2 text-sm uppercase tracking-widest font-bold">
               View All Experts <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {TOP_ASTROLOGERS.slice(0, 3).map((a, idx) => (
-              <div key={idx} className="group relative border border-gray-100 bg-white rounded-3xl shadow-lg shadow-gray-200/50 hover:shadow-2xl hover:shadow-[#FF8C00]/20 hover:-translate-y-2 transition-all duration-500 p-8 flex flex-col overflow-hidden">
-                <div className="absolute top-0 right-0 p-4 font-bold text-[10px] text-white bg-[#32CD32] rounded-bl-xl tracking-widest uppercase shadow-md">{a.online ? 'Online' : 'Offline'}</div>
-                <div className="flex items-center gap-6 mb-8 mt-2">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-white shadow-md group-hover:scale-105 group-hover:shadow-xl group-hover:border-[#FF8C00]/30 transition-all duration-500 shrink-0">
-                    <img src={a.img} alt={a.name} className="w-full h-full object-cover transition-all duration-700" />
+              <div key={idx} className="group relative bg-white rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_40px_80px_rgba(255,195,0,0.15)] hover:-translate-y-2 transition-all duration-700 p-8 flex flex-col overflow-hidden border border-gray-50">
+                <div className="absolute top-0 right-0 px-6 py-3 font-bold text-[10px] text-[#1A1A1A] bg-[#FFC300] rounded-bl-3xl tracking-widest uppercase shadow-md">{a.online ? 'Online' : 'Offline'}</div>
+                <div className="flex flex-col items-center text-center mt-4 mb-8">
+                  <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-[0_10px_20px_rgba(50,205,50,0.1)] group-hover:scale-105 group-hover:border-[#32CD32]/20 transition-all duration-700 mb-6 shrink-0">
+                    <img src={a.img} alt={a.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-[#1A1A1A] group-hover:text-[#FF8C00] transition-colors">{a.name}</h3>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="text-xs font-bold text-gray-500">{a.exp}</span>
-                      <span className="text-gray-300">•</span>
-                      <span className="text-[#32CD32] text-xs font-bold">★ {a.rating}</span>
+                    <h3 className="text-2xl font-serif text-[#1A1A1A] group-hover:text-[#32CD32] transition-colors mb-2">{a.name}</h3>
+                    <div className="flex items-center justify-center gap-3 mt-2">
+                      <span className="text-sm font-light text-gray-500">{a.exp}</span>
+                      <span className="text-gray-200">•</span>
+                      <span className="text-[#FFC300] text-sm font-bold">★ {a.rating}</span>
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {a.tags.slice(0, 3).map((s: string) => (
-                    <span key={s} className="px-3 py-1 bg-gray-50 rounded-full text-[10px] font-bold text-gray-600 uppercase border border-gray-100 group-hover:border-[#32CD32]/30 transition-colors">
-                      {s}
-                    </span>
-                  ))}
-                </div>
-                <Button className="w-full h-12 rounded-xl bg-[#FAFAFA] text-gray-800 hover:bg-[#32CD32] hover:text-white font-bold uppercase tracking-widest text-xs transition-all shadow-sm">
-                  Connect Now
-                </Button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (variant === 'aurora') {
-    return (
-      <section className="py-24 relative z-10 bg-[#FAFAFA] overflow-hidden">
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <span className="text-[#32CD32] text-sm font-bold uppercase tracking-widest mb-3 block">Premium Network</span>
-            <h2 className="text-4xl md:text-5xl font-sans font-black text-gray-900 tracking-tighter">Verified Masters</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {TOP_ASTROLOGERS.slice(0, 3).map((a, idx) => (
-              <div key={idx} className="group p-8 rounded-[2rem] border border-gray-200 bg-white shadow-xl shadow-gray-200/50 hover:border-[#FF8C00]/30 hover:shadow-2xl hover:shadow-[#32CD32]/20 transition-all duration-500 flex flex-col items-center text-center relative hover:-translate-y-2">
-                <div className="w-24 h-24 rounded-full overflow-hidden mb-6 border-4 border-white shadow-lg group-hover:border-[#32CD32]/20 transition-all duration-500">
-                  <img src={a.img} alt={a.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                </div>
-                <h3 className="text-2xl font-black text-gray-900 mb-2 group-hover:text-[#32CD32] transition-colors">{a.name}</h3>
-                <div className="flex items-center gap-3 text-sm font-bold text-gray-500 mb-6">
-                  <span>{a.exp}</span>
-                  <span className="text-gray-300">•</span>
-                  <span className="text-[#FF8C00]">★ {a.rating}</span>
-                </div>
                 <div className="flex flex-wrap justify-center gap-2 mb-8">
-                  {a.tags.slice(0, 2).map((s: string) => (
-                    <span key={s} className="px-4 py-1.5 rounded-full bg-[#FF8C00]/10 text-xs font-bold text-[#FF8C00]">
+                  {a.tags.slice(0, 3).map((s: string) => (
+                    <span key={s} className="px-4 py-1.5 bg-gray-50 rounded-full text-[10px] font-bold text-gray-400 uppercase tracking-widest border border-gray-100 group-hover:bg-[#FFC300]/10 group-hover:text-[#FFC300] group-hover:border-[#FFC300]/20 transition-colors">
                       {s}
                     </span>
                   ))}
                 </div>
-                <Button className="w-full h-12 rounded-2xl bg-gradient-to-r from-[#32CD32] to-[#FF8C00] hover:from-[#2E8B57] hover:to-[#e67e00] text-white font-black uppercase tracking-widest transition-all shadow-lg shadow-[#32CD32]/20">
-                  Connect Now
+                <Button className="w-full h-14 rounded-2xl bg-[#FAFAFA] text-[#1A1A1A] hover:bg-[#32CD32] hover:text-white font-bold uppercase tracking-widest text-xs transition-all duration-500 border border-gray-100 group-hover:border-transparent">
+                  Initiate Link
                 </Button>
               </div>
             ))}

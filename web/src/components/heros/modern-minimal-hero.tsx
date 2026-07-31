@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function ModernMinimalHero() {
@@ -10,82 +10,93 @@ export default function ModernMinimalHero() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <section className="relative min-h-screen bg-white flex flex-col lg:flex-row items-center overflow-hidden">
+    <section className="relative overflow-hidden min-h-[100vh] bg-[#FDFCF8] flex items-center justify-center pt-20 perspective-[2000px]">
       
-      {/* LEFT HALF: Content */}
-      <div className="w-full lg:w-1/2 pt-32 pb-16 px-6 lg:pl-20 xl:pl-32 relative z-10 flex flex-col justify-center h-full">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FF8C00]/10 text-[#FF8C00] font-bold text-xs uppercase tracking-widest mb-8 w-fit border border-[#FF8C00]/20">
-          <Sparkles className="w-4 h-4" />
-          Illuminate Your Future
-        </div>
+      {/* Cinematic Soft Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Extremely slow, massive, soft glowing orbs */}
+        <div className="absolute top-[-20%] right-[-10%] w-[80vw] h-[80vw] bg-[radial-gradient(circle,rgba(50,205,50,0.15)_0%,transparent_60%)] blur-[120px] animate-[cinematicPan_25s_ease-in-out_infinite_alternate-reverse]" />
+        <div className="absolute bottom-[-10%] left-[-20%] w-[90vw] h-[90vw] bg-[radial-gradient(circle,rgba(255,195,0,0.12)_0%,transparent_60%)] blur-[150px] animate-[cinematicPan_30s_ease-in-out_infinite_alternate]" />
         
-        <h1 className="text-6xl lg:text-[5.5rem] font-black tracking-tighter text-[#1A1A1A] leading-[1.05] mb-6">
-          Find Your <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C00] to-[#32CD32] pr-2">
-            Perfect Balance
-          </span>
-        </h1>
-        
-        <p className="text-xl text-gray-500 font-medium max-w-md mb-10 leading-relaxed">
-          Unlock the secrets of the universe with our vibrant community of professional spiritual guides.
-        </p>
-        
-        <div className="flex gap-4">
-          <Link href="/practitioners">
-            <Button size="lg" className="rounded-2xl h-14 px-8 bg-[#FF8C00] hover:bg-[#e67e00] text-white shadow-xl shadow-[#FF8C00]/20 font-bold text-base transition-all hover:-translate-y-1">
-              Connect Now <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-          </Link>
-          <Link href="/services">
-            <Button size="lg" variant="outline" className="rounded-2xl h-14 px-8 border-gray-200 text-gray-700 hover:bg-gray-50 font-bold text-base transition-all">
-              Our Services
-            </Button>
-          </Link>
+        {/* Subtle noise texture to make it feel like film */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }} />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10 w-full">
+        <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-16">
+          
+          {/* Main Hero Text (Right) */}
+          <div className="w-full lg:w-1/2 flex flex-col items-start text-left z-20">
+            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-[#FFC300]/30 bg-white/80 backdrop-blur-xl mb-10 shadow-sm transition-all hover:bg-white">
+              <Sparkles className="w-4 h-4 text-[#32CD32]" />
+              <span className="text-[12px] uppercase tracking-[0.4em] font-semibold text-[#FFC300]">Pure Harmony</span>
+            </div>
+            
+            <h1 className="text-6xl md:text-8xl lg:text-[7.5rem] font-serif leading-[0.95] tracking-tight text-[#1A1A1A] mb-8">
+              Inner <br />
+              <span className="italic text-transparent bg-clip-text bg-gradient-to-br from-[#FFC300] to-[#32CD32] pr-4">
+                Balance
+              </span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-[#4A4A4A] max-w-lg font-light leading-relaxed mb-12">
+              Discover the serenity of knowing your path. Our spiritual masters provide profound clarity through cinematic readings.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
+              <Link href="/practitioners" className="w-full sm:w-auto">
+                <Button className="w-full h-16 px-12 rounded-full bg-[#FFC300] hover:bg-[#E6B000] text-[#1A1A1A] font-bold uppercase tracking-widest text-sm transition-all hover:scale-[1.02] hover:shadow-[0_20px_40px_rgba(255,195,0,0.2)]">
+                  Start Healing <ArrowRight className="ml-3 w-5 h-5" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+          
+          {/* Cinematic Gallery (Left) */}
+          <div className="w-full lg:w-1/2 relative h-[700px] hidden md:block">
+            {mounted && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                {/* Center Image - Massive, slow floating */}
+                <div className="absolute top-[15%] right-[20%] w-[340px] h-[480px] bg-white rounded-[2rem] p-3 shadow-[0_30px_60px_rgba(0,0,0,0.08)] transform rotate-[4deg] transition-all duration-1000 ease-out hover:rotate-0 hover:scale-105 z-30" style={{ animation: 'cinematicFloat 15s ease-in-out infinite' }}>
+                  <img src="/zodiacs/zodiac_9.jpg" alt="Sagittarius" className="w-full h-full object-cover rounded-3xl" />
+                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-xl px-8 py-3 rounded-full shadow-[0_10px_30px_rgba(255,195,0,0.15)] font-bold text-[#1A1A1A] text-sm whitespace-nowrap uppercase tracking-widest border border-[#FFC300]/20">
+                    Cosmic Balance
+                  </div>
+                </div>
+                
+                {/* Top Left Image - Pushed back in Z space */}
+                <div className="absolute top-[5%] left-[5%] w-[240px] h-[320px] bg-white rounded-[2rem] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.05)] transform rotate-[-8deg] translate-z-[-100px] transition-all duration-1000 ease-out hover:rotate-0 hover:scale-105 hover:translate-z-0 z-20" style={{ animation: 'cinematicFloat 20s ease-in-out infinite reverse' }}>
+                  <img src="/zodiacs/zodiac_12.jpg" alt="Pisces" className="w-full h-full object-cover rounded-[1.5rem]" />
+                  <div className="absolute top-6 -right-6 bg-[#32CD32] text-white px-4 py-2 rounded-full shadow-lg font-bold text-[10px] uppercase tracking-widest">
+                    Clarity
+                  </div>
+                </div>
+                
+                {/* Bottom Right Image - Pushed forward */}
+                <div className="absolute bottom-[10%] right-[5%] w-[220px] h-[280px] bg-white rounded-[1.5rem] p-2 shadow-[0_40px_80px_rgba(0,0,0,0.12)] transform rotate-[12deg] translate-z-[100px] transition-all duration-1000 ease-out hover:rotate-0 hover:scale-105 z-40" style={{ animation: 'cinematicFloat 18s ease-in-out infinite 2s' }}>
+                  <img src="/zodiacs/zodiac_2.jpg" alt="Taurus" className="w-full h-full object-cover rounded-xl" />
+                  <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-lg shadow-sm font-bold text-[#FFC300] text-xs">
+                    ★ 5.0
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          
         </div>
       </div>
 
-      {/* RIGHT HALF: Visuals & Masonry */}
-      <div className="w-full lg:w-1/2 h-[600px] lg:h-screen relative bg-gradient-to-br from-[#32CD32]/10 via-[#FF8C00]/10 to-transparent flex items-center justify-center p-8">
-        
-        {/* Abstract Background Shapes */}
-        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#32CD32] rounded-full blur-[100px] opacity-20 animate-[pulse_8s_ease-in-out_infinite]" />
-        <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-[#FF8C00] rounded-full blur-[100px] opacity-20 animate-[pulse_10s_ease-in-out_infinite_alternate]" />
-        
-        <div className="relative w-full max-w-lg aspect-square">
-          {/* Dynamic Grid Layout for Assets */}
-          {mounted && (
-            <>
-              {/* Top Left Card (Taurus) */}
-              <div className="absolute top-0 left-0 w-[45%] h-[55%] bg-white rounded-3xl p-2 shadow-2xl shadow-gray-200/50 transform hover:scale-105 transition-transform duration-500 z-20">
-                <img src="/zodiacs/zodiac_2.jpg" alt="Taurus" className="w-full h-full object-cover rounded-2xl" />
-                <div className="absolute -bottom-4 -right-4 bg-white px-4 py-2 rounded-full shadow-lg border border-gray-100 flex items-center gap-2">
-                  <span className="w-3 h-3 bg-[#32CD32] rounded-full animate-pulse" />
-                  <span className="text-xs font-bold text-gray-800 uppercase">Taurus</span>
-                </div>
-              </div>
-              
-              {/* Top Right Card (Sagittarius) */}
-              <div className="absolute top-8 right-0 w-[45%] h-[40%] bg-white rounded-3xl p-2 shadow-xl shadow-gray-200/50 transform hover:scale-105 transition-transform duration-500 z-10">
-                <img src="/zodiacs/zodiac_9.jpg" alt="Sagittarius" className="w-full h-full object-cover rounded-2xl" />
-                <div className="absolute top-4 -right-4 bg-[#FF8C00] text-white px-3 py-1 rounded-full shadow-lg font-bold text-[10px] uppercase">
-                  Top Rated
-                </div>
-              </div>
-              
-              {/* Bottom Right Card (Pisces) */}
-              <div className="absolute bottom-0 right-4 w-[50%] h-[50%] bg-white rounded-3xl p-2 shadow-2xl shadow-gray-200/50 transform hover:scale-105 transition-transform duration-500 z-30">
-                <img src="/zodiacs/zodiac_12.jpg" alt="Pisces" className="w-full h-full object-cover rounded-2xl" />
-                <div className="absolute -left-6 bottom-8 bg-white p-3 rounded-2xl shadow-xl border border-gray-100">
-                  <div className="flex gap-1 text-[#FF8C00]">
-                    ★ ★ ★ ★ ★
-                  </div>
-                  <p className="text-[10px] font-bold text-gray-500 mt-1 uppercase">Astrology Master</p>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes cinematicPan {
+          0% { transform: translate(0, 0) scale(1); }
+          100% { transform: translate(-100px, -50px) scale(1.1); }
+        }
+        @keyframes cinematicFloat {
+          0% { transform: translateY(0px) rotate(var(--tw-rotate)); }
+          50% { transform: translateY(-30px) rotate(calc(var(--tw-rotate) + 2deg)); }
+          100% { transform: translateY(0px) rotate(var(--tw-rotate)); }
+        }
+      `}} />
     </section>
   );
 }

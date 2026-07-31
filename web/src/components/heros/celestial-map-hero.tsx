@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function CelestialMapHero() {
@@ -10,74 +10,73 @@ export default function CelestialMapHero() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <section className="relative overflow-hidden min-h-screen bg-[#FAFAFA] flex items-center justify-center pt-20">
+    <section className="relative overflow-hidden min-h-[100vh] bg-[#FDFCF8] flex items-center justify-center pt-20 perspective-[2000px]">
       
-      {/* Lively Parrot Green & Orange Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-[#FAFAFA]">
-        {/* Vibrant glowing blobs */}
-        <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(50,205,50,0.3)_0%,transparent_60%)] blur-3xl animate-[pulse_10s_ease-in-out_infinite]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] bg-[radial-gradient(circle,rgba(255,140,0,0.25)_0%,transparent_60%)] blur-[100px] animate-[pulse_15s_ease-in-out_infinite_alternate]" />
-        <div className="absolute top-[30%] left-[40%] w-[40vw] h-[40vw] bg-[radial-gradient(circle,rgba(255,165,0,0.2)_0%,transparent_70%)] blur-[80px] animate-[pulse_12s_ease-in-out_infinite_alternate-reverse]" />
+      {/* Cinematic Soft Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Extremely slow, massive, soft glowing orbs */}
+        <div className="absolute top-[-20%] left-[-10%] w-[80vw] h-[80vw] bg-[radial-gradient(circle,rgba(50,205,50,0.15)_0%,transparent_60%)] blur-[120px] animate-[cinematicPan_25s_ease-in-out_infinite_alternate]" />
+        <div className="absolute bottom-[-10%] right-[-20%] w-[90vw] h-[90vw] bg-[radial-gradient(circle,rgba(255,195,0,0.12)_0%,transparent_60%)] blur-[150px] animate-[cinematicPan_30s_ease-in-out_infinite_alternate-reverse]" />
         
-        {/* Subtle dot matrix overlay for texture */}
-        <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#000000 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+        {/* Subtle noise texture to make it feel like film */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }} />
       </div>
 
       <div className="container mx-auto px-6 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
           
-          {/* Main Hero Text (Left/Center) */}
-          <div className="lg:col-span-6 flex flex-col items-start text-left">
-            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-[#32CD32]/30 bg-white/60 backdrop-blur-md mb-8 shadow-sm">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#32CD32] animate-pulse shadow-[0_0_8px_#32CD32]" />
-              <span className="text-[11px] uppercase tracking-[0.3em] font-bold text-[#2E8B57]">Fresh Cosmic Insights</span>
+          {/* Main Hero Text (Left) */}
+          <div className="w-full lg:w-1/2 flex flex-col items-start text-left z-20">
+            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-[#32CD32]/20 bg-white/80 backdrop-blur-xl mb-10 shadow-sm transition-all hover:bg-white">
+              <Sparkles className="w-4 h-4 text-[#FFC300]" />
+              <span className="text-[12px] uppercase tracking-[0.4em] font-semibold text-[#2E8B57]">Awaken Clarity</span>
             </div>
             
-            <h1 className="text-6xl md:text-7xl lg:text-[6rem] font-sans font-black leading-[1.05] tracking-tight text-[#1A1A1A] mb-8">
-              Awaken Your <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#32CD32] to-[#FF8C00]">
-                True Path
+            <h1 className="text-6xl md:text-8xl lg:text-[7.5rem] font-serif leading-[0.95] tracking-tight text-[#1A1A1A] mb-8">
+              Divine <br />
+              <span className="italic text-transparent bg-clip-text bg-gradient-to-br from-[#32CD32] to-[#FFC300] pr-4">
+                Guidance
               </span>
             </h1>
             
-            <p className="text-xl text-[#4A4A4A] max-w-xl font-medium leading-relaxed mb-12 border-l-4 border-[#FF8C00] pl-6 bg-white/30 backdrop-blur-sm py-2 rounded-r-xl">
-              Experience astrology in a vibrant new light. Connect with top seers who bring positive, actionable energy to your destiny.
+            <p className="text-xl md:text-2xl text-[#4A4A4A] max-w-lg font-light leading-relaxed mb-12">
+              Step into a realm of pure insight. Connect with masterful seers who illuminate your path with absolute clarity.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-5">
-              <Link href="/practitioners">
-                <Button className="h-14 px-10 rounded-2xl bg-gradient-to-r from-[#32CD32] to-[#4CBB17] hover:from-[#2E8B57] hover:to-[#32CD32] text-white font-bold uppercase tracking-widest text-sm transition-all hover:scale-105 shadow-xl shadow-[#32CD32]/20">
-                  Start Reading <ArrowRight className="ml-3 w-5 h-5" />
+            <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
+              <Link href="/practitioners" className="w-full sm:w-auto">
+                <Button className="w-full h-16 px-12 rounded-full bg-[#32CD32] hover:bg-[#28A428] text-white font-bold uppercase tracking-widest text-sm transition-all hover:scale-[1.02] hover:shadow-[0_20px_40px_rgba(50,205,50,0.2)]">
+                  Begin Journey <ArrowRight className="ml-3 w-5 h-5" />
                 </Button>
               </Link>
             </div>
           </div>
           
-          {/* Creative Zodiac Cards (Right) */}
-          <div className="lg:col-span-6 relative h-[600px] hidden lg:block">
+          {/* Cinematic Gallery (Right) */}
+          <div className="w-full lg:w-1/2 relative h-[700px] hidden md:block">
             {mounted && (
               <div className="absolute inset-0 flex items-center justify-center">
-                {/* Main floating card (Taurus) */}
-                <div className="absolute top-[10%] left-[20%] w-56 h-80 bg-white/80 backdrop-blur-xl border border-white rounded-[2rem] p-3 shadow-2xl shadow-[#32CD32]/20 transform rotate-[-8deg] hover:rotate-0 hover:scale-105 transition-all duration-500 z-30 animate-[float_8s_ease-in-out_infinite]">
-                  <img src="/zodiacs/zodiac_2.jpg" alt="Taurus" className="w-full h-full object-cover rounded-2xl" />
-                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg font-bold text-[#1A1A1A] text-sm whitespace-nowrap">
-                    ♉ Taurus Energy
+                {/* Center Image - Massive, slow floating */}
+                <div className="absolute top-[15%] left-[20%] w-[340px] h-[480px] bg-white rounded-[2rem] p-3 shadow-[0_30px_60px_rgba(0,0,0,0.08)] transform rotate-[-4deg] transition-all duration-1000 ease-out hover:rotate-0 hover:scale-105 z-30" style={{ animation: 'cinematicFloat 15s ease-in-out infinite' }}>
+                  <img src="/zodiacs/zodiac_2.jpg" alt="Taurus" className="w-full h-full object-cover rounded-3xl" />
+                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-xl px-8 py-3 rounded-full shadow-[0_10px_30px_rgba(50,205,50,0.15)] font-bold text-[#1A1A1A] text-sm whitespace-nowrap uppercase tracking-widest border border-[#32CD32]/10">
+                    Taurus Energy
                   </div>
                 </div>
                 
-                {/* Secondary card (Pisces) */}
-                <div className="absolute top-[30%] right-[10%] w-48 h-72 bg-white/80 backdrop-blur-xl border border-white rounded-[2rem] p-3 shadow-2xl shadow-[#FF8C00]/20 transform rotate-[12deg] hover:rotate-0 hover:scale-105 transition-all duration-500 z-20 animate-[float_10s_ease-in-out_infinite_reverse]">
-                  <img src="/zodiacs/zodiac_12.jpg" alt="Pisces" className="w-full h-full object-cover rounded-2xl" />
-                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg font-bold text-[#1A1A1A] text-sm whitespace-nowrap">
-                    ♓ Pisces Intuition
+                {/* Top Right Image - Pushed back in Z space */}
+                <div className="absolute top-[5%] right-[5%] w-[240px] h-[320px] bg-white rounded-[2rem] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.05)] transform rotate-[8deg] translate-z-[-100px] transition-all duration-1000 ease-out hover:rotate-0 hover:scale-105 hover:translate-z-0 z-20" style={{ animation: 'cinematicFloat 20s ease-in-out infinite reverse' }}>
+                  <img src="/zodiacs/zodiac_12.jpg" alt="Pisces" className="w-full h-full object-cover rounded-[1.5rem]" />
+                  <div className="absolute top-6 -left-6 bg-[#FFC300] text-[#1A1A1A] px-4 py-2 rounded-full shadow-lg font-bold text-[10px] uppercase tracking-widest">
+                    Intuition
                   </div>
                 </div>
                 
-                {/* Tertiary card (Sagittarius) */}
-                <div className="absolute bottom-[5%] left-[30%] w-40 h-60 bg-white/80 backdrop-blur-xl border border-white rounded-[2rem] p-2 shadow-2xl shadow-gray-200 transform rotate-[-15deg] hover:rotate-0 hover:scale-105 transition-all duration-500 z-10 animate-[float_12s_ease-in-out_infinite]">
+                {/* Bottom Left Image - Pushed forward */}
+                <div className="absolute bottom-[10%] left-[5%] w-[220px] h-[280px] bg-white rounded-[1.5rem] p-2 shadow-[0_40px_80px_rgba(0,0,0,0.12)] transform rotate-[-12deg] translate-z-[100px] transition-all duration-1000 ease-out hover:rotate-0 hover:scale-105 z-40" style={{ animation: 'cinematicFloat 18s ease-in-out infinite 2s' }}>
                   <img src="/zodiacs/zodiac_9.jpg" alt="Sagittarius" className="w-full h-full object-cover rounded-xl" />
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg font-bold text-[#1A1A1A] text-xs whitespace-nowrap">
-                    ♐ Sagittarius
+                  <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-lg shadow-sm font-bold text-[#32CD32] text-xs">
+                    ★ 5.0
                   </div>
                 </div>
               </div>
@@ -88,10 +87,14 @@ export default function CelestialMapHero() {
       </div>
 
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes float {
-          0% { transform: translateY(0px) rotate(-8deg); }
-          50% { transform: translateY(-20px) rotate(-5deg); }
-          100% { transform: translateY(0px) rotate(-8deg); }
+        @keyframes cinematicPan {
+          0% { transform: translate(0, 0) scale(1); }
+          100% { transform: translate(100px, -50px) scale(1.1); }
+        }
+        @keyframes cinematicFloat {
+          0% { transform: translateY(0px) rotate(var(--tw-rotate)); }
+          50% { transform: translateY(-30px) rotate(calc(var(--tw-rotate) + 2deg)); }
+          100% { transform: translateY(0px) rotate(var(--tw-rotate)); }
         }
       `}} />
     </section>

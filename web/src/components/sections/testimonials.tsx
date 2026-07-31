@@ -2,9 +2,43 @@
 
 import { useLang } from '@/lib/lang-context';
 import { TESTIMONIALS } from '@/lib/constants';
+import { Star } from 'lucide-react';
 
 export function Testimonials({ variant }: { variant: string }) {
   const { t } = useLang();
+
+  if (variant === 'cinematic-nature') {
+    return (
+      <section className="py-32 relative z-10 bg-[#FDFCF8] overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_right,rgba(50,205,50,0.03)_0%,transparent_50%)] pointer-events-none" />
+        <div className="container mx-auto px-6 relative z-10 border-t border-gray-100 pt-20">
+          <div className="text-center mb-24">
+            <span className="text-[#32CD32] text-sm uppercase tracking-[0.4em] font-bold mb-4 block">Client Journeys</span>
+            <h2 className="text-5xl md:text-6xl font-serif text-[#1A1A1A] tracking-tight">Stories of Clarity</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto">
+            {TESTIMONIALS.slice(0, 3).map((test, idx) => (
+              <div key={idx} className="group flex flex-col items-center text-center p-12 rounded-[2.5rem] bg-white border border-gray-50 shadow-[0_20px_60px_rgba(0,0,0,0.03)] hover:shadow-[0_40px_80px_rgba(255,195,0,0.1)] transition-all duration-700 hover:-translate-y-4">
+                <div className="text-[#FFC300] flex gap-1 mb-8 transform group-hover:scale-110 transition-transform duration-500">
+                  <Star className="w-5 h-5 fill-current" /><Star className="w-5 h-5 fill-current" /><Star className="w-5 h-5 fill-current" /><Star className="w-5 h-5 fill-current" /><Star className="w-5 h-5 fill-current" />
+                </div>
+                <p className="text-[#4A4A4A] leading-loose text-lg font-light italic mb-10">"{test.text}"</p>
+                <div className="flex items-center gap-4 mt-auto">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#32CD32]/20 to-[#FFC300]/20 flex items-center justify-center font-bold text-[#32CD32]">
+                    {test.name.charAt(0)}
+                  </div>
+                  <div className="text-left">
+                    <h4 className="font-bold text-[#1A1A1A]">{test.name}</h4>
+                    <span className="text-xs text-gray-400 font-bold uppercase tracking-widest">Verified Session</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (variant === 'cosmic') {
     return (

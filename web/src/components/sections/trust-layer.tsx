@@ -1,8 +1,43 @@
 'use client';
 
-import { Star, MessageCircle, Shield, Globe } from 'lucide-react';
+import { Star, MessageCircle, Shield, Globe, CheckCircle2, Lock } from 'lucide-react';
 
 export function TrustLayer({ variant }: { variant: string }) {
+  if (variant === 'cinematic-nature') {
+    return (
+      <section className="py-24 relative z-10 bg-white overflow-hidden border-t border-gray-50">
+        <div className="container mx-auto px-6 relative z-10 max-w-6xl">
+          <div className="text-center mb-16">
+            <span className="text-[#32CD32] text-sm uppercase tracking-[0.4em] font-bold mb-4 block">Our Commitment</span>
+            <h2 className="text-4xl md:text-5xl font-serif text-[#1A1A1A] tracking-tight">Guaranteed Serenity</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            <div className="flex flex-col items-center group">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#FFC300]/10 to-[#32CD32]/10 flex items-center justify-center mb-8 shadow-sm group-hover:scale-110 transition-transform duration-700">
+                <Shield className="w-8 h-8 text-[#FFC300]" />
+              </div>
+              <h3 className="text-xl font-bold text-[#1A1A1A] mb-4">100% Secure</h3>
+              <p className="text-[#4A4A4A] font-light leading-relaxed">Your privacy is our utmost priority. All sessions are completely confidential and encrypted.</p>
+            </div>
+            <div className="flex flex-col items-center group">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#FFC300]/10 to-[#32CD32]/10 flex items-center justify-center mb-8 shadow-sm group-hover:scale-110 transition-transform duration-700">
+                <CheckCircle2 className="w-8 h-8 text-[#32CD32]" />
+              </div>
+              <h3 className="text-xl font-bold text-[#1A1A1A] mb-4">Verified Experts</h3>
+              <p className="text-[#4A4A4A] font-light leading-relaxed">Every master undergoes a rigorous 5-step screening process to ensure absolute authenticity.</p>
+            </div>
+            <div className="flex flex-col items-center group">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#FFC300]/10 to-[#32CD32]/10 flex items-center justify-center mb-8 shadow-sm group-hover:scale-110 transition-transform duration-700">
+                <Lock className="w-8 h-8 text-[#FFC300]" />
+              </div>
+              <h3 className="text-xl font-bold text-[#1A1A1A] mb-4">Money Back</h3>
+              <p className="text-[#4A4A4A] font-light leading-relaxed">Not satisfied with your reading? We offer a full refund guarantee on your first session.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
   if (variant === 'cosmic') {
     return (
       <section className="relative z-20 py-12 border-y border-red-900/10 bg-white">

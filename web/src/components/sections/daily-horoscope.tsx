@@ -3,11 +3,53 @@
 import { useState } from 'react';
 import { useLang } from '@/lib/lang-context';
 import { ZODIAC_SIGNS, HOROSCOPE_DATA } from '@/lib/constants';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export function DailyHoroscope({ variant }: { variant: string }) {
   const { t } = useLang();
+
+  if (variant === 'cinematic-nature') {
+    return (
+      <section className="py-24 relative z-10 bg-white overflow-hidden">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
+            <div>
+              <span className="text-[#32CD32] text-sm uppercase tracking-[0.4em] font-bold mb-4 block">Daily Alignments</span>
+              <h2 className="text-5xl md:text-6xl font-serif text-[#1A1A1A] tracking-tight">Cosmic Forecast</h2>
+            </div>
+            <div className="flex gap-4">
+              <Button variant="outline" size="icon" className="w-12 h-12 rounded-full border-gray-200 text-gray-500 hover:text-[#32CD32] hover:border-[#32CD32] transition-colors"><ChevronLeft className="w-5 h-5" /></Button>
+              <Button variant="outline" size="icon" className="w-12 h-12 rounded-full border-gray-200 text-gray-500 hover:text-[#32CD32] hover:border-[#32CD32] transition-colors"><ChevronRight className="w-5 h-5" /></Button>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {ZODIAC_SIGNS.slice(0, 3).map((h, idx) => {
+              const data = HOROSCOPE_DATA[idx];
+              return (
+                <div key={idx} className="group bg-[#FDFCF8] rounded-[2rem] p-10 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_60px_rgba(50,205,50,0.08)] border border-gray-50 transition-all duration-700 hover:-translate-y-2">
+                  <div className="flex items-center gap-6 mb-8">
+                    <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center border border-gray-100 shadow-sm group-hover:border-[#32CD32]/20 group-hover:scale-110 transition-all duration-500">
+                      <Moon className="w-6 h-6 text-[#FFC300]" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-serif text-[#1A1A1A] mb-1">{h.name}</h3>
+                      <p className="text-sm font-bold text-[#32CD32] uppercase tracking-widest">{data.dateRange}</p>
+                    </div>
+                  </div>
+                  <p className="text-[#4A4A4A] leading-relaxed font-light mb-8">{data.text}</p>
+                  <Link href="#" className="text-[#FFC300] hover:text-[#E6B000] text-sm uppercase tracking-widest font-bold flex items-center gap-2 group/link">
+                    Read Full Forecast <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    );
+  }
   const [activeZodiac, setActiveZodiac] = useState(0);
 
   if (variant === 'cosmic') {
