@@ -29,10 +29,12 @@ export default function LandingPage() {
   if (!mounted) return <div className="min-h-screen bg-background" />;
 
   // Determine variant string based on layout context
-  let variant: 'mystic' | 'golden' | 'cosmic' | 'split' = 'mystic';
-  if (layout === 'celestial-map' || layout === 'ruby-velvet') variant = 'golden';
+  let variant: string = 'mystic';
+  if (layout === 'celestial-map') variant = 'constellation';
+  if (layout === 'ruby-velvet') variant = 'golden';
   if (layout === 'sacred-geometry') variant = 'cosmic';
-  if (layout === 'modern-minimal' || layout === 'zen-minimalist') variant = 'split';
+  if (layout === 'modern-minimal') variant = 'aurora';
+  if (layout === 'zen-minimalist') variant = 'split';
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">

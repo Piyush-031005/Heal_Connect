@@ -3,7 +3,7 @@
 import { useLang } from '@/lib/lang-context';
 import { TESTIMONIALS } from '@/lib/constants';
 
-export function Testimonials({ variant }: { variant: 'mystic' | 'golden' | 'cosmic' | 'split' }) {
+export function Testimonials({ variant }: { variant: string }) {
   const { t } = useLang();
 
   if (variant === 'cosmic') {

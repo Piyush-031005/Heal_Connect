@@ -1,147 +1,111 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
-// ── Layout 4: "Split Astrologer" ─────────────────────────────────────────────
-// Inspired by: The half-light/half-dark chart layout from reference image.
-// Left half = warm parchment cream with line art chart. Right = deep navy dark.
-// This is the most unique layout — a bold split-screen effect that is eye-catching.
-
-const SPLIT_SIGNS = ['♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'];
-
-export default function SplitAstrologerHero() {
-  const [activeSign, setActiveSign] = useState(4); // Leo default
+export default function ModernMinimalHero() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   return (
-    <section className="relative overflow-hidden min-h-[95vh] flex flex-col md:flex-row">
-
-      {/* LEFT HALF — Warm parchment */}
-      <div className="relative flex-1 flex flex-col items-center justify-center px-8 py-24 overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #F2E8D5 0%, #E8DBBF 100%)' }}>
-
-        {/* Faint chart watermark left */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none" viewBox="0 0 400 400">
-          <circle cx="200" cy="200" r="190" fill="none" stroke="#6B4C1E" strokeWidth="1" />
-          <circle cx="200" cy="200" r="150" fill="none" stroke="#6B4C1E" strokeWidth="0.8" />
-          <circle cx="200" cy="200" r="110" fill="none" stroke="#6B4C1E" strokeWidth="0.6" />
-          <circle cx="200" cy="200" r="60" fill="none" stroke="#6B4C1E" strokeWidth="1" />
-          {Array.from({ length: 12 }, (_, i) => {
-            const a = ((i * 30 - 90) * Math.PI) / 180;
-            return <line key={i} x1={200 + 60 * Math.cos(a)} y1={200 + 60 * Math.sin(a)} x2={200 + 190 * Math.cos(a)} y2={200 + 190 * Math.sin(a)} stroke="#6B4C1E" strokeWidth="0.6" />;
-          })}
-        </svg>
-
-        {/* Moon phase decorations */}
-        <div className="absolute top-8 left-8 flex gap-2 opacity-30">
-          {['●', '◕', '◑', '◔', '○'].map((m, i) => (
-            <span key={i} className="text-2xl" style={{ color: '#6B4C1E' }}>{m}</span>
-          ))}
-        </div>
-
-        {/* Content left */}
-        <div className="relative z-10 max-w-sm text-center">
-          <span className="text-xs font-bold tracking-[0.25em] uppercase block mb-6" style={{ color: '#B87333' }}>
-            HealConnect · Astrology
-          </span>
-          <h1 className="text-4xl md:text-5xl font-serif font-black leading-tight mb-6" style={{ color: '#1C1208' }}>
-            Discover<br />
-            <span className="italic font-light" style={{ color: '#8B6914' }}>Your Destiny</span><br />
-            Through Stars
-          </h1>
-          <p className="text-base font-light leading-relaxed mb-8" style={{ color: '#5A4A2E' }}>
-            Ancient celestial wisdom decoded by India's most verified expert astrologers, available 24x7 at your fingertips.
-          </p>
-          <Link href="/practitioners">
-            <Button size="lg" className="rounded-none px-10 h-12 text-sm font-bold uppercase tracking-widest border-0 text-white shadow-md transition-all hover:scale-105"
-              style={{ background: '#C4772A' }}>
-              Begin Your Journey
-            </Button>
-          </Link>
-        </div>
+    <section className="relative min-h-screen bg-[#020202] flex items-center justify-center overflow-hidden pt-20 perspective-[1000px]">
+      
+      {/* Aurora Borealis Animated Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.25)_0%,transparent_60%)] blur-[100px] animate-[pulse_10s_ease-in-out_infinite_alternate]" />
+        <div className="absolute bottom-[-10%] right-[-20%] w-[70vw] h-[70vw] bg-[radial-gradient(ellipse_at_center,rgba(168,85,247,0.2)_0%,transparent_60%)] blur-[120px] animate-[pulse_15s_ease-in-out_infinite]" />
+        <div className="absolute top-[20%] left-[30%] w-[40vw] h-[40vw] bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.15)_0%,transparent_60%)] blur-[90px] animate-[pulse_12s_ease-in-out_infinite_alternate-reverse]" />
+        
+        {/* Subtle dot matrix overlay */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
       </div>
 
-      {/* CENTER DIVIDER LINE with spinning chart */}
-      <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center hidden md:flex">
-        <div className="relative">
-          {/* Spinning circle chart at center */}
-          <svg className="animate-[spin_60s_linear_infinite] drop-shadow-2xl" width="320" height="320" viewBox="0 0 320 320">
-            <circle cx="160" cy="160" r="150" fill="rgba(18,18,30,0.95)" stroke="#D4A843" strokeWidth="2" />
-            <circle cx="160" cy="160" r="115" fill="none" stroke="#D4A843" strokeWidth="1" opacity="0.6" />
-            <circle cx="160" cy="160" r="80" fill="none" stroke="#D4A843" strokeWidth="0.8" opacity="0.4" />
-            <circle cx="160" cy="160" r="40" fill="#D4A843" opacity="0.15" />
-            <circle cx="160" cy="160" r="20" fill="#D4A843" opacity="0.9" />
-            <text x="160" y="167" textAnchor="middle" fontSize="20" fill="#1C1208" fontFamily="serif">☀</text>
-            {SPLIT_SIGNS.map((sign, i) => {
-              const a = ((i * 30 - 90) * Math.PI) / 180;
-              const sr = 132;
-              return (
-                <text key={i} x={160 + sr * Math.cos(a)} y={160 + sr * Math.sin(a)}
-                  textAnchor="middle" dominantBaseline="middle" fontSize="18" fill="#D4A843" opacity="0.95" fontFamily="serif">
-                  {sign}
-                </text>
-              );
-            })}
-            {Array.from({ length: 12 }, (_, i) => {
-              const a = ((i * 30 - 90) * Math.PI) / 180;
-              return <line key={i} x1={160 + 40 * Math.cos(a)} y1={160 + 40 * Math.sin(a)} x2={160 + 150 * Math.cos(a)} y2={160 + 150 * Math.sin(a)} stroke="#D4A843" strokeWidth="0.8" opacity="0.4" />;
-            })}
-          </svg>
-        </div>
-      </div>
-
-      {/* RIGHT HALF — Deep navy dark */}
-      <div className="relative flex-1 flex flex-col items-center justify-center px-8 py-24 overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #12121E 0%, #0D0D1A 100%)' }}>
-
-        {/* Stars background right */}
-        <div className="absolute inset-0 pointer-events-none">
-          {Array.from({ length: 60 }, (_, i) => (
-            <div key={i} className="absolute rounded-full bg-white animate-pulse"
-              style={{
-                top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%`,
-                width: `${Math.random() * 2 + 0.5}px`, height: `${Math.random() * 2 + 0.5}px`,
-                opacity: Math.random() * 0.5 + 0.1,
-                animationDelay: `${Math.random() * 5}s`, animationDuration: `${Math.random() * 3 + 2}s`,
-              }} />
-          ))}
-        </div>
-
-        {/* Content right */}
-        <div className="relative z-10 max-w-sm text-center">
-          <span className="text-xs font-bold tracking-[0.25em] uppercase block mb-6 text-amber-400/70">
-            ✦ 500+ Verified Experts
-          </span>
-          <h2 className="text-3xl md:text-4xl font-serif font-light leading-tight mb-6 text-white">
-            Choose Your<br />
-            <span className="font-black text-amber-300 italic text-4xl md:text-5xl">Sign</span>
-          </h2>
-
-          {/* Sign selector grid */}
-          <div className="grid grid-cols-6 gap-2 mb-8">
-            {SPLIT_SIGNS.map((sign, i) => (
-              <button key={i} onClick={() => setActiveSign(i)}
-                className="w-10 h-10 rounded-lg text-xl flex items-center justify-center transition-all duration-200 hover:scale-110 border"
-                style={{
-                  background: activeSign === i ? 'rgba(212,168,67,0.3)' : 'rgba(255,255,255,0.04)',
-                  borderColor: activeSign === i ? '#D4A843' : 'rgba(255,255,255,0.1)',
-                  color: activeSign === i ? '#D4A843' : 'rgba(255,255,255,0.5)',
-                }}>
-                {sign}
-              </button>
-            ))}
+      <div className="container mx-auto px-6 relative z-10 w-full h-full">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-16 h-full">
+          
+          {/* Hero Content (Left) */}
+          <div className="w-full lg:w-1/2 flex flex-col items-start z-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
+              <Sparkles className="w-4 h-4 text-cyan-400" />
+              <span className="text-xs uppercase tracking-[0.2em] font-semibold text-white/80">Next-Gen Astrology</span>
+            </div>
+            
+            <h1 className="text-6xl md:text-8xl font-sans font-black tracking-tighter leading-[1.05] text-white mb-8">
+              Cosmic <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400">
+                Intelligence
+              </span>
+            </h1>
+            
+            <p className="text-xl text-white/60 font-light leading-relaxed max-w-lg mb-10">
+              Decode the universe with breathtaking clarity. Our verified network of masters provides profound insights into your life's trajectory.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <Link href="/practitioners" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto h-14 px-10 rounded-2xl bg-white text-black hover:bg-gray-200 transition-all font-bold text-base shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-105">
+                  Begin Journey <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+              <Link href="/services" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-10 rounded-2xl border-white/20 text-white hover:bg-white/10 hover:border-white/40 transition-all font-medium text-base backdrop-blur-sm">
+                  View Experts
+                </Button>
+              </Link>
+            </div>
           </div>
 
-          <Link href="/practitioners">
-            <Button size="lg" className="rounded-full px-10 h-12 text-sm font-bold border-2 text-amber-300 hover:bg-amber-300/10 transition-all"
-              style={{ borderColor: '#D4A843' }}>
-              Talk to an Expert <ArrowRight className="w-4 h-4 ml-2 inline" />
-            </Button>
-          </Link>
+          {/* Abstract Glassmorphism Composition (Right) */}
+          <div className="w-full lg:w-1/2 relative h-[500px] md:h-[600px] hidden md:flex items-center justify-center">
+            
+            {/* Center Massive Glass Orb */}
+            <div className="absolute w-[300px] h-[300px] rounded-full border border-white/10 bg-white/5 backdrop-blur-2xl shadow-[inset_0_0_40px_rgba(255,255,255,0.1)] flex items-center justify-center animate-[float_10s_ease-in-out_infinite]">
+              <div className="w-[280px] h-[280px] rounded-full border border-white/5 bg-gradient-to-tr from-cyan-500/10 to-purple-500/10 flex items-center justify-center">
+                <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center shadow-[0_0_30px_rgba(56,189,248,0.3)]">
+                  <Sparkles className="w-8 h-8 text-cyan-200 animate-pulse" />
+                </div>
+              </div>
+            </div>
+
+            {/* Orbiting Glass Cards */}
+            {mounted && [
+              { top: '10%', left: '10%', rot: '-15deg', delay: '0s', label: 'Natal Chart' },
+              { top: '60%', left: '-5%', rot: '10deg', delay: '2s', label: 'Tarot Arcana' },
+              { top: '80%', left: '60%', rot: '-5deg', delay: '4s', label: 'Vastu Shastra' },
+              { top: '20%', left: '70%', rot: '15deg', delay: '1s', label: 'Numerology' },
+            ].map((card, idx) => (
+              <div 
+                key={idx}
+                className="absolute w-40 h-48 rounded-3xl border border-white/20 bg-white/5 backdrop-blur-xl shadow-2xl p-5 flex flex-col justify-end"
+                style={{
+                  top: card.top,
+                  left: card.left,
+                  transform: `rotate(${card.rot})`,
+                  animation: `float 8s ease-in-out infinite alternate`,
+                  animationDelay: card.delay
+                }}
+              >
+                <div className="w-8 h-8 rounded-full bg-white/10 mb-auto flex items-center justify-center">
+                  <div className="w-3 h-3 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400" />
+                </div>
+                <h4 className="text-white font-medium text-sm">{card.label}</h4>
+                <p className="text-white/40 text-[10px] mt-1">Live syncing...</p>
+              </div>
+            ))}
+          </div>
+          
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes float {
+          0% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(2deg); }
+          100% { transform: translateY(0px) rotate(0deg); }
+        }
+      `}} />
     </section>
   );
 }

@@ -20,25 +20,38 @@ export default function ZenMinimalistHero() {
       {/* Huge Orbiting 2D Wheel Background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
         {mounted && (
-          <div className="relative w-[150vw] h-[150vw] md:w-[1200px] md:h-[1200px] opacity-20" style={{ animation: 'crimsonSpin 90s linear infinite' }}>
-            {cards.map((card) => (
-              <div
-                key={card.id}
-                className="absolute top-1/2 left-1/2 w-40 h-60 md:w-56 md:h-80 -ml-20 -mt-30 md:-ml-28 md:-mt-40 origin-center"
-                style={{
-                  transform: `rotate(${card.angle}deg) translateY(-35vw) md:translateY(-480px)`,
-                }}
-              >
-                {/* Counter-rotating container keeps the card upright */}
-                <div className="w-full h-full" style={{ animation: 'crimsonCounterSpin 90s linear infinite' }}>
-                  <img 
-                    src={`/zodiacs/red/red_${card.id}.png`} 
-                    alt="Zodiac" 
-                    className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(220,38,38,0.3)]" 
-                  />
+          <div className="absolute w-[800px] h-[800px] md:w-[1400px] md:h-[1400px] rounded-full" style={{ animation: 'crimsonSpin 90s linear infinite' }}>
+            {/* The circular track line */}
+            <div className="absolute inset-10 rounded-full border border-red-900/10" />
+            <div className="absolute inset-20 rounded-full border border-red-900/5 border-dashed" />
+            
+            {cards.map((card, index) => {
+              // Calculate exact x,y positions on the circle
+              const radius = 50; // percentage
+              const angleInRads = (card.angle - 90) * (Math.PI / 180);
+              const x = 50 + radius * Math.cos(angleInRads);
+              const y = 50 + radius * Math.sin(angleInRads);
+
+              return (
+                <div
+                  key={card.id}
+                  className="absolute w-32 h-48 md:w-56 md:h-80 -ml-16 -mt-24 md:-ml-28 md:-mt-40 origin-center"
+                  style={{
+                    left: `${x}%`,
+                    top: `${y}%`,
+                  }}
+                >
+                  {/* Counter-rotating container keeps the card upright */}
+                  <div className="w-full h-full" style={{ animation: 'crimsonCounterSpin 90s linear infinite' }}>
+                    <img 
+                      src={`/zodiacs/red/red_${card.id}.png`} 
+                      alt="Zodiac" 
+                      className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(220,38,38,0.3)] opacity-40" 
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>

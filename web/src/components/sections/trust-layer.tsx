@@ -2,7 +2,7 @@
 
 import { Star, MessageCircle, Shield, Globe } from 'lucide-react';
 
-export function TrustLayer({ variant }: { variant: 'mystic' | 'golden' | 'cosmic' | 'split' }) {
+export function TrustLayer({ variant }: { variant: string }) {
   if (variant === 'cosmic') {
     return (
       <section className="relative z-20 py-12 border-y border-red-900/10 bg-white">

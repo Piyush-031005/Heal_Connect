@@ -7,8 +7,95 @@ import { ArrowRight } from 'lucide-react';
 import { useLang } from '@/lib/lang-context';
 import { TOP_ASTROLOGERS } from '@/lib/constants';
 
-export function TopAstrologers({ variant }: { variant: 'mystic' | 'golden' | 'cosmic' | 'split' }) {
+export function TopAstrologers({ variant }: { variant: string }) {
   const { t } = useLang();
+
+  if (variant === 'constellation') {
+    return (
+      <section className="py-24 relative z-10 bg-[#05050A] overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(212,168,67,0.1)_0%,transparent_60%)] pointer-events-none" />
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div>
+              <span className="text-[#D4A843] text-xs uppercase tracking-[0.4em] font-semibold mb-4 block">The Oracle Council</span>
+              <h2 className="text-4xl md:text-5xl font-serif text-white tracking-tight">Active Seers</h2>
+            </div>
+            <Link href="/practitioners" className="text-[#D4A843] hover:text-white transition-colors flex items-center gap-2 text-sm uppercase tracking-widest font-mono">
+              View All <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {TOP_ASTROLOGERS.slice(0, 3).map((a, idx) => (
+              <div key={idx} className="group relative border border-[#D4A843]/20 bg-[#D4A843]/5 backdrop-blur-xl hover:bg-[#D4A843]/10 transition-all duration-700 p-8 flex flex-col">
+                <div className="absolute top-0 right-0 p-4 opacity-50 font-mono text-[10px] text-[#D4A843]">[{a.online ? 'ONLINE' : 'OFFLINE'}]</div>
+                <div className="flex items-center gap-6 mb-8">
+                  <div className="w-20 h-20 rounded-none border border-[#D4A843]/40 p-1 shrink-0 group-hover:scale-105 transition-transform">
+                    <img src={a.img} alt={a.name} className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-serif text-white group-hover:text-[#D4A843] transition-colors">{a.name}</h3>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="text-xs text-white/50">{a.exp}</span>
+                      <span className="text-white/20">•</span>
+                      <span className="text-[#D4A843] text-xs">★ {a.rating}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {a.tags.slice(0, 3).map((s: string) => (
+                    <span key={s} className="px-2 py-1 border border-white/10 text-[10px] text-white/40 font-mono uppercase">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+                <Button className="w-full h-12 rounded-none bg-white text-black hover:bg-[#D4A843] font-bold uppercase tracking-widest text-xs transition-all">
+                  Initiate Link
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (variant === 'aurora') {
+    return (
+      <section className="py-24 relative z-10 bg-[#020202] overflow-hidden">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <span className="text-purple-400 text-xs font-bold uppercase tracking-widest mb-3 block">Network Nodes</span>
+            <h2 className="text-4xl md:text-5xl font-sans font-black text-white tracking-tighter">Verified Experts</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            {TOP_ASTROLOGERS.slice(0, 3).map((a, idx) => (
+              <div key={idx} className="group p-8 rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-3xl hover:bg-white/10 hover:border-purple-500/30 hover:shadow-[0_0_40px_rgba(168,85,247,0.15)] transition-all duration-500 flex flex-col items-center text-center">
+                <div className="w-24 h-24 rounded-full overflow-hidden mb-6 border-2 border-white/10 group-hover:border-purple-400/50 transition-colors p-1">
+                  <img src={a.img} alt={a.name} className="w-full h-full rounded-full object-cover" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">{a.name}</h3>
+                <div className="flex items-center gap-3 text-sm text-white/50 mb-6">
+                  <span>{a.exp}</span>
+                  <span>•</span>
+                  <span className="text-purple-300 font-medium">★ {a.rating}</span>
+                </div>
+                <div className="flex flex-wrap justify-center gap-2 mb-8">
+                  {a.tags.slice(0, 2).map((s: string) => (
+                    <span key={s} className="px-3 py-1 rounded-full bg-white/5 text-xs text-white/70">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+                <Button className="w-full h-12 rounded-xl bg-gradient-to-r from-cyan-500/20 to-purple-500/20 hover:from-cyan-500/40 hover:to-purple-500/40 border border-white/10 text-white font-semibold transition-all">
+                  Connect Now
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (variant === 'cosmic') {
     return (

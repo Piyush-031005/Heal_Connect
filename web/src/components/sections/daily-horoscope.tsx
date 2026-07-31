@@ -6,7 +6,7 @@ import { ZODIAC_SIGNS, HOROSCOPE_DATA } from '@/lib/constants';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-export function DailyHoroscope({ variant }: { variant: 'mystic' | 'golden' | 'cosmic' | 'split' }) {
+export function DailyHoroscope({ variant }: { variant: string }) {
   const { t } = useLang();
   const [activeZodiac, setActiveZodiac] = useState(0);
 

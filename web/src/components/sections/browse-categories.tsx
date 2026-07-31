@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 import { useLang } from '@/lib/lang-context';
 import { CATEGORIES } from '@/lib/constants';
 
-export function BrowseCategories({ variant }: { variant: 'mystic' | 'golden' | 'cosmic' | 'split' }) {
+export function BrowseCategories({ variant }: { variant: string }) {
   const { t } = useLang();
 
   if (variant === 'cosmic') {
