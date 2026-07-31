@@ -12,43 +12,43 @@ export function TopAstrologers({ variant }: { variant: 'mystic' | 'golden' | 'co
 
   if (variant === 'cosmic') {
     return (
-      <section className="py-24 relative z-10 bg-[#05050A]">
+      <section className="py-24 relative z-10 bg-[#FDFBF7]">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">Master Guides</h2>
-            <p className="text-white/60">Connect with enlightened souls for cosmic clarity.</p>
+            <h2 className="text-4xl md:text-5xl font-black text-[#1A0B0F] mb-4">Master Guides</h2>
+            <p className="text-[#4A3B3F]">Connect with enlightened souls for cosmic clarity.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {TOP_ASTROLOGERS.map((a, idx) => (
-              <div key={idx} className="group relative rounded-[2.5rem] overflow-hidden p-1 bg-gradient-to-b from-white/10 to-transparent hover:from-pink-500/50 hover:to-purple-500/20 transition-all duration-700">
-                <div className="absolute inset-0 bg-black/90 rounded-[2.5rem]" />
-                <div className="relative h-full flex flex-col p-6 bg-black/40 backdrop-blur-md rounded-[2.5rem]">
+              <div key={idx} className="group relative rounded-[2.5rem] overflow-hidden p-[1px] bg-red-900/10 hover:bg-red-500/50 transition-all duration-700 shadow-[0_10px_30px_rgba(220,38,38,0.05)] hover:shadow-[0_20px_50px_rgba(220,38,38,0.2)]">
+                <div className="absolute inset-0 bg-white rounded-[2.5rem]" />
+                <div className="relative h-full flex flex-col p-6 bg-white/80 backdrop-blur-md rounded-[2.5rem]">
                   <div className="flex gap-6 mb-6">
-                    <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.1)] group-hover:border-pink-500/50 group-hover:shadow-[0_0_30px_rgba(236,72,153,0.3)] transition-all shrink-0">
+                    <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-red-100 shadow-md group-hover:border-red-400 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.2)] transition-all shrink-0">
                       <img src={a.img} alt={a.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     </div>
                     <div className="flex-1 pt-2">
-                      <h3 className="font-bold text-white text-2xl mb-1">{a.name}</h3>
-                      <p className="text-pink-400 text-sm font-medium">{a.exp}</p>
+                      <h3 className="font-bold text-[#1A0B0F] text-2xl mb-1">{a.name}</h3>
+                      <p className="text-red-600 text-sm font-medium">{a.exp}</p>
                       <div className="flex items-center gap-1 mt-2">
                         <span className="text-yellow-500 text-sm">★</span>
-                        <span className="text-white text-sm font-bold">{a.rating}</span>
-                        <span className="text-white/40 text-xs ml-1">({a.orders})</span>
+                        <span className="text-[#1A0B0F] text-sm font-bold">{a.rating}</span>
+                        <span className="text-[#4A3B3F] text-xs ml-1">({a.orders})</span>
                       </div>
                     </div>
                   </div>
                   
                   <div className="flex flex-wrap gap-2 mb-8">
                     {a.tags.map(tag => (
-                      <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs font-medium">
+                      <span key={tag} className="px-3 py-1 rounded-full bg-red-50 border border-red-100 text-red-900/70 text-xs font-medium">
                         {tag}
                       </span>
                     ))}
                   </div>
 
                   <div className="mt-auto flex items-center justify-between">
-                    <p className="text-white font-bold">₹{a.price}/min</p>
-                    <Button className="rounded-full bg-white text-black hover:bg-pink-500 hover:text-white transition-colors border-0">
+                    <p className="text-[#1A0B0F] font-bold">₹{a.price}/min</p>
+                    <Button className="rounded-full bg-red-600 text-white hover:bg-red-700 transition-colors border-0 shadow-md">
                       Connect Now
                     </Button>
                   </div>

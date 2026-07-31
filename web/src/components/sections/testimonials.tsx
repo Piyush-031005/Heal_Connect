@@ -8,26 +8,26 @@ export function Testimonials({ variant }: { variant: 'mystic' | 'golden' | 'cosm
 
   if (variant === 'cosmic') {
     return (
-      <section className="py-24 relative z-10 bg-[#05050A]">
+      <section className="py-24 relative z-10 bg-[#FDFBF7]">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">Cosmic Connections</h2>
-            <p className="text-white/60">Real stories from aligned souls.</p>
+            <h2 className="text-4xl md:text-5xl font-black text-[#1A0B0F] mb-4">Cosmic Connections</h2>
+            <p className="text-[#4A3B3F]">Real stories from aligned souls.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {TESTIMONIALS.map((testi, idx) => (
-              <div key={idx} className="group relative rounded-[2.5rem] p-1 bg-gradient-to-br from-white/10 to-transparent hover:from-pink-500/30 hover:to-purple-500/30 transition-all duration-700">
-                <div className="absolute inset-0 bg-black/90 rounded-[2.5rem]" />
-                <div className="relative p-10 bg-black/40 backdrop-blur-xl rounded-[2.5rem] h-full flex flex-col">
-                  <div className="text-pink-500 text-6xl font-serif mb-4 leading-none opacity-50 group-hover:opacity-100 transition-opacity">"</div>
-                  <p className="text-lg text-white/80 leading-relaxed mb-8 flex-1">"{testi.text}"</p>
+              <div key={idx} className="group relative rounded-[2.5rem] p-[1px] bg-red-900/10 hover:bg-red-500/50 transition-all duration-700 shadow-md hover:shadow-xl">
+                <div className="absolute inset-0 bg-white rounded-[2.5rem]" />
+                <div className="relative p-10 bg-white/60 backdrop-blur-xl rounded-[2.5rem] h-full flex flex-col">
+                  <div className="text-red-500 text-6xl font-serif mb-4 leading-none opacity-50 group-hover:opacity-100 transition-opacity">"</div>
+                  <p className="text-lg text-[#1A0B0F]/80 leading-relaxed mb-8 flex-1">"{testi.text}"</p>
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white font-bold text-lg shadow-[0_5px_15px_rgba(220,38,38,0.4)]">
                       {testi.name.charAt(0)}
                     </div>
                     <div>
-                      <h4 className="text-white font-bold">{testi.name}</h4>
-                      <p className="text-white/40 text-sm">{testi.loc}</p>
+                      <h4 className="text-[#1A0B0F] font-bold">{testi.name}</h4>
+                      <p className="text-red-700/80 text-sm font-medium">{testi.loc}</p>
                     </div>
                   </div>
                 </div>

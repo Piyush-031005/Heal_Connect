@@ -122,27 +122,27 @@
   }
 
   .cosmic {
-    --background: #1B0B2A;
-    --foreground: #F8FAFC;
-    --card: #281242;
-    --card-foreground: #F8FAFC;
-    --popover: #281242;
-    --popover-foreground: #F8FAFC;
-    --primary: #D6B46B;
-    --primary-foreground: #1B0B2A;
-    --secondary: #3D1C63;
-    --secondary-foreground: #F8FAFC;
-    --muted: #3D1C63;
-    --muted-foreground: #BFA8D9;
-    --accent: #9333EA;
-    --accent-foreground: #F8FAFC;
+    --background: #FDFBF7;
+    --foreground: #1A0B0F;
+    --card: #FFFFFF;
+    --card-foreground: #1A0B0F;
+    --popover: #FFFFFF;
+    --popover-foreground: #1A0B0F;
+    --primary: #DC2626;
+    --primary-foreground: #FFFFFF;
+    --secondary: #FEE2E2;
+    --secondary-foreground: #991B1B;
+    --muted: #F3F4F6;
+    --muted-foreground: #6B7280;
+    --accent: #DC2626;
+    --accent-foreground: #FFFFFF;
     --destructive: #EF4444;
-    --destructive-foreground: #F8FAFC;
+    --destructive-foreground: #FDFBF7;
     --success: #22C55E;
-    --success-foreground: #F8FAFC;
-    --border: #3D1C63;
-    --input: #3D1C63;
-    --ring: #D6B46B;
+    --success-foreground: #FDFBF7;
+    --border: #FECACA;
+    --input: #FECACA;
+    --ring: #DC2626;
     --radius: 0.625rem;
   }
 

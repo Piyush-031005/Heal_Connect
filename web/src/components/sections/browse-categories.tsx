@@ -10,27 +10,27 @@ export function BrowseCategories({ variant }: { variant: 'mystic' | 'golden' | '
 
   if (variant === 'cosmic') {
     return (
-      <section className="py-24 relative z-10 bg-[#05050A]">
+      <section className="py-24 relative z-10 bg-[#FDFBF7]">
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white">{t.browseTitle}</h2>
-            <div className="h-px bg-gradient-to-r from-pink-500/50 to-transparent flex-1 ml-8 hidden md:block" />
+            <h2 className="text-4xl md:text-5xl font-black text-[#1A0B0F]">{t.browseTitle}</h2>
+            <div className="h-px bg-gradient-to-r from-red-600/50 to-transparent flex-1 ml-8 hidden md:block" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {CATEGORIES.map((cat, idx) => {
               const catData = t.categories[idx] || { name: cat.name, count: cat.count };
               return (
                 <Link key={cat.name} href="/signup" className="group">
-                  <div className="relative flex flex-col justify-end p-8 rounded-3xl overflow-hidden aspect-video border border-white/5 shadow-2xl hover:shadow-[0_0_50px_rgba(236,72,153,0.3)] transition-all group-hover:scale-[1.02] duration-700">
-                    <img src={`/zodiacs/zodiac_${(idx % 30) + 1}.jpg`} alt={catData.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity" />
+                  <div className="relative flex flex-col justify-end p-8 rounded-3xl overflow-hidden aspect-video border border-red-900/10 shadow-lg hover:shadow-[0_15px_40px_rgba(220,38,38,0.2)] transition-all group-hover:scale-[1.02] duration-700 bg-white">
+                    <img src={`/zodiacs/red/red_${(idx % 12) + 1}.png`} alt={catData.name} className="absolute inset-0 w-full h-full object-contain p-4 opacity-30 group-hover:opacity-60 group-hover:scale-110 transition-transform duration-[2s]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/60 to-transparent opacity-90 group-hover:opacity-70 transition-opacity" />
                     
                     <div className="relative z-10">
-                      <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center mb-4 border border-white/20">
-                        <cat.icon className="w-5 h-5 text-white" />
+                      <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4 border border-red-200 shadow-sm group-hover:bg-red-100 group-hover:border-red-300 transition-colors">
+                        <cat.icon className="w-5 h-5 text-red-700" />
                       </div>
-                      <h3 className="font-black text-white text-2xl mb-1">{catData.name}</h3>
-                      <p className="text-sm text-white/70 font-light">{catData.count} {t.browseSubtitleEm === 'astrologer' ? 'experts' : 'विशेषज्ञ'}</p>
+                      <h3 className="font-black text-[#1A0B0F] text-2xl mb-1">{catData.name}</h3>
+                      <p className="text-sm text-[#4A3B3F] font-bold">{catData.count} {t.browseSubtitleEm === 'astrologer' ? 'experts' : 'विशेषज्ञ'}</p>
                     </div>
                   </div>
                 </Link>

@@ -21,73 +21,84 @@ export function DailyHoroscope({ variant }: { variant: 'mystic' | 'golden' | 'co
     ];
 
     return (
-      <section id="horoscope" className="py-24 relative z-10 bg-[#05050A]">
+      <section id="horoscope" className="py-24 relative z-10 bg-[#FDFBF7]">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">Cosmic Reading</h2>
-            <p className="text-white/60">Your personalized daily energy forecast.</p>
+            <h2 className="text-4xl md:text-5xl font-black text-[#1A0B0F] mb-4">Cosmic Reading</h2>
+            <p className="text-[#4A3B3F]">Your personalized daily energy forecast.</p>
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-12 bg-black/40 backdrop-blur-3xl border border-white/10 rounded-[3rem] p-8 md:p-12 shadow-2xl">
+          <div className="flex flex-col lg:flex-row gap-12 bg-white border border-red-900/10 rounded-[3rem] p-8 md:p-12 shadow-xl relative overflow-hidden">
+            {/* Subtle background element */}
+            <div className="absolute -top-40 -right-40 w-96 h-96 bg-red-100 rounded-full blur-3xl opacity-50 pointer-events-none" />
+            
             {/* Left: Horoscope text */}
-            <div className="flex-1">
+            <div className="flex-1 relative z-10">
               <div className="flex items-center gap-6 mb-8">
-                <div className="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-4xl shadow-inner">
+                <div className="w-20 h-20 rounded-2xl bg-red-50 border border-red-200 flex items-center justify-center text-4xl shadow-inner">
                   {selected.emoji}
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold text-white">{selected.name}</h3>
-                  <p className="text-white/40">{data.dateRange}</p>
+                  <h3 className="text-3xl font-bold text-[#1A0B0F]">{selected.name}</h3>
+                  <p className="text-red-700/80 font-medium">{data.dateRange}</p>
                 </div>
               </div>
-              <p className="text-lg text-white/80 leading-relaxed mb-8">{data.text}</p>
+              <p className="text-lg text-[#4A3B3F] leading-relaxed mb-8">{data.text}</p>
               
               <div className="flex flex-wrap gap-4 mb-8">
-                <div className="px-6 py-3 rounded-2xl bg-white/5 border border-white/10">
-                  <span className="block text-xs text-white/40 uppercase mb-1">Mood</span>
-                  <span className="text-white font-medium">{data.mood}</span>
+                <div className="px-6 py-3 rounded-2xl bg-white border border-red-100 shadow-sm">
+                  <span className="block text-xs text-red-900/50 uppercase mb-1">Mood</span>
+                  <span className="text-[#1A0B0F] font-bold">{data.mood}</span>
                 </div>
-                <div className="px-6 py-3 rounded-2xl bg-white/5 border border-white/10">
-                  <span className="block text-xs text-white/40 uppercase mb-1">Lucky Number</span>
-                  <span className="text-white font-medium">{data.luckyNum}</span>
+                <div className="px-6 py-3 rounded-2xl bg-white border border-red-100 shadow-sm">
+                  <span className="block text-xs text-red-900/50 uppercase mb-1">Lucky Number</span>
+                  <span className="text-[#1A0B0F] font-bold">{data.luckyNum}</span>
                 </div>
-                <div className="px-6 py-3 rounded-2xl bg-white/5 border border-white/10">
-                  <span className="block text-xs text-white/40 uppercase mb-1">Color</span>
+                <div className="px-6 py-3 rounded-2xl bg-white border border-red-100 shadow-sm">
+                  <span className="block text-xs text-red-900/50 uppercase mb-1">Color</span>
                   <div className="flex items-center gap-2">
                     <span className={`w-3 h-3 rounded-full ${data.colorClass}`} />
-                    <span className="text-white font-medium">{data.color}</span>
+                    <span className="text-[#1A0B0F] font-bold">{data.color}</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Right: Progress bars and Zodiac Selector */}
-            <div className="lg:w-96 flex flex-col gap-8">
-              <div className="space-y-4 bg-white/5 p-6 rounded-3xl border border-white/10">
-                <h4 className="text-white font-bold mb-4">Energy Levels</h4>
+            <div className="lg:w-96 flex flex-col gap-8 relative z-10">
+              <div className="space-y-4 bg-red-50/50 p-6 rounded-3xl border border-red-100">
+                <h4 className="text-[#1A0B0F] font-bold mb-4">Energy Levels</h4>
                 {areas.map(({ label, value, color, textColor }) => (
                   <div key={label} className="flex flex-col gap-2">
                     <div className="flex justify-between items-center text-sm">
-                      <span className="text-white/70">{label}</span>
-                      <span className={textColor}>{value}%</span>
+                      <span className="text-[#4A3B3F] font-medium">{label}</span>
+                      <span className={`font-bold ${textColor}`}>{value}%</span>
                     </div>
-                    <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div className="w-full h-2 bg-red-900/10 rounded-full overflow-hidden">
                       <div className={`h-full ${color} rounded-full transition-all duration-1000`} style={{ width: `${value}%` }} />
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="grid grid-cols-4 gap-2">
-                {ZODIAC_SIGNS.map((sign, idx) => (
-                  <button
-                    key={sign.name}
-                    onClick={() => setActiveZodiac(idx)}
-                    className={`aspect-square rounded-xl border flex items-center justify-center text-2xl transition-all ${activeZodiac === idx ? 'bg-pink-500/20 border-pink-500 text-white' : 'bg-white/5 border-white/10 text-white/50 hover:bg-white/10'}`}
-                  >
-                    {sign.emoji}
-                  </button>
-                ))}
+              <div>
+                <h4 className="text-[#1A0B0F] font-bold mb-4 text-sm uppercase tracking-wider">Select Sign</h4>
+                <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-4 gap-2">
+                  {ZODIAC_SIGNS.map((sign, idx) => (
+                    <button
+                      key={sign.name}
+                      onClick={() => setActiveZodiac(idx)}
+                      className={`p-2 rounded-xl text-2xl transition-all duration-300 ${
+                        activeZodiac === idx 
+                          ? 'bg-red-600 shadow-[0_5px_15px_rgba(220,38,38,0.4)] scale-110 z-10' 
+                          : 'bg-white border border-red-100 hover:bg-red-50 hover:scale-105 opacity-70 hover:opacity-100'
+                      }`}
+                      title={sign.name}
+                    >
+                      <span className={activeZodiac === idx ? 'opacity-100 grayscale-0 drop-shadow-md' : 'grayscale'}>{sign.emoji}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

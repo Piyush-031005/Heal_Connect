@@ -5,7 +5,7 @@ import { Star, MessageCircle, Shield, Globe } from 'lucide-react';
 export function TrustLayer({ variant }: { variant: 'mystic' | 'golden' | 'cosmic' | 'split' }) {
   if (variant === 'cosmic') {
     return (
-      <section className="relative z-20 py-12 border-y border-white/5 bg-[#05050A]">
+      <section className="relative z-20 py-12 border-y border-red-900/10 bg-white">
         <div className="container mx-auto px-6">
           <div className="flex flex-wrap justify-center lg:justify-between items-center gap-8">
             {[
@@ -15,9 +15,9 @@ export function TrustLayer({ variant }: { variant: 'mystic' | 'golden' | 'cosmic
               { label: 'Available', value: '24x7', icon: Globe },
             ].map((stat, idx) => (
               <div key={idx} className="flex flex-col items-center group">
-                <stat.icon className="w-8 h-8 text-pink-500 mb-3 group-hover:scale-125 transition-transform duration-500 group-hover:drop-shadow-[0_0_15px_rgba(236,72,153,0.8)]" />
-                <span className="text-3xl font-black text-white">{stat.value}</span>
-                <span className="text-xs uppercase tracking-[0.2em] text-white/40 mt-1">{stat.label}</span>
+                <stat.icon className="w-8 h-8 text-red-600 mb-3 group-hover:scale-125 transition-transform duration-500 group-hover:drop-shadow-[0_0_15px_rgba(220,38,38,0.4)]" />
+                <span className="text-3xl font-black text-[#1A0B0F]">{stat.value}</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-[#4A3B3F] mt-1">{stat.label}</span>
               </div>
             ))}
           </div>

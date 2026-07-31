@@ -11,25 +11,25 @@ export function ServiceCards({ variant }: { variant: 'mystic' | 'golden' | 'cosm
   // Different rendering based on the layout variant
   if (variant === 'cosmic') {
     return (
-      <section className="py-24 relative z-10 bg-black overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(236,72,153,0.05)_0%,transparent_70%)] pointer-events-none" />
+      <section className="py-24 relative z-10 bg-[#FDFBF7] overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(220,38,38,0.03)_0%,transparent_70%)] pointer-events-none" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">Our Services</h2>
-            <p className="text-white/60">Explore spiritual connections in a new dimension.</p>
+            <h2 className="text-4xl md:text-5xl font-black text-[#1A0B0F] mb-4">Our Services</h2>
+            <p className="text-[#4A3B3F]">Explore spiritual connections in a new dimension.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {t.servicesList.slice(0, 4).map((svc: any, idx: number) => (
-              <div key={idx} className="group relative rounded-[2.5rem] overflow-hidden aspect-[4/5] cursor-pointer border border-white/10 hover:border-pink-500/50 hover:shadow-[0_0_50px_rgba(236,72,153,0.3)] transition-all duration-700">
-                <img src={`/zodiacs/zodiac_${idx + 13}.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" alt="Service" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20 opacity-90 group-hover:opacity-70 transition-opacity duration-700" />
+              <div key={idx} className="group relative rounded-[2.5rem] overflow-hidden aspect-[4/5] cursor-pointer border border-red-900/10 bg-white hover:border-red-500/50 hover:shadow-[0_20px_50px_rgba(220,38,38,0.15)] transition-all duration-700">
+                <img src={`/zodiacs/red/red_${idx + 1}.png`} className="absolute inset-0 w-full h-full object-contain p-8 opacity-40 transition-transform duration-[2s] group-hover:scale-110 group-hover:opacity-100 drop-shadow-[0_0_10px_rgba(220,38,38,0.3)]" alt="Service" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/80 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-700" />
                 <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col items-center text-center transform transition-transform duration-700 group-hover:-translate-y-4">
-                  <div className="w-16 h-16 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(255,255,255,0.1)] group-hover:bg-pink-500/20 group-hover:border-pink-500/50 group-hover:shadow-[0_0_40px_rgba(236,72,153,0.4)] group-hover:scale-110 transition-all duration-500">
-                     <Sparkles className="w-6 h-6 text-white" />
+                  <div className="w-16 h-16 rounded-full border border-red-200 bg-white shadow-lg flex items-center justify-center mb-6 group-hover:bg-red-50 group-hover:border-red-300 group-hover:shadow-[0_10px_20px_rgba(220,38,38,0.2)] group-hover:scale-110 transition-all duration-500">
+                     <Sparkles className="w-6 h-6 text-red-600" />
                   </div>
-                  <h3 className="text-2xl font-black text-white mb-4 group-hover:text-pink-300 transition-colors drop-shadow-md">{svc.name}</h3>
+                  <h3 className="text-2xl font-black text-[#1A0B0F] mb-4 group-hover:text-red-700 transition-colors">{svc.name}</h3>
                   <div className="h-0 group-hover:h-20 overflow-hidden transition-all duration-700">
-                    <p className="text-sm text-white/70 leading-relaxed font-light">{svc.desc}</p>
+                    <p className="text-sm text-[#4A3B3F] leading-relaxed font-medium">{svc.desc}</p>
                   </div>
                 </div>
               </div>
