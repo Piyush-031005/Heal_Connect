@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export type LayoutMode = 'mystic-wheel' | 'celestial-map' | 'sacred-geometry' | 'modern-minimal' | 'ruby-velvet' | 'zen-minimalist' | 'sunburst-radiance' | 'lotus-harmony' | 'emerald-aurora' | 'divine-lotus';
+export type LayoutMode = 'cosmic-future' | 'aether-gold' | 'cosmic-library' | 'celestial-garden' | 'modern-minimal';
 
 interface LayoutContextType {
   layout: LayoutMode;
@@ -12,13 +12,13 @@ interface LayoutContextType {
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
-  const [layout, setLayoutState] = useState<LayoutMode>('mystic-wheel');
+  const [layout, setLayoutState] = useState<LayoutMode>('cosmic-future');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const stored = localStorage.getItem('hc_layout') as LayoutMode;
-    if (stored && ['mystic-wheel', 'celestial-map', 'sacred-geometry', 'modern-minimal', 'ruby-velvet', 'zen-minimalist', 'sunburst-radiance', 'lotus-harmony', 'emerald-aurora', 'divine-lotus'].includes(stored)) {
+    if (stored && ['cosmic-future', 'aether-gold', 'cosmic-library', 'celestial-garden', 'modern-minimal'].includes(stored)) {
       setLayoutState(stored);
     }
   }, []);
@@ -34,7 +34,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   // but context values can just be the default on server.
   
   return (
-    <LayoutContext.Provider value={{ layout: mounted ? layout : 'mystic-wheel', setLayout }}>
+    <LayoutContext.Provider value={{ layout: mounted ? layout : 'cosmic-future', setLayout }}>
       {children}
     </LayoutContext.Provider>
   );

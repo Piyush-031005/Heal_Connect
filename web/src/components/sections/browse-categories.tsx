@@ -69,6 +69,32 @@ export function BrowseCategories({ variant }: { variant: string }) {
     );
   }
 
+  if (variant === 'cosmic-future') {
+    return (
+      <section className="py-24 relative z-10 bg-gray-50 border-t border-gray-100 font-sans selection:bg-sky-200">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div>
+              <span className="text-gray-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block">Life Aspects</span>
+              <h2 className="text-4xl md:text-5xl font-medium text-[#111111] tracking-tight">Navigate <span className="text-gray-400">Your Journey.</span></h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-7xl mx-auto">
+            {CATEGORIES.map((c) => (
+              <div key={c.name} className="group relative bg-white rounded-3xl p-6 flex flex-col items-center justify-center text-center cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center mb-4 text-2xl group-hover:scale-110 group-hover:bg-white transition-all duration-500 shadow-sm">
+                  <c.icon />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-900 z-10">{c.name}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   if (variant === 'split') {
     return (
       <section className="py-24 relative z-10 bg-[#0D0D1A]">

@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   description: "Connect with verified energy healers, Vastu experts, numerologists, and tarot readers instantly.",
 };
 
+import SmoothScroll from "@/components/smooth-scroll";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,7 +33,9 @@ export default function RootLayout({
         >
           <LangProvider>
             <LayoutProvider>
-              {children}
+              <SmoothScroll>
+                {children}
+              </SmoothScroll>
             </LayoutProvider>
           </LangProvider>
         </ThemeProvider>

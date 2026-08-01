@@ -8,6 +8,39 @@ import { Button } from '@/components/ui/button';
 export function ServiceCards({ variant }: { variant: string }) {
   const { t } = useLang();
 
+  if (variant === 'cosmic-future') {
+    return (
+      <section className="py-24 relative z-10 bg-white font-sans selection:bg-sky-200">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
+            <div>
+              <span className="text-gray-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block">Cosmic Toolbox</span>
+              <h2 className="text-4xl md:text-5xl font-medium text-[#111111] tracking-tight">Explore <span className="text-gray-400">Services.</span></h2>
+            </div>
+            <Link href="/services" className="group flex items-center gap-2 px-6 py-2.5 rounded-full bg-gray-50 border border-gray-200 text-sm font-medium text-gray-900 hover:bg-gray-100 transition-colors">
+              View All <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {t.servicesList.slice(0, 4).map((svc: any, idx: number) => (
+              <div key={idx} className="group p-8 rounded-3xl bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 cursor-pointer flex flex-col relative overflow-hidden">
+                <div className="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-gray-100 transition-all duration-500">
+                  <Zap className="w-5 h-5 text-gray-900" />
+                </div>
+                <h3 className="text-xl font-medium text-gray-900 mb-3">{svc.name}</h3>
+                <p className="text-gray-500 leading-relaxed text-sm">{svc.desc}</p>
+                <div className="mt-auto pt-8 flex justify-between items-center text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                   <span>Available</span>
+                   <span className="text-gray-900 group-hover:translate-x-2 transition-transform duration-500">Explore →</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   if (variant === 'divine-lotus') {
     return (
       <section className="py-24 relative z-10 bg-[#FDFBF7] overflow-hidden">

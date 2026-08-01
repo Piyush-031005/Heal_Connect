@@ -10,6 +10,54 @@ import { TOP_ASTROLOGERS } from '@/lib/constants';
 export function TopAstrologers({ variant }: { variant: string }) {
   const { t } = useLang();
 
+  if (variant === 'cosmic-future') {
+    return (
+      <section className="py-24 relative z-10 bg-white border-t border-gray-100 font-sans selection:bg-sky-200">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
+            <div>
+              <span className="text-gray-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block">Verified Network</span>
+              <h2 className="text-4xl md:text-5xl font-medium text-[#111111] tracking-tight">Meet the <span className="text-gray-400">Experts.</span></h2>
+            </div>
+            <Link href="/practitioners" className="group flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#111111] text-sm font-medium text-white hover:scale-105 transition-all shadow-md">
+              View All Experts <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {TOP_ASTROLOGERS.slice(0, 3).map((a, idx) => (
+              <div key={idx} className="group relative bg-white rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-700 p-8 flex flex-col overflow-hidden border border-gray-100">
+                <div className="absolute top-0 right-0 px-6 py-2 font-bold text-[10px] text-gray-900 bg-gray-100 rounded-bl-2xl tracking-widest uppercase">{a.online ? 'Online' : 'Offline'}</div>
+                <div className="flex flex-col items-center text-center mt-6 mb-8">
+                  <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-50 shadow-sm group-hover:scale-105 transition-all duration-700 mb-6 shrink-0 relative">
+                     <img src={a.img} alt={a.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-medium text-gray-900 mb-2">{a.name}</h3>
+                    <div className="flex items-center justify-center gap-3 mt-2">
+                      <span className="text-sm font-light text-gray-500">{a.exp}</span>
+                      <span className="text-gray-200">•</span>
+                      <span className="text-gray-900 text-sm font-bold">★ {a.rating}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-wrap justify-center gap-2 mb-8">
+                  {a.tags.slice(0, 3).map((s: string) => (
+                    <span key={s} className="px-4 py-1.5 bg-gray-50 rounded-full text-[10px] font-bold text-gray-500 uppercase tracking-widest border border-gray-100">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+                <Button className="w-full h-14 rounded-full bg-white border border-gray-200 text-gray-900 hover:bg-gray-50 font-medium text-base transition-all duration-500">
+                  Connect
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   if (variant === 'divine-lotus') {
     return (
       <section className="py-24 relative z-10 bg-[#FDFBF7] border-t border-pink-100 overflow-hidden">

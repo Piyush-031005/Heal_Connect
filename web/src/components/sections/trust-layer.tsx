@@ -1,8 +1,40 @@
 'use client';
 
-import { Star, MessageCircle, Shield, Globe, CheckCircle2, Lock } from 'lucide-react';
+import { Star, MessageCircle, Shield, Globe, CheckCircle2, Lock, Heart } from 'lucide-react';
 
 export function TrustLayer({ variant }: { variant: string }) {
+  if (variant === 'cosmic-future') {
+    return (
+      <section className="relative z-20 py-24 border-y border-gray-100 bg-white overflow-hidden font-sans">
+        <div className="container mx-auto px-6 max-w-6xl relative z-10">
+          <div className="flex flex-col items-center justify-center text-center gap-12">
+            <h3 className="text-sm md:text-base font-semibold text-gray-400 tracking-widest uppercase">
+              Trusted by seekers across the universe
+            </h3>
+            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
+              <div className="flex items-center gap-3">
+                 <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center"><Shield className="w-5 h-5 text-gray-800" /></div>
+                 <span className="text-xl font-bold text-gray-900 tracking-tight">Verified</span>
+              </div>
+              <div className="flex items-center gap-3">
+                 <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center"><Star className="w-5 h-5 text-gray-800" /></div>
+                 <span className="text-xl font-bold text-gray-900 tracking-tight">Top Rated</span>
+              </div>
+              <div className="flex items-center gap-3">
+                 <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center"><Globe className="w-5 h-5 text-gray-800" /></div>
+                 <span className="text-xl font-bold text-gray-900 tracking-tight">Global</span>
+              </div>
+              <div className="flex items-center gap-3">
+                 <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center"><Heart className="w-5 h-5 text-gray-800" /></div>
+                 <span className="text-xl font-bold text-gray-900 tracking-tight">Private</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   if (variant === 'divine-lotus') {
     return (
       <section className="relative z-20 py-24 border-y border-pink-100 bg-white overflow-hidden">

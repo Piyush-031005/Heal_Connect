@@ -399,15 +399,10 @@ export default function Navbar() {
               {layoutOpen && (
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
-                    { code: 'divine-lotus', label: '❁ Divine Lotus' },
-                    { code: 'sunburst-radiance', label: '☀ Sunburst Radiance' },
-                    { code: 'lotus-harmony', label: '❁ Lotus Harmony' },
-                    { code: 'emerald-aurora', label: '✧ Emerald Aurora' },
-                    { code: 'ruby-velvet', label: '✦ Ruby Velvet' },
-                    { code: 'zen-minimalist', label: '○ Zen Minimalist' },
-                    { code: 'mystic-wheel', label: '✦ Ethereal Zodiac' },
-                    { code: 'celestial-map', label: '☀ Golden Destiny' },
-                    { code: 'sacred-geometry', label: '✦ Cosmic Aura' },
+                    { code: 'cosmic-future', label: '🚀 Cosmic Future (Apple x Space)' },
+                    { code: 'aether-gold', label: '✨ Aether Gold (Luxury Editorial)' },
+                    { code: 'cosmic-library', label: '📜 Cosmic Library (Ancient Knowledge)' },
+                    { code: 'celestial-garden', label: '🌿 Celestial Garden (Positive Energy)' },
                     { code: 'modern-minimal', label: '⊕ Split Astrologer' },
                   ] as const).map((l) => (
                     <button
