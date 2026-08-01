@@ -10,6 +10,10 @@ import SacredGeometryHero from '@/components/heros/sacred-geometry-hero';
 import ModernMinimalHero from '@/components/heros/modern-minimal-hero';
 import RubyVelvetHero from '@/components/heros/ruby-velvet-hero';
 import ZenMinimalistHero from '@/components/heros/zen-minimalist-hero';
+import SunburstRadianceHero from '@/components/heros/sunburst-radiance-hero';
+import LotusHarmonyHero from '@/components/heros/lotus-harmony-hero';
+import EmeraldAuroraHero from '@/components/heros/emerald-aurora-hero';
+import DivineLotusHero from '@/components/heros/divine-lotus-hero';
 
 import { TrustLayer } from '@/components/sections/trust-layer';
 import { ServiceCards } from '@/components/sections/service-cards';
@@ -34,9 +38,11 @@ export default function LandingPage() {
   if (layout === 'ruby-velvet') variant = 'golden';
   if (layout === 'sacred-geometry') variant = 'cosmic';
   if (layout === 'zen-minimalist') variant = 'split';
+  if (layout === 'sunburst-radiance' || layout === 'lotus-harmony' || layout === 'emerald-aurora') variant = 'mystic';
+  if (layout === 'divine-lotus') variant = 'divine-lotus';
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
+    <div className={`min-h-screen ${layout === 'divine-lotus' ? 'bg-[#0a050f] text-pink-50' : 'bg-background text-foreground'} flex flex-col font-sans`}>
       <Navbar />
 
       <main className="flex-1">
@@ -47,6 +53,10 @@ export default function LandingPage() {
         {layout === 'modern-minimal' && <ModernMinimalHero />}
         {layout === 'ruby-velvet' && <RubyVelvetHero />}
         {layout === 'zen-minimalist' && <ZenMinimalistHero />}
+        {layout === 'sunburst-radiance' && <SunburstRadianceHero />}
+        {layout === 'lotus-harmony' && <LotusHarmonyHero />}
+        {layout === 'emerald-aurora' && <EmeraldAuroraHero />}
+        {layout === 'divine-lotus' && <DivineLotusHero />}
 
         {/* ═══ FULL PAGE LAYOUT SECTIONS ═══ */}
         <TrustLayer variant={variant} />

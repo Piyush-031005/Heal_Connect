@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export type LayoutMode = 'mystic-wheel' | 'celestial-map' | 'sacred-geometry' | 'modern-minimal' | 'ruby-velvet' | 'zen-minimalist';
+export type LayoutMode = 'mystic-wheel' | 'celestial-map' | 'sacred-geometry' | 'modern-minimal' | 'ruby-velvet' | 'zen-minimalist' | 'sunburst-radiance' | 'lotus-harmony' | 'emerald-aurora' | 'divine-lotus';
 
 interface LayoutContextType {
   layout: LayoutMode;
@@ -18,7 +18,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMounted(true);
     const stored = localStorage.getItem('hc_layout') as LayoutMode;
-    if (stored && ['mystic-wheel', 'celestial-map', 'sacred-geometry', 'modern-minimal'].includes(stored)) {
+    if (stored && ['mystic-wheel', 'celestial-map', 'sacred-geometry', 'modern-minimal', 'ruby-velvet', 'zen-minimalist', 'sunburst-radiance', 'lotus-harmony', 'emerald-aurora', 'divine-lotus'].includes(stored)) {
       setLayoutState(stored);
     }
   }, []);
