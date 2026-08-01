@@ -404,7 +404,8 @@ export default function Navbar() {
                     { code: 'cosmic-observatory', label: '🔭 Cosmic Observatory (NASA)' },
                     { code: 'living-universe', label: '🌌 Living Universe (Storytelling)' },
                     { code: 'wellness-sanctuary', label: '🌿 Wellness Sanctuary (Calm)' },
-                    { code: 'ai-future', label: '🔮 AI Future (Neo-Futuristic)' },
+                    { code: 'ai-future', label: '✨ Quantum Oracle (Ethereal WebGL)' },
+                    { code: 'divine-lotus-monolith', label: '🌸 Divine Lotus (Rotating Wheel)' },
                   ] as const).map((l) => (
                     <button
                       key={l.code}

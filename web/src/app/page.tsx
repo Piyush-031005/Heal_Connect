@@ -22,6 +22,7 @@ import { CosmicObservatoryExperience } from '@/components/experiences/cosmic-obs
 import { LivingUniverseExperience } from '@/components/experiences/living-universe/page';
 import { WellnessSanctuaryExperience } from '@/components/experiences/wellness-sanctuary/page';
 import { AiFutureExperience } from '@/components/experiences/ai-future/page';
+import { DivineLotusMonolithExperience } from '@/components/experiences/divine-lotus-monolith/page';
 
 import { TrustLayer } from '@/components/sections/trust-layer';
 import { ServiceCards } from '@/components/sections/service-cards';
@@ -48,6 +49,7 @@ export default function LandingPage() {
   if (layout === 'living-universe') return <LivingUniverseExperience />;
   if (layout === 'wellness-sanctuary') return <WellnessSanctuaryExperience />;
   if (layout === 'ai-future') return <AiFutureExperience />;
+  if (layout === 'divine-lotus-monolith') return <DivineLotusMonolithExperience />;
 
   // ORIGINAL LAYOUTS (8 Core Themes) - Shared Architecture
   let variant = 'mystic'; // default
