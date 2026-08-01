@@ -399,11 +399,12 @@ export default function Navbar() {
               {layoutOpen && (
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
-                    { code: 'cosmic-future', label: '🚀 Cosmic Future (Apple x Space)' },
-                    { code: 'aether-gold', label: '✨ Aether Gold (Luxury Editorial)' },
-                    { code: 'cosmic-library', label: '📜 Cosmic Library (Ancient Knowledge)' },
-                    { code: 'celestial-garden', label: '🌿 Celestial Garden (Positive Energy)' },
-                    { code: 'modern-minimal', label: '⊕ Split Astrologer' },
+                    { code: 'apple-cosmic', label: '🚀 Apple Cosmic (Apple x Space)' },
+                    { code: 'luxury-editorial', label: '✨ Luxury Editorial (Magazine)' },
+                    { code: 'cosmic-observatory', label: '🔭 Cosmic Observatory (NASA)' },
+                    { code: 'living-universe', label: '🌌 Living Universe (Storytelling)' },
+                    { code: 'wellness-sanctuary', label: '🌿 Wellness Sanctuary (Calm)' },
+                    { code: 'ai-future', label: '🔮 AI Future (Neo-Futuristic)' },
                   ] as const).map((l) => (
                     <button
                       key={l.code}

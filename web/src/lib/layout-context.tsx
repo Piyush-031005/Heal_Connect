@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export type LayoutMode = 'cosmic-future' | 'aether-gold' | 'cosmic-library' | 'celestial-garden' | 'modern-minimal';
+export type LayoutMode = string;
 
 interface LayoutContextType {
   layout: LayoutMode;
@@ -12,13 +12,13 @@ interface LayoutContextType {
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
-  const [layout, setLayoutState] = useState<LayoutMode>('cosmic-future');
+  const [layout, setLayoutState] = useState<LayoutMode>('mystic-wheel');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const stored = localStorage.getItem('hc_layout') as LayoutMode;
-    if (stored && ['cosmic-future', 'aether-gold', 'cosmic-library', 'celestial-garden', 'modern-minimal'].includes(stored)) {
+    if (stored) {
       setLayoutState(stored);
     }
   }, []);
@@ -34,7 +34,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   // but context values can just be the default on server.
   
   return (
-    <LayoutContext.Provider value={{ layout: mounted ? layout : 'cosmic-future', setLayout }}>
+    <LayoutContext.Provider value={{ layout: mounted ? layout : 'mystic-wheel', setLayout }}>
       {children}
     </LayoutContext.Provider>
   );

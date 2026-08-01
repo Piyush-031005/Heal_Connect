@@ -10,11 +10,18 @@ import CelestialMapHero from '@/components/heros/celestial-map-hero';
 import SacredGeometryHero from '@/components/heros/sacred-geometry-hero';
 import ModernMinimalHero from '@/components/heros/modern-minimal-hero';
 import RubyVelvetHero from '@/components/heros/ruby-velvet-hero';
-import CosmicFutureHero from '@/components/heros/cosmic-future-hero';
-// We will create the others shortly. For now, let's map them.
-// import AetherGoldHero from '@/components/heros/aether-gold-hero';
-// import CosmicLibraryHero from '@/components/heros/cosmic-library-hero';
-// import CelestialGardenHero from '@/components/heros/celestial-garden-hero';
+import ZenMinimalistHero from '@/components/heros/zen-minimalist-hero';
+import SunburstRadianceHero from '@/components/heros/sunburst-radiance-hero';
+import LotusHarmonyHero from '@/components/heros/lotus-harmony-hero';
+import EmeraldAuroraHero from '@/components/heros/emerald-aurora-hero';
+import DivineLotusHero from '@/components/heros/divine-lotus-hero';
+import { ThemeWheel } from '@/components/theme-wheel';
+import { AppleCosmicExperience } from '@/components/experiences/apple-cosmic/page';
+import { LuxuryEditorialExperience } from '@/components/experiences/luxury-editorial/page';
+import { CosmicObservatoryExperience } from '@/components/experiences/cosmic-observatory/page';
+import { LivingUniverseExperience } from '@/components/experiences/living-universe/page';
+import { WellnessSanctuaryExperience } from '@/components/experiences/wellness-sanctuary/page';
+import { AiFutureExperience } from '@/components/experiences/ai-future/page';
 
 import { TrustLayer } from '@/components/sections/trust-layer';
 import { ServiceCards } from '@/components/sections/service-cards';
@@ -34,29 +41,41 @@ export default function LandingPage() {
 
   if (!mounted) return <div className="min-h-screen bg-background" />;
 
-  let variant = 'cosmic'; // default
-  
-  if (layout === 'modern-minimal') variant = 'split';
-  if (layout === 'cosmic-future') variant = 'cosmic-future';
-  if (layout === 'aether-gold') variant = 'aether-gold';
-  if (layout === 'cosmic-library') variant = 'cosmic-library';
-  if (layout === 'celestial-garden') variant = 'celestial-garden';
+  // NEW EXPERIMENTAL LAYOUTS - Monolithic Architecture
+  if (layout === 'cosmic-future' || layout === 'apple-cosmic') return <AppleCosmicExperience />;
+  if (layout === 'luxury-editorial') return <LuxuryEditorialExperience />;
+  if (layout === 'cosmic-observatory') return <CosmicObservatoryExperience />;
+  if (layout === 'living-universe') return <LivingUniverseExperience />;
+  if (layout === 'wellness-sanctuary') return <WellnessSanctuaryExperience />;
+  if (layout === 'ai-future') return <AiFutureExperience />;
+
+  // ORIGINAL LAYOUTS (8 Core Themes) - Shared Architecture
+  let variant = 'mystic'; // default
+  if (layout === 'celestial-map' || layout === 'modern-minimal') variant = 'cinematic-nature';
+  if (layout === 'ruby-velvet') variant = 'golden';
+  if (layout === 'sacred-geometry') variant = 'cosmic';
+  if (layout === 'zen-minimalist') variant = 'split';
+  if (layout === 'sunburst-radiance' || layout === 'lotus-harmony' || layout === 'emerald-aurora') variant = 'mystic';
+  if (layout === 'divine-lotus') variant = 'divine-lotus';
 
   return (
-    <div className={`min-h-screen ${
-      ['cosmic-future', 'aether-gold', 'cosmic-library', 'celestial-garden'].includes(layout) 
-        ? 'bg-white text-gray-900' 
-        : 'bg-background text-foreground'
-    } flex flex-col font-sans`}>
+    <div className={`min-h-screen ${layout === 'divine-lotus' ? 'bg-[#FDFBF7] text-[#1A0B16]' : 'bg-background text-foreground'} flex flex-col font-sans`}>
       <Navbar />
+      <ThemeWheel />
 
       <main className="flex-1">
-        {layout === 'cosmic-future' && <CosmicFutureHero />}
-        {layout === 'aether-gold' && <CosmicFutureHero /> /* Temporary fallback */}
-        {layout === 'cosmic-library' && <CosmicFutureHero /> /* Temporary fallback */}
-        {layout === 'celestial-garden' && <CosmicFutureHero /> /* Temporary fallback */}
+        {/* ═══ HERO ENGINE ═══ */}
+        {layout === 'mystic-wheel' && <MysticWheelHero />}
+        {layout === 'celestial-map' && <CelestialMapHero />}
+        {layout === 'sacred-geometry' && <SacredGeometryHero />}
         {layout === 'modern-minimal' && <ModernMinimalHero />}
-        {!['cosmic-future', 'aether-gold', 'cosmic-library', 'celestial-garden', 'modern-minimal'].includes(layout) && <CosmicFutureHero /> /* Default */}
+        {layout === 'ruby-velvet' && <RubyVelvetHero />}
+        {layout === 'zen-minimalist' && <ZenMinimalistHero />}
+        {layout === 'sunburst-radiance' && <SunburstRadianceHero />}
+        {layout === 'lotus-harmony' && <LotusHarmonyHero />}
+        {layout === 'emerald-aurora' && <EmeraldAuroraHero />}
+        {layout === 'divine-lotus' && <DivineLotusHero />}
+        {!['mystic-wheel', 'celestial-map', 'sacred-geometry', 'modern-minimal', 'ruby-velvet', 'zen-minimalist', 'sunburst-radiance', 'lotus-harmony', 'emerald-aurora', 'divine-lotus'].includes(layout) && <MysticWheelHero /> /* Default */}
 
         {/* ═══ FULL PAGE LAYOUT SECTIONS ═══ */}
         <TrustLayer variant={variant} />
