@@ -42,7 +42,7 @@ export default function LandingPage() {
   if (layout === 'divine-lotus') variant = 'divine-lotus';
 
   return (
-    <div className={`min-h-screen ${layout === 'divine-lotus' ? 'bg-[#0a050f] text-pink-50' : 'bg-background text-foreground'} flex flex-col font-sans`}>
+    <div className={`min-h-screen ${layout === 'divine-lotus' ? 'bg-[#FDFBF7] text-[#1A0B16]' : 'bg-background text-foreground'} flex flex-col font-sans`}>
       <Navbar />
 
       <main className="flex-1">
