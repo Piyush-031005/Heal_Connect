@@ -8,6 +8,48 @@ import { Button } from '@/components/ui/button';
 export function ServiceCards({ variant }: { variant: string }) {
   const { t } = useLang();
 
+  if (variant === 'divine-lotus') {
+    return (
+      <section className="py-24 relative z-10 bg-[#FDFBF7] overflow-hidden">
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+          <svg className="absolute w-[800px] h-[800px] top-0 left-[-200px]" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="40" stroke="#EC4899" strokeWidth="0.1" strokeDasharray="2 4" className="animate-spin-slow" />
+          </svg>
+          <svg className="absolute w-[800px] h-[800px] bottom-0 right-[-200px]" viewBox="0 0 100 100" fill="none">
+             <circle cx="50" cy="50" r="30" stroke="#EC4899" strokeWidth="0.1" strokeDasharray="1 3" className="animate-spin-slow" style={{ animationDirection: 'reverse' }} />
+          </svg>
+        </div>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
+            <div>
+              <span className="text-pink-500 text-xs uppercase tracking-[0.4em] font-bold mb-4 block">Sacred Arts</span>
+              <h2 className="text-5xl md:text-6xl font-serif text-[#1A0B16] tracking-tight font-light">Spiritual <span className="italic font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-fuchsia-500">Disciplines</span></h2>
+            </div>
+            <Link href="/services" className="text-pink-600 hover:text-fuchsia-600 transition-colors flex items-center gap-2 text-sm uppercase tracking-widest font-bold group">
+              View All <Sparkles className="w-4 h-4 group-hover:scale-125 transition-transform" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            {t.servicesList.slice(0, 4).map((svc: any, idx: number) => (
+              <div key={idx} className="group p-10 rounded-[2rem] border border-pink-100 bg-white shadow-[0_10px_40px_rgba(236,72,153,0.03)] hover:shadow-[0_30px_60px_rgba(236,72,153,0.1)] hover:-translate-y-2 transition-all duration-700 cursor-pointer flex flex-col relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-300 to-fuchsia-400 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="w-16 h-16 rounded-full border border-pink-200 bg-pink-50 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-700">
+                  <Zap className="w-6 h-6 text-pink-500" />
+                </div>
+                <h3 className="text-2xl font-serif text-[#1A0B16] mb-4 group-hover:text-pink-600 transition-colors">{svc.name}</h3>
+                <p className="text-gray-500 leading-relaxed text-sm font-light">{svc.desc}</p>
+                <div className="mt-auto pt-8 flex justify-between items-center text-xs font-bold text-pink-300 uppercase tracking-widest">
+                   <span>Available</span>
+                   <span className="text-pink-500 group-hover:translate-x-2 transition-transform duration-500">Explore →</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   if (variant === 'cinematic-nature') {
     return (
       <section className="py-24 relative z-10 bg-[#FDFCF8] overflow-hidden">
