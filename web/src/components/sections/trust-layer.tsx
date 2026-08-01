@@ -3,6 +3,42 @@
 import { Star, MessageCircle, Shield, Globe, CheckCircle2, Lock } from 'lucide-react';
 
 export function TrustLayer({ variant }: { variant: string }) {
+  if (variant === 'divine-lotus') {
+    return (
+      <section className="relative z-20 py-20 border-y border-pink-500/10 bg-[#0a050f] overflow-hidden">
+        {/* Soft background accents */}
+        <div className="absolute inset-0 z-0 flex justify-center items-center pointer-events-none opacity-30">
+          <div className="w-[800px] h-full bg-gradient-to-r from-transparent via-pink-900/10 to-transparent" />
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+             <h2 className="text-3xl md:text-5xl font-serif text-white mb-4">
+               The Path to <span className="text-pink-400 italic">Enlightenment</span>
+             </h2>
+             <div className="w-24 h-[1px] bg-pink-500/50 mx-auto" />
+          </div>
+          <div className="flex flex-wrap justify-center lg:justify-between items-center gap-12 max-w-6xl mx-auto">
+            {[
+              { label: 'Divine Rating', value: '4.9 ★', icon: Star },
+              { label: 'Spiritual Readings', value: '100k+', icon: MessageCircle },
+              { label: 'Ascended Masters', value: '500+', icon: Shield },
+              { label: 'Cosmic Connection', value: '24x7', icon: Globe },
+            ].map((stat, idx) => (
+              <div key={idx} className="flex flex-col items-center group">
+                <div className="w-16 h-16 rounded-full border border-pink-500/20 bg-pink-500/5 flex items-center justify-center mb-4 group-hover:bg-pink-500/20 transition-all duration-500 group-hover:scale-110 shadow-[0_0_15px_rgba(236,72,153,0.1)]">
+                  <stat.icon className="w-6 h-6 text-pink-400" />
+                </div>
+                <span className="text-3xl font-serif font-black text-white">{stat.value}</span>
+                <span className="text-[10px] uppercase tracking-[0.3em] text-pink-200/50 mt-2">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   if (variant === 'cinematic-nature') {
     return (
       <section className="py-24 relative z-10 bg-white overflow-hidden border-t border-gray-50">
