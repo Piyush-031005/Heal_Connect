@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Zap, MessageCircle, Phone, Sparkles } from 'lucide-react';
+import { Zap, MessageCircle, Phone, Sparkles, ArrowRight } from 'lucide-react';
 import { useLang } from '@/lib/lang-context';
 import { Button } from '@/components/ui/button';
 

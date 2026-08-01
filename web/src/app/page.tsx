@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/navbar';
 import { useLayout } from '@/lib/layout-context';
+import { useTheme } from 'next-themes';
 
 import MysticWheelHero from '@/components/heros/mystic-wheel-hero';
 import CelestialMapHero from '@/components/heros/celestial-map-hero';
