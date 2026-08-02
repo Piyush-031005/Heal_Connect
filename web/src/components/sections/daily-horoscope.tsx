@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useLang } from '@/lib/lang-context';
 import { ZODIAC_SIGNS, HOROSCOPE_DATA } from '@/lib/constants';
 import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Moon } from 'lucide-react';
+import { ZodiacIcon } from '@/components/icons/zodiac-icons';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -77,8 +78,8 @@ export function DailyHoroscope({ variant }: { variant: string }) {
             {/* Left: Horoscope text */}
             <div className="flex-1 relative z-10">
               <div className="flex items-center gap-6 mb-8">
-                <div className="w-20 h-20 rounded-2xl bg-red-50 border border-red-200 flex items-center justify-center text-4xl shadow-inner">
-                  {selected.emoji}
+                <div className="w-20 h-20 rounded-2xl bg-red-50 border border-red-200 flex items-center justify-center text-red-600 shadow-inner">
+                  <ZodiacIcon name={selected.name} className="w-10 h-10" />
                 </div>
                 <div>
                   <h3 className="text-3xl font-bold text-[#1A0B0F]">{selected.name}</h3>
@@ -137,7 +138,9 @@ export function DailyHoroscope({ variant }: { variant: string }) {
                       }`}
                       title={sign.name}
                     >
-                      <span className={activeZodiac === idx ? 'opacity-100 grayscale-0 drop-shadow-md' : 'grayscale'}>{sign.emoji}</span>
+                      <span className={`block w-6 h-6 mx-auto ${activeZodiac === idx ? 'opacity-100 drop-shadow-md text-red-600' : 'opacity-50 text-red-900 grayscale'}`}>
+                        <ZodiacIcon name={sign.name} className="w-full h-full" />
+                      </span>
                     </button>
                   ))}
                 </div>
@@ -158,7 +161,9 @@ export function DailyHoroscope({ variant }: { variant: string }) {
         <div className="container mx-auto px-6 max-w-7xl flex flex-col md:flex-row gap-12 items-center border border-[#D4A843]/20 bg-[#1A1A2E]">
           {/* Left Dark Block */}
           <div className="flex-1 p-12 lg:p-20 relative">
-            <span className="text-[12rem] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 text-[#D4A843] pointer-events-none">{selected.emoji}</span>
+            <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 text-[#D4A843] pointer-events-none">
+              <ZodiacIcon name={selected.name} className="w-96 h-96" />
+            </span>
             <div className="relative z-10">
               <span className="text-[#D4A843] text-sm uppercase tracking-widest mb-4 block font-serif">Daily Forecast</span>
               <h2 className="text-5xl font-serif text-white mb-2">{selected.name}</h2>
@@ -186,7 +191,7 @@ export function DailyHoroscope({ variant }: { variant: string }) {
                   onClick={() => setActiveZodiac(idx)}
                   className={`py-4 rounded-none border transition-all flex flex-col items-center gap-2 ${activeZodiac === idx ? 'border-[#C4772A] bg-[#E8DBBF] text-[#1C1208] shadow-inner' : 'border-[#6B4C1E]/20 text-[#5A4A2E] hover:border-[#6B4C1E]/50'}`}
                 >
-                  <span className="text-2xl">{sign.emoji}</span>
+                  <ZodiacIcon name={sign.name} className="w-8 h-8" />
                   <span className="text-[10px] uppercase tracking-wider font-serif">{sign.name}</span>
                 </button>
               ))}
@@ -232,7 +237,9 @@ export function DailyHoroscope({ variant }: { variant: string }) {
                   : 'bg-secondary border-border hover:border-primary/40 hover:bg-secondary/80'
               }`}
             >
-              <span className={`text-2xl ${activeZodiac === idx ? 'opacity-100' : 'opacity-70'}`}>{sign.emoji}</span>
+              <div className={`w-8 h-8 flex items-center justify-center ${activeZodiac === idx ? 'opacity-100' : 'opacity-70'}`}>
+                <ZodiacIcon name={sign.name} className="w-6 h-6" />
+              </div>
               <div className="text-left">
                 <span className="block font-bold text-sm leading-tight">{sign.name}</span>
                 <span className={`text-xs ${activeZodiac === idx ? 'text-primary-foreground/80' : 'text-muted-foreground'}`}>{sign.alt}</span>
@@ -247,7 +254,9 @@ export function DailyHoroscope({ variant }: { variant: string }) {
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="flex-1">
               <div className="flex items-center gap-4 mb-6">
-                <span className="text-5xl drop-shadow-md">{selected.emoji}</span>
+                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary drop-shadow-md">
+                  <ZodiacIcon name={selected.name} className="w-10 h-10" />
+                </div>
                 <div>
                   <h3 className="text-2xl md:text-3xl font-bold text-foreground">{selected.name} <span className="text-muted-foreground font-normal text-xl ml-2">({selected.alt})</span></h3>
                   <p className="text-sm text-primary font-medium">{data.dateRange}</p>
