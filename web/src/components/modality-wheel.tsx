@@ -104,6 +104,7 @@ export default function ModalityWheel() {
                     y="-24" 
                     width="48" 
                     height="48" 
+                    className="mix-blend-screen"
                     style={{ filter: 'hue-rotate(240deg) saturate(2) brightness(1.5) drop-shadow(0 0 10px rgba(138, 100, 181, 0.5))' }}
                   />
                 </g>
@@ -153,7 +154,7 @@ export default function ModalityWheel() {
                       y="-100" 
                       width="200" 
                       height="200" 
-                      className="transition-all duration-500" 
+                      className="transition-all duration-500 mix-blend-screen" 
                       style={{ 
                         filter: isHovered ? 'drop-shadow(0 0 15px rgba(214,180,107,0.9)) brightness(1.3)' : 'drop-shadow(0 0 5px rgba(0,0,0,0.3)) brightness(0.8)' 
                       }} 
@@ -191,8 +192,8 @@ export default function ModalityWheel() {
           
           <div className="relative z-10 flex flex-col items-center text-center px-4">
             <span className="text-primary/60 uppercase tracking-widest text-[10px] font-bold mb-3">Explore Your Path</span>
-            <div className="w-20 h-20 rounded-full border border-primary/30 flex items-center justify-center mb-3 bg-white/5 backdrop-blur-xl shadow-inner">
-              <img src="/logo.png" alt="HealConnect Logo" className="w-14 h-14 object-contain" />
+            <div className="w-20 h-20 rounded-full border border-primary/30 flex items-center justify-center mb-3 bg-white/5 backdrop-blur-xl shadow-inner overflow-hidden">
+              <img src="/logo.png" alt="HealConnect Logo" className="w-16 h-16 object-contain mix-blend-screen opacity-90 scale-110" />
             </div>
             <span className="font-serif text-2xl font-medium text-foreground tracking-wide">HealConnect</span>
           </div>
