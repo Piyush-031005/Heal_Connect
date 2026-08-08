@@ -12,7 +12,7 @@ interface LayoutContextType {
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
-  const [layout, setLayoutState] = useState<LayoutMode>('mystic-wheel');
+  const [layout, setLayoutState] = useState<LayoutMode>('primary');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -28,13 +28,8 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('hc_layout', mode);
   };
 
-  // Skip rendering children until mounted to prevent hydration errors? 
-  // No, we want to render children immediately for SEO.
-  // We just won't apply client-side layout classes on the first pass if needed, 
-  // but context values can just be the default on server.
-  
   return (
-    <LayoutContext.Provider value={{ layout: mounted ? layout : 'mystic-wheel', setLayout }}>
+    <LayoutContext.Provider value={{ layout: mounted ? layout : 'primary', setLayout }}>
       {children}
     </LayoutContext.Provider>
   );

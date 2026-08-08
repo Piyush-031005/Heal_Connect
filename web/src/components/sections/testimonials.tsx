@@ -2,125 +2,43 @@
 
 import { useLang } from '@/lib/lang-context';
 import { TESTIMONIALS } from '@/lib/constants';
-import { Star } from 'lucide-react';
 
-export function Testimonials({ variant }: { variant: string }) {
+export function Testimonials() {
   const { t } = useLang();
 
-  if (variant === 'cinematic-nature') {
-    return (
-      <section className="py-32 relative z-10 bg-[#FDFCF8] overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_right,rgba(50,205,50,0.03)_0%,transparent_50%)] pointer-events-none" />
-        <div className="container mx-auto px-6 relative z-10 border-t border-gray-100 pt-20">
-          <div className="text-center mb-24">
-            <span className="text-[#32CD32] text-sm uppercase tracking-[0.4em] font-bold mb-4 block">Client Journeys</span>
-            <h2 className="text-5xl md:text-6xl font-serif text-[#1A1A1A] tracking-tight">Stories of Clarity</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto">
-            {TESTIMONIALS.slice(0, 3).map((test, idx) => (
-              <div key={idx} className="group flex flex-col items-center text-center p-12 rounded-[2.5rem] bg-white border border-gray-50 shadow-[0_20px_60px_rgba(0,0,0,0.03)] hover:shadow-[0_40px_80px_rgba(255,195,0,0.1)] transition-all duration-700 hover:-translate-y-4">
-                <div className="text-[#FFC300] flex gap-1 mb-8 transform group-hover:scale-110 transition-transform duration-500">
-                  <Star className="w-5 h-5 fill-current" /><Star className="w-5 h-5 fill-current" /><Star className="w-5 h-5 fill-current" /><Star className="w-5 h-5 fill-current" /><Star className="w-5 h-5 fill-current" />
-                </div>
-                <p className="text-[#4A4A4A] leading-loose text-lg font-light italic mb-10">"{test.text}"</p>
-                <div className="flex items-center gap-4 mt-auto">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#32CD32]/20 to-[#FFC300]/20 flex items-center justify-center font-bold text-[#32CD32]">
-                    {test.name.charAt(0)}
-                  </div>
-                  <div className="text-left">
-                    <h4 className="font-bold text-[#1A1A1A]">{test.name}</h4>
-                    <span className="text-xs text-gray-400 font-bold uppercase tracking-widest">Verified Session</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (variant === 'cosmic') {
-    return (
-      <section className="py-24 relative z-10 bg-[#FDFBF7]">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-[#1A0B0F] mb-4">Cosmic Connections</h2>
-            <p className="text-[#4A3B3F]">Real stories from aligned souls.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {TESTIMONIALS.map((testi, idx) => (
-              <div key={idx} className="group relative rounded-[2.5rem] p-[1px] bg-red-900/10 hover:bg-red-500/50 transition-all duration-700 shadow-md hover:shadow-xl">
-                <div className="absolute inset-0 bg-white rounded-[2.5rem]" />
-                <div className="relative p-10 bg-white/60 backdrop-blur-xl rounded-[2.5rem] h-full flex flex-col">
-                  <div className="text-red-500 text-6xl font-serif mb-4 leading-none opacity-50 group-hover:opacity-100 transition-opacity">"</div>
-                  <p className="text-lg text-[#1A0B0F]/80 leading-relaxed mb-8 flex-1">"{testi.text}"</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white font-bold text-lg shadow-[0_5px_15px_rgba(220,38,38,0.4)]">
-                      {testi.name.charAt(0)}
-                    </div>
-                    <div>
-                      <h4 className="text-[#1A0B0F] font-bold">{testi.name}</h4>
-                      <p className="text-red-700/80 text-sm font-medium">{testi.loc}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (variant === 'split') {
-    return (
-      <section className="py-24 relative z-10 bg-[#E8DBBF]">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl md:text-5xl font-serif text-[#1C1208] mb-16 text-center">Words of the Seekers</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-[#6B4C1E]/20 max-w-6xl mx-auto divide-y md:divide-y-0 md:divide-x divide-[#6B4C1E]/20">
-            {TESTIMONIALS.map((testi, idx) => (
-              <div key={idx} className="p-12 bg-[#F2E8D5] flex flex-col justify-between group hover:bg-[#E8DBBF] transition-colors duration-500">
-                <p className="text-xl text-[#5A4A2E] leading-relaxed font-serif italic mb-8">
-                  "{testi.text}"
-                </p>
-                <div>
-                  <h4 className="text-[#1C1208] font-bold tracking-wider uppercase text-sm mb-1">{testi.name}</h4>
-                  <p className="text-[#B87333] text-xs font-serif uppercase tracking-widest">{testi.loc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  // Default mystic/golden
   return (
-    <section className="py-16 md:py-24 bg-card/30 relative z-10">
-      <div className="container mx-auto px-4">
+    <section className="py-24 bg-card relative z-10 border-t border-border">
+      <div className="container mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">{t.testimonialTitle}</h2>
-          <p className="text-muted-foreground text-lg">{t.testimonialSubtext}</p>
+          <h2 className="text-4xl md:text-5xl font-heading font-medium mb-4 text-foreground">
+            {t.testimonialTitle || "Stories of Healing"}
+          </h2>
+          <div className="w-12 h-0.5 bg-primary/40 mx-auto mb-6" />
+          <p className="text-muted-foreground text-lg">
+            {t.testimonialSubtext || "Real experiences from our global community of seekers."}
+          </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {TESTIMONIALS.map((testi, idx) => (
-            <div key={idx} className="bg-background rounded-3xl p-8 border border-border shadow-sm hover:shadow-xl hover:border-primary/40 hover:-translate-y-1 transition-all duration-500 group">
-              <div className="flex gap-1 mb-6">
+            <div key={idx} className="bg-background rounded-3xl p-8 border border-border shadow-sm hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-500 group flex flex-col">
+              <div className="flex gap-1 mb-6 text-primary">
                 {[1, 2, 3, 4, 5].map(s => (
-                  <span key={s} className="text-amber-500 text-lg group-hover:scale-110 transition-transform delay-75">★</span>
+                  <svg key={s} className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
                 ))}
               </div>
-              <p className="text-foreground/80 leading-relaxed italic mb-8 text-lg">"{testi.text}"</p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg border border-primary/20">
+              <p className="text-foreground/80 leading-relaxed font-light mb-8 flex-1 text-lg">
+                "{testi.text}"
+              </p>
+              <div className="flex items-center gap-4 border-t border-border pt-6 mt-auto">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">
                   {testi.name.charAt(0)}
                 </div>
                 <div>
-                  <h4 className="font-bold text-foreground text-base">{testi.name}</h4>
-                  <p className="text-muted-foreground text-sm">{testi.loc}</p>
+                  <h4 className="font-bold text-foreground text-sm">{testi.name}</h4>
+                  <p className="text-muted-foreground text-xs uppercase tracking-wider mt-0.5">{testi.loc}</p>
                 </div>
               </div>
             </div>

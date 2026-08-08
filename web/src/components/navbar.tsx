@@ -343,15 +343,9 @@ export default function Navbar() {
               {themeOpen && (
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
-                    { code: 'light', label: 'Emerald (Light)' },
-                    { code: 'dark', label: 'Navy (Dark)' },
-                    { code: 'chestnut', label: 'Chestnut' },
-                    { code: 'cosmic', label: 'Cosmic' },
-                    { code: 'obsidian', label: 'Obsidian / Yellow' },
-                    { code: 'black-pink', label: 'Black / Pink' },
-                    { code: 'dark-coral', label: 'Black / Coral' },
-                    { code: 'mystic-amethyst', label: 'Mystic Amethyst' },
-                    { code: 'ocean-breeze', label: 'Ocean Breeze' }
+                    { code: 'main', label: 'Deep Cosmic (Main)' },
+                    { code: 'theme-lavender', label: 'Soft Lavender (Zen)' },
+                    { code: 'theme-plum', label: 'Royal Plum & Rose' }
                   ]).map((t) => (
                     <button
                       key={t.code}
@@ -363,16 +357,10 @@ export default function Navbar() {
                       }`}
                     >
                       <div className={`w-3.5 h-3.5 rounded-full ${
-                        t.code === 'light' ? 'bg-[#083D31]' :
-                        t.code === 'dark' ? 'bg-[#0B0D17]' :
-                        t.code === 'chestnut' ? 'bg-[#2D0502]' :
-                        t.code === 'cosmic' ? 'bg-[#1B0B2A]' :
-                        t.code === 'obsidian' ? 'bg-[#240E4E]' :
-                        t.code === 'black-pink' ? 'bg-[#000000]' :
-                        t.code === 'dark-coral' ? 'bg-[#111111]' :
-                        t.code === 'mystic-amethyst' ? 'bg-[#1C0A33]' :
-                        'bg-[#022C3A]'
-                      } border border-white/20`} />
+                        t.code === 'main' ? 'bg-[#110A1F] border-amber-500' :
+                        t.code === 'theme-lavender' ? 'bg-[#F7F5FA] border-purple-300' :
+                        'bg-[#461C3E] border-pink-300'
+                      } border-2`} />
                       {t.label}
                       {theme === t.code && (
                         <svg className="w-3.5 h-3.5 ml-auto text-primary" fill="currentColor" viewBox="0 0 20 20">
@@ -399,13 +387,9 @@ export default function Navbar() {
               {layoutOpen && (
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
-                    { code: 'apple-cosmic', label: '🚀 Apple Cosmic (Apple x Space)' },
-                    { code: 'luxury-editorial', label: '✨ Luxury Editorial (Magazine)' },
-                    { code: 'cosmic-observatory', label: '🔭 Cosmic Observatory (NASA)' },
-                    { code: 'living-universe', label: '🌌 Living Universe (Storytelling)' },
-                    { code: 'wellness-sanctuary', label: '🌿 Wellness Sanctuary (Calm)' },
-                    { code: 'ai-future', label: '✨ Quantum Oracle (Ethereal WebGL)' },
-                    { code: 'divine-lotus-monolith', label: '🌸 Divine Lotus (Rotating Wheel)' },
+                    { code: 'primary', label: '✦ Primary (Locked)' },
+                    { code: 'editorial', label: '📰 Editorial (Magazine)' },
+                    { code: 'organic', label: '🌿 Organic (Flow)' },
                   ] as const).map((l) => (
                     <button
                       key={l.code}

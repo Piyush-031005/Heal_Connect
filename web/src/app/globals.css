@@ -9,7 +9,7 @@
     text-wrap: balance;
   }
   .input-style {
-    @apply w-full text-sm rounded-lg bg-muted border border-border px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-indigo-500/50;
+    @apply w-full text-sm rounded-lg bg-muted border border-border px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50;
   }
   .animate-marquee {
     animation: marquee 30s linear infinite;
@@ -30,6 +30,11 @@
   .animate-circle-reveal.in-view {
     clip-path: circle(100% at 50% 50%);
   }
+  
+  /* Smooth scrolling utility for Modality Wheel */
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @keyframes marquee {
@@ -46,236 +51,90 @@
     --font-heading: var(--font-playfair);
     --font-sans: var(--font-inter);
   }
+  
+  /* THEME 01 - MAIN / LOCKED (Dark Purple & Gold) */
   :root {
-    --background: #083D31;
+    --background: #110A1F; /* Deep Cosmic Purple */
     --foreground: #FDFBF7;
-    --card: #0A4A3C;
+    --card: #1A1030;
     --card-foreground: #FDFBF7;
-    --popover: #0A4A3C;
+    --popover: #1A1030;
     --popover-foreground: #FDFBF7;
-    --primary: #D6B46B;
-    --primary-foreground: #083D31;
-    --secondary: #0F5C4B;
+    --primary: #D4A843; /* Subtle Gold */
+    --primary-foreground: #110A1F;
+    --secondary: #2C1B4A;
     --secondary-foreground: #FDFBF7;
-    --muted: #0F5C4B;
-    --muted-foreground: #9DBEB5;
-    --accent: #CE793A;
-    --accent-foreground: #FFFFFF;
+    --muted: #2C1B4A;
+    --muted-foreground: #A198B5;
+    --accent: #E2C073;
+    --accent-foreground: #110A1F;
     --destructive: #EF4444;
     --destructive-foreground: #FDFBF7;
     --success: #22C55E;
     --success-foreground: #FDFBF7;
-    --border: #0F5C4B;
-    --input: #0F5C4B;
-    --ring: #D6B46B;
-    --radius: 0.625rem;
+    --border: #2C1B4A;
+    --input: #2C1B4A;
+    --ring: #D4A843;
+    --radius: 0.75rem;
   }
   
-  .dark {
-    --background: #0B0D17;
-    --foreground: #F8FAFC;
-    --card: #111424;
-    --card-foreground: #F8FAFC;
-    --popover: #111424;
-    --popover-foreground: #F8FAFC;
-    --primary: #D6B46B;
-    --primary-foreground: #0B0D17;
-    --secondary: #1E293B;
-    --secondary-foreground: #F8FAFC;
-    --muted: #1E293B;
-    --muted-foreground: #94A3B8;
-    --accent: #2EC4B6;
-    --accent-foreground: #0B0D17;
-    --destructive: #EF4444;
-    --destructive-foreground: #F8FAFC;
-    --success: #22C55E;
-    --success-foreground: #0B0D17;
-    --border: #1E293B;
-    --input: #1E293B;
-    --ring: #D6B46B;
-    --radius: 0.625rem;
-  }
-  
-  .chestnut {
-    --background: #2D0502;
-    --foreground: #F8FAFC;
-    --card: #3A0B07;
-    --card-foreground: #F8FAFC;
-    --popover: #3A0B07;
-    --popover-foreground: #F8FAFC;
-    --primary: #D6B46B;
-    --primary-foreground: #2D0502;
-    --secondary: #4A1009;
-    --secondary-foreground: #F8FAFC;
-    --muted: #4A1009;
-    --muted-foreground: #AFA09E;
-    --accent: #E6D1A4;
-    --accent-foreground: #2D0502;
-    --destructive: #EF4444;
-    --destructive-foreground: #F8FAFC;
-    --success: #22C55E;
-    --success-foreground: #F8FAFC;
-    --border: #4A1009;
-    --input: #4A1009;
-    --ring: #D6B46B;
-    --radius: 0.625rem;
-  }
-
-  .cosmic {
-    --background: #FDFBF7;
-    --foreground: #1A0B0F;
+  /* THEME 02 - SOFT LAVENDER (Minimal, Zen, Premium) */
+  .theme-lavender {
+    --background: #F7F5FA; /* Very soft lavender/off-white */
+    --foreground: #2A1B38; /* Deep plum text */
     --card: #FFFFFF;
-    --card-foreground: #1A0B0F;
+    --card-foreground: #2A1B38;
     --popover: #FFFFFF;
-    --popover-foreground: #1A0B0F;
-    --primary: #DC2626;
+    --popover-foreground: #2A1B38;
+    --primary: #7C5C9E; /* Muted Lilac/Purple */
     --primary-foreground: #FFFFFF;
-    --secondary: #FEE2E2;
-    --secondary-foreground: #991B1B;
-    --muted: #F3F4F6;
-    --muted-foreground: #6B7280;
-    --accent: #DC2626;
+    --secondary: #E9E1F0;
+    --secondary-foreground: #4A3361;
+    --muted: #E9E1F0;
+    --muted-foreground: #7D6B91;
+    --accent: #9474B8;
     --accent-foreground: #FFFFFF;
     --destructive: #EF4444;
     --destructive-foreground: #FDFBF7;
     --success: #22C55E;
     --success-foreground: #FDFBF7;
-    --border: #FECACA;
-    --input: #FECACA;
-    --ring: #DC2626;
-    --radius: 0.625rem;
+    --border: #E2D7EB;
+    --input: #E2D7EB;
+    --ring: #7C5C9E;
+    --radius: 0.75rem;
   }
-
-  .obsidian {
-    --background: #240E4E;
-    --foreground: #FFFFFF;
-    --card: #1D0B3E;
-    --card-foreground: #FFFFFF;
-    --popover: #1D0B3E;
-    --popover-foreground: #FFFFFF;
-    --primary: #FFE956;
-    --primary-foreground: #240E4E;
-    --secondary: #160830;
-    --secondary-foreground: #FFFFFF;
-    --muted: #160830;
-    --muted-foreground: #A18DCE;
-    --accent: #FFE956;
-    --accent-foreground: #240E4E;
+  
+  /* THEME 03 - ROYAL PLUM / ROSE (Warm, Elegant) */
+  .theme-plum {
+    --background: #461C3E; /* Deep Royal Plum */
+    --foreground: #FDF8FA; /* Soft Rose White */
+    --card: #5A2751;
+    --card-foreground: #FDF8FA;
+    --popover: #5A2751;
+    --popover-foreground: #FDF8FA;
+    --primary: #E5A3BC; /* Dusty Rose */
+    --primary-foreground: #2B0E25;
+    --secondary: #703366;
+    --secondary-foreground: #FDF8FA;
+    --muted: #703366;
+    --muted-foreground: #C899B8;
+    --accent: #F4C4D6;
+    --accent-foreground: #2B0E25;
     --destructive: #EF4444;
-    --destructive-foreground: #FFFFFF;
+    --destructive-foreground: #FDF8FA;
     --success: #22C55E;
-    --success-foreground: #FFFFFF;
-    --border: #160830;
-    --input: #160830;
-    --ring: #FFE956;
-    --radius: 0.625rem;
-  }
-
-  .black-pink {
-    --background: #000000;
-    --foreground: #FFFFFF;
-    --card: #111111;
-    --card-foreground: #FFFFFF;
-    --popover: #111111;
-    --popover-foreground: #FFFFFF;
-    --primary: #FFB6C1;
-    --primary-foreground: #000000;
-    --secondary: #1A1A1A;
-    --secondary-foreground: #FFFFFF;
-    --muted: #1A1A1A;
-    --muted-foreground: #E0A0AA;
-    --accent: #FFB6C1;
-    --accent-foreground: #000000;
-    --destructive: #EF4444;
-    --destructive-foreground: #FFFFFF;
-    --success: #22C55E;
-    --success-foreground: #FFFFFF;
-    --border: #1A1A1A;
-    --input: #1A1A1A;
-    --ring: #FFB6C1;
-    --radius: 0.625rem;
-  }
-
-  .dark-coral {
-    --background: #111111;
-    --foreground: #FFFFFF;
-    --card: #1A1A1A;
-    --card-foreground: #FFFFFF;
-    --popover: #1A1A1A;
-    --popover-foreground: #FFFFFF;
-    --primary: #FF7043;
-    --primary-foreground: #111111;
-    --secondary: #222222;
-    --secondary-foreground: #FFFFFF;
-    --muted: #222222;
-    --muted-foreground: #F4A28C;
-    --accent: #FF7043;
-    --accent-foreground: #111111;
-    --destructive: #EF4444;
-    --destructive-foreground: #FFFFFF;
-    --success: #22C55E;
-    --success-foreground: #FFFFFF;
-    --border: #222222;
-    --input: #222222;
-    --ring: #FF7043;
-    --radius: 0.625rem;
-  }
-
-  .mystic-amethyst {
-    --background: #1C0A33;
-    --foreground: #F8FAFC;
-    --card: #28104A;
-    --card-foreground: #F8FAFC;
-    --popover: #28104A;
-    --popover-foreground: #F8FAFC;
-    --primary: #E9D5FF;
-    --primary-foreground: #1C0A33;
-    --secondary: #3B176B;
-    --secondary-foreground: #F8FAFC;
-    --muted: #3B176B;
-    --muted-foreground: #D8B4E2;
-    --accent: #E9D5FF;
-    --accent-foreground: #1C0A33;
-    --destructive: #EF4444;
-    --destructive-foreground: #F8FAFC;
-    --success: #22C55E;
-    --success-foreground: #F8FAFC;
-    --border: #3B176B;
-    --input: #3B176B;
-    --ring: #E9D5FF;
-    --radius: 0.625rem;
-  }
-
-  .ocean-breeze {
-    --background: #022C3A;
-    --foreground: #F8FAFC;
-    --card: #044256;
-    --card-foreground: #F8FAFC;
-    --popover: #044256;
-    --popover-foreground: #F8FAFC;
-    --primary: #99F6E4;
-    --primary-foreground: #022C3A;
-    --secondary: #075E79;
-    --secondary-foreground: #F8FAFC;
-    --muted: #075E79;
-    --muted-foreground: #8BD2E3;
-    --accent: #99F6E4;
-    --accent-foreground: #022C3A;
-    --destructive: #EF4444;
-    --destructive-foreground: #F8FAFC;
-    --success: #22C55E;
-    --success-foreground: #F8FAFC;
-    --border: #075E79;
-    --input: #075E79;
-    --ring: #99F6E4;
-    --radius: 0.625rem;
+    --success-foreground: #FDF8FA;
+    --border: #703366;
+    --input: #703366;
+    --ring: #E5A3BC;
+    --radius: 0.75rem;
   }
   
   * {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-500 ease-in-out;
   }
   html {
     @apply font-sans;
