@@ -5,7 +5,7 @@ import Link from 'next/link';
 const MODALITIES = [
   { id: 'astrology', name: 'Astrology', desc: 'Understand your cosmic patterns.', image: '/12-modalities/astrology.png' },
   { id: 'tarot', name: 'Tarot Reading', desc: 'Explore intuitive guidance.', image: '/12-modalities/tarocard.png' },
-  { id: 'palm-reading', name: 'Palm Reading', desc: 'Discover the story in your hands.', image: '/logo.png' },
+  { id: 'palm-reading', name: 'Palm Reading', desc: 'Discover the story in your hands.', image: '/12-modalities/ai-match.png' },
   { id: 'face-reading', name: 'Face Reading', desc: 'Explore personality and patterns.', image: '/12-modalities/face reading.png' },
   { id: 'numerology', name: 'Numerology', desc: 'Uncover your numbers.', image: '/12-modalities/numeriology.png' },
   { id: 'energy-healing', name: 'Energy Healing', desc: 'Restore balance and wellbeing.', image: '/12-modalities/energy healing.png' },

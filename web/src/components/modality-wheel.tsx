@@ -18,17 +18,17 @@ import {
 
 const MODALITIES = [
   { id: 'astrology', name: 'Astrology', image: '/12-modalities/astrology.png' },
-  { id: 'vastu', name: 'Vastu', image: '/12-modalities/vastu.png' },
-  { id: 'healing', name: 'Energy Healing', image: '/12-modalities/energy healing.png' },
-  { id: 'eft', name: 'EFT', image: '/12-modalities/eft.png' },
-  { id: 'meditation', name: 'Meditation', image: '/12-modalities/medidation and breathing.png' },
-  { id: 'yoga', name: 'Yoga', image: '/12-modalities/yoga.png' },
-  { id: 'tarot', name: 'Tarot Cards', image: '/12-modalities/tarocard.png' },
-  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities/sound.png' },
-  { id: 'numerology', name: 'Numerology', image: '/12-modalities/numeriology.png' },
+  { id: 'tarot', name: 'Tarot Reading', image: '/12-modalities/tarocard.png' },
+  { id: 'palm-reading', name: 'Palm Reading', image: '/12-modalities/ai-match.png' },
   { id: 'face-reading', name: 'Face Reading', image: '/12-modalities/face reading.png' },
-  { id: 'spirituality', name: 'Spirituality', image: '/12-modalities/spitutality.png' },
-  { id: 'ai-match', name: 'AI Expert Match', image: '/logo.png' },
+  { id: 'numerology', name: 'Numerology', image: '/12-modalities/numeriology.png' },
+  { id: 'healing', name: 'Energy Healing', image: '/12-modalities/energy healing.png' },
+  { id: 'meditation', name: 'Meditation & Breathwork', image: '/12-modalities/medidation and breathing.png' },
+  { id: 'yoga', name: 'Yoga & Mindfulness', image: '/12-modalities/yoga.png' },
+  { id: 'vastu', name: 'Vastu & Space Energy', image: '/12-modalities/vastu.png' },
+  { id: 'eft', name: 'EFT Tapping', image: '/12-modalities/eft.png' },
+  { id: 'spiritual', name: 'Spiritual Guidance', image: '/12-modalities/spitutality.png' },
+  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities/sound.png' },
 ];
 
 export default function ModalityWheel() {
