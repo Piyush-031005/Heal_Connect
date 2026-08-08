@@ -17,18 +17,18 @@ import {
 } from 'lucide-react';
 
 const MODALITIES = [
-  { id: 'astrology', name: 'Astrology', image: '/removed background/aries-removebg-preview.png' },
-  { id: 'vastu', name: 'Vastu', image: '/removed background/taurus-removebg-preview.png' },
-  { id: 'healing', name: 'Healing', image: '/removed background/gemini-removebg-preview.png' },
-  { id: 'eft', name: 'EFT', image: '/removed background/cancer-removebg-preview.png' },
-  { id: 'meditation', name: 'Meditation', image: '/removed background/leo-removebg-preview.png' },
-  { id: 'yoga', name: 'Yoga', image: '/removed background/virgo-removebg-preview.png' },
-  { id: 'tarot', name: 'Tarot Cards', image: '/removed background/libra-removebg-preview.png' },
-  { id: 'psychic', name: 'Psychic Reading', image: '/removed background/scorpio-removebg-preview.png' },
-  { id: 'palmistry', name: 'Palmistry', image: '/removed background/sagittarius-removebg-preview.png' },
-  { id: 'face-reading', name: 'Face Reading', image: '/removed background/capricorn-removebg-preview.png' },
-  { id: 'lal-kitab', name: 'Lal Kitab', image: '/removed background/aquarius-removebg-preview.png' },
-  { id: 'ai-match', name: 'AI Expert Match', image: '/removed background/pisces-removebg-preview.png' },
+  { id: 'astrology', name: 'Astrology', image: '/12-modalities/astrology.png' },
+  { id: 'vastu', name: 'Vastu', image: '/12-modalities/vastu.png' },
+  { id: 'healing', name: 'Energy Healing', image: '/12-modalities/energy healing.png' },
+  { id: 'eft', name: 'EFT', image: '/12-modalities/eft.png' },
+  { id: 'meditation', name: 'Meditation', image: '/12-modalities/medidation and breathing.png' },
+  { id: 'yoga', name: 'Yoga', image: '/12-modalities/yoga.png' },
+  { id: 'tarot', name: 'Tarot Cards', image: '/12-modalities/tarocard.png' },
+  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities/sound.png' },
+  { id: 'numerology', name: 'Numerology', image: '/12-modalities/numeriology.png' },
+  { id: 'face-reading', name: 'Face Reading', image: '/12-modalities/face reading.png' },
+  { id: 'spirituality', name: 'Spirituality', image: '/12-modalities/spitutality.png' },
+  { id: 'ai-match', name: 'AI Expert Match', image: '/logo.png' },
 ];
 
 export default function ModalityWheel() {
