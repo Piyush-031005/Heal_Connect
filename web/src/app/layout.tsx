@@ -26,8 +26,8 @@ export default function RootLayout({
       <body className={`${inter.variable} ${playfair.variable} ${cormorant.variable} font-sans antialiased theme`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="main"
-          themes={['main', 'theme-lavender', 'theme-plum']}
+          defaultTheme="theme-lavender-base"
+          themes={['theme-lavender-base', 'theme-lavender-light', 'theme-lavender-deep', 'theme-lavender-night']}
           enableSystem={false}
           disableTransitionOnChange
         >

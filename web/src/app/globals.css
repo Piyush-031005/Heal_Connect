@@ -52,81 +52,107 @@
     --font-sans: var(--font-inter);
   }
   
-  /* THEME 01 - MAIN / LOCKED (Dark Purple & Gold) */
-  :root {
-    --background: #110A1F; /* Deep Cosmic Purple */
-    --foreground: #FDFBF7;
-    --card: #1A1030;
-    --card-foreground: #FDFBF7;
-    --popover: #1A1030;
-    --popover-foreground: #FDFBF7;
-    --primary: #D4A843; /* Subtle Gold */
-    --primary-foreground: #110A1F;
-    --secondary: #2C1B4A;
-    --secondary-foreground: #FDFBF7;
-    --muted: #2C1B4A;
-    --muted-foreground: #A198B5;
-    --accent: #E2C073;
-    --accent-foreground: #110A1F;
+  /* THEME 01 - LAVENDER BASE (Default, Nice Shade) */
+  :root, .theme-lavender-base {
+    --background: #F4EEFB; /* Nice soft lavender */
+    --foreground: #382452; /* Deep purple text */
+    --card: #FFFFFF;
+    --card-foreground: #382452;
+    --popover: #FFFFFF;
+    --popover-foreground: #382452;
+    --primary: #8A64B5; /* Classic Lavender primary */
+    --primary-foreground: #FFFFFF;
+    --secondary: #E3D5F2;
+    --secondary-foreground: #4B316C;
+    --muted: #E3D5F2;
+    --muted-foreground: #7E6B99;
+    --accent: #A384C6;
+    --accent-foreground: #FFFFFF;
     --destructive: #EF4444;
-    --destructive-foreground: #FDFBF7;
+    --destructive-foreground: #FFFFFF;
     --success: #22C55E;
-    --success-foreground: #FDFBF7;
-    --border: #2C1B4A;
-    --input: #2C1B4A;
-    --ring: #D4A843;
+    --success-foreground: #FFFFFF;
+    --border: #DBC7F0;
+    --input: #DBC7F0;
+    --ring: #8A64B5;
     --radius: 0.75rem;
   }
   
-  /* THEME 02 - SOFT LAVENDER (Minimal, Zen, Premium) */
-  .theme-lavender {
-    --background: #F7F5FA; /* Very soft lavender/off-white */
-    --foreground: #2A1B38; /* Deep plum text */
+  /* THEME 02 - LAVENDER LIGHT (Very Low Shade, Whitish) */
+  .theme-lavender-light {
+    --background: #FDFBFF; /* Extremely light */
+    --foreground: #2A1B38; 
     --card: #FFFFFF;
     --card-foreground: #2A1B38;
     --popover: #FFFFFF;
     --popover-foreground: #2A1B38;
-    --primary: #7C5C9E; /* Muted Lilac/Purple */
-    --primary-foreground: #FFFFFF;
-    --secondary: #E9E1F0;
+    --primary: #B298CE; /* Very soft muted lavender */
+    --primary-foreground: #2A1B38;
+    --secondary: #F3EEF9;
     --secondary-foreground: #4A3361;
-    --muted: #E9E1F0;
-    --muted-foreground: #7D6B91;
-    --accent: #9474B8;
-    --accent-foreground: #FFFFFF;
+    --muted: #F3EEF9;
+    --muted-foreground: #8C7C9E;
+    --accent: #C7B4DE;
+    --accent-foreground: #2A1B38;
     --destructive: #EF4444;
-    --destructive-foreground: #FDFBF7;
+    --destructive-foreground: #FFFFFF;
     --success: #22C55E;
-    --success-foreground: #FDFBF7;
-    --border: #E2D7EB;
-    --input: #E2D7EB;
-    --ring: #7C5C9E;
+    --success-foreground: #FFFFFF;
+    --border: #EBE1F5;
+    --input: #EBE1F5;
+    --ring: #B298CE;
     --radius: 0.75rem;
   }
   
-  /* THEME 03 - ROYAL PLUM / ROSE (Warm, Elegant) */
-  .theme-plum {
-    --background: #461C3E; /* Deep Royal Plum */
-    --foreground: #FDF8FA; /* Soft Rose White */
-    --card: #5A2751;
-    --card-foreground: #FDF8FA;
-    --popover: #5A2751;
-    --popover-foreground: #FDF8FA;
-    --primary: #E5A3BC; /* Dusty Rose */
-    --primary-foreground: #2B0E25;
-    --secondary: #703366;
-    --secondary-foreground: #FDF8FA;
-    --muted: #703366;
-    --muted-foreground: #C899B8;
-    --accent: #F4C4D6;
-    --accent-foreground: #2B0E25;
+  /* THEME 03 - LAVENDER DEEP (Rich Plum/Lavender) */
+  .theme-lavender-deep {
+    --background: #4B2F6E; /* Rich deep lavender */
+    --foreground: #FDFBFF; /* White/soft lavender text */
+    --card: #5A3A82;
+    --card-foreground: #FDFBFF;
+    --popover: #5A3A82;
+    --popover-foreground: #FDFBFF;
+    --primary: #D1BDEB; /* Light lavender for contrast */
+    --primary-foreground: #382452;
+    --secondary: #6B4996;
+    --secondary-foreground: #FDFBFF;
+    --muted: #6B4996;
+    --muted-foreground: #D3C5E3;
+    --accent: #E3D5F2;
+    --accent-foreground: #382452;
     --destructive: #EF4444;
-    --destructive-foreground: #FDF8FA;
+    --destructive-foreground: #FDFBFF;
     --success: #22C55E;
-    --success-foreground: #FDF8FA;
-    --border: #703366;
-    --input: #703366;
-    --ring: #E5A3BC;
+    --success-foreground: #FDFBFF;
+    --border: #6B4996;
+    --input: #6B4996;
+    --ring: #D1BDEB;
+    --radius: 0.75rem;
+  }
+  
+  /* THEME 04 - LAVENDER NIGHT (Cosmic Dark Mode) */
+  .theme-lavender-night {
+    --background: #190F26; /* Very dark cosmic purple */
+    --foreground: #F4EEFB; 
+    --card: #251638;
+    --card-foreground: #F4EEFB;
+    --popover: #251638;
+    --popover-foreground: #F4EEFB;
+    --primary: #A384C6; /* Vibrant Lavender */
+    --primary-foreground: #190F26;
+    --secondary: #33204D;
+    --secondary-foreground: #F4EEFB;
+    --muted: #33204D;
+    --muted-foreground: #A495B8;
+    --accent: #B89DD4;
+    --accent-foreground: #190F26;
+    --destructive: #EF4444;
+    --destructive-foreground: #F4EEFB;
+    --success: #22C55E;
+    --success-foreground: #F4EEFB;
+    --border: #33204D;
+    --input: #33204D;
+    --ring: #A384C6;
     --radius: 0.75rem;
   }
   

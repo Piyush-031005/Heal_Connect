@@ -17,18 +17,18 @@ import {
 } from 'lucide-react';
 
 const MODALITIES = [
-  { id: 'astrology', name: 'Astrology', icon: Star },
-  { id: 'vastu', name: 'Vastu', icon: Compass },
-  { id: 'healing', name: 'Healing', icon: HeartPulse },
-  { id: 'eft', name: 'EFT', icon: Activity },
-  { id: 'meditation', name: 'Meditation & Breathwork', icon: Wind },
-  { id: 'yoga', name: 'Yoga', icon: Flower2 },
-  { id: 'tarot', name: 'Tarot Cards', icon: Layers },
-  { id: 'psychic', name: 'Psychic Reading', icon: Eye },
-  { id: 'palmistry', name: 'Palmistry', icon: Hand },
-  { id: 'face-reading', name: 'Face Reading', icon: User },
-  { id: 'lal-kitab', name: 'Lal Kitab', icon: Book },
-  { id: 'ai-match', name: 'AI Expert Match', icon: Sparkles },
+  { id: 'astrology', name: 'Astrology', image: '/removed background/aries-removebg-preview.png' },
+  { id: 'vastu', name: 'Vastu', image: '/removed background/taurus-removebg-preview.png' },
+  { id: 'healing', name: 'Healing', image: '/removed background/gemini-removebg-preview.png' },
+  { id: 'eft', name: 'EFT', image: '/removed background/cancer-removebg-preview.png' },
+  { id: 'meditation', name: 'Meditation', image: '/removed background/leo-removebg-preview.png' },
+  { id: 'yoga', name: 'Yoga', image: '/removed background/virgo-removebg-preview.png' },
+  { id: 'tarot', name: 'Tarot Cards', image: '/removed background/libra-removebg-preview.png' },
+  { id: 'psychic', name: 'Psychic Reading', image: '/removed background/scorpio-removebg-preview.png' },
+  { id: 'palmistry', name: 'Palmistry', image: '/removed background/sagittarius-removebg-preview.png' },
+  { id: 'face-reading', name: 'Face Reading', image: '/removed background/capricorn-removebg-preview.png' },
+  { id: 'lal-kitab', name: 'Lal Kitab', image: '/removed background/aquarius-removebg-preview.png' },
+  { id: 'ai-match', name: 'AI Expert Match', image: '/removed background/pisces-removebg-preview.png' },
 ];
 
 export default function ModalityWheel() {
@@ -119,28 +119,37 @@ export default function ModalityWheel() {
                     cx="0" 
                     cy="0" 
                     r="36" 
-                    className={`transition-all duration-300 backdrop-blur-md ${isHovered ? "fill-background stroke-primary" : "fill-background/80 stroke-primary/30"}`} 
+                    className={`transition-all duration-300 backdrop-blur-md ${isHovered ? "fill-primary/20 stroke-primary" : "fill-background/80 stroke-primary/30"}`} 
                     strokeWidth="1.5" 
                   />
                   
-                  {/* HTML Icon overlay */}
-                  <foreignObject x="-20" y="-35" width="40" height="40" className="pointer-events-none">
-                    <div className="w-full h-full flex items-center justify-center text-primary">
-                      <modality.icon strokeWidth={1.5} className={isHovered ? "w-7 h-7" : "w-6 h-6 opacity-70"} />
-                    </div>
-                  </foreignObject>
+                  {/* High-Fidelity Custom Image Asset */}
+                  <g className="transition-all duration-500 pointer-events-none" style={{ transform: isHovered ? 'scale(1.15)' : 'scale(1)' }}>
+                    <image 
+                      href={modality.image} 
+                      x="-80" 
+                      y="-80" 
+                      width="160" 
+                      height="160" 
+                      className="transition-all duration-500 mix-blend-screen" 
+                      style={{ 
+                        filter: isHovered ? 'drop-shadow(0 0 12px rgba(214,180,107,0.8)) brightness(1.2)' : 'brightness(0.7)' 
+                      }} 
+                    />
+                  </g>
                   
                   {/* Modality Name */}
                   <text
                     x="0"
-                    y="22"
+                    y="24"
                     textAnchor="middle"
                     dominantBaseline="middle"
-                    className="fill-foreground font-sans tracking-wide pointer-events-none transition-all duration-300"
+                    className="fill-foreground font-sans tracking-wide pointer-events-none transition-all duration-300 shadow-sm"
                     style={{ 
                       fontSize: '11px',
-                      fontWeight: isHovered ? 600 : 500,
+                      fontWeight: isHovered ? 700 : 500,
                       opacity: isHovered ? 1 : 0.6,
+                      textShadow: isHovered ? '0px 2px 8px rgba(0,0,0,0.8)' : 'none'
                     }}
                   >
                     {modality.name}
