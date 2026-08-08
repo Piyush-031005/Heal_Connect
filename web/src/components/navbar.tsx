@@ -346,7 +346,10 @@ export default function Navbar() {
                     { code: 'theme-lavender-base', label: 'Lavender Base' },
                     { code: 'theme-lavender-light', label: 'Lavender Light' },
                     { code: 'theme-lavender-deep', label: 'Lavender Deep' },
-                    { code: 'theme-lavender-night', label: 'Cosmic Night' }
+                    { code: 'theme-lavender-night', label: 'Cosmic Night' },
+                    { code: 'theme-soft-blue', label: 'Soft Blue (Zen)' },
+                    { code: 'theme-pink-lavender', label: 'Pink Lavender Mix' },
+                    { code: 'theme-deep-forest', label: 'Deep Forest' }
                   ]).map((t) => (
                     <button
                       key={t.code}
@@ -361,7 +364,10 @@ export default function Navbar() {
                         t.code === 'theme-lavender-base' ? 'bg-[#F4EEFB] border-[#8A64B5]' :
                         t.code === 'theme-lavender-light' ? 'bg-[#FDFBFF] border-[#B298CE]' :
                         t.code === 'theme-lavender-deep' ? 'bg-[#4B2F6E] border-[#D1BDEB]' :
-                        'bg-[#190F26] border-[#A384C6]'
+                        t.code === 'theme-lavender-night' ? 'bg-[#190F26] border-[#A384C6]' :
+                        t.code === 'theme-soft-blue' ? 'bg-[#E8F0FE] border-[#6A8EAE]' :
+                        t.code === 'theme-pink-lavender' ? 'bg-[#FDF5F9] border-[#C988AD]' :
+                        'bg-[#1C2B23] border-[#85B899]'
                       } border-2`} />
                       {t.label}
                       {theme === t.code && (
@@ -392,6 +398,8 @@ export default function Navbar() {
                     { code: 'primary', label: '✦ Primary (Locked)' },
                     { code: 'editorial', label: '📰 Editorial (Magazine)' },
                     { code: 'organic', label: '🌿 Organic (Flow)' },
+                    { code: 'minimalist', label: '✨ Minimalist (Clean)' },
+                    { code: 'modern-glow', label: '🌟 Modern Glow (Neon)' },
                   ] as const).map((l) => (
                     <button
                       key={l.code}

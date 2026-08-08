@@ -60,6 +60,9 @@ export default function ModalityWheel() {
         style={{ animation: 'spin 120s linear infinite', animationPlayState: playState }}
       >
         <svg viewBox="0 0 800 800" className="w-full h-full overflow-visible">
+          {/* Theme-specific background (e.g. white for deep lavender) */}
+          <circle cx={cx} cy={cy} r={radius + 60} fill="var(--wheel-bg, transparent)" className="transition-colors duration-500" />
+          
           {/* MINIMAL PREMIUM RINGS */}
           
           {/* Outer gentle halo */}
@@ -88,6 +91,25 @@ export default function ModalityWheel() {
             opacity="0.1" 
             strokeWidth="0.5"
           />
+
+          {/* Roaming Logo Orbiting the inner track */}
+          <g className="pointer-events-none">
+            {/* The group rotates at a faster speed to orbit */}
+            <g style={{ animation: 'spin 40s linear infinite' }}>
+              <g transform={`translate(${cx}, ${cy - (radius - 80)})`}>
+                <g style={{ animation: 'spin 40s linear infinite reverse' }}>
+                  <image 
+                    href="/logo.png" 
+                    x="-24" 
+                    y="-24" 
+                    width="48" 
+                    height="48" 
+                    style={{ filter: 'hue-rotate(240deg) saturate(2) brightness(1.5) drop-shadow(0 0 10px rgba(138, 100, 181, 0.5))' }}
+                  />
+                </g>
+              </g>
+            </g>
+          </g>
 
           {/* Modality Nodes around the track */}
           {MODALITIES.map((modality, idx) => {
@@ -118,22 +140,22 @@ export default function ModalityWheel() {
                   <circle 
                     cx="0" 
                     cy="0" 
-                    r="36" 
-                    className={`transition-all duration-300 backdrop-blur-md ${isHovered ? "fill-primary/20 stroke-primary" : "fill-background/80 stroke-primary/30"}`} 
+                    r="40" 
+                    className={`transition-all duration-300 backdrop-blur-md ${isHovered ? "fill-primary/20 stroke-primary" : "fill-background/90 stroke-primary/30"}`} 
                     strokeWidth="1.5" 
                   />
                   
                   {/* High-Fidelity Custom Image Asset */}
-                  <g className="transition-all duration-500 pointer-events-none" style={{ transform: isHovered ? 'scale(1.15)' : 'scale(1)' }}>
+                  <g className="transition-all duration-500 pointer-events-none" style={{ transform: isHovered ? 'scale(1.25)' : 'scale(1)' }}>
                     <image 
                       href={modality.image} 
-                      x="-80" 
-                      y="-80" 
-                      width="160" 
-                      height="160" 
-                      className="transition-all duration-500 mix-blend-screen" 
+                      x="-100" 
+                      y="-100" 
+                      width="200" 
+                      height="200" 
+                      className="transition-all duration-500" 
                       style={{ 
-                        filter: isHovered ? 'drop-shadow(0 0 12px rgba(214,180,107,0.8)) brightness(1.2)' : 'brightness(0.7)' 
+                        filter: isHovered ? 'drop-shadow(0 0 15px rgba(214,180,107,0.9)) brightness(1.3)' : 'drop-shadow(0 0 5px rgba(0,0,0,0.3)) brightness(0.8)' 
                       }} 
                     />
                   </g>
@@ -169,8 +191,8 @@ export default function ModalityWheel() {
           
           <div className="relative z-10 flex flex-col items-center text-center px-4">
             <span className="text-primary/60 uppercase tracking-widest text-[10px] font-bold mb-3">Explore Your Path</span>
-            <div className="w-16 h-16 rounded-full border border-primary/30 flex items-center justify-center mb-3">
-              <Sparkles className="w-6 h-6 text-primary" strokeWidth={1.5} />
+            <div className="w-20 h-20 rounded-full border border-primary/30 flex items-center justify-center mb-3 bg-white/5 backdrop-blur-xl shadow-inner">
+              <img src="/logo.png" alt="HealConnect Logo" className="w-14 h-14 object-contain" />
             </div>
             <span className="font-serif text-2xl font-medium text-foreground tracking-wide">HealConnect</span>
           </div>

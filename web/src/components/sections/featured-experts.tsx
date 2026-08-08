@@ -17,7 +17,7 @@ const EXPERTS = [
     location: 'Milan, Italy (Global)',
     price: '$120 / session',
     availability: 'Available Today',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400&h=400'
+    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=400&h=400'
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const EXPERTS = [
     location: 'Singapore (Global)',
     price: '$150 / session',
     availability: 'Next Avail: Tomorrow',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400&h=400'
+    image: 'https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80&w=400&h=400'
   },
   {
     id: 3,
@@ -43,7 +43,7 @@ const EXPERTS = [
     location: 'London, UK (Global)',
     price: '$90 / session',
     availability: 'Available Today',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400&h=400'
+    image: 'https://images.unsplash.com/photo-1603525166014-9b51e0ff0537?auto=format&fit=crop&q=80&w=400&h=400'
   }
 ];
 

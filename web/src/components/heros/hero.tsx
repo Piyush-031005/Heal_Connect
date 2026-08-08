@@ -126,13 +126,18 @@ function EditorialHero() {
 // --- ORGANIC LAYOUT HERO (Flow) ---
 function OrganicHero() {
   return (
-    <section className="relative overflow-hidden pt-32 pb-24 bg-background min-h-[90vh] flex items-center">
+    <section className="relative overflow-hidden pt-64 pb-24 bg-background min-h-[90vh] flex items-center">
       {/* Flowing Organic Shapes */}
-      <svg className="absolute top-0 right-0 w-full h-full text-primary/5 opacity-50 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <path d="M0,0 Q50,100 100,0 L100,100 L0,100 Z" fill="currentColor" />
+      <svg className="absolute bottom-0 left-0 w-full h-1/2 text-primary/10 opacity-50 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M0,100 Q50,0 100,100 Z" fill="currentColor" />
       </svg>
       
-      <div className="container mx-auto px-6 relative z-10 text-center">
+      {/* Modality Wheel Arc at Top Center */}
+      <div className="absolute top-[-400px] left-1/2 -translate-x-1/2 opacity-90 z-20 pointer-events-auto">
+        <ModalityWheel />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10 text-center mt-12">
         <div className="flex justify-center mb-8">
           <div className="w-24 h-24 bg-primary/10 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] flex items-center justify-center text-primary animate-[spin_10s_linear_infinite]">
             <Flower2 className="w-10 h-10 animate-[spin_10s_linear_infinite_reverse]" />
@@ -158,11 +163,66 @@ function OrganicHero() {
   );
 }
 
+// --- MINIMALIST LAYOUT HERO (Clean) ---
+function MinimalistHero() {
+  return (
+    <section className="relative pt-40 pb-32 bg-background min-h-[85vh] flex flex-col items-center justify-center text-center">
+      <div className="container mx-auto px-6 max-w-4xl">
+        <h1 className="text-5xl md:text-7xl font-sans font-light tracking-tight text-foreground mb-8">
+          Wellness, <span className="font-semibold text-primary">Simplified.</span>
+        </h1>
+        <p className="text-lg md:text-xl text-muted-foreground font-light mb-12 max-w-2xl mx-auto">
+          Connect with elite practitioners to heal your mind, body, and energy in a space free of distractions.
+        </p>
+        <Link href="/practitioners">
+          <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 rounded-none px-12 h-14 uppercase tracking-widest text-xs font-bold transition-all">
+            Find Your Expert
+          </Button>
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+// --- MODERN GLOW LAYOUT HERO (Neon) ---
+function ModernGlowHero() {
+  return (
+    <section className="relative overflow-hidden pt-40 pb-32 bg-[#090514] min-h-[90vh] flex items-center border-b border-primary/20">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(214,180,107,0.15)_0%,transparent_70%)]" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] mix-blend-screen" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[100px] mix-blend-screen" />
+      
+      <div className="container mx-auto px-6 relative z-10 text-center">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary mb-8 backdrop-blur-md">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          </span>
+          <span className="text-xs uppercase tracking-widest font-bold">Live Sessions Available</span>
+        </div>
+        <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-primary/80 to-accent mb-8">
+          Awaken Your Potential
+        </h1>
+        <p className="text-xl text-white/60 mb-12 max-w-2xl mx-auto font-medium">
+          The most vibrant community of modern mystics, healers, and guides.
+        </p>
+        <Link href="/practitioners">
+          <Button size="lg" className="bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground rounded-full px-12 h-14 text-lg font-bold transition-all shadow-[0_0_30px_rgba(214,180,107,0.3)] hover:shadow-[0_0_50px_rgba(214,180,107,0.5)] border border-primary/50">
+            Start Journey
+          </Button>
+        </Link>
+      </div>
+    </section>
+  );
+}
+
 // --- MAIN EXPORT ---
 export default function Hero() {
   const { layout } = useLayout();
   
   if (layout === 'editorial') return <EditorialHero />;
   if (layout === 'organic') return <OrganicHero />;
+  if (layout === 'minimalist') return <MinimalistHero />;
+  if (layout === 'modern-glow') return <ModernGlowHero />;
   return <PrimaryHero />; // layout === 'primary' or default
 }

@@ -128,34 +128,113 @@
     --input: #6B4996;
     --ring: #D1BDEB;
     --radius: 0.75rem;
+    --wheel-bg: #FFFFFF; /* Requested white background for circular revolution */
   }
   
-  /* THEME 04 - LAVENDER NIGHT (Cosmic Dark Mode) */
+  /* THEME 04 - COSMIC NIGHT (Lighter, more colorful dark mode) */
   .theme-lavender-night {
-    --background: #190F26; /* Very dark cosmic purple */
+    --background: #1E1B38; /* Slightly lighter cosmic navy/purple */
     --foreground: #F4EEFB; 
-    --card: #251638;
+    --card: #2B254D;
     --card-foreground: #F4EEFB;
-    --popover: #251638;
+    --popover: #2B254D;
     --popover-foreground: #F4EEFB;
-    --primary: #A384C6; /* Vibrant Lavender */
-    --primary-foreground: #190F26;
-    --secondary: #33204D;
+    --primary: #B298CE; /* Brighter lavender */
+    --primary-foreground: #1E1B38;
+    --secondary: #403666;
     --secondary-foreground: #F4EEFB;
-    --muted: #33204D;
+    --muted: #403666;
     --muted-foreground: #A495B8;
-    --accent: #B89DD4;
-    --accent-foreground: #190F26;
+    --accent: #9A7BC4; /* Vibrant purple accent */
+    --accent-foreground: #1E1B38;
     --destructive: #EF4444;
     --destructive-foreground: #F4EEFB;
     --success: #22C55E;
     --success-foreground: #F4EEFB;
-    --border: #33204D;
-    --input: #33204D;
-    --ring: #A384C6;
+    --border: #403666;
+    --input: #403666;
+    --ring: #B298CE;
     --radius: 0.75rem;
   }
   
+  /* THEME 05 - SOFT BLUISH (Zen Align image theme) */
+  .theme-soft-blue {
+    --background: #E8F0FE; /* Very soft bluish tint */
+    --foreground: #2C3E50; 
+    --card: #FFFFFF;
+    --card-foreground: #2C3E50;
+    --popover: #FFFFFF;
+    --popover-foreground: #2C3E50;
+    --primary: #6A8EAE; /* Muted blue-grey */
+    --primary-foreground: #FFFFFF;
+    --secondary: #D4E1F9;
+    --secondary-foreground: #34495E;
+    --muted: #D4E1F9;
+    --muted-foreground: #7F8C8D;
+    --accent: #8AB4F8; /* Light bright blue */
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #D4E1F9;
+    --input: #D4E1F9;
+    --ring: #6A8EAE;
+    --radius: 0.75rem;
+  }
+
+  /* THEME 06 - PINK LAVENDER MIX */
+  .theme-pink-lavender {
+    --background: #FDF5F9; /* Very soft pink */
+    --foreground: #4A2B42; 
+    --card: #FFFFFF;
+    --card-foreground: #4A2B42;
+    --popover: #FFFFFF;
+    --popover-foreground: #4A2B42;
+    --primary: #C988AD; /* Mix of pink and lavender */
+    --primary-foreground: #FFFFFF;
+    --secondary: #F3DEEA;
+    --secondary-foreground: #5C3754;
+    --muted: #F3DEEA;
+    --muted-foreground: #9B7894;
+    --accent: #E5A9CB; 
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #F3DEEA;
+    --input: #F3DEEA;
+    --ring: #C988AD;
+    --radius: 0.75rem;
+  }
+  
+  /* THEME 07 - DEEP FOREST (Optional extra for 7 themes) */
+  .theme-deep-forest {
+    --background: #1C2B23; /* Deep green */
+    --foreground: #F2F7F4; 
+    --card: #283D33;
+    --card-foreground: #F2F7F4;
+    --popover: #283D33;
+    --popover-foreground: #F2F7F4;
+    --primary: #85B899; 
+    --primary-foreground: #1C2B23;
+    --secondary: #3D5A4C;
+    --secondary-foreground: #F2F7F4;
+    --muted: #3D5A4C;
+    --muted-foreground: #9DBFA9;
+    --accent: #A5D6B6; 
+    --accent-foreground: #1C2B23;
+    --destructive: #EF4444;
+    --destructive-foreground: #F2F7F4;
+    --success: #22C55E;
+    --success-foreground: #F2F7F4;
+    --border: #3D5A4C;
+    --input: #3D5A4C;
+    --ring: #85B899;
+    --radius: 0.75rem;
+  }
+
   * {
     @apply border-border;
   }
