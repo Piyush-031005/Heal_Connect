@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Search, Sparkles } from 'lucide-react';
+import { ArrowRight, Search, Sparkles, Flower2 } from 'lucide-react';
 import { useLayout } from '@/lib/layout-context';
 import ModalityWheel from '@/components/modality-wheel';
 
