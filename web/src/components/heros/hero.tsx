@@ -132,11 +132,6 @@ function OrganicHero() {
         <path d="M0,100 Q50,0 100,100 Z" fill="currentColor" />
       </svg>
       
-      {/* Modality Wheel Arc at Top Center */}
-      <div className="absolute top-[-400px] left-1/2 -translate-x-1/2 opacity-90 z-20 pointer-events-auto">
-        <ModalityWheel />
-      </div>
-
       <div className="container mx-auto px-6 relative z-10 text-center mt-12 pointer-events-none">
         <div className="pointer-events-auto">
           <div className="flex justify-center mb-8">
@@ -167,51 +162,68 @@ function OrganicHero() {
   );
 }
 
-// --- MINIMALIST LAYOUT HERO (Clean) ---
+// --- MINIMALIST LAYOUT HERO (Clean & Imagery Focused) ---
 function MinimalistHero() {
   return (
-    <section className="relative pt-40 pb-32 bg-background min-h-[85vh] flex flex-col items-center justify-center text-center">
-      <div className="container mx-auto px-6 max-w-4xl">
-        <h1 className="text-5xl md:text-7xl font-sans font-light tracking-tight text-foreground mb-8">
-          Wellness, <span className="font-semibold text-primary">Simplified.</span>
-        </h1>
-        <p className="text-lg md:text-xl text-muted-foreground font-light mb-12 max-w-2xl mx-auto">
-          Connect with elite practitioners to heal your mind, body, and energy in a space free of distractions.
-        </p>
-        <Link href="/practitioners">
-          <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 rounded-none px-12 h-14 uppercase tracking-widest text-xs font-bold transition-all">
-            Find Your Expert
-          </Button>
-        </Link>
+    <section className="relative pt-32 pb-24 bg-background min-h-[85vh] flex items-center">
+      <div className="container mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-2xl">
+            <h1 className="text-5xl md:text-7xl font-sans font-light tracking-tight text-foreground mb-8 leading-[1.1]">
+              Healing, <br /><span className="font-semibold text-primary">Elevated.</span>
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground font-light mb-12">
+              Connect with elite practitioners to heal your mind, body, and energy. Experience the power of crystals, tarot, and holistic therapies.
+            </p>
+            <Link href="/practitioners">
+              <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 rounded-none px-12 h-14 uppercase tracking-widest text-xs font-bold transition-all">
+                Discover Your Path
+              </Button>
+            </Link>
+          </div>
+          <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
+            <Image 
+              src="https://images.unsplash.com/photo-1515023677547-593d7638cbd6?auto=format&fit=crop&q=80" 
+              alt="Healing Crystals" 
+              fill 
+              className="object-cover hover:scale-105 transition-transform duration-1000"
+            />
+            <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
-// --- MODERN GLOW LAYOUT HERO (Neon) ---
+// --- MODERN GLOW LAYOUT HERO (Mystic Imagery) ---
 function ModernGlowHero() {
   return (
-    <section className="relative overflow-hidden pt-40 pb-32 bg-[#090514] min-h-[90vh] flex items-center border-b border-primary/20">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(214,180,107,0.15)_0%,transparent_70%)]" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] mix-blend-screen" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[100px] mix-blend-screen" />
+    <section className="relative overflow-hidden pt-32 pb-32 bg-card min-h-[90vh] flex items-center border-b border-border">
+      {/* Background Image instead of neon glow */}
+      <div className="absolute inset-0 z-0">
+        <Image 
+          src="https://images.unsplash.com/photo-1632516482181-427c3f3ab654?auto=format&fit=crop&q=80" 
+          alt="Tarot and Mystic Aesthetic" 
+          fill 
+          className="object-cover opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
+      </div>
       
       <div className="container mx-auto px-6 relative z-10 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary mb-8 backdrop-blur-md">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-          </span>
-          <span className="text-xs uppercase tracking-widest font-bold">Live Sessions Available</span>
+        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary/20 bg-background/50 backdrop-blur-md text-primary mb-8 shadow-sm">
+          <Sparkles className="w-4 h-4" />
+          <span className="text-xs uppercase tracking-widest font-bold">Unveil The Future</span>
         </div>
-        <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-primary/80 to-accent mb-8">
-          Awaken Your Potential
+        <h1 className="text-6xl md:text-8xl font-serif font-medium tracking-tight text-foreground mb-8 drop-shadow-sm">
+          Awaken Your Spirit
         </h1>
-        <p className="text-xl text-white/60 mb-12 max-w-2xl mx-auto font-medium">
-          The most vibrant community of modern mystics, healers, and guides.
+        <p className="text-xl text-foreground/70 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+          The most vibrant community of modern mystics, healers, and spiritual guides.
         </p>
         <Link href="/practitioners">
-          <Button size="lg" className="bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground rounded-full px-12 h-14 text-lg font-bold transition-all shadow-[0_0_30px_rgba(214,180,107,0.3)] hover:shadow-[0_0_50px_rgba(214,180,107,0.5)] border border-primary/50">
+          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-12 h-14 text-lg font-medium transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
             Start Journey
           </Button>
         </Link>
