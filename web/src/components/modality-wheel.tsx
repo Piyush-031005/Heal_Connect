@@ -186,21 +186,17 @@ export default function ModalityWheel() {
 
       {/* Center Minimal Focus Point */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-        <div className="w-56 h-56 rounded-full flex flex-col items-center justify-center relative bg-background/50 backdrop-blur-sm border border-primary/20 shadow-xl">
+        <div className="w-64 h-64 rounded-full flex flex-col items-center justify-center relative bg-background/50 backdrop-blur-sm border border-primary/20 shadow-xl overflow-hidden">
           {/* Subtle center glow */}
-          <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(214,180,107,0.08)_0%,transparent_70%)] animate-pulse" style={{ animationDuration: '4s' }} />
+          <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(214,180,107,0.15)_0%,transparent_70%)] animate-pulse" style={{ animationDuration: '4s' }} />
           
-          <div className="relative z-10 flex flex-col items-center text-center px-4">
-            <span className="text-primary/60 uppercase tracking-widest text-[10px] font-bold mb-3">Explore Your Path</span>
-            <div className="w-20 h-20 rounded-full border border-primary/30 flex items-center justify-center mb-3 bg-white/5 backdrop-blur-xl shadow-inner overflow-hidden">
-              <img src="/logo.png" alt="HealConnect Logo" className="w-16 h-16 object-contain mix-blend-screen opacity-90 scale-110" />
-            </div>
-            <span className="font-serif text-2xl font-medium text-foreground tracking-wide">HealConnect</span>
+          <div className="relative z-10 flex items-center justify-center w-full h-full p-6">
+            <img src="/logo.png" alt="Main Logo" className="w-full h-full object-contain mix-blend-screen opacity-90 drop-shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
           </div>
           
           {/* Minimal outer rings */}
-          <div className="absolute inset-[-10px] border-[1px] border-primary/20 rounded-full animate-[spin_60s_linear_infinite_reverse]" />
-          <div className="absolute inset-[-20px] border-[1px] border-dashed border-accent/10 rounded-full animate-[spin_40s_linear_infinite]" />
+          <div className="absolute inset-[4px] border-[1px] border-primary/20 rounded-full animate-[spin_60s_linear_infinite_reverse]" />
+          <div className="absolute inset-[12px] border-[1px] border-dashed border-accent/20 rounded-full animate-[spin_40s_linear_infinite]" />
         </div>
       </div>
     </div>

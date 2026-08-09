@@ -20,8 +20,8 @@ function PrimaryHero() {
         <ModalityWheel />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-3xl">
+      <div className="container mx-auto px-6 relative z-10 pointer-events-none">
+        <div className="max-w-3xl pointer-events-auto">
           <div className="flex items-center gap-3 mb-6">
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-xs tracking-[0.25em] uppercase text-primary font-bold">Align Your Wellness</span>
@@ -137,27 +137,31 @@ function OrganicHero() {
         <ModalityWheel />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 text-center mt-12">
-        <div className="flex justify-center mb-8">
-          <div className="w-24 h-24 bg-primary/10 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] flex items-center justify-center text-primary animate-[spin_10s_linear_infinite]">
-            <Flower2 className="w-10 h-10 animate-[spin_10s_linear_infinite_reverse]" />
+      <div className="container mx-auto px-6 relative z-10 text-center mt-12 pointer-events-none">
+        <div className="pointer-events-auto">
+          <div className="flex justify-center mb-8">
+            <div className="w-24 h-24 bg-primary/10 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] flex items-center justify-center text-primary animate-[spin_10s_linear_infinite]">
+              <Flower2 className="w-10 h-10 animate-[spin_10s_linear_infinite_reverse]" />
+            </div>
           </div>
         </div>
         
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-medium tracking-tight leading-tight mb-8 text-foreground max-w-5xl mx-auto">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-medium tracking-tight leading-tight mb-8 text-foreground max-w-5xl mx-auto pointer-events-auto">
           Heal your mind, body <br />
           <span className="text-primary italic">& energy.</span>
         </h1>
         
-        <p className="text-xl text-foreground/80 mb-12 max-w-2xl mx-auto font-light">
+        <p className="text-xl text-foreground/80 mb-12 max-w-2xl mx-auto font-light pointer-events-auto">
           Join a global community dedicated to healing, growth and transformation. Find your perfect practitioner today.
         </p>
         
-        <Link href="/practitioners">
-          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 h-14 text-lg rounded-full font-medium transition-all shadow-xl shadow-primary/20">
-            Join HealConnect Today
-          </Button>
-        </Link>
+        <div className="pointer-events-auto">
+          <Link href="/practitioners">
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 h-14 text-lg rounded-full font-medium transition-all shadow-xl shadow-primary/20">
+              Join HealConnect Today
+            </Button>
+          </Link>
+        </div>
       </div>
     </section>
   );
