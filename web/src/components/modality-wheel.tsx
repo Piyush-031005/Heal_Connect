@@ -134,8 +134,8 @@ export default function ModalityWheel() {
               >
                 {/* Counter-rotate group to keep upright */}
                 <g style={{ animation: 'spin 120s linear infinite reverse', animationPlayState: playState }}>
-                  {/* Invisible hit area */}
-                  <circle cx="0" cy="0" r="45" fill="transparent" />
+                  {/* Invisible hit area - increased size for easier hover */}
+                  <circle cx="0" cy="0" r="60" fill="transparent" pointerEvents="all" />
                   
                   {/* Node Background */}
                   <circle 

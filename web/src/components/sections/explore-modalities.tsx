@@ -31,10 +31,11 @@ export function ExploreModalities() {
             <div 
               key={mod.id} 
               id={mod.id} 
-              className="group relative bg-card hover:bg-primary/5 rounded-2xl p-8 border border-border hover:border-primary/30 transition-all duration-300 text-center flex flex-col items-center"
+              className="group relative bg-card hover:bg-primary/5 rounded-2xl p-8 border border-border hover:border-primary/30 transition-all duration-300 text-center flex flex-col items-center shadow-sm hover:shadow-md"
             >
-              <div className="w-24 h-24 rounded-full bg-background border border-primary/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary/20 group-hover:text-primary transition-all duration-500 shadow-sm overflow-hidden">
-                <img src={mod.image} alt={mod.name} className="w-16 h-16 object-contain mix-blend-screen opacity-90 group-hover:opacity-100 transition-opacity" />
+              {/* Dark container is required for mix-blend-screen to correctly remove the black background of the images without washing out the colors on light themes */}
+              <div className="w-24 h-24 rounded-full bg-[#090514] border border-primary/30 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(214,180,107,0.3)] transition-all duration-500 overflow-hidden relative">
+                <img src={mod.image} alt={mod.name} className="w-20 h-20 object-contain mix-blend-screen opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-md" />
               </div>
               <h3 className="text-xl font-bold text-foreground mb-3">{mod.name}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1">
