@@ -47,23 +47,22 @@ export default function ZodiacHoroscope() {
 
         {/* Horizontal Zodiac Selector */}
         <div className="flex overflow-x-auto hide-scrollbar gap-4 mb-12 pb-4 px-2 snap-x">
-          {ZODIACS.map((zodiac) => {
+          {ZODIACS.map((zodiac, index) => {
             const isActive = activeZodiac.id === zodiac.id;
             return (
               <button
                 key={zodiac.id}
                 onClick={() => setActiveZodiac(zodiac)}
-                className={`flex items-center gap-3 px-5 py-3 rounded-xl border transition-all shrink-0 snap-start
+                className={`flex items-center gap-3 px-5 py-2.5 rounded-full border transition-all shrink-0 snap-start
                   ${isActive 
                     ? 'border-amber-300 bg-amber-50 shadow-sm' 
                     : 'border-border/50 bg-card hover:border-primary/30 hover:shadow-sm'
                   }`}
               >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-white ${isActive ? 'bg-amber-500' : 'bg-purple-500'}`}>
-                  {/* Placeholder for actual zodiac icon, using first letter for now or an emoji */}
-                  <span className="text-sm font-serif font-bold">{zodiac.name[0]}</span>
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center overflow-hidden border-2 ${isActive ? 'border-amber-500 shadow-md' : 'border-transparent'}`}>
+                  <img src={`/zodiacs/zodiac_${index + 1}.jpg`} alt={zodiac.name} className="w-full h-full object-cover" />
                 </div>
-                <div className="flex flex-col text-left">
+                <div className="flex flex-col text-left pr-2">
                   <span className={`text-sm font-bold ${isActive ? 'text-amber-700' : 'text-foreground'}`}>
                     {zodiac.name}
                   </span>
