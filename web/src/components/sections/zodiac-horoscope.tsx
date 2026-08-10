@@ -89,9 +89,7 @@ export default function ZodiacHoroscope() {
                 >
                   <div className={`relative flex flex-col items-center gap-2 ${isActive ? 'drop-shadow-[0_0_20px_rgba(244,114,182,0.6)]' : ''}`}>
                     <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden border-2 transition-colors duration-500 ${isActive ? 'border-pink-400 shadow-[0_0_30px_rgba(244,114,182,0.6)]' : 'border-indigo-500/20 group-hover:border-indigo-400'}`}>
-                      <img src={zodiac.image} alt={zodiac.name} className="w-full h-full object-cover" />
-                      {/* Glow overlay */}
-                      <div className="absolute inset-0 bg-indigo-900/40 mix-blend-overlay transition-opacity duration-500" style={{ opacity: isActive ? 0 : 1 }} />
+                      <img src={zodiac.image} alt={zodiac.name} className="w-full h-full object-cover mix-blend-screen" />
                     </div>
                     {/* Only show names for front-facing items to avoid clutter */}
                     <div className={`absolute top-full mt-2 text-center transition-opacity duration-300 ${depth > 0.8 || isActive ? 'opacity-100' : 'opacity-0'}`}>
@@ -115,8 +113,8 @@ export default function ZodiacHoroscope() {
             {/* Left Content */}
             <div className="flex-1">
               <div className="flex items-center gap-6 mb-8">
-                <div className="w-20 h-20 rounded-full border-2 border-pink-400/50 overflow-hidden shadow-[0_0_30px_rgba(244,114,182,0.2)]">
-                  <img src={`/zodiacs/zodiac_${ZODIACS.findIndex(z => z.id === activeZodiac.id) + 1}.jpg`} alt={activeZodiac.name} className="w-full h-full object-cover" />
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden border border-border/50 shrink-0">
+                  <img src={activeZodiac.image} alt={activeZodiac.name} className="w-full h-full object-cover mix-blend-screen" />
                 </div>
                 <div>
                   <h3 className="text-4xl font-serif font-bold text-white mb-1">{activeZodiac.name}</h3>
