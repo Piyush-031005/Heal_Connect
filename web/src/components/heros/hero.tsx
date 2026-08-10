@@ -386,27 +386,25 @@ function Layout2Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Right Side: Intricate Zodiac Artwork */}
+        {/* Right Side: Optical Wheel & Artwork */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full lg:w-1/2 relative flex justify-center lg:justify-end"
+          className="w-full lg:w-1/2 relative flex justify-center lg:justify-end h-[600px] lg:h-[800px] items-center"
         >
           {/* Subtle glow behind image */}
           <div className="absolute inset-0 bg-primary/20 rounded-full blur-[100px] -z-10 animate-pulse" />
           
-          <div className="relative w-[300px] h-[450px] md:w-[400px] md:h-[600px] lg:w-[500px] lg:h-[750px] hover:scale-105 transition-transform duration-1000 ease-out">
+          <div className="absolute right-[-20%] md:right-[-10%] top-1/2 -translate-y-1/2 h-[700px] w-[700px] md:h-[850px] md:w-[850px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center transform-style-3d">
+            <OpticalWheel />
+          </div>
+
+          <div className="absolute top-10 right-10 w-[200px] h-[300px] md:w-[250px] md:h-[350px] opacity-40 hover:opacity-100 transition-opacity duration-700 z-0 mix-blend-multiply">
             <img 
               src="/zodiac-masterpiece.jpg" 
-              alt="Intricate Zodiac Masterpiece" 
-              className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-screen drop-shadow-2xl"
-              onError={(e) => {
-                // Fallback styling if image is missing
-                const target = e.target as HTMLImageElement;
-                target.src = "https://images.unsplash.com/photo-1532968961962-8a0cb3a2d4f5?auto=format&fit=crop&q=80";
-                target.className = "w-full h-full object-cover rounded-[100px] opacity-80 border-4 border-primary/20";
-              }}
+              alt="Zenauraa" 
+              className="w-full h-full object-contain"
             />
           </div>
         </motion.div>

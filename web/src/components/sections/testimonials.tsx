@@ -1,27 +1,56 @@
 'use client';
 
+import React, { useRef } from 'react';
 import { useLang } from '@/lib/lang-context';
 import { TESTIMONIALS } from '@/lib/constants';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 export function Testimonials() {
   const { t } = useLang();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = 400; // card width approx + gap
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <section className="py-24 bg-card relative z-10 border-t border-border">
       <div className="container mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading font-medium mb-4 text-foreground">
-            {t.testimonialTitle || "Stories of Healing"}
-          </h2>
-          <div className="w-12 h-0.5 bg-primary/40 mx-auto mb-6" />
-          <p className="text-muted-foreground text-lg">
-            {t.testimonialSubtext || "Real experiences from our global community of seekers."}
-          </p>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 max-w-7xl mx-auto">
+          <div className="max-w-2xl">
+            <h2 className="text-4xl md:text-5xl font-heading font-medium mb-4 text-foreground">
+              {t.testimonialTitle || "Stories of Healing"}
+            </h2>
+            <div className="w-12 h-0.5 bg-primary/40 mb-6" />
+            <p className="text-muted-foreground text-lg">
+              {t.testimonialSubtext || "Real experiences from our global community of seekers."}
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="icon" onClick={() => scroll('left')} className="rounded-full w-12 h-12 border-border/50 hover:bg-primary/5">
+              <ArrowRight className="w-5 h-5 rotate-180 text-foreground" />
+            </Button>
+            <Button variant="outline" size="icon" onClick={() => scroll('right')} className="rounded-full w-12 h-12 border-border/50 hover:bg-primary/5">
+              <ArrowRight className="w-5 h-5 text-foreground" />
+            </Button>
+          </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div 
+          ref={scrollRef}
+          className="flex overflow-x-auto gap-8 pb-8 snap-x snap-mandatory scroll-smooth hide-scrollbar max-w-7xl mx-auto"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
           {TESTIMONIALS.map((testi, idx) => (
-            <div key={idx} className="bg-background rounded-3xl p-8 border border-border shadow-sm hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-500 group flex flex-col">
+            <div key={idx} className="w-[350px] md:w-[400px] shrink-0 snap-start bg-background rounded-3xl p-8 border border-border shadow-sm hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-500 group flex flex-col">
               <div className="flex gap-1 mb-6 text-primary">
                 {[1, 2, 3, 4, 5].map(s => (
                   <svg key={s} className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 20 20">
