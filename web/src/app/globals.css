@@ -273,6 +273,32 @@
     --radius: 0.75rem;
   }
 
+  /* THEME 09 - LAYOUT 2 (Sky Blue Celestial) */
+  .theme-layout-2 {
+    --background: #F8FCFE; 
+    --foreground: #12527F; 
+    --card: #FFFFFF;
+    --card-foreground: #12527F;
+    --popover: #FFFFFF;
+    --popover-foreground: #12527F;
+    --primary: #1A92C6; /* Main Blue */
+    --primary-foreground: #FFFFFF;
+    --secondary: #CDE9F4; /* Soft Sky */
+    --secondary-foreground: #17619A;
+    --muted: #EDF8FC; /* Very Light Blue */
+    --muted-foreground: #63BFE4; /* Sky Blue */
+    --accent: #20A6DC; /* Bright Blue */
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #CDE9F4;
+    --input: #CDE9F4;
+    --ring: #1A92C6;
+    --radius: 0.75rem;
+  }
+
   * {
     @apply border-border;
   }

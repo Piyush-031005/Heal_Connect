@@ -316,10 +316,110 @@ function ZenAlignHero() {
   );
 }
 
+// --- LAYOUT 2 HERO (Sky Blue Celestial) ---
+function Layout2Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  
+  return (
+    <section 
+      ref={containerRef}
+      className="relative pt-32 pb-40 lg:pb-56 bg-background min-h-[100vh] flex flex-col items-center justify-center border-b border-border/50 overflow-hidden"
+    >
+      
+      {/* Soft glowing ambient backgrounds */}
+      <motion.div style={{ y: yBg }} className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(99,191,228,0.15)_0%,transparent_70%)] pointer-events-none" />
+      <motion.div style={{ y: yBg }} className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(32,166,220,0.1)_0%,transparent_70%)] pointer-events-none" />
+
+      <div className="container mx-auto px-6 relative z-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+        
+        {/* Left Side: Typography & Search */}
+        <motion.div 
+          style={{ y: yText }} 
+          className="w-full lg:w-1/2 flex flex-col items-start text-left"
+        >
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary mb-6 shadow-sm">
+              <Sparkles className="w-4 h-4" />
+              <span className="text-xs uppercase tracking-widest font-bold">Awaken Your Destiny</span>
+            </div>
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-sans font-bold tracking-tighter text-foreground mb-6 leading-[1.05]">
+              Discover <br />
+              <span className="text-primary font-serif italic font-medium">Cosmic Harmony.</span>
+            </h1>
+          </motion.div>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-lg md:text-xl text-foreground/80 mb-10 font-medium leading-relaxed font-sans max-w-lg"
+          >
+            Connect with vetted spiritual guides, astrologers, and energy healers to align your inner world and outer reality.
+          </motion.p>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-center bg-card rounded-full p-2 w-full max-w-md shadow-xl border border-primary/20 transition-transform duration-300 hover:shadow-2xl"
+          >
+            <Search className="w-5 h-5 text-primary ml-4 mr-2" />
+            <input 
+              type="text" 
+              placeholder="Search by specialty, service or name" 
+              className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground font-sans font-medium"
+            />
+            <Button className="bg-primary hover:bg-primary-dark text-white rounded-full px-8 h-12 font-bold font-sans transition-all">
+              Search
+            </Button>
+          </motion.div>
+        </motion.div>
+
+        {/* Right Side: Intricate Zodiac Artwork */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full lg:w-1/2 relative flex justify-center lg:justify-end"
+        >
+          {/* Subtle glow behind image */}
+          <div className="absolute inset-0 bg-primary/20 rounded-full blur-[100px] -z-10 animate-pulse" />
+          
+          <div className="relative w-[300px] h-[450px] md:w-[400px] md:h-[600px] lg:w-[500px] lg:h-[750px] hover:scale-105 transition-transform duration-1000 ease-out">
+            <img 
+              src="/zodiac-masterpiece.jpg" 
+              alt="Intricate Zodiac Masterpiece" 
+              className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-screen drop-shadow-2xl"
+              onError={(e) => {
+                // Fallback styling if image is missing
+                const target = e.target as HTMLImageElement;
+                target.src = "https://images.unsplash.com/photo-1532968961962-8a0cb3a2d4f5?auto=format&fit=crop&q=80";
+                target.className = "w-full h-full object-cover rounded-[100px] opacity-80 border-4 border-primary/20";
+              }}
+            />
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 // --- MAIN EXPORT ---
 export default function Hero() {
   const { layout } = useLayout();
   
+  if (layout === 'layout-2') return <Layout2Hero />;
   if (layout === 'new-design-1') return <ZenAlignHero />;
   if (layout === 'editorial') return <EditorialHero />;
   if (layout === 'organic') return <OrganicHero />;
