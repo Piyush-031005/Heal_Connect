@@ -54,7 +54,7 @@ export default function ExploreModalities() {
               {/* Massive Image Container */}
               <div className="w-40 h-40 rounded-full bg-primary/[0.03] border-4 border-primary/10 flex items-center justify-center mb-6 group-hover:scale-[1.15] transition-transform duration-700 shadow-xl relative overflow-hidden">
                 <div className="absolute inset-2 border border-dashed border-primary/30 rounded-full animate-[spin_30s_linear_infinite]" />
-                <img src={mod.image} alt={mod.name} className="w-full h-full object-cover rounded-full mix-blend-multiply" />
+                <img src={`${mod.image}?v=2`} alt={mod.name} className="w-full h-full object-cover rounded-full mix-blend-multiply" />
               </div>
               <h3 className="text-xl font-medium text-foreground mb-3">{mod.name}</h3>
               <div className="w-8 h-0.5 bg-primary/20 rounded-full mb-4 group-hover:w-16 transition-all duration-300" />
