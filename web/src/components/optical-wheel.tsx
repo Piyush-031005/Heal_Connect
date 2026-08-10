@@ -143,31 +143,31 @@ export default function OpticalWheel() {
                     <circle cx="0" cy="0" r="55" fill="transparent" pointerEvents="all" />
                     
                     {/* Button Background - Changed to light theme */}
-                    <circle cx="0" cy="0" r="40" className="fill-white stroke-primary/30 transition-all duration-300 shadow-xl" strokeWidth={isHovered ? "3" : "1.5"} style={{ filter: 'drop-shadow(0px 8px 24px rgba(78,89,194,0.2))' }} />
+                    <circle cx="0" cy="0" r="55" className="fill-white stroke-primary/30 transition-all duration-300 shadow-xl" strokeWidth={isHovered ? "4" : "2"} style={{ filter: 'drop-shadow(0px 8px 24px rgba(78,89,194,0.2))' }} />
                     
                     {/* Glowing Aura on Hover */}
-                    <circle cx="0" cy="0" r="48" className="fill-transparent stroke-primary/0 group-hover:stroke-primary/40 transition-all duration-300 blur-[2px]" strokeWidth="4" />
+                    <circle cx="0" cy="0" r="65" className="fill-transparent stroke-primary/0 group-hover:stroke-primary/40 transition-all duration-300 blur-[2px]" strokeWidth="4" />
                     
                     {/* Outer animated dots on hover */}
                     <g className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ animation: 'spin 10s linear infinite', transformOrigin: '0px 0px' }}>
                       {[0, 1, 2, 3].map((d) => (
-                        <circle key={d} cx={44 * Math.cos(d * Math.PI/2)} cy={44 * Math.sin(d * Math.PI/2)} r="3" className="fill-primary" />
+                        <circle key={d} cx={60 * Math.cos(d * Math.PI/2)} cy={60 * Math.sin(d * Math.PI/2)} r="4" className="fill-primary" />
                       ))}
                     </g>
 
                     {/* Image */}
                     <image 
                       href={modality.image} 
-                      x="-35" 
-                      y="-35" 
-                      width="70" 
-                      height="70" 
+                      x="-45" 
+                      y="-45" 
+                      width="90" 
+                      height="90" 
                       className={`transition-all duration-300 ${isHovered ? 'scale-110 drop-shadow-xl' : 'opacity-95'}`}
                       /* Removed mixBlendMode screen so the images show fully colored */
                     />
 
                     {/* Node Text Label (Floating Button Style) */}
-                    <foreignObject x="-60" y="55" width="120" height="40" className={`pointer-events-none overflow-visible transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+                    <foreignObject x="-60" y="70" width="120" height="40" className={`pointer-events-none overflow-visible transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
                       <div className="w-full flex justify-center">
                         <span className="bg-white border border-primary/20 text-primary text-xs font-bold px-4 py-2 rounded-full shadow-lg whitespace-nowrap">
                           {modality.name}

@@ -9,6 +9,9 @@ import { AiExpertMatching } from '@/components/sections/ai-expert-matching';
 import { FeaturedExperts } from '@/components/sections/featured-experts';
 import { TrustLayer } from '@/components/sections/trust-layer';
 import { Testimonials } from '@/components/sections/testimonials';
+import ZodiacHoroscope from '@/components/sections/zodiac-horoscope';
+import PricingSection from '@/components/sections/pricing';
+import FaqSection from '@/components/sections/faq';
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
@@ -39,11 +42,20 @@ export default function LandingPage() {
         {/* 05 - Explore All Modalities */}
         <ExploreModalities />
 
-        {/* 06 - How HealConnect Works */}
+        {/* 06 - Zodiac Horoscope */}
+        <ZodiacHoroscope />
+
+        {/* 07 - How HealConnect Works */}
         <HowItWorks />
 
-        {/* 07 - Testimonials / Global Community */}
+        {/* 08 - Pricing */}
+        <PricingSection />
+
+        {/* 09 - Testimonials / Global Community */}
         <Testimonials />
+
+        {/* 10 - FAQ Section */}
+        <FaqSection />
       </main>
 
       {/* 08 - FOOTER */}

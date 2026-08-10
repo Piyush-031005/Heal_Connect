@@ -90,49 +90,80 @@ export function FeaturedExperts() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {EXPERTS.map((expert) => (
-            <div key={expert.id} className="bg-background rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-lg hover:border-primary/40 transition-all duration-300 flex flex-col group p-6">
-              <div className="relative w-32 h-32 mx-auto mb-6 overflow-hidden rounded-full border-4 border-primary/20 bg-[#F0E8F8]">
-                <img 
-                  src={expert.image} 
-                  alt={expert.name}
-                  className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-background/95 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 shadow-md border border-border">
-                  <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                  <span className="text-xs font-bold text-foreground">{expert.rating}</span>
+            <div key={expert.id} className="bg-card rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group p-5 relative overflow-hidden">
+              
+              {/* Top Choice / Tag (Simulating Astrotalk Tags) */}
+              <div className="absolute top-4 right-4 z-10">
+                <span className={`text-[10px] font-bold px-3 py-1 rounded-full text-white ${expert.id % 2 === 0 ? 'bg-amber-500' : 'bg-purple-500'}`}>
+                  {expert.id % 2 === 0 ? 'Top Choice' : 'Celebrity'}
+                </span>
+              </div>
+
+              {/* Profile Image & Name Row */}
+              <div className="flex items-center gap-4 mb-4 mt-2">
+                <div className="relative w-16 h-16 shrink-0">
+                  <div className="w-full h-full rounded-full border-2 border-primary/20 overflow-hidden bg-muted">
+                    <img 
+                      src={expert.image} 
+                      alt={expert.name}
+                      className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                  {/* Online Dot */}
+                  <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full z-10" />
+                </div>
+                
+                <div>
+                  <h3 className="text-lg font-bold text-foreground leading-none mb-1.5">{expert.name.split(' ')[0]}</h3>
+                  <div className="flex items-center gap-1.5 text-xs font-medium">
+                    <span className="text-amber-500 flex items-center">
+                      <Star className="w-3 h-3 fill-amber-500 mr-0.5" />
+                      {expert.rating}
+                    </span>
+                    <span className="text-muted-foreground">({expert.reviews}k+ orders)</span>
+                  </div>
                 </div>
               </div>
               
-              <div className="flex-1 flex flex-col text-center">
-                <h3 className="text-xl font-bold text-foreground mb-1">{expert.name}</h3>
-                <p className="text-primary text-sm font-medium mb-5">{expert.specialization}</p>
-                
-                <div className="flex flex-col gap-2.5 text-sm text-muted-foreground mb-6">
-                  <div className="flex items-center justify-center gap-2">
-                    <Clock className="w-4 h-4 text-primary/70" />
-                    <span>{expert.experience} Experience</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-2">
-                    <MapPin className="w-4 h-4 text-primary/70" />
-                    <span className="truncate">{expert.location}</span>
-                  </div>
-                </div>
+              {/* Specialties / Tags */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {expert.specialization.split(', ').map((spec, i) => (
+                  <span key={i} className="text-[10px] font-medium px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-100">
+                    {spec}
+                  </span>
+                ))}
+              </div>
 
-                <div className="mt-auto pt-5 border-t border-border/50 flex flex-col gap-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-medium text-success flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-                      {expert.availability}
-                    </span>
-                    <span className="text-sm font-bold text-foreground">{expert.price}</span>
-                  </div>
-                  <Button className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
-                    Book Consultation
-                  </Button>
+              {/* Details (Languages & Experience) */}
+              <div className="flex flex-col gap-1 text-xs text-muted-foreground mb-4 font-medium">
+                <p className="truncate">{expert.languages}</p>
+                <p>{expert.experience}</p>
+              </div>
+
+              {/* Price Row */}
+              <div className="mt-auto flex items-center justify-between mb-4 border-t border-border/50 pt-4">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-green-500" />
+                  <span className="text-xs font-medium text-green-600">Online</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-sm font-bold text-foreground">{expert.price.replace('$', '₹')}</span>
+                  <span className="text-xs text-muted-foreground">/min</span>
                 </div>
               </div>
+              
+              {/* Action Buttons */}
+              <div className="grid grid-cols-2 gap-3">
+                <Button className="w-full h-9 rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm font-semibold text-xs border border-amber-600">
+                  Chat
+                </Button>
+                <Button variant="outline" className="w-full h-9 rounded-lg border-border hover:bg-muted font-semibold text-xs">
+                  Call
+                </Button>
+              </div>
+
             </div>
           ))}
         </div>

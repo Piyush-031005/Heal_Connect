@@ -49,19 +49,22 @@ export default function ExploreModalities() {
             <div 
               key={mod.id} 
               id={mod.id} 
-              className="group bg-card rounded-3xl p-8 border border-primary/5 hover:border-primary/20 transition-all duration-300 text-center flex flex-col items-center shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] cursor-pointer"
+              className="group bg-card rounded-3xl p-6 border border-primary/5 hover:border-primary/20 transition-all duration-300 text-center flex flex-col items-center shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] cursor-pointer"
             >
-              <div className="w-28 h-28 rounded-full bg-primary/[0.03] border-4 border-primary/10 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-500 shadow-sm relative overflow-hidden">
-                <img src={mod.image} alt={mod.name} className="w-full h-full object-cover rounded-full" />
+              {/* Massive Image Container */}
+              <div className="w-40 h-40 rounded-full bg-primary/[0.03] border-4 border-primary/10 flex items-center justify-center mb-6 group-hover:scale-[1.15] transition-transform duration-700 shadow-xl relative overflow-hidden">
+                <div className="absolute inset-2 border border-dashed border-primary/30 rounded-full animate-[spin_30s_linear_infinite]" />
+                <img src={mod.image} alt={mod.name} className="w-full h-full object-cover rounded-full mix-blend-multiply" />
               </div>
-              <h3 className="text-lg font-medium text-foreground mb-3">{mod.name}</h3>
-              <div className="w-6 h-0.5 bg-primary/20 rounded-full mb-4 group-hover:w-12 transition-all duration-300" />
-              <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1 font-light">
+              <h3 className="text-xl font-medium text-foreground mb-3">{mod.name}</h3>
+              <div className="w-8 h-0.5 bg-primary/20 rounded-full mb-4 group-hover:w-16 transition-all duration-300" />
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1 font-light px-2">
                 {mod.desc}
               </p>
               
               <Link 
                 href={`/category/${mod.id}`}
+                prefetch={false}
                 className="text-primary font-medium text-sm flex items-center gap-2 group-hover:gap-3 transition-all opacity-80 group-hover:opacity-100"
               >
                 Explore <ArrowRight className="w-4 h-4" />
