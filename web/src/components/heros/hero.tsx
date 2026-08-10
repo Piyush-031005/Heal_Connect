@@ -238,9 +238,8 @@ function ZenAlignHero() {
   return (
     <section className="relative overflow-hidden pt-32 pb-24 bg-zen-hero min-h-[95vh] flex items-center border-b border-border/50">
       
-      {/* Floating magical orbs / blur blobs in background */}
-      <div className="absolute top-10 left-10 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none animate-pulse" style={{ animationDuration: '8s' }} />
-      <div className="absolute bottom-10 right-10 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] pointer-events-none animate-pulse" style={{ animationDuration: '10s' }} />
+      {/* Background radial gradient to give a subtle center light */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0%,transparent_100%)] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 items-center">

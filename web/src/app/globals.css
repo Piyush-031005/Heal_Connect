@@ -247,29 +247,29 @@
     --radius: 0.75rem;
   }
 
-  /* THEME 08 - ZEN ALIGN */
+  /* THEME 08 - ZEN ALIGN (Blue-focused) */
   .theme-zen-align {
-    --background: #ECE4FC; 
+    --background: #F0F2FA; 
     --foreground: #1C2058; 
-    --card: #F8F4FC;
+    --card: #FFFFFF;
     --card-foreground: #1C2058;
-    --popover: #F8F4FC;
+    --popover: #FFFFFF;
     --popover-foreground: #1C2058;
-    --primary: #6848B3; 
+    --primary: #4E59C2; /* The blue requested */
     --primary-foreground: #FFFFFF;
-    --secondary: #F0E8F8;
+    --secondary: #D0D0F8; /* Light blue */
     --secondary-foreground: #303060;
-    --muted: #D8D0F8;
-    --muted-foreground: #5C3CA8;
-    --accent: #4E59C2; 
+    --muted: #E2E2F8;
+    --muted-foreground: #6848B3;
+    --accent: #6848B3; 
     --accent-foreground: #FFFFFF;
     --destructive: #EF4444;
     --destructive-foreground: #FFFFFF;
     --success: #22C55E;
     --success-foreground: #FFFFFF;
-    --border: #D8D0F8;
-    --input: #D8D0F8;
-    --ring: #6848B3;
+    --border: #D0D0F8;
+    --input: #D0D0F8;
+    --ring: #4E59C2;
     --radius: 0.75rem;
   }
 

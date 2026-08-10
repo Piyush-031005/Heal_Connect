@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finger Mandala 🌀</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌀</text></svg>" />
+    <link rel="stylesheet" href="/src/mandala.css" />
+  </head>
+  <body>
+    <video id="webcam" playsinline muted></video>
+    <canvas id="stage"></canvas>
+
+    <nav id="modes">
+      <a href="./">🏠 Home</a>
+      <a href="board.html">✍️ Board</a>
+      <a href="mandala.html" class="cur">🌀 Mandala</a>
+      <a href="studio.html">🪄 Strange</a>
+    </nav>
+
+    <div id="controls">
+      <span class="clabel">🌀 Symmetry</span>
+      <button class="seg" data-sym="2">2</button>
+      <button class="seg active" data-sym="6">6</button>
+      <button class="seg" data-sym="8">8</button>
+      <button class="seg" data-sym="12">12</button>
+      <span class="sep"></span>
+      <button class="seg wide" id="audioBtn" data-on="1">🔊 Sound</button>
+    </div>
+
+    <div id="hud">
+      <h1>Finger Mandala</h1>
+      <p>Raise <b>both hands</b> — your index &amp; thumb tips become four glowing nodes woven into a mandala.
+         Curl or drop a finger and its threads dissolve · move to paint light and play the strings.</p>
+    </div>
+
+    <div id="gate">
+      <div class="gate-card">
+        <div class="gate-emoji">🌀</div>
+        <h2 id="gateTitle">Weave with your hands</h2>
+        <p id="gateMsg">Uses your webcam locally to track both hands — nothing leaves your device.</p>
+        <button id="startBtn">Enable camera &amp; begin</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/mandala.js"></script>
+  </body>
+</html>

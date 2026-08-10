@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Strange 🪄 — Air Studio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪄</text></svg>" />
+    <link rel="stylesheet" href="/src/studio.css" />
+  </head>
+  <body>
+    <video id="webcam" playsinline muted></video>
+    <canvas id="stage"></canvas>
+
+    <nav id="modes">
+      <a href="./">🏠 Home</a>
+      <a href="board.html">✍️ Board</a>
+      <a href="mandala.html">🌀 Mandala</a>
+      <a href="studio.html" class="cur">🪄 Strange</a>
+    </nav>
+
+    <button id="soundBtn" title="Sound on / off">🔊</button>
+
+    <div id="statuschip">
+      <span id="modeLabel">— raise a hand —</span>
+      <span id="foldLabel"></span>
+    </div>
+
+    <div id="depthmeter" title="How close your hand is">
+      <span class="dm-cap">near</span>
+      <div class="dm-track"><div id="dmFill"></div></div>
+      <span class="dm-cap">far</span>
+    </div>
+
+    <div id="hud">
+      <p><b>🪄 Raise a hand</b> and conjure a rune circle from your five fingers.<br />
+         <b>Open</b> to bloom · <b>fist</b> to collapse · snap ✊→🖐 to <b>cast a blast</b> · <b>twist your wrist</b> to spin · ✌️ raises a <b>shield</b>.<br />
+         <b>Two hands:</b> the circles link with a beam — bring them together to <b>fuse a portal</b>.</p>
+    </div>
+
+    <div id="debug">starting…</div>
+
+    <div id="gate">
+      <div class="gate-card">
+        <div class="gate-emoji">🪄</div>
+        <h2 id="gateTitle">Cast magic circles</h2>
+        <p id="gateMsg">Uses your webcam locally to track your hands — nothing leaves your device.</p>
+        <button id="startBtn">Enable camera &amp; begin</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/studio.js"></script>
+  </body>
+</html>
