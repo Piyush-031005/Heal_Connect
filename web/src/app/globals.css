@@ -35,6 +35,18 @@
   html {
     scroll-behavior: smooth;
   }
+
+  .bg-zen-gradient-135 {
+    background: linear-gradient(135deg, #5C3CA8, #6848B3, #4E59C2);
+  }
+
+  .bg-zen-gradient-90 {
+    background: linear-gradient(90deg, #5F3BA7 0%, #5745B1 50%, #4E59C2 100%);
+  }
+
+  .bg-zen-hero {
+    background: linear-gradient(135deg, #EDE5FC 0%, #ECE4FB 45%, #E8E0F8 100%);
+  }
 }
 
 @keyframes marquee {
@@ -232,6 +244,32 @@
     --border: #3D5A4C;
     --input: #3D5A4C;
     --ring: #85B899;
+    --radius: 0.75rem;
+  }
+
+  /* THEME 08 - ZEN ALIGN */
+  .theme-zen-align {
+    --background: #ECE4FC; 
+    --foreground: #1C2058; 
+    --card: #F8F4FC;
+    --card-foreground: #1C2058;
+    --popover: #F8F4FC;
+    --popover-foreground: #1C2058;
+    --primary: #6848B3; 
+    --primary-foreground: #FFFFFF;
+    --secondary: #F0E8F8;
+    --secondary-foreground: #303060;
+    --muted: #D8D0F8;
+    --muted-foreground: #5C3CA8;
+    --accent: #4E59C2; 
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #D8D0F8;
+    --input: #D8D0F8;
+    --ring: #6848B3;
     --radius: 0.75rem;
   }
 

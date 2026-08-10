@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Search, Sparkles, Flower2 } from 'lucide-react';
 import { useLayout } from '@/lib/layout-context';
 import ModalityWheel from '@/components/modality-wheel';
+import OpticalWheel from '@/components/optical-wheel';
 
 // --- PRIMARY LAYOUT HERO (Locked) ---
 function PrimaryHero() {
@@ -232,10 +233,71 @@ function ModernGlowHero() {
   );
 }
 
+// --- ZEN ALIGN LAYOUT HERO (New Design 1) ---
+function ZenAlignHero() {
+  return (
+    <section className="relative overflow-hidden pt-32 pb-24 bg-zen-hero min-h-[95vh] flex items-center border-b border-border/50">
+      
+      {/* Floating magical orbs / blur blobs in background */}
+      <div className="absolute top-10 left-10 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none animate-pulse" style={{ animationDuration: '8s' }} />
+      <div className="absolute bottom-10 right-10 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] pointer-events-none animate-pulse" style={{ animationDuration: '10s' }} />
+
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
+          
+          {/* Left Text Content */}
+          <div className="max-w-2xl text-center lg:text-left z-20">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-medium tracking-tight text-foreground mb-6 leading-[1.1] drop-shadow-sm">
+              Your Path to <br />
+              Wellness Begins Here
+            </h1>
+            <p className="text-lg md:text-xl text-foreground/80 mb-10 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+              Connect with trusted holistic health, astrological and wellness practitioners from around the world—all in one place.
+            </p>
+            
+            {/* Search Bar matching Zen Align reference */}
+            <div className="flex flex-col sm:flex-row items-center bg-card rounded-3xl sm:rounded-full p-2 max-w-xl mx-auto lg:mx-0 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-primary/10 transition-shadow hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] mb-6">
+              <div className="flex-1 flex items-center w-full px-4 py-2 sm:py-0">
+                <Search className="w-5 h-5 text-muted-foreground mr-3 shrink-0" />
+                <input 
+                  type="text" 
+                  placeholder="Search by specialty, service or name" 
+                  className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground min-w-0"
+                />
+              </div>
+              <Button className="w-full sm:w-auto bg-zen-gradient-135 hover:opacity-90 text-primary-foreground rounded-2xl sm:rounded-full px-8 h-12 font-medium transition-all shadow-md shadow-primary/20">
+                Search
+              </Button>
+            </div>
+            
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mt-8 text-sm text-muted-foreground">
+              <span className="font-medium text-foreground">Popular:</span>
+              <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary font-medium hover:bg-primary/20 cursor-pointer transition-colors">Astrologers</span>
+              <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary font-medium hover:bg-primary/20 cursor-pointer transition-colors">Energy Healing</span>
+              <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary font-medium hover:bg-primary/20 cursor-pointer transition-colors">Therapists</span>
+              <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary font-medium hover:bg-primary/20 cursor-pointer transition-colors">Yoga</span>
+            </div>
+          </div>
+
+          {/* Right Optical Wheel (Doctor Strange WebGL style) */}
+          <div className="relative h-[600px] w-full flex items-center justify-center z-10 opacity-90 lg:opacity-100 mt-12 lg:mt-0 lg:-ml-12 pointer-events-none lg:pointer-events-auto">
+            {/* The optical wheel overflows its container slightly for grandeur */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] scale-75 sm:scale-90 lg:scale-100 flex items-center justify-center pointer-events-auto">
+              <OpticalWheel />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // --- MAIN EXPORT ---
 export default function Hero() {
   const { layout } = useLayout();
   
+  if (layout === 'new-design-1') return <ZenAlignHero />;
   if (layout === 'editorial') return <EditorialHero />;
   if (layout === 'organic') return <OrganicHero />;
   if (layout === 'minimalist') return <MinimalistHero />;

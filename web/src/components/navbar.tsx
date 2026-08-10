@@ -343,6 +343,7 @@ export default function Navbar() {
               {themeOpen && (
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
+                    { code: 'theme-zen-align', label: 'Zen Align (Premium)' },
                     { code: 'theme-lavender-base', label: 'Lavender Base' },
                     { code: 'theme-lavender-light', label: 'Lavender Light' },
                     { code: 'theme-lavender-deep', label: 'Lavender Deep' },
@@ -361,6 +362,7 @@ export default function Navbar() {
                       }`}
                     >
                       <div className={`w-3.5 h-3.5 rounded-full ${
+                        t.code === 'theme-zen-align' ? 'bg-[#ECE4FC] border-[#6848B3]' :
                         t.code === 'theme-lavender-base' ? 'bg-[#F4EEFB] border-[#8A64B5]' :
                         t.code === 'theme-lavender-light' ? 'bg-[#FDFBFF] border-[#B298CE]' :
                         t.code === 'theme-lavender-deep' ? 'bg-[#4B2F6E] border-[#D1BDEB]' :
@@ -395,6 +397,7 @@ export default function Navbar() {
               {layoutOpen && (
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
+                    { code: 'new-design-1', label: '💜 New Design 1 (Zen)' },
                     { code: 'primary', label: '✦ Primary (Locked)' },
                     { code: 'editorial', label: '📰 Editorial (Magazine)' },
                     { code: 'organic', label: '🌿 Organic (Flow)' },
