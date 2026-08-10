@@ -5,18 +5,18 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 
 const ZODIACS = [
-  { id: 'aries', name: 'Aries', hindi: 'Mesh', date: 'Mar 21 - Apr 19' },
-  { id: 'taurus', name: 'Taurus', hindi: 'Vrishabha', date: 'Apr 20 - May 20' },
-  { id: 'gemini', name: 'Gemini', hindi: 'Mithun', date: 'May 21 - Jun 20' },
-  { id: 'cancer', name: 'Cancer', hindi: 'Karka', date: 'Jun 21 - Jul 22' },
-  { id: 'leo', name: 'Leo', hindi: 'Simha', date: 'Jul 23 - Aug 22' },
-  { id: 'virgo', name: 'Virgo', hindi: 'Kanya', date: 'Aug 23 - Sep 22' },
-  { id: 'libra', name: 'Libra', hindi: 'Tula', date: 'Sep 23 - Oct 22' },
-  { id: 'scorpio', name: 'Scorpio', hindi: 'Vrishchika', date: 'Oct 23 - Nov 21' },
-  { id: 'sagittarius', name: 'Sagittarius', hindi: 'Dhanu', date: 'Nov 22 - Dec 21' },
-  { id: 'capricorn', name: 'Capricorn', hindi: 'Makara', date: 'Dec 22 - Jan 19' },
-  { id: 'aquarius', name: 'Aquarius', hindi: 'Kumbha', date: 'Jan 20 - Feb 18' },
-  { id: 'pisces', name: 'Pisces', hindi: 'Meena', date: 'Feb 19 - Mar 20' },
+  { id: 'aries', name: 'Aries', hindi: 'Mesh', date: 'Mar 21 - Apr 19', image: '/new-zodiacs/aries.png' },
+  { id: 'taurus', name: 'Taurus', hindi: 'Vrishabha', date: 'Apr 20 - May 20', image: '/new-zodiacs/taurus.png' },
+  { id: 'gemini', name: 'Gemini', hindi: 'Mithun', date: 'May 21 - Jun 20', image: '/new-zodiacs/gemini.png' },
+  { id: 'cancer', name: 'Cancer', hindi: 'Karka', date: 'Jun 21 - Jul 22', image: '/new-zodiacs/cancer.png' },
+  { id: 'leo', name: 'Leo', hindi: 'Simha', date: 'Jul 23 - Aug 22', image: '/new-zodiacs/leoo.png' },
+  { id: 'virgo', name: 'Virgo', hindi: 'Kanya', date: 'Aug 23 - Sep 22', image: '/new-zodiacs/vigro.png' },
+  { id: 'libra', name: 'Libra', hindi: 'Tula', date: 'Sep 23 - Oct 22', image: '/new-zodiacs/libra.png' },
+  { id: 'scorpio', name: 'Scorpio', hindi: 'Vrishchika', date: 'Oct 23 - Nov 21', image: '/new-zodiacs/scorpio.png' },
+  { id: 'sagittarius', name: 'Sagittarius', hindi: 'Dhanu', date: 'Nov 22 - Dec 21', image: '/new-zodiacs/saggitarius.png' },
+  { id: 'capricorn', name: 'Capricorn', hindi: 'Makara', date: 'Dec 22 - Jan 19', image: '/new-zodiacs/capricon.png' },
+  { id: 'aquarius', name: 'Aquarius', hindi: 'Kumbha', date: 'Jan 20 - Feb 18', image: '/new-zodiacs/aqarius.png' },
+  { id: 'pisces', name: 'Pisces', hindi: 'Meena', date: 'Feb 19 - Mar 20', image: '/new-zodiacs/pices.png' },
 ];
 
 export default function ZodiacHoroscope() {
@@ -89,7 +89,7 @@ export default function ZodiacHoroscope() {
                 >
                   <div className={`relative flex flex-col items-center gap-2 ${isActive ? 'drop-shadow-[0_0_20px_rgba(244,114,182,0.6)]' : ''}`}>
                     <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden border-2 transition-colors duration-500 ${isActive ? 'border-pink-400 shadow-[0_0_30px_rgba(244,114,182,0.6)]' : 'border-indigo-500/20 group-hover:border-indigo-400'}`}>
-                      <img src={`/zodiacs/zodiac_${index + 1}.jpg`} alt={zodiac.name} className="w-full h-full object-cover" />
+                      <img src={zodiac.image} alt={zodiac.name} className="w-full h-full object-cover" />
                       {/* Glow overlay */}
                       <div className="absolute inset-0 bg-indigo-900/40 mix-blend-overlay transition-opacity duration-500" style={{ opacity: isActive ? 0 : 1 }} />
                     </div>

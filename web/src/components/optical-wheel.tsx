@@ -14,7 +14,7 @@ const MODALITIES = [
   { id: 'vastu', name: 'Vastu', image: '/12-modalities-v2/vastu.png' },
   { id: 'eft', name: 'EFT Tapping', image: '/12-modalities-v2/eft.png' },
   { id: 'spiritual', name: 'Spiritual Guide', image: '/12-modalities-v2/spiritual.png' },
-  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-v2/sound-v5.png' },
+  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-v2/sound-newest.png' },
 ];
 
 export default function OpticalWheel() {

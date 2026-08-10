@@ -245,29 +245,14 @@ function ZenAlignHero() {
     offset: ["start start", "end start"]
   });
 
-  const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
-  
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
-    setMousePosition({ x, y });
-  };
-
   // Parallax effects
   const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   const yText = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   
-  // 3D Tilt calculation based on mouse
-  const rotateX = (mousePosition.y - 0.5) * -20; // -10 to 10 degrees
-  const rotateY = (mousePosition.x - 0.5) * 20; // -10 to 10 degrees
-
   return (
     <section 
       ref={containerRef}
-      onMouseMove={handleMouseMove}
-      className="relative overflow-hidden pt-32 pb-24 bg-gradient-to-b from-[#F0F4FF] to-white min-h-[95vh] flex flex-col items-center justify-center border-b border-border/50 perspective-1000"
+      className="relative overflow-hidden pt-32 pb-48 bg-gradient-to-b from-[#F0F4FF] to-white min-h-[110vh] flex flex-col items-center justify-center border-b border-border/50"
     >
       
       {/* Background radial gradient to give a subtle center light */}
@@ -317,11 +302,9 @@ function ZenAlignHero() {
         </motion.div>
       </div>
 
-      {/* Right Optical Wheel (Doctor Strange WebGL style) with 3D Tilt */}
+      {/* Right Optical Wheel (Doctor Strange WebGL style) */}
       <motion.div 
         animate={{ 
-          rotateX, 
-          rotateY,
           translateY: '-50%' 
         }}
         transition={{ type: "spring", stiffness: 75, damping: 20 }}
