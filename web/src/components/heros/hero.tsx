@@ -308,7 +308,7 @@ function ZenAlignHero() {
           translateY: '-50%' 
         }}
         transition={{ type: "spring", stiffness: 75, damping: 20 }}
-        className="absolute right-[-25%] md:right-[-15%] top-[65%] md:top-[65%] h-[700px] w-[700px] md:h-[850px] md:w-[850px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center transform-style-3d"
+        className="absolute right-[-25%] md:right-[-15%] top-[45%] md:top-[45%] h-[700px] w-[700px] md:h-[850px] md:w-[850px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center transform-style-3d"
       >
         <OpticalWheel />
       </motion.div>

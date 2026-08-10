@@ -4,6 +4,7 @@ import { Star, MapPin, Languages, Clock, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 
 const EXPERTS = [
   {
@@ -74,10 +75,22 @@ const EXPERTS = [
 ];
 
 export function FeaturedExperts() {
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = 320; // card width + gap
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <section className="py-24 bg-card border-t border-border">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
             <h2 className="text-4xl md:text-5xl font-heading font-medium text-foreground mb-4">Featured Experts</h2>
             <div className="w-12 h-0.5 bg-primary/40" />
@@ -85,14 +98,28 @@ export function FeaturedExperts() {
               Connect with our highest-rated, verified practitioners worldwide.
             </p>
           </div>
-          <Link href="/practitioners" className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors">
-            View All Experts <ArrowRight className="w-4 h-4 ml-1" />
-          </Link>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="icon" onClick={() => scroll('left')} className="rounded-full w-10 h-10 border-border/50 hover:bg-primary/5">
+                <ArrowRight className="w-4 h-4 rotate-180 text-foreground" />
+              </Button>
+              <Button variant="outline" size="icon" onClick={() => scroll('right')} className="rounded-full w-10 h-10 border-border/50 hover:bg-primary/5">
+                <ArrowRight className="w-4 h-4 text-foreground" />
+              </Button>
+            </div>
+            <Link href="/practitioners" className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors bg-primary/10 px-4 py-2 rounded-full">
+              View All
+            </Link>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div 
+          ref={scrollRef}
+          className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scroll-smooth"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
           {EXPERTS.map((expert) => (
-            <div key={expert.id} className="bg-card rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group p-5 relative overflow-hidden">
+            <div key={expert.id} className="w-[300px] shrink-0 snap-start bg-card rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group p-5 relative overflow-hidden">
               
               {/* Top Choice / Tag (Simulating Astrotalk Tags) */}
               <div className="absolute top-4 right-4 z-10">
