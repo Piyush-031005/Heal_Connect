@@ -18,31 +18,23 @@ import {
 import Link from 'next/link';
 
 const MODALITIES = [
-  { id: 'astrology', name: 'Astrology', desc: 'Understand your cosmic patterns.', icon: Star },
-  { id: 'tarot', name: 'Tarot', desc: 'Explore intuitive guidance.', icon: GalleryVertical },
-  { id: 'palm-reading', name: 'Palm Reading', desc: 'Discover the story in your hands.', icon: Hand },
-  { id: 'face-reading', name: 'Face Reading', desc: 'Explore personality and patterns.', icon: UserRound },
-  { id: 'numerology', name: 'Numerology', desc: 'Uncover your numbers.', icon: Hash },
-  { id: 'energy-healing', name: 'Energy Healing', desc: 'Restore balance and wellbeing.', icon: Sparkles },
-  { id: 'meditation', name: 'Meditation', desc: 'Find calm and clarity.', icon: Flower2 },
-  { id: 'yoga', name: 'Yoga & Mindfulness', desc: 'Reconnect mind and body.', icon: Activity },
-  { id: 'vastu', name: 'Vastu & Space Energy', desc: 'Create harmony in your environment.', icon: Home },
-  { id: 'eft', name: 'EFT Tapping', desc: 'Release emotional blocks.', icon: Touchpad },
-  { id: 'spiritual', name: 'Spiritual Guidance', desc: 'Awaken your inner potential.', icon: Sun },
-  { id: 'sound-healing', name: 'Sound Healing', desc: 'Heal through frequencies.', icon: Radio },
+  { id: 'astrology', name: 'Astrology', desc: 'Understand your cosmic patterns.', image: '/12-modalities-v2/astrology.png' },
+  { id: 'tarot', name: 'Tarot', desc: 'Explore intuitive guidance.', image: '/12-modalities-v2/tarot.png' },
+  { id: 'palm-reading', name: 'Palm Reading', desc: 'Discover the story in your hands.', image: '/12-modalities-v2/palm.png' },
+  { id: 'face-reading', name: 'Face Reading', desc: 'Explore personality and patterns.', image: '/12-modalities-v2/face.png' },
+  { id: 'numerology', name: 'Numerology', desc: 'Uncover your numbers.', image: '/12-modalities-v2/numerology.png' },
+  { id: 'energy-healing', name: 'Energy Healing', desc: 'Restore balance and wellbeing.', image: '/12-modalities-v2/energy.png' },
+  { id: 'meditation', name: 'Meditation', desc: 'Find calm and clarity.', image: '/12-modalities-v2/meditation.png' },
+  { id: 'yoga', name: 'Yoga & Mindfulness', desc: 'Reconnect mind and body.', image: '/12-modalities-v2/yoga.png' },
+  { id: 'vastu', name: 'Vastu & Space Energy', desc: 'Create harmony in your environment.', image: '/12-modalities-v2/vastu.png' },
+  { id: 'eft', name: 'EFT Tapping', desc: 'Release emotional blocks.', image: '/12-modalities-v2/eft.png' },
+  { id: 'spiritual', name: 'Spiritual Guidance', desc: 'Awaken your inner potential.', image: '/12-modalities-v2/spiritual.png' },
+  { id: 'sound-healing', name: 'Sound Healing', desc: 'Heal through frequencies.', image: '/12-modalities-v2/sound.png' },
 ];
 
 export default function ExploreModalities() {
   return (
     <section className="py-24 bg-background border-b border-border/50 relative">
-      {/* Definitively inject gradient for SVGs */}
-      <svg width="0" height="0" className="absolute">
-        <linearGradient id="zenIconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop stopColor="#6848B3" offset="0%" />
-          <stop stopColor="#4E59C2" offset="100%" />
-        </linearGradient>
-      </svg>
-      
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-6 drop-shadow-sm">Explore by Category</h2>
@@ -59,10 +51,8 @@ export default function ExploreModalities() {
               id={mod.id} 
               className="group bg-card rounded-3xl p-8 border border-primary/5 hover:border-primary/20 transition-all duration-300 text-center flex flex-col items-center shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] cursor-pointer"
             >
-              <div className="w-24 h-24 rounded-full bg-primary/[0.03] border border-primary/10 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-500 shadow-inner relative overflow-hidden">
-                {/* Subtle outer dashed ring for intricate detail */}
-                <div className="absolute inset-2 border border-dashed border-primary/20 rounded-full animate-[spin_30s_linear_infinite]" />
-                <mod.icon className="w-12 h-12 stroke-[1.5px]" style={{ stroke: "url(#zenIconGradient)" }} />
+              <div className="w-28 h-28 rounded-full bg-primary/[0.03] border-4 border-primary/10 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-500 shadow-sm relative overflow-hidden">
+                <img src={mod.image} alt={mod.name} className="w-full h-full object-cover rounded-full" />
               </div>
               <h3 className="text-lg font-medium text-foreground mb-3">{mod.name}</h3>
               <div className="w-6 h-0.5 bg-primary/20 rounded-full mb-4 group-hover:w-12 transition-all duration-300" />
