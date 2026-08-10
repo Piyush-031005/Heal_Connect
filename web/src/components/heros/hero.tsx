@@ -317,6 +317,7 @@ function ZenAlignHero() {
 }
 
 // --- LAYOUT 2 HERO (Sky Blue Celestial) ---
+// --- LAYOUT 2 HERO (Sky Blue Celestial - Awwwards Level) ---
 function Layout2Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -324,95 +325,144 @@ function Layout2Hero() {
     offset: ["start start", "end start"]
   });
 
-  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
+  const yImage = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const yFloating1 = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
+  const yFloating2 = useTransform(scrollYProgress, [0, 1], ["0%", "60%"]);
   
   return (
     <section 
       ref={containerRef}
-      className="relative pt-32 pb-40 lg:pb-56 bg-background min-h-[100vh] flex flex-col items-center justify-center border-b border-border/50 overflow-hidden"
+      className="relative pt-32 pb-40 lg:pb-56 bg-background min-h-[110vh] flex flex-col items-center justify-center border-b border-border/50 overflow-hidden"
     >
-      
+      {/* Massive Background Parallax Text */}
+      <motion.div 
+        style={{ y: yText }}
+        className="absolute top-20 left-1/2 -translate-x-1/2 w-full text-center z-0 pointer-events-none select-none opacity-10 mix-blend-overlay"
+      >
+        <h1 className="text-[15vw] font-serif font-bold tracking-tighter text-primary leading-none whitespace-nowrap">
+          ZENAURAA
+        </h1>
+      </motion.div>
+
       {/* Soft glowing ambient backgrounds */}
-      <motion.div style={{ y: yBg }} className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(99,191,228,0.15)_0%,transparent_70%)] pointer-events-none" />
-      <motion.div style={{ y: yBg }} className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(32,166,220,0.1)_0%,transparent_70%)] pointer-events-none" />
+      <motion.div style={{ y: yBg }} className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(99,191,228,0.2)_0%,transparent_70%)] rounded-full blur-[100px] pointer-events-none" />
+      <motion.div style={{ y: yBg }} className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(32,166,220,0.15)_0%,transparent_70%)] rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="container mx-auto px-6 relative z-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+      <div className="container mx-auto px-6 relative z-20 mt-12 lg:mt-24">
         
-        {/* Left Side: Typography & Search */}
-        <motion.div 
-          style={{ y: yText }} 
-          className="w-full lg:w-1/2 flex flex-col items-start text-left"
-        >
+        {/* Asymmetrical Grid Layout */}
+        <div className="grid lg:grid-cols-12 gap-8 items-center relative">
+          
+          {/* Main Masterpiece Image (Centered / Right Bias) */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            style={{ y: yImage }}
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(20px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-8 lg:col-start-5 relative flex justify-center lg:justify-end z-10"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary mb-6 shadow-sm">
-              <Sparkles className="w-4 h-4" />
-              <span className="text-xs uppercase tracking-widest font-bold">Awaken Your Destiny</span>
-            </div>
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-sans font-bold tracking-tighter text-foreground mb-6 leading-[1.05]">
-              Discover <br />
-              <span className="text-primary font-serif italic font-medium">Zenauraa.</span>
-            </h1>
-          </motion.div>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg md:text-xl text-foreground/80 mb-10 font-medium leading-relaxed font-sans max-w-lg"
-          >
-            Connect with vetted spiritual guides, astrologers, and energy healers to align your inner world and outer reality.
-          </motion.p>
+            {/* Subtle glow behind image */}
+            <div className="absolute inset-0 bg-primary/30 rounded-full blur-[120px] -z-10 animate-[pulse_4s_ease-in-out_infinite]" />
+            
+            <motion.div 
+              animate={{ y: [0, -15, 0], rotate: [0, 1, 0] }}
+              transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+              className="relative w-full max-w-[500px] lg:max-w-[750px] aspect-[4/5] z-10"
+            >
+              <img 
+                src="/zodiac-masterpiece.png" 
+                alt="Zenauraa Masterpiece" 
+                className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(26,146,198,0.3)] hover:scale-105 transition-transform duration-700 ease-out"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = "https://images.unsplash.com/photo-1532968961962-8a0cb3a2d4f5?auto=format&fit=crop&q=80";
+                }}
+              />
+            </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center bg-card rounded-full p-2 w-full max-w-md shadow-xl border border-primary/20 transition-transform duration-300 hover:shadow-2xl"
-          >
-            <Search className="w-5 h-5 text-primary ml-4 mr-2" />
-            <input 
-              type="text" 
-              placeholder="Search by specialty, service or name" 
-              className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground font-sans font-medium"
-            />
-            <Button className="bg-primary hover:bg-primary-dark text-white rounded-full px-8 h-12 font-bold font-sans transition-all">
-              Search
-            </Button>
-          </motion.div>
-        </motion.div>
+            {/* Floating Real-Life Glassmorphism Cards */}
+            <motion.div 
+              style={{ y: yFloating1 }}
+              className="absolute top-10 -left-10 lg:-left-20 w-48 h-64 rounded-3xl overflow-hidden border border-white/20 shadow-2xl backdrop-blur-xl bg-white/10 z-20 hidden md:block"
+            >
+              <img src="https://images.unsplash.com/photo-1515023677547-593d7638cbd6?auto=format&fit=crop&q=80&w=400" alt="Healing Crystal" className="w-full h-full object-cover opacity-80 mix-blend-overlay hover:opacity-100 hover:mix-blend-normal transition-all duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
+                <p className="text-white text-xs font-semibold tracking-wider">Aura Cleansing</p>
+              </div>
+            </motion.div>
 
-        {/* Right Side: Zenauraa Masterpiece Artwork */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full lg:w-1/2 relative flex justify-center lg:justify-end h-[600px] lg:h-[800px] items-center"
-        >
-          {/* Subtle glow behind image */}
-          <div className="absolute inset-0 bg-primary/20 rounded-full blur-[100px] -z-10 animate-pulse" />
-          
-          <motion.div 
-            animate={{ y: [0, -20, 0] }}
-            transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-            className="relative w-[400px] h-[550px] md:w-[500px] md:h-[700px] lg:w-[650px] lg:h-[900px] hover:scale-105 transition-transform duration-1000 ease-out drop-shadow-2xl z-10"
-          >
-            <img 
-              src="/zodiac-masterpiece.png" 
-              alt="Zenauraa" 
-              className="w-full h-full object-contain drop-shadow-2xl"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = "https://images.unsplash.com/photo-1532968961962-8a0cb3a2d4f5?auto=format&fit=crop&q=80";
-              }}
-            />
+            <motion.div 
+              style={{ y: yFloating2 }}
+              className="absolute bottom-20 -right-4 lg:-right-12 w-40 h-40 rounded-full overflow-hidden border border-white/20 shadow-2xl backdrop-blur-xl bg-white/10 z-20 hidden md:block"
+            >
+              <img src="https://images.unsplash.com/photo-1632516482181-427c3f3ab654?auto=format&fit=crop&q=80&w=400" alt="Tarot" className="w-full h-full object-cover opacity-90 hover:scale-110 transition-transform duration-700" />
+            </motion.div>
           </motion.div>
-        </motion.div>
+
+          {/* Overlapping Typography (Left Bias) */}
+          <motion.div 
+            className="lg:col-span-6 lg:col-start-1 lg:row-start-1 flex flex-col items-start text-left z-30 pt-12 lg:pt-0 pointer-events-none"
+          >
+            <motion.div
+              initial={{ opacity: 0, x: -60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="pointer-events-auto"
+            >
+              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary/30 bg-background/40 backdrop-blur-md text-primary mb-8 shadow-sm">
+                <Sparkles className="w-4 h-4" />
+                <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Awaken Your Destiny</span>
+              </div>
+              <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-sans font-bold tracking-tighter text-foreground mb-6 leading-[1.05] drop-shadow-lg">
+                Discover <br />
+                <span className="text-primary font-serif italic font-medium">Zenauraa.</span>
+              </h1>
+            </motion.div>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="text-lg md:text-xl text-foreground/80 mb-12 font-medium leading-relaxed font-sans max-w-md drop-shadow-md pointer-events-auto"
+            >
+              Connect with vetted spiritual guides, astrologers, and energy healers to align your inner world and outer reality.
+            </motion.p>
+
+            {/* Glassmorphism Search Bar */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="pointer-events-auto w-full max-w-lg"
+            >
+              <div className="flex items-center bg-white/40 backdrop-blur-2xl rounded-full p-2.5 w-full shadow-[0_8px_32px_rgba(0,0,0,0.05)] border border-white/60 transition-transform duration-500 hover:shadow-[0_12px_48px_rgba(26,146,198,0.15)] hover:scale-[1.02]">
+                <Search className="w-5 h-5 text-primary ml-5 mr-3" />
+                <input 
+                  type="text" 
+                  placeholder="Find your spiritual guide..." 
+                  className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-foreground/50 font-sans font-medium text-lg placeholder:font-light"
+                />
+                <Button className="bg-primary hover:bg-primary-dark text-white rounded-full px-8 h-12 lg:h-14 font-bold font-sans transition-all text-base shadow-md">
+                  Search
+                </Button>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
       </div>
+
+      {/* Scroll Down Indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      >
+        <span className="text-[10px] uppercase tracking-widest font-bold text-primary">Scroll</span>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent" />
+      </motion.div>
     </section>
   );
 }
