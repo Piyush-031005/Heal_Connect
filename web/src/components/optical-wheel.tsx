@@ -3,10 +3,10 @@
 import { useState } from 'react';
 
 const MODALITIES = [
-  { id: 'astrology', name: 'Astrology', image: '/12-modalities-v2/astrology.png' },
-  { id: 'tarot', name: 'Tarot', image: '/12-modalities-v2/tarot.png' },
+  { id: 'astrology', name: 'Astrology', image: '/12-modalities-v2/astrology-v3.png' },
+  { id: 'tarot', name: 'Tarot', image: '/12-modalities-v2/tarot-v3.png' },
   { id: 'palm-reading', name: 'Palm Reading', image: '/12-modalities-v2/palm.png' },
-  { id: 'face-reading', name: 'Face Reading', image: '/12-modalities-v2/face.png' },
+  { id: 'face-reading', name: 'Face Reading', image: '/12-modalities-v2/face-v3.png' },
   { id: 'numerology', name: 'Numerology', image: '/12-modalities-v2/numerology.png' },
   { id: 'energy-healing', name: 'Energy Healing', image: '/12-modalities-v2/energy.png' },
   { id: 'meditation', name: 'Meditation', image: '/12-modalities-v2/meditation.png' },
@@ -14,7 +14,7 @@ const MODALITIES = [
   { id: 'vastu', name: 'Vastu', image: '/12-modalities-v2/vastu.png' },
   { id: 'eft', name: 'EFT Tapping', image: '/12-modalities-v2/eft.png' },
   { id: 'spiritual', name: 'Spiritual Guide', image: '/12-modalities-v2/spiritual.png' },
-  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-v2/sound.png' },
+  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-v2/sound-v3.png' },
 ];
 
 export default function OpticalWheel() {

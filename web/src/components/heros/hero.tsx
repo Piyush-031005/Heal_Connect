@@ -17,8 +17,8 @@ function PrimaryHero() {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Big Modality Wheel overflowing on right */}
-      <div className="absolute top-1/2 -translate-y-1/2 right-[-50%] md:right-[-30%] lg:right-[-15%] opacity-40 lg:opacity-100 pointer-events-none lg:pointer-events-auto">
-        <ModalityWheel />
+      <div className="absolute right-[-20%] md:right-[-10%] top-1/2 -translate-y-1/2 h-[800px] w-[800px] md:h-[1000px] md:w-[1000px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center">
+        <OpticalWheel />
       </div>
 
       <div className="container mx-auto px-6 relative z-10 pointer-events-none">

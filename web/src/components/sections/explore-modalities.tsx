@@ -18,18 +18,18 @@ import {
 import Link from 'next/link';
 
 const MODALITIES = [
-  { id: 'astrology', name: 'Astrology', desc: 'Understand your cosmic patterns.', image: '/12-modalities-v2/astrology.png' },
-  { id: 'tarot', name: 'Tarot', desc: 'Explore intuitive guidance.', image: '/12-modalities-v2/tarot.png' },
-  { id: 'palm-reading', name: 'Palm Reading', desc: 'Discover the story in your hands.', image: '/12-modalities-v2/palm.png' },
-  { id: 'face-reading', name: 'Face Reading', desc: 'Explore personality and patterns.', image: '/12-modalities-v2/face.png' },
-  { id: 'numerology', name: 'Numerology', desc: 'Uncover your numbers.', image: '/12-modalities-v2/numerology.png' },
-  { id: 'energy-healing', name: 'Energy Healing', desc: 'Restore balance and wellbeing.', image: '/12-modalities-v2/energy.png' },
-  { id: 'meditation', name: 'Meditation', desc: 'Find calm and clarity.', image: '/12-modalities-v2/meditation.png' },
-  { id: 'yoga', name: 'Yoga & Mindfulness', desc: 'Reconnect mind and body.', image: '/12-modalities-v2/yoga.png' },
-  { id: 'vastu', name: 'Vastu & Space Energy', desc: 'Create harmony in your environment.', image: '/12-modalities-v2/vastu.png' },
-  { id: 'eft', name: 'EFT Tapping', desc: 'Release emotional blocks.', image: '/12-modalities-v2/eft.png' },
-  { id: 'spiritual', name: 'Spiritual Guidance', desc: 'Awaken your inner potential.', image: '/12-modalities-v2/spiritual.png' },
-  { id: 'sound-healing', name: 'Sound Healing', desc: 'Heal through frequencies.', image: '/12-modalities-v2/sound.png' },
+  { id: 'astrology', name: 'Astrology', desc: 'Gain cosmic insights and life path guidance.', image: '/12-modalities-v2/astrology-v3.png' },
+  { id: 'tarot', name: 'Tarot', desc: 'Unveil hidden truths through symbolic cards.', image: '/12-modalities-v2/tarot-v3.png' },
+  { id: 'palm-reading', name: 'Palm Reading', desc: 'Discover destiny written in your hands.', image: '/12-modalities-v2/palm.png' },
+  { id: 'face-reading', name: 'Face Reading', desc: 'Understand personality and health markers.', image: '/12-modalities-v2/face-v3.png' },
+  { id: 'numerology', name: 'Numerology', desc: 'Unlock the power of your life path numbers.', image: '/12-modalities-v2/numerology.png' },
+  { id: 'energy-healing', name: 'Energy Healing', desc: 'Restore balance and clear energy blockages.', image: '/12-modalities-v2/energy.png' },
+  { id: 'meditation', name: 'Meditation', desc: 'Cultivate mindfulness and inner peace.', image: '/12-modalities-v2/meditation.png' },
+  { id: 'yoga', name: 'Yoga & Mindfulness', desc: 'Align mind, body, and spirit through movement.', image: '/12-modalities-v2/yoga.png' },
+  { id: 'vastu', name: 'Vastu & Space Energy', desc: 'Harmonize your living and working spaces.', image: '/12-modalities-v2/vastu.png' },
+  { id: 'eft', name: 'EFT Tapping', desc: 'Release emotional distress through tapping.', image: '/12-modalities-v2/eft.png' },
+  { id: 'spiritual', name: 'Spiritual Guidance', desc: 'Connect with higher purpose and wisdom.', image: '/12-modalities-v2/spiritual.png' },
+  { id: 'sound-healing', name: 'Sound Healing', desc: 'Harmonize your body with therapeutic frequencies.', image: '/12-modalities-v2/sound-v3.png' },
 ];
 
 export default function ExploreModalities() {
