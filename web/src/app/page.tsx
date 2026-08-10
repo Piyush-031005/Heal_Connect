@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/navbar';
 import Hero from '@/components/heros/hero';
-import { ExploreModalities } from '@/components/sections/explore-modalities';
+import ExploreModalities from '@/components/sections/explore-modalities';
 import { HowItWorks } from '@/components/sections/how-it-works';
 import { AiExpertMatching } from '@/components/sections/ai-expert-matching';
 import { FeaturedExperts } from '@/components/sections/featured-experts';
