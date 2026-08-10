@@ -1,20 +1,34 @@
 'use client';
 
 import { useState } from 'react';
+import { 
+  Star, 
+  GalleryVertical, 
+  Hand, 
+  UserRound, 
+  Hash, 
+  Sparkles, 
+  Flower2, 
+  Activity, 
+  Home, 
+  Touchpad, 
+  Sun, 
+  Radio
+} from 'lucide-react';
 
 const MODALITIES = [
-  { id: 'astrology', name: 'Astrology', image: '/12-modalities/astrology.png' },
-  { id: 'tarot', name: 'Tarot', image: '/12-modalities/tarocard.png' },
-  { id: 'palm-reading', name: 'Palm Reading', image: '/12-modalities/ai-match.png' },
-  { id: 'face-reading', name: 'Face Reading', image: '/12-modalities/face reading.png' },
-  { id: 'numerology', name: 'Numerology', image: '/12-modalities/numeriology.png' },
-  { id: 'energy-healing', name: 'Energy Healing', image: '/12-modalities/energy healing.png' },
-  { id: 'meditation', name: 'Meditation', image: '/12-modalities/medidation and breathing.png' },
-  { id: 'yoga', name: 'Yoga', image: '/12-modalities/yoga.png' },
-  { id: 'vastu', name: 'Vastu', image: '/12-modalities/vastu.png' },
-  { id: 'eft', name: 'EFT Tapping', image: '/12-modalities/eft.png' },
-  { id: 'spiritual', name: 'Spiritual Guide', image: '/12-modalities/spitutality.png' },
-  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities/sound.png' },
+  { id: 'astrology', name: 'Astrology', icon: Star },
+  { id: 'tarot', name: 'Tarot', icon: GalleryVertical },
+  { id: 'palm-reading', name: 'Palm Reading', icon: Hand },
+  { id: 'face-reading', name: 'Face Reading', icon: UserRound },
+  { id: 'numerology', name: 'Numerology', icon: Hash },
+  { id: 'energy-healing', name: 'Energy Healing', icon: Sparkles },
+  { id: 'meditation', name: 'Meditation', icon: Flower2 },
+  { id: 'yoga', name: 'Yoga', icon: Activity },
+  { id: 'vastu', name: 'Vastu', icon: Home },
+  { id: 'eft', name: 'EFT Tapping', icon: Touchpad },
+  { id: 'spiritual', name: 'Spiritual Guide', icon: Sun },
+  { id: 'sound-healing', name: 'Sound Healing', icon: Radio },
 ];
 
 export default function OpticalWheel() {
@@ -22,7 +36,7 @@ export default function OpticalWheel() {
 
   const cx = 500;
   const cy = 500;
-  const outerRadius = 400;
+  const outerRadius = 380;
 
   const isAnyHovered = hoveredIdx !== null;
   const playState = isAnyHovered ? 'paused' : 'running';
@@ -35,39 +49,49 @@ export default function OpticalWheel() {
   };
 
   return (
-    <div className="relative w-full h-full max-w-[900px] max-h-[900px] aspect-square flex items-center justify-center pointer-events-none">
+    <div className="relative w-full h-full max-w-[900px] max-h-[900px] aspect-square flex items-center justify-center pointer-events-none mx-auto">
       
       {/* Central Glow / Magical Aura */}
       <div className="absolute inset-0 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+      
+      {/* Gradient for Icons */}
+      <svg width="0" height="0" className="absolute">
+        <linearGradient id="wheelIconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop stopColor="var(--primary)" offset="0%" />
+          <stop stopColor="var(--accent)" offset="100%" />
+        </linearGradient>
+      </svg>
 
       <div className="absolute inset-0 z-10 pointer-events-auto">
         <svg viewBox="0 0 1000 1000" className="w-full h-full overflow-visible">
           
-          {/* LAYER 1: Deep Mathematical Rings (Like the reference image) */}
+          {/* LAYER 1: Deep Mathematical Rings */}
           <g style={{ animation: 'spin 180s linear infinite', transformOrigin: 'center' }}>
-            <circle cx={cx} cy={cy} r={outerRadius + 20} fill="none" className="stroke-primary/20" strokeWidth="2" />
-            <circle cx={cx} cy={cy} r={outerRadius + 30} fill="none" className="stroke-primary/40" strokeWidth="1" />
-            <circle cx={cx} cy={cy} r={outerRadius + 45} fill="none" className="stroke-primary/20" strokeWidth="6" strokeDasharray="1 10" />
-            <circle cx={cx} cy={cy} r={outerRadius + 60} fill="none" className="stroke-primary/20" strokeWidth="1" />
+            {/* Outer decorative tracks */}
+            <circle cx={cx} cy={cy} r={outerRadius + 80} fill="none" className="stroke-primary/20" strokeWidth="1" />
+            <circle cx={cx} cy={cy} r={outerRadius + 95} fill="none" className="stroke-primary/10" strokeWidth="0.5" strokeDasharray="4 8" />
             
-            {/* Runic markings on outer edge */}
-            {[...Array(72)].map((_, i) => (
+            {/* Intricate edge markings */}
+            {[...Array(120)].map((_, i) => (
               <line 
                 key={`mark-${i}`}
-                x1={cx + (outerRadius + 60) * Math.cos(i * 5 * Math.PI / 180)}
-                y1={cy + (outerRadius + 60) * Math.sin(i * 5 * Math.PI / 180)}
-                x2={cx + (outerRadius + (i % 6 === 0 ? 80 : 70)) * Math.cos(i * 5 * Math.PI / 180)}
-                y2={cy + (outerRadius + (i % 6 === 0 ? 80 : 70)) * Math.sin(i * 5 * Math.PI / 180)}
-                className={i % 6 === 0 ? "stroke-primary/40" : "stroke-primary/20"}
-                strokeWidth={i % 6 === 0 ? "2" : "1"}
+                x1={cx + (outerRadius + 80) * Math.cos(i * 3 * Math.PI / 180)}
+                y1={cy + (outerRadius + 80) * Math.sin(i * 3 * Math.PI / 180)}
+                x2={cx + (outerRadius + (i % 5 === 0 ? 95 : 85)) * Math.cos(i * 3 * Math.PI / 180)}
+                y2={cy + (outerRadius + (i % 5 === 0 ? 95 : 85)) * Math.sin(i * 3 * Math.PI / 180)}
+                className={i % 5 === 0 ? "stroke-primary/40" : "stroke-primary/20"}
+                strokeWidth={i % 5 === 0 ? "2" : "1"}
               />
             ))}
-            <circle cx={cx} cy={cy} r={outerRadius + 85} fill="none" className="stroke-primary/20" strokeWidth="1" />
+            <circle cx={cx} cy={cy} r={outerRadius + 110} fill="none" className="stroke-primary/20" strokeWidth="1" />
           </g>
           
-          {/* LAYER 2: Overlapping geometric mandalas (Squares & Triangles) */}
+          {/* LAYER 2: Sacred Geometry (Metatron's Cube / Hexagrams) */}
           <g style={{ animation: 'spin 240s linear infinite reverse', transformOrigin: 'center' }}>
-            {[0, 30, 60].map((rot, i) => (
+            <circle cx={cx} cy={cy} r={outerRadius - 60} fill="none" className="stroke-primary/20" strokeWidth="1" />
+            <circle cx={cx} cy={cy} r={outerRadius - 100} fill="none" className="stroke-primary/30" strokeWidth="1.5" strokeDasharray="15 5" />
+            
+            {[0, 15, 30, 45, 60, 75].map((rot, i) => (
               <rect 
                 key={`sq-${i}`}
                 x={cx - (outerRadius - 60)} 
@@ -75,50 +99,64 @@ export default function OpticalWheel() {
                 width={(outerRadius - 60) * 2} 
                 height={(outerRadius - 60) * 2} 
                 fill="none" 
-                className="stroke-primary/20" 
-                strokeWidth="1.5"
+                className="stroke-primary/10 transition-colors duration-1000" 
+                strokeWidth="1"
                 transform={`rotate(${rot}, ${cx}, ${cy})`}
               />
             ))}
-            
-            <circle cx={cx} cy={cy} r={outerRadius - 60} fill="none" className="stroke-primary/20" strokeWidth="1" />
-            <circle cx={cx} cy={cy} r={outerRadius - 80} fill="none" className="stroke-primary/40" strokeWidth="1" strokeDasharray="10 5" />
           </g>
 
           {/* LAYER 3: Intricate 12-pointed star pattern */}
           <g style={{ animation: 'spin 300s linear infinite', transformOrigin: 'center' }}>
-             {[0, 15, 30, 45].map((rot, i) => (
+             {[0, 30].map((rot, i) => (
               <polygon 
                 key={`hex-${i}`}
                 points={`
-                  ${cx},${cy - (outerRadius - 120)} 
-                  ${cx + (outerRadius - 120) * Math.sin(Math.PI/3)},${cy + (outerRadius - 120) * Math.cos(Math.PI/3)} 
-                  ${cx - (outerRadius - 120) * Math.sin(Math.PI/3)},${cy + (outerRadius - 120) * Math.cos(Math.PI/3)}
+                  ${cx},${cy - (outerRadius - 140)} 
+                  ${cx + (outerRadius - 140) * Math.sin(Math.PI/3)},${cy + (outerRadius - 140) * Math.cos(Math.PI/3)} 
+                  ${cx - (outerRadius - 140) * Math.sin(Math.PI/3)},${cy + (outerRadius - 140) * Math.cos(Math.PI/3)}
                 `}
                 fill="none"
-                className="stroke-primary/30"
-                strokeWidth="1"
+                className="stroke-primary/20"
+                strokeWidth="1.5"
                 transform={`rotate(${rot}, ${cx}, ${cy})`}
               />
              ))}
-             <circle cx={cx} cy={cy} r={outerRadius - 120} fill="none" className="stroke-primary/20" strokeWidth="2" />
+             {[0, 30].map((rot, i) => (
+              <polygon 
+                key={`hex-inv-${i}`}
+                points={`
+                  ${cx},${cy + (outerRadius - 140)} 
+                  ${cx + (outerRadius - 140) * Math.sin(Math.PI/3)},${cy - (outerRadius - 140) * Math.cos(Math.PI/3)} 
+                  ${cx - (outerRadius - 140) * Math.sin(Math.PI/3)},${cy - (outerRadius - 140) * Math.cos(Math.PI/3)}
+                `}
+                fill="none"
+                className="stroke-primary/20"
+                strokeWidth="1.5"
+                transform={`rotate(${rot}, ${cx}, ${cy})`}
+              />
+             ))}
+             <circle cx={cx} cy={cy} r={outerRadius - 140} fill="none" className="stroke-primary/20" strokeWidth="2" />
           </g>
 
-          {/* LAYER 4: The 12 Modalities orbiting on a solid magical ring */}
+          {/* LAYER 4: The 12 Modalities orbiting */}
           <circle cx={cx} cy={cy} r={outerRadius} fill="none" className="stroke-primary/30" strokeWidth="2" />
+          
           <g style={{ animation: 'spin 120s linear infinite', animationPlayState: playState, transformOrigin: 'center' }}>
-            
-            {/* The nodes */}
             {MODALITIES.map((modality, idx) => {
               const angle = (idx * 30 - 90) * (Math.PI / 180);
               const x = cx + outerRadius * Math.cos(angle);
               const y = cy + outerRadius * Math.sin(angle);
               const isHovered = hoveredIdx === idx;
               
+              // We render the Lucide Icon via a foreignObject so we can easily use React components
+              // However, since we are inside SVG, it's easier to just use HTML absolute positioning for the icons in an overlay, 
+              // BUT to keep them spinning accurately with the SVG, foreignObject is best.
+              
               return (
                 <g 
                   key={idx} 
-                  transform={`translate(${x}, ${y}) scale(${isHovered ? 1.3 : 1})`}
+                  transform={`translate(${x}, ${y}) scale(${isHovered ? 1.25 : 1})`}
                   onMouseEnter={() => setHoveredIdx(idx)}
                   onMouseLeave={() => setHoveredIdx(null)}
                   onClick={() => handleScrollTo(modality.id)}
@@ -127,34 +165,38 @@ export default function OpticalWheel() {
                   <g style={{ animation: 'spin 120s linear infinite reverse', animationPlayState: playState, transformOrigin: 'center' }}>
                     
                     {/* Hit Area */}
-                    <circle cx="0" cy="0" r="50" fill="transparent" pointerEvents="all" />
+                    <circle cx="0" cy="0" r="55" fill="transparent" pointerEvents="all" />
                     
-                    {/* Dark backdrop circle for PNG to pop using mix-blend-screen */}
-                    <circle cx="0" cy="0" r="30" className="fill-[#090514] stroke-primary/50 transition-all duration-300" strokeWidth={isHovered ? "2" : "1"} />
+                    {/* Dark backdrop circle for PNG/Icon to pop */}
+                    <circle cx="0" cy="0" r="32" className="fill-card stroke-primary/30 transition-all duration-300 shadow-xl" strokeWidth={isHovered ? "3" : "1"} />
                     
                     {/* Glowing Aura on Hover */}
-                    <circle cx="0" cy="0" r="40" className="fill-transparent stroke-primary/0 group-hover:stroke-primary/50 transition-all duration-300 blur-sm" strokeWidth="4" />
+                    <circle cx="0" cy="0" r="42" className="fill-transparent stroke-primary/0 group-hover:stroke-primary/40 transition-all duration-300 blur-sm" strokeWidth="4" />
                     
-                    {/* The PNG Image */}
-                    <image 
-                      href={modality.image} 
-                      x="-20" 
-                      y="-20" 
-                      width="40" 
-                      height="40" 
-                      className="opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-lg"
-                      style={{ mixBlendMode: 'screen' }} 
-                    />
+                    {/* Outer animated dots on hover */}
+                    <g className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ animation: 'spin 10s linear infinite' }}>
+                      {[0, 1, 2, 3].map((d) => (
+                        <circle key={d} cx={38 * Math.cos(d * Math.PI/2)} cy={38 * Math.sin(d * Math.PI/2)} r="2.5" className="fill-primary" />
+                      ))}
+                    </g>
+
+                    {/* Lucide Icon using foreignObject */}
+                    <foreignObject x="-20" y="-20" width="40" height="40" className="pointer-events-none">
+                      <div className="w-full h-full flex items-center justify-center">
+                        <modality.icon className={`w-7 h-7 transition-all duration-300 ${isHovered ? 'scale-110 drop-shadow-md' : 'opacity-90'}`} style={{ stroke: 'url(#wheelIconGradient)', strokeWidth: 1.5 }} />
+                      </div>
+                    </foreignObject>
 
                     {/* Node Text Label (Floating Outside) */}
                     <text
                       x="0"
-                      y={isHovered ? "-45" : "-40"}
+                      y={isHovered ? "-52" : "-45"}
                       textAnchor="middle"
-                      className="fill-foreground font-sans font-medium tracking-wide transition-all duration-300 shadow-sm pointer-events-none"
+                      className="fill-foreground font-sans font-semibold tracking-wide transition-all duration-300 pointer-events-none"
                       style={{ 
-                        fontSize: '14px',
+                        fontSize: '15px',
                         opacity: isHovered ? 1 : 0,
+                        textShadow: '0 2px 10px rgba(0,0,0,0.1)'
                       }}
                     >
                       {modality.name}
@@ -168,25 +210,24 @@ export default function OpticalWheel() {
           {/* LAYER 5: Central Focus Core (Logo) */}
           <g transform={`translate(${cx}, ${cy})`}>
             {/* Intricate Inner Core */}
-            <circle cx="0" cy="0" r="140" fill="none" className="stroke-primary/20" strokeWidth="1" />
-            <circle cx="0" cy="0" r="130" fill="none" className="stroke-primary/40" strokeWidth="2" strokeDasharray="10 20" style={{ animation: 'spin 60s linear infinite' }} />
-            <circle cx="0" cy="0" r="115" fill="none" className="stroke-primary/30" strokeWidth="1" />
+            <circle cx="0" cy="0" r="160" fill="none" className="stroke-primary/20" strokeWidth="1" />
+            <circle cx="0" cy="0" r="145" fill="none" className="stroke-primary/40" strokeWidth="2" strokeDasharray="4 12" style={{ animation: 'spin 60s linear infinite' }} />
             
             {/* Spinning runes/dash array core */}
-            <circle cx="0" cy="0" r="100" fill="none" className="stroke-primary/50" strokeWidth="3" strokeDasharray="5 20" style={{ animation: 'spin 60s linear infinite' }} />
-            <circle cx="0" cy="0" r="85" fill="none" className="stroke-primary/40" strokeWidth="1" strokeDasharray="30 10" style={{ animation: 'spin 40s linear infinite reverse' }} />
+            <circle cx="0" cy="0" r="115" fill="none" className="stroke-primary/50" strokeWidth="4" strokeDasharray="1 15" style={{ animation: 'spin 90s linear infinite reverse' }} />
+            <circle cx="0" cy="0" r="95" fill="none" className="stroke-primary/30" strokeWidth="1" strokeDasharray="30 10" style={{ animation: 'spin 40s linear infinite' }} />
             
             {/* Solid Center Backdrop */}
-            <circle cx="0" cy="0" r="70" className="fill-background/80 backdrop-blur-md stroke-primary/30" strokeWidth="1" />
+            <circle cx="0" cy="0" r="85" className="fill-card/90 backdrop-blur-md stroke-primary/30" strokeWidth="1" />
           </g>
 
         </svg>
 
         {/* HTML Center Overlay for Logo */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-32 h-32 flex items-center justify-center">
-            {/* Using mix-blend-screen to make background of logo transparent and colors pop */}
-            <img src="/logo.png" alt="Main Logo" className="w-full h-full object-contain mix-blend-screen scale-150 drop-shadow-[0_0_15px_rgba(78,89,194,0.5)]" />
+          <div className="w-36 h-36 flex items-center justify-center bg-transparent rounded-full drop-shadow-2xl">
+            {/* The primary logo */}
+            <img src="/logo.png" alt="Main Logo" className="w-24 h-24 object-contain scale-125" style={{ filter: 'drop-shadow(0 0 10px rgba(78,89,194,0.3))' }} />
           </div>
         </div>
 
