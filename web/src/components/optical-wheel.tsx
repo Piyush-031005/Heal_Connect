@@ -1,34 +1,20 @@
 'use client';
 
 import { useState } from 'react';
-import { 
-  Star, 
-  GalleryVertical, 
-  Hand, 
-  UserRound, 
-  Hash, 
-  Sparkles, 
-  Flower2, 
-  Activity, 
-  Home, 
-  Touchpad, 
-  Sun, 
-  Radio
-} from 'lucide-react';
 
 const MODALITIES = [
-  { id: 'astrology', name: 'Astrology', icon: Star },
-  { id: 'tarot', name: 'Tarot', icon: GalleryVertical },
-  { id: 'palm-reading', name: 'Palm Reading', icon: Hand },
-  { id: 'face-reading', name: 'Face Reading', icon: UserRound },
-  { id: 'numerology', name: 'Numerology', icon: Hash },
-  { id: 'energy-healing', name: 'Energy Healing', icon: Sparkles },
-  { id: 'meditation', name: 'Meditation', icon: Flower2 },
-  { id: 'yoga', name: 'Yoga', icon: Activity },
-  { id: 'vastu', name: 'Vastu', icon: Home },
-  { id: 'eft', name: 'EFT Tapping', icon: Touchpad },
-  { id: 'spiritual', name: 'Spiritual Guide', icon: Sun },
-  { id: 'sound-healing', name: 'Sound Healing', icon: Radio },
+  { id: 'astrology', name: 'Astrology', image: '/12-modalities-v2/astrology.png' },
+  { id: 'tarot', name: 'Tarot', image: '/12-modalities-v2/tarot.png' },
+  { id: 'palm-reading', name: 'Palm Reading', image: '/12-modalities-v2/palm.png' },
+  { id: 'face-reading', name: 'Face Reading', image: '/12-modalities-v2/face.png' },
+  { id: 'numerology', name: 'Numerology', image: '/12-modalities-v2/numerology.png' },
+  { id: 'energy-healing', name: 'Energy Healing', image: '/12-modalities-v2/energy.png' },
+  { id: 'meditation', name: 'Meditation', image: '/12-modalities-v2/meditation.png' },
+  { id: 'yoga', name: 'Yoga', image: '/12-modalities-v2/yoga.png' },
+  { id: 'vastu', name: 'Vastu', image: '/12-modalities-v2/vastu.png' },
+  { id: 'eft', name: 'EFT Tapping', image: '/12-modalities-v2/eft.png' },
+  { id: 'spiritual', name: 'Spiritual Guide', image: '/12-modalities-v2/spiritual.png' },
+  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-v2/sound.png' },
 ];
 
 export default function OpticalWheel() {
@@ -54,19 +40,11 @@ export default function OpticalWheel() {
       {/* Central Glow / Magical Aura */}
       <div className="absolute inset-0 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
       
-      {/* Gradient for Icons */}
-      <svg width="0" height="0" className="absolute">
-        <linearGradient id="wheelIconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop stopColor="var(--primary)" offset="0%" />
-          <stop stopColor="var(--accent)" offset="100%" />
-        </linearGradient>
-      </svg>
-
       <div className="absolute inset-0 z-10 pointer-events-auto">
         <svg viewBox="0 0 1000 1000" className="w-full h-full overflow-visible">
           
           {/* LAYER 1: Deep Mathematical Rings */}
-          <g style={{ animation: 'spin 180s linear infinite', transformOrigin: 'center' }}>
+          <g style={{ animation: 'spin 180s linear infinite', transformOrigin: '500px 500px' }}>
             {/* Outer decorative tracks */}
             <circle cx={cx} cy={cy} r={outerRadius + 80} fill="none" className="stroke-primary/20" strokeWidth="1" />
             <circle cx={cx} cy={cy} r={outerRadius + 95} fill="none" className="stroke-primary/10" strokeWidth="0.5" strokeDasharray="4 8" />
@@ -87,7 +65,7 @@ export default function OpticalWheel() {
           </g>
           
           {/* LAYER 2: Sacred Geometry (Metatron's Cube / Hexagrams) */}
-          <g style={{ animation: 'spin 240s linear infinite reverse', transformOrigin: 'center' }}>
+          <g style={{ animation: 'spin 240s linear infinite reverse', transformOrigin: '500px 500px' }}>
             <circle cx={cx} cy={cy} r={outerRadius - 60} fill="none" className="stroke-primary/20" strokeWidth="1" />
             <circle cx={cx} cy={cy} r={outerRadius - 100} fill="none" className="stroke-primary/30" strokeWidth="1.5" strokeDasharray="15 5" />
             
@@ -107,7 +85,7 @@ export default function OpticalWheel() {
           </g>
 
           {/* LAYER 3: Intricate 12-pointed star pattern */}
-          <g style={{ animation: 'spin 300s linear infinite', transformOrigin: 'center' }}>
+          <g style={{ animation: 'spin 300s linear infinite', transformOrigin: '500px 500px' }}>
              {[0, 30].map((rot, i) => (
               <polygon 
                 key={`hex-${i}`}
@@ -142,16 +120,12 @@ export default function OpticalWheel() {
           {/* LAYER 4: The 12 Modalities orbiting */}
           <circle cx={cx} cy={cy} r={outerRadius} fill="none" className="stroke-primary/30" strokeWidth="2" />
           
-          <g style={{ animation: 'spin 120s linear infinite', animationPlayState: playState, transformOrigin: 'center' }}>
+          <g style={{ animation: 'spin 120s linear infinite', animationPlayState: playState, transformOrigin: '500px 500px' }}>
             {MODALITIES.map((modality, idx) => {
               const angle = (idx * 30 - 90) * (Math.PI / 180);
               const x = cx + outerRadius * Math.cos(angle);
               const y = cy + outerRadius * Math.sin(angle);
               const isHovered = hoveredIdx === idx;
-              
-              // We render the Lucide Icon via a foreignObject so we can easily use React components
-              // However, since we are inside SVG, it's easier to just use HTML absolute positioning for the icons in an overlay, 
-              // BUT to keep them spinning accurately with the SVG, foreignObject is best.
               
               return (
                 <g 
@@ -162,41 +136,45 @@ export default function OpticalWheel() {
                   onClick={() => handleScrollTo(modality.id)}
                   className="transition-all duration-500 ease-out cursor-pointer group"
                 >
-                  <g style={{ animation: 'spin 120s linear infinite reverse', animationPlayState: playState, transformOrigin: 'center' }}>
+                  {/* Notice transformOrigin '0px 0px' here because we translated to the node's center! */}
+                  <g style={{ animation: 'spin 120s linear infinite reverse', animationPlayState: playState, transformOrigin: '0px 0px' }}>
                     
                     {/* Hit Area */}
                     <circle cx="0" cy="0" r="55" fill="transparent" pointerEvents="all" />
                     
                     {/* Button Background */}
-                    <circle cx="0" cy="0" r="32" className="fill-card stroke-border transition-all duration-300 shadow-2xl" strokeWidth={isHovered ? "3" : "1.5"} style={{ filter: 'drop-shadow(0px 8px 16px rgba(0,0,0,0.15))' }} />
+                    <circle cx="0" cy="0" r="40" className="fill-[#090514] stroke-primary/50 transition-all duration-300 shadow-2xl" strokeWidth={isHovered ? "3" : "1.5"} style={{ filter: 'drop-shadow(0px 8px 16px rgba(0,0,0,0.15))' }} />
                     
                     {/* Glowing Aura on Hover */}
-                    <circle cx="0" cy="0" r="42" className="fill-transparent stroke-primary/0 group-hover:stroke-primary/50 transition-all duration-300 blur-[2px]" strokeWidth="3" />
+                    <circle cx="0" cy="0" r="48" className="fill-transparent stroke-primary/0 group-hover:stroke-primary/50 transition-all duration-300 blur-[2px]" strokeWidth="3" />
                     
                     {/* Outer animated dots on hover */}
-                    <g className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ animation: 'spin 10s linear infinite' }}>
+                    <g className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ animation: 'spin 10s linear infinite', transformOrigin: '0px 0px' }}>
                       {[0, 1, 2, 3].map((d) => (
-                        <circle key={d} cx={38 * Math.cos(d * Math.PI/2)} cy={38 * Math.sin(d * Math.PI/2)} r="3" className="fill-primary" />
+                        <circle key={d} cx={44 * Math.cos(d * Math.PI/2)} cy={44 * Math.sin(d * Math.PI/2)} r="3" className="fill-primary" />
                       ))}
                     </g>
 
-                    {/* Lucide Icon using foreignObject */}
-                    <foreignObject x="-20" y="-20" width="40" height="40" className="pointer-events-none">
-                      <div className="w-full h-full flex items-center justify-center">
-                        <modality.icon className={`w-7 h-7 transition-all duration-300 ${isHovered ? 'scale-110 drop-shadow-md' : 'opacity-90'}`} style={{ stroke: 'url(#wheelIconGradient)', strokeWidth: 1.5 }} />
+                    {/* Image */}
+                    <image 
+                      href={modality.image} 
+                      x="-25" 
+                      y="-25" 
+                      width="50" 
+                      height="50" 
+                      className={`transition-all duration-300 ${isHovered ? 'scale-110 drop-shadow-lg' : 'opacity-90'}`}
+                      style={{ mixBlendMode: 'screen' }} 
+                    />
+
+                    {/* Node Text Label (Floating Button Style) */}
+                    <foreignObject x="-60" y="55" width="120" height="40" className={`pointer-events-none overflow-visible transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+                      <div className="w-full flex justify-center">
+                        <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+                          {modality.name}
+                        </span>
                       </div>
                     </foreignObject>
 
-                    {/* Node Text Label (Floating Button Style) */}
-                    {isHovered && (
-                      <foreignObject x="-60" y="45" width="120" height="40" className="pointer-events-none overflow-visible">
-                        <div className="w-full flex justify-center">
-                          <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap">
-                            {modality.name}
-                          </span>
-                        </div>
-                      </foreignObject>
-                    )}
                   </g>
                 </g>
               );
@@ -207,14 +185,14 @@ export default function OpticalWheel() {
           <g transform={`translate(${cx}, ${cy})`}>
             {/* Intricate Inner Core */}
             <circle cx="0" cy="0" r="160" fill="none" className="stroke-primary/20" strokeWidth="1" />
-            <circle cx="0" cy="0" r="145" fill="none" className="stroke-primary/40" strokeWidth="2" strokeDasharray="4 12" style={{ animation: 'spin 60s linear infinite' }} />
+            <circle cx="0" cy="0" r="145" fill="none" className="stroke-primary/40" strokeWidth="2" strokeDasharray="4 12" style={{ animation: 'spin 60s linear infinite', transformOrigin: '0px 0px' }} />
             
             {/* Spinning runes/dash array core */}
-            <circle cx="0" cy="0" r="115" fill="none" className="stroke-primary/50" strokeWidth="4" strokeDasharray="1 15" style={{ animation: 'spin 90s linear infinite reverse' }} />
-            <circle cx="0" cy="0" r="95" fill="none" className="stroke-primary/30" strokeWidth="1" strokeDasharray="30 10" style={{ animation: 'spin 40s linear infinite' }} />
+            <circle cx="0" cy="0" r="115" fill="none" className="stroke-primary/50" strokeWidth="4" strokeDasharray="1 15" style={{ animation: 'spin 90s linear infinite reverse', transformOrigin: '0px 0px' }} />
+            <circle cx="0" cy="0" r="95" fill="none" className="stroke-primary/30" strokeWidth="1" strokeDasharray="30 10" style={{ animation: 'spin 40s linear infinite', transformOrigin: '0px 0px' }} />
             
             {/* Solid Center Backdrop */}
-            <circle cx="0" cy="0" r="85" className="fill-card/90 backdrop-blur-md stroke-primary/30" strokeWidth="1" />
+            <circle cx="0" cy="0" r="85" className="fill-[#090514]/90 backdrop-blur-md stroke-primary/30" strokeWidth="1" />
           </g>
 
         </svg>
@@ -223,7 +201,7 @@ export default function OpticalWheel() {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-36 h-36 flex items-center justify-center bg-transparent rounded-full drop-shadow-2xl">
             {/* The primary logo */}
-            <img src="/logo.png" alt="Main Logo" className="w-24 h-24 object-contain scale-125" style={{ filter: 'drop-shadow(0 0 10px rgba(78,89,194,0.3))' }} />
+            <img src="/new_logo.png" alt="Main Logo" className="w-32 h-32 object-contain scale-[1.3]" style={{ filter: 'drop-shadow(0 0 10px rgba(78,89,194,0.3)) mix-blend-mode(screen)' }} />
           </div>
         </div>
 
