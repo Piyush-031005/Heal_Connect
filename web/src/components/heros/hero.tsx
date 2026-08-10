@@ -251,29 +251,29 @@ function ZenAlignHero() {
   ];
 
   return (
-    <section className="relative overflow-hidden pt-32 pb-24 bg-zen-hero min-h-[95vh] flex flex-col items-center justify-center border-b border-border/50">
+    <section className="relative overflow-hidden pt-32 pb-24 bg-gradient-to-b from-[#F0F4FF] to-white min-h-[95vh] flex flex-col items-center justify-center border-b border-border/50">
       
       {/* Background radial gradient to give a subtle center light */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0%,transparent_100%)] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-20">
         <div className="max-w-2xl">
-          <h1 className="text-6xl md:text-8xl font-heading font-medium tracking-tight text-foreground mb-8">
+          <h1 className="text-6xl md:text-8xl font-heading font-medium tracking-tight text-[#2E2854] mb-8">
             Align Your <br />
             <span className="text-primary italic">Inner World.</span>
           </h1>
-          <p className="text-xl text-muted-foreground mb-10 font-light leading-relaxed">
+          <p className="text-xl text-[#4A417C]/80 mb-10 font-light leading-relaxed">
             Discover a curated space for holistic wellness. Connect with vetted practitioners who guide you toward balance, clarity, and transformation.
           </p>
 
-          <div className="flex items-center bg-card rounded-full p-2 max-w-xl shadow-lg border border-primary/10">
+          <div className="flex items-center bg-white rounded-full p-2 max-w-xl shadow-xl border border-primary/10">
             <Search className="w-5 h-5 text-muted-foreground ml-4 mr-2" />
             <input 
               type="text" 
               placeholder="Search by specialty, service or name" 
               className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground"
             />
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 h-12 font-medium">
+            <Button className="bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-full px-8 h-12 font-medium">
               Search
             </Button>
           </div>
@@ -281,7 +281,7 @@ function ZenAlignHero() {
       </div>
 
       {/* Right Optical Wheel (Doctor Strange WebGL style) */}
-      <div className="absolute right-[-20%] md:right-[-10%] top-1/2 -translate-y-1/2 h-[800px] w-[800px] md:h-[1000px] md:w-[1000px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center">
+      <div className="absolute right-[-20%] md:right-[-10%] top-[60%] md:top-[55%] -translate-y-1/2 h-[800px] w-[800px] md:h-[1000px] md:w-[1000px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center">
         <OpticalWheel />
       </div>
     </section>

@@ -290,9 +290,9 @@ export function TopAstrologers({ variant }: { variant: string }) {
                   </div>
                   <div className="flex-1">
                     <div className="flex justify-between items-start">
-                      <h3 className="font-bold text-lg text-foreground group-hover:text-amber-500 transition-colors">{a.name}</h3>
+                      <h3 className="font-bold text-lg text-foreground group-hover:text-pink-500 transition-colors">{a.name}</h3>
                       <div className="flex items-center gap-1 bg-background px-2 py-1 rounded-lg">
-                        <span className="text-amber-500 text-sm">★</span>
+                        <span className="text-pink-500 text-sm">★</span>
                         <span className="text-sm font-semibold">{a.rating}</span>
                       </div>
                     </div>
@@ -315,7 +315,7 @@ export function TopAstrologers({ variant }: { variant: string }) {
                     <span className="font-bold text-foreground">₹{a.price}<span className="text-sm font-normal text-muted-foreground">/min</span></span>
                   </div>
                   <Link href="/practitioners">
-                    <Button className="rounded-full bg-gradient-to-r from-primary to-amber-500 hover:from-amber-500 hover:to-amber-600 text-primary-foreground border-0 shadow-md">
+                    <Button className="rounded-full bg-gradient-to-r from-primary to-pink-500 hover:from-pink-500 hover:to-pink-600 text-primary-foreground border-0 shadow-md">
                       Chat / Call
                     </Button>
                   </Link>

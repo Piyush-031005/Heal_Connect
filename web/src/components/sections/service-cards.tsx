@@ -189,7 +189,7 @@ export function ServiceCards({ variant }: { variant: string }) {
             <Link key={idx} href="/signup" className="group relative">
               <div className="flex flex-col items-center text-center p-6 rounded-3xl bg-gradient-to-b from-primary/5 to-transparent backdrop-blur-xl border border-primary/10 shadow-sm hover:border-primary/30 transition-all group-hover:-translate-y-2 duration-500 h-full">
                 <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-500">
-                  <Zap className="w-6 h-6 text-primary group-hover:text-amber-500" />
+                  <Zap className="w-6 h-6 text-primary group-hover:text-pink-500" />
                 </div>
                 <p className="font-bold text-foreground text-sm mb-2">{svc.name}</p>
                 <p className="text-xs text-muted-foreground font-light">{svc.desc}</p>

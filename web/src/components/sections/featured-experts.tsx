@@ -96,7 +96,7 @@ export function FeaturedExperts() {
               
               {/* Top Choice / Tag (Simulating Astrotalk Tags) */}
               <div className="absolute top-4 right-4 z-10">
-                <span className={`text-[10px] font-bold px-3 py-1 rounded-full text-white ${expert.id % 2 === 0 ? 'bg-amber-500' : 'bg-purple-500'}`}>
+                <span className={`text-[10px] font-bold px-3 py-1 rounded-full text-white ${expert.id % 2 === 0 ? 'bg-pink-500' : 'bg-purple-500'}`}>
                   {expert.id % 2 === 0 ? 'Top Choice' : 'Celebrity'}
                 </span>
               </div>
@@ -118,8 +118,8 @@ export function FeaturedExperts() {
                 <div>
                   <h3 className="text-lg font-bold text-foreground leading-none mb-1.5">{expert.name.split(' ')[0]}</h3>
                   <div className="flex items-center gap-1.5 text-xs font-medium">
-                    <span className="text-amber-500 flex items-center">
-                      <Star className="w-3 h-3 fill-amber-500 mr-0.5" />
+                    <span className="text-pink-500 flex items-center">
+                      <Star className="w-3 h-3 fill-pink-500 mr-0.5" />
                       {expert.rating}
                     </span>
                     <span className="text-muted-foreground">({expert.reviews}k+ orders)</span>
@@ -130,7 +130,7 @@ export function FeaturedExperts() {
               {/* Specialties / Tags */}
               <div className="flex flex-wrap gap-2 mb-4">
                 {expert.specialization.split(', ').map((spec, i) => (
-                  <span key={i} className="text-[10px] font-medium px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-100">
+                  <span key={i} className="text-[10px] font-medium px-2 py-0.5 rounded bg-pink-50 text-pink-700 border border-pink-100">
                     {spec}
                   </span>
                 ))}
@@ -156,7 +156,7 @@ export function FeaturedExperts() {
               
               {/* Action Buttons */}
               <div className="grid grid-cols-2 gap-3">
-                <Button className="w-full h-9 rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm font-semibold text-xs border border-amber-600">
+                <Button className="w-full h-9 rounded-lg bg-pink-500 hover:bg-pink-600 text-white shadow-sm font-semibold text-xs border border-pink-600">
                   Chat
                 </Button>
                 <Button variant="outline" className="w-full h-9 rounded-lg border-border hover:bg-muted font-semibold text-xs">

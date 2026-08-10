@@ -148,12 +148,12 @@ export function BrowseCategories({ variant }: { variant: string }) {
                   <div className="relative z-10 flex items-end justify-between">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <cat.icon className={`w-4 h-4 text-amber-500`} />
+                        <cat.icon className={`w-4 h-4 text-pink-500`} />
                         <h3 className="font-bold text-white text-base truncate">{catData.name}</h3>
                       </div>
                       <p className="text-xs text-white/70 font-light truncate">{catData.count} {t.browseSubtitleEm === 'astrologer' ? 'astrologers' : 'ज्योतिषी'}</p>
                     </div>
-                    <div className="w-8 h-8 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm flex items-center justify-center group-hover:bg-amber-500 group-hover:border-amber-500 transition-colors shrink-0">
+                    <div className="w-8 h-8 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm flex items-center justify-center group-hover:bg-pink-500 group-hover:border-pink-500 transition-colors shrink-0">
                       <ArrowRight className="w-4 h-4 text-white group-hover:text-black transition-colors" />
                     </div>
                   </div>

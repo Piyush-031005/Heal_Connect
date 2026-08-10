@@ -60,7 +60,7 @@ export function DailyHoroscope({ variant }: { variant: string }) {
       { label: 'Love', value: data.love, color: 'bg-pink-500', textColor: 'text-pink-400' },
       { label: 'Career', value: data.career, color: 'bg-indigo-500', textColor: 'text-indigo-400' },
       { label: 'Health', value: data.health, color: 'bg-emerald-500', textColor: 'text-emerald-400' },
-      { label: 'Money', value: data.money, color: 'bg-amber-500', textColor: 'text-amber-400' },
+      { label: 'Money', value: data.money, color: 'bg-pink-500', textColor: 'text-pink-400' },
     ];
 
     return (
@@ -212,7 +212,7 @@ export function DailyHoroscope({ variant }: { variant: string }) {
     { label: 'Love', value: data.love, color: 'bg-rose-400', textColor: 'text-rose-500' },
     { label: 'Career', value: data.career, color: 'bg-blue-400', textColor: 'text-blue-500' },
     { label: 'Health', value: data.health, color: 'bg-emerald-400', textColor: 'text-emerald-500' },
-    { label: 'Money', value: data.money, color: 'bg-amber-400', textColor: 'text-amber-500' },
+    { label: 'Money', value: data.money, color: 'bg-pink-400', textColor: 'text-pink-500' },
   ];
 
   return (

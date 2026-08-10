@@ -14,116 +14,63 @@ const MODALITIES = [
   { id: 'vastu', name: 'Vastu', image: '/12-modalities-v2/vastu.png' },
   { id: 'eft', name: 'EFT Tapping', image: '/12-modalities-v2/eft.png' },
   { id: 'spiritual', name: 'Spiritual Guide', image: '/12-modalities-v2/spiritual.png' },
-  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-v2/sound-v3.png' },
+  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-v2/sound-v4.png' },
 ];
 
 export default function OpticalWheel() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [playState, setPlayState] = useState<'running' | 'paused'>('running');
 
   const cx = 500;
   const cy = 500;
   const outerRadius = 380;
 
-  const isAnyHovered = hoveredIdx !== null;
-  const playState = isAnyHovered ? 'paused' : 'running';
-
   const handleScrollTo = (id: string) => {
-    const element = document.getElementById(id);
+    const element = document.getElementById(`modality-${id}`);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
-    <div className="relative w-full h-full max-w-[900px] max-h-[900px] aspect-square flex items-center justify-center pointer-events-none mx-auto">
-      
-      {/* Central Glow / Magical Aura */}
-      <div className="absolute inset-0 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+    <div 
+      className="relative w-full h-full select-none"
+      onMouseEnter={() => setPlayState('paused')}
+      onMouseLeave={() => setPlayState('running')}
+    >
       
       <div className="absolute inset-0 z-10 pointer-events-auto">
-        <svg viewBox="0 0 1000 1000" className="w-full h-full overflow-visible">
+        <svg viewBox="0 0 1000 1000" className="w-full h-full mx-auto filter drop-shadow-2xl">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="var(--primary)" stopOpacity="0" />
+            </radialGradient>
+          </defs>
           
-          {/* LAYER 1: Deep Mathematical Rings */}
+          <circle cx={cx} cy={cy} r="480" fill="url(#glow)" />
+
+          {/* LAYER 1: Minimal Rings */}
           <g style={{ animation: 'spin 180s linear infinite', transformOrigin: '500px 500px' }}>
-            {/* Outer decorative tracks */}
-            <circle cx={cx} cy={cy} r={outerRadius + 80} fill="none" stroke="#312E81" opacity="0.6" strokeWidth="2" />
-            <circle cx={cx} cy={cy} r={outerRadius + 95} fill="none" stroke="#312E81" opacity="0.4" strokeWidth="1" strokeDasharray="4 8" />
+            <circle cx={cx} cy={cy} r={outerRadius + 80} fill="none" stroke="#312E81" opacity="0.3" strokeWidth="2" />
             
-            {/* Intricate edge markings */}
-            {[...Array(120)].map((_, i) => (
+            {[...Array(60)].map((_, i) => (
               <line 
                 key={`mark-${i}`}
-                x1={cx + (outerRadius + 80) * Math.cos(i * 3 * Math.PI / 180)}
-                y1={cy + (outerRadius + 80) * Math.sin(i * 3 * Math.PI / 180)}
-                x2={cx + (outerRadius + (i % 5 === 0 ? 95 : 85)) * Math.cos(i * 3 * Math.PI / 180)}
-                y2={cy + (outerRadius + (i % 5 === 0 ? 95 : 85)) * Math.sin(i * 3 * Math.PI / 180)}
+                x1={cx + (outerRadius + 80) * Math.cos(i * 6 * Math.PI / 180)}
+                y1={cy + (outerRadius + 80) * Math.sin(i * 6 * Math.PI / 180)}
+                x2={cx + (outerRadius + (i % 5 === 0 ? 95 : 85)) * Math.cos(i * 6 * Math.PI / 180)}
+                y2={cy + (outerRadius + (i % 5 === 0 ? 95 : 85)) * Math.sin(i * 6 * Math.PI / 180)}
                 stroke="#312E81"
-                opacity={i % 5 === 0 ? "0.8" : "0.5"}
+                opacity={i % 5 === 0 ? "0.6" : "0.3"}
                 strokeWidth={i % 5 === 0 ? "3" : "1.5"}
               />
             ))}
-            <circle cx={cx} cy={cy} r={outerRadius + 110} fill="none" stroke="#312E81" opacity="0.5" strokeWidth="2" />
-          </g>
-          
-          {/* LAYER 2: Sacred Geometry (Metatron's Cube / Hexagrams) */}
-          <g style={{ animation: 'spin 240s linear infinite reverse', transformOrigin: '500px 500px' }}>
-            <circle cx={cx} cy={cy} r={outerRadius - 60} fill="none" stroke="#312E81" opacity="0.5" strokeWidth="2" />
-            <circle cx={cx} cy={cy} r={outerRadius - 100} fill="none" stroke="#312E81" opacity="0.6" strokeWidth="2" strokeDasharray="15 5" />
-            
-            {[0, 15, 30, 45, 60, 75].map((rot, i) => (
-              <rect 
-                key={`sq-${i}`}
-                x={cx - (outerRadius - 60)} 
-                y={cy - (outerRadius - 60)} 
-                width={(outerRadius - 60) * 2} 
-                height={(outerRadius - 60) * 2} 
-                fill="none" 
-                stroke="#312E81"
-                opacity="0.3"
-                className="transition-colors duration-1000" 
-                strokeWidth="2"
-                transform={`rotate(${rot}, ${cx}, ${cy})`}
-              />
-            ))}
-          </g>
-
-          {/* LAYER 3: Intricate 12-pointed star pattern */}
-          <g style={{ animation: 'spin 300s linear infinite', transformOrigin: '500px 500px' }}>
-             {[0, 30].map((rot, i) => (
-              <polygon 
-                key={`hex-${i}`}
-                points={`
-                  ${cx},${cy - (outerRadius - 140)} 
-                  ${cx + (outerRadius - 140) * Math.sin(Math.PI/3)},${cy + (outerRadius - 140) * Math.cos(Math.PI/3)} 
-                  ${cx - (outerRadius - 140) * Math.sin(Math.PI/3)},${cy + (outerRadius - 140) * Math.cos(Math.PI/3)}
-                `}
-                fill="none"
-                stroke="#312E81"
-                opacity="0.4"
-                strokeWidth="2"
-                transform={`rotate(${rot}, ${cx}, ${cy})`}
-              />
-             ))}
-             {[0, 30].map((rot, i) => (
-              <polygon 
-                key={`hex-inv-${i}`}
-                points={`
-                  ${cx},${cy + (outerRadius - 140)} 
-                  ${cx + (outerRadius - 140) * Math.sin(Math.PI/3)},${cy - (outerRadius - 140) * Math.cos(Math.PI/3)} 
-                  ${cx - (outerRadius - 140) * Math.sin(Math.PI/3)},${cy - (outerRadius - 140) * Math.cos(Math.PI/3)}
-                `}
-                fill="none"
-                stroke="#312E81"
-                opacity="0.4"
-                strokeWidth="2"
-                transform={`rotate(${rot}, ${cx}, ${cy})`}
-              />
-             ))}
-             <circle cx={cx} cy={cy} r={outerRadius - 140} fill="none" stroke="#312E81" opacity="0.5" strokeWidth="3" />
+            <circle cx={cx} cy={cy} r={outerRadius + 110} fill="none" stroke="#312E81" opacity="0.2" strokeWidth="2" />
           </g>
 
           {/* LAYER 4: The 12 Modalities orbiting */}
-          <circle cx={cx} cy={cy} r={outerRadius} fill="none" stroke="#312E81" opacity="0.7" strokeWidth="4" />
+          <circle cx={cx} cy={cy} r={outerRadius} fill="none" stroke="#312E81" opacity="0.5" strokeWidth="4" />
           
           <g style={{ animation: 'spin 120s linear infinite', animationPlayState: playState, transformOrigin: '500px 500px' }}>
             {MODALITIES.map((modality, idx) => {

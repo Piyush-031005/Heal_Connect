@@ -21,10 +21,10 @@ export default function FaqSection() {
         <div className="flex flex-col md:flex-row gap-16 items-start">
           
           <div className="md:w-1/3 sticky top-32">
-            <h4 className="text-amber-600 font-bold tracking-widest text-sm uppercase mb-3">Questions, Answered</h4>
+            <h4 className="text-pink-600 font-bold tracking-widest text-sm uppercase mb-3">Questions, Answered</h4>
             <h2 className="text-4xl md:text-5xl font-serif text-foreground font-bold leading-tight">
               First time? <br/>
-              <span className="text-amber-700">Read these</span> first.
+              <span className="text-pink-700">Read these</span> first.
             </h2>
           </div>
 
@@ -32,15 +32,15 @@ export default function FaqSection() {
             {FAQS.map((faq, idx) => (
               <div 
                 key={idx} 
-                className={`bg-white rounded-2xl transition-all duration-300 cursor-pointer overflow-hidden ${openIdx === idx ? 'shadow-md border border-amber-100 ring-1 ring-amber-50' : 'shadow-sm border border-border/50 hover:border-amber-100'}`}
+                className={`bg-white rounded-2xl transition-all duration-300 cursor-pointer overflow-hidden ${openIdx === idx ? 'shadow-md border border-pink-100 ring-1 ring-pink-50' : 'shadow-sm border border-border/50 hover:border-pink-100'}`}
                 onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
               >
                 <div className="p-6 flex items-center justify-between">
-                  <h3 className={`font-semibold text-base ${openIdx === idx ? 'text-amber-800' : 'text-foreground'}`}>
+                  <h3 className={`font-semibold text-base ${openIdx === idx ? 'text-pink-800' : 'text-foreground'}`}>
                     {faq.q}
                   </h3>
                   {openIdx === idx ? (
-                    <ChevronUp className="w-5 h-5 text-amber-500 shrink-0" />
+                    <ChevronUp className="w-5 h-5 text-pink-500 shrink-0" />
                   ) : (
                     <ChevronDown className="w-5 h-5 text-muted-foreground shrink-0" />
                   )}

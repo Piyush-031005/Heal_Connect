@@ -18,13 +18,13 @@ const PLANS = [
   },
   {
     name: 'Pro',
-    price: '₹25',
-    type: '/min',
-    description: 'Deep dive into your cosmic path.',
+    price: '$89',
+    period: 'per month',
+    description: 'Perfect for dedicated seekers wanting regular guidance.',
     features: ['Chat + Call', 'Detailed horoscope', 'Priority support', 'Kundli access'],
     popular: true,
-    color: 'from-amber-50 to-amber-100',
-    borderColor: 'border-amber-200',
+    color: 'from-pink-50 to-pink-100',
+    borderColor: 'border-pink-200',
     image: '/12-modalities-v2/tarot-v3.png'
   },
   {
@@ -55,12 +55,12 @@ export default function PricingSection() {
               key={idx} 
               className={`relative bg-white rounded-[2rem] p-8 flex flex-col transition-all duration-300 ${
                 plan.popular 
-                  ? 'border-2 border-amber-400 shadow-2xl md:-translate-y-4 md:scale-105 z-10 bg-gradient-to-b from-white to-amber-50/30' 
+                  ? 'border-2 border-pink-400 shadow-2xl md:-translate-y-4 md:scale-105 z-10 bg-gradient-to-b from-white to-pink-50/30' 
                   : 'border border-border shadow-md hover:shadow-xl'
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-amber-500 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-md">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-pink-500 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-md">
                   Most Popular
                 </div>
               )}
@@ -73,7 +73,7 @@ export default function PricingSection() {
 
               <div className="text-center mb-8">
                 <h3 className="text-xl font-bold text-foreground mb-2">{plan.name}</h3>
-                <div className="flex items-center justify-center text-amber-600">
+                <div className="flex items-center justify-center text-pink-600">
                   <span className="text-5xl font-black">{plan.price}</span>
                   <span className="text-lg font-medium ml-1">{plan.type}</span>
                 </div>
@@ -82,7 +82,7 @@ export default function PricingSection() {
               <div className="flex-1 space-y-4 mb-8">
                 {plan.features.map((feature, i) => (
                   <div key={i} className="flex items-center gap-3">
-                    <Check className={`w-5 h-5 ${plan.popular ? 'text-amber-500' : 'text-primary/70'}`} />
+                    <Check className={`w-5 h-5 ${plan.popular ? 'text-pink-500' : 'text-primary/70'}`} />
                     <span className="text-sm font-medium text-foreground/80">{feature}</span>
                   </div>
                 ))}
@@ -91,7 +91,7 @@ export default function PricingSection() {
               <Button 
                 className={`w-full py-6 rounded-xl font-bold text-base transition-all shadow-sm ${
                   plan.popular 
-                    ? 'bg-amber-500 hover:bg-amber-600 text-white shadow-amber-500/25' 
+                    ? 'bg-pink-500 hover:bg-pink-600 text-white shadow-pink-500/25' 
                     : 'bg-muted hover:bg-primary hover:text-white text-foreground'
                 }`}
               >
