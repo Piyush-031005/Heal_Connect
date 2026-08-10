@@ -252,7 +252,7 @@ function ZenAlignHero() {
   return (
     <section 
       ref={containerRef}
-      className="relative pt-32 pb-48 bg-gradient-to-b from-[#F0F4FF] to-white min-h-[110vh] flex flex-col items-center justify-center border-b border-border/50"
+      className="relative pt-32 pb-[350px] lg:pb-[400px] bg-gradient-to-b from-[#F0F4FF] to-white min-h-[120vh] flex flex-col items-center justify-center border-b border-border/50"
     >
       
       {/* Background radial gradient to give a subtle center light */}
