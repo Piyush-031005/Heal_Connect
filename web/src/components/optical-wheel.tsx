@@ -167,16 +167,16 @@ export default function OpticalWheel() {
                     {/* Hit Area */}
                     <circle cx="0" cy="0" r="55" fill="transparent" pointerEvents="all" />
                     
-                    {/* Dark backdrop circle for PNG/Icon to pop */}
-                    <circle cx="0" cy="0" r="32" className="fill-card stroke-primary/30 transition-all duration-300 shadow-xl" strokeWidth={isHovered ? "3" : "1"} />
+                    {/* Button Background */}
+                    <circle cx="0" cy="0" r="32" className="fill-card stroke-border transition-all duration-300 shadow-2xl" strokeWidth={isHovered ? "3" : "1.5"} style={{ filter: 'drop-shadow(0px 8px 16px rgba(0,0,0,0.15))' }} />
                     
                     {/* Glowing Aura on Hover */}
-                    <circle cx="0" cy="0" r="42" className="fill-transparent stroke-primary/0 group-hover:stroke-primary/40 transition-all duration-300 blur-sm" strokeWidth="4" />
+                    <circle cx="0" cy="0" r="42" className="fill-transparent stroke-primary/0 group-hover:stroke-primary/50 transition-all duration-300 blur-[2px]" strokeWidth="3" />
                     
                     {/* Outer animated dots on hover */}
                     <g className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ animation: 'spin 10s linear infinite' }}>
                       {[0, 1, 2, 3].map((d) => (
-                        <circle key={d} cx={38 * Math.cos(d * Math.PI/2)} cy={38 * Math.sin(d * Math.PI/2)} r="2.5" className="fill-primary" />
+                        <circle key={d} cx={38 * Math.cos(d * Math.PI/2)} cy={38 * Math.sin(d * Math.PI/2)} r="3" className="fill-primary" />
                       ))}
                     </g>
 
@@ -187,20 +187,16 @@ export default function OpticalWheel() {
                       </div>
                     </foreignObject>
 
-                    {/* Node Text Label (Floating Outside) */}
-                    <text
-                      x="0"
-                      y={isHovered ? "-52" : "-45"}
-                      textAnchor="middle"
-                      className="fill-foreground font-sans font-semibold tracking-wide transition-all duration-300 pointer-events-none"
-                      style={{ 
-                        fontSize: '15px',
-                        opacity: isHovered ? 1 : 0,
-                        textShadow: '0 2px 10px rgba(0,0,0,0.1)'
-                      }}
-                    >
-                      {modality.name}
-                    </text>
+                    {/* Node Text Label (Floating Button Style) */}
+                    {isHovered && (
+                      <foreignObject x="-60" y="45" width="120" height="40" className="pointer-events-none overflow-visible">
+                        <div className="w-full flex justify-center">
+                          <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+                            {modality.name}
+                          </span>
+                        </div>
+                      </foreignObject>
+                    )}
                   </g>
                 </g>
               );

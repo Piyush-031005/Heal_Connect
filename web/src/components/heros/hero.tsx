@@ -256,15 +256,33 @@ function ZenAlignHero() {
       {/* Background radial gradient to give a subtle center light */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0%,transparent_100%)] pointer-events-none" />
 
-          {/* Right Optical Wheel (Doctor Strange WebGL style) */}
-          <div className="relative h-[600px] w-full flex items-center justify-center z-10 opacity-90 lg:opacity-100 mt-12 lg:mt-0 lg:-ml-12 pointer-events-none lg:pointer-events-auto">
-            {/* The optical wheel overflows its container slightly for grandeur */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] scale-75 sm:scale-90 lg:scale-100 flex items-center justify-center pointer-events-auto">
-              <OpticalWheel />
-            </div>
-          </div>
+      <div className="container mx-auto px-6 relative z-20">
+        <div className="max-w-2xl">
+          <h1 className="text-6xl md:text-8xl font-heading font-medium tracking-tight text-foreground mb-8">
+            Align Your <br />
+            <span className="text-primary italic">Inner World.</span>
+          </h1>
+          <p className="text-xl text-muted-foreground mb-10 font-light leading-relaxed">
+            Discover a curated space for holistic wellness. Connect with vetted practitioners who guide you toward balance, clarity, and transformation.
+          </p>
 
+          <div className="flex items-center bg-card rounded-full p-2 max-w-xl shadow-lg border border-primary/10">
+            <Search className="w-5 h-5 text-muted-foreground ml-4 mr-2" />
+            <input 
+              type="text" 
+              placeholder="Search by specialty, service or name" 
+              className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground"
+            />
+            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 h-12 font-medium">
+              Search
+            </Button>
+          </div>
         </div>
+      </div>
+
+      {/* Right Optical Wheel (Doctor Strange WebGL style) */}
+      <div className="absolute right-[-20%] md:right-[-10%] top-1/2 -translate-y-1/2 h-[800px] w-[800px] md:h-[1000px] md:w-[1000px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center">
+        <OpticalWheel />
       </div>
     </section>
   );
