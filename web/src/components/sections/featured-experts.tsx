@@ -90,44 +90,46 @@ export function FeaturedExperts() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {EXPERTS.map((expert) => (
-            <div key={expert.id} className="bg-background rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md hover:border-primary/40 transition-all duration-300 flex flex-col group p-4">
-              <div className="relative w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full border-2 border-primary/20 bg-[#F0E8F8]">
-                <Image 
+            <div key={expert.id} className="bg-background rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-lg hover:border-primary/40 transition-all duration-300 flex flex-col group p-6">
+              <div className="relative w-32 h-32 mx-auto mb-6 overflow-hidden rounded-full border-4 border-primary/20 bg-[#F0E8F8]">
+                <img 
                   src={expert.image} 
                   alt={expert.name}
-                  fill
-                  className="object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-background/90 backdrop-blur-md px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm border border-border">
-                  <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-                  <span className="text-[10px] font-bold text-foreground">{expert.rating}</span>
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-background/95 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 shadow-md border border-border">
+                  <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                  <span className="text-xs font-bold text-foreground">{expert.rating}</span>
                 </div>
               </div>
               
               <div className="flex-1 flex flex-col text-center">
-                <h3 className="text-sm font-bold text-foreground mb-0.5 truncate">{expert.name}</h3>
-                <p className="text-primary text-[11px] font-medium mb-3 truncate">{expert.specialization}</p>
+                <h3 className="text-xl font-bold text-foreground mb-1">{expert.name}</h3>
+                <p className="text-primary text-sm font-medium mb-5">{expert.specialization}</p>
                 
-                <div className="flex flex-col gap-1.5 text-[11px] text-muted-foreground mb-4">
-                  <div className="flex items-center justify-center gap-1.5">
-                    <Clock className="w-3 h-3" />
-                    <span>{expert.experience} Exp.</span>
+                <div className="flex flex-col gap-2.5 text-sm text-muted-foreground mb-6">
+                  <div className="flex items-center justify-center gap-2">
+                    <Clock className="w-4 h-4 text-primary/70" />
+                    <span>{expert.experience} Experience</span>
                   </div>
-                  <div className="flex items-center justify-center gap-1.5">
-                    <MapPin className="w-3 h-3" />
+                  <div className="flex items-center justify-center gap-2">
+                    <MapPin className="w-4 h-4 text-primary/70" />
                     <span className="truncate">{expert.location}</span>
                   </div>
                 </div>
 
-                <div className="mt-auto pt-3 border-t border-border/50 flex flex-col items-center justify-center gap-2">
-                  <span className="text-[10px] font-medium text-success flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
-                    {expert.availability}
-                  </span>
-                  <Button size="sm" className="w-full h-8 text-xs rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all">
-                    Book {expert.price.split(' ')[0]}
+                <div className="mt-auto pt-5 border-t border-border/50 flex flex-col gap-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-medium text-success flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
+                      {expert.availability}
+                    </span>
+                    <span className="text-sm font-bold text-foreground">{expert.price}</span>
+                  </div>
+                  <Button className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+                    Book Consultation
                   </Button>
                 </div>
               </div>

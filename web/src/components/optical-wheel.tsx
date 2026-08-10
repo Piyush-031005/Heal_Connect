@@ -142,11 +142,11 @@ export default function OpticalWheel() {
                     {/* Hit Area */}
                     <circle cx="0" cy="0" r="55" fill="transparent" pointerEvents="all" />
                     
-                    {/* Button Background */}
-                    <circle cx="0" cy="0" r="40" className="fill-[#090514] stroke-primary/50 transition-all duration-300 shadow-2xl" strokeWidth={isHovered ? "3" : "1.5"} style={{ filter: 'drop-shadow(0px 8px 16px rgba(0,0,0,0.15))' }} />
+                    {/* Button Background - Changed to light theme */}
+                    <circle cx="0" cy="0" r="40" className="fill-white stroke-primary/30 transition-all duration-300 shadow-xl" strokeWidth={isHovered ? "3" : "1.5"} style={{ filter: 'drop-shadow(0px 8px 24px rgba(78,89,194,0.2))' }} />
                     
                     {/* Glowing Aura on Hover */}
-                    <circle cx="0" cy="0" r="48" className="fill-transparent stroke-primary/0 group-hover:stroke-primary/50 transition-all duration-300 blur-[2px]" strokeWidth="3" />
+                    <circle cx="0" cy="0" r="48" className="fill-transparent stroke-primary/0 group-hover:stroke-primary/40 transition-all duration-300 blur-[2px]" strokeWidth="4" />
                     
                     {/* Outer animated dots on hover */}
                     <g className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ animation: 'spin 10s linear infinite', transformOrigin: '0px 0px' }}>
@@ -158,18 +158,18 @@ export default function OpticalWheel() {
                     {/* Image */}
                     <image 
                       href={modality.image} 
-                      x="-25" 
-                      y="-25" 
-                      width="50" 
-                      height="50" 
-                      className={`transition-all duration-300 ${isHovered ? 'scale-110 drop-shadow-lg' : 'opacity-90'}`}
-                      style={{ mixBlendMode: 'screen' }} 
+                      x="-35" 
+                      y="-35" 
+                      width="70" 
+                      height="70" 
+                      className={`transition-all duration-300 ${isHovered ? 'scale-110 drop-shadow-xl' : 'opacity-95'}`}
+                      /* Removed mixBlendMode screen so the images show fully colored */
                     />
 
                     {/* Node Text Label (Floating Button Style) */}
                     <foreignObject x="-60" y="55" width="120" height="40" className={`pointer-events-none overflow-visible transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
                       <div className="w-full flex justify-center">
-                        <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+                        <span className="bg-white border border-primary/20 text-primary text-xs font-bold px-4 py-2 rounded-full shadow-lg whitespace-nowrap">
                           {modality.name}
                         </span>
                       </div>
@@ -184,24 +184,24 @@ export default function OpticalWheel() {
           {/* LAYER 5: Central Focus Core (Logo) */}
           <g transform={`translate(${cx}, ${cy})`}>
             {/* Intricate Inner Core */}
-            <circle cx="0" cy="0" r="160" fill="none" className="stroke-primary/20" strokeWidth="1" />
-            <circle cx="0" cy="0" r="145" fill="none" className="stroke-primary/40" strokeWidth="2" strokeDasharray="4 12" style={{ animation: 'spin 60s linear infinite', transformOrigin: '0px 0px' }} />
+            <circle cx="0" cy="0" r="160" fill="none" className="stroke-primary/30" strokeWidth="2" />
+            <circle cx="0" cy="0" r="145" fill="none" className="stroke-primary/50" strokeWidth="3" strokeDasharray="4 12" style={{ animation: 'spin 60s linear infinite', transformOrigin: '0px 0px' }} />
             
             {/* Spinning runes/dash array core */}
-            <circle cx="0" cy="0" r="115" fill="none" className="stroke-primary/50" strokeWidth="4" strokeDasharray="1 15" style={{ animation: 'spin 90s linear infinite reverse', transformOrigin: '0px 0px' }} />
-            <circle cx="0" cy="0" r="95" fill="none" className="stroke-primary/30" strokeWidth="1" strokeDasharray="30 10" style={{ animation: 'spin 40s linear infinite', transformOrigin: '0px 0px' }} />
+            <circle cx="0" cy="0" r="115" fill="none" className="stroke-primary/60" strokeWidth="4" strokeDasharray="1 15" style={{ animation: 'spin 90s linear infinite reverse', transformOrigin: '0px 0px' }} />
+            <circle cx="0" cy="0" r="95" fill="none" className="stroke-primary/40" strokeWidth="2" strokeDasharray="30 10" style={{ animation: 'spin 40s linear infinite', transformOrigin: '0px 0px' }} />
             
-            {/* Solid Center Backdrop */}
-            <circle cx="0" cy="0" r="85" className="fill-[#090514]/90 backdrop-blur-md stroke-primary/30" strokeWidth="1" />
+            {/* Solid Center Backdrop - Changed to match light theme */}
+            <circle cx="0" cy="0" r="85" className="fill-white/80 backdrop-blur-md stroke-primary/30 shadow-[0_0_50px_rgba(78,89,194,0.3)]" strokeWidth="2" />
           </g>
 
         </svg>
 
         {/* HTML Center Overlay for Logo */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-36 h-36 flex items-center justify-center bg-transparent rounded-full drop-shadow-2xl">
+          <div className="w-48 h-48 flex items-center justify-center bg-transparent rounded-full drop-shadow-2xl">
             {/* The primary logo */}
-            <img src="/new_logo.png" alt="Main Logo" className="w-32 h-32 object-contain scale-[1.3]" style={{ filter: 'drop-shadow(0 0 10px rgba(78,89,194,0.3)) mix-blend-mode(screen)' }} />
+            <img src="/new_logo.png" alt="Main Logo" className="w-40 h-40 object-contain scale-[1.3]" style={{ filter: 'drop-shadow(0 0 20px rgba(78,89,194,0.4))' }} />
           </div>
         </div>
 
