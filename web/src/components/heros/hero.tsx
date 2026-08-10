@@ -252,7 +252,7 @@ function ZenAlignHero() {
   return (
     <section 
       ref={containerRef}
-      className="relative overflow-hidden pt-32 pb-48 bg-gradient-to-b from-[#F0F4FF] to-white min-h-[110vh] flex flex-col items-center justify-center border-b border-border/50"
+      className="relative pt-32 pb-48 bg-gradient-to-b from-[#F0F4FF] to-white min-h-[110vh] flex flex-col items-center justify-center border-b border-border/50"
     >
       
       {/* Background radial gradient to give a subtle center light */}
@@ -293,9 +293,9 @@ function ZenAlignHero() {
             <input 
               type="text" 
               placeholder="Search by specialty, service or name" 
-              className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground font-sans font-medium cursor-none"
+              className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground font-sans font-medium"
             />
-            <Button className="bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-full px-8 h-12 font-bold font-sans cursor-none">
+            <Button className="bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-full px-8 h-12 font-bold font-sans">
               Search
             </Button>
           </motion.div>

@@ -15,7 +15,6 @@ export const metadata: Metadata = {
 };
 
 import SmoothScroll from "@/components/smooth-scroll";
-import CustomCursor from "@/components/custom-cursor";
 
 export default function RootLayout({
   children,
@@ -34,7 +33,6 @@ export default function RootLayout({
         >
           <LangProvider>
             <LayoutProvider>
-              <CustomCursor />
               <SmoothScroll>
                 {children}
               </SmoothScroll>
