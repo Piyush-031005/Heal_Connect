@@ -234,56 +234,101 @@ function ModernGlowHero() {
 }
 
 // --- ZEN ALIGN LAYOUT HERO (New Design 1) ---
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+
+// --- ZEN ALIGN LAYOUT HERO (New Design 1) ---
 function ZenAlignHero() {
-  const cartoonModalities = [
-    { id: 'astrology', name: 'Astrology', image: 'https://api.dicebear.com/7.x/micah/svg?seed=Astrology&backgroundColor=E8E0F8' },
-    { id: 'tarot', name: 'Tarot', image: 'https://api.dicebear.com/7.x/micah/svg?seed=Tarot&backgroundColor=E8E0F8' },
-    { id: 'palm-reading', name: 'Palm Reading', image: 'https://api.dicebear.com/7.x/micah/svg?seed=Palm&backgroundColor=E8E0F8' },
-    { id: 'face-reading', name: 'Face Reading', image: 'https://api.dicebear.com/7.x/micah/svg?seed=Face&backgroundColor=E8E0F8' },
-    { id: 'numerology', name: 'Numerology', image: 'https://api.dicebear.com/7.x/micah/svg?seed=Number&backgroundColor=E8E0F8' },
-    { id: 'energy-healing', name: 'Energy Healing', image: 'https://api.dicebear.com/7.x/micah/svg?seed=Energy&backgroundColor=E8E0F8' },
-    { id: 'meditation', name: 'Meditation', image: 'https://api.dicebear.com/7.x/micah/svg?seed=Meditate&backgroundColor=E8E0F8' },
-    { id: 'yoga', name: 'Yoga', image: 'https://api.dicebear.com/7.x/micah/svg?seed=Yoga&backgroundColor=E8E0F8' },
-    { id: 'vastu', name: 'Vastu', image: 'https://api.dicebear.com/7.x/micah/svg?seed=Home&backgroundColor=E8E0F8' },
-    { id: 'eft', name: 'EFT Tapping', image: 'https://api.dicebear.com/7.x/micah/svg?seed=Touch&backgroundColor=E8E0F8' },
-    { id: 'spiritual', name: 'Spiritual Guide', image: 'https://api.dicebear.com/7.x/micah/svg?seed=Spirit&backgroundColor=E8E0F8' },
-    { id: 'sound-healing', name: 'Sound Healing', image: 'https://api.dicebear.com/7.x/micah/svg?seed=Sound&backgroundColor=E8E0F8' },
-  ];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+  
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    setMousePosition({ x, y });
+  };
+
+  // Parallax effects
+  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  
+  // 3D Tilt calculation based on mouse
+  const rotateX = (mousePosition.y - 0.5) * -20; // -10 to 10 degrees
+  const rotateY = (mousePosition.x - 0.5) * 20; // -10 to 10 degrees
 
   return (
-    <section className="relative overflow-hidden pt-32 pb-24 bg-gradient-to-b from-[#F0F4FF] to-white min-h-[95vh] flex flex-col items-center justify-center border-b border-border/50">
+    <section 
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      className="relative overflow-hidden pt-32 pb-24 bg-gradient-to-b from-[#F0F4FF] to-white min-h-[95vh] flex flex-col items-center justify-center border-b border-border/50 perspective-1000"
+    >
       
       {/* Background radial gradient to give a subtle center light */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0%,transparent_100%)] pointer-events-none" />
+      <motion.div style={{ y: yBg }} className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0%,transparent_100%)] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-20">
-        <div className="max-w-2xl">
-          <h1 className="text-6xl md:text-8xl font-sans font-bold tracking-tight text-[#2E2854] mb-8 leading-[1.1]">
-            Align Your <br />
-            <span className="text-[#6366F1]">Inner World.</span>
-          </h1>
-          <p className="text-xl text-[#4A417C]/80 mb-10 font-medium leading-relaxed font-sans">
+        <motion.div 
+          style={{ y: yText }} 
+          className="max-w-2xl"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h1 className="text-6xl md:text-8xl font-sans font-bold tracking-tight text-[#2E2854] mb-8 leading-[1.1]">
+              Align Your <br />
+              <span className="text-[#6366F1]">Inner World.</span>
+            </h1>
+          </motion.div>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-xl text-[#4A417C]/80 mb-10 font-medium leading-relaxed font-sans"
+          >
             Discover a curated space for holistic wellness. Connect with vetted practitioners who guide you toward balance, clarity, and transformation.
-          </p>
+          </motion.p>
 
-          <div className="flex items-center bg-white rounded-full p-2 max-w-xl shadow-xl border border-primary/10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-center bg-white rounded-full p-2 max-w-xl shadow-xl border border-primary/10 transition-transform duration-300 hover:shadow-2xl hover:scale-[1.02]"
+          >
             <Search className="w-5 h-5 text-muted-foreground ml-4 mr-2" />
             <input 
               type="text" 
               placeholder="Search by specialty, service or name" 
-              className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground font-sans font-medium"
+              className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground font-sans font-medium cursor-none"
             />
-            <Button className="bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-full px-8 h-12 font-bold font-sans">
+            <Button className="bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-full px-8 h-12 font-bold font-sans cursor-none">
               Search
             </Button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
-      {/* Right Optical Wheel (Doctor Strange WebGL style) */}
-      <div className="absolute right-[-25%] md:right-[-15%] top-[65%] md:top-[65%] -translate-y-1/2 h-[700px] w-[700px] md:h-[850px] md:w-[850px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center">
+      {/* Right Optical Wheel (Doctor Strange WebGL style) with 3D Tilt */}
+      <motion.div 
+        animate={{ 
+          rotateX, 
+          rotateY,
+          translateY: '-50%' 
+        }}
+        transition={{ type: "spring", stiffness: 75, damping: 20 }}
+        className="absolute right-[-25%] md:right-[-15%] top-[65%] md:top-[65%] h-[700px] w-[700px] md:h-[850px] md:w-[850px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center transform-style-3d"
+      >
         <OpticalWheel />
-      </div>
+      </motion.div>
     </section>
   );
 }

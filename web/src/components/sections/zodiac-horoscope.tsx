@@ -2,20 +2,21 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
 
 const ZODIACS = [
   { id: 'aries', name: 'Aries', hindi: 'Mesh', date: 'Mar 21 - Apr 19' },
   { id: 'taurus', name: 'Taurus', hindi: 'Vrishabha', date: 'Apr 20 - May 20' },
   { id: 'gemini', name: 'Gemini', hindi: 'Mithun', date: 'May 21 - Jun 20' },
-  { id: 'cancer', name: 'Cancer', hindi: 'Kark', date: 'Jun 21 - Jul 22' },
-  { id: 'leo', name: 'Leo', hindi: 'Singh', date: 'Jul 23 - Aug 22' },
+  { id: 'cancer', name: 'Cancer', hindi: 'Karka', date: 'Jun 21 - Jul 22' },
+  { id: 'leo', name: 'Leo', hindi: 'Simha', date: 'Jul 23 - Aug 22' },
   { id: 'virgo', name: 'Virgo', hindi: 'Kanya', date: 'Aug 23 - Sep 22' },
   { id: 'libra', name: 'Libra', hindi: 'Tula', date: 'Sep 23 - Oct 22' },
-  { id: 'scorpio', name: 'Scorpio', hindi: 'Vrishchik', date: 'Oct 23 - Nov 21' },
+  { id: 'scorpio', name: 'Scorpio', hindi: 'Vrishchika', date: 'Oct 23 - Nov 21' },
   { id: 'sagittarius', name: 'Sagittarius', hindi: 'Dhanu', date: 'Nov 22 - Dec 21' },
-  { id: 'capricorn', name: 'Capricorn', hindi: 'Makar', date: 'Dec 22 - Jan 19' },
-  { id: 'aquarius', name: 'Aquarius', hindi: 'Kumbh', date: 'Jan 20 - Feb 18' },
-  { id: 'pisces', name: 'Pisces', hindi: 'Meen', date: 'Feb 19 - Mar 20' },
+  { id: 'capricorn', name: 'Capricorn', hindi: 'Makara', date: 'Dec 22 - Jan 19' },
+  { id: 'aquarius', name: 'Aquarius', hindi: 'Kumbha', date: 'Jan 20 - Feb 18' },
+  { id: 'pisces', name: 'Pisces', hindi: 'Meena', date: 'Feb 19 - Mar 20' },
 ];
 
 export default function ZodiacHoroscope() {
@@ -69,33 +70,37 @@ export default function ZodiacHoroscope() {
               const depth = (Math.sin(angle) + 1) / 2; // 0 to 1
               const scale = 0.6 + (depth * 0.6); // 0.6 to 1.2
               const zIndex = Math.floor(depth * 100);
-              const opacity = 0.4 + (depth * 0.6);
+              const opacity = 0.2 + (depth * 0.8);
 
               return (
-                <div
+                <motion.div
                   key={zodiac.id}
                   onClick={() => setActiveZodiac(zodiac)}
-                  className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-300 group`}
-                  style={{
-                    transform: `translate3d(${x}px, ${y}px, 0) scale(${isActive ? scale * 1.2 : scale})`,
+                  className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer group`}
+                  animate={{
+                    x: x,
+                    y: y,
+                    scale: isActive ? scale * 1.3 : scale,
                     zIndex: isActive ? 200 : zIndex,
                     opacity: isActive ? 1 : opacity,
+                    filter: isActive ? 'blur(0px)' : `blur(${Math.max(0, (1-depth) * 4)}px)`
                   }}
+                  transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                 >
                   <div className={`relative flex flex-col items-center gap-2 ${isActive ? 'drop-shadow-[0_0_20px_rgba(244,114,182,0.6)]' : ''}`}>
-                    <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden border-2 transition-colors ${isActive ? 'border-pink-400 shadow-[0_0_30px_rgba(244,114,182,0.4)]' : 'border-indigo-500/30 group-hover:border-indigo-400'}`}>
+                    <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden border-2 transition-colors duration-500 ${isActive ? 'border-pink-400 shadow-[0_0_30px_rgba(244,114,182,0.6)]' : 'border-indigo-500/20 group-hover:border-indigo-400'}`}>
                       <img src={`/zodiacs/zodiac_${index + 1}.jpg`} alt={zodiac.name} className="w-full h-full object-cover" />
                       {/* Glow overlay */}
-                      <div className="absolute inset-0 bg-indigo-900/20 mix-blend-overlay" />
+                      <div className="absolute inset-0 bg-indigo-900/40 mix-blend-overlay transition-opacity duration-500" style={{ opacity: isActive ? 0 : 1 }} />
                     </div>
                     {/* Only show names for front-facing items to avoid clutter */}
-                    <div className={`absolute top-full mt-2 text-center transition-opacity duration-300 ${depth > 0.7 || isActive ? 'opacity-100' : 'opacity-0'}`}>
-                      <span className={`block text-sm font-bold ${isActive ? 'text-pink-400' : 'text-indigo-100'}`}>
+                    <div className={`absolute top-full mt-2 text-center transition-opacity duration-300 ${depth > 0.8 || isActive ? 'opacity-100' : 'opacity-0'}`}>
+                      <span className={`block text-sm font-bold font-sans tracking-wide ${isActive ? 'text-pink-400' : 'text-indigo-200/80'}`}>
                         {zodiac.name}
                       </span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
