@@ -14,7 +14,7 @@ const PLANS = [
     popular: false,
     color: 'from-blue-50 to-blue-100',
     borderColor: 'border-blue-200',
-    image: '/12-modalities-v2/astrology.png'
+    image: '/12-modalities-v2/astrology-v3.png'
   },
   {
     name: 'Pro',
@@ -25,7 +25,7 @@ const PLANS = [
     popular: true,
     color: 'from-amber-50 to-amber-100',
     borderColor: 'border-amber-200',
-    image: '/12-modalities-v2/tarot.png'
+    image: '/12-modalities-v2/tarot-v3.png'
   },
   {
     name: 'Premium',
