@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -48,7 +48,7 @@ export default function CustomCursor() {
     return null;
   }
 
-  const variants = {
+  const variants: Variants = {
     default: {
       x: mousePosition.x - 16,
       y: mousePosition.y - 16,
