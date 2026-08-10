@@ -32,10 +32,10 @@ export default function ZodiacHoroscope() {
   }, []);
 
   return (
-    <section className="py-24 bg-[#0B0914] relative overflow-hidden text-white min-h-screen flex flex-col">
-      {/* Dark Space Background Elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/40 via-[#0B0914] to-[#0B0914] pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-[600px] bg-indigo-600/10 rounded-[100%] blur-[120px] pointer-events-none" />
+    <section className="py-24 relative overflow-hidden text-white min-h-screen flex flex-col bg-[#0B0914]" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2094&auto=format&fit=crop')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
+      {/* Dark Space Background Overlay */}
+      <div className="absolute inset-0 bg-indigo-950/60 pointer-events-none mix-blend-multiply" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-[600px] bg-indigo-500/20 rounded-[100%] blur-[120px] pointer-events-none" />
       
       {/* Stars Background */}
       <div className="absolute inset-0 opacity-30 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '40px 40px' }} />

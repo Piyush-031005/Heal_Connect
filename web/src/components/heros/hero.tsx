@@ -258,11 +258,11 @@ function ZenAlignHero() {
 
       <div className="container mx-auto px-6 relative z-20">
         <div className="max-w-2xl">
-          <h1 className="text-6xl md:text-8xl font-heading font-medium tracking-tight text-[#2E2854] mb-8">
+          <h1 className="text-6xl md:text-8xl font-sans font-bold tracking-tight text-[#2E2854] mb-8 leading-[1.1]">
             Align Your <br />
-            <span className="text-primary italic">Inner World.</span>
+            <span className="text-[#6366F1]">Inner World.</span>
           </h1>
-          <p className="text-xl text-[#4A417C]/80 mb-10 font-light leading-relaxed">
+          <p className="text-xl text-[#4A417C]/80 mb-10 font-medium leading-relaxed font-sans">
             Discover a curated space for holistic wellness. Connect with vetted practitioners who guide you toward balance, clarity, and transformation.
           </p>
 
@@ -271,9 +271,9 @@ function ZenAlignHero() {
             <input 
               type="text" 
               placeholder="Search by specialty, service or name" 
-              className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground"
+              className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground font-sans font-medium"
             />
-            <Button className="bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-full px-8 h-12 font-medium">
+            <Button className="bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-full px-8 h-12 font-bold font-sans">
               Search
             </Button>
           </div>
@@ -281,7 +281,7 @@ function ZenAlignHero() {
       </div>
 
       {/* Right Optical Wheel (Doctor Strange WebGL style) */}
-      <div className="absolute right-[-20%] md:right-[-10%] top-[60%] md:top-[55%] -translate-y-1/2 h-[800px] w-[800px] md:h-[1000px] md:w-[1000px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center">
+      <div className="absolute right-[-25%] md:right-[-15%] top-[65%] md:top-[65%] -translate-y-1/2 h-[700px] w-[700px] md:h-[850px] md:w-[850px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center">
         <OpticalWheel />
       </div>
     </section>

@@ -14,7 +14,7 @@ const MODALITIES = [
   { id: 'vastu', name: 'Vastu', image: '/12-modalities-v2/vastu.png' },
   { id: 'eft', name: 'EFT Tapping', image: '/12-modalities-v2/eft.png' },
   { id: 'spiritual', name: 'Spiritual Guide', image: '/12-modalities-v2/spiritual.png' },
-  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-v2/sound-v4.png' },
+  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-v2/sound-v5.png' },
 ];
 
 export default function OpticalWheel() {
@@ -72,6 +72,42 @@ export default function OpticalWheel() {
           {/* LAYER 4: The 12 Modalities orbiting */}
           <circle cx={cx} cy={cy} r={outerRadius} fill="none" stroke="#312E81" opacity="0.5" strokeWidth="4" />
           
+          {/* LAYER 5: Intricate Center (Astrology style) */}
+          <g style={{ animation: 'spin 240s linear infinite reverse', transformOrigin: '500px 500px' }}>
+            {/* Center concentric rings */}
+            <circle cx={cx} cy={cy} r={220} fill="none" stroke="#312E81" opacity="0.4" strokeWidth="2" />
+            <circle cx={cx} cy={cy} r={200} fill="none" stroke="#312E81" opacity="0.6" strokeWidth="1" strokeDasharray="4 6" />
+            <circle cx={cx} cy={cy} r={180} fill="none" stroke="#312E81" opacity="0.4" strokeWidth="2" />
+            
+            {/* 8-pointed star */}
+            {[0, 45].map((rot, i) => (
+              <rect 
+                key={`star-sq-${i}`}
+                x={cx - 180 * Math.sin(Math.PI/4)} 
+                y={cy - 180 * Math.sin(Math.PI/4)} 
+                width={180 * Math.sin(Math.PI/4) * 2} 
+                height={180 * Math.sin(Math.PI/4) * 2} 
+                fill="none" 
+                stroke="#312E81"
+                opacity="0.5"
+                strokeWidth="2"
+                transform={`rotate(${rot}, ${cx}, ${cy})`}
+              />
+            ))}
+
+            {/* Core aesthetic center glow & ring */}
+            <circle cx={cx} cy={cy} r={100} fill="#ffffff" opacity="0.8" stroke="#6366F1" strokeWidth="4" />
+            <circle cx={cx} cy={cy} r={115} fill="none" stroke="#6366F1" opacity="0.3" strokeWidth="8" />
+            
+            {/* We can put a small spiritual icon/logo in the very center if we wanted, or just the glowing orb */}
+            <circle cx={cx} cy={cy} r={80} fill="url(#glow)" opacity="0.6" />
+            {/* Small celestial compass lines inside the center */}
+            <line x1={cx} y1={cy-80} x2={cx} y2={cy+80} stroke="#312E81" opacity="0.4" strokeWidth="1.5" />
+            <line x1={cx-80} y1={cy} x2={cx+80} y2={cy} stroke="#312E81" opacity="0.4" strokeWidth="1.5" />
+            <circle cx={cx} cy={cy} r={20} fill="#6366F1" opacity="0.2" />
+            <circle cx={cx} cy={cy} r={4} fill="#6366F1" />
+          </g>
+
           <g style={{ animation: 'spin 120s linear infinite', animationPlayState: playState, transformOrigin: '500px 500px' }}>
             {MODALITIES.map((modality, idx) => {
               const angle = (idx * 30 - 90) * (Math.PI / 180);
