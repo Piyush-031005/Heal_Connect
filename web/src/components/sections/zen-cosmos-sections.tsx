@@ -67,7 +67,7 @@ export function WhyYouHere() {
       <div className="container mx-auto px-6 lg:px-16 pt-20 pb-6 relative z-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#D4A853]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4A853]">02 — What Brings You Here</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4A853]">What Brings You Here</span>
         </div>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-2">What Are You Seeking?</h2>
         <p className="text-[#1A92C6] text-sm font-bold max-w-lg">Every star is a question someone asked. Hover to explore what HealConnect can answer for you. Drag to navigate.</p>
@@ -98,13 +98,6 @@ export function WhyYouHere() {
         onMouseLeave={() => setDragging(false)}
       >
         <svg className="absolute inset-0 w-full h-full" style={{ transform: `translate(${offset.x}px,${offset.y}px)` }}>
-          {/* Constellation lines within clusters */}
-          {INTENTION_STARS.map((s, i) =>
-            INTENTION_STARS.slice(i + 1).filter(s2 => s2.cluster === s.cluster).map(s2 => (
-              <line key={`${s.id}-${s2.id}`} x1={`${s.x}%`} y1={`${s.y}%`} x2={`${s2.x}%`} y2={`${s2.y}%`}
-                stroke={INTENTION_COLORS[s.cluster]} strokeOpacity="0.4" strokeWidth="1.5" strokeDasharray="4 6" />
-            ))
-          )}
           {INTENTION_STARS.map(s => {
             const col = INTENTION_COLORS[s.cluster];
             const isHov = hovered?.id === s.id;
@@ -119,15 +112,15 @@ export function WhyYouHere() {
               >
                 <circle cx={`${s.x}%`} cy={`${s.y}%`} r="35" fill="transparent" />
                 {/* Outer glow ring */}
-                <circle cx={`${s.x}%`} cy={`${s.y}%`} r={isHov ? '24' : '18'} fill="none" stroke={col}
-                  strokeWidth="1.5" strokeOpacity={isHov ? 0.7 : 0.3}
+                <circle cx={`${s.x}%`} cy={`${s.y}%`} r={isHov ? '24' : '18'} fill={col}
+                  opacity={isHov ? 0.15 : 0.05}
                   style={{ transition: 'all 0.4s ease' }} />
                 {/* Core star */}
-                <circle cx={`${s.x}%`} cy={`${s.y}%`} r={isHov ? '12' : '8'} fill={col} fillOpacity={isHov ? 1 : 0.85}
-                  style={{ filter: `drop-shadow(0 0 ${isHov ? 16 : 8}px ${col}80)`, transition: 'all 0.4s ease' }} />
+                <circle cx={`${s.x}%`} cy={`${s.y}%`} r={isHov ? '14' : '10'} fill={col} fillOpacity={isHov ? 1 : 0.9}
+                  style={{ filter: `drop-shadow(0 0 ${isHov ? 20 : 10}px ${col})`, transition: 'all 0.4s ease' }} />
                 {/* Label */}
-                <text x={`${s.x}%`} y={`${s.y}%`} dy="38" textAnchor="middle"
-                  fill="#12527F" fontSize="11" fontWeight="700" opacity={isHov ? 1 : 0.8} fontFamily="serif"
+                <text x={`${s.x}%`} y={`${s.y}%`} dy="32" textAnchor="middle"
+                  fill="#12527F" fontSize="12" fontWeight="700" opacity={isHov ? 1 : 0.8}
                   style={{ transition: 'all 0.3s ease' }}>{s.name}</text>
               </g>
             );
@@ -212,7 +205,7 @@ export function ZodiacOrbitRing() {
       <div className="container mx-auto px-6 lg:px-16 py-24 relative z-10">
         <div className="flex items-center gap-3 mb-12">
           <div className="w-8 h-[2px]" style={{ backgroundColor: active.color }} />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: active.color }}>02 — Zodiac Orbit</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: active.color }}>Zodiac Orbit</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -291,51 +284,51 @@ const TAROT_CARDS = [
   {
     name: 'The Fool', roman: '0', subtitle: 'New Beginnings · Spontaneity',
     message: 'A blank slate lies before you. Take the leap of faith without fear, trusting that the universe will catch you. Embrace the unknown with childlike wonder.',
-    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
-    border: '#D7CCC8', accent: '#EFEBE9',
-    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
+    cardBg: 'linear-gradient(170deg, #E0F2FE 0%, #BAE6FD 100%)',
+    border: '#38BDF8', accent: '#0284C7',
+    color: '#0284C7', backBg: 'linear-gradient(145deg, #0EA5E9, #0369A1)'
   },
   {
     name: 'The High Priestess', roman: 'II', subtitle: 'Intuition · Inner Voice · Mystery',
     message: 'Your subconscious holds truths the waking mind has yet to hear. Honour the cycles within you — your intuition is your most sacred compass right now.',
-    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
-    border: '#D7CCC8', accent: '#EFEBE9',
-    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
+    cardBg: 'linear-gradient(170deg, #F3E8FF 0%, #E9D5FF 100%)',
+    border: '#C084FC', accent: '#7E22CE',
+    color: '#7E22CE', backBg: 'linear-gradient(145deg, #A855F7, #6B21A8)'
   },
   {
     name: 'The Sun', roman: 'XIX', subtitle: 'Joy · Vitality · Success',
     message: 'Radiant golden energy courses through every opportunity before you. A magnificent chapter of abundance, creative power, and warmth is beautifully unfolding.',
-    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
-    border: '#D7CCC8', accent: '#EFEBE9',
-    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
+    cardBg: 'linear-gradient(170deg, #FEF3C7 0%, #FDE68A 100%)',
+    border: '#FBBF24', accent: '#B45309',
+    color: '#B45309', backBg: 'linear-gradient(145deg, #F59E0B, #B45309)'
   },
   {
     name: 'The World', roman: 'XXI', subtitle: 'Completion · Wholeness · Triumph',
     message: 'You stand at the sacred culmination of an extraordinary cycle. Embrace the beautiful wholeness you have earned — a glorious new chapter awaits your first step.',
-    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
-    border: '#D7CCC8', accent: '#EFEBE9',
-    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
+    cardBg: 'linear-gradient(170deg, #DCFCE7 0%, #BBF7D0 100%)',
+    border: '#4ADE80', accent: '#15803D',
+    color: '#15803D', backBg: 'linear-gradient(145deg, #22C55E, #166534)'
   },
   {
     name: 'The Tower', roman: 'XVI', subtitle: 'Revelation · Transformation · Truth',
     message: 'A powerful revelation shakes what was never truly stable. What crumbles was built on illusion — what remains is the indestructible core of your true self.',
-    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
-    border: '#D7CCC8', accent: '#EFEBE9',
-    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
+    cardBg: 'linear-gradient(170deg, #FFEDD5 0%, #FED7AA 100%)',
+    border: '#FB923C', accent: '#C2410C',
+    color: '#C2410C', backBg: 'linear-gradient(145deg, #F97316, #9A3412)'
   },
   {
     name: 'The Star', roman: 'XVII', subtitle: 'Hope · Inspiration · Serenity',
     message: 'After the storm comes clear, starlit skies. A time of deep spiritual healing and renewed hope is upon you. Trust in the quiet guidance of the universe.',
-    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
-    border: '#D7CCC8', accent: '#EFEBE9',
-    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
+    cardBg: 'linear-gradient(170deg, #CCFBF1 0%, #99F6E4 100%)',
+    border: '#2DD4BF', accent: '#0F766E',
+    color: '#0F766E', backBg: 'linear-gradient(145deg, #14B8A6, #115E59)'
   },
   {
     name: 'The Magician', roman: 'I', subtitle: 'Manifestation · Power · Action',
     message: 'You possess all the tools needed to manifest your desires. Align your thoughts, words, and actions, and watch the universe bend to your will.',
-    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
-    border: '#D7CCC8', accent: '#EFEBE9',
-    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
+    cardBg: 'linear-gradient(170deg, #FCE7F3 0%, #FBCFE8 100%)',
+    border: '#F472B6', accent: '#BE185D',
+    color: '#BE185D', backBg: 'linear-gradient(145deg, #EC4899, #9D174D)'
   }
 ];
 
@@ -357,7 +350,7 @@ export function TarotTable() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10 text-center">
         <div className="flex items-center justify-center gap-3 mb-4">
           <div className="w-10 h-[1px] bg-[#1A92C6]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#1A92C6]">05 — Tarot Reading</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#1A92C6]">Tarot Reading</span>
           <div className="w-10 h-[1px] bg-[#1A92C6]" />
         </div>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-3">Draw Your Card</h2>
@@ -487,7 +480,7 @@ export function ModalityUniverse() {
       <div className="container mx-auto px-6 lg:px-16 text-center mb-8 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#1A92C6]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1A92C6]">03 — Modality Universe</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1A92C6]">Modality Universe</span>
           <div className="w-8 h-[2px] bg-[#1A92C6]" />
         </div>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-3">Explore What Speaks To You</h2>
@@ -529,10 +522,9 @@ export function ModalityUniverse() {
                 {/* Label */}
                 <text x={node.cx} y={node.cy} dy="0.35em" textAnchor="middle"
                   fill="#12527F"
-                  fontSize={node.center ? 18 : 13}
-                  fontFamily="Georgia, serif"
-                  fontWeight={node.center ? '700' : '600'}
-                  opacity={isHov ? 1 : 0.85}
+                  fontSize={node.center ? 18 : 14}
+                  fontWeight={node.center ? '800' : '700'}
+                  opacity={isHov ? 1 : 0.9}
                   style={{ transition: 'all 0.4s ease' }}>{node.label}</text>
                 {/* Guide count on hover */}
                 {isHov && (
@@ -592,7 +584,7 @@ export function ExpertStoriesDeck() {
           <div className="lg:w-1/2">
             <div className="flex items-center gap-3 mb-10">
               <div className="w-8 h-[2px]" style={{ backgroundColor: expert.color }} />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: expert.color }}>05 — Meet Your Guide</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: expert.color }}>Meet Your Guide</span>
             </div>
             <div className="relative" style={{ height: '380px', width: '280px' }}>
               {STORY_EXPERTS.map((ex, i) => {
@@ -696,14 +688,14 @@ export function ExpertStoriesDeck() {
 // 06. HEALCONNECT GLOBAL DISTRIBUTION — Platform reach visualised
 // ─────────────────────────────────────────────────────────────────────────
 const HC_NODES = [
-  { name: 'India', x: 70, y: 46, users: '3.2M+', guides: '4,200+', top: 'Vedic Astrology', color: '#63BFE4', size: 'lg' },
-  { name: 'USA', x: 22, y: 35, users: '820K+', guides: '1,100+', top: 'Life Coaching · Tarot', color: '#C9A0DC', size: 'md' },
-  { name: 'UK', x: 47, y: 25, users: '420K+', guides: '820+', top: 'Tarot · Astrology', color: '#7EDEA0', size: 'sm' },
-  { name: 'UAE', x: 62, y: 43, users: '310K+', guides: '650+', top: 'Spiritual Guidance', color: '#F4D58D', size: 'sm' },
-  { name: 'Singapore', x: 77, y: 56, users: '180K+', guides: '480+', top: 'Energy Healing', color: '#98E6F4', size: 'sm' },
-  { name: 'Australia', x: 84, y: 76, users: '150K+', guides: '390+', top: 'Meditation · Tarot', color: '#9B8FFF', size: 'sm' },
-  { name: 'Brazil', x: 32, y: 65, users: '90K+', guides: '290+', top: 'Astrology', color: '#FF6B9D', size: 'xs' },
-  { name: 'Japan', x: 85, y: 34, users: '110K+', guides: '310+', top: 'Numerology · Reiki', color: '#F4A261', size: 'xs' },
+  { name: 'India', x: 71.3, y: 38.8, users: '3.2M+', guides: '4,200+', top: 'Vedic Astrology', color: '#63BFE4', size: 'lg' },
+  { name: 'USA', x: 23.0, y: 28.8, users: '820K+', guides: '1,100+', top: 'Life Coaching · Tarot', color: '#C9A0DC', size: 'md' },
+  { name: 'UK', x: 49.1, y: 19.4, users: '420K+', guides: '820+', top: 'Tarot · Astrology', color: '#7EDEA0', size: 'sm' },
+  { name: 'UAE', x: 65.0, y: 37.2, users: '310K+', guides: '650+', top: 'Spiritual Guidance', color: '#F4D58D', size: 'sm' },
+  { name: 'Singapore', x: 78.6, y: 49.4, users: '180K+', guides: '480+', top: 'Energy Healing', color: '#98E6F4', size: 'sm' },
+  { name: 'Australia', x: 86.9, y: 63.8, users: '150K+', guides: '390+', top: 'Meditation · Tarot', color: '#9B8FFF', size: 'sm' },
+  { name: 'Brazil', x: 35.8, y: 57.7, users: '90K+', guides: '290+', top: 'Astrology', color: '#FF6B9D', size: 'xs' },
+  { name: 'Japan', x: 88.3, y: 30.0, users: '110K+', guides: '310+', top: 'Numerology · Reiki', color: '#F4A261', size: 'xs' },
 ];
 
 const GROWTH_STATS = [
@@ -733,7 +725,7 @@ export function GlobalGuidanceMap() {
       <div className="container mx-auto px-6 lg:px-16 text-center mb-10 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-4">
           <div className="w-10 h-[1px] bg-[#1A92C6]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#1A92C6]">06 — Our Global Reach</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#1A92C6]">Our Global Reach</span>
           <div className="w-10 h-[1px] bg-[#1A92C6]" />
         </div>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-3">HealConnect Is Everywhere</h2>
@@ -860,7 +852,7 @@ export function YourNextDiscovery() {
           <div className="text-5xl mb-4 text-[#12527F]/15">✦ YOU ✦</div>
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-8 h-[2px] bg-[#1A92C6]" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1A92C6]">07 — Your Next Discovery</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1A92C6]">Your Next Discovery</span>
             <div className="w-8 h-[2px] bg-[#1A92C6]" />
           </div>
           <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F]">Where Will You Go Next?</h2>
