@@ -49,7 +49,7 @@ export function BrowseCategories({ variant }: { variant: string }) {
               return (
                 <Link key={cat.name} href="/signup" className="group">
                   <div className="relative flex flex-col justify-end p-8 rounded-3xl overflow-hidden aspect-video border border-red-900/10 shadow-lg hover:shadow-[0_15px_40px_rgba(220,38,38,0.2)] transition-all group-hover:scale-[1.02] duration-700 bg-white">
-                    <img src={`/zodiacs/red/red_${(idx % 12) + 1}.png`} alt={catData.name} className="absolute inset-0 w-full h-full object-contain p-4 opacity-30 group-hover:opacity-60 group-hover:scale-110 transition-transform duration-[2s]" />
+                    <img src={['/new-zodiacs/aries.png','/new-zodiacs/taurus.png','/new-zodiacs/gemini.png','/new-zodiacs/cancer.png','/new-zodiacs/leoo.png','/new-zodiacs/vigro.png','/new-zodiacs/libra.png','/new-zodiacs/scorpio.png','/new-zodiacs/saggitarius.png','/new-zodiacs/capricon.png','/new-zodiacs/aqarius.png','/new-zodiacs/pices.png'][idx % 12] || `/zodiacs/red/red_${(idx % 12) + 1}.png`} alt={catData.name} className="absolute inset-0 w-full h-full object-contain p-4 opacity-30 group-hover:opacity-70 group-hover:scale-110 transition-all duration-[2s]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/60 to-transparent opacity-90 group-hover:opacity-70 transition-opacity" />
                     
                     <div className="relative z-10">

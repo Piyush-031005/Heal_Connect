@@ -130,7 +130,7 @@ export function ServiceCards({ variant }: { variant: string }) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {t.servicesList.slice(0, 4).map((svc: any, idx: number) => (
               <div key={idx} className="group relative rounded-[2.5rem] overflow-hidden aspect-[4/5] cursor-pointer border border-red-900/10 bg-white hover:border-red-500/50 hover:shadow-[0_20px_50px_rgba(220,38,38,0.15)] transition-all duration-700">
-                <img src={`/zodiacs/red/red_${idx + 1}.png`} className="absolute inset-0 w-full h-full object-contain p-8 opacity-40 transition-transform duration-[2s] group-hover:scale-110 group-hover:opacity-100 drop-shadow-[0_0_10px_rgba(220,38,38,0.3)]" alt="Service" />
+                <img src={['/new-zodiacs/aries.png','/new-zodiacs/taurus.png','/new-zodiacs/gemini.png','/new-zodiacs/cancer.png'][idx] || `/zodiacs/red/red_${idx + 1}.png`} className="absolute inset-0 w-full h-full object-contain p-8 opacity-40 transition-transform duration-[2s] group-hover:scale-110 group-hover:opacity-100" alt="Service" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/80 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-700" />
                 <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col items-center text-center transform transition-transform duration-700 group-hover:-translate-y-4">
                   <div className="w-16 h-16 rounded-full border border-red-200 bg-white shadow-lg flex items-center justify-center mb-6 group-hover:bg-red-50 group-hover:border-red-300 group-hover:shadow-[0_10px_20px_rgba(220,38,38,0.2)] group-hover:scale-110 transition-all duration-500">
