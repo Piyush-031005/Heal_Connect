@@ -14,7 +14,7 @@ import PricingSection from '@/components/sections/pricing';
 import FaqSection from '@/components/sections/faq';
 import { useLayout } from '@/lib/layout-context';
 import {
-  ExpertConstellation,
+  WhyYouHere,
   ZodiacOrbitRing,
   TarotTable,
   ModalityUniverse,
@@ -66,14 +66,25 @@ export default function LandingPage() {
 
         {isNewDesign1 ? (
           <>
-            {/* ZEN LAYOUT — 7 Cosmos Sections */}
-            <ExpertConstellation />
-            <ZodiacOrbitRing />
-            <TarotTable />
-            <ModalityUniverse />
+            {/* ZEN LAYOUT — User-designed section order */}
+            {/* 01 - Meet Your Guide (expert portrait deck) */}
             <ExpertStoriesDeck />
+            {/* 02 - What Brings You Here (life intention stars) */}
+            <WhyYouHere />
+            {/* 03 - Modality Universe (readable node map) */}
+            <ModalityUniverse />
+            {/* 04 - Zodiac Ring */}
+            <ZodiacOrbitRing />
+            {/* 05 - Tarot Reading (premium zodiac-art cards) */}
+            <TarotTable />
+            {/* 06 - HealConnect Global Distribution Map */}
             <GlobalGuidanceMap />
+            {/* 07 - Your Next Discovery (3-path CTA) */}
             <YourNextDiscovery />
+            {/* 08 - Pricing */}
+            <PricingSection />
+            {/* 09 - FAQ */}
+            <FaqSection />
           </>
         ) : (
           <>

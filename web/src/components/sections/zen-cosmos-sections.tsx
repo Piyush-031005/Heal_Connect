@@ -5,33 +5,41 @@ import Link from 'next/link';
 import { Star, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // ─────────────────────────────────────────────────────────────────────────
-// 01. EXPERT CONSTELLATION — Dark space, draggable star universe
+// 01. WHY YOU ARE HERE — Life intention star clusters
 // ─────────────────────────────────────────────────────────────────────────
-const EXPERTS = [
-  { id: 1, name: 'Maya Sharma', specialty: 'Vedic Astrology', rating: 4.9, sessions: 1240, x: 22, y: 28, cluster: 'astrology', style: 'Intuitive' },
-  { id: 2, name: 'Arun Nair', specialty: 'Tarot Reading', rating: 4.8, sessions: 890, x: 62, y: 18, cluster: 'tarot', style: 'Spiritual' },
-  { id: 3, name: 'Dr. Elena Rossi', specialty: 'Energy Healing', rating: 4.9, sessions: 1100, x: 82, y: 42, cluster: 'healing', style: 'Analytical' },
-  { id: 4, name: 'Chen Wei', specialty: 'Numerology', rating: 5.0, sessions: 342, x: 44, y: 62, cluster: 'numerology', style: 'Practical' },
-  { id: 5, name: 'Sarah Jenkins', specialty: 'Western Astrology', rating: 4.8, sessions: 678, x: 14, y: 58, cluster: 'astrology', style: 'Warm' },
-  { id: 6, name: 'Yogi Ram', specialty: 'Spiritual Guide', rating: 5.0, sessions: 412, x: 72, y: 72, cluster: 'healing', style: 'Gentle' },
-  { id: 7, name: 'Luna Vega', specialty: 'Tarot & Crystals', rating: 4.7, sessions: 523, x: 54, y: 38, cluster: 'tarot', style: 'Creative' },
-  { id: 8, name: 'Omar Hassan', specialty: 'Numerology', rating: 4.9, sessions: 311, x: 32, y: 80, cluster: 'numerology', style: 'Logical' },
-  { id: 9, name: 'Priya Patel', specialty: 'Vedic Astrology', rating: 4.8, sessions: 925, x: 88, y: 22, cluster: 'astrology', style: 'Deep' },
-  { id: 10, name: 'James Wright', specialty: 'Life Coaching', rating: 4.7, sessions: 201, x: 18, y: 74, cluster: 'coaching', style: 'Direct' },
-  { id: 11, name: 'Mei Lin', specialty: 'Energy Healing', rating: 4.9, sessions: 445, x: 74, y: 56, cluster: 'healing', style: 'Soft' },
-  { id: 12, name: 'Aria Stone', specialty: 'Tarot', rating: 4.8, sessions: 789, x: 38, y: 48, cluster: 'tarot', style: 'Visionary' },
+const INTENTION_STARS = [
+  { id: 1, name: 'Find Love', x: 16, y: 32, cluster: 'love', tip: 'Love & Relationships' },
+  { id: 2, name: 'Heal a Relationship', x: 24, y: 50, cluster: 'love', tip: 'Love & Relationships' },
+  { id: 3, name: 'Marriage Timing', x: 12, y: 66, cluster: 'love', tip: 'Love & Relationships' },
+  { id: 4, name: 'Career Clarity', x: 72, y: 20, cluster: 'career', tip: 'Career & Finance' },
+  { id: 5, name: 'Business Growth', x: 84, y: 36, cluster: 'career', tip: 'Career & Finance' },
+  { id: 6, name: 'Financial Future', x: 78, y: 52, cluster: 'career', tip: 'Career & Finance' },
+  { id: 7, name: 'Heal Trauma', x: 42, y: 74, cluster: 'health', tip: 'Health & Wellbeing' },
+  { id: 8, name: 'Inner Peace', x: 56, y: 82, cluster: 'health', tip: 'Health & Wellbeing' },
+  { id: 9, name: 'Life Purpose', x: 60, y: 30, cluster: 'spiritual', tip: 'Spiritual Growth' },
+  { id: 10, name: 'Spiritual Awakening', x: 70, y: 62, cluster: 'spiritual', tip: 'Spiritual Growth' },
+  { id: 11, name: 'Know Myself', x: 38, y: 20, cluster: 'self', tip: 'Self Discovery' },
+  { id: 12, name: 'Life Decisions', x: 30, y: 78, cluster: 'self', tip: 'Self Discovery' },
 ];
 
-const CLUSTER_COLORS: Record<string, string> = {
-  astrology: '#63BFE4',
-  tarot: '#C9A0DC',
-  healing: '#7EDEA0',
-  numerology: '#F4D58D',
-  coaching: '#F4A261',
+const INTENTION_COLORS: Record<string, string> = {
+  love: '#FF6B9D',
+  career: '#D4A853',
+  health: '#7EDEA0',
+  spiritual: '#C9A0DC',
+  self: '#63BFE4',
 };
 
-export function ExpertConstellation() {
-  const [hovered, setHovered] = useState<(typeof EXPERTS)[0] | null>(null);
+const INTENTION_LABELS: Record<string, string> = {
+  love: 'Love & Relationships',
+  career: 'Career & Finance',
+  health: 'Health & Wellbeing',
+  spiritual: 'Spiritual Growth',
+  self: 'Self Discovery',
+};
+
+export function WhyYouHere() {
+  const [hovered, setHovered] = useState<(typeof INTENTION_STARS)[0] | null>(null);
   const [tipPos, setTipPos] = useState({ x: 0, y: 0 });
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
@@ -39,15 +47,16 @@ export function ExpertConstellation() {
   const ref = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="relative min-h-[90vh] bg-[#060B1E] overflow-hidden flex flex-col border-t border-white/5">
-      {/* Starfield */}
+    <section className="relative min-h-[90vh] overflow-hidden flex flex-col border-t border-white/5"
+      style={{ background: 'radial-gradient(ellipse at 20% 50%, #0e1a2e 0%, #060B1E 60%, #080412 100%)' }}>
+      {/* Deep starfield */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[...Array(150)].map((_, i) => (
+        {[...Array(200)].map((_, i) => (
           <div key={i} className="absolute rounded-full bg-white"
             style={{
               width: `${(i % 3) + 0.5}px`, height: `${(i % 3) + 0.5}px`,
               left: `${(i * 17.3) % 100}%`, top: `${(i * 23.7) % 100}%`,
-              opacity: 0.05 + (i % 7) * 0.08,
+              opacity: 0.04 + (i % 8) * 0.06,
               animation: `zen-twinkle ${2 + (i % 4)}s ease-in-out infinite`,
               animationDelay: `${(i * 0.3) % 5}s`,
             }}
@@ -56,19 +65,19 @@ export function ExpertConstellation() {
       </div>
 
       <div className="container mx-auto px-6 lg:px-16 pt-20 pb-6 relative z-10">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="w-8 h-[2px] bg-[#63BFE4]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#63BFE4]">01 — Expert Constellation</span>
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-8 h-[2px] bg-[#D4A853]" />
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4A853]">02 — What Brings You Here</span>
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-medium text-white mb-1">Find Your Guide</h2>
-        <p className="text-[#9FD6EE]/60 text-sm font-medium">Drag the universe. Hover a star to discover.</p>
+        <h2 className="text-4xl md:text-6xl font-serif font-medium text-white mb-2">What Are You Seeking?</h2>
+        <p className="text-white/50 text-sm font-medium max-w-lg">Every star is a question someone asked. Hover to explore what HealConnect can answer for you. Drag to navigate.</p>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-16 z-10 flex gap-6 flex-wrap mb-4">
-        {Object.entries(CLUSTER_COLORS).map(([c, col]) => (
+      <div className="container mx-auto px-6 lg:px-16 z-10 flex gap-5 flex-wrap mb-4">
+        {Object.entries(INTENTION_LABELS).map(([c, label]) => (
           <div key={c} className="flex items-center gap-2">
-            <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: col, boxShadow: `0 0 8px ${col}` }} />
-            <span className="text-xs font-bold text-white/50 capitalize">{c}</span>
+            <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: INTENTION_COLORS[c], boxShadow: `0 0 8px ${INTENTION_COLORS[c]}` }} />
+            <span className="text-xs font-bold text-white/50">{label}</span>
           </div>
         ))}
       </div>
@@ -89,56 +98,67 @@ export function ExpertConstellation() {
         onMouseLeave={() => setDragging(false)}
       >
         <svg className="absolute inset-0 w-full h-full" style={{ transform: `translate(${offset.x}px,${offset.y}px)` }}>
-          {EXPERTS.map((ex, i) =>
-            EXPERTS.slice(i + 1).filter(e2 => e2.cluster === ex.cluster).map(e2 => (
-              <line key={`${ex.id}-${e2.id}`} x1={`${ex.x}%`} y1={`${ex.y}%`} x2={`${e2.x}%`} y2={`${e2.y}%`}
-                stroke={CLUSTER_COLORS[ex.cluster]} strokeOpacity="0.18" strokeWidth="1" />
+          {/* Constellation lines within clusters */}
+          {INTENTION_STARS.map((s, i) =>
+            INTENTION_STARS.slice(i + 1).filter(s2 => s2.cluster === s.cluster).map(s2 => (
+              <line key={`${s.id}-${s2.id}`} x1={`${s.x}%`} y1={`${s.y}%`} x2={`${s2.x}%`} y2={`${s2.y}%`}
+                stroke={INTENTION_COLORS[s.cluster]} strokeOpacity="0.25" strokeWidth="1" strokeDasharray="3 5" />
             ))
           )}
-          {EXPERTS.map(ex => {
-            const col = CLUSTER_COLORS[ex.cluster];
+          {INTENTION_STARS.map(s => {
+            const col = INTENTION_COLORS[s.cluster];
+            const isHov = hovered?.id === s.id;
             return (
-              <g key={ex.id} style={{ cursor: 'pointer' }}
+              <g key={s.id} style={{ cursor: 'pointer' }}
                 onMouseEnter={e => {
-                  setHovered(ex);
+                  setHovered(s);
                   const rect = ref.current?.getBoundingClientRect();
                   if (rect) setTipPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
                 }}
                 onMouseLeave={() => setHovered(null)}
               >
-                <circle cx={`${ex.x}%`} cy={`${ex.y}%`} r="24" fill="transparent" />
-                <circle cx={`${ex.x}%`} cy={`${ex.y}%`} r="14" fill="none" stroke={col} strokeWidth="0.5" strokeOpacity="0.3" />
-                <circle cx={`${ex.x}%`} cy={`${ex.y}%`} r="5" fill={col}
-                  style={{ filter: `drop-shadow(0 0 10px ${col}) drop-shadow(0 0 4px ${col})` }} />
-                <text x={`${ex.x}%`} y={`${ex.y}%`} dy="22" textAnchor="middle"
-                  fill="white" fontSize="9" opacity="0.55" fontFamily="serif">{ex.name.split(' ')[0]}</text>
+                <circle cx={`${s.x}%`} cy={`${s.y}%`} r="22" fill="transparent" />
+                {/* Outer glow ring */}
+                <circle cx={`${s.x}%`} cy={`${s.y}%`} r={isHov ? '16' : '12'} fill="none" stroke={col}
+                  strokeWidth="0.5" strokeOpacity={isHov ? 0.6 : 0.2}
+                  style={{ transition: 'all 0.4s ease' }} />
+                {/* Core star */}
+                <circle cx={`${s.x}%`} cy={`${s.y}%`} r={isHov ? '7' : '4.5'} fill={col}
+                  style={{ filter: `drop-shadow(0 0 ${isHov ? 14 : 8}px ${col})`, transition: 'all 0.4s ease' }} />
+                {/* Label */}
+                <text x={`${s.x}%`} y={`${s.y}%`} dy="26" textAnchor="middle"
+                  fill="white" fontSize="10" opacity={isHov ? 0.9 : 0.5} fontFamily="serif"
+                  style={{ transition: 'all 0.3s ease' }}>{s.name}</text>
               </g>
             );
           })}
         </svg>
         {hovered && (
-          <div className="absolute z-50 pointer-events-none bg-white/8 backdrop-blur-2xl border border-white/15 rounded-2xl p-4 w-52 shadow-2xl"
-            style={{ left: tipPos.x + 18, top: tipPos.y - 70 }}>
-            <div className="text-sm font-bold text-white mb-1">{hovered.name}</div>
-            <div className="text-xs text-[#9FD6EE] mb-2">{hovered.specialty}</div>
-            <div className="flex items-center gap-2 text-xs text-white/70">
-              <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-              <span>{hovered.rating}</span>
-              <span className="text-white/40">· {hovered.sessions} sessions</span>
-            </div>
-            <div className="mt-2 inline-block text-[10px] font-bold px-2.5 py-1 rounded-full bg-white/10 text-white/70">{hovered.style}</div>
+          <div className="absolute z-50 pointer-events-none backdrop-blur-2xl border rounded-2xl p-5 w-60 shadow-2xl"
+            style={{ left: Math.min(tipPos.x + 18, 600), top: tipPos.y - 80, backgroundColor: '#0D1629CC', borderColor: `${INTENTION_COLORS[hovered.cluster]}50` }}>
+            <div className="text-[9px] font-black uppercase tracking-widest mb-2" style={{ color: INTENTION_COLORS[hovered.cluster] }}>{INTENTION_LABELS[hovered.cluster]}</div>
+            <div className="text-base font-bold text-white mb-3">{hovered.name}</div>
+            <Link href="/signup" className="inline-flex items-center gap-1.5 text-xs font-bold transition-colors"
+              style={{ color: INTENTION_COLORS[hovered.cluster] }}>
+              Find Specialists <ArrowRight className="w-3 h-3" />
+            </Link>
           </div>
         )}
       </div>
 
-      <div className="container mx-auto px-6 lg:px-16 py-8 z-10 flex justify-end">
-        <Link href="/signup" className="inline-flex items-center gap-2 text-sm font-bold text-[#63BFE4] hover:text-white transition-colors">
-          Browse all guides <ArrowRight className="w-4 h-4" />
-        </Link>
+      {/* Bottom cluster CTAs */}
+      <div className="container mx-auto px-6 lg:px-16 py-8 z-10 flex flex-wrap justify-center gap-3">
+        {Object.entries(INTENTION_LABELS).map(([cluster, label]) => (
+          <Link key={cluster} href="/signup"
+            className="px-5 py-2.5 rounded-full text-xs font-bold border transition-all hover:scale-105"
+            style={{ borderColor: `${INTENTION_COLORS[cluster]}40`, color: INTENTION_COLORS[cluster], backgroundColor: `${INTENTION_COLORS[cluster]}10` }}>
+            {label}
+          </Link>
+        ))}
       </div>
 
       <style>{`
-        @keyframes zen-twinkle { 0%,100%{opacity:0.05} 50%{opacity:0.6} }
+        @keyframes zen-twinkle { 0%,100%{opacity:0.04} 50%{opacity:0.55} }
       `}</style>
     </section>
   );
@@ -271,72 +291,131 @@ export function ZodiacOrbitRing() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────
-// 03. TAROT TABLE — Luxury 3D flip card reading
+// 03. TAROT TABLE — Premium zodiac-art card reading
 // ─────────────────────────────────────────────────────────────────────────
 const TAROT_CARDS = [
-  { name: 'The Star', subtitle: 'Hope · Renewal · Direction', message: 'A period of clarity and cosmic alignment is upon you. Trust in the universe\'s guidance and allow yourself to shine.', color: '#63BFE4', symbol: '⭐' },
-  { name: 'The Moon', subtitle: 'Intuition · Mystery · Dreams', message: 'Your subconscious holds important truths right now. Pay attention to dreams and gut feelings — they carry wisdom.', color: '#C9A0DC', symbol: '🌙' },
-  { name: 'The Sun', subtitle: 'Joy · Success · Vitality', message: 'Radiant energy surrounds you. A new chapter of positivity and abundance is beginning to unfold in your life.', color: '#FFB347', symbol: '☀️' },
-  { name: 'The World', subtitle: 'Completion · Integration · Travel', message: 'You are reaching the culmination of an important cycle. Embrace the wholeness you\'ve achieved and prepare for new beginnings.', color: '#7EDEA0', symbol: '🌍' },
-  { name: 'The Tower', subtitle: 'Revelation · Upheaval · Change', message: 'A sudden revelation may shake the foundations, but what falls away was never truly stable. Embrace transformation.', color: '#F4A261', symbol: '⚡' },
+  {
+    name: 'The Star', roman: 'XVII', subtitle: 'Hope · Renewal · Clarity',
+    message: 'A period of profound clarity and cosmic alignment surrounds you. Trust in the universe\'s divine guidance — allow your authentic light to illuminate the path ahead.',
+    cardBg: 'linear-gradient(170deg, #0D1B3E 0%, #162347 50%, #0A1128 100%)',
+    border: '#4A78B8', accent: '#8BADDF', img: '/new-zodiacs/aqarius.png',
+    color: '#8BADDF', backBg: 'linear-gradient(145deg, #0D1B3E, #0A1128)'
+  },
+  {
+    name: 'The Moon', roman: 'XVIII', subtitle: 'Intuition · Mystery · Dreams',
+    message: 'Your subconscious holds truths the waking mind has yet to hear. Honour the cycles within you — your intuition is your most sacred compass right now.',
+    cardBg: 'linear-gradient(170deg, #1A0E3A 0%, #251450 50%, #0E0820 100%)',
+    border: '#7B6CF6', accent: '#C9A0DC', img: '/new-zodiacs/pices.png',
+    color: '#C9A0DC', backBg: 'linear-gradient(145deg, #1A0E3A, #0E0820)'
+  },
+  {
+    name: 'The Sun', roman: 'XIX', subtitle: 'Joy · Vitality · Success',
+    message: 'Radiant golden energy courses through every opportunity before you. A magnificent chapter of abundance, creative power, and warmth is beautifully unfolding.',
+    cardBg: 'linear-gradient(170deg, #2A1800 0%, #3D2400 50%, #1A0E00 100%)',
+    border: '#D4A853', accent: '#F4D58D', img: '/new-zodiacs/leo_new.png',
+    color: '#F4D58D', backBg: 'linear-gradient(145deg, #2A1800, #1A0E00)'
+  },
+  {
+    name: 'The World', roman: 'XXI', subtitle: 'Completion · Wholeness · Triumph',
+    message: 'You stand at the sacred culmination of an extraordinary cycle. Embrace the beautiful wholeness you have earned — a glorious new chapter awaits your first step.',
+    cardBg: 'linear-gradient(170deg, #0A2A1A 0%, #0F3520 50%, #051208 100%)',
+    border: '#2E8B57', accent: '#7EDEA0', img: '/new-zodiacs/libra_new.png',
+    color: '#7EDEA0', backBg: 'linear-gradient(145deg, #0A2A1A, #051208)'
+  },
+  {
+    name: 'The Tower', roman: 'XVI', subtitle: 'Revelation · Transformation · Truth',
+    message: 'A powerful revelation shakes what was never truly stable. What crumbles was built on illusion — what remains is the indestructible core of your true self.',
+    cardBg: 'linear-gradient(170deg, #2A0A0A 0%, #3D1010 50%, #1A0505 100%)',
+    border: '#C45C3A', accent: '#F4A261', img: '/new-zodiacs/scorpio_new.png',
+    color: '#F4A261', backBg: 'linear-gradient(145deg, #2A0A0A, #1A0505)'
+  },
 ];
 
-const CARD_ROTATIONS = [-8, -3, 0, 4, 9];
+const CARD_ROTATIONS = [-10, -4, 0, 5, 11];
 
 export function TarotTable() {
   const [flipped, setFlipped] = useState<number | null>(null);
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center py-24 overflow-hidden"
-      style={{ background: 'radial-gradient(ellipse at center, #1a2a1a 0%, #0d1a0d 50%, #050d05 100%)' }}>
-      <div className="absolute inset-0 opacity-20 pointer-events-none"
-        style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px)' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full blur-[120px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse, rgba(124,186,124,0.12) 0%, transparent 70%)' }} />
+      style={{ background: 'radial-gradient(ellipse at 50% 60%, #111820 0%, #0A0F18 60%, #050810 100%)' }}>
+
+      {/* Subtle velvet texture */}
+      <div className="absolute inset-0 opacity-30 pointer-events-none"
+        style={{ backgroundImage: 'repeating-linear-gradient(60deg, transparent, transparent 3px, rgba(212,168,83,0.015) 3px, rgba(212,168,83,0.015) 6px)' }} />
+      {/* Gold glow orb */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[350px] rounded-full blur-[100px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(212,168,83,0.08) 0%, transparent 70%)' }} />
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10 text-center">
         <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="w-8 h-[2px] bg-[#7EDEA0]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#7EDEA0]">03 — Tarot Table</span>
-          <div className="w-8 h-[2px] bg-[#7EDEA0]" />
+          <div className="w-10 h-[1px] bg-[#D4A853]" />
+          <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#D4A853]">05 — Tarot Reading</span>
+          <div className="w-10 h-[1px] bg-[#D4A853]" />
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-medium text-white mb-4">Draw Your Card</h2>
-        <p className="text-[#7EDEA0]/60 text-base font-medium mb-4">Set your intention. Click a card.</p>
-        <div className="inline-flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl px-6 py-3 mb-16 backdrop-blur-md">
-          <span className="text-white/30 text-sm">✦</span>
-          <span className="text-white/60 text-sm font-medium italic">&quot;What energy should I focus on today?&quot;</span>
+        <h2 className="text-4xl md:text-6xl font-serif font-medium text-white mb-3">Draw Your Card</h2>
+        <p className="text-[#D4A853]/60 text-sm font-medium mb-3">Set your intention. Choose a card. Receive your message.</p>
+        <div className="inline-flex items-center gap-3 rounded-2xl px-6 py-3 mb-14 border border-[#D4A853]/15 bg-[#D4A853]/5">
+          <span className="text-[#D4A853]/50 text-sm">✦</span>
+          <span className="text-white/50 text-sm font-medium italic">&ldquo;What energy should I honour today?&rdquo;</span>
         </div>
 
-        <div className="relative flex items-center justify-center gap-3 md:gap-4 mb-20 min-h-[340px] flex-wrap">
+        {/* Card spread */}
+        <div className="relative flex items-end justify-center gap-2 md:gap-3 mb-16 min-h-[280px]">
           {TAROT_CARDS.map((card, i) => {
             const isFlipped = flipped === i;
             const rot = CARD_ROTATIONS[i] || 0;
             return (
-              <div key={i} className="relative group"
-                style={{ transform: `rotate(${rot}deg)`, zIndex: isFlipped ? 50 : i, transition: 'all 0.5s cubic-bezier(0.34,1.56,0.64,1)' }}>
-                <div className="w-[110px] h-[185px] md:w-[130px] md:h-[215px] relative cursor-pointer"
-                  style={{ perspective: '1000px' }}
+              <div key={i} className="relative"
+                style={{
+                  transform: `rotate(${isFlipped ? 0 : rot}deg) ${isFlipped ? 'scale(1.08) translateY(-16px)' : ''}`,
+                  zIndex: isFlipped ? 50 : i + 1,
+                  transition: 'all 0.6s cubic-bezier(0.34,1.56,0.64,1)',
+                }}>
+                <div className="w-[120px] h-[200px] md:w-[145px] md:h-[240px] relative cursor-pointer"
+                  style={{ perspective: '1200px' }}
                   onClick={() => setFlipped(isFlipped ? null : i)}>
                   <div className="relative w-full h-full"
-                    style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', transition: 'transform 0.7s cubic-bezier(0.34,1.56,0.64,1)' }}>
-                    {/* Card Back */}
-                    <div className="absolute inset-0 rounded-2xl border border-white/15 overflow-hidden shadow-2xl"
-                      style={{ backfaceVisibility: 'hidden', background: 'linear-gradient(135deg, #1a2a1a 0%, #0d1a0d 100%)' }}>
-                      <div className="absolute inset-2 border border-[#7EDEA0]/20 rounded-xl" />
-                      <div className="absolute inset-4 border border-[#7EDEA0]/10 rounded-lg" />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-[#7EDEA0]/30 text-4xl">✦</div>
+                    style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', transition: 'transform 0.75s cubic-bezier(0.34,1.56,0.64,1)' }}>
+
+                    {/* ── Card Back ── */}
+                    <div className="absolute inset-0 rounded-xl overflow-hidden shadow-2xl"
+                      style={{ backfaceVisibility: 'hidden', background: card.backBg, border: `1.5px solid ${card.border}30` }}>
+                      {/* Ornate border layers */}
+                      <div className="absolute inset-[6px] rounded-lg border" style={{ borderColor: `${card.border}20` }} />
+                      <div className="absolute inset-[11px] rounded-md border" style={{ borderColor: `${card.border}15` }} />
+                      {/* Center emblem */}
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                        <div className="text-2xl font-serif" style={{ color: `${card.border}60` }}>✦</div>
+                        <div className="text-[8px] font-black uppercase tracking-[0.25em]" style={{ color: `${card.border}40` }}>HealConnect</div>
                       </div>
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+                      {/* Corner ornaments */}
+                      <div className="absolute top-3 left-3 text-xs" style={{ color: `${card.border}35` }}>✦</div>
+                      <div className="absolute top-3 right-3 text-xs" style={{ color: `${card.border}35` }}>✦</div>
+                      <div className="absolute bottom-3 left-3 text-xs" style={{ color: `${card.border}35` }}>✦</div>
+                      <div className="absolute bottom-3 right-3 text-xs" style={{ color: `${card.border}35` }}>✦</div>
                     </div>
-                    {/* Card Front */}
-                    <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl flex flex-col items-center justify-between p-4 text-center"
-                      style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: `linear-gradient(135deg, ${card.color}20 0%, #0d1a0d 100%)`, border: `1px solid ${card.color}40` }}>
-                      <div className="text-4xl mt-2">{card.symbol}</div>
-                      <div>
-                        <div className="text-xs font-black uppercase tracking-widest mb-1" style={{ color: card.color }}>{card.name}</div>
-                        <div className="text-[9px] text-white/50 font-medium">{card.subtitle}</div>
+
+                    {/* ── Card Front ── */}
+                    <div className="absolute inset-0 rounded-xl overflow-hidden shadow-2xl flex flex-col"
+                      style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: card.cardBg, border: `1.5px solid ${card.border}60` }}>
+                      {/* Roman numeral */}
+                      <div className="text-center pt-3 pb-1">
+                        <span className="text-[9px] font-black tracking-widest" style={{ color: `${card.accent}70` }}>{card.roman}</span>
                       </div>
+                      {/* Zodiac image art */}
+                      <div className="flex-1 flex items-center justify-center px-3 py-1">
+                        <img src={card.img} alt={card.name}
+                          className="w-full h-full object-contain"
+                          style={{ filter: `drop-shadow(0 0 20px ${card.accent}50) brightness(1.05)`, maxHeight: '140px' }} />
+                      </div>
+                      {/* Card name */}
+                      <div className="text-center px-3 pb-4">
+                        <div className="text-[10px] font-black uppercase tracking-[0.2em] mb-0.5" style={{ color: card.accent }}>{card.name}</div>
+                        <div className="text-[8px] text-white/40 font-medium leading-tight">{card.subtitle}</div>
+                      </div>
+                      {/* Gold shimmer overlay */}
+                      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 50%, rgba(212,168,83,0.04) 100%)' }} />
                     </div>
                   </div>
                 </div>
@@ -345,26 +424,27 @@ export function TarotTable() {
           })}
         </div>
 
+        {/* Reading panel */}
         {flipped !== null && (
-          <div className="max-w-lg mx-auto bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 text-center"
-            style={{ animation: 'zen-fade 0.5s ease' }}>
-            <div className="text-3xl mb-3">{TAROT_CARDS[flipped].symbol}</div>
-            <h3 className="text-2xl font-serif font-bold text-white mb-1">{TAROT_CARDS[flipped].name}</h3>
-            <p className="text-xs font-black uppercase tracking-widest mb-4" style={{ color: TAROT_CARDS[flipped].color }}>{TAROT_CARDS[flipped].subtitle}</p>
-            <p className="text-sm text-white/75 leading-relaxed mb-6 font-light">{TAROT_CARDS[flipped].message}</p>
+          <div className="max-w-xl mx-auto rounded-3xl p-8 text-center border"
+            style={{ animation: 'zen-fade 0.5s ease', background: `linear-gradient(135deg, ${TAROT_CARDS[flipped].border}18 0%, #0A0F1880 100%)`, borderColor: `${TAROT_CARDS[flipped].border}40`, backdropFilter: 'blur(20px)' }}>
+            <div className="text-xs font-black uppercase tracking-[0.3em] mb-3" style={{ color: TAROT_CARDS[flipped].accent }}>{TAROT_CARDS[flipped].roman} · {TAROT_CARDS[flipped].name}</div>
+            <h3 className="text-2xl font-serif font-medium text-white mb-2">{TAROT_CARDS[flipped].subtitle}</h3>
+            <div className="w-16 h-[1px] mx-auto mb-5" style={{ backgroundColor: TAROT_CARDS[flipped].accent }} />
+            <p className="text-sm text-white/70 leading-relaxed mb-7 font-light max-w-md mx-auto">{TAROT_CARDS[flipped].message}</p>
             <div className="flex gap-3 justify-center flex-wrap">
-              <Link href="/signup" className="px-5 py-2.5 rounded-full text-xs font-bold transition-all hover:scale-105 text-white"
-                style={{ backgroundColor: TAROT_CARDS[flipped].color + '25', border: `1px solid ${TAROT_CARDS[flipped].color}50` }}>
+              <Link href="/signup" className="px-6 py-3 rounded-full text-xs font-bold transition-all hover:scale-105 text-white"
+                style={{ background: `linear-gradient(135deg, ${TAROT_CARDS[flipped].border}, ${TAROT_CARDS[flipped].accent}80)` }}>
                 Find a Tarot Reader
               </Link>
-              <Link href="/signup" className="px-5 py-2.5 rounded-full text-xs font-bold transition-all hover:scale-105 text-white/60 border border-white/10">
+              <Link href="/signup" className="px-6 py-3 rounded-full text-xs font-bold transition-all hover:scale-105 text-white/50 border border-white/10">
                 Full Reading
               </Link>
             </div>
           </div>
         )}
         {flipped === null && (
-          <p className="text-white/30 text-xs font-medium animate-pulse">Click any card to reveal your reading</p>
+          <p className="text-white/25 text-xs font-medium" style={{ letterSpacing: '0.2em' }}>✦ SELECT A CARD ✦</p>
         )}
       </div>
     </section>
@@ -372,28 +452,29 @@ export function TarotTable() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────
-// 04. MODALITY UNIVERSE — Floating luminous node map
+// 04. MODALITY UNIVERSE — Pixel-perfect node map with readable labels
 // ─────────────────────────────────────────────────────────────────────────
-const MODALITY_NODES = [
-  { id: 'astrology', label: 'Astrology', x: 50, y: 50, size: 18, color: '#63BFE4', count: '500+', center: true },
-  { id: 'tarot', label: 'Tarot', x: 25, y: 30, size: 13, color: '#C9A0DC', count: '120' },
-  { id: 'numerology', label: 'Numerology', x: 75, y: 28, size: 11, color: '#F4D58D', count: '85' },
-  { id: 'healing', label: 'Energy Healing', x: 20, y: 62, size: 12, color: '#7EDEA0', count: '200' },
-  { id: 'meditation', label: 'Meditation', x: 78, y: 58, size: 10, color: '#98E6F4', count: '150' },
-  { id: 'palmistry', label: 'Palm Reading', x: 40, y: 78, size: 9, color: '#F4A261', count: '70' },
-  { id: 'vastu', label: 'Vastu', x: 62, y: 75, size: 8, color: '#A0AEC0', count: '45' },
-  { id: 'yoga', label: 'Yoga', x: 30, y: 18, size: 8, color: '#7EDEA0', count: '95' },
-  { id: 'eft', label: 'EFT Tapping', x: 68, y: 18, size: 7, color: '#9B8FFF', count: '35' },
-  { id: 'coaching', label: 'Life Coaching', x: 82, y: 42, size: 10, color: '#F4D58D', count: '110' },
-  { id: 'spiritual', label: 'Spiritual Guide', x: 18, y: 42, size: 11, color: '#C9A0DC', count: '180' },
-  { id: 'face', label: 'Face Reading', x: 50, y: 20, size: 7, color: '#FF6B6B', count: '30' },
+// viewBox: 900 x 460 px — all coords in absolute pixels
+const MOD_NODES = [
+  { id: 'astrology', label: 'Astrology', cx: 450, cy: 230, r: 52, color: '#63BFE4', count: '500+ guides', center: true },
+  { id: 'tarot', label: 'Tarot', cx: 200, cy: 135, r: 40, color: '#C9A0DC', count: '120 guides' },
+  { id: 'numerology', label: 'Numerology', cx: 690, cy: 120, r: 36, color: '#F4D58D', count: '85 guides' },
+  { id: 'healing', label: 'Energy Healing', cx: 148, cy: 298, r: 40, color: '#7EDEA0', count: '200 guides' },
+  { id: 'meditation', label: 'Meditation', cx: 730, cy: 290, r: 34, color: '#98E6F4', count: '150 guides' },
+  { id: 'palmistry', label: 'Palm Reading', cx: 348, cy: 380, r: 30, color: '#F4A261', count: '70 guides' },
+  { id: 'vastu', label: 'Vastu', cx: 570, cy: 370, r: 28, color: '#A0AEC0', count: '45 guides' },
+  { id: 'yoga', label: 'Yoga', cx: 248, cy: 68, r: 26, color: '#7EDEA0', count: '95 guides' },
+  { id: 'eft', label: 'EFT Tapping', cx: 640, cy: 65, r: 24, color: '#9B8FFF', count: '35 guides' },
+  { id: 'coaching', label: 'Life Coaching', cx: 790, cy: 200, r: 34, color: '#F4D58D', count: '110 guides' },
+  { id: 'spiritual', label: 'Spiritual Guide', cx: 110, cy: 195, r: 36, color: '#C9A0DC', count: '180 guides' },
+  { id: 'face', label: 'Face Reading', cx: 450, cy: 68, r: 22, color: '#FF6B6B', count: '30 guides' },
 ];
 
 export function ModalityUniverse() {
-  const [hovered, setHovered] = useState<(typeof MODALITY_NODES)[0] | null>(null);
+  const [hovered, setHovered] = useState<(typeof MOD_NODES)[0] | null>(null);
 
   return (
-    <section className="relative min-h-screen bg-[#080C18] overflow-hidden flex flex-col items-center justify-center py-24">
+    <section className="relative min-h-screen bg-[#080C18] overflow-hidden flex flex-col items-center justify-center py-20">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(60)].map((_, i) => (
           <div key={i} className="absolute rounded-full bg-white"
@@ -401,50 +482,60 @@ export function ModalityUniverse() {
         ))}
       </div>
 
-      <div className="container mx-auto px-6 lg:px-16 text-center mb-10 relative z-10">
+      <div className="container mx-auto px-6 lg:px-16 text-center mb-8 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#C9A0DC]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#C9A0DC]">04 — Modality Universe</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#C9A0DC]">03 — Modality Universe</span>
           <div className="w-8 h-[2px] bg-[#C9A0DC]" />
         </div>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-white mb-3">Explore What Speaks To You</h2>
-        <p className="text-white/40 text-sm font-medium">Hover any node to discover a modality.</p>
+        <p className="text-white/40 text-sm font-medium">Hover any circle to discover a healing modality</p>
       </div>
 
-      <div className="relative w-full max-w-4xl mx-auto px-6" style={{ height: '480px' }}>
-        <svg className="absolute inset-0 w-full h-full">
-          {MODALITY_NODES.filter(n => !n.center).map(node => {
-            const center = MODALITY_NODES[0];
-            return (
-              <line key={`l-${node.id}`}
-                x1={`${center.x}%`} y1={`${center.y}%`}
-                x2={`${node.x}%`} y2={`${node.y}%`}
-                stroke={node.color} strokeOpacity="0.15" strokeWidth="1"
-                strokeDasharray="4 6" />
-            );
-          })}
-          {MODALITY_NODES.map(node => {
+      {/* SVG with fixed viewBox for readable text */}
+      <div className="relative w-full max-w-5xl mx-auto px-4" style={{ height: '460px' }}>
+        <svg viewBox="0 0 900 460" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid meet">
+          {/* Connector lines from center */}
+          {MOD_NODES.filter(n => !n.center).map(node => (
+            <line key={`l-${node.id}`}
+              x1={MOD_NODES[0].cx} y1={MOD_NODES[0].cy}
+              x2={node.cx} y2={node.cy}
+              stroke={node.color} strokeOpacity="0.12" strokeWidth="1"
+              strokeDasharray="5 7" />
+          ))}
+
+          {MOD_NODES.map(node => {
             const isHov = hovered?.id === node.id;
+            const r = node.r * (isHov ? 1.35 : 1);
             return (
               <g key={node.id}
                 onMouseEnter={() => setHovered(node)}
                 onMouseLeave={() => setHovered(null)}
                 style={{ cursor: 'pointer' }}>
-                <circle cx={`${node.x}%`} cy={`${node.y}%`}
-                  r={`${node.size * (isHov ? 1.6 : 1)}%`}
-                  fill={node.color}
-                  fillOpacity={isHov ? 0.2 : 0.07}
-                  stroke={node.color}
-                  strokeOpacity={isHov ? 0.9 : 0.35}
-                  strokeWidth={isHov ? '1.5' : '1'}
-                  style={{ transition: 'all 0.4s ease', filter: isHov ? `drop-shadow(0 0 16px ${node.color})` : 'none' }} />
-                <text x={`${node.x}%`} y={`${node.y}%`} dy="0.35em" textAnchor="middle"
-                  fill={node.color} fontSize={node.center ? '6.5' : '4.5'}
-                  fontFamily="serif" opacity={isHov ? 1 : 0.65}
+                {/* Glow circle */}
+                <circle cx={node.cx} cy={node.cy} r={r + 8}
+                  fill={node.color} fillOpacity={isHov ? 0.12 : 0.04}
+                  style={{ transition: 'all 0.4s ease' }} />
+                {/* Main circle */}
+                <circle cx={node.cx} cy={node.cy} r={r}
+                  fill={node.color} fillOpacity={isHov ? 0.22 : 0.09}
+                  stroke={node.color} strokeOpacity={isHov ? 0.95 : 0.45}
+                  strokeWidth={isHov ? 2 : 1.2}
+                  style={{ transition: 'all 0.4s ease', filter: isHov ? `drop-shadow(0 0 18px ${node.color})` : 'none' }} />
+                {/* Label — always visible, large enough to read */}
+                <text x={node.cx} y={node.cy} dy="0.35em" textAnchor="middle"
+                  fill={isHov ? 'white' : node.color}
+                  fontSize={node.center ? 18 : 13}
+                  fontFamily="Georgia, serif"
+                  fontWeight={node.center ? '600' : '500'}
+                  opacity={isHov ? 1 : 0.85}
                   style={{ transition: 'all 0.4s ease' }}>{node.label}</text>
+                {/* Guide count on hover */}
                 {isHov && (
-                  <text x={`${node.x}%`} y={`${node.y}%`} dy="6" textAnchor="middle"
-                    fill="white" fontSize="3" opacity="0.6">{node.count} guides</text>
+                  <text x={node.cx} y={node.cy + r + 18} textAnchor="middle"
+                    fill={node.color} fontSize="11" opacity="0.8" fontFamily="sans-serif">
+                    {node.count}
+                  </text>
                 )}
               </g>
             );
@@ -453,10 +544,10 @@ export function ModalityUniverse() {
       </div>
 
       {hovered && !hovered.center && (
-        <div className="relative z-10 mt-6 text-center" style={{ animation: 'zen-fade 0.3s ease' }}>
+        <div className="relative z-10 mt-4 text-center" style={{ animation: 'zen-fade 0.3s ease' }}>
           <Link href="/signup"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all hover:scale-105"
-            style={{ backgroundColor: `${hovered.color}20`, border: `1px solid ${hovered.color}50`, color: hovered.color }}>
+            style={{ backgroundColor: `${hovered.color}18`, border: `1px solid ${hovered.color}50`, color: hovered.color }}>
             Explore {hovered.label} <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -592,84 +683,121 @@ export function ExpertStoriesDeck() {
 // ─────────────────────────────────────────────────────────────────────────
 // 06. GLOBAL GUIDANCE MAP — Dark world map with glow cities
 // ─────────────────────────────────────────────────────────────────────────
-const CITIES = [
-  { name: 'New Delhi', x: 65, y: 38, count: '4,200+', specialty: 'Vedic Astrology · Ayurveda · Meditation', color: '#63BFE4' },
-  { name: 'London', x: 46, y: 24, count: '820+', specialty: 'Tarot · Coaching · Western Astrology', color: '#C9A0DC' },
-  { name: 'New York', x: 25, y: 30, count: '1,100+', specialty: 'Life Coaching · Numerology · Tarot', color: '#F4A261' },
-  { name: 'Dubai', x: 60, y: 42, count: '650+', specialty: 'Astrology · Healing · Spiritual Guidance', color: '#F4D58D' },
-  { name: 'Singapore', x: 77, y: 54, count: '480+', specialty: 'Energy Healing · Numerology · Reiki', color: '#7EDEA0' },
-  { name: 'Sydney', x: 83, y: 70, count: '390+', specialty: 'Meditation · Tarot · Crystal Healing', color: '#9B8FFF' },
-  { name: 'São Paulo', x: 32, y: 65, count: '290+', specialty: 'Tarot · Astrology · Energy Work', color: '#FF6B6B' },
-  { name: 'Tokyo', x: 83, y: 33, count: '310+', specialty: 'Numerology · Reiki · Spiritual Guidance', color: '#98E6F4' },
+// 06. HEALCONNECT GLOBAL DISTRIBUTION — Platform reach visualised
+// ─────────────────────────────────────────────────────────────────────────
+const HC_NODES = [
+  { name: 'India', x: 65, y: 40, users: '3.2M+', guides: '4,200+', top: 'Vedic Astrology', color: '#63BFE4', size: 'lg' },
+  { name: 'USA', x: 22, y: 30, users: '820K+', guides: '1,100+', top: 'Life Coaching · Tarot', color: '#C9A0DC', size: 'md' },
+  { name: 'UK', x: 45, y: 22, users: '420K+', guides: '820+', top: 'Tarot · Astrology', color: '#7EDEA0', size: 'sm' },
+  { name: 'UAE', x: 59, y: 44, users: '310K+', guides: '650+', top: 'Spiritual Guidance', color: '#F4D58D', size: 'sm' },
+  { name: 'Singapore', x: 77, y: 55, users: '180K+', guides: '480+', top: 'Energy Healing', color: '#98E6F4', size: 'sm' },
+  { name: 'Australia', x: 83, y: 70, users: '150K+', guides: '390+', top: 'Meditation · Tarot', color: '#9B8FFF', size: 'sm' },
+  { name: 'Brazil', x: 30, y: 65, users: '90K+', guides: '290+', top: 'Astrology', color: '#FF6B9D', size: 'xs' },
+  { name: 'Japan', x: 83, y: 33, users: '110K+', guides: '310+', top: 'Numerology · Reiki', color: '#F4A261', size: 'xs' },
+];
+
+const GROWTH_STATS = [
+  { value: '60+', label: 'Countries' },
+  { value: '5.5M+', label: 'Users Worldwide' },
+  { value: '8,000+', label: 'Verified Guides' },
+  { value: '24', label: 'Languages' },
 ];
 
 export function GlobalGuidanceMap() {
-  const [hoveredCity, setHoveredCity] = useState<(typeof CITIES)[0] | null>(null);
+  const [hovered, setHovered] = useState<(typeof HC_NODES)[0] | null>(null);
+
+  const nodeRadius: Record<string, number> = { lg: 22, md: 16, sm: 12, xs: 9 };
 
   return (
-    <section className="relative min-h-screen bg-[#060B1E] overflow-hidden flex flex-col items-center justify-center py-24">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 opacity-20"
-          style={{ backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(99,191,228,0.15) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(201,160,220,0.1) 0%, transparent 40%)' }} />
-      </div>
+    <section className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center py-24"
+      style={{ background: 'radial-gradient(ellipse at 50% 30%, #0E1E38 0%, #060B1E 55%, #04080F 100%)' }}>
 
-      <div className="container mx-auto px-6 lg:px-16 text-center mb-12 relative z-10">
+      {/* Grid overlay */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        style={{ backgroundImage: 'linear-gradient(to right, #63BFE4 1px, transparent 1px), linear-gradient(to bottom, #63BFE4 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+
+      {/* Glow centers */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] blur-[120px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(99,191,228,0.1) 0%, transparent 70%)' }} />
+
+      <div className="container mx-auto px-6 lg:px-16 text-center mb-10 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="w-8 h-[2px] bg-[#63BFE4]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#63BFE4]">06 — Global Network</span>
-          <div className="w-8 h-[2px] bg-[#63BFE4]" />
+          <div className="w-10 h-[1px] bg-[#63BFE4]" />
+          <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#63BFE4]">06 — Our Global Reach</span>
+          <div className="w-10 h-[1px] bg-[#63BFE4]" />
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-medium text-white mb-3">Wisdom Has No Borders</h2>
-        <p className="text-white/40 text-sm font-medium">Over 8,000 verified practitioners across 60+ countries</p>
+        <h2 className="text-4xl md:text-6xl font-serif font-medium text-white mb-3">HealConnect Is Everywhere</h2>
+        <p className="text-white/40 text-sm font-medium max-w-xl mx-auto">From New Delhi to New York, millions of seekers find guidance through HealConnect every day. Hover a node to see our reach.</p>
       </div>
 
-      <div className="relative w-full max-w-5xl mx-auto px-6 z-10" style={{ height: '380px' }}>
+      {/* World map viz */}
+      <div className="relative w-full max-w-5xl mx-auto px-6 z-10" style={{ height: '360px' }}>
+        {/* Base map grid lines */}
         <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-          {[...Array(8)].map((_, i) => (
-            <line key={`h${i}`} x1="0" y1={`${(i + 1) * 11}%`} x2="100%" y2={`${(i + 1) * 11}%`}
-              stroke="white" strokeOpacity="0.03" strokeWidth="1" />
+          {[...Array(6)].map((_, i) => (
+            <line key={`h${i}`} x1="0" y1={`${(i + 1) * 14}%`} x2="100%" y2={`${(i + 1) * 14}%`}
+              stroke="#63BFE4" strokeOpacity="0.05" strokeWidth="1" />
           ))}
-          {[...Array(12)].map((_, i) => (
-            <line key={`v${i}`} x1={`${(i + 1) * 8}%`} y1="0" x2={`${(i + 1) * 8}%`} y2="100%"
-              stroke="white" strokeOpacity="0.03" strokeWidth="1" />
+          {[...Array(10)].map((_, i) => (
+            <line key={`v${i}`} x1={`${(i + 1) * 9}%`} y1="0" x2={`${(i + 1) * 9}%`} y2="100%"
+              stroke="#63BFE4" strokeOpacity="0.05" strokeWidth="1" />
           ))}
-          <ellipse cx="50%" cy="36%" rx="10%" ry="14%" fill="#1A2340" opacity="0.55" />
-          <ellipse cx="65%" cy="42%" rx="8%" ry="12%" fill="#1A2340" opacity="0.55" />
-          <ellipse cx="81%" cy="35%" rx="5%" ry="8%" fill="#1A2340" opacity="0.55" />
-          <ellipse cx="29%" cy="35%" rx="7%" ry="10%" fill="#1A2340" opacity="0.55" />
-          <ellipse cx="34%" cy="63%" rx="5%" ry="9%" fill="#1A2340" opacity="0.55" />
-          <ellipse cx="52%" cy="56%" rx="8%" ry="8%" fill="#1A2340" opacity="0.55" />
-          <ellipse cx="84%" cy="68%" rx="4%" ry="5%" fill="#1A2340" opacity="0.55" />
+          {/* Curved connection lines from India (biggest hub) */}
+          {HC_NODES.slice(1).map(node => (
+            <path key={`p-${node.name}`}
+              d={`M ${HC_NODES[0].x}% ${HC_NODES[0].y}% Q 50% 50% ${node.x}% ${node.y}%`}
+              fill="none" stroke={node.color} strokeOpacity="0.15" strokeWidth="1" strokeDasharray="4 6" />
+          ))}
         </svg>
-        {CITIES.map(city => (
-          <div key={city.name} className="absolute"
-            style={{ left: `${city.x}%`, top: `${city.y}%`, transform: 'translate(-50%,-50%)', zIndex: hoveredCity?.name === city.name ? 50 : 10 }}
-            onMouseEnter={() => setHoveredCity(city)}
-            onMouseLeave={() => setHoveredCity(null)}>
-            <div className="absolute rounded-full animate-ping"
-              style={{ width: '28px', height: '28px', top: '-8px', left: '-8px', backgroundColor: city.color, opacity: 0.12 }} />
-            <div className="absolute rounded-full"
-              style={{ width: '18px', height: '18px', top: '-3px', left: '-3px', backgroundColor: city.color, opacity: 0.18 }} />
-            <div className="w-3 h-3 rounded-full cursor-pointer transition-all hover:scale-150"
-              style={{ backgroundColor: city.color, boxShadow: `0 0 12px ${city.color}, 0 0 4px ${city.color}` }} />
-            {hoveredCity?.name === city.name && (
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 w-52 bg-[#0D1629] border rounded-xl p-4 shadow-2xl pointer-events-none"
-                style={{ borderColor: `${city.color}40`, animation: 'zen-fade 0.3s ease' }}>
-                <div className="text-sm font-bold text-white mb-1">{city.name}</div>
-                <div className="text-base font-black mb-2" style={{ color: city.color }}>{city.count} Guides</div>
-                <div className="text-[10px] text-white/50 leading-relaxed">{city.specialty}</div>
+
+        {/* Nodes */}
+        {HC_NODES.map(node => {
+          const r = nodeRadius[node.size];
+          const isHov = hovered?.name === node.name;
+          return (
+            <div key={node.name} className="absolute"
+              style={{ left: `${node.x}%`, top: `${node.y}%`, transform: 'translate(-50%,-50%)', zIndex: isHov ? 50 : 10 }}
+              onMouseEnter={() => setHovered(node)}
+              onMouseLeave={() => setHovered(null)}>
+              {/* Pulse ring */}
+              <div className="absolute rounded-full animate-ping"
+                style={{ width: r * 2.8 + 'px', height: r * 2.8 + 'px', top: -(r * 0.9) + 'px', left: -(r * 0.9) + 'px', backgroundColor: node.color, opacity: 0.08 }} />
+              {/* Halo */}
+              <div className="absolute rounded-full"
+                style={{ width: r * 2 + 'px', height: r * 2 + 'px', top: -r * 0.5 + 'px', left: -r * 0.5 + 'px', backgroundColor: node.color, opacity: 0.14, transition: 'all 0.4s ease', transform: isHov ? 'scale(1.5)' : 'scale(1)' }} />
+              {/* Core dot */}
+              <div className="rounded-full cursor-pointer transition-all duration-400"
+                style={{ width: r + 'px', height: r + 'px', backgroundColor: node.color, boxShadow: `0 0 ${isHov ? 24 : 10}px ${node.color}`, transform: isHov ? 'scale(1.35)' : 'scale(1)' }} />
+              {/* City label */}
+              <div className="absolute text-center" style={{ top: r + 6 + 'px', left: '50%', transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}>
+                <span className="text-[10px] font-bold" style={{ color: node.color, opacity: isHov ? 1 : 0.6 }}>{node.name}</span>
               </div>
-            )}
-          </div>
-        ))}
+              {/* Tooltip */}
+              {isHov && (
+                <div className="absolute z-50 rounded-2xl p-4 shadow-2xl border pointer-events-none"
+                  style={{ width: '210px', bottom: r + 20 + 'px', left: '50%', transform: 'translateX(-50%)', background: '#0D1629EE', borderColor: `${node.color}40`, animation: 'zen-fade 0.25s ease', backdropFilter: 'blur(16px)' }}>
+                  <div className="text-xs font-black uppercase tracking-wider mb-1" style={{ color: node.color }}>{node.name}</div>
+                  <div className="flex justify-between items-baseline mb-2">
+                    <span className="text-xl font-bold text-white">{node.users}</span>
+                    <span className="text-[10px] text-white/40">active users</span>
+                  </div>
+                  <div className="text-[11px] text-white/60 mb-1">{node.guides} verified guides</div>
+                  <div className="text-[10px] text-white/40 border-t border-white/10 pt-2 mt-2">{node.top}</div>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
-      <div className="container mx-auto px-6 lg:px-16 mt-16 z-10">
+      {/* Stats strip */}
+      <div className="container mx-auto px-6 lg:px-16 mt-12 z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-white/8 pt-10">
-          {[{ label: 'Countries', value: '60+' }, { label: 'Practitioners', value: '8,000+' }, { label: 'Languages', value: '24' }, { label: 'Traditions', value: '12' }].map(s => (
+          {GROWTH_STATS.map(s => (
             <div key={s.label} className="text-center">
-              <div className="text-3xl md:text-4xl font-serif font-bold text-white mb-1">{s.value}</div>
-              <div className="text-xs font-black uppercase tracking-widest text-white/30">{s.label}</div>
+              <div className="text-3xl md:text-4xl font-serif font-bold text-white mb-1"
+                style={{ textShadow: '0 0 30px rgba(99,191,228,0.3)' }}>{s.value}</div>
+              <div className="text-[11px] font-black uppercase tracking-widest text-white/30">{s.label}</div>
             </div>
           ))}
         </div>
@@ -677,6 +805,9 @@ export function GlobalGuidanceMap() {
     </section>
   );
 }
+
+// backward-compat alias so old imports still work
+export { GlobalGuidanceMap as GlobalDistributionMap };
 
 // ─────────────────────────────────────────────────────────────────────────
 // 07. YOUR NEXT DISCOVERY — Animated 3-path journey CTA
