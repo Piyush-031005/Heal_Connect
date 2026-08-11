@@ -14,7 +14,7 @@ const MODALITIES = [
   { id: 'vastu', name: 'Vastu', image: '/12-modalities-v2/vastu.png' },
   { id: 'eft', name: 'EFT Tapping', image: '/12-modalities-v2/eft.png' },
   { id: 'spiritual', name: 'Spiritual Guide', image: '/12-modalities-v2/spiritual.png' },
-  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-v2/sound-transparent.png' },
+  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-v2/sound-v3.png' },
 ];
 
 export default function OpticalWheel() {
@@ -46,6 +46,9 @@ export default function OpticalWheel() {
               <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.4" />
               <stop offset="100%" stopColor="var(--primary)" stopOpacity="0" />
             </radialGradient>
+            <clipPath id="node-circle-clip">
+              <circle cx="0" cy="0" r="75" />
+            </clipPath>
           </defs>
           
           <circle cx={cx} cy={cy} r="480" fill="url(#glow)" />
@@ -142,15 +145,17 @@ export default function OpticalWheel() {
                       ))}
                     </g>
 
-                    {/* Image */}
-                    <image 
-                      href={`${modality.image}?v=4`} 
-                      x="-80" 
-                      y="-80" 
-                      width="160" 
-                      height="160" 
-                      className={`transition-all duration-300 ${isHovered ? 'scale-110 drop-shadow-2xl' : 'opacity-100'}`}
-                    />
+                    {/* Image clipped to circle */}
+                    <g clipPath="url(#node-circle-clip)">
+                      <image 
+                        href={`${modality.image}?v=5`} 
+                        x="-75" 
+                        y="-75" 
+                        width="150" 
+                        height="150" 
+                        className={`transition-all duration-300 ${isHovered ? 'scale-110 drop-shadow-2xl' : 'opacity-100'}`}
+                      />
+                    </g>
 
                     {/* Node Text Label (Floating Button Style) */}
                     <foreignObject x="-90" y="100" width="180" height="50" className={`pointer-events-none overflow-visible transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>

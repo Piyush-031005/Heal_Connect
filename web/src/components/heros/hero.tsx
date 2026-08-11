@@ -400,7 +400,7 @@ function ZenAlignHero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <div className="flex items-center bg-white/60 backdrop-blur-2xl rounded-2xl p-2 max-w-md shadow-[0_8px_40px_rgba(26,146,198,0.18)] border border-white/80 hover:shadow-[0_12px_60px_rgba(26,146,198,0.28)] transition-all duration-500">
+              <div className="flex items-center bg-white/70 backdrop-blur-2xl rounded-2xl p-2 max-w-md shadow-[0_8px_40px_rgba(26,146,198,0.18)] border border-white/80 hover:shadow-[0_12px_60px_rgba(26,146,198,0.28)] transition-all duration-500">
                 <Search className="w-5 h-5 text-[#1A92C6] ml-4 mr-3 shrink-0" />
                 <input
                   type="text"
@@ -410,21 +410,6 @@ function ZenAlignHero() {
                 <Button className="bg-[#1A92C6] hover:bg-[#17619A] text-white rounded-xl px-7 h-11 font-bold text-sm tracking-wider transition-all">
                   Search
                 </Button>
-              </div>
-
-              {/* Tags */}
-              <div className="flex items-center gap-2 mt-5 flex-wrap">
-                {['Astrology', 'Tarot', 'Energy Healing', 'Numerology'].map((tag, i) => (
-                  <motion.span
-                    key={tag}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.8 + i * 0.08 }}
-                    className="text-xs font-bold px-4 py-1.5 rounded-full bg-white/50 border border-[#9FD6EE]/60 text-[#1A92C6] cursor-pointer hover:bg-[#1A92C6] hover:text-white transition-all duration-300 backdrop-blur-sm"
-                  >
-                    {tag}
-                  </motion.span>
-                ))}
               </div>
             </motion.div>
 

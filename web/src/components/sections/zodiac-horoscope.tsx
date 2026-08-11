@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import { useLayout } from '@/lib/layout-context';
 
 const ZODIACS = [
   { id: 'aries', name: 'Aries', hindi: 'Mesh', date: 'Mar 21 - Apr 19', image: '/new-zodiacs/aries_new.png' },
@@ -20,11 +21,12 @@ const ZODIACS = [
 ];
 
 export default function ZodiacHoroscope() {
-  const [activeZodiac, setActiveZodiac] = useState(ZODIACS[6]); // Default Libra
+  const { layout } = useLayout();
+  const isNewDesign1 = layout === 'new-design-1';
+  const [activeZodiac, setActiveZodiac] = useState(ZODIACS[6]);
   const [activeTab, setActiveTab] = useState('Today');
   const [rotation, setRotation] = useState(0);
 
-  // Auto-rotate the ellipse slowly
   useEffect(() => {
     const interval = setInterval(() => {
       setRotation(prev => prev + 0.002);
@@ -87,13 +89,13 @@ export default function ZodiacHoroscope() {
                   }}
                   transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                 >
-                  <div className={`relative flex flex-col items-center gap-2 ${isActive ? 'drop-shadow-[0_0_20px_rgba(244,114,182,0.6)]' : ''}`}>
-                    <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden border-2 transition-colors duration-500 ${isActive ? 'border-pink-400 shadow-[0_0_30px_rgba(244,114,182,0.6)]' : 'border-indigo-500/20 group-hover:border-indigo-400'}`}>
-                      <img src={zodiac.image} alt={zodiac.name} className="w-full h-full object-cover mix-blend-screen" />
+                  <div className={`relative flex flex-col items-center gap-2 ${isActive ? (isNewDesign1 ? 'drop-shadow-[0_0_20px_rgba(26,146,198,0.5)]' : 'drop-shadow-[0_0_20px_rgba(244,114,182,0.6)]') : ''}`}>
+                    <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden border-2 transition-colors duration-500 bg-white/90 shadow-md ${isActive ? (isNewDesign1 ? 'border-[#1A92C6] shadow-[0_0_30px_rgba(26,146,198,0.5)]' : 'border-pink-400 shadow-[0_0_30px_rgba(244,114,182,0.6)]') : (isNewDesign1 ? 'border-[#9FD6EE]/60' : 'border-indigo-500/20 group-hover:border-indigo-400')}`}>
+                      <img src={zodiac.image} alt={zodiac.name} className="w-full h-full object-contain p-1.5" />
                     </div>
                     {/* Only show names for front-facing items to avoid clutter */}
                     <div className={`absolute top-full mt-2 text-center transition-opacity duration-300 ${depth > 0.8 || isActive ? 'opacity-100' : 'opacity-0'}`}>
-                      <span className={`block text-sm font-bold font-sans tracking-wide ${isActive ? 'text-pink-400' : 'text-indigo-200/80'}`}>
+                      <span className={`block text-sm font-bold font-sans tracking-wide ${isActive ? (isNewDesign1 ? 'text-[#1A92C6]' : 'text-pink-400') : (isNewDesign1 ? 'text-[#17619A]' : 'text-indigo-200/80')}`}>
                         {zodiac.name}
                       </span>
                     </div>
@@ -104,33 +106,33 @@ export default function ZodiacHoroscope() {
           </div>
         </div>
 
-        {/* Detailed Dashboard Card - Dark Theme */}
-        <div className="bg-[#131022]/80 backdrop-blur-xl rounded-3xl border border-indigo-500/20 shadow-2xl p-8 md:p-12 relative overflow-hidden">
+        {/* Detailed Dashboard Card */}
+        <div className={`${isNewDesign1 ? 'bg-white/80 border-[#CDE9F4] text-[#12527F]' : 'bg-[#131022]/80 border-indigo-500/20 text-white'} backdrop-blur-xl rounded-3xl border shadow-2xl p-8 md:p-12 relative overflow-hidden transition-all`}>
           
-          <div className="absolute top-0 right-0 w-64 h-64 bg-pink-500/10 rounded-full blur-[80px]" />
+          <div className={`absolute top-0 right-0 w-64 h-64 ${isNewDesign1 ? 'bg-[#20A6DC]/10' : 'bg-pink-500/10'} rounded-full blur-[80px]`} />
           
           <div className="flex flex-col md:flex-row gap-12 relative z-10">
             {/* Left Content */}
             <div className="flex-1">
               <div className="flex items-center gap-6 mb-8">
-                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden border border-border/50 shrink-0">
-                  <img src={activeZodiac.image} alt={activeZodiac.name} className="w-full h-full object-cover mix-blend-screen" />
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden border border-[#9FD6EE] bg-white p-1.5 shadow-sm shrink-0">
+                  <img src={activeZodiac.image} alt={activeZodiac.name} className="w-full h-full object-contain" />
                 </div>
                 <div>
-                  <h3 className="text-4xl font-serif font-bold text-white mb-1">{activeZodiac.name}</h3>
-                  <p className="text-indigo-300/80 text-sm">{activeZodiac.hindi} • {activeZodiac.date}</p>
+                  <h3 className={`text-4xl font-serif font-bold ${isNewDesign1 ? 'text-[#12527F]' : 'text-white'} mb-1`}>{activeZodiac.name}</h3>
+                  <p className={isNewDesign1 ? 'text-[#17619A]/80 text-sm' : 'text-indigo-300/80 text-sm'}>{activeZodiac.hindi} • {activeZodiac.date}</p>
                 </div>
               </div>
 
-              <p className="text-indigo-100/70 leading-relaxed mb-8 text-lg font-light">
+              <p className={`${isNewDesign1 ? 'text-[#17619A]/90' : 'text-indigo-100/70'} leading-relaxed mb-8 text-lg font-light`}>
                 {activeZodiac.name}, don't take on more than you can manage. Attempting to make everyone happy could exhaust you emotionally. You may need a healthy break due to work-related stress, and a little sleep could be really beneficial. A setback could make you doubt your luck, but don't give up. Recognize other people's emotions to prevent needless confrontation.
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Button className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-6 rounded-xl font-bold shadow-[0_0_20px_rgba(236,72,153,0.3)] border-none">
+                <Button className={isNewDesign1 ? 'bg-[#1A92C6] hover:bg-[#17619A] text-white px-8 py-6 rounded-xl font-bold border-none shadow-md' : 'bg-pink-500 hover:bg-pink-600 text-white px-8 py-6 rounded-xl font-bold shadow-[0_0_20px_rgba(236,72,153,0.3)] border-none'}>
                   Get my detailed horoscope
                 </Button>
-                <Button variant="outline" className="text-indigo-300 border-indigo-500/30 bg-indigo-500/10 hover:bg-indigo-500/20 hover:text-white px-8 py-6 rounded-xl font-bold">
+                <Button variant="outline" className={isNewDesign1 ? 'text-[#1A92C6] border-[#9FD6EE] bg-white hover:bg-[#EDF8FC] px-8 py-6 rounded-xl font-bold' : 'text-indigo-300 border-indigo-500/30 bg-indigo-500/10 hover:bg-indigo-500/20 hover:text-white px-8 py-6 rounded-xl font-bold'}>
                   Talk to a specialist
                 </Button>
               </div>

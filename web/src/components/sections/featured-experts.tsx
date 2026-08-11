@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { useLayout } from '@/lib/layout-context';
 
 const EXPERTS = [
   {
@@ -75,17 +76,103 @@ const EXPERTS = [
 ];
 
 export function FeaturedExperts() {
+  const { layout } = useLayout();
+  const isNewDesign1 = layout === 'new-design-1';
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      const scrollAmount = 320; // card width + gap
+      const scrollAmount = 340;
       scrollRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
       });
     }
   };
+
+  if (isNewDesign1) {
+    return (
+      <section className="py-28 bg-[#EDF8FC] border-t border-[#CDE9F4]/60">
+        <div className="container mx-auto px-6 lg:px-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-[2px] bg-[#1A92C6]" />
+                <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1A92C6]">Vetted Practitioners</span>
+              </div>
+              <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F]">Featured Cosmic Guides</h2>
+            </div>
+            <div className="flex items-center gap-4">
+              <Button variant="outline" size="icon" onClick={() => scroll('left')} className="rounded-full w-12 h-12 border-[#CDE9F4] bg-white text-[#12527F] hover:bg-[#1A92C6] hover:text-white hover:border-[#1A92C6] transition-all">
+                <ArrowRight className="w-5 h-5 rotate-180" />
+              </Button>
+              <Button variant="outline" size="icon" onClick={() => scroll('right')} className="rounded-full w-12 h-12 border-[#CDE9F4] bg-white text-[#12527F] hover:bg-[#1A92C6] hover:text-white hover:border-[#1A92C6] transition-all">
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </div>
+          </div>
+
+          <div
+            ref={scrollRef}
+            className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scroll-smooth"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {EXPERTS.map((expert) => (
+              <div key={expert.id} className="w-[320px] shrink-0 snap-start bg-white/80 backdrop-blur-xl rounded-3xl border border-[#CDE9F4] p-6 shadow-sm hover:shadow-xl hover:border-[#9FD6EE] transition-all duration-500 flex flex-col justify-between group">
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-[#EDF8FC] border border-[#9FD6EE] text-[#1A92C6] uppercase tracking-wider">
+                      {expert.specialization}
+                    </span>
+                    <div className="flex items-center gap-1 text-sm font-bold text-[#12527F]">
+                      <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                      <span>{expert.rating}</span>
+                      <span className="text-xs text-[#17619A]/60 font-normal">({expert.reviews})</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-16 h-16 rounded-2xl overflow-hidden bg-[#CDE9F4]/40 border border-[#9FD6EE]/60 shrink-0">
+                      <img src={expert.image} alt={expert.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-[#12527F] group-hover:text-[#1A92C6] transition-colors">{expert.name}</h3>
+                      <p className="text-xs font-medium text-[#17619A]/75 flex items-center gap-1 mt-1">
+                        <MapPin className="w-3 h-3 text-[#1A92C6]" /> {expert.location}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 py-4 border-y border-[#CDE9F4]/60 text-xs text-[#17619A]/80 font-medium">
+                    <div className="flex justify-between">
+                      <span>Experience</span>
+                      <span className="font-bold text-[#12527F]">{expert.experience}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Languages</span>
+                      <span className="font-bold text-[#12527F]">{expert.languages}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between mt-6 pt-2">
+                  <div>
+                    <span className="text-[10px] font-bold text-[#17619A]/60 uppercase tracking-widest block">Session</span>
+                    <span className="text-base font-extrabold text-[#12527F]">{expert.price}</span>
+                  </div>
+                  <Link href="/signup">
+                    <Button className="bg-[#1A92C6] hover:bg-[#17619A] text-white rounded-xl px-5 h-10 font-bold text-xs tracking-wider transition-all">
+                      Book Now
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-24 bg-card border-t border-border">
