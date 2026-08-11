@@ -12,9 +12,11 @@ import { Testimonials } from '@/components/sections/testimonials';
 import ZodiacHoroscope from '@/components/sections/zodiac-horoscope';
 import PricingSection from '@/components/sections/pricing';
 import FaqSection from '@/components/sections/faq';
+import { useLayout } from '@/lib/layout-context';
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
+  const { layout } = useLayout();
 
   useEffect(() => {
     setMounted(true);
@@ -22,8 +24,31 @@ export default function LandingPage() {
 
   if (!mounted) return <div className="min-h-screen bg-background" />;
 
+  const isNewDesign1 = layout === 'new-design-1';
+
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans transition-colors duration-500">
+    <div
+      className={`min-h-screen text-foreground flex flex-col font-sans transition-colors duration-500 ${isNewDesign1 ? 'theme-layout-2' : 'bg-background'}`}
+      style={isNewDesign1 ? {
+        '--background': '#EDF8FC',
+        '--foreground': '#12527F',
+        '--card': '#FFFFFF',
+        '--card-foreground': '#12527F',
+        '--primary': '#1A92C6',
+        '--primary-foreground': '#FFFFFF',
+        '--secondary': '#CDE9F4',
+        '--secondary-foreground': '#17619A',
+        '--muted': '#EDF8FC',
+        '--muted-foreground': '#63BFE4',
+        '--accent': '#20A6DC',
+        '--accent-foreground': '#FFFFFF',
+        '--border': '#CDE9F4',
+        '--input': '#CDE9F4',
+        '--ring': '#1A92C6',
+        backgroundColor: '#EDF8FC',
+        color: '#12527F',
+      } as React.CSSProperties : {}}
+    >
       <Navbar />
 
       <main className="flex-1">
@@ -58,12 +83,12 @@ export default function LandingPage() {
         <FaqSection />
       </main>
 
-      {/* 08 - FOOTER */}
-      <footer className="py-12 bg-card border-t border-border">
+      {/* FOOTER */}
+      <footer className={`py-12 border-t ${isNewDesign1 ? 'bg-[#EDF8FC] border-[#CDE9F4]' : 'bg-card border-border'}`}>
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-            <div className="text-2xl font-heading font-medium text-foreground mb-4 md:mb-0">
-              Heal<span className="text-primary italic">Connect.</span>
+            <div className={`text-2xl font-heading font-medium mb-4 md:mb-0 ${isNewDesign1 ? 'text-[#12527F]' : 'text-foreground'}`}>
+              Heal<span className={`${isNewDesign1 ? 'text-[#1A92C6]' : 'text-primary'} italic`}>Connect.</span>
             </div>
             <div className="flex gap-6 text-sm text-muted-foreground font-medium">
               <span className="hover:text-primary cursor-pointer transition-colors">Privacy Policy</span>

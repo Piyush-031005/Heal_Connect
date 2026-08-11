@@ -16,8 +16,8 @@ function PrimaryHero() {
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
 
-      {/* Big Modality Wheel overflowing on right */}
-      <div className="absolute right-[-20%] md:right-[-10%] top-1/2 -translate-y-1/2 h-[800px] w-[800px] md:h-[1000px] md:w-[1000px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center">
+      {/* Big Modality Wheel - slightly smaller, perfectly centered */}
+      <div className="absolute right-[-15%] md:right-[-5%] top-1/2 -translate-y-1/2 h-[650px] w-[650px] md:h-[780px] md:w-[780px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center">
         <OpticalWheel />
       </div>
 
@@ -358,7 +358,7 @@ function ZenAlignHero() {
           {/* LEFT: Text */}
           <motion.div
             style={{ y: yText, opacity }}
-            className="lg:col-span-6 flex flex-col justify-center pt-24 lg:pt-0 pb-16 lg:pb-0"
+            className="lg:col-span-6 flex flex-col justify-center pt-32 lg:pt-0 pb-16 lg:pb-0 lg:mt-0 mt-16"
           >
             {/* Top label */}
             <motion.div
@@ -373,26 +373,25 @@ function ZenAlignHero() {
               </span>
             </motion.div>
 
-            {/* Main heading — bold, no cursive */}
-            <div className="overflow-hidden mb-3">
+            {/* Main heading — Condensed heavy style like top astro sites */}
+            <div className="overflow-hidden mb-1">
               <motion.h1
                 initial={{ y: '110%' }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[3.8rem] md:text-[5.5rem] lg:text-[6.5rem] font-black leading-[0.95] tracking-tighter text-[#12527F] uppercase"
+                className="text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black leading-[0.88] tracking-[-0.04em] text-[#12527F] uppercase"
+                style={{ fontStretch: 'condensed', letterSpacing: '-0.04em' }}
               >
                 ALIGN
               </motion.h1>
             </div>
-            <div className="overflow-hidden mb-3">
+            <div className="overflow-hidden mb-1">
               <motion.h1
                 initial={{ y: '110%' }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.9, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[3.8rem] md:text-[5.5rem] lg:text-[6.5rem] font-black leading-[0.95] tracking-tighter text-transparent"
-                style={{
-                  WebkitTextStroke: '2px #1A92C6',
-                }}
+                className="text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black leading-[0.88] tracking-[-0.04em] text-transparent uppercase"
+                style={{ WebkitTextStroke: '3px #1A92C6', letterSpacing: '-0.04em' }}
               >
                 YOUR
               </motion.h1>
@@ -402,7 +401,8 @@ function ZenAlignHero() {
                 initial={{ y: '110%' }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.9, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[3.8rem] md:text-[5.5rem] lg:text-[6.5rem] font-black leading-[0.95] tracking-tighter text-[#1E6CAC] uppercase"
+                className="text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black leading-[0.88] tracking-[-0.04em] text-[#1E6CAC] uppercase"
+                style={{ letterSpacing: '-0.04em' }}
               >
                 COSMOS
               </motion.h1>
@@ -510,38 +510,6 @@ function ZenAlignHero() {
                 alt="Cosmic Masterpiece"
                 className="w-full h-full object-contain drop-shadow-[0_30px_80px_rgba(26,146,198,0.35)]"
               />
-            </motion.div>
-
-            {/* Floating pill — top left of image */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.2, duration: 0.8 }}
-              className="absolute top-[12%] left-[2%] bg-white/70 backdrop-blur-xl border border-[#CDE9F4] rounded-2xl px-4 py-3 shadow-lg flex items-center gap-3 z-20"
-            >
-              <div className="w-8 h-8 rounded-full bg-[#EDF8FC] flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-[#1A92C6]" />
-              </div>
-              <div>
-                <p className="text-[11px] font-black text-[#12527F] uppercase tracking-wider">Live Reading</p>
-                <p className="text-[10px] text-[#1A92C6]/80 font-medium">12 experts online</p>
-              </div>
-            </motion.div>
-
-            {/* Floating pill — bottom right */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.4, duration: 0.8 }}
-              className="absolute bottom-[15%] right-[2%] bg-[#1A92C6] rounded-2xl px-4 py-3 shadow-xl flex items-center gap-3 z-20"
-            >
-              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                <span className="text-white text-sm font-black">♈</span>
-              </div>
-              <div>
-                <p className="text-[11px] font-black text-white uppercase tracking-wider">Your Sign</p>
-                <p className="text-[10px] text-white/70 font-medium">Explore birth chart</p>
-              </div>
             </motion.div>
           </motion.div>
         </div>
