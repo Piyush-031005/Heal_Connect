@@ -485,24 +485,21 @@ function ZenAlignHero() {
               />
 
               {/* Central Glowing Orb & Logo */}
-              <div className="absolute w-[26%] h-[26%] rounded-full flex items-center justify-center z-20">
-                 {/* Core glow orb matching the bluish theme */}
-                 <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,1)_0%,rgba(237,248,252,1)_100%)] rounded-full border border-[#63BFE4]/30 shadow-[0_0_60px_rgba(26,146,198,0.3)] overflow-visible" />
-                 
+              <motion.div 
+                animate={{ y: [0, -6, 0] }}
+                transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+                className="absolute w-[28%] h-[28%] rounded-full flex items-center justify-center z-20"
+              >
                  {/* Main Logo */}
-                 <motion.div
-                   animate={{ y: [0, -6, 0] }}
-                   transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-                   className="relative w-[160%] h-[160%] z-10"
-                 >
+                 <div className="relative w-full h-full z-10">
                    <Image
                      src="/old_logo.png"
                      alt="HealConnect Logo"
                      fill
-                     className="object-contain drop-shadow-[0_10px_20px_rgba(26,146,198,0.15)] scale-[1.1]"
+                     className="object-contain drop-shadow-[0_10px_30px_rgba(26,146,198,0.4)]"
                    />
-                 </motion.div>
-              </div>
+                 </div>
+              </motion.div>
 
             </div>
           </motion.div>
