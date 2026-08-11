@@ -16,6 +16,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import Link from 'next/link';
+import { useLayout } from '@/lib/layout-context';
 
 const MODALITIES = [
   { id: 'astrology', name: 'Astrology', desc: 'Gain cosmic insights and life path guidance.', image: '/12-modalities-v2/astrology-v3.png' },
@@ -33,6 +34,47 @@ const MODALITIES = [
 ];
 
 export default function ExploreModalities() {
+  const { layout } = useLayout();
+  const isNewDesign1 = layout === 'new-design-1';
+
+  if (isNewDesign1) {
+    return (
+      <section className="py-28 bg-[#EDF8FC] border-t border-[#CDE9F4]/60 relative">
+        <div className="container mx-auto px-6 lg:px-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-[2px] bg-[#1A92C6]" />
+                <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1A92C6]">Explore Specialties</span>
+              </div>
+              <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F]">Curated Modalities</h2>
+            </div>
+            <p className="text-[#17619A]/80 font-medium max-w-md">Browse 12 ancient and modern modalities to find the exact guidance your soul seeks.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {MODALITIES.map((mod) => (
+              <div 
+                key={mod.id} 
+                id={`modality-${mod.id}`}
+                className="group bg-white/80 backdrop-blur-xl rounded-3xl p-6 border border-[#CDE9F4] hover:border-[#9FD6EE] transition-all duration-500 flex flex-col items-center text-center shadow-sm hover:shadow-xl cursor-pointer relative overflow-hidden"
+              >
+                <div className="w-36 h-36 rounded-full bg-[#EDF8FC] border-2 border-[#9FD6EE]/60 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-700 shadow-inner relative p-2">
+                  <img src={`${mod.image}?v=5`} alt={mod.name} className="w-full h-full object-contain rounded-full" />
+                </div>
+                <h3 className="text-lg font-bold text-[#12527F] mb-2 group-hover:text-[#1A92C6] transition-colors">{mod.name}</h3>
+                <p className="text-xs text-[#17619A]/75 leading-relaxed font-medium mb-4">{mod.desc}</p>
+                <Link href="/signup" className="mt-auto inline-flex items-center gap-2 text-xs font-bold text-[#1A92C6] hover:text-[#17619A]">
+                  Explore Practitioners <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-24 bg-background border-b border-border/50 relative">
       <div className="container mx-auto px-6">
@@ -51,23 +93,16 @@ export default function ExploreModalities() {
               id={mod.id} 
               className="group bg-card rounded-3xl p-6 border border-primary/5 hover:border-primary/20 transition-all duration-300 text-center flex flex-col items-center shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] cursor-pointer"
             >
-              {/* Massive Image Container */}
               <div className="w-40 h-40 rounded-full bg-primary/[0.03] border-4 border-primary/10 flex items-center justify-center mb-6 group-hover:scale-[1.15] transition-transform duration-700 shadow-xl relative overflow-hidden">
                 <div className="absolute inset-2 border border-dashed border-primary/30 rounded-full animate-[spin_30s_linear_infinite]" />
                 <img src={`${mod.image}?v=2`} alt={mod.name} className="w-full h-full object-cover rounded-full mix-blend-multiply" />
               </div>
               <h3 className="text-xl font-medium text-foreground mb-3">{mod.name}</h3>
               <div className="w-8 h-0.5 bg-primary/20 rounded-full mb-4 group-hover:w-16 transition-all duration-300" />
-              <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1 font-light px-2">
-                {mod.desc}
-              </p>
+              <p className="text-sm text-muted-foreground font-light leading-relaxed mb-6">{mod.desc}</p>
               
-              <Link 
-                href={`/category/${mod.id}`}
-                prefetch={false}
-                className="text-primary font-medium text-sm flex items-center gap-2 group-hover:gap-3 transition-all opacity-80 group-hover:opacity-100"
-              >
-                Explore <ArrowRight className="w-4 h-4" />
+              <Link href="/signup" className="mt-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary group-hover:translate-x-1 transition-transform">
+                Explore <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           ))}

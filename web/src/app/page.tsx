@@ -13,6 +13,15 @@ import ZodiacHoroscope from '@/components/sections/zodiac-horoscope';
 import PricingSection from '@/components/sections/pricing';
 import FaqSection from '@/components/sections/faq';
 import { useLayout } from '@/lib/layout-context';
+import {
+  ExpertConstellation,
+  ZodiacOrbitRing,
+  TarotTable,
+  ModalityUniverse,
+  ExpertStoriesDeck,
+  GlobalGuidanceMap,
+  YourNextDiscovery,
+} from '@/components/sections/zen-cosmos-sections';
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
@@ -55,32 +64,31 @@ export default function LandingPage() {
         {/* 01 - Hero & Modality Wheel */}
         <Hero />
 
-        {/* 02 - Global Trust & Scale */}
-        <TrustLayer />
-
-        {/* 03 - Featured Experts Showcase */}
-        <FeaturedExperts />
-
-        {/* 04 - AI Expert Matching Feature */}
-        <AiExpertMatching />
-
-        {/* 05 - Explore All Modalities */}
-        <ExploreModalities />
-
-        {/* 06 - Zodiac Horoscope */}
-        <ZodiacHoroscope />
-
-        {/* 07 - How HealConnect Works */}
-        <HowItWorks />
-
-        {/* 08 - Pricing */}
-        <PricingSection />
-
-        {/* 09 - Testimonials / Global Community */}
-        <Testimonials />
-
-        {/* 10 - FAQ Section */}
-        <FaqSection />
+        {isNewDesign1 ? (
+          <>
+            {/* ZEN LAYOUT — 7 Cosmos Sections */}
+            <ExpertConstellation />
+            <ZodiacOrbitRing />
+            <TarotTable />
+            <ModalityUniverse />
+            <ExpertStoriesDeck />
+            <GlobalGuidanceMap />
+            <YourNextDiscovery />
+          </>
+        ) : (
+          <>
+            {/* PRIMARY LOCKED — Standard Sections */}
+            <TrustLayer />
+            <FeaturedExperts />
+            <AiExpertMatching />
+            <ExploreModalities />
+            <ZodiacHoroscope />
+            <HowItWorks />
+            <PricingSection />
+            <Testimonials />
+            <FaqSection />
+          </>
+        )}
       </main>
 
       {/* FOOTER */}

@@ -152,54 +152,59 @@ export function HowItWorks() {
     );
   }
 
-  // --- PRIMARY LOCKED LAYOUT APP SHOWCASE (Exact Screenshot 2 styling: Yellow/Amber Gold theme) ---
+  // --- PRIMARY LOCKED LAYOUT APP SHOWCASE (Lavender / Deep Purple Theme) ---
   return (
-    <section className="py-24 bg-[#EAB308] text-white relative overflow-hidden z-10">
+    <section className="py-24 bg-gradient-to-br from-[#382452] via-[#4B2F6E] to-[#5A3A82] text-white relative overflow-hidden z-10 border-t border-[#6B4996]/40">
       {/* Background radial glow */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-300/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#8A64B5]/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#A384C6]/15 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Column: App Info */}
           <div className="lg:col-span-6 flex flex-col justify-center">
-            <span className="text-xs font-black uppercase tracking-[0.25em] text-amber-950/80 mb-4 block">
+            <span className="text-xs font-black uppercase tracking-[0.25em] text-[#D1BDEB] mb-4 block">
               THE HEALCONNECT APP
             </span>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-amber-950 mb-6 leading-[1.15]">
-              Astrology made simpler, and available to you <span className="underline decoration-amber-950/30">24×7.</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-white mb-6 leading-[1.15]">
+              Astrology made simpler, and available to you <span className="text-[#D1BDEB] italic font-normal">24×7.</span>
             </h2>
 
-            <p className="text-base md:text-lg text-amber-950/90 mb-8 leading-relaxed font-semibold max-w-xl">
+            <p className="text-base md:text-lg text-[#E3D5F2]/90 mb-8 leading-relaxed font-normal max-w-xl">
               Connect with an astrologer anytime, and find the solutions to all your love, marriage, career, and finance related problems instantly.
             </p>
 
             <div className="space-y-4 mb-10">
               <div className="flex items-center gap-3">
-                <Check className="w-5 h-5 text-amber-950 stroke-[3]" />
-                <span className="text-base font-extrabold text-amber-950">Instant chats, notifications, and alerts</span>
+                <div className="w-6 h-6 rounded-full bg-[#8A64B5] flex items-center justify-center shrink-0">
+                  <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                </div>
+                <span className="text-base font-semibold text-white">Instant chats, notifications, and alerts</span>
               </div>
               <div className="flex items-center gap-3">
-                <Check className="w-5 h-5 text-amber-950 stroke-[3]" />
-                <span className="text-base font-extrabold text-amber-950">Secure payments, UPI, cards & wallet, all encrypted</span>
+                <div className="w-6 h-6 rounded-full bg-[#8A64B5] flex items-center justify-center shrink-0">
+                  <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                </div>
+                <span className="text-base font-semibold text-white">Secure payments, UPI, cards & wallet, all encrypted</span>
               </div>
             </div>
 
             {/* App Store / Google Play Buttons */}
             <div className="flex flex-wrap gap-4">
-              <button className="flex items-center gap-3 bg-white text-amber-950 hover:bg-amber-50 px-6 py-3.5 rounded-2xl font-bold transition-all shadow-xl hover:scale-[1.03]">
-                <Download className="w-5 h-5 text-amber-950" />
+              <button className="flex items-center gap-3 bg-white text-[#382452] hover:bg-[#F4EEFB] px-6 py-3.5 rounded-2xl font-bold transition-all shadow-xl hover:scale-[1.03]">
+                <Download className="w-5 h-5 text-[#8A64B5]" />
                 <div className="text-left leading-tight">
-                  <span className="text-[10px] uppercase font-black text-amber-900/60 block">Download on</span>
-                  <span className="text-sm font-black">App Store</span>
+                  <span className="text-[10px] uppercase font-bold text-[#7E6B99] block">Download on</span>
+                  <span className="text-sm font-extrabold">App Store</span>
                 </div>
               </button>
-              <button className="flex items-center gap-3 bg-white text-amber-950 hover:bg-amber-50 px-6 py-3.5 rounded-2xl font-bold transition-all shadow-xl hover:scale-[1.03]">
-                <Download className="w-5 h-5 text-amber-950" />
+              <button className="flex items-center gap-3 bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 px-6 py-3.5 rounded-2xl font-bold transition-all shadow-xl hover:scale-[1.03]">
+                <Download className="w-5 h-5 text-[#D1BDEB]" />
                 <div className="text-left leading-tight">
-                  <span className="text-[10px] uppercase font-black text-amber-900/60 block">GET IT ON</span>
-                  <span className="text-sm font-black">Google Play</span>
+                  <span className="text-[10px] uppercase font-bold text-[#E3D5F2]/70 block">GET IT ON</span>
+                  <span className="text-sm font-extrabold">Google Play</span>
                 </div>
               </button>
             </div>
@@ -207,67 +212,68 @@ export function HowItWorks() {
 
           {/* Right Column: Phone Chat Interface Mockup */}
           <div className="lg:col-span-6 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[340px] md:max-w-[380px] bg-white rounded-[40px] shadow-[0_30px_90px_rgba(0,0,0,0.35)] border-[8px] border-amber-950 overflow-hidden text-amber-950">
+            <div className="relative w-full max-w-[340px] md:max-w-[380px] bg-white rounded-[40px] shadow-[0_30px_90px_rgba(0,0,0,0.4)] border-[8px] border-[#2A1B38] overflow-hidden text-[#382452]">
               
               {/* Status Header */}
-              <div className="bg-amber-50/50 px-6 py-3 border-b border-amber-200/60 flex justify-between items-center text-xs font-black text-amber-950">
+              <div className="bg-[#F4EEFB] px-6 py-3 border-b border-[#E3D5F2] flex justify-between items-center text-xs font-bold text-[#382452]">
                 <span>9:41</span>
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-[11px] font-semibold text-emerald-600">Online</span>
                 </div>
               </div>
 
               {/* Astrologer Bar */}
-              <div className="bg-white px-5 py-3 border-b border-amber-100 flex items-center justify-between">
+              <div className="bg-white px-5 py-3 border-b border-[#E3D5F2] flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-amber-300">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-[#8A64B5]">
                     <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=250&auto=format&fit=crop" alt="Astrologer" className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-black text-amber-950">Riya</h4>
-                    <p className="text-[10px] font-bold text-emerald-600">Online</p>
+                    <h4 className="text-sm font-bold text-[#382452]">Riya Sharma</h4>
+                    <p className="text-[10px] font-semibold text-emerald-600">Vedic Astrologer • Active</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 text-amber-950">
+                <div className="flex items-center gap-3 text-[#8A64B5]">
                   <PhoneCall className="w-4 h-4 cursor-pointer" />
                   <Video className="w-4 h-4 cursor-pointer" />
                 </div>
               </div>
 
               {/* Chat Body */}
-              <div className="p-5 bg-amber-50/30 space-y-4 min-h-[300px] flex flex-col justify-end text-xs">
+              <div className="p-5 bg-[#F4EEFB]/60 space-y-4 min-h-[300px] flex flex-col justify-end text-xs">
                 {/* Astrologer Message */}
-                <div className="bg-white p-3.5 rounded-2xl rounded-tl-none border border-amber-200/60 max-w-[85%] shadow-sm text-amber-950 font-semibold leading-relaxed">
-                  Hello! How can I help you today?
-                  <span className="block text-[9px] text-amber-900/50 mt-1 text-right">9:41 AM</span>
+                <div className="bg-white p-3.5 rounded-2xl rounded-tl-none border border-[#E3D5F2] max-w-[85%] shadow-sm text-[#382452] font-medium leading-relaxed">
+                  Hello! How can I help guide your destiny today? ✨
+                  <span className="block text-[9px] text-[#7E6B99] mt-1 text-right">9:41 AM</span>
                 </div>
 
                 {/* User Message */}
-                <div className="bg-[#EAB308] text-amber-950 p-3.5 rounded-2xl rounded-tr-none max-w-[85%] ml-auto font-bold shadow-md leading-relaxed">
-                  I need guidance about my career
-                  <span className="block text-[9px] text-amber-950/70 mt-1 text-right">9:42 AM ✓✓</span>
+                <div className="bg-[#8A64B5] text-white p-3.5 rounded-2xl rounded-tr-none max-w-[85%] ml-auto font-medium shadow-md leading-relaxed">
+                  I need guidance about my career transition next month.
+                  <span className="block text-[9px] text-white/70 mt-1 text-right">9:42 AM ✓✓</span>
                 </div>
 
                 {/* Typing Indicator */}
-                <div className="bg-white p-3 rounded-2xl rounded-tl-none border border-amber-200/60 w-fit flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce [animation-delay:0.2s]" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce [animation-delay:0.4s]" />
+                <div className="bg-white p-3 rounded-2xl rounded-tl-none border border-[#E3D5F2] w-fit flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#8A64B5] animate-bounce" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#8A64B5] animate-bounce [animation-delay:0.2s]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#8A64B5] animate-bounce [animation-delay:0.4s]" />
                 </div>
               </div>
 
               {/* Chat Input */}
-              <div className="p-3 bg-white border-t border-amber-100 flex items-center gap-2">
-                <MessageSquare className="w-4 h-4 text-amber-900/40 ml-2" />
+              <div className="p-3 bg-white border-t border-[#E3D5F2] flex items-center gap-2">
+                <MessageSquare className="w-4 h-4 text-[#7E6B99] ml-2" />
                 <input
                   type="text"
                   placeholder="Type a message..."
-                  className="flex-1 bg-amber-50/50 border-none rounded-full px-3 py-2 text-xs focus:outline-none text-amber-950 placeholder:text-amber-900/40 font-medium"
+                  className="flex-1 bg-[#F4EEFB] border-none rounded-full px-3 py-2 text-xs focus:outline-none text-[#382452] placeholder:text-[#7E6B99]"
                   readOnly
-                  value="Type a message..."
+                  value="Tell me about Jupiter transit..."
                 />
-                <button className="w-8 h-8 rounded-full bg-[#EAB308] flex items-center justify-center text-amber-950 shrink-0 shadow-md">
-                  <Send className="w-4 h-4 fill-amber-950" />
+                <button className="w-8 h-8 rounded-full bg-[#8A64B5] flex items-center justify-center text-white shrink-0 shadow-md">
+                  <Send className="w-4 h-4 fill-white" />
                 </button>
               </div>
 
