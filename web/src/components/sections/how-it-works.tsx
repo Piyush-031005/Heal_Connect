@@ -1,7 +1,8 @@
 'use client';
 
-import { Search, UserCircle, CalendarCheck, Leaf } from 'lucide-react';
+import { Check, Download, Send, PhoneCall, Video, ShieldCheck, Sparkles, MessageSquare } from 'lucide-react';
 import { useLayout } from '@/lib/layout-context';
+import { Button } from '@/components/ui/button';
 
 export function HowItWorks() {
   const { layout } = useLayout();
@@ -9,89 +10,274 @@ export function HowItWorks() {
 
   if (isNewDesign1) {
     return (
-      <section className="py-28 bg-[#EDF8FC] border-t border-[#CDE9F4]/60 relative z-10">
-        <div className="container mx-auto px-6 lg:px-16">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-[2px] bg-[#1A92C6]" />
-                <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1A92C6]">Simple Process</span>
-              </div>
-              <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F]">How Zenauraa Works</h2>
-            </div>
-            <p className="text-[#17619A]/80 font-medium max-w-md">Your seamless journey to connecting with verified cosmic guides and spiritual practitioners.</p>
-          </div>
+      <section className="py-24 bg-gradient-to-br from-[#12527F] via-[#17619A] to-[#1E6CAC] text-white relative overflow-hidden z-10">
+        {/* Background glow and subtle circle map */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#63BFE4]/20 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#20A6DC]/15 rounded-full blur-[120px] pointer-events-none" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { num: '01', title: 'Discover Guides', desc: 'Filter through vetted astrologers, tarot readers & energy healers by specialty and rating.', icon: Search },
-              { num: '02', title: 'Compare Profiles', desc: 'Read genuine reviews, explore certifications, and view real-time practitioner availability.', icon: UserCircle },
-              { num: '03', title: 'Instant Booking', desc: 'Reserve 1-on-1 video or audio consultation sessions effortlessly with flexible slots.', icon: CalendarCheck },
-              { num: '04', title: 'Transform & Thrive', desc: 'Gain deep cosmic clarity, personalized horoscopes, and spiritual alignment for life.', icon: Leaf },
-            ].map((step, idx) => (
-              <div key={idx} className="bg-white/80 backdrop-blur-xl border border-[#CDE9F4] rounded-3xl p-8 shadow-sm hover:shadow-xl hover:border-[#9FD6EE] transition-all duration-500 group relative overflow-hidden">
-                <div className="text-5xl font-black text-[#1A92C6]/15 group-hover:text-[#1A92C6]/25 transition-colors mb-6 font-mono">
-                  {step.num}
-                </div>
-                <div className="w-12 h-12 rounded-2xl bg-[#EDF8FC] border border-[#CDE9F4] flex items-center justify-center mb-6 group-hover:bg-[#1A92C6] group-hover:text-white transition-colors duration-500">
-                  <step.icon className="w-6 h-6 text-[#1A92C6] group-hover:text-white transition-colors" strokeWidth={1.75} />
-                </div>
-                <h3 className="text-xl font-bold text-[#12527F] mb-3">{step.title}</h3>
-                <p className="text-sm text-[#17619A]/75 leading-relaxed">{step.desc}</p>
+        <div className="container mx-auto px-6 lg:px-16 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            {/* Left Column: Headline & Benefits */}
+            <div className="lg:col-span-6 flex flex-col justify-center">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold uppercase tracking-[0.2em] text-[#CDE9F4] mb-6 w-fit">
+                <Sparkles className="w-3.5 h-3.5 text-[#63BFE4]" />
+                The Zenauraa App
               </div>
-            ))}
+
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-[1.1]">
+                Astrology Made Simpler, <br />
+                <span className="text-[#63BFE4] italic font-normal">Available 24×7.</span>
+              </h2>
+
+              <p className="text-lg text-[#CDE9F4]/90 mb-8 leading-relaxed font-normal max-w-xl">
+                Connect with verified astrologers anytime, and find guidance for love, career, marriage, and finance instantly on your phone.
+              </p>
+
+              <div className="space-y-4 mb-10">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[#20A6DC] flex items-center justify-center shrink-0">
+                    <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                  </div>
+                  <span className="text-base font-semibold text-white">Instant chats, 1-on-1 calls, and live notifications</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[#20A6DC] flex items-center justify-center shrink-0">
+                    <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                  </div>
+                  <span className="text-base font-semibold text-white">Secure UPI, Cards & Wallet payments with 256-bit encryption</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[#20A6DC] flex items-center justify-center shrink-0">
+                    <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                  </div>
+                  <span className="text-base font-semibold text-white">Daily personalized horoscopes & tarot readings</span>
+                </div>
+              </div>
+
+              {/* App Store Buttons */}
+              <div className="flex flex-wrap gap-4">
+                <button className="flex items-center gap-3 bg-white text-[#12527F] hover:bg-[#EDF8FC] px-6 py-3.5 rounded-2xl font-bold transition-all shadow-lg hover:scale-[1.03]">
+                  <Download className="w-5 h-5 text-[#1A92C6]" />
+                  <div className="text-left leading-tight">
+                    <span className="text-[10px] uppercase font-bold text-[#17619A]/70 block">Download on</span>
+                    <span className="text-sm font-extrabold">App Store</span>
+                  </div>
+                </button>
+                <button className="flex items-center gap-3 bg-white/10 backdrop-blur-md text-white border border-white/30 hover:bg-white/20 px-6 py-3.5 rounded-2xl font-bold transition-all hover:scale-[1.03]">
+                  <Download className="w-5 h-5 text-[#63BFE4]" />
+                  <div className="text-left leading-tight">
+                    <span className="text-[10px] uppercase font-bold text-[#CDE9F4]/70 block">GET IT ON</span>
+                    <span className="text-sm font-extrabold">Google Play</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Right Column: Mobile App Chat Mockup */}
+            <div className="lg:col-span-6 flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-[340px] md:max-w-[380px] bg-white rounded-[40px] shadow-[0_25px_70px_rgba(0,0,0,0.4)] border-[8px] border-[#0A3250] overflow-hidden text-[#12527F]">
+                
+                {/* Phone Notch / Status Header */}
+                <div className="bg-[#F8FCFE] px-6 py-3 border-b border-[#CDE9F4]/60 flex justify-between items-center text-xs font-bold text-[#17619A]">
+                  <span>9:41</span>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-[11px] font-semibold text-emerald-600">Online</span>
+                  </div>
+                </div>
+
+                {/* Astrologer Bar */}
+                <div className="bg-white px-5 py-3 border-b border-[#CDE9F4]/40 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#9FD6EE]">
+                      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=250&auto=format&fit=crop" alt="Astrologer" className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-[#12527F]">Riya Sharma</h4>
+                      <p className="text-[10px] font-semibold text-emerald-600">Vedic Astrologer • Active</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 text-[#1A92C6]">
+                    <div className="p-2 rounded-full bg-[#EDF8FC] hover:bg-[#CDE9F4] cursor-pointer">
+                      <PhoneCall className="w-4 h-4" />
+                    </div>
+                    <div className="p-2 rounded-full bg-[#EDF8FC] hover:bg-[#CDE9F4] cursor-pointer">
+                      <Video className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Chat Area */}
+                <div className="p-5 bg-[#EDF8FC]/50 space-y-4 min-h-[300px] flex flex-col justify-end text-xs">
+                  {/* Astrologer Bubble */}
+                  <div className="bg-white p-3.5 rounded-2xl rounded-tl-none border border-[#CDE9F4] max-w-[85%] shadow-sm text-[#12527F] font-medium leading-relaxed">
+                    Hello! How can I help guide your destiny today? ✨
+                    <span className="block text-[9px] text-[#17619A]/50 mt-1 text-right">9:41 AM</span>
+                  </div>
+
+                  {/* User Bubble */}
+                  <div className="bg-[#1A92C6] text-white p-3.5 rounded-2xl rounded-tr-none max-w-[85%] ml-auto font-medium shadow-md leading-relaxed">
+                    I need guidance about my career transition next month.
+                    <span className="block text-[9px] text-white/70 mt-1 text-right">9:42 AM ✓✓</span>
+                  </div>
+
+                  {/* Typing Indicator */}
+                  <div className="bg-white p-3 rounded-2xl rounded-tl-none border border-[#CDE9F4] w-fit flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#1A92C6] animate-bounce" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#1A92C6] animate-bounce [animation-delay:0.2s]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#1A92C6] animate-bounce [animation-delay:0.4s]" />
+                  </div>
+                </div>
+
+                {/* Chat Input Bar */}
+                <div className="p-3 bg-white border-t border-[#CDE9F4] flex items-center gap-2">
+                  <input
+                    type="text"
+                    placeholder="Type a message..."
+                    className="flex-1 bg-[#EDF8FC] border-none rounded-full px-4 py-2 text-xs focus:outline-none text-[#12527F] placeholder:text-[#7FB2D3]"
+                    readOnly
+                    value="Tell me about Jupiter transit..."
+                  />
+                  <button className="w-8 h-8 rounded-full bg-[#1A92C6] flex items-center justify-center text-white shrink-0 shadow-md">
+                    <Send className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
     );
   }
 
+  // --- PRIMARY LOCKED LAYOUT APP SHOWCASE (Exact Screenshot 2 styling: Yellow/Amber Gold theme) ---
   return (
-    <section className="py-24 bg-background">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-heading font-medium text-foreground mb-4">How HealConnect Works</h2>
-          <div className="w-12 h-0.5 bg-primary/40 mx-auto" />
-        </div>
+    <section className="py-24 bg-[#EAB308] text-white relative overflow-hidden z-10">
+      {/* Background radial glow */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-300/20 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="flex flex-col md:flex-row items-start justify-between relative max-w-5xl mx-auto">
-          {/* Connecting line for desktop */}
-          <div className="hidden md:block absolute top-12 left-[10%] right-[10%] h-px border-t-2 border-dashed border-border" />
+      <div className="container mx-auto px-6 lg:px-16 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          <div className="flex-1 flex flex-col items-center text-center px-4 relative z-10 mb-12 md:mb-0">
-            <div className="w-24 h-24 rounded-full bg-card border-2 border-primary/20 flex items-center justify-center text-primary mb-6 shadow-sm">
-              <Search className="w-10 h-10" strokeWidth={1.5} />
+          {/* Left Column: App Info */}
+          <div className="lg:col-span-6 flex flex-col justify-center">
+            <span className="text-xs font-black uppercase tracking-[0.25em] text-amber-950/80 mb-4 block">
+              THE HEALCONNECT APP
+            </span>
+
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-amber-950 mb-6 leading-[1.15]">
+              Astrology made simpler, and available to you <span className="underline decoration-amber-950/30">24×7.</span>
+            </h2>
+
+            <p className="text-base md:text-lg text-amber-950/90 mb-8 leading-relaxed font-semibold max-w-xl">
+              Connect with an astrologer anytime, and find the solutions to all your love, marriage, career, and finance related problems instantly.
+            </p>
+
+            <div className="space-y-4 mb-10">
+              <div className="flex items-center gap-3">
+                <Check className="w-5 h-5 text-amber-950 stroke-[3]" />
+                <span className="text-base font-extrabold text-amber-950">Instant chats, notifications, and alerts</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Check className="w-5 h-5 text-amber-950 stroke-[3]" />
+                <span className="text-base font-extrabold text-amber-950">Secure payments, UPI, cards & wallet, all encrypted</span>
+              </div>
             </div>
-            <h3 className="text-xl font-bold text-foreground mb-3">1. Discover</h3>
-            <p className="text-sm text-muted-foreground">Search and explore practitioners by specialty, service or location.</p>
+
+            {/* App Store / Google Play Buttons */}
+            <div className="flex flex-wrap gap-4">
+              <button className="flex items-center gap-3 bg-white text-amber-950 hover:bg-amber-50 px-6 py-3.5 rounded-2xl font-bold transition-all shadow-xl hover:scale-[1.03]">
+                <Download className="w-5 h-5 text-amber-950" />
+                <div className="text-left leading-tight">
+                  <span className="text-[10px] uppercase font-black text-amber-900/60 block">Download on</span>
+                  <span className="text-sm font-black">App Store</span>
+                </div>
+              </button>
+              <button className="flex items-center gap-3 bg-white text-amber-950 hover:bg-amber-50 px-6 py-3.5 rounded-2xl font-bold transition-all shadow-xl hover:scale-[1.03]">
+                <Download className="w-5 h-5 text-amber-950" />
+                <div className="text-left leading-tight">
+                  <span className="text-[10px] uppercase font-black text-amber-900/60 block">GET IT ON</span>
+                  <span className="text-sm font-black">Google Play</span>
+                </div>
+              </button>
+            </div>
           </div>
 
-          <div className="flex-1 flex flex-col items-center text-center px-4 relative z-10 mb-12 md:mb-0">
-            <div className="w-24 h-24 rounded-full bg-card border-2 border-primary/20 flex items-center justify-center text-primary mb-6 shadow-sm">
-              <UserCircle className="w-10 h-10" strokeWidth={1.5} />
+          {/* Right Column: Phone Chat Interface Mockup */}
+          <div className="lg:col-span-6 flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-[340px] md:max-w-[380px] bg-white rounded-[40px] shadow-[0_30px_90px_rgba(0,0,0,0.35)] border-[8px] border-amber-950 overflow-hidden text-amber-950">
+              
+              {/* Status Header */}
+              <div className="bg-amber-50/50 px-6 py-3 border-b border-amber-200/60 flex justify-between items-center text-xs font-black text-amber-950">
+                <span>9:41</span>
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                </div>
+              </div>
+
+              {/* Astrologer Bar */}
+              <div className="bg-white px-5 py-3 border-b border-amber-100 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-amber-300">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=250&auto=format&fit=crop" alt="Astrologer" className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-black text-amber-950">Riya</h4>
+                    <p className="text-[10px] font-bold text-emerald-600">Online</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 text-amber-950">
+                  <PhoneCall className="w-4 h-4 cursor-pointer" />
+                  <Video className="w-4 h-4 cursor-pointer" />
+                </div>
+              </div>
+
+              {/* Chat Body */}
+              <div className="p-5 bg-amber-50/30 space-y-4 min-h-[300px] flex flex-col justify-end text-xs">
+                {/* Astrologer Message */}
+                <div className="bg-white p-3.5 rounded-2xl rounded-tl-none border border-amber-200/60 max-w-[85%] shadow-sm text-amber-950 font-semibold leading-relaxed">
+                  Hello! How can I help you today?
+                  <span className="block text-[9px] text-amber-900/50 mt-1 text-right">9:41 AM</span>
+                </div>
+
+                {/* User Message */}
+                <div className="bg-[#EAB308] text-amber-950 p-3.5 rounded-2xl rounded-tr-none max-w-[85%] ml-auto font-bold shadow-md leading-relaxed">
+                  I need guidance about my career
+                  <span className="block text-[9px] text-amber-950/70 mt-1 text-right">9:42 AM ✓✓</span>
+                </div>
+
+                {/* Typing Indicator */}
+                <div className="bg-white p-3 rounded-2xl rounded-tl-none border border-amber-200/60 w-fit flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce [animation-delay:0.2s]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce [animation-delay:0.4s]" />
+                </div>
+              </div>
+
+              {/* Chat Input */}
+              <div className="p-3 bg-white border-t border-amber-100 flex items-center gap-2">
+                <MessageSquare className="w-4 h-4 text-amber-900/40 ml-2" />
+                <input
+                  type="text"
+                  placeholder="Type a message..."
+                  className="flex-1 bg-amber-50/50 border-none rounded-full px-3 py-2 text-xs focus:outline-none text-amber-950 placeholder:text-amber-900/40 font-medium"
+                  readOnly
+                  value="Type a message..."
+                />
+                <button className="w-8 h-8 rounded-full bg-[#EAB308] flex items-center justify-center text-amber-950 shrink-0 shadow-md">
+                  <Send className="w-4 h-4 fill-amber-950" />
+                </button>
+              </div>
+
             </div>
-            <h3 className="text-xl font-bold text-foreground mb-3">2. Connect</h3>
-            <p className="text-sm text-muted-foreground">View profiles, read reviews and find the perfect match for your needs.</p>
           </div>
 
-          <div className="flex-1 flex flex-col items-center text-center px-4 relative z-10 mb-12 md:mb-0">
-            <div className="w-24 h-24 rounded-full bg-card border-2 border-primary/20 flex items-center justify-center text-primary mb-6 shadow-sm">
-              <CalendarCheck className="w-10 h-10" strokeWidth={1.5} />
-            </div>
-            <h3 className="text-xl font-bold text-foreground mb-3">3. Book</h3>
-            <p className="text-sm text-muted-foreground">Book sessions or services securely and easily through our platform.</p>
-          </div>
-
-          <div className="flex-1 flex flex-col items-center text-center px-4 relative z-10">
-            <div className="w-24 h-24 rounded-full bg-card border-2 border-primary/20 flex items-center justify-center text-primary mb-6 shadow-sm">
-              <Leaf className="w-10 h-10" strokeWidth={1.5} />
-            </div>
-            <h3 className="text-xl font-bold text-foreground mb-3">4. Thrive</h3>
-            <p className="text-sm text-muted-foreground">Begin your journey toward balance, clarity and transformation.</p>
-          </div>
         </div>
       </div>
     </section>
   );
 }
+
 
