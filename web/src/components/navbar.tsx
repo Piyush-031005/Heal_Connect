@@ -400,9 +400,6 @@ export default function Navbar() {
                     { code: 'new-design-1', label: '💜 New Design 1 (Zen)' },
                     { code: 'primary', label: '✦ Primary (Locked)' },
                     { code: 'editorial', label: '📰 Editorial (Magazine)' },
-                    { code: 'organic', label: '🌿 Organic (Flow)' },
-                    { code: 'minimalist', label: '✨ Minimalist (Clean)' },
-                    { code: 'modern-glow', label: '🌟 Modern Glow (Neon)' },
                   ] as const).map((l) => (
                     <button
                       key={l.code}

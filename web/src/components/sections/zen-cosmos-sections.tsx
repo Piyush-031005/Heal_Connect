@@ -47,16 +47,16 @@ export function WhyYouHere() {
   const ref = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="relative min-h-[90vh] overflow-hidden flex flex-col border-t border-white/5"
-      style={{ background: 'radial-gradient(ellipse at 20% 50%, #0e1a2e 0%, #060B1E 60%, #080412 100%)' }}>
+    <section className="relative min-h-[90vh] overflow-hidden flex flex-col border-t border-[#EDF8FC]"
+      style={{ background: 'radial-gradient(ellipse at 20% 50%, #FFFFFF 0%, #EDF8FC 60%, #CDE9F4 100%)' }}>
       {/* Deep starfield */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(200)].map((_, i) => (
-          <div key={i} className="absolute rounded-full bg-white"
+          <div key={i} className="absolute rounded-full bg-[#1A92C6]"
             style={{
               width: `${(i % 3) + 0.5}px`, height: `${(i % 3) + 0.5}px`,
               left: `${(i * 17.3) % 100}%`, top: `${(i * 23.7) % 100}%`,
-              opacity: 0.04 + (i % 8) * 0.06,
+              opacity: 0.05 + (i % 8) * 0.05,
               animation: `zen-twinkle ${2 + (i % 4)}s ease-in-out infinite`,
               animationDelay: `${(i * 0.3) % 5}s`,
             }}
@@ -69,15 +69,15 @@ export function WhyYouHere() {
           <div className="w-8 h-[2px] bg-[#D4A853]" />
           <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4A853]">02 — What Brings You Here</span>
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-medium text-white mb-2">What Are You Seeking?</h2>
-        <p className="text-white/50 text-sm font-medium max-w-lg">Every star is a question someone asked. Hover to explore what HealConnect can answer for you. Drag to navigate.</p>
+        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-2">What Are You Seeking?</h2>
+        <p className="text-[#1A92C6] text-sm font-bold max-w-lg">Every star is a question someone asked. Hover to explore what HealConnect can answer for you. Drag to navigate.</p>
       </div>
 
       <div className="container mx-auto px-6 lg:px-16 z-10 flex gap-5 flex-wrap mb-4">
         {Object.entries(INTENTION_LABELS).map(([c, label]) => (
           <div key={c} className="flex items-center gap-2">
-            <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: INTENTION_COLORS[c], boxShadow: `0 0 8px ${INTENTION_COLORS[c]}` }} />
-            <span className="text-xs font-bold text-white/50">{label}</span>
+            <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: INTENTION_COLORS[c], boxShadow: `0 0 8px ${INTENTION_COLORS[c]}40` }} />
+            <span className="text-xs font-bold text-[#12527F]/70">{label}</span>
           </div>
         ))}
       </div>
@@ -102,7 +102,7 @@ export function WhyYouHere() {
           {INTENTION_STARS.map((s, i) =>
             INTENTION_STARS.slice(i + 1).filter(s2 => s2.cluster === s.cluster).map(s2 => (
               <line key={`${s.id}-${s2.id}`} x1={`${s.x}%`} y1={`${s.y}%`} x2={`${s2.x}%`} y2={`${s2.y}%`}
-                stroke={INTENTION_COLORS[s.cluster]} strokeOpacity="0.25" strokeWidth="1" strokeDasharray="3 5" />
+                stroke={INTENTION_COLORS[s.cluster]} strokeOpacity="0.4" strokeWidth="1.5" strokeDasharray="4 6" />
             ))
           )}
           {INTENTION_STARS.map(s => {
@@ -117,27 +117,27 @@ export function WhyYouHere() {
                 }}
                 onMouseLeave={() => setHovered(null)}
               >
-                <circle cx={`${s.x}%`} cy={`${s.y}%`} r="22" fill="transparent" />
+                <circle cx={`${s.x}%`} cy={`${s.y}%`} r="35" fill="transparent" />
                 {/* Outer glow ring */}
-                <circle cx={`${s.x}%`} cy={`${s.y}%`} r={isHov ? '16' : '12'} fill="none" stroke={col}
-                  strokeWidth="0.5" strokeOpacity={isHov ? 0.6 : 0.2}
+                <circle cx={`${s.x}%`} cy={`${s.y}%`} r={isHov ? '24' : '18'} fill="none" stroke={col}
+                  strokeWidth="1.5" strokeOpacity={isHov ? 0.7 : 0.3}
                   style={{ transition: 'all 0.4s ease' }} />
                 {/* Core star */}
-                <circle cx={`${s.x}%`} cy={`${s.y}%`} r={isHov ? '7' : '4.5'} fill={col}
-                  style={{ filter: `drop-shadow(0 0 ${isHov ? 14 : 8}px ${col})`, transition: 'all 0.4s ease' }} />
+                <circle cx={`${s.x}%`} cy={`${s.y}%`} r={isHov ? '12' : '8'} fill={col} fillOpacity={isHov ? 1 : 0.85}
+                  style={{ filter: `drop-shadow(0 0 ${isHov ? 16 : 8}px ${col}80)`, transition: 'all 0.4s ease' }} />
                 {/* Label */}
-                <text x={`${s.x}%`} y={`${s.y}%`} dy="26" textAnchor="middle"
-                  fill="white" fontSize="10" opacity={isHov ? 0.9 : 0.5} fontFamily="serif"
+                <text x={`${s.x}%`} y={`${s.y}%`} dy="38" textAnchor="middle"
+                  fill="#12527F" fontSize="11" fontWeight="700" opacity={isHov ? 1 : 0.8} fontFamily="serif"
                   style={{ transition: 'all 0.3s ease' }}>{s.name}</text>
               </g>
             );
           })}
         </svg>
         {hovered && (
-          <div className="absolute z-50 pointer-events-none backdrop-blur-2xl border rounded-2xl p-5 w-60 shadow-2xl"
-            style={{ left: Math.min(tipPos.x + 18, 600), top: tipPos.y - 80, backgroundColor: '#0D1629CC', borderColor: `${INTENTION_COLORS[hovered.cluster]}50` }}>
+          <div className="absolute z-50 pointer-events-none backdrop-blur-xl border rounded-2xl p-5 w-60 shadow-xl"
+            style={{ left: Math.min(tipPos.x + 18, 600), top: tipPos.y - 80, backgroundColor: 'rgba(255,255,255,0.95)', borderColor: `${INTENTION_COLORS[hovered.cluster]}50` }}>
             <div className="text-[9px] font-black uppercase tracking-widest mb-2" style={{ color: INTENTION_COLORS[hovered.cluster] }}>{INTENTION_LABELS[hovered.cluster]}</div>
-            <div className="text-base font-bold text-white mb-3">{hovered.name}</div>
+            <div className="text-base font-bold text-[#12527F] mb-3">{hovered.name}</div>
             <Link href="/signup" className="inline-flex items-center gap-1.5 text-xs font-bold transition-colors"
               style={{ color: INTENTION_COLORS[hovered.cluster] }}>
               Find Specialists <ArrowRight className="w-3 h-3" />
@@ -234,18 +234,18 @@ export function ZodiacOrbitRing() {
                 const isActive = z.id === active.id;
                 return (
                   <g key={z.id} onClick={() => setActive(z)} style={{ cursor: 'pointer' }}>
-                    <circle cx={x} cy={y} r={isActive ? 6 : 4}
+                    <circle cx={x} cy={y} r={isActive ? 8 : 6.5}
                       fill="white"
                       style={{ filter: isActive ? `drop-shadow(0 0 8px ${z.color})` : 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))', transition: 'all 0.4s ease' }} />
-                    <image href={z.img} x={x - (isActive ? 4 : 2.5)} y={y - (isActive ? 4 : 2.5)} width={isActive ? 8 : 5} height={isActive ? 8 : 5}
+                    <image href={z.img} x={x - (isActive ? 5.5 : 4.5)} y={y - (isActive ? 5.5 : 4.5)} width={isActive ? 11 : 9} height={isActive ? 11 : 9}
                       opacity={isActive ? 1 : 0.6}
                       style={{ transition: 'all 0.4s ease' }} />
                   </g>
                 );
               })}
-              <circle cx={CX} cy={CY} r="16" fill="white" style={{ filter: 'drop-shadow(0 4px 12px rgba(18,82,127,0.15))' }} />
-              <image href={active.img} x={CX - 10} y={CY - 14} width="20" height="20" style={{ transition: 'all 0.5s ease' }} />
-              <text x={CX} y={CY + 10} textAnchor="middle" fill="#12527F" fontSize="3.5" opacity="0.9"
+              <circle cx={CX} cy={CY} r="22" fill="white" style={{ filter: 'drop-shadow(0 4px 12px rgba(18,82,127,0.15))' }} />
+              <image href={active.img} x={CX - 13} y={CY - 16} width="26" height="26" style={{ transition: 'all 0.5s ease' }} />
+              <text x={CX} y={CY + 13} textAnchor="middle" fill="#12527F" fontSize="4" opacity="0.9"
                 fontFamily="serif" fontWeight="bold">{active.name.toUpperCase()}</text>
             </svg>
           </div>
@@ -289,14 +289,14 @@ export function ZodiacOrbitRing() {
 // ─────────────────────────────────────────────────────────────────────────
 const TAROT_CARDS = [
   {
-    name: 'The Star', roman: 'XVII', subtitle: 'Hope · Renewal · Clarity',
-    message: 'A period of profound clarity and cosmic alignment surrounds you. Trust in the universe\'s divine guidance — allow your authentic light to illuminate the path ahead.',
-    cardBg: 'linear-gradient(170deg, #12527F 0%, #0A2B45 100%)',
-    border: '#63BFE4', accent: '#EDF8FC',
-    color: '#1A92C6', backBg: 'linear-gradient(145deg, #1A92C6, #12527F)'
+    name: 'The Fool', roman: '0', subtitle: 'New Beginnings · Spontaneity',
+    message: 'A blank slate lies before you. Take the leap of faith without fear, trusting that the universe will catch you. Embrace the unknown with childlike wonder.',
+    cardBg: 'linear-gradient(170deg, #1A365D 0%, #0F172A 100%)',
+    border: '#63BFE4', accent: '#E0F2FE',
+    color: '#3B82F6', backBg: 'linear-gradient(145deg, #1A92C6, #0F172A)'
   },
   {
-    name: 'The Moon', roman: 'XVIII', subtitle: 'Intuition · Mystery · Dreams',
+    name: 'The High Priestess', roman: 'II', subtitle: 'Intuition · Inner Voice · Mystery',
     message: 'Your subconscious holds truths the waking mind has yet to hear. Honour the cycles within you — your intuition is your most sacred compass right now.',
     cardBg: 'linear-gradient(170deg, #1A0E3A 0%, #251450 50%, #0E0820 100%)',
     border: '#C9A0DC', accent: '#F5F3FF',
@@ -323,9 +323,24 @@ const TAROT_CARDS = [
     border: '#F4A261', accent: '#FFF5F5',
     color: '#C45C3A', backBg: 'linear-gradient(145deg, #C45C3A, #3D1010)'
   },
+  {
+    name: 'The Star', roman: 'XVII', subtitle: 'Hope · Inspiration · Serenity',
+    message: 'After the storm comes clear, starlit skies. A time of deep spiritual healing and renewed hope is upon you. Trust in the quiet guidance of the universe.',
+    cardBg: 'linear-gradient(170deg, #0C1E3A 0%, #06101D 100%)',
+    border: '#98E6F4', accent: '#E0F7FA',
+    color: '#4DD0E1', backBg: 'linear-gradient(145deg, #00BCD4, #06101D)'
+  },
+  {
+    name: 'The Magician', roman: 'I', subtitle: 'Manifestation · Power · Action',
+    message: 'You possess all the tools needed to manifest your desires. Align your thoughts, words, and actions, and watch the universe bend to your will.',
+    cardBg: 'linear-gradient(170deg, #4A154B 0%, #29082A 100%)',
+    border: '#FF6B9D', accent: '#FCE4EC',
+    color: '#E91E63', backBg: 'linear-gradient(145deg, #E91E63, #29082A)'
+  }
 ];
 
-const CARD_ROTATIONS = [-10, -4, 0, 5, 11];
+const CARD_ROTATIONS = [-15, -10, -5, 0, 5, 10, 15];
+const CARD_OFFSETS = [30, 20, 10, 0, 10, 20, 30];
 
 export function TarotTable() {
   const [flipped, setFlipped] = useState<number | null>(null);
@@ -337,7 +352,7 @@ export function TarotTable() {
       <div className="absolute inset-0 opacity-40 pointer-events-none"
         style={{ backgroundImage: 'linear-gradient(rgba(26,146,198,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(26,146,198,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       {/* Light glow orb */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full blur-[120px] pointer-events-none bg-white" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[120px] pointer-events-none bg-white" />
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10 text-center">
         <div className="flex items-center justify-center gap-3 mb-4">
@@ -352,56 +367,58 @@ export function TarotTable() {
           <span className="text-[#12527F]/70 text-sm font-medium italic">&ldquo;What energy should I honour today?&rdquo;</span>
         </div>
 
-        {/* Card spread */}
-        <div className="relative flex items-end justify-center gap-2 md:gap-3 mb-16 min-h-[280px]">
+        {/* Card spread deck */}
+        <div className="relative flex items-end justify-center gap-1 md:gap-2 mb-20 min-h-[300px]">
           {TAROT_CARDS.map((card, i) => {
             const isFlipped = flipped === i;
             const rot = CARD_ROTATIONS[i] || 0;
+            const yOffset = CARD_OFFSETS[i] || 0;
             return (
-              <div key={i} className="relative"
+              <div key={i} className="relative group"
                 style={{
-                  transform: `rotate(${isFlipped ? 0 : rot}deg) ${isFlipped ? 'scale(1.08) translateY(-16px)' : ''}`,
+                  transform: `rotate(${isFlipped ? 0 : rot}deg) translateY(${isFlipped ? -40 : yOffset}px) scale(${isFlipped ? 1.15 : 1})`,
                   zIndex: isFlipped ? 50 : i + 1,
                   transition: 'all 0.6s cubic-bezier(0.34,1.56,0.64,1)',
+                  margin: '0 -20px' // Negative margin to overlap cards like a spread deck
                 }}>
-                <div className="w-[120px] h-[200px] md:w-[145px] md:h-[240px] relative cursor-pointer"
+                <div className="w-[110px] h-[190px] md:w-[150px] md:h-[250px] relative cursor-pointer"
                   style={{ perspective: '1200px' }}
                   onClick={() => setFlipped(isFlipped ? null : i)}>
-                  <div className="relative w-full h-full"
-                    style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', transition: 'transform 0.75s cubic-bezier(0.34,1.56,0.64,1)' }}>
+                  <div className="relative w-full h-full shadow-2xl rounded-xl group-hover:-translate-y-4 transition-transform duration-500"
+                    style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', transition: 'transform 0.8s cubic-bezier(0.34,1.56,0.64,1)' }}>
 
-                    {/* ── Card Back ── */}
-                    <div className="absolute inset-0 w-full h-full rounded-xl flex items-center justify-center shadow-2xl p-3 transition-all duration-700"
+                    {/* ── Card Back (Static 0deg) ── */}
+                    <div className="absolute inset-0 w-full h-full rounded-xl flex items-center justify-center p-3"
                       style={{
                         background: card.backBg, border: `1px solid ${card.border}60`,
-                        transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', backfaceVisibility: 'hidden'
+                        backfaceVisibility: 'hidden'
                       }}>
                       <div className="w-full h-full border-2 rounded-lg flex flex-col items-center justify-center relative overflow-hidden"
                         style={{ borderColor: `${card.accent}40`, backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px)` }}>
                         <span className="text-xl mb-2" style={{ color: card.border }}>✦</span>
-                        <div className="text-[8px] font-black tracking-[0.3em] uppercase opacity-70" style={{ color: card.accent }}>HealConnect</div>
+                        <div className="text-[7px] md:text-[9px] font-black tracking-[0.3em] uppercase opacity-70" style={{ color: card.accent }}>HealConnect</div>
                         <div className="absolute inset-2 border border-dashed rounded-md opacity-20 pointer-events-none" style={{ borderColor: card.accent }} />
                       </div>
                     </div>
 
-                    {/* ── Card Front ── */}
-                    <div className="absolute inset-0 w-full h-full rounded-xl flex flex-col items-center justify-center shadow-2xl p-4 transition-all duration-700"
+                    {/* ── Card Front (Static 180deg) ── */}
+                    <div className="absolute inset-0 w-full h-full rounded-xl flex flex-col items-center justify-center p-4"
                       style={{
                         background: card.cardBg, border: `2px solid ${card.border}`,
-                        transform: isFlipped ? 'rotateY(0deg)' : 'rotateY(-180deg)', backfaceVisibility: 'hidden'
+                        transform: 'rotateY(180deg)', backfaceVisibility: 'hidden'
                       }}>
                       <div className="absolute inset-1 rounded-lg border" style={{ borderColor: `${card.accent}30` }} />
                       <div className="absolute top-4 w-full text-center text-[10px] font-black tracking-[0.2em]" style={{ color: card.border }}>{card.roman}</div>
                       
-                      <div className="my-auto w-24 h-24 rounded-full flex items-center justify-center border-4" style={{ borderColor: card.border, backgroundColor: 'rgba(255,255,255,0.05)' }}>
-                         <div className="w-16 h-16 rounded-full border-2 border-dashed flex items-center justify-center" style={{ borderColor: card.accent }}>
-                           <span className="text-4xl" style={{ color: card.border }}>✦</span>
+                      <div className="my-auto w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center border-4" style={{ borderColor: card.border, backgroundColor: 'rgba(255,255,255,0.05)' }}>
+                         <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border-2 border-dashed flex items-center justify-center" style={{ borderColor: card.accent }}>
+                           <span className="text-3xl md:text-4xl" style={{ color: card.border }}>✦</span>
                          </div>
                       </div>
 
-                      <div className="absolute bottom-6 w-full text-center px-4">
-                        <div className="font-serif font-bold text-lg mb-1 tracking-wider text-white drop-shadow-md">{card.name.toUpperCase()}</div>
-                        <div className="text-[8px] uppercase tracking-widest font-bold" style={{ color: card.accent }}>{card.subtitle}</div>
+                      <div className="absolute bottom-6 w-full text-center px-2 md:px-4">
+                        <div className="font-serif font-bold text-sm md:text-lg mb-1 tracking-wider text-white drop-shadow-md leading-tight">{card.name.toUpperCase()}</div>
+                        <div className="text-[6px] md:text-[8px] uppercase tracking-widest font-bold" style={{ color: card.accent }}>{card.subtitle}</div>
                       </div>
                     </div>
                   </div>
@@ -413,15 +430,15 @@ export function TarotTable() {
 
         {/* Reading panel */}
         {flipped !== null && (
-          <div className="max-w-xl mx-auto rounded-3xl p-8 text-center border"
-            style={{ animation: 'zen-fade 0.5s ease', background: `linear-gradient(135deg, ${TAROT_CARDS[flipped].border}18 0%, #0A0F1880 100%)`, borderColor: `${TAROT_CARDS[flipped].border}40`, backdropFilter: 'blur(20px)' }}>
-            <div className="text-xs font-black uppercase tracking-[0.3em] mb-3" style={{ color: TAROT_CARDS[flipped].accent }}>{TAROT_CARDS[flipped].roman} · {TAROT_CARDS[flipped].name}</div>
-            <h3 className="text-2xl font-serif font-medium text-white mb-2">{TAROT_CARDS[flipped].subtitle}</h3>
-            <div className="w-16 h-[1px] mx-auto mb-5" style={{ backgroundColor: TAROT_CARDS[flipped].accent }} />
-            <p className="text-sm text-white/70 leading-relaxed mb-7 font-light max-w-md mx-auto">{TAROT_CARDS[flipped].message}</p>
+          <div className="max-w-xl mx-auto rounded-3xl p-8 text-center shadow-xl border border-[#CDE9F4]"
+            style={{ animation: 'zen-fade 0.5s ease', background: `linear-gradient(135deg, #FFFFFF 0%, #F6FBFC 100%)` }}>
+            <div className="text-xs font-black uppercase tracking-[0.3em] mb-3" style={{ color: TAROT_CARDS[flipped].color }}>{TAROT_CARDS[flipped].roman} · {TAROT_CARDS[flipped].name}</div>
+            <h3 className="text-2xl font-serif font-medium text-[#12527F] mb-2">{TAROT_CARDS[flipped].subtitle}</h3>
+            <div className="w-16 h-[2px] mx-auto mb-5" style={{ backgroundColor: TAROT_CARDS[flipped].color }} />
+            <p className="text-sm text-[#1A92C6] leading-relaxed mb-7 font-bold max-w-md mx-auto">{TAROT_CARDS[flipped].message}</p>
             <div className="flex gap-3 justify-center flex-wrap">
-              <Link href="/signup" className="px-6 py-3 rounded-full text-xs font-bold transition-all hover:scale-105 text-white"
-                style={{ background: `linear-gradient(135deg, ${TAROT_CARDS[flipped].border}, ${TAROT_CARDS[flipped].accent}80)` }}>
+              <Link href="/signup" className="px-6 py-3 rounded-full text-xs font-bold transition-all shadow-md hover:scale-105 text-white"
+                style={{ background: `linear-gradient(135deg, ${TAROT_CARDS[flipped].color}, ${TAROT_CARDS[flipped].color}EE)` }}>
                 Find a Tarot Reader
               </Link>
               <Link href="/signup" className="px-6 py-3 rounded-full text-xs font-bold transition-all hover:scale-105 text-white/50 border border-white/10">
@@ -441,20 +458,18 @@ export function TarotTable() {
 // ─────────────────────────────────────────────────────────────────────────
 // 04. MODALITY UNIVERSE — Pixel-perfect node map with readable labels
 // ─────────────────────────────────────────────────────────────────────────
-// viewBox: 900 x 460 px — all coords in absolute pixels
 const MOD_NODES = [
-  { id: 'astrology', label: 'Astrology', cx: 450, cy: 230, r: 52, color: '#63BFE4', count: '500+ guides', center: true },
-  { id: 'tarot', label: 'Tarot', cx: 200, cy: 135, r: 40, color: '#C9A0DC', count: '120 guides' },
-  { id: 'numerology', label: 'Numerology', cx: 690, cy: 120, r: 36, color: '#F4D58D', count: '85 guides' },
-  { id: 'healing', label: 'Energy Healing', cx: 148, cy: 298, r: 40, color: '#7EDEA0', count: '200 guides' },
-  { id: 'meditation', label: 'Meditation', cx: 730, cy: 290, r: 34, color: '#98E6F4', count: '150 guides' },
-  { id: 'palmistry', label: 'Palm Reading', cx: 348, cy: 380, r: 30, color: '#F4A261', count: '70 guides' },
-  { id: 'vastu', label: 'Vastu', cx: 570, cy: 370, r: 28, color: '#A0AEC0', count: '45 guides' },
-  { id: 'yoga', label: 'Yoga', cx: 248, cy: 68, r: 26, color: '#7EDEA0', count: '95 guides' },
-  { id: 'eft', label: 'EFT Tapping', cx: 640, cy: 65, r: 24, color: '#9B8FFF', count: '35 guides' },
-  { id: 'coaching', label: 'Life Coaching', cx: 790, cy: 200, r: 34, color: '#F4D58D', count: '110 guides' },
-  { id: 'spiritual', label: 'Spiritual Guide', cx: 110, cy: 195, r: 36, color: '#C9A0DC', count: '180 guides' },
-  { id: 'face', label: 'Face Reading', cx: 450, cy: 68, r: 22, color: '#FF6B6B', count: '30 guides' },
+  { id: 'astrology', label: 'Astrology', cx: 450, cy: 240, r: 75, color: '#63BFE4', center: true, count: '320 guides' },
+  { id: 'tarot', label: 'Tarot', cx: 280, cy: 160, r: 50, color: '#C9A0DC', count: '240 guides' },
+  { id: 'reiki', label: 'Energy Healing', cx: 230, cy: 330, r: 62, color: '#7EDEA0', count: '180 guides' },
+  { id: 'meditation', label: 'Meditation', cx: 710, cy: 320, r: 52, color: '#98E6F4', count: '150 guides' },
+  { id: 'palmistry', label: 'Palm Reading', cx: 370, cy: 410, r: 48, color: '#F4A261', count: '70 guides' },
+  { id: 'vastu', label: 'Vastu', cx: 560, cy: 420, r: 45, color: '#A0AEC0', count: '45 guides' },
+  { id: 'yoga', label: 'Yoga', cx: 220, cy: 60, r: 38, color: '#7EDEA0', count: '95 guides' },
+  { id: 'eft', label: 'EFT Tapping', cx: 560, cy: 80, r: 48, color: '#9B8FFF', count: '35 guides' },
+  { id: 'coaching', label: 'Life Coaching', cx: 680, cy: 140, r: 55, color: '#F4D58D', count: '110 guides' },
+  { id: 'spiritual', label: 'Spiritual Guide', cx: 120, cy: 180, r: 58, color: '#C9A0DC', count: '180 guides' },
+  { id: 'face', label: 'Face Reading', cx: 420, cy: 70, r: 46, color: '#FF6B6B', count: '30 guides' },
 ];
 
 export function ModalityUniverse() {
@@ -480,42 +495,51 @@ export function ModalityUniverse() {
       </div>
 
       {/* SVG with fixed viewBox for readable text */}
-      <div className="relative w-full max-w-5xl mx-auto px-4" style={{ height: '460px' }}>
-        <svg viewBox="0 0 900 460" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid meet">
+      <div className="relative w-full max-w-5xl mx-auto px-4" style={{ height: '500px' }}>
+        <svg viewBox="0 0 900 500" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            {MOD_NODES.map(node => (
+              <radialGradient key={`grad-${node.id}`} id={`grad-${node.id}`} cx="30%" cy="30%" r="70%">
+                <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.8" />
+                <stop offset="100%" stopColor={node.color} stopOpacity="0.2" />
+              </radialGradient>
+            ))}
+          </defs>
+
           {/* Connector lines from center */}
           {MOD_NODES.filter(n => !n.center).map(node => (
-            <line key={`l-${node.id}`}
-              x1={MOD_NODES[0].cx} y1={MOD_NODES[0].cy}
-              x2={node.cx} y2={node.cy}
-              stroke={node.color} strokeOpacity="0.12" strokeWidth="1"
-              strokeDasharray="5 7" />
+            <path key={`l-${node.id}`}
+              d={`M ${MOD_NODES[0].cx} ${MOD_NODES[0].cy} Q ${(MOD_NODES[0].cx + node.cx)/2} ${(MOD_NODES[0].cy + node.cy)/2 - 30} ${node.cx} ${node.cy}`}
+              fill="none"
+              stroke={node.color} strokeOpacity="0.25" strokeWidth="1.5"
+              strokeDasharray="4 6" />
           ))}
 
           {MOD_NODES.map(node => {
             const isHov = hovered?.id === node.id;
-            const r = node.r * (isHov ? 1.35 : 1);
+            const r = node.r * (isHov ? 1.15 : 1);
             return (
               <g key={node.id}
                 onMouseEnter={() => setHovered(node)}
                 onMouseLeave={() => setHovered(null)}
                 style={{ cursor: 'pointer' }}>
                 {/* Glow circle */}
-                <circle cx={node.cx} cy={node.cy} r={r + 8}
-                  fill={node.color} fillOpacity={isHov ? 0.12 : 0.04}
+                <circle cx={node.cx} cy={node.cy} r={r + 12}
+                  fill={node.color} fillOpacity={isHov ? 0.15 : 0.03}
                   style={{ transition: 'all 0.4s ease' }} />
-                {/* Main circle */}
+                {/* Main bubble */}
                 <circle cx={node.cx} cy={node.cy} r={r}
-                  fill={node.color} fillOpacity={isHov ? 0.22 : 0.09}
-                  stroke={node.color} strokeOpacity={isHov ? 0.95 : 0.45}
-                  strokeWidth={isHov ? 2 : 1.2}
-                  style={{ transition: 'all 0.4s ease', filter: isHov ? `drop-shadow(0 0 18px ${node.color})` : 'none' }} />
-                {/* Label — always visible, large enough to read */}
+                  fill={`url(#grad-${node.id})`}
+                  stroke={node.color} strokeOpacity={isHov ? 0.8 : 0.3}
+                  strokeWidth={isHov ? 2 : 1}
+                  style={{ transition: 'all 0.4s ease', filter: isHov ? `drop-shadow(0 10px 20px ${node.color}40)` : 'drop-shadow(0 4px 10px rgba(0,0,0,0.02))' }} />
+                {/* Label */}
                 <text x={node.cx} y={node.cy} dy="0.35em" textAnchor="middle"
-                  fill={isHov ? '#12527F' : node.color}
+                  fill="#12527F"
                   fontSize={node.center ? 18 : 13}
                   fontFamily="Georgia, serif"
                   fontWeight={node.center ? '700' : '600'}
-                  opacity={isHov ? 1 : 0.9}
+                  opacity={isHov ? 1 : 0.85}
                   style={{ transition: 'all 0.4s ease' }}>{node.label}</text>
                 {/* Guide count on hover */}
                 {isHov && (
@@ -673,14 +697,14 @@ export function ExpertStoriesDeck() {
 // 06. HEALCONNECT GLOBAL DISTRIBUTION — Platform reach visualised
 // ─────────────────────────────────────────────────────────────────────────
 const HC_NODES = [
-  { name: 'India', x: 65, y: 40, users: '3.2M+', guides: '4,200+', top: 'Vedic Astrology', color: '#63BFE4', size: 'lg' },
-  { name: 'USA', x: 22, y: 30, users: '820K+', guides: '1,100+', top: 'Life Coaching · Tarot', color: '#C9A0DC', size: 'md' },
-  { name: 'UK', x: 45, y: 22, users: '420K+', guides: '820+', top: 'Tarot · Astrology', color: '#7EDEA0', size: 'sm' },
-  { name: 'UAE', x: 59, y: 44, users: '310K+', guides: '650+', top: 'Spiritual Guidance', color: '#F4D58D', size: 'sm' },
-  { name: 'Singapore', x: 77, y: 55, users: '180K+', guides: '480+', top: 'Energy Healing', color: '#98E6F4', size: 'sm' },
-  { name: 'Australia', x: 83, y: 70, users: '150K+', guides: '390+', top: 'Meditation · Tarot', color: '#9B8FFF', size: 'sm' },
-  { name: 'Brazil', x: 30, y: 65, users: '90K+', guides: '290+', top: 'Astrology', color: '#FF6B9D', size: 'xs' },
-  { name: 'Japan', x: 83, y: 33, users: '110K+', guides: '310+', top: 'Numerology · Reiki', color: '#F4A261', size: 'xs' },
+  { name: 'India', x: 70, y: 46, users: '3.2M+', guides: '4,200+', top: 'Vedic Astrology', color: '#63BFE4', size: 'lg' },
+  { name: 'USA', x: 22, y: 35, users: '820K+', guides: '1,100+', top: 'Life Coaching · Tarot', color: '#C9A0DC', size: 'md' },
+  { name: 'UK', x: 47, y: 25, users: '420K+', guides: '820+', top: 'Tarot · Astrology', color: '#7EDEA0', size: 'sm' },
+  { name: 'UAE', x: 62, y: 43, users: '310K+', guides: '650+', top: 'Spiritual Guidance', color: '#F4D58D', size: 'sm' },
+  { name: 'Singapore', x: 77, y: 56, users: '180K+', guides: '480+', top: 'Energy Healing', color: '#98E6F4', size: 'sm' },
+  { name: 'Australia', x: 84, y: 76, users: '150K+', guides: '390+', top: 'Meditation · Tarot', color: '#9B8FFF', size: 'sm' },
+  { name: 'Brazil', x: 32, y: 65, users: '90K+', guides: '290+', top: 'Astrology', color: '#FF6B9D', size: 'xs' },
+  { name: 'Japan', x: 85, y: 34, users: '110K+', guides: '310+', top: 'Numerology · Reiki', color: '#F4A261', size: 'xs' },
 ];
 
 const GROWTH_STATS = [
@@ -718,51 +742,50 @@ export function GlobalGuidanceMap() {
       </div>
 
       {/* World map viz */}
-      <div className="relative w-full max-w-5xl mx-auto px-6 z-10" style={{ height: '360px' }}>
-        {/* Base map grid lines */}
-        <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-          {[...Array(6)].map((_, i) => (
-            <line key={`h${i}`} x1="0" y1={`${(i + 1) * 14}%`} x2="100%" y2={`${(i + 1) * 14}%`}
-              stroke="#63BFE4" strokeOpacity="0.05" strokeWidth="1" />
-          ))}
-          {[...Array(10)].map((_, i) => (
-            <line key={`v${i}`} x1={`${(i + 1) * 9}%`} y1="0" x2={`${(i + 1) * 9}%`} y2="100%"
-              stroke="#63BFE4" strokeOpacity="0.05" strokeWidth="1" />
-          ))}
+      <div className="relative w-full max-w-5xl mx-auto px-6 z-10 flex items-center justify-center" style={{ height: '500px' }}>
+        
+        {/* Actual World Map Background */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-[0.07] pointer-events-none px-6">
+          <img src="/world-map.svg" alt="World Map" className="w-full h-full object-contain filter drop-shadow-xl" style={{ filter: 'invert(37%) sepia(85%) saturate(366%) hue-rotate(159deg) brightness(85%) contrast(87%)' }} />
+        </div>
+
+        {/* Base map connection lines */}
+        <svg className="absolute inset-6 w-[calc(100%-3rem)] h-full" preserveAspectRatio="none">
           {/* Curved connection lines from India (biggest hub) */}
           {HC_NODES.slice(1).map(node => (
             <path key={`p-${node.name}`}
               d={`M ${HC_NODES[0].x}% ${HC_NODES[0].y}% Q 50% 50% ${node.x}% ${node.y}%`}
-              fill="none" stroke={node.color} strokeOpacity="0.15" strokeWidth="1" strokeDasharray="4 6" />
+              fill="none" stroke={node.color} strokeOpacity="0.3" strokeWidth="1.5" strokeDasharray="4 6" />
           ))}
         </svg>
 
         {/* Nodes */}
+        <div className="absolute inset-6 w-[calc(100%-3rem)] h-full pointer-events-none">
         {HC_NODES.map(node => {
           const r = nodeRadius[node.size];
           const isHov = hovered?.name === node.name;
           return (
-            <div key={node.name} className="absolute"
+            <div key={node.name} className="absolute pointer-events-auto"
               style={{ left: `${node.x}%`, top: `${node.y}%`, transform: 'translate(-50%,-50%)', zIndex: isHov ? 50 : 10 }}
               onMouseEnter={() => setHovered(node)}
               onMouseLeave={() => setHovered(null)}>
               {/* Pulse ring */}
               <div className="absolute rounded-full animate-ping"
-                style={{ width: r * 2.8 + 'px', height: r * 2.8 + 'px', top: -(r * 0.9) + 'px', left: -(r * 0.9) + 'px', backgroundColor: node.color, opacity: 0.08 }} />
+                style={{ width: r * 2.8 + 'px', height: r * 2.8 + 'px', top: -(r * 0.9) + 'px', left: -(r * 0.9) + 'px', backgroundColor: node.color, opacity: 0.15 }} />
               {/* Halo */}
               <div className="absolute rounded-full"
-                style={{ width: r * 2 + 'px', height: r * 2 + 'px', top: -r * 0.5 + 'px', left: -r * 0.5 + 'px', backgroundColor: node.color, opacity: 0.14, transition: 'all 0.4s ease', transform: isHov ? 'scale(1.5)' : 'scale(1)' }} />
+                style={{ width: r * 2 + 'px', height: r * 2 + 'px', top: -r * 0.5 + 'px', left: -r * 0.5 + 'px', backgroundColor: node.color, opacity: 0.25, transition: 'all 0.4s ease', transform: isHov ? 'scale(1.5)' : 'scale(1)' }} />
               {/* Core dot */}
               <div className="rounded-full cursor-pointer transition-all duration-400"
                 style={{ width: r + 'px', height: r + 'px', backgroundColor: node.color, boxShadow: `0 0 ${isHov ? 24 : 10}px ${node.color}`, transform: isHov ? 'scale(1.35)' : 'scale(1)' }} />
               {/* City label */}
               <div className="absolute text-center" style={{ top: r + 6 + 'px', left: '50%', transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}>
-                <span className="text-[10px] font-bold" style={{ color: node.color, opacity: isHov ? 1 : 0.6 }}>{node.name}</span>
+                <span className="text-[10px] font-bold" style={{ color: node.color, opacity: isHov ? 1 : 0.8 }}>{node.name}</span>
               </div>
               {/* Tooltip */}
               {isHov && (
                 <div className="absolute z-50 rounded-2xl p-4 shadow-xl border pointer-events-none"
-                  style={{ width: '210px', bottom: r + 20 + 'px', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', borderColor: `${node.color}40`, animation: 'zen-fade 0.25s ease', backdropFilter: 'blur(16px)' }}>
+                  style={{ width: '210px', bottom: r + 20 + 'px', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', borderColor: `${node.color}40`, animation: 'zen-fade 0.25s ease', backdropFilter: 'blur(16px)' }}>
                   <div className="text-xs font-black uppercase tracking-wider mb-1" style={{ color: node.color }}>{node.name}</div>
                   <div className="flex justify-between items-baseline mb-2">
                     <span className="text-xl font-bold text-[#12527F]">{node.users}</span>
@@ -775,6 +798,7 @@ export function GlobalGuidanceMap() {
             </div>
           );
         })}
+        </div>
       </div>
 
       {/* Stats strip */}
