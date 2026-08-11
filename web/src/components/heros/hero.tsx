@@ -466,9 +466,12 @@ function ZenAlignHero() {
               transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}
               className="relative z-10 w-[85%] max-w-[520px] aspect-[3/4]"
             >
-              <img
+              <Image
                 src="/zodiac-masterpiece.png"
                 alt="Cosmic Masterpiece"
+                width={520}
+                height={693}
+                priority
                 className="w-full h-full object-contain drop-shadow-[0_30px_80px_rgba(26,146,198,0.35)]"
               />
             </motion.div>

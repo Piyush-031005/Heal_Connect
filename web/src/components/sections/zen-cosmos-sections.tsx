@@ -168,25 +168,25 @@ export function WhyYouHere() {
 // 02. ZODIAC ORBIT RING — Interactive rotating orbital
 // ─────────────────────────────────────────────────────────────────────────
 const ZODIACS = [
-  { id: 'aries', name: 'Aries', symbol: '♈', element: 'Fire', quality: 'Cardinal', trait: 'Bold, ambitious, passionate leader.', date: 'Mar 21–Apr 19', color: '#FF6B6B' },
-  { id: 'taurus', name: 'Taurus', symbol: '♉', element: 'Earth', quality: 'Fixed', trait: 'Patient, reliable, sensual, determined.', date: 'Apr 20–May 20', color: '#7EDEA0' },
-  { id: 'gemini', name: 'Gemini', symbol: '♊', element: 'Air', quality: 'Mutable', trait: 'Curious, communicative, adaptable, witty.', date: 'May 21–Jun 20', color: '#F4D58D' },
-  { id: 'cancer', name: 'Cancer', symbol: '♋', element: 'Water', quality: 'Cardinal', trait: 'Nurturing, intuitive, protective, empathic.', date: 'Jun 21–Jul 22', color: '#9FD6EE' },
-  { id: 'leo', name: 'Leo', symbol: '♌', element: 'Fire', quality: 'Fixed', trait: 'Magnetic, generous, creative, warmhearted.', date: 'Jul 23–Aug 22', color: '#FFB347' },
-  { id: 'virgo', name: 'Virgo', symbol: '♍', element: 'Earth', quality: 'Mutable', trait: 'Analytical, detail-oriented, service-driven.', date: 'Aug 23–Sep 22', color: '#98E6A2' },
-  { id: 'libra', name: 'Libra', symbol: '♎', element: 'Air', quality: 'Cardinal', trait: 'Balanced, harmonious, fair, socially gifted.', date: 'Sep 23–Oct 22', color: '#C9A0DC' },
-  { id: 'scorpio', name: 'Scorpio', symbol: '♏', element: 'Water', quality: 'Fixed', trait: 'Intense, perceptive, transformative, deep.', date: 'Oct 23–Nov 21', color: '#7B6CF6' },
-  { id: 'sagittarius', name: 'Sagittarius', symbol: '♐', element: 'Fire', quality: 'Mutable', trait: 'Adventurous, philosophical, free-spirited.', date: 'Nov 22–Dec 21', color: '#F4A261' },
-  { id: 'capricorn', name: 'Capricorn', symbol: '♑', element: 'Earth', quality: 'Cardinal', trait: 'Disciplined, responsible, ambitious, wise.', date: 'Dec 22–Jan 19', color: '#A0AEC0' },
-  { id: 'aquarius', name: 'Aquarius', symbol: '♒', element: 'Air', quality: 'Fixed', trait: 'Innovative, humanitarian, eccentric, visionary.', date: 'Jan 20–Feb 18', color: '#63BFE4' },
-  { id: 'pisces', name: 'Pisces', symbol: '♓', element: 'Water', quality: 'Mutable', trait: 'Dreamy, compassionate, mystical, creative.', date: 'Feb 19–Mar 20', color: '#9B8FFF' },
+  { id: 'aries', name: 'Aries', img: '/new-zodiacs/aries_new.png', element: 'Fire', quality: 'Cardinal', trait: 'Bold, ambitious, passionate leader.', date: 'Mar 21–Apr 19', color: '#FF6B6B' },
+  { id: 'taurus', name: 'Taurus', img: '/new-zodiacs/taurus.png', element: 'Earth', quality: 'Fixed', trait: 'Patient, reliable, sensual, determined.', date: 'Apr 20–May 20', color: '#7EDEA0' },
+  { id: 'gemini', name: 'Gemini', img: '/new-zodiacs/gemini_new.png', element: 'Air', quality: 'Mutable', trait: 'Curious, communicative, adaptable, witty.', date: 'May 21–Jun 20', color: '#F4D58D' },
+  { id: 'cancer', name: 'Cancer', img: '/new-zodiacs/cancer.png', element: 'Water', quality: 'Cardinal', trait: 'Nurturing, intuitive, protective, empathic.', date: 'Jun 21–Jul 22', color: '#9FD6EE' },
+  { id: 'leo', name: 'Leo', img: '/new-zodiacs/leo_new.png', element: 'Fire', quality: 'Fixed', trait: 'Magnetic, generous, creative, warmhearted.', date: 'Jul 23–Aug 22', color: '#FFB347' },
+  { id: 'virgo', name: 'Virgo', img: '/new-zodiacs/virgo_new.png', element: 'Earth', quality: 'Mutable', trait: 'Analytical, detail-oriented, service-driven.', date: 'Aug 23–Sep 22', color: '#98E6A2' },
+  { id: 'libra', name: 'Libra', img: '/new-zodiacs/libra_new.png', element: 'Air', quality: 'Cardinal', trait: 'Balanced, harmonious, fair, socially gifted.', date: 'Sep 23–Oct 22', color: '#C9A0DC' },
+  { id: 'scorpio', name: 'Scorpio', img: '/new-zodiacs/scorpio_new.png', element: 'Water', quality: 'Fixed', trait: 'Intense, perceptive, transformative, deep.', date: 'Oct 23–Nov 21', color: '#7B6CF6' },
+  { id: 'sagittarius', name: 'Sagittarius', img: '/new-zodiacs/saggitarius.png', element: 'Fire', quality: 'Mutable', trait: 'Adventurous, philosophical, free-spirited.', date: 'Nov 22–Dec 21', color: '#F4A261' },
+  { id: 'capricorn', name: 'Capricorn', img: '/new-zodiacs/capricon_new.png', element: 'Earth', quality: 'Cardinal', trait: 'Disciplined, responsible, ambitious, wise.', date: 'Dec 22–Jan 19', color: '#A0AEC0' },
+  { id: 'aquarius', name: 'Aquarius', img: '/new-zodiacs/aqarius.png', element: 'Air', quality: 'Fixed', trait: 'Innovative, humanitarian, eccentric, visionary.', date: 'Jan 20–Feb 18', color: '#63BFE4' },
+  { id: 'pisces', name: 'Pisces', img: '/new-zodiacs/pices.png', element: 'Water', quality: 'Mutable', trait: 'Dreamy, compassionate, mystical, creative.', date: 'Feb 19–Mar 20', color: '#9B8FFF' },
 ];
 
 const ELEMENT_BG: Record<string, string> = {
-  Fire: 'radial-gradient(ellipse at 30% 40%, #3a1212 0%, #1a0808 50%, #060B1E 100%)',
-  Earth: 'radial-gradient(ellipse at 30% 40%, #122a16 0%, #081408 50%, #060B1E 100%)',
-  Air: 'radial-gradient(ellipse at 30% 40%, #0e1e3a 0%, #080e1e 50%, #060B1E 100%)',
-  Water: 'radial-gradient(ellipse at 30% 40%, #1a0e3a 0%, #0e081e 50%, #060B1E 100%)',
+  Fire: 'radial-gradient(ellipse at 30% 40%, #FFF5F5 0%, #EDF8FC 60%, #EDF8FC 100%)',
+  Earth: 'radial-gradient(ellipse at 30% 40%, #F0FFF4 0%, #EDF8FC 60%, #EDF8FC 100%)',
+  Air: 'radial-gradient(ellipse at 30% 40%, #F5F3FF 0%, #EDF8FC 60%, #EDF8FC 100%)',
+  Water: 'radial-gradient(ellipse at 30% 40%, #E0F2FE 0%, #EDF8FC 60%, #EDF8FC 100%)',
 };
 
 export function ZodiacOrbitRing() {
@@ -225,8 +225,8 @@ export function ZodiacOrbitRing() {
                   <stop offset="100%" stopColor={active.color} stopOpacity="0" />
                 </radialGradient>
               </defs>
-              <circle cx={CX} cy={CY} r={R} fill="none" stroke="white" strokeOpacity="0.08" strokeWidth="0.5" />
-              <circle cx={CX} cy={CY} r={R - 2} fill="none" stroke="white" strokeOpacity="0.04" strokeWidth="0.3" strokeDasharray="2 3" />
+              <circle cx={CX} cy={CY} r={R} fill="none" stroke="#12527F" strokeOpacity="0.15" strokeWidth="0.5" />
+              <circle cx={CX} cy={CY} r={R - 2} fill="none" stroke="#12527F" strokeOpacity="0.1" strokeWidth="0.3" strokeDasharray="2 3" />
               {ZODIACS.map((z, i) => {
                 const angle = ((i / 12) * Math.PI * 2) + rotation;
                 const x = CX + R * Math.cos(angle);
@@ -234,48 +234,42 @@ export function ZodiacOrbitRing() {
                 const isActive = z.id === active.id;
                 return (
                   <g key={z.id} onClick={() => setActive(z)} style={{ cursor: 'pointer' }}>
-                    <circle cx={x} cy={y} r={isActive ? 5 : 3.5}
-                      fill={isActive ? z.color : 'white'}
-                      fillOpacity={isActive ? 1 : 0.25}
-                      style={{ filter: isActive ? `drop-shadow(0 0 6px ${z.color})` : 'none', transition: 'all 0.4s ease' }} />
-                    <text x={x} y={y} dy="0.35em" textAnchor="middle"
-                      fill="white" fontSize={isActive ? '3.5' : '2.5'} opacity={isActive ? 1 : 0.5}
-                      style={{ transition: 'all 0.4s ease' }}>{z.symbol}</text>
+                    <circle cx={x} cy={y} r={isActive ? 6 : 4}
+                      fill="white"
+                      style={{ filter: isActive ? `drop-shadow(0 0 8px ${z.color})` : 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))', transition: 'all 0.4s ease' }} />
+                    <image href={z.img} x={x - (isActive ? 4 : 2.5)} y={y - (isActive ? 4 : 2.5)} width={isActive ? 8 : 5} height={isActive ? 8 : 5}
+                      opacity={isActive ? 1 : 0.6}
+                      style={{ transition: 'all 0.4s ease' }} />
                   </g>
                 );
               })}
-              <circle cx={CX} cy={CY} r="15" fill="url(#zodiacGlow)" opacity="0.4" />
-              <text x={CX} y={CY} dy="-1" textAnchor="middle" fill={active.color} fontSize="12"
-                style={{ transition: 'all 0.5s ease', filter: `drop-shadow(0 0 8px ${active.color})` }}>{active.symbol}</text>
-              <text x={CX} y={CY} dy="5" textAnchor="middle" fill="white" fontSize="3.5" opacity="0.7"
-                fontFamily="serif">{active.name.toUpperCase()}</text>
+              <circle cx={CX} cy={CY} r="16" fill="white" style={{ filter: 'drop-shadow(0 4px 12px rgba(18,82,127,0.15))' }} />
+              <image href={active.img} x={CX - 10} y={CY - 14} width="20" height="20" style={{ transition: 'all 0.5s ease' }} />
+              <text x={CX} y={CY + 10} textAnchor="middle" fill="#12527F" fontSize="3.5" opacity="0.9"
+                fontFamily="serif" fontWeight="bold">{active.name.toUpperCase()}</text>
             </svg>
           </div>
 
           {/* Content */}
           <div key={active.id} style={{ animation: 'zen-fade 0.5s ease' }}>
-            <div className="inline-block px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest mb-6 border"
-              style={{ color: active.color, borderColor: `${active.color}40`, backgroundColor: `${active.color}12` }}>
-              {active.element} · {active.quality}
-            </div>
-            <h2 className="text-6xl md:text-8xl font-serif font-medium text-white mb-4" style={{ transition: 'all 0.5s ease' }}>
+            <h2 className="text-5xl md:text-7xl font-serif font-medium text-[#12527F] mb-6 drop-shadow-sm">
               {active.name}
             </h2>
-            <p className="text-sm text-white/50 mb-6 font-mono tracking-widest">{active.date}</p>
-            <p className="text-lg text-white/80 font-light leading-relaxed mb-10 max-w-md">{active.trait}</p>
+            <p className="text-sm text-[#1A92C6] mb-6 font-mono tracking-widest font-bold">{active.date}</p>
+            <p className="text-lg text-[#12527F]/80 font-medium leading-relaxed mb-10 max-w-md">{active.trait}</p>
             <div className="flex flex-wrap gap-3 mb-10">
               {['Love Compatibility', 'Career Outlook', 'Monthly Reading', 'Find a Guide'].map(tag => (
                 <Link key={tag} href="/signup"
-                  className="px-5 py-2.5 rounded-full text-sm font-bold border transition-all hover:scale-105"
-                  style={{ borderColor: `${active.color}40`, color: active.color, backgroundColor: `${active.color}10` }}>
+                  className="px-5 py-2.5 rounded-full text-sm font-bold border transition-all hover:scale-105 bg-white shadow-sm"
+                  style={{ borderColor: `${active.color}40`, color: '#12527F' }}>
                   {tag}
                 </Link>
               ))}
             </div>
-            <Link href="/signup" className="inline-flex items-center gap-3 text-white font-bold group">
+            <Link href="/signup" className="inline-flex items-center gap-3 text-[#12527F] font-bold group">
               <span className="text-lg">Explore {active.name}</span>
-              <div className="w-12 h-12 rounded-full flex items-center justify-center border border-white/20 group-hover:border-white/60 transition-all"
-                style={{ backgroundColor: `${active.color}20` }}>
+              <div className="w-12 h-12 rounded-full flex items-center justify-center border border-[#12527F]/20 group-hover:bg-[#12527F] group-hover:text-white transition-all bg-white"
+                style={{ borderColor: `${active.color}40` }}>
                 <ArrowRight className="w-5 h-5" />
               </div>
             </Link>
@@ -297,37 +291,37 @@ const TAROT_CARDS = [
   {
     name: 'The Star', roman: 'XVII', subtitle: 'Hope · Renewal · Clarity',
     message: 'A period of profound clarity and cosmic alignment surrounds you. Trust in the universe\'s divine guidance — allow your authentic light to illuminate the path ahead.',
-    cardBg: 'linear-gradient(170deg, #0D1B3E 0%, #162347 50%, #0A1128 100%)',
-    border: '#4A78B8', accent: '#8BADDF', img: '/new-zodiacs/aqarius.png',
-    color: '#8BADDF', backBg: 'linear-gradient(145deg, #0D1B3E, #0A1128)'
+    cardBg: 'linear-gradient(170deg, #12527F 0%, #0A2B45 100%)',
+    border: '#63BFE4', accent: '#EDF8FC',
+    color: '#1A92C6', backBg: 'linear-gradient(145deg, #1A92C6, #12527F)'
   },
   {
     name: 'The Moon', roman: 'XVIII', subtitle: 'Intuition · Mystery · Dreams',
     message: 'Your subconscious holds truths the waking mind has yet to hear. Honour the cycles within you — your intuition is your most sacred compass right now.',
     cardBg: 'linear-gradient(170deg, #1A0E3A 0%, #251450 50%, #0E0820 100%)',
-    border: '#7B6CF6', accent: '#C9A0DC', img: '/new-zodiacs/pices.png',
-    color: '#C9A0DC', backBg: 'linear-gradient(145deg, #1A0E3A, #0E0820)'
+    border: '#C9A0DC', accent: '#F5F3FF',
+    color: '#9B8FFF', backBg: 'linear-gradient(145deg, #7B6CF6, #251450)'
   },
   {
     name: 'The Sun', roman: 'XIX', subtitle: 'Joy · Vitality · Success',
     message: 'Radiant golden energy courses through every opportunity before you. A magnificent chapter of abundance, creative power, and warmth is beautifully unfolding.',
-    cardBg: 'linear-gradient(170deg, #2A1800 0%, #3D2400 50%, #1A0E00 100%)',
-    border: '#D4A853', accent: '#F4D58D', img: '/new-zodiacs/leo_new.png',
-    color: '#F4D58D', backBg: 'linear-gradient(145deg, #2A1800, #1A0E00)'
+    cardBg: 'linear-gradient(170deg, #B8860B 0%, #8B6508 100%)',
+    border: '#FFD700', accent: '#FFFBEB',
+    color: '#D4A853', backBg: 'linear-gradient(145deg, #DAA520, #8B6508)'
   },
   {
     name: 'The World', roman: 'XXI', subtitle: 'Completion · Wholeness · Triumph',
     message: 'You stand at the sacred culmination of an extraordinary cycle. Embrace the beautiful wholeness you have earned — a glorious new chapter awaits your first step.',
-    cardBg: 'linear-gradient(170deg, #0A2A1A 0%, #0F3520 50%, #051208 100%)',
-    border: '#2E8B57', accent: '#7EDEA0', img: '/new-zodiacs/libra_new.png',
-    color: '#7EDEA0', backBg: 'linear-gradient(145deg, #0A2A1A, #051208)'
+    cardBg: 'linear-gradient(170deg, #0A2A1A 0%, #0F3520 100%)',
+    border: '#7EDEA0', accent: '#F0FFF4',
+    color: '#2E8B57', backBg: 'linear-gradient(145deg, #2E8B57, #0A2A1A)'
   },
   {
     name: 'The Tower', roman: 'XVI', subtitle: 'Revelation · Transformation · Truth',
     message: 'A powerful revelation shakes what was never truly stable. What crumbles was built on illusion — what remains is the indestructible core of your true self.',
-    cardBg: 'linear-gradient(170deg, #2A0A0A 0%, #3D1010 50%, #1A0505 100%)',
-    border: '#C45C3A', accent: '#F4A261', img: '/new-zodiacs/scorpio_new.png',
-    color: '#F4A261', backBg: 'linear-gradient(145deg, #2A0A0A, #1A0505)'
+    cardBg: 'linear-gradient(170deg, #3D1010 0%, #1A0505 100%)',
+    border: '#F4A261', accent: '#FFF5F5',
+    color: '#C45C3A', backBg: 'linear-gradient(145deg, #C45C3A, #3D1010)'
   },
 ];
 
@@ -337,27 +331,25 @@ export function TarotTable() {
   const [flipped, setFlipped] = useState<number | null>(null);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center py-24 overflow-hidden"
-      style={{ background: 'radial-gradient(ellipse at 50% 60%, #111820 0%, #0A0F18 60%, #050810 100%)' }}>
+    <section className="relative min-h-screen flex flex-col items-center justify-center py-24 overflow-hidden bg-[#EDF8FC]">
 
-      {/* Subtle velvet texture */}
-      <div className="absolute inset-0 opacity-30 pointer-events-none"
-        style={{ backgroundImage: 'repeating-linear-gradient(60deg, transparent, transparent 3px, rgba(212,168,83,0.015) 3px, rgba(212,168,83,0.015) 6px)' }} />
-      {/* Gold glow orb */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[350px] rounded-full blur-[100px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse, rgba(212,168,83,0.08) 0%, transparent 70%)' }} />
+      {/* Subtle geometric texture */}
+      <div className="absolute inset-0 opacity-40 pointer-events-none"
+        style={{ backgroundImage: 'linear-gradient(rgba(26,146,198,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(26,146,198,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+      {/* Light glow orb */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full blur-[120px] pointer-events-none bg-white" />
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10 text-center">
         <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="w-10 h-[1px] bg-[#D4A853]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#D4A853]">05 — Tarot Reading</span>
-          <div className="w-10 h-[1px] bg-[#D4A853]" />
+          <div className="w-10 h-[1px] bg-[#1A92C6]" />
+          <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#1A92C6]">05 — Tarot Reading</span>
+          <div className="w-10 h-[1px] bg-[#1A92C6]" />
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-medium text-white mb-3">Draw Your Card</h2>
-        <p className="text-[#D4A853]/60 text-sm font-medium mb-3">Set your intention. Choose a card. Receive your message.</p>
-        <div className="inline-flex items-center gap-3 rounded-2xl px-6 py-3 mb-14 border border-[#D4A853]/15 bg-[#D4A853]/5">
-          <span className="text-[#D4A853]/50 text-sm">✦</span>
-          <span className="text-white/50 text-sm font-medium italic">&ldquo;What energy should I honour today?&rdquo;</span>
+        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-3">Draw Your Card</h2>
+        <p className="text-[#1A92C6] text-sm font-bold mb-3">Set your intention. Choose a card. Receive your message.</p>
+        <div className="inline-flex items-center gap-3 rounded-2xl px-6 py-3 mb-14 border border-[#1A92C6]/20 bg-white shadow-sm">
+          <span className="text-[#1A92C6] text-sm">✦</span>
+          <span className="text-[#12527F]/70 text-sm font-medium italic">&ldquo;What energy should I honour today?&rdquo;</span>
         </div>
 
         {/* Card spread */}
@@ -379,43 +371,38 @@ export function TarotTable() {
                     style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', transition: 'transform 0.75s cubic-bezier(0.34,1.56,0.64,1)' }}>
 
                     {/* ── Card Back ── */}
-                    <div className="absolute inset-0 rounded-xl overflow-hidden shadow-2xl"
-                      style={{ backfaceVisibility: 'hidden', background: card.backBg, border: `1.5px solid ${card.border}30` }}>
-                      {/* Ornate border layers */}
-                      <div className="absolute inset-[6px] rounded-lg border" style={{ borderColor: `${card.border}20` }} />
-                      <div className="absolute inset-[11px] rounded-md border" style={{ borderColor: `${card.border}15` }} />
-                      {/* Center emblem */}
-                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                        <div className="text-2xl font-serif" style={{ color: `${card.border}60` }}>✦</div>
-                        <div className="text-[8px] font-black uppercase tracking-[0.25em]" style={{ color: `${card.border}40` }}>HealConnect</div>
+                    <div className="absolute inset-0 w-full h-full rounded-xl flex items-center justify-center shadow-2xl p-3 transition-all duration-700"
+                      style={{
+                        background: card.backBg, border: `1px solid ${card.border}60`,
+                        transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', backfaceVisibility: 'hidden'
+                      }}>
+                      <div className="w-full h-full border-2 rounded-lg flex flex-col items-center justify-center relative overflow-hidden"
+                        style={{ borderColor: `${card.accent}40`, backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px)` }}>
+                        <span className="text-xl mb-2" style={{ color: card.border }}>✦</span>
+                        <div className="text-[8px] font-black tracking-[0.3em] uppercase opacity-70" style={{ color: card.accent }}>HealConnect</div>
+                        <div className="absolute inset-2 border border-dashed rounded-md opacity-20 pointer-events-none" style={{ borderColor: card.accent }} />
                       </div>
-                      {/* Corner ornaments */}
-                      <div className="absolute top-3 left-3 text-xs" style={{ color: `${card.border}35` }}>✦</div>
-                      <div className="absolute top-3 right-3 text-xs" style={{ color: `${card.border}35` }}>✦</div>
-                      <div className="absolute bottom-3 left-3 text-xs" style={{ color: `${card.border}35` }}>✦</div>
-                      <div className="absolute bottom-3 right-3 text-xs" style={{ color: `${card.border}35` }}>✦</div>
                     </div>
 
                     {/* ── Card Front ── */}
-                    <div className="absolute inset-0 rounded-xl overflow-hidden shadow-2xl flex flex-col"
-                      style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: card.cardBg, border: `1.5px solid ${card.border}60` }}>
-                      {/* Roman numeral */}
-                      <div className="text-center pt-3 pb-1">
-                        <span className="text-[9px] font-black tracking-widest" style={{ color: `${card.accent}70` }}>{card.roman}</span>
+                    <div className="absolute inset-0 w-full h-full rounded-xl flex flex-col items-center justify-center shadow-2xl p-4 transition-all duration-700"
+                      style={{
+                        background: card.cardBg, border: `2px solid ${card.border}`,
+                        transform: isFlipped ? 'rotateY(0deg)' : 'rotateY(-180deg)', backfaceVisibility: 'hidden'
+                      }}>
+                      <div className="absolute inset-1 rounded-lg border" style={{ borderColor: `${card.accent}30` }} />
+                      <div className="absolute top-4 w-full text-center text-[10px] font-black tracking-[0.2em]" style={{ color: card.border }}>{card.roman}</div>
+                      
+                      <div className="my-auto w-24 h-24 rounded-full flex items-center justify-center border-4" style={{ borderColor: card.border, backgroundColor: 'rgba(255,255,255,0.05)' }}>
+                         <div className="w-16 h-16 rounded-full border-2 border-dashed flex items-center justify-center" style={{ borderColor: card.accent }}>
+                           <span className="text-4xl" style={{ color: card.border }}>✦</span>
+                         </div>
                       </div>
-                      {/* Zodiac image art */}
-                      <div className="flex-1 flex items-center justify-center px-3 py-1">
-                        <img src={card.img} alt={card.name}
-                          className="w-full h-full object-contain"
-                          style={{ filter: `drop-shadow(0 0 20px ${card.accent}50) brightness(1.05)`, maxHeight: '140px' }} />
+
+                      <div className="absolute bottom-6 w-full text-center px-4">
+                        <div className="font-serif font-bold text-lg mb-1 tracking-wider text-white drop-shadow-md">{card.name.toUpperCase()}</div>
+                        <div className="text-[8px] uppercase tracking-widest font-bold" style={{ color: card.accent }}>{card.subtitle}</div>
                       </div>
-                      {/* Card name */}
-                      <div className="text-center px-3 pb-4">
-                        <div className="text-[10px] font-black uppercase tracking-[0.2em] mb-0.5" style={{ color: card.accent }}>{card.name}</div>
-                        <div className="text-[8px] text-white/40 font-medium leading-tight">{card.subtitle}</div>
-                      </div>
-                      {/* Gold shimmer overlay */}
-                      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 50%, rgba(212,168,83,0.04) 100%)' }} />
                     </div>
                   </div>
                 </div>
@@ -474,22 +461,22 @@ export function ModalityUniverse() {
   const [hovered, setHovered] = useState<(typeof MOD_NODES)[0] | null>(null);
 
   return (
-    <section className="relative min-h-screen bg-[#080C18] overflow-hidden flex flex-col items-center justify-center py-20">
+    <section className="relative min-h-screen bg-[#F6FBFC] overflow-hidden flex flex-col items-center justify-center py-20">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(60)].map((_, i) => (
-          <div key={i} className="absolute rounded-full bg-white"
-            style={{ width: `${(i % 2) + 1}px`, height: `${(i % 2) + 1}px`, left: `${(i * 17.3) % 100}%`, top: `${(i * 23.1) % 100}%`, opacity: 0.04 + (i % 4) * 0.03 }} />
+          <div key={i} className="absolute rounded-full bg-[#1A92C6]"
+            style={{ width: `${(i % 2) + 1}px`, height: `${(i % 2) + 1}px`, left: `${(i * 17.3) % 100}%`, top: `${(i * 23.1) % 100}%`, opacity: 0.05 + (i % 4) * 0.05 }} />
         ))}
       </div>
 
       <div className="container mx-auto px-6 lg:px-16 text-center mb-8 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="w-8 h-[2px] bg-[#C9A0DC]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#C9A0DC]">03 — Modality Universe</span>
-          <div className="w-8 h-[2px] bg-[#C9A0DC]" />
+          <div className="w-8 h-[2px] bg-[#1A92C6]" />
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1A92C6]">03 — Modality Universe</span>
+          <div className="w-8 h-[2px] bg-[#1A92C6]" />
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-medium text-white mb-3">Explore What Speaks To You</h2>
-        <p className="text-white/40 text-sm font-medium">Hover any circle to discover a healing modality</p>
+        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-3">Explore What Speaks To You</h2>
+        <p className="text-[#1A92C6] text-sm font-bold">Hover any circle to discover a healing modality</p>
       </div>
 
       {/* SVG with fixed viewBox for readable text */}
@@ -524,11 +511,11 @@ export function ModalityUniverse() {
                   style={{ transition: 'all 0.4s ease', filter: isHov ? `drop-shadow(0 0 18px ${node.color})` : 'none' }} />
                 {/* Label — always visible, large enough to read */}
                 <text x={node.cx} y={node.cy} dy="0.35em" textAnchor="middle"
-                  fill={isHov ? 'white' : node.color}
+                  fill={isHov ? '#12527F' : node.color}
                   fontSize={node.center ? 18 : 13}
                   fontFamily="Georgia, serif"
-                  fontWeight={node.center ? '600' : '500'}
-                  opacity={isHov ? 1 : 0.85}
+                  fontWeight={node.center ? '700' : '600'}
+                  opacity={isHov ? 1 : 0.9}
                   style={{ transition: 'all 0.4s ease' }}>{node.label}</text>
                 {/* Guide count on hover */}
                 {isHov && (
@@ -710,24 +697,24 @@ export function GlobalGuidanceMap() {
 
   return (
     <section className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center py-24"
-      style={{ background: 'radial-gradient(ellipse at 50% 30%, #0E1E38 0%, #060B1E 55%, #04080F 100%)' }}>
+      style={{ background: 'radial-gradient(ellipse at 50% 30%, #FFFFFF 0%, #EDF8FC 55%, #CDE9F4 100%)' }}>
 
       {/* Grid overlay */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
-        style={{ backgroundImage: 'linear-gradient(to right, #63BFE4 1px, transparent 1px), linear-gradient(to bottom, #63BFE4 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+      <div className="absolute inset-0 pointer-events-none opacity-[0.08]"
+        style={{ backgroundImage: 'linear-gradient(to right, #1A92C6 1px, transparent 1px), linear-gradient(to bottom, #1A92C6 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
 
       {/* Glow centers */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] blur-[120px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse, rgba(99,191,228,0.1) 0%, transparent 70%)' }} />
+        style={{ background: 'radial-gradient(ellipse, rgba(99,191,228,0.2) 0%, transparent 70%)' }} />
 
       <div className="container mx-auto px-6 lg:px-16 text-center mb-10 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="w-10 h-[1px] bg-[#63BFE4]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#63BFE4]">06 — Our Global Reach</span>
-          <div className="w-10 h-[1px] bg-[#63BFE4]" />
+          <div className="w-10 h-[1px] bg-[#1A92C6]" />
+          <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#1A92C6]">06 — Our Global Reach</span>
+          <div className="w-10 h-[1px] bg-[#1A92C6]" />
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-medium text-white mb-3">HealConnect Is Everywhere</h2>
-        <p className="text-white/40 text-sm font-medium max-w-xl mx-auto">From New Delhi to New York, millions of seekers find guidance through HealConnect every day. Hover a node to see our reach.</p>
+        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-3">HealConnect Is Everywhere</h2>
+        <p className="text-[#1A92C6] text-sm font-medium max-w-xl mx-auto font-bold">From New Delhi to New York, millions of seekers find guidance through HealConnect every day. Hover a node to see our reach.</p>
       </div>
 
       {/* World map viz */}
@@ -774,15 +761,15 @@ export function GlobalGuidanceMap() {
               </div>
               {/* Tooltip */}
               {isHov && (
-                <div className="absolute z-50 rounded-2xl p-4 shadow-2xl border pointer-events-none"
-                  style={{ width: '210px', bottom: r + 20 + 'px', left: '50%', transform: 'translateX(-50%)', background: '#0D1629EE', borderColor: `${node.color}40`, animation: 'zen-fade 0.25s ease', backdropFilter: 'blur(16px)' }}>
+                <div className="absolute z-50 rounded-2xl p-4 shadow-xl border pointer-events-none"
+                  style={{ width: '210px', bottom: r + 20 + 'px', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', borderColor: `${node.color}40`, animation: 'zen-fade 0.25s ease', backdropFilter: 'blur(16px)' }}>
                   <div className="text-xs font-black uppercase tracking-wider mb-1" style={{ color: node.color }}>{node.name}</div>
                   <div className="flex justify-between items-baseline mb-2">
-                    <span className="text-xl font-bold text-white">{node.users}</span>
-                    <span className="text-[10px] text-white/40">active users</span>
+                    <span className="text-xl font-bold text-[#12527F]">{node.users}</span>
+                    <span className="text-[10px] text-[#1A92C6] font-bold">active users</span>
                   </div>
-                  <div className="text-[11px] text-white/60 mb-1">{node.guides} verified guides</div>
-                  <div className="text-[10px] text-white/40 border-t border-white/10 pt-2 mt-2">{node.top}</div>
+                  <div className="text-[11px] text-[#12527F]/70 font-medium mb-1">{node.guides} verified guides</div>
+                  <div className="text-[10px] text-[#1A92C6] border-t border-[#CDE9F4] pt-2 mt-2 font-bold">{node.top}</div>
                 </div>
               )}
             </div>
@@ -792,12 +779,11 @@ export function GlobalGuidanceMap() {
 
       {/* Stats strip */}
       <div className="container mx-auto px-6 lg:px-16 mt-12 z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-white/8 pt-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-[#1A92C6]/20 pt-10">
           {GROWTH_STATS.map(s => (
             <div key={s.label} className="text-center">
-              <div className="text-3xl md:text-4xl font-serif font-bold text-white mb-1"
-                style={{ textShadow: '0 0 30px rgba(99,191,228,0.3)' }}>{s.value}</div>
-              <div className="text-[11px] font-black uppercase tracking-widest text-white/30">{s.label}</div>
+              <div className="text-3xl md:text-4xl font-serif font-bold text-[#12527F] mb-1">{s.value}</div>
+              <div className="text-[11px] font-black uppercase tracking-widest text-[#1A92C6]">{s.label}</div>
             </div>
           ))}
         </div>
