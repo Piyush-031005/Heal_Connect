@@ -237,90 +237,329 @@ function ModernGlowHero() {
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 
-// --- ZEN ALIGN LAYOUT HERO (New Design 1) ---
+// WebGL-style Canvas Star Field
+function StarCanvas() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    let animId: number;
+    let W = canvas.width = canvas.offsetWidth;
+    let H = canvas.height = canvas.offsetHeight;
+
+    const stars = Array.from({ length: 180 }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.8 + 0.2,
+      a: Math.random() * Math.PI * 2,
+      speed: Math.random() * 0.3 + 0.05,
+      pulse: Math.random() * Math.PI * 2,
+      opacity: Math.random() * 0.6 + 0.2,
+    }));
+
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+      stars.forEach(s => {
+        s.pulse += 0.01;
+        const op = s.opacity * (0.7 + 0.3 * Math.sin(s.pulse));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(99, 191, 228, ${op})`;
+        ctx.fill();
+      });
+      animId = requestAnimationFrame(draw);
+    };
+
+    draw();
+    const resize = () => {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    };
+    window.addEventListener('resize', resize);
+    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
+  }, []);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-0" />;
+}
+
+// Animated constellation SVG lines (decorative)
+function ConstellationLines() {
+  const points = [
+    { x: '10%', y: '20%' }, { x: '25%', y: '12%' }, { x: '40%', y: '28%' },
+    { x: '20%', y: '45%' }, { x: '15%', y: '65%' },
+  ];
+  return (
+    <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
+      {points.slice(0, -1).map((p, i) => (
+        <motion.line
+          key={i}
+          x1={p.x} y1={p.y}
+          x2={points[i + 1].x} y2={points[i + 1].y}
+          stroke="#63BFE4"
+          strokeWidth="0.15"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 0.5 }}
+          transition={{ duration: 2, delay: i * 0.4, ease: 'easeInOut' }}
+        />
+      ))}
+      {points.map((p, i) => (
+        <motion.circle
+          key={i}
+          cx={p.x} cy={p.y} r="0.5"
+          fill="#20A6DC"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.8 }}
+          transition={{ duration: 0.5, delay: i * 0.4 }}
+        />
+      ))}
+    </svg>
+  );
+}
+
+// --- NEW ZEN ALIGN HERO (REWRITTEN) ---
 function ZenAlignHero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ['start start', 'end start'],
   });
 
-  // Parallax effects
-  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  
+  const yImage = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
+  const yText = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
   return (
-    <section 
+    <section
       ref={containerRef}
-      className="relative pt-32 pb-[350px] lg:pb-[400px] bg-gradient-to-b from-[#F0F4FF] to-white min-h-[120vh] flex flex-col items-center justify-center border-b border-border/50"
+      className="relative min-h-[100svh] flex items-center overflow-hidden border-b border-[#CDE9F4]/40"
+      style={{ background: 'linear-gradient(135deg, #EDF8FC 0%, #CDE9F4 40%, #9FD6EE 100%)' }}
     >
-      
-      {/* Background radial gradient to give a subtle center light */}
-      <motion.div style={{ y: yBg }} className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0%,transparent_100%)] pointer-events-none" />
+      {/* WebGL-style animated star canvas */}
+      <StarCanvas />
 
-      <div className="container mx-auto px-6 relative z-20">
-        <motion.div 
-          style={{ y: yText }} 
-          className="max-w-2xl"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <h1 className="text-6xl md:text-8xl font-sans font-bold tracking-tight text-[#2E2854] mb-8 leading-[1.1]">
-              Align Your <br />
-              <span className="text-[#6366F1]">Inner World.</span>
-            </h1>
-          </motion.div>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-xl text-[#4A417C]/80 mb-10 font-medium leading-relaxed font-sans"
-          >
-            Discover a curated space for holistic wellness. Connect with vetted practitioners who guide you toward balance, clarity, and transformation.
-          </motion.p>
+      {/* Constellation SVG overlay */}
+      <ConstellationLines />
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center bg-white rounded-full p-2 max-w-xl shadow-xl border border-primary/10 transition-transform duration-300 hover:shadow-2xl hover:scale-[1.02]"
-          >
-            <Search className="w-5 h-5 text-muted-foreground ml-4 mr-2" />
-            <input 
-              type="text" 
-              placeholder="Search by specialty, service or name" 
-              className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground font-sans font-medium"
-            />
-            <Button className="bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-full px-8 h-12 font-bold font-sans">
-              Search
-            </Button>
-          </motion.div>
-        </motion.div>
+      {/* Large radial glow — center-right */}
+      <div className="absolute right-0 top-0 w-[70vw] h-full bg-[radial-gradient(ellipse_at_70%_40%,rgba(32,166,220,0.18)_0%,transparent_65%)] pointer-events-none z-0" />
+      <div className="absolute left-0 bottom-0 w-[50vw] h-1/2 bg-[radial-gradient(ellipse_at_30%_80%,rgba(23,97,154,0.10)_0%,transparent_60%)] pointer-events-none z-0" />
+
+      {/* Giant background number/glyph */}
+      <div className="absolute top-0 right-0 text-[32vw] font-black leading-none text-[#1A92C6]/[0.04] pointer-events-none select-none z-0 tracking-tighter">
+        12
       </div>
 
-      {/* Right Side: Masterpiece Image (replaces wheel) */}
-      <motion.div 
-        animate={{ 
-          translateY: '-50%' 
-        }}
-        transition={{ type: "spring", stiffness: 75, damping: 20 }}
-        className="absolute right-[-10%] md:right-5 top-[45%] md:top-[45%] h-[600px] w-[600px] md:h-[700px] md:w-[700px] z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center"
+      {/* --- Main Content --- */}
+      <div className="container mx-auto px-6 lg:px-16 relative z-20 py-32 lg:py-0">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-center min-h-[100svh]">
+
+          {/* LEFT: Text */}
+          <motion.div
+            style={{ y: yText, opacity }}
+            className="lg:col-span-6 flex flex-col justify-center pt-24 lg:pt-0 pb-16 lg:pb-0"
+          >
+            {/* Top label */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="flex items-center gap-3 mb-10"
+            >
+              <div className="w-8 h-[2px] bg-[#1A92C6]" />
+              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1A92C6]">
+                New Design 1
+              </span>
+            </motion.div>
+
+            {/* Main heading — bold, no cursive */}
+            <div className="overflow-hidden mb-3">
+              <motion.h1
+                initial={{ y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[3.8rem] md:text-[5.5rem] lg:text-[6.5rem] font-black leading-[0.95] tracking-tighter text-[#12527F] uppercase"
+              >
+                ALIGN
+              </motion.h1>
+            </div>
+            <div className="overflow-hidden mb-3">
+              <motion.h1
+                initial={{ y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.9, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[3.8rem] md:text-[5.5rem] lg:text-[6.5rem] font-black leading-[0.95] tracking-tighter text-transparent"
+                style={{
+                  WebkitTextStroke: '2px #1A92C6',
+                }}
+              >
+                YOUR
+              </motion.h1>
+            </div>
+            <div className="overflow-hidden mb-10">
+              <motion.h1
+                initial={{ y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.9, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[3.8rem] md:text-[5.5rem] lg:text-[6.5rem] font-black leading-[0.95] tracking-tighter text-[#1E6CAC] uppercase"
+              >
+                COSMOS
+              </motion.h1>
+            </div>
+
+            {/* Subtext */}
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.45 }}
+              className="text-base md:text-lg font-medium text-[#17619A]/75 max-w-sm mb-10 leading-relaxed"
+            >
+              Discover vetted astrologers, energy healers, and spiritual guides. Reconnect with the universe.
+            </motion.p>
+
+            {/* Search Bar — glassmorphism */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <div className="flex items-center bg-white/60 backdrop-blur-2xl rounded-2xl p-2 max-w-md shadow-[0_8px_40px_rgba(26,146,198,0.18)] border border-white/80 hover:shadow-[0_12px_60px_rgba(26,146,198,0.28)] transition-all duration-500">
+                <Search className="w-5 h-5 text-[#1A92C6] ml-4 mr-3 shrink-0" />
+                <input
+                  type="text"
+                  placeholder="Find your guide..."
+                  className="flex-1 bg-transparent border-none focus:outline-none text-[#12527F] placeholder:text-[#7FB2D3] font-semibold text-base py-2"
+                />
+                <Button className="bg-[#1A92C6] hover:bg-[#17619A] text-white rounded-xl px-7 h-11 font-bold text-sm tracking-wider transition-all">
+                  Search
+                </Button>
+              </div>
+
+              {/* Tags */}
+              <div className="flex items-center gap-2 mt-5 flex-wrap">
+                {['Astrology', 'Tarot', 'Energy Healing', 'Numerology'].map((tag, i) => (
+                  <motion.span
+                    key={tag}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.8 + i * 0.08 }}
+                    className="text-xs font-bold px-4 py-1.5 rounded-full bg-white/50 border border-[#9FD6EE]/60 text-[#1A92C6] cursor-pointer hover:bg-[#1A92C6] hover:text-white transition-all duration-300 backdrop-blur-sm"
+                  >
+                    {tag}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Stats row */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.1, duration: 0.8 }}
+              className="flex items-center gap-8 mt-12 pt-8 border-t border-[#9FD6EE]/40"
+            >
+              <div>
+                <p className="text-2xl font-black text-[#12527F]">10K+</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#1A92C6]/70">Practitioners</p>
+              </div>
+              <div className="w-px h-8 bg-[#9FD6EE]/60" />
+              <div>
+                <p className="text-2xl font-black text-[#12527F]">50+</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#1A92C6]/70">Modalities</p>
+              </div>
+              <div className="w-px h-8 bg-[#9FD6EE]/60" />
+              <div>
+                <p className="text-2xl font-black text-[#12527F]">4.9★</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#1A92C6]/70">Avg Rating</p>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* RIGHT: Image */}
+          <motion.div
+            style={{ y: yImage }}
+            initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6 relative flex items-center justify-center lg:justify-end h-[50vw] max-h-[700px] min-h-[350px]"
+          >
+            {/* Glowing ring behind image */}
+            <div className="absolute inset-0 m-auto w-[80%] h-[80%] rounded-full bg-[radial-gradient(circle,rgba(32,166,220,0.25)_0%,transparent_70%)] blur-2xl animate-[pulse_5s_ease-in-out_infinite]" />
+
+            {/* Decorative ring */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
+              className="absolute w-[85%] h-[85%] rounded-full border border-[#63BFE4]/20 border-dashed"
+            />
+            <motion.div
+              animate={{ rotate: -360 }}
+              transition={{ repeat: Infinity, duration: 28, ease: 'linear' }}
+              className="absolute w-[70%] h-[70%] rounded-full border border-[#20A6DC]/15 border-dotted"
+            />
+
+            {/* Main zodiac image — floating */}
+            <motion.div
+              animate={{ y: [0, -18, 0] }}
+              transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}
+              className="relative z-10 w-[85%] max-w-[520px] aspect-[3/4]"
+            >
+              <img
+                src="/zodiac-masterpiece.png"
+                alt="Cosmic Masterpiece"
+                className="w-full h-full object-contain drop-shadow-[0_30px_80px_rgba(26,146,198,0.35)]"
+              />
+            </motion.div>
+
+            {/* Floating pill — top left of image */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.2, duration: 0.8 }}
+              className="absolute top-[12%] left-[2%] bg-white/70 backdrop-blur-xl border border-[#CDE9F4] rounded-2xl px-4 py-3 shadow-lg flex items-center gap-3 z-20"
+            >
+              <div className="w-8 h-8 rounded-full bg-[#EDF8FC] flex items-center justify-center">
+                <Sparkles className="w-4 h-4 text-[#1A92C6]" />
+              </div>
+              <div>
+                <p className="text-[11px] font-black text-[#12527F] uppercase tracking-wider">Live Reading</p>
+                <p className="text-[10px] text-[#1A92C6]/80 font-medium">12 experts online</p>
+              </div>
+            </motion.div>
+
+            {/* Floating pill — bottom right */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.4, duration: 0.8 }}
+              className="absolute bottom-[15%] right-[2%] bg-[#1A92C6] rounded-2xl px-4 py-3 shadow-xl flex items-center gap-3 z-20"
+            >
+              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                <span className="text-white text-sm font-black">♈</span>
+              </div>
+              <div>
+                <p className="text-[11px] font-black text-white uppercase tracking-wider">Your Sign</p>
+                <p className="text-[10px] text-white/70 font-medium">Explore birth chart</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Bottom scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.8 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
       >
-        <motion.div 
-          animate={{ y: [0, -15, 0] }}
-          transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-          className="relative w-full h-full"
-        >
-          <img 
-            src="/zodiac-masterpiece.png" 
-            alt="Zenauraa Masterpiece" 
-            className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(99,102,241,0.3)] hover:scale-105 transition-transform duration-700 ease-out"
-          />
-        </motion.div>
+        <span className="text-[9px] uppercase tracking-[0.3em] font-bold text-[#1A92C6]/60">Scroll</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+          className="w-[1px] h-10 bg-gradient-to-b from-[#1A92C6] to-transparent"
+        />
       </motion.div>
     </section>
   );
