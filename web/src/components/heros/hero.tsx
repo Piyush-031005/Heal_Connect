@@ -437,44 +437,74 @@ function ZenAlignHero() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT: Image */}
+          {/* RIGHT: Cosmic Wheel Graphic */}
           <motion.div
             style={{ y: yImage }}
             initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
             animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 relative flex items-center justify-center lg:justify-end h-[50vw] max-h-[700px] min-h-[350px]"
+            className="lg:col-span-6 relative flex items-center justify-center h-[50vw] max-h-[700px] min-h-[350px] w-full mt-10 lg:mt-0"
           >
-            {/* Glowing ring behind image */}
-            <div className="absolute inset-0 m-auto w-[80%] h-[80%] rounded-full bg-[radial-gradient(circle,rgba(32,166,220,0.25)_0%,transparent_70%)] blur-2xl animate-[pulse_5s_ease-in-out_infinite]" />
+            {/* Dark background glow for the wheel */}
+            <div className="absolute inset-0 m-auto w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle,rgba(20,12,40,0.95)_0%,rgba(20,12,40,0.85)_40%,transparent_75%)] blur-md z-0" />
 
-            {/* Decorative ring */}
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
-              className="absolute w-[85%] h-[85%] rounded-full border border-[#63BFE4]/20 border-dashed"
-            />
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ repeat: Infinity, duration: 28, ease: 'linear' }}
-              className="absolute w-[70%] h-[70%] rounded-full border border-[#20A6DC]/15 border-dotted"
-            />
-
-            {/* Main zodiac image — floating */}
-            <motion.div
-              animate={{ y: [0, -18, 0] }}
-              transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}
-              className="relative z-10 w-[85%] max-w-[520px] aspect-[3/4]"
-            >
-              <Image
-                src="/zodiac-masterpiece.png"
-                alt="Cosmic Masterpiece"
-                width={520}
-                height={693}
-                priority
-                className="w-full h-full object-contain drop-shadow-[0_30px_80px_rgba(26,146,198,0.35)]"
+            {/* Wheel Container */}
+            <div className="relative w-[90%] max-w-[550px] aspect-square flex items-center justify-center rounded-full z-10">
+              
+              {/* Outer Dashed Ring 1 */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 90, ease: 'linear' }}
+                className="absolute w-full h-full rounded-full border border-dashed border-[#D4A853]/50"
               />
-            </motion.div>
+              
+              {/* Solid Ring 2 with Nodes */}
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ repeat: Infinity, duration: 110, ease: 'linear' }}
+                className="absolute w-[82%] h-[82%] rounded-full border border-[#D4A853]/40"
+              >
+                 {/* Zodiac Nodes (CSS positioned around circle) */}
+                 {[...Array(8)].map((_, i) => (
+                    <div key={i} className="absolute inset-0 flex justify-center"
+                         style={{ transform: `rotate(${i * 45}deg)` }}>
+                       <div className="flex flex-col items-center -mt-2">
+                         <div className="w-2 h-2 bg-[#D4A853] rounded-full shadow-[0_0_10px_#D4A853]" />
+                         <div className="w-[1px] h-4 bg-[#D4A853]/50 mt-1" />
+                       </div>
+                    </div>
+                 ))}
+              </motion.div>
+
+              {/* Inner Dashed Ring 3 */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 60, ease: 'linear' }}
+                className="absolute w-[62%] h-[62%] rounded-full border border-[#D4A853]/60"
+                style={{ strokeDasharray: '4 8' }}
+              />
+
+              {/* Central Glowing Orb & Logo */}
+              <div className="absolute w-[45%] h-[45%] rounded-full flex items-center justify-center z-20">
+                 {/* Core glow orb */}
+                 <div className="absolute inset-0 bg-gradient-to-tr from-[#1A0C2E] to-[#2B1B4A] rounded-full border border-[#D4A853]/40 shadow-[0_0_80px_rgba(212,168,83,0.35)]" />
+                 
+                 {/* Hands Logo */}
+                 <motion.div
+                   animate={{ y: [0, -6, 0], scale: [1, 1.03, 1] }}
+                   transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+                   className="relative w-[85%] h-[85%] z-10"
+                 >
+                   <Image
+                     src="/hands-star.png"
+                     alt="HealConnect Mystical Logo"
+                     fill
+                     className="object-contain drop-shadow-[0_0_20px_rgba(212,168,83,0.8)]"
+                   />
+                 </motion.div>
+              </div>
+
+            </div>
           </motion.div>
         </div>
       </div>
