@@ -234,11 +234,11 @@ export function ZodiacOrbitRing() {
                 const isActive = z.id === active.id;
                 return (
                   <g key={z.id} onClick={() => setActive(z)} style={{ cursor: 'pointer' }}>
-                    <circle cx={x} cy={y} r={isActive ? 8 : 6.5}
+                    <circle cx={x} cy={y} r={isActive ? 10 : 8}
                       fill="white"
                       style={{ filter: isActive ? `drop-shadow(0 0 8px ${z.color})` : 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))', transition: 'all 0.4s ease' }} />
-                    <image href={z.img} x={x - (isActive ? 5.5 : 4.5)} y={y - (isActive ? 5.5 : 4.5)} width={isActive ? 11 : 9} height={isActive ? 11 : 9}
-                      opacity={isActive ? 1 : 0.6}
+                    <image href={z.img} x={x - (isActive ? 7.5 : 6)} y={y - (isActive ? 7.5 : 6)} width={isActive ? 15 : 12} height={isActive ? 15 : 12}
+                      opacity={isActive ? 1 : 0.8}
                       style={{ transition: 'all 0.4s ease' }} />
                   </g>
                 );
@@ -291,51 +291,51 @@ const TAROT_CARDS = [
   {
     name: 'The Fool', roman: '0', subtitle: 'New Beginnings · Spontaneity',
     message: 'A blank slate lies before you. Take the leap of faith without fear, trusting that the universe will catch you. Embrace the unknown with childlike wonder.',
-    cardBg: 'linear-gradient(170deg, #1A365D 0%, #0F172A 100%)',
-    border: '#63BFE4', accent: '#E0F2FE',
-    color: '#3B82F6', backBg: 'linear-gradient(145deg, #1A92C6, #0F172A)'
+    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
+    border: '#D7CCC8', accent: '#EFEBE9',
+    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
   },
   {
     name: 'The High Priestess', roman: 'II', subtitle: 'Intuition · Inner Voice · Mystery',
     message: 'Your subconscious holds truths the waking mind has yet to hear. Honour the cycles within you — your intuition is your most sacred compass right now.',
-    cardBg: 'linear-gradient(170deg, #1A0E3A 0%, #251450 50%, #0E0820 100%)',
-    border: '#C9A0DC', accent: '#F5F3FF',
-    color: '#9B8FFF', backBg: 'linear-gradient(145deg, #7B6CF6, #251450)'
+    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
+    border: '#D7CCC8', accent: '#EFEBE9',
+    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
   },
   {
     name: 'The Sun', roman: 'XIX', subtitle: 'Joy · Vitality · Success',
     message: 'Radiant golden energy courses through every opportunity before you. A magnificent chapter of abundance, creative power, and warmth is beautifully unfolding.',
-    cardBg: 'linear-gradient(170deg, #B8860B 0%, #8B6508 100%)',
-    border: '#FFD700', accent: '#FFFBEB',
-    color: '#D4A853', backBg: 'linear-gradient(145deg, #DAA520, #8B6508)'
+    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
+    border: '#D7CCC8', accent: '#EFEBE9',
+    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
   },
   {
     name: 'The World', roman: 'XXI', subtitle: 'Completion · Wholeness · Triumph',
     message: 'You stand at the sacred culmination of an extraordinary cycle. Embrace the beautiful wholeness you have earned — a glorious new chapter awaits your first step.',
-    cardBg: 'linear-gradient(170deg, #0A2A1A 0%, #0F3520 100%)',
-    border: '#7EDEA0', accent: '#F0FFF4',
-    color: '#2E8B57', backBg: 'linear-gradient(145deg, #2E8B57, #0A2A1A)'
+    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
+    border: '#D7CCC8', accent: '#EFEBE9',
+    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
   },
   {
     name: 'The Tower', roman: 'XVI', subtitle: 'Revelation · Transformation · Truth',
     message: 'A powerful revelation shakes what was never truly stable. What crumbles was built on illusion — what remains is the indestructible core of your true self.',
-    cardBg: 'linear-gradient(170deg, #3D1010 0%, #1A0505 100%)',
-    border: '#F4A261', accent: '#FFF5F5',
-    color: '#C45C3A', backBg: 'linear-gradient(145deg, #C45C3A, #3D1010)'
+    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
+    border: '#D7CCC8', accent: '#EFEBE9',
+    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
   },
   {
     name: 'The Star', roman: 'XVII', subtitle: 'Hope · Inspiration · Serenity',
     message: 'After the storm comes clear, starlit skies. A time of deep spiritual healing and renewed hope is upon you. Trust in the quiet guidance of the universe.',
-    cardBg: 'linear-gradient(170deg, #0C1E3A 0%, #06101D 100%)',
-    border: '#98E6F4', accent: '#E0F7FA',
-    color: '#4DD0E1', backBg: 'linear-gradient(145deg, #00BCD4, #06101D)'
+    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
+    border: '#D7CCC8', accent: '#EFEBE9',
+    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
   },
   {
     name: 'The Magician', roman: 'I', subtitle: 'Manifestation · Power · Action',
     message: 'You possess all the tools needed to manifest your desires. Align your thoughts, words, and actions, and watch the universe bend to your will.',
-    cardBg: 'linear-gradient(170deg, #4A154B 0%, #29082A 100%)',
-    border: '#FF6B9D', accent: '#FCE4EC',
-    color: '#E91E63', backBg: 'linear-gradient(145deg, #E91E63, #29082A)'
+    cardBg: 'linear-gradient(170deg, #3E2723 0%, #291814 100%)',
+    border: '#D7CCC8', accent: '#EFEBE9',
+    color: '#8D6E63', backBg: 'linear-gradient(145deg, #5D4037, #3E2723)'
   }
 ];
 
@@ -459,17 +459,17 @@ export function TarotTable() {
 // 04. MODALITY UNIVERSE — Pixel-perfect node map with readable labels
 // ─────────────────────────────────────────────────────────────────────────
 const MOD_NODES = [
-  { id: 'astrology', label: 'Astrology', cx: 450, cy: 240, r: 75, color: '#63BFE4', center: true, count: '320 guides' },
-  { id: 'tarot', label: 'Tarot', cx: 280, cy: 160, r: 50, color: '#C9A0DC', count: '240 guides' },
-  { id: 'reiki', label: 'Energy Healing', cx: 230, cy: 330, r: 62, color: '#7EDEA0', count: '180 guides' },
-  { id: 'meditation', label: 'Meditation', cx: 710, cy: 320, r: 52, color: '#98E6F4', count: '150 guides' },
-  { id: 'palmistry', label: 'Palm Reading', cx: 370, cy: 410, r: 48, color: '#F4A261', count: '70 guides' },
-  { id: 'vastu', label: 'Vastu', cx: 560, cy: 420, r: 45, color: '#A0AEC0', count: '45 guides' },
-  { id: 'yoga', label: 'Yoga', cx: 220, cy: 60, r: 38, color: '#7EDEA0', count: '95 guides' },
-  { id: 'eft', label: 'EFT Tapping', cx: 560, cy: 80, r: 48, color: '#9B8FFF', count: '35 guides' },
-  { id: 'coaching', label: 'Life Coaching', cx: 680, cy: 140, r: 55, color: '#F4D58D', count: '110 guides' },
-  { id: 'spiritual', label: 'Spiritual Guide', cx: 120, cy: 180, r: 58, color: '#C9A0DC', count: '180 guides' },
-  { id: 'face', label: 'Face Reading', cx: 420, cy: 70, r: 46, color: '#FF6B6B', count: '30 guides' },
+  { id: 'astrology', label: 'Astrology', cx: 450, cy: 260, r: 75, color: '#63BFE4', center: true, count: '320 guides' },
+  { id: 'tarot', label: 'Tarot', cx: 240, cy: 190, r: 54, color: '#C9A0DC', count: '240 guides' },
+  { id: 'reiki', label: 'Energy Healing', cx: 300, cy: 370, r: 62, color: '#7EDEA0', count: '180 guides' },
+  { id: 'meditation', label: 'Meditation', cx: 660, cy: 380, r: 52, color: '#98E6F4', count: '150 guides' },
+  { id: 'palmistry', label: 'Palm Reading', cx: 430, cy: 450, r: 48, color: '#F4A261', count: '70 guides' },
+  { id: 'vastu', label: 'Vastu', cx: 580, cy: 140, r: 45, color: '#A0AEC0', count: '45 guides' },
+  { id: 'yoga', label: 'Yoga', cx: 180, cy: 90, r: 44, color: '#7EDEA0', count: '95 guides' },
+  { id: 'eft', label: 'EFT Tapping', cx: 750, cy: 170, r: 48, color: '#9B8FFF', count: '35 guides' },
+  { id: 'coaching', label: 'Life Coaching', cx: 720, cy: 280, r: 55, color: '#F4D58D', count: '110 guides' },
+  { id: 'spiritual', label: 'Spiritual Guide', cx: 140, cy: 300, r: 58, color: '#C9A0DC', count: '180 guides' },
+  { id: 'face', label: 'Face Reading', cx: 360, cy: 80, r: 46, color: '#FF6B6B', count: '30 guides' },
 ];
 
 export function ModalityUniverse() {
@@ -506,14 +506,7 @@ export function ModalityUniverse() {
             ))}
           </defs>
 
-          {/* Connector lines from center */}
-          {MOD_NODES.filter(n => !n.center).map(node => (
-            <path key={`l-${node.id}`}
-              d={`M ${MOD_NODES[0].cx} ${MOD_NODES[0].cy} Q ${(MOD_NODES[0].cx + node.cx)/2} ${(MOD_NODES[0].cy + node.cy)/2 - 30} ${node.cx} ${node.cy}`}
-              fill="none"
-              stroke={node.color} strokeOpacity="0.25" strokeWidth="1.5"
-              strokeDasharray="4 6" />
-          ))}
+          {/* No connection lines - making it purely floating and organic */}
 
           {MOD_NODES.map(node => {
             const isHov = hovered?.id === node.id;
@@ -587,8 +580,14 @@ export function ExpertStoriesDeck() {
       <div className="absolute left-0 top-0 bottom-0 w-1/3 pointer-events-none"
         style={{ background: `linear-gradient(to right, ${expert.color}12, transparent)`, transition: 'background 0.8s ease' }} />
 
-      <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-16">
+      <div className="max-w-5xl mx-auto px-6 lg:px-16 relative z-10">
+        
+        {/* Large Decorative Quote mark to fill space */}
+        <div className="absolute right-0 top-10 text-[200px] leading-none font-serif text-[#12527F] opacity-[0.03] pointer-events-none select-none">
+          &rdquo;
+        </div>
+
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-20">
           {/* Left: cards */}
           <div className="lg:w-1/2">
             <div className="flex items-center gap-3 mb-10">
