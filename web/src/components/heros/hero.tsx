@@ -352,61 +352,37 @@ function ZenAlignHero() {
       </div>
 
       {/* --- Main Content --- */}
-      <div className="container mx-auto px-6 lg:px-16 relative z-20 py-32 lg:py-0">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-center min-h-[100svh]">
+      <div className="container mx-auto px-6 lg:px-16 relative z-20 pt-36 pb-24 lg:pt-40 lg:pb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
           {/* LEFT: Text */}
           <motion.div
             style={{ y: yText, opacity }}
-            className="lg:col-span-6 flex flex-col justify-center pt-32 lg:pt-0 pb-16 lg:pb-0 lg:mt-0 mt-16"
+            className="lg:col-span-6 flex flex-col justify-center"
           >
             {/* Top label */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="flex items-center gap-3 mb-10"
+              className="flex items-center gap-3 mb-6"
             >
               <div className="w-8 h-[2px] bg-[#1A92C6]" />
               <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1A92C6]">
-                New Design 1
+                Zenauraa Cosmos
               </span>
             </motion.div>
 
-            {/* Main heading — Condensed heavy style like top astro sites */}
-            <div className="overflow-hidden mb-1">
-              <motion.h1
-                initial={{ y: '110%' }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black leading-[0.88] tracking-[-0.04em] text-[#12527F] uppercase"
-                style={{ fontStretch: 'condensed', letterSpacing: '-0.04em' }}
-              >
-                ALIGN
-              </motion.h1>
-            </div>
-            <div className="overflow-hidden mb-1">
-              <motion.h1
-                initial={{ y: '110%' }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.9, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black leading-[0.88] tracking-[-0.04em] text-transparent uppercase"
-                style={{ WebkitTextStroke: '3px #1A92C6', letterSpacing: '-0.04em' }}
-              >
-                YOUR
-              </motion.h1>
-            </div>
-            <div className="overflow-hidden mb-10">
-              <motion.h1
-                initial={{ y: '110%' }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.9, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black leading-[0.88] tracking-[-0.04em] text-[#1E6CAC] uppercase"
-                style={{ letterSpacing: '-0.04em' }}
-              >
-                COSMOS
-              </motion.h1>
-            </div>
+            {/* Main heading — High-end elegant editorial typography */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="text-5xl md:text-7xl lg:text-8xl font-serif font-medium tracking-tight text-[#12527F] mb-6 leading-[1.05]"
+            >
+              Align Your <br />
+              <span className="italic font-normal text-[#1A92C6]">Inner Cosmos.</span>
+            </motion.h1>
 
             {/* Subtext */}
             <motion.p

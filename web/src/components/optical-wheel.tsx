@@ -52,7 +52,7 @@ export default function OpticalWheel() {
 
           {/* LAYER 1: Minimal Rings */}
           <g style={{ animation: 'spin 180s linear infinite', transformOrigin: '500px 500px' }}>
-            <circle cx={cx} cy={cy} r={outerRadius + 80} fill="none" stroke="#312E81" opacity="0.3" strokeWidth="2" />
+            <circle cx={cx} cy={cy} r={outerRadius + 80} fill="none" stroke="#312E81" opacity="0.25" strokeWidth="1" />
             
             {[...Array(60)].map((_, i) => (
               <line 
@@ -62,22 +62,22 @@ export default function OpticalWheel() {
                 x2={cx + (outerRadius + (i % 5 === 0 ? 95 : 85)) * Math.cos(i * 6 * Math.PI / 180)}
                 y2={cy + (outerRadius + (i % 5 === 0 ? 95 : 85)) * Math.sin(i * 6 * Math.PI / 180)}
                 stroke="#312E81"
-                opacity={i % 5 === 0 ? "0.6" : "0.3"}
-                strokeWidth={i % 5 === 0 ? "3" : "1.5"}
+                opacity={i % 5 === 0 ? "0.45" : "0.2"}
+                strokeWidth={i % 5 === 0 ? "1.5" : "0.75"}
               />
             ))}
-            <circle cx={cx} cy={cy} r={outerRadius + 110} fill="none" stroke="#312E81" opacity="0.2" strokeWidth="2" />
+            <circle cx={cx} cy={cy} r={outerRadius + 110} fill="none" stroke="#312E81" opacity="0.15" strokeWidth="1" />
           </g>
 
           {/* LAYER 4: The 12 Modalities orbiting */}
-          <circle cx={cx} cy={cy} r={outerRadius} fill="none" stroke="#312E81" opacity="0.5" strokeWidth="4" />
+          <circle cx={cx} cy={cy} r={outerRadius} fill="none" stroke="#312E81" opacity="0.35" strokeWidth="1.5" />
           
           {/* LAYER 5: Intricate Center (Astrology style) */}
           <g style={{ animation: 'spin 240s linear infinite reverse', transformOrigin: '500px 500px' }}>
             {/* Center concentric rings */}
-            <circle cx={cx} cy={cy} r={220} fill="none" stroke="#312E81" opacity="0.4" strokeWidth="2" />
-            <circle cx={cx} cy={cy} r={200} fill="none" stroke="#312E81" opacity="0.6" strokeWidth="1" strokeDasharray="4 6" />
-            <circle cx={cx} cy={cy} r={180} fill="none" stroke="#312E81" opacity="0.4" strokeWidth="2" />
+            <circle cx={cx} cy={cy} r={220} fill="none" stroke="#312E81" opacity="0.3" strokeWidth="1" />
+            <circle cx={cx} cy={cy} r={200} fill="none" stroke="#312E81" opacity="0.4" strokeWidth="0.75" strokeDasharray="4 6" />
+            <circle cx={cx} cy={cy} r={180} fill="none" stroke="#312E81" opacity="0.3" strokeWidth="1" />
             
             {/* 8-pointed star */}
             {[0, 45].map((rot, i) => (
@@ -89,21 +89,21 @@ export default function OpticalWheel() {
                 height={180 * Math.sin(Math.PI/4) * 2} 
                 fill="none" 
                 stroke="#312E81"
-                opacity="0.5"
-                strokeWidth="2"
+                opacity="0.35"
+                strokeWidth="1"
                 transform={`rotate(${rot}, ${cx}, ${cy})`}
               />
             ))}
 
             {/* Core aesthetic center glow & ring */}
-            <circle cx={cx} cy={cy} r={100} fill="#ffffff" opacity="0.8" stroke="#6366F1" strokeWidth="4" />
-            <circle cx={cx} cy={cy} r={115} fill="none" stroke="#6366F1" opacity="0.3" strokeWidth="8" />
+            <circle cx={cx} cy={cy} r={100} fill="#ffffff" opacity="0.85" stroke="#6366F1" strokeWidth="1.5" />
+            <circle cx={cx} cy={cy} r={115} fill="none" stroke="#6366F1" opacity="0.2" strokeWidth="3" />
             
             {/* We can put a small spiritual icon/logo in the very center if we wanted, or just the glowing orb */}
             <circle cx={cx} cy={cy} r={80} fill="url(#glow)" opacity="0.6" />
             {/* Small celestial compass lines inside the center */}
-            <line x1={cx} y1={cy-80} x2={cx} y2={cy+80} stroke="#312E81" opacity="0.4" strokeWidth="1.5" />
-            <line x1={cx-80} y1={cy} x2={cx+80} y2={cy} stroke="#312E81" opacity="0.4" strokeWidth="1.5" />
+            <line x1={cx} y1={cy-80} x2={cx} y2={cy+80} stroke="#312E81" opacity="0.3" strokeWidth="1" />
+            <line x1={cx-80} y1={cy} x2={cx+80} y2={cy} stroke="#312E81" opacity="0.3" strokeWidth="1" />
             <circle cx={cx} cy={cy} r={20} fill="#6366F1" opacity="0.2" />
             <circle cx={cx} cy={cy} r={4} fill="#6366F1" />
           </g>
@@ -130,15 +130,15 @@ export default function OpticalWheel() {
                     <circle cx="0" cy="0" r="90" fill="transparent" pointerEvents="all" />
                     
                     {/* Button Background - Changed to light theme */}
-                    <circle cx="0" cy="0" r="85" className="fill-white transition-all duration-300 shadow-xl" stroke="#312E81" opacity={isHovered ? "1" : "0.5"} strokeWidth={isHovered ? "6" : "3"} style={{ filter: 'drop-shadow(0px 8px 24px rgba(78,89,194,0.4))' }} />
+                    <circle cx="0" cy="0" r="85" className="fill-white transition-all duration-300 shadow-xl" stroke="#312E81" opacity={isHovered ? "0.9" : "0.35"} strokeWidth={isHovered ? "3" : "1.5"} style={{ filter: 'drop-shadow(0px 8px 24px rgba(78,89,194,0.4))' }} />
                     
                     {/* Glowing Aura on Hover */}
-                    <circle cx="0" cy="0" r="95" className="fill-transparent transition-all duration-300 blur-[3px]" stroke="#312E81" opacity={isHovered ? "0.6" : "0"} strokeWidth="6" />
+                    <circle cx="0" cy="0" r="95" className="fill-transparent transition-all duration-300 blur-[3px]" stroke="#312E81" opacity={isHovered ? "0.5" : "0"} strokeWidth="3" />
                     
                     {/* Outer animated dots on hover */}
                     <g className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ animation: 'spin 10s linear infinite', transformOrigin: '0px 0px' }}>
                       {[0, 1, 2, 3].map((d) => (
-                        <circle key={d} cx={90 * Math.cos(d * Math.PI/2)} cy={90 * Math.sin(d * Math.PI/2)} r="6" fill="#312E81" />
+                        <circle key={d} cx={90 * Math.cos(d * Math.PI/2)} cy={90 * Math.sin(d * Math.PI/2)} r="4" fill="#312E81" />
                       ))}
                     </g>
 
@@ -170,15 +170,15 @@ export default function OpticalWheel() {
           {/* LAYER 5: Central Focus Core (Logo) */}
           <g transform={`translate(${cx}, ${cy})`}>
             {/* Intricate Inner Core */}
-            <circle cx="0" cy="0" r="160" fill="none" stroke="#312E81" opacity="0.5" strokeWidth="3" />
-            <circle cx="0" cy="0" r="145" fill="none" stroke="#312E81" opacity="0.7" strokeWidth="4" strokeDasharray="4 12" style={{ animation: 'spin 60s linear infinite', transformOrigin: '0px 0px' }} />
+            <circle cx="0" cy="0" r="160" fill="none" stroke="#312E81" opacity="0.35" strokeWidth="1.5" />
+            <circle cx="0" cy="0" r="145" fill="none" stroke="#312E81" opacity="0.5" strokeWidth="1" strokeDasharray="4 12" style={{ animation: 'spin 60s linear infinite', transformOrigin: '0px 0px' }} />
             
             {/* Spinning runes/dash array core */}
-            <circle cx="0" cy="0" r="115" fill="none" stroke="#312E81" opacity="0.8" strokeWidth="5" strokeDasharray="1 15" style={{ animation: 'spin 90s linear infinite reverse', transformOrigin: '0px 0px' }} />
-            <circle cx="0" cy="0" r="95" fill="none" stroke="#312E81" opacity="0.6" strokeWidth="3" strokeDasharray="30 10" style={{ animation: 'spin 40s linear infinite', transformOrigin: '0px 0px' }} />
+            <circle cx="0" cy="0" r="115" fill="none" stroke="#312E81" opacity="0.6" strokeWidth="1.5" strokeDasharray="1 15" style={{ animation: 'spin 90s linear infinite reverse', transformOrigin: '0px 0px' }} />
+            <circle cx="0" cy="0" r="95" fill="none" stroke="#312E81" opacity="0.4" strokeWidth="1" strokeDasharray="30 10" style={{ animation: 'spin 40s linear infinite', transformOrigin: '0px 0px' }} />
             
             {/* Solid Center Backdrop */}
-            <circle cx="0" cy="0" r="85" className="fill-white/90 backdrop-blur-md shadow-[0_0_50px_rgba(78,89,194,0.5)]" stroke="#312E81" opacity="0.5" strokeWidth="3" />
+            <circle cx="0" cy="0" r="85" className="fill-white/90 backdrop-blur-md shadow-[0_0_50px_rgba(78,89,194,0.5)]" stroke="#312E81" opacity="0.35" strokeWidth="1.5" />
           </g>
 
         </svg>
