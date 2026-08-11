@@ -284,51 +284,37 @@ const TAROT_CARDS = [
   {
     name: 'The Fool', roman: '0', subtitle: 'New Beginnings · Spontaneity',
     message: 'A blank slate lies before you. Take the leap of faith without fear, trusting that the universe will catch you. Embrace the unknown with childlike wonder.',
-    cardBg: 'linear-gradient(170deg, #E0F2FE 0%, #BAE6FD 100%)',
-    border: '#38BDF8', accent: '#0284C7',
-    color: '#0284C7', backBg: 'linear-gradient(145deg, #0EA5E9, #0369A1)'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The High Priestess', roman: 'II', subtitle: 'Intuition · Inner Voice · Mystery',
     message: 'Your subconscious holds truths the waking mind has yet to hear. Honour the cycles within you — your intuition is your most sacred compass right now.',
-    cardBg: 'linear-gradient(170deg, #F3E8FF 0%, #E9D5FF 100%)',
-    border: '#C084FC', accent: '#7E22CE',
-    color: '#7E22CE', backBg: 'linear-gradient(145deg, #A855F7, #6B21A8)'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Sun', roman: 'XIX', subtitle: 'Joy · Vitality · Success',
     message: 'Radiant golden energy courses through every opportunity before you. A magnificent chapter of abundance, creative power, and warmth is beautifully unfolding.',
-    cardBg: 'linear-gradient(170deg, #FEF3C7 0%, #FDE68A 100%)',
-    border: '#FBBF24', accent: '#B45309',
-    color: '#B45309', backBg: 'linear-gradient(145deg, #F59E0B, #B45309)'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The World', roman: 'XXI', subtitle: 'Completion · Wholeness · Triumph',
     message: 'You stand at the sacred culmination of an extraordinary cycle. Embrace the beautiful wholeness you have earned — a glorious new chapter awaits your first step.',
-    cardBg: 'linear-gradient(170deg, #DCFCE7 0%, #BBF7D0 100%)',
-    border: '#4ADE80', accent: '#15803D',
-    color: '#15803D', backBg: 'linear-gradient(145deg, #22C55E, #166534)'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Tower', roman: 'XVI', subtitle: 'Revelation · Transformation · Truth',
     message: 'A powerful revelation shakes what was never truly stable. What crumbles was built on illusion — what remains is the indestructible core of your true self.',
-    cardBg: 'linear-gradient(170deg, #FFEDD5 0%, #FED7AA 100%)',
-    border: '#FB923C', accent: '#C2410C',
-    color: '#C2410C', backBg: 'linear-gradient(145deg, #F97316, #9A3412)'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Star', roman: 'XVII', subtitle: 'Hope · Inspiration · Serenity',
     message: 'After the storm comes clear, starlit skies. A time of deep spiritual healing and renewed hope is upon you. Trust in the quiet guidance of the universe.',
-    cardBg: 'linear-gradient(170deg, #CCFBF1 0%, #99F6E4 100%)',
-    border: '#2DD4BF', accent: '#0F766E',
-    color: '#0F766E', backBg: 'linear-gradient(145deg, #14B8A6, #115E59)'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Magician', roman: 'I', subtitle: 'Manifestation · Power · Action',
     message: 'You possess all the tools needed to manifest your desires. Align your thoughts, words, and actions, and watch the universe bend to your will.',
-    cardBg: 'linear-gradient(170deg, #FCE7F3 0%, #FBCFE8 100%)',
-    border: '#F472B6', accent: '#BE185D',
-    color: '#BE185D', backBg: 'linear-gradient(145deg, #EC4899, #9D174D)'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   }
 ];
 
@@ -381,37 +367,50 @@ export function TarotTable() {
                     style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', transition: 'transform 0.8s cubic-bezier(0.34,1.56,0.64,1)' }}>
 
                     {/* ── Card Back (Static 0deg) ── */}
-                    <div className="absolute inset-0 w-full h-full rounded-xl flex items-center justify-center p-3"
+                    <div className="absolute inset-0 w-full h-full rounded-xl flex items-center justify-center p-2"
                       style={{
-                        background: card.backBg, border: `1px solid ${card.border}60`,
+                        background: card.backBg, border: `1px solid #E5E5E0`,
                         backfaceVisibility: 'hidden'
                       }}>
-                      <div className="w-full h-full border-2 rounded-lg flex flex-col items-center justify-center relative overflow-hidden"
-                        style={{ borderColor: `${card.accent}40`, backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px)` }}>
-                        <span className="text-xl mb-2" style={{ color: card.border }}>✦</span>
-                        <div className="text-[7px] md:text-[9px] font-black tracking-[0.3em] uppercase opacity-70" style={{ color: card.accent }}>HealConnect</div>
-                        <div className="absolute inset-2 border border-dashed rounded-md opacity-20 pointer-events-none" style={{ borderColor: card.accent }} />
+                      <div className="w-full h-full border rounded-lg flex flex-col items-center justify-center relative overflow-hidden"
+                        style={{ borderColor: card.border }}>
+                        <div className="absolute inset-1 border rounded-md pointer-events-none" style={{ borderColor: `${card.border}50` }} />
+                        {/* Moon phases */}
+                        <svg width="24" height="100" viewBox="0 0 24 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="12" cy="15" r="4" stroke={card.border} strokeWidth="1" strokeDasharray="1 1" />
+                          <path d="M12 28 A 5 5 0 1 1 12 38 A 3 5 0 1 0 12 28" fill={card.border} />
+                          <circle cx="12" cy="50" r="5" fill={card.border} />
+                          <path d="M12 62 A 5 5 0 1 0 12 72 A 3 5 0 1 1 12 62" fill={card.border} />
+                          <circle cx="12" cy="85" r="4" stroke={card.border} strokeWidth="1" strokeDasharray="1 1" />
+                        </svg>
+                        {/* Little stars */}
+                        <div className="absolute top-4 left-4 text-[8px]" style={{ color: card.border }}>✦</div>
+                        <div className="absolute bottom-4 right-4 text-[8px]" style={{ color: card.border }}>✦</div>
+                        <div className="absolute top-1/4 right-3 text-[6px]" style={{ color: card.border }}>✧</div>
+                        <div className="absolute bottom-1/4 left-3 text-[6px]" style={{ color: card.border }}>✧</div>
                       </div>
                     </div>
 
                     {/* ── Card Front (Static 180deg) ── */}
-                    <div className="absolute inset-0 w-full h-full rounded-xl flex flex-col items-center justify-center p-4"
+                    <div className="absolute inset-0 w-full h-full rounded-xl flex flex-col items-center justify-center p-2"
                       style={{
-                        background: card.cardBg, border: `2px solid ${card.border}`,
+                        background: card.cardBg, border: `1px solid #E5E5E0`,
                         transform: 'rotateY(180deg)', backfaceVisibility: 'hidden'
                       }}>
-                      <div className="absolute inset-1 rounded-lg border" style={{ borderColor: `${card.accent}30` }} />
-                      <div className="absolute top-4 w-full text-center text-[10px] font-black tracking-[0.2em]" style={{ color: card.border }}>{card.roman}</div>
-                      
-                      <div className="my-auto w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center border-4" style={{ borderColor: card.border, backgroundColor: 'rgba(255,255,255,0.05)' }}>
-                         <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border-2 border-dashed flex items-center justify-center" style={{ borderColor: card.accent }}>
-                           <span className="text-3xl md:text-4xl" style={{ color: card.border }}>✦</span>
-                         </div>
-                      </div>
+                      <div className="w-full h-full rounded-lg border flex flex-col items-center justify-center relative p-3" style={{ borderColor: card.border }}>
+                        <div className="absolute inset-1 rounded-md border" style={{ borderColor: `${card.border}50` }} />
+                        <div className="absolute top-3 w-full text-center text-[10px] font-black tracking-[0.2em]" style={{ color: card.border }}>{card.roman}</div>
+                        
+                        <div className="my-auto w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center border" style={{ borderColor: card.border }}>
+                           <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border border-dashed flex items-center justify-center" style={{ borderColor: card.accent }}>
+                             <span className="text-2xl md:text-3xl" style={{ color: card.border }}>✦</span>
+                           </div>
+                        </div>
 
-                      <div className="absolute bottom-6 w-full text-center px-2 md:px-4">
-                        <div className="font-serif font-bold text-sm md:text-lg mb-1 tracking-wider text-white drop-shadow-md leading-tight">{card.name.toUpperCase()}</div>
-                        <div className="text-[6px] md:text-[8px] uppercase tracking-widest font-bold" style={{ color: card.accent }}>{card.subtitle}</div>
+                        <div className="absolute bottom-4 w-full text-center px-1">
+                          <div className="font-serif font-bold text-xs md:text-sm tracking-wider leading-tight" style={{ color: card.border }}>{card.name.toUpperCase()}</div>
+                          <div className="text-[5px] md:text-[6.5px] mt-1 uppercase tracking-widest font-bold" style={{ color: card.border }}>{card.subtitle}</div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -688,14 +687,14 @@ export function ExpertStoriesDeck() {
 // 06. HEALCONNECT GLOBAL DISTRIBUTION — Platform reach visualised
 // ─────────────────────────────────────────────────────────────────────────
 const HC_NODES = [
-  { name: 'India', x: 71.3, y: 38.8, users: '3.2M+', guides: '4,200+', top: 'Vedic Astrology', color: '#63BFE4', size: 'lg' },
-  { name: 'USA', x: 23.0, y: 28.8, users: '820K+', guides: '1,100+', top: 'Life Coaching · Tarot', color: '#C9A0DC', size: 'md' },
-  { name: 'UK', x: 49.1, y: 19.4, users: '420K+', guides: '820+', top: 'Tarot · Astrology', color: '#7EDEA0', size: 'sm' },
-  { name: 'UAE', x: 65.0, y: 37.2, users: '310K+', guides: '650+', top: 'Spiritual Guidance', color: '#F4D58D', size: 'sm' },
-  { name: 'Singapore', x: 78.6, y: 49.4, users: '180K+', guides: '480+', top: 'Energy Healing', color: '#98E6F4', size: 'sm' },
-  { name: 'Australia', x: 86.9, y: 63.8, users: '150K+', guides: '390+', top: 'Meditation · Tarot', color: '#9B8FFF', size: 'sm' },
-  { name: 'Brazil', x: 35.8, y: 57.7, users: '90K+', guides: '290+', top: 'Astrology', color: '#FF6B9D', size: 'xs' },
-  { name: 'Japan', x: 88.3, y: 30.0, users: '110K+', guides: '310+', top: 'Numerology · Reiki', color: '#F4A261', size: 'xs' },
+  { name: 'India', x: 71, y: 41, users: '3.2M+', guides: '4,200+', top: 'Vedic Astrology', color: '#63BFE4', size: 'lg' },
+  { name: 'USA', x: 21, y: 35, users: '820K+', guides: '1,100+', top: 'Life Coaching · Tarot', color: '#C9A0DC', size: 'md' },
+  { name: 'UK', x: 47, y: 24, users: '420K+', guides: '820+', top: 'Tarot · Astrology', color: '#7EDEA0', size: 'sm' },
+  { name: 'UAE', x: 64, y: 42, users: '310K+', guides: '650+', top: 'Spiritual Guidance', color: '#F4D58D', size: 'sm' },
+  { name: 'Singapore', x: 78, y: 56, users: '180K+', guides: '480+', top: 'Energy Healing', color: '#98E6F4', size: 'sm' },
+  { name: 'Australia', x: 85, y: 75, users: '150K+', guides: '390+', top: 'Meditation · Tarot', color: '#9B8FFF', size: 'sm' },
+  { name: 'Brazil', x: 32, y: 65, users: '90K+', guides: '290+', top: 'Astrology', color: '#FF6B9D', size: 'xs' },
+  { name: 'Japan', x: 86, y: 33, users: '110K+', guides: '310+', top: 'Numerology · Reiki', color: '#F4A261', size: 'xs' },
 ];
 
 const GROWTH_STATS = [
@@ -733,62 +732,65 @@ export function GlobalGuidanceMap() {
       </div>
 
       {/* World map viz */}
-      <div className="relative w-full max-w-5xl mx-auto px-6 z-10 flex items-center justify-center" style={{ height: '500px' }}>
+      <div className="relative w-full max-w-4xl mx-auto px-6 z-10 flex items-center justify-center">
         
-        {/* Actual World Map Background */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-[0.07] pointer-events-none px-6">
-          <img src="/world-map.svg" alt="World Map" className="w-full h-full object-contain filter drop-shadow-xl" style={{ filter: 'invert(37%) sepia(85%) saturate(366%) hue-rotate(159deg) brightness(85%) contrast(87%)' }} />
-        </div>
+        {/* Aspect Ratio Container for Map */}
+        <div className="relative w-full aspect-[950/620]">
+          {/* Actual World Map Background */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-[0.07] pointer-events-none">
+            <img src="/world-map.svg" alt="World Map" className="w-full h-full object-cover filter drop-shadow-xl" style={{ filter: 'invert(37%) sepia(85%) saturate(366%) hue-rotate(159deg) brightness(85%) contrast(87%)' }} />
+          </div>
 
-        {/* Base map connection lines */}
-        <svg className="absolute inset-6 w-[calc(100%-3rem)] h-full" preserveAspectRatio="none">
-          {/* Curved connection lines from India (biggest hub) */}
-          {HC_NODES.slice(1).map(node => (
-            <path key={`p-${node.name}`}
-              d={`M ${HC_NODES[0].x}% ${HC_NODES[0].y}% Q 50% 50% ${node.x}% ${node.y}%`}
-              fill="none" stroke={node.color} strokeOpacity="0.3" strokeWidth="1.5" strokeDasharray="4 6" />
-          ))}
-        </svg>
+          {/* Base map connection lines */}
+          <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+            {/* Curved connection lines from India (biggest hub) */}
+            {HC_NODES.slice(1).map(node => (
+              <path key={`p-${node.name}`}
+                d={`M ${HC_NODES[0].x}% ${HC_NODES[0].y}% Q 50% 50% ${node.x}% ${node.y}%`}
+                fill="none" stroke={node.color} strokeOpacity="0.3" strokeWidth="1.5" strokeDasharray="4 6" />
+            ))}
+          </svg>
 
-        {/* Nodes */}
-        <div className="absolute inset-6 w-[calc(100%-3rem)] h-full pointer-events-none">
-        {HC_NODES.map(node => {
-          const r = nodeRadius[node.size];
-          const isHov = hovered?.name === node.name;
-          return (
-            <div key={node.name} className="absolute pointer-events-auto"
-              style={{ left: `${node.x}%`, top: `${node.y}%`, transform: 'translate(-50%,-50%)', zIndex: isHov ? 50 : 10 }}
-              onMouseEnter={() => setHovered(node)}
-              onMouseLeave={() => setHovered(null)}>
-              {/* Pulse ring */}
-              <div className="absolute rounded-full animate-ping"
-                style={{ width: r * 2.8 + 'px', height: r * 2.8 + 'px', top: -(r * 0.9) + 'px', left: -(r * 0.9) + 'px', backgroundColor: node.color, opacity: 0.15 }} />
-              {/* Halo */}
-              <div className="absolute rounded-full"
-                style={{ width: r * 2 + 'px', height: r * 2 + 'px', top: -r * 0.5 + 'px', left: -r * 0.5 + 'px', backgroundColor: node.color, opacity: 0.25, transition: 'all 0.4s ease', transform: isHov ? 'scale(1.5)' : 'scale(1)' }} />
-              {/* Core dot */}
-              <div className="rounded-full cursor-pointer transition-all duration-400"
-                style={{ width: r + 'px', height: r + 'px', backgroundColor: node.color, boxShadow: `0 0 ${isHov ? 24 : 10}px ${node.color}`, transform: isHov ? 'scale(1.35)' : 'scale(1)' }} />
-              {/* City label */}
-              <div className="absolute text-center" style={{ top: r + 6 + 'px', left: '50%', transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}>
-                <span className="text-[10px] font-bold" style={{ color: node.color, opacity: isHov ? 1 : 0.8 }}>{node.name}</span>
-              </div>
-              {/* Tooltip */}
-              {isHov && (
-                <div className="absolute z-50 rounded-2xl p-4 shadow-xl border pointer-events-none"
-                  style={{ width: '210px', bottom: r + 20 + 'px', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', borderColor: `${node.color}40`, animation: 'zen-fade 0.25s ease', backdropFilter: 'blur(16px)' }}>
-                  <div className="text-xs font-black uppercase tracking-wider mb-1" style={{ color: node.color }}>{node.name}</div>
-                  <div className="flex justify-between items-baseline mb-2">
-                    <span className="text-xl font-bold text-[#12527F]">{node.users}</span>
-                    <span className="text-[10px] text-[#1A92C6] font-bold">active users</span>
-                  </div>
-                  <div className="text-[11px] text-[#12527F]/70 font-medium mb-1">{node.guides} verified guides</div>
-                  <div className="text-[10px] text-[#1A92C6] border-t border-[#CDE9F4] pt-2 mt-2 font-bold">{node.top}</div>
+          {/* Nodes */}
+          <div className="absolute inset-0 w-full h-full pointer-events-none">
+          {HC_NODES.map(node => {
+            const r = nodeRadius[node.size];
+            const isHov = hovered?.name === node.name;
+            return (
+              <div key={node.name} className="absolute pointer-events-auto"
+                style={{ left: `${node.x}%`, top: `${node.y}%`, transform: 'translate(-50%,-50%)', zIndex: isHov ? 50 : 10 }}
+                onMouseEnter={() => setHovered(node)}
+                onMouseLeave={() => setHovered(null)}>
+                {/* Pulse ring */}
+                <div className="absolute rounded-full animate-ping"
+                  style={{ width: r * 2.8 + 'px', height: r * 2.8 + 'px', top: -(r * 0.9) + 'px', left: -(r * 0.9) + 'px', backgroundColor: node.color, opacity: 0.15 }} />
+                {/* Halo */}
+                <div className="absolute rounded-full"
+                  style={{ width: r * 2 + 'px', height: r * 2 + 'px', top: -r * 0.5 + 'px', left: -r * 0.5 + 'px', backgroundColor: node.color, opacity: 0.25, transition: 'all 0.4s ease', transform: isHov ? 'scale(1.5)' : 'scale(1)' }} />
+                {/* Core dot */}
+                <div className="rounded-full cursor-pointer transition-all duration-400"
+                  style={{ width: r + 'px', height: r + 'px', backgroundColor: node.color, boxShadow: `0 0 ${isHov ? 24 : 10}px ${node.color}`, transform: isHov ? 'scale(1.35)' : 'scale(1)' }} />
+                {/* City label */}
+                <div className="absolute text-center" style={{ top: r + 6 + 'px', left: '50%', transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}>
+                  <span className="text-[10px] font-bold" style={{ color: node.color, opacity: isHov ? 1 : 0.8 }}>{node.name}</span>
                 </div>
-              )}
-            </div>
-          );
-        })}
+                {/* Tooltip */}
+                {isHov && (
+                  <div className="absolute z-50 rounded-2xl p-4 shadow-xl border pointer-events-none"
+                    style={{ width: '210px', bottom: r + 20 + 'px', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', borderColor: `${node.color}40`, animation: 'zen-fade 0.25s ease', backdropFilter: 'blur(16px)' }}>
+                    <div className="text-xs font-black uppercase tracking-wider mb-1" style={{ color: node.color }}>{node.name}</div>
+                    <div className="flex justify-between items-baseline mb-2">
+                      <span className="text-xl font-bold text-[#12527F]">{node.users}</span>
+                      <span className="text-[10px] text-[#1A92C6] font-bold">active users</span>
+                    </div>
+                    <div className="text-[11px] text-[#12527F]/70 font-medium mb-1">{node.guides} verified guides</div>
+                    <div className="text-[10px] text-[#1A92C6] border-t border-[#CDE9F4] pt-2 mt-2 font-bold">{node.top}</div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+          </div>
         </div>
       </div>
 
