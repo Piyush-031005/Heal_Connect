@@ -5,16 +5,16 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 
 const ZODIACS = [
-  { id: 'aries', name: 'Aries', hindi: 'Mesh', date: 'Mar 21 - Apr 19', image: '/new-zodiacs/aries.png' },
+  { id: 'aries', name: 'Aries', hindi: 'Mesh', date: 'Mar 21 - Apr 19', image: '/new-zodiacs/aries_new.png' },
   { id: 'taurus', name: 'Taurus', hindi: 'Vrishabha', date: 'Apr 20 - May 20', image: '/new-zodiacs/taurus.png' },
-  { id: 'gemini', name: 'Gemini', hindi: 'Mithun', date: 'May 21 - Jun 20', image: '/new-zodiacs/gemini.png' },
+  { id: 'gemini', name: 'Gemini', hindi: 'Mithun', date: 'May 21 - Jun 20', image: '/new-zodiacs/gemini_new.png' },
   { id: 'cancer', name: 'Cancer', hindi: 'Karka', date: 'Jun 21 - Jul 22', image: '/new-zodiacs/cancer.png' },
-  { id: 'leo', name: 'Leo', hindi: 'Simha', date: 'Jul 23 - Aug 22', image: '/new-zodiacs/leoo.png' },
-  { id: 'virgo', name: 'Virgo', hindi: 'Kanya', date: 'Aug 23 - Sep 22', image: '/new-zodiacs/vigro.png' },
-  { id: 'libra', name: 'Libra', hindi: 'Tula', date: 'Sep 23 - Oct 22', image: '/new-zodiacs/libra.png' },
-  { id: 'scorpio', name: 'Scorpio', hindi: 'Vrishchika', date: 'Oct 23 - Nov 21', image: '/new-zodiacs/scorpio.png' },
+  { id: 'leo', name: 'Leo', hindi: 'Simha', date: 'Jul 23 - Aug 22', image: '/new-zodiacs/leo_new.png' },
+  { id: 'virgo', name: 'Virgo', hindi: 'Kanya', date: 'Aug 23 - Sep 22', image: '/new-zodiacs/virgo_new.png' },
+  { id: 'libra', name: 'Libra', hindi: 'Tula', date: 'Sep 23 - Oct 22', image: '/new-zodiacs/libra_new.png' },
+  { id: 'scorpio', name: 'Scorpio', hindi: 'Vrishchika', date: 'Oct 23 - Nov 21', image: '/new-zodiacs/scorpio_new.png' },
   { id: 'sagittarius', name: 'Sagittarius', hindi: 'Dhanu', date: 'Nov 22 - Dec 21', image: '/new-zodiacs/saggitarius.png' },
-  { id: 'capricorn', name: 'Capricorn', hindi: 'Makara', date: 'Dec 22 - Jan 19', image: '/new-zodiacs/capricon.png' },
+  { id: 'capricorn', name: 'Capricorn', hindi: 'Makara', date: 'Dec 22 - Jan 19', image: '/new-zodiacs/capricon_new.png' },
   { id: 'aquarius', name: 'Aquarius', hindi: 'Kumbha', date: 'Jan 20 - Feb 18', image: '/new-zodiacs/aqarius.png' },
   { id: 'pisces', name: 'Pisces', hindi: 'Meena', date: 'Feb 19 - Mar 20', image: '/new-zodiacs/pices.png' },
 ];
