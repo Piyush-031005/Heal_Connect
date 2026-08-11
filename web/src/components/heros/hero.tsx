@@ -443,7 +443,7 @@ function ZenAlignHero() {
             initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
             animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 relative flex items-center justify-center h-[50vw] max-h-[700px] min-h-[350px] w-full mt-10 lg:mt-0"
+            className="lg:col-span-6 relative flex items-center justify-center h-[50vw] max-h-[700px] min-h-[350px] w-full lg:-mt-12 lg:-translate-y-6"
           >
             {/* Soft blue background glow for the wheel */}
             <div className="absolute inset-0 m-auto w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle,rgba(26,146,198,0.15)_0%,rgba(99,191,228,0.05)_50%,transparent_70%)] blur-2xl z-0" />
@@ -485,7 +485,7 @@ function ZenAlignHero() {
               />
 
               {/* Central Glowing Orb & Logo */}
-              <div className="absolute w-[45%] h-[45%] rounded-full flex items-center justify-center z-20">
+              <div className="absolute w-[33%] h-[33%] rounded-full flex items-center justify-center z-20">
                  {/* Core glow orb matching the bluish theme */}
                  <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.9)_0%,rgba(237,248,252,0.95)_100%)] rounded-full border border-[#63BFE4]/50 shadow-[0_0_60px_rgba(26,146,198,0.25)]" />
                  
@@ -493,7 +493,7 @@ function ZenAlignHero() {
                  <motion.div
                    animate={{ y: [0, -6, 0] }}
                    transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-                   className="relative w-[80%] h-[80%] z-10"
+                   className="relative w-[115%] h-[115%] z-10"
                  >
                    <Image
                      src="/old_logo.png"
