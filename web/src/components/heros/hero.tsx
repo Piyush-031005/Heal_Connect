@@ -488,7 +488,7 @@ function ZenAlignHero() {
               <motion.div 
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-                className="absolute w-[28%] h-[28%] rounded-full flex items-center justify-center z-20"
+                className="absolute w-[42%] h-[42%] rounded-full flex items-center justify-center z-20"
               >
                  {/* Main Logo */}
                  <div className="relative w-full h-full z-10">
