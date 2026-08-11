@@ -445,8 +445,8 @@ function ZenAlignHero() {
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6 relative flex items-center justify-center h-[50vw] max-h-[700px] min-h-[350px] w-full mt-10 lg:mt-0"
           >
-            {/* Dark background glow for the wheel */}
-            <div className="absolute inset-0 m-auto w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle,rgba(20,12,40,0.95)_0%,rgba(20,12,40,0.85)_40%,transparent_75%)] blur-md z-0" />
+            {/* Soft blue background glow for the wheel */}
+            <div className="absolute inset-0 m-auto w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle,rgba(26,146,198,0.15)_0%,rgba(99,191,228,0.05)_50%,transparent_70%)] blur-2xl z-0" />
 
             {/* Wheel Container */}
             <div className="relative w-[90%] max-w-[550px] aspect-square flex items-center justify-center rounded-full z-10">
@@ -455,22 +455,22 @@ function ZenAlignHero() {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 90, ease: 'linear' }}
-                className="absolute w-full h-full rounded-full border border-dashed border-[#D4A853]/50"
+                className="absolute w-full h-full rounded-full border border-dashed border-[#1A92C6]/30"
               />
               
               {/* Solid Ring 2 with Nodes */}
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ repeat: Infinity, duration: 110, ease: 'linear' }}
-                className="absolute w-[82%] h-[82%] rounded-full border border-[#D4A853]/40"
+                className="absolute w-[82%] h-[82%] rounded-full border border-[#1A92C6]/25"
               >
                  {/* Zodiac Nodes (CSS positioned around circle) */}
                  {[...Array(8)].map((_, i) => (
                     <div key={i} className="absolute inset-0 flex justify-center"
                          style={{ transform: `rotate(${i * 45}deg)` }}>
                        <div className="flex flex-col items-center -mt-2">
-                         <div className="w-2 h-2 bg-[#D4A853] rounded-full shadow-[0_0_10px_#D4A853]" />
-                         <div className="w-[1px] h-4 bg-[#D4A853]/50 mt-1" />
+                         <div className="w-2 h-2 bg-[#1A92C6] rounded-full shadow-[0_0_10px_#1A92C6]" />
+                         <div className="w-[1px] h-4 bg-[#1A92C6]/50 mt-1" />
                        </div>
                     </div>
                  ))}
@@ -480,26 +480,26 @@ function ZenAlignHero() {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 60, ease: 'linear' }}
-                className="absolute w-[62%] h-[62%] rounded-full border border-[#D4A853]/60"
+                className="absolute w-[62%] h-[62%] rounded-full border border-[#1A92C6]/40"
                 style={{ strokeDasharray: '4 8' }}
               />
 
               {/* Central Glowing Orb & Logo */}
               <div className="absolute w-[45%] h-[45%] rounded-full flex items-center justify-center z-20">
-                 {/* Core glow orb */}
-                 <div className="absolute inset-0 bg-gradient-to-tr from-[#1A0C2E] to-[#2B1B4A] rounded-full border border-[#D4A853]/40 shadow-[0_0_80px_rgba(212,168,83,0.35)]" />
+                 {/* Core glow orb matching the bluish theme */}
+                 <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.9)_0%,rgba(237,248,252,0.95)_100%)] rounded-full border border-[#63BFE4]/50 shadow-[0_0_60px_rgba(26,146,198,0.25)]" />
                  
-                 {/* Hands Logo */}
+                 {/* Main Logo */}
                  <motion.div
-                   animate={{ y: [0, -6, 0], scale: [1, 1.03, 1] }}
+                   animate={{ y: [0, -6, 0] }}
                    transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-                   className="relative w-[85%] h-[85%] z-10"
+                   className="relative w-[80%] h-[80%] z-10"
                  >
                    <Image
-                     src="/hands-star.png"
-                     alt="HealConnect Mystical Logo"
+                     src="/old_logo.png"
+                     alt="HealConnect Logo"
                      fill
-                     className="object-contain drop-shadow-[0_0_20px_rgba(212,168,83,0.8)]"
+                     className="object-contain drop-shadow-[0_10px_20px_rgba(26,146,198,0.15)]"
                    />
                  </motion.div>
               </div>
