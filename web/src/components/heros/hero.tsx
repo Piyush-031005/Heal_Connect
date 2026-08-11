@@ -302,15 +302,25 @@ function ZenAlignHero() {
         </motion.div>
       </div>
 
-      {/* Right Optical Wheel (Doctor Strange WebGL style) */}
+      {/* Right Side: Masterpiece Image (replaces wheel) */}
       <motion.div 
         animate={{ 
           translateY: '-50%' 
         }}
         transition={{ type: "spring", stiffness: 75, damping: 20 }}
-        className="absolute right-[-25%] md:right-[-15%] top-[45%] md:top-[45%] h-[700px] w-[700px] md:h-[850px] md:w-[850px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center transform-style-3d"
+        className="absolute right-[-10%] md:right-5 top-[45%] md:top-[45%] h-[600px] w-[600px] md:h-[700px] md:w-[700px] z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center"
       >
-        <OpticalWheel />
+        <motion.div 
+          animate={{ y: [0, -15, 0] }}
+          transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+          className="relative w-full h-full"
+        >
+          <img 
+            src="/zodiac-masterpiece.png" 
+            alt="Zenauraa Masterpiece" 
+            className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(99,102,241,0.3)] hover:scale-105 transition-transform duration-700 ease-out"
+          />
+        </motion.div>
       </motion.div>
     </section>
   );
