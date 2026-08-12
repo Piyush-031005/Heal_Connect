@@ -125,7 +125,7 @@ export function FeaturedExperts() {
                       {expert.specialization}
                     </span>
                     <div className="flex items-center gap-1 text-sm font-bold text-[#12527F]">
-                      <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                      <Star className="w-4 h-4 fill-purple-300 text-purple-300" />
                       <span>{expert.rating}</span>
                       <span className="text-xs text-[#17619A]/60 font-normal">({expert.reviews})</span>
                     </div>

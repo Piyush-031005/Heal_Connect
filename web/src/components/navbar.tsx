@@ -179,11 +179,11 @@ export default function Navbar() {
       {/* Left Slide Drawer */}
       <aside className={`fixed top-0 left-0 h-full w-72 z-50 bg-white shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${drawerOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Gradient header */}
-        <div className="bg-gradient-to-br from-amber-400 to-orange-400 px-5 pt-6 pb-6">
+        <div className="bg-gradient-to-br from-purple-300 to-orange-400 px-5 pt-6 pb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
-              <Image src="/lavender_logo.png" alt="HealConnect" width={32} height={32} className="rounded-full border-2 border-white/40" />
-              <span className="text-xl font-serif font-bold text-white">HealConnect</span>
+              <Image src="/lavender_logo.png" alt="Zenauraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
+              <span className="text-2xl font-serif font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide">Zenauraa</span>
             </div>
             <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
@@ -223,7 +223,7 @@ export default function Navbar() {
             className="block bg-white rounded-xl px-4 py-3.5 shadow-md hover:shadow-lg transition-all"
           >
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 flex items-center justify-center shrink-0">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-300 to-orange-400 flex items-center justify-center shrink-0">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
                   <circle cx="12" cy="8" r="4" />
                   <path strokeLinecap="round" d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
@@ -254,13 +254,13 @@ export default function Navbar() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setDrawerOpen(false)}
-                  className="flex items-center gap-3 px-4 py-2.5 mx-2 rounded-xl text-sm font-medium text-gray-700 hover:bg-amber-50 hover:text-amber-700 transition-all group"
+                  className="flex items-center gap-3 px-4 py-2.5 mx-2 rounded-xl text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-amber-700 transition-all group"
                 >
                   <span className="w-8 h-8 rounded-lg bg-gray-50 group-hover:bg-amber-100 flex items-center justify-center text-base transition-colors">
                     <item.Icon className="w-4 h-4 text-gray-500 group-hover:text-amber-600" />
                   </span>
                   {item.label}
-                  <svg className="w-3.5 h-3.5 text-gray-300 group-hover:text-amber-400 ml-auto transition-colors" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 text-gray-300 group-hover:text-purple-300 ml-auto transition-colors" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
@@ -278,7 +278,7 @@ export default function Navbar() {
                   key={val}
                   onClick={() => setTheme(val)}
                   className={`flex-1 py-2 rounded-xl text-xs font-semibold border transition-all flex items-center justify-center gap-1 ${
-                    (mounted && theme === val) ? 'bg-amber-500 text-white border-amber-500 shadow-sm' : 'bg-gray-50 text-gray-600 border-gray-200 hover:border-amber-300 hover:bg-amber-50'
+                    (mounted && theme === val) ? 'bg-purple-400 text-white border-purple-400 shadow-sm' : 'bg-gray-50 text-gray-600 border-gray-200 hover:border-amber-300 hover:bg-purple-50'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
@@ -307,41 +307,41 @@ export default function Navbar() {
                 </svg>
               </button>
               <Link href="/" className="flex items-center gap-2">
-                <Image src="/lavender_logo.png" alt="HealConnect" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
-                <span className="text-xl font-serif font-bold transition-colors text-foreground">HealConnect</span>
+                <Image src="/lavender_logo.png" alt="Zenauraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
+                <span className="text-2xl font-serif font-black bg-clip-text text-transparent bg-gradient-to-r from-[#B79AE6] via-[#E5D9F2] to-[#B79AE6] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105">Zenauraa</span>
               </Link>
             </div>
 
             {/* Links for Final Hybrid layout sit next to the logo */}
             {isFinalHybrid && (
               <nav className="hidden md:flex items-center gap-4 ml-4">
-                <Link href="/practitioners" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#D4AF37] transition-colors">
+                <Link href="/practitioners" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#B79AE6] transition-colors">
                   Find Expert
                 </Link>
-                <Link href="#horoscope" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#D4AF37] transition-colors">
+                <Link href="#horoscope" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#B79AE6] transition-colors">
                   Horoscope
                 </Link>
-                <Link href="#review" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#D4AF37] transition-colors">
+                <Link href="#review" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#B79AE6] transition-colors">
                   Review
                 </Link>
                   <div className="relative group cursor-pointer">
-                  <span className="text-sm font-semibold text-[#F8F7FA] group-hover:text-[#D4AF37] transition-colors flex items-center gap-1">
+                  <span className="text-sm font-semibold text-[#F8F7FA] group-hover:text-[#B79AE6] transition-colors flex items-center gap-1">
                     Modalities
                     <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </span>
                   <div className="absolute top-full left-0 mt-2 w-56 bg-[#7A48AB] border border-[#694091] rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2">
-                    <Link href="/modalities/astrology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#D4AF37]">Astrology</Link>
-                    <Link href="/modalities/tarot" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#D4AF37]">Tarot</Link>
-                    <Link href="/modalities/palm-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#D4AF37]">Palm Reading</Link>
-                    <Link href="/modalities/face-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#D4AF37]">Face Reading</Link>
-                    <Link href="/modalities/numerology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#D4AF37]">Numerology</Link>
-                    <Link href="/modalities/energy-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#D4AF37]">Energy Healing</Link>
-                    <Link href="/modalities/meditation" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#D4AF37]">Meditation</Link>
-                    <Link href="/modalities/yoga" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#D4AF37]">Yoga & Mindfulness</Link>
-                    <Link href="/modalities/vastu" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#D4AF37]">Vastu & Space Energy</Link>
-                    <Link href="/modalities/eft" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#D4AF37]">EFT Tapping</Link>
-                    <Link href="/modalities/spiritual" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#D4AF37]">Spiritual Guidance</Link>
-                    <Link href="/modalities/sound-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#D4AF37]">Sound Healing</Link>
+                    <Link href="/modalities/astrology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Astrology</Link>
+                    <Link href="/modalities/tarot" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Tarot</Link>
+                    <Link href="/modalities/palm-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Palm Reading</Link>
+                    <Link href="/modalities/face-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Face Reading</Link>
+                    <Link href="/modalities/numerology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Numerology</Link>
+                    <Link href="/modalities/energy-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Energy Healing</Link>
+                    <Link href="/modalities/meditation" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Meditation</Link>
+                    <Link href="/modalities/yoga" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Yoga & Mindfulness</Link>
+                    <Link href="/modalities/vastu" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Vastu & Space Energy</Link>
+                    <Link href="/modalities/eft" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">EFT Tapping</Link>
+                    <Link href="/modalities/spiritual" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Spiritual Guidance</Link>
+                    <Link href="/modalities/sound-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Sound Healing</Link>
                   </div>
                 </div>
               </nav>
@@ -374,7 +374,7 @@ export default function Navbar() {
               <button
                 onClick={() => setThemeOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
-                  isDark ? 'border-white/20 hover:bg-white/10 hover:text-white' : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-600'
+                  isDark ? 'border-white/20 hover:bg-white/10 hover:text-white' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50 hover:text-amber-600'
                 }`}
               >
                 <Palette className="w-4 h-4" />
@@ -428,7 +428,7 @@ export default function Navbar() {
               <button
                 onClick={() => setLayoutOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
-                  isDark ? 'border-white/20 hover:bg-white/10 hover:text-white' : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-600'
+                  isDark ? 'border-white/20 hover:bg-white/10 hover:text-white' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50 hover:text-amber-600'
                 }`}
               >
                 <Layout className="w-4 h-4" />
@@ -469,10 +469,10 @@ export default function Navbar() {
               <button
                 onClick={() => setLangOpen((p) => !p)}
                 className={`flex items-center gap-0.5 px-2.5 py-1.5 rounded-full border text-[13px] font-black transition-all ${
-                  isDark ? 'border-white/20 hover:bg-white/10' : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50'
+                  isDark ? 'border-white/20 hover:bg-white/10' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50'
                 }`}
               >
-                <span className="text-amber-500">अ</span>
+                <span className="text-purple-400">अ</span>
                 <span className={isDark ? 'text-gray-400' : 'text-gray-400'}>/</span>
                 <span className={isDark ? 'text-gray-200' : 'text-gray-700'}>A</span>
                 <svg className={`w-3 h-3 ml-0.5 transition-transform ${langOpen ? 'rotate-180' : ''} ${isDark ? 'text-gray-400' : 'text-gray-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -488,14 +488,14 @@ export default function Navbar() {
                       onClick={() => { setLang(l.code); setLangOpen(false); }}
                       className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
                         lang === l.code
-                          ? 'bg-amber-50 text-[#d97706] font-semibold'
+                          ? 'bg-purple-50 text-[#d97706] font-semibold'
                           : isDark ? 'text-gray-300 hover:bg-white/10' : 'text-gray-700 hover:bg-gray-50'
                       }`}
                     >
-                      <span className="font-bold text-amber-500">{l.sub}</span>
+                      <span className="font-bold text-purple-400">{l.sub}</span>
                       {l.label}
                       {lang === l.code && (
-                        <svg className="w-3.5 h-3.5 ml-auto text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-3.5 h-3.5 ml-auto text-purple-400" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                       )}
@@ -518,11 +518,11 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
-                <Link href="/login" className={`hidden md:block text-sm font-medium transition-colors px-2 ${isFinalHybrid ? 'text-[#F8F7FA] hover:text-[#D4AF37]' : 'text-foreground hover:text-primary'}`}>
+                <Link href="/login" className={`hidden md:block text-sm font-medium transition-colors px-2 ${isFinalHybrid ? 'text-[#F8F7FA] hover:text-[#B79AE6]' : 'text-foreground hover:text-primary'}`}>
                   Login
                 </Link>
                 {isFinalHybrid && (
-                  <Link href="/register" className="hidden md:block text-sm font-semibold text-[#4D316B] bg-[#D4AF37] hover:bg-[#c9a000] transition-colors px-4 py-1.5 rounded-full ml-1">
+                  <Link href="/register" className="hidden md:block text-sm font-semibold text-[#4D316B] bg-[#B79AE6] hover:bg-[#c9a000] transition-colors px-4 py-1.5 rounded-full ml-1">
                     Register
                   </Link>
                 )}

@@ -70,7 +70,7 @@ export function WhyYouHere() {
           <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4A853]">What Brings You Here</span>
         </div>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-2">What Are You Seeking?</h2>
-        <p className="text-[#1A92C6] text-sm font-bold max-w-lg">Every star is a question someone asked. Hover to explore what HealConnect can answer for you. Drag to navigate.</p>
+        <p className="text-[#1A92C6] text-sm font-bold max-w-lg">Every star is a question someone asked. Hover to explore what Zenauraa can answer for you. Drag to navigate.</p>
       </div>
 
       <div className="container mx-auto px-6 lg:px-16 z-10 flex gap-5 flex-wrap mb-4">
@@ -684,7 +684,7 @@ export function ExpertStoriesDeck() {
 // ─────────────────────────────────────────────────────────────────────────
 // 06. GLOBAL GUIDANCE MAP — Dark world map with glow cities
 // ─────────────────────────────────────────────────────────────────────────
-// 06. HEALCONNECT GLOBAL DISTRIBUTION — Platform reach visualised
+// 06. Zenauraa GLOBAL DISTRIBUTION — Platform reach visualised
 // ─────────────────────────────────────────────────────────────────────────
 const HC_NODES = [
   { name: 'India', x: 71, y: 41, users: '3.2M+', guides: '4,200+', top: 'Vedic Astrology', color: '#63BFE4', size: 'lg' },
@@ -727,8 +727,8 @@ export function GlobalGuidanceMap() {
           <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#1A92C6]">Our Global Reach</span>
           <div className="w-10 h-[1px] bg-[#1A92C6]" />
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-3">HealConnect Is Everywhere</h2>
-        <p className="text-[#1A92C6] text-sm font-medium max-w-xl mx-auto font-bold">From New Delhi to New York, millions of seekers find guidance through HealConnect every day. Hover a node to see our reach.</p>
+        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-3">Zenauraa Is Everywhere</h2>
+        <p className="text-[#1A92C6] text-sm font-medium max-w-xl mx-auto font-bold">From New Delhi to New York, millions of seekers find guidance through Zenauraa every day. Hover a node to see our reach.</p>
       </div>
 
       {/* World map viz */}

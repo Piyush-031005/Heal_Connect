@@ -126,8 +126,8 @@ function VerifyOtpContent() {
     <Card className="w-full max-w-md bg-white border border-yellow-100 shadow-xl">
       <CardHeader className="space-y-2 pb-4">
         <div className="flex items-center gap-2 mb-2">
-          <Image src="/logo.png" alt="HealConnect" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-[#f59e0b]">HealConnect</span>
+          <Image src="/logo.png" alt="Zenauraa" width={32} height={32} className="rounded-full" />
+          <span className="text-xl font-extrabold text-[#f59e0b]">Zenauraa</span>
         </div>
         <div className="flex items-center gap-2">
           <Phone className="h-5 w-5 text-[#f59e0b]" />

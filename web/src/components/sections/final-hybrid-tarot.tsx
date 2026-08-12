@@ -104,14 +104,14 @@ export function FinalHybridTarot() {
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10 text-center">
         <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="w-10 h-[1px] bg-[#D4AF37]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#D4AF37]">Tarot Reading</span>
-          <div className="w-10 h-[1px] bg-[#D4AF37]" />
+          <div className="w-10 h-[1px] bg-[#B79AE6]" />
+          <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#B79AE6]">Tarot Reading</span>
+          <div className="w-10 h-[1px] bg-[#B79AE6]" />
         </div>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#F8F7FA] mb-3">Draw 3 Cards</h2>
         <p className="text-[#B79AE6] text-sm font-bold mb-3">Set your intention. Choose 3 cards to reveal your Past, Present, and Future.</p>
         <div className="inline-flex items-center gap-3 rounded-full px-6 py-3 mb-14 border border-[#694091] bg-[#7A48AB]/80 backdrop-blur-sm shadow-lg">
-          <span className="text-[#D4AF37] text-sm">✦</span>
+          <span className="text-[#B79AE6] text-sm">✦</span>
           <span className="text-[#F8F7FA]/90 text-sm font-medium italic">"{selected.length}/3 cards selected"</span>
         </div>
 
@@ -209,7 +209,7 @@ export function FinalHybridTarot() {
 
         {/* Reading panel */}
         {isReadingReady && (
-          <div className="max-w-4xl mx-auto rounded-3xl p-8 text-center shadow-[0_0_50px_rgba(212,175,55,0.1)] border border-[#D4AF37]/30 bg-[#7A48AB]/90 backdrop-blur-xl"
+          <div className="max-w-4xl mx-auto rounded-3xl p-8 text-center shadow-[0_0_50px_rgba(212,175,55,0.1)] border border-[#B79AE6]/30 bg-[#7A48AB]/90 backdrop-blur-xl"
             style={{ animation: 'zen-fade 1s ease' }}>
             <h3 className="text-3xl font-serif font-medium text-[#F8F7FA] mb-8">Your Reading</h3>
             
@@ -220,7 +220,7 @@ export function FinalHybridTarot() {
                 { title: 'FUTURE', card: TAROT_CARDS[selected[2]] }
               ].map((pos, idx) => (
                 <div key={idx} className="p-5 rounded-2xl bg-[#4D316B] border border-[#694091]">
-                  <div className="text-[10px] font-black uppercase tracking-widest text-[#D4AF37] mb-2">{pos.title}</div>
+                  <div className="text-[10px] font-black uppercase tracking-widest text-[#B79AE6] mb-2">{pos.title}</div>
                   <div className="font-serif text-lg text-[#F8F7FA] mb-2">{pos.card.name}</div>
                   <p className="text-xs text-[#B79AE6] leading-relaxed">{pos.card.message}</p>
                 </div>
@@ -231,7 +231,7 @@ export function FinalHybridTarot() {
               <button onClick={() => setSelected([])} className="px-6 py-3 rounded-full text-sm font-bold transition-all border border-[#694091] text-[#B79AE6] hover:bg-[#694091]/30">
                 Draw Again
               </button>
-              <Link href="/practitioners" className="px-6 py-3 rounded-full text-sm font-bold transition-all shadow-md hover:scale-105 text-[#4D316B] bg-[#D4AF37]">
+              <Link href="/practitioners" className="px-6 py-3 rounded-full text-sm font-bold transition-all shadow-md hover:scale-105 text-[#4D316B] bg-[#B79AE6]">
                 Get a Full Reading
               </Link>
             </div>
@@ -239,7 +239,7 @@ export function FinalHybridTarot() {
         )}
         
         {!isReadingReady && selected.length > 0 && (
-          <p className="text-[#D4AF37]/70 text-xs font-medium" style={{ letterSpacing: '0.2em' }}>
+          <p className="text-[#B79AE6]/70 text-xs font-medium" style={{ letterSpacing: '0.2em' }}>
             {3 - selected.length} MORE CARD{3 - selected.length > 1 ? 'S' : ''} TO SELECT
           </p>
         )}

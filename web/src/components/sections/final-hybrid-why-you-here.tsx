@@ -21,7 +21,7 @@ const INTENTION_STARS = [
 
 const INTENTION_COLORS: Record<string, string> = {
   love: '#FF6B9D', // Pinkish
-  career: '#D4AF37', // Gold
+  career: '#B79AE6', // Gold
   health: '#7EDEA0', // Mint
   spiritual: '#C9A0DC', // Lavender
   self: '#63BFE4', // Sky blue
@@ -48,7 +48,7 @@ export function FinalHybridWhyYouHere() {
       {/* Deep starfield */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(200)].map((_, i) => (
-          <div key={i} className="absolute rounded-full bg-[#D4AF37]"
+          <div key={i} className="absolute rounded-full bg-[#B79AE6]"
             style={{
               width: `${(i % 3) + 0.5}px`, height: `${(i % 3) + 0.5}px`,
               left: `${(i * 17.3) % 100}%`, top: `${(i * 23.7) % 100}%`,
@@ -62,11 +62,11 @@ export function FinalHybridWhyYouHere() {
 
       <div className="container mx-auto px-6 lg:px-16 pt-24 pb-6 relative z-10">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-[2px] bg-[#D4AF37]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4AF37]">What Brings You Here</span>
+          <div className="w-8 h-[2px] bg-[#B79AE6]" />
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#B79AE6]">What Brings You Here</span>
         </div>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#F8F7FA] mb-2">What Are You Seeking?</h2>
-        <p className="text-[#B79AE6] text-sm font-bold max-w-lg">Every star is a question someone asked. Hover to explore what HealConnect can answer for you. Drag to navigate.</p>
+        <p className="text-[#B79AE6] text-sm font-bold max-w-lg">Every star is a question someone asked. Hover to explore what Zenauraa can answer for you. Drag to navigate.</p>
       </div>
 
       <div className="container mx-auto px-6 lg:px-16 z-10 flex gap-5 flex-wrap mb-4">

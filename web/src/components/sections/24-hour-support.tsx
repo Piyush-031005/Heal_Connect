@@ -18,12 +18,12 @@ export function FinalHybridSupport() {
           {/* Left Text Content */}
           <div className="lg:w-1/2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-[2px] bg-[#D4AF37]" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4AF37]">The HealConnect App</span>
+              <div className="w-8 h-[2px] bg-[#B79AE6]" />
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#B79AE6]">The Zenauraa App</span>
             </div>
             
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-[#F8F7FA] mb-6 leading-tight drop-shadow-md">
-              Astrology made simpler, and available to you <span className="text-[#D4AF37]">24×7.</span>
+              Astrology made simpler, and available to you <span className="text-[#B79AE6]">24×7.</span>
             </h2>
             
             <p className="text-lg md:text-xl text-[#B79AE6] mb-8 leading-relaxed font-medium">
@@ -32,11 +32,11 @@ export function FinalHybridSupport() {
             
             <div className="space-y-4 mb-10">
               <div className="flex items-center gap-3">
-                <Check className="w-5 h-5 text-[#D4AF37]" />
+                <Check className="w-5 h-5 text-[#B79AE6]" />
                 <span className="text-[#F8F7FA] font-medium">Instant chats, notifications, and alerts</span>
               </div>
               <div className="flex items-center gap-3">
-                <Check className="w-5 h-5 text-[#D4AF37]" />
+                <Check className="w-5 h-5 text-[#B79AE6]" />
                 <span className="text-[#F8F7FA] font-medium">Secure payments, UPI, cards & wallet, all encrypted</span>
               </div>
             </div>
@@ -97,7 +97,7 @@ export function FinalHybridSupport() {
                   
                   <div className="flex gap-2 flex-row-reverse">
                     <div>
-                      <div className="bg-gradient-to-r from-orange-400 to-amber-400 text-white p-3 rounded-2xl rounded-tr-none shadow-sm text-xs">
+                      <div className="bg-gradient-to-r from-orange-400 to-purple-300 text-white p-3 rounded-2xl rounded-tr-none shadow-sm text-xs">
                         I need guidance about my career
                       </div>
                       <p className="text-[9px] text-gray-400 mt-1 mr-1 text-right">9:42 AM ✓</p>

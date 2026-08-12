@@ -71,17 +71,17 @@ export default function LandingPage() {
       '--foreground': '#F8F7FA',
       '--card': '#7A48AB',
       '--card-foreground': '#F8F7FA',
-      '--primary': '#D4AF37', // Gold
+      '--primary': '#B79AE6', // Gold
       '--primary-foreground': '#4D316B',
       '--secondary': '#694091', // Lavender deep
       '--secondary-foreground': '#F8F7FA',
       '--muted': '#7A48AB',
       '--muted-foreground': '#B79AE6', // Light lavender
-      '--accent': '#D4AF37',
+      '--accent': '#B79AE6',
       '--accent-foreground': '#4D316B',
       '--border': '#694091',
       '--input': '#7A48AB',
-      '--ring': '#D4AF37',
+      '--ring': '#B79AE6',
       backgroundColor: '#4D316B',
       color: '#F8F7FA',
     };
@@ -111,7 +111,7 @@ export default function LandingPage() {
             <ZodiacOrbitRing />
             {/* 05 - Tarot Reading (premium zodiac-art cards) */}
             <TarotTable />
-            {/* 06 - HealConnect Global Distribution Map */}
+            {/* 06 - Zenauraa Global Distribution Map */}
             <GlobalGuidanceMap />
             {/* 07 - Your Next Discovery (3-path CTA) */}
             <YourNextDiscovery />
@@ -165,7 +165,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="text-center text-muted-foreground text-sm border-t border-border pt-8">
-            &copy; {new Date().getFullYear()} HealConnect Wellness. All rights reserved.
+            &copy; {new Date().getFullYear()} Zenauraa Wellness. All rights reserved.
           </div>
         </div>
       </footer>

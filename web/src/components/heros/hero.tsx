@@ -154,7 +154,7 @@ function OrganicHero() {
         <div className="pointer-events-auto">
           <Link href="/practitioners">
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 h-14 text-lg rounded-full font-medium transition-all shadow-xl shadow-primary/20">
-              Join HealConnect Today
+              Join Zenauraa Today
             </Button>
           </Link>
         </div>
@@ -494,7 +494,7 @@ function ZenAlignHero() {
                  <div className="relative w-full h-full z-10">
                    <Image
                      src="/lavender_logo.png"
-                     alt="HealConnect Logo"
+                     alt="Zenauraa Logo"
                      fill
                      className="object-contain drop-shadow-[0_10px_30px_rgba(26,146,198,0.4)]"
                    />
@@ -692,7 +692,7 @@ function FinalHybridHero() {
     >
       {/* Background glow effects */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#694091]/20 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#B79AE6]/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -723,8 +723,8 @@ function FinalHybridHero() {
             </div>
 
             <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#694091]/30 border border-[#694091]/50 mb-8 backdrop-blur-sm">
-              <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">Premium Consultation</span>
+              <Sparkles className="w-4 h-4 text-[#B79AE6]" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B79AE6]">Premium Consultation</span>
             </div>
 
             {/* Typography from very old layout */}
@@ -736,7 +736,7 @@ function FinalHybridHero() {
             >
               Guidance.<br/>
               Clarity.<br/>
-              <span className="text-[#D4AF37] italic">Confidence.</span>
+              <span className="text-[#B79AE6] italic">Confidence.</span>
             </motion.h1>
 
             <motion.p
@@ -795,22 +795,22 @@ function FinalHybridHero() {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 90, ease: 'linear' }}
-                className="absolute w-full h-full rounded-full border border-dashed border-[#D4AF37]/30"
+                className="absolute w-full h-full rounded-full border border-dashed border-[#B79AE6]/30"
               />
               
               {/* Solid Ring 2 with Nodes */}
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ repeat: Infinity, duration: 110, ease: 'linear' }}
-                className="absolute w-[82%] h-[82%] rounded-full border border-[#D4AF37]/25"
+                className="absolute w-[82%] h-[82%] rounded-full border border-[#B79AE6]/25"
               >
                  {/* Nodes */}
                  {[...Array(8)].map((_, i) => (
                     <div key={i} className="absolute inset-0 flex justify-center"
                          style={{ transform: `rotate(${i * 45}deg)` }}>
                        <div className="flex flex-col items-center -mt-2">
-                         <div className="w-2 h-2 bg-[#D4AF37] rounded-full shadow-[0_0_10px_#D4AF37]" />
-                         <div className="w-[1px] h-4 bg-[#D4AF37]/50 mt-1" />
+                         <div className="w-2 h-2 bg-[#B79AE6] rounded-full shadow-[0_0_10px_#B79AE6]" />
+                         <div className="w-[1px] h-4 bg-[#B79AE6]/50 mt-1" />
                        </div>
                     </div>
                  ))}
@@ -833,7 +833,7 @@ function FinalHybridHero() {
                  <div className="relative w-[150%] h-[150%] z-10">
                    <Image
                      src="/lavender_logo.png"
-                     alt="HealConnect Logo"
+                     alt="Zenauraa Logo"
                      fill
                      className="object-contain drop-shadow-[0_10px_30px_rgba(212,175,55,0.2)]"
                    />

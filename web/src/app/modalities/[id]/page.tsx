@@ -111,7 +111,7 @@ export default function ModalityPage() {
   const content = MODALITY_CONTENT[id] || MODALITY_CONTENT['default'];
 
   return (
-    <div className="min-h-screen bg-[#4D316B] text-[#F8F7FA] font-sans selection:bg-[#D4AF37] selection:text-[#4D316B]">
+    <div className="min-h-screen bg-[#4D316B] text-[#F8F7FA] font-sans selection:bg-[#B79AE6] selection:text-[#4D316B]">
       <Navbar />
 
       <main className="pt-20">
@@ -124,8 +124,8 @@ export default function ModalityPage() {
           
           <div className="container mx-auto px-6 relative z-10 text-center mt-12">
             <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#694091]/30 border border-[#694091]/50 mb-6 backdrop-blur-sm">
-              <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">Premium Modality</span>
+              <Sparkles className="w-4 h-4 text-[#B79AE6]" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B79AE6]">Premium Modality</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-6 drop-shadow-lg">
               {content.title}
@@ -152,7 +152,7 @@ export default function ModalityPage() {
                 {/* Image */}
                 <div className="w-full lg:w-1/2">
                   <div className="relative rounded-[2rem] overflow-hidden group">
-                    <div className="absolute inset-0 bg-[#D4AF37]/20 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-700" />
+                    <div className="absolute inset-0 bg-[#B79AE6]/20 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-700" />
                     <img 
                       src={sec.img} 
                       alt={sec.title} 
@@ -173,11 +173,11 @@ export default function ModalityPage() {
                   {/* If it's the last section, show the benefits list */}
                   {idx === content.sections.length - 1 && (
                     <div className="mt-4 space-y-4">
-                      <h4 className="text-sm font-bold uppercase tracking-widest text-[#D4AF37] mb-4">What You Will Gain</h4>
+                      <h4 className="text-sm font-bold uppercase tracking-widest text-[#B79AE6] mb-4">What You Will Gain</h4>
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {content.benefits.map((ben: string, i: number) => (
                           <li key={i} className="flex items-center gap-3 text-sm font-medium text-[#F8F7FA]">
-                            <CheckCircle2 className="w-5 h-5 text-[#D4AF37]" />
+                            <CheckCircle2 className="w-5 h-5 text-[#B79AE6]" />
                             {ben}
                           </li>
                         ))}
@@ -193,7 +193,7 @@ export default function ModalityPage() {
 
         {/* CTA Section */}
         <section className="py-24 relative overflow-hidden bg-[#7A48AB]">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D4AF37]/10 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#B79AE6]/10 rounded-full blur-[120px] pointer-events-none" />
           <div className="container mx-auto px-6 relative z-10 text-center">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
               Ready to seek guidance?
@@ -203,7 +203,7 @@ export default function ModalityPage() {
             </p>
             <Link 
               href="/practitioners" 
-              className="inline-flex items-center justify-center gap-2 bg-[#D4AF37] text-[#4D316B] px-8 py-4 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl hover:shadow-[0_10px_40px_rgba(212,175,55,0.3)] hover:-translate-y-1"
+              className="inline-flex items-center justify-center gap-2 bg-[#B79AE6] text-[#4D316B] px-8 py-4 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl hover:shadow-[0_10px_40px_rgba(212,175,55,0.3)] hover:-translate-y-1"
             >
               Find a Practitioner <ArrowRight className="w-5 h-5" />
             </Link>
@@ -214,7 +214,7 @@ export default function ModalityPage() {
 
       {/* Footer minimal */}
       <footer className="py-12 border-t border-[#694091] bg-[#4D316B] text-center text-[#B79AE6] text-sm font-medium">
-        &copy; {new Date().getFullYear()} HealConnect Wellness. All rights reserved.
+        &copy; {new Date().getFullYear()} Zenauraa Wellness. All rights reserved.
       </footer>
     </div>
   );

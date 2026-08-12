@@ -18,7 +18,7 @@ const SPECIALTIES = [
 ];
 const LANGUAGES = ['English', 'Hindi', 'Bengali', 'Tamil', 'Telugu', 'Marathi', 'Gujarati', 'Kannada'];
 
-const INPUT_CLS = 'w-full text-sm rounded-lg bg-amber-50/70 border border-amber-200 px-4 py-2.5 text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400 transition-all';
+const INPUT_CLS = 'w-full text-sm rounded-lg bg-purple-50/70 border border-amber-200 px-4 py-2.5 text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-purple-300/40 focus:border-purple-300 transition-all';
 const LABEL_CLS = 'text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 block';
 
 interface ExpertProfile {
@@ -113,7 +113,7 @@ export default function ExpertProfilePage() {
     return (
       <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <Image src="/logo.png" alt="HealConnect" width={48} height={48} className="rounded-full animate-pulse" />
+          <Image src="/logo.png" alt="Zenauraa" width={48} height={48} className="rounded-full animate-pulse" />
           <p className="text-gray-500">Loading profile...</p>
         </div>
       </div>
@@ -126,10 +126,10 @@ export default function ExpertProfilePage() {
     <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
       <header className="sticky top-0 z-50 w-full border-b border-amber-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/expert/dashboard" className="flex items-center gap-2 text-gray-500 hover:text-amber-500 transition-colors">
+          <Link href="/expert/dashboard" className="flex items-center gap-2 text-gray-500 hover:text-purple-400 transition-colors">
             <ArrowLeft className="h-4 w-4" />
-            <Image src="/logo.png" alt="HealConnect" width={28} height={28} className="rounded-full" />
-            <span className="font-extrabold text-amber-500">HealConnect</span>
+            <Image src="/logo.png" alt="Zenauraa" width={28} height={28} className="rounded-full" />
+            <span className="font-extrabold text-purple-400">Zenauraa</span>
           </Link>
           <div className="text-sm font-semibold text-gray-600">Expert Profile</div>
         </div>
@@ -139,20 +139,20 @@ export default function ExpertProfilePage() {
 
         {/* Profile Header Card */}
         <Card className="bg-white border-0 shadow-lg rounded-2xl overflow-hidden">
-          <div className="h-20 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 relative">
+          <div className="h-20 bg-gradient-to-r from-purple-400 via-orange-500 to-amber-600 relative">
             <div className="absolute -bottom-12 left-6">
               <div className="relative w-24 h-24 rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-white">
                 {profile.photoUrl ? (
                   <img src={profile.photoUrl} alt={profile.name} className="w-full h-full object-cover" />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white text-3xl font-bold">
+                  <div className="w-full h-full bg-gradient-to-br from-purple-300 to-orange-500 flex items-center justify-center text-white text-3xl font-bold">
                     {initials}
                   </div>
                 )}
                 <button
                   onClick={() => fileRef.current?.click()}
                   disabled={uploading}
-                  className="absolute bottom-0 right-0 w-8 h-8 bg-amber-500 hover:bg-amber-600 rounded-full flex items-center justify-center text-white shadow-lg transition-all hover:scale-110"
+                  className="absolute bottom-0 right-0 w-8 h-8 bg-purple-400 hover:bg-amber-600 rounded-full flex items-center justify-center text-white shadow-lg transition-all hover:scale-110"
                 >
                   {uploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Camera className="h-4 w-4" />}
                 </button>
@@ -177,7 +177,7 @@ export default function ExpertProfilePage() {
               )}
               {profile.avgRating !== undefined && (
                 <div className="flex items-center gap-1">
-                  <Star className="w-3.5 h-3.5 text-amber-400 fill-current" />
+                  <Star className="w-3.5 h-3.5 text-purple-300 fill-current" />
                   <span className="text-sm font-semibold">{profile.avgRating || '—'}</span>
                   <span className="text-xs text-gray-400">({profile.reviewCount ?? 0} reviews)</span>
                 </div>
@@ -188,17 +188,17 @@ export default function ExpertProfilePage() {
 
         {/* Basic Info */}
         <Card className="bg-white border border-amber-100 shadow-sm rounded-2xl overflow-hidden">
-          <div className="px-6 pt-5 pb-3 border-b border-amber-50 flex items-center gap-2">
-            <User className="w-5 h-5 text-amber-500" />
+          <div className="px-6 pt-5 pb-3 border-b border-purple-50 flex items-center gap-2">
+            <User className="w-5 h-5 text-purple-400" />
             <h2 className="text-lg font-bold text-gray-900">Basic Information</h2>
           </div>
           <div className="p-6 space-y-5">
             <div>
-              <label className={LABEL_CLS}><User className="w-3 h-3 inline mr-1 text-amber-500" /> Full Name</label>
+              <label className={LABEL_CLS}><User className="w-3 h-3 inline mr-1 text-purple-400" /> Full Name</label>
               <input value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} placeholder="Your full name" className={INPUT_CLS} />
             </div>
             <div>
-              <label className={LABEL_CLS}><BookOpen className="w-3 h-3 inline mr-1 text-amber-500" /> Bio</label>
+              <label className={LABEL_CLS}><BookOpen className="w-3 h-3 inline mr-1 text-purple-400" /> Bio</label>
               <textarea
                 value={form.bio}
                 onChange={(e) => setForm((f) => ({ ...f, bio: e.target.value }))}
@@ -209,11 +209,11 @@ export default function ExpertProfilePage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className={LABEL_CLS}><IndianRupee className="w-3 h-3 inline mr-1 text-amber-500" /> Rate (₹/min)</label>
+                <label className={LABEL_CLS}><IndianRupee className="w-3 h-3 inline mr-1 text-purple-400" /> Rate (₹/min)</label>
                 <input type="number" min="0" value={form.perMinuteRate} onChange={(e) => setForm((f) => ({ ...f, perMinuteRate: e.target.value }))} className={INPUT_CLS} />
               </div>
               <div>
-                <label className={LABEL_CLS}><Star className="w-3 h-3 inline mr-1 text-amber-500" /> Experience (yrs)</label>
+                <label className={LABEL_CLS}><Star className="w-3 h-3 inline mr-1 text-purple-400" /> Experience (yrs)</label>
                 <input type="number" min="0" value={form.experienceYrs} onChange={(e) => setForm((f) => ({ ...f, experienceYrs: e.target.value }))} className={INPUT_CLS} />
               </div>
             </div>
@@ -222,8 +222,8 @@ export default function ExpertProfilePage() {
 
         {/* Specialties */}
         <Card className="bg-white border border-amber-100 shadow-sm rounded-2xl overflow-hidden">
-          <div className="px-6 pt-5 pb-3 border-b border-amber-50 flex items-center gap-2">
-            <Star className="w-5 h-5 text-amber-500" />
+          <div className="px-6 pt-5 pb-3 border-b border-purple-50 flex items-center gap-2">
+            <Star className="w-5 h-5 text-purple-400" />
             <h2 className="text-lg font-bold text-gray-900">Specialties</h2>
           </div>
           <div className="p-6 flex flex-wrap gap-2.5">
@@ -231,8 +231,8 @@ export default function ExpertProfilePage() {
               <button key={s} onClick={() => toggle(specialties, setSpecialties, s)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
                   specialties.includes(s)
-                    ? 'bg-amber-500 text-white border-amber-500 shadow-sm'
-                    : 'bg-white text-gray-600 border-amber-200 hover:border-amber-400 hover:text-amber-700 hover:bg-amber-50'
+                    ? 'bg-purple-400 text-white border-purple-400 shadow-sm'
+                    : 'bg-white text-gray-600 border-amber-200 hover:border-purple-300 hover:text-amber-700 hover:bg-purple-50'
                 }`}>
                 {s}
               </button>
@@ -242,8 +242,8 @@ export default function ExpertProfilePage() {
 
         {/* Languages */}
         <Card className="bg-white border border-amber-100 shadow-sm rounded-2xl overflow-hidden">
-          <div className="px-6 pt-5 pb-3 border-b border-amber-50 flex items-center gap-2">
-            <Languages className="w-5 h-5 text-amber-500" />
+          <div className="px-6 pt-5 pb-3 border-b border-purple-50 flex items-center gap-2">
+            <Languages className="w-5 h-5 text-purple-400" />
             <h2 className="text-lg font-bold text-gray-900">Languages</h2>
           </div>
           <div className="p-6 flex flex-wrap gap-2.5">
@@ -251,8 +251,8 @@ export default function ExpertProfilePage() {
               <button key={l} onClick={() => toggle(languages, setLanguages, l)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
                   languages.includes(l)
-                    ? 'bg-amber-500 text-white border-amber-500 shadow-sm'
-                    : 'bg-white text-gray-600 border-amber-200 hover:border-amber-400 hover:text-amber-700 hover:bg-amber-50'
+                    ? 'bg-purple-400 text-white border-purple-400 shadow-sm'
+                    : 'bg-white text-gray-600 border-amber-200 hover:border-purple-300 hover:text-amber-700 hover:bg-purple-50'
                 }`}>
                 {l}
               </button>
@@ -262,8 +262,8 @@ export default function ExpertProfilePage() {
 
         {/* Certifications */}
         <Card className="bg-white border border-amber-100 shadow-sm rounded-2xl overflow-hidden">
-          <div className="px-6 pt-5 pb-3 border-b border-amber-50 flex items-center gap-2">
-            <Award className="w-5 h-5 text-amber-500" />
+          <div className="px-6 pt-5 pb-3 border-b border-purple-50 flex items-center gap-2">
+            <Award className="w-5 h-5 text-purple-400" />
             <h2 className="text-lg font-bold text-gray-900">Certifications</h2>
           </div>
           <div className="p-6 space-y-4">
@@ -275,12 +275,12 @@ export default function ExpertProfilePage() {
                 placeholder="e.g. Reiki Level 2"
                 className={INPUT_CLS}
               />
-              <Button onClick={addCert} className="bg-amber-500 hover:bg-amber-600 text-white border-0 rounded-lg px-4 shrink-0">Add</Button>
+              <Button onClick={addCert} className="bg-purple-400 hover:bg-amber-600 text-white border-0 rounded-lg px-4 shrink-0">Add</Button>
             </div>
             {certifications.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {certifications.map((c) => (
-                  <span key={c} className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-700 text-sm font-medium px-3 py-1 rounded-full">
+                  <span key={c} className="inline-flex items-center gap-1.5 bg-purple-50 border border-amber-200 text-amber-700 text-sm font-medium px-3 py-1 rounded-full">
                     {c}
                     <button onClick={() => setCertifications((prev) => prev.filter((x) => x !== c))} className="hover:text-red-500 transition-colors">
                       <X className="w-3 h-3" />
@@ -300,11 +300,11 @@ export default function ExpertProfilePage() {
 
         <div className="flex items-center gap-3 pb-8">
           <Button onClick={handleSave} disabled={saving}
-            className="flex-1 bg-amber-500 hover:bg-amber-600 text-white border-0 rounded-full h-12 font-bold shadow-lg shadow-amber-200 transition-all">
+            className="flex-1 bg-purple-400 hover:bg-amber-600 text-white border-0 rounded-full h-12 font-bold shadow-lg shadow-amber-200 transition-all">
             {saving ? <Loader2 className="h-5 w-5 animate-spin" /> : saved ? <><Check className="h-5 w-5 mr-2" /> Saved!</> : 'Save Changes'}
           </Button>
           <Link href="/expert/dashboard">
-            <Button variant="outline" className="border-amber-200 text-gray-600 hover:text-amber-700 hover:bg-amber-50 rounded-full h-12 px-6">Cancel</Button>
+            <Button variant="outline" className="border-amber-200 text-gray-600 hover:text-amber-700 hover:bg-purple-50 rounded-full h-12 px-6">Cancel</Button>
           </Link>
         </div>
 

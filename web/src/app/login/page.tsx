@@ -92,8 +92,8 @@ function LoginInner() {
       <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-black/5 dark:bg-black/20 backdrop-blur-md relative z-10 border-r border-border">
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
-            <Image src="/logo.png" alt="HealConnect" width={36} height={36} className="rounded-full shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
-            <span className="text-2xl font-extrabold text-foreground tracking-wide uppercase">HealConnect</span>
+            <Image src="/logo.png" alt="Zenauraa" width={36} height={36} className="rounded-full shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
+            <span className="text-2xl font-extrabold text-foreground tracking-wide uppercase">Zenauraa</span>
           </Link>
           <h1 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-6 leading-tight">
             Begin your journey <br /> <span className="text-primary">to inner peace.</span>
@@ -132,8 +132,8 @@ function LoginInner() {
       <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative z-10">
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="HealConnect" width={28} height={28} className="rounded-full shadow-[0_0_10px_rgba(214,180,107,0.5)]" />
-            <span className="text-xl font-extrabold text-primary uppercase tracking-wide">HealConnect</span>
+            <Image src="/logo.png" alt="Zenauraa" width={28} height={28} className="rounded-full shadow-[0_0_10px_rgba(214,180,107,0.5)]" />
+            <span className="text-xl font-extrabold text-primary uppercase tracking-wide">Zenauraa</span>
           </Link>
         </div>
 

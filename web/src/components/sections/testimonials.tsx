@@ -37,8 +37,8 @@ export function Testimonials() {
           <div className="max-w-2xl">
             {isFinalHybrid && (
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-[2px] bg-[#D4AF37]" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4AF37]">Global Impact</span>
+                <div className="w-8 h-[2px] bg-[#B79AE6]" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#B79AE6]">Global Impact</span>
               </div>
             )}
             <h2 className="text-4xl md:text-5xl font-serif font-medium mb-4 text-foreground">
@@ -66,7 +66,7 @@ export function Testimonials() {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {TESTIMONIALS.map((testi, idx) => (
-            <div key={idx} className={`w-[350px] md:w-[400px] shrink-0 snap-start rounded-[2.5rem] p-8 border hover:-translate-y-1 transition-all duration-500 group flex flex-col ${isFinalHybrid ? 'bg-[#7A48AB]/40 backdrop-blur-xl border-[#694091] shadow-xl hover:bg-[#7A48AB]/60 hover:border-[#D4AF37]/50' : 'bg-background border-border shadow-sm hover:shadow-lg hover:border-primary/30'}`}>
+            <div key={idx} className={`w-[350px] md:w-[400px] shrink-0 snap-start rounded-[2.5rem] p-8 border hover:-translate-y-1 transition-all duration-500 group flex flex-col ${isFinalHybrid ? 'bg-[#7A48AB]/40 backdrop-blur-xl border-[#694091] shadow-xl hover:bg-[#7A48AB]/60 hover:border-[#B79AE6]/50' : 'bg-background border-border shadow-sm hover:shadow-lg hover:border-primary/30'}`}>
               <div className="flex gap-1 mb-6 text-primary">
                 {[1, 2, 3, 4, 5].map(s => (
                   <svg key={s} className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 20 20">

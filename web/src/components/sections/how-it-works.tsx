@@ -165,7 +165,7 @@ export function HowItWorks() {
           {/* Left Column: App Info */}
           <div className="lg:col-span-6 flex flex-col justify-center">
             <span className="text-xs font-black uppercase tracking-[0.25em] text-[#D1BDEB] mb-4 block">
-              THE HEALCONNECT APP
+              THE Zenauraa APP
             </span>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-white mb-6 leading-[1.15]">

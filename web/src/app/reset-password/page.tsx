@@ -87,9 +87,9 @@ function ResetPasswordContent() {
         <Link href="/" className="inline-flex items-center gap-2 mb-8 group">
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
-            <Image src="/logo.png" alt="HealConnect" width={48} height={48} className="relative rounded-full shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
+            <Image src="/logo.png" alt="Zenauraa" width={48} height={48} className="relative rounded-full shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
           </div>
-          <span className="text-2xl font-extrabold text-foreground tracking-wide uppercase">HealConnect</span>
+          <span className="text-2xl font-extrabold text-foreground tracking-wide uppercase">Zenauraa</span>
         </Link>
       </div>
 

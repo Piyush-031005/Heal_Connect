@@ -65,7 +65,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'dummy_key',
         amount: rechargeAmount * 100,
         currency: 'INR',
-        name: 'HealConnect',
+        name: 'Zenauraa',
         description: 'Wallet Recharge',
         order_id: orderId,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
@@ -76,7 +76,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
           onClose();
         },
         prefill: {
-          name: 'HealConnect User',
+          name: 'Zenauraa User',
         },
         theme: {
           color: '#f59e0b',
