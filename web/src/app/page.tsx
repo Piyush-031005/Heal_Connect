@@ -25,6 +25,7 @@ import {
 import { FinalHybridExperts } from '@/components/sections/final-hybrid-experts';
 import { FinalHybridTarot } from '@/components/sections/final-hybrid-tarot';
 import { FinalHybridWhyYouHere } from '@/components/sections/final-hybrid-why-you-here';
+import { FinalHybridSupport } from '@/components/sections/24-hour-support';
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
@@ -125,8 +126,13 @@ export default function LandingPage() {
             <FinalHybridExperts />
             <ExploreModalities />
             <FinalHybridTarot />
-            <FinalHybridWhyYouHere />
-            <div className="bg-[#150d30] border-t border-[#3B236D]/50 pt-12">
+            
+            <YourNextDiscovery />
+            <PricingSection />
+            <Testimonials />
+            <FinalHybridSupport />
+            
+            <div className="bg-[#150d30] pt-12">
               <FaqSection />
             </div>
           </>

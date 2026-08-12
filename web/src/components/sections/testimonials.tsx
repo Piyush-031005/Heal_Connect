@@ -2,13 +2,17 @@
 
 import React, { useRef } from 'react';
 import { useLang } from '@/lib/lang-context';
+import { useLayout } from '@/lib/layout-context';
 import { TESTIMONIALS } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
 export function Testimonials() {
   const { t } = useLang();
+  const { layout } = useLayout();
   const scrollRef = useRef<HTMLDivElement>(null);
+  
+  const isFinalHybrid = layout === 'final-hybrid';
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -21,11 +25,23 @@ export function Testimonials() {
   };
 
   return (
-    <section className="py-24 bg-card relative z-10 border-t border-border">
-      <div className="container mx-auto px-6">
+    <section 
+      className={`py-24 relative z-10 border-t border-border ${isFinalHybrid ? 'bg-fixed bg-center bg-cover' : 'bg-card'}`}
+      style={isFinalHybrid ? { backgroundImage: 'url(/hands-star-bg.png)' } : {}}
+    >
+      {/* Overlay for readability if using the space background */}
+      {isFinalHybrid && <div className="absolute inset-0 bg-[#150d30]/70 backdrop-blur-[2px] z-0" />}
+      
+      <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 max-w-7xl mx-auto">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-heading font-medium mb-4 text-foreground">
+            {isFinalHybrid && (
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-[2px] bg-[#D4AF37]" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4AF37]">Global Impact</span>
+              </div>
+            )}
+            <h2 className="text-4xl md:text-5xl font-serif font-medium mb-4 text-foreground">
               {t.testimonialTitle || "Stories of Healing"}
             </h2>
             <div className="w-12 h-0.5 bg-primary/40 mb-6" />
@@ -50,7 +66,7 @@ export function Testimonials() {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {TESTIMONIALS.map((testi, idx) => (
-            <div key={idx} className="w-[350px] md:w-[400px] shrink-0 snap-start bg-background rounded-3xl p-8 border border-border shadow-sm hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-500 group flex flex-col">
+            <div key={idx} className={`w-[350px] md:w-[400px] shrink-0 snap-start rounded-[2.5rem] p-8 border hover:-translate-y-1 transition-all duration-500 group flex flex-col ${isFinalHybrid ? 'bg-[#25174A]/40 backdrop-blur-xl border-[#3B236D] shadow-xl hover:bg-[#25174A]/60 hover:border-[#D4AF37]/50' : 'bg-background border-border shadow-sm hover:shadow-lg hover:border-primary/30'}`}>
               <div className="flex gap-1 mb-6 text-primary">
                 {[1, 2, 3, 4, 5].map(s => (
                   <svg key={s} className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 20 20">
