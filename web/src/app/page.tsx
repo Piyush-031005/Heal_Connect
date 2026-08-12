@@ -128,11 +128,11 @@ export default function LandingPage() {
             <FinalHybridTarot />
             
             <YourNextDiscovery />
-            <PricingSection />
             <Testimonials />
             <FinalHybridSupport />
             
             <div className="bg-[#150d30] pt-12">
+              <PricingSection />
               <FaqSection />
             </div>
           </>

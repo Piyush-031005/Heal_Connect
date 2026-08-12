@@ -321,15 +321,24 @@ export default function Navbar() {
                 <Link href="#horoscope" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#D4AF37] transition-colors">
                   Horoscope
                 </Link>
-                <div className="relative group cursor-pointer">
+                  <div className="relative group cursor-pointer">
                   <span className="text-sm font-semibold text-[#F8F7FA] group-hover:text-[#D4AF37] transition-colors flex items-center gap-1">
                     Modalities
                     <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </span>
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-[#25174A] border border-[#3B236D] rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                  <div className="absolute top-full left-0 mt-2 w-56 bg-[#25174A] border border-[#3B236D] rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2">
                     <Link href="/modalities/astrology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Astrology</Link>
                     <Link href="/modalities/tarot" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Tarot</Link>
-                    <Link href="/modalities/vastu" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Vastu</Link>
+                    <Link href="/modalities/palm-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Palm Reading</Link>
+                    <Link href="/modalities/face-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Face Reading</Link>
+                    <Link href="/modalities/numerology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Numerology</Link>
+                    <Link href="/modalities/energy-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Energy Healing</Link>
+                    <Link href="/modalities/meditation" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Meditation</Link>
+                    <Link href="/modalities/yoga" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Yoga & Mindfulness</Link>
+                    <Link href="/modalities/vastu" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Vastu & Space Energy</Link>
+                    <Link href="/modalities/eft" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">EFT Tapping</Link>
+                    <Link href="/modalities/spiritual" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Spiritual Guidance</Link>
+                    <Link href="/modalities/sound-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Sound Healing</Link>
                   </div>
                 </div>
               </nav>
@@ -508,24 +517,6 @@ export default function Navbar() {
               <Link href="/login" className={`hidden md:block text-sm font-medium transition-colors px-2 ${isFinalHybrid ? 'text-[#F8F7FA] hover:text-[#D4AF37]' : 'text-foreground hover:text-primary'}`}>
                 Login
               </Link>
-            )}
-
-            {/* Final Hybrid Custom Nav Items */}
-            {isFinalHybrid && (
-              <div className="hidden md:flex items-center gap-4 mr-2">
-                {!userProfile && (
-                  <Link href="/register" className="text-sm font-medium text-[#F8F7FA] hover:text-[#D4AF37] transition-colors">
-                    Register
-                  </Link>
-                )}
-                <div className="h-4 w-px bg-white/20 mx-1"></div>
-                <Link href="/practitioners" className="text-sm font-medium text-[#F8F7FA] hover:text-[#D4AF37] transition-colors">
-                  Find Expert
-                </Link>
-                <Link href="#horoscope" className="text-sm font-medium text-[#F8F7FA] hover:text-[#D4AF37] transition-colors">
-                  Free Horoscope
-                </Link>
-              </div>
             )}
 
             {/* Primary CTA */}

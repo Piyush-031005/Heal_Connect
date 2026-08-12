@@ -14,9 +14,10 @@ const EXPERTS = [
 
 export function FinalHybridExperts() {
   return (
-    <section className="relative bg-[#150d30] py-24 overflow-hidden border-b border-[#3B236D]/50">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#3B236D]/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#D4AF37]/5 rounded-full blur-[100px] pointer-events-none" />
+    <section className="relative py-24 overflow-hidden border-b border-[#3B236D]/50" style={{ background: 'linear-gradient(135deg, #2D1B54 0%, #3B236D 40%, #4A2B80 70%, #2D1B54 100%)' }}>
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#9E88C7]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#D4AF37]/8 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(158,136,199,0.4) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
