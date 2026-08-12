@@ -55,8 +55,7 @@ const MENU_SECTIONS: { title: string; items: MenuItem[] }[] = [
 
 const NAV_SECTIONS = [
   { id: 'find-expert', label: 'Find Expert', href: '/practitioners' },
-  { id: 'horoscope', label: 'Horoscope', href: '#horoscope' },
-  { id: 'pricing', label: 'Pricing', href: '#pricing' },
+  { id: 'free-services', label: 'Free Services', href: '#free-services' },
   { id: 'about', label: 'About', href: '#about' },
 ];
 
@@ -318,15 +317,15 @@ export default function Navbar() {
                 <Link href="/practitioners" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#B79AE6] transition-colors">
                   Find Expert
                 </Link>
-                <Link href="#horoscope" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#B79AE6] transition-colors">
-                  Horoscope
+                <Link href="#free-services" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#B79AE6] transition-colors">
+                  Free Services
                 </Link>
                 <Link href="#review" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#B79AE6] transition-colors">
                   Review
                 </Link>
                   <div className="relative group cursor-pointer">
                   <span className="text-sm font-semibold text-[#F8F7FA] group-hover:text-[#B79AE6] transition-colors flex items-center gap-1">
-                    Modalities
+                    Free Insights
                     <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </span>
                   <div className="absolute top-full left-0 mt-2 w-56 bg-[#7A48AB] border border-[#694091] rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2">

@@ -45,11 +45,11 @@ export default function ExploreModalities() {
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="w-8 h-[2px] bg-[#B79AE6]" />
-              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#B79AE6]">Explore Specialties</span>
+              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#B79AE6]">Explore Free Insights</span>
               <div className="w-8 h-[2px] bg-[#B79AE6]" />
             </div>
-            <h2 className="text-4xl md:text-5xl font-serif font-medium text-[#F8F7FA] mb-6">Curated Modalities</h2>
-            <p className="text-[#B79AE6] font-medium max-w-md mx-auto">Browse 12 ancient and modern modalities to find the exact guidance your soul seeks.</p>
+            <h2 className="text-4xl md:text-5xl font-serif font-medium text-[#F8F7FA] mb-6">Free Insights</h2>
+            <p className="text-[#B79AE6] font-medium max-w-md mx-auto">Browse 12 ancient and modern insights to find the exact guidance your soul seeks.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
