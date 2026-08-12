@@ -12,7 +12,7 @@ interface LayoutContextType {
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
-  const [layout, setLayoutState] = useState<LayoutMode>('layout-2');
+  const [layout, setLayoutState] = useState<LayoutMode>('final-hybrid');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <LayoutContext.Provider value={{ layout: mounted ? layout : 'layout-2', setLayout }}>
+    <LayoutContext.Provider value={{ layout: mounted ? layout : 'final-hybrid', setLayout }}>
       {children}
     </LayoutContext.Provider>
   );

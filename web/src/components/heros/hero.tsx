@@ -675,10 +675,166 @@ function Layout2Hero() {
   );
 }
 
+// --- FINAL HYBRID HERO (Amethyst/Gold with Classic Typography) ---
+function FinalHybridHero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const yImage = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  
+  return (
+    <section 
+      ref={containerRef}
+      className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 bg-[#150d30] min-h-[95vh] flex items-center justify-center overflow-hidden"
+    >
+      {/* Background glow effects */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#3B236D]/20 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* LEFT: Typography & CTA */}
+          <motion.div 
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6 z-20"
+          >
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#3B236D]/30 border border-[#3B236D]/50 mb-8 backdrop-blur-sm">
+              <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">Premium Consultation</span>
+            </div>
+
+            {/* Typography from very old layout */}
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="text-6xl md:text-8xl font-serif font-medium tracking-tight text-[#F8F7FA] mb-6 leading-[1.1]"
+            >
+              Guidance.<br/>
+              Clarity.<br/>
+              <span className="text-[#D4AF37] italic">Confidence.</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.45 }}
+              className="text-lg md:text-xl font-medium text-[#9E88C7] max-w-md mb-12 leading-relaxed"
+            >
+              Find trusted guidance for every stage of life. Connect with verified experts instantly.
+            </motion.p>
+
+            {/* Stats row from screenshot 2 */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.1, duration: 0.8 }}
+              className="flex items-center gap-8 pt-8 border-t border-[#3B236D]"
+            >
+              <div>
+                <p className="text-2xl font-serif text-[#F8F7FA]">4.9★</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#9E88C7]">Rating</p>
+              </div>
+              <div className="w-px h-8 bg-[#3B236D]" />
+              <div>
+                <p className="text-2xl font-serif text-[#F8F7FA]">100k+</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#9E88C7]">Consultations</p>
+              </div>
+              <div className="w-px h-8 bg-[#3B236D]" />
+              <div>
+                <p className="text-2xl font-serif text-[#F8F7FA]">500+</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#9E88C7]">Experts</p>
+              </div>
+              <div className="w-px h-8 bg-[#3B236D]" />
+              <div>
+                <p className="text-2xl font-serif text-[#F8F7FA]">24x7</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#9E88C7]">Availability</p>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* RIGHT: Cosmic Wheel Graphic (Adapted to Gold/Amethyst) */}
+          <motion.div
+            style={{ y: yImage }}
+            initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6 relative flex items-center justify-center h-[50vw] max-h-[700px] min-h-[350px] w-full lg:-mt-12 lg:-translate-y-6"
+          >
+            {/* Deep purple/gold background glow for the wheel */}
+            <div className="absolute inset-0 m-auto w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.15)_0%,rgba(59,35,109,0.4)_50%,transparent_70%)] blur-2xl z-0" />
+
+            {/* Wheel Container */}
+            <div className="relative w-[90%] max-w-[550px] aspect-square flex items-center justify-center rounded-full z-10">
+              
+              {/* Outer Dashed Ring 1 */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 90, ease: 'linear' }}
+                className="absolute w-full h-full rounded-full border border-dashed border-[#D4AF37]/30"
+              />
+              
+              {/* Solid Ring 2 with Nodes */}
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ repeat: Infinity, duration: 110, ease: 'linear' }}
+                className="absolute w-[82%] h-[82%] rounded-full border border-[#D4AF37]/25"
+              >
+                 {/* Nodes */}
+                 {[...Array(8)].map((_, i) => (
+                    <div key={i} className="absolute inset-0 flex justify-center"
+                         style={{ transform: `rotate(${i * 45}deg)` }}>
+                       <div className="flex flex-col items-center -mt-2">
+                         <div className="w-2 h-2 bg-[#D4AF37] rounded-full shadow-[0_0_10px_#D4AF37]" />
+                         <div className="w-[1px] h-4 bg-[#D4AF37]/50 mt-1" />
+                       </div>
+                    </div>
+                 ))}
+              </motion.div>
+
+              {/* Inner Dashed Ring 3 */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 60, ease: 'linear' }}
+                className="absolute w-[62%] h-[62%] rounded-full border border-[#3B236D]/60"
+                style={{ strokeDasharray: '4 8' }}
+              />
+
+              {/* Central Logo */}
+              <motion.div 
+                animate={{ y: [0, -6, 0] }}
+                transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+                className="absolute w-[42%] h-[42%] rounded-full flex items-center justify-center z-20"
+              >
+                 <div className="relative w-[150%] h-[150%] z-10">
+                   <Image
+                     src="/old_logo.png"
+                     alt="HealConnect Logo"
+                     fill
+                     className="object-contain drop-shadow-[0_10px_30px_rgba(212,175,55,0.2)]"
+                   />
+                 </div>
+              </motion.div>
+
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // --- MAIN EXPORT ---
 export default function Hero() {
   const { layout } = useLayout();
   
+  if (layout === 'final-hybrid') return <FinalHybridHero />;
   if (layout === 'layout-2') return <Layout2Hero />;
   if (layout === 'new-design-1') return <ZenAlignHero />;
   if (layout === 'editorial') return <EditorialHero />;

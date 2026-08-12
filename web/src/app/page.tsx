@@ -34,29 +34,59 @@ export default function LandingPage() {
   if (!mounted) return <div className="min-h-screen bg-background" />;
 
   const isNewDesign1 = layout === 'new-design-1';
+  const isFinalHybrid = layout === 'final-hybrid';
+
+  let themeStyles = {};
+  let themeClasses = 'bg-background';
+
+  if (isNewDesign1) {
+    themeClasses = 'theme-layout-2';
+    themeStyles = {
+      '--background': '#EDF8FC',
+      '--foreground': '#12527F',
+      '--card': '#FFFFFF',
+      '--card-foreground': '#12527F',
+      '--primary': '#1A92C6',
+      '--primary-foreground': '#FFFFFF',
+      '--secondary': '#CDE9F4',
+      '--secondary-foreground': '#17619A',
+      '--muted': '#EDF8FC',
+      '--muted-foreground': '#63BFE4',
+      '--accent': '#20A6DC',
+      '--accent-foreground': '#FFFFFF',
+      '--border': '#CDE9F4',
+      '--input': '#CDE9F4',
+      '--ring': '#1A92C6',
+      backgroundColor: '#EDF8FC',
+      color: '#12527F',
+    };
+  } else if (isFinalHybrid) {
+    themeClasses = 'theme-final-hybrid bg-[#150d30]';
+    themeStyles = {
+      '--background': '#150d30',
+      '--foreground': '#F8F7FA',
+      '--card': '#25174A',
+      '--card-foreground': '#F8F7FA',
+      '--primary': '#D4AF37', // Gold
+      '--primary-foreground': '#150d30',
+      '--secondary': '#3B236D', // Lavender deep
+      '--secondary-foreground': '#F8F7FA',
+      '--muted': '#25174A',
+      '--muted-foreground': '#9E88C7', // Light lavender
+      '--accent': '#D4AF37',
+      '--accent-foreground': '#150d30',
+      '--border': '#3B236D',
+      '--input': '#25174A',
+      '--ring': '#D4AF37',
+      backgroundColor: '#150d30',
+      color: '#F8F7FA',
+    };
+  }
 
   return (
     <div
-      className={`min-h-screen text-foreground flex flex-col font-sans transition-colors duration-500 ${isNewDesign1 ? 'theme-layout-2' : 'bg-background'}`}
-      style={isNewDesign1 ? {
-        '--background': '#EDF8FC',
-        '--foreground': '#12527F',
-        '--card': '#FFFFFF',
-        '--card-foreground': '#12527F',
-        '--primary': '#1A92C6',
-        '--primary-foreground': '#FFFFFF',
-        '--secondary': '#CDE9F4',
-        '--secondary-foreground': '#17619A',
-        '--muted': '#EDF8FC',
-        '--muted-foreground': '#63BFE4',
-        '--accent': '#20A6DC',
-        '--accent-foreground': '#FFFFFF',
-        '--border': '#CDE9F4',
-        '--input': '#CDE9F4',
-        '--ring': '#1A92C6',
-        backgroundColor: '#EDF8FC',
-        color: '#12527F',
-      } as React.CSSProperties : {}}
+      className={`min-h-screen text-foreground flex flex-col font-sans transition-colors duration-500 ${themeClasses}`}
+      style={themeStyles as React.CSSProperties}
     >
       <Navbar />
 

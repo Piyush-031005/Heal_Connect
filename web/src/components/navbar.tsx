@@ -75,6 +75,9 @@ export default function Navbar() {
   const { lang, setLang } = useLang();
   const { layout, setLayout } = useLayout();
   
+  const isDark = theme === 'dark' || theme === 'theme-lavender-night' || theme === 'theme-deep-forest' || layout === 'final-hybrid';
+  const isFinalHybrid = layout === 'final-hybrid';
+  
   const [userProfile, setUserProfile] = useState<{ photoUrl: string | null; role: string; id: string; name: string | null } | null>(null);
 
   useEffect(() => {
@@ -311,21 +314,62 @@ export default function Navbar() {
           </div>
 
           {/* Center nav */}
-          <nav className="hidden md:flex items-center gap-1 bg-surface backdrop-blur-md rounded-full border border-border px-1.5 py-1 shadow-sm">
-            {NAV_SECTIONS.map(({ id, label, href }) => (
-              <Link
-                key={id}
-                href={href}
-                className={`relative text-sm font-medium transition-all px-4 py-1.5 rounded-full flex items-center gap-1.5 ${
-                  activeSection === id
-                    ? 'bg-primary/10 text-primary shadow-sm'
-                    : 'text-foreground/80 hover:text-primary hover:bg-white/5'
-                }`}
-              >
-                {label}
+          {isFinalHybrid ? (
+            <nav className="hidden md:flex items-center gap-1 bg-[#25174A]/80 backdrop-blur-md rounded-full border border-[#3B236D] px-2 py-1 shadow-sm">
+              <Link href="/practitioners" className="text-sm font-medium transition-all px-4 py-1.5 rounded-full flex items-center text-[#F8F7FA]/80 hover:text-[#D4AF37] hover:bg-white/5">
+                Find an Expert
               </Link>
-            ))}
-          </nav>
+              <div className="relative group">
+                <Link href="#horoscope" className="text-sm font-medium transition-all px-4 py-1.5 rounded-full flex items-center gap-1 text-[#F8F7FA]/80 hover:text-[#D4AF37] hover:bg-white/5">
+                  Free Horoscope
+                  <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </Link>
+                {/* Dropdown */}
+                <div className="absolute top-full left-0 mt-2 w-48 bg-[#150d30] border border-[#3B236D] rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                   <Link href="#" className="block px-4 py-2.5 text-sm text-[#F8F7FA]/80 hover:text-[#D4AF37] hover:bg-white/5 border-b border-[#3B236D]/50">Free dash calculator</Link>
+                   <Link href="#" className="block px-4 py-2.5 text-sm text-[#F8F7FA]/80 hover:text-[#D4AF37] hover:bg-white/5 border-b border-[#3B236D]/50">Panchang</Link>
+                   <Link href="#" className="block px-4 py-2.5 text-sm text-[#F8F7FA]/80 hover:text-[#D4AF37] hover:bg-white/5">Free matchmaking</Link>
+                </div>
+              </div>
+              <Link href="#reviews" className="text-sm font-medium transition-all px-4 py-1.5 rounded-full flex items-center text-[#F8F7FA]/80 hover:text-[#D4AF37] hover:bg-white/5">
+                Reviews
+              </Link>
+              {/* Modality Search */}
+              <div className="relative ml-2 flex items-center bg-[#150d30] rounded-full border border-[#3B236D] px-3 py-1">
+                <svg className="w-4 h-4 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                <select className="bg-transparent border-none text-sm text-[#F8F7FA]/80 focus:ring-0 cursor-pointer ml-1 py-1 w-32 outline-none">
+                  <option value="" className="bg-[#150d30]">Search Modality</option>
+                  <option value="astrology" className="bg-[#150d30]">Astrology</option>
+                  <option value="vastu" className="bg-[#150d30]">Vastu</option>
+                  <option value="healing" className="bg-[#150d30]">Healing</option>
+                  <option value="eft" className="bg-[#150d30]">EFT</option>
+                  <option value="meditation" className="bg-[#150d30]">Meditation</option>
+                  <option value="yoga" className="bg-[#150d30]">Yoga</option>
+                  <option value="tarot" className="bg-[#150d30]">Tarot Card</option>
+                  <option value="psychic" className="bg-[#150d30]">Psychic</option>
+                  <option value="palmistry" className="bg-[#150d30]">Palmistry</option>
+                  <option value="facereading" className="bg-[#150d30]">Face Reading</option>
+                  <option value="lalkitab" className="bg-[#150d30]">Lal Kitab</option>
+                </select>
+              </div>
+            </nav>
+          ) : (
+            <nav className="hidden md:flex items-center gap-1 bg-surface backdrop-blur-md rounded-full border border-border px-1.5 py-1 shadow-sm">
+              {NAV_SECTIONS.map(({ id, label, href }) => (
+                <Link
+                  key={id}
+                  href={href}
+                  className={`relative text-sm font-medium transition-all px-4 py-1.5 rounded-full flex items-center gap-1.5 ${
+                    activeSection === id
+                      ? 'bg-primary/10 text-primary shadow-sm'
+                      : 'text-foreground/80 hover:text-primary hover:bg-white/5'
+                  }`}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          )}
 
           {/* Right: theme toggle + lang dropdown + profile */}
           <div className="flex items-center gap-2">
@@ -397,6 +441,7 @@ export default function Navbar() {
               {layoutOpen && (
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
+                    { code: 'final-hybrid', label: '👑 Final Hybrid' },
                     { code: 'new-design-1', label: '💜 New Design 1 (Zen)' },
                     { code: 'primary', label: '✦ Primary (Locked)' },
                     { code: 'editorial', label: '📰 Editorial (Magazine)' },
@@ -482,12 +527,36 @@ export default function Navbar() {
             )}
 
             {/* Primary CTA */}
-            <Link
-              href="/practitioners"
-              className="bg-accent text-accent-foreground px-4 py-2 rounded-full text-sm font-medium shadow-sm hover:brightness-110 transition-all ml-2"
-            >
-              Book Consultation
-            </Link>
+            {isFinalHybrid ? (
+              <div className="flex items-center gap-2 ml-2">
+                <Link
+                  href="/practitioners"
+                  className="bg-[#D4AF37]/10 text-[#D4AF37] border border-[#D4AF37]/30 px-4 py-1.5 rounded-full text-sm font-medium hover:bg-[#D4AF37]/20 transition-all flex items-center gap-1.5"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                  Start Chat
+                </Link>
+                <Link
+                  href="/practitioners"
+                  className="bg-[#D4AF37] text-[#150d30] px-4 py-1.5 rounded-full text-sm font-medium shadow-sm hover:brightness-110 transition-all flex items-center gap-1.5"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                  Start Calling
+                </Link>
+                {!userProfile && (
+                  <Link href="/register" className="hidden md:block text-sm font-medium text-[#F8F7FA] hover:text-[#D4AF37] transition-colors px-2 ml-2">
+                    Register
+                  </Link>
+                )}
+              </div>
+            ) : (
+              <Link
+                href="/practitioners"
+                className="bg-accent text-accent-foreground px-4 py-2 rounded-full text-sm font-medium shadow-sm hover:brightness-110 transition-all ml-2"
+              >
+                Book Consultation
+              </Link>
+            )}
           </div>
         </header>
       </div>
