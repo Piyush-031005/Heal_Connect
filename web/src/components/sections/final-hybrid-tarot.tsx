@@ -37,12 +37,47 @@ const TAROT_CARDS = [
   {
     name: 'The Magician', roman: 'I', subtitle: 'Manifestation & Power',
     message: 'You possess all the tools needed to manifest your desires. Align your thoughts, words, and actions, and watch the universe bend to your will.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#25174A'
+    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+  },
+  {
+    name: 'The Empress', roman: 'III', subtitle: 'Abundance & Nurturing',
+    message: 'Embrace your creative power and connect with the natural world around you. A time of growth, beauty, and bountiful harvest is approaching.',
+    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+  },
+  {
+    name: 'The Emperor', roman: 'IV', subtitle: 'Structure & Authority',
+    message: 'Step into your personal power and establish solid foundations. Logic, stability, and clear boundaries will guide you to lasting success.',
+    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+  },
+  {
+    name: 'The Hierophant', roman: 'V', subtitle: 'Tradition & Guidance',
+    message: 'Seek wisdom from established systems or spiritual mentors. Sometimes the answers we seek are found in the timeless rituals of the past.',
+    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+  },
+  {
+    name: 'The Lovers', roman: 'VI', subtitle: 'Harmony & Choices',
+    message: 'A significant alignment of values is occurring. Whether in relationships or major life choices, follow the path that brings deep harmony to your soul.',
+    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+  },
+  {
+    name: 'The Chariot', roman: 'VII', subtitle: 'Determination & Victory',
+    message: 'Harness your opposing forces and steer them with focused willpower. Through discipline and confidence, you will overcome any obstacles in your path.',
+    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+  },
+  {
+    name: 'Strength', roman: 'VIII', subtitle: 'Courage & Compassion',
+    message: 'True power comes from gentle resilience, not forceful domination. Tame your inner fears with love and patience; your quiet courage is your greatest asset.',
+    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+  },
+  {
+    name: 'The Hermit', roman: 'IX', subtitle: 'Introspection & Inner Guidance',
+    message: 'Withdraw from the noise of the world to hear your own inner truth. The lantern of your soul holds the exact light you need for the next step.',
+    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
   }
 ];
 
-const CARD_ROTATIONS = [-15, -10, -5, 0, 5, 10, 15];
-const CARD_OFFSETS = [30, 20, 10, 0, 10, 20, 30];
+const CARD_ROTATIONS = [-35, -30, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35];
+const CARD_OFFSETS = [70, 55, 42, 30, 20, 12, 5, 0, 5, 12, 20, 30, 42, 55, 70];
 
 export function FinalHybridTarot() {
   const [selected, setSelected] = useState<number[]>([]);
