@@ -832,7 +832,7 @@ function FinalHybridHero() {
               >
                  <div className="relative w-[150%] h-[150%] z-10">
                    <Image
-                     src="/new_logo.png"
+                     src="/final_logo.png"
                      alt="HealConnect Logo"
                      fill
                      className="object-contain drop-shadow-[0_10px_30px_rgba(212,175,55,0.2)]"

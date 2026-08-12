@@ -514,9 +514,16 @@ export default function Navbar() {
                 </div>
               </Link>
             ) : (
-              <Link href="/login" className={`hidden md:block text-sm font-medium transition-colors px-2 ${isFinalHybrid ? 'text-[#F8F7FA] hover:text-[#D4AF37]' : 'text-foreground hover:text-primary'}`}>
-                Login
-              </Link>
+              <>
+                <Link href="/login" className={`hidden md:block text-sm font-medium transition-colors px-2 ${isFinalHybrid ? 'text-[#F8F7FA] hover:text-[#D4AF37]' : 'text-foreground hover:text-primary'}`}>
+                  Login
+                </Link>
+                {isFinalHybrid && (
+                  <Link href="/register" className="hidden md:block text-sm font-semibold text-[#150d30] bg-[#D4AF37] hover:bg-[#c9a000] transition-colors px-4 py-1.5 rounded-full ml-1">
+                    Register
+                  </Link>
+                )}
+              </>
             )}
 
             {/* Primary CTA */}
