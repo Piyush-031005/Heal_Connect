@@ -169,8 +169,6 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  const isDark = scrolled;
-
   return (
     <>
       {/* Backdrop */}
