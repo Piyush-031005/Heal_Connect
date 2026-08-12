@@ -44,7 +44,7 @@ export function FinalHybridWhyYouHere() {
   const ref = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="relative min-h-[90vh] overflow-hidden flex flex-col bg-[#150d30] border-t border-[#3B236D]/50">
+    <section className="relative min-h-[90vh] overflow-hidden flex flex-col bg-[#4D316B] border-t border-[#694091]/50">
       {/* Deep starfield */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(200)].map((_, i) => (
@@ -66,7 +66,7 @@ export function FinalHybridWhyYouHere() {
           <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4AF37]">What Brings You Here</span>
         </div>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#F8F7FA] mb-2">What Are You Seeking?</h2>
-        <p className="text-[#9E88C7] text-sm font-bold max-w-lg">Every star is a question someone asked. Hover to explore what HealConnect can answer for you. Drag to navigate.</p>
+        <p className="text-[#B79AE6] text-sm font-bold max-w-lg">Every star is a question someone asked. Hover to explore what HealConnect can answer for you. Drag to navigate.</p>
       </div>
 
       <div className="container mx-auto px-6 lg:px-16 z-10 flex gap-5 flex-wrap mb-4">

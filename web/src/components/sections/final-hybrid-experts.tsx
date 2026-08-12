@@ -15,7 +15,7 @@ const EXPERTS = [
 export function FinalHybridExperts() {
   return (
     <section className="relative py-24 overflow-hidden border-b border-[#7A48AB]/50" style={{ background: 'linear-gradient(135deg, #B79AE6 0%, #7A48AB 50%, #694091 100%)' }}>
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#9E88C7]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#B79AE6]/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#D4AF37]/8 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(158,136,199,0.4) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
 
@@ -30,7 +30,7 @@ export function FinalHybridExperts() {
               Connect with top-rated guides.
             </h2>
           </div>
-          <Link href="/practitioners" className="hidden md:flex items-center gap-2 text-sm font-semibold text-[#9E88C7] hover:text-[#D4AF37] transition-colors pb-2">
+          <Link href="/practitioners" className="hidden md:flex items-center gap-2 text-sm font-semibold text-[#B79AE6] hover:text-[#D4AF37] transition-colors pb-2">
             View All Experts <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -40,11 +40,11 @@ export function FinalHybridExperts() {
           {EXPERTS.map((expert, idx) => (
             <div 
               key={idx} 
-              className="min-w-[280px] md:min-w-[320px] flex-shrink-0 snap-start bg-[#2D1B54] border border-[#4B2F6E] rounded-[2rem] p-6 relative group transition-all hover:bg-[#3B236D] hover:border-[#D4AF37]/50 shadow-lg"
+              className="min-w-[280px] md:min-w-[320px] flex-shrink-0 snap-start bg-[#2D1B54] border border-[#4B2F6E] rounded-[2rem] p-6 relative group transition-all hover:bg-[#694091] hover:border-[#D4AF37]/50 shadow-lg"
             >
               {/* Badges */}
               {expert.badge && (
-                <div className={`absolute top-4 right-4 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full ${expert.badge === 'Celebrity' ? 'bg-[#D4AF37] text-[#150d30]' : 'bg-[#9E88C7] text-[#150d30]'}`}>
+                <div className={`absolute top-4 right-4 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full ${expert.badge === 'Celebrity' ? 'bg-[#D4AF37] text-[#4D316B]' : 'bg-[#B79AE6] text-[#4D316B]'}`}>
                   {expert.badge}
                 </div>
               )}
@@ -56,12 +56,12 @@ export function FinalHybridExperts() {
                     <img src={expert.img} alt={expert.name} className="w-full h-full object-cover rounded-full" />
                   </div>
                   {expert.available && (
-                    <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-[#150d30] rounded-full animate-pulse" />
+                    <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-[#4D316B] rounded-full animate-pulse" />
                   )}
                 </div>
                 <div>
                   <h3 className="text-xl font-serif font-bold text-[#F8F7FA]">{expert.name}</h3>
-                  <p className="text-xs font-semibold text-[#9E88C7] bg-[#3B236D]/30 inline-block px-2 py-0.5 rounded mt-1">{expert.role}</p>
+                  <p className="text-xs font-semibold text-[#B79AE6] bg-[#694091]/30 inline-block px-2 py-0.5 rounded mt-1">{expert.role}</p>
                 </div>
               </div>
 
@@ -69,32 +69,32 @@ export function FinalHybridExperts() {
               <div className="flex items-center gap-2 mb-6">
                 <Star className="w-4 h-4 text-[#D4AF37]" fill="#D4AF37" />
                 <span className="text-sm font-bold text-[#F8F7FA]">{expert.rating}</span>
-                <span className="text-xs text-[#9E88C7]">({expert.reviews} orders)</span>
+                <span className="text-xs text-[#B79AE6]">({expert.reviews} orders)</span>
               </div>
 
               {/* Details */}
-              <div className="space-y-2 mb-6 border-t border-[#3B236D]/50 pt-4">
+              <div className="space-y-2 mb-6 border-t border-[#694091]/50 pt-4">
                 <div className="flex justify-between text-xs">
-                  <span className="text-[#9E88C7]">Languages</span>
+                  <span className="text-[#B79AE6]">Languages</span>
                   <span className="text-[#F8F7FA] font-medium">{expert.langs}</span>
                 </div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-[#9E88C7]">Experience</span>
+                  <span className="text-[#B79AE6]">Experience</span>
                   <span className="text-[#F8F7FA] font-medium">{expert.exp}</span>
                 </div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-[#9E88C7]">Price</span>
+                  <span className="text-[#B79AE6]">Price</span>
                   <span className="text-[#D4AF37] font-bold">{expert.price} / min</span>
                 </div>
               </div>
 
               {/* Action Buttons */}
               <div className="flex items-center gap-3">
-                <button className="flex-1 bg-transparent border border-[#3B236D] text-[#F8F7FA] py-2.5 rounded-xl text-xs font-bold hover:bg-[#3B236D] hover:text-white transition-colors flex items-center justify-center gap-1.5">
+                <button className="flex-1 bg-transparent border border-[#694091] text-[#F8F7FA] py-2.5 rounded-xl text-xs font-bold hover:bg-[#694091] hover:text-white transition-colors flex items-center justify-center gap-1.5">
                   <MessageCircle className="w-3.5 h-3.5" />
                   Chat
                 </button>
-                <button className="flex-1 bg-transparent border border-[#3B236D] text-[#F8F7FA] py-2.5 rounded-xl text-xs font-bold hover:bg-[#3B236D] hover:text-white transition-colors flex items-center justify-center gap-1.5">
+                <button className="flex-1 bg-transparent border border-[#694091] text-[#F8F7FA] py-2.5 rounded-xl text-xs font-bold hover:bg-[#694091] hover:text-white transition-colors flex items-center justify-center gap-1.5">
                   <Phone className="w-3.5 h-3.5" />
                   Call
                 </button>
@@ -103,7 +103,7 @@ export function FinalHybridExperts() {
           ))}
         </div>
         
-        <Link href="/practitioners" className="md:hidden flex items-center justify-center gap-2 text-sm font-semibold text-[#9E88C7] mt-4">
+        <Link href="/practitioners" className="md:hidden flex items-center justify-center gap-2 text-sm font-semibold text-[#B79AE6] mt-4">
           View All Experts <ArrowRight className="w-4 h-4" />
         </Link>
       </div>

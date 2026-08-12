@@ -688,10 +688,10 @@ function FinalHybridHero() {
   return (
     <section 
       ref={containerRef}
-      className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 bg-[#150d30] min-h-[95vh] flex items-center justify-center overflow-hidden"
+      className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 bg-[#4D316B] min-h-[95vh] flex items-center justify-center overflow-hidden"
     >
       {/* Background glow effects */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#3B236D]/20 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#694091]/20 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
@@ -708,21 +708,21 @@ function FinalHybridHero() {
             <div className="flex flex-wrap items-center gap-3 mb-6">
               <Link
                 href="/practitioners"
-                className="bg-[#9E88C7]/20 text-[#D1BDEB] border border-[#9E88C7]/40 px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#9E88C7]/30 transition-all flex items-center gap-2"
+                className="bg-[#B79AE6]/20 text-[#D1BDEB] border border-[#B79AE6]/40 px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#B79AE6]/30 transition-all flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
                 Start Chat
               </Link>
               <Link
                 href="/practitioners"
-                className="bg-[#9E88C7] text-[#150d30] px-5 py-2 rounded-full text-sm font-semibold shadow-sm hover:brightness-110 transition-all flex items-center gap-2"
+                className="bg-[#B79AE6] text-[#4D316B] px-5 py-2 rounded-full text-sm font-semibold shadow-sm hover:brightness-110 transition-all flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                 Start Calling
               </Link>
             </div>
 
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#3B236D]/30 border border-[#3B236D]/50 mb-8 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#694091]/30 border border-[#694091]/50 mb-8 backdrop-blur-sm">
               <Sparkles className="w-4 h-4 text-[#D4AF37]" />
               <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">Premium Consultation</span>
             </div>
@@ -743,7 +743,7 @@ function FinalHybridHero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.45 }}
-              className="text-lg md:text-xl font-medium text-[#9E88C7] max-w-md mb-12 leading-relaxed"
+              className="text-lg md:text-xl font-medium text-[#B79AE6] max-w-md mb-12 leading-relaxed"
             >
               Find trusted guidance for every stage of life. Connect with verified experts instantly.
             </motion.p>
@@ -753,26 +753,26 @@ function FinalHybridHero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.1, duration: 0.8 }}
-              className="flex items-center gap-8 pt-8 border-t border-[#3B236D]"
+              className="flex items-center gap-8 pt-8 border-t border-[#694091]"
             >
               <div>
                 <p className="text-2xl font-serif text-[#F8F7FA]">4.9★</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#9E88C7]">Rating</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B79AE6]">Rating</p>
               </div>
-              <div className="w-px h-8 bg-[#3B236D]" />
+              <div className="w-px h-8 bg-[#694091]" />
               <div>
                 <p className="text-2xl font-serif text-[#F8F7FA]">100k+</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#9E88C7]">Consultations</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B79AE6]">Consultations</p>
               </div>
-              <div className="w-px h-8 bg-[#3B236D]" />
+              <div className="w-px h-8 bg-[#694091]" />
               <div>
                 <p className="text-2xl font-serif text-[#F8F7FA]">500+</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#9E88C7]">Experts</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B79AE6]">Experts</p>
               </div>
-              <div className="w-px h-8 bg-[#3B236D]" />
+              <div className="w-px h-8 bg-[#694091]" />
               <div>
                 <p className="text-2xl font-serif text-[#F8F7FA]">24x7</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#9E88C7]">Availability</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B79AE6]">Availability</p>
               </div>
             </motion.div>
           </motion.div>
@@ -820,7 +820,7 @@ function FinalHybridHero() {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 60, ease: 'linear' }}
-                className="absolute w-[62%] h-[62%] rounded-full border border-[#3B236D]/60"
+                className="absolute w-[62%] h-[62%] rounded-full border border-[#694091]/60"
                 style={{ strokeDasharray: '4 8' }}
               />
 

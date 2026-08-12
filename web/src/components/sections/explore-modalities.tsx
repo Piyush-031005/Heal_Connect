@@ -40,7 +40,7 @@ export default function ExploreModalities() {
 
   if (isFinalHybrid) {
     return (
-      <section className="py-28 bg-[#150d30] border-t border-[#3B236D]/50 relative">
+      <section className="py-28 bg-[#4D316B] border-t border-[#694091]/50 relative">
         <div className="container mx-auto px-6 lg:px-16">
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <div className="flex items-center justify-center gap-3 mb-4">
@@ -49,7 +49,7 @@ export default function ExploreModalities() {
               <div className="w-8 h-[2px] bg-[#D4AF37]" />
             </div>
             <h2 className="text-4xl md:text-5xl font-serif font-medium text-[#F8F7FA] mb-6">Curated Modalities</h2>
-            <p className="text-[#9E88C7] font-medium max-w-md mx-auto">Browse 12 ancient and modern modalities to find the exact guidance your soul seeks.</p>
+            <p className="text-[#B79AE6] font-medium max-w-md mx-auto">Browse 12 ancient and modern modalities to find the exact guidance your soul seeks.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -58,13 +58,13 @@ export default function ExploreModalities() {
                 href={`/modalities/${mod.id}`}
                 key={mod.id} 
                 id={`modality-${mod.id}`}
-                className="group bg-[#25174A]/80 backdrop-blur-xl rounded-2xl p-6 border border-[#3B236D] hover:border-[#D4AF37]/50 transition-all duration-500 flex flex-col items-center text-center shadow-lg hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)] cursor-pointer relative overflow-hidden"
+                className="group bg-[#7A48AB]/80 backdrop-blur-xl rounded-2xl p-6 border border-[#694091] hover:border-[#D4AF37]/50 transition-all duration-500 flex flex-col items-center text-center shadow-lg hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)] cursor-pointer relative overflow-hidden"
               >
-                <div className="w-32 h-32 rounded-full bg-[#150d30] border-2 border-[#3B236D] flex items-center justify-center mb-6 group-hover:border-[#D4AF37] group-hover:scale-105 transition-all duration-500 shadow-inner relative p-3">
+                <div className="w-32 h-32 rounded-full bg-[#4D316B] border-2 border-[#694091] flex items-center justify-center mb-6 group-hover:border-[#D4AF37] group-hover:scale-105 transition-all duration-500 shadow-inner relative p-3">
                   <img src={`${mod.image}?v=5`} alt={mod.name} className="w-full h-full object-contain rounded-full brightness-90 group-hover:brightness-110 transition-all" />
                 </div>
                 <h3 className="text-lg font-bold text-[#F8F7FA] mb-2 group-hover:text-[#D4AF37] transition-colors">{mod.name}</h3>
-                <p className="text-xs text-[#9E88C7] leading-relaxed font-medium mb-6">{mod.desc}</p>
+                <p className="text-xs text-[#B79AE6] leading-relaxed font-medium mb-6">{mod.desc}</p>
                 <div className="mt-auto inline-flex items-center gap-2 text-xs font-bold text-[#D4AF37] opacity-80 group-hover:opacity-100 hover:text-[#F8F7FA] transition-colors">
                   Explore Modality <ArrowRight className="w-3.5 h-3.5" />
                 </div>

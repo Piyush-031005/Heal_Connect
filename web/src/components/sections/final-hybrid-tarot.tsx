@@ -93,14 +93,14 @@ export function FinalHybridTarot() {
   const isReadingReady = selected.length === 3;
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center py-24 overflow-hidden bg-[#150d30] border-t border-[#3B236D]/50">
+    <section className="relative min-h-screen flex flex-col items-center justify-center py-24 overflow-hidden bg-[#4D316B] border-t border-[#694091]/50">
 
       {/* Subtle geometric texture */}
       <div className="absolute inset-0 opacity-20 pointer-events-none"
         style={{ backgroundImage: 'linear-gradient(rgba(212,175,55,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       
       {/* Light glow orb */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[150px] pointer-events-none bg-[#3B236D]/10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[150px] pointer-events-none bg-[#694091]/10" />
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10 text-center">
         <div className="flex items-center justify-center gap-3 mb-4">
@@ -109,8 +109,8 @@ export function FinalHybridTarot() {
           <div className="w-10 h-[1px] bg-[#D4AF37]" />
         </div>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#F8F7FA] mb-3">Draw 3 Cards</h2>
-        <p className="text-[#9E88C7] text-sm font-bold mb-3">Set your intention. Choose 3 cards to reveal your Past, Present, and Future.</p>
-        <div className="inline-flex items-center gap-3 rounded-full px-6 py-3 mb-14 border border-[#3B236D] bg-[#25174A]/80 backdrop-blur-sm shadow-lg">
+        <p className="text-[#B79AE6] text-sm font-bold mb-3">Set your intention. Choose 3 cards to reveal your Past, Present, and Future.</p>
+        <div className="inline-flex items-center gap-3 rounded-full px-6 py-3 mb-14 border border-[#694091] bg-[#7A48AB]/80 backdrop-blur-sm shadow-lg">
           <span className="text-[#D4AF37] text-sm">✦</span>
           <span className="text-[#F8F7FA]/90 text-sm font-medium italic">"{selected.length}/3 cards selected"</span>
         </div>
@@ -209,7 +209,7 @@ export function FinalHybridTarot() {
 
         {/* Reading panel */}
         {isReadingReady && (
-          <div className="max-w-4xl mx-auto rounded-3xl p-8 text-center shadow-[0_0_50px_rgba(212,175,55,0.1)] border border-[#D4AF37]/30 bg-[#25174A]/90 backdrop-blur-xl"
+          <div className="max-w-4xl mx-auto rounded-3xl p-8 text-center shadow-[0_0_50px_rgba(212,175,55,0.1)] border border-[#D4AF37]/30 bg-[#7A48AB]/90 backdrop-blur-xl"
             style={{ animation: 'zen-fade 1s ease' }}>
             <h3 className="text-3xl font-serif font-medium text-[#F8F7FA] mb-8">Your Reading</h3>
             
@@ -219,19 +219,19 @@ export function FinalHybridTarot() {
                 { title: 'PRESENT', card: TAROT_CARDS[selected[1]] },
                 { title: 'FUTURE', card: TAROT_CARDS[selected[2]] }
               ].map((pos, idx) => (
-                <div key={idx} className="p-5 rounded-2xl bg-[#150d30] border border-[#3B236D]">
+                <div key={idx} className="p-5 rounded-2xl bg-[#4D316B] border border-[#694091]">
                   <div className="text-[10px] font-black uppercase tracking-widest text-[#D4AF37] mb-2">{pos.title}</div>
                   <div className="font-serif text-lg text-[#F8F7FA] mb-2">{pos.card.name}</div>
-                  <p className="text-xs text-[#9E88C7] leading-relaxed">{pos.card.message}</p>
+                  <p className="text-xs text-[#B79AE6] leading-relaxed">{pos.card.message}</p>
                 </div>
               ))}
             </div>
 
             <div className="flex gap-4 justify-center">
-              <button onClick={() => setSelected([])} className="px-6 py-3 rounded-full text-sm font-bold transition-all border border-[#3B236D] text-[#9E88C7] hover:bg-[#3B236D]/30">
+              <button onClick={() => setSelected([])} className="px-6 py-3 rounded-full text-sm font-bold transition-all border border-[#694091] text-[#B79AE6] hover:bg-[#694091]/30">
                 Draw Again
               </button>
-              <Link href="/practitioners" className="px-6 py-3 rounded-full text-sm font-bold transition-all shadow-md hover:scale-105 text-[#150d30] bg-[#D4AF37]">
+              <Link href="/practitioners" className="px-6 py-3 rounded-full text-sm font-bold transition-all shadow-md hover:scale-105 text-[#4D316B] bg-[#D4AF37]">
                 Get a Full Reading
               </Link>
             </div>

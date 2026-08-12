@@ -111,7 +111,7 @@ export default function ModalityPage() {
   const content = MODALITY_CONTENT[id] || MODALITY_CONTENT['default'];
 
   return (
-    <div className="min-h-screen bg-[#150d30] text-[#F8F7FA] font-sans selection:bg-[#D4AF37] selection:text-[#150d30]">
+    <div className="min-h-screen bg-[#4D316B] text-[#F8F7FA] font-sans selection:bg-[#D4AF37] selection:text-[#4D316B]">
       <Navbar />
 
       <main className="pt-20">
@@ -119,11 +119,11 @@ export default function ModalityPage() {
         <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img src={content.heroImg} alt={content.title} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#150d30]/80 via-[#150d30]/60 to-[#150d30]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#4D316B]/80 via-[#4D316B]/60 to-[#4D316B]" />
           </div>
           
           <div className="container mx-auto px-6 relative z-10 text-center mt-12">
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#3B236D]/30 border border-[#3B236D]/50 mb-6 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#694091]/30 border border-[#694091]/50 mb-6 backdrop-blur-sm">
               <Sparkles className="w-4 h-4 text-[#D4AF37]" />
               <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">Premium Modality</span>
             </div>
@@ -166,7 +166,7 @@ export default function ModalityPage() {
                   <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-[#F8F7FA]">
                     {sec.title}
                   </h2>
-                  <p className="text-lg text-[#9E88C7] leading-relaxed mb-8">
+                  <p className="text-lg text-[#B79AE6] leading-relaxed mb-8">
                     {sec.content}
                   </p>
                   
@@ -192,7 +192,7 @@ export default function ModalityPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 relative overflow-hidden bg-[#25174A]">
+        <section className="py-24 relative overflow-hidden bg-[#7A48AB]">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D4AF37]/10 rounded-full blur-[120px] pointer-events-none" />
           <div className="container mx-auto px-6 relative z-10 text-center">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
@@ -203,7 +203,7 @@ export default function ModalityPage() {
             </p>
             <Link 
               href="/practitioners" 
-              className="inline-flex items-center justify-center gap-2 bg-[#D4AF37] text-[#150d30] px-8 py-4 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl hover:shadow-[0_10px_40px_rgba(212,175,55,0.3)] hover:-translate-y-1"
+              className="inline-flex items-center justify-center gap-2 bg-[#D4AF37] text-[#4D316B] px-8 py-4 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl hover:shadow-[0_10px_40px_rgba(212,175,55,0.3)] hover:-translate-y-1"
             >
               Find a Practitioner <ArrowRight className="w-5 h-5" />
             </Link>
@@ -213,7 +213,7 @@ export default function ModalityPage() {
       </main>
 
       {/* Footer minimal */}
-      <footer className="py-12 border-t border-[#3B236D] bg-[#150d30] text-center text-[#9E88C7] text-sm font-medium">
+      <footer className="py-12 border-t border-[#694091] bg-[#4D316B] text-center text-[#B79AE6] text-sm font-medium">
         &copy; {new Date().getFullYear()} HealConnect Wellness. All rights reserved.
       </footer>
     </div>

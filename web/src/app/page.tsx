@@ -65,24 +65,24 @@ export default function LandingPage() {
       color: '#12527F',
     };
   } else if (isFinalHybrid) {
-    themeClasses = 'theme-final-hybrid bg-[#150d30]';
+    themeClasses = 'theme-final-hybrid bg-[#4D316B]';
     themeStyles = {
-      '--background': '#150d30',
+      '--background': '#4D316B',
       '--foreground': '#F8F7FA',
-      '--card': '#25174A',
+      '--card': '#7A48AB',
       '--card-foreground': '#F8F7FA',
       '--primary': '#D4AF37', // Gold
-      '--primary-foreground': '#150d30',
-      '--secondary': '#3B236D', // Lavender deep
+      '--primary-foreground': '#4D316B',
+      '--secondary': '#694091', // Lavender deep
       '--secondary-foreground': '#F8F7FA',
-      '--muted': '#25174A',
-      '--muted-foreground': '#9E88C7', // Light lavender
+      '--muted': '#7A48AB',
+      '--muted-foreground': '#B79AE6', // Light lavender
       '--accent': '#D4AF37',
-      '--accent-foreground': '#150d30',
-      '--border': '#3B236D',
-      '--input': '#25174A',
+      '--accent-foreground': '#4D316B',
+      '--border': '#694091',
+      '--input': '#7A48AB',
       '--ring': '#D4AF37',
-      backgroundColor: '#150d30',
+      backgroundColor: '#4D316B',
       color: '#F8F7FA',
     };
   }
@@ -131,7 +131,7 @@ export default function LandingPage() {
             <Testimonials />
             <FinalHybridSupport />
             
-            <div className="bg-[#150d30] pt-12">
+            <div className="bg-[#4D316B] pt-12">
               <FaqSection />
             </div>
           </>

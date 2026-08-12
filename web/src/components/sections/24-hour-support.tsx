@@ -6,11 +6,11 @@ import Image from 'next/image';
 
 export function FinalHybridSupport() {
   return (
-    <section className="relative py-24 bg-fixed bg-center bg-cover border-t border-[#3B236D]/50 overflow-hidden"
+    <section className="relative py-24 bg-fixed bg-center bg-cover border-t border-[#694091]/50 overflow-hidden"
       style={{ backgroundImage: 'url(/hands-star-bg.png)' }}
     >
       {/* Overlay to ensure readability while letting the cosmic background shine through */}
-      <div className="absolute inset-0 bg-[#150d30]/75 backdrop-blur-sm z-0" />
+      <div className="absolute inset-0 bg-[#4D316B]/75 backdrop-blur-sm z-0" />
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
@@ -26,7 +26,7 @@ export function FinalHybridSupport() {
               Astrology made simpler, and available to you <span className="text-[#D4AF37]">24×7.</span>
             </h2>
             
-            <p className="text-lg md:text-xl text-[#9E88C7] mb-8 leading-relaxed font-medium">
+            <p className="text-lg md:text-xl text-[#B79AE6] mb-8 leading-relaxed font-medium">
               Connect with an astrologer anytime, and find the solutions to all your love, marriage, career, and finance related problems instantly.
             </p>
             
@@ -44,14 +44,14 @@ export function FinalHybridSupport() {
             <div className="flex flex-wrap items-center gap-4">
               <Link
                 href="/app-store"
-                className="bg-white text-[#150d30] px-6 py-3.5 rounded-xl text-sm font-bold shadow-lg hover:bg-gray-100 transition-all flex items-center gap-2"
+                className="bg-white text-[#4D316B] px-6 py-3.5 rounded-xl text-sm font-bold shadow-lg hover:bg-gray-100 transition-all flex items-center gap-2"
               >
                 <Smartphone className="w-5 h-5" />
                 App Store
               </Link>
               <Link
                 href="/google-play"
-                className="bg-white text-[#150d30] px-6 py-3.5 rounded-xl text-sm font-bold shadow-lg hover:bg-gray-100 transition-all flex items-center gap-2"
+                className="bg-white text-[#4D316B] px-6 py-3.5 rounded-xl text-sm font-bold shadow-lg hover:bg-gray-100 transition-all flex items-center gap-2"
               >
                 <Smartphone className="w-5 h-5" />
                 Google Play

@@ -47,8 +47,8 @@ export default function FaqSection() {
                 className={`rounded-[1.5rem] transition-all duration-300 cursor-pointer overflow-hidden border ${
                   isFinalHybrid 
                     ? openIdx === idx 
-                      ? 'bg-[#25174A] border-[#D4AF37]/50 shadow-[0_10px_30px_rgba(212,175,55,0.1)]' 
-                      : 'bg-[#150d30] border-[#3B236D] hover:bg-[#25174A]/40'
+                      ? 'bg-[#7A48AB] border-[#D4AF37]/50 shadow-[0_10px_30px_rgba(212,175,55,0.1)]' 
+                      : 'bg-[#4D316B] border-[#694091] hover:bg-[#7A48AB]/40'
                     : openIdx === idx 
                       ? 'bg-white border-pink-100 shadow-md ring-1 ring-pink-50' 
                       : 'bg-white border-border/50 hover:border-pink-100 shadow-sm'
@@ -66,13 +66,13 @@ export default function FaqSection() {
                   {openIdx === idx ? (
                     <ChevronUp className={`w-5 h-5 shrink-0 ${isFinalHybrid ? 'text-[#D4AF37]' : 'text-pink-500'}`} />
                   ) : (
-                    <ChevronDown className={`w-5 h-5 shrink-0 ${isFinalHybrid ? 'text-[#9E88C7]' : 'text-muted-foreground'}`} />
+                    <ChevronDown className={`w-5 h-5 shrink-0 ${isFinalHybrid ? 'text-[#B79AE6]' : 'text-muted-foreground'}`} />
                   )}
                 </div>
                 
                 {openIdx === idx && (
                   <div className={`px-6 md:px-8 pb-8 text-sm md:text-base leading-relaxed animate-in fade-in slide-in-from-top-4 duration-300 ${
-                    isFinalHybrid ? 'text-[#9E88C7]' : 'text-muted-foreground'
+                    isFinalHybrid ? 'text-[#B79AE6]' : 'text-muted-foreground'
                   }`}>
                     {faq.a}
                   </div>
