@@ -7,72 +7,72 @@ const TAROT_CARDS = [
   {
     name: 'The Fool', roman: '0', subtitle: 'New Beginnings & Spontaneity',
     message: 'A blank slate lies before you. Take the leap of faith without fear, trusting that the universe will catch you. Embrace the unknown with childlike wonder.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#25174A'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The High Priestess', roman: 'II', subtitle: 'Intuition & Inner Voice',
     message: 'Your subconscious holds truths the waking mind has yet to hear. Honour the cycles within you - your intuition is your most sacred compass right now.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#25174A'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Sun', roman: 'XIX', subtitle: 'Joy & Success',
     message: 'Radiant golden energy courses through every opportunity before you. A magnificent chapter of abundance, creative power, and warmth is beautifully unfolding.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#25174A'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The World', roman: 'XXI', subtitle: 'Completion & Wholeness',
     message: 'You stand at the sacred culmination of an extraordinary cycle. Embrace the beautiful wholeness you have earned - a glorious new chapter awaits your first step.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#25174A'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Tower', roman: 'XVI', subtitle: 'Revelation & Transformation',
     message: 'A powerful revelation shakes what was never truly stable. What crumbles was built on illusion - what remains is the indestructible core of your true self.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#25174A'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Star', roman: 'XVII', subtitle: 'Hope & Serenity',
     message: 'After the storm comes clear, starlit skies. A time of deep spiritual healing and renewed hope is upon you. Trust in the quiet guidance of the universe.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#25174A'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Magician', roman: 'I', subtitle: 'Manifestation & Power',
     message: 'You possess all the tools needed to manifest your desires. Align your thoughts, words, and actions, and watch the universe bend to your will.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Empress', roman: 'III', subtitle: 'Abundance & Nurturing',
     message: 'Embrace your creative power and connect with the natural world around you. A time of growth, beauty, and bountiful harvest is approaching.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Emperor', roman: 'IV', subtitle: 'Structure & Authority',
     message: 'Step into your personal power and establish solid foundations. Logic, stability, and clear boundaries will guide you to lasting success.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Hierophant', roman: 'V', subtitle: 'Tradition & Guidance',
     message: 'Seek wisdom from established systems or spiritual mentors. Sometimes the answers we seek are found in the timeless rituals of the past.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Lovers', roman: 'VI', subtitle: 'Harmony & Choices',
     message: 'A significant alignment of values is occurring. Whether in relationships or major life choices, follow the path that brings deep harmony to your soul.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Chariot', roman: 'VII', subtitle: 'Determination & Victory',
     message: 'Harness your opposing forces and steer them with focused willpower. Through discipline and confidence, you will overcome any obstacles in your path.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'Strength', roman: 'VIII', subtitle: 'Courage & Compassion',
     message: 'True power comes from gentle resilience, not forceful domination. Tame your inner fears with love and patience; your quiet courage is your greatest asset.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
     name: 'The Hermit', roman: 'IX', subtitle: 'Introspection & Inner Guidance',
     message: 'Withdraw from the noise of the world to hear your own inner truth. The lantern of your soul holds the exact light you need for the next step.',
-    cardBg: '#150d30', border: '#D4AF37', accent: '#D4AF37', color: '#D4AF37', backBg: '#1a1025'
+    cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   }
 ];
 
@@ -161,14 +161,13 @@ export function FinalHybridTarot() {
                         style={{ borderColor: card.border }}>
                         <div className="absolute inset-1 border rounded-md pointer-events-none" style={{ borderColor: `${card.border}50` }} />
                         
-                        {/* Elegant Drawing on Card Back */}
-                        <svg width="60" height="120" viewBox="0 0 60 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="30" cy="30" r="15" stroke={card.border} strokeWidth="1" strokeDasharray="2 2" />
-                          <circle cx="30" cy="30" r="10" stroke={card.border} strokeWidth="1" />
-                          <path d="M30 0 L30 15 M30 45 L30 120" stroke={card.border} strokeWidth="1" strokeDasharray="1 3" />
-                          <path d="M0 30 L15 30 M45 30 L60 30" stroke={card.border} strokeWidth="1" />
-                          <circle cx="30" cy="90" r="20" stroke={card.border} strokeWidth="1" />
-                          <path d="M15 90 Q 30 70 45 90 Q 30 110 15 90" fill={card.border} fillOpacity="0.1" stroke={card.border} strokeWidth="1" />
+                        {/* Moon phases */}
+                        <svg width="24" height="100" viewBox="0 0 24 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="12" cy="15" r="4" stroke={card.border} strokeWidth="1" strokeDasharray="1 1" />
+                          <path d="M12 28 A 5 5 0 1 1 12 38 A 3 5 0 1 0 12 28" fill={card.border} />
+                          <circle cx="12" cy="50" r="5" fill={card.border} />
+                          <path d="M12 62 A 5 5 0 1 0 12 72 A 3 5 0 1 1 12 62" fill={card.border} />
+                          <circle cx="12" cy="85" r="4" stroke={card.border} strokeWidth="1" strokeDasharray="1 1" />
                         </svg>
 
                         {/* Little stars */}

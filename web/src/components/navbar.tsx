@@ -295,23 +295,48 @@ export default function Navbar() {
         <header className={`mx-auto transition-all duration-300 flex items-center justify-between px-4 h-14 ${
           !scrolled ? 'bg-surface/80 backdrop-blur-md rounded-full border border-border shadow-sm max-w-6xl' : 'max-w-7xl px-4 sm:px-6 lg:px-8'
         }`}>
-          {/* Left: hamburger + logo */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setDrawerOpen(true)}
-              className={`p-1.5 rounded-lg transition-colors ${isDark ? 'hover:bg-white/10 text-gray-300' : 'hover:bg-gray-100 text-gray-600'}`}
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-            <Link href="/" className="flex items-center gap-2">
-              <Image src="/final_logo.png" alt="HealConnect" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
-              <span className="text-xl font-serif font-bold transition-colors text-foreground">HealConnect</span>
-            </Link>
+          {/* Left: hamburger + logo + links (Final Hybrid) */}
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setDrawerOpen(true)}
+                className={`p-1.5 rounded-lg transition-colors ${isDark ? 'hover:bg-white/10 text-gray-300' : 'hover:bg-gray-100 text-gray-600'}`}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+              <Link href="/" className="flex items-center gap-2">
+                <Image src="/final_logo.png" alt="HealConnect" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
+                <span className="text-xl font-serif font-bold transition-colors text-foreground">HealConnect</span>
+              </Link>
+            </div>
+
+            {/* Links for Final Hybrid layout sit next to the logo */}
+            {isFinalHybrid && (
+              <nav className="hidden md:flex items-center gap-4 ml-4">
+                <Link href="/practitioners" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#D4AF37] transition-colors">
+                  Find Expert
+                </Link>
+                <Link href="#horoscope" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#D4AF37] transition-colors">
+                  Horoscope
+                </Link>
+                <div className="relative group cursor-pointer">
+                  <span className="text-sm font-semibold text-[#F8F7FA] group-hover:text-[#D4AF37] transition-colors flex items-center gap-1">
+                    Modalities
+                    <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                  </span>
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-[#25174A] border border-[#3B236D] rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                    <Link href="/modalities/astrology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Astrology</Link>
+                    <Link href="/modalities/tarot" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Tarot</Link>
+                    <Link href="/modalities/vastu" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#3B236D]/50 hover:text-[#D4AF37]">Vastu</Link>
+                  </div>
+                </div>
+              </nav>
+            )}
           </div>
 
-          {/* Center nav */}
+          {/* Center nav (Standard) */}
           {!isFinalHybrid && (
             <nav className="hidden md:flex items-center gap-1 bg-surface backdrop-blur-md rounded-full border border-border px-1.5 py-1 shadow-sm">
               {NAV_SECTIONS.map(({ id, label, href }) => (

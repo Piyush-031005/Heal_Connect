@@ -39,7 +39,7 @@ export function FinalHybridExperts() {
           {EXPERTS.map((expert, idx) => (
             <div 
               key={idx} 
-              className="min-w-[280px] md:min-w-[320px] flex-shrink-0 snap-start bg-[#25174A]/40 backdrop-blur-xl border border-[#3B236D] rounded-[2rem] p-6 relative group transition-all hover:bg-[#25174A]/60 hover:border-[#D4AF37]/50"
+              className="min-w-[280px] md:min-w-[320px] flex-shrink-0 snap-start bg-[#2D1B54] border border-[#4B2F6E] rounded-[2rem] p-6 relative group transition-all hover:bg-[#3B236D] hover:border-[#D4AF37]/50 shadow-lg"
             >
               {/* Badges */}
               {expert.badge && (
