@@ -54,7 +54,8 @@ export default function ExploreModalities() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {MODALITIES.map((mod) => (
-              <div 
+              <Link 
+                href={`/modalities/${mod.id}`}
                 key={mod.id} 
                 id={`modality-${mod.id}`}
                 className="group bg-[#25174A]/80 backdrop-blur-xl rounded-2xl p-6 border border-[#3B236D] hover:border-[#D4AF37]/50 transition-all duration-500 flex flex-col items-center text-center shadow-lg hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)] cursor-pointer relative overflow-hidden"
@@ -64,10 +65,10 @@ export default function ExploreModalities() {
                 </div>
                 <h3 className="text-lg font-bold text-[#F8F7FA] mb-2 group-hover:text-[#D4AF37] transition-colors">{mod.name}</h3>
                 <p className="text-xs text-[#9E88C7] leading-relaxed font-medium mb-6">{mod.desc}</p>
-                <Link href="/practitioners" className="mt-auto inline-flex items-center gap-2 text-xs font-bold text-[#D4AF37] opacity-80 group-hover:opacity-100 hover:text-[#F8F7FA] transition-colors">
-                  Explore Practitioners <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
+                <div className="mt-auto inline-flex items-center gap-2 text-xs font-bold text-[#D4AF37] opacity-80 group-hover:opacity-100 hover:text-[#F8F7FA] transition-colors">
+                  Explore Modality <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </Link>
             ))}
           </div>
         </div>
