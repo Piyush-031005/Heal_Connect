@@ -182,7 +182,7 @@ export default function Navbar() {
         <div className="bg-gradient-to-br from-amber-400 to-orange-400 px-5 pt-6 pb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
-              <Image src="/final_logooo.png" alt="HealConnect" width={32} height={32} className="rounded-full border-2 border-white/40" />
+              <Image src="/lavender_logo.png" alt="HealConnect" width={32} height={32} className="rounded-full border-2 border-white/40" />
               <span className="text-xl font-serif font-bold text-white">HealConnect</span>
             </div>
             <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
@@ -307,7 +307,7 @@ export default function Navbar() {
                 </svg>
               </button>
               <Link href="/" className="flex items-center gap-2">
-                <Image src="/final_logooo.png" alt="HealConnect" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
+                <Image src="/lavender_logo.png" alt="HealConnect" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
                 <span className="text-xl font-serif font-bold transition-colors text-foreground">HealConnect</span>
               </Link>
             </div>
