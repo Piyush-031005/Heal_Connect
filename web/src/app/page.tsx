@@ -132,7 +132,6 @@ export default function LandingPage() {
             <FinalHybridSupport />
             
             <div className="bg-[#150d30] pt-12">
-              <PricingSection />
               <FaqSection />
             </div>
           </>

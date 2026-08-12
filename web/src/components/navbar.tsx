@@ -321,6 +321,9 @@ export default function Navbar() {
                 <Link href="#horoscope" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#D4AF37] transition-colors">
                   Horoscope
                 </Link>
+                <Link href="#review" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#D4AF37] transition-colors">
+                  Review
+                </Link>
                   <div className="relative group cursor-pointer">
                   <span className="text-sm font-semibold text-[#F8F7FA] group-hover:text-[#D4AF37] transition-colors flex items-center gap-1">
                     Modalities
