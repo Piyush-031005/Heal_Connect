@@ -791,72 +791,72 @@ function FinalHybridHero() {
             {/* Wheel Container */}
             <div className="relative w-[90%] max-w-[550px] aspect-square flex items-center justify-center rounded-full z-10">
               
-              {/* Outer Dashed Ring 1 */}
+              {/* Outer Dashed Ring */}
+              <div className="absolute w-full h-full rounded-full border border-dashed border-[#B79AE6]/25" />
+
+              {/* THE REVOLVING ORBIT — the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 90, ease: 'linear' }}
-                className="absolute w-full h-full rounded-full border border-dashed border-[#B79AE6]/30"
-              />
-              
-              {/* Ring 2 with Modality Image Nodes — math-positioned to avoid overlap */}
-              <div className="absolute w-[82%] h-[82%]">
-                {/* Orbit ring border */}
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
-                  className="absolute inset-0 rounded-full border border-[#B79AE6]/20"
-                />
+                transition={{ repeat: Infinity, duration: 28, ease: 'linear' }}
+                className="absolute w-[88%] h-[88%] rounded-full border border-[#B79AE6]/20"
+              >
                 {[
-                  { img: '/12-modalities-updates/astrology.png', label: 'Astrology', angle: 0 },
-                  { img: '/12-modalities-updates/tarot.png', label: 'Tarot', angle: 72 },
-                  { img: '/12-modalities-updates/facereading.png', label: 'Face Reading', angle: 144 },
-                  { img: '/12-modalities-updates/vastu.png', label: 'Vastu', angle: 216 },
-                  { img: '/12-modalities-updates/palmreading.png', label: 'Palm Reading', angle: 288 },
-                ].map((mod, i) => {
-                  const rad = (mod.angle - 90) * (Math.PI / 180);
-                  const r = 50; // % radius from center
-                  const x = 50 + r * Math.cos(rad);
-                  const y = 50 + r * Math.sin(rad);
+                  { img: '/12-modalities-updates/astrology.png',       label: 'Astrology' },
+                  { img: '/12-modalities-updates/tarot.png',            label: 'Tarot' },
+                  { img: '/12-modalities-updates/facereading.png',      label: 'Face Reading' },
+                  { img: '/12-modalities-updates/plamreading.png',      label: 'Palm Reading' },
+                  { img: '/12-modalities-updates/sound.png',            label: 'Sound Healing' },
+                  { img: '/12-modalities-updates/medidation.png',       label: 'Meditation' },
+                  { img: '/12-modalities-updates/spiritual.png',        label: 'Spiritual' },
+                  { img: '/12-modalities-updates/chakrahealing.png',    label: 'Chakra' },
+                  { img: '/12-modalities-updates/breathwork.png',       label: 'Breathwork' },
+                  { img: '/12-modalities-updates/dream_prediction.png', label: 'Dreams' },
+                  { img: '/12-modalities-updates/space_harmony.png',    label: 'Vastu' },
+                ].map((mod, i, arr) => {
+                  const angle = (i * 360) / arr.length;
                   return (
-                    <div
+                    <motion.div
                       key={i}
-                      className="absolute flex flex-col items-center"
-                      style={{
-                        left: `${x}%`,
-                        top: `${y}%`,
-                        transform: 'translate(-50%, -50%)',
-                      }}
+                      className="absolute inset-0 flex justify-center"
+                      style={{ transform: `rotate(${angle}deg)` }}
                     >
-                      <div className="w-14 h-14 rounded-full bg-[#7A48AB]/70 border-2 border-[#B79AE6]/60 overflow-hidden shadow-[0_0_20px_rgba(183,154,230,0.5)] flex items-center justify-center">
-                        <img src={mod.img} alt={mod.label} className="w-full h-full object-cover" />
-                      </div>
-                      <span className="text-[8px] font-bold text-[#E5D9F2] mt-1 tracking-wide whitespace-nowrap">{mod.label}</span>
-                    </div>
+                      {/* Counter-rotate the icon so it always faces upright */}
+                      <motion.div
+                        animate={{ rotate: -360 }}
+                        transition={{ repeat: Infinity, duration: 28, ease: 'linear' }}
+                        className="flex flex-col items-center -mt-9"
+                      >
+                        <div className="w-16 h-16 rounded-full bg-[#5C2E8A]/80 border-2 border-[#B79AE6]/70 overflow-hidden shadow-[0_0_22px_rgba(183,154,230,0.6)] flex items-center justify-center">
+                          <img src={mod.img} alt={mod.label} className="w-full h-full object-cover" />
+                        </div>
+                        <span className="text-[8px] font-semibold text-[#E5D9F2] mt-1.5 tracking-wide whitespace-nowrap drop-shadow-md">{mod.label}</span>
+                      </motion.div>
+                    </motion.div>
                   );
                 })}
-              </div>
+              </motion.div>
 
-              {/* Inner Dashed Ring 3 */}
+              {/* Inner glowing ring */}
               <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 60, ease: 'linear' }}
-                className="absolute w-[62%] h-[62%] rounded-full border border-[#694091]/60"
+                animate={{ rotate: -360 }}
+                transition={{ repeat: Infinity, duration: 55, ease: 'linear' }}
+                className="absolute w-[58%] h-[58%] rounded-full border border-[#694091]/50"
               />
 
-              {/* Central Logo */}
-              <motion.div 
+              {/* Central Logo — gentle float */}
+              <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-                className="absolute w-[42%] h-[42%] rounded-full flex items-center justify-center z-20"
+                className="absolute w-[40%] h-[40%] rounded-full flex items-center justify-center z-20"
               >
-                 <div className="relative w-[150%] h-[150%] z-10">
-                   <Image
-                     src="/lavender_logo.png"
-                     alt="Zenauraa Logo"
-                     fill
-                     className="object-contain drop-shadow-[0_10px_30px_rgba(183,154,230,0.35)]"
-                   />
-                 </div>
+                <div className="relative w-[160%] h-[160%] z-10">
+                  <Image
+                    src="/lavender_logo.png"
+                    alt="Zenauraa Logo"
+                    fill
+                    className="object-contain drop-shadow-[0_10px_30px_rgba(183,154,230,0.45)]"
+                  />
+                </div>
               </motion.div>
 
             </div>
