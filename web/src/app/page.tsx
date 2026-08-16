@@ -39,8 +39,6 @@ export default function LandingPage() {
 
   const isNewDesign1 = layout === 'new-design-1';
   const isFinalHybrid = layout === 'final-hybrid';
-  const isLavenderLight = layout === 'lavender-light';
-  const isLavenderVivid = layout === 'lavender-vivid';
 
   let themeStyles = {};
   let themeClasses = 'bg-background';
@@ -87,50 +85,6 @@ export default function LandingPage() {
       backgroundColor: '#4D316B',
       color: '#F8F7FA',
     };
-  } else if (isLavenderLight) {
-    // Theme 2: Soft medium lavender — from Image 1 (soft, pastel purple)
-    themeClasses = 'theme-lavender-light bg-[#9B70C2]';
-    themeStyles = {
-      '--background': '#9B70C2',
-      '--foreground': '#FDFBFF',
-      '--card': '#8A5EB0',
-      '--card-foreground': '#FDFBFF',
-      '--primary': '#D7C2ED',
-      '--primary-foreground': '#4B2875',
-      '--secondary': '#8354A8',
-      '--secondary-foreground': '#FDFBFF',
-      '--muted': '#8A5EB0',
-      '--muted-foreground': '#D7C2ED',
-      '--accent': '#D7C2ED',
-      '--accent-foreground': '#4B2875',
-      '--border': '#8354A8',
-      '--input': '#8A5EB0',
-      '--ring': '#D7C2ED',
-      backgroundColor: '#9B70C2',
-      color: '#FDFBFF',
-    };
-  } else if (isLavenderVivid) {
-    // Theme 3: Bright vivid lilac/magenta bokeh — from Image 2 (electric, bright purple)
-    themeClasses = 'theme-lavender-vivid bg-[#C485F0]';
-    themeStyles = {
-      '--background': '#C485F0',
-      '--foreground': '#FFFFFF',
-      '--card': '#B065E6',
-      '--card-foreground': '#FFFFFF',
-      '--primary': '#521094',
-      '--primary-foreground': '#FFFFFF',
-      '--secondary': '#A552DF',
-      '--secondary-foreground': '#FFFFFF',
-      '--muted': '#B065E6',
-      '--muted-foreground': '#F5EEFF',
-      '--accent': '#521094',
-      '--accent-foreground': '#FFFFFF',
-      '--border': '#A552DF',
-      '--input': '#B065E6',
-      '--ring': '#521094',
-      backgroundColor: '#C485F0',
-      color: '#FFFFFF',
-    };
   }
 
   return (
@@ -166,9 +120,9 @@ export default function LandingPage() {
             {/* 09 - FAQ */}
             <FaqSection />
           </>
-        ) : isFinalHybrid || isLavenderLight || isLavenderVivid ? (
+        ) : isFinalHybrid ? (
           <>
-            {/* FINAL HYBRID + THEME VARIANTS LAYOUT */}
+            {/* FINAL HYBRID LAYOUT */}
             <FinalHybridExperts />
             <ExploreModalities />
             <FinalHybridTarot />
@@ -177,7 +131,7 @@ export default function LandingPage() {
             <Testimonials />
             <FinalHybridSupport />
             
-            <div className="pt-12" style={{ backgroundColor: 'var(--background)' }}>
+            <div className="bg-[#4D316B] pt-12">
               <FaqSection />
             </div>
           </>

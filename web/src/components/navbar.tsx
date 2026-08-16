@@ -382,14 +382,9 @@ export default function Navbar() {
               {themeOpen && (
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
-                    { code: 'theme-zen-align', label: 'Zen Align (Premium)' },
                     { code: 'theme-lavender-base', label: 'Lavender Base' },
                     { code: 'theme-lavender-light', label: 'Lavender Light' },
-                    { code: 'theme-lavender-deep', label: 'Lavender Deep' },
-                    { code: 'theme-lavender-night', label: 'Cosmic Night' },
-                    { code: 'theme-soft-blue', label: 'Soft Blue (Zen)' },
-                    { code: 'theme-pink-lavender', label: 'Pink Lavender Mix' },
-                    { code: 'theme-deep-forest', label: 'Deep Forest' }
+                    { code: 'theme-lavender-vivid', label: 'Lavender Vivid' }
                   ]).map((t) => (
                     <button
                       key={t.code}
@@ -401,14 +396,9 @@ export default function Navbar() {
                       }`}
                     >
                       <div className={`w-3.5 h-3.5 rounded-full ${
-                        t.code === 'theme-zen-align' ? 'bg-[#ECE4FC] border-[#6848B3]' :
                         t.code === 'theme-lavender-base' ? 'bg-[#F4EEFB] border-[#8A64B5]' :
-                        t.code === 'theme-lavender-light' ? 'bg-[#FDFBFF] border-[#B298CE]' :
-                        t.code === 'theme-lavender-deep' ? 'bg-[#4B2F6E] border-[#D1BDEB]' :
-                        t.code === 'theme-lavender-night' ? 'bg-[#190F26] border-[#A384C6]' :
-                        t.code === 'theme-soft-blue' ? 'bg-[#E8F0FE] border-[#6A8EAE]' :
-                        t.code === 'theme-pink-lavender' ? 'bg-[#FDF5F9] border-[#C988AD]' :
-                        'bg-[#1C2B23] border-[#85B899]'
+                        t.code === 'theme-lavender-light' ? 'bg-[#9B70C2] border-[#D7C2ED]' :
+                        'bg-[#C485F0] border-[#521094]'
                       } border-2`} />
                       {t.label}
                       {theme === t.code && (
@@ -436,9 +426,10 @@ export default function Navbar() {
               {layoutOpen && (
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
-                    { code: 'final-hybrid', label: '👑 Final Hybrid (Dark)' },
-                    { code: 'lavender-light', label: '🌸 Lavender Light' },
-                    { code: 'lavender-vivid', label: '⚡ Lavender Vivid' },
+                    { code: 'final-hybrid', label: '👑 Final Hybrid' },
+                    { code: 'new-design-1', label: '💜 New Design 1 (Zen)' },
+                    { code: 'primary', label: '✦ Primary (Locked)' },
+                    { code: 'editorial', label: '📰 Editorial (Magazine)' },
                   ] as const).map((l) => (
                     <button
                       key={l.code}
