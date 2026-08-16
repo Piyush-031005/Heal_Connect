@@ -436,9 +436,7 @@ export default function Navbar() {
               {layoutOpen && (
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
-                    { code: 'final-hybrid', label: '👑 Final Hybrid (Dark)' },
-                    { code: 'lavender-light', label: '🌸 Lavender Light' },
-                    { code: 'lavender-vivid', label: '⚡ Lavender Vivid' },
+                    { code: 'final-hybrid', label: '👑 Final Hybrid' },
                     { code: 'new-design-1', label: '💜 New Design 1 (Zen)' },
                     { code: 'primary', label: '✦ Primary (Locked)' },
                     { code: 'editorial', label: '📰 Editorial (Magazine)' },

@@ -798,35 +798,43 @@ function FinalHybridHero() {
                 className="absolute w-full h-full rounded-full border border-dashed border-[#B79AE6]/30"
               />
               
-              {/* Ring 2 with Modality Image Nodes */}
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ repeat: Infinity, duration: 110, ease: 'linear' }}
-                className="absolute w-[82%] h-[82%] rounded-full border border-[#B79AE6]/20"
-              >
+              {/* Ring 2 with Modality Image Nodes — math-positioned to avoid overlap */}
+              <div className="absolute w-[82%] h-[82%]">
+                {/* Orbit ring border */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
+                  className="absolute inset-0 rounded-full border border-[#B79AE6]/20"
+                />
                 {[
-                  { img: '/12-modalities-v2/astrology-v3.png', label: 'Astrology' },
-                  { img: '/12-modalities-v2/tarot-v3.png', label: 'Tarot' },
-                  { img: '/12-modalities-v2/numerology.png', label: 'Numerology' },
-                  { img: '/12-modalities-v2/meditation.png', label: 'Meditation' },
-                  { img: '/12-modalities-v2/energy.png', label: 'Energy' },
-                  { img: '/12-modalities-v2/spiritual.png', label: 'Spiritual' },
-                ].map((mod, i) => (
-                   <motion.div key={i}
-                        className="absolute inset-0 flex justify-center"
-                        style={{ transform: `rotate(${i * 60}deg)` }}>
-                     <motion.div
-                       style={{ transform: `rotate(${i * 60 * -1}deg)` }}
-                       className="flex flex-col items-center -mt-7"
-                     >
-                       <div className="w-14 h-14 rounded-full bg-[#7A48AB]/60 border-2 border-[#B79AE6]/50 backdrop-blur-sm overflow-hidden shadow-[0_0_18px_rgba(183,154,230,0.4)] flex items-center justify-center">
-                         <img src={mod.img} alt={mod.label} className="w-full h-full object-cover" />
-                       </div>
-                       <span className="text-[9px] font-bold text-[#E5D9F2] mt-1 tracking-wide">{mod.label}</span>
-                     </motion.div>
-                   </motion.div>
-                ))}
-              </motion.div>
+                  { img: '/12-modalities-updates/astrology.png', label: 'Astrology', angle: 0 },
+                  { img: '/12-modalities-updates/tarot.png', label: 'Tarot', angle: 72 },
+                  { img: '/12-modalities-updates/facereading.png', label: 'Face Reading', angle: 144 },
+                  { img: '/12-modalities-updates/vastu.png', label: 'Vastu', angle: 216 },
+                  { img: '/12-modalities-updates/palmreading.png', label: 'Palm Reading', angle: 288 },
+                ].map((mod, i) => {
+                  const rad = (mod.angle - 90) * (Math.PI / 180);
+                  const r = 50; // % radius from center
+                  const x = 50 + r * Math.cos(rad);
+                  const y = 50 + r * Math.sin(rad);
+                  return (
+                    <div
+                      key={i}
+                      className="absolute flex flex-col items-center"
+                      style={{
+                        left: `${x}%`,
+                        top: `${y}%`,
+                        transform: 'translate(-50%, -50%)',
+                      }}
+                    >
+                      <div className="w-14 h-14 rounded-full bg-[#7A48AB]/70 border-2 border-[#B79AE6]/60 overflow-hidden shadow-[0_0_20px_rgba(183,154,230,0.5)] flex items-center justify-center">
+                        <img src={mod.img} alt={mod.label} className="w-full h-full object-cover" />
+                      </div>
+                      <span className="text-[8px] font-bold text-[#E5D9F2] mt-1 tracking-wide whitespace-nowrap">{mod.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
 
               {/* Inner Dashed Ring 3 */}
               <motion.div
