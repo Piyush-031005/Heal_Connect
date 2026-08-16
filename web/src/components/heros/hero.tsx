@@ -785,8 +785,8 @@ function FinalHybridHero() {
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6 relative flex items-center justify-center h-[50vw] max-h-[700px] min-h-[350px] w-full lg:-mt-12 lg:-translate-y-6"
           >
-            {/* Deep purple/gold background glow for the wheel */}
-            <div className="absolute inset-0 m-auto w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.15)_0%,rgba(59,35,109,0.4)_50%,transparent_70%)] blur-2xl z-0" />
+            {/* Lavender glow */}
+            <div className="absolute inset-0 m-auto w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle,rgba(183,154,230,0.18)_0%,rgba(105,64,145,0.35)_50%,transparent_70%)] blur-2xl z-0" />
 
             {/* Wheel Container */}
             <div className="relative w-[90%] max-w-[550px] aspect-square flex items-center justify-center rounded-full z-10">
@@ -798,22 +798,34 @@ function FinalHybridHero() {
                 className="absolute w-full h-full rounded-full border border-dashed border-[#B79AE6]/30"
               />
               
-              {/* Solid Ring 2 with Nodes */}
+              {/* Ring 2 with Modality Image Nodes */}
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ repeat: Infinity, duration: 110, ease: 'linear' }}
-                className="absolute w-[82%] h-[82%] rounded-full border border-[#B79AE6]/25"
+                className="absolute w-[82%] h-[82%] rounded-full border border-[#B79AE6]/20"
               >
-                 {/* Nodes */}
-                 {[...Array(8)].map((_, i) => (
-                    <div key={i} className="absolute inset-0 flex justify-center"
-                         style={{ transform: `rotate(${i * 45}deg)` }}>
-                       <div className="flex flex-col items-center -mt-2">
-                         <div className="w-2 h-2 bg-[#B79AE6] rounded-full shadow-[0_0_10px_#B79AE6]" />
-                         <div className="w-[1px] h-4 bg-[#B79AE6]/50 mt-1" />
+                {[
+                  { img: '/12-modalities-v2/astrology-v3.png', label: 'Astrology' },
+                  { img: '/12-modalities-v2/tarot-v3.png', label: 'Tarot' },
+                  { img: '/12-modalities-v2/numerology.png', label: 'Numerology' },
+                  { img: '/12-modalities-v2/meditation.png', label: 'Meditation' },
+                  { img: '/12-modalities-v2/energy.png', label: 'Energy' },
+                  { img: '/12-modalities-v2/spiritual.png', label: 'Spiritual' },
+                ].map((mod, i) => (
+                   <motion.div key={i}
+                        className="absolute inset-0 flex justify-center"
+                        style={{ transform: `rotate(${i * 60}deg)` }}>
+                     <motion.div
+                       style={{ transform: `rotate(${i * 60 * -1}deg)` }}
+                       className="flex flex-col items-center -mt-7"
+                     >
+                       <div className="w-14 h-14 rounded-full bg-[#7A48AB]/60 border-2 border-[#B79AE6]/50 backdrop-blur-sm overflow-hidden shadow-[0_0_18px_rgba(183,154,230,0.4)] flex items-center justify-center">
+                         <img src={mod.img} alt={mod.label} className="w-full h-full object-cover" />
                        </div>
-                    </div>
-                 ))}
+                       <span className="text-[9px] font-bold text-[#E5D9F2] mt-1 tracking-wide">{mod.label}</span>
+                     </motion.div>
+                   </motion.div>
+                ))}
               </motion.div>
 
               {/* Inner Dashed Ring 3 */}
@@ -821,7 +833,6 @@ function FinalHybridHero() {
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 60, ease: 'linear' }}
                 className="absolute w-[62%] h-[62%] rounded-full border border-[#694091]/60"
-                style={{ strokeDasharray: '4 8' }}
               />
 
               {/* Central Logo */}
@@ -835,7 +846,7 @@ function FinalHybridHero() {
                      src="/lavender_logo.png"
                      alt="Zenauraa Logo"
                      fill
-                     className="object-contain drop-shadow-[0_10px_30px_rgba(212,175,55,0.2)]"
+                     className="object-contain drop-shadow-[0_10px_30px_rgba(183,154,230,0.35)]"
                    />
                  </div>
               </motion.div>
