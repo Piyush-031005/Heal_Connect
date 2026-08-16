@@ -64,81 +64,81 @@
     --font-sans: var(--font-inter);
   }
   
-  /* THEME 01 - LAVENDER BASE (Default, Nice Shade) */
+  /* THEME 01 - LAVENDER BASE (Dark Theme) */
   :root, .theme-lavender-base {
-    --background: #F4EEFB; /* Nice soft lavender */
-    --foreground: #382452; /* Deep purple text */
-    --card: #FFFFFF;
-    --card-foreground: #382452;
-    --popover: #FFFFFF;
-    --popover-foreground: #382452;
-    --primary: #8A64B5; /* Classic Lavender primary */
-    --primary-foreground: #FFFFFF;
-    --secondary: #E3D5F2;
-    --secondary-foreground: #4B316C;
-    --muted: #E3D5F2;
-    --muted-foreground: #7E6B99;
-    --accent: #A384C6;
-    --accent-foreground: #FFFFFF;
+    --background: #4D316B; 
+    --foreground: #F8F7FA; 
+    --card: #7A48AB;
+    --card-foreground: #F8F7FA;
+    --popover: #7A48AB;
+    --popover-foreground: #F8F7FA;
+    --primary: #B79AE6; 
+    --primary-foreground: #4D316B;
+    --secondary: #694091;
+    --secondary-foreground: #F8F7FA;
+    --muted: #7A48AB;
+    --muted-foreground: #B79AE6;
+    --accent: #B79AE6;
+    --accent-foreground: #4D316B;
     --destructive: #EF4444;
     --destructive-foreground: #FFFFFF;
     --success: #22C55E;
     --success-foreground: #FFFFFF;
-    --border: #DBC7F0;
-    --input: #DBC7F0;
-    --ring: #8A64B5;
+    --border: #694091;
+    --input: #7A48AB;
+    --ring: #B79AE6;
     --radius: 0.75rem;
   }
   
   /* THEME 02 - LAVENDER LIGHT (Soft Pastel Purple - Image 1) */
   .theme-lavender-light {
-    --background: #9B70C2; 
-    --foreground: #FDFBFF; 
-    --card: #8A5EB0;
-    --card-foreground: #FDFBFF;
-    --popover: #8A5EB0;
-    --popover-foreground: #FDFBFF;
-    --primary: #D7C2ED; 
-    --primary-foreground: #4B2875;
-    --secondary: #8354A8;
-    --secondary-foreground: #FDFBFF;
-    --muted: #8A5EB0;
-    --muted-foreground: #D7C2ED;
-    --accent: #D7C2ED;
-    --accent-foreground: #4B2875;
-    --destructive: #EF4444;
-    --destructive-foreground: #FDFBFF;
-    --success: #22C55E;
-    --success-foreground: #FDFBFF;
-    --border: #8354A8;
-    --input: #8A5EB0;
-    --ring: #D7C2ED;
-    --radius: 0.75rem;
-  }
-  
-  /* THEME 03 - LAVENDER VIVID (Bright Electric Lilac - Image 2) */
-  .theme-lavender-vivid {
-    --background: #C485F0; 
-    --foreground: #FFFFFF; 
-    --card: #B065E6;
-    --card-foreground: #FFFFFF;
-    --popover: #B065E6;
-    --popover-foreground: #FFFFFF;
-    --primary: #521094; 
+    --background: #C296D1; 
+    --foreground: #4A2B5E; 
+    --card: #D8BEE3;
+    --card-foreground: #4A2B5E;
+    --popover: #D8BEE3;
+    --popover-foreground: #4A2B5E;
+    --primary: #8A63A8; 
     --primary-foreground: #FFFFFF;
-    --secondary: #A552DF;
-    --secondary-foreground: #FFFFFF;
-    --muted: #B065E6;
-    --muted-foreground: #F5EEFF;
-    --accent: #521094;
+    --secondary: #EADCF0;
+    --secondary-foreground: #4A2B5E;
+    --muted: #D8BEE3;
+    --muted-foreground: #8A63A8;
+    --accent: #8A63A8;
     --accent-foreground: #FFFFFF;
     --destructive: #EF4444;
     --destructive-foreground: #FFFFFF;
     --success: #22C55E;
     --success-foreground: #FFFFFF;
-    --border: #A552DF;
-    --input: #B065E6;
-    --ring: #521094;
+    --border: #EADCF0;
+    --input: #D8BEE3;
+    --ring: #8A63A8;
+    --radius: 0.75rem;
+  }
+  
+  /* THEME 03 - LAVENDER VIVID (Bright Electric Lilac - Image 2) */
+  .theme-lavender-vivid {
+    --background: #BAA3F6; 
+    --foreground: #3A2E6B; 
+    --card: #DDD2FF;
+    --card-foreground: #3A2E6B;
+    --popover: #DDD2FF;
+    --popover-foreground: #3A2E6B;
+    --primary: #7860D8; 
+    --primary-foreground: #FFFFFF;
+    --secondary: #EBE5FF;
+    --secondary-foreground: #3A2E6B;
+    --muted: #DDD2FF;
+    --muted-foreground: #7860D8;
+    --accent: #7860D8;
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #EBE5FF;
+    --input: #DDD2FF;
+    --ring: #7860D8;
     --radius: 0.75rem;
   }
 

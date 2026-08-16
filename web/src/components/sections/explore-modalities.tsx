@@ -19,18 +19,17 @@ import Link from 'next/link';
 import { useLayout } from '@/lib/layout-context';
 
 const MODALITIES = [
-  { id: 'astrology', name: 'Astrology', desc: 'Gain cosmic insights and life path guidance.', image: '/12-modalities-v2/astrology-v3.png' },
-  { id: 'tarot', name: 'Tarot', desc: 'Unveil hidden truths through symbolic cards.', image: '/12-modalities-v2/tarot-v3.png' },
-  { id: 'palm-reading', name: 'Palm Reading', desc: 'Discover destiny written in your hands.', image: '/12-modalities-v2/palm.png' },
-  { id: 'face-reading', name: 'Face Reading', desc: 'Understand personality and health markers.', image: '/12-modalities-v2/face-v3.png' },
-  { id: 'numerology', name: 'Numerology', desc: 'Unlock the power of your life path numbers.', image: '/12-modalities-v2/numerology.png' },
-  { id: 'energy-healing', name: 'Energy Healing', desc: 'Restore balance and clear energy blockages.', image: '/12-modalities-v2/energy.png' },
-  { id: 'meditation', name: 'Meditation', desc: 'Cultivate mindfulness and inner peace.', image: '/12-modalities-v2/meditation.png' },
-  { id: 'yoga', name: 'Yoga & Mindfulness', desc: 'Align mind, body, and spirit through movement.', image: '/12-modalities-v2/yoga.png' },
-  { id: 'vastu', name: 'Vastu & Space Energy', desc: 'Harmonize your living and working spaces.', image: '/12-modalities-v2/vastu.png' },
-  { id: 'eft', name: 'EFT Tapping', desc: 'Release emotional distress through tapping.', image: '/12-modalities-v2/eft.png' },
-  { id: 'spiritual', name: 'Spiritual Guidance', desc: 'Connect with higher purpose and wisdom.', image: '/12-modalities-v2/spiritual.png' },
-  { id: 'sound-healing', name: 'Sound Healing', desc: 'Harmonize your body with therapeutic frequencies.', image: '/12-modalities-v2/sound-v3.png' },
+  { id: 'astrology', name: 'Astrology', desc: 'Gain cosmic insights and life path guidance.', image: '/12-modalities-updates/astrology.png' },
+  { id: 'tarot', name: 'Tarot', desc: 'Unveil hidden truths through symbolic cards.', image: '/12-modalities-updates/tarot.png' },
+  { id: 'face-reading', name: 'Face Reading', desc: 'Understand personality and health markers.', image: '/12-modalities-updates/facereading.png' },
+  { id: 'palm-reading', name: 'Palm Reading', desc: 'Discover destiny written in your hands.', image: '/12-modalities-updates/plamreading.png' },
+  { id: 'sound-healing', name: 'Sound Healing', desc: 'Harmonize your body with therapeutic frequencies.', image: '/12-modalities-updates/sound.png' },
+  { id: 'meditation', name: 'Meditation', desc: 'Cultivate mindfulness and inner peace.', image: '/12-modalities-updates/medidation.png' },
+  { id: 'spiritual', name: 'Spiritual Guidance', desc: 'Connect with higher purpose and wisdom.', image: '/12-modalities-updates/spiritual.png' },
+  { id: 'chakra', name: 'Chakra Healing', desc: 'Restore balance and clear energy blockages.', image: '/12-modalities-updates/chakrahealing.png' },
+  { id: 'breathwork', name: 'Breathwork', desc: 'Align mind, body, and spirit through mindful breathing.', image: '/12-modalities-updates/breathwork.png' },
+  { id: 'dreams', name: 'Dream Prediction', desc: 'Unlock the power of your subconscious dreams.', image: '/12-modalities-updates/dream_prediction.png' },
+  { id: 'space-harmony', name: 'Space Harmony', desc: 'Harmonize your living and working spaces.', image: '/12-modalities-updates/space_harmony.png' },
 ];
 
 export default function ExploreModalities() {

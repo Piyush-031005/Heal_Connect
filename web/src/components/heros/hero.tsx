@@ -811,7 +811,7 @@ function FinalHybridHero() {
                   { img: '/12-modalities-updates/chakrahealing.png',    label: 'Chakra' },
                   { img: '/12-modalities-updates/breathwork.png',       label: 'Breathwork' },
                   { img: '/12-modalities-updates/dream_prediction.png', label: 'Dreams' },
-                  { img: '/12-modalities-updates/space_harmony.png',    label: 'Vastu' },
+                  { img: '/12-modalities-updates/space_harmony.png',    label: 'Space Harmony' },
                 ].map((mod, i, arr) => {
                   const angle = (i * 360) / arr.length;
                   return (
@@ -824,12 +824,12 @@ function FinalHybridHero() {
                       <motion.div
                         animate={{ rotate: -360 }}
                         transition={{ repeat: Infinity, duration: 28, ease: 'linear' }}
-                        className="flex flex-col items-center -mt-9"
+                        className="flex flex-col items-center -mt-10"
                       >
-                        <div className="w-16 h-16 rounded-full bg-[#5C2E8A]/80 border-2 border-[#B79AE6]/70 overflow-hidden shadow-[0_0_22px_rgba(183,154,230,0.6)] flex items-center justify-center">
+                        <div className="w-20 h-20 rounded-full bg-[#5C2E8A]/80 border-2 border-[#B79AE6]/70 overflow-hidden shadow-[0_0_25px_rgba(183,154,230,0.6)] flex items-center justify-center">
                           <img src={mod.img} alt={mod.label} className="w-full h-full object-cover" />
                         </div>
-                        <span className="text-[8px] font-semibold text-[#E5D9F2] mt-1.5 tracking-wide whitespace-nowrap drop-shadow-md">{mod.label}</span>
+                        <span className="text-[10px] font-bold text-[#E5D9F2] mt-2 tracking-wide whitespace-nowrap drop-shadow-md">{mod.label}</span>
                       </motion.div>
                     </motion.div>
                   );

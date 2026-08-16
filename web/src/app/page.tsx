@@ -40,58 +40,14 @@ export default function LandingPage() {
   const isNewDesign1 = layout === 'new-design-1';
   const isFinalHybrid = layout === 'final-hybrid';
 
-  let themeStyles = {};
-  let themeClasses = 'bg-background';
-
   if (isNewDesign1) {
-    themeClasses = 'theme-layout-2';
-    themeStyles = {
-      '--background': '#EDF8FC',
-      '--foreground': '#12527F',
-      '--card': '#FFFFFF',
-      '--card-foreground': '#12527F',
-      '--primary': '#1A92C6',
-      '--primary-foreground': '#FFFFFF',
-      '--secondary': '#CDE9F4',
-      '--secondary-foreground': '#17619A',
-      '--muted': '#EDF8FC',
-      '--muted-foreground': '#63BFE4',
-      '--accent': '#20A6DC',
-      '--accent-foreground': '#FFFFFF',
-      '--border': '#CDE9F4',
-      '--input': '#CDE9F4',
-      '--ring': '#1A92C6',
-      backgroundColor: '#EDF8FC',
-      color: '#12527F',
-    };
-    } else if (isFinalHybrid) {
-    themeClasses = 'theme-final-hybrid bg-[#4D316B]';
-    themeStyles = {
-      '--background': '#4D316B',
-      '--foreground': '#F8F7FA',
-      '--card': '#7A48AB',
-      '--card-foreground': '#F8F7FA',
-      '--primary': '#B79AE6',
-      '--primary-foreground': '#4D316B',
-      '--secondary': '#694091',
-      '--secondary-foreground': '#F8F7FA',
-      '--muted': '#7A48AB',
-      '--muted-foreground': '#B79AE6',
-      '--accent': '#B79AE6',
-      '--accent-foreground': '#4D316B',
-      '--border': '#694091',
-      '--input': '#7A48AB',
-      '--ring': '#B79AE6',
-      backgroundColor: '#4D316B',
-      color: '#F8F7FA',
-    };
+    // legacy layout
+  } else if (isFinalHybrid) {
+    // legacy layout
   }
 
   return (
-    <div
-      className={`min-h-screen text-foreground flex flex-col font-sans transition-colors duration-500 ${themeClasses}`}
-      style={themeStyles as React.CSSProperties}
-    >
+    <div className="min-h-screen text-foreground flex flex-col font-sans transition-colors duration-500 bg-background">
       <Navbar />
 
       <main className="flex-1">
@@ -131,7 +87,7 @@ export default function LandingPage() {
             <Testimonials />
             <FinalHybridSupport />
             
-            <div className="bg-[#4D316B] pt-12">
+            <div className="bg-background pt-12">
               <FaqSection />
             </div>
           </>
