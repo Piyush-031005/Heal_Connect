@@ -88,48 +88,48 @@ export default function LandingPage() {
       color: '#F8F7FA',
     };
   } else if (isLavenderLight) {
-    // Theme 2: Soft light lavender — airy, calm, pale (like image 1)
-    themeClasses = 'theme-lavender-light bg-[#F0EAF8]';
+    // Theme 2: Soft medium lavender — from Image 1 (soft, pastel purple)
+    themeClasses = 'theme-lavender-light bg-[#9B70C2]';
     themeStyles = {
-      '--background': '#F0EAF8',
-      '--foreground': '#3B1F6B',
-      '--card': '#FFFFFF',
-      '--card-foreground': '#3B1F6B',
-      '--primary': '#7A48AB',
-      '--primary-foreground': '#FFFFFF',
-      '--secondary': '#E0D4F5',
-      '--secondary-foreground': '#4D316B',
-      '--muted': '#F5F0FD',
-      '--muted-foreground': '#9B7EC8',
-      '--accent': '#B79AE6',
-      '--accent-foreground': '#3B1F6B',
-      '--border': '#D8C8F0',
-      '--input': '#EEE5FA',
-      '--ring': '#7A48AB',
-      backgroundColor: '#F0EAF8',
-      color: '#3B1F6B',
+      '--background': '#9B70C2',
+      '--foreground': '#FDFBFF',
+      '--card': '#8A5EB0',
+      '--card-foreground': '#FDFBFF',
+      '--primary': '#D7C2ED',
+      '--primary-foreground': '#4B2875',
+      '--secondary': '#8354A8',
+      '--secondary-foreground': '#FDFBFF',
+      '--muted': '#8A5EB0',
+      '--muted-foreground': '#D7C2ED',
+      '--accent': '#D7C2ED',
+      '--accent-foreground': '#4B2875',
+      '--border': '#8354A8',
+      '--input': '#8A5EB0',
+      '--ring': '#D7C2ED',
+      backgroundColor: '#9B70C2',
+      color: '#FDFBFF',
     };
   } else if (isLavenderVivid) {
-    // Theme 3: Bright vivid violet/magenta bokeh — electric, vibrant (like image 2)
-    themeClasses = 'theme-lavender-vivid bg-[#2D0B5A]';
+    // Theme 3: Bright vivid lilac/magenta bokeh — from Image 2 (electric, bright purple)
+    themeClasses = 'theme-lavender-vivid bg-[#C485F0]';
     themeStyles = {
-      '--background': '#2D0B5A',
-      '--foreground': '#F5EEFF',
-      '--card': '#4A0E8F',
-      '--card-foreground': '#F5EEFF',
-      '--primary': '#C77DFF',
-      '--primary-foreground': '#2D0B5A',
-      '--secondary': '#7B2FBE',
-      '--secondary-foreground': '#F5EEFF',
-      '--muted': '#3D1070',
-      '--muted-foreground': '#D4AAFF',
-      '--accent': '#E040FB',
-      '--accent-foreground': '#2D0B5A',
-      '--border': '#6A1FAD',
-      '--input': '#3D1070',
-      '--ring': '#C77DFF',
-      backgroundColor: '#2D0B5A',
-      color: '#F5EEFF',
+      '--background': '#C485F0',
+      '--foreground': '#FFFFFF',
+      '--card': '#B065E6',
+      '--card-foreground': '#FFFFFF',
+      '--primary': '#521094',
+      '--primary-foreground': '#FFFFFF',
+      '--secondary': '#A552DF',
+      '--secondary-foreground': '#FFFFFF',
+      '--muted': '#B065E6',
+      '--muted-foreground': '#F5EEFF',
+      '--accent': '#521094',
+      '--accent-foreground': '#FFFFFF',
+      '--border': '#A552DF',
+      '--input': '#B065E6',
+      '--ring': '#521094',
+      backgroundColor: '#C485F0',
+      color: '#FFFFFF',
     };
   }
 
