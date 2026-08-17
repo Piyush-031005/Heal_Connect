@@ -26,10 +26,11 @@ const MODALITIES = [
   { id: 'sound-healing', name: 'Sound Healing', desc: 'Harmonize your body with therapeutic frequencies.', image: '/12-modalities-updates/sound.png' },
   { id: 'meditation', name: 'Meditation', desc: 'Cultivate mindfulness and inner peace.', image: '/12-modalities-updates/medidation.png' },
   { id: 'spiritual', name: 'Spiritual Guidance', desc: 'Connect with higher purpose and wisdom.', image: '/12-modalities-updates/spiritual.png' },
-  { id: 'chakra', name: 'Chakra Healing', desc: 'Restore balance and clear energy blockages.', image: '/12-modalities-updates/chakrahealing.png' },
+  { id: 'chakra-healing', name: 'Chakra Healing', desc: 'Restore balance and clear energy blockages.', image: '/12-modalities-updates/chakrahealing.png' },
   { id: 'breathwork', name: 'Breathwork', desc: 'Align mind, body, and spirit through mindful breathing.', image: '/12-modalities-updates/breathwork.png' },
   { id: 'dreams', name: 'Dream Prediction', desc: 'Unlock the power of your subconscious dreams.', image: '/12-modalities-updates/dream_prediction.png' },
   { id: 'space-harmony', name: 'Space Harmony', desc: 'Harmonize your living and working spaces.', image: '/12-modalities-updates/space_harmony.png' },
+  { id: 'numerology', name: 'Numerology', desc: 'Uncover the hidden vibrations of numbers.', image: '/12-modalities-updates/numerology.png' },
 ];
 
 export default function ExploreModalities() {

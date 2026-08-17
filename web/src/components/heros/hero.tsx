@@ -797,42 +797,43 @@ function FinalHybridHero() {
               {/* THE REVOLVING ORBIT — the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 15, ease: 'linear' }}
+                transition={{ repeat: Infinity, duration: 25, ease: 'linear' }}
                 className="absolute w-[88%] h-[88%] rounded-full border border-primary/20 transition-colors duration-500"
               >
                 {[
-                  { img: '/12-modalities-updates/astrology.png',       label: 'Astrology' },
-                  { img: '/12-modalities-updates/tarot.png',            label: 'Tarot' },
-                  { img: '/12-modalities-updates/facereading.png',      label: 'Face Reading' },
-                  { img: '/12-modalities-updates/plamreading.png',      label: 'Palm Reading' },
-                  { img: '/12-modalities-updates/sound.png',            label: 'Sound Healing' },
-                  { img: '/12-modalities-updates/medidation.png',       label: 'Meditation' },
-                  { img: '/12-modalities-updates/spiritual.png',        label: 'Spiritual' },
-                  { img: '/12-modalities-updates/chakrahealing.png',    label: 'Chakra' },
-                  { img: '/12-modalities-updates/breathwork.png',       label: 'Breathwork' },
-                  { img: '/12-modalities-updates/dream_prediction.png', label: 'Dreams' },
-                  { img: '/12-modalities-updates/space_harmony.png',    label: 'Space Harmony' },
+                  { img: '/12-modalities-updates/astrology.png',       label: 'Astrology',     id: 'astrology' },
+                  { img: '/12-modalities-updates/tarot.png',            label: 'Tarot',         id: 'tarot' },
+                  { img: '/12-modalities-updates/facereading.png',      label: 'Face Reading',  id: 'face-reading' },
+                  { img: '/12-modalities-updates/plamreading.png',      label: 'Palm Reading',  id: 'palm-reading' },
+                  { img: '/12-modalities-updates/sound.png',            label: 'Sound Healing', id: 'sound-healing' },
+                  { img: '/12-modalities-updates/medidation.png',       label: 'Meditation',    id: 'meditation' },
+                  { img: '/12-modalities-updates/spiritual.png',        label: 'Spiritual',     id: 'spiritual' },
+                  { img: '/12-modalities-updates/chakrahealing.png',    label: 'Chakra',        id: 'chakra-healing' },
+                  { img: '/12-modalities-updates/breathwork.png',       label: 'Breathwork',    id: 'breathwork' },
+                  { img: '/12-modalities-updates/dream_prediction.png', label: 'Dreams',        id: 'dreams' },
+                  { img: '/12-modalities-updates/space_harmony.png',    label: 'Space Harmony', id: 'space-harmony' },
+                  { img: '/12-modalities-updates/numerology.png',       label: 'Numerology',    id: 'numerology' },
                 ].map((mod, i, arr) => {
                   const angle = (i * 360) / arr.length;
                   return (
-                    <div
+                    <motion.div
                       key={i}
                       className="absolute inset-0 flex justify-center items-start origin-center"
-                      style={{ transform: `rotate(${angle}deg)` }}
+                      initial={{ rotate: angle }}
                     >
                       {/* Counter-rotate the icon so it always faces upright */}
                       <motion.div
                         initial={{ rotate: -angle }}
                         animate={{ rotate: -(360 + angle) }}
-                        transition={{ repeat: Infinity, duration: 15, ease: 'linear' }}
-                        className="flex flex-col items-center -mt-10"
+                        transition={{ repeat: Infinity, duration: 25, ease: 'linear' }}
+                        className="flex flex-col items-center -mt-10 group cursor-pointer"
                       >
-                        <div className="w-20 h-20 rounded-full bg-background border-2 border-primary/70 overflow-hidden shadow-[0_0_25px_rgba(var(--primary),0.6)] flex items-center justify-center transition-colors duration-500">
-                          <img src={mod.img} alt={mod.label} className="w-full h-full object-cover" />
-                        </div>
-                        <span className="text-[10px] font-bold text-foreground mt-2 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500">{mod.label}</span>
+                        <Link href={`/modalities/${mod.id}`} className="w-28 h-28 flex items-center justify-center transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)]">
+                          <img src={mod.img} alt={mod.label} className="w-full h-full object-contain group-hover:brightness-125 transition-all" />
+                        </Link>
+                        <span className="text-xs font-bold text-foreground mt-2 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500">{mod.label}</span>
                       </motion.div>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </motion.div>
