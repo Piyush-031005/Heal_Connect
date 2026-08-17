@@ -777,28 +777,36 @@ function FinalHybridHero() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT: Cosmic Wheel Graphic (Adapted to Gold/Amethyst) */}
+          {/* RIGHT: Cosmic Wheel Graphic (Adapted to Half-Arc) */}
           <motion.div
             style={{ y: yImage }}
             initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
             animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 relative flex items-center justify-center h-[50vw] max-h-[700px] min-h-[350px] w-full lg:-mt-12 lg:-translate-y-6"
+            className="lg:col-span-6 absolute inset-y-0 right-0 w-full h-full pointer-events-none flex items-center justify-center z-0"
           >
             {/* Lavender glow */}
-            <div className="absolute inset-0 m-auto w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle,rgba(183,154,230,0.18)_0%,rgba(105,64,145,0.35)_50%,transparent_70%)] blur-2xl z-0" />
+            <div className="absolute top-1/2 right-0 translate-x-[30%] -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)] blur-3xl z-0" />
 
-            {/* Wheel Container */}
-            <div className="relative w-[95%] max-w-[700px] aspect-square flex items-center justify-center rounded-full z-10">
+            {/* Wheel Container - MASSIVE HALF ARC */}
+            <div className="absolute top-1/2 right-0 translate-x-[40%] md:translate-x-[35%] lg:translate-x-[30%] -translate-y-1/2 w-[900px] h-[900px] md:w-[1200px] md:h-[1200px] lg:w-[1400px] lg:h-[1400px] flex items-center justify-center rounded-full z-10 pointer-events-none">
               
+              {/* Zodiac Background Image */}
+              <div className="absolute inset-0 w-full h-full rounded-full overflow-hidden opacity-40 mix-blend-screen pointer-events-none">
+                <img src="/zodiac-masterpiece.png" alt="Zodiac Background" className="w-full h-full object-cover scale-110" />
+              </div>
+
               {/* Outer Dashed Ring */}
-              <div className="absolute w-full h-full rounded-full border border-dashed border-[#B79AE6]/25" />
+              <div className="absolute w-[95%] h-[95%] rounded-full border border-dashed border-[#B79AE6]/30 pointer-events-none" />
+              
+              {/* Inner Thin Ring */}
+              <div className="absolute w-[75%] h-[75%] rounded-full border border-[#B79AE6]/20 pointer-events-none" />
 
               {/* THE REVOLVING ORBIT — the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 25, ease: 'linear' }}
-                className="absolute w-[88%] h-[88%] rounded-full border border-primary/20 transition-colors duration-500"
+                transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
+                className="absolute w-[95%] h-[95%] rounded-full transition-colors duration-500 pointer-events-none"
               >
                 {[
                   { img: '/12-modalities-updates/astrology.png',       label: 'Astrology',     id: 'astrology' },
@@ -818,45 +826,38 @@ function FinalHybridHero() {
                   return (
                     <motion.div
                       key={i}
-                      className="absolute inset-0 flex justify-center items-start origin-center"
+                      className="absolute inset-0 flex justify-center items-start origin-center pointer-events-none"
                       initial={{ rotate: angle }}
                     >
                       {/* Counter-rotate the icon so it always faces upright */}
                       <motion.div
                         initial={{ rotate: -angle }}
                         animate={{ rotate: -(360 + angle) }}
-                        transition={{ repeat: Infinity, duration: 25, ease: 'linear' }}
-                        className="flex flex-col items-center -mt-12 group cursor-pointer"
+                        transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
+                        className="flex flex-col items-center -mt-12 md:-mt-16 group cursor-pointer pointer-events-auto"
                       >
-                        <Link href={`/modalities/${mod.id}`} className="w-32 h-32 flex items-center justify-center transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)]">
+                        <Link href={`/modalities/${mod.id}`} className="w-24 h-24 md:w-36 md:h-36 flex items-center justify-center transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)]">
                           <img src={mod.img} alt={mod.label} className="w-full h-full object-contain group-hover:brightness-125 transition-all" />
                         </Link>
-                        <span className="text-[13px] font-bold text-foreground mt-2 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500">{mod.label}</span>
+                        <span className="text-[14px] md:text-[16px] font-bold text-foreground mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500">{mod.label}</span>
                       </motion.div>
                     </motion.div>
                   );
                 })}
               </motion.div>
 
-              {/* Inner glowing ring */}
+              {/* Central Logo */}
               <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ repeat: Infinity, duration: 55, ease: 'linear' }}
-                className="absolute w-[58%] h-[58%] rounded-full border border-[#694091]/50"
-              />
-
-              {/* Central Logo — gentle float */}
-              <motion.div
-                animate={{ y: [0, -6, 0] }}
+                animate={{ y: [0, -8, 0] }}
                 transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-                className="absolute w-[40%] h-[40%] rounded-full flex items-center justify-center z-20"
+                className="absolute w-[25%] h-[25%] rounded-full flex items-center justify-center z-20 pointer-events-auto"
               >
-                <div className="relative w-[100%] h-[100%] z-10">
+                <div className="relative w-full h-full z-10 flex items-center justify-center">
                   <Image
-                    src="/lavender_logo.png"
-                    alt="Zenauraa Logo"
+                    src="/this_is_the_logo.png"
+                    alt="HealConnect Logo"
                     fill
-                    className="object-contain drop-shadow-[0_10px_30px_rgba(183,154,230,0.45)]"
+                    className="object-contain drop-shadow-[0_10px_30px_rgba(183,154,230,0.6)] hover:scale-105 transition-transform duration-500 cursor-pointer"
                   />
                 </div>
               </motion.div>
