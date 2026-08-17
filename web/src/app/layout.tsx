@@ -27,7 +27,7 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="theme-lavender-base"
-          themes={['theme-lavender-base', 'theme-lavender-light', 'theme-lavender-deep', 'theme-lavender-night', 'theme-soft-blue', 'theme-pink-lavender', 'theme-deep-forest']}
+          themes={['theme-lavender-base', 'theme-lavender-light', 'theme-lavender-vivid', 'theme-lavender-deep', 'theme-lavender-night', 'theme-soft-blue', 'theme-pink-lavender', 'theme-deep-forest']}
           enableSystem={false}
           disableTransitionOnChange
         >

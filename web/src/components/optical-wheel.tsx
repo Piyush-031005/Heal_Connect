@@ -3,18 +3,21 @@
 import { useState } from 'react';
 
 const MODALITIES = [
-  { id: 'astrology', name: 'Astrology', image: '/12-modalities-v2/astrology-v3.png' },
-  { id: 'tarot', name: 'Tarot', image: '/12-modalities-v2/tarot-v3.png' },
-  { id: 'palm-reading', name: 'Palm Reading', image: '/12-modalities-v2/palm.png' },
-  { id: 'face-reading', name: 'Face Reading', image: '/12-modalities-v2/face-v3.png' },
-  { id: 'numerology', name: 'Numerology', image: '/12-modalities-v2/numerology.png' },
-  { id: 'energy-healing', name: 'Energy Healing', image: '/12-modalities-v2/energy.png' },
-  { id: 'meditation', name: 'Meditation', image: '/12-modalities-v2/meditation.png' },
-  { id: 'yoga', name: 'Yoga', image: '/12-modalities-v2/yoga.png' },
-  { id: 'vastu', name: 'Vastu', image: '/12-modalities-v2/vastu.png' },
-  { id: 'eft', name: 'EFT Tapping', image: '/12-modalities-v2/eft.png' },
-  { id: 'spiritual', name: 'Spiritual Guide', image: '/12-modalities-v2/spiritual.png' },
-  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-v2/sound-v3.png' },
+  { id: 'astrology', name: 'Astrology', image: '/12-modalities-updates/astrology.png' },
+  { id: 'tarot', name: 'Tarot', image: '/12-modalities-updates/tarot.png' },
+  { id: 'palm-reading', name: 'Palm Reading', image: '/12-modalities-updates/plamreading.png' },
+  { id: 'face-reading', name: 'Face Reading', image: '/12-modalities-updates/facereading.png' },
+  { id: 'numerology', name: 'Numerology', image: '/12-modalities-updates/numeriology.png' },
+  { id: 'energy-healing', name: 'Energy Healing', image: '/12-modalities-updates/energy healing.png' },
+  { id: 'meditation', name: 'Meditation', image: '/12-modalities-updates/medidation.png' },
+  { id: 'yoga', name: 'Yoga', image: '/12-modalities-updates/yoga.png' },
+  { id: 'chakra-healing', name: 'Chakra', image: '/12-modalities-updates/chakrahealing.png' },
+  { id: 'eft', name: 'EFT Tapping', image: '/12-modalities-updates/eft.png' },
+  { id: 'spiritual', name: 'Spiritual Guide', image: '/12-modalities-updates/spiritual.png' },
+  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-updates/sound.png' },
+  { id: 'breathwork', name: 'Breathwork', image: '/12-modalities-updates/breathwork.png' },
+  { id: 'dreams', name: 'Dreams', image: '/12-modalities-updates/dream_prediction.png' },
+  { id: 'space-harmony', name: 'Space Harmony', image: '/12-modalities-updates/space_harmony.png' },
 ];
 
 export default function OpticalWheel() {
@@ -111,9 +114,9 @@ export default function OpticalWheel() {
             <circle cx={cx} cy={cy} r={4} fill="#6366F1" />
           </g>
 
-          <g style={{ animation: 'spin 120s linear infinite', animationPlayState: playState, transformOrigin: '500px 500px' }}>
+          <g style={{ animation: 'spin 40s linear infinite', animationPlayState: playState, transformOrigin: '500px 500px' }}>
             {MODALITIES.map((modality, idx) => {
-              const angle = (idx * 30 - 90) * (Math.PI / 180);
+              const angle = (idx * 24 - 90) * (Math.PI / 180);
               const x = cx + outerRadius * Math.cos(angle);
               const y = cy + outerRadius * Math.sin(angle);
               const isHovered = hoveredIdx === idx;
@@ -127,21 +130,21 @@ export default function OpticalWheel() {
                   onClick={() => handleScrollTo(modality.id)}
                   className="transition-all duration-500 ease-out cursor-pointer group"
                 >
-                  <g style={{ animation: 'spin 120s linear infinite reverse', animationPlayState: playState, transformOrigin: '0px 0px' }}>
+                  <g style={{ animation: 'spin 40s linear infinite reverse', animationPlayState: playState, transformOrigin: '0px 0px' }}>
                     
                     {/* Hit Area */}
-                    <circle cx="0" cy="0" r="90" fill="transparent" pointerEvents="all" />
+                    <circle cx="0" cy="0" r="110" fill="transparent" pointerEvents="all" />
                     
                     {/* Button Background - Changed to light theme */}
-                    <circle cx="0" cy="0" r="85" className="fill-white transition-all duration-300 shadow-xl" stroke="#312E81" opacity={isHovered ? "0.9" : "0.35"} strokeWidth={isHovered ? "3" : "1.5"} style={{ filter: 'drop-shadow(0px 8px 24px rgba(78,89,194,0.4))' }} />
+                    <circle cx="0" cy="0" r="100" className="fill-white transition-all duration-300 shadow-xl" stroke="#312E81" opacity={isHovered ? "0.9" : "0.35"} strokeWidth={isHovered ? "3" : "1.5"} style={{ filter: 'drop-shadow(0px 8px 24px rgba(78,89,194,0.4))' }} />
                     
                     {/* Glowing Aura on Hover */}
-                    <circle cx="0" cy="0" r="95" className="fill-transparent transition-all duration-300 blur-[3px]" stroke="#312E81" opacity={isHovered ? "0.5" : "0"} strokeWidth="3" />
+                    <circle cx="0" cy="0" r="110" className="fill-transparent transition-all duration-300 blur-[3px]" stroke="#312E81" opacity={isHovered ? "0.5" : "0"} strokeWidth="3" />
                     
                     {/* Outer animated dots on hover */}
                     <g className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ animation: 'spin 10s linear infinite', transformOrigin: '0px 0px' }}>
                       {[0, 1, 2, 3].map((d) => (
-                        <circle key={d} cx={90 * Math.cos(d * Math.PI/2)} cy={90 * Math.sin(d * Math.PI/2)} r="4" fill="#312E81" />
+                        <circle key={d} cx={105 * Math.cos(d * Math.PI/2)} cy={105 * Math.sin(d * Math.PI/2)} r="4" fill="#312E81" />
                       ))}
                     </g>
 
@@ -149,16 +152,16 @@ export default function OpticalWheel() {
                     <g clipPath="url(#node-circle-clip)">
                       <image 
                         href={`${modality.image}?v=5`} 
-                        x="-75" 
-                        y="-75" 
-                        width="150" 
-                        height="150" 
+                        x="-100" 
+                        y="-100" 
+                        width="200" 
+                        height="200" 
                         className={`transition-all duration-300 ${isHovered ? 'scale-110 drop-shadow-2xl' : 'opacity-100'}`}
                       />
                     </g>
 
                     {/* Node Text Label (Floating Button Style) */}
-                    <foreignObject x="-90" y="100" width="180" height="50" className={`pointer-events-none overflow-visible transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+                    <foreignObject x="-100" y="115" width="200" height="50" className={`pointer-events-none overflow-visible transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
                       <div className="w-full flex justify-center">
                         <span className="bg-white border-2 border-indigo-200 text-[#312E81] text-sm font-bold px-6 py-2 rounded-full shadow-2xl whitespace-nowrap">
                           {modality.name}

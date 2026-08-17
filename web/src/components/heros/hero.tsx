@@ -822,7 +822,8 @@ function FinalHybridHero() {
                     >
                       {/* Counter-rotate the icon so it always faces upright */}
                       <motion.div
-                        animate={{ rotate: -360 }}
+                        initial={{ rotate: -angle }}
+                        animate={{ rotate: -(360 + angle) }}
                         transition={{ repeat: Infinity, duration: 28, ease: 'linear' }}
                         className="flex flex-col items-center -mt-10"
                       >

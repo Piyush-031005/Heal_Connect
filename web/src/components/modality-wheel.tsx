@@ -17,18 +17,21 @@ import {
 } from 'lucide-react';
 
 const MODALITIES = [
-  { id: 'astrology', name: 'Astrology', image: '/12-modalities/astrology.png' },
-  { id: 'tarot', name: 'Tarot Reading', image: '/12-modalities/tarocard.png' },
-  { id: 'palm-reading', name: 'Palm Reading', image: '/12-modalities/ai-match.png' },
-  { id: 'face-reading', name: 'Face Reading', image: '/12-modalities/face reading.png' },
-  { id: 'numerology', name: 'Numerology', image: '/12-modalities/numeriology.png' },
-  { id: 'healing', name: 'Energy Healing', image: '/12-modalities/energy healing.png' },
-  { id: 'meditation', name: 'Meditation & Breathwork', image: '/12-modalities/medidation and breathing.png' },
-  { id: 'yoga', name: 'Yoga & Mindfulness', image: '/12-modalities/yoga.png' },
-  { id: 'vastu', name: 'Vastu & Space Energy', image: '/12-modalities/vastu.png' },
-  { id: 'eft', name: 'EFT Tapping', image: '/12-modalities/eft.png' },
-  { id: 'spiritual', name: 'Spiritual Guidance', image: '/12-modalities/spitutality.png' },
-  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities/sound.png' },
+  { id: 'astrology', name: 'Astrology', image: '/12-modalities-updates/astrology.png' },
+  { id: 'tarot', name: 'Tarot', image: '/12-modalities-updates/tarot.png' },
+  { id: 'palm-reading', name: 'Palm Reading', image: '/12-modalities-updates/plamreading.png' },
+  { id: 'face-reading', name: 'Face Reading', image: '/12-modalities-updates/facereading.png' },
+  { id: 'numerology', name: 'Numerology', image: '/12-modalities-updates/numeriology.png' },
+  { id: 'energy-healing', name: 'Energy Healing', image: '/12-modalities-updates/energy healing.png' },
+  { id: 'meditation', name: 'Meditation', image: '/12-modalities-updates/medidation.png' },
+  { id: 'yoga', name: 'Yoga', image: '/12-modalities-updates/yoga.png' },
+  { id: 'chakra-healing', name: 'Chakra', image: '/12-modalities-updates/chakrahealing.png' },
+  { id: 'eft', name: 'EFT Tapping', image: '/12-modalities-updates/eft.png' },
+  { id: 'spiritual', name: 'Spiritual Guide', image: '/12-modalities-updates/spiritual.png' },
+  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-updates/sound.png' },
+  { id: 'breathwork', name: 'Breathwork', image: '/12-modalities-updates/breathwork.png' },
+  { id: 'dreams', name: 'Dreams', image: '/12-modalities-updates/dream_prediction.png' },
+  { id: 'space-harmony', name: 'Space Harmony', image: '/12-modalities-updates/space_harmony.png' },
 ];
 
 export default function ModalityWheel() {
@@ -57,7 +60,7 @@ export default function ModalityWheel() {
       {/* Rotating Wheel Container */}
       <div 
         className="absolute inset-0 z-10 cursor-pointer group"
-        style={{ animation: 'spin 120s linear infinite', animationPlayState: playState }}
+        style={{ animation: 'spin 40s linear infinite', animationPlayState: playState }}
       >
         <svg viewBox="0 0 800 800" className="w-full h-full overflow-visible">
           {/* Theme-specific background (e.g. white for deep lavender) */}
@@ -114,7 +117,7 @@ export default function ModalityWheel() {
 
           {/* Modality Nodes around the track */}
           {MODALITIES.map((modality, idx) => {
-            const angle = (idx * 30 - 90) * (Math.PI / 180); // Start at top
+            const angle = (idx * 24 - 90) * (Math.PI / 180); // Start at top
             const x = (cx + radius * Math.cos(angle)).toFixed(2);
             const y = (cy + radius * Math.sin(angle)).toFixed(2);
             const isHovered = hoveredIdx === idx;
@@ -133,15 +136,15 @@ export default function ModalityWheel() {
                 }}
               >
                 {/* Counter-rotate group to keep upright */}
-                <g style={{ animation: 'spin 120s linear infinite reverse', animationPlayState: playState }}>
+                <g style={{ animation: 'spin 40s linear infinite reverse', animationPlayState: playState }}>
                   {/* Invisible hit area - increased size for easier hover */}
-                  <circle cx="0" cy="0" r="60" fill="transparent" pointerEvents="all" />
+                  <circle cx="0" cy="0" r="80" fill="transparent" pointerEvents="all" />
                   
                   {/* Node Background */}
                   <circle 
                     cx="0" 
                     cy="0" 
-                    r="40" 
+                    r="60" 
                     className={`transition-all duration-300 backdrop-blur-md ${isHovered ? "fill-primary/20 stroke-primary" : "fill-background/90 stroke-primary/30"}`} 
                     strokeWidth="1.5" 
                   />
@@ -164,7 +167,7 @@ export default function ModalityWheel() {
                   {/* Modality Name */}
                   <text
                     x="0"
-                    y="24"
+                    y="40"
                     textAnchor="middle"
                     dominantBaseline="middle"
                     className="fill-foreground font-sans tracking-wide pointer-events-none transition-all duration-300 shadow-sm"
