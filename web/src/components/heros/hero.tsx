@@ -688,7 +688,7 @@ function FinalHybridHero() {
   return (
     <section 
       ref={containerRef}
-      className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 bg-[#4D316B] min-h-[95vh] flex items-center justify-center overflow-hidden"
+      className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 bg-background transition-colors duration-500 min-h-[95vh] flex items-center justify-center overflow-hidden"
     >
       {/* Background glow effects */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#694091]/20 rounded-full blur-[150px] pointer-events-none" />
@@ -708,23 +708,23 @@ function FinalHybridHero() {
             <div className="flex flex-wrap items-center gap-3 mb-6">
               <Link
                 href="/practitioners"
-                className="bg-[#B79AE6]/20 text-[#D1BDEB] border border-[#B79AE6]/40 px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#B79AE6]/30 transition-all flex items-center gap-2"
+                className="bg-primary/20 text-primary border border-primary/40 px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary/30 transition-all flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
                 Start Chat
               </Link>
               <Link
                 href="/practitioners"
-                className="bg-[#B79AE6] text-[#4D316B] px-5 py-2 rounded-full text-sm font-semibold shadow-sm hover:brightness-110 transition-all flex items-center gap-2"
+                className="bg-primary text-primary-foreground px-5 py-2 rounded-full text-sm font-semibold shadow-sm hover:brightness-110 transition-all flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                 Start Calling
               </Link>
             </div>
 
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#694091]/30 border border-[#694091]/50 mb-8 backdrop-blur-sm">
-              <Sparkles className="w-4 h-4 text-[#B79AE6]" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B79AE6]">Premium Consultation</span>
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-8 backdrop-blur-sm">
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary">Premium Consultation</span>
             </div>
 
             {/* Typography from very old layout */}
@@ -732,18 +732,18 @@ function FinalHybridHero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="text-6xl md:text-8xl font-serif font-medium tracking-tight text-[#F8F7FA] mb-6 leading-[1.1]"
+              className="text-6xl md:text-8xl font-serif font-medium tracking-tight text-foreground mb-6 leading-[1.1] transition-colors duration-500"
             >
               Guidance.<br/>
               Clarity.<br/>
-              <span className="text-[#B79AE6] italic">Confidence.</span>
+              <span className="text-primary italic transition-colors duration-500">Confidence.</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.45 }}
-              className="text-lg md:text-xl font-medium text-[#B79AE6] max-w-md mb-12 leading-relaxed"
+              className="text-lg md:text-xl font-medium text-muted-foreground max-w-md mb-12 leading-relaxed transition-colors duration-500"
             >
               Find trusted guidance for every stage of life. Connect with verified experts instantly.
             </motion.p>
@@ -753,26 +753,26 @@ function FinalHybridHero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.1, duration: 0.8 }}
-              className="flex items-center gap-8 pt-8 border-t border-[#694091]"
+              className="flex items-center gap-8 pt-8 border-t border-primary/30 transition-colors duration-500"
             >
               <div>
-                <p className="text-2xl font-serif text-[#F8F7FA]">4.9★</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B79AE6]">Rating</p>
+                <p className="text-2xl font-serif text-foreground">4.9★</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Rating</p>
               </div>
-              <div className="w-px h-8 bg-[#694091]" />
+              <div className="w-px h-8 bg-primary/30" />
               <div>
-                <p className="text-2xl font-serif text-[#F8F7FA]">100k+</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B79AE6]">Consultations</p>
+                <p className="text-2xl font-serif text-foreground">100k+</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Consultations</p>
               </div>
-              <div className="w-px h-8 bg-[#694091]" />
+              <div className="w-px h-8 bg-primary/30" />
               <div>
-                <p className="text-2xl font-serif text-[#F8F7FA]">500+</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B79AE6]">Experts</p>
+                <p className="text-2xl font-serif text-foreground">500+</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Experts</p>
               </div>
-              <div className="w-px h-8 bg-[#694091]" />
+              <div className="w-px h-8 bg-primary/30" />
               <div>
-                <p className="text-2xl font-serif text-[#F8F7FA]">24x7</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B79AE6]">Availability</p>
+                <p className="text-2xl font-serif text-foreground">24x7</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Availability</p>
               </div>
             </motion.div>
           </motion.div>
@@ -797,8 +797,8 @@ function FinalHybridHero() {
               {/* THE REVOLVING ORBIT — the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 28, ease: 'linear' }}
-                className="absolute w-[88%] h-[88%] rounded-full border border-[#B79AE6]/20"
+                transition={{ repeat: Infinity, duration: 15, ease: 'linear' }}
+                className="absolute w-[88%] h-[88%] rounded-full border border-primary/20 transition-colors duration-500"
               >
                 {[
                   { img: '/12-modalities-updates/astrology.png',       label: 'Astrology' },
@@ -815,24 +815,24 @@ function FinalHybridHero() {
                 ].map((mod, i, arr) => {
                   const angle = (i * 360) / arr.length;
                   return (
-                    <motion.div
+                    <div
                       key={i}
-                      className="absolute inset-0 flex justify-center"
+                      className="absolute inset-0 flex justify-center origin-center"
                       style={{ transform: `rotate(${angle}deg)` }}
                     >
                       {/* Counter-rotate the icon so it always faces upright */}
                       <motion.div
                         initial={{ rotate: -angle }}
                         animate={{ rotate: -(360 + angle) }}
-                        transition={{ repeat: Infinity, duration: 28, ease: 'linear' }}
+                        transition={{ repeat: Infinity, duration: 15, ease: 'linear' }}
                         className="flex flex-col items-center -mt-10"
                       >
-                        <div className="w-20 h-20 rounded-full bg-[#5C2E8A]/80 border-2 border-[#B79AE6]/70 overflow-hidden shadow-[0_0_25px_rgba(183,154,230,0.6)] flex items-center justify-center">
+                        <div className="w-16 h-16 rounded-full bg-background border-2 border-primary/70 overflow-hidden shadow-[0_0_25px_rgba(var(--primary),0.6)] flex items-center justify-center transition-colors duration-500">
                           <img src={mod.img} alt={mod.label} className="w-full h-full object-cover" />
                         </div>
-                        <span className="text-[10px] font-bold text-[#E5D9F2] mt-2 tracking-wide whitespace-nowrap drop-shadow-md">{mod.label}</span>
+                        <span className="text-[10px] font-bold text-foreground mt-2 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500">{mod.label}</span>
                       </motion.div>
-                    </motion.div>
+                    </div>
                   );
                 })}
               </motion.div>
