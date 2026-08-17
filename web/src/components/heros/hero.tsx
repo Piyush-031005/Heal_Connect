@@ -817,7 +817,7 @@ function FinalHybridHero() {
                   return (
                     <div
                       key={i}
-                      className="absolute inset-0 flex justify-center origin-center"
+                      className="absolute inset-0 flex justify-center items-start origin-center"
                       style={{ transform: `rotate(${angle}deg)` }}
                     >
                       {/* Counter-rotate the icon so it always faces upright */}
@@ -827,7 +827,7 @@ function FinalHybridHero() {
                         transition={{ repeat: Infinity, duration: 15, ease: 'linear' }}
                         className="flex flex-col items-center -mt-10"
                       >
-                        <div className="w-16 h-16 rounded-full bg-background border-2 border-primary/70 overflow-hidden shadow-[0_0_25px_rgba(var(--primary),0.6)] flex items-center justify-center transition-colors duration-500">
+                        <div className="w-20 h-20 rounded-full bg-background border-2 border-primary/70 overflow-hidden shadow-[0_0_25px_rgba(var(--primary),0.6)] flex items-center justify-center transition-colors duration-500">
                           <img src={mod.img} alt={mod.label} className="w-full h-full object-cover" />
                         </div>
                         <span className="text-[10px] font-bold text-foreground mt-2 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500">{mod.label}</span>
@@ -850,7 +850,7 @@ function FinalHybridHero() {
                 transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
                 className="absolute w-[40%] h-[40%] rounded-full flex items-center justify-center z-20"
               >
-                <div className="relative w-[160%] h-[160%] z-10">
+                <div className="relative w-[100%] h-[100%] z-10">
                   <Image
                     src="/lavender_logo.png"
                     alt="Zenauraa Logo"
