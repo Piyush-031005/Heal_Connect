@@ -449,7 +449,7 @@ function ZenAlignHero() {
             <div className="absolute inset-0 m-auto w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle,rgba(26,146,198,0.15)_0%,rgba(99,191,228,0.05)_50%,transparent_70%)] blur-2xl z-0" />
 
             {/* Wheel Container */}
-            <div className="relative w-[90%] max-w-[550px] aspect-square flex items-center justify-center rounded-full z-10">
+            <div className="relative w-[95%] max-w-[700px] aspect-square flex items-center justify-center rounded-full z-10">
               
               {/* Outer Dashed Ring 1 */}
               <motion.div
@@ -789,7 +789,7 @@ function FinalHybridHero() {
             <div className="absolute inset-0 m-auto w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle,rgba(183,154,230,0.18)_0%,rgba(105,64,145,0.35)_50%,transparent_70%)] blur-2xl z-0" />
 
             {/* Wheel Container */}
-            <div className="relative w-[90%] max-w-[550px] aspect-square flex items-center justify-center rounded-full z-10">
+            <div className="relative w-[95%] max-w-[700px] aspect-square flex items-center justify-center rounded-full z-10">
               
               {/* Outer Dashed Ring */}
               <div className="absolute w-full h-full rounded-full border border-dashed border-[#B79AE6]/25" />
@@ -826,12 +826,12 @@ function FinalHybridHero() {
                         initial={{ rotate: -angle }}
                         animate={{ rotate: -(360 + angle) }}
                         transition={{ repeat: Infinity, duration: 25, ease: 'linear' }}
-                        className="flex flex-col items-center -mt-10 group cursor-pointer"
+                        className="flex flex-col items-center -mt-12 group cursor-pointer"
                       >
-                        <Link href={`/modalities/${mod.id}`} className="w-28 h-28 flex items-center justify-center transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)]">
+                        <Link href={`/modalities/${mod.id}`} className="w-32 h-32 flex items-center justify-center transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)]">
                           <img src={mod.img} alt={mod.label} className="w-full h-full object-contain group-hover:brightness-125 transition-all" />
                         </Link>
-                        <span className="text-xs font-bold text-foreground mt-2 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500">{mod.label}</span>
+                        <span className="text-[13px] font-bold text-foreground mt-2 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500">{mod.label}</span>
                       </motion.div>
                     </motion.div>
                   );

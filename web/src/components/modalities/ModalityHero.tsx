@@ -39,8 +39,8 @@ export default function ModalityHero({ data }: Props) {
         </AnimatePresence>
         
         {/* Deep overlay to ensure text readability while maintaining theme color */}
-        <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px] transition-colors duration-500" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent transition-colors duration-500" />
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] transition-colors duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent transition-colors duration-500" />
       </div>
 
       {/* Content */}
