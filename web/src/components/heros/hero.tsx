@@ -788,8 +788,8 @@ function FinalHybridHero() {
             {/* Lavender glow */}
             <div className="absolute top-1/2 right-0 translate-x-[30%] -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)] blur-3xl z-0" />
 
-            {/* Wheel Container - MASSIVE HALF ARC (Slightly Reduced Size) */}
-            <div className="absolute top-1/2 right-0 translate-x-[35%] md:translate-x-[30%] lg:translate-x-[25%] -translate-y-1/2 w-[400px] h-[400px] md:w-[600px] md:h-[600px] lg:w-[750px] lg:h-[750px] flex items-center justify-center rounded-full z-10 pointer-events-none">
+            {/* Wheel Container - MASSIVE HALF ARC */}
+            <div className="absolute top-1/2 right-0 translate-x-[35%] md:translate-x-[30%] lg:translate-x-[25%] -translate-y-1/2 w-[650px] h-[650px] md:w-[900px] md:h-[900px] lg:w-[1150px] lg:h-[1150px] flex items-center justify-center rounded-full z-10 pointer-events-none">
               
               {/* Outer Dashed Ring */}
               <div className="absolute w-[95%] h-[95%] rounded-full border border-dashed border-[#B79AE6]/30 pointer-events-none" />
@@ -841,19 +841,37 @@ function FinalHybridHero() {
                 })}
               </motion.div>
 
-              {/* Central Logo */}
+              {/* Central Logo Area */}
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-                className="absolute w-[25%] h-[25%] rounded-full flex items-center justify-center z-20 pointer-events-auto"
+                className="absolute w-[28%] h-[28%] rounded-full flex items-center justify-center z-20 pointer-events-auto"
               >
-                <div className="relative w-full h-full z-10 flex items-center justify-center">
-                  <Image
-                    src="/this_is_the_logo.png"
-                    alt="HealConnect Logo"
-                    fill
-                    className="object-contain drop-shadow-[0_10px_30px_rgba(183,154,230,0.6)] hover:scale-105 transition-transform duration-500 cursor-pointer"
-                  />
+                {/* Geometric Star Pattern Behind Logo */}
+                <motion.div 
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 120, ease: 'linear' }}
+                  className="absolute inset-0 w-full h-full"
+                >
+                  <div className="absolute inset-0 w-full h-full border border-primary/30 rotate-0 rounded-sm" />
+                  <div className="absolute inset-0 w-full h-full border border-primary/30 rotate-[30deg] rounded-sm" />
+                  <div className="absolute inset-0 w-full h-full border border-primary/30 rotate-[60deg] rounded-sm" />
+                </motion.div>
+
+                {/* Glowing Dark Center Circle */}
+                <div className="absolute w-[80%] h-[80%] rounded-full bg-[#0B1520] shadow-[0_0_80px_rgba(var(--primary),0.3)] border border-primary/40 flex items-center justify-center">
+                  {/* Additional inner glow */}
+                  <div className="absolute inset-0 rounded-full shadow-[inset_0_0_30px_rgba(var(--primary),0.2)]" />
+                  
+                  {/* The Logo */}
+                  <div className="relative w-[85%] h-[85%] z-10 flex items-center justify-center">
+                    <Image
+                      src="/this_is_the_logo.png"
+                      alt="HealConnect Logo"
+                      fill
+                      className="object-contain drop-shadow-[0_10px_20px_rgba(var(--primary),0.6)] hover:scale-105 hover:drop-shadow-[0_15px_30px_rgba(var(--primary),0.8)] transition-all duration-500 cursor-pointer"
+                    />
+                  </div>
                 </div>
               </motion.div>
 
