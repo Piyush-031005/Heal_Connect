@@ -789,7 +789,7 @@ function FinalHybridHero() {
             <div className="absolute top-1/2 right-0 translate-x-[30%] -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)] blur-3xl z-0" />
 
             {/* Wheel Container - MASSIVE HALF ARC */}
-            <div className="absolute top-1/2 right-0 translate-x-[35%] md:translate-x-[30%] lg:translate-x-[25%] -translate-y-1/2 w-[650px] h-[650px] md:w-[900px] md:h-[900px] lg:w-[1150px] lg:h-[1150px] flex items-center justify-center rounded-full z-10 pointer-events-none">
+            <div className="absolute top-1/2 right-0 translate-x-[35%] md:translate-x-[30%] lg:translate-x-[25%] -translate-y-1/2 w-[600px] h-[600px] md:w-[750px] md:h-[750px] lg:w-[900px] lg:h-[900px] flex items-center justify-center rounded-full z-10 pointer-events-none">
               
               {/* Outer Dashed Ring */}
               <div className="absolute w-[95%] h-[95%] rounded-full border border-dashed border-[#B79AE6]/30 pointer-events-none" />
@@ -858,13 +858,11 @@ function FinalHybridHero() {
                   <div className="absolute inset-0 w-full h-full border border-primary/30 rotate-[60deg] rounded-sm" />
                 </motion.div>
 
-                {/* Glowing Dark Center Circle */}
-                <div className="absolute w-[80%] h-[80%] rounded-full bg-[#0B1520] shadow-[0_0_80px_rgba(var(--primary),0.3)] border border-primary/40 flex items-center justify-center">
-                  {/* Additional inner glow */}
-                  <div className="absolute inset-0 rounded-full shadow-[inset_0_0_30px_rgba(var(--primary),0.2)]" />
+                {/* Glowing Aura without Black Ring */}
+                <div className="absolute w-[80%] h-[80%] rounded-full flex items-center justify-center">
                   
                   {/* The Logo */}
-                  <div className="relative w-[85%] h-[85%] z-10 flex items-center justify-center">
+                  <div className="relative w-full h-full z-10 flex items-center justify-center">
                     <Image
                       src="/this_is_the_logo.png"
                       alt="HealConnect Logo"
