@@ -788,14 +788,9 @@ function FinalHybridHero() {
             {/* Lavender glow */}
             <div className="absolute top-1/2 right-0 translate-x-[30%] -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)] blur-3xl z-0" />
 
-            {/* Wheel Container - MASSIVE HALF ARC */}
-            <div className="absolute top-1/2 right-0 translate-x-[40%] md:translate-x-[35%] lg:translate-x-[30%] -translate-y-1/2 w-[900px] h-[900px] md:w-[1200px] md:h-[1200px] lg:w-[1400px] lg:h-[1400px] flex items-center justify-center rounded-full z-10 pointer-events-none">
+            {/* Wheel Container - MASSIVE HALF ARC (Slightly Reduced Size) */}
+            <div className="absolute top-1/2 right-0 translate-x-[35%] md:translate-x-[30%] lg:translate-x-[25%] -translate-y-1/2 w-[750px] h-[750px] md:w-[950px] md:h-[950px] lg:w-[1100px] lg:h-[1100px] flex items-center justify-center rounded-full z-10 pointer-events-none">
               
-              {/* Zodiac Background Image */}
-              <div className="absolute inset-0 w-full h-full rounded-full overflow-hidden opacity-40 mix-blend-screen pointer-events-none">
-                <img src="/zodiac-masterpiece.png" alt="Zodiac Background" className="w-full h-full object-cover scale-110" />
-              </div>
-
               {/* Outer Dashed Ring */}
               <div className="absolute w-[95%] h-[95%] rounded-full border border-dashed border-[#B79AE6]/30 pointer-events-none" />
               
