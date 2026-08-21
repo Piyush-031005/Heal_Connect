@@ -739,6 +739,104 @@ function FinalHybridHero() {
               <span className="text-primary italic transition-colors duration-500">Confidence.</span>
             </motion.h1>
 
+            {/* RIGHT: Cosmic Wheel Graphic (Adapted to Half-Arc) */}
+          <motion.div
+            style={{ y: yImage }}
+            initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+            className="flex lg:hidden relative w-full items-center justify-center z-0 my-8 overflow-visible"
+          >
+            {/* Lavender glow */}
+            <div className="absolute top-1/2 lg:right-0 lg:translate-x-[30%] -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)] blur-3xl z-0" />
+
+            {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
+            <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[25%] w-[450px] h-[450px] sm:w-[550px] sm:h-[550px] md:w-[700px] md:h-[700px] lg:w-[900px] lg:h-[900px] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0">
+              
+              {/* Outer Dashed Ring */}
+              <div className="absolute w-[95%] h-[95%] rounded-full border border-dashed border-[#B79AE6]/30 pointer-events-none" />
+              
+              {/* Inner Thin Ring */}
+              <div className="absolute w-[75%] h-[75%] rounded-full border border-[#B79AE6]/20 pointer-events-none" />
+
+              {/* THE REVOLVING ORBIT — the whole ring spins, icons counter-rotate to stay upright */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
+                className="absolute w-[95%] h-[95%] rounded-full transition-colors duration-500 pointer-events-none"
+              >
+                {[
+                  { img: '/12-modalities-updates/astrology.png',       label: 'Astrology',     id: 'astrology' },
+                  { img: '/12-modalities-updates/tarot.png',            label: 'Tarot',         id: 'tarot' },
+                  { img: '/12-modalities-updates/facereading.png',      label: 'Face Reading',  id: 'face-reading' },
+                  { img: '/12-modalities-updates/plamreading.png',      label: 'Palm Reading',  id: 'palm-reading' },
+                  { img: '/12-modalities-updates/sound.png',            label: 'Sound Healing', id: 'sound-healing' },
+                  { img: '/12-modalities-updates/medidation.png',       label: 'Meditation',    id: 'meditation' },
+                  { img: '/12-modalities-updates/spiritual.png',        label: 'Spiritual',     id: 'spiritual' },
+                  { img: '/12-modalities-updates/chakrahealing.png',    label: 'Chakra',        id: 'chakra-healing' },
+                  { img: '/12-modalities-updates/breathwork.png',       label: 'Breathwork',    id: 'breathwork' },
+                  { img: '/12-modalities-updates/dream_prediction.png', label: 'Dreams',        id: 'dreams' },
+                  { img: '/12-modalities-updates/space_harmony.png',    label: 'Space Harmony', id: 'space-harmony' },
+                  { img: '/12-modalities-updates/numerology.png',       label: 'Numerology',    id: 'numerology' },
+                ].map((mod, i, arr) => {
+                  const angle = (i * 360) / arr.length;
+                  return (
+                    <motion.div
+                      key={i}
+                      className="absolute inset-0 flex justify-center items-start origin-center pointer-events-none"
+                      initial={{ rotate: angle }}
+                    >
+                      {/* Counter-rotate the icon so it always faces upright */}
+                      <motion.div
+                        initial={{ rotate: -angle }}
+                        animate={{ rotate: -(360 + angle) }}
+                        transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
+                        className="flex flex-col items-center -mt-12 md:-mt-16 group cursor-pointer pointer-events-auto"
+                      >
+                        <Link href={`/modalities/${mod.id}`} className="w-24 h-24 md:w-36 md:h-36 flex items-center justify-center transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)]">
+                          <img src={mod.img} alt={mod.label} className="w-full h-full object-contain group-hover:brightness-125 transition-all" />
+                        </Link>
+                        <span className="text-[14px] md:text-[16px] font-bold text-foreground mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500">{mod.label}</span>
+                      </motion.div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+
+              {/* Central Logo Area */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+                className="absolute w-[28%] h-[28%] rounded-full flex items-center justify-center z-20 pointer-events-auto"
+              >
+                {/* Geometric Star Pattern Behind Logo */}
+                <motion.div 
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 120, ease: 'linear' }}
+                  className="absolute inset-0 w-full h-full"
+                >
+                  <div className="absolute inset-0 w-full h-full border border-primary/30 rotate-0 rounded-sm" />
+                  <div className="absolute inset-0 w-full h-full border border-primary/30 rotate-[30deg] rounded-sm" />
+                  <div className="absolute inset-0 w-full h-full border border-primary/30 rotate-[60deg] rounded-sm" />
+                </motion.div>
+
+                {/* Glowing Aura without Black Ring */}
+                <div className="absolute w-[80%] h-[80%] rounded-full flex items-center justify-center">
+                  
+                  {/* The Logo */}
+                  <div className="relative w-full h-full z-10 flex items-center justify-center">
+                    <Image
+                      src="/this_is_the_logo.png"
+                      alt="HealConnect Logo"
+                      fill
+                      className="object-contain drop-shadow-[0_10px_20px_rgba(var(--primary),0.6)] hover:scale-105 hover:drop-shadow-[0_15px_30px_rgba(var(--primary),0.8)] transition-all duration-500 cursor-pointer"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+
+            </div>
+          </motion.div>
             <motion.p
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -753,26 +851,26 @@ function FinalHybridHero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.1, duration: 0.8 }}
-              className="flex items-center gap-8 pt-8 border-t border-primary/30 transition-colors duration-500"
+              className="flex items-center gap-3 sm:gap-6 lg:gap-8 pt-8 border-t border-primary/30 transition-colors duration-500 w-full overflow-x-auto scrollbar-hide pb-2"
             >
-              <div>
-                <p className="text-2xl font-serif text-foreground">4.9★</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Rating</p>
+              <div className="shrink-0">
+                <p className="text-xl md:text-2xl font-serif text-foreground">4.9★</p>
+                <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Rating</p>
               </div>
-              <div className="w-px h-8 bg-primary/30" />
-              <div>
-                <p className="text-2xl font-serif text-foreground">100k+</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Consultations</p>
+              <div className="w-px h-8 bg-primary/30 shrink-0" />
+              <div className="shrink-0">
+                <p className="text-xl md:text-2xl font-serif text-foreground">100k+</p>
+                <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Consultations</p>
               </div>
-              <div className="w-px h-8 bg-primary/30" />
-              <div>
-                <p className="text-2xl font-serif text-foreground">500+</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Experts</p>
+              <div className="w-px h-8 bg-primary/30 shrink-0" />
+              <div className="shrink-0">
+                <p className="text-xl md:text-2xl font-serif text-foreground">500+</p>
+                <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Experts</p>
               </div>
-              <div className="w-px h-8 bg-primary/30" />
-              <div>
-                <p className="text-2xl font-serif text-foreground">24x7</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Availability</p>
+              <div className="w-px h-8 bg-primary/30 shrink-0" />
+              <div className="shrink-0">
+                <p className="text-xl md:text-2xl font-serif text-foreground">24x7</p>
+                <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Availability</p>
               </div>
             </motion.div>
           </motion.div>
@@ -783,7 +881,7 @@ function FinalHybridHero() {
             initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
             animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 relative lg:absolute lg:inset-y-0 lg:right-0 w-full lg:h-full lg:pointer-events-none flex items-center justify-center z-0 mt-16 lg:mt-0"
+            className="hidden lg:flex lg:col-span-6 absolute inset-y-0 right-0 w-full h-full pointer-events-none items-center justify-center z-0"
           >
             {/* Lavender glow */}
             <div className="absolute top-1/2 lg:right-0 lg:translate-x-[30%] -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)] blur-3xl z-0" />

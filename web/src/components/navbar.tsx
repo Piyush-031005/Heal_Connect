@@ -368,6 +368,11 @@ export default function Navbar() {
 
           {/* Right: theme toggle + lang dropdown + profile */}
           <div className="flex items-center gap-2">
+            {isFinalHybrid && (
+              <Link href="/modalities/astrology" className="md:hidden text-[10px] sm:text-xs font-semibold text-[#F8F7FA] border border-[#B79AE6]/50 rounded-full px-2.5 py-1 whitespace-nowrap bg-[#694091]/30">
+                Free Insights
+              </Link>
+            )}
             {/* Theme Dropdown */}
             <div className="relative" ref={themeRef}>
               <button
