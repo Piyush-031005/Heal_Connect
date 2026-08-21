@@ -466,6 +466,8 @@ const MOD_NODES = [
 ];
 
 export function ModalityUniverse() {
+  const { theme } = useTheme();
+  const isNewColor = theme === 'theme-new-color';
   const [hovered, setHovered] = useState<(typeof MOD_NODES)[0] | null>(null);
 
   return (
