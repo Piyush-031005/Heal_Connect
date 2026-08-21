@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Star, Shield, Phone, MessageCircle } from 'lucide-react';
 
+import { useRouter } from 'next/navigation';
+
 const EXPERTS = [
   { name: 'Maya Sharma', role: 'Vedic Astrologer', rating: '4.9', reviews: '128k+', langs: 'English, Hindi', exp: '15+ Years', price: '₹120', available: true, img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop', badge: 'Celebrity' },
   { name: 'Arun Nair', role: 'Tarot & Crystals', rating: '5.0', reviews: '342k+', langs: 'English, Malayalam', exp: '20+ Years', price: '₹150', available: true, img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop', badge: 'Top Choice' },
@@ -13,6 +15,8 @@ const EXPERTS = [
 ];
 
 export function FinalHybridExperts() {
+  const router = useRouter();
+
   return (
     <section className="relative py-24 overflow-hidden border-b border-[#7A48AB]/50" style={{ background: 'linear-gradient(135deg, #B79AE6 0%, #7A48AB 50%, #694091 100%)' }}>
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#B79AE6]/10 rounded-full blur-[120px] pointer-events-none" />
@@ -40,7 +44,8 @@ export function FinalHybridExperts() {
           {EXPERTS.map((expert, idx) => (
             <div 
               key={idx} 
-              className="w-[260px] min-w-[260px] md:w-[320px] md:min-w-[320px] flex-shrink-0 snap-start bg-[#2D1B54] border border-[#4B2F6E] rounded-[2rem] p-6 relative group transition-all hover:bg-[#694091] hover:border-[#B79AE6]/50 shadow-lg"
+              onClick={() => router.push('/practitioners')}
+              className="w-[260px] min-w-[260px] md:w-[320px] md:min-w-[320px] flex-shrink-0 snap-start bg-[#2D1B54] border border-[#4B2F6E] rounded-[2rem] p-6 relative group transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(183,154,230,0.15)] hover:border-[#B79AE6]/50 shadow-lg cursor-pointer"
             >
               {/* Badges */}
               {expert.badge && (
@@ -90,11 +95,17 @@ export function FinalHybridExperts() {
 
               {/* Action Buttons */}
               <div className="flex items-center gap-3">
-                <button className="flex-1 bg-transparent border border-[#694091] text-[#F8F7FA] py-2.5 rounded-xl text-xs font-bold hover:bg-[#694091] hover:text-white transition-colors flex items-center justify-center gap-1.5">
+                <button 
+                  onClick={(e) => { e.stopPropagation(); router.push('/login'); }}
+                  className="flex-1 bg-transparent border border-[#694091] text-[#F8F7FA] py-2.5 rounded-xl text-xs font-bold hover:bg-[#B79AE6] hover:text-[#2D1B54] hover:border-[#B79AE6] transition-colors flex items-center justify-center gap-1.5"
+                >
                   <MessageCircle className="w-3.5 h-3.5" />
                   Chat
                 </button>
-                <button className="flex-1 bg-transparent border border-[#694091] text-[#F8F7FA] py-2.5 rounded-xl text-xs font-bold hover:bg-[#694091] hover:text-white transition-colors flex items-center justify-center gap-1.5">
+                <button 
+                  onClick={(e) => { e.stopPropagation(); router.push('/login'); }}
+                  className="flex-1 bg-transparent border border-[#694091] text-[#F8F7FA] py-2.5 rounded-xl text-xs font-bold hover:bg-[#B79AE6] hover:text-[#2D1B54] hover:border-[#B79AE6] transition-colors flex items-center justify-center gap-1.5"
+                >
                   <Phone className="w-3.5 h-3.5" />
                   Call
                 </button>
