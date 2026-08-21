@@ -479,7 +479,7 @@ export function ModalityUniverse() {
       <div className="container mx-auto px-6 lg:px-16 text-center mb-8 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#1A92C6]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1A92C6]">Modality Universe</span>
+          <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${isNewColor ? 'text-primary' : 'text-[#1A92C6]'}`}>Modality Universe</span>
           <div className="w-8 h-[2px] bg-[#1A92C6]" />
         </div>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-3">Explore What Speaks To You</h2>
@@ -837,11 +837,13 @@ const JOURNEY_PATHS = [
 ];
 
 export function YourNextDiscovery() {
+  const { theme } = useTheme();
+  const isNewColor = theme === 'theme-new-color';
   const [hovered, setHovered] = useState<string | null>('explore');
 
   return (
     <section className="relative py-32 overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #EDF8FC 0%, #CDE9F4 40%, #9FD6EE 100%)' }}>
+      style={isNewColor ? { background: 'linear-gradient(135deg, #F7F3FC 0%, #F2ECFB 40%, #ECE4F7 100%)' } : { background: 'linear-gradient(135deg, #EDF8FC 0%, #CDE9F4 40%, #9FD6EE 100%)' }}>
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(40)].map((_, i) => (
           <div key={i} className="absolute rounded-full bg-[#12527F]"
@@ -851,14 +853,14 @@ export function YourNextDiscovery() {
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <div className="text-center mb-20">
-          <div className="text-5xl mb-4 text-[#12527F]/15">✦ YOU ✦</div>
+          <div className={`text-5xl mb-4 ${isNewColor ? 'text-primary/15' : 'text-[#12527F]/15'}`}>✦ YOU ✦</div>
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-8 h-[2px] bg-[#1A92C6]" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1A92C6]">Your Next Discovery</span>
+            <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${isNewColor ? 'text-primary' : 'text-[#1A92C6]'}`}>Your Next Discovery</span>
             <div className="w-8 h-[2px] bg-[#1A92C6]" />
           </div>
-          <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F]">Where Will You Go Next?</h2>
-          <p className="text-[#17619A]/70 mt-4 text-base font-medium max-w-xl mx-auto">
+          <h2 className={`text-4xl md:text-6xl font-serif font-medium ${isNewColor ? 'text-foreground' : 'text-[#12527F]'}`}>Where Will You Go Next?</h2>
+          <p className={`mt-4 text-base font-medium max-w-xl mx-auto ${isNewColor ? 'text-muted-foreground' : 'text-[#17619A]/70'}`}>
             Three paths. One cosmic journey. Choose where to begin.
           </p>
         </div>

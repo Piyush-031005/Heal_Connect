@@ -756,7 +756,7 @@ function FinalHybridHero() {
             <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[30%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)]'}`} />
 
             {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
-            <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[25%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[450px] h-[450px] sm:w-[550px] sm:h-[550px] md:w-[600px] md:h-[600px] lg:w-[650px] lg:h-[650px]' : 'w-[550px] h-[550px] sm:w-[650px] sm:h-[650px] md:w-[750px] md:h-[750px] lg:w-[900px] lg:h-[900px]'}`}>
+            <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[25%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] md:w-[650px] md:h-[650px] lg:w-[750px] lg:h-[750px]' : 'w-[550px] h-[550px] sm:w-[650px] sm:h-[650px] md:w-[750px] md:h-[750px] lg:w-[900px] lg:h-[900px]'}`}>
               
               {/* Outer Dashed Ring */}
               <div className={`absolute w-[95%] h-[95%] rounded-full border border-dashed pointer-events-none ${isNewColor ? 'border-white/40' : 'border-[#B79AE6]/30'}`} />
@@ -892,7 +892,7 @@ function FinalHybridHero() {
             <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[30%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)]'}`} />
 
             {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
-            <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[25%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[450px] h-[450px] sm:w-[550px] sm:h-[550px] md:w-[600px] md:h-[600px] lg:w-[650px] lg:h-[650px]' : 'w-[550px] h-[550px] sm:w-[650px] sm:h-[650px] md:w-[750px] md:h-[750px] lg:w-[900px] lg:h-[900px]'}`}>
+            <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[25%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] md:w-[650px] md:h-[650px] lg:w-[750px] lg:h-[750px]' : 'w-[550px] h-[550px] sm:w-[650px] sm:h-[650px] md:w-[750px] md:h-[750px] lg:w-[900px] lg:h-[900px]'}`}>
               
               {/* Outer Dashed Ring */}
               <div className={`absolute w-[95%] h-[95%] rounded-full border border-dashed pointer-events-none ${isNewColor ? 'border-white/40' : 'border-[#B79AE6]/30'}`} />

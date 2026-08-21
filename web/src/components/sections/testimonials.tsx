@@ -3,6 +3,7 @@
 import React, { useRef } from 'react';
 import { useLang } from '@/lib/lang-context';
 import { useLayout } from '@/lib/layout-context';
+import { useTheme } from '@/components/theme-provider';
 import { TESTIMONIALS } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -10,6 +11,8 @@ import { ArrowRight } from 'lucide-react';
 export function Testimonials() {
   const { t } = useLang();
   const { layout } = useLayout();
+  const { theme } = useTheme();
+  const isNewColor = theme === 'theme-new-color';
   const scrollRef = useRef<HTMLDivElement>(null);
   
   const isFinalHybrid = layout === 'final-hybrid';
@@ -26,26 +29,26 @@ export function Testimonials() {
 
   return (
     <section 
-      className={`py-24 relative z-10 ${isFinalHybrid ? 'bg-fixed bg-center bg-cover border-none' : 'bg-card border-t border-border'}`}
-      style={isFinalHybrid ? { backgroundImage: "url('/hands-star-bg.png')" } : {}}
+      className={`py-24 relative z-10 ${(isFinalHybrid && !isNewColor) ? 'bg-fixed bg-center bg-cover border-none' : (isNewColor ? 'bg-background border-t border-primary/20' : 'bg-card border-t border-border')}`}
+      style={(isFinalHybrid && !isNewColor) ? { backgroundImage: "url('/hands-star-bg.png')" } : {}}
     >
       {/* Overlay for readability */}
-      {isFinalHybrid && <div className="absolute inset-0 bg-[#4D316B]/80 backdrop-blur-[2px] z-0" />}
+      {(isFinalHybrid && !isNewColor) && <div className="absolute inset-0 bg-[#4D316B]/80 backdrop-blur-[2px] z-0" />}
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 max-w-7xl mx-auto">
           <div className="max-w-2xl">
             {isFinalHybrid && (
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-[2px] bg-[#B79AE6]" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#B79AE6]">Global Impact</span>
+                <div className={`w-8 h-[2px] ${(isFinalHybrid && !isNewColor) ? 'bg-[#B79AE6]' : 'bg-primary'}`} />
+                <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${(isFinalHybrid && !isNewColor) ? 'text-[#B79AE6]' : 'text-primary'}`}>Global Impact</span>
               </div>
             )}
-            <h2 className="text-4xl md:text-5xl font-serif font-medium mb-4 text-foreground">
+            <h2 className={`text-4xl md:text-5xl font-serif font-medium mb-4 ${(isFinalHybrid && !isNewColor) ? 'text-white' : 'text-foreground'}`}>
               {t.testimonialTitle || "Stories of Healing"}
             </h2>
             <div className="w-12 h-0.5 bg-primary/40 mb-6" />
-            <p className="text-muted-foreground text-lg">
+            <p className={`text-lg ${(isFinalHybrid && !isNewColor) ? 'text-white/80' : 'text-muted-foreground'}`}>
               {t.testimonialSubtext || "Real experiences from our global community of seekers."}
             </p>
           </div>
@@ -66,7 +69,7 @@ export function Testimonials() {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {TESTIMONIALS.map((testi, idx) => (
-            <div key={idx} className={`w-[280px] md:w-[400px] shrink-0 snap-start rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-8 border hover:-translate-y-1 transition-all duration-500 group flex flex-col ${isFinalHybrid ? 'bg-[#7A48AB]/40 backdrop-blur-xl border-[#694091] shadow-xl hover:bg-[#7A48AB]/60 hover:border-[#B79AE6]/50' : 'bg-background border-border shadow-sm hover:shadow-lg hover:border-primary/30'}`}>
+            <div key={idx} className={`w-[280px] md:w-[400px] shrink-0 snap-start rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-8 border hover:-translate-y-1 transition-all duration-500 group flex flex-col ${(isFinalHybrid && !isNewColor) ? 'bg-[#7A48AB]/40 backdrop-blur-xl border-[#694091] shadow-xl hover:bg-[#7A48AB]/60 hover:border-[#B79AE6]/50' : 'bg-white border-primary/20 shadow-sm hover:shadow-lg hover:border-primary/40'}`}>
               <div className="flex gap-1 mb-4 md:mb-6 text-primary">
                 {[1, 2, 3, 4, 5].map(s => (
                   <svg key={s} className="w-3.5 h-3.5 md:w-4 md:h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 20 20">
@@ -74,7 +77,7 @@ export function Testimonials() {
                   </svg>
                 ))}
               </div>
-              <p className="text-foreground/80 leading-relaxed font-light mb-6 md:mb-8 flex-1 text-sm md:text-lg">
+              <p className={`leading-relaxed font-light mb-6 md:mb-8 flex-1 text-sm md:text-lg ${(isFinalHybrid && !isNewColor) ? 'text-white/90' : 'text-foreground/80'}`}>
                 "{testi.text}"
               </p>
               <div className="flex items-center gap-4 border-t border-border pt-6 mt-auto">
@@ -82,8 +85,8 @@ export function Testimonials() {
                   {testi.name.charAt(0)}
                 </div>
                 <div>
-                  <h4 className="font-bold text-foreground text-sm">{testi.name}</h4>
-                  <p className="text-muted-foreground text-xs uppercase tracking-wider mt-0.5">{testi.loc}</p>
+                  <h4 className={`font-bold text-sm ${(isFinalHybrid && !isNewColor) ? 'text-white' : 'text-foreground'}`}>{testi.name}</h4>
+                  <p className={`text-xs uppercase tracking-wider mt-0.5 ${(isFinalHybrid && !isNewColor) ? 'text-white/70' : 'text-muted-foreground'}`}>{testi.loc}</p>
                 </div>
               </div>
             </div>
