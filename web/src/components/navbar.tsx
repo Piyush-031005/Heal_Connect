@@ -74,7 +74,7 @@ export default function Navbar() {
   const { lang, setLang } = useLang();
   const { layout, setLayout } = useLayout();
   
-  const isDark = theme === 'dark' || theme === 'theme-lavender-night' || theme === 'theme-deep-forest' || layout === 'final-hybrid';
+  const isDark = theme === 'dark' || theme === 'theme-lavender-night' || theme === 'theme-deep-forest' || theme === 'theme-royal-indigo' || layout === 'final-hybrid';
   const isFinalHybrid = layout === 'final-hybrid';
   
   const [userProfile, setUserProfile] = useState<{ photoUrl: string | null; role: string; id: string; name: string | null } | null>(null);
@@ -181,7 +181,7 @@ export default function Navbar() {
         <div className="bg-gradient-to-br from-purple-300 to-orange-400 px-5 pt-6 pb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
-              <Image src="/new_center_logo.png" alt="Zenauraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
+              <Image src={theme === 'theme-royal-indigo' ? '/new_center_logo_dark.png' : '/new_center_logo.png'} alt="Zenauraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
               <span className="text-2xl font-serif font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide">Zenauraa</span>
             </div>
             <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
@@ -306,7 +306,7 @@ export default function Navbar() {
                 </svg>
               </button>
               <Link href="/" className="flex items-center gap-2">
-                <Image src="/new_center_logo.png" alt="Zenauraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
+                <Image src={theme === 'theme-royal-indigo' ? '/new_center_logo_dark.png' : '/new_center_logo.png'} alt="Zenauraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
                 <span className="text-2xl font-serif font-black bg-clip-text text-transparent bg-gradient-to-r from-[#B79AE6] via-[#E5D9F2] to-[#B79AE6] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105">Zenauraa</span>
               </Link>
             </div>
@@ -389,7 +389,8 @@ export default function Navbar() {
                   {([
                     { code: 'theme-lavender-base', label: 'Lavender Base' },
                     { code: 'theme-lavender-light', label: 'Lavender Light' },
-                    { code: 'theme-lavender-vivid', label: 'Lavender Vivid' }
+                    { code: 'theme-lavender-vivid', label: 'Lavender Vivid' },
+                    { code: 'theme-royal-indigo', label: 'Royal Indigo' }
                   ]).map((t) => (
                     <button
                       key={t.code}
@@ -403,7 +404,8 @@ export default function Navbar() {
                       <div className={`w-3.5 h-3.5 rounded-full ${
                         t.code === 'theme-lavender-base' ? 'bg-[#F4EEFB] border-[#8A64B5]' :
                         t.code === 'theme-lavender-light' ? 'bg-[#9B70C2] border-[#D7C2ED]' :
-                        'bg-[#C485F0] border-[#521094]'
+                        t.code === 'theme-lavender-vivid' ? 'bg-[#C485F0] border-[#521094]' :
+                        'bg-[#D8AF37] border-[#1C1236]'
                       } border-2`} />
                       {t.label}
                       {theme === t.code && (

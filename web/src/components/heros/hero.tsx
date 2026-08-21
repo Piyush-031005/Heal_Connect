@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Search, Sparkles, Flower2 } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { useLayout } from '@/lib/layout-context';
 import ModalityWheel from '@/components/modality-wheel';
 import OpticalWheel from '@/components/optical-wheel';
@@ -683,6 +684,9 @@ function FinalHybridHero() {
     offset: ["start start", "end start"]
   });
 
+  const { theme } = useTheme();
+  const currentLogo = theme === 'theme-royal-indigo' ? '/new_center_logo_dark.png' : '/new_center_logo.png';
+
   const yImage = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   
   return (
@@ -826,7 +830,7 @@ function FinalHybridHero() {
                   {/* The Logo */}
                   <div className="relative w-full h-full z-10 flex items-center justify-center">
                     <Image
-                      src="/new_center_logo.png"
+                      src={currentLogo}
                       alt="HealConnect Logo"
                       fill
                       className="object-contain drop-shadow-[0_10px_20px_rgba(var(--primary),0.6)] hover:scale-105 hover:drop-shadow-[0_15px_30px_rgba(var(--primary),0.8)] transition-all duration-500 cursor-pointer"
@@ -962,7 +966,7 @@ function FinalHybridHero() {
                   {/* The Logo */}
                   <div className="relative w-full h-full z-10 flex items-center justify-center">
                     <Image
-                      src="/new_center_logo.png"
+                      src={currentLogo}
                       alt="HealConnect Logo"
                       fill
                       className="object-contain drop-shadow-[0_10px_20px_rgba(var(--primary),0.6)] hover:scale-105 hover:drop-shadow-[0_15px_30px_rgba(var(--primary),0.8)] transition-all duration-500 cursor-pointer"

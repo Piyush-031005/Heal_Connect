@@ -142,6 +142,33 @@
     --radius: 0.75rem;
   }
 
+  /* THEME 04 - ROYAL INDIGO (Deep Midnight Purple + Gold) */
+  .theme-royal-indigo {
+    --background: #1C1236; 
+    --foreground: #F5F2F0; 
+    --card: #241545;
+    --card-foreground: #F5F2F0;
+    --popover: #241545;
+    --popover-foreground: #F5F2F0;
+    --primary: #D8AF37; /* Royal Gold for primary accents */
+    --primary-foreground: #1C1236;
+    --secondary: #4F2E73; /* Royal Purple */
+    --secondary-foreground: #F5F2F0;
+    --muted: #241545;
+    --muted-foreground: #7A4FD6; /* Amethyst Purple */
+    --accent: #7A4FD6; /* Amethyst Purple */
+    --accent-foreground: #F5F2F0;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #4F2E73;
+    --input: #241545;
+    --ring: #D8AF37;
+    --radius: 0.75rem;
+  }
+
+
   /* THEME 08 - ZEN ALIGN (Blue-focused) */
   .theme-zen-align {
     --background: #F0F2FA; 
