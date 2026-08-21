@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { useLayout } from '@/lib/layout-context';
+import { useTheme } from 'next-themes';
 
 const MODALITIES = [
   { id: 'astrology', name: 'Astrology', desc: 'Gain cosmic insights and life path guidance.', image: '/12-modalities-updates/astrology.png' },
@@ -35,8 +36,12 @@ const MODALITIES = [
 
 export default function ExploreModalities() {
   const { layout } = useLayout();
+  const { theme } = useTheme();
+  
   const isNewDesign1 = layout === 'new-design-1';
   const isFinalHybrid = layout === 'final-hybrid';
+  const isNewColor = theme === 'theme-new-color';
+  const gridClass = isNewColor ? "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6";
 
   if (isFinalHybrid) {
     return (
@@ -52,7 +57,7 @@ export default function ExploreModalities() {
             <p className="text-muted-foreground font-medium max-w-md mx-auto transition-colors duration-500">Browse 12 ancient and modern insights to find the exact guidance your soul seeks.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className={gridClass}>
             {MODALITIES.map((mod) => (
               <Link 
                 href={`/modalities/${mod.id}`}
@@ -91,7 +96,7 @@ export default function ExploreModalities() {
             <p className="text-[#17619A]/80 font-medium max-w-md">Browse 12 ancient and modern modalities to find the exact guidance your soul seeks.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className={gridClass}>
             {MODALITIES.map((mod) => (
               <div 
                 key={mod.id} 
@@ -125,7 +130,7 @@ export default function ExploreModalities() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6">
+        <div className={gridClass}>
           {MODALITIES.map((mod) => (
             <div 
               key={mod.id} 

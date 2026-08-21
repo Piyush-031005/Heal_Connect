@@ -294,5 +294,5 @@ html.theme-new-color, html.theme-new-color body, .theme-new-color .bg-background
 }
 
 .theme-new-color .bg-hero-glow {
-  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(245,233,255,0.7) 20%, rgba(214,185,255,0.25) 45%, transparent 70%) !important;
+  background: radial-gradient(circle, rgba(236,228,247,0.9) 0%, rgba(214,185,255,0.6) 20%, rgba(214,185,255,0.25) 45%, transparent 70%) !important;
 }
