@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export function FinalHybridSupport() {
   return (
-    <section className="relative py-24 bg-fixed bg-center bg-cover border-t border-[#694091]/50 overflow-hidden"
+    <section className="relative py-24 bg-fixed bg-center bg-cover border-none overflow-hidden"
       style={{ backgroundImage: 'url(/hands-star-bg.png)' }}
     >
       {/* Overlay to ensure readability while letting the cosmic background shine through */}

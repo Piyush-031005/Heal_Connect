@@ -755,7 +755,7 @@ function FinalHybridHero() {
             <div className="absolute top-1/2 lg:right-0 lg:translate-x-[30%] -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)] blur-3xl z-0" />
 
             {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
-            <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[25%] w-[450px] h-[450px] sm:w-[550px] sm:h-[550px] md:w-[700px] md:h-[700px] lg:w-[900px] lg:h-[900px] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0">
+            <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[25%] w-[450px] h-[450px] sm:w-[550px] sm:h-[550px] md:w-[600px] md:h-[600px] lg:w-[750px] lg:h-[750px] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0">
               
               {/* Outer Dashed Ring */}
               <div className="absolute w-[95%] h-[95%] rounded-full border border-dashed border-[#B79AE6]/30 pointer-events-none" />
@@ -766,7 +766,7 @@ function FinalHybridHero() {
               {/* THE REVOLVING ORBIT — the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
+                transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
                 className="absolute w-[95%] h-[95%] rounded-full transition-colors duration-500 pointer-events-none"
               >
                 {[
@@ -794,7 +794,7 @@ function FinalHybridHero() {
                       <motion.div
                         initial={{ rotate: -angle }}
                         animate={{ rotate: -(360 + angle) }}
-                        transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
+                        transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
                         className="flex flex-col items-center -mt-12 md:-mt-16 group cursor-pointer pointer-events-auto"
                       >
                         <Link href={`/modalities/${mod.id}`} className="w-24 h-24 md:w-36 md:h-36 flex items-center justify-center transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)]">
@@ -891,7 +891,7 @@ function FinalHybridHero() {
             <div className="absolute top-1/2 lg:right-0 lg:translate-x-[30%] -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)] blur-3xl z-0" />
 
             {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
-            <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[25%] w-[450px] h-[450px] sm:w-[550px] sm:h-[550px] md:w-[700px] md:h-[700px] lg:w-[900px] lg:h-[900px] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0">
+            <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[25%] w-[450px] h-[450px] sm:w-[550px] sm:h-[550px] md:w-[600px] md:h-[600px] lg:w-[750px] lg:h-[750px] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0">
               
               {/* Outer Dashed Ring */}
               <div className="absolute w-[95%] h-[95%] rounded-full border border-dashed border-[#B79AE6]/30 pointer-events-none" />
@@ -902,7 +902,7 @@ function FinalHybridHero() {
               {/* THE REVOLVING ORBIT — the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
+                transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
                 className="absolute w-[95%] h-[95%] rounded-full transition-colors duration-500 pointer-events-none"
               >
                 {[
@@ -930,7 +930,7 @@ function FinalHybridHero() {
                       <motion.div
                         initial={{ rotate: -angle }}
                         animate={{ rotate: -(360 + angle) }}
-                        transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
+                        transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
                         className="flex flex-col items-center -mt-12 md:-mt-16 group cursor-pointer pointer-events-auto"
                       >
                         <Link href={`/modalities/${mod.id}`} className="w-24 h-24 md:w-36 md:h-36 flex items-center justify-center transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)]">

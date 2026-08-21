@@ -26,11 +26,11 @@ export function Testimonials() {
 
   return (
     <section 
-      className={`py-24 relative z-10 border-t border-border ${isFinalHybrid ? 'bg-fixed bg-center bg-cover' : 'bg-card'}`}
-      style={isFinalHybrid ? { backgroundImage: "url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2094&auto=format&fit=crop')" } : {}}
+      className={`py-24 relative z-10 ${isFinalHybrid ? 'bg-fixed bg-center bg-cover border-none' : 'bg-card border-t border-border'}`}
+      style={isFinalHybrid ? { backgroundImage: "url('/hands-star-bg.png')" } : {}}
     >
       {/* Overlay for readability */}
-      {isFinalHybrid && <div className="absolute inset-0 bg-[#4D316B]/70 backdrop-blur-[2px] z-0" />}
+      {isFinalHybrid && <div className="absolute inset-0 bg-[#4D316B]/80 backdrop-blur-[2px] z-0" />}
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 max-w-7xl mx-auto">
