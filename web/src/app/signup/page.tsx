@@ -127,7 +127,7 @@ export default function SignupPage() {
           </Link>
         </div>
 
-        <Card className="w-full max-w-md bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-border shadow-2xl rounded-2xl overflow-hidden">
+        <Card className="w-full max-w-md bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-border shadow-2xl rounded-2xl overflow-hidden">
           <CardHeader className="space-y-2 pb-6 border-b border-border bg-black/5 dark:bg-white/5">
             <CardTitle className="text-2xl font-bold text-foreground tracking-wide">Create your account</CardTitle>
             <CardDescription className="text-muted-foreground text-base">Enter your details to get started.</CardDescription>

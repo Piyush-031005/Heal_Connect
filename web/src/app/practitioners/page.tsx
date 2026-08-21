@@ -40,7 +40,7 @@ const SPECIALTIES = ['Vedic Astrology', 'Tarot', 'Reiki', 'Vastu', 'Numerology',
 const LANGUAGES = ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Bengali', 'Marathi'];
 const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
-const SELECT_CLS = 'w-full text-sm rounded-xl bg-white/40 dark:bg-black/40 border border-border px-4 py-2.5 text-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-all hover:bg-secondary';
+const SELECT_CLS = 'w-full text-sm rounded-xl bg-card/80 dark:bg-card/80 border border-border px-4 py-2.5 text-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-all hover:bg-secondary';
 
 export default function PractitionersPage() {
   const [practitioners, setPractitioners] = useState<Practitioner[]>([]);
@@ -93,9 +93,9 @@ export default function PractitionersPage() {
         <div className="flex gap-4 mb-8">
           <div className="relative flex-1">
             <Search className="absolute left-4 top-3.5 h-5 w-5 text-muted-foreground" />
-            <input type="text" placeholder="Search by name or specialty..." value={filters.search} onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))} className="w-full pl-12 pr-4 py-3 text-base rounded-2xl bg-white/40 dark:bg-black/40 border border-border focus:outline-none focus:ring-1 focus:ring-primary text-foreground placeholder:text-muted-foreground transition-all backdrop-blur-sm" />
+            <input type="text" placeholder="Search by name or specialty..." value={filters.search} onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))} className="w-full pl-12 pr-4 py-3 text-base rounded-2xl bg-card/80 dark:bg-card/80 border border-border focus:outline-none focus:ring-1 focus:ring-primary text-foreground placeholder:text-muted-foreground transition-all backdrop-blur-sm" />
           </div>
-          <Button variant="outline" onClick={() => setShowFilters((v) => !v)} className={`rounded-2xl px-6 gap-2 border-border hover:bg-secondary hover:border-border text-foreground h-[50px] transition-all backdrop-blur-sm ${showFilters ? 'bg-secondary border-border' : 'bg-white/40 dark:bg-black/40'}`}>
+          <Button variant="outline" onClick={() => setShowFilters((v) => !v)} className={`rounded-2xl px-6 gap-2 border-border hover:bg-secondary hover:border-border text-foreground h-[50px] transition-all backdrop-blur-sm ${showFilters ? 'bg-secondary border-border' : 'bg-card/80 dark:bg-card/80'}`}>
             <SlidersHorizontal className="h-4 w-4" />
             <span className="hidden sm:inline">Filters</span>
             {activeFilterCount > 0 && <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center shadow-[0_0_10px_rgba(214,180,107,0.3)]">{activeFilterCount}</span>}
@@ -104,26 +104,26 @@ export default function PractitionersPage() {
 
         {/* Filter Panel */}
         {showFilters && (
-          <div className="mb-8 p-6 rounded-3xl bg-[#121420]/80 backdrop-blur-xl border border-border shadow-[0_8px_30px_rgba(0,0,0,0.5)] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="mb-8 p-6 rounded-3xl bg-card/90 backdrop-blur-xl border border-border shadow-[0_8px_30px_rgba(0,0,0,0.5)] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             <div>
               <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Specialty</label>
               <select value={filters.specialty} onChange={(e) => setFilters((f) => ({ ...f, specialty: e.target.value }))} className={SELECT_CLS}>
-                <option value="" className="bg-[#121420]">All</option>
-                {SPECIALTIES.map((s) => <option key={s} value={s} className="bg-[#121420]">{s}</option>)}
+                <option value="" className="bg-card">All</option>
+                {SPECIALTIES.map((s) => <option key={s} value={s} className="bg-card">{s}</option>)}
               </select>
             </div>
             <div>
               <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Language</label>
               <select value={filters.language} onChange={(e) => setFilters((f) => ({ ...f, language: e.target.value }))} className={SELECT_CLS}>
-                <option value="" className="bg-[#121420]">All</option>
-                {LANGUAGES.map((l) => <option key={l} value={l} className="bg-[#121420]">{l}</option>)}
+                <option value="" className="bg-card">All</option>
+                {LANGUAGES.map((l) => <option key={l} value={l} className="bg-card">{l}</option>)}
               </select>
             </div>
             <div>
               <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Min Rating</label>
               <select value={filters.minRating} onChange={(e) => setFilters((f) => ({ ...f, minRating: e.target.value }))} className={SELECT_CLS}>
-                <option value="" className="bg-[#121420]">Any</option>
-                {['3', '3.5', '4', '4.5'].map((r) => <option key={r} value={r} className="bg-[#121420]">⭐ {r}+</option>)}
+                <option value="" className="bg-card">Any</option>
+                {['3', '3.5', '4', '4.5'].map((r) => <option key={r} value={r} className="bg-card">⭐ {r}+</option>)}
               </select>
             </div>
             <div>
@@ -164,7 +164,7 @@ export default function PractitionersPage() {
             {Array.from({ length: 8 }).map((_, i) => <div key={i} className="h-[340px] rounded-3xl bg-secondary border border-border animate-pulse" />)}
           </div>
         ) : practitioners.length === 0 ? (
-          <div className="text-center py-32 bg-white/40 dark:bg-black/40 rounded-3xl border border-border backdrop-blur-md">
+          <div className="text-center py-32 bg-card/80 dark:bg-card/80 rounded-3xl border border-border backdrop-blur-md">
             <Image src="/logo.png" alt="" width={64} height={64} className="mx-auto mb-6 opacity-30 rounded-full grayscale" />
             <p className="text-xl font-bold text-foreground mb-2">No practitioners found</p>
             <p className="text-muted-foreground">Try adjusting your filters or search terms</p>
@@ -193,7 +193,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
   const avatarSrc = getPractitionerAvatar(p.photoUrl, p.id);
 
   return (
-    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-border hover:border-primary/50 hover:shadow-[0_8px_30px_rgba(214,180,107,0.15)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
+    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-border hover:border-primary/50 hover:shadow-[0_8px_30px_rgba(214,180,107,0.15)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
       <CardContent className="p-0 flex flex-col h-full relative">
         {/* Top strip with avatar */}
         <div className="relative h-20 bg-gradient-to-r from-white/5 to-white/10 shrink-0">
@@ -202,9 +202,9 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
           </div>
           <div className="absolute top-4 right-4 z-10">
             <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full ${
-              p.isOnline ? 'bg-accent/20 text-accent border border-accent/30 shadow-[0_0_10px_rgba(46,196,182,0.2)]' : 'bg-gray-800 text-muted-foreground border border-gray-700'
+              p.isOnline ? 'bg-accent/20 text-accent border border-accent/30 shadow-[0_0_10px_rgba(46,196,182,0.2)]' : 'bg-secondary text-secondary-foreground border border-border'
             }`}>
-              <span className={`w-1.5 h-1.5 rounded-full ${p.isOnline ? 'bg-accent animate-pulse' : 'bg-gray-500'}`} />
+              <span className={`w-1.5 h-1.5 rounded-full ${p.isOnline ? 'bg-accent animate-pulse' : 'bg-muted-foreground'}`} />
               {p.isOnline ? 'Online' : 'Offline'}
             </span>
           </div>
@@ -231,9 +231,9 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
               <span className="text-sm font-bold text-foreground">{p.avgRating || '—'}</span>
               <span className="text-xs text-muted-foreground">({p.reviewCount})</span>
             </div>
-            <span className="text-gray-700">|</span>
+            <span className="text-muted-foreground">|</span>
             <span className="text-xs text-muted-foreground font-medium">{p.experienceYrs} yrs exp</span>
-            <span className="text-gray-700 hidden sm:inline">|</span>
+            <span className="text-muted-foreground hidden sm:inline">|</span>
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground bg-secondary px-2 py-1 rounded-lg border border-border">
               <Globe className="w-3 h-3 text-muted-foreground" />
               <span className="truncate max-w-[80px]">{p.languages.slice(0, 2).join(', ') || '—'}</span>
@@ -251,10 +251,10 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
               <span className="text-xs text-muted-foreground ml-1">/min</span>
             </div>
             <div className="flex gap-2">
-              <Button size="sm" variant="outline" className="h-9 rounded-xl px-4 border-border hover:border-primary hover:text-primary hover:bg-primary/10 text-xs font-semibold text-muted-foreground transition-all" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+              <Button size="sm" className="h-9 rounded-xl px-4 bg-primary/20 text-primary hover:bg-primary/30 border-0 text-xs font-semibold transition-all" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
                 <MessageCircle className="h-4 w-4 mr-1.5" /> Chat
               </Button>
-              <Button size="sm" disabled={!p.isOnline} className="h-9 rounded-xl px-4 bg-accent hover:bg-accent/90 text-primary-foreground border-0 text-xs font-bold transition-all disabled:opacity-30 disabled:hover:bg-accent" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+              <Button size="sm" disabled={!p.isOnline} className="h-9 rounded-xl px-4 bg-accent hover:bg-accent/90 text-accent-foreground border-0 text-xs font-bold transition-all disabled:opacity-30 disabled:hover:bg-accent" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
                 <Phone className="h-4 w-4 mr-1.5" /> Call
               </Button>
             </div>
