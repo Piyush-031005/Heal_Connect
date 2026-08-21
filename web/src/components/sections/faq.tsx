@@ -24,7 +24,7 @@ export default function FaqSection() {
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
         <div className="flex flex-col md:flex-row gap-16 items-start">
           
-          <div className="md:w-1/3 sticky top-32">
+          <div className="w-full md:w-1/3 relative md:sticky md:top-32 mb-8 md:mb-0 z-20">
             {isFinalHybrid ? (
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-[2px] bg-[#B79AE6]" />

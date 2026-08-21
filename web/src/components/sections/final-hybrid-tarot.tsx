@@ -116,7 +116,7 @@ export function FinalHybridTarot() {
         </div>
 
         {/* Card spread deck */}
-        <div className="relative flex items-end justify-center gap-1 md:gap-2 mb-20 min-h-[300px]">
+        <div className="relative flex items-end justify-center gap-1 md:gap-2 mb-20 min-h-[300px] scale-[0.8] sm:scale-100 origin-bottom">
           {TAROT_CARDS.map((card, i) => {
             const isSelected = selected.includes(i);
             const selectionIndex = selected.indexOf(i);
@@ -127,9 +127,9 @@ export function FinalHybridTarot() {
             let finalRot = 0;
             
             if (isSelected) {
-              if (selectionIndex === 0) { finalX = -150; finalY = -50; finalRot = -5; } // Past
+              if (selectionIndex === 0) { finalX = -100; finalY = -50; finalRot = -5; } // Past
               if (selectionIndex === 1) { finalX = 0; finalY = -60; finalRot = 0; } // Present
-              if (selectionIndex === 2) { finalX = 150; finalY = -50; finalRot = 5; } // Future
+              if (selectionIndex === 2) { finalX = 100; finalY = -50; finalRot = 5; } // Future
             }
 
             const rot = isSelected ? finalRot : (CARD_ROTATIONS[i] || 0);
@@ -137,7 +137,7 @@ export function FinalHybridTarot() {
             const xOffset = isSelected ? finalX : 0;
             
             return (
-              <div key={i} className="relative group"
+              <div key={i} className={`relative group ${i < 4 || i > 10 ? 'hidden md:block' : ''}`}
                 style={{
                   transform: `translateX(${xOffset}px) rotate(${rot}deg) translateY(${yOffset}px) scale(${isSelected ? 1.15 : 1})`,
                   zIndex: isSelected ? 50 + selectionIndex : i + 1,
