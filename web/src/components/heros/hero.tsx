@@ -783,13 +783,13 @@ function FinalHybridHero() {
             initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
             animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 absolute inset-y-0 right-0 w-full h-full pointer-events-none flex items-center justify-center z-0"
+            className="lg:col-span-6 relative lg:absolute lg:inset-y-0 lg:right-0 w-full lg:h-full lg:pointer-events-none flex items-center justify-center z-0 mt-16 lg:mt-0"
           >
             {/* Lavender glow */}
-            <div className="absolute top-1/2 right-0 translate-x-[30%] -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)] blur-3xl z-0" />
+            <div className="absolute top-1/2 lg:right-0 lg:translate-x-[30%] -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)] blur-3xl z-0" />
 
-            {/* Wheel Container - MASSIVE HALF ARC */}
-            <div className="absolute top-1/2 right-0 translate-x-[35%] md:translate-x-[30%] lg:translate-x-[25%] -translate-y-1/2 w-[600px] h-[600px] md:w-[750px] md:h-[750px] lg:w-[900px] lg:h-[900px] flex items-center justify-center rounded-full z-10 pointer-events-none">
+            {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
+            <div className="relative lg:absolute lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[25%] w-[450px] h-[450px] sm:w-[550px] sm:h-[550px] md:w-[700px] md:h-[700px] lg:w-[900px] lg:h-[900px] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0">
               
               {/* Outer Dashed Ring */}
               <div className="absolute w-[95%] h-[95%] rounded-full border border-dashed border-[#B79AE6]/30 pointer-events-none" />
