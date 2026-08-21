@@ -52,7 +52,7 @@ export default function ExploreModalities() {
             <p className="text-muted-foreground font-medium max-w-md mx-auto transition-colors duration-500">Browse 12 ancient and modern insights to find the exact guidance your soul seeks.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {MODALITIES.map((mod) => (
               <Link 
                 href={`/modalities/${mod.id}`}
@@ -91,7 +91,7 @@ export default function ExploreModalities() {
             <p className="text-[#17619A]/80 font-medium max-w-md">Browse 12 ancient and modern modalities to find the exact guidance your soul seeks.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {MODALITIES.map((mod) => (
               <div 
                 key={mod.id} 
@@ -125,7 +125,7 @@ export default function ExploreModalities() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {MODALITIES.map((mod) => (
             <div 
               key={mod.id} 

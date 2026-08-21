@@ -169,6 +169,35 @@
   }
 
 
+  
+  /* THEME 05 - NEW COLOR (Zen Align Light) */
+  .theme-new-color {
+    --background: #F7F3FC;
+    --foreground: #5E3DA7;
+    --card: #FEFCFF;
+    --card-foreground: #6A4DB7;
+    --popover: #FEFCFF;
+    --popover-foreground: #6A4DB7;
+    --primary: #8B5CF6;
+    --primary-foreground: #FFFFFF;
+    --secondary: #F2ECFB;
+    --secondary-foreground: #5E3DA7;
+    --muted: #ECE4F7;
+    --muted-foreground: #6E56C8;
+    --accent: #5C6FE8;
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --border: #ECE4F7;
+    --input: #F2ECFB;
+    --ring: #8B5CF6;
+    --radius: 1rem;
+  }
+  
+  html.theme-new-color body, html.theme-new-color .bg-background {
+    background: linear-gradient(135deg, #F7F3FC 0%, #F2ECFB 45%, #ECE4F7 100%) !important;
+  }
+
   /* THEME 08 - ZEN ALIGN (Blue-focused) */
   .theme-zen-align {
     --background: #F0F2FA; 
@@ -230,4 +259,40 @@
   html {
     @apply font-sans;
   }
+}
+/* THEME - NEW COLOR (Zen Align Light) */
+.theme-new-color {
+  --background: #F7F3FC;
+  --foreground: #5E3DA7;
+  --card: #FEFCFF;
+  --card-foreground: #6A4DB7;
+  --popover: #FEFCFF;
+  --popover-foreground: #6A4DB7;
+  --primary: #8B5CF6;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F2ECFB;
+  --secondary-foreground: #5E3DA7;
+  --muted: #ECE4F7;
+  --muted-foreground: #6E56C8;
+  --accent: #5C6FE8;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: #ECE4F7;
+  --input: #F2ECFB;
+  --ring: #8B5CF6;
+  --radius: 1rem;
+}
+
+html.theme-new-color, html.theme-new-color body, .theme-new-color .bg-background {
+  background: linear-gradient(135deg, #F7F3FC 0%, #F2ECFB 45%, #ECE4F7 100%) !important;
+}
+
+.theme-new-color .bg-stats-gradient {
+  background: linear-gradient(90deg, #5E3DA7 0%, #6A4DB7 35%, #6E56C8 70%, #5C6FE8 100%) !important;
+  color: white;
+}
+
+.theme-new-color .bg-hero-glow {
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(245,233,255,0.7) 20%, rgba(214,185,255,0.25) 45%, transparent 70%) !important;
 }

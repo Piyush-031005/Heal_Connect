@@ -74,7 +74,7 @@ export default function Navbar() {
   const { lang, setLang } = useLang();
   const { layout, setLayout } = useLayout();
   
-  const isDark = theme === 'dark' || theme === 'theme-lavender-night' || theme === 'theme-deep-forest' || theme === 'theme-royal-indigo' || layout === 'final-hybrid';
+  const isDark = (theme === 'dark' || theme === 'theme-lavender-night' || theme === 'theme-deep-forest' || theme === 'theme-royal-indigo' || layout === 'final-hybrid') && theme !== 'theme-new-color';
   const isFinalHybrid = layout === 'final-hybrid';
   
   const [userProfile, setUserProfile] = useState<{ photoUrl: string | null; role: string; id: string; name: string | null } | null>(null);
@@ -390,7 +390,8 @@ export default function Navbar() {
                     { code: 'theme-lavender-base', label: 'Lavender Base' },
                     { code: 'theme-lavender-light', label: 'Lavender Light' },
                     { code: 'theme-lavender-vivid', label: 'Lavender Vivid' },
-                    { code: 'theme-royal-indigo', label: 'Royal Indigo' }
+                    { code: 'theme-royal-indigo', label: 'Royal Indigo' },
+                    { code: 'theme-new-color', label: 'Zen Align Light' }
                   ]).map((t) => (
                     <button
                       key={t.code}
@@ -405,6 +406,7 @@ export default function Navbar() {
                         t.code === 'theme-lavender-base' ? 'bg-[#F4EEFB] border-[#8A64B5]' :
                         t.code === 'theme-lavender-light' ? 'bg-[#9B70C2] border-[#D7C2ED]' :
                         t.code === 'theme-lavender-vivid' ? 'bg-[#C485F0] border-[#521094]' :
+                        t.code === 'theme-new-color' ? 'bg-[#ECE4F7] border-[#8B5CF6]' :
                         'bg-[#D8AF37] border-[#1C1236]'
                       } border-2`} />
                       {t.label}
