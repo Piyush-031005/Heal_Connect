@@ -693,7 +693,7 @@ function FinalHybridHero() {
   return (
     <section 
       ref={containerRef}
-      className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 bg-background transition-colors duration-500 min-h-[95vh] flex items-center justify-center overflow-hidden"
+      className={`relative pt-32 pb-24 lg:pt-48 lg:pb-32 transition-colors duration-500 min-h-[95vh] flex items-center justify-center overflow-hidden ${isNewColor ? 'bg-stats-gradient' : 'bg-background'}`}
     >
       {/* Background glow effects */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#694091]/20 rounded-full blur-[150px] pointer-events-none" />
@@ -713,23 +713,23 @@ function FinalHybridHero() {
             <div className="flex flex-wrap items-center gap-3 mb-6">
               <Link
                 href="/practitioners"
-                className="bg-primary/20 text-primary border border-primary/40 px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary/30 transition-all flex items-center gap-2"
+                className={`${isNewColor ? 'bg-white/20 text-white border-white/40 hover:bg-white/30' : 'bg-primary/20 text-primary border-primary/40 hover:bg-primary/30'} px-5 py-2 rounded-full text-sm font-semibold transition-all flex items-center border gap-2`}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
                 Start Chat
               </Link>
               <Link
                 href="/practitioners"
-                className="bg-primary text-primary-foreground px-5 py-2 rounded-full text-sm font-semibold shadow-sm hover:brightness-110 transition-all flex items-center gap-2"
+                className={`${isNewColor ? 'bg-white text-[#5E3DA7] hover:bg-white/90' : 'bg-primary text-primary-foreground hover:brightness-110'} px-5 py-2 rounded-full text-sm font-semibold shadow-sm transition-all flex items-center gap-2`}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                 Start Calling
               </Link>
             </div>
 
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-8 backdrop-blur-sm">
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary">Premium Consultation</span>
+            <div className={`inline-flex items-center gap-3 px-4 py-2 rounded-full border mb-8 backdrop-blur-sm ${isNewColor ? 'bg-white/10 border-white/30' : 'bg-primary/10 border-primary/30'}`}>
+              <Sparkles className={`w-4 h-4 ${isNewColor ? 'text-white' : 'text-primary'}`} />
+              <span className={`text-[11px] font-bold uppercase tracking-[0.2em] ${isNewColor ? 'text-white' : 'text-primary'}`}>Premium Consultation</span>
             </div>
 
             {/* Typography from very old layout */}
@@ -737,11 +737,11 @@ function FinalHybridHero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="text-6xl md:text-8xl font-serif font-medium tracking-tight text-foreground mb-6 leading-[1.1] transition-colors duration-500"
+              className={`text-6xl md:text-8xl font-serif font-medium tracking-tight mb-6 leading-[1.1] transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-foreground'}`}
             >
               Guidance.<br/>
               Clarity.<br/>
-              <span className="text-primary italic transition-colors duration-500">Confidence.</span>
+              <span className={`${isNewColor ? 'text-white/90' : 'text-primary'} italic transition-colors duration-500`}>Confidence.</span>
             </motion.h1>
 
             {/* RIGHT: Cosmic Wheel Graphic (Adapted to Half-Arc) */}
@@ -759,10 +759,10 @@ function FinalHybridHero() {
             <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[25%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[450px] h-[450px] sm:w-[550px] sm:h-[550px] md:w-[600px] md:h-[600px] lg:w-[650px] lg:h-[650px]' : 'w-[550px] h-[550px] sm:w-[650px] sm:h-[650px] md:w-[750px] md:h-[750px] lg:w-[900px] lg:h-[900px]'}`}>
               
               {/* Outer Dashed Ring */}
-              <div className="absolute w-[95%] h-[95%] rounded-full border border-dashed border-[#B79AE6]/30 pointer-events-none" />
+              <div className={`absolute w-[95%] h-[95%] rounded-full border border-dashed pointer-events-none ${isNewColor ? 'border-white/40' : 'border-[#B79AE6]/30'}`} />
               
               {/* Inner Thin Ring */}
-              <div className="absolute w-[75%] h-[75%] rounded-full border border-[#B79AE6]/20 pointer-events-none" />
+              <div className={`absolute w-[75%] h-[75%] rounded-full border pointer-events-none ${isNewColor ? 'border-white/20' : 'border-[#B79AE6]/20'}`} />
 
               {/* THE REVOLVING ORBIT — the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
@@ -799,9 +799,9 @@ function FinalHybridHero() {
                         className="flex flex-col items-center -mt-12 md:-mt-16 group cursor-pointer pointer-events-auto"
                       >
                         <Link href={`/modalities/${mod.id}`} className="w-24 h-24 md:w-36 md:h-36 flex items-center justify-center transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)]">
-                          <img src={mod.img} alt={mod.label} className="w-full h-full object-contain group-hover:brightness-125 transition-all" />
+                          <img src={mod.img} alt={mod.label} className={`w-full h-full object-contain group-hover:brightness-125 transition-all ${isNewColor ? 'invert brightness-0' : ''}`} style={isNewColor ? { filter: 'brightness(0) invert(1)' } : {}} />
                         </Link>
-                        <span className="text-[14px] md:text-[16px] font-bold text-foreground mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500">{mod.label}</span>
+                        <span className={`text-[14px] md:text-[16px] font-bold mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-foreground'}`}>{mod.label}</span>
                       </motion.div>
                     </motion.div>
                   );
@@ -820,9 +820,9 @@ function FinalHybridHero() {
                   transition={{ repeat: Infinity, duration: 120, ease: 'linear' }}
                   className="absolute inset-0 w-full h-full"
                 >
-                  <div className="absolute inset-0 w-full h-full border border-primary/30 rotate-0 rounded-sm" />
-                  <div className="absolute inset-0 w-full h-full border border-primary/30 rotate-[30deg] rounded-sm" />
-                  <div className="absolute inset-0 w-full h-full border border-primary/30 rotate-[60deg] rounded-sm" />
+                  <div className={`absolute inset-0 w-full h-full border rotate-0 rounded-sm ${isNewColor ? 'border-white/30' : 'border-primary/30'}`} />
+                  <div className={`absolute inset-0 w-full h-full border rotate-[30deg] rounded-sm ${isNewColor ? 'border-white/30' : 'border-primary/30'}`} />
+                  <div className={`absolute inset-0 w-full h-full border rotate-[60deg] rounded-sm ${isNewColor ? 'border-white/30' : 'border-primary/30'}`} />
                 </motion.div>
 
                 {/* Glowing Aura without Black Ring */}
@@ -846,7 +846,7 @@ function FinalHybridHero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.45 }}
-              className="text-lg md:text-xl font-medium text-muted-foreground max-w-md mb-12 leading-relaxed transition-colors duration-500"
+              className={`text-lg md:text-xl font-medium max-w-md mb-12 leading-relaxed transition-colors duration-500 ${isNewColor ? 'text-white/80' : 'text-muted-foreground'}`}
             >
               Find trusted guidance for every stage of life. Connect with verified experts instantly.
             </motion.p>
@@ -856,26 +856,26 @@ function FinalHybridHero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.1, duration: 0.8 }}
-              className="flex items-center gap-3 sm:gap-6 lg:gap-8 pt-8 border-t border-primary/30 transition-colors duration-500 w-full overflow-x-auto scrollbar-hide pb-2"
+              className={`flex items-center gap-3 sm:gap-6 lg:gap-8 pt-8 border-t transition-colors duration-500 w-full overflow-x-auto scrollbar-hide pb-2 ${isNewColor ? 'border-white/30' : 'border-primary/30'}`}
             >
               <div className="shrink-0">
-                <p className="text-xl md:text-2xl font-serif text-foreground">4.9★</p>
-                <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Rating</p>
+                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-foreground'}`}>4.9★</p>
+                <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-muted-foreground'}`}>Rating</p>
               </div>
-              <div className="w-px h-8 bg-primary/30 shrink-0" />
+              <div className={`w-px h-8 shrink-0 ${isNewColor ? 'bg-white/30' : 'bg-primary/30'}`} />
               <div className="shrink-0">
-                <p className="text-xl md:text-2xl font-serif text-foreground">100k+</p>
-                <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Consultations</p>
+                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-foreground'}`}>100k+</p>
+                <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-muted-foreground'}`}>Consultations</p>
               </div>
-              <div className="w-px h-8 bg-primary/30 shrink-0" />
+              <div className={`w-px h-8 shrink-0 ${isNewColor ? 'bg-white/30' : 'bg-primary/30'}`} />
               <div className="shrink-0">
-                <p className="text-xl md:text-2xl font-serif text-foreground">500+</p>
-                <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Experts</p>
+                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-foreground'}`}>500+</p>
+                <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-muted-foreground'}`}>Experts</p>
               </div>
-              <div className="w-px h-8 bg-primary/30 shrink-0" />
+              <div className={`w-px h-8 shrink-0 ${isNewColor ? 'bg-white/30' : 'bg-primary/30'}`} />
               <div className="shrink-0">
-                <p className="text-xl md:text-2xl font-serif text-foreground">24x7</p>
-                <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Availability</p>
+                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-foreground'}`}>24x7</p>
+                <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-muted-foreground'}`}>Availability</p>
               </div>
             </motion.div>
           </motion.div>
@@ -895,10 +895,10 @@ function FinalHybridHero() {
             <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[25%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[450px] h-[450px] sm:w-[550px] sm:h-[550px] md:w-[600px] md:h-[600px] lg:w-[650px] lg:h-[650px]' : 'w-[550px] h-[550px] sm:w-[650px] sm:h-[650px] md:w-[750px] md:h-[750px] lg:w-[900px] lg:h-[900px]'}`}>
               
               {/* Outer Dashed Ring */}
-              <div className="absolute w-[95%] h-[95%] rounded-full border border-dashed border-[#B79AE6]/30 pointer-events-none" />
+              <div className={`absolute w-[95%] h-[95%] rounded-full border border-dashed pointer-events-none ${isNewColor ? 'border-white/40' : 'border-[#B79AE6]/30'}`} />
               
               {/* Inner Thin Ring */}
-              <div className="absolute w-[75%] h-[75%] rounded-full border border-[#B79AE6]/20 pointer-events-none" />
+              <div className={`absolute w-[75%] h-[75%] rounded-full border pointer-events-none ${isNewColor ? 'border-white/20' : 'border-[#B79AE6]/20'}`} />
 
               {/* THE REVOLVING ORBIT — the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
@@ -935,9 +935,9 @@ function FinalHybridHero() {
                         className="flex flex-col items-center -mt-12 md:-mt-16 group cursor-pointer pointer-events-auto"
                       >
                         <Link href={`/modalities/${mod.id}`} className="w-24 h-24 md:w-36 md:h-36 flex items-center justify-center transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)]">
-                          <img src={mod.img} alt={mod.label} className="w-full h-full object-contain group-hover:brightness-125 transition-all" />
+                          <img src={mod.img} alt={mod.label} className={`w-full h-full object-contain group-hover:brightness-125 transition-all ${isNewColor ? 'invert brightness-0' : ''}`} style={isNewColor ? { filter: 'brightness(0) invert(1)' } : {}} />
                         </Link>
-                        <span className="text-[14px] md:text-[16px] font-bold text-foreground mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500">{mod.label}</span>
+                        <span className={`text-[14px] md:text-[16px] font-bold mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-foreground'}`}>{mod.label}</span>
                       </motion.div>
                     </motion.div>
                   );
@@ -956,9 +956,9 @@ function FinalHybridHero() {
                   transition={{ repeat: Infinity, duration: 120, ease: 'linear' }}
                   className="absolute inset-0 w-full h-full"
                 >
-                  <div className="absolute inset-0 w-full h-full border border-primary/30 rotate-0 rounded-sm" />
-                  <div className="absolute inset-0 w-full h-full border border-primary/30 rotate-[30deg] rounded-sm" />
-                  <div className="absolute inset-0 w-full h-full border border-primary/30 rotate-[60deg] rounded-sm" />
+                  <div className={`absolute inset-0 w-full h-full border rotate-0 rounded-sm ${isNewColor ? 'border-white/30' : 'border-primary/30'}`} />
+                  <div className={`absolute inset-0 w-full h-full border rotate-[30deg] rounded-sm ${isNewColor ? 'border-white/30' : 'border-primary/30'}`} />
+                  <div className={`absolute inset-0 w-full h-full border rotate-[60deg] rounded-sm ${isNewColor ? 'border-white/30' : 'border-primary/30'}`} />
                 </motion.div>
 
                 {/* Glowing Aura without Black Ring */}
