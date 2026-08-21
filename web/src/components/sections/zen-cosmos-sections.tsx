@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
+import { useTheme } from 'next-themes';
 import { Star, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 
 // ─────────────────────────────────────────────────────────────────────────
 // 01. WHY YOU ARE HERE — Life intention star clusters

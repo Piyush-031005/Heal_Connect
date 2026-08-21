@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Star, Shield, Phone, MessageCircle } from 'lucide-react';
 
+import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
 
 const EXPERTS = [

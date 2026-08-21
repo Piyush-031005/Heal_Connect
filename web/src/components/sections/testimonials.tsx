@@ -3,7 +3,7 @@
 import React, { useRef } from 'react';
 import { useLang } from '@/lib/lang-context';
 import { useLayout } from '@/lib/layout-context';
-import { useTheme } from '@/components/theme-provider';
+import { useTheme } from 'next-themes';
 import { TESTIMONIALS } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
