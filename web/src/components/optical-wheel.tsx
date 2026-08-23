@@ -25,8 +25,9 @@ export default function OpticalWheel() {
 
   const cx = 500;
   const cy = 500;
-  const outerR = 360; // Uniform circle radius matching HealConnect
-  const imgH = 55; // Icon size (110x110)
+  const outerR = 360; 
+  // Increased icon size slightly as requested
+  const imgH = 65; 
 
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(`modality-${id}`);
@@ -46,16 +47,12 @@ export default function OpticalWheel() {
               <stop offset="0%"   stopColor={GOLD} stopOpacity="0.10" />
               <stop offset="100%" stopColor={GOLD} stopOpacity="0"   />
             </radialGradient>
-            <radialGradient id="centerDiscGrad" cx="50%" cy="50%" r="50%">
-              <stop offset="0%"   stopColor="#240E4E" />
-              <stop offset="100%" stopColor="#15082E" />
-            </radialGradient>
           </defs>
 
           {/* Ambient glow */}
           <circle cx={cx} cy={cy} r="480" fill="url(#outerGlowWhl)" />
 
-          {/* ── WHEEL PATTERN (Exact HealConnect Structure) ── */}
+          {/* ── WHEEL PATTERN ── */}
           <g style={{ animation: 'spin 120s linear infinite', transformOrigin: '500px 500px', animationPlayState: playState }}>
             
             {/* Primary thin gold ring */}
@@ -67,7 +64,7 @@ export default function OpticalWheel() {
             {/* Inner dashed ring */}
             <circle cx={cx} cy={cy} r={outerR - 80} fill="none" stroke={GOLD} opacity="0.2" strokeWidth="0.75" strokeDasharray="3 9" />
 
-            {/* ── THE 12 MODALITY NODES (Evenly spaced, uniform circle) ── */}
+            {/* ── THE 12 MODALITY NODES ── */}
             {MODALITIES.map((mod, idx) => {
               const angle = (idx * 30 - 90) * (Math.PI / 180);
               const nx = cx + outerR * Math.cos(angle);
@@ -92,9 +89,12 @@ export default function OpticalWheel() {
                     {/* Hit area */}
                     <circle cx="0" cy="0" r={imgH + 20} fill="transparent" pointerEvents="all" />
 
-                    {/* MODALITY ICON (NO dark vignette/badge behind it, just the raw transparent icon on the ring) */}
+                    {/* Small black dot in the center of the logo (fingertip size) */}
+                    <circle cx="0" cy="0" r="30" fill="#0A0415" />
+
+                    {/* MODALITY ICON */}
                     <image
-                      href={`${mod.image}?v=15`}
+                      href={`${mod.image}?v=16`}
                       x={-imgH} y={-imgH}
                       width={imgH * 2} height={imgH * 2}
                       preserveAspectRatio="xMidYMid meet"
@@ -106,7 +106,7 @@ export default function OpticalWheel() {
 
                     {/* Label */}
                     <text
-                      x="0" y={imgH + 22}
+                      x="0" y={imgH + 24}
                       textAnchor="middle"
                       fill={isHovered ? '#FFFFFF' : GOLD}
                       fontSize="14"
@@ -121,19 +121,14 @@ export default function OpticalWheel() {
               );
             })}
           </g>
-
-          {/* ── CENTER MEDALLION ── */}
-          <circle cx={cx} cy={cy} r="160" fill="none" stroke={GOLD} opacity="0.25" strokeWidth="1" />
-          <circle cx={cx} cy={cy} r="145" fill="none" stroke={GOLD} opacity="0.4" strokeWidth="1" strokeDasharray="2 6" style={{ animation: 'spin 80s linear infinite', transformOrigin: '500px 500px' }} />
-          <circle cx={cx} cy={cy} r="135" fill="url(#centerDiscGrad)" />
-          
         </svg>
 
+        {/* ── CENTER MEDALLION (No outer dark concentric rings, just the logo) ── */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center' }}>
             <div style={{
               position: 'absolute', width: '240px', height: '240px', borderRadius: '50%',
-              background: `radial-gradient(circle, rgba(245,200,76,0.12) 0%, transparent 65%)`,
+              background: `radial-gradient(circle, rgba(245,200,76,0.1) 0%, transparent 55%)`,
             }} />
             <img
               src="/new_center_logo_dark.png"

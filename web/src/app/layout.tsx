@@ -24,10 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${playfair.variable} ${cormorant.variable} font-sans antialiased theme`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="theme-lavender-base"
-          themes={['theme-lavender-base', 'theme-lavender-light', 'theme-lavender-vivid', 'theme-lavender-deep', 'theme-lavender-night', 'theme-soft-blue', 'theme-pink-lavender', 'theme-deep-forest']}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="theme-new-color"
+            themes={['theme-new-color']}
           enableSystem={false}
           disableTransitionOnChange
         >

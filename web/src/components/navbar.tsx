@@ -268,24 +268,7 @@ export default function Navbar() {
             </div>
           ))}
 
-          {/* Theme */}
-          <div className="mx-4 mt-4 border-t border-gray-100 pt-4">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2.5">Theme</p>
-            <div className="flex gap-2">
-              {([{ Icon: RefreshCw, val: 'system' }, { Icon: Sun, val: 'light' }, { Icon: Moon, val: 'dark' }]).map(({ Icon, val }) => (
-                <button
-                  key={val}
-                  onClick={() => setTheme(val)}
-                  className={`flex-1 py-2 rounded-xl text-xs font-semibold border transition-all flex items-center justify-center gap-1 ${
-                    (mounted && theme === val) ? 'bg-purple-400 text-white border-purple-400 shadow-sm' : 'bg-gray-50 text-gray-600 border-gray-200 hover:border-amber-300 hover:bg-purple-50'
-                  }`}
-                >
-                  <Icon className="w-3.5 h-3.5" />
-                  {val === 'system' ? 'Auto' : val === 'light' ? 'Day' : 'Night'}
-                </button>
-              ))}
-            </div>
-          </div>
+
         </div>
       </aside>
 
@@ -373,53 +356,6 @@ export default function Navbar() {
                 Free Insights
               </Link>
             )}
-            {/* Theme Dropdown */}
-            <div className="relative" ref={themeRef}>
-              <button
-                onClick={() => setThemeOpen((p) => !p)}
-                className={`flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
-                  isDark ? 'border-white/20 hover:bg-white/10 hover:text-white' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50 hover:text-amber-600'
-                }`}
-              >
-                <Palette className="w-4 h-4" />
-              </button>
-
-              {themeOpen && (
-                <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
-                  {([
-                    { code: 'theme-lavender-base', label: 'Lavender Base' },
-                    { code: 'theme-lavender-light', label: 'Lavender Light' },
-                    { code: 'theme-lavender-vivid', label: 'Lavender Vivid' },
-                    { code: 'theme-royal-indigo', label: 'Royal Indigo' },
-                    { code: 'theme-new-color', label: 'Zen Align Light' }
-                  ]).map((t) => (
-                    <button
-                      key={t.code}
-                      onClick={() => { setTheme(t.code); setThemeOpen(false); }}
-                      className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-[13px] transition-colors ${
-                        theme === t.code
-                          ? 'bg-primary/20 text-primary font-semibold'
-                          : isDark ? 'text-gray-300 hover:bg-white/10' : 'text-gray-700 hover:bg-gray-50'
-                      }`}
-                    >
-                      <div className={`w-3.5 h-3.5 rounded-full ${
-                        t.code === 'theme-lavender-base' ? 'bg-[#F4EEFB] border-[#8A64B5]' :
-                        t.code === 'theme-lavender-light' ? 'bg-[#9B70C2] border-[#D7C2ED]' :
-                        t.code === 'theme-lavender-vivid' ? 'bg-[#C485F0] border-[#521094]' :
-                        t.code === 'theme-new-color' ? 'bg-[#ECE4F7] border-[#8B5CF6]' :
-                        'bg-[#D8AF37] border-[#1C1236]'
-                      } border-2`} />
-                      {t.label}
-                      {theme === t.code && (
-                        <svg className="w-3.5 h-3.5 ml-auto text-primary" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
 
             {/* Layout Dropdown */}
             <div className="relative" ref={layoutRef}>
