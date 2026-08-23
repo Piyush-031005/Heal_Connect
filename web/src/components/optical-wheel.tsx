@@ -23,11 +23,12 @@ export default function OpticalWheel() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [playState, setPlayState] = useState<'running' | 'paused'>('running');
 
-  const cx = 500;
-  const cy = 500;
-  const outerR = 360; 
-  // Increased icon size slightly as requested
-  const imgH = 65; 
+  const cx = 600;
+  const cy = 600;
+  const outerR = 500; // Increased to push the wheel outward for the arc look
+  
+  // Increased icon size slightly as requested by the user
+  const imgH = 95; 
 
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(`modality-${id}`);
@@ -41,7 +42,7 @@ export default function OpticalWheel() {
       onMouseLeave={() => setPlayState('running')}
     >
       <div className="absolute inset-0 z-10 pointer-events-auto">
-        <svg viewBox="0 0 1000 1000" className="w-full h-full">
+        <svg viewBox="0 0 1200 1200" className="w-full h-full">
           <defs>
             <radialGradient id="outerGlowWhl" cx="50%" cy="50%" r="50%">
               <stop offset="0%"   stopColor={GOLD} stopOpacity="0.10" />
@@ -50,10 +51,10 @@ export default function OpticalWheel() {
           </defs>
 
           {/* Ambient glow */}
-          <circle cx={cx} cy={cy} r="480" fill="url(#outerGlowWhl)" />
+          <circle cx={cx} cy={cy} r="580" fill="url(#outerGlowWhl)" />
 
           {/* ── WHEEL PATTERN ── */}
-          <g style={{ animation: 'spin 120s linear infinite', transformOrigin: '500px 500px', animationPlayState: playState }}>
+          <g style={{ animation: 'spin 180s linear infinite', transformOrigin: '600px 600px', animationPlayState: playState }}>
             
             {/* Primary thin gold ring */}
             <circle cx={cx} cy={cy} r={outerR} fill="none" stroke={GOLD} opacity="0.4" strokeWidth="1" />
@@ -90,7 +91,7 @@ export default function OpticalWheel() {
                     <circle cx="0" cy="0" r={imgH + 20} fill="transparent" pointerEvents="all" />
 
                     {/* Small black dot in the center of the logo (fingertip size) */}
-                    <circle cx="0" cy="0" r="30" fill="#0A0415" />
+                    <circle cx="0" cy="0" r="40" fill="#0A0415" />
 
                     {/* MODALITY ICON */}
                     <image
@@ -127,14 +128,14 @@ export default function OpticalWheel() {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center' }}>
             <div style={{
-              position: 'absolute', width: '240px', height: '240px', borderRadius: '50%',
+              position: 'absolute', width: '320px', height: '320px', borderRadius: '50%',
               background: `radial-gradient(circle, rgba(245,200,76,0.1) 0%, transparent 55%)`,
             }} />
             <img
               src="/new_center_logo_dark.png"
               alt="ZenAuraa Center"
               style={{
-                width: '140px', height: '140px', objectFit: 'contain',
+                width: '210px', height: '210px', objectFit: 'contain',
                 position: 'relative', zIndex: 10,
                 filter: `drop-shadow(0 0 15px rgba(245,200,76,0.2))`
               }}
