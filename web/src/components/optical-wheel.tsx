@@ -17,7 +17,8 @@ const MODALITIES = [
   { id: 'numerology',     name: 'Numerology',       image: '/final_ensights/numerology.png' },
 ];
 
-const GOLD = '#F5C84C'; // Using the exact accent color from the Dark Theme
+const GOLD = '#F5C84C'; // exact old deployment accent
+const NEAR_BLACK = '#0A0612';
 
 export default function OpticalWheel() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
@@ -27,8 +28,9 @@ export default function OpticalWheel() {
   const cy = 500;
   const outerR = 345;
   
-  // Smaller image size to match the original layout so they don't look huge/overlap
-  const imgH = 48;   
+  // Icon sizes
+  const imgH = 58; // Increased from 48 to be visually clearer, about 15-20% larger
+  const blackSpotR = 52; // Solid near-black circle for contrast behind the icon
 
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(`modality-${id}`);
@@ -45,12 +47,11 @@ export default function OpticalWheel() {
         <svg viewBox="0 0 1000 1000" className="w-full h-full">
           <defs>
             <radialGradient id="outerGlowWhl" cx="50%" cy="50%" r="50%">
-              <stop offset="0%"   stopColor={GOLD} stopOpacity="0.12" />
+              <stop offset="0%"   stopColor={GOLD} stopOpacity="0.10" />
               <stop offset="100%" stopColor={GOLD} stopOpacity="0"   />
             </radialGradient>
-            <radialGradient id="centerDiscGrad" cx="40%" cy="35%" r="70%">
+            <radialGradient id="centerDiscGrad" cx="50%" cy="50%" r="50%">
               <stop offset="0%"   stopColor="#2A1658" />
-              <stop offset="60%"  stopColor="#1E1144" />
               <stop offset="100%" stopColor="#0B061A" />
             </radialGradient>
           </defs>
@@ -58,24 +59,15 @@ export default function OpticalWheel() {
           {/* Ambient glow */}
           <circle cx={cx} cy={cy} r="480" fill="url(#outerGlowWhl)" />
 
-          {/* Main orbit ring */}
-          <circle cx={cx} cy={cy} r={outerR}      fill="none" stroke={GOLD} opacity="0.4"  strokeWidth="1"    />
-          <circle cx={cx} cy={cy} r={outerR + 85} fill="none" stroke={GOLD} opacity="0.08" strokeWidth="0.75" />
-          
-          {/* Inner decorative rings */}
-          <circle cx={cx} cy={cy} r={outerR - 80}  fill="none" stroke={GOLD} opacity="0.15" strokeWidth="0.75" strokeDasharray="3 12" />
-          <circle cx={cx} cy={cy} r={outerR - 160} fill="none" stroke={GOLD} opacity="0.2"  strokeWidth="0.75" />
+          {/* ── WHEEL PATTERN ── 
+              Thin single-line gold circular ring. No double rings. 
+              No filled/solid circle backgrounds behind the ring path itself. */}
+          <circle cx={cx} cy={cy} r={outerR} fill="none" stroke={GOLD} opacity="0.4" strokeWidth="1" />
 
-          {/* ── CENTER DISC ── */}
-          <circle cx={cx} cy={cy} r="178" fill="none" stroke={GOLD} opacity="0.4" strokeWidth="1.5" />
-          <circle cx={cx} cy={cy} r="164" fill="none" stroke={GOLD} opacity="0.15" strokeWidth="0.75" />
-          <circle cx={cx} cy={cy} r="157" fill="url(#centerDiscGrad)" />
-          <circle
-            cx={cx} cy={cy} r="147"
-            fill="none" stroke={GOLD} opacity="0.25" strokeWidth="0.75" strokeDasharray="2 6"
-            style={{ animation: 'spin 80s linear infinite', transformOrigin: '500px 500px' }}
-          />
-          <circle cx={cx} cy={cy} r="128" fill="none" stroke={GOLD} opacity="0.15" strokeWidth="0.5" />
+          {/* ── CENTER LOGO / MEDALLION ──
+              Simplified: one clean circular frame, soft glow, no extra decorative borders. */}
+          <circle cx={cx} cy={cy} r="115" fill="none" stroke={GOLD} opacity="0.3" strokeWidth="1" />
+          <circle cx={cx} cy={cy} r="110" fill="url(#centerDiscGrad)" />
 
           {/* ── THE 12 MODALITY NODES ── */}
           <g style={{ animation: 'spin 55s linear infinite', animationPlayState: playState, transformOrigin: '500px 500px' }}>
@@ -103,21 +95,24 @@ export default function OpticalWheel() {
                     {/* Hit area */}
                     <circle cx="0" cy="0" r={imgH + 22} fill="transparent" pointerEvents="all" />
 
-                    {/* RAW image — No black dot, just the logo on the orbit exactly as requested */}
+                    {/* Small solid black circle for contrast, no outer border */}
+                    <circle cx="0" cy="0" r={blackSpotR} fill={NEAR_BLACK} />
+
+                    {/* Modality Icon */}
                     <image
-                      href={`${mod.image}?v=12`}
+                      href={`${mod.image}?v=13`}
                       x={-imgH} y={-imgH}
                       width={imgH * 2} height={imgH * 2}
                       preserveAspectRatio="xMidYMid meet"
                       style={{
-                        filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'drop-shadow(0 2px 5px rgba(0,0,0,0.6))',
+                        filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))',
                         transition: 'filter 0.3s ease',
                       }}
                     />
 
-                    {/* Gold name label */}
+                    {/* Label */}
                     <text
-                      x="0" y={imgH + 20}
+                      x="0" y={imgH + 24}
                       textAnchor="middle"
                       fill={isHovered ? '#FFFFFF' : GOLD}
                       fontSize="14"
@@ -134,19 +129,19 @@ export default function OpticalWheel() {
           </g>
         </svg>
 
-        {/* Center logo */}
+        {/* Center Logo - Small and clean */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div style={{
-              position: 'absolute', width: '280px', height: '280px', borderRadius: '50%',
-              background: `radial-gradient(circle, rgba(245,200,76,0.15) 0%, transparent 70%)`,
+              position: 'absolute', width: '220px', height: '220px', borderRadius: '50%',
+              background: `radial-gradient(circle, rgba(245,200,76,0.12) 0%, transparent 60%)`,
             }} />
             <img
               src="/new_center_logo_dark.png"
-              alt="ZenAuraa"
+              alt="ZenAuraa Center"
               style={{
-                width: '208px', height: '208px', objectFit: 'contain',
-                filter: `drop-shadow(0 0 20px rgba(245,200,76,0.3))`,
+                width: '150px', height: '150px', objectFit: 'contain',
+                filter: `drop-shadow(0 0 15px rgba(245,200,76,0.25))`,
                 position: 'relative', zIndex: 10,
               }}
             />
