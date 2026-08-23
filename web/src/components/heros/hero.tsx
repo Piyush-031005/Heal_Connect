@@ -29,8 +29,8 @@ function PrimaryHero() {
             <span className="text-xs tracking-[0.25em] uppercase text-primary font-bold">Align Your Wellness</span>
           </div>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000">
-            <span className="text-foreground">Heal</span>
-            <span className="text-primary italic">Connect.</span>
+            <span className="text-foreground">Zen</span>
+            <span className="text-primary italic">Auraa.</span>
           </h1>
           <p className="text-xl lg:text-2xl text-foreground/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
             Your one stop shop to discover and connect with holistic health, astrological and wellness practitioners around the world.
@@ -699,6 +699,22 @@ function FinalHybridHero() {
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#694091]/20 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#B79AE6]/5 rounded-full blur-[120px] pointer-events-none" />
 
+      {/* Subtle Starry Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-60">
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className={`absolute rounded-full ${isNewColor ? 'bg-primary/30' : 'bg-white/40'}`}
+            style={{
+              width: `${(i % 3) + 1}px`,
+              height: `${(i % 3) + 1}px`,
+              top: `${(i * 23.1) % 100}%`,
+              left: `${(i * 17.7) % 100}%`,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
@@ -723,7 +739,7 @@ function FinalHybridHero() {
                 className={`${isNewColor ? 'bg-white text-[#5E3DA7] hover:bg-white/90' : 'bg-primary text-primary-foreground hover:brightness-110'} px-5 py-2 rounded-full text-sm font-semibold shadow-sm transition-all flex items-center gap-2`}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                Start Calling
+                Ask me Anything
               </Link>
             </div>
 
@@ -739,9 +755,7 @@ function FinalHybridHero() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className={`text-6xl md:text-8xl font-serif font-medium tracking-tight mb-6 leading-[1.1] transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-foreground'}`}
             >
-              Guidance.<br/>
-              Clarity.<br/>
-              <span className={`${isNewColor ? 'text-white/90' : 'text-primary'} italic transition-colors duration-500`}>Confidence.</span>
+              Zen<span className={`${isNewColor ? 'text-white/90' : 'text-primary'} italic transition-colors duration-500`}>Auraa.</span>
             </motion.h1>
 
             {/* RIGHT: Cosmic Wheel Graphic (Adapted to Half-Arc) */}
@@ -771,18 +785,18 @@ function FinalHybridHero() {
                 className="absolute w-[95%] h-[95%] rounded-full transition-colors duration-500 pointer-events-none"
               >
                 {[
-                  { img: '/12-modalities-updates/astrology.png',       label: 'Astrology',     id: 'astrology' },
-                  { img: '/12-modalities-updates/tarot.png',            label: 'Tarot',         id: 'tarot' },
+                  { img: '/final_ensights/astrology.png',       label: 'Astrology',     id: 'astrology' },
+                  { img: '/final_ensights/tarot.png',            label: 'Tarot',         id: 'tarot' },
                   { img: '/12-modalities-updates/facereading.png',      label: 'Face Reading',  id: 'face-reading' },
                   { img: '/12-modalities-updates/plamreading.png',      label: 'Palm Reading',  id: 'palm-reading' },
-                  { img: '/12-modalities-updates/sound.png',            label: 'Sound Healing', id: 'sound-healing' },
+                  { img: '/final_ensights/sound healing.png',            label: 'Sound Healing', id: 'sound-healing' },
                   { img: '/12-modalities-updates/medidation.png',       label: 'Meditation',    id: 'meditation' },
-                  { img: '/12-modalities-updates/spiritual.png',        label: 'Spiritual',     id: 'spiritual' },
+                  { img: '/final_ensights/spiritual  guidance.png',        label: 'Spiritual',     id: 'spiritual' },
                   { img: '/12-modalities-updates/chakrahealing.png',    label: 'Chakra',        id: 'chakra-healing' },
-                  { img: '/12-modalities-updates/breathwork.png',       label: 'Breathwork',    id: 'breathwork' },
+                  { img: '/final_ensights/breathwork.png',       label: 'Breathwork',    id: 'breathwork' },
                   { img: '/12-modalities-updates/dream_prediction.png', label: 'Dreams',        id: 'dreams' },
                   { img: '/12-modalities-updates/space_harmony.png',    label: 'Space Harmony', id: 'space-harmony' },
-                  { img: '/12-modalities-updates/numerology.png',       label: 'Numerology',    id: 'numerology' },
+                  { img: '/final_ensights/numerology.png',       label: 'Numerology',    id: 'numerology' },
                 ].map((mod, i, arr) => {
                   const angle = (i * 360) / arr.length;
                   return (
@@ -798,7 +812,7 @@ function FinalHybridHero() {
                         transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
                         className="flex flex-col items-center -mt-12 md:-mt-16 group cursor-pointer pointer-events-auto"
                       >
-                        <Link href={`/modalities/${mod.id}`} className="w-24 h-24 md:w-36 md:h-36 flex items-center justify-center transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)]">
+                        <Link href={`/modalities/${mod.id}`} className="w-16 h-16 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-black/80 border border-white/10 p-3 transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)] relative overflow-hidden">
                           <img src={mod.img} alt={mod.label} className={`w-full h-full object-contain group-hover:brightness-125 transition-all ${isNewColor ? 'invert brightness-0' : ''}`} style={isNewColor ? { filter: 'brightness(0) invert(1)' } : {}} />
                         </Link>
                         <span className={`text-[14px] md:text-[16px] font-bold mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-foreground'}`}>{mod.label}</span>
@@ -842,14 +856,7 @@ function FinalHybridHero() {
 
             </div>
           </motion.div>
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.45 }}
-              className={`text-lg md:text-xl font-medium max-w-md mb-12 leading-relaxed transition-colors duration-500 ${isNewColor ? 'text-white/80' : 'text-muted-foreground'}`}
-            >
-              Find trusted guidance for every stage of life. Connect with verified experts instantly.
-            </motion.p>
+
 
             {/* Stats row from screenshot 2 */}
             <motion.div
@@ -907,18 +914,18 @@ function FinalHybridHero() {
                 className="absolute w-[95%] h-[95%] rounded-full transition-colors duration-500 pointer-events-none"
               >
                 {[
-                  { img: '/12-modalities-updates/astrology.png',       label: 'Astrology',     id: 'astrology' },
-                  { img: '/12-modalities-updates/tarot.png',            label: 'Tarot',         id: 'tarot' },
+                  { img: '/final_ensights/astrology.png',       label: 'Astrology',     id: 'astrology' },
+                  { img: '/final_ensights/tarot.png',            label: 'Tarot',         id: 'tarot' },
                   { img: '/12-modalities-updates/facereading.png',      label: 'Face Reading',  id: 'face-reading' },
                   { img: '/12-modalities-updates/plamreading.png',      label: 'Palm Reading',  id: 'palm-reading' },
-                  { img: '/12-modalities-updates/sound.png',            label: 'Sound Healing', id: 'sound-healing' },
+                  { img: '/final_ensights/sound healing.png',            label: 'Sound Healing', id: 'sound-healing' },
                   { img: '/12-modalities-updates/medidation.png',       label: 'Meditation',    id: 'meditation' },
-                  { img: '/12-modalities-updates/spiritual.png',        label: 'Spiritual',     id: 'spiritual' },
+                  { img: '/final_ensights/spiritual  guidance.png',        label: 'Spiritual',     id: 'spiritual' },
                   { img: '/12-modalities-updates/chakrahealing.png',    label: 'Chakra',        id: 'chakra-healing' },
-                  { img: '/12-modalities-updates/breathwork.png',       label: 'Breathwork',    id: 'breathwork' },
+                  { img: '/final_ensights/breathwork.png',       label: 'Breathwork',    id: 'breathwork' },
                   { img: '/12-modalities-updates/dream_prediction.png', label: 'Dreams',        id: 'dreams' },
                   { img: '/12-modalities-updates/space_harmony.png',    label: 'Space Harmony', id: 'space-harmony' },
-                  { img: '/12-modalities-updates/numerology.png',       label: 'Numerology',    id: 'numerology' },
+                  { img: '/final_ensights/numerology.png',       label: 'Numerology',    id: 'numerology' },
                 ].map((mod, i, arr) => {
                   const angle = (i * 360) / arr.length;
                   return (
@@ -934,7 +941,7 @@ function FinalHybridHero() {
                         transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
                         className="flex flex-col items-center -mt-12 md:-mt-16 group cursor-pointer pointer-events-auto"
                       >
-                        <Link href={`/modalities/${mod.id}`} className="w-24 h-24 md:w-36 md:h-36 flex items-center justify-center transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)]">
+                        <Link href={`/modalities/${mod.id}`} className="w-16 h-16 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-black/80 border border-white/10 p-3 transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)] relative overflow-hidden">
                           <img src={mod.img} alt={mod.label} className={`w-full h-full object-contain group-hover:brightness-125 transition-all ${isNewColor ? 'invert brightness-0' : ''}`} style={isNewColor ? { filter: 'brightness(0) invert(1)' } : {}} />
                         </Link>
                         <span className={`text-[14px] md:text-[16px] font-bold mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-foreground'}`}>{mod.label}</span>
