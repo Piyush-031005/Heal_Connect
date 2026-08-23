@@ -17,24 +17,15 @@ const MODALITIES = [
   { id: 'numerology', name: 'Numerology', image: '/final_ensights/numerology.png' },
 ];
 
-// Gold color matching the reference image
-const GOLD = '#C9A84C';
-const GOLD_DIM = '#8B6914';
-const DOT_BG = '#0D0820'; // Very dark near-black background for dots, like ref image
-
 export default function OpticalWheel() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [playState, setPlayState] = useState<'running' | 'paused'>('running');
 
   const cx = 500;
   const cy = 500;
-  const outerRadius = 370;
-  // Clip radius for logos - bigger so logos fill the dot properly
-  const clipR = 88;
-  // The black dot circle radius
-  const dotR = 95;
-  // The hit area radius
-  const hitR = 110;
+  const outerRadius = 360;
+  // Size of each raw image (no clip)
+  const imgHalf = 85;
 
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(`modality-${id}`);
@@ -44,7 +35,7 @@ export default function OpticalWheel() {
   };
 
   return (
-    <div 
+    <div
       className="relative w-full h-full select-none"
       onMouseEnter={() => setPlayState('paused')}
       onMouseLeave={() => setPlayState('running')}
@@ -52,88 +43,34 @@ export default function OpticalWheel() {
       <div className="absolute inset-0 z-10 pointer-events-auto">
         <svg viewBox="0 0 1000 1000" className="w-full h-full mx-auto">
           <defs>
-            {/* Glow gradient for center */}
-            <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor={GOLD} stopOpacity="0.5" />
-              <stop offset="60%" stopColor={GOLD} stopOpacity="0.15" />
-              <stop offset="100%" stopColor={GOLD} stopOpacity="0" />
+            {/* Soft ambient glow for center */}
+            <radialGradient id="ambientGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#9B7FD4" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#9B7FD4" stopOpacity="0" />
             </radialGradient>
-            {/* Dark dot gradient - matches the reference image dark cosmic look */}
-            <radialGradient id="dotGrad" cx="35%" cy="30%" r="70%">
-              <stop offset="0%" stopColor="#1a0e3a" />
-              <stop offset="100%" stopColor="#0D0820" />
-            </radialGradient>
-            {/* Clip path for each modality icon */}
-            <clipPath id="node-circle-clip">
-              <circle cx="0" cy="0" r={clipR} />
-            </clipPath>
           </defs>
 
-          {/* Ambient outer glow */}
-          <circle cx={cx} cy={cy} r="490" fill="url(#centerGlow)" opacity="0.3" />
+          {/* Ambient soft glow behind entire wheel */}
+          <circle cx={cx} cy={cy} r="470" fill="url(#ambientGlow)" />
 
-          {/* ── OUTER DECORATIVE RINGS (gold, matching ref image) ── */}
-          {/* Outermost ring */}
-          <circle cx={cx} cy={cy} r={outerRadius + 90} fill="none" stroke={GOLD} opacity="0.15" strokeWidth="1" />
-          {/* Tick marks around outer ring */}
-          <g style={{ animation: 'spin 200s linear infinite', transformOrigin: '500px 500px' }}>
-            {[...Array(72)].map((_, i) => (
-              <line
-                key={`tick-${i}`}
-                x1={cx + (outerRadius + 90) * Math.cos(i * 5 * Math.PI / 180)}
-                y1={cy + (outerRadius + 90) * Math.sin(i * 5 * Math.PI / 180)}
-                x2={cx + (outerRadius + (i % 6 === 0 ? 103 : 94)) * Math.cos(i * 5 * Math.PI / 180)}
-                y2={cy + (outerRadius + (i % 6 === 0 ? 103 : 94)) * Math.sin(i * 5 * Math.PI / 180)}
-                stroke={GOLD}
-                opacity={i % 6 === 0 ? "0.55" : "0.2"}
-                strokeWidth={i % 6 === 0 ? "1.5" : "0.75"}
-              />
-            ))}
-            <circle cx={cx} cy={cy} r={outerRadius + 115} fill="none" stroke={GOLD} opacity="0.1" strokeWidth="0.75" />
-          </g>
+          {/* ── CONCENTRIC DASHED ORBIT RINGS (matching Zenauraa reference) ── */}
+          {/* Outermost faint ring */}
+          <circle cx={cx} cy={cy} r={outerRadius + 110} fill="none" stroke="#9B7FD4" opacity="0.12" strokeWidth="1" strokeDasharray="6 18" />
+          {/* Main orbit ring where logos sit */}
+          <circle cx={cx} cy={cy} r={outerRadius} fill="none" stroke="#9B7FD4" opacity="0.3" strokeWidth="1" strokeDasharray="4 12" />
+          {/* Inner ring */}
+          <circle cx={cx} cy={cy} r={outerRadius - 80} fill="none" stroke="#9B7FD4" opacity="0.18" strokeWidth="0.75" strokeDasharray="3 10" />
+          {/* Innermost ring near center */}
+          <circle cx={cx} cy={cy} r={outerRadius - 170} fill="none" stroke="#9B7FD4" opacity="0.15" strokeWidth="0.75" strokeDasharray="2 8" />
 
-          {/* The main orbit ring that nodes sit on */}
-          <circle cx={cx} cy={cy} r={outerRadius} fill="none" stroke={GOLD} opacity="0.4" strokeWidth="1.5" />
-          {/* Inner guide ring */}
-          <circle cx={cx} cy={cy} r={outerRadius - 20} fill="none" stroke={GOLD} opacity="0.12" strokeWidth="0.75" strokeDasharray="4 12" />
-
-          {/* ── CENTER DECORATIVE GEOMETRY ── */}
-          <g style={{ animation: 'spin 300s linear infinite reverse', transformOrigin: '500px 500px' }}>
-            <circle cx={cx} cy={cy} r={220} fill="none" stroke={GOLD} opacity="0.25" strokeWidth="1" />
-            <circle cx={cx} cy={cy} r={200} fill="none" stroke={GOLD} opacity="0.3" strokeWidth="0.75" strokeDasharray="3 9" />
-            <circle cx={cx} cy={cy} r={175} fill="none" stroke={GOLD} opacity="0.2" strokeWidth="1" />
-            {/* 8-point star / square pattern */}
-            {[0, 45].map((rot, i) => (
-              <rect
-                key={`sq-${i}`}
-                x={cx - 140}
-                y={cy - 140}
-                width={280}
-                height={280}
-                fill="none"
-                stroke={GOLD}
-                opacity="0.25"
-                strokeWidth="0.75"
-                transform={`rotate(${rot}, ${cx}, ${cy})`}
-              />
-            ))}
-          </g>
-
-          {/* Center solid circle backdrop (like the dark cosmic center in ref image) */}
-          <circle cx={cx} cy={cy} r={135} fill="#0D0820" opacity="0.95" />
-          <circle cx={cx} cy={cy} r={135} fill="none" stroke={GOLD} opacity="0.5" strokeWidth="1.5" />
-          <circle cx={cx} cy={cy} r={120} fill="none" stroke={GOLD} opacity="0.25" strokeWidth="0.75" strokeDasharray="2 8" style={{ animation: 'spin 60s linear infinite', transformOrigin: '500px 500px' }} />
-          {/* Cross lines inside center */}
-          <line x1={cx} y1={cy - 120} x2={cx} y2={cy + 120} stroke={GOLD} opacity="0.2" strokeWidth="0.75" />
-          <line x1={cx - 120} y1={cy} x2={cx + 120} y2={cy} stroke={GOLD} opacity="0.2" strokeWidth="0.75" />
-          <line x1={cx - 85} y1={cy - 85} x2={cx + 85} y2={cy + 85} stroke={GOLD} opacity="0.15" strokeWidth="0.75" />
-          <line x1={cx + 85} y1={cy - 85} x2={cx - 85} y2={cy + 85} stroke={GOLD} opacity="0.15" strokeWidth="0.75" />
-          {/* Center dot */}
-          <circle cx={cx} cy={cy} r="6" fill={GOLD} opacity="0.9" />
-          <circle cx={cx} cy={cy} r="3" fill="#FFFFFF" opacity="1" />
-
-          {/* ── THE 12 MODALITY NODES (spinning) ── */}
-          <g style={{ animation: 'spin 50s linear infinite', animationPlayState: playState, transformOrigin: '500px 500px' }}>
+          {/* ── THE 12 MODALITY NODES — raw images, no clip circles ── */}
+          <g
+            style={{
+              animation: 'spin 60s linear infinite',
+              animationPlayState: playState,
+              transformOrigin: '500px 500px',
+            }}
+          >
             {MODALITIES.map((modality, idx) => {
               const angle = (idx * 30 - 90) * (Math.PI / 180);
               const x = cx + outerRadius * Math.cos(angle);
@@ -143,60 +80,63 @@ export default function OpticalWheel() {
               return (
                 <g
                   key={idx}
-                  transform={`translate(${x}, ${y}) scale(${isHovered ? 1.2 : 1})`}
+                  transform={`translate(${x}, ${y})`}
                   onMouseEnter={() => setHoveredIdx(idx)}
                   onMouseLeave={() => setHoveredIdx(null)}
                   onClick={() => handleScrollTo(modality.id)}
-                  className="transition-all duration-300 ease-out cursor-pointer group"
+                  className="cursor-pointer"
                   style={{ transformOrigin: `${x}px ${y}px` }}
                 >
-                  {/* Counter-spin so icons stay upright */}
-                  <g style={{ animation: 'spin 50s linear infinite reverse', animationPlayState: playState, transformOrigin: '0px 0px' }}>
-
-                    {/* Hit area (invisible, big) */}
-                    <circle cx="0" cy="0" r={hitR} fill="transparent" pointerEvents="all" />
-
-                    {/* The BLACK dot - exactly like ref image */}
+                  {/* Counter-spin so logos stay upright */}
+                  <g
+                    style={{
+                      animation: 'spin 60s linear infinite reverse',
+                      animationPlayState: playState,
+                      transformOrigin: '0px 0px',
+                    }}
+                  >
+                    {/* Small dark decorative dot behind the logo (subtle, like reference) */}
                     <circle
-                      cx="0" cy="0" r={dotR}
-                      fill="url(#dotGrad)"
-                      stroke={isHovered ? GOLD : GOLD_DIM}
-                      strokeWidth={isHovered ? "2.5" : "1.5"}
-                      opacity="1"
-                      style={{ filter: isHovered ? `drop-shadow(0 0 12px ${GOLD})` : 'none' }}
+                      cx="0"
+                      cy="0"
+                      r="50"
+                      fill="#1a0e3a"
+                      opacity="0.55"
                     />
 
-                    {/* Small decorative ring around each dot (like ref image) */}
-                    <circle
-                      cx="0" cy="0" r={dotR + 10}
-                      fill="none"
-                      stroke={GOLD}
-                      strokeWidth="0.75"
-                      opacity={isHovered ? "0.6" : "0.25"}
-                      strokeDasharray="3 10"
+                    {/* RAW image — no clipping, no circular border, just the PNG */}
+                    <image
+                      href={`${modality.image}?v=7`}
+                      x={-imgHalf}
+                      y={-imgHalf}
+                      width={imgHalf * 2}
+                      height={imgHalf * 2}
+                      preserveAspectRatio="xMidYMid meet"
+                      opacity={isHovered ? '1' : '0.92'}
+                      style={{
+                        filter: isHovered
+                          ? 'drop-shadow(0 0 16px rgba(183,154,230,0.9)) brightness(1.15)'
+                          : 'drop-shadow(0 2px 8px rgba(0,0,0,0.5))',
+                        transition: 'all 0.3s ease',
+                      }}
                     />
 
-                    {/* The modality icon - clipped to circle, bigger */}
-                    <g clipPath="url(#node-circle-clip)">
-                      <image
-                        href={`${modality.image}?v=6`}
-                        x={-clipR}
-                        y={-clipR}
-                        width={clipR * 2}
-                        height={clipR * 2}
-                        preserveAspectRatio="xMidYMid meet"
-                      />
-                    </g>
+                    {/* Name label — visible always, subtle; brighter on hover */}
+                    <text
+                      x="0"
+                      y={imgHalf + 22}
+                      textAnchor="middle"
+                      fill={isHovered ? '#E5D9F2' : '#B79AE6'}
+                      fontSize="18"
+                      fontFamily="serif"
+                      fontWeight={isHovered ? '600' : '400'}
+                      opacity={isHovered ? '1' : '0.75'}
+                    >
+                      {modality.name}
+                    </text>
 
-                    {/* Hover label */}
-                    <foreignObject x="-90" y={dotR + 8} width="180" height="38" className={`pointer-events-none overflow-visible transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
-                      <div className="w-full flex justify-center">
-                        <span style={{ background: DOT_BG, border: `1px solid ${GOLD}`, color: GOLD, fontSize: '11px', fontWeight: '700', padding: '4px 14px', borderRadius: '20px', whiteSpace: 'nowrap', letterSpacing: '0.05em' }}>
-                          {modality.name}
-                        </span>
-                      </div>
-                    </foreignObject>
-
+                    {/* Hit area (invisible, generous) */}
+                    <circle cx="0" cy="0" r={imgHalf + 30} fill="transparent" pointerEvents="all" />
                   </g>
                 </g>
               );
@@ -205,14 +145,29 @@ export default function OpticalWheel() {
 
         </svg>
 
-        {/* Center logo overlay */}
+        {/* ── CENTER: Main logo (large, prominent, like Zenauraa reference) ── */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-44 h-44 flex items-center justify-center">
+          <div className="relative flex items-center justify-center">
+            {/* Soft glow ring behind logo */}
+            <div
+              className="absolute rounded-full"
+              style={{
+                width: '280px',
+                height: '280px',
+                background: 'radial-gradient(circle, rgba(155,127,212,0.35) 0%, rgba(77,49,107,0.2) 60%, transparent 100%)',
+              }}
+            />
             <img
               src="/new_logo.png"
               alt="ZenAuraa Logo"
-              className="w-36 h-36 object-contain"
-              style={{ filter: `drop-shadow(0 0 16px ${GOLD})` }}
+              style={{
+                width: '220px',
+                height: '220px',
+                objectFit: 'contain',
+                filter: 'drop-shadow(0 0 30px rgba(183,154,230,0.6))',
+                position: 'relative',
+                zIndex: 10,
+              }}
             />
           </div>
         </div>
