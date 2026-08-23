@@ -320,9 +320,6 @@ export default function Navbar() {
                 <Link href="#free-services" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#B79AE6] transition-colors">
                   Free Services
                 </Link>
-                <Link href="#reviews" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#B79AE6] transition-colors">
-                  Reviews
-                </Link>
                   <div className="relative group cursor-pointer">
                   <span className="text-sm font-semibold text-[#F8F7FA] group-hover:text-[#B79AE6] transition-colors flex items-center gap-1">
                     Free Insights
@@ -336,13 +333,16 @@ export default function Navbar() {
                     <Link href="/modalities/numerology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Numerology</Link>
                     <Link href="/modalities/energy-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Energy Healing</Link>
                     <Link href="/modalities/meditation" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Meditation</Link>
-                    <Link href="/modalities/yoga" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Yoga & Mindfulness</Link>
-                    <Link href="/modalities/vastu" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Vastu & Space Energy</Link>
+                    <Link href="/modalities/yoga" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Yoga &amp; Mindfulness</Link>
+                    <Link href="/modalities/vastu" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Vastu &amp; Space Energy</Link>
                     <Link href="/modalities/eft" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">EFT Tapping</Link>
                     <Link href="/modalities/spiritual" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Spiritual Guidance</Link>
                     <Link href="/modalities/sound-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Sound Healing</Link>
                   </div>
                 </div>
+                <Link href="#reviews" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#B79AE6] transition-colors">
+                  Reviews
+                </Link>
               </nav>
             )}
           </div>

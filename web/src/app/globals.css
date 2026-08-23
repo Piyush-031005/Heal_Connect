@@ -365,36 +365,29 @@
 
 
   
-  /* THEME 05 - NEW COLOR (Lighter Old Theme) */
+  /* THEME 05 - NEW COLOR (Lighter version of Old Dark Indigo) */
   .theme-new-color {
-    --background: #1f143a; 
-    --foreground: #F5F2F0; 
-    --card: #241545;
-    --card-foreground: #F5F2F0;
-    --popover: #241545;
-    --popover-foreground: #F5F2F0;
-    --primary: #D8AF37; 
-    --primary-foreground: #1C1236;
-    --secondary: #4F2E73; 
-    --secondary-foreground: #F5F2F0;
-    --muted: #241545;
-    --muted-foreground: #9a76e3; 
-    --accent: #9a76e3; 
-    --accent-foreground: #F5F2F0;
+    /* Lighter royal indigo - same family as the deep purple reference, just brighter */
+    --background: #2D1B6E; 
+    --foreground: #F0EAF8; 
+    --card: #3D2585;
+    --card-foreground: #F0EAF8;
+    --popover: #3D2585;
+    --popover-foreground: #F0EAF8;
+    --primary: #C9A84C; /* The gold from reference image */
+    --primary-foreground: #150D35;
+    --secondary: #5C3A9E; 
+    --secondary-foreground: #F0EAF8;
+    --muted: #3D2585;
+    --muted-foreground: #B8A0E0;
+    --accent: #B8A0E0;
+    --accent-foreground: #150D35;
     --destructive: #EF4444;
-    --destructive-foreground: #F5F2F0;
-    --border: #3A2368;
-    --input: #3A2368;
-    --ring: #D8AF37;
+    --destructive-foreground: #FFFFFF;
+    --border: #5C3A9E;
+    --input: #3D2585;
+    --ring: #C9A84C;
     --radius: 0.75rem;
-  }
-
-  .theme-new-color .bg-stats-gradient {
-    background: transparent !important;
-  }
-
-  .theme-new-color .bg-hero-glow {
-    background: radial-gradient(circle, rgba(216,175,55,0.15) 0%, rgba(79,46,115,0.2) 40%, transparent 70%) !important;
   }
 
   /* THEME 08 - ZEN ALIGN (Blue-focused) */
