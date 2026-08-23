@@ -365,27 +365,26 @@
 
 
   
-  /* THEME: FINAL THEME (Lighter HealConnect — same deep purple hue, ~30% brighter) */
+  /* THEME: FINAL THEME (Lighter HealConnect — #1E1144 → lighter = #2B1970) */
   .theme-new-color {
-    /* HealConnect reference: #1E1144 → 30% lighter = #3B2285 */
-    --background: #3B2285;
+    --background: #2B1970;
     --foreground: #F5F0FF;
-    --card: #4A2D9E;
+    --card: #381F8A;
     --card-foreground: #F5F0FF;
-    --popover: #4A2D9E;
+    --popover: #381F8A;
     --popover-foreground: #F5F0FF;
     --primary: #C9A84C;
     --primary-foreground: #1E1144;
-    --secondary: #5A38B5;
+    --secondary: #4630A0;
     --secondary-foreground: #F5F0FF;
-    --muted: #4A2D9E;
+    --muted: #381F8A;
     --muted-foreground: #C4AAEE;
     --accent: #B79AE6;
     --accent-foreground: #1E1144;
     --destructive: #EF4444;
     --destructive-foreground: #FFFFFF;
-    --border: #5A38B5;
-    --input: #4A2D9E;
+    --border: #4630A0;
+    --input: #381F8A;
     --ring: #C9A84C;
     --radius: 0.75rem;
   }
