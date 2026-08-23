@@ -17,8 +17,7 @@ const MODALITIES = [
   { id: 'numerology',     name: 'Numerology',       image: '/final_ensights/numerology.png' },
 ];
 
-const GOLD = '#F5C84C'; // Using the exact accent color from their Dark Theme
-const DOT_BG = '#06030F'; // Small black dot color
+const GOLD = '#F5C84C'; // Using the exact accent color from the Dark Theme
 
 export default function OpticalWheel() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
@@ -27,9 +26,9 @@ export default function OpticalWheel() {
   const cx = 500;
   const cy = 500;
   const outerR = 345;
-  // A very SMALL black dot behind the logo, just to mask the orbit line, exactly like old screenshot
-  const dotR = 25;   
-  const imgH = 88;   
+  
+  // Smaller image size to match the original layout so they don't look huge/overlap
+  const imgH = 48;   
 
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(`modality-${id}`);
@@ -59,23 +58,10 @@ export default function OpticalWheel() {
           {/* Ambient glow */}
           <circle cx={cx} cy={cy} r="480" fill="url(#outerGlowWhl)" />
 
-          {/* ── ORBIT & GEOMETRIC LINES (exact match to old deployment) ── */}
-          {MODALITIES.map((_, i) => {
-            const a1 = ((i * 30 - 90) * Math.PI) / 180;
-            const a2 = (((i + 6) * 30 - 90) * Math.PI) / 180;
-            return (
-              <line
-                key={`spoke-${i}`}
-                x1={cx + outerR * Math.cos(a1)} y1={cy + outerR * Math.sin(a1)}
-                x2={cx + outerR * Math.cos(a2)} y2={cy + outerR * Math.sin(a2)}
-                stroke={GOLD} strokeWidth="0.5" opacity="0.14"
-              />
-            );
-          })}
-
           {/* Main orbit ring */}
           <circle cx={cx} cy={cy} r={outerR}      fill="none" stroke={GOLD} opacity="0.4"  strokeWidth="1"    />
           <circle cx={cx} cy={cy} r={outerR + 85} fill="none" stroke={GOLD} opacity="0.08" strokeWidth="0.75" />
+          
           {/* Inner decorative rings */}
           <circle cx={cx} cy={cy} r={outerR - 80}  fill="none" stroke={GOLD} opacity="0.15" strokeWidth="0.75" strokeDasharray="3 12" />
           <circle cx={cx} cy={cy} r={outerR - 160} fill="none" stroke={GOLD} opacity="0.2"  strokeWidth="0.75" />
@@ -117,24 +103,21 @@ export default function OpticalWheel() {
                     {/* Hit area */}
                     <circle cx="0" cy="0" r={imgH + 22} fill="transparent" pointerEvents="all" />
 
-                    {/* ── SMALL BLACK SPOT (Just masks the orbit line behind the logo) ── */}
-                    <circle cx="0" cy="0" r={dotR} fill={DOT_BG} />
-
-                    {/* RAW image — No mix-blend-mode hack, so transparent PNGs render naturally */}
+                    {/* RAW image — No black dot, just the logo on the orbit exactly as requested */}
                     <image
-                      href={`${mod.image}?v=11`}
+                      href={`${mod.image}?v=12`}
                       x={-imgH} y={-imgH}
                       width={imgH * 2} height={imgH * 2}
                       preserveAspectRatio="xMidYMid meet"
                       style={{
-                        filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'drop-shadow(0 2px 5px rgba(0,0,0,0.5))',
+                        filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'drop-shadow(0 2px 5px rgba(0,0,0,0.6))',
                         transition: 'filter 0.3s ease',
                       }}
                     />
 
                     {/* Gold name label */}
                     <text
-                      x="0" y={imgH + 18}
+                      x="0" y={imgH + 20}
                       textAnchor="middle"
                       fill={isHovered ? '#FFFFFF' : GOLD}
                       fontSize="14"
