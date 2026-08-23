@@ -21,7 +21,9 @@ const GOLD = '#F5C84C';
 
 export default function OpticalWheel() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-  const [playState, setPlayState] = useState<'running' | 'paused'>('running');
+  
+  // Pause animation only when hovering over a specific logo
+  const playState = hoveredIdx !== null ? 'paused' : 'running';
 
   const cx = 600;
   const cy = 600;
@@ -36,11 +38,7 @@ export default function OpticalWheel() {
   };
 
   return (
-    <div
-      className="relative w-full h-full select-none"
-      onMouseEnter={() => setPlayState('paused')}
-      onMouseLeave={() => setPlayState('running')}
-    >
+    <div className="relative w-full h-full select-none">
       <div className="absolute inset-0 z-10 pointer-events-auto">
         <svg viewBox="0 0 1200 1200" className="w-full h-full">
           <defs>
@@ -81,9 +79,9 @@ export default function OpticalWheel() {
                   onClick={() => handleScrollTo(mod.id)}
                   className="cursor-pointer"
                 >
-                  {/* Counter-spin so labels/icons stay upright */}
+                  {/* Counter-spin so labels/icons stay upright (Fixed duration match) */}
                   <g style={{
-                    animation: 'spin 120s linear infinite reverse',
+                    animation: 'spin 180s linear infinite reverse',
                     animationPlayState: playState,
                     transformOrigin: '0px 0px',
                   }}>
@@ -112,6 +110,7 @@ export default function OpticalWheel() {
                       fill={isHovered ? '#FFFFFF' : GOLD}
                       fontSize="14"
                       fontFamily="'Georgia', serif"
+                      fontWeight="300"
                       letterSpacing="1.5"
                       opacity={isHovered ? '1' : '0.8'}
                     >
