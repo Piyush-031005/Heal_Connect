@@ -81,11 +81,11 @@ export default function LandingPage() {
           <>
             {/* FINAL HYBRID LAYOUT */}
             <FinalHybridExperts />
-            <Testimonials />
             <FinalHybridTarot />
             
             <YourNextDiscovery />
             <ExploreModalities />
+            <Testimonials />
             <FinalHybridSupport />
             
             <div className="bg-background pt-12">

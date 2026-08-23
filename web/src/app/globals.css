@@ -260,39 +260,34 @@
     @apply font-sans;
   }
 }
-/* THEME - NEW COLOR (Zen Align Light) */
-.theme-new-color {
-  --background: #FAF7FF;
-  --foreground: #24154C;
-  --card: #FFFFFF;
-  --card-foreground: #24154C;
-  --popover: #FFFFFF;
-  --popover-foreground: #24154C;
-  --primary: #E3B83C;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F5F0FF;
-  --secondary-foreground: #4B3A76;
-  --muted: #EFE8FC;
-  --muted-foreground: #7A6B9A;
-  --accent: #E3B83C;
-  --accent-foreground: #FFFFFF;
-  --destructive: #EF4444;
-  --destructive-foreground: #FFFFFF;
-  --border: #E8DFF8;
-  --input: #EFE8FC;
-  --ring: #E3B83C;
-  --radius: 1rem;
-}
+  /* LIGHTER ROYAL INDIGO (User requested lighter version of the old theme) */
+  .theme-new-color {
+    --background: #2b1f4c; 
+    --foreground: #F5F2F0; 
+    --card: #3a2862;
+    --card-foreground: #F5F2F0;
+    --popover: #3a2862;
+    --popover-foreground: #F5F2F0;
+    --primary: #E5C352; /* Lighter Gold */
+    --primary-foreground: #2b1f4c;
+    --secondary: #62408B; /* Lighter Royal Purple */
+    --secondary-foreground: #F5F2F0;
+    --muted: #3a2862;
+    --muted-foreground: #A17BF0; /* Lighter Amethyst */
+    --accent: #A17BF0;
+    --accent-foreground: #F5F2F0;
+    --destructive: #EF4444;
+    --destructive-foreground: #F8FAFC;
+    --border: #4D3478;
+    --input: #4D3478;
+    --ring: #E5C352;
+    --radius: 0.75rem;
+  }
 
-html.theme-new-color, html.theme-new-color body, .theme-new-color .bg-background {
-  background: linear-gradient(135deg, #FAF7FF 0%, #F5F0FF 45%, #EFE8FC 100%) !important;
-}
+  .theme-new-color .bg-stats-gradient {
+    background: linear-gradient(90deg, #3a2862 0%, #4D3478 35%, #62408B 70%, #A17BF0 100%) !important;
+  }
 
-.theme-new-color .bg-stats-gradient {
-  background: linear-gradient(90deg, #5E3DA7 0%, #6A4DB7 35%, #6E56C8 70%, #5C6FE8 100%) !important;
-  color: white;
-}
-
-.theme-new-color .bg-hero-glow {
-  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(245,233,255,0.7) 20%, rgba(214,185,255,0.25) 45%, transparent 70%) !important;
-}
+  .theme-new-color .bg-hero-glow {
+    background: radial-gradient(circle, rgba(161,123,240,0.4) 0%, rgba(98,64,139,0.3) 30%, rgba(58,40,98,0.2) 60%, transparent 80%) !important;
+  }

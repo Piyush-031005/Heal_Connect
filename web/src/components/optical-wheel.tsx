@@ -3,21 +3,18 @@
 import { useState } from 'react';
 
 const MODALITIES = [
-  { id: 'astrology', name: 'Astrology', image: '/12-modalities-updates/astrology.png' },
-  { id: 'tarot', name: 'Tarot', image: '/12-modalities-updates/tarot.png' },
-  { id: 'palm-reading', name: 'Palm Reading', image: '/12-modalities-updates/plamreading.png' },
-  { id: 'face-reading', name: 'Face Reading', image: '/12-modalities-updates/facereading.png' },
-  { id: 'numerology', name: 'Numerology', image: '/12-modalities-updates/numeriology.png' },
-  { id: 'energy-healing', name: 'Energy Healing', image: '/12-modalities-updates/energy healing.png' },
-  { id: 'meditation', name: 'Meditation', image: '/12-modalities-updates/medidation.png' },
-  { id: 'yoga', name: 'Yoga', image: '/12-modalities-updates/yoga.png' },
-  { id: 'chakra-healing', name: 'Chakra', image: '/12-modalities-updates/chakrahealing.png' },
-  { id: 'eft', name: 'EFT Tapping', image: '/12-modalities-updates/eft.png' },
-  { id: 'spiritual', name: 'Spiritual Guide', image: '/12-modalities-updates/spiritual.png' },
-  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-updates/sound.png' },
-  { id: 'breathwork', name: 'Breathwork', image: '/12-modalities-updates/breathwork.png' },
-  { id: 'dreams', name: 'Dreams', image: '/12-modalities-updates/dream_prediction.png' },
-  { id: 'space-harmony', name: 'Space Harmony', image: '/12-modalities-updates/space_harmony.png' },
+  { id: 'astrology', name: 'Astrology', image: '/final_ensights/astrology.png' },
+  { id: 'tarot', name: 'Tarot', image: '/final_ensights/tarot.png' },
+  { id: 'face-reading', name: 'Face Reading', image: '/final_ensights/face reading.png' },
+  { id: 'palm-reading', name: 'Palm Reading', image: '/final_ensights/palm reading.png' },
+  { id: 'sound-healing', name: 'Sound Healing', image: '/final_ensights/sound healing.png' },
+  { id: 'meditation', name: 'Meditation', image: '/final_ensights/medidation.png' },
+  { id: 'spiritual', name: 'Spiritual Guidance', image: '/final_ensights/spiritual  guidance.png' },
+  { id: 'chakra-healing', name: 'Chakra Healing', image: '/final_ensights/chakra healing.png' },
+  { id: 'breathwork', name: 'Breathwork', image: '/final_ensights/breathwork.png' },
+  { id: 'dreams', name: 'Dream Prediction', image: '/final_ensights/dream interpretetion.png' },
+  { id: 'space-harmony', name: 'Space Harmony', image: '/final_ensights/space harmony.png' },
+  { id: 'numerology', name: 'Numerology', image: '/final_ensights/numerology.png' },
 ];
 
 export default function OpticalWheel() {
@@ -116,7 +113,7 @@ export default function OpticalWheel() {
 
           <g style={{ animation: 'spin 40s linear infinite', animationPlayState: playState, transformOrigin: '500px 500px' }}>
             {MODALITIES.map((modality, idx) => {
-              const angle = (idx * 24 - 90) * (Math.PI / 180);
+              const angle = (idx * 30 - 90) * (Math.PI / 180);
               const x = cx + outerRadius * Math.cos(angle);
               const y = cy + outerRadius * Math.sin(angle);
               const isHovered = hoveredIdx === idx;

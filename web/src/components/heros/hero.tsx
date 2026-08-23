@@ -35,10 +35,10 @@ function PrimaryHero() {
           <p className="text-xl lg:text-2xl text-foreground/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
             Your one stop shop to discover and connect with holistic health, astrological and wellness practitioners around the world.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-in slide-in-from-left duration-1000 delay-300">
+          <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-in slide-in-from-left duration-1000 delay-300 pointer-events-auto">
             <Link href="/practitioners">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 h-14 text-lg rounded-full font-medium transition-all shadow-lg shadow-primary/20">
-                Book Consultation <ArrowRight className="w-5 h-5 ml-2 inline" />
+                Ask me Anything <ArrowRight className="w-5 h-5 ml-2 inline" />
               </Button>
             </Link>
           </div>
@@ -995,7 +995,7 @@ function FinalHybridHero() {
 export default function Hero() {
   const { layout } = useLayout();
   
-  if (layout === 'final-hybrid') return <FinalHybridHero />;
+  if (layout === 'final-hybrid') return <PrimaryHero />;
   if (layout === 'layout-2') return <Layout2Hero />;
   if (layout === 'new-design-1') return <ZenAlignHero />;
   if (layout === 'editorial') return <EditorialHero />;

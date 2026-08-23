@@ -320,8 +320,8 @@ export default function Navbar() {
                 <Link href="#free-services" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#B79AE6] transition-colors">
                   Free Services
                 </Link>
-                <Link href="#review" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#B79AE6] transition-colors">
-                  Review
+                <Link href="#reviews" className="text-sm font-semibold text-[#F8F7FA] hover:text-[#B79AE6] transition-colors">
+                  Reviews
                 </Link>
                   <div className="relative group cursor-pointer">
                   <span className="text-sm font-semibold text-[#F8F7FA] group-hover:text-[#B79AE6] transition-colors flex items-center gap-1">
