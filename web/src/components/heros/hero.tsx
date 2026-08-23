@@ -13,14 +13,30 @@ import OpticalWheel from '@/components/optical-wheel';
 function PrimaryHero() {
   return (
     <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-background min-h-[90vh] flex items-center">
-      {/* Soft Light Gradients */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
+      {/* Scattered star particles — like HealConnect reference */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
+        {[
+          [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
+          [82,15],[88,60],[93,35],[5,48],[18,78],[35,5],[50,68],[65,92],[80,30],[95,80],
+          [12,25],[28,50],[42,75],[58,12],[72,55],[85,88],[3,70],[20,95],[48,35],[78,8],
+          [91,50],[25,15],[55,85],[70,22],[40,60],[10,90],[62,40],[87,68],[33,30],[16,55],
+        ].map(([x, y], i) => (
+          <circle
+            key={i}
+            cx={`${x}%`}
+            cy={`${y}%`}
+            r={i % 5 === 0 ? '1.5' : i % 3 === 0 ? '1' : '0.7'}
+            fill="white"
+            opacity={i % 4 === 0 ? '0.6' : i % 3 === 0 ? '0.4' : '0.25'}
+          />
+        ))}
+      </svg>
 
-      {/* Big Modality Wheel - slightly smaller, perfectly centered */}
+      {/* Big Modality Wheel */}
       <div className="absolute right-[-15%] md:right-[-5%] top-1/2 -translate-y-1/2 h-[650px] w-[650px] md:h-[780px] md:w-[780px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center">
         <OpticalWheel />
       </div>
+
 
       <div className="container mx-auto px-6 relative z-10 pointer-events-none">
         <div className="max-w-3xl pointer-events-auto">

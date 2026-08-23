@@ -1,42 +1,86 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-// Using final_ensights logos as RAW images - exactly like HealConnect reference
 const MODALITIES = [
-  { id: 'astrology',     name: 'Astrology',         image: '/final_ensights/astrology.png' },
-  { id: 'tarot',         name: 'Tarot',             image: '/final_ensights/tarot.png' },
-  { id: 'face-reading',  name: 'Face Reading',      image: '/final_ensights/face reading.png' },
-  { id: 'palm-reading',  name: 'Palm Reading',      image: '/final_ensights/palm reading.png' },
-  { id: 'sound-healing', name: 'Sound Healing',     image: '/final_ensights/sound healing.png' },
-  { id: 'meditation',    name: 'Meditation',        image: '/final_ensights/medidation.png' },
-  { id: 'spiritual',     name: 'Spiritual',         image: '/final_ensights/spiritual  guidance.png' },
-  { id: 'chakra-healing',name: 'Chakra Healing',    image: '/final_ensights/chakra healing.png' },
-  { id: 'breathwork',    name: 'Breathwork',        image: '/final_ensights/breathwork.png' },
-  { id: 'dreams',        name: 'Dream Prediction',  image: '/final_ensights/dream interpretetion.png' },
-  { id: 'space-harmony', name: 'Space Harmony',     image: '/final_ensights/space harmony.png' },
-  { id: 'numerology',    name: 'Numerology',        image: '/final_ensights/numerology.png' },
+  { id: 'astrology',      name: 'Astrology',        image: '/final_ensights/astrology.png' },
+  { id: 'tarot',          name: 'Tarot',            image: '/final_ensights/tarot.png' },
+  { id: 'face-reading',   name: 'Face Reading',     image: '/final_ensights/face reading.png' },
+  { id: 'palm-reading',   name: 'Palm Reading',     image: '/final_ensights/palm reading.png' },
+  { id: 'sound-healing',  name: 'Sound Healing',    image: '/final_ensights/sound healing.png' },
+  { id: 'meditation',     name: 'Meditation',       image: '/final_ensights/medidation.png' },
+  { id: 'spiritual',      name: 'Spiritual',        image: '/final_ensights/spiritual  guidance.png' },
+  { id: 'chakra-healing', name: 'Chakra Healing',   image: '/final_ensights/chakra healing.png' },
+  { id: 'breathwork',     name: 'Breathwork',       image: '/final_ensights/breathwork.png' },
+  { id: 'dreams',         name: 'Dream Prediction', image: '/final_ensights/dream interpretetion.png' },
+  { id: 'space-harmony',  name: 'Space Harmony',    image: '/final_ensights/space harmony.png' },
+  { id: 'numerology',     name: 'Numerology',       image: '/final_ensights/numerology.png' },
 ];
 
-// Gold color from reference image
+// Gold matching reference image
 const GOLD = '#C9A84C';
+const DISC_COLOR = '#080414'; // Near-black disc behind each logo
+
+// Build 12-pointed star polygon points for the geometric lines
+function buildStarPolygon(cx: number, cy: number, r: number, points: number): string {
+  const coords: string[] = [];
+  for (let i = 0; i < points; i++) {
+    const angle = (i * (360 / points) - 90) * (Math.PI / 180);
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    coords.push(`${x},${y}`);
+  }
+  // Connect every other point to create star
+  return coords.join(' ');
+}
 
 export default function OpticalWheel() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [playState, setPlayState] = useState<'running' | 'paused'>('running');
+  const [rotation, setRotation] = useState(0);
+  const rafRef = useRef<number>(0);
+  const lastRef = useRef<number>(0);
 
   const cx = 500;
   const cy = 500;
-  const outerRadius = 340;
-  // Each image half-size (no clipping — raw rectangular image)
+  const outerRadius = 345;
+  // Disc radius behind each logo (solid black circle)
+  const discR = 78;
+  // Logo image half-size (placed on top of disc, no clipping)
   const imgHalf = 90;
+
+  // Smooth rotation using requestAnimationFrame
+  useEffect(() => {
+    const SPEED = 0.008; // degrees per ms
+    const animate = (now: number) => {
+      if (lastRef.current) {
+        const delta = now - lastRef.current;
+        if (playState === 'running') {
+          setRotation(prev => (prev + SPEED * delta) % 360);
+        }
+      }
+      lastRef.current = now;
+      rafRef.current = requestAnimationFrame(animate);
+    };
+    rafRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [playState]);
 
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(`modality-${id}`);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // Compute node positions
+  const nodes = MODALITIES.map((mod, idx) => {
+    const angleDeg = (idx * 30 - 90 + rotation) % 360;
+    const angleRad = angleDeg * (Math.PI / 180);
+    const x = cx + outerRadius * Math.cos(angleRad);
+    const y = cy + outerRadius * Math.sin(angleRad);
+    // Counter-rotation so labels stay upright
+    const counterRot = -rotation;
+    return { ...mod, x, y, counterRot };
+  });
 
   return (
     <div
@@ -45,169 +89,161 @@ export default function OpticalWheel() {
       onMouseLeave={() => setPlayState('running')}
     >
       <div className="absolute inset-0 z-10 pointer-events-auto">
-        <svg viewBox="0 0 1000 1000" className="w-full h-full mx-auto">
+        <svg viewBox="0 0 1000 1000" className="w-full h-full">
           <defs>
-            {/* Gold radial glow for center */}
-            <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor={GOLD} stopOpacity="0.4" />
-              <stop offset="50%" stopColor={GOLD} stopOpacity="0.1" />
+            {/* Gold ambient glow */}
+            <radialGradient id="outerGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor={GOLD} stopOpacity="0.18" />
+              <stop offset="70%" stopColor={GOLD} stopOpacity="0.05" />
               <stop offset="100%" stopColor={GOLD} stopOpacity="0" />
             </radialGradient>
-            {/* Dark backdrop for each image stamp */}
-            <radialGradient id="stampGrad" cx="40%" cy="30%" r="75%">
-              <stop offset="0%" stopColor="#1a0a2e" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#0d061c" stopOpacity="0.95" />
+            {/* Center disc gradient — matches reference */}
+            <radialGradient id="centerDisc" cx="40%" cy="35%" r="70%">
+              <stop offset="0%" stopColor="#2a1060" />
+              <stop offset="60%" stopColor="#150830" />
+              <stop offset="100%" stopColor="#080210" />
+            </radialGradient>
+            {/* Center ring bevel */}
+            <radialGradient id="ringBevel" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor={GOLD} stopOpacity="0.5" />
+              <stop offset="100%" stopColor={GOLD} stopOpacity="0.1" />
             </radialGradient>
           </defs>
 
-          {/* ── ORBIT RINGS — thin gold, like reference ── */}
-          {/* Outermost subtle ring */}
-          <circle cx={cx} cy={cy} r={outerRadius + 105} fill="none" stroke={GOLD} opacity="0.12" strokeWidth="0.75" />
-          {/* Main orbit path (logos sit on this) */}
-          <circle cx={cx} cy={cy} r={outerRadius} fill="none" stroke={GOLD} opacity="0.45" strokeWidth="1" />
-          {/* Inner decorative ring */}
-          <circle cx={cx} cy={cy} r={outerRadius - 75} fill="none" stroke={GOLD} opacity="0.2" strokeWidth="0.75" strokeDasharray="5 15" />
-          {/* Center ring */}
-          <circle cx={cx} cy={cy} r={outerRadius - 155} fill="none" stroke={GOLD} opacity="0.25" strokeWidth="0.75" />
-          {/* Innermost tight ring around center */}
-          <circle cx={cx} cy={cy} r={175} fill="none" stroke={GOLD} opacity="0.35" strokeWidth="1" />
-          <circle cx={cx} cy={cy} r={155} fill="none" stroke={GOLD} opacity="0.2" strokeWidth="0.75" strokeDasharray="3 8" style={{ animation: 'spin 120s linear infinite', transformOrigin: '500px 500px' }} />
+          {/* ── BACKGROUND AMBIENT GLOW ── */}
+          <circle cx={cx} cy={cy} r="480" fill="url(#outerGlow)" />
 
-          {/* Ambient gold glow behind center */}
-          <circle cx={cx} cy={cy} r="200" fill="url(#centerGlow)" />
+          {/* ── OUTER ORBIT RING (gold, single solid line — matches reference) ── */}
+          <circle cx={cx} cy={cy} r={outerRadius} fill="none" stroke={GOLD} opacity="0.55" strokeWidth="1" />
+          {/* Faint outer guide ring */}
+          <circle cx={cx} cy={cy} r={outerRadius + 80} fill="none" stroke={GOLD} opacity="0.1" strokeWidth="0.75" />
 
-          {/* Center dark disc */}
-          <circle cx={cx} cy={cy} r="155" fill="#0d061c" opacity="0.95" />
-          <circle cx={cx} cy={cy} r="155" fill="none" stroke={GOLD} opacity="0.6" strokeWidth="1.5" />
+          {/* ── GEOMETRIC STAR POLYGON LINES (12-spoke, like reference) ── */}
+          {/* These are the faint diagonal lines connecting across the wheel */}
+          {MODALITIES.map((_, i) => {
+            const a1 = ((i * 30 - 90) * Math.PI) / 180;
+            const a2 = (((i + 6) * 30 - 90) * Math.PI) / 180;
+            return (
+              <line
+                key={`spoke-${i}`}
+                x1={cx + outerRadius * Math.cos(a1)}
+                y1={cy + outerRadius * Math.sin(a1)}
+                x2={cx + outerRadius * Math.cos(a2)}
+                y2={cy + outerRadius * Math.sin(a2)}
+                stroke={GOLD}
+                strokeWidth="0.5"
+                opacity="0.12"
+              />
+            );
+          })}
+
+          {/* ── INNER DECORATIVE RINGS ── */}
+          <circle cx={cx} cy={cy} r={outerRadius - 80} fill="none" stroke={GOLD} opacity="0.18" strokeWidth="0.75" strokeDasharray="3 12" />
+          <circle cx={cx} cy={cy} r={outerRadius - 155} fill="none" stroke={GOLD} opacity="0.22" strokeWidth="0.75" />
+
+          {/* ── CENTER ELEMENT ── */}
+          {/* Outer decorative ring of center */}
+          <circle cx={cx} cy={cy} r="178" fill="none" stroke={GOLD} opacity="0.45" strokeWidth="2" />
+          {/* Middle ring */}
+          <circle cx={cx} cy={cy} r="165" fill="none" stroke={GOLD} opacity="0.2" strokeWidth="1" />
+          {/* Dark disc for center */}
+          <circle cx={cx} cy={cy} r="158" fill="url(#centerDisc)" />
+          {/* Inner decorative rings on center disc */}
+          <circle cx={cx} cy={cy} r="148" fill="none" stroke={GOLD} opacity="0.3" strokeWidth="0.75" strokeDasharray="2 6" />
+          <circle cx={cx} cy={cy} r="130" fill="none" stroke={GOLD} opacity="0.2" strokeWidth="0.5" />
 
           {/* ── THE 12 MODALITY NODES ── */}
-          <g
-            style={{
-              animation: 'spin 55s linear infinite',
-              animationPlayState: playState,
-              transformOrigin: '500px 500px',
-            }}
-          >
-            {MODALITIES.map((modality, idx) => {
-              const angle = (idx * 30 - 90) * (Math.PI / 180);
-              const x = cx + outerRadius * Math.cos(angle);
-              const y = cy + outerRadius * Math.sin(angle);
-              const isHovered = hoveredIdx === idx;
+          {nodes.map((node, idx) => {
+            const isHovered = hoveredIdx === idx;
 
-              return (
-                <g
-                  key={idx}
-                  transform={`translate(${x}, ${y})`}
-                  onMouseEnter={() => setHoveredIdx(idx)}
-                  onMouseLeave={() => setHoveredIdx(null)}
-                  onClick={() => handleScrollTo(modality.id)}
-                  className="cursor-pointer"
-                >
-                  {/* Counter-spin so everything stays upright */}
-                  <g
+            return (
+              <g
+                key={idx}
+                transform={`translate(${node.x}, ${node.y})`}
+                onMouseEnter={() => { setHoveredIdx(idx); }}
+                onMouseLeave={() => setHoveredIdx(null)}
+                onClick={() => handleScrollTo(node.id)}
+                className="cursor-pointer"
+              >
+                {/* Counter-rotate so labels stay upright */}
+                <g transform={`rotate(${node.counterRot})`}>
+
+                  {/* Hit area */}
+                  <circle cx="0" cy="0" r={imgHalf + 20} fill="transparent" pointerEvents="all" />
+
+                  {/* ── SOLID BLACK CIRCULAR DISC (the "small black spot" from reference) ── */}
+                  <circle
+                    cx="0"
+                    cy="0"
+                    r={discR}
+                    fill={DISC_COLOR}
+                    opacity={isHovered ? '1' : '0.92'}
                     style={{
-                      animation: 'spin 55s linear infinite reverse',
-                      animationPlayState: playState,
-                      transformOrigin: '0px 0px',
+                      filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'none',
                     }}
+                  />
+
+                  {/* RAW image — NO circular clip, just placed on top of the disc */}
+                  {/* Transparent areas of the PNG will show the black disc below */}
+                  <image
+                    href={`${node.image}?v=9`}
+                    x={-imgHalf}
+                    y={-imgHalf}
+                    width={imgHalf * 2}
+                    height={imgHalf * 2}
+                    preserveAspectRatio="xMidYMid meet"
+                    style={{
+                      filter: isHovered
+                        ? `drop-shadow(0 0 10px ${GOLD})`
+                        : 'drop-shadow(0 2px 8px rgba(0,0,0,0.7))',
+                      transition: 'filter 0.3s ease',
+                    }}
+                  />
+
+                  {/* Gold name label below — small caps like reference */}
+                  <text
+                    x="0"
+                    y={discR + 22}
+                    textAnchor="middle"
+                    fill={isHovered ? '#FFE082' : GOLD}
+                    fontSize="16"
+                    fontFamily="'Georgia', 'Times New Roman', serif"
+                    fontWeight="400"
+                    letterSpacing="2"
+                    opacity={isHovered ? '1' : '0.85'}
+                    style={{ textTransform: 'uppercase' }}
                   >
-                    {/* Hit area */}
-                    <circle cx="0" cy="0" r={imgHalf + 25} fill="transparent" pointerEvents="all" />
+                    {node.name}
+                  </text>
 
-                    {/* Small dark rectangular stamp behind image — like the reference */}
-                    <rect
-                      x={-imgHalf - 4}
-                      y={-imgHalf - 4}
-                      width={(imgHalf + 4) * 2}
-                      height={(imgHalf + 4) * 2}
-                      rx="12"
-                      ry="12"
-                      fill="url(#stampGrad)"
-                      opacity={isHovered ? '0.95' : '0.75'}
-                    />
-
-                    {/* Thin gold border on hover */}
-                    {isHovered && (
-                      <rect
-                        x={-imgHalf - 4}
-                        y={-imgHalf - 4}
-                        width={(imgHalf + 4) * 2}
-                        height={(imgHalf + 4) * 2}
-                        rx="12"
-                        ry="12"
-                        fill="none"
-                        stroke={GOLD}
-                        strokeWidth="1.5"
-                        opacity="0.7"
-                      />
-                    )}
-
-                    {/* RAW image — NO circular clip, exactly like HealConnect reference */}
-                    <image
-                      href={`${modality.image}?v=8`}
-                      x={-imgHalf}
-                      y={-imgHalf}
-                      width={imgHalf * 2}
-                      height={imgHalf * 2}
-                      preserveAspectRatio="xMidYMid meet"
-                      style={{
-                        filter: isHovered
-                          ? `drop-shadow(0 0 12px ${GOLD}) brightness(1.1)`
-                          : 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))',
-                        transition: 'all 0.3s ease',
-                      }}
-                    />
-
-                    {/* Name label in gold text below image — like reference */}
-                    <text
-                      x="0"
-                      y={imgHalf + 20}
-                      textAnchor="middle"
-                      fill={isHovered ? '#FFE082' : GOLD}
-                      fontSize="17"
-                      fontFamily="'Georgia', serif"
-                      fontWeight="400"
-                      letterSpacing="1"
-                      opacity={isHovered ? '1' : '0.8'}
-                    >
-                      {modality.name}
-                    </text>
-                  </g>
                 </g>
-              );
-            })}
-          </g>
+              </g>
+            );
+          })}
 
         </svg>
 
-        {/* ── CENTER LOGO overlay (HTML, not SVG for clarity) ── */}
+        {/* ── CENTER LOGO (HTML overlay) ── */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="relative flex items-center justify-center">
+          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {/* Gold glow behind logo */}
-            <div
-              style={{
-                position: 'absolute',
-                width: '260px',
-                height: '260px',
-                borderRadius: '50%',
-                background: `radial-gradient(circle, rgba(201,168,76,0.3) 0%, rgba(201,168,76,0.1) 50%, transparent 75%)`,
-              }}
-            />
-            {/* The center logo */}
+            <div style={{
+              position: 'absolute',
+              width: '280px',
+              height: '280px',
+              borderRadius: '50%',
+              background: `radial-gradient(circle, rgba(201,168,76,0.2) 0%, rgba(201,168,76,0.06) 50%, transparent 75%)`,
+            }} />
             <img
               src="/new_center_logo_dark.png"
               alt="ZenAuraa"
               style={{
-                width: '200px',
-                height: '200px',
+                width: '210px',
+                height: '210px',
                 objectFit: 'contain',
-                filter: `drop-shadow(0 0 20px rgba(201,168,76,0.5))`,
+                filter: `drop-shadow(0 0 24px rgba(201,168,76,0.45))`,
                 position: 'relative',
                 zIndex: 10,
-              }}
-              onError={(e) => {
-                // Fallback to other logo if primary fails
-                (e.target as HTMLImageElement).src = '/this_is_the_logo.png';
               }}
             />
           </div>

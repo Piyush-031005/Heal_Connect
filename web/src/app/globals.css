@@ -365,27 +365,27 @@
 
 
   
-  /* THEME 05 - NEW COLOR: Lighter version of HealConnect dark purple #1a0e3a */
+  /* THEME: FINAL THEME (Lighter HealConnect — same deep purple hue, ~30% brighter) */
   .theme-new-color {
-    /* HealConnect reference: #1a0e3a (very dark). ~25% lighter = #2e1b5e */
-    --background: #2e1b5e;
+    /* HealConnect reference: #1E1144 → 30% lighter = #3B2285 */
+    --background: #3B2285;
     --foreground: #F5F0FF;
-    --card: #3c2472;
+    --card: #4A2D9E;
     --card-foreground: #F5F0FF;
-    --popover: #3c2472;
+    --popover: #4A2D9E;
     --popover-foreground: #F5F0FF;
-    --primary: #C9A84C; /* Gold from HealConnect reference */
-    --primary-foreground: #1a0e3a;
-    --secondary: #4a2f85;
+    --primary: #C9A84C;
+    --primary-foreground: #1E1144;
+    --secondary: #5A38B5;
     --secondary-foreground: #F5F0FF;
-    --muted: #3c2472;
+    --muted: #4A2D9E;
     --muted-foreground: #C4AAEE;
     --accent: #B79AE6;
-    --accent-foreground: #1a0e3a;
+    --accent-foreground: #1E1144;
     --destructive: #EF4444;
     --destructive-foreground: #FFFFFF;
-    --border: #4a2f85;
-    --input: #3c2472;
+    --border: #5A38B5;
+    --input: #4A2D9E;
     --ring: #C9A84C;
     --radius: 0.75rem;
   }
