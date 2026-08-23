@@ -174,7 +174,9 @@ export const usersApi = {
     request('/api/users/me', { method: 'DELETE', headers: authHeader(token) }),
 
   exportData: (token: string) =>
-    request('/api/users/me/export', { method: 'POST', headers: authHeader(token) }),
+    // Backend route is GET (see backend/src/routes/users.ts) — POST here would
+    // 404 (no matching route/method), which was silently breaking "Download my data".
+    request('/api/users/me/export', { method: 'GET', headers: authHeader(token) }),
 };
 
 export const practitionersApi = {
@@ -232,7 +234,9 @@ export const practitionersApi = {
     request('/api/practitioners/me', { method: 'DELETE', headers: authHeader(token) }),
 
   exportData: (token: string) =>
-    request('/api/practitioners/me/export', { method: 'POST', headers: authHeader(token) }),
+    // Backend route is GET (see backend/src/routes/practitioners.ts) — POST here
+    // would 404, which was silently breaking "Download my data" for experts too.
+    request('/api/practitioners/me/export', { method: 'GET', headers: authHeader(token) }),
 };
 
 export const sessionsApi = {
@@ -296,7 +300,10 @@ export const sessionsApi = {
     }),
 
   myTranscripts: (token: string, page?: number) =>
-    request<{ transcripts: TranscriptEntry[]; pagination: Pagination }>('/api/sessions/transcripts' + (page ? `?page=${page}` : ''), { headers: authHeader(token) }),
+    // Backend route is /api/sessions/user/transcripts (see backend/src/routes/sessions.ts) —
+    // this was missing the "user/" segment, so it always 404'd (or hit GET /:id with
+    // id="transcripts") and the "My Call Transcripts" page always showed empty.
+    request<{ transcripts: TranscriptEntry[]; pagination: Pagination }>('/api/sessions/user/transcripts' + (page ? `?page=${page}` : ''), { headers: authHeader(token) }),
 
   practitionerTranscripts: (token: string, page?: number) =>
     request<{ transcripts: TranscriptEntry[]; pagination: Pagination }>('/api/sessions/practitioner/transcripts' + (page ? `?page=${page}` : ''), { headers: authHeader(token) }),
@@ -740,5 +747,17 @@ export const ticketsApi = {
     request<{ ticket: SupportTicketEntry }>(`/api/tickets/${id}/close`, {
       method: 'POST',
       headers: authHeader(token),
+    }),
+};
+
+// No dedicated backend endpoint exists yet for the practitioner-interest
+// application form — it reuses the existing ContactMessage inbox (same one
+// admins already review at /admin/messages) rather than requiring a new
+// Prisma model + migration for what is, structurally, a lead-capture form.
+export const contactApi = {
+  submit: (body: { name: string; email: string; subject: string; message: string }) =>
+    request('/api/contact', {
+      method: 'POST',
+      body: JSON.stringify(body),
     }),
 };

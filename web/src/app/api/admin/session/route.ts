@@ -14,7 +14,7 @@ import { decodeSessionToken, SESSION_COOKIE, SESSION_TTL_MS } from '@/lib/adminS
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-const BACKEND = process.env['NEXT_PUBLIC_API_URL'] ?? 'http://localhost:5000';
+const BACKEND = process.env['BACKEND_URL'] ?? process.env['NEXT_PUBLIC_API_URL'] ?? 'http://backend:8082';
 
 export async function GET(req: NextRequest) {
   const token = req.cookies.get(SESSION_COOKIE)?.value;

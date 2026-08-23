@@ -18,7 +18,7 @@ import { SESSION_COOKIE, SESSION_TTL_MS } from '@/lib/adminSession';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-const BACKEND = process.env['NEXT_PUBLIC_API_URL'] ?? 'http://localhost:5000';
+const BACKEND = process.env['BACKEND_URL'] ?? process.env['NEXT_PUBLIC_API_URL'] ?? 'http://backend:8082';
 
 // POST /api/admin/session/mfa — verify TOTP (or confirm setup)
 export async function POST(req: NextRequest) {

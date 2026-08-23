@@ -581,6 +581,11 @@ router.post(
           });
         }
 
+        if (isActivelyBanned(pract)) {
+          bannedResponse(res, pract);
+          return;
+        }
+
         const payload: import('../lib/jwt').JwtPayload = { userId: pract.id, practitionerId: pract.id, ...(pract.email ? { email: pract.email } : {}) };
         const accessToken = signAccessToken(payload);
         const refreshToken = signRefreshToken(payload);
@@ -620,6 +625,11 @@ router.post(
           where: { id: user.id },
           data: { googleId, isEmailVerified: true },
         });
+      }
+
+      if (isActivelyBanned(user)) {
+        bannedResponse(res, user);
+        return;
       }
 
       const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
@@ -674,6 +684,11 @@ router.post(
         if (email && name) sendWelcomeEmail(email, name).catch(() => {});
       } else if (!user.appleId) {
         user = await prisma.user.update({ where: { id: user.id }, data: { appleId } });
+      }
+
+      if (isActivelyBanned(user)) {
+        bannedResponse(res, user);
+        return;
       }
 
       const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
