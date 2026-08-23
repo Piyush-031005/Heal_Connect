@@ -30,7 +30,7 @@ docker-compose up --build
 **Run Database Migrations (First time only):**
 Once the containers are running, you need to push the Prisma schema to the local Postgres database. Open a new terminal and run:
 ```bash
-docker-compose exec backend npx prisma migrate dev
+docker-compose exec backend npx prisma db push
 ```
 
 **Access Points:**
@@ -70,3 +70,4 @@ If testing Google Auth locally, ensure that `http://localhost:3000/auth/google/c
 - Beautiful Light and Dark modes with smooth transitions.
 - Authentication screens (Login/Signup) ready for integration.
 - PostgreSQL database schema for Practitioners, Users, Wallets, and Sessions.
+
