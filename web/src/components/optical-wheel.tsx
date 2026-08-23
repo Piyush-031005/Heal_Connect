@@ -17,8 +17,8 @@ const MODALITIES = [
   { id: 'numerology',     name: 'Numerology',       image: '/final_ensights/numerology.png' },
 ];
 
-const GOLD = '#C9A84C';
-const DISC_BG = '#080414'; // Near-black disc — matches HealConnect reference exactly
+const GOLD = '#F5C84C'; // Using the exact accent color from their Dark Theme
+const DOT_BG = '#06030F'; // Small black dot color
 
 export default function OpticalWheel() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
@@ -27,8 +27,9 @@ export default function OpticalWheel() {
   const cx = 500;
   const cy = 500;
   const outerR = 345;
-  const discR  = 80;   // solid black circle radius
-  const imgH   = 88;   // image half-size (slightly smaller than disc so disc edge shows as ring)
+  // A very SMALL black dot behind the logo, just to mask the orbit line, exactly like old screenshot
+  const dotR = 25;   
+  const imgH = 88;   
 
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(`modality-${id}`);
@@ -45,21 +46,20 @@ export default function OpticalWheel() {
         <svg viewBox="0 0 1000 1000" className="w-full h-full">
           <defs>
             <radialGradient id="outerGlowWhl" cx="50%" cy="50%" r="50%">
-              <stop offset="0%"   stopColor={GOLD} stopOpacity="0.14" />
+              <stop offset="0%"   stopColor={GOLD} stopOpacity="0.12" />
               <stop offset="100%" stopColor={GOLD} stopOpacity="0"   />
             </radialGradient>
             <radialGradient id="centerDiscGrad" cx="40%" cy="35%" r="70%">
-              <stop offset="0%"   stopColor="#2a1060" />
-              <stop offset="60%"  stopColor="#130828" />
-              <stop offset="100%" stopColor="#060112" />
+              <stop offset="0%"   stopColor="#2A1658" />
+              <stop offset="60%"  stopColor="#1E1144" />
+              <stop offset="100%" stopColor="#0B061A" />
             </radialGradient>
           </defs>
 
           {/* Ambient glow */}
           <circle cx={cx} cy={cy} r="480" fill="url(#outerGlowWhl)" />
 
-          {/* ── ORBIT & GEOMETRIC LINES (matching HealConnect reference) ── */}
-          {/* 12-spoke diagonal lines connecting opposite nodes */}
+          {/* ── ORBIT & GEOMETRIC LINES (exact match to old deployment) ── */}
           {MODALITIES.map((_, i) => {
             const a1 = ((i * 30 - 90) * Math.PI) / 180;
             const a2 = (((i + 6) * 30 - 90) * Math.PI) / 180;
@@ -74,25 +74,24 @@ export default function OpticalWheel() {
           })}
 
           {/* Main orbit ring */}
-          <circle cx={cx} cy={cy} r={outerR}      fill="none" stroke={GOLD} opacity="0.5"  strokeWidth="1"    />
+          <circle cx={cx} cy={cy} r={outerR}      fill="none" stroke={GOLD} opacity="0.4"  strokeWidth="1"    />
           <circle cx={cx} cy={cy} r={outerR + 85} fill="none" stroke={GOLD} opacity="0.08" strokeWidth="0.75" />
           {/* Inner decorative rings */}
           <circle cx={cx} cy={cy} r={outerR - 80}  fill="none" stroke={GOLD} opacity="0.15" strokeWidth="0.75" strokeDasharray="3 12" />
           <circle cx={cx} cy={cy} r={outerR - 160} fill="none" stroke={GOLD} opacity="0.2"  strokeWidth="0.75" />
 
-          {/* ── CENTER DISC (matches HealConnect reference exactly) ── */}
-          <circle cx={cx} cy={cy} r="178" fill="none" stroke={GOLD} opacity="0.5" strokeWidth="1.5" />
-          <circle cx={cx} cy={cy} r="164" fill="none" stroke={GOLD} opacity="0.2" strokeWidth="0.75" />
+          {/* ── CENTER DISC ── */}
+          <circle cx={cx} cy={cy} r="178" fill="none" stroke={GOLD} opacity="0.4" strokeWidth="1.5" />
+          <circle cx={cx} cy={cy} r="164" fill="none" stroke={GOLD} opacity="0.15" strokeWidth="0.75" />
           <circle cx={cx} cy={cy} r="157" fill="url(#centerDiscGrad)" />
           <circle
             cx={cx} cy={cy} r="147"
-            fill="none" stroke={GOLD} opacity="0.3" strokeWidth="0.75" strokeDasharray="2 6"
+            fill="none" stroke={GOLD} opacity="0.25" strokeWidth="0.75" strokeDasharray="2 6"
             style={{ animation: 'spin 80s linear infinite', transformOrigin: '500px 500px' }}
           />
-          <circle cx={cx} cy={cy} r="128" fill="none" stroke={GOLD} opacity="0.18" strokeWidth="0.5" />
+          <circle cx={cx} cy={cy} r="128" fill="none" stroke={GOLD} opacity="0.15" strokeWidth="0.5" />
 
           {/* ── THE 12 MODALITY NODES ── */}
-          {/* Outer group spins the whole ring */}
           <g style={{ animation: 'spin 55s linear infinite', animationPlayState: playState, transformOrigin: '500px 500px' }}>
             {MODALITIES.map((mod, idx) => {
               const angle = (idx * 30 - 90) * (Math.PI / 180);
@@ -109,7 +108,7 @@ export default function OpticalWheel() {
                   onClick={() => handleScrollTo(mod.id)}
                   className="cursor-pointer"
                 >
-                  {/* Counter-spin: transformOrigin 0px 0px = node center (after parent translate) */}
+                  {/* Counter-spin so labels stay upright */}
                   <g style={{
                     animation: 'spin 55s linear infinite reverse',
                     animationPlayState: playState,
@@ -118,49 +117,38 @@ export default function OpticalWheel() {
                     {/* Hit area */}
                     <circle cx="0" cy="0" r={imgH + 22} fill="transparent" pointerEvents="all" />
 
-                    {/* ── SOLID BLACK CIRCULAR DISC ── */}
-                    <circle
-                      cx="0" cy="0" r={discR}
-                      fill={DISC_BG}
-                      style={{ filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'none' }}
+                    {/* ── SMALL BLACK SPOT (Just masks the orbit line behind the logo) ── */}
+                    <circle cx="0" cy="0" r={dotR} fill={DOT_BG} />
+
+                    {/* RAW image — No mix-blend-mode hack, so transparent PNGs render naturally */}
+                    <image
+                      href={`${mod.image}?v=11`}
+                      x={-imgH} y={-imgH}
+                      width={imgH * 2} height={imgH * 2}
+                      preserveAspectRatio="xMidYMid meet"
+                      style={{
+                        filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'drop-shadow(0 2px 5px rgba(0,0,0,0.5))',
+                        transition: 'filter 0.3s ease',
+                      }}
                     />
 
-                    {/* RAW image on disc — mix-blend-mode multiply hides white backgrounds */}
-                    <foreignObject x={-imgH} y={-imgH} width={imgH * 2} height={imgH * 2}
-                      style={{ overflow: 'visible', pointerEvents: 'none' }}>
-                      <img
-                        src={`${mod.image}?v=10`}
-                        style={{
-                          width: `${imgH * 2}px`,
-                          height: `${imgH * 2}px`,
-                          objectFit: 'contain',
-                          mixBlendMode: 'screen', // makes white transparent on dark disc
-                          filter: isHovered ? `drop-shadow(0 0 8px ${GOLD}) brightness(1.15)` : 'none',
-                          display: 'block',
-                        }}
-                        alt={mod.name}
-                      />
-                    </foreignObject>
-
-                    {/* Gold name label — stays upright due to counter-rotation */}
+                    {/* Gold name label */}
                     <text
-                      x="0" y={discR + 22}
+                      x="0" y={imgH + 18}
                       textAnchor="middle"
-                      fill={isHovered ? '#FFE082' : GOLD}
-                      fontSize="15"
+                      fill={isHovered ? '#FFFFFF' : GOLD}
+                      fontSize="14"
                       fontFamily="'Georgia', serif"
                       letterSpacing="1.5"
                       opacity={isHovered ? '1' : '0.8'}
                     >
                       {mod.name.toUpperCase()}
                     </text>
-
                   </g>
                 </g>
               );
             })}
           </g>
-
         </svg>
 
         {/* Center logo */}
@@ -168,14 +156,14 @@ export default function OpticalWheel() {
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div style={{
               position: 'absolute', width: '280px', height: '280px', borderRadius: '50%',
-              background: `radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%)`,
+              background: `radial-gradient(circle, rgba(245,200,76,0.15) 0%, transparent 70%)`,
             }} />
             <img
               src="/new_center_logo_dark.png"
               alt="ZenAuraa"
               style={{
                 width: '208px', height: '208px', objectFit: 'contain',
-                filter: `drop-shadow(0 0 20px rgba(201,168,76,0.4))`,
+                filter: `drop-shadow(0 0 20px rgba(245,200,76,0.3))`,
                 position: 'relative', zIndex: 10,
               }}
             />
