@@ -26,14 +26,14 @@ function PrimaryHero() {
         <div className="max-w-3xl pointer-events-auto">
           <div className="flex items-center gap-3 mb-6">
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-xs tracking-[0.25em] uppercase text-primary font-bold">Align Your Wellness</span>
+            <span className="text-xs tracking-[0.25em] uppercase text-primary font-bold">HEALCONNECT — EST. 2024</span>
           </div>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000">
             <span className="text-foreground">Zen</span>
             <span className="text-primary italic">Auraa.</span>
           </h1>
           <p className="text-xl lg:text-2xl text-foreground/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
-            Your one stop shop to discover and connect with holistic health, astrological and wellness practitioners around the world.
+            Find trusted guidance for every stage of life.<br/>Connect with verified experts instantly.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-in slide-in-from-left duration-1000 delay-300 pointer-events-auto">
             <Link href="/practitioners">
@@ -41,18 +41,30 @@ function PrimaryHero() {
                 Ask me Anything <ArrowRight className="w-5 h-5 ml-2 inline" />
               </Button>
             </Link>
+            <Link href="/horoscope">
+              <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10 text-foreground px-10 h-14 text-lg rounded-full font-medium transition-all">
+                Today's Horoscope
+              </Button>
+            </Link>
           </div>
           
           {/* Subtle Trust Indicators */}
-          <div className="flex items-center gap-8 animate-in fade-in duration-1000 delay-500 border-t border-primary/20 pt-8">
-            <div className="flex flex-col">
-              <span className="text-2xl font-serif text-foreground">10,000+</span>
-              <span className="text-[11px] text-muted-foreground uppercase tracking-widest">Trusted Practitioners</span>
+          <div className="flex items-center gap-6 animate-in fade-in duration-1000 delay-500 pt-2">
+            <div className="flex flex-col mr-2">
+              <span className="text-2xl font-serif text-foreground font-bold flex items-center">4.9<Star className="w-5 h-5 ml-1 fill-primary text-primary"/></span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Rating</span>
             </div>
-            <div className="w-px h-10 bg-primary/20" />
+            <div className="flex flex-col mr-2">
+              <span className="text-2xl font-serif text-foreground font-bold">100k+</span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Sessions</span>
+            </div>
+            <div className="flex flex-col mr-2">
+              <span className="text-2xl font-serif text-foreground font-bold">500+</span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Experts</span>
+            </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-serif text-foreground">50+</span>
-              <span className="text-[11px] text-muted-foreground uppercase tracking-widest">Wellness Categories</span>
+              <span className="text-2xl font-serif text-foreground font-bold">24x7</span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Available</span>
             </div>
           </div>
         </div>

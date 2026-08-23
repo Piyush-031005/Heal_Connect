@@ -255,39 +255,207 @@
   }
   body {
     @apply bg-background text-foreground transition-colors duration-500 ease-in-out;
+    --font-heading: var(--font-playfair);
+    --font-sans: var(--font-inter);
+  }
+  
+  /* THEME 01 - LAVENDER BASE (Dark Theme) */
+  :root, .theme-lavender-base {
+    --background: #4D316B; 
+    --foreground: #F8F7FA; 
+    --card: #7A48AB;
+    --card-foreground: #F8F7FA;
+    --popover: #7A48AB;
+    --popover-foreground: #F8F7FA;
+    --primary: #B79AE6; 
+    --primary-foreground: #4D316B;
+    --secondary: #694091;
+    --secondary-foreground: #F8F7FA;
+    --muted: #7A48AB;
+    --muted-foreground: #B79AE6;
+    --accent: #B79AE6;
+    --accent-foreground: #4D316B;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #694091;
+    --input: #7A48AB;
+    --ring: #B79AE6;
+    --radius: 0.75rem;
+  }
+  
+  /* THEME 02 - LAVENDER LIGHT (Soft Pastel Purple - Image 1) */
+  .theme-lavender-light {
+    --background: #C296D1; 
+    --foreground: #4A2B5E; 
+    --card: #D8BEE3;
+    --card-foreground: #4A2B5E;
+    --popover: #D8BEE3;
+    --popover-foreground: #4A2B5E;
+    --primary: #8A63A8; 
+    --primary-foreground: #FFFFFF;
+    --secondary: #EADCF0;
+    --secondary-foreground: #4A2B5E;
+    --muted: #D8BEE3;
+    --muted-foreground: #8A63A8;
+    --accent: #8A63A8;
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #EADCF0;
+    --input: #D8BEE3;
+    --ring: #8A63A8;
+    --radius: 0.75rem;
+  }
+  
+  /* THEME 03 - LAVENDER VIVID (Bright Electric Lilac - Image 2) */
+  .theme-lavender-vivid {
+    --background: #BAA3F6; 
+    --foreground: #3A2E6B; 
+    --card: #DDD2FF;
+    --card-foreground: #3A2E6B;
+    --popover: #DDD2FF;
+    --popover-foreground: #3A2E6B;
+    --primary: #7860D8; 
+    --primary-foreground: #FFFFFF;
+    --secondary: #EBE5FF;
+    --secondary-foreground: #3A2E6B;
+    --muted: #DDD2FF;
+    --muted-foreground: #7860D8;
+    --accent: #7860D8;
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #EBE5FF;
+    --input: #DDD2FF;
+    --ring: #7860D8;
+    --radius: 0.75rem;
+  }
+
+  /* THEME 04 - ROYAL INDIGO (Deep Midnight Purple + Gold) */
+  .theme-royal-indigo {
+    --background: #1C1236; 
+    --foreground: #F5F2F0; 
+    --card: #241545;
+    --card-foreground: #F5F2F0;
+    --popover: #241545;
+    --popover-foreground: #F5F2F0;
+    --primary: #D8AF37; /* Royal Gold for primary accents */
+    --primary-foreground: #1C1236;
+    --secondary: #4F2E73; /* Royal Purple */
+    --secondary-foreground: #F5F2F0;
+    --muted: #241545;
+    --muted-foreground: #7A4FD6; /* Amethyst Purple */
+    --accent: #7A4FD6; /* Amethyst Purple */
+    --accent-foreground: #F5F2F0;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #4F2E73;
+    --input: #241545;
+    --ring: #D8AF37;
+    --radius: 0.75rem;
+  }
+
+
+  
+  /* THEME 05 - NEW COLOR (Lighter Old Theme) */
+  .theme-new-color {
+    --background: #1f143a; 
+    --foreground: #F5F2F0; 
+    --card: #241545;
+    --card-foreground: #F5F2F0;
+    --popover: #241545;
+    --popover-foreground: #F5F2F0;
+    --primary: #D8AF37; 
+    --primary-foreground: #1C1236;
+    --secondary: #4F2E73; 
+    --secondary-foreground: #F5F2F0;
+    --muted: #241545;
+    --muted-foreground: #9a76e3; 
+    --accent: #9a76e3; 
+    --accent-foreground: #F5F2F0;
+    --destructive: #EF4444;
+    --destructive-foreground: #F5F2F0;
+    --border: #3A2368;
+    --input: #3A2368;
+    --ring: #D8AF37;
+    --radius: 0.75rem;
+  }
+
+  .theme-new-color .bg-stats-gradient {
+    background: transparent !important;
+  }
+
+  .theme-new-color .bg-hero-glow {
+    background: radial-gradient(circle, rgba(216,175,55,0.15) 0%, rgba(79,46,115,0.2) 40%, transparent 70%) !important;
+  }
+
+  /* THEME 08 - ZEN ALIGN (Blue-focused) */
+  .theme-zen-align {
+    --background: #F0F2FA; 
+    --foreground: #1C2058; 
+    --card: #FFFFFF;
+    --card-foreground: #1C2058;
+    --popover: #FFFFFF;
+    --popover-foreground: #1C2058;
+    --primary: #4E59C2; /* The blue requested */
+    --primary-foreground: #FFFFFF;
+    --secondary: #D0D0F8; /* Light blue */
+    --secondary-foreground: #303060;
+    --muted: #E2E2F8;
+    --muted-foreground: #6848B3;
+    --accent: #6848B3; 
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #D0D0F8;
+    --input: #D0D0F8;
+    --ring: #4E59C2;
+    --radius: 0.75rem;
+  }
+
+  /* THEME 09 - LAYOUT 2 (Sky Blue Celestial) */
+  .theme-layout-2 {
+    --background: #F8FCFE; 
+    --foreground: #12527F; 
+    --card: #FFFFFF;
+    --card-foreground: #12527F;
+    --popover: #FFFFFF;
+    --popover-foreground: #12527F;
+    --primary: #1A92C6; /* Main Blue */
+    --primary-foreground: #FFFFFF;
+    --secondary: #CDE9F4; /* Soft Sky */
+    --secondary-foreground: #17619A;
+    --muted: #EDF8FC; /* Very Light Blue */
+    --muted-foreground: #63BFE4; /* Sky Blue */
+    --accent: #20A6DC; /* Bright Blue */
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #22C55E;
+    --success-foreground: #FFFFFF;
+    --border: #CDE9F4;
+    --input: #CDE9F4;
+    --ring: #1A92C6;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground transition-colors duration-500 ease-in-out;
   }
   html {
     @apply font-sans;
   }
 }
-  /* LIGHTER ROYAL INDIGO (User requested lighter version of the old theme) */
-  .theme-new-color {
-    --background: #2b1f4c; 
-    --foreground: #F5F2F0; 
-    --card: #3a2862;
-    --card-foreground: #F5F2F0;
-    --popover: #3a2862;
-    --popover-foreground: #F5F2F0;
-    --primary: #E5C352; /* Lighter Gold */
-    --primary-foreground: #2b1f4c;
-    --secondary: #62408B; /* Lighter Royal Purple */
-    --secondary-foreground: #F5F2F0;
-    --muted: #3a2862;
-    --muted-foreground: #A17BF0; /* Lighter Amethyst */
-    --accent: #A17BF0;
-    --accent-foreground: #F5F2F0;
-    --destructive: #EF4444;
-    --destructive-foreground: #F8FAFC;
-    --border: #4D3478;
-    --input: #4D3478;
-    --ring: #E5C352;
-    --radius: 0.75rem;
-  }
-
-  .theme-new-color .bg-stats-gradient {
-    background: linear-gradient(90deg, #3a2862 0%, #4D3478 35%, #62408B 70%, #A17BF0 100%) !important;
-  }
-
-  .theme-new-color .bg-hero-glow {
-    background: radial-gradient(circle, rgba(161,123,240,0.4) 0%, rgba(98,64,139,0.3) 30%, rgba(58,40,98,0.2) 60%, transparent 80%) !important;
-  }
