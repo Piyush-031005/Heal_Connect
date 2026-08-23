@@ -365,27 +365,27 @@
 
 
   
-  /* THEME 05 - NEW COLOR (Lighter Zenauraa Purple — same hue as reference, just brighter) */
+  /* THEME 05 - NEW COLOR: Lighter version of HealConnect dark purple #1a0e3a */
   .theme-new-color {
-    /* Reference dark: #4D316B → This is ~30% lighter: #6B4494 */
-    --background: #5A3680;
-    --foreground: #F8F7FA;
-    --card: #6B4494;
-    --card-foreground: #F8F7FA;
-    --popover: #6B4494;
-    --popover-foreground: #F8F7FA;
-    --primary: #C9A84C; /* Gold accent from HealConnect reference */
-    --primary-foreground: #2A1555;
-    --secondary: #7A4FAD;
-    --secondary-foreground: #F8F7FA;
-    --muted: #6B4494;
-    --muted-foreground: #D4B8F0;
+    /* HealConnect reference: #1a0e3a (very dark). ~25% lighter = #2e1b5e */
+    --background: #2e1b5e;
+    --foreground: #F5F0FF;
+    --card: #3c2472;
+    --card-foreground: #F5F0FF;
+    --popover: #3c2472;
+    --popover-foreground: #F5F0FF;
+    --primary: #C9A84C; /* Gold from HealConnect reference */
+    --primary-foreground: #1a0e3a;
+    --secondary: #4a2f85;
+    --secondary-foreground: #F5F0FF;
+    --muted: #3c2472;
+    --muted-foreground: #C4AAEE;
     --accent: #B79AE6;
-    --accent-foreground: #2A1555;
+    --accent-foreground: #1a0e3a;
     --destructive: #EF4444;
     --destructive-foreground: #FFFFFF;
-    --border: #7A4FAD;
-    --input: #6B4494;
+    --border: #4a2f85;
+    --input: #3c2472;
     --ring: #C9A84C;
     --radius: 0.75rem;
   }
