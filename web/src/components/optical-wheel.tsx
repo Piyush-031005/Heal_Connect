@@ -30,7 +30,7 @@ export default function OpticalWheel() {
   const outerR = 500; // Increased to push the wheel outward for the arc look
   
   // Increased icon size slightly as requested by the user
-  const imgH = 95; 
+  const imgH = 100; 
 
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(`modality-${id}`);

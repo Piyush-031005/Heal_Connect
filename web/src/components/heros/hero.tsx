@@ -33,7 +33,7 @@ function PrimaryHero() {
       </svg>
 
       {/* Big Modality Wheel - Scaled up and shifted right to create the Arc effect */}
-      <div className="absolute right-0 translate-x-[30%] md:translate-x-[35%] lg:translate-x-[30%] top-1/2 -translate-y-1/2 h-[700px] w-[700px] md:h-[850px] md:w-[850px] lg:h-[1000px] lg:w-[1000px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center">
+      <div className="absolute right-0 translate-x-[25%] md:translate-x-[30%] lg:translate-x-[25%] top-1/2 -translate-y-1/2 h-[700px] w-[700px] md:h-[750px] md:w-[750px] lg:h-[850px] lg:w-[850px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center">
         <OpticalWheel />
       </div>
 
