@@ -398,16 +398,46 @@ export default function Navbar() {
               )}
             </div>
 
-                        {/* Theme Toggle */}
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'theme-new-color' : 'dark')}
-              className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all ${
-                theme === 'dark' ? 'border-white/20 hover:bg-white/10 text-white' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50 text-amber-600'
-              }`}
-              title="Toggle Light/Dark Theme"
-            >
-              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
+                        {/* Theme Dropdown */}
+            <div className="relative" ref={themeRef}>
+              <button
+                onClick={() => setThemeOpen((p) => !p)}
+                className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all ${
+                  isDark ? 'border-white/20 hover:bg-white/10 text-white' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50 text-amber-600'
+                }`}
+                title="Select Theme"
+              >
+                <Palette className="w-4 h-4" />
+              </button>
+
+              {themeOpen && (
+                <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
+                  {([
+                    { code: 'dark', label: ' Dark (#240E4E)' },
+                    { code: 'theme-new-color', label: ' Medium (#301368)' },
+                    { code: 'theme-royal-indigo', label: ' Light (#3D1A82)' },
+                  ] as const).map((t) => (
+                    <button
+                      key={t.code}
+                      onClick={() => { setTheme(t.code); setThemeOpen(false); }}
+                      className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-[13px] transition-colors ${
+                        theme === t.code
+                          ? 'bg-primary/20 text-primary font-semibold'
+                          : isDark ? 'text-gray-300 hover:bg-white/10' : 'text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      <Palette className="w-3.5 h-3.5 opacity-70" />
+                      {t.label}
+                      {theme === t.code && (
+                        <svg className="w-3.5 h-3.5 ml-auto text-primary" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             
             {/* Language dropdown */}
             <div className="relative" ref={langRef}>

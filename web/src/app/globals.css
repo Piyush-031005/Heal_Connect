@@ -111,6 +111,38 @@
     --radius: 0.75rem;
   }
 
+  /* LIGHTEST THEME (#3D1A82) */
+  .theme-royal-indigo {
+    --background: #3D1A82;
+    --foreground: #FFFFFF;
+    
+    --card: #4A2796;
+    --card-foreground: #FFFFFF;
+    
+    --popover: #4A2796;
+    --popover-foreground: #FFFFFF;
+    
+    --primary: #F5C84C;
+    --primary-foreground: #1E1144;
+    
+    --secondary: #40208A;
+    --secondary-foreground: #D8CCF7;
+    
+    --muted: #4A2796;
+    --muted-foreground: #D8CCF7;
+    
+    --accent: #F5C84C;
+    --accent-foreground: #1E1144;
+    
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    
+    --border: #40208A;
+    --input: #4A2796;
+    --ring: #F5C84C;
+    --radius: 0.75rem;
+  }
+
   * {
     @apply border-border;
   }
