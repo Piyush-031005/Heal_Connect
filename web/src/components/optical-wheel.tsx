@@ -3,18 +3,18 @@
 import { useState } from 'react';
 
 const MODALITIES = [
-  { id: 'aries', name: 'Aries', image: '/new-zodiacs/aries_new.png' },
-  { id: 'taurus', name: 'Taurus', image: '/new-zodiacs/taurus.png' },
-  { id: 'gemini', name: 'Gemini', image: '/new-zodiacs/gemini_new.png' },
-  { id: 'cancer', name: 'Cancer', image: '/new-zodiacs/cancer.png' },
-  { id: 'leo', name: 'Leo', image: '/new-zodiacs/leo_new.png' },
-  { id: 'virgo', name: 'Virgo', image: '/new-zodiacs/virgo_new.png' },
-  { id: 'libra', name: 'Libra', image: '/new-zodiacs/libra_new.png' },
-  { id: 'scorpio', name: 'Scorpio', image: '/new-zodiacs/scorpio_new.png' },
-  { id: 'sagittarius', name: 'Sagittarius', image: '/new-zodiacs/saggitarius.png' },
-  { id: 'capricorn', name: 'Capricorn', image: '/new-zodiacs/capricon_new.png' },
-  { id: 'aquarius', name: 'Aquarius', image: '/new-zodiacs/aqarius.png' },
-  { id: 'pisces', name: 'Pisces', image: '/new-zodiacs/pices.png' },
+  { id: 'astrology',      name: 'Astrology',        image: '/final_ensights/astrology.png' },
+  { id: 'tarot',          name: 'Tarot',            image: '/final_ensights/tarot.png' },
+  { id: 'face-reading',   name: 'Face Reading',     image: '/final_ensights/face reading.png' },
+  { id: 'palm-reading',   name: 'Palm Reading',     image: '/final_ensights/palm reading.png' },
+  { id: 'sound-healing',  name: 'Sound Healing',    image: '/final_ensights/sound healing.png' },
+  { id: 'meditation',     name: 'Meditation',       image: '/final_ensights/medidation.png' },
+  { id: 'spiritual',      name: 'Spiritual',        image: '/final_ensights/spiritual  guidance.png' },
+  { id: 'chakra-healing', name: 'Chakra Healing',   image: '/final_ensights/chakra healing.png' },
+  { id: 'breathwork',     name: 'Breathwork',       image: '/final_ensights/breathwork.png' },
+  { id: 'dreams',         name: 'Dream Predict',    image: '/final_ensights/dream interpretetion.png' },
+  { id: 'space-harmony',  name: 'Space Harmony',    image: '/final_ensights/space harmony.png' },
+  { id: 'numerology',     name: 'Numerology',       image: '/final_ensights/numerology.png' },
 ];
 
 const GOLD = '#F5C84C'; 
@@ -87,6 +87,7 @@ export default function OpticalWheel() {
                   }}>
                     {/* Hit area */}
                     <circle cx="0" cy="0" r={imgH + 20} fill="transparent" pointerEvents="all" />
+                    <circle cx="0" cy="0" r="40" fill="#0A0415" />
 
                     {/* Small black dot in the center of the logo (fingertip size) */}
                     
