@@ -67,6 +67,9 @@ export default function OpticalWheel() {
             
             {/* Inner dashed ring */}
             <circle cx={cx} cy={cy} r={outerR - 80} fill="none" stroke={GOLD} opacity="0.2" strokeWidth="0.75" strokeDasharray="3 9" />
+            
+            {/* Mid-way thin golden concentric circle far from the center */}
+            <circle cx={cx} cy={cy} r={260} fill="none" stroke={GOLD} opacity="0.3" strokeWidth="1" />
 
             {/* ── THE 12 MODALITY NODES ── */}
             {MODALITIES.map((mod, idx) => {
