@@ -44,7 +44,7 @@ export function Testimonials() {
                 <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${(isFinalHybrid && !isNewColor) ? 'text-[#B79AE6]' : 'text-primary'}`}>Global Impact</span>
               </div>
             )}
-            <h2 className={`text-4xl md:text-5xl font-serif font-medium mb-4 ${(isFinalHybrid && !isNewColor) ? 'text-white' : 'text-foreground'}`}>
+            <h2 className={`text-4xl md:text-5xl font-serif font-medium mb-4 text-[#F8F7FA]`}>
               {t.testimonialTitle || "Stories of Healing"}
             </h2>
             <div className="w-12 h-0.5 bg-primary/40 mb-6" />
@@ -69,7 +69,7 @@ export function Testimonials() {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {TESTIMONIALS.map((testi, idx) => (
-            <div key={idx} className={`w-[280px] md:w-[400px] shrink-0 snap-start rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-8 border hover:-translate-y-1 transition-all duration-500 group flex flex-col ${(isFinalHybrid && !isNewColor) ? 'bg-[#7A48AB]/40 backdrop-blur-xl border-[#694091] shadow-xl hover:bg-[#7A48AB]/60 hover:border-[#B79AE6]/50' : 'bg-white border-primary/20 shadow-sm hover:shadow-lg hover:border-primary/40'}`}>
+            <div key={idx} className={`w-[280px] md:w-[400px] shrink-0 snap-start rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-8 border hover:-translate-y-1 transition-all duration-500 group flex flex-col bg-[#2D1B54] border-[#4B2F6E] shadow-xl hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(183,154,230,0.15)] hover:border-[#B79AE6]/50`}>
               <div className="flex gap-1 mb-4 md:mb-6 text-primary">
                 {[1, 2, 3, 4, 5].map(s => (
                   <svg key={s} className="w-3.5 h-3.5 md:w-4 md:h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 20 20">
@@ -77,7 +77,7 @@ export function Testimonials() {
                   </svg>
                 ))}
               </div>
-              <p className={`leading-relaxed font-light mb-6 md:mb-8 flex-1 text-sm md:text-lg ${(isFinalHybrid && !isNewColor) ? 'text-white/90' : 'text-foreground/80'}`}>
+              <p className={`leading-relaxed font-light mb-6 md:mb-8 flex-1 text-sm md:text-lg text-[#F8F7FA]`}>
                 "{testi.text}"
               </p>
               <div className="flex items-center gap-4 border-t border-border pt-6 mt-auto">
@@ -85,8 +85,8 @@ export function Testimonials() {
                   {testi.name.charAt(0)}
                 </div>
                 <div>
-                  <h4 className={`font-bold text-sm ${(isFinalHybrid && !isNewColor) ? 'text-white' : 'text-foreground'}`}>{testi.name}</h4>
-                  <p className={`text-xs uppercase tracking-wider mt-0.5 ${(isFinalHybrid && !isNewColor) ? 'text-white/70' : 'text-muted-foreground'}`}>{testi.loc}</p>
+                  <h4 className={`font-bold text-sm text-[#F8F7FA]`}>{testi.name}</h4>
+                  <p className={`text-xs uppercase tracking-wider mt-0.5 text-[#B79AE6]`}>{testi.loc}</p>
                 </div>
               </div>
             </div>
