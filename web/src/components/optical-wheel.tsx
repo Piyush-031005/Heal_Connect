@@ -46,6 +46,11 @@ export default function OpticalWheel() {
               <stop offset="0%"   stopColor={GOLD} stopOpacity="0.10" />
               <stop offset="100%" stopColor={GOLD} stopOpacity="0"   />
             </radialGradient>
+            <radialGradient id="centerDiscGrad" cx="40%" cy="35%" r="70%">
+              <stop offset="0%"   stopColor="#2A1658" />
+              <stop offset="60%"  stopColor="#1E1144" />
+              <stop offset="100%" stopColor="#0B061A" />
+            </radialGradient>
           </defs>
 
           {/* Ambient glow */}
@@ -126,18 +131,18 @@ export default function OpticalWheel() {
 
         {/* ── CENTER MEDALLION (No outer dark concentric rings, just the logo) ── */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center' }}>
+          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div style={{
-              position: 'absolute', width: '320px', height: '320px', borderRadius: '50%',
-              background: `radial-gradient(circle, rgba(245,200,76,0.1) 0%, transparent 55%)`,
+              position: 'absolute', width: '280px', height: '280px', borderRadius: '50%',
+              background: `radial-gradient(circle, rgba(245,200,76,0.15) 0%, transparent 70%)`,
             }} />
             <img
               src="/new_center_logo_dark.png"
-              alt="ZenAuraa Center"
+              alt="ZenAuraa"
               style={{
-                width: '210px', height: '210px', objectFit: 'contain',
+                width: '208px', height: '208px', objectFit: 'contain',
+                filter: `drop-shadow(0 0 20px rgba(245,200,76,0.3))`,
                 position: 'relative', zIndex: 10,
-                filter: `drop-shadow(0 0 15px rgba(245,200,76,0.2))`
               }}
             />
           </div>
