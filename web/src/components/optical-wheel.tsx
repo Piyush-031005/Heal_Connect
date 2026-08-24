@@ -132,16 +132,13 @@ export default function OpticalWheel() {
         {/* ── CENTER MEDALLION (No outer dark concentric rings, just the logo) ── */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{
-              position: 'absolute', width: '280px', height: '280px', borderRadius: '50%',
-              background: `radial-gradient(circle, rgba(245,200,76,0.15) 0%, transparent 70%)`,
-            }} />
+            {/* Removed the large yellowish radial gradient background */}
             <img
-              src="/main centre logo/final_logo centre.png"
+              src="/main centre logo/finall.png"
               alt="ZenAuraa"
               style={{
-                width: '208px', height: '208px', objectFit: 'contain',
-                filter: `drop-shadow(0 0 20px rgba(245,200,76,0.3))`,
+                width: '150px', height: '150px', objectFit: 'contain',
+                filter: `drop-shadow(0 0 10px rgba(255,255,255,0.1))`,
                 position: 'relative', zIndex: 10,
               }}
             />
