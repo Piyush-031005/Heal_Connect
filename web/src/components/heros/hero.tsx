@@ -798,7 +798,7 @@ function FinalHybridHero() {
             <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[50%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)]'}`} />
 
             {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
-            <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[60%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] md:w-[750px] md:h-[750px] lg:w-[850px] lg:h-[850px]' : 'w-[550px] h-[550px] sm:w-[650px] sm:h-[650px] md:w-[750px] md:h-[750px] lg:w-[900px] lg:h-[900px]'}`}>
+            <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[40%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[400px] h-[400px] sm:w-[450px] sm:h-[450px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]' : 'w-[450px] h-[450px] sm:w-[500px] sm:h-[500px] md:w-[550px] md:h-[550px] lg:w-[650px] lg:h-[650px]'}`}>
               
               {/* Outer Dashed Ring */}
               <div className={`absolute w-[95%] h-[95%] rounded-full border border-dashed pointer-events-none ${isNewColor ? 'border-white/40' : 'border-[#B79AE6]/30'}`} />
@@ -838,9 +838,9 @@ function FinalHybridHero() {
                         initial={{ rotate: -angle }}
                         animate={{ rotate: -(360 + angle) }}
                         transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
-                        className="flex flex-col items-center -mt-12 md:-mt-16 group cursor-pointer pointer-events-auto"
+                        className="flex flex-col items-center -mt-8 md:-mt-10 group cursor-pointer pointer-events-auto"
                       >
-                        <Link href={`/modalities/${mod.id}`} className="w-16 h-16 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-black/80 border border-white/10 p-3 transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)] relative overflow-hidden">
+                        <Link href={`/modalities/${mod.id}`} className="w-16 h-16 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-black/80 border border-white/10 p-3 transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)] relative overflow-hidden">
                           <img src={mod.img} alt={mod.label} className={`w-full h-full object-contain group-hover:brightness-125 transition-all ${isNewColor ? 'invert brightness-0' : ''}`} style={isNewColor ? { filter: 'brightness(0) invert(1)' } : {}} />
                         </Link>
                         <span className={`text-[14px] md:text-[16px] font-bold mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-foreground'}`}>{mod.label}</span>
@@ -927,7 +927,7 @@ function FinalHybridHero() {
             <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[50%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)]'}`} />
 
             {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
-            <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[60%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] md:w-[750px] md:h-[750px] lg:w-[850px] lg:h-[850px]' : 'w-[550px] h-[550px] sm:w-[650px] sm:h-[650px] md:w-[750px] md:h-[750px] lg:w-[900px] lg:h-[900px]'}`}>
+            <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[40%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[400px] h-[400px] sm:w-[450px] sm:h-[450px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]' : 'w-[450px] h-[450px] sm:w-[500px] sm:h-[500px] md:w-[550px] md:h-[550px] lg:w-[650px] lg:h-[650px]'}`}>
               
               {/* Outer Dashed Ring */}
               <div className={`absolute w-[95%] h-[95%] rounded-full border border-dashed pointer-events-none ${isNewColor ? 'border-white/40' : 'border-[#B79AE6]/30'}`} />
@@ -967,9 +967,9 @@ function FinalHybridHero() {
                         initial={{ rotate: -angle }}
                         animate={{ rotate: -(360 + angle) }}
                         transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
-                        className="flex flex-col items-center -mt-12 md:-mt-16 group cursor-pointer pointer-events-auto"
+                        className="flex flex-col items-center -mt-8 md:-mt-10 group cursor-pointer pointer-events-auto"
                       >
-                        <Link href={`/modalities/${mod.id}`} className="w-16 h-16 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-black/80 border border-white/10 p-3 transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)] relative overflow-hidden">
+                        <Link href={`/modalities/${mod.id}`} className="w-16 h-16 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-black/80 border border-white/10 p-3 transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)] relative overflow-hidden">
                           <img src={mod.img} alt={mod.label} className={`w-full h-full object-contain group-hover:brightness-125 transition-all ${isNewColor ? 'invert brightness-0' : ''}`} style={isNewColor ? { filter: 'brightness(0) invert(1)' } : {}} />
                         </Link>
                         <span className={`text-[14px] md:text-[16px] font-bold mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-foreground'}`}>{mod.label}</span>

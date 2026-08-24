@@ -650,7 +650,7 @@ export function ExpertStoriesDeck() {
             <h2 className="text-5xl md:text-7xl font-serif font-medium mb-2" style={{ color: '#111', transition: 'color 0.5s ease' }}>
               {expert.name}
             </h2>
-            <p className="text-base text-gray-500 mb-6 font-medium">{expert.role} · {expert.years}</p>
+            <p className="text-base text-[#B79AE6] mb-6 font-medium">{expert.role} · {expert.years}</p>
             <blockquote className="text-xl font-light text-gray-700 mb-8 leading-relaxed border-l-4 pl-6 italic"
               style={{ borderColor: expert.color }}>
               &ldquo;{expert.quote}&rdquo;
@@ -669,7 +669,7 @@ export function ExpertStoriesDeck() {
             <div className="mb-10">
               <p className="text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Languages</p>
               <div className="flex gap-4">
-                {expert.langs.map(l => (<span key={l} className="text-sm font-bold text-gray-600">{l}</span>))}
+                {expert.langs.map(l => (<span key={l} className="text-sm font-bold text-[#B79AE6]">{l}</span>))}
               </div>
             </div>
             <Link href="/signup"
@@ -862,7 +862,7 @@ export function YourNextDiscovery() {
             <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${isNewColor ? 'text-primary' : 'text-[#1A92C6]'}`}>Your Next Discovery</span>
             <div className="w-8 h-[2px] bg-[#1A92C6]" />
           </div>
-          <h2 className={`text-4xl md:text-6xl font-serif font-medium ${isNewColor ? 'text-foreground' : 'text-[#12527F]'}`}>Where Will You Go Next?</h2>
+          <h2 className={`text-4xl md:text-6xl font-serif font-medium ${isNewColor ? 'text-[#F8F7FA]' : 'text-[#12527F]'}`}>Where Will You Go Next?</h2>
           <p className={`mt-4 text-base font-medium max-w-xl mx-auto ${isNewColor ? 'text-muted-foreground' : 'text-[#17619A]/70'}`}>
             Three paths. One cosmic journey. Choose where to begin.
           </p>
