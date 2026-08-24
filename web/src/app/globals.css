@@ -47,8 +47,40 @@
     --font-sans: var(--font-inter);
   }
   
-  /* SINGLE FINAL THEME DEFINITION - EXACT OLD DEPLOYMENT COLOR (#240E4E) */
-  :root, .dark, .theme-new-color {
+  /* LIGHT THEME (Slightly lighter purple as requested) */
+  :root, .theme-new-color {
+    --background: #301368;
+    --foreground: #FFFFFF;
+    
+    --card: #3C1C7D;
+    --card-foreground: #FFFFFF;
+    
+    --popover: #3C1C7D;
+    --popover-foreground: #FFFFFF;
+    
+    --primary: #F5C84C;
+    --primary-foreground: #1E1144;
+    
+    --secondary: #35186E;
+    --secondary-foreground: #D8CCF7;
+    
+    --muted: #3C1C7D;
+    --muted-foreground: #D8CCF7;
+    
+    --accent: #F5C84C;
+    --accent-foreground: #1E1144;
+    
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    
+    --border: #35186E;
+    --input: #3C1C7D;
+    --ring: #F5C84C;
+    --radius: 0.75rem;
+  }
+
+  /* DARK THEME (Original darker purple) */
+  .dark {
     --background: #240E4E;
     --foreground: #FFFFFF;
     
