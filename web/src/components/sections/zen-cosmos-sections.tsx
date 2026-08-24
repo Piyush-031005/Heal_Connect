@@ -70,7 +70,7 @@ export function WhyYouHere() {
           <div className="w-8 h-[2px] bg-[#D4A853]" />
           <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4A853]">What Brings You Here</span>
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-2">What Are You Seeking?</h2>
+        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#F8F7FA] mb-2">What Are You Seeking?</h2>
         <p className="text-[#1A92C6] text-sm font-bold max-w-lg">Every star is a question someone asked. Hover to explore what Zenauraa can answer for you. Drag to navigate.</p>
       </div>
 
@@ -78,7 +78,7 @@ export function WhyYouHere() {
         {Object.entries(INTENTION_LABELS).map(([c, label]) => (
           <div key={c} className="flex items-center gap-2">
             <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: INTENTION_COLORS[c], boxShadow: `0 0 8px ${INTENTION_COLORS[c]}40` }} />
-            <span className="text-xs font-bold text-[#12527F]/70">{label}</span>
+            <span className="text-xs font-bold text-[#F8F7FA]/70">{label}</span>
           </div>
         ))}
       </div>
@@ -131,7 +131,7 @@ export function WhyYouHere() {
           <div className="absolute z-50 pointer-events-none backdrop-blur-xl border rounded-2xl p-5 w-60 shadow-xl"
             style={{ left: Math.min(tipPos.x + 18, 600), top: tipPos.y - 80, backgroundColor: 'rgba(255,255,255,0.95)', borderColor: `${INTENTION_COLORS[hovered.cluster]}50` }}>
             <div className="text-[9px] font-black uppercase tracking-widest mb-2" style={{ color: INTENTION_COLORS[hovered.cluster] }}>{INTENTION_LABELS[hovered.cluster]}</div>
-            <div className="text-base font-bold text-[#12527F] mb-3">{hovered.name}</div>
+            <div className="text-base font-bold text-[#F8F7FA] mb-3">{hovered.name}</div>
             <Link href="/signup" className="inline-flex items-center gap-1.5 text-xs font-bold transition-colors"
               style={{ color: INTENTION_COLORS[hovered.cluster] }}>
               Find Specialists <ArrowRight className="w-3 h-3" />
@@ -246,11 +246,11 @@ export function ZodiacOrbitRing() {
 
           {/* Content */}
           <div key={active.id} style={{ animation: 'zen-fade 0.5s ease' }}>
-            <h2 className="text-5xl md:text-7xl font-serif font-medium text-[#12527F] mb-6 drop-shadow-sm">
+            <h2 className="text-5xl md:text-7xl font-serif font-medium text-[#F8F7FA] mb-6 drop-shadow-sm">
               {active.name}
             </h2>
             <p className="text-sm text-[#1A92C6] mb-6 font-mono tracking-widest font-bold">{active.date}</p>
-            <p className="text-lg text-[#12527F]/80 font-medium leading-relaxed mb-10 max-w-md">{active.trait}</p>
+            <p className="text-lg text-[#F8F7FA]/80 font-medium leading-relaxed mb-10 max-w-md">{active.trait}</p>
             <div className="flex flex-wrap gap-3 mb-10">
               {['Love Compatibility', 'Career Outlook', 'Monthly Reading', 'Find a Guide'].map(tag => (
                 <Link key={tag} href="/signup"
@@ -260,7 +260,7 @@ export function ZodiacOrbitRing() {
                 </Link>
               ))}
             </div>
-            <Link href="/signup" className="inline-flex items-center gap-3 text-[#12527F] font-bold group">
+            <Link href="/signup" className="inline-flex items-center gap-3 text-[#F8F7FA] font-bold group">
               <span className="text-lg">Explore {active.name}</span>
               <div className="w-12 h-12 rounded-full flex items-center justify-center border border-[#12527F]/20 group-hover:bg-[#12527F] group-hover:text-white transition-all bg-white"
                 style={{ borderColor: `${active.color}40` }}>
@@ -340,11 +340,11 @@ export function TarotTable() {
           <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#1A92C6]">Tarot Reading</span>
           <div className="w-10 h-[1px] bg-[#1A92C6]" />
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-3">Draw Your Card</h2>
+        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#F8F7FA] mb-3">Draw Your Card</h2>
         <p className="text-[#1A92C6] text-sm font-bold mb-3">Set your intention. Choose a card. Receive your message.</p>
         <div className="inline-flex items-center gap-3 rounded-2xl px-6 py-3 mb-14 border border-[#1A92C6]/20 bg-white shadow-sm">
           <span className="text-[#1A92C6] text-sm">✦</span>
-          <span className="text-[#12527F]/70 text-sm font-medium italic">&ldquo;What energy should I honour today?&rdquo;</span>
+          <span className="text-[#F8F7FA]/70 text-sm font-medium italic">&ldquo;What energy should I honour today?&rdquo;</span>
         </div>
 
         {/* Card spread deck */}
@@ -426,7 +426,7 @@ export function TarotTable() {
           <div className="max-w-xl mx-auto rounded-3xl p-8 text-center shadow-xl border border-[#CDE9F4]"
             style={{ animation: 'zen-fade 0.5s ease', background: `linear-gradient(135deg, #FFFFFF 0%, #F6FBFC 100%)` }}>
             <div className="text-xs font-black uppercase tracking-[0.3em] mb-3" style={{ color: TAROT_CARDS[flipped].color }}>{TAROT_CARDS[flipped].roman} · {TAROT_CARDS[flipped].name}</div>
-            <h3 className="text-2xl font-serif font-medium text-[#12527F] mb-2">{TAROT_CARDS[flipped].subtitle}</h3>
+            <h3 className="text-2xl font-serif font-medium text-[#F8F7FA] mb-2">{TAROT_CARDS[flipped].subtitle}</h3>
             <div className="w-16 h-[2px] mx-auto mb-5" style={{ backgroundColor: TAROT_CARDS[flipped].color }} />
             <p className="text-sm text-[#1A92C6] leading-relaxed mb-7 font-bold max-w-md mx-auto">{TAROT_CARDS[flipped].message}</p>
             <div className="flex gap-3 justify-center flex-wrap">
@@ -485,7 +485,7 @@ export function ModalityUniverse() {
           <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${isNewColor ? 'text-primary' : 'text-[#1A92C6]'}`}>Modality Universe</span>
           <div className="w-8 h-[2px] bg-[#1A92C6]" />
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-3">Explore What Speaks To You</h2>
+        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#F8F7FA] mb-3">Explore What Speaks To You</h2>
         <p className="text-[#1A92C6] text-sm font-bold">Hover any circle to discover a healing modality</p>
       </div>
 
@@ -577,7 +577,7 @@ export function ExpertStoriesDeck() {
       <div className="max-w-5xl mx-auto px-6 lg:px-16 relative z-10">
         
         {/* Large Decorative Quote mark to fill space */}
-        <div className="absolute right-0 top-10 text-[200px] leading-none font-serif text-[#12527F] opacity-[0.03] pointer-events-none select-none">
+        <div className="absolute right-0 top-10 text-[200px] leading-none font-serif text-[#F8F7FA] opacity-[0.03] pointer-events-none select-none">
           &rdquo;
         </div>
 
@@ -730,7 +730,7 @@ export function GlobalGuidanceMap() {
           <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[#1A92C6]">Our Global Reach</span>
           <div className="w-10 h-[1px] bg-[#1A92C6]" />
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#12527F] mb-3">Zenauraa Is Everywhere</h2>
+        <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#F8F7FA] mb-3">Zenauraa Is Everywhere</h2>
         <p className="text-[#1A92C6] text-sm font-medium max-w-xl mx-auto font-bold">From New Delhi to New York, millions of seekers find guidance through Zenauraa every day. Hover a node to see our reach.</p>
       </div>
 
@@ -783,10 +783,10 @@ export function GlobalGuidanceMap() {
                     style={{ width: '210px', bottom: r + 20 + 'px', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', borderColor: `${node.color}40`, animation: 'zen-fade 0.25s ease', backdropFilter: 'blur(16px)' }}>
                     <div className="text-xs font-black uppercase tracking-wider mb-1" style={{ color: node.color }}>{node.name}</div>
                     <div className="flex justify-between items-baseline mb-2">
-                      <span className="text-xl font-bold text-[#12527F]">{node.users}</span>
+                      <span className="text-xl font-bold text-[#F8F7FA]">{node.users}</span>
                       <span className="text-[10px] text-[#1A92C6] font-bold">active users</span>
                     </div>
-                    <div className="text-[11px] text-[#12527F]/70 font-medium mb-1">{node.guides} verified guides</div>
+                    <div className="text-[11px] text-[#F8F7FA]/70 font-medium mb-1">{node.guides} verified guides</div>
                     <div className="text-[10px] text-[#1A92C6] border-t border-[#CDE9F4] pt-2 mt-2 font-bold">{node.top}</div>
                   </div>
                 )}
@@ -802,7 +802,7 @@ export function GlobalGuidanceMap() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-[#1A92C6]/20 pt-10">
           {GROWTH_STATS.map(s => (
             <div key={s.label} className="text-center">
-              <div className="text-3xl md:text-4xl font-serif font-bold text-[#12527F] mb-1">{s.value}</div>
+              <div className="text-3xl md:text-4xl font-serif font-bold text-[#F8F7FA] mb-1">{s.value}</div>
               <div className="text-[11px] font-black uppercase tracking-widest text-[#1A92C6]">{s.label}</div>
             </div>
           ))}
@@ -856,13 +856,13 @@ export function YourNextDiscovery() {
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <div className="text-center mb-20">
-          <div className={`text-5xl mb-4 ${isNewColor ? 'text-primary/15' : 'text-[#12527F]/15'}`}>✦ YOU ✦</div>
+          <div className={`text-5xl mb-4 ${isNewColor ? 'text-primary/15' : 'text-[#F8F7FA]/15'}`}>✦ YOU ✦</div>
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-8 h-[2px] bg-[#1A92C6]" />
             <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${isNewColor ? 'text-primary' : 'text-[#1A92C6]'}`}>Your Next Discovery</span>
             <div className="w-8 h-[2px] bg-[#1A92C6]" />
           </div>
-          <h2 className={`text-4xl md:text-6xl font-serif font-medium ${isNewColor ? 'text-[#F8F7FA]' : 'text-[#12527F]'}`}>Where Will You Go Next?</h2>
+          <h2 className={`text-4xl md:text-6xl font-serif font-medium ${isNewColor ? 'text-[#F8F7FA]' : 'text-[#F8F7FA]'}`}>Where Will You Go Next?</h2>
           <p className={`mt-4 text-base font-medium max-w-xl mx-auto ${isNewColor ? 'text-muted-foreground' : 'text-[#17619A]/70'}`}>
             Three paths. One cosmic journey. Choose where to begin.
           </p>
@@ -889,7 +889,7 @@ export function YourNextDiscovery() {
                 )}
                 <div className="text-4xl mb-6 font-serif" style={{ color: path.color }}>{path.icon}</div>
                 <div className="text-[10px] font-black uppercase tracking-widest mb-2" style={{ color: path.color }}>{path.label}</div>
-                <h3 className="text-2xl font-serif font-medium text-[#12527F] mb-4">{path.title}</h3>
+                <h3 className="text-2xl font-serif font-medium text-[#F8F7FA] mb-4">{path.title}</h3>
                 <p className="text-sm text-[#17619A]/75 leading-relaxed mb-6 font-medium">{path.desc}</p>
                 <div className="space-y-2 mb-8">
                   {path.items.map(item => (
