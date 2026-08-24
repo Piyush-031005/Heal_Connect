@@ -21,7 +21,7 @@ export function FinalHybridExperts() {
   const router = useRouter();
 
   return (
-    <section className="relative py-24 overflow-hidden border-b border-[#7A48AB]/50" style={isNewColor ? { background: 'linear-gradient(135deg, #F7F3FC 0%, #F2ECFB 45%, #ECE4F7 100%)' } : { background: 'linear-gradient(135deg, #B79AE6 0%, #7A48AB 50%, #694091 100%)' }}>
+    <section className="relative py-24 overflow-hidden border-b border-[#7A48AB]/50" style={isNewColor ? { backgroundColor: '#301368' } : { background: 'linear-gradient(135deg, #B79AE6 0%, #7A48AB 50%, #694091 100%)' }}>
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#B79AE6]/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#B79AE6]/8 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(158,136,199,0.4) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
@@ -33,7 +33,7 @@ export function FinalHybridExperts() {
               <div className="w-8 h-[2px] bg-[#B79AE6]" />
               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#B79AE6]">Featured Experts</span>
             </div>
-            <h2 className={`text-4xl md:text-5xl font-serif font-medium ${isNewColor ? 'text-foreground' : 'text-[#F8F7FA]'}`}>
+            <h2 className={`text-4xl md:text-5xl font-serif font-medium text-[#F8F7FA]`}>
               Connect with top-rated guides.
             </h2>
           </div>

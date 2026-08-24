@@ -81,10 +81,9 @@ export default function LandingPage() {
           <>
             {/* FINAL HYBRID LAYOUT */}
             <FinalHybridExperts />
-            <FinalHybridTarot />
-            
-            <YourNextDiscovery />
             <ExploreModalities />
+            <FinalHybridTarot />
+            <YourNextDiscovery />
             <Testimonials />
             <FinalHybridSupport />
             
