@@ -846,7 +846,7 @@ export function YourNextDiscovery() {
 
   return (
     <section className="relative py-32 overflow-hidden"
-      style={isNewColor ? { background: 'linear-gradient(135deg, #F7F3FC 0%, #F2ECFB 40%, #ECE4F7 100%)' } : { background: 'linear-gradient(135deg, #EDF8FC 0%, #CDE9F4 40%, #9FD6EE 100%)' }}>
+      style={{ background: 'linear-gradient(135deg, #2D1B54 0%, #301368 100%)' }}>
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(40)].map((_, i) => (
           <div key={i} className="absolute rounded-full bg-[#12527F]"
@@ -875,8 +875,8 @@ export function YourNextDiscovery() {
               <div key={path.id}
                 className="relative rounded-3xl p-8 border transition-all duration-500 cursor-pointer group overflow-hidden"
                 style={{
-                  backgroundColor: isHov ? `${path.color}15` : 'rgba(255,255,255,0.65)',
-                  borderColor: isHov ? path.color : 'rgba(255,255,255,0.8)',
+                  backgroundColor: isHov ? `${path.color}25` : 'rgba(48,19,104,0.65)',
+                  borderColor: isHov ? path.color : 'rgba(183,154,230,0.3)',
                   transform: isHov ? 'translateY(-8px)' : 'translateY(0)',
                   boxShadow: isHov ? `0 24px 60px ${path.color}25` : '0 4px 20px rgba(0,0,0,0.04)',
                   backdropFilter: 'blur(16px)',
