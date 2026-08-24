@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Search, Sparkles, Flower2, Star } from 'lucide-react';
+import { ArrowRight, Search, Sparkles, Flower2, Star, MessageCircle, Phone } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useLayout } from '@/lib/layout-context';
 import ModalityWheel from '@/components/modality-wheel';
@@ -44,6 +44,19 @@ function PrimaryHero() {
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-xs tracking-[0.25em] uppercase text-primary font-bold">HEALCONNECT — EST. 2024</span>
           </div>
+          
+          {/* Action Buttons */}
+          <div className="flex items-center gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-100">
+            <button className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white/90 text-sm font-medium transition-all">
+              <MessageCircle className="w-4 h-4" />
+              <span>Start Chat</span>
+            </button>
+            <button className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#B79AE6] hover:bg-[#a686d9] text-[#301368] text-sm font-bold transition-all shadow-lg shadow-[#B79AE6]/20">
+              <Phone className="w-4 h-4" />
+              <span>Start Calling</span>
+            </button>
+          </div>
+
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000">
             <span className="text-foreground">Zen</span>
             <span className="text-primary italic">Auraa.</span>
