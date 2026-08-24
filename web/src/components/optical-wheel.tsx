@@ -70,6 +70,20 @@ export default function OpticalWheel() {
             
             {/* Mid-way thin golden concentric circle far from the center */}
             <circle cx={cx} cy={cy} r={260} fill="none" stroke={GOLD} opacity="0.3" strokeWidth="1" />
+            
+            {/* Triangular mountains effect around the inner center */}
+            <polygon
+              points={Array.from({ length: 48 }).map((_, i) => {
+                const r = i % 2 === 0 ? 255 : 268;
+                const angle = (i * (360 / 48) - 90) * Math.PI / 180;
+                return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
+              }).join(' ')}
+              fill="none"
+              stroke={GOLD}
+              opacity="0.3"
+              strokeWidth="1"
+              transform={`translate(${cx}, ${cy})`}
+            />
 
             {/* ── THE 12 MODALITY NODES ── */}
             {MODALITIES.map((mod, idx) => {

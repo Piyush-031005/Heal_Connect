@@ -398,6 +398,17 @@ export default function Navbar() {
               )}
             </div>
 
+                        {/* Theme Toggle */}
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'theme-new-color' : 'dark')}
+              className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all ${
+                theme === 'dark' ? 'border-white/20 hover:bg-white/10 text-white' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50 text-amber-600'
+              }`}
+              title="Toggle Light/Dark Theme"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+            
             {/* Language dropdown */}
             <div className="relative" ref={langRef}>
               <button
