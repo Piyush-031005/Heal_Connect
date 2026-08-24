@@ -3,18 +3,18 @@
 import { useState } from 'react';
 
 const MODALITIES = [
-  { id: 'aries', name: 'Aries', date: 'MAR 21 - APR 19', image: '/zodiac/aries.png' },
-  { id: 'taurus', name: 'Taurus', date: 'APR 20 - MAY 20', image: '/zodiac/taurus.png' },
-  { id: 'gemini', name: 'Gemini', date: 'MAY 21 - JUN 20', image: '/zodiac/gemini.png' },
-  { id: 'cancer', name: 'Cancer', date: 'JUN 21 - JUL 22', image: '/zodiac/cancer.png' },
-  { id: 'leo', name: 'Leo', date: 'JUL 23 - AUG 22', image: '/zodiac/leo.png' },
-  { id: 'virgo', name: 'Virgo', date: 'AUG 23 - SEP 22', image: '/zodiac/virgo.png' },
-  { id: 'libra', name: 'Libra', date: 'SEP 23 - OCT 22', image: '/zodiac/libra.png' },
-  { id: 'scorpio', name: 'Scorpio', date: 'OCT 23 - NOV 21', image: '/zodiac/scorpio.png' },
-  { id: 'sagittarius', name: 'Sagittarius', date: 'NOV 22 - DEC 21', image: '/zodiac/sagittarius.png' },
-  { id: 'capricorn', name: 'Capricorn', date: 'DEC 22 - JAN 19', image: '/zodiac/capricorn.png' },
-  { id: 'aquarius', name: 'Aquarius', date: 'JAN 20 - FEB 18', image: '/zodiac/aquarius.png' },
-  { id: 'pisces', name: 'Pisces', date: 'FEB 19 - MAR 20', image: '/zodiac/pisces.png' },
+  { id: 'astrology',      name: 'Astrology',        image: '/final_ensights/astrology.png' },
+  { id: 'tarot',          name: 'Tarot',            image: '/final_ensights/tarot.png' },
+  { id: 'face-reading',   name: 'Face Reading',     image: '/final_ensights/face reading.png' },
+  { id: 'palm-reading',   name: 'Palm Reading',     image: '/final_ensights/palm reading.png' },
+  { id: 'sound-healing',  name: 'Sound Healing',    image: '/final_ensights/sound healing.png' },
+  { id: 'meditation',     name: 'Meditation',       image: '/final_ensights/medidation.png' },
+  { id: 'spiritual',      name: 'Spiritual',        image: '/final_ensights/spiritual  guidance.png' },
+  { id: 'chakra-healing', name: 'Chakra Healing',   image: '/final_ensights/chakra healing.png' },
+  { id: 'breathwork',     name: 'Breathwork',       image: '/final_ensights/breathwork.png' },
+  { id: 'dreams',         name: 'Dream Predict',    image: '/final_ensights/dream interpretetion.png' },
+  { id: 'space-harmony',  name: 'Space Harmony',    image: '/final_ensights/space harmony.png' },
+  { id: 'numerology',     name: 'Numerology',       image: '/final_ensights/numerology.png' },
 ];
 
 const GOLD = '#F5C84C'; 
@@ -137,7 +137,7 @@ export default function OpticalWheel() {
               background: `radial-gradient(circle, rgba(245,200,76,0.15) 0%, transparent 70%)`,
             }} />
             <img
-              src="/hands-star.png"
+              src="/main centre logo/final_logo centre.png"
               alt="ZenAuraa"
               style={{
                 width: '208px', height: '208px', objectFit: 'contain',
