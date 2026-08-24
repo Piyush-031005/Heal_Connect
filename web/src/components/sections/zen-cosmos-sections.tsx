@@ -912,7 +912,7 @@ export function YourNextDiscovery() {
         <div className="text-center">
           <Link href="/signup"
             className="inline-flex items-center gap-4 px-10 py-5 rounded-2xl text-white font-bold text-lg shadow-2xl hover:scale-105 transition-all"
-            style={{ background: 'linear-gradient(135deg, #1A92C6 0%, #12527F 100%)' }}>
+            style={{ background: 'linear-gradient(135deg, #FACC15 0%, #EAB308 100%)', color: '#301368' }}>
             <span>Begin Your Cosmic Journey</span>
             <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
               <ArrowRight className="w-5 h-5" />
