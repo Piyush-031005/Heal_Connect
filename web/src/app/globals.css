@@ -207,6 +207,38 @@
     --radius: 0.75rem;
   }
 
+  /* ZEN ALIGN THEME */
+  .theme-zen-align {
+    --background: #F4F1FE;
+    --foreground: #1E2059;
+    
+    --card: #FFFFFF;
+    --card-foreground: #1E2059;
+    
+    --popover: #FFFFFF;
+    --popover-foreground: #1E2059;
+    
+    --primary: #5F3BA9;
+    --primary-foreground: #FFFFFF;
+    
+    --secondary: #E8DFF5;
+    --secondary-foreground: #5F3BA9;
+    
+    --muted: #E8DFF5;
+    --muted-foreground: #574899;
+    
+    --accent: #4E67CC;
+    --accent-foreground: #FFFFFF;
+    
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    
+    --border: #D8CCF7;
+    --input: #FFFFFF;
+    --ring: #5F3BA9;
+    --radius: 0.75rem;
+  }
+
   * {
     @apply border-border;
   }

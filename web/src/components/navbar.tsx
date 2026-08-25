@@ -418,6 +418,7 @@ export default function Navbar() {
                     { code: 'theme-royal-indigo', label: ' Light' },
                     { code: 'theme-zen-light', label: ' New Shade' },
                     { code: 'theme-new-shade-update', label: ' New Shade Update' },
+                    { code: 'theme-zen-align', label: ' Zen Align' },
                   ] as const).map((t) => (
                     <button
                       key={t.code}
