@@ -29,6 +29,19 @@ import { buildRegistrationConsentRows } from '../lib/consentPolicy';
 const router = Router();
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
+// Debug endpoint to check OAuth configuration
+router.get('/debug/oauth-config', (req: Request, res: Response) => {
+  res.json({
+    success: true,
+    data: {
+      googleClientIdConfigured: !!process.env.GOOGLE_CLIENT_ID,
+      googleClientIdPrefix: process.env.GOOGLE_CLIENT_ID?.substring(0, 20) + '...',
+      frontendUrl: process.env.FRONTEND_URL,
+      appUrl: process.env.APP_URL,
+    }
+  });
+});
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 /** A ban is active if isBanned is set and (banUntil is unset [permanent] or still in the future). */
@@ -544,9 +557,16 @@ router.post(
   [body('idToken').notEmpty().withMessage('Google ID token required')],
   handleValidation,
   async (req: Request, res: Response) => {
-    const { idToken, role } = req.body as { idToken: string; role?: string };
+    const { idToken, role, state } = req.body as { idToken: string; role?: string; state?: string };
 
     try {
+      console.log('Google auth request received:', { 
+        hasIdToken: !!idToken, 
+        role, 
+        state,
+        audience: process.env.GOOGLE_CLIENT_ID?.substring(0, 20) + '...'
+      });
+
       const ticket = await googleClient.verifyIdToken({
         idToken,
         audience: process.env.GOOGLE_CLIENT_ID ?? '',
@@ -554,17 +574,25 @@ router.post(
 
       const gPayload = ticket.getPayload();
       if (!gPayload?.sub) {
-        res.status(400).json({ success: false, message: 'Invalid Google token' });
+        console.error('Invalid Google token payload:', gPayload);
+        res.status(400).json({ success: false, message: 'Invalid Google token payload' });
         return;
       }
 
       const { sub: googleId, email, name, email_verified } = gPayload;
+      console.log('Google token verified for user:', { googleId: googleId.substring(0, 10) + '...', email, name });
 
-      if (role === 'expert') {
+      // Support both 'role' and 'state' parameters for expert authentication
+      const isExpert = role === 'expert' || state === 'expert';
+      console.log('Authentication type determined:', { isExpert, role, state });
+
+      if (isExpert) {
+        console.log('Processing expert authentication...');
         let pract = await prisma.practitioner.findUnique({ where: { googleId } });
         if (!pract && email) pract = await prisma.practitioner.findUnique({ where: { email } });
 
         if (!pract) {
+          console.log('Creating new practitioner account for:', email);
           pract = await prisma.practitioner.create({
             data: {
               googleId,
@@ -573,13 +601,16 @@ router.post(
               isVerified: false, // Must be verified by admin
             },
           });
-          if (email && name) sendWelcomeEmail(email, name).catch(() => {});
+          if (email && name) sendWelcomeEmail(email, name).catch(err => console.error('Welcome email failed:', err));
         } else if (!pract.googleId) {
+          console.log('Linking Google account to existing practitioner:', pract.id);
           pract = await prisma.practitioner.update({
             where: { id: pract.id },
             data: { googleId },
           });
         }
+
+        console.log('Practitioner authenticated successfully:', pract.id);
 
         const payload: import('../lib/jwt').JwtPayload = { userId: pract.id, practitionerId: pract.id, ...(pract.email ? { email: pract.email } : {}) };
         const accessToken = signAccessToken(payload);

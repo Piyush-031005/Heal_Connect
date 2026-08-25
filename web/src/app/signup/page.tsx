@@ -18,10 +18,6 @@ function SignupInner() {
   const searchParams = useSearchParams();
   const [role, setRole] = useState<Role>('user');
 
-  useEffect(() => {
-    if (searchParams.get('role') === 'expert') setRole('expert');
-  }, [searchParams]);
-
   // Redirect already-logged-in users
   useEffect(() => {
     const token = localStorage.getItem('hc_access');
@@ -78,22 +74,45 @@ function SignupInner() {
     if (!pwdOk) { setError('Password does not meet the required criteria.'); setLoading(false); return; }
     try {
       if (role === 'expert') {
-        const res = await authApi.practitionerRegister(name, email, password, dob, {
-          acceptTerms,
-          acceptPrivacy,
-          emailMarketingOptIn,
-        });
-        if (!res.success || !res.data) {
-          setError(res.message || 'Registration failed');
-          return;
-        }
-        tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-        localStorage.setItem('hc_role', 'practitioner');
-        localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
-        localStorage.setItem('hc_pid', res.data.practitioner.id);
-        localStorage.setItem('hc_practitioner_name', res.data.practitioner.name ?? name);
-        setSuccess('Expert account created!');
-        setTimeout(() => router.push('/expert/dashboard'), 1200);
+        // Expert registration using astrologer API
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('dob', dob);
+        
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/auth/astrologer/register', true);
+
+        xhr.onload = () => {
+          setLoading(false);
+          try {
+            const res = JSON.parse(xhr.responseText);
+            if (!res.success) {
+              setError(res.message || 'Registration failed.');
+              return;
+            }
+            tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+            localStorage.setItem('hc_role', 'practitioner');
+            if (res.data.astrologer) {
+              localStorage.setItem('hc_practitioner_id', res.data.astrologer.id);
+              localStorage.setItem('hc_pid', res.data.astrologer.id);
+              localStorage.setItem('hc_practitioner_name', res.data.astrologer.name ?? name);
+            }
+            setSuccess('Expert account created!');
+            setTimeout(() => router.push('/astrologer/onboarding'), 1200);
+          } catch {
+            setError('Failed to parse response.');
+          }
+        };
+
+        xhr.onerror = () => {
+          setLoading(false);
+          setError('Registration failed. Please check your network connection.');
+        };
+
+        xhr.send(formData);
+        return;
       } else {
         const res = await authApi.register({ name, email, password, dob, acceptTerms, acceptPrivacy, emailMarketingOptIn });
         if (!res.success || !res.data) {
@@ -119,6 +138,14 @@ function SignupInner() {
     setError('');
     try {
       const cleanPhone = phone.replace(/\s+/g, '');
+      
+      if (role === 'expert') {
+        // Expert OTP signup - redirect to expert signup page
+        router.push('/expert/signup');
+        return;
+      }
+      
+      // User OTP signup
       const res = await (authApi as any).requestLoginOtp(cleanPhone, 'user');
       if (!res.success) {
         setError(res.message || 'Failed to send OTP.');
@@ -217,17 +244,62 @@ function SignupInner() {
               </div>
             )}
 
-            <div className="flex rounded-xl border border-yellow-200 overflow-hidden bg-[#fffbf0] p-1 gap-1 mb-4">
-              <button type="button" onClick={() => { setLoginMethod('password'); setError(''); setSuccess(''); }}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                  loginMethod === 'password' ? 'bg-[#f59e0b] text-white shadow' : 'text-gray-500 hover:text-[#f59e0b]'}`}>
-                Email & Password
-              </button>
-              <button type="button" onClick={() => { setLoginMethod('otp'); setError(''); setSuccess(''); }}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                  loginMethod === 'otp' ? 'bg-[#f59e0b] text-white shadow' : 'text-gray-500 hover:text-[#f59e0b]'}`}>
-                Phone & OTP
-              </button>
+            {/* User/Expert Toggle - Bold & Prominent */}
+            <div className="space-y-1.5">
+              <label className="block text-xs font-medium text-gray-500 uppercase tracking-wide">Account Type</label>
+              <div className="flex rounded-2xl border-2 border-[#f59e0b]/20 overflow-hidden bg-gradient-to-br from-[#fffbf0] to-white p-1.5 gap-2 shadow-sm">
+                <button
+                  type="button"
+                  onClick={() => setRole('user')}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-base font-bold transition-all ${
+                    role === 'user' 
+                      ? 'bg-gradient-to-br from-[#f59e0b] to-[#d97706] text-white shadow-lg scale-[1.02]' 
+                      : 'text-gray-600 hover:text-[#f59e0b] hover:bg-white/50'
+                  }`}
+                >
+                  {role === 'user' && '✦ '}User
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setRole('expert')}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-base font-bold transition-all ${
+                    role === 'expert' 
+                      ? 'bg-gradient-to-br from-[#f59e0b] to-[#d97706] text-white shadow-lg scale-[1.02]' 
+                      : 'text-gray-600 hover:text-[#f59e0b] hover:bg-white/50'
+                  }`}
+                >
+                  {role === 'expert' && '✦ '}Expert
+                </button>
+              </div>
+            </div>
+
+            {/* Email/Phone Toggle - Subtle & Clean */}
+            <div className="space-y-1.5">
+              <label className="block text-xs font-medium text-gray-500">Signup Method</label>
+              <div className="inline-flex rounded-lg border border-gray-200 overflow-hidden bg-gray-50 p-0.5 gap-0.5">
+                <button 
+                  type="button" 
+                  onClick={() => { setLoginMethod('password'); setError(''); setSuccess(''); }}
+                  className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
+                    loginMethod === 'password' 
+                      ? 'bg-white text-gray-900 shadow-sm' 
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  Email
+                </button>
+                <button 
+                  type="button" 
+                  onClick={() => { setLoginMethod('otp'); setError(''); setSuccess(''); }}
+                  className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
+                    loginMethod === 'otp' 
+                      ? 'bg-white text-gray-900 shadow-sm' 
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  Phone
+                </button>
+              </div>
             </div>
 
             {loginMethod === 'otp' && (
@@ -396,12 +468,6 @@ function SignupInner() {
               Already have an account?{' '}
               <Link href="/login" className="text-[#f59e0b] font-semibold hover:underline">Log in</Link>
             </p>
-            <div className="mt-4 pt-4 border-t border-yellow-100">
-              <p className="text-center text-sm font-medium text-gray-600">
-                Are you a wellness practitioner?{' '}
-                <Link href="/expert/signup" className="text-[#f59e0b] font-bold hover:underline">Apply here</Link>
-              </p>
-            </div>
           </CardContent>
         </Card>
       </div>

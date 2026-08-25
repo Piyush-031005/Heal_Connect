@@ -64,7 +64,7 @@ export default function AstrologerOnboardingPage() {
 
   useEffect(() => {
     const token = astrologerTokenStore.getAccess();
-    if (!token) { router.replace('/astrologer/login'); return; }
+    if (!token) { router.replace('/login'); return; }
 
     // Use cached profile for redirect check only — skip the API call
     const cached = astrologerTokenStore.getProfile();
@@ -76,7 +76,7 @@ export default function AstrologerOnboardingPage() {
     }
 
     astrologerApi.getApplication(token).then((res) => {
-      if (!res.success) { astrologerTokenStore.clear(); router.replace('/astrologer/login'); return; }
+      if (!res.success) { astrologerTokenStore.clear(); router.replace('/login'); return; }
       const p = res.data?.profile;
       if (p) {
         if (p.applicationStatus === 'APPROVED' && p.accountStatus === 'ACTIVE') { router.replace('/astrologer/dashboard'); return; }
@@ -87,7 +87,7 @@ export default function AstrologerOnboardingPage() {
         if (p.city || p.country) set('location', [p.city, p.country].filter(Boolean).join(', '));
       }
       setLoading(false);
-    }).catch(() => router.replace('/astrologer/login'));
+    }).catch(() => router.replace('/login'));
   }, [router]);
 
   const handleNext = async () => {
@@ -95,7 +95,7 @@ export default function AstrologerOnboardingPage() {
     if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) { setError('Valid email is required.'); return; }
     if (!form.location.trim()) { setError('Please tell us where you are based.'); return; }
     const token = astrologerTokenStore.getAccess();
-    if (!token) { router.replace('/astrologer/login'); return; }
+    if (!token) { router.replace('/login'); return; }
     setSaving(true); setError('');
     try {
       await astrologerApi.updateApplication(token, {
@@ -194,7 +194,7 @@ export default function AstrologerOnboardingPage() {
 
           <p className="text-center text-sm text-gray-500 mt-5">
             Already registered?{' '}
-            <Link href="/astrologer/login" className="text-amber-600 font-semibold hover:underline">Sign in</Link>
+            <Link href="/login" className="text-amber-600 font-semibold hover:underline">Sign in</Link>
           </p>
         </div>
       </div>

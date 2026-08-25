@@ -48,22 +48,22 @@ export default function AstrologerVerificationPage() {
 
   useEffect(() => {
     const token = astrologerTokenStore.getAccess();
-    if (!token) { router.replace('/astrologer/login'); return; }
+    if (!token) { router.replace('/login'); return; }
     astrologerApi.getApplication(token).then((res) => {
-      if (!res.success) { astrologerTokenStore.clear(); router.replace('/astrologer/login'); return; }
+      if (!res.success) { astrologerTokenStore.clear(); router.replace('/login'); return; }
       const p = res.data?.profile;
       if (p) {
         if (p.applicationStatus === 'APPROVED' && p.accountStatus === 'ACTIVE') { router.replace('/astrologer/dashboard'); return; }
         if (['ADMIN_REVIEW', 'UNDER_REVIEW', 'PENDING_REVIEW', 'SUBMITTED'].includes(p.applicationStatus)) { router.replace('/astrologer/onboarding/submitted'); return; }
       }
       setLoading(false);
-    }).catch(() => router.replace('/astrologer/login'));
+    }).catch(() => router.replace('/login'));
   }, [router]);
 
   const handleSubmit = async () => {
     if (!verificationComfort) { setError('Please answer the verification question.'); return; }
     const token = astrologerTokenStore.getAccess();
-    if (!token) { router.replace('/astrologer/login'); return; }
+    if (!token) { router.replace('/login'); return; }
     setSubmitting(true); setError('');
     try {
       await astrologerApi.updateApplication(token, { previousPlatformExperience: anythingElse || undefined, step: 3 });

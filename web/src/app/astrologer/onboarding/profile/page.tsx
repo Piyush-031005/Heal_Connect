@@ -97,9 +97,9 @@ export default function AstrologerProfilePage() {
 
   useEffect(() => {
     const token = astrologerTokenStore.getAccess();
-    if (!token) { router.replace('/astrologer/login'); return; }
+    if (!token) { router.replace('/login'); return; }
     astrologerApi.getApplication(token).then((res) => {
-      if (!res.success) { astrologerTokenStore.clear(); router.replace('/astrologer/login'); return; }
+      if (!res.success) { astrologerTokenStore.clear(); router.replace('/login'); return; }
       const p = res.data?.profile;
       if (p) {
         if (p.applicationStatus === 'APPROVED' && p.accountStatus === 'ACTIVE') { router.replace('/astrologer/dashboard'); return; }
@@ -108,7 +108,7 @@ export default function AstrologerProfilePage() {
         if (p.professionalBio) set('practiceBio', p.professionalBio);
       }
       setLoading(false);
-    }).catch(() => router.replace('/astrologer/login'));
+    }).catch(() => router.replace('/login'));
   }, [router]);
 
   const handleNext = async () => {
@@ -121,7 +121,7 @@ export default function AstrologerProfilePage() {
     if (!form.whyZenAuraa.trim()) { setError('Please tell us what interests you about ZenAuraa.'); return; }
 
     const token = astrologerTokenStore.getAccess();
-    if (!token) { router.replace('/astrologer/login'); return; }
+    if (!token) { router.replace('/login'); return; }
     const expYears: Record<string, number> = { 'Less than 1 year': 0, '1–3 years': 1, '3–5 years': 3, '5–10 years': 5, '10+ years': 10 };
     setSaving(true); setError('');
     try {

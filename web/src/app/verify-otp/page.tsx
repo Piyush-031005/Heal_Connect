@@ -130,29 +130,50 @@ function VerifyOtpContent() {
     setTimeout(async () => {
       setLoading(true);
       try {
-        const endpoint = type === 'login' ? `${API_URL}/api/auth/login-otp/verify` : `${API_URL}/api/auth/verify-otp`;
-        const body = type === 'login' ? JSON.stringify({ phone, otp: otpCode, role }) : JSON.stringify({ phone, otp: otpCode });
+        let endpoint, body;
+        
+        if (role === 'expert') {
+          // Use astrologer OTP verification endpoint
+          endpoint = `${API_URL}/api/auth/astrologer/verify-otp`;
+          body = JSON.stringify({ phone, otp: otpCode, purpose: type });
+        } else if (type === 'login') {
+          endpoint = `${API_URL}/api/auth/login-otp/verify`;
+          body = JSON.stringify({ phone, otp: otpCode, role });
+        } else {
+          endpoint = `${API_URL}/api/auth/verify-otp`;
+          body = JSON.stringify({ phone, otp: otpCode });
+        }
         
         const res  = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body
         });
-        const data = await res.json() as { success: boolean; message: string; data?: { accessToken: string; refreshToken: string; role?: string; practitioner?: any } };
+        const data = await res.json() as { success: boolean; message: string; data?: { accessToken: string; refreshToken: string; role?: string; practitioner?: any; astrologer?: any; redirect?: string } };
 
         if (data.success) {
-          if (type === 'login' && data.data) {
-            localStorage.setItem('hc_access_token', data.data.accessToken);
-            localStorage.setItem('hc_refresh_token', data.data.refreshToken);
-            if (role === 'expert' && data.data.practitioner) {
-              localStorage.setItem('hc_role', 'practitioner');
-              localStorage.setItem('hc_pid', data.data.practitioner.id);
+          if (data.data) {
+            if (role === 'expert') {
+              // Handle astrologer login/signup
+              localStorage.setItem('hca_access', data.data.accessToken);
+              localStorage.setItem('hca_refresh', data.data.refreshToken);
+              if (data.data.astrologer) {
+                localStorage.setItem('hca_profile', JSON.stringify(data.data.astrologer));
+              }
+            } else {
+              // Handle user login
+              localStorage.setItem('hc_access', data.data.accessToken);
+              localStorage.setItem('hc_refresh', data.data.refreshToken);
+              if (data.data.practitioner) {
+                localStorage.setItem('hc_role', 'practitioner');
+                localStorage.setItem('hc_pid', data.data.practitioner.id);
+              }
             }
           }
           setSuccess(true);
           setTimeout(() => {
-            if (type === 'login') {
-              router.push(role === 'expert' ? '/expert/dashboard' : '/dashboard');
+            if (type === 'login' || (role === 'expert' && data.data?.redirect)) {
+              router.push(role === 'expert' ? (data.data?.redirect || '/astrologer/onboarding') : '/dashboard');
             } else {
               router.push('/login');
             }

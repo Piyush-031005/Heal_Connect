@@ -45,7 +45,7 @@ export default function AstrologerSubmittedPage() {
             We'll review your application and be in touch if we'd like to invite you to the next stage.
           </p>
           <button
-            onClick={() => window.location.href = '/astrologer/login'}
+            onClick={() => window.location.href = '/login'}
             className="mt-8 text-sm text-amber-600 hover:text-amber-700 font-semibold hover:underline transition-colors"
           >
             Sign in to check your status →
