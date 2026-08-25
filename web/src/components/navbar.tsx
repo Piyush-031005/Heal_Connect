@@ -417,6 +417,7 @@ export default function Navbar() {
                     { code: 'theme-new-color', label: ' Medium' },
                     { code: 'theme-royal-indigo', label: ' Light' },
                     { code: 'theme-zen-light', label: ' New Shade' },
+                    { code: 'theme-new-shade-update', label: ' New Shade Update' },
                   ] as const).map((t) => (
                     <button
                       key={t.code}

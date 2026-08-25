@@ -24,9 +24,10 @@ export default function OpticalWheel() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const { theme } = useTheme();
   const isZenLight = theme === 'theme-zen-light';
+  const isNewShadeUpdate = theme === 'theme-new-shade-update';
   
-  const GOLD = isZenLight ? '#7A48AB' : '#F5C84C';
-  const TEXT_COLOR = isZenLight ? '#2A1658' : '#FFFFFF';
+  const GOLD = (isZenLight || isNewShadeUpdate) ? '#7A48AB' : '#F5C84C';
+  const TEXT_COLOR = (isZenLight || isNewShadeUpdate) ? '#2A1658' : '#FFFFFF';
   
   // Pause animation only when hovering over a specific logo
   const playState = hoveredIdx !== null ? 'paused' : 'running';
@@ -53,9 +54,9 @@ export default function OpticalWheel() {
               <stop offset="100%" stopColor={GOLD} stopOpacity="0"   />
             </radialGradient>
             <radialGradient id="centerDiscGrad" cx="40%" cy="35%" r="70%">
-              <stop offset="0%"   stopColor={isZenLight ? "#F4F1FE" : "#2A1658"} />
-              <stop offset="60%"  stopColor={isZenLight ? "#E9E1F9" : "#1E1144"} />
-              <stop offset="100%" stopColor={isZenLight ? "#D8CCF7" : "#0B061A"} />
+              <stop offset="0%"   stopColor={(isZenLight || isNewShadeUpdate) ? "#F4F1FE" : "#2A1658"} />
+              <stop offset="60%"  stopColor={(isZenLight || isNewShadeUpdate) ? "#E9E1F9" : "#1E1144"} />
+              <stop offset="100%" stopColor={(isZenLight || isNewShadeUpdate) ? "#D8CCF7" : "#0B061A"} />
             </radialGradient>
           </defs>
 
@@ -120,7 +121,7 @@ export default function OpticalWheel() {
                   }}>
                     {/* Hit area */}
                     <circle cx="0" cy="0" r={imgH + 20} fill="transparent" pointerEvents="all" />
-                    <circle cx="0" cy="0" r="40" fill="#0A0415" />
+                    <circle cx="0" cy="0" r="40" fill={isNewShadeUpdate ? "#A689D8" : "#0A0415"} />
 
                     {/* Small black dot in the center of the logo (fingertip size) */}
                     
