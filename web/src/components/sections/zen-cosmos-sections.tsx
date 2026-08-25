@@ -481,9 +481,9 @@ export function ModalityUniverse() {
 
       <div className="container mx-auto px-6 lg:px-16 text-center mb-8 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="w-8 h-[2px] bg-[#1A92C6]" />
-          <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${isNewColor ? 'text-primary' : 'text-[#1A92C6]'}`}>Modality Universe</span>
-          <div className="w-8 h-[2px] bg-[#1A92C6]" />
+          <div className="w-8 h-[2px] bg-primary" />
+          <span className={`text-[10px] font-black uppercase tracking-[0.3em] text-primary`}>Modality Universe</span>
+          <div className="w-8 h-[2px] bg-primary" />
         </div>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#F8F7FA] mb-3">Explore What Speaks To You</h2>
         <p className="text-[#1A92C6] text-sm font-bold">Hover any circle to discover a healing modality</p>
@@ -845,8 +845,7 @@ export function YourNextDiscovery() {
   const [hovered, setHovered] = useState<string | null>('explore');
 
   return (
-    <section className="relative py-32 overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #2D1B54 0%, #301368 100%)' }}>
+    <section className="relative py-32 overflow-hidden bg-background">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(40)].map((_, i) => (
           <div key={i} className="absolute rounded-full bg-[#12527F]"
@@ -856,14 +855,14 @@ export function YourNextDiscovery() {
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <div className="text-center mb-20">
-          <div className={`text-5xl mb-4 ${isNewColor ? 'text-primary/15' : 'text-[#F8F7FA]/15'}`}>✦ YOU ✦</div>
+          <div className={`text-5xl mb-4 text-foreground/15`}>✦ YOU ✦</div>
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-8 h-[2px] bg-[#1A92C6]" />
-            <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${isNewColor ? 'text-primary' : 'text-[#1A92C6]'}`}>Your Next Discovery</span>
-            <div className="w-8 h-[2px] bg-[#1A92C6]" />
+            <div className="w-8 h-[2px] bg-primary" />
+            <span className={`text-[10px] font-black uppercase tracking-[0.3em] text-primary`}>Your Next Discovery</span>
+            <div className="w-8 h-[2px] bg-primary" />
           </div>
-          <h2 className={`text-4xl md:text-6xl font-serif font-medium ${isNewColor ? 'text-[#F8F7FA]' : 'text-[#F8F7FA]'}`}>Where Will You Go Next?</h2>
-          <p className={`mt-4 text-base font-medium max-w-xl mx-auto ${isNewColor ? 'text-muted-foreground' : 'text-[#17619A]/70'}`}>
+          <h2 className={`text-4xl md:text-6xl font-serif font-medium text-foreground`}>Where Will You Go Next?</h2>
+          <p className={`mt-4 text-base font-medium max-w-xl mx-auto text-muted-foreground`}>
             Three paths. One cosmic journey. Choose where to begin.
           </p>
         </div>
@@ -873,10 +872,9 @@ export function YourNextDiscovery() {
             const isHov = hovered === path.id;
             return (
               <div key={path.id}
-                className="relative rounded-3xl p-8 border transition-all duration-500 cursor-pointer group overflow-hidden"
+                                className={`relative rounded-3xl p-8 border transition-all duration-500 cursor-pointer group overflow-hidden bg-card/40`}
                 style={{
-                  backgroundColor: isHov ? `${path.color}25` : 'rgba(48,19,104,0.65)',
-                  borderColor: isHov ? path.color : 'rgba(183,154,230,0.3)',
+                  borderColor: isHov ? path.color : 'var(--border)',
                   transform: isHov ? 'translateY(-8px)' : 'translateY(0)',
                   boxShadow: isHov ? `0 24px 60px ${path.color}25` : '0 4px 20px rgba(0,0,0,0.04)',
                   backdropFilter: 'blur(16px)',
@@ -889,11 +887,11 @@ export function YourNextDiscovery() {
                 )}
                 <div className="text-4xl mb-6 font-serif" style={{ color: path.color }}>{path.icon}</div>
                 <div className="text-[10px] font-black uppercase tracking-widest mb-2" style={{ color: path.color }}>{path.label}</div>
-                <h3 className="text-2xl font-serif font-medium text-[#F8F7FA] mb-4">{path.title}</h3>
-                <p className="text-sm text-[#17619A]/75 leading-relaxed mb-6 font-medium">{path.desc}</p>
+                <h3 className="text-2xl font-serif font-medium text-foreground mb-4">{path.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-6 font-medium">{path.desc}</p>
                 <div className="space-y-2 mb-8">
                   {path.items.map(item => (
-                    <div key={item} className="flex items-center gap-3 text-sm text-[#17619A]/80 font-medium">
+                    <div key={item} className="flex items-center gap-3 text-sm text-muted-foreground font-medium">
                       <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: path.color }} />
                       {item}
                     </div>
@@ -918,7 +916,7 @@ export function YourNextDiscovery() {
               <ArrowRight className="w-5 h-5" />
             </div>
           </Link>
-          <p className="text-[#17619A]/50 text-xs mt-4 font-medium">Free to explore · No credit card required</p>
+          <p className="text-muted-foreground/60 text-xs mt-4 font-medium">Free to explore · No credit card required</p>
         </div>
       </div>
     </section>
