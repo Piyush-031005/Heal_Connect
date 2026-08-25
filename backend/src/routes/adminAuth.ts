@@ -12,9 +12,12 @@
  *   2. GET  /mfa/setup    → returns { qrUrl, secret } (loginToken in header)
  *   3. POST /mfa/confirm  → confirms TOTP, marks mfaEnabled = true, issues session cookie
  *
- * Flow for MODERATOR (MFA optional):
+ * Flow for MODERATOR | SUPPORT | VIEWER (MFA optional):
  *   1. POST /login        → if mfaEnabled: same as SUPERADMIN flow
  *                           if !mfaEnabled: returns { mfaSetupRequired: false } + issues cookie directly
+ *
+ * Roles hierarchy (most → least powerful):
+ *   SUPERADMIN > MODERATOR > SUPPORT > VIEWER
  *
  * Session cookie:
  *   Name: hc_admin_session  (same name as before — adminSession.ts is updated to carry identity)
@@ -82,7 +85,7 @@ router.post('/login', async (req: Request, res: Response) => {
     const isSuperadmin = admin.role === 'SUPERADMIN';
     const mfaEnabled = admin.mfaEnabled;
 
-    // MODERATOR without MFA set up → issue session cookie immediately
+    // MODERATOR / SUPPORT / VIEWER without MFA set up → issue session cookie immediately
     if (!isSuperadmin && !mfaEnabled) {
       const token = createAdminSessionToken({ id: admin.id, email: admin.email, role: admin.role });
       setSessionCookie(res, token);
@@ -322,10 +325,13 @@ router.get('/admins', requireAdminSession(['SUPERADMIN']), async (_req: Request,
 });
 
 // POST /admins — create a new admin account (SUPERADMIN only)
+// Valid roles in descending order of privilege
+const VALID_ADMIN_ROLES = ['SUPERADMIN', 'MODERATOR', 'SUPPORT', 'VIEWER'] as const;
+
 router.post('/admins', requireAdminSession(['SUPERADMIN']), async (req: Request, res: Response) => {
   const { email, role } = req.body as { email?: string; role?: string };
-  if (!email || !['SUPERADMIN', 'MODERATOR'].includes(role ?? '')) {
-    res.status(400).json({ success: false, message: 'email and role (SUPERADMIN | MODERATOR) are required' });
+  if (!email || !VALID_ADMIN_ROLES.includes(role as any)) {
+    res.status(400).json({ success: false, message: `email and role (${VALID_ADMIN_ROLES.join(' | ')}) are required` });
     return;
   }
 

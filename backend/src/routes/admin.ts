@@ -36,13 +36,24 @@ async function writeAuditLog(
   }
 }
 
-// SEC-04/05: All admin routes are now guarded by the per-identity cookie session.
-// requireAdminAuth() with no args allows both SUPERADMIN and MODERATOR.
-// Sensitive routes individually add requireAdminAuth(['SUPERADMIN']).
-router.use(requireAdminAuth());
+// ─── Role constants (descending privilege) ───────────────────────────────────
+// SUPERADMIN > MODERATOR > SUPPORT > VIEWER
+//
+// VIEWER   : read-only GET access to all admin data — no mutations at all
+// SUPPORT  : VIEWER + ban/unban users & practitioners, verify practitioners, reply to tickets
+// MODERATOR: SUPPORT + create/edit content (blogs/faqs/banners), flag messages, scan transcripts, delete reviews
+// SUPERADMIN: everything + permanent deletes + wallet edits + DB migrations
+const ALL_ROLES   = ['SUPERADMIN', 'MODERATOR', 'SUPPORT', 'VIEWER'];
+const WRITE_ROLES = ['SUPERADMIN', 'MODERATOR', 'SUPPORT']; // can do mutations
+const MOD_ROLES   = ['SUPERADMIN', 'MODERATOR'];             // moderator-level and above
+const SA_ONLY     = ['SUPERADMIN'];                          // superadmin only
+
+// SEC-04/05: Global guard — all four roles can access the admin panel.
+// Sensitive routes override with a narrower role list.
+router.use(requireAdminAuth(ALL_ROLES));
 
 // â”€â”€â”€ 0. Run Database Migrations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-router.all('/migrate', requireAdminAuth(['SUPERADMIN']), async (req: Request, res: Response) => {
+router.all('/migrate', requireAdminAuth(SA_ONLY), async (req: Request, res: Response) => {
   try {
     // Single shared migration script — see lib/migrationSql.ts for why this
     // used to be two different, out-of-sync copies (this route was missing
@@ -388,7 +399,7 @@ router.get('/users', async (req: Request, res: Response) => {
 });
 
 // â”€â”€â”€ 4.1 Update User Balance â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-router.patch('/users/:id/balance', requireAdminAuth(['SUPERADMIN']), async (req: Request, res: Response) => {
+router.patch('/users/:id/balance', requireAdminAuth(SA_ONLY), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
     const { balance } = req.body;
@@ -453,7 +464,7 @@ router.patch('/users/:id/balance', requireAdminAuth(['SUPERADMIN']), async (req:
 });
 
 // PATCH /api/admin/users/:id/ban â€” temporary or permanent suspension
-router.patch('/users/:id/ban', async (req: Request, res: Response) => {
+router.patch('/users/:id/ban', requireAdminAuth(WRITE_ROLES), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
     const { banned, days, reason } = req.body as { banned: boolean; days?: number; reason?: string };
@@ -532,7 +543,7 @@ router.get('/users/:id', async (req: Request, res: Response) => {
 });
 
 // DELETE /api/admin/users/:id
-router.delete('/users/:id', requireAdminAuth(['SUPERADMIN']), async (req: Request, res: Response) => {
+router.delete('/users/:id', requireAdminAuth(SA_ONLY), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
 
@@ -663,7 +674,7 @@ router.get('/practitioners', async (req: Request, res: Response) => {
 });
 
 // PATCH /api/admin/practitioners/:id/verify
-router.patch('/practitioners/:id/verify', async (req: Request, res: Response) => {
+router.patch('/practitioners/:id/verify', requireAdminAuth(WRITE_ROLES), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
     const body = (req.body ?? {}) as { isVerified?: unknown };
@@ -686,7 +697,7 @@ router.patch('/practitioners/:id/verify', async (req: Request, res: Response) =>
 });
 
 // PATCH /api/admin/practitioners/:id/ban â€” temporary or permanent suspension
-router.patch('/practitioners/:id/ban', async (req: Request, res: Response) => {
+router.patch('/practitioners/:id/ban', requireAdminAuth(WRITE_ROLES), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
     const { banned, days, reason } = req.body as { banned: boolean; days?: number; reason?: string };
@@ -765,7 +776,7 @@ router.get('/practitioners/:id', async (req: Request, res: Response) => {
 });
 
 // DELETE /api/admin/practitioners/:id
-router.delete('/practitioners/:id', requireAdminAuth(['SUPERADMIN']), async (req: Request, res: Response) => {
+router.delete('/practitioners/:id', requireAdminAuth(SA_ONLY), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
 
@@ -971,7 +982,7 @@ router.get('/sessions/:id/transcript', requireAdmin, async (req: Request, res: R
 });
 
 // â”€â”€â”€ 8.2 Scan Transcript for Flags â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-router.post('/sessions/:id/transcript/scan', requireAdmin, async (req: Request, res: Response) => {
+router.post('/sessions/:id/transcript/scan', requireAdminAuth(MOD_ROLES), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
     
@@ -1033,7 +1044,7 @@ router.get('/moderation', requireAdmin, async (req: Request, res: Response) => {
   }
 });
 
-router.patch('/moderation/:id', requireAdmin, async (req: Request, res: Response) => {
+router.patch('/moderation/:id', requireAdminAuth(MOD_ROLES), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
     const { status } = req.body;
@@ -1071,7 +1082,7 @@ router.get('/messages', requireAdmin, async (req: Request, res: Response) => {
   }
 });
 
-router.patch('/messages/:id', requireAdmin, async (req: Request, res: Response) => {
+router.patch('/messages/:id', requireAdminAuth(MOD_ROLES), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
     const { status } = req.body;
@@ -1086,7 +1097,7 @@ router.patch('/messages/:id', requireAdmin, async (req: Request, res: Response) 
   }
 });
 
-router.delete('/messages/:id', requireAdminAuth(['SUPERADMIN']), async (req: Request, res: Response) => {
+router.delete('/messages/:id', requireAdminAuth(SA_ONLY), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
     await prisma.contactMessage.delete({ where: { id } });
@@ -1155,7 +1166,7 @@ router.get('/tickets/:id', requireAdmin, async (req: Request, res: Response) => 
   }
 });
 
-router.post('/tickets/:id/messages', requireAdmin, async (req: Request, res: Response) => {
+router.post('/tickets/:id/messages', requireAdminAuth(WRITE_ROLES), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
     const { message, status } = req.body as { message?: string; status?: string };
@@ -1229,7 +1240,7 @@ router.get('/blogs', requireAdmin, async (req: Request, res: Response) => {
   }
 });
 
-router.post('/blogs', requireAdmin, async (req: Request, res: Response) => {
+router.post('/blogs', requireAdminAuth(MOD_ROLES), async (req: Request, res: Response) => {
   try {
     const { title, content, author, imageUrl, published } = req.body;
     const blog = await prisma.blog.create({ data: { title, content, author, imageUrl, published } });
@@ -1239,7 +1250,7 @@ router.post('/blogs', requireAdmin, async (req: Request, res: Response) => {
   }
 });
 
-router.patch('/blogs/:id', requireAdmin, async (req: Request, res: Response) => {
+router.patch('/blogs/:id', requireAdminAuth(MOD_ROLES), async (req: Request, res: Response) => {
   try {
     const blog = await prisma.blog.update({
       where: { id: req.params.id as string },
@@ -1251,7 +1262,7 @@ router.patch('/blogs/:id', requireAdmin, async (req: Request, res: Response) => 
   }
 });
 
-router.delete('/blogs/:id', requireAdminAuth(['SUPERADMIN']), async (req: Request, res: Response) => {
+router.delete('/blogs/:id', requireAdminAuth(SA_ONLY), async (req: Request, res: Response) => {
   try {
     await prisma.blog.delete({ where: { id: req.params.id as string } });
     res.json({ success: true, message: 'Blog deleted' });
@@ -1270,7 +1281,7 @@ router.get('/faqs', requireAdmin, async (req: Request, res: Response) => {
   }
 });
 
-router.post('/faqs', requireAdmin, async (req: Request, res: Response) => {
+router.post('/faqs', requireAdminAuth(MOD_ROLES), async (req: Request, res: Response) => {
   try {
     const { question, answer, category } = req.body;
     const faq = await prisma.faq.create({ data: { question, answer, category } });
@@ -1280,7 +1291,7 @@ router.post('/faqs', requireAdmin, async (req: Request, res: Response) => {
   }
 });
 
-router.patch('/faqs/:id', requireAdmin, async (req: Request, res: Response) => {
+router.patch('/faqs/:id', requireAdminAuth(MOD_ROLES), async (req: Request, res: Response) => {
   try {
     const faq = await prisma.faq.update({
       where: { id: req.params.id as string },
@@ -1292,7 +1303,7 @@ router.patch('/faqs/:id', requireAdmin, async (req: Request, res: Response) => {
   }
 });
 
-router.delete('/faqs/:id', requireAdminAuth(['SUPERADMIN']), async (req: Request, res: Response) => {
+router.delete('/faqs/:id', requireAdminAuth(SA_ONLY), async (req: Request, res: Response) => {
   try {
     await prisma.faq.delete({ where: { id: req.params.id as string } });
     res.json({ success: true, message: 'FAQ deleted' });
@@ -1311,7 +1322,7 @@ router.get('/banners', requireAdmin, async (req: Request, res: Response) => {
   }
 });
 
-router.post('/banners', requireAdmin, async (req: Request, res: Response) => {
+router.post('/banners', requireAdminAuth(MOD_ROLES), async (req: Request, res: Response) => {
   try {
     const { title, imageUrl, linkUrl, isActive } = req.body;
     const banner = await prisma.banner.create({ data: { title, imageUrl, linkUrl, isActive } });
@@ -1321,7 +1332,7 @@ router.post('/banners', requireAdmin, async (req: Request, res: Response) => {
   }
 });
 
-router.patch('/banners/:id', requireAdmin, async (req: Request, res: Response) => {
+router.patch('/banners/:id', requireAdminAuth(MOD_ROLES), async (req: Request, res: Response) => {
   try {
     const banner = await prisma.banner.update({
       where: { id: req.params.id as string },
@@ -1333,7 +1344,7 @@ router.patch('/banners/:id', requireAdmin, async (req: Request, res: Response) =
   }
 });
 
-router.delete('/banners/:id', requireAdminAuth(['SUPERADMIN']), async (req: Request, res: Response) => {
+router.delete('/banners/:id', requireAdminAuth(SA_ONLY), async (req: Request, res: Response) => {
   try {
     await prisma.banner.delete({ where: { id: req.params.id as string } });
     res.json({ success: true, message: 'Banner deleted' });
@@ -1520,7 +1531,7 @@ router.get('/reviews', async (req: Request, res: Response) => {
   }
 });
 
-router.delete('/reviews/:id', requireAdminAuth(['SUPERADMIN', 'MODERATOR']), async (req: Request, res: Response) => {
+router.delete('/reviews/:id', requireAdminAuth(MOD_ROLES), async (req: Request, res: Response) => {
   try {
     const id = req.params['id'];
     if (typeof id !== 'string' || !id) {
