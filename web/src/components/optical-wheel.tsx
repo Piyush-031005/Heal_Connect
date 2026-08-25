@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTheme } from 'next-themes';
 
 const MODALITIES = [
   { id: 'astrology',      name: 'Astrology',        image: '/final_ensights/astrology.png' },
