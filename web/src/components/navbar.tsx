@@ -413,9 +413,10 @@ export default function Navbar() {
               {themeOpen && (
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
-                    { code: 'dark', label: ' Dark (#240E4E)' },
-                    { code: 'theme-new-color', label: ' Medium (#301368)' },
-                    { code: 'theme-royal-indigo', label: ' Light (#3D1A82)' },
+                    { code: 'dark', label: ' Dark' },
+                    { code: 'theme-new-color', label: ' Medium' },
+                    { code: 'theme-royal-indigo', label: ' Light' },
+                    { code: 'theme-zen-light', label: ' New Shade' },
                   ] as const).map((t) => (
                     <button
                       key={t.code}

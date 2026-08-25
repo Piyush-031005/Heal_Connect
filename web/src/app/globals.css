@@ -143,6 +143,38 @@
     --radius: 0.75rem;
   }
 
+  /* ZEN LIGHT THEME (New Shade) */
+  .theme-zen-light {
+    --background: #F4F1FE;
+    --foreground: #2A1658;
+    
+    --card: #FFFFFF;
+    --card-foreground: #2A1658;
+    
+    --popover: #FFFFFF;
+    --popover-foreground: #2A1658;
+    
+    --primary: #7A48AB;
+    --primary-foreground: #FFFFFF;
+    
+    --secondary: #E9E1F9;
+    --secondary-foreground: #4A2796;
+    
+    --muted: #F3F0FA;
+    --muted-foreground: #694091;
+    
+    --accent: #B79AE6;
+    --accent-foreground: #2A1658;
+    
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    
+    --border: #E0D4F5;
+    --input: #FFFFFF;
+    --ring: #7A48AB;
+    --radius: 0.75rem;
+  }
+
   * {
     @apply border-border;
   }

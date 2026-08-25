@@ -65,8 +65,8 @@ export default function ExploreModalities() {
                 id={`modality-${mod.id}`}
                 className="group bg-primary/10 backdrop-blur-xl rounded-2xl p-6 border border-primary/20 hover:border-primary/50 transition-all duration-500 flex flex-col items-center text-center shadow-lg hover:shadow-[0_10px_30px_rgba(var(--primary),0.15)] cursor-pointer relative overflow-hidden"
               >
-                <div className="w-32 h-32 rounded-full bg-background border-2 border-primary/30 flex items-center justify-center mb-6 group-hover:border-primary group-hover:scale-105 transition-all duration-500 shadow-inner relative p-3">
-                  <img src={`${mod.image}?v=5`} alt={mod.name} className={`w-full h-full object-contain rounded-full transition-all ${isNewColor ? "brightness-0 opacity-60 group-hover:opacity-100 group-hover:brightness-0" : "brightness-90 group-hover:brightness-110"}`} />
+                <div className="w-32 h-32 rounded-full bg-[#2A1658] border-2 border-primary/30 flex items-center justify-center mb-6 group-hover:border-primary group-hover:scale-105 transition-all duration-500 shadow-inner relative p-3">
+                  <img src={`${mod.image}?v=5`} alt={mod.name} className="w-full h-full object-contain rounded-full transition-all brightness-90 group-hover:brightness-110"  />
                 </div>
                 <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-500">{mod.name}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed font-medium mb-6 transition-colors duration-500">{mod.desc}</p>

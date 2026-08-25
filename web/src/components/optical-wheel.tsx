@@ -17,10 +17,13 @@ const MODALITIES = [
   { id: 'numerology',     name: 'Numerology',       image: '/final_ensights/numerology.png' },
 ];
 
-const GOLD = '#F5C84C'; 
+const GOLD = isZenLight ? '#7A48AB' : '#F5C84C';
+  const TEXT_COLOR = isZenLight ? '#2A1658' : '#FFFFFF'; 
 
 export default function OpticalWheel() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const { theme } = useTheme();
+  const isZenLight = theme === 'theme-zen-light';
   
   // Pause animation only when hovering over a specific logo
   const playState = hoveredIdx !== null ? 'paused' : 'running';
@@ -47,9 +50,9 @@ export default function OpticalWheel() {
               <stop offset="100%" stopColor={GOLD} stopOpacity="0"   />
             </radialGradient>
             <radialGradient id="centerDiscGrad" cx="40%" cy="35%" r="70%">
-              <stop offset="0%"   stopColor="#2A1658" />
-              <stop offset="60%"  stopColor="#1E1144" />
-              <stop offset="100%" stopColor="#0B061A" />
+              <stop offset="0%"   stopColor={isZenLight ? "#F4F1FE" : "#2A1658"} />
+              <stop offset="60%"  stopColor={isZenLight ? "#E9E1F9" : "#1E1144"} />
+              <stop offset="100%" stopColor={isZenLight ? "#D8CCF7" : "#0B061A"} />
             </radialGradient>
           </defs>
 
@@ -130,7 +133,7 @@ export default function OpticalWheel() {
                     <text
                       x="0" y={imgH + 24}
                       textAnchor="middle"
-                      fill={isHovered ? '#FFFFFF' : GOLD}
+                      fill={isHovered ? TEXT_COLOR : GOLD}
                       fontSize="14"
                       fontFamily="'Georgia', serif"
                       fontWeight="300"
