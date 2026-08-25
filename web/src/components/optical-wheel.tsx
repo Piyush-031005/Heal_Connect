@@ -17,13 +17,15 @@ const MODALITIES = [
   { id: 'numerology',     name: 'Numerology',       image: '/final_ensights/numerology.png' },
 ];
 
-const GOLD = isZenLight ? '#7A48AB' : '#F5C84C';
-  const TEXT_COLOR = isZenLight ? '#2A1658' : '#FFFFFF'; 
+
 
 export default function OpticalWheel() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const { theme } = useTheme();
   const isZenLight = theme === 'theme-zen-light';
+  
+  const GOLD = isZenLight ? '#7A48AB' : '#F5C84C';
+  const TEXT_COLOR = isZenLight ? '#2A1658' : '#FFFFFF';
   
   // Pause animation only when hovering over a specific logo
   const playState = hoveredIdx !== null ? 'paused' : 'running';
@@ -67,6 +69,11 @@ export default function OpticalWheel() {
             
             {/* Outer decorative ring */}
             <circle cx={cx} cy={cy} r={outerR + 70} fill="none" stroke={GOLD} opacity="0.15" strokeWidth="0.75" />
+            
+            {/* Added Dotted Concentric Circles for nice effect */}
+            <circle cx={cx} cy={cy} r={340} fill="none" stroke={GOLD} opacity="0.3" strokeWidth="1.5" strokeDasharray="1 15" strokeLinecap="round" />
+            <circle cx={cx} cy={cy} r={180} fill="none" stroke={GOLD} opacity="0.4" strokeWidth="2" strokeDasharray="1 20" strokeLinecap="round" />
+            <circle cx={cx} cy={cy} r={110} fill="none" stroke={GOLD} opacity="0.5" strokeWidth="1.5" strokeDasharray="1 12" strokeLinecap="round" />
             
             {/* Inner dashed ring */}
             <circle cx={cx} cy={cy} r={outerR - 80} fill="none" stroke={GOLD} opacity="0.2" strokeWidth="0.75" strokeDasharray="3 9" />
