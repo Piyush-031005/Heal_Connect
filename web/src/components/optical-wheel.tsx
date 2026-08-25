@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useTheme } from 'next-themes';
+import { useLayout } from '@/lib/layout-context';
 
 const MODALITIES = [
   { id: 'astrology',      name: 'Astrology',        image: '/final_ensights/astrology.png' },
@@ -23,6 +24,8 @@ const MODALITIES = [
 export default function OpticalWheel() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const { theme } = useTheme();
+  const { layout } = useLayout();
+  const isNewLayout1 = layout === 'new-layout-1';
   const isZenLight = theme === 'theme-zen-light';
   const isNewShadeUpdate = theme === 'theme-new-shade-update';
   const isZenAlign = theme === 'theme-zen-align';
@@ -115,6 +118,22 @@ export default function OpticalWheel() {
                   className="cursor-pointer"
                 >
                   {/* Counter-spin so labels/icons stay upright (Fixed duration match) */}
+                  {/* Pebble image (Centrifugal) - No reverse spin so it rotates with the wheel */}
+                  {isNewLayout1 && (
+                    <g transform={`rotate(${idx * 30 + 15})`}>
+                      <image
+                        href="/pebbles/pebbel1.png"
+                        x={-imgH} y={-imgH}
+                        width={imgH * 2} height={imgH * 2}
+                        preserveAspectRatio="xMidYMid meet"
+                        style={{
+                          filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))',
+                          transition: 'filter 0.3s ease',
+                        }}
+                      />
+                    </g>
+                  )}
+
                   <g style={{
                     animation: 'spin 180s linear infinite reverse',
                     animationPlayState: playState,
@@ -122,22 +141,24 @@ export default function OpticalWheel() {
                   }}>
                     {/* Hit area */}
                     <circle cx="0" cy="0" r={imgH + 20} fill="transparent" pointerEvents="all" />
-                    <circle cx="0" cy="0" r="40" fill={isNewShadeUpdate ? "#A689D8" : "#0A0415"} />
+                    {!isNewLayout1 && <circle cx="0" cy="0" r="40" fill={isNewShadeUpdate ? "#A689D8" : "#0A0415"} />}
 
                     {/* Small black dot in the center of the logo (fingertip size) */}
                     
 
-                    {/* MODALITY ICON */}
-                    <image
-                      href={`${mod.image}?v=16`}
-                      x={-imgH} y={-imgH}
-                      width={imgH * 2} height={imgH * 2}
-                      preserveAspectRatio="xMidYMid meet"
-                      style={{
-                        filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))',
-                        transition: 'filter 0.3s ease',
-                      }}
-                    />
+                    {/* MODALITY ICON (Non-pebble) */}
+                    {!isNewLayout1 && (
+                      <image
+                        href={`${mod.image}?v=16`}
+                        x={-imgH} y={-imgH}
+                        width={imgH * 2} height={imgH * 2}
+                        preserveAspectRatio="xMidYMid meet"
+                        style={{
+                          filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))',
+                          transition: 'filter 0.3s ease',
+                        }}
+                      />
+                    )}
 
                     {/* Label */}
                     <text

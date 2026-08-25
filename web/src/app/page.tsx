@@ -77,8 +77,8 @@ export default function LandingPage() {
             {/* 09 - FAQ */}
             <FaqSection />
           </>
-        ) : isFinalHybrid ? (
-          <>
+        ) : isFinalHybrid || layout === 'new-layout-1' ? (
+          <div className={layout === 'new-layout-1' ? "bg-gradient-to-b from-[#1E2059] to-[#4363CA] text-white" : ""}>
             {/* FINAL HYBRID LAYOUT */}
             <FinalHybridExperts />
             <ExploreModalities />
@@ -87,10 +87,10 @@ export default function LandingPage() {
             <Testimonials />
             <FinalHybridSupport />
             
-            <div className="bg-background pt-12">
+            <div className={layout === 'new-layout-1' ? "pt-12" : "bg-background pt-12"}>
               <FaqSection />
             </div>
-          </>
+          </div>
         ) : (
           <>
             {/* PRIMARY LOCKED — Standard Sections */}

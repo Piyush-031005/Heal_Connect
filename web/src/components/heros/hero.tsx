@@ -99,6 +99,96 @@ function PrimaryHero() {
   );
 }
 
+// --- NEW LAYOUT 1 HERO ---
+function NewLayout1Hero() {
+  return (
+    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-gradient-to-b from-[#EDE5FC] via-[#EDE5FC] to-[#4E67CC]/40 min-h-[90vh] flex items-center">
+      {/* Scattered star particles — like HealConnect reference */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
+        {[
+          [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
+          [82,15],[88,60],[93,35],[5,48],[18,78],[35,5],[50,68],[65,92],[80,30],[95,80],
+          [12,25],[28,50],[42,75],[58,12],[72,55],[85,88],[3,70],[20,95],[48,35],[78,8],
+          [91,50],[25,15],[55,85],[70,22],[40,60],[10,90],[62,40],[87,68],[33,30],[16,55],
+        ].map(([x, y], i) => (
+          <circle
+            key={i}
+            cx={`${x}%`}
+            cy={`${y}%`}
+            r={i % 5 === 0 ? '1.5' : i % 3 === 0 ? '1' : '0.7'}
+            fill="white"
+            opacity={i % 4 === 0 ? '0.6' : i % 3 === 0 ? '0.4' : '0.25'}
+          />
+        ))}
+      </svg>
+
+      {/* Big Modality Wheel - Scaled up and shifted right to create the Arc effect */}
+      <div className="absolute right-0 translate-x-[25%] md:translate-x-[30%] lg:translate-x-[25%] top-1/2 -translate-y-1/2 h-[700px] w-[700px] md:h-[750px] md:w-[750px] lg:h-[850px] lg:w-[850px] opacity-90 lg:opacity-100 z-10 pointer-events-none lg:pointer-events-auto flex items-center justify-center">
+        <OpticalWheel />
+      </div>
+
+
+      <div className="container mx-auto px-6 relative z-10 pointer-events-none">
+        <div className="max-w-3xl pointer-events-auto">
+          
+          
+          {/* Action Buttons */}
+          <div className="flex items-center gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-100">
+            <button className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary text-sm font-medium transition-all">
+              <MessageCircle className="w-4 h-4" />
+              <span>Start Chat</span>
+            </button>
+            <button className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all shadow-lg shadow-primary/20">
+              <Phone className="w-4 h-4" />
+              <span>Start Calling</span>
+            </button>
+          </div>
+
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000">
+            <span className="text-[#1E2059]">Zen</span>
+            <span className="text-primary">Auraa.</span>
+          </h1>
+          <p className="text-xl lg:text-2xl text-[#1E2059]/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
+            Find trusted guidance for every stage of life.<br/>Connect with verified experts instantly.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-in slide-in-from-left duration-1000 delay-300 pointer-events-auto">
+            <Link href="/practitioners">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 h-14 text-lg rounded-full font-medium transition-all shadow-lg shadow-primary/20">
+                Ask me Anything <ArrowRight className="w-5 h-5 ml-2 inline" />
+              </Button>
+            </Link>
+            <Link href="/horoscope">
+              <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10 text-foreground px-10 h-14 text-lg rounded-full font-medium transition-all">
+                Today's Horoscope
+              </Button>
+            </Link>
+          </div>
+          
+          {/* Subtle Trust Indicators */}
+          <div className="flex items-center gap-6 animate-in fade-in duration-1000 delay-500 pt-2">
+            <div className="flex flex-col mr-2">
+              <span className="text-2xl font-serif text-[#1E2059] font-bold flex items-center">4.9<Star className="w-5 h-5 ml-1 fill-primary text-primary"/></span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Rating</span>
+            </div>
+            <div className="flex flex-col mr-2">
+              <span className="text-2xl font-serif text-[#1E2059] font-bold">100k+</span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Sessions</span>
+            </div>
+            <div className="flex flex-col mr-2">
+              <span className="text-2xl font-serif text-[#1E2059] font-bold">500+</span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Experts</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-2xl font-serif text-[#1E2059] font-bold">24x7</span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Available</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // --- EDITORIAL LAYOUT HERO (Magazine) ---
 function EditorialHero() {
   return (
@@ -1034,6 +1124,7 @@ export default function Hero() {
   const { layout } = useLayout();
   
   if (layout === 'final-hybrid') return <PrimaryHero />;
+  if (layout === 'new-layout-1') return <NewLayout1Hero />;
   if (layout === 'layout-2') return <Layout2Hero />;
   if (layout === 'new-design-1') return <ZenAlignHero />;
   if (layout === 'editorial') return <EditorialHero />;

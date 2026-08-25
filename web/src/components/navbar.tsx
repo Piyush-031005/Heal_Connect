@@ -74,8 +74,8 @@ export default function Navbar() {
   const { lang, setLang } = useLang();
   const { layout, setLayout } = useLayout();
   
-  const isDark = (theme === 'dark' || theme === 'theme-lavender-night' || theme === 'theme-deep-forest' || theme === 'theme-royal-indigo' || layout === 'final-hybrid') && theme !== 'theme-new-color';
-  const isFinalHybrid = layout === 'final-hybrid';
+  const isDark = (theme === 'dark' || theme === 'theme-lavender-night' || theme === 'theme-deep-forest' || theme === 'theme-royal-indigo' || layout === 'final-hybrid' || layout === 'new-layout-1') && theme !== 'theme-new-color';
+  const isFinalHybrid = layout === 'final-hybrid' || layout === 'new-layout-1';
   
   const [userProfile, setUserProfile] = useState<{ photoUrl: string | null; role: string; id: string; name: string | null } | null>(null);
 
