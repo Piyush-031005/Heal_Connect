@@ -47,11 +47,11 @@ function PrimaryHero() {
           
           {/* Action Buttons */}
           <div className="flex items-center gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-100">
-            <button className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white/90 text-sm font-medium transition-all">
+            <button className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary text-sm font-medium transition-all">
               <MessageCircle className="w-4 h-4" />
               <span>Start Chat</span>
             </button>
-            <button className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#B79AE6] hover:bg-[#a686d9] text-[#301368] text-sm font-bold transition-all shadow-lg shadow-[#B79AE6]/20">
+            <button className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all shadow-lg shadow-primary/20">
               <Phone className="w-4 h-4" />
               <span>Start Calling</span>
             </button>
@@ -59,7 +59,7 @@ function PrimaryHero() {
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000">
             <span className="text-foreground">Zen</span>
-            <span className="text-primary italic">Auraa.</span>
+            <span className="text-primary">Auraa.</span>
           </h1>
           <p className="text-xl lg:text-2xl text-foreground/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
             Find trusted guidance for every stage of life.<br/>Connect with verified experts instantly.
