@@ -91,8 +91,8 @@ export default function AstrologerVerificationPage() {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
-            <Image src="/logo.png" alt="HealConnect" width={36} height={36} className="rounded-full" />
-            <span className="text-2xl font-extrabold text-white">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={36} height={36} className="rounded-full" />
+            <span className="text-2xl font-extrabold text-white">ZenAuraa</span>
           </Link>
           <div className="mb-4 inline-flex items-center gap-2 bg-white/20 text-white text-xs font-bold px-4 py-2 rounded-full tracking-wide">
             STEP 3 OF 3
@@ -109,15 +109,15 @@ export default function AstrologerVerificationPage() {
           </p>
         </div>
         <div className="relative z-10 mt-auto pt-12 border-t border-white/20">
-          <p className="text-amber-100/60 text-xs">© 2026 HealConnect. All rights reserved.</p>
+          <p className="text-amber-100/60 text-xs">© 2026 ZenAuraa. All rights reserved.</p>
         </div>
       </div>
 
       {/* Right panel */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-12">
         <div className="flex items-center gap-2 mb-8 md:hidden">
-          <Image src="/logo.png" alt="HealConnect" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-amber-500">HealConnect</span>
+          <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+          <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
         </div>
 
         <div className="w-full max-w-2xl">

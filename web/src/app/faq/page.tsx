@@ -5,7 +5,7 @@ import FaqClient from './FaqClient';
 export const metadata: Metadata = buildMetadata({
   title: 'Frequently Asked Questions',
   description:
-    'Answers to common questions about HealConnect — bookings, payments, wallet recharge, and sessions with astrologers, healers, and wellness experts.',
+    'Answers to common questions about ZenAuraa — bookings, payments, wallet recharge, and sessions with astrologers, healers, and wellness experts.',
   path: '/faq',
 });
 

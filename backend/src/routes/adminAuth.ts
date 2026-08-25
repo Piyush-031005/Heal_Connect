@@ -150,7 +150,7 @@ router.post('/mfa/verify', async (req: Request, res: Response) => {
 
   try {
     const totp = new OTPAuth.TOTP({
-      issuer: 'HealConnect',
+      issuer: 'ZenAuraa',
       label: admin.email,
       algorithm: 'SHA1',
       digits: 6,
@@ -191,7 +191,7 @@ router.get('/mfa/setup', async (req: Request, res: Response) => {
     // (idempotent — if they scan again before confirming, that's fine)
     const secret = new OTPAuth.Secret({ size: 20 });
     const totp = new OTPAuth.TOTP({
-      issuer: 'HealConnect Admin',
+      issuer: 'ZenAuraa Admin',
       label: admin.email,
       algorithm: 'SHA1',
       digits: 6,
@@ -236,7 +236,7 @@ router.post('/mfa/confirm', async (req: Request, res: Response) => {
 
   try {
     const totp = new OTPAuth.TOTP({
-      issuer: 'HealConnect Admin',
+      issuer: 'ZenAuraa Admin',
       label: admin.email,
       algorithm: 'SHA1',
       digits: 6,

@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const specialty = p.specialties?.[0];
   return buildMetadata({
     title: `${p.name}${specialty ? ` — ${specialty} Expert` : ''}`,
-    description: toMetaDescription(p.bio, `Connect with ${p.name} on HealConnect for a live consultation.`),
+    description: toMetaDescription(p.bio, `Connect with ${p.name} on ZenAuraa for a live consultation.`),
     path: `/practitioners/${p.id}`,
     image: p.photoUrl || undefined,
   });

@@ -6,7 +6,7 @@ import { ShieldCheck } from 'lucide-react';
 export const metadata: Metadata = buildMetadata({
   title: 'Privacy Policy',
   description:
-    'How HealConnect collects, uses, shares, and protects your personal data, and how to exercise your data protection rights.',
+    'How ZenAuraa collects, uses, shares, and protects your personal data, and how to exercise your data protection rights.',
   path: '/privacy',
 });
 
@@ -39,7 +39,7 @@ export default function PrivacyPolicyPage() {
           </div>
 
           <p className="text-gray-700 leading-relaxed mb-10 text-[15px]">
-            This policy explains how HealConnect ("we", "us") collects, uses, and protects your personal data when
+            This policy explains how ZenAuraa ("we", "us") collects, uses, and protects your personal data when
             you use our website and app to connect with astrologers and wellness practitioners. It applies to
             registered users and practitioners (experts) alike. It is written to be read alongside applicable data
             protection law, including the EU/UK GDPR and India's Digital Personal Data Protection Act.
@@ -47,7 +47,7 @@ export default function PrivacyPolicyPage() {
 
           <Section n={1} title="Who we are">
             <p>
-              HealConnect operates this platform. For any privacy question, correction request, or complaint,
+              ZenAuraa operates this platform. For any privacy question, correction request, or complaint,
               contact us at <span className="font-semibold">privacy@healconnect.app</span>.
             </p>
           </Section>

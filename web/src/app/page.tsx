@@ -904,8 +904,8 @@ export default function LandingPage() {
               {/* Brand */}
               <div className="w-full lg:w-72">
                 <div className="flex items-center gap-2 mb-4">
-                  <Image src="/logo.png" alt="HealConnect" width={28} height={28} className="rounded-full" />
-                  <span className="text-lg font-extrabold text-amber-600">HealConnect</span>
+                  <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
+                  <span className="text-lg font-extrabold text-amber-600">ZenAuraa</span>
                 </div>
                 <p className="text-xs text-gray-500 leading-relaxed mb-4">
                   {t.footerBrandDesc}

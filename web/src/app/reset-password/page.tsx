@@ -111,8 +111,8 @@ function ResetPasswordContent() {
     <Card className="w-full max-w-md bg-white border border-yellow-100 shadow-xl">
       <CardHeader className="space-y-2 pb-4">
         <div className="flex items-center gap-2 mb-2">
-          <Image src="/logo.png" alt="HealConnect" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-[#f59e0b]">HealConnect</span>
+          <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+          <span className="text-xl font-extrabold text-[#f59e0b]">ZenAuraa</span>
         </div>
         <CardTitle className="text-2xl font-extrabold text-[#1a1a1a]">
           Set a new password

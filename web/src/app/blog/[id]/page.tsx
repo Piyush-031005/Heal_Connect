@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
   return buildMetadata({
     title: blog.title,
-    description: toMetaDescription(plainText(blog.content), 'Read this article on HealConnect.'),
+    description: toMetaDescription(plainText(blog.content), 'Read this article on ZenAuraa.'),
     path: `/blog/${blog.id}`,
     image: blog.imageUrl || undefined,
     type: 'article',

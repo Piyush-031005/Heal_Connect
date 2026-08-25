@@ -125,8 +125,8 @@ export default function AstrologerOnboardingPage() {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
-            <Image src="/logo.png" alt="HealConnect" width={36} height={36} className="rounded-full" />
-            <span className="text-2xl font-extrabold text-white">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={36} height={36} className="rounded-full" />
+            <span className="text-2xl font-extrabold text-white">ZenAuraa</span>
           </Link>
           <div className="mb-3 inline-flex items-center gap-2 bg-white/15 text-white text-xs font-semibold px-3 py-1.5 rounded-full">
             STEP 1 OF 3
@@ -143,7 +143,7 @@ export default function AstrologerOnboardingPage() {
           </p>
         </div>
         <div className="relative z-10 border-t border-white/20 pt-6">
-          <p className="text-amber-100/60 text-xs">© 2026 HealConnect. All rights reserved.</p>
+          <p className="text-amber-100/60 text-xs">© 2026 ZenAuraa. All rights reserved.</p>
         </div>
       </div>
 
@@ -152,8 +152,8 @@ export default function AstrologerOnboardingPage() {
 
         {/* Mobile logo */}
         <div className="flex items-center gap-2 mb-8 md:hidden">
-          <Image src="/logo.png" alt="HealConnect" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-amber-500">HealConnect</span>
+          <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+          <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
         </div>
 
         <div className="w-full max-w-2xl">

@@ -64,7 +64,7 @@ app.use(express.json({
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 // ─── Health Check (Before Rate Limiter) ───────────────────────────────────────
-app.get('/', (_req, res) => res.send('HealConnect API is running'));
+app.get('/', (_req, res) => res.send('ZenAuraa API is running'));
 app.disable('x-powered-by'); // Belt-and-suspenders (helmet already removes this)
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
@@ -230,6 +230,6 @@ import { createServer } from 'http';
 const httpServer = createServer(app);
 initSocketServer(httpServer);
 httpServer.listen(port, () => {
-  console.log(`✦ HealConnect API running on port ${port}`);
+  console.log(`✦ ZenAuraa API running on port ${port}`);
   startBillingEngine();
 });

@@ -5,7 +5,7 @@ import BlogClient from './BlogClient';
 export const metadata: Metadata = buildMetadata({
   title: 'Astrology & Wellness Blog',
   description:
-    'Explore articles on Vedic astrology, numerology, tarot, Vastu Shastra, zodiac signs, and holistic wellness from HealConnect experts.',
+    'Explore articles on Vedic astrology, numerology, tarot, Vastu Shastra, zodiac signs, and holistic wellness from ZenAuraa experts.',
   path: '/blog',
 });
 

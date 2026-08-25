@@ -141,13 +141,13 @@ const SAMPLE_SAVED = [
 // --- FAQS ---
 const FAQS = [
   { q: 'What is a Janam Kundli?', a: 'A Janam Kundli (Birth Chart) is an astrological snapshot of the heavens at the exact moment and place of your birth. It maps out planetary placements across 12 houses to reveal your life path, character, career, health, and relationships.' },
-  { q: 'How accurate is this online Kundli generator?', a: 'HealConnect Kundli Generator uses high-precision astronomical Swiss Ephemeris algorithms combined with classical Vedic Lahiri Ayanamsa principles to provide accurate planetary degrees, houses, and dashas.' },
+  { q: 'How accurate is this online Kundli generator?', a: 'ZenAuraa Kundli Generator uses high-precision astronomical Swiss Ephemeris algorithms combined with classical Vedic Lahiri Ayanamsa principles to provide accurate planetary degrees, houses, and dashas.' },
   { q: 'What details are required to generate an accurate Kundli?', a: 'You need your exact Birth Date, Birth Time (hour, minute, AM/PM), and Birth City/Location. Accurate birth time ensures precise Lagna (Ascendant) calculation.' },
   { q: 'What is the difference between Lagna Chart (D1) and Navamsa Chart (D9)?', a: 'The Lagna Chart (D1) reflects physical reality and life events. The D9 Navamsa Chart reveals inner spiritual strength, marital compatibility, and life after age 30.' },
   { q: 'How do Vimshottari Dasha periods work?', a: 'Vimshottari Dasha is a 120-year planetary cycle dictating when specific life events unfold. The active Mahadasha planet governs current life opportunities and challenges.' },
   { q: 'What should I do if Mangal Dosha is present?', a: 'Vedic astrology provides highly effective remedies including specific mantra recitations, gemstone recommendations, fasting, and charity to balance planetary vibrations.' },
   { q: 'Can I save my generated Kundli?', a: 'Yes! Generated Kundlis are saved to your session allowing you to re-open your birth chart anytime with 1-click.' },
-  { q: 'Does HealConnect offer professional consultations?', a: 'Yes! Connect with verified Vedic Astrologers for detailed 1-on-1 audio and video Kundli readings anytime on our platform.' }
+  { q: 'Does ZenAuraa offer professional consultations?', a: 'Yes! Connect with verified Vedic Astrologers for detailed 1-on-1 audio and video Kundli readings anytime on our platform.' }
 ];
 
 // --- PLANET POSITIONS ---
@@ -650,7 +650,7 @@ export default function KundliPage() {
               <div className="p-6 md:p-8 space-y-4">
                 <div className="flex items-center justify-between text-xs font-bold text-gray-400 border-b border-gray-100 pb-3">
                   <span className="flex items-center gap-1.5 text-amber-700 font-extrabold">
-                    <BookOpen className="w-4 h-4" /> HealConnect Guide
+                    <BookOpen className="w-4 h-4" /> ZenAuraa Guide
                   </span>
                   <span className="flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5" /> {selectedGuide.readTime}
@@ -677,8 +677,8 @@ export default function KundliPage() {
           <div className="flex flex-wrap gap-8 mb-10">
             <div className="w-full lg:w-72 text-center lg:text-left space-y-3">
               <div className="flex items-center gap-2 justify-center lg:justify-start">
-                <Image src="/logo.png" alt="HealConnect" width={28} height={28} className="rounded-full" />
-                <span className="text-lg font-extrabold text-amber-600">HealConnect</span>
+                <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
+                <span className="text-lg font-extrabold text-amber-600">ZenAuraa</span>
               </div>
               <p className="text-xs text-gray-500 leading-relaxed">Your trusted companion for Janam Kundli calculations, Vedic Astrology insights, and emotional wellness.</p>
             </div>
@@ -687,7 +687,7 @@ export default function KundliPage() {
                 { title: 'Kundli Tools', links: ['Kundli', 'Kundli Matching', 'Mahadasha', 'Dosha Analysis'] },
                 { title: 'Free Calculators', links: ['Sade Sati', 'Manglik Calculator', 'Gemstone Guide', 'Panchang'] },
                 { title: 'Astrology Guides', links: ['12 Houses', 'Navgrahas', 'Nakshatras', 'Astrology Blog'] },
-                { title: 'HealConnect', links: ['About Us', 'Verified Experts', 'Privacy Policy', 'Contact Support'] }
+                { title: 'ZenAuraa', links: ['About Us', 'Verified Experts', 'Privacy Policy', 'Contact Support'] }
               ].map((col) => (
                 <div key={col.title}>
                   <h4 className="text-amber-800 font-bold text-sm mb-3">{col.title}</h4>
@@ -701,7 +701,7 @@ export default function KundliPage() {
             </div>
           </div>
           <div className="border-t border-amber-200 pt-6 text-center text-xs text-gray-500">
-            <p>&copy; {new Date().getFullYear()} HealConnect. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} ZenAuraa. All rights reserved.</p>
           </div>
         </div>
       </footer>

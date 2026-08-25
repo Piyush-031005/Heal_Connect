@@ -57,8 +57,8 @@ function VerifyEmailContent() {
 
         {/* Logo */}
         <div className="flex items-center justify-center gap-2">
-          <Image src="/logo.png" alt="HealConnect" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-[#f59e0b]">HealConnect</span>
+          <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+          <span className="text-xl font-extrabold text-[#f59e0b]">ZenAuraa</span>
         </div>
 
         {/* Loading */}

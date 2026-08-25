@@ -88,7 +88,7 @@ export default function AstrologerProfilePage() {
     expertiseDevelopment: '',
     offerings: [] as string[],
     practiceBio: '',
-    whyHealConnect: '',
+    whyZenAuraa: '',
   });
 
   const set = (k: string, v: unknown) => setForm(f => ({ ...f, [k]: v }));
@@ -118,7 +118,7 @@ export default function AstrologerProfilePage() {
     if (!form.expertiseDevelopment.trim()) { setError('Please tell us how you developed your expertise.'); return; }
     if (form.offerings.length === 0) { setError('Please select at least one offering.'); return; }
     if (!form.practiceBio.trim()) { setError('Please tell us about your practice.'); return; }
-    if (!form.whyHealConnect.trim()) { setError('Please tell us what interests you about HealConnect.'); return; }
+    if (!form.whyZenAuraa.trim()) { setError('Please tell us what interests you about ZenAuraa.'); return; }
 
     const token = astrologerTokenStore.getAccess();
     if (!token) { router.replace('/astrologer/login'); return; }
@@ -130,7 +130,7 @@ export default function AstrologerProfilePage() {
         astrologyExperienceYears: expYears[form.experience] ?? 0,
         professionalBio: form.practiceBio,
         consultationApproach: form.expertiseDevelopment,
-        previousPlatformExperience: form.whyHealConnect,
+        previousPlatformExperience: form.whyZenAuraa,
         step: 2,
       });
       router.push('/astrologer/onboarding/verification');
@@ -153,8 +153,8 @@ export default function AstrologerProfilePage() {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
-            <Image src="/logo.png" alt="HealConnect" width={36} height={36} className="rounded-full" />
-            <span className="text-2xl font-extrabold text-white">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={36} height={36} className="rounded-full" />
+            <span className="text-2xl font-extrabold text-white">ZenAuraa</span>
           </Link>
           <div className="mb-4 inline-flex items-center gap-2 bg-white/20 text-white text-xs font-bold px-4 py-2 rounded-full tracking-wide">
             STEP 2 OF 3
@@ -173,7 +173,7 @@ export default function AstrologerProfilePage() {
           </div>
         </div>
         <div className="relative z-10 mt-auto pt-12 border-t border-white/20">
-          <p className="text-amber-100/60 text-xs">© 2026 HealConnect. All rights reserved.</p>
+          <p className="text-amber-100/60 text-xs">© 2026 ZenAuraa. All rights reserved.</p>
         </div>
       </div>
 
@@ -181,8 +181,8 @@ export default function AstrologerProfilePage() {
       <div className="flex-1 flex flex-col items-center justify-start px-6 py-12 overflow-y-auto">
 
         <div className="flex items-center gap-2 mb-8 md:hidden">
-          <Image src="/logo.png" alt="HealConnect" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-amber-500">HealConnect</span>
+          <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+          <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
         </div>
 
         <div className="w-full max-w-2xl">
@@ -247,7 +247,7 @@ export default function AstrologerProfilePage() {
 
             {/* Offerings */}
             <div>
-              <SectionLabel num="5" title="How do you work with clients online?" subtitle="What would you like to offer through HealConnect?" />
+              <SectionLabel num="5" title="How do you work with clients online?" subtitle="What would you like to offer through ZenAuraa?" />
               <div className="flex flex-wrap gap-2">
                 {OFFERING_OPTIONS.map(opt => (
                   <Pill key={opt} label={opt} active={form.offerings.includes(opt)} onClick={() => toggleOffering(opt)} />
@@ -261,10 +261,10 @@ export default function AstrologerProfilePage() {
               <textarea className={textareaCls} rows={4} placeholder="Short paragraph." value={form.practiceBio} onChange={e => set('practiceBio', e.target.value)} />
             </div>
 
-            {/* Why HealConnect */}
+            {/* Why ZenAuraa */}
             <div>
-              <SectionLabel num="7" title="What interests you about HealConnect?" />
-              <textarea className={textareaCls} rows={3} placeholder="Short paragraph." value={form.whyHealConnect} onChange={e => set('whyHealConnect', e.target.value)} />
+              <SectionLabel num="7" title="What interests you about ZenAuraa?" />
+              <textarea className={textareaCls} rows={3} placeholder="Short paragraph." value={form.whyZenAuraa} onChange={e => set('whyZenAuraa', e.target.value)} />
             </div>
 
             {/* Nav */}

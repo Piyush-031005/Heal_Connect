@@ -5,13 +5,13 @@ import type { Metadata } from 'next';
 // image URLs. Set NEXT_PUBLIC_SITE_URL once a custom domain is attached to the
 // Azure Static Web App; until then this falls back to the default Azure URL.
 
-export const SITE_NAME = 'HealConnect';
+export const SITE_NAME = 'ZenAuraa';
 
 export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL || 'https://blue-plant-0d21bc900.7.azurestaticapps.net'
 ).replace(/\/$/, '');
 
-export const DEFAULT_TITLE = 'HealConnect - Professional Wellness';
+export const DEFAULT_TITLE = 'ZenAuraa - Professional Wellness';
 export const DEFAULT_DESCRIPTION =
   'Connect with verified energy healers, Vastu experts, numerologists, and tarot readers instantly via chat, audio, or video.';
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/Logo.png`;

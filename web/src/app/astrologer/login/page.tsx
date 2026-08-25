@@ -47,8 +47,8 @@ export default function AstrologerLoginPage() {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
-            <Image src="/logo.png" alt="HealConnect" width={36} height={36} className="rounded-full" />
-            <span className="text-2xl font-extrabold text-white">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={36} height={36} className="rounded-full" />
+            <span className="text-2xl font-extrabold text-white">ZenAuraa</span>
           </Link>
           <div className="inline-flex items-center gap-2 bg-white/20 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
             <Star className="w-4 h-4 fill-white" /> Astrologer Portal
@@ -57,7 +57,7 @@ export default function AstrologerLoginPage() {
             Share your wisdom.<br />Grow your practice.
           </h1>
           <p className="text-lg text-yellow-100 max-w-md leading-relaxed mb-12">
-            Join thousands of verified astrologers earning on HealConnect — consult clients via chat & call, on your schedule.
+            Join thousands of verified astrologers earning on ZenAuraa — consult clients via chat & call, on your schedule.
           </p>
           <div className="space-y-6">
             {[
@@ -86,8 +86,8 @@ export default function AstrologerLoginPage() {
       <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative">
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="HealConnect" width={28} height={28} className="rounded-full" />
-            <span className="text-xl font-extrabold text-amber-500">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
+            <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
           </Link>
         </div>
 

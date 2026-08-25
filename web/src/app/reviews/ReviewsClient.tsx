@@ -35,7 +35,7 @@ const INITIAL_REVIEWS: Review[] = [
   {
     id: 'r1', userId: 'u1', userName: 'Priya Sharma',
     rating: 5, title: 'Life-changing consultation!',
-    body: 'My session with Pandit Rameshwar was absolutely transformative. He accurately predicted major events in my career and gave actionable remedies that have genuinely worked. His insights on my Lagna chart were spot-on, and his calm demeanor made me feel at ease throughout the session. I have already referred three friends to HealConnect!',
+    body: 'My session with Pandit Rameshwar was absolutely transformative. He accurately predicted major events in my career and gave actionable remedies that have genuinely worked. His insights on my Lagna chart were spot-on, and his calm demeanor made me feel at ease throughout the session. I have already referred three friends to ZenAuraa!',
     astrologerName: 'Pandit Rameshwar', date: '2026-07-20', likes: 24, liked: false, verified: true
   },
   {
@@ -47,7 +47,7 @@ const INITIAL_REVIEWS: Review[] = [
   {
     id: 'r3', userId: 'u3', userName: 'Ananya Bose',
     rating: 5, title: 'Best astrology platform!',
-    body: 'HealConnect has the most genuine astrologers I have encountered online. The Kundli generator is incredibly detailed — showing Vimshottari Dasha, Navamsa, and Yogas all in one place. The blog articles are also super educational. I have been using this platform for 3 months and it keeps getting better!',
+    body: 'ZenAuraa has the most genuine astrologers I have encountered online. The Kundli generator is incredibly detailed — showing Vimshottari Dasha, Navamsa, and Yogas all in one place. The blog articles are also super educational. I have been using this platform for 3 months and it keeps getting better!',
     date: '2026-07-10', likes: 31, liked: false, verified: true
   },
   {
@@ -77,7 +77,7 @@ const INITIAL_REVIEWS: Review[] = [
   {
     id: 'r8', userId: 'u8', userName: 'Amit Kulkarni',
     rating: 5, title: 'Outstanding experience overall',
-    body: 'From the moment I landed on HealConnect, the design and energy of the platform felt different from typical astrology sites. The free Kundli tool is fantastic, and the blog has some of the most well-researched astrology content I have read. My paid consultation with Pandit Gurudev was worth every rupee — his predictions about my family situation were eerily accurate!',
+    body: 'From the moment I landed on ZenAuraa, the design and energy of the platform felt different from typical astrology sites. The free Kundli tool is fantastic, and the blog has some of the most well-researched astrology content I have read. My paid consultation with Pandit Gurudev was worth every rupee — his predictions about my family situation were eerily accurate!',
     astrologerName: 'Pandit Gurudev', date: '2026-06-05', likes: 37, liked: false, verified: true
   },
 ];
@@ -268,7 +268,7 @@ export default function ReviewsPage() {
             <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">Is Saying</span>
           </h1>
           <p className="text-gray-600 text-lg font-medium max-w-xl mx-auto">
-            Real experiences from real people. Discover why thousands trust HealConnect for their spiritual journey.
+            Real experiences from real people. Discover why thousands trust ZenAuraa for their spiritual journey.
           </p>
         </motion.div>
       </section>
@@ -702,7 +702,7 @@ export default function ReviewsPage() {
           className="mt-12 text-center bg-gradient-to-r from-amber-500 to-orange-500 rounded-3xl p-8 shadow-xl shadow-amber-200/50 text-white"
         >
           <h2 className="text-2xl font-black mb-2">Had a great experience?</h2>
-          <p className="text-white/80 text-sm font-medium mb-5">Help others discover HealConnect by sharing your story.</p>
+          <p className="text-white/80 text-sm font-medium mb-5">Help others discover ZenAuraa by sharing your story.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={openAdd}

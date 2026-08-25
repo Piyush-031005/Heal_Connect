@@ -32,7 +32,7 @@ export const useFCM = () => {
                 platform: 'web'
               })
             });
-            console.log("FCM Token registered with HealConnect backend.");
+            console.log("FCM Token registered with ZenAuraa backend.");
           } catch (err) {
             console.error("Failed to register FCM token with backend", err);
           }

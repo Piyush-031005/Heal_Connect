@@ -141,8 +141,8 @@ function LoginInner() {
 
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
-            <Image src="/logo.png" alt="HealConnect" width={36} height={36} className="rounded-full" />
-            <span className="text-2xl font-extrabold text-white">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={36} height={36} className="rounded-full" />
+            <span className="text-2xl font-extrabold text-white">ZenAuraa</span>
           </Link>
           <h1 className="text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">
             Begin your journey <br /> to inner peace.
@@ -181,8 +181,8 @@ function LoginInner() {
       <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative">
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="HealConnect" width={28} height={28} className="rounded-full" />
-            <span className="text-xl font-extrabold text-[#f59e0b]">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
+            <span className="text-xl font-extrabold text-[#f59e0b]">ZenAuraa</span>
           </Link>
         </div>
 

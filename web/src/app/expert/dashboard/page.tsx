@@ -159,8 +159,8 @@ export default function ExpertDashboardPage() {
       <header className="sticky top-0 z-50 w-full border-b border-amber-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="HealConnect" width={32} height={32} className="rounded-full" />
-            <span className="text-xl font-extrabold text-amber-500">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+            <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
             <span className="hidden sm:inline-flex items-center gap-1 ml-1 text-xs font-semibold text-amber-600 bg-amber-50 border border-amber-200 rounded-full px-2 py-0.5">
               <Sparkles className="w-3 h-3" /> Expert
             </span>

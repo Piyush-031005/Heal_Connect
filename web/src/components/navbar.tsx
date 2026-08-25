@@ -172,8 +172,8 @@ export default function Navbar() {
         <div className="bg-gradient-to-br from-amber-400 to-orange-400 px-5 pt-6 pb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
-              <Image src="/logo.png" alt="HealConnect" width={32} height={32} className="rounded-full border-2 border-white/40" />
-              <span className="text-lg font-extrabold text-white">HealConnect</span>
+              <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
+              <span className="text-lg font-extrabold text-white">ZenAuraa</span>
             </div>
             <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
@@ -318,8 +318,8 @@ export default function Navbar() {
               </svg>
             </button>
             <Link href="/" className="flex items-center gap-2">
-              <Image src="/logo.png" alt="HealConnect" width={30} height={30} className="rounded-full shadow-sm" />
-              <span className={`text-lg font-extrabold transition-colors ${isDark ? 'text-white' : 'text-black'}`}>HealConnect</span>
+              <Image src="/logo.png" alt="ZenAuraa" width={30} height={30} className="rounded-full shadow-sm" />
+              <span className={`text-lg font-extrabold transition-colors ${isDark ? 'text-white' : 'text-black'}`}>ZenAuraa</span>
             </Link>
           </div>
 

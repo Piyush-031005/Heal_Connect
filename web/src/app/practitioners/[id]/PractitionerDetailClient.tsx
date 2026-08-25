@@ -86,8 +86,8 @@ export default function PractitionerDetailPage() {
     if (!p) return;
     const url = `${window.location.origin}/practitioners/${p.id}`;
     const shareData = {
-      title: `${p.name} on HealConnect`,
-      text: `Check out ${p.name}'s profile on HealConnect${p.specialties[0] ? ` — ${p.specialties[0]} expert` : ''}.`,
+      title: `${p.name} on ZenAuraa`,
+      text: `Check out ${p.name}'s profile on ZenAuraa${p.specialties[0] ? ` — ${p.specialties[0]} expert` : ''}.`,
       url,
     };
 
@@ -231,8 +231,8 @@ export default function PractitionerDetailPage() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <button onClick={() => router.back()} className="flex items-center gap-2 text-gray-600 hover:text-[#f59e0b] transition-colors group bg-transparent border-none cursor-pointer">
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            <Image src="/logo.png" alt="HealConnect" width={28} height={28} className="rounded-full shadow-sm" />
-            <span className="font-extrabold text-[#f59e0b] tracking-tight">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full shadow-sm" />
+            <span className="font-extrabold text-[#f59e0b] tracking-tight">ZenAuraa</span>
           </button>
         </div>
       </header>
