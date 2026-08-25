@@ -60,7 +60,7 @@ export default function AdminAccountsPage() {
   // Create modal
   const [showCreate, setShowCreate] = useState(false);
   const [createEmail, setCreateEmail] = useState('');
-  const [createRole, setCreateRole] = useState<'SUPERADMIN' | 'MODERATOR'>('MODERATOR');
+  const [createRole, setCreateRole] = useState<'SUPERADMIN' | 'MODERATOR' | 'SUPPORT' | 'VIEWER'>('MODERATOR');
   const [creating, setCreating] = useState(false);
   const [createError, setCreateError] = useState('');
   const [tempPassword, setTempPassword] = useState('');
@@ -276,9 +276,11 @@ export default function AdminAccountsPage() {
                   <label className="text-xs font-extrabold uppercase tracking-wider text-white/60 mb-1.5 block">Role</label>
                   <select
                     value={createRole}
-                    onChange={(e) => setCreateRole(e.target.value as 'SUPERADMIN' | 'MODERATOR')}
+                    onChange={(e) => setCreateRole(e.target.value as 'SUPERADMIN' | 'MODERATOR' | 'SUPPORT' | 'VIEWER')}
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-2xl text-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500/50 appearance-none"
                   >
+                    <option value="VIEWER" className="bg-slate-900">Viewer</option>
+                    <option value="SUPPORT" className="bg-slate-900">Support</option>
                     <option value="MODERATOR" className="bg-slate-900">Moderator</option>
                     <option value="SUPERADMIN" className="bg-slate-900">Superadmin</option>
                   </select>
