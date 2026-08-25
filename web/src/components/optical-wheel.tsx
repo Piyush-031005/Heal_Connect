@@ -120,7 +120,7 @@ export default function OpticalWheel() {
                   {/* Counter-spin so labels/icons stay upright (Fixed duration match) */}
                   {/* Pebble image (Centrifugal) - No reverse spin so it rotates with the wheel */}
                   {isNewLayout1 && (
-                    <g transform={`rotate(${idx * 30 + 15})`}>
+                    <g transform={`rotate(${idx * 30 - 45})`}>
                       <image
                         href="/pebbles/pebbel1.png"
                         x={-imgH} y={-imgH}
