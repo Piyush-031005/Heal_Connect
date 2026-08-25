@@ -40,10 +40,7 @@ function PrimaryHero() {
 
       <div className="container mx-auto px-6 relative z-10 pointer-events-none">
         <div className="max-w-3xl pointer-events-auto">
-          <div className="flex items-center gap-3 mb-6">
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-xs tracking-[0.25em] uppercase text-primary font-bold">HEALCONNECT — EST. 2024</span>
-          </div>
+          
           
           {/* Action Buttons */}
           <div className="flex items-center gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-100">
@@ -196,7 +193,7 @@ function OrganicHero() {
         <div className="pointer-events-auto">
           <Link href="/practitioners">
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 h-14 text-lg rounded-full font-medium transition-all shadow-xl shadow-primary/20">
-              Join Zenauraa Today
+              Join ZenAuraa Today
             </Button>
           </Link>
         </div>
@@ -411,7 +408,7 @@ function ZenAlignHero() {
             >
               <div className="w-8 h-[2px] bg-[#1A92C6]" />
               <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1A92C6]">
-                Zenauraa Cosmos
+                ZenAuraa Cosmos
               </span>
             </motion.div>
 
@@ -536,7 +533,7 @@ function ZenAlignHero() {
                  <div className="relative w-full h-full z-10">
                    <Image
                      src="/new_center_logo.png"
-                     alt="Zenauraa Logo"
+                     alt="ZenAuraa Logo"
                      fill
                      className="object-contain drop-shadow-[0_10px_30px_rgba(26,146,198,0.4)]"
                    />
@@ -623,7 +620,7 @@ function Layout2Hero() {
             >
               <img 
                 src="/zodiac-masterpiece.png" 
-                alt="Zenauraa Masterpiece" 
+                alt="ZenAuraa Masterpiece" 
                 className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(26,146,198,0.3)] hover:scale-105 transition-transform duration-700 ease-out"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
@@ -667,7 +664,7 @@ function Layout2Hero() {
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-sans font-bold tracking-tighter text-foreground mb-6 leading-[1.05] drop-shadow-lg">
                 Discover <br />
-                <span className="text-primary font-serif italic font-medium">Zenauraa.</span>
+                <span className="text-primary font-serif font-medium">ZenAuraa.</span>
               </h1>
             </motion.div>
             
