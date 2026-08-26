@@ -19,10 +19,10 @@ export default function PeacockBloom() {
   if (!mounted) return null;
 
   const FEATHER_COUNT = 24; // Double for density
-  const LABEL_RADIUS = 280;
+  const LABEL_RADIUS = 230;
 
   return (
-    <div className="relative w-[700px] h-[700px] flex items-center justify-center scale-[0.85] lg:scale-100">
+    <div className="relative w-[600px] h-[600px] flex items-center justify-center scale-[0.75] lg:scale-[0.85]">
       
       {/* Breathing feather fan */}
       <motion.div
@@ -33,7 +33,7 @@ export default function PeacockBloom() {
         {Array.from({length: FEATHER_COUNT}).map((_, i) => {
           const angle = (i / FEATHER_COUNT) * 360;
           const isLong = i % 2 === 0;
-          const len = isLong ? 260 : 220;
+          const len = isLong ? 200 : 170;
           const width = isLong ? 50 : 38;
           // Gradient position shifts per feather for blend effect
           const colorPos = i / FEATHER_COUNT;
@@ -41,8 +41,8 @@ export default function PeacockBloom() {
           return (
             <motion.div
               key={`feather-${i}`}
-              className="absolute origin-bottom"
-              style={{ transform: `rotate(${angle}deg)`, height: len }}
+              className="absolute origin-center"
+              style={{ transform: `rotate(${angle}deg)`, height: len, marginTop: -len/2 }}
               animate={{ rotate: [angle - 1.5, angle + 1.5, angle - 1.5] }}
               transition={{ duration: 4 + (i % 3), repeat: Infinity, ease: 'easeInOut', delay: i * 0.15 }}
             >
