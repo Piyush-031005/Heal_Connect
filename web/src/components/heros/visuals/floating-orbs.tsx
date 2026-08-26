@@ -25,9 +25,9 @@ export default function FloatingOrbs() {
         {[1, 2, 3].map(i => (
           <div 
             key={i} 
-            className="absolute rounded-full border border-[#8982D0]/30"
+            className="absolute rounded-full border-2 border-[#8982D0]/40"
             style={{
-              width: `${100 + i * 150}px`, height: `${100 + i * 150}px`,
+              width: `${150 + i * 140}px`, height: `${150 + i * 140}px`,
               animation: `ripple 6s linear ${i * 2}s infinite`
             }}
           />
@@ -35,17 +35,18 @@ export default function FloatingOrbs() {
       </div>
 
       {/* Center Logo */}
-      <div className="absolute z-10 w-24 h-24 rounded-full bg-white shadow-xl flex items-center justify-center p-2">
-        <img src="/zenauraa logo main.png" alt="ZenAuraa" className="w-full h-full object-contain" />
+      <div className="absolute z-10 w-28 h-28 rounded-full bg-white shadow-xl flex items-center justify-center p-3 relative">
+        <div className="absolute inset-0 rounded-full bg-white/20 blur-xl animate-pulse" />
+        <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain relative z-10" />
       </div>
 
       {/* Orbs */}
       {MODALITIES.map((mod, i) => {
         const angle = (i / MODALITIES.length) * Math.PI * 2;
-        const radius = 180 + Math.sin(i * 13) * 60; 
+        const radius = 190 + Math.sin(i * 13) * 60; 
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
-        const size = 45 + (i % 4) * 10;
+        const size = 50 + (i % 4) * 15;
         const delay = (i % 5) * 1;
 
         return (
@@ -55,21 +56,23 @@ export default function FloatingOrbs() {
             className="absolute flex flex-col items-center justify-center group cursor-pointer"
             style={{ 
               transform: `translate(${x}px, ${y}px)`,
+              '--x': `${x}px`,
+              '--y': `${y}px`,
               animation: `rise 6s ease-in-out ${delay}s infinite`
-            }}
+            } as React.CSSProperties}
           >
             <div 
-              className="rounded-full shadow-lg backdrop-blur-sm relative flex items-center justify-center transition-transform group-hover:scale-110"
+              className="rounded-full shadow-[0_8px_32px_rgba(31,38,135,0.2)] border border-white/40 backdrop-blur-md relative flex items-center justify-center transition-transform group-hover:scale-110"
               style={{
                 width: size, height: size,
-                background: 'linear-gradient(135deg, rgba(137, 130, 208, 0.8) 0%, rgba(78, 103, 204, 0.8) 100%)',
+                background: 'linear-gradient(135deg, rgba(137, 130, 208, 0.85) 0%, rgba(78, 103, 204, 0.85) 100%)',
               }}
             >
-              {/* White Highlight */}
-              <div className="absolute top-[15%] left-[20%] w-[25%] h-[25%] bg-white/40 rounded-full blur-[2px]" />
+              {/* White Highlight for Glass Effect */}
+              <div className="absolute top-[10%] left-[15%] w-[35%] h-[35%] bg-white/60 rounded-full blur-[2px]" />
             </div>
             
-            <span className="absolute -bottom-6 text-[10px] uppercase tracking-wider font-semibold text-[#1E2059] opacity-0 group-hover:opacity-100 transition-opacity bg-white/70 px-2 py-0.5 rounded-full whitespace-nowrap">
+            <span className="absolute -bottom-8 text-[11px] uppercase tracking-wider font-bold text-[#1E2059] opacity-0 group-hover:opacity-100 transition-opacity bg-white/80 backdrop-blur-md px-3 py-1 rounded-full whitespace-nowrap shadow-sm border border-white/50">
               {mod.name}
             </span>
           </div>
@@ -78,13 +81,13 @@ export default function FloatingOrbs() {
 
       <style jsx>{`
         @keyframes rise {
-          0% { transform: translate(var(--x, 0), calc(var(--y, 0) + 10px)); opacity: 0.5; }
-          50% { transform: translate(var(--x, 0), calc(var(--y, 0) - 10px)); opacity: 1; }
-          100% { transform: translate(var(--x, 0), calc(var(--y, 0) + 10px)); opacity: 0.5; }
+          0% { transform: translate(var(--x, 0), calc(var(--y, 0) + 15px)); opacity: 0.6; }
+          50% { transform: translate(var(--x, 0), calc(var(--y, 0) - 15px)); opacity: 1; }
+          100% { transform: translate(var(--x, 0), calc(var(--y, 0) + 15px)); opacity: 0.6; }
         }
         @keyframes ripple {
-          0% { transform: scale(0.5); opacity: 1; }
-          100% { transform: scale(1.5); opacity: 0; }
+          0% { transform: scale(0.6); opacity: 1; }
+          100% { transform: scale(1.4); opacity: 0; }
         }
       `}</style>
     </div>

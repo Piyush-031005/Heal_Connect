@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const MODALITIES = [
-  { id: 'astrology', name: 'Astrology' }, { id: 'tarot', name: 'Tarot' },
-  { id: 'face-reading', name: 'Face Reading' }, { id: 'palm-reading', name: 'Palm Reading' },
-  { id: 'sound-healing', name: 'Sound Healing' }, { id: 'meditation', name: 'Meditation' },
-  { id: 'spiritual', name: 'Spiritual' }, { id: 'chakra-healing', name: 'Chakra Healing' },
-  { id: 'breathwork', name: 'Breathwork' }, { id: 'dreams', name: 'Dream Predict' },
-  { id: 'space-harmony', name: 'Space Harmony' }, { id: 'numerology', name: 'Numerology' },
+  { id: 'astrology', name: 'Astrology', ring: 0 }, { id: 'tarot', name: 'Tarot', ring: 1 },
+  { id: 'face-reading', name: 'Face Reading', ring: 2 }, { id: 'palm-reading', name: 'Palm Reading', ring: 0 },
+  { id: 'sound-healing', name: 'Sound Healing', ring: 1 }, { id: 'meditation', name: 'Meditation', ring: 2 },
+  { id: 'spiritual', name: 'Spiritual', ring: 0 }, { id: 'chakra-healing', name: 'Chakra Healing', ring: 1 },
+  { id: 'breathwork', name: 'Breathwork', ring: 2 }, { id: 'dreams', name: 'Dream Predict', ring: 0 },
+  { id: 'space-harmony', name: 'Space Harmony', ring: 1 }, { id: 'numerology', name: 'Numerology', ring: 2 },
 ];
 
 export default function LightParticles() {
@@ -18,53 +18,51 @@ export default function LightParticles() {
 
   if (!mounted) return null;
 
-  return (
-    <div className="relative w-[600px] h-[600px] flex items-center justify-center">
-      {/* Constellation Lines SVG */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ animation: 'spinParallax 120s linear infinite' }}>
-        <g stroke="#B9A0E4" strokeWidth="1" strokeOpacity="0.2">
-          {MODALITIES.map((mod, i) => {
-            const angle1 = (i / MODALITIES.length) * Math.PI * 2;
-            const r1 = 120 + ((i*7)%3) * 50;
-            const x1 = 300 + Math.cos(angle1) * r1;
-            const y1 = 300 + Math.sin(angle1) * r1;
-            
-            const nextI = (i + 1) % MODALITIES.length;
-            const angle2 = (nextI / MODALITIES.length) * Math.PI * 2;
-            const r2 = 120 + ((nextI*7)%3) * 50;
-            const x2 = 300 + Math.cos(angle2) * r2;
-            const y2 = 300 + Math.sin(angle2) * r2;
-            
-            return <line key={`l1-${i}`} x1={x1} y1={y1} x2={x2} y2={y2} />;
-          })}
-        </g>
-      </svg>
+  const RINGS = [150, 210, 270]; // Orbit radii
 
-      {/* Orbiting Particles */}
-      <div className="absolute inset-0 flex items-center justify-center" style={{ animation: 'spinParallax 120s linear infinite' }}>
+  return (
+    <div className="relative w-[650px] h-[650px] flex items-center justify-center scale-90 lg:scale-100">
+      
+      {/* Clean Orbital Rings */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        {RINGS.map((r, idx) => (
+          <div 
+            key={idx}
+            className="absolute rounded-full border border-white/40"
+            style={{ width: r * 2, height: r * 2 }}
+          />
+        ))}
+      </div>
+
+      {/* Orbiting Planets (Modalities) */}
+      <div className="absolute inset-0 flex items-center justify-center" style={{ animation: 'spinPlanets 80s linear infinite' }}>
         {MODALITIES.map((mod, i) => {
           const angle = (i / MODALITIES.length) * 360;
-          const radius = 120 + ((i*7)%3) * 50;
-          const size = 6 + (i % 3) * 4;
+          const radius = RINGS[mod.ring];
+          const size = 16 + (i % 3) * 6;
 
           return (
             <div 
               key={mod.id}
-            onClick={() => router.push(`/modalities/${mod.id}`)}
               className="absolute flex flex-col items-center cursor-pointer group"
               style={{ transform: `rotate(${angle}deg) translateY(-${radius}px)` }}
             >
-              {/* Un-rotate content so it stays upright relative to screen (approx) */}
-              <div style={{ transform: `rotate(-${angle}deg)`, display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px' }}>
+              {/* Un-rotate content so it stays upright relative to screen */}
+              <div 
+                style={{ transform: `rotate(-${angle}deg)`, animation: 'spinPlanetsReverse 80s linear infinite' }} 
+                className="flex flex-row items-center gap-3 relative"
+                onClick={() => router.push(`/modalities/${mod.id}`)}
+              >
+                {/* Glowing Planet */}
                 <div 
-                  className="rounded-full shadow-[0_0_15px_rgba(137,130,208,0.8)]"
+                  className="rounded-full shadow-[0_0_20px_rgba(255,255,255,0.8)] border border-white transition-transform group-hover:scale-150"
                   style={{
                     width: size, height: size,
-                    background: 'radial-gradient(circle, #8982D0 0%, #4E67CC 100%)',
-                    animation: `twinkle ${2 + i%3}s ease-in-out infinite alternate`
+                    background: mod.ring % 2 === 0 ? 'radial-gradient(circle at 30% 30%, #E5D9F2, #5F3BA9)' : 'radial-gradient(circle at 30% 30%, #FFFFFF, #4E67CC)',
+                    boxShadow: 'inset -3px -3px 6px rgba(0,0,0,0.3), 0 0 15px rgba(255,255,255,0.6)'
                   }}
                 />
-                <span className="text-[11px] font-semibold text-[#1E2059] opacity-70 group-hover:opacity-100 transition-opacity bg-white/40 px-2 py-0.5 rounded-full whitespace-nowrap">
+                <span className="absolute left-[110%] text-xs font-bold text-[#1E2059] opacity-80 group-hover:opacity-100 transition-opacity bg-white/80 backdrop-blur-md px-3 py-1 rounded-full whitespace-nowrap shadow-sm border border-white/50">
                   {mod.name}
                 </span>
               </div>
@@ -74,18 +72,18 @@ export default function LightParticles() {
       </div>
 
       {/* Center Sun Logo */}
-      <div className="absolute z-10 w-24 h-24 rounded-full bg-white shadow-[0_0_50px_rgba(78,103,204,0.6)] flex items-center justify-center p-2">
-        <img src="/zenauraa logo main.png" alt="ZenAuraa" className="w-full h-full object-contain" />
+      <div className="absolute z-10 w-28 h-28 rounded-full bg-white shadow-[0_0_80px_rgba(255,255,255,1)] flex items-center justify-center p-3">
+        <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain" />
       </div>
 
       <style jsx>{`
-        @keyframes spinParallax {
+        @keyframes spinPlanets {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
         }
-        @keyframes twinkle {
-          0% { opacity: 0.4; transform: scale(0.8); }
-          100% { opacity: 1; transform: scale(1.2); }
+        @keyframes spinPlanetsReverse {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(-360deg); }
         }
       `}</style>
     </div>

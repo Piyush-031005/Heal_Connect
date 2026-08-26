@@ -72,8 +72,15 @@ export default function LandingPage() {
             {/* 09 - FAQ */}
             <FaqSection />
           </>
-        ) : isFinalHybrid || layout === 'new-layout-1' ? (
-          <div className={layout === 'new-layout-1' ? "bg-gradient-to-b from-[#1E2059] to-[#4363CA] text-white" : ""}>
+        ) : isFinalHybrid ? (
+          <div className={
+            layout === 'layout-1' ? 'bg-gradient-to-b from-[#D5B6DC] via-[#E5D9F2] to-white' :
+            layout === 'layout-2' ? 'bg-gradient-to-br from-[#E5D9F2] to-[#B79AE6]/20' :
+            layout === 'layout-3' ? 'bg-gradient-to-b from-[#D5B6DC] to-[#F8F7FA]' :
+            layout === 'layout-4' ? 'bg-gradient-to-b from-[#B79AE6]/30 via-white to-white' :
+            layout === 'layout-5' ? 'bg-gradient-to-bl from-[#E5D9F2] via-[#D5B6DC]/50 to-white' :
+            ''
+          }>
             {/* FINAL HYBRID LAYOUT */}
             <FinalHybridExperts />
             <ExploreModalities />

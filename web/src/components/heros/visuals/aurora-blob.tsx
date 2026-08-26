@@ -19,69 +19,57 @@ export default function AuroraBlob() {
   if (!mounted) return null;
 
   return (
-    <div className="relative w-[500px] h-[500px] flex items-center justify-center">
-      {/* Morphing Aurora Blob Background */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-80">
-        <div 
-          className="w-full h-full absolute transition-all"
-          style={{
-            background: 'linear-gradient(120deg, #1E2059, #5F3BA9, #4E67CC, #8982D0)',
-            backgroundSize: '300% 300%',
-            animation: 'blob 10s ease-in-out infinite, gradientShift 15s ease infinite',
-            filter: 'blur(10px)',
-            opacity: 0.7
-          }}
-        />
-        <div 
-          className="w-[80%] h-[80%] absolute transition-all"
-          style={{
-            background: 'linear-gradient(45deg, #4E67CC, #B9A0E4, #5F3BA9)',
-            backgroundSize: '300% 300%',
-            animation: 'blob 8s ease-in-out infinite reverse, gradientShift 12s ease infinite',
-            filter: 'blur(8px)',
-            opacity: 0.9
-          }}
-        />
+    <div className="relative w-[600px] h-[600px] flex items-center justify-center scale-90 lg:scale-100">
+      
+      {/* Deep Nebula Background replacing the broken blob */}
+      <div className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-full opacity-90 shadow-[0_0_100px_rgba(95,59,169,0.5)] bg-[#1E2059]" style={{ animation: 'breatheNebula 10s ease-in-out infinite alternate' }}>
+        <div className="absolute w-[400px] h-[400px] bg-[#5F3BA9] rounded-full mix-blend-screen filter blur-[60px] opacity-70 animate-pulse" style={{ transform: 'translate(-50px, -50px)' }} />
+        <div className="absolute w-[350px] h-[350px] bg-[#4E67CC] rounded-full mix-blend-screen filter blur-[70px] opacity-70" style={{ transform: 'translate(100px, 50px)', animation: 'spin 20s linear infinite' }} />
+        <div className="absolute w-[450px] h-[450px] bg-[#B9A0E4] rounded-full mix-blend-screen filter blur-[80px] opacity-60" style={{ transform: 'translate(-50px, 150px)', animation: 'spin 30s linear infinite reverse' }} />
       </div>
 
-      {/* Fixed Orbit Text Labels */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Orbit Ring Labels */}
+      <div className="absolute inset-0 flex items-center justify-center" style={{ animation: 'spin 120s linear infinite' }}>
         {MODALITIES.map((mod, i) => {
-          const angle = (i / MODALITIES.length) * Math.PI * 2;
-          const radius = 230; 
-          const x = 250 + Math.cos(angle) * radius;
-          const y = 250 + Math.sin(angle) * radius;
+          const angle = (i / MODALITIES.length) * 360;
+          const radius = 290; 
 
           return (
             <div 
               key={mod.id}
-              onClick={() => router.push(`/modalities/${mod.id}`)}
-              className="absolute transform -translate-x-1/2 -translate-y-1/2"
-              style={{ left: x, top: y }}
+              className="absolute flex items-center justify-center"
+              style={{ transform: `rotate(${angle}deg) translateY(-${radius}px)` }}
             >
-              <span className="text-[12px] font-bold text-[#1E2059] opacity-90 whitespace-nowrap bg-white/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/40 pointer-events-auto cursor-pointer hover:bg-white/70 hover:scale-105 transition-all">
-                {mod.name}
-              </span>
+              <div style={{ transform: `rotate(-${angle}deg)`, animation: 'spinReverse 120s linear infinite' }}>
+                <span 
+                  onClick={() => router.push(`/modalities/${mod.id}`)}
+                  className="text-[13px] font-bold text-white bg-white/10 backdrop-blur-xl px-4 py-2 rounded-full border border-white/30 pointer-events-auto cursor-pointer hover:bg-white/30 hover:scale-110 hover:border-white transition-all shadow-[0_4px_15px_rgba(0,0,0,0.2)] whitespace-nowrap flex items-center justify-center"
+                >
+                  {mod.name}
+                </span>
+              </div>
             </div>
           );
         })}
       </div>
 
       {/* Center Logo */}
-      <div className="absolute z-10 w-28 h-28 rounded-full bg-white shadow-[0_0_60px_rgba(255,255,255,0.8)] flex items-center justify-center p-3 relative">
-        <div className="absolute inset-0 rounded-full border-2 border-white/50 animate-ping" />
-        <img src="/zenauraa logo main.png" alt="ZenAuraa" className="w-full h-full object-contain relative z-10" />
+      <div className="absolute z-10 w-32 h-32 rounded-full bg-white shadow-[0_0_60px_rgba(255,255,255,0.8)] flex items-center justify-center p-3">
+        <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain" />
       </div>
 
       <style jsx>{`
-        @keyframes blob {
-          0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-          50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+        @keyframes breatheNebula {
+          0% { transform: scale(0.95); opacity: 0.8; }
+          100% { transform: scale(1.05); opacity: 1; }
         }
-        @keyframes gradientShift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes spinReverse {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(-360deg); }
         }
       `}</style>
     </div>
