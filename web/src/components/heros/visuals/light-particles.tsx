@@ -1,7 +1,10 @@
 "use client";
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Points, PointMaterial, Line } from '@react-three/drei';
+import * as THREE from 'three';
 
 const MODALITIES = [
   {id:'astrology',name:'Astrology'},{id:'tarot',name:'Tarot'},
@@ -12,119 +15,145 @@ const MODALITIES = [
   {id:'space-harmony',name:'Space Harmony'},{id:'numerology',name:'Numerology'},
 ];
 
+function ParticleNebula() {
+  const ref = useRef<THREE.Points>(null);
+  
+  // Generate random particles in a sphere
+  const sphere = useMemo(() => {
+    const positions = new Float32Array(3000 * 3);
+    for (let i = 0; i < 3000; i++) {
+      const r = 2.5 * Math.cbrt(Math.random()); // Radius 2.5
+      const theta = Math.random() * 2 * Math.PI;
+      const phi = Math.acos(2 * Math.random() - 1);
+      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      positions[i * 3 + 2] = r * Math.cos(phi);
+    }
+    return positions;
+  }, []);
+
+  useFrame((state, delta) => {
+    if (ref.current) {
+      ref.current.rotation.x -= delta / 10;
+      ref.current.rotation.y -= delta / 15;
+    }
+  });
+
+  return (
+    <group rotation={[0, 0, Math.PI / 4]}>
+      <Points ref={ref} positions={sphere} stride={3} frustumCulled={false}>
+        <PointMaterial
+          transparent
+          color="#B9A0E4"
+          size={0.03}
+          sizeAttenuation={true}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+        />
+      </Points>
+    </group>
+  );
+}
+
+function ConstellationLines() {
+  const groupRef = useRef<THREE.Group>(null);
+  
+  useFrame((state, delta) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.z += delta * 0.05;
+      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
+      groupRef.current.rotation.y = Math.cos(state.clock.elapsedTime * 0.2) * 0.1;
+    }
+  });
+
+  const points = useMemo(() => {
+    const pts = [];
+    const radius = 2.2;
+    for (let i = 0; i < MODALITIES.length; i++) {
+      const angle = (i / MODALITIES.length) * Math.PI * 2;
+      pts.push(new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius, (Math.random() - 0.5) * 0.5));
+    }
+    return pts;
+  }, []);
+
+  return (
+    <group ref={groupRef}>
+      {/* Outer connecting lines */}
+      <Line points={[...points, points[0]]} color="#8982D0" lineWidth={1} transparent opacity={0.4} />
+      
+      {/* Inner web connections */}
+      {points.map((p, i) => {
+        if (i % 3 === 0) {
+          const target = points[(i + 4) % points.length];
+          return <Line key={i} points={[p, target]} color="#4E67CC" lineWidth={0.5} transparent opacity={0.2} />;
+        }
+        return null;
+      })}
+
+      {/* Glowing nodes */}
+      {points.map((p, i) => (
+        <mesh key={`node-${i}`} position={p}>
+          <sphereGeometry args={[0.06, 16, 16]} />
+          <meshBasicMaterial color={i % 2 === 0 ? "#8982D0" : "#B9A0E4"} transparent opacity={0.8} />
+          {/* Subtle halo */}
+          <mesh>
+            <sphereGeometry args={[0.15, 16, 16]} />
+            <meshBasicMaterial color={i % 2 === 0 ? "#4E67CC" : "#5F3BA9"} transparent opacity={0.2} blending={THREE.AdditiveBlending} />
+          </mesh>
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
 export default function LightParticles() {
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => { setMounted(true); }, []);
-
-  // Draw constellation lines on canvas
-  useEffect(() => {
-    if (!mounted || !canvasRef.current) return;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const W = 550, H = 550;
-    canvas.width = W; canvas.height = H;
-    const cx = W / 2, cy = H / 2;
-    const RADIUS = 210;
-
-    const points = MODALITIES.map((_, i) => {
-      const angle = (i / MODALITIES.length) * Math.PI * 2 - Math.PI / 2;
-      return { x: cx + Math.cos(angle) * RADIUS, y: cy + Math.sin(angle) * RADIUS };
-    });
-
-    let frame = 0;
-    const draw = () => {
-      ctx.clearRect(0, 0, W, H);
-      frame += 0.003;
-
-      // Draw connecting lines
-      for (let i = 0; i < points.length; i++) {
-        const next = (i + 1) % points.length;
-        const skip = (i + 2) % points.length;
-        ctx.beginPath();
-        ctx.moveTo(points[i].x, points[i].y);
-        ctx.lineTo(points[next].x, points[next].y);
-        ctx.strokeStyle = 'rgba(137,130,208,0.25)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-
-        // Cross lines for some
-        if (i % 3 === 0) {
-          ctx.beginPath();
-          ctx.moveTo(points[i].x, points[i].y);
-          ctx.lineTo(points[skip].x, points[skip].y);
-          ctx.strokeStyle = 'rgba(78,103,204,0.15)';
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-
-      // Draw twinkling background stars
-      for (let s = 0; s < 40; s++) {
-        const sx = (Math.sin(s * 47.3 + frame) * 0.5 + 0.5) * W;
-        const sy = (Math.cos(s * 31.7 + frame * 0.7) * 0.5 + 0.5) * H;
-        const opacity = 0.1 + Math.sin(frame * 2 + s) * 0.15;
-        ctx.beginPath();
-        ctx.arc(sx, sy, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(185,160,228,${opacity})`;
-        ctx.fill();
-      }
-
-      requestAnimationFrame(draw);
-    };
-    const id = requestAnimationFrame(draw);
-    return () => cancelAnimationFrame(id);
-  }, [mounted]);
-
+  useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
-  const RADIUS = 210;
+  const RADIUS = 250;
 
   return (
-    <div className="relative w-[550px] h-[550px] flex items-center justify-center">
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" style={{ width: 550, height: 550 }} />
-
-      {/* Center */}
-      <div className="absolute z-10 w-24 h-24 rounded-full bg-white/90 shadow-[0_0_50px_rgba(95,59,169,0.4)] flex items-center justify-center p-3 border border-white/40">
-        <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain" />
+    <div className="relative w-[650px] h-[650px] flex items-center justify-center scale-90 lg:scale-100">
+      
+      {/* 3D WebGL Canvas underneath */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
+          <ambientLight intensity={0.5} />
+          <ParticleNebula />
+          <ConstellationLines />
+        </Canvas>
       </div>
 
-      {MODALITIES.map((mod, i) => {
-        const angle = (i / MODALITIES.length) * Math.PI * 2 - Math.PI / 2;
-        const x = Math.cos(angle) * RADIUS;
-        const y = Math.sin(angle) * RADIUS;
-        const dotSize = 8 + (i % 3) * 3;
+      {/* Static Upright Labels (Separate Layer, Interactive) */}
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+        {MODALITIES.map((mod, i) => {
+          const angle = (i / MODALITIES.length) * Math.PI * 2 - Math.PI / 2;
+          const x = Math.cos(angle) * RADIUS;
+          const y = Math.sin(angle) * RADIUS;
+          return (
+            <div
+              key={`label-${mod.id}`}
+              className="absolute pointer-events-auto cursor-pointer group"
+              style={{ transform: `translate(${x}px, ${y}px)` }}
+              onClick={() => router.push(`/modalities/${mod.id}`)}
+            >
+              {/* Invisible interactive area over the 3D node */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full" />
+              
+              <span className="relative top-6 text-[10px] font-bold text-[#1E2059] bg-white/80 backdrop-blur-sm px-2.5 py-1 rounded-full whitespace-nowrap shadow-sm border border-white/40 group-hover:bg-white group-hover:scale-110 transition-all">
+                {mod.name}
+              </span>
+            </div>
+          );
+        })}
+      </div>
 
-        return (
-          <motion.div
-            key={mod.id}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: i * 0.08, duration: 0.4 }}
-            onClick={() => router.push(`/modalities/${mod.id}`)}
-            className="absolute flex flex-col items-center cursor-pointer group"
-            style={{ left: `calc(50% + ${x}px)`, top: `calc(50% + ${y}px)`, transform: 'translate(-50%, -50%)' }}
-          >
-            <motion.div
-              animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 3 + (i % 4), repeat: Infinity, ease: 'easeInOut', delay: i * 0.5 }}
-              className="rounded-full"
-              style={{
-                width: dotSize, height: dotSize,
-                background: i % 2 === 0 ? 'radial-gradient(circle, #8982D0, #4E67CC)' : 'radial-gradient(circle, #B9A0E4, #5F3BA9)',
-                boxShadow: `0 0 ${dotSize}px rgba(137,130,208,0.8)`,
-              }}
-            />
-            <span className="mt-2 text-[10px] font-bold text-[#1E2059] bg-white/80 backdrop-blur-sm px-2.5 py-0.5 rounded-full whitespace-nowrap shadow-sm border border-white/40 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all">
-              {mod.name}
-            </span>
-          </motion.div>
-        );
-      })}
+      {/* Center Logo */}
+      <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-[0_0_40px_rgba(137,130,208,0.5)] flex items-center justify-center p-3 backdrop-blur-sm border border-white/40 cursor-pointer hover:scale-105 transition-transform">
+        <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain" />
+      </div>
     </div>
   );
 }

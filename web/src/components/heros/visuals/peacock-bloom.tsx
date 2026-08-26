@@ -1,7 +1,9 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Environment, Float, Sphere } from '@react-three/drei';
+import * as THREE from 'three';
 
 const MODALITIES = [
   {id:'astrology',name:'Astrology'},{id:'tarot',name:'Tarot'},
@@ -12,72 +14,135 @@ const MODALITIES = [
   {id:'space-harmony',name:'Space Harmony'},{id:'numerology',name:'Numerology'},
 ];
 
+function Feather({ angle, radius, isLong, delay }: { angle: number, radius: number, isLong: boolean, delay: number }) {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const length = isLong ? 2.5 : 2.0;
+  
+  useFrame((state) => {
+    if (meshRef.current) {
+      // Breathing / fanning animation
+      meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime + delay) * 0.1;
+    }
+  });
+
+  return (
+    <group rotation={[0, 0, angle]}>
+      {/* Position feather outwards from center */}
+      <group position={[0, length / 2 + 0.5, 0]}>
+        <mesh ref={meshRef}>
+          {/* A stretched sphere acts as a nice thick feather blade */}
+          <sphereGeometry args={[0.2, 32, 32]} />
+          <meshPhysicalMaterial 
+            color="#5F3BA9"
+            emissive="#1E2059"
+            emissiveIntensity={0.5}
+            roughness={0.2}
+            metalness={0.8}
+            clearcoat={1}
+            clearcoatRoughness={0.1}
+            iridescence={1}
+            iridescenceIOR={1.5}
+            iridescenceThicknessRange={[100, 400]}
+          />
+        </mesh>
+        
+        {/* Scale the sphere to be long and flat like a feather */}
+        <group scale={[1, length * 2.5, 0.1]}>
+          <mesh>
+            <sphereGeometry args={[0.2, 32, 32]} />
+            <meshPhysicalMaterial 
+              color="#8982D0"
+              roughness={0.3}
+              metalness={0.6}
+              clearcoat={1}
+              iridescence={1}
+            />
+          </mesh>
+        </group>
+
+        {/* Eye Spot */}
+        {isLong && (
+          <mesh position={[0, length - 0.5, 0.05]}>
+            <cylinderGeometry args={[0.15, 0.15, 0.05, 32]} />
+            <meshStandardMaterial color="#B9A0E4" emissive="#B9A0E4" emissiveIntensity={0.5} metalness={1} roughness={0} />
+          </mesh>
+        )}
+      </group>
+    </group>
+  );
+}
+
+function PeacockFan() {
+  const fanRef = useRef<THREE.Group>(null);
+  
+  useFrame((state, delta) => {
+    if (fanRef.current) {
+      // Gentle sway
+      fanRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.5) * 0.05;
+      fanRef.current.rotation.x = Math.cos(state.clock.elapsedTime * 0.3) * 0.05;
+    }
+  });
+
+  const FEATHER_COUNT = 24;
+
+  return (
+    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
+      <group ref={fanRef} position={[0, -0.5, 0]}>
+        {Array.from({length: FEATHER_COUNT}).map((_, i) => {
+          const angle = (i / FEATHER_COUNT) * Math.PI * 2;
+          return (
+            <Feather 
+              key={i} 
+              angle={angle} 
+              radius={2} 
+              isLong={i % 2 === 0} 
+              delay={i * 0.2} 
+            />
+          );
+        })}
+      </group>
+    </Float>
+  );
+}
+
 export default function PeacockBloom() {
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
-  const FEATHER_COUNT = 24; // Double for density
-  const LABEL_RADIUS = 230;
+  const RADIUS = 280;
 
   return (
-    <div className="relative w-[600px] h-[600px] flex items-center justify-center scale-[0.75] lg:scale-[0.85]">
+    <div className="relative w-[650px] h-[650px] flex items-center justify-center scale-85 lg:scale-100">
       
-      {/* Breathing feather fan */}
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center"
-        animate={{ scale: [0.96, 1.04, 0.96] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        {Array.from({length: FEATHER_COUNT}).map((_, i) => {
-          const angle = (i / FEATHER_COUNT) * 360;
-          const isLong = i % 2 === 0;
-          const len = isLong ? 200 : 170;
-          const width = isLong ? 50 : 38;
-          // Gradient position shifts per feather for blend effect
-          const colorPos = i / FEATHER_COUNT;
+      {/* 3D WebGL Canvas */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Canvas camera={{ position: [0, 0, 8], fov: 55 }}>
+          <ambientLight intensity={0.8} />
+          <directionalLight position={[5, 10, 5]} intensity={2.5} color="#ffffff" />
+          <pointLight position={[-5, -5, 5]} intensity={2} color="#B9A0E4" />
+          
+          <PeacockFan />
+          
+          <Environment preset="dawn" />
+        </Canvas>
+      </div>
 
-          return (
-            <motion.div
-              key={`feather-${i}`}
-              className="absolute origin-center"
-              style={{ transform: `rotate(${angle}deg)`, height: len, marginTop: -len/2 }}
-              animate={{ rotate: [angle - 1.5, angle + 1.5, angle - 1.5] }}
-              transition={{ duration: 4 + (i % 3), repeat: Infinity, ease: 'easeInOut', delay: i * 0.15 }}
-            >
-              <svg width={width} height={len} viewBox={`0 0 ${width} ${len}`} className="drop-shadow-md" style={{ opacity: 0.75 + colorPos * 0.15 }}>
-                <defs>
-                  <linearGradient id={`feath-${i}`} x1="0.5" y1="1" x2="0.5" y2="0">
-                    <stop offset="0%" stopColor="#1E2059" />
-                    <stop offset="30%" stopColor="#5F3BA9" />
-                    <stop offset="60%" stopColor="#8982D0" />
-                    <stop offset="100%" stopColor="#B9A0E4" />
-                  </linearGradient>
-                </defs>
-                <path d={`M${width/2},0 C${width},${len*0.15} ${width},${len*0.7} ${width/2},${len} C0,${len*0.7} 0,${len*0.15} ${width/2},0Z`} fill={`url(#feath-${i})`} />
-                {/* Eye spot */}
-                {isLong && <ellipse cx={width/2} cy={len*0.25} rx={width*0.18} ry={len*0.05} fill="#5F3BA9" opacity="0.5" />}
-              </svg>
-            </motion.div>
-          );
-        })}
-      </motion.div>
-
-      {/* Static upright labels */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      {/* Static Upright Labels (Separate Layer) */}
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
         {MODALITIES.map((mod, i) => {
           const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
-          const x = Math.cos(angle) * LABEL_RADIUS;
-          const y = Math.sin(angle) * LABEL_RADIUS;
+          const x = Math.cos(angle) * RADIUS;
+          const y = Math.sin(angle) * RADIUS;
           return (
             <div
-              key={mod.id}
-              className="absolute pointer-events-auto cursor-pointer"
+              key={`label-${mod.id}`}
+              className="absolute pointer-events-auto cursor-pointer group"
               style={{ transform: `translate(${x}px, ${y}px)` }}
               onClick={() => router.push(`/modalities/${mod.id}`)}
             >
-              <span className="text-[10px] font-bold text-[#1E2059] bg-white/80 backdrop-blur-sm px-2.5 py-1 rounded-full whitespace-nowrap shadow-md border border-[#B9A0E4]/30 hover:bg-white hover:scale-110 transition-all">
+              <span className="text-[10px] font-bold text-[#1E2059] bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full whitespace-nowrap shadow-md border border-[#B9A0E4]/40 group-hover:bg-white group-hover:scale-110 transition-all">
                 {mod.name}
               </span>
             </div>
@@ -85,8 +150,8 @@ export default function PeacockBloom() {
         })}
       </div>
 
-      {/* Center Logo — peacock body position */}
-      <div className="absolute z-10 w-28 h-28 rounded-full bg-white/95 shadow-2xl flex items-center justify-center p-3 border-2 border-[#5F3BA9]/20">
+      {/* Center Logo */}
+      <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-2xl flex items-center justify-center p-3 border-2 border-[#5F3BA9]/30 cursor-pointer hover:scale-105 transition-transform">
         <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain" />
       </div>
     </div>

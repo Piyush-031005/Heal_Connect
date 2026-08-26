@@ -1,7 +1,9 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Sphere, MeshDistortMaterial, Environment, Float, Sparkles } from '@react-three/drei';
+import * as THREE from 'three';
 
 const MODALITIES = [
   {id:'astrology',name:'Astrology'},{id:'tarot',name:'Tarot'},
@@ -12,71 +14,101 @@ const MODALITIES = [
   {id:'space-harmony',name:'Space Harmony'},{id:'numerology',name:'Numerology'},
 ];
 
+function OrganicBlob() {
+  const meshRef = useRef<THREE.Mesh>(null);
+  
+  useFrame((state, delta) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.x += delta * 0.1;
+      meshRef.current.rotation.y += delta * 0.15;
+    }
+  });
+
+  return (
+    <Float speed={2} rotationIntensity={1} floatIntensity={2}>
+      <Sphere ref={meshRef} args={[2.2, 128, 128]}>
+        <MeshDistortMaterial 
+          color="#B9A0E4" 
+          attach="material" 
+          distort={0.4} 
+          speed={1.5} 
+          roughness={0.1}
+          metalness={0.2}
+          transmission={0.9} // Glass effect
+          thickness={1.5}
+          ior={1.2}
+          envMapIntensity={1}
+          clearcoat={1}
+          clearcoatRoughness={0.1}
+        />
+      </Sphere>
+      
+      {/* Inner glowing core */}
+      <Sphere args={[1.2, 32, 32]}>
+        <meshBasicMaterial color="#5F3BA9" transparent opacity={0.6} />
+      </Sphere>
+    </Float>
+  );
+}
+
 export default function AuroraBlob() {
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
-  const LABEL_RADIUS = 270;
+  const RADIUS = 250;
 
   return (
-    <div className="relative w-[600px] h-[600px] flex items-center justify-center">
+    <div className="relative w-[650px] h-[650px] flex items-center justify-center scale-90 lg:scale-100">
       
-      {/* Breathing Nebula — multiple overlapping blurred circles */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <motion.div
-          className="absolute w-[350px] h-[350px] rounded-full opacity-60"
-          style={{ background: 'radial-gradient(circle, #5F3BA9, transparent)', filter: 'blur(60px)' }}
-          animate={{ scale: [0.9, 1.1, 0.9], x: [-20, 20, -20], y: [-10, 10, -10] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute w-[300px] h-[300px] rounded-full opacity-50"
-          style={{ background: 'radial-gradient(circle, #4E67CC, transparent)', filter: 'blur(50px)' }}
-          animate={{ scale: [1.1, 0.9, 1.1], x: [30, -30, 30], y: [20, -20, 20] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute w-[280px] h-[280px] rounded-full opacity-40"
-          style={{ background: 'radial-gradient(circle, #8982D0, transparent)', filter: 'blur(70px)' }}
-          animate={{ scale: [0.95, 1.15, 0.95], x: [-15, 25, -15], y: [15, -25, 15] }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute w-[200px] h-[200px] rounded-full opacity-30"
-          style={{ background: 'radial-gradient(circle, #B9A0E4, transparent)', filter: 'blur(40px)' }}
-          animate={{ scale: [1.05, 0.85, 1.05] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        />
+      {/* 3D WebGL Canvas */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 5]} intensity={2} color="#8982D0" />
+          <pointLight position={[-10, -10, -5]} intensity={1.5} color="#4E67CC" />
+          
+          <OrganicBlob />
+          
+          <Sparkles count={150} scale={8} size={2} speed={0.4} opacity={0.5} color="#B9A0E4" />
+          <Environment preset="city" />
+        </Canvas>
       </div>
 
-      {/* Static orbit labels */}
+      {/* Orbiting Orbs for Modalities */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         {MODALITIES.map((mod, i) => {
           const angle = (i / MODALITIES.length) * Math.PI * 2 - Math.PI / 2;
-          const x = Math.cos(angle) * LABEL_RADIUS;
-          const y = Math.sin(angle) * LABEL_RADIUS;
+          const x = Math.cos(angle) * RADIUS;
+          const y = Math.sin(angle) * RADIUS;
           return (
-            <motion.div
-              key={mod.id}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: i * 0.1 }}
-              className="absolute pointer-events-auto cursor-pointer"
+            <div
+              key={`mod-${mod.id}`}
+              className="absolute pointer-events-auto cursor-pointer group"
               style={{ transform: `translate(${x}px, ${y}px)` }}
               onClick={() => router.push(`/modalities/${mod.id}`)}
             >
-              <span className="text-[11px] font-bold text-[#1E2059] bg-white/70 backdrop-blur-md px-3 py-1 rounded-full whitespace-nowrap shadow-sm border border-white/40 hover:bg-white hover:scale-110 transition-all">
+              {/* Floating orb */}
+              <div 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full shadow-[0_0_15px_rgba(185,160,228,0.6)] group-hover:scale-125 transition-transform duration-300"
+                style={{
+                  background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(137,130,208,0.4))',
+                  backdropFilter: 'blur(4px)',
+                  border: '1px solid rgba(255,255,255,0.5)'
+                }}
+              />
+              
+              <span className="relative top-6 text-[10px] font-bold text-[#1E2059] bg-white/80 backdrop-blur-sm px-2.5 py-1 rounded-full whitespace-nowrap shadow-sm border border-white/40 group-hover:bg-white transition-all">
                 {mod.name}
               </span>
-            </motion.div>
+            </div>
           );
         })}
       </div>
 
-      {/* Center */}
-      <div className="absolute z-10 w-28 h-28 rounded-full bg-white/95 shadow-[0_0_60px_rgba(255,255,255,0.8)] flex items-center justify-center p-3 border border-white/40">
+      {/* Center Logo */}
+      <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-[0_0_50px_rgba(255,255,255,0.8)] flex items-center justify-center p-3 backdrop-blur-sm border border-white/50 cursor-pointer hover:scale-105 transition-transform">
         <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain" />
       </div>
     </div>
