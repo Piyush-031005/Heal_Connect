@@ -54,7 +54,7 @@ export default function ExploreModalities() {
               <span className="text-[11px] font-black uppercase tracking-[0.3em] text-primary transition-colors duration-500">Explore Free Insights</span>
               <div className="w-8 h-[2px] bg-primary" />
             </div>
-            <h2 className="text-4xl md:text-5xl font-serif font-medium text-foreground mb-6 transition-colors duration-500">Free Insights</h2>
+            <h2 className="text-4xl md:text-5xl font-serif font-medium text-[#1E2059] mb-6 transition-colors duration-500">Free Insights</h2>
             <p className="text-muted-foreground font-medium max-w-md mx-auto transition-colors duration-500">Browse 12 ancient and modern insights to find the exact guidance your soul seeks.</p>
           </div>
 
@@ -121,12 +121,12 @@ export default function ExploreModalities() {
   }
 
   return (
-    <section className="py-24 bg-background border-b border-border/50 relative">
+    <section className="py-24 bg-gradient-to-br from-[#F5F3FF] to-[#EDE9FE] border-b border-purple-100 relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-6 drop-shadow-sm">Explore by Category</h2>
+          <h2 className="text-3xl md:text-5xl font-serif text-[#1E2059] mb-6 drop-shadow-sm">Explore by Category</h2>
           <div className="w-16 h-0.5 bg-primary/30 mx-auto rounded-full mb-6" />
-          <p className="text-foreground/70 text-lg font-light">
+          <p className="text-[#3730A3] text-lg font-light">
             Find the perfect practitioner for your unique journey. 
           </p>
         </div>
@@ -136,15 +136,15 @@ export default function ExploreModalities() {
             <div 
               key={mod.id} 
               id={mod.id} 
-              className="group bg-gradient-to-br from-[#E0E7FF] to-[#C7D2FE] text-[#3A247A] rounded-3xl p-6 border border-primary/5 hover:border-primary/20 transition-all duration-300 text-center flex flex-col items-center shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] cursor-pointer"
+              className="group bg-gradient-to-br from-[#2D1B69] to-[#170936] text-[#3A247A] rounded-3xl p-6 border border-primary/5 hover:border-primary/20 transition-all duration-300 text-center flex flex-col items-center shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] cursor-pointer"
             >
               <div className="w-40 h-40 rounded-full bg-primary/[0.03] border-4 border-primary/10 flex items-center justify-center mb-6 group-hover:scale-[1.15] transition-transform duration-700 shadow-xl relative overflow-hidden">
                 <div className="absolute inset-2 border border-dashed border-primary/30 rounded-full animate-[spin_30s_linear_infinite]" />
                 <img src={`${mod.image}?v=2`} alt={mod.name} className="w-full h-full object-cover rounded-full mix-blend-multiply" />
               </div>
-              <h3 className="text-xl font-medium text-[#1E2059] font-bold mb-3">{mod.name}</h3>
+              <h3 className="text-xl font-medium text-[#E2D4FF] font-medium mb-3">{mod.name}</h3>
               <div className="w-8 h-0.5 bg-primary/20 rounded-full mb-4 group-hover:w-16 transition-all duration-300" />
-              <p className="text-sm text-[#3730A3] font-medium leading-relaxed mb-6">{mod.desc}</p>
+              <p className="text-sm text-[#A78BFA] font-light leading-relaxed mb-6">{mod.desc}</p>
               
               <Link href="/signup" className="mt-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary group-hover:translate-x-1 transition-transform">
                 Explore <ArrowRight className="w-3.5 h-3.5" />

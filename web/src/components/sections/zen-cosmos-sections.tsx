@@ -849,7 +849,7 @@ export function YourNextDiscovery() {
   const [hovered, setHovered] = useState<string | null>('explore');
 
   return (
-    <section className="relative py-32 overflow-hidden bg-background">
+    <section className="relative py-32 overflow-hidden bg-gradient-to-b from-[#EDE9FE] to-[#F5F3FF]">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(40)].map((_, i) => (
           <div key={i} className="absolute rounded-full bg-[#12527F]"
@@ -859,14 +859,14 @@ export function YourNextDiscovery() {
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <div className="text-center mb-20">
-          <div className={`text-5xl mb-4 text-foreground/15`}>✦ YOU ✦</div>
+          <div className={`text-5xl mb-4 text-[#1E2059]/10`}>✦ YOU ✦</div>
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-8 h-[2px] bg-primary" />
             <span className={`text-[10px] font-black uppercase tracking-[0.3em] text-primary`}>Your Next Discovery</span>
             <div className="w-8 h-[2px] bg-primary" />
           </div>
-          <h2 className={`text-4xl md:text-6xl font-serif font-medium text-foreground`}>Where Will You Go Next?</h2>
-          <p className={`mt-4 text-base font-medium max-w-xl mx-auto text-muted-foreground`}>
+          <h2 className={`text-4xl md:text-6xl font-serif font-medium text-[#1E2059]`}>Where Will You Go Next?</h2>
+          <p className={`mt-4 text-base font-medium max-w-xl mx-auto text-[#3730A3]`}>
             Three paths. One cosmic journey. Choose where to begin.
           </p>
         </div>
@@ -876,7 +876,7 @@ export function YourNextDiscovery() {
             const isHov = hovered === path.id;
             return (
               <div key={path.id}
-                                className={`relative rounded-3xl p-8 border transition-all duration-500 cursor-pointer group overflow-hidden bg-gradient-to-br from-[#E0E7FF] to-[#C7D2FE]`}
+                                className={`relative rounded-3xl p-8 border transition-all duration-500 cursor-pointer group overflow-hidden bg-gradient-to-br from-[#2D1B69] to-[#170936]`}
                 style={{
                   borderColor: isHov ? path.color : 'var(--border)',
                   transform: isHov ? 'translateY(-8px)' : 'translateY(0)',
@@ -891,11 +891,11 @@ export function YourNextDiscovery() {
                 )}
                 <div className="text-4xl mb-6 font-serif" style={{ color: path.color }}>{path.icon}</div>
                 <div className="text-[10px] font-black uppercase tracking-widest mb-2" style={{ color: path.color }}>{path.label}</div>
-                <h3 className="text-2xl font-serif font-medium text-[#1E2059] font-bold mb-4">{path.title}</h3>
-                <p className="text-sm text-[#3730A3] font-medium leading-relaxed mb-6 font-medium">{path.desc}</p>
+                <h3 className="text-2xl font-serif font-medium text-[#E2D4FF] font-medium mb-4">{path.title}</h3>
+                <p className="text-sm text-[#A78BFA] font-light leading-relaxed mb-6 font-medium">{path.desc}</p>
                 <div className="space-y-2 mb-8">
                   {path.items.map(item => (
-                    <div key={item} className="flex items-center gap-3 text-sm text-muted-foreground font-medium">
+                    <div key={item} className="flex items-center gap-3 text-sm text-[#3730A3] font-medium">
                       <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: path.color }} />
                       {item}
                     </div>
@@ -920,7 +920,7 @@ export function YourNextDiscovery() {
               <ArrowRight className="w-5 h-5" />
             </div>
           </Link>
-          <p className="text-muted-foreground/60 text-xs mt-4 font-medium">Free to explore · No credit card required</p>
+          <p className="text-[#3730A3]/60 text-xs mt-4 font-medium">Free to explore · No credit card required</p>
         </div>
       </div>
     </section>
