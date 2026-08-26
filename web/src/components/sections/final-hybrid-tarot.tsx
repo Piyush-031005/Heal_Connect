@@ -1,4 +1,5 @@
 'use client';
+import { useLayout } from '@/lib/layout-context';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -80,6 +81,8 @@ const CARD_ROTATIONS = [-35, -30, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 
 const CARD_OFFSETS = [70, 55, 42, 30, 20, 12, 5, 0, 5, 12, 20, 30, 42, 55, 70];
 
 export function FinalHybridTarot() {
+  const { layout } = useLayout();
+  const isNewLayout = layout.startsWith('layout-');
   const [selected, setSelected] = useState<number[]>([]);
   
   const handleSelect = (index: number) => {

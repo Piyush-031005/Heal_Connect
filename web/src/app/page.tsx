@@ -45,7 +45,7 @@ export default function LandingPage() {
   return (
     <div className={`min-h-screen text-foreground flex flex-col font-sans transition-colors duration-500 ${layout.startsWith('layout-') ? 'bg-transparent' : 'bg-background'}`}>
       {layout.startsWith('layout-') && (
-        <div className="fixed inset-0 z-[-1] bg-[linear-gradient(160deg,#D5B6DC_0%,#E5D9F2_30%,#B79AE6_70%,#8982D0_100%)] opacity-80" />
+        <div className="absolute inset-0 z-[-1] min-h-full bg-[linear-gradient(180deg,#D5B6DC_0%,#E5D9F2_15%,#D5B6DC_35%,#B9A0E4_55%,#8982D0_75%,#5F3BA9_90%,#4E67CC_100%)]" />
       )}
       <Navbar />
 
@@ -85,7 +85,7 @@ export default function LandingPage() {
             <Testimonials />
             <FinalHybridSupport />
             
-            <div className={layout === 'new-layout-1' ? "pt-12" : "bg-background pt-12"}>
+            <div className={layout.startsWith('layout-') ? "pt-12 bg-transparent" : "bg-background pt-12"}>
               <FaqSection />
             </div>
           </div>

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowRight, Star, Shield, Phone, MessageCircle } from 'lucide-react';
 
 import { useTheme } from 'next-themes';
+import { useLayout } from '@/lib/layout-context';
 import { useRouter } from 'next/navigation';
 
 const EXPERTS = [
@@ -20,9 +21,11 @@ export function FinalHybridExperts() {
   const isNewColor = theme === 'theme-new-color';
   const isZenAlign = theme === 'theme-zen-align';
   const router = useRouter();
+  const { layout } = useLayout();
+  const isNewLayout = layout.startsWith('layout-');
 
   return (
-    <section className="relative py-24 overflow-hidden border-b border-primary/50" style={isZenAlign ? { background: 'linear-gradient(135deg, #5F3BA9 0%, #4E67CC 100%)' } : isNewColor ? { backgroundColor: '#301368' } : { background: 'linear-gradient(135deg, #B79AE6 0%, #7A48AB 50%, #694091 100%)' }}>
+    <section className="relative py-24 overflow-hidden border-b border-primary/50" style={isNewLayout ? { background: 'transparent' } : isZenAlign ? { background: 'linear-gradient(135deg, #5F3BA9 0%, #4E67CC 100%)' } : isNewColor ? { backgroundColor: '#301368' } : { background: 'linear-gradient(135deg, #B79AE6 0%, #7A48AB 50%, #694091 100%)' }}>
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/8 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(158,136,199,0.4) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />

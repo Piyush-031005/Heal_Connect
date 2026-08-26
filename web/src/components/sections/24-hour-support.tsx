@@ -1,10 +1,13 @@
 'use client';
+import { useLayout } from '@/lib/layout-context';
 
 import { Check, Smartphone } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export function FinalHybridSupport() {
+  const { layout } = useLayout();
+  const isNewLayout = layout.startsWith('layout-');
   return (
     <section className="relative py-24 bg-fixed bg-center bg-cover border-none overflow-hidden"
       style={{ backgroundImage: 'url(/hands-star-bg.png)' }}
