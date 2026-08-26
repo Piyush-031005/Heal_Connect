@@ -96,7 +96,7 @@ export function FinalHybridTarot() {
   const isReadingReady = selected.length === 3;
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center py-24 overflow-hidden bg-[#4D316B] border-t border-[#694091]/50">
+    <section className={`relative min-h-screen flex flex-col items-center justify-center py-24 overflow-hidden  ${isNewLayout ? "bg-transparent" : "bg-[#4D316B]"}  border-t border-[#694091]/50`}>
 
       {/* Subtle geometric texture */}
       <div className="absolute inset-0 opacity-20 pointer-events-none"
@@ -222,7 +222,7 @@ export function FinalHybridTarot() {
                 { title: 'PRESENT', card: TAROT_CARDS[selected[1]] },
                 { title: 'FUTURE', card: TAROT_CARDS[selected[2]] }
               ].map((pos, idx) => (
-                <div key={idx} className="p-5 rounded-2xl bg-[#4D316B] border border-[#694091]">
+                <div key={idx} className={`p-5 rounded-2xl  ${isNewLayout ? "bg-transparent" : "bg-[#4D316B]"}  border border-[#694091]`}>
                   <div className="text-[10px] font-black uppercase tracking-widest text-[#B79AE6] mb-2">{pos.title}</div>
                   <div className="font-serif text-lg text-[#F8F7FA] mb-2">{pos.card.name}</div>
                   <p className="text-xs text-[#B79AE6] leading-relaxed">{pos.card.message}</p>

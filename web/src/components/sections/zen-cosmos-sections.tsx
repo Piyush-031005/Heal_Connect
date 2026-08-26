@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from 'next-themes';
+import { useLayout } from '@/lib/layout-context';
 import { Star, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
@@ -840,6 +841,9 @@ const JOURNEY_PATHS = [
 ];
 
 export function YourNextDiscovery() {
+  const { layout } = useLayout();
+  const isNewLayout = layout.startsWith("layout-");
+
   const { theme } = useTheme();
   const isNewColor = theme === 'theme-new-color';
   const [hovered, setHovered] = useState<string | null>('explore');
