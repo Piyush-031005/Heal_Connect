@@ -19,70 +19,16 @@ const leafShape = new THREE.Shape();
 leafShape.moveTo(0, 0);
 leafShape.quadraticCurveTo(0.6, 1.2, 0, 3);
 leafShape.quadraticCurveTo(-0.6, 1.2, 0, 0);
-
 const leafGeometry = new THREE.ShapeGeometry(leafShape);
 
-// A simple custom shader for realistic, iridescent, glossy leaves
-const leafMaterialShader = {
-  uniforms: {
-    baseColor: { value: new THREE.Color("#8982D0") },
-    glowColor: { value: new THREE.Color("#ffffff") },
-    opacity: { value: 0.8 },
-  },
-  vertexShader: `
-    varying vec2 vUv;
-    varying vec3 vNormal;
-    varying vec3 vViewPosition;
-    void main() {
-      vUv = uv;
-      vNormal = normalize(normalMatrix * normal);
-      vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-      vViewPosition = -mvPosition.xyz;
-      gl_Position = projectionMatrix * mvPosition;
-    }
-  `,
-  fragmentShader: `
-    uniform vec3 baseColor;
-    uniform vec3 glowColor;
-    uniform float opacity;
-    varying vec2 vUv;
-    varying vec3 vNormal;
-    varying vec3 vViewPosition;
-    void main() {
-      // Simulate light catching the edges (Fresnel effect)
-      vec3 normal = normalize(vNormal);
-      vec3 viewDir = normalize(vViewPosition);
-      float fresnel = dot(normal, viewDir);
-      fresnel = clamp(1.0 - fresnel, 0.0, 1.0);
-      fresnel = pow(fresnel, 2.0); // sharp edge glow
-      
-      // Vertical gradient for realism
-      float gradient = smoothstep(0.0, 3.0, vUv.y * 3.0);
-      
-      vec3 finalColor = mix(baseColor, glowColor, fresnel * 0.5 + gradient * 0.2);
-      
-      gl_FragColor = vec4(finalColor, opacity);
-    }
-  `
-};
-
 function Leaf({ rotation, color, scale, distance, zOffset, opacity }: { rotation: [number, number, number], color: string, scale: number, distance: number, zOffset: number, opacity: number }) {
-  const materialRef = useRef<THREE.ShaderMaterial>(null);
-  
-  useEffect(() => {
-    if (materialRef.current) {
-      materialRef.current.uniforms.baseColor.value = new THREE.Color(color);
-      materialRef.current.uniforms.opacity.value = opacity;
-    }
-  }, [color, opacity]);
-
   return (
     <group rotation={rotation} position={[0, 0, zOffset]}>
       <mesh geometry={leafGeometry} position={[0, distance, 0]} scale={[scale, scale, 1]}>
-        <shaderMaterial 
-          ref={materialRef}
-          args={[leafMaterialShader]}
+        <meshBasicMaterial 
+          color={color} 
           transparent 
+          opacity={opacity} 
           depthWrite={false}
           side={THREE.DoubleSide}
         />
@@ -103,7 +49,7 @@ function MandalaPeacock() {
   });
   
   return (
-    <group ref={groupRef} scale={[0.85, 0.85, 0.85]}>
+    <group ref={groupRef} scale={[0.7, 0.7, 0.7]}> {/* SCALED DOWN SO IT NEVER CUTS OFF */}
         {/* Layer 1: Outer Soft Purple/Blue Leaves */}
         {Array.from({ length: 12 }).map((_, i) => (
           <Leaf 
@@ -152,8 +98,6 @@ export default function PeacockBloom() {
 
   return (
     <div className="relative w-[650px] h-[650px] flex items-center justify-center scale-85 lg:scale-100">
-      
-      {/* 3D WebGL Canvas */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Canvas camera={{ position: [0, 0, 8], fov: 55 }}>
           <Float speed={1} rotationIntensity={0.1} floatIntensity={0.5}>
@@ -161,50 +105,29 @@ export default function PeacockBloom() {
           </Float>
         </Canvas>
       </div>
-
-      {/* Revolving Minimal Ethereal Labels */}
-      <div 
-        className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
-        style={{ animation: 'spin 80s linear infinite' }}
-      >
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none" style={{ animation: 'spin 80s linear infinite' }}>
         {MODALITIES.map((mod, i) => {
           const total = MODALITIES.length;
           const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
           const r = 260; 
           const x = Math.cos(angle) * r;
           const y = Math.sin(angle) * r;
-          
           return (
-            <div
-              key={`label-${mod.id}`}
-              className="absolute"
-              style={{ transform: `translate(${x}px, ${y}px)` }}
-            >
-              <div 
-                className="pointer-events-auto cursor-pointer group"
-                style={{ animation: 'spin 80s linear infinite reverse' }}
-                onClick={() => router.push(`/modalities/${mod.id}`)}
-              >
+            <div key={`label-${mod.id}`} className="absolute" style={{ transform: `translate(${x}px, ${y}px)` }}>
+              <div className="pointer-events-auto cursor-pointer group" style={{ animation: 'spin 80s linear infinite reverse' }} onClick={() => router.push(`/modalities/${mod.id}`)}>
                 <div className="flex items-center gap-2 px-3 py-1.5 transition-all duration-300 hover:scale-110">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#1E2059]/40 group-hover:bg-[#5F3BA9] shadow-[0_0_8px_rgba(95,59,169,0.5)] transition-colors" />
-                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#3A247A] group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
-                    {mod.name}
-                  </span>
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#3A247A] group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">{mod.name}</span>
                 </div>
               </div>
             </div>
           );
         })}
       </div>
-
-      {/* Center Logo */}
       <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-        <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-full flex items-center justify-center pointer-events-auto shadow-[0_0_40px_rgba(255,255,255,0.9)] overflow-hidden bg-white group transition-transform duration-700 hover:scale-105">
-          <img
-            src="/center_logo_final.png"
-            alt="ZenAuraa"
-            className="w-[110%] h-[110%] object-cover scale-[1.15] group-hover:scale-[1.25] transition-transform duration-700 mt-2 ml-1"
-          />
+        {/* LOGO SCALED DOWN SLIGHTLY SO IT FITS PERFECTLY (w-24 instead of w-28) */}
+        <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center pointer-events-auto shadow-[0_0_40px_rgba(255,255,255,0.9)] overflow-hidden bg-white group transition-transform duration-700 hover:scale-105">
+          <img src="/center_logo_final.png" alt="ZenAuraa" className="w-[100%] h-[100%] object-cover scale-[1.0] group-hover:scale-[1.1] transition-transform duration-700 mt-2 ml-1" />
         </div>
       </div>
     </div>
