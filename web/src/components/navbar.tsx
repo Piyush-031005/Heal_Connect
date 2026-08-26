@@ -26,7 +26,8 @@ import {
 import { tokenStore, authApi, practitionersApi } from '@/lib/api';
 import { getAvatarUrl, getPractitionerAvatar } from '@/lib/utils';
 
-type MenuItem = { label: string; href: string; Icon: ElementType };
+import type { ComponentType } from 'react';
+type MenuItem = { label: string; href: string; Icon: ComponentType<{ className?: string }> };
 
 const MENU_SECTIONS: { title: string; items: MenuItem[] }[] = [
   {
