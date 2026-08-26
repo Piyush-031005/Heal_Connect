@@ -1,3 +1,4 @@
+import NewLayoutsHero from './new-layouts-hero';
 'use client';
 
 import Link from 'next/link';
@@ -1124,7 +1125,7 @@ export default function Hero() {
   const { layout } = useLayout();
   
   if (layout === 'final-hybrid') return <PrimaryHero />;
-  if (layout === 'new-layout-1') return <NewLayout1Hero />;
+  if (layout.startsWith('layout-')) return <NewLayoutsHero />;
   if (layout === 'layout-2') return <Layout2Hero />;
   if (layout === 'new-design-1') return <ZenAlignHero />;
   if (layout === 'editorial') return <EditorialHero />;

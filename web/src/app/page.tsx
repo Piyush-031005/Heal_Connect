@@ -38,14 +38,9 @@ export default function LandingPage() {
 
   if (!mounted) return <div className="min-h-screen bg-background" />;
 
-  const isNewDesign1 = layout === 'new-design-1';
-  const isFinalHybrid = layout === 'final-hybrid';
+  const isFinalHybrid = layout === 'final-hybrid' || layout.startsWith('layout-');
 
-  if (isNewDesign1) {
-    // legacy layout
-  } else if (isFinalHybrid) {
-    // legacy layout
-  }
+
 
   return (
     <div className="min-h-screen text-foreground flex flex-col font-sans transition-colors duration-500 bg-background">
@@ -55,7 +50,7 @@ export default function LandingPage() {
         {/* 01 - Hero & Modality Wheel */}
         <Hero />
 
-        {isNewDesign1 ? (
+        {false ? (
           <>
             {/* ZEN LAYOUT — User-designed section order */}
             {/* 01 - Meet Your Guide (expert portrait deck) */}
