@@ -128,7 +128,7 @@ export default function AuroraBlob() {
 
       {/* Center Logo */}
       <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-[0_0_50px_rgba(255,255,255,0.8)] flex items-center justify-center p-3 backdrop-blur-sm border border-white/50 cursor-pointer hover:scale-105 transition-transform">
-        <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain" />
+        <img src="/center_logo_final.png" alt="ZenAuraa" className="w-full h-full object-contain" />
       </div>
     </div>
   );

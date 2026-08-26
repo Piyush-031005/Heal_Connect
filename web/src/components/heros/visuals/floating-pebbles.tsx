@@ -98,7 +98,7 @@ export default function FloatingPebbles() {
 
       {/* Center Logo */}
       <div className="absolute z-10 w-28 h-28 rounded-full bg-white/95 shadow-[0_0_40px_rgba(109,79,199,0.5)] flex items-center justify-center p-3 backdrop-blur-sm border border-white/50">
-        <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain" />
+        <img src="/center_logo_final.png" alt="ZenAuraa" className="w-full h-full object-contain" />
       </div>
     </div>
   );

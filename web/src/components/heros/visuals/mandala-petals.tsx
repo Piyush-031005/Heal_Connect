@@ -124,7 +124,7 @@ export default function MandalaPetals() {
 
       {/* Center Logo */}
       <div className="absolute z-10 w-24 h-24 rounded-full bg-white/95 shadow-[0_0_40px_rgba(137,130,208,0.5)] flex items-center justify-center p-2.5 border border-[#8982D0]/30">
-        <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain" />
+        <img src="/center_logo_final.png" alt="ZenAuraa" className="w-full h-full object-contain" />
       </div>
     </div>
   );

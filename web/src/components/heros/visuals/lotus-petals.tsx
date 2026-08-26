@@ -79,7 +79,7 @@ export default function LotusPetals() {
 
       {/* Center */}
       <div className="absolute z-10 w-28 h-28 rounded-full bg-white/90 shadow-2xl flex items-center justify-center p-3 border-2 border-[#8982D0]/30">
-        <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain" />
+        <img src="/center_logo_final.png" alt="ZenAuraa" className="w-full h-full object-contain" />
       </div>
     </div>
   );

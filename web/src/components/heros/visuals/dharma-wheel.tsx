@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Float, Torus, Cylinder } from '@react-three/drei';
+import { Environment, Float, Torus, Cylinder, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
 
 const MODALITIES = [
@@ -26,7 +26,10 @@ function Wheel3D() {
   });
 
   return (
-    <group ref={wheelRef}>
+        <group ref={wheelRef}>
+      {/* Magical Stardust */}
+      <Sparkles count={400} scale={6} size={2} speed={0.4} color="#D5B6DC" opacity={0.5} />
+      <Sparkles count={200} scale={4} size={3} speed={0.2} color="#ffffff" opacity={0.8} />
       {/* Outer very thin glowing rings */}
       <Torus args={[2.8, 0.015, 16, 128]} material={new THREE.MeshBasicMaterial({ color: "#B9A0E4", transparent: true, opacity: 0.6 })} />
       <Torus args={[2.65, 0.005, 16, 128]} material={new THREE.MeshBasicMaterial({ color: "#8982D0", transparent: true, opacity: 0.4 })} />
@@ -141,7 +144,7 @@ export default function DharmaWheel() {
 
       {/* Center Logo */}
       <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-2xl flex items-center justify-center p-3 border-2 border-[#8982D0]/40 cursor-pointer hover:scale-105 transition-transform">
-        <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain" />
+        <img src="/center_logo_final.png" alt="ZenAuraa" className="w-full h-full object-contain" />
       </div>
     </div>
   );

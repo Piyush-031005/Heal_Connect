@@ -105,7 +105,7 @@ export default function FloatingOrbs() {
 
       {/* Center Logo */}
       <div className="absolute z-10 w-28 h-28 rounded-full bg-white/95 shadow-xl flex items-center justify-center p-3 backdrop-blur-sm border border-white/40">
-        <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain" />
+        <img src="/center_logo_final.png" alt="ZenAuraa" className="w-full h-full object-contain" />
       </div>
 
     </div>

@@ -57,10 +57,14 @@ function Feather({ angle, radius, size, delay, color, isAccent = false }: { angl
             <meshBasicMaterial color={color} transparent opacity={0.6} />
           </mesh>
 
-          {/* Ethereal glow behind the eye */}
-          <mesh position={[0, 0, -0.02]}>
-            <planeGeometry args={[0.8 * size, 1.2 * size]} />
-            <meshBasicMaterial color={color} transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} />
+          {/* Exquisite 3D glow leaf (No flat planes) */}
+          <mesh position={[0, 0, -0.01]} scale={[0.4 * size, 0.7 * size, 0.02]}>
+            <sphereGeometry args={[1, 32, 32]} />
+            <meshBasicMaterial color={color} transparent opacity={0.25} depthWrite={false} />
+          </mesh>
+          <mesh position={[0, 0, -0.015]} scale={[0.5 * size, 0.8 * size, 0.01]}>
+            <sphereGeometry args={[1, 32, 32]} />
+            <meshBasicMaterial color={"#ffffff"} transparent opacity={0.1} blending={THREE.AdditiveBlending} depthWrite={false} />
           </mesh>
         </group>
       </group>
@@ -161,7 +165,7 @@ export default function PeacockBloom() {
 
       {/* Center Logo */}
       <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-2xl flex items-center justify-center p-3 border-2 border-[#5F3BA9]/30 cursor-pointer hover:scale-105 transition-transform">
-        <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain" />
+        <img src="/center_logo_final.png" alt="ZenAuraa" className="w-full h-full object-contain" />
       </div>
     </div>
   );

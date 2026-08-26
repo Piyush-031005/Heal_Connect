@@ -182,7 +182,7 @@ export default function Navbar() {
         <div className="bg-gradient-to-br from-purple-300 to-orange-400 px-5 pt-6 pb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
-              <Image src={theme === 'theme-royal-indigo' ? '/new_center_logo_dark.png' : '/new_center_logo.png'} alt="ZenAuraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
+              <Image src={theme === 'theme-royal-indigo' ? '/center_logo_final.png' : '/center_logo_final.png'} alt="ZenAuraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
               <span className="text-2xl font-serif font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide">ZenAuraa</span>
             </div>
             <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
@@ -290,7 +290,7 @@ export default function Navbar() {
                 </svg>
               </button>
               <Link href="/" className="flex items-center gap-2">
-                <Image src={theme === 'theme-royal-indigo' ? '/new_center_logo_dark.png' : '/new_center_logo.png'} alt="ZenAuraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
+                <Image src={theme === 'theme-royal-indigo' ? '/center_logo_final.png' : '/center_logo_final.png'} alt="ZenAuraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
                 <span className="text-2xl font-serif font-black bg-clip-text text-transparent bg-gradient-to-r from-[#B79AE6] via-[#E5D9F2] to-[#B79AE6] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105">ZenAuraa</span>
               </Link>
             </div>
