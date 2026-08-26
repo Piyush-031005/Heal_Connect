@@ -36,6 +36,7 @@ const MODALITIES = [
 
 export default function ExploreModalities() {
   const { layout } = useLayout();
+  const isNewLayout = layout.startsWith("layout-");
   const { theme } = useTheme();
   
   const isNewDesign1 = layout === 'new-design-1';
@@ -45,7 +46,7 @@ export default function ExploreModalities() {
 
   if (isFinalHybrid) {
     return (
-      <section className="py-28 bg-background border-t border-primary/20 relative transition-colors duration-500">
+      <section className={`py-28 ${isNewLayout ? "bg-transparent" : "bg-background"} border-t border-primary/20 relative transition-colors duration-500`}>
         <div className="container mx-auto px-6 lg:px-16">
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <div className="flex items-center justify-center gap-3 mb-4">
