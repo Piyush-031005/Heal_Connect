@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Sphere, MeshDistortMaterial, Environment, Float, Sparkles } from '@react-three/drei';
+import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 const MODALITIES = [
@@ -14,40 +14,103 @@ const MODALITIES = [
   {id:'space-harmony',name:'Space Harmony'},{id:'numerology',name:'Numerology'},
 ];
 
-function OrganicBlob() {
+// Realistic Feather Shader
+const featherShader = {
+  uniforms: {
+    color: { value: new THREE.Color("#B9A0E4") },
+    opacity: { value: 0.8 },
+  },
+  vertexShader: `
+    varying vec2 vUv;
+    varying vec3 vNormal;
+    void main() {
+      vUv = uv;
+      vNormal = normalize(normalMatrix * normal);
+      // Gentle flutter
+      vec3 pos = position;
+      pos.z += sin(pos.y * 10.0) * 0.05;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+    }
+  `,
+  fragmentShader: `
+    uniform vec3 color;
+    uniform float opacity;
+    varying vec2 vUv;
+    varying vec3 vNormal;
+    void main() {
+      // Create a soft, fuzzy edge mask
+      float distToCenter = abs(vUv.x - 0.5) * 2.0;
+      float alpha = (1.0 - pow(distToCenter, 1.5)) * sin(vUv.y * 3.14159);
+      
+      // Fresnel shine
+      float fresnel = dot(vNormal, vec3(0.0, 0.0, 1.0));
+      vec3 finalColor = mix(color, vec3(1.0), pow(1.0 - fresnel, 3.0) * 0.5);
+
+      if(alpha < 0.05) discard;
+      
+      gl_FragColor = vec4(finalColor, alpha * opacity);
+    }
+  `
+};
+
+function FallingFeather({ startPos, speed, scale, color }: { startPos: [number, number, number], speed: number, scale: number, color: string }) {
   const meshRef = useRef<THREE.Mesh>(null);
   
-  useFrame((state, delta) => {
+  const uniforms = useMemo(() => {
+    return {
+      color: { value: new THREE.Color(color) },
+      opacity: { value: 0.7 }
+    };
+  }, [color]);
+
+  useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.x += delta * 0.1;
-      meshRef.current.rotation.y += delta * 0.15;
+      meshRef.current.position.y -= speed;
+      meshRef.current.rotation.z = Math.sin(state.clock.elapsedTime * speed * 5) * 0.2;
+      meshRef.current.rotation.y = state.clock.elapsedTime * speed;
+      
+      // Reset if too low
+      if (meshRef.current.position.y < -5) {
+        meshRef.current.position.y = 5;
+        meshRef.current.position.x = startPos[0] + (Math.random() - 0.5) * 2;
+      }
     }
   });
 
   return (
-    <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-      <Sphere ref={meshRef} args={[2.2, 128, 128]}>
-        <MeshDistortMaterial 
-          color="#B9A0E4" 
-          attach="material" 
-          distort={0.4} 
-          speed={1.5} 
-          roughness={0.1}
-          metalness={0.2}
-          transmission={0.9} // Glass effect
-          thickness={1.5}
-          ior={1.2}
-          envMapIntensity={1}
-          clearcoat={1}
-          clearcoatRoughness={0.1}
-        />
-      </Sphere>
-      
-      {/* Inner glowing core */}
-      <Sphere args={[1.2, 32, 32]}>
-        <meshBasicMaterial color="#5F3BA9" transparent opacity={0.6} />
-      </Sphere>
-    </Float>
+    <mesh ref={meshRef} position={startPos} scale={[scale, scale * 2.5, scale]}>
+      <planeGeometry args={[1, 1, 16, 16]} />
+      <shaderMaterial 
+        args={[{
+          uniforms,
+          vertexShader: featherShader.vertexShader,
+          fragmentShader: featherShader.fragmentShader,
+          transparent: true,
+          depthWrite: false,
+          side: THREE.DoubleSide
+        }]}
+      />
+    </mesh>
+  );
+}
+
+function FeatherSwarm() {
+  const feathers = useMemo(() => {
+    const colors = ["#8982D0", "#B9A0E4", "#ffffff", "#5F3BA9"];
+    return Array.from({ length: 40 }).map((_, i) => ({
+      pos: [(Math.random() - 0.5) * 10, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 5] as [number, number, number],
+      speed: 0.005 + Math.random() * 0.015,
+      scale: 0.2 + Math.random() * 0.4,
+      color: colors[Math.floor(Math.random() * colors.length)]
+    }));
+  }, []);
+
+  return (
+    <group>
+      {feathers.map((f, i) => (
+        <FallingFeather key={i} startPos={f.pos} speed={f.speed} scale={f.scale} color={f.color} />
+      ))}
+    </group>
   );
 }
 
@@ -57,41 +120,17 @@ export default function AuroraBlob() {
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
-  const RADIUS = 250;
-
   return (
-    <div className="relative w-[650px] h-[650px] flex items-center justify-center scale-90 lg:scale-100">
+    <div className="relative w-[650px] h-[650px] flex items-center justify-center scale-85 lg:scale-100">
       
-      {/* 3D WebGL Canvas */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} intensity={2} color="#8982D0" />
-          <pointLight position={[-10, -10, -5]} intensity={1.5} color="#4E67CC" />
-          
-          <OrganicBlob />
-          
-          <Sparkles count={150} scale={8} size={2} speed={0.4} opacity={0.5} color="#B9A0E4" />
-          <Environment resolution={64}>
-            <group>
-              <mesh scale={100}>
-                <sphereGeometry args={[1, 16, 16]} />
-                <meshBasicMaterial color="#333333" side={THREE.BackSide} />
-              </mesh>
-              <mesh position={[10, 10, -10]}>
-                <planeGeometry args={[20, 20]} />
-                <meshBasicMaterial color="#ffffff" />
-              </mesh>
-              <mesh position={[-10, -10, -10]}>
-                <planeGeometry args={[20, 20]} />
-                <meshBasicMaterial color="#B9A0E4" />
-              </mesh>
-            </group>
-          </Environment>
+        <Canvas camera={{ position: [0, 0, 8], fov: 55 }}>
+          <Float speed={1} rotationIntensity={0.2} floatIntensity={0.5}>
+             <FeatherSwarm />
+          </Float>
         </Canvas>
       </div>
 
-      {/* Revolving Minimal Ethereal Labels */}
       <div 
         className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
         style={{ animation: 'spin 80s linear infinite' }}
@@ -116,7 +155,7 @@ export default function AuroraBlob() {
               >
                 <div className="flex items-center gap-2 px-3 py-1.5 transition-all duration-300 hover:scale-110">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#1E2059]/40 group-hover:bg-[#5F3BA9] shadow-[0_0_8px_rgba(95,59,169,0.5)] transition-colors" />
-                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#1E2059]/60 group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#3A247A] group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
                     {mod.name}
                   </span>
                 </div>
@@ -127,8 +166,14 @@ export default function AuroraBlob() {
       </div>
 
       {/* Center Logo */}
-      <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-[0_0_50px_rgba(255,255,255,0.8)] flex items-center justify-center p-3 backdrop-blur-sm border border-white/50 cursor-pointer hover:scale-105 transition-transform">
-        <img src="/center_logo_final.png" alt="ZenAuraa" className="w-full h-full object-cover scale-[1.25] mt-2 ml-1" />
+      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+        <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-full flex items-center justify-center pointer-events-auto shadow-[0_0_40px_rgba(255,255,255,0.9)] overflow-hidden bg-white group transition-transform duration-700 hover:scale-105">
+          <img
+            src="/center_logo_final.png"
+            alt="ZenAuraa"
+            className="w-[110%] h-[110%] object-cover scale-[1.15] group-hover:scale-[1.25] transition-transform duration-700 mt-2 ml-1"
+          />
+        </div>
       </div>
     </div>
   );

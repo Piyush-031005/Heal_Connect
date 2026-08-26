@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Float, Torus, Cylinder, Sparkles } from '@react-three/drei';
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 const MODALITIES = [
@@ -14,54 +14,81 @@ const MODALITIES = [
   {id:'space-harmony',name:'Space Harmony'},{id:'numerology',name:'Numerology'},
 ];
 
-function Wheel3D() {
-  const wheelRef = useRef<THREE.Group>(null);
-  
+function GalaxyStone({ position, scale, rotationSpeed, textureUrl }: { position: [number, number, number], scale: number, rotationSpeed: number, textureUrl: string }) {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const texture = useLoader(THREE.TextureLoader, textureUrl);
+
   useFrame((state, delta) => {
-    if (wheelRef.current) {
-      wheelRef.current.rotation.z -= delta * 0.1;
-      wheelRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.05;
-      wheelRef.current.rotation.y = Math.cos(state.clock.elapsedTime * 0.5) * 0.05;
+    if (meshRef.current) {
+      // Gentle self rotation and bobbing
+      meshRef.current.rotation.z += delta * rotationSpeed;
+      meshRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.2;
+      meshRef.current.rotation.x = Math.cos(state.clock.elapsedTime * 0.5) * 0.2;
     }
   });
 
   return (
-        <group ref={wheelRef}>
-      {/* Magical Stardust */}
-      <Sparkles count={400} scale={6} size={2} speed={0.4} color="#D5B6DC" opacity={0.5} />
-      <Sparkles count={200} scale={4} size={3} speed={0.2} color="#ffffff" opacity={0.8} />
-      {/* Outer very thin glowing rings */}
-      <Torus args={[2.8, 0.015, 16, 128]} material={new THREE.MeshBasicMaterial({ color: "#B9A0E4", transparent: true, opacity: 0.6 })} />
-      <Torus args={[2.65, 0.005, 16, 128]} material={new THREE.MeshBasicMaterial({ color: "#8982D0", transparent: true, opacity: 0.4 })} />
-      <Torus args={[0.8, 0.01, 16, 64]} material={new THREE.MeshBasicMaterial({ color: "#5F3BA9", transparent: true, opacity: 0.8 })} />
-      <Torus args={[0.7, 0.005, 16, 64]} material={new THREE.MeshBasicMaterial({ color: "#ffffff", transparent: true, opacity: 0.3 })} />
-      
-      {/* Center glowing core */}
-      <mesh>
-        <sphereGeometry args={[0.3, 32, 32]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.1} />
+    <mesh ref={meshRef} position={position} scale={[scale, scale, 1]}>
+      <planeGeometry args={[1, 1]} />
+      <meshBasicMaterial 
+        map={texture} 
+        transparent={true} 
+        depthWrite={false}
+        side={THREE.DoubleSide}
+      />
+    </mesh>
+  );
+}
+
+function HybridWheel() {
+  const groupRef = useRef<THREE.Group>(null);
+  
+  useFrame((state, delta) => {
+    if (groupRef.current) {
+      // Wheel slow rotation
+      groupRef.current.rotation.z -= delta * 0.05;
+    }
+  });
+
+  // Distribute stones in a majestic hybrid arc/wheel
+  const stones = useMemo(() => {
+    const textures = [
+      '/galaxy_crystal_1.png',
+      '/galaxy_crystal_2.png',
+      '/galaxy_crystal_3.png'
+    ];
+    
+    return Array.from({ length: 16 }).map((_, i) => {
+      const angle = (i / 16) * Math.PI * 2;
+      const radius = 2.5 + Math.sin(i * 3.14) * 0.2; // slight variation
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
+      return {
+        pos: [x, y, 0] as [number, number, number],
+        scale: 0.8 + Math.random() * 0.6,
+        speed: (Math.random() - 0.5) * 0.5,
+        texture: textures[Math.floor(Math.random() * textures.length)]
+      };
+    });
+  }, []);
+  
+  return (
+    <group ref={groupRef}>
+      {/* Background soft glow for the wheel */}
+      <mesh position={[0, 0, -1]}>
+        <sphereGeometry args={[2.5, 32, 32]} />
+        <meshBasicMaterial color="#5F3BA9" transparent opacity={0.05} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
 
-      {/* 24 thin ethereal spokes */}
-      {Array.from({length: 24}).map((_, i) => {
-        const angle = (i / 24) * Math.PI * 2;
-        const isMajor = i % 2 === 0;
-        return (
-          <group key={`spoke-${i}`} rotation={[0, 0, angle]}>
-            <Cylinder 
-              args={[isMajor ? 0.01 : 0.003, isMajor ? 0.01 : 0.003, 1.85, 8]} 
-              position={[0, 1.725, 0]} 
-              material={new THREE.MeshBasicMaterial({ color: isMajor ? "#ffffff" : "#D5B6DC", transparent: true, opacity: isMajor ? 0.5 : 0.2 })} 
-            />
-            {isMajor && (
-              <mesh position={[0, 2.7, 0]}>
-                <sphereGeometry args={[0.04, 16, 16]} />
-                <meshBasicMaterial color="#ffffff" transparent opacity={0.9} />
-              </mesh>
-            )}
-          </group>
-        );
-      })}
+      {stones.map((stone, i) => (
+        <GalaxyStone 
+          key={i} 
+          position={stone.pos} 
+          scale={stone.scale} 
+          rotationSpeed={stone.speed} 
+          textureUrl={stone.texture} 
+        />
+      ))}
     </group>
   );
 }
@@ -72,38 +99,15 @@ export default function DharmaWheel() {
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
-  const RADIUS = 280;
-
   return (
     <div className="relative w-[650px] h-[650px] flex items-center justify-center scale-85 lg:scale-100">
       
       {/* 3D WebGL Canvas */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[5, 10, 5]} intensity={2} color="#ffffff" />
-          <pointLight position={[-5, -5, 5]} intensity={1.5} color="#B9A0E4" />
-          
-          <Float speed={1} rotationIntensity={0.2} floatIntensity={0.5}>
-            <Wheel3D />
+        <Canvas camera={{ position: [0, 0, 8], fov: 55 }}>
+          <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.3}>
+            <HybridWheel />
           </Float>
-          
-          <Environment resolution={64}>
-            <group>
-              <mesh scale={100}>
-                <sphereGeometry args={[1, 16, 16]} />
-                <meshBasicMaterial color="#333333" side={THREE.BackSide} />
-              </mesh>
-              <mesh position={[10, 10, -10]}>
-                <planeGeometry args={[20, 20]} />
-                <meshBasicMaterial color="#ffffff" />
-              </mesh>
-              <mesh position={[-10, -10, -10]}>
-                <planeGeometry args={[20, 20]} />
-                <meshBasicMaterial color="#B9A0E4" />
-              </mesh>
-            </group>
-          </Environment>
         </Canvas>
       </div>
 
@@ -132,7 +136,7 @@ export default function DharmaWheel() {
               >
                 <div className="flex items-center gap-2 px-3 py-1.5 transition-all duration-300 hover:scale-110">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#1E2059]/40 group-hover:bg-[#5F3BA9] shadow-[0_0_8px_rgba(95,59,169,0.5)] transition-colors" />
-                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#1E2059]/60 group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#3A247A] group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
                     {mod.name}
                   </span>
                 </div>
@@ -143,8 +147,14 @@ export default function DharmaWheel() {
       </div>
 
       {/* Center Logo */}
-      <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-2xl flex items-center justify-center p-3 border-2 border-[#8982D0]/40 cursor-pointer hover:scale-105 transition-transform">
-        <img src="/center_logo_final.png" alt="ZenAuraa" className="w-full h-full object-cover scale-[1.25] mt-2 ml-1" />
+      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+        <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-full flex items-center justify-center pointer-events-auto shadow-[0_0_40px_rgba(255,255,255,0.9)] overflow-hidden bg-white group transition-transform duration-700 hover:scale-105">
+          <img
+            src="/center_logo_final.png"
+            alt="ZenAuraa"
+            className="w-[110%] h-[110%] object-cover scale-[1.15] group-hover:scale-[1.25] transition-transform duration-700 mt-2 ml-1"
+          />
+        </div>
       </div>
     </div>
   );
