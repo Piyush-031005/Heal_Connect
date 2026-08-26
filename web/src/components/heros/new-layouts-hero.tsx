@@ -66,9 +66,9 @@ export default function NewLayoutsHero() {
               </button>
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000 text-[#1E2059]">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-sans font-bold not-italic tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000 text-[#1E2059]">
               <span>Zen</span>
-              <span className="text-[#FFD700] drop-shadow-md">Auraa.</span>
+              <span className="text-[#5F3BA9] drop-shadow-md">Auraa.</span>
             </h1>
             
             <p className="text-xl lg:text-2xl text-[#1E2059]/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
@@ -77,7 +77,7 @@ export default function NewLayoutsHero() {
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-in slide-in-from-left duration-1000 delay-300 pointer-events-auto">
               <Link href="/practitioners">
-                <Button size="lg" className="bg-[#FFD700] hover:bg-[#FFC000] text-[#1E2059] px-10 h-14 text-lg rounded-full font-semibold transition-all shadow-lg shadow-[#FFD700]/20">
+                <Button size="lg" className="bg-[#5F3BA9] hover:bg-[#4D316B] text-white px-10 h-14 text-lg rounded-full font-semibold transition-all shadow-lg shadow-[#5F3BA9]/20">
                   Ask me Anything <ArrowRight className="w-5 h-5 ml-2 inline" />
                 </Button>
               </Link>
