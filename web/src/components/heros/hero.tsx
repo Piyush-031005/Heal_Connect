@@ -14,7 +14,7 @@ import OpticalWheel from '@/components/optical-wheel';
 function PrimaryHero() {
   return (
     <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-background min-h-[90vh] flex items-center">
-      {/* Scattered star particles — like HealConnect reference */}
+      {/* Scattered star particles — like ZenAuraa reference */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
         {[
           [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
@@ -104,7 +104,7 @@ function PrimaryHero() {
 function NewLayout1Hero() {
   return (
     <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-gradient-to-b from-[#EDE5FC] via-[#EDE5FC] to-[#4E67CC]/40 min-h-[90vh] flex items-center">
-      {/* Scattered star particles — like HealConnect reference */}
+      {/* Scattered star particles — like ZenAuraa reference */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
         {[
           [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
@@ -975,7 +975,7 @@ function FinalHybridHero() {
                   <div className="relative w-full h-full z-10 flex items-center justify-center">
                     <Image
                       src={currentLogo}
-                      alt="HealConnect Logo"
+                      alt="ZenAuraa Logo"
                       fill
                       className="object-contain drop-shadow-[0_10px_20px_rgba(var(--primary),0.6)] hover:scale-105 hover:drop-shadow-[0_15px_30px_rgba(var(--primary),0.8)] transition-all duration-500 cursor-pointer"
                     />
@@ -1104,7 +1104,7 @@ function FinalHybridHero() {
                   <div className="relative w-full h-full z-10 flex items-center justify-center">
                     <Image
                       src={currentLogo}
-                      alt="HealConnect Logo"
+                      alt="ZenAuraa Logo"
                       fill
                       className="object-contain drop-shadow-[0_10px_20px_rgba(var(--primary),0.6)] hover:scale-105 hover:drop-shadow-[0_15px_30px_rgba(var(--primary),0.8)] transition-all duration-500 cursor-pointer"
                     />

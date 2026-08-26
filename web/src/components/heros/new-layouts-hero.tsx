@@ -30,13 +30,7 @@ export default function NewLayoutsHero() {
   const renderVisual = () => {
     switch (layout) {
       case 'layout-1': return <FloatingPebbles />;
-      case 'layout-2': return <FloatingOrbs />;
-      case 'layout-3': return <LotusPetals />;
-      case 'layout-4': return <LightParticles />;
       case 'layout-5': return <AuroraBlob />;
-      case 'layout-6': return <MandalaPetals />;
-      case 'layout-7': return <DharmaWheel />;
-      case 'layout-8': return <MeditationMudras />;
       case 'layout-9': return <PeacockBloom />;
       default: return null;
     }
@@ -53,11 +47,11 @@ export default function NewLayoutsHero() {
             
             {/* Action Buttons (Yellowish) */}
             <div className="flex items-center gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-100">
-              <button className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#FFD700]/30 bg-[#FFD700]/10 hover:bg-[#FFD700]/20 text-[#1E2059] text-sm font-semibold transition-all">
+              <button className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#F5DD97]/30 bg-[#F5DD97]/10 hover:bg-[#F5DD97]/20 text-[#1E2059] text-sm font-semibold transition-all">
                 <MessageCircle className="w-4 h-4 text-[#B48A28]" />
                 <span>Start Chat</span>
               </button>
-              <button className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#FFD700] hover:bg-[#FFC000] text-[#1E2059] text-sm font-bold transition-all shadow-lg shadow-[#FFD700]/20">
+              <button className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#F5DD97] hover:bg-[#e0c67e] text-[#1E2059] text-sm font-bold transition-all shadow-lg shadow-[#F5DD97]/20">
                 <Phone className="w-4 h-4" />
                 <span>Start Calling</span>
               </button>

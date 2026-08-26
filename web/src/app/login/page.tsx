@@ -81,7 +81,7 @@ function LoginInner() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col md:flex-row font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#E6E6FA] via-[#D8BFD8] to-[#E6E6FA] text-foreground flex flex-col md:flex-row font-sans relative overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(214,180,107,0.15)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />

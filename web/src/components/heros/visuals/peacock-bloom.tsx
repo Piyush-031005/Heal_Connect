@@ -126,8 +126,8 @@ export default function PeacockBloom() {
       </div>
       <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
         {/* LOGO SCALED DOWN SLIGHTLY SO IT FITS PERFECTLY (w-24 instead of w-28) */}
-        <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center pointer-events-auto shadow-[0_0_40px_rgba(255,255,255,0.9)] overflow-hidden bg-white group transition-transform duration-700 hover:scale-105">
-          <img src="/center_logo_final.png" alt="ZenAuraa" className="w-[100%] h-[100%] object-cover scale-[1.0] group-hover:scale-[1.1] transition-transform duration-700 mt-2 ml-1" />
+        <div className="relative w-36 h-36 md:w-48 md:h-48 rounded-full flex items-center justify-center pointer-events-auto shadow-[0_0_40px_rgba(255,255,255,0.9)] overflow-hidden bg-white group transition-transform duration-700 hover:scale-105">
+          <img src="/main centre logo/girl.png" alt="ZenAuraa" className="w-[100%] h-[100%] object-cover scale-[1.0] group-hover:scale-[1.1] transition-transform duration-700 mt-2 ml-1" />
         </div>
       </div>
     </div>

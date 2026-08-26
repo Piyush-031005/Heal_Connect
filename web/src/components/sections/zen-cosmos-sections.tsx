@@ -263,7 +263,7 @@ export function ZodiacOrbitRing() {
             </div>
             <Link href="/signup" className="inline-flex items-center gap-3 text-[#F8F7FA] font-bold group">
               <span className="text-lg">Explore {active.name}</span>
-              <div className="w-12 h-12 rounded-full flex items-center justify-center border border-[#12527F]/20 group-hover:bg-[#12527F] group-hover:text-white transition-all bg-white"
+              <div className="w-12 h-12 rounded-full flex items-center justify-center border border-[#12527F]/20 group-hover:bg-[#12527F] group-hover:text-[#3A247A] transition-all bg-white"
                 style={{ borderColor: `${active.color}40` }}>
                 <ArrowRight className="w-5 h-5" />
               </div>
@@ -431,18 +431,18 @@ export function TarotTable() {
             <div className="w-16 h-[2px] mx-auto mb-5" style={{ backgroundColor: TAROT_CARDS[flipped].color }} />
             <p className="text-sm text-[#1A92C6] leading-relaxed mb-7 font-bold max-w-md mx-auto">{TAROT_CARDS[flipped].message}</p>
             <div className="flex gap-3 justify-center flex-wrap">
-              <Link href="/signup" className="px-6 py-3 rounded-full text-xs font-bold transition-all shadow-md hover:scale-105 text-white"
+              <Link href="/signup" className="px-6 py-3 rounded-full text-xs font-bold transition-all shadow-md hover:scale-105 text-[#3A247A]"
                 style={{ background: `linear-gradient(135deg, ${TAROT_CARDS[flipped].color}, ${TAROT_CARDS[flipped].color}EE)` }}>
                 Find a Tarot Reader
               </Link>
-              <Link href="/signup" className="px-6 py-3 rounded-full text-xs font-bold transition-all hover:scale-105 text-white/50 border border-white/10">
+              <Link href="/signup" className="px-6 py-3 rounded-full text-xs font-bold transition-all hover:scale-105 text-[#3A247A]/50 border border-white/10">
                 Full Reading
               </Link>
             </div>
           </div>
         )}
         {flipped === null && (
-          <p className="text-white/25 text-xs font-medium" style={{ letterSpacing: '0.2em' }}>✦ SELECT A CARD ✦</p>
+          <p className="text-[#3A247A]/25 text-xs font-medium" style={{ letterSpacing: '0.2em' }}>✦ SELECT A CARD ✦</p>
         )}
       </div>
     </section>
@@ -612,7 +612,7 @@ export function ExpertStoriesDeck() {
                   >
                     <img src={ex.img} alt={ex.name} className="w-full h-full object-cover object-top" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-4 left-4 text-white">
+                    <div className="absolute bottom-4 left-4 text-[#3A247A]">
                       <div className="font-bold text-sm">{ex.name}</div>
                       <div className="text-xs opacity-75">{ex.role}</div>
                     </div>
@@ -674,7 +674,7 @@ export function ExpertStoriesDeck() {
               </div>
             </div>
             <Link href="/signup"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl text-white font-bold text-base shadow-xl hover:scale-105 transition-all"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl text-[#3A247A] font-bold text-base shadow-xl hover:scale-105 transition-all"
               style={{ backgroundColor: expert.color }}>
               Book a Session <ArrowRight className="w-5 h-5" />
             </Link>
@@ -886,7 +886,7 @@ export function YourNextDiscovery() {
                 onMouseEnter={() => setHovered(path.id)}
                 onMouseLeave={() => setHovered('explore')}>
                 {'featured' in path && (
-                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wider text-white"
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wider text-[#3A247A]"
                     style={{ backgroundColor: path.color }}>Popular</div>
                 )}
                 <div className="text-4xl mb-6 font-serif" style={{ color: path.color }}>{path.icon}</div>
@@ -913,7 +913,7 @@ export function YourNextDiscovery() {
 
         <div className="text-center">
           <Link href="/signup"
-            className="inline-flex items-center gap-4 px-10 py-5 rounded-2xl text-white font-bold text-lg shadow-2xl hover:scale-105 transition-all"
+            className="inline-flex items-center gap-4 px-10 py-5 rounded-2xl text-[#3A247A] font-bold text-lg shadow-2xl hover:scale-105 transition-all"
             style={{ background: 'linear-gradient(135deg, #B79AE6 0%, #694091 100%)', color: '#F8F7FA' }}>
             <span>Begin Your Cosmic Journey</span>
             <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">

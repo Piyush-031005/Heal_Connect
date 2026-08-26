@@ -183,10 +183,10 @@ export default function Navbar() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
               <Image src={theme === 'theme-royal-indigo' ? '/center_logo_final.png' : '/center_logo_final.png'} alt="ZenAuraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
-              <span className="text-2xl font-serif font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide">ZenAuraa</span>
+              <span className="text-2xl font-serif font-black text-[#5F3BA9] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide">ZenAuraa</span>
             </div>
             <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-[#5F3BA9]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -198,7 +198,7 @@ export default function Navbar() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400" />
             </span>
-            <span className="text-white/90 text-xs font-semibold">1,240 astrologers online now</span>
+            <span className="text-[#5F3BA9] text-xs font-semibold">1,240 astrologers online now</span>
           </div>
 
           {/* Avatar row */}
@@ -210,10 +210,10 @@ export default function Navbar() {
                 </div>
               ))}
               <div className="w-7 h-7 rounded-full border-2 border-white/60 bg-white/20 flex items-center justify-center">
-                <span className="text-[10px] font-bold text-white">+3</span>
+                <span className="text-[10px] font-bold text-[#5F3BA9]">+3</span>
               </div>
             </div>
-            <span className="text-white/70 text-[11px] ml-1">Astrologer</span>
+            <span className="text-[#5F3BA9]/70 text-[11px] ml-1">Astrologer</span>
           </div>
 
           {/* Sign in CTA */}
@@ -224,7 +224,7 @@ export default function Navbar() {
           >
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-300 to-orange-400 flex items-center justify-center shrink-0">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-[#5F3BA9]" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
                   <circle cx="12" cy="8" r="4" />
                   <path strokeLinecap="round" d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                 </svg>
@@ -363,7 +363,7 @@ export default function Navbar() {
               <button
                 onClick={() => setLayoutOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
-                  isDark ? 'border-white/20 hover:bg-white/10 hover:text-white' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50 hover:text-amber-600'
+                  isDark ? 'border-white/20 hover:bg-white/10 hover:text-[#5F3BA9]' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50 hover:text-amber-600'
                 }`}
               >
                 <Layout className="w-4 h-4" />
@@ -410,7 +410,7 @@ export default function Navbar() {
               <button
                 onClick={() => setThemeOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all ${
-                  isDark ? 'border-white/20 hover:bg-white/10 text-white' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50 text-amber-600'
+                  isDark ? 'border-white/20 hover:bg-white/10 text-[#5F3BA9]' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50 text-amber-600'
                 }`}
                 title="Select Theme"
               >
