@@ -374,14 +374,8 @@ export default function Navbar() {
                   {([
                     { code: 'final-hybrid', label: ' Final Hybrid' },
                     { code: 'layout-1', label: ' Layout 1 (Pebbles)' },
-                    { code: 'layout-2', label: ' Layout 2 (Orbs)' },
-                    { code: 'layout-3', label: ' Layout 3 (Lotus)' },
-                    { code: 'layout-4', label: ' Layout 4 (Constellation)' },
-                    { code: 'layout-5', label: ' Layout 5 (Nebula)' },
-                    { code: 'layout-6', label: ' Layout 6 (Mandala)' },
-                    { code: 'layout-7', label: ' Layout 7 (Dharma Wheel)' },
-                    { code: 'layout-8', label: ' Layout 8 (Mudras)' },
-                    { code: 'layout-9', label: ' Layout 9 (Peacock)' },
+                                                                                { code: 'layout-5', label: ' Layout 5 (Nebula)' },
+                                                                                { code: 'layout-9', label: ' Layout 9 (Peacock)' },
                   ] as const).map((l) => (
                     <button
                       key={l.code}
