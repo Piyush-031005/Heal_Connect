@@ -20,7 +20,7 @@ export default function FaqSection() {
   const isFinalHybrid = layout === 'final-hybrid';
 
   return (
-    <section className={`py-24 relative ${isFinalHybrid ? 'bg-transparent' : 'bg-[#F8F9FA]'}`}>
+    <section className={`py-24 relative bg-transparent`}>
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
         <div className="flex flex-col md:flex-row gap-16 items-start">
           
@@ -31,12 +31,15 @@ export default function FaqSection() {
                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#B79AE6]">Support</span>
               </div>
             ) : (
-              <h4 className="text-pink-600 font-bold tracking-widest text-sm uppercase mb-3">Questions, Answered</h4>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-[2px] bg-[#5F3BA9]" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#5F3BA9]">Support</span>
+              </div>
             )}
             
-            <h2 className={`text-4xl md:text-5xl font-serif font-bold leading-tight ${isFinalHybrid ? 'text-[#F8F7FA]' : 'text-foreground'}`}>
+            <h2 className={`text-4xl md:text-5xl font-heading font-semibold not-italic leading-tight ${isFinalHybrid ? 'text-[#F8F7FA]' : 'text-[#1E2059]'}`}>
               First time? <br/>
-              <span className={isFinalHybrid ? 'text-[#B79AE6] italic font-medium' : 'text-pink-700'}>Read these</span> first.
+              <span className={isFinalHybrid ? 'text-[#B79AE6] italic font-medium' : 'text-[#5F3BA9] font-medium'}>Read these</span> first.
             </h2>
           </div>
 
@@ -50,8 +53,8 @@ export default function FaqSection() {
                       ? 'bg-[#7A48AB] border-[#B79AE6]/50 shadow-[0_10px_30px_rgba(212,175,55,0.1)]' 
                       : 'bg-[#4D316B] border-[#694091] hover:bg-[#7A48AB]/40'
                     : openIdx === idx 
-                      ? 'bg-white border-pink-100 shadow-md ring-1 ring-pink-50' 
-                      : 'bg-white border-border/50 hover:border-pink-100 shadow-sm'
+                      ? 'bg-[#1E2059]/10 border-[#5F3BA9]/30 shadow-[0_10px_30px_rgba(30,32,89,0.1)] backdrop-blur-md' 
+                      : 'bg-white/40 border-white/40 hover:bg-[#1E2059]/5 backdrop-blur-md'
                 }`}
                 onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
               >
@@ -59,20 +62,20 @@ export default function FaqSection() {
                   <h3 className={`font-serif font-medium text-lg md:text-xl ${
                     isFinalHybrid 
                       ? openIdx === idx ? 'text-[#B79AE6]' : 'text-[#F8F7FA]'
-                      : openIdx === idx ? 'text-pink-800' : 'text-foreground'
+                      : openIdx === idx ? 'text-[#5F3BA9]' : 'text-[#1E2059]'
                   }`}>
                     {faq.q}
                   </h3>
                   {openIdx === idx ? (
-                    <ChevronUp className={`w-5 h-5 shrink-0 ${isFinalHybrid ? 'text-[#B79AE6]' : 'text-pink-500'}`} />
+                    <ChevronUp className={`w-5 h-5 shrink-0 ${isFinalHybrid ? 'text-[#B79AE6]' : 'text-[#5F3BA9]'}`} />
                   ) : (
-                    <ChevronDown className={`w-5 h-5 shrink-0 ${isFinalHybrid ? 'text-[#B79AE6]' : 'text-muted-foreground'}`} />
+                    <ChevronDown className={`w-5 h-5 shrink-0 ${isFinalHybrid ? 'text-[#B79AE6]' : 'text-[#1E2059]/60'}`} />
                   )}
                 </div>
                 
                 {openIdx === idx && (
                   <div className={`px-6 md:px-8 pb-8 text-sm md:text-base leading-relaxed animate-in fade-in slide-in-from-top-4 duration-300 ${
-                    isFinalHybrid ? 'text-[#B79AE6]' : 'text-muted-foreground'
+                    isFinalHybrid ? 'text-[#B79AE6]' : 'text-[#1E2059]/60'
                   }`}>
                     {faq.a}
                   </div>

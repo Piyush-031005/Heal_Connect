@@ -101,16 +101,14 @@ export default function MeditationMudras() {
         </Canvas>
       </div>
 
-      {/* Revolving Premium Labels Layer */}
+      {/* Revolving Minimal Ethereal Labels */}
       <div 
         className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
         style={{ animation: 'spin 80s linear infinite' }}
       >
         {MODALITIES.map((mod, i) => {
-          // Calculate positions in a circle
           const total = MODALITIES.length;
           const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
-          // Use a fixed radius for the orbit
           const r = 260; 
           const x = Math.cos(angle) * r;
           const y = Math.sin(angle) * r;
@@ -121,15 +119,14 @@ export default function MeditationMudras() {
               className="absolute"
               style={{ transform: `translate(${x}px, ${y}px)` }}
             >
-              {/* Counter-rotation to keep labels upright */}
               <div 
                 className="pointer-events-auto cursor-pointer group"
                 style={{ animation: 'spin 80s linear infinite reverse' }}
                 onClick={() => router.push(`/modalities/${mod.id}`)}
               >
-                <div className="flex items-center gap-2 bg-[#1E2059]/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:bg-[#5F3BA9]/80 hover:border-white/30 transition-all duration-300 hover:scale-110">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#D5B6DC] group-hover:bg-white shadow-[0_0_8px_#fff] transition-colors" />
-                  <span className="text-[10px] sm:text-xs tracking-widest font-medium text-white/90 group-hover:text-white uppercase transition-colors">
+                <div className="flex items-center gap-2 px-3 py-1.5 transition-all duration-300 hover:scale-110">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#1E2059]/40 group-hover:bg-[#5F3BA9] shadow-[0_0_8px_rgba(95,59,169,0.5)] transition-colors" />
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#1E2059]/60 group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
                     {mod.name}
                   </span>
                 </div>
