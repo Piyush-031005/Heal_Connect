@@ -1,5 +1,5 @@
-import NewLayoutsHero from './new-layouts-hero';
 'use client';
+import NewLayoutsHero from './new-layouts-hero';
 
 import Link from 'next/link';
 import Image from 'next/image';
