@@ -63,7 +63,7 @@ export default function NewLayoutsHero() {
               </button>
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-sans font-bold not-italic tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000 text-[#1E2059]">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-medium not-italic tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000 text-[#1E2059]">
               <span>Zen</span>
               <span className="text-[#5F3BA9] drop-shadow-md">Auraa.</span>
             </h1>

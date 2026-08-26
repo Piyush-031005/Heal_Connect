@@ -19,58 +19,43 @@ function Wheel3D() {
   
   useFrame((state, delta) => {
     if (wheelRef.current) {
-      // Slow rotation on Z axis
       wheelRef.current.rotation.z -= delta * 0.1;
-      // Slight tilting for 3D effect
-      wheelRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
-      wheelRef.current.rotation.y = Math.cos(state.clock.elapsedTime * 0.5) * 0.1;
+      wheelRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.05;
+      wheelRef.current.rotation.y = Math.cos(state.clock.elapsedTime * 0.5) * 0.05;
     }
   });
 
-  const materialProps = {
-    color: "#D5B6DC",
-    metalness: 0.9,
-    roughness: 0.2,
-    envMapIntensity: 1.5,
-  };
-
-  const accentProps = {
-    color: "#5F3BA9",
-    metalness: 0.8,
-    roughness: 0.3,
-  };
-
   return (
     <group ref={wheelRef}>
-      {/* Outer thick rim */}
-      <Torus args={[2.8, 0.12, 16, 100]} material={new THREE.MeshStandardMaterial(materialProps)} />
+      {/* Outer very thin glowing rings */}
+      <Torus args={[2.8, 0.015, 16, 128]} material={new THREE.MeshBasicMaterial({ color: "#B9A0E4", transparent: true, opacity: 0.6 })} />
+      <Torus args={[2.65, 0.005, 16, 128]} material={new THREE.MeshBasicMaterial({ color: "#8982D0", transparent: true, opacity: 0.4 })} />
+      <Torus args={[0.8, 0.01, 16, 64]} material={new THREE.MeshBasicMaterial({ color: "#5F3BA9", transparent: true, opacity: 0.8 })} />
+      <Torus args={[0.7, 0.005, 16, 64]} material={new THREE.MeshBasicMaterial({ color: "#ffffff", transparent: true, opacity: 0.3 })} />
       
-      {/* Inner thin rim */}
-      <Torus args={[2.5, 0.04, 16, 100]} material={new THREE.MeshStandardMaterial(accentProps)} />
-      
-      {/* Center Hub */}
-      <Torus args={[0.6, 0.15, 16, 64]} material={new THREE.MeshStandardMaterial(materialProps)} />
-      <Cylinder args={[0.5, 0.5, 0.2, 32]} rotation={[Math.PI/2, 0, 0]} material={new THREE.MeshStandardMaterial(accentProps)} />
+      {/* Center glowing core */}
+      <mesh>
+        <sphereGeometry args={[0.3, 32, 32]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.1} />
+      </mesh>
 
-      {/* 12 Spokes */}
-      {Array.from({length: 12}).map((_, i) => {
-        const angle = (i / 12) * Math.PI * 2;
+      {/* 24 thin ethereal spokes */}
+      {Array.from({length: 24}).map((_, i) => {
+        const angle = (i / 24) * Math.PI * 2;
+        const isMajor = i % 2 === 0;
         return (
           <group key={`spoke-${i}`} rotation={[0, 0, angle]}>
             <Cylinder 
-              args={[0.04, 0.02, 2.2, 16]} 
-              position={[0, 1.6, 0]} 
-              material={new THREE.MeshStandardMaterial(materialProps)} 
+              args={[isMajor ? 0.01 : 0.003, isMajor ? 0.01 : 0.003, 1.85, 8]} 
+              position={[0, 1.725, 0]} 
+              material={new THREE.MeshBasicMaterial({ color: isMajor ? "#ffffff" : "#D5B6DC", transparent: true, opacity: isMajor ? 0.5 : 0.2 })} 
             />
-            {/* Spoke ornaments */}
-            <mesh position={[0, 1.2, 0]}>
-              <sphereGeometry args={[0.08, 16, 16]} />
-              <meshStandardMaterial {...accentProps} />
-            </mesh>
-            <mesh position={[0, 2.7, 0]}>
-              <sphereGeometry args={[0.1, 16, 16]} />
-              <meshStandardMaterial {...accentProps} />
-            </mesh>
+            {isMajor && (
+              <mesh position={[0, 2.7, 0]}>
+                <sphereGeometry args={[0.04, 16, 16]} />
+                <meshBasicMaterial color="#ffffff" transparent opacity={0.9} />
+              </mesh>
+            )}
           </group>
         );
       })}
@@ -119,22 +104,39 @@ export default function DharmaWheel() {
         </Canvas>
       </div>
 
-      {/* Static Upright Labels (Separate Layer) */}
-      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+      {/* Revolving Premium Labels Layer */}
+      <div 
+        className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
+        style={{ animation: 'spin 80s linear infinite' }}
+      >
         {MODALITIES.map((mod, i) => {
-          const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
-          const x = Math.cos(angle) * RADIUS;
-          const y = Math.sin(angle) * RADIUS;
+          // Calculate positions in a circle
+          const total = MODALITIES.length;
+          const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
+          // Use a fixed radius for the orbit
+          const r = 260; 
+          const x = Math.cos(angle) * r;
+          const y = Math.sin(angle) * r;
+          
           return (
             <div
               key={`label-${mod.id}`}
-              className="absolute pointer-events-auto cursor-pointer group"
+              className="absolute"
               style={{ transform: `translate(${x}px, ${y}px)` }}
-              onClick={() => router.push(`/modalities/${mod.id}`)}
             >
-              <span className="text-[10px] font-bold text-[#1E2059] bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full whitespace-nowrap shadow-md border border-[#5F3BA9]/30 group-hover:bg-white group-hover:scale-110 transition-all">
-                {mod.name}
-              </span>
+              {/* Counter-rotation to keep labels upright */}
+              <div 
+                className="pointer-events-auto cursor-pointer group"
+                style={{ animation: 'spin 80s linear infinite reverse' }}
+                onClick={() => router.push(`/modalities/${mod.id}`)}
+              >
+                <div className="flex items-center gap-2 bg-[#1E2059]/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:bg-[#5F3BA9]/80 hover:border-white/30 transition-all duration-300 hover:scale-110">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#D5B6DC] group-hover:bg-white shadow-[0_0_8px_#fff] transition-colors" />
+                  <span className="text-[10px] sm:text-xs tracking-widest font-medium text-white/90 group-hover:text-white uppercase transition-colors">
+                    {mod.name}
+                  </span>
+                </div>
+              </div>
             </div>
           );
         })}

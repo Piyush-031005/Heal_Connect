@@ -126,25 +126,39 @@ export default function LightParticles() {
         </Canvas>
       </div>
 
-      {/* Static Upright Labels (Separate Layer, Interactive) */}
-      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+      {/* Revolving Premium Labels Layer */}
+      <div 
+        className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
+        style={{ animation: 'spin 80s linear infinite' }}
+      >
         {MODALITIES.map((mod, i) => {
-          const angle = (i / MODALITIES.length) * Math.PI * 2 - Math.PI / 2;
-          const x = Math.cos(angle) * RADIUS;
-          const y = Math.sin(angle) * RADIUS;
+          // Calculate positions in a circle
+          const total = MODALITIES.length;
+          const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
+          // Use a fixed radius for the orbit
+          const r = 260; 
+          const x = Math.cos(angle) * r;
+          const y = Math.sin(angle) * r;
+          
           return (
             <div
               key={`label-${mod.id}`}
-              className="absolute pointer-events-auto cursor-pointer group"
+              className="absolute"
               style={{ transform: `translate(${x}px, ${y}px)` }}
-              onClick={() => router.push(`/modalities/${mod.id}`)}
             >
-              {/* Invisible interactive area over the 3D node */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full" />
-              
-              <span className="relative top-6 text-[10px] font-bold text-[#1E2059] bg-white/80 backdrop-blur-sm px-2.5 py-1 rounded-full whitespace-nowrap shadow-sm border border-white/40 group-hover:bg-white group-hover:scale-110 transition-all">
-                {mod.name}
-              </span>
+              {/* Counter-rotation to keep labels upright */}
+              <div 
+                className="pointer-events-auto cursor-pointer group"
+                style={{ animation: 'spin 80s linear infinite reverse' }}
+                onClick={() => router.push(`/modalities/${mod.id}`)}
+              >
+                <div className="flex items-center gap-2 bg-[#1E2059]/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:bg-[#5F3BA9]/80 hover:border-white/30 transition-all duration-300 hover:scale-110">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#D5B6DC] group-hover:bg-white shadow-[0_0_8px_#fff] transition-colors" />
+                  <span className="text-[10px] sm:text-xs tracking-widest font-medium text-white/90 group-hover:text-white uppercase transition-colors">
+                    {mod.name}
+                  </span>
+                </div>
+              </div>
             </div>
           );
         })}

@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState, useRef, useMemo } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Float, Sphere } from '@react-three/drei';
+import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 const MODALITIES = [
@@ -14,94 +14,95 @@ const MODALITIES = [
   {id:'space-harmony',name:'Space Harmony'},{id:'numerology',name:'Numerology'},
 ];
 
-function Feather({ angle, radius, isLong, delay }: { angle: number, radius: number, isLong: boolean, delay: number }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const length = isLong ? 2.5 : 2.0;
+function Feather({ angle, radius, size, delay, color, isAccent = false }: { angle: number, radius: number, size: number, delay: number, color: string, isAccent?: boolean }) {
+  const ref = useRef<THREE.Group>(null);
   
   useFrame((state) => {
-    if (meshRef.current) {
-      // Breathing / fanning animation
-      meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime + delay) * 0.1;
+    if (ref.current) {
+      // Gentle breathing effect
+      const scale = 1 + Math.sin(state.clock.elapsedTime * 1.2 + delay) * 0.08;
+      ref.current.scale.set(scale, scale, scale);
+      
+      // Slight inward/outward bending
+      ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.8 + delay) * 0.1;
     }
   });
 
   return (
     <group rotation={[0, 0, angle]}>
-      {/* Position feather outwards from center */}
-      <group position={[0, length / 2 + 0.5, 0]}>
-        <mesh ref={meshRef}>
-          {/* A stretched sphere acts as a nice thick feather blade */}
-          <sphereGeometry args={[0.2, 32, 32]} />
-          <meshPhysicalMaterial 
-            color="#5F3BA9"
-            emissive="#1E2059"
-            emissiveIntensity={0.5}
-            roughness={0.2}
-            metalness={0.8}
-            clearcoat={1}
-            clearcoatRoughness={0.1}
-            iridescence={1}
-            iridescenceIOR={1.5}
-            iridescenceThicknessRange={[100, 400]}
-          />
+      <group ref={ref} position={[0, radius / 2, 0]}>
+        {/* Delicate stem */}
+        <mesh position={[0, 0, 0]}>
+          <cylinderGeometry args={[0.005 * size, 0.02 * size, radius, 8]} />
+          <meshBasicMaterial color={color} transparent opacity={0.5} />
         </mesh>
         
-        {/* Scale the sphere to be long and flat like a feather */}
-        <group scale={[1, length * 2.5, 0.1]}>
-          <mesh>
-            <sphereGeometry args={[0.2, 32, 32]} />
-            <meshPhysicalMaterial 
-              color="#8982D0"
-              roughness={0.3}
-              metalness={0.6}
-              clearcoat={1}
-              iridescence={1}
-            />
+        {/* Peacock Eye (Tip) */}
+        <group position={[0, radius / 2 - 0.1 * size, 0.05]}>
+          {/* Center bright dot */}
+          <mesh position={[0, 0, 0.02]}>
+            <sphereGeometry args={[0.06 * size, 16, 16]} />
+            <meshBasicMaterial color={isAccent ? "#FFD700" : "#ffffff"} transparent opacity={0.9} />
+          </mesh>
+          
+          {/* Inner ring */}
+          <mesh position={[0, 0, 0.01]}>
+            <torusGeometry args={[0.12 * size, 0.03 * size, 16, 32]} />
+            <meshBasicMaterial color="#5F3BA9" transparent opacity={0.8} />
+          </mesh>
+
+          {/* Outer glowing ring */}
+          <mesh position={[0, 0, 0]}>
+            <torusGeometry args={[0.22 * size, 0.02 * size, 16, 32]} />
+            <meshBasicMaterial color={color} transparent opacity={0.6} />
+          </mesh>
+
+          {/* Ethereal glow behind the eye */}
+          <mesh position={[0, 0, -0.02]}>
+            <planeGeometry args={[0.8 * size, 1.2 * size]} />
+            <meshBasicMaterial color={color} transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} />
           </mesh>
         </group>
-
-        {/* Eye Spot */}
-        {isLong && (
-          <mesh position={[0, length - 0.5, 0.05]}>
-            <cylinderGeometry args={[0.15, 0.15, 0.05, 32]} />
-            <meshStandardMaterial color="#B9A0E4" emissive="#B9A0E4" emissiveIntensity={0.5} metalness={1} roughness={0} />
-          </mesh>
-        )}
       </group>
     </group>
   );
 }
 
-function PeacockFan() {
-  const fanRef = useRef<THREE.Group>(null);
+function MandalaPeacock() {
+  const groupRef = useRef<THREE.Group>(null);
   
   useFrame((state, delta) => {
-    if (fanRef.current) {
-      // Gentle sway
-      fanRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.5) * 0.05;
-      fanRef.current.rotation.x = Math.cos(state.clock.elapsedTime * 0.3) * 0.05;
+    if (groupRef.current) {
+      // Very slow majestic rotation
+      groupRef.current.rotation.z -= delta * 0.05;
+      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.3) * 0.05;
+      groupRef.current.rotation.y = Math.cos(state.clock.elapsedTime * 0.3) * 0.05;
     }
   });
-
-  const FEATHER_COUNT = 24;
-
+  
   return (
-    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
-      <group ref={fanRef} position={[0, -0.5, 0]}>
-        {Array.from({length: FEATHER_COUNT}).map((_, i) => {
-          const angle = (i / FEATHER_COUNT) * Math.PI * 2;
-          return (
-            <Feather 
-              key={i} 
-              angle={angle} 
-              radius={2} 
-              isLong={i % 2 === 0} 
-              delay={i * 0.2} 
-            />
-          );
-        })}
-      </group>
-    </Float>
+    <group ref={groupRef}>
+      {/* Background ambient core */}
+      <mesh>
+        <sphereGeometry args={[0.5, 32, 32]} />
+        <meshBasicMaterial color="#B9A0E4" transparent opacity={0.1} blending={THREE.AdditiveBlending} />
+      </mesh>
+
+      {/* Layer 1: Long majestic feathers */}
+      {Array.from({length: 16}).map((_, i) => (
+        <Feather key={`l1-${i}`} angle={(i / 16) * Math.PI * 2} radius={2.8} size={1.2} delay={i * 0.2} color="#B9A0E4" isAccent={i % 2 === 0} />
+      ))}
+      
+      {/* Layer 2: Medium dense feathers */}
+      {Array.from({length: 12}).map((_, i) => (
+        <Feather key={`l2-${i}`} angle={(i / 12) * Math.PI * 2 + 0.2} radius={2.0} size={0.9} delay={i * 0.3} color="#8982D0" />
+      ))}
+      
+      {/* Layer 3: Short inner crown */}
+      {Array.from({length: 8}).map((_, i) => (
+        <Feather key={`l3-${i}`} angle={(i / 8) * Math.PI * 2 + 0.1} radius={1.2} size={0.6} delay={i * 0.4} color="#5F3BA9" isAccent />
+      ))}
+    </group>
   );
 }
 
@@ -111,55 +112,48 @@ export default function PeacockBloom() {
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
-  const RADIUS = 280;
-
   return (
     <div className="relative w-[650px] h-[650px] flex items-center justify-center scale-85 lg:scale-100">
       
       {/* 3D WebGL Canvas */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Canvas camera={{ position: [0, 0, 8], fov: 55 }}>
-          <ambientLight intensity={0.8} />
-          <directionalLight position={[5, 10, 5]} intensity={2.5} color="#ffffff" />
-          <pointLight position={[-5, -5, 5]} intensity={2} color="#B9A0E4" />
-          
-          <PeacockFan />
-          
-          <Environment resolution={64}>
-            <group>
-              <mesh scale={100}>
-                <sphereGeometry args={[1, 16, 16]} />
-                <meshBasicMaterial color="#333333" side={THREE.BackSide} />
-              </mesh>
-              <mesh position={[10, 10, -10]}>
-                <planeGeometry args={[20, 20]} />
-                <meshBasicMaterial color="#ffffff" />
-              </mesh>
-              <mesh position={[-10, -10, -10]}>
-                <planeGeometry args={[20, 20]} />
-                <meshBasicMaterial color="#B9A0E4" />
-              </mesh>
-            </group>
-          </Environment>
+          <Float speed={1} rotationIntensity={0.1} floatIntensity={0.5}>
+            <MandalaPeacock />
+          </Float>
         </Canvas>
       </div>
 
-      {/* Static Upright Labels (Separate Layer) */}
-      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+      {/* Revolving Premium Labels Layer */}
+      <div 
+        className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
+        style={{ animation: 'spin 80s linear infinite' }}
+      >
         {MODALITIES.map((mod, i) => {
-          const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
-          const x = Math.cos(angle) * RADIUS;
-          const y = Math.sin(angle) * RADIUS;
+          const total = MODALITIES.length;
+          const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
+          const r = 260; 
+          const x = Math.cos(angle) * r;
+          const y = Math.sin(angle) * r;
+          
           return (
             <div
               key={`label-${mod.id}`}
-              className="absolute pointer-events-auto cursor-pointer group"
+              className="absolute"
               style={{ transform: `translate(${x}px, ${y}px)` }}
-              onClick={() => router.push(`/modalities/${mod.id}`)}
             >
-              <span className="text-[10px] font-bold text-[#1E2059] bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full whitespace-nowrap shadow-md border border-[#B9A0E4]/40 group-hover:bg-white group-hover:scale-110 transition-all">
-                {mod.name}
-              </span>
+              <div 
+                className="pointer-events-auto cursor-pointer group"
+                style={{ animation: 'spin 80s linear infinite reverse' }}
+                onClick={() => router.push(`/modalities/${mod.id}`)}
+              >
+                <div className="flex items-center gap-2 bg-[#1E2059]/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:bg-[#5F3BA9]/80 hover:border-white/30 transition-all duration-300 hover:scale-110">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#D5B6DC] group-hover:bg-white shadow-[0_0_8px_#fff] transition-colors" />
+                  <span className="text-[10px] sm:text-xs tracking-widest font-medium text-white/90 group-hover:text-white uppercase transition-colors">
+                    {mod.name}
+                  </span>
+                </div>
+              </div>
             </div>
           );
         })}
