@@ -5,14 +5,13 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Loader2, Eye, EyeOff, ArrowRight } from 'lucide-react';
-import { astrologerTokenStore, authApi } from '@/lib/api';
+import { astrologerTokenStore, authApi, tokenStore } from '@/lib/api';
 
 export default function ExpertSignupPage() {
   const router = useRouter();
-  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '', phone: '', dob: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '', dob: '' });
   const [showPass, setShowPass] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [signupMethod, setSignupMethod] = useState<'email' | 'phone'>('email');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -56,74 +55,28 @@ export default function ExpertSignupPage() {
 
     setLoading(true);
     try {
-      const res = await fetch('/api/auth/astrologer/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          password: form.password,
-          dob: form.dob,
-        }),
-      }).then(r => r.json());
+      const res = await authApi.practitionerRegister(
+        form.name,
+        form.email,
+        form.password,
+        form.dob,
+        { acceptTerms: true, acceptPrivacy: true, emailMarketingOptIn: false }
+      );
 
-      if (!res.success) {
+      if (!res.success || !res.data) {
         setError(res.message || 'Registration failed.');
         return;
       }
       
-      astrologerTokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-      if (res.data.astrologer) astrologerTokenStore.setProfile(res.data.astrologer);
-      router.push('/astrologer/onboarding');
+      tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+      localStorage.setItem('hc_role', 'practitioner');
+      localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
+      localStorage.setItem('hc_pid', res.data.practitioner.id);
+      localStorage.setItem('hc_practitioner_name', res.data.practitioner.name ?? '');
+      
+      router.push('/expert/dashboard');
     } catch {
       setError('Something went wrong. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handlePhoneSignup = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    
-    if (!form.phone) {
-      setError('Please enter a phone number.');
-      return;
-    }
-    if (!form.name) {
-      setError('Please enter your name.');
-      return;
-    }
-    if (!form.dob) {
-      setError('Please enter your date of birth.');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const cleanPhone = form.phone.replace(/\s+/g, '');
-      // Use astrologer OTP API
-      const res = await fetch('/api/auth/astrologer/send-otp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: cleanPhone, purpose: 'register' }),
-      }).then(r => r.json());
-      
-      if (!res.success) {
-        setError(res.message || 'Failed to send OTP.');
-        return;
-      }
-      
-      // Save form data to complete registration after OTP verification
-      sessionStorage.setItem('expertSignupData', JSON.stringify({
-        name: form.name,
-        phone: cleanPhone,
-        dob: form.dob,
-      }));
-      
-      router.push(`/verify-otp?phone=${encodeURIComponent(cleanPhone)}&type=register&role=expert`);
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong sending OTP.');
     } finally {
       setLoading(false);
     }
@@ -207,30 +160,8 @@ export default function ExpertSignupPage() {
               <div className="mb-5 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">{error}</div>
             )}
 
-            {/* Email/Phone Tabs */}
-            <div className="flex rounded-xl border border-yellow-200 overflow-hidden bg-[#fffbf0] p-1 gap-1 mb-5">
-              <button
-                type="button"
-                onClick={() => { setSignupMethod('email'); setError(''); }}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                  signupMethod === 'email' ? 'bg-amber-500 text-white shadow' : 'text-gray-500 hover:text-amber-500'
-                }`}
-              >
-                Email
-              </button>
-              <button
-                type="button"
-                onClick={() => { setSignupMethod('phone'); setError(''); }}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                  signupMethod === 'phone' ? 'bg-amber-500 text-white shadow' : 'text-gray-500 hover:text-amber-500'
-                }`}
-              >
-                Phone
-              </button>
-            </div>
-
-            {signupMethod === 'email' ? (
-              <form onSubmit={handleEmailSignup} className="space-y-4">
+            {/* Email signup form only for experts - phone registration not yet implemented for practitioners */}
+            <form onSubmit={handleEmailSignup} className="space-y-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name <span className="text-red-500">*</span></label>
                 <input className={inputCls} placeholder="Your full name" value={form.name} onChange={e => set('name', e.target.value)} required />
@@ -315,37 +246,6 @@ export default function ExpertSignupPage() {
                 {loading ? 'Creating account...' : <>Create Account & Continue <ArrowRight className="w-4 h-4" /></>}
               </button>
             </form>
-            ) : (
-              <form onSubmit={handlePhoneSignup} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name <span className="text-red-500">*</span></label>
-                  <input className={inputCls} placeholder="Your full name" value={form.name} onChange={e => set('name', e.target.value)} required />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phone Number <span className="text-red-500">*</span></label>
-                  <input className={inputCls} type="tel" placeholder="+919876543210" value={form.phone} onChange={e => set('phone', e.target.value)} required />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Date of Birth <span className="text-red-500">*</span></label>
-                  <input 
-                    className={inputCls} 
-                    type="date" 
-                    value={form.dob} 
-                    onChange={e => set('dob', e.target.value)} 
-                    required
-                    max={(() => { const d = new Date(); d.setFullYear(d.getFullYear() - 18); return d.toISOString().split('T')[0]; })()}
-                  />
-                </div>
-                
-                <button type="submit" disabled={loading}
-                  className="mt-3 w-full h-12 bg-amber-500 hover:bg-amber-600 disabled:opacity-60 text-white font-bold rounded-full text-sm shadow-lg flex items-center justify-center gap-2 transition-colors">
-                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
-                  {loading ? 'Sending OTP...' : <>Send OTP <ArrowRight className="w-4 h-4" /></>}
-                </button>
-              </form>
-            )}
 
             <div className="relative flex items-center py-4">
               <div className="flex-grow border-t border-yellow-100" />

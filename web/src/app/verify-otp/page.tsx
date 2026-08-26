@@ -133,9 +133,9 @@ function VerifyOtpContent() {
         let endpoint, body;
         
         if (role === 'expert') {
-          // Use astrologer OTP verification endpoint
-          endpoint = `${API_URL}/api/auth/astrologer/verify-otp`;
-          body = JSON.stringify({ phone, otp: otpCode, purpose: type });
+          // Use practitioner OTP verification endpoint
+          endpoint = `${API_URL}/api/auth/login-otp/verify`;
+          body = JSON.stringify({ phone, otp: otpCode, role: 'expert' });
         } else if (type === 'login') {
           endpoint = `${API_URL}/api/auth/login-otp/verify`;
           body = JSON.stringify({ phone, otp: otpCode, role });
@@ -154,11 +154,14 @@ function VerifyOtpContent() {
         if (data.success) {
           if (data.data) {
             if (role === 'expert') {
-              // Handle astrologer login/signup
-              localStorage.setItem('hca_access', data.data.accessToken);
-              localStorage.setItem('hca_refresh', data.data.refreshToken);
-              if (data.data.astrologer) {
-                localStorage.setItem('hca_profile', JSON.stringify(data.data.astrologer));
+              // Handle expert login/signup - use practitioner token store
+              localStorage.setItem('hc_access', data.data.accessToken);
+              localStorage.setItem('hc_refresh', data.data.refreshToken);
+              localStorage.setItem('hc_role', 'practitioner');
+              if (data.data.practitioner) {
+                localStorage.setItem('hc_practitioner_id', data.data.practitioner.id);
+                localStorage.setItem('hc_pid', data.data.practitioner.id);
+                localStorage.setItem('hc_practitioner_name', data.data.practitioner.name ?? '');
               }
             } else {
               // Handle user login
@@ -173,7 +176,10 @@ function VerifyOtpContent() {
           setSuccess(true);
           setTimeout(() => {
             if (type === 'login' || (role === 'expert' && data.data?.redirect)) {
-              router.push(role === 'expert' ? (data.data?.redirect || '/astrologer/onboarding') : '/dashboard');
+              router.push(role === 'expert' ? (data.data?.redirect || '/expert/dashboard') : '/dashboard');
+            } else if (role === 'expert') {
+              // Expert phone signup completed, redirect to dashboard
+              router.push('/expert/dashboard');
             } else {
               router.push('/login');
             }
