@@ -7,6 +7,10 @@ import FloatingOrbs from './visuals/floating-orbs';
 import LotusPetals from './visuals/lotus-petals';
 import LightParticles from './visuals/light-particles';
 import AuroraBlob from './visuals/aurora-blob';
+import MandalaPetals from './visuals/mandala-petals';
+import DharmaWheel from './visuals/dharma-wheel';
+import MeditationMudras from './visuals/meditation-mudras';
+import PeacockBloom from './visuals/peacock-bloom';
 
 export default function NewLayoutsHero() {
   const { layout } = useLayout();
@@ -18,6 +22,10 @@ export default function NewLayoutsHero() {
       case 'layout-3': return <LotusPetals />;
       case 'layout-4': return <LightParticles />;
       case 'layout-5': return <AuroraBlob />;
+      case 'layout-6': return <MandalaPetals />;
+      case 'layout-7': return <DharmaWheel />;
+      case 'layout-8': return <MeditationMudras />;
+      case 'layout-9': return <PeacockBloom />;
       default: return null;
     }
   };

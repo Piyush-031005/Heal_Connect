@@ -1,15 +1,8 @@
-'use client';
+"use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const MODALITIES = [
-  { id: 'astrology', name: 'Astrology' }, { id: 'tarot', name: 'Tarot' },
-  { id: 'face-reading', name: 'Face Reading' }, { id: 'palm-reading', name: 'Palm Reading' },
-  { id: 'sound-healing', name: 'Sound Healing' }, { id: 'meditation', name: 'Meditation' },
-  { id: 'spiritual', name: 'Spiritual' }, { id: 'chakra-healing', name: 'Chakra Healing' },
-  { id: 'breathwork', name: 'Breathwork' }, { id: 'dreams', name: 'Dream Predict' },
-  { id: 'space-harmony', name: 'Space Harmony' }, { id: 'numerology', name: 'Numerology' },
-];
+const MODALITIES = [{id:'astrology',name:'Astrology'},{id:'tarot',name:'Tarot'},{id:'face-reading',name:'Face Reading'},{id:'palm-reading',name:'Palm Reading'},{id:'sound-healing',name:'Sound Healing'},{id:'meditation',name:'Meditation'},{id:'spiritual',name:'Spiritual'},{id:'chakra-healing',name:'Chakra Healing'},{id:'breathwork',name:'Breathwork'},{id:'dreams',name:'Dream Predict'},{id:'space-harmony',name:'Space Harmony'},{id:'numerology',name:'Numerology'}];
 
 export default function FloatingPebbles() {
   const [mounted, setMounted] = useState(false);
@@ -19,23 +12,18 @@ export default function FloatingPebbles() {
   if (!mounted) return null;
 
   return (
-    <div className="relative w-[500px] h-[500px] flex items-center justify-center">
-      {/* Center Logo with Halo */}
+    <div className="relative w-[500px] h-[500px] flex items-center justify-center scale-90 lg:scale-100">
       <div className="absolute z-10 w-28 h-28 rounded-full bg-white shadow-[0_0_40px_rgba(109,79,199,0.5)] flex items-center justify-center p-3">
         <img src="/new_center_logo.png" alt="ZenAuraa" className="w-full h-full object-contain drop-shadow-md" />
       </div>
 
-      {/* Pebbles */}
       {MODALITIES.map((mod, i) => {
         const angle = (i / MODALITIES.length) * Math.PI * 2;
-        // Randomize radius between 120 and 220
-        const radius = 170 + Math.sin(i * 45) * 50; 
+        const radius = 210; // FIXED RADIUS FOR PERFECT CIRCLE
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
         const size = 50 + (i % 3) * 15;
         const delay = (i % 5) * 0.5;
-        
-        // Reversed gradient for every 3rd pebble
         const isReversed = i % 3 === 0;
 
         return (
@@ -45,13 +33,10 @@ export default function FloatingPebbles() {
             className="absolute flex flex-col items-center justify-center transition-transform hover:scale-110 cursor-pointer"
             style={{ 
               transform: `translate(${x}px, ${y}px)`,
-              // Fixed: Added CSS custom properties for animation to use
-              '--x': `${x}px`,
-              '--y': `${y}px`,
+              '--x': `${x}px`, '--y': `${y}px`,
               animation: `float ${4 + (i % 3)}s ease-in-out ${delay}s infinite alternate`
             } as React.CSSProperties}
           >
-            {/* SVG Pebble Shape */}
             <svg width={size} height={size} viewBox="0 0 100 100" className="drop-shadow-lg opacity-90">
               <defs>
                 <radialGradient id={`grad-peb-${i}`} cx="30%" cy="30%" r="70%">
@@ -68,14 +53,12 @@ export default function FloatingPebbles() {
                 className="transition-all duration-300"
               />
             </svg>
-            
             <span className="mt-2 text-xs font-semibold text-[#1E2059] bg-white/60 backdrop-blur-md px-2.5 py-1 rounded-full shadow-sm whitespace-nowrap">
               {mod.name}
             </span>
           </div>
         );
       })}
-
       <style jsx>{`
         @keyframes float {
           0% { transform: translate(var(--x, 0), calc(var(--y, 0) - 8px)) rotate(-5deg); }

@@ -43,7 +43,10 @@ export default function LandingPage() {
 
 
   return (
-    <div className="min-h-screen text-foreground flex flex-col font-sans transition-colors duration-500 bg-background">
+    <div className={`min-h-screen text-foreground flex flex-col font-sans transition-colors duration-500 ${layout.startsWith('layout-') ? 'bg-transparent' : 'bg-background'}`}>
+      {layout.startsWith('layout-') && (
+        <div className="fixed inset-0 z-[-1] bg-[linear-gradient(160deg,#D5B6DC_0%,#E5D9F2_30%,#B79AE6_70%,#8982D0_100%)] opacity-80" />
+      )}
       <Navbar />
 
       <main className="flex-1">
@@ -73,14 +76,7 @@ export default function LandingPage() {
             <FaqSection />
           </>
         ) : isFinalHybrid ? (
-          <div className={
-            layout === 'layout-1' ? 'bg-gradient-to-b from-[#D5B6DC] via-[#E5D9F2] to-white' :
-            layout === 'layout-2' ? 'bg-gradient-to-br from-[#E5D9F2] to-[#B79AE6]/20' :
-            layout === 'layout-3' ? 'bg-gradient-to-b from-[#D5B6DC] to-[#F8F7FA]' :
-            layout === 'layout-4' ? 'bg-gradient-to-b from-[#B79AE6]/30 via-white to-white' :
-            layout === 'layout-5' ? 'bg-gradient-to-bl from-[#E5D9F2] via-[#D5B6DC]/50 to-white' :
-            ''
-          }>
+          <div>
             {/* FINAL HYBRID LAYOUT */}
             <FinalHybridExperts />
             <ExploreModalities />
