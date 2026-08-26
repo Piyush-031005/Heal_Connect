@@ -111,3 +111,13 @@ export default function NewLayoutsHero() {
           </div>
 
           
+
+          {/* Right Content - Visual Switcher */}
+          <div className="relative hidden lg:flex justify-center items-center h-[600px]">
+            {renderVisual()}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
