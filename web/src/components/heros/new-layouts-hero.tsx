@@ -47,7 +47,7 @@ export default function NewLayoutsHero() {
             
             {/* Action Buttons (Yellowish) */}
             <div className="flex items-center gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-100">
-              <button className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#F5DD97]/30 bg-[#F5DD97]/10 hover:bg-[#F5DD97]/20 text-[#1E2059] text-sm font-semibold transition-all">
+              <button className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#F5DD97] hover:bg-[#e0c67e] shadow-lg shadow-[#F5DD97]/20 border-none text-[#1E2059] text-sm font-semibold transition-all">
                 <MessageCircle className="w-4 h-4 text-[#B48A28]" />
                 <span>Start Chat</span>
               </button>
