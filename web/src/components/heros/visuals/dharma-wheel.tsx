@@ -144,7 +144,7 @@ export default function DharmaWheel() {
 
       {/* Center Logo */}
       <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-2xl flex items-center justify-center p-3 border-2 border-[#8982D0]/40 cursor-pointer hover:scale-105 transition-transform">
-        <img src="/center_logo_final.png" alt="ZenAuraa" className="w-full h-full object-contain" />
+        <img src="/center_logo_final.png" alt="ZenAuraa" className="w-full h-full object-cover scale-[1.25] mt-2 ml-1" />
       </div>
     </div>
   );

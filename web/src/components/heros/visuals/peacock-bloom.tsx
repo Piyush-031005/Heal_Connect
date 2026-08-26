@@ -14,60 +14,26 @@ const MODALITIES = [
   {id:'space-harmony',name:'Space Harmony'},{id:'numerology',name:'Numerology'},
 ];
 
-function Feather({ angle, radius, size, delay, color, isAccent = false }: { angle: number, radius: number, size: number, delay: number, color: string, isAccent?: boolean }) {
-  const ref = useRef<THREE.Group>(null);
-  
-  useFrame((state) => {
-    if (ref.current) {
-      // Gentle breathing effect
-      const scale = 1 + Math.sin(state.clock.elapsedTime * 1.2 + delay) * 0.08;
-      ref.current.scale.set(scale, scale, scale);
-      
-      // Slight inward/outward bending
-      ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.8 + delay) * 0.1;
-    }
-  });
+// Custom Leaf Shape
+const leafShape = new THREE.Shape();
+leafShape.moveTo(0, 0);
+leafShape.quadraticCurveTo(0.6, 1.2, 0, 3);
+leafShape.quadraticCurveTo(-0.6, 1.2, 0, 0);
 
+const leafGeometry = new THREE.ShapeGeometry(leafShape);
+
+function Leaf({ rotation, color, scale, distance, zOffset, opacity }: { rotation: [number, number, number], color: string, scale: number, distance: number, zOffset: number, opacity: number }) {
   return (
-    <group rotation={[0, 0, angle]}>
-      <group ref={ref} position={[0, radius / 2, 0]}>
-        {/* Delicate stem */}
-        <mesh position={[0, 0, 0]}>
-          <cylinderGeometry args={[0.005 * size, 0.02 * size, radius, 8]} />
-          <meshBasicMaterial color={color} transparent opacity={0.5} />
-        </mesh>
-        
-        {/* Peacock Eye (Tip) */}
-        <group position={[0, radius / 2 - 0.1 * size, 0.05]}>
-          {/* Center bright dot */}
-          <mesh position={[0, 0, 0.02]}>
-            <sphereGeometry args={[0.06 * size, 16, 16]} />
-            <meshBasicMaterial color={isAccent ? "#FFD700" : "#ffffff"} transparent opacity={0.9} />
-          </mesh>
-          
-          {/* Inner ring */}
-          <mesh position={[0, 0, 0.01]}>
-            <torusGeometry args={[0.12 * size, 0.03 * size, 16, 32]} />
-            <meshBasicMaterial color="#5F3BA9" transparent opacity={0.8} />
-          </mesh>
-
-          {/* Outer glowing ring */}
-          <mesh position={[0, 0, 0]}>
-            <torusGeometry args={[0.22 * size, 0.02 * size, 16, 32]} />
-            <meshBasicMaterial color={color} transparent opacity={0.6} />
-          </mesh>
-
-          {/* Exquisite 3D glow leaf (No flat planes) */}
-          <mesh position={[0, 0, -0.01]} scale={[0.4 * size, 0.7 * size, 0.02]}>
-            <sphereGeometry args={[1, 32, 32]} />
-            <meshBasicMaterial color={color} transparent opacity={0.25} depthWrite={false} />
-          </mesh>
-          <mesh position={[0, 0, -0.015]} scale={[0.5 * size, 0.8 * size, 0.01]}>
-            <sphereGeometry args={[1, 32, 32]} />
-            <meshBasicMaterial color={"#ffffff"} transparent opacity={0.1} blending={THREE.AdditiveBlending} depthWrite={false} />
-          </mesh>
-        </group>
-      </group>
+    <group rotation={rotation} position={[0, 0, zOffset]}>
+      <mesh geometry={leafGeometry} position={[0, distance, 0]} scale={[scale, scale, 1]}>
+        <meshBasicMaterial 
+          color={color} 
+          transparent 
+          opacity={opacity} 
+          depthWrite={false}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
     </group>
   );
 }
@@ -77,7 +43,6 @@ function MandalaPeacock() {
   
   useFrame((state, delta) => {
     if (groupRef.current) {
-      // Very slow majestic rotation
       groupRef.current.rotation.z -= delta * 0.05;
       groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.3) * 0.05;
       groupRef.current.rotation.y = Math.cos(state.clock.elapsedTime * 0.3) * 0.05;
@@ -86,26 +51,42 @@ function MandalaPeacock() {
   
   return (
     <group ref={groupRef}>
-      {/* Background ambient core */}
-      <mesh>
-        <sphereGeometry args={[0.5, 32, 32]} />
-        <meshBasicMaterial color="#B9A0E4" transparent opacity={0.1} blending={THREE.AdditiveBlending} />
-      </mesh>
-
-      {/* Layer 1: Long majestic feathers */}
-      {Array.from({length: 16}).map((_, i) => (
-        <Feather key={`l1-${i}`} angle={(i / 16) * Math.PI * 2} radius={2.8} size={1.2} delay={i * 0.2} color="#B9A0E4" isAccent={i % 2 === 0} />
-      ))}
-      
-      {/* Layer 2: Medium dense feathers */}
-      {Array.from({length: 12}).map((_, i) => (
-        <Feather key={`l2-${i}`} angle={(i / 12) * Math.PI * 2 + 0.2} radius={2.0} size={0.9} delay={i * 0.3} color="#8982D0" />
-      ))}
-      
-      {/* Layer 3: Short inner crown */}
-      {Array.from({length: 8}).map((_, i) => (
-        <Feather key={`l3-${i}`} angle={(i / 8) * Math.PI * 2 + 0.1} radius={1.2} size={0.6} delay={i * 0.4} color="#5F3BA9" isAccent />
-      ))}
+        {/* Layer 1: Outer Soft Purple/Blue Leaves */}
+        {Array.from({ length: 12 }).map((_, i) => (
+          <Leaf 
+            key={`outer-${i}`}
+            rotation={[0, 0, (i / 12) * Math.PI * 2]} 
+            color="#8982D0" 
+            scale={1.2}
+            distance={1.6}
+            zOffset={-0.3}
+            opacity={0.4}
+          />
+        ))}
+        {/* Layer 2: Mid Purple Leaves */}
+        {Array.from({ length: 12 }).map((_, i) => (
+          <Leaf 
+            key={`mid-${i}`}
+            rotation={[0, 0, (i / 12) * Math.PI * 2 + Math.PI/12]} 
+            color="#6B52AD" 
+            scale={0.9}
+            distance={1.0}
+            zOffset={-0.2}
+            opacity={0.6}
+          />
+        ))}
+        {/* Layer 3: Inner Deep Indigo Leaves */}
+        {Array.from({ length: 12 }).map((_, i) => (
+          <Leaf 
+            key={`inner-${i}`}
+            rotation={[0, 0, (i / 12) * Math.PI * 2]} 
+            color="#3A247A" 
+            scale={0.6}
+            distance={0.6}
+            zOffset={-0.1}
+            opacity={0.85}
+          />
+        ))}
     </group>
   );
 }
@@ -153,7 +134,7 @@ export default function PeacockBloom() {
               >
                 <div className="flex items-center gap-2 px-3 py-1.5 transition-all duration-300 hover:scale-110">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#1E2059]/40 group-hover:bg-[#5F3BA9] shadow-[0_0_8px_rgba(95,59,169,0.5)] transition-colors" />
-                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#1E2059]/60 group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#3A247A] group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
                     {mod.name}
                   </span>
                 </div>
@@ -164,8 +145,14 @@ export default function PeacockBloom() {
       </div>
 
       {/* Center Logo */}
-      <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-2xl flex items-center justify-center p-3 border-2 border-[#5F3BA9]/30 cursor-pointer hover:scale-105 transition-transform">
-        <img src="/center_logo_final.png" alt="ZenAuraa" className="w-full h-full object-contain" />
+      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+        <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-full flex items-center justify-center pointer-events-auto shadow-[0_0_40px_rgba(255,255,255,0.9)] overflow-hidden bg-white group transition-transform duration-700 hover:scale-105">
+          <img
+            src="/center_logo_final.png"
+            alt="ZenAuraa"
+            className="w-[120%] h-[120%] object-cover scale-[1.25] group-hover:scale-[1.35] transition-transform duration-700 mt-2 ml-1"
+          />
+        </div>
       </div>
     </div>
   );
