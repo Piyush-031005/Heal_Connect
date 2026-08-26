@@ -7,26 +7,23 @@ import { MessageCircle, Phone, ArrowRight } from 'lucide-react';
 // Visual components
 import dynamic from 'next/dynamic';
 
-const FloatingPebbles = dynamic(() => import('./visuals/floating-pebbles'), { ssr: false });
-const FloatingOrbs = dynamic(() => import('./visuals/floating-orbs'), { ssr: false });
-const LotusPetals = dynamic(() => import('./visuals/lotus-petals'), { ssr: false });
-const LightParticles = dynamic(() => import('./visuals/light-particles'), { ssr: false });
-const AuroraBlob = dynamic(() => import('./visuals/aurora-blob'), { ssr: false });
-const MandalaPetals = dynamic(() => import('./visuals/mandala-petals'), { ssr: false });
-const DharmaWheel = dynamic(() => import('./visuals/dharma-wheel'), { ssr: false });
-const MeditationMudras = dynamic(() => import('./visuals/meditation-mudras'), { ssr: false });
-const PeacockBloom = dynamic(() => import('./visuals/peacock-bloom'), { ssr: false });
 
+const LoadingVisual = () => (
+  <div className="absolute inset-0 flex flex-col items-center justify-center">
+    <div className="w-12 h-12 border-4 border-[#1E2059]/20 border-t-[#5F3BA9] rounded-full animate-spin mb-4"></div>
+    <p className="text-[#1E2059]/70 font-medium animate-pulse text-sm">Loading 3D Engine...</p>
+  </div>
+);
 
-
-
-
-
-
-
-
-
-
+const FloatingPebbles = dynamic(() => import('./visuals/floating-pebbles'), { ssr: false, loading: () => <LoadingVisual /> });
+const FloatingOrbs = dynamic(() => import('./visuals/floating-orbs'), { ssr: false, loading: () => <LoadingVisual /> });
+const LotusPetals = dynamic(() => import('./visuals/lotus-petals'), { ssr: false, loading: () => <LoadingVisual /> });
+const LightParticles = dynamic(() => import('./visuals/light-particles'), { ssr: false, loading: () => <LoadingVisual /> });
+const AuroraBlob = dynamic(() => import('./visuals/aurora-blob'), { ssr: false, loading: () => <LoadingVisual /> });
+const MandalaPetals = dynamic(() => import('./visuals/mandala-petals'), { ssr: false, loading: () => <LoadingVisual /> });
+const DharmaWheel = dynamic(() => import('./visuals/dharma-wheel'), { ssr: false, loading: () => <LoadingVisual /> });
+const MeditationMudras = dynamic(() => import('./visuals/meditation-mudras'), { ssr: false, loading: () => <LoadingVisual /> });
+const PeacockBloom = dynamic(() => import('./visuals/peacock-bloom'), { ssr: false, loading: () => <LoadingVisual /> });
 export default function NewLayoutsHero() {
   const { layout } = useLayout();
 
