@@ -2,15 +2,27 @@ import { useLayout } from '@/lib/layout-context';
 import Link from 'next/link';
 
 // Visual components
-import FloatingPebbles from './visuals/floating-pebbles';
-import FloatingOrbs from './visuals/floating-orbs';
-import LotusPetals from './visuals/lotus-petals';
-import LightParticles from './visuals/light-particles';
-import AuroraBlob from './visuals/aurora-blob';
-import MandalaPetals from './visuals/mandala-petals';
-import DharmaWheel from './visuals/dharma-wheel';
-import MeditationMudras from './visuals/meditation-mudras';
-import PeacockBloom from './visuals/peacock-bloom';
+import dynamic from 'next/dynamic';
+
+const FloatingPebbles = dynamic(() => import('./visuals/floating-pebbles'), { ssr: false });
+const FloatingOrbs = dynamic(() => import('./visuals/floating-orbs'), { ssr: false });
+const LotusPetals = dynamic(() => import('./visuals/lotus-petals'), { ssr: false });
+const LightParticles = dynamic(() => import('./visuals/light-particles'), { ssr: false });
+const AuroraBlob = dynamic(() => import('./visuals/aurora-blob'), { ssr: false });
+const MandalaPetals = dynamic(() => import('./visuals/mandala-petals'), { ssr: false });
+const DharmaWheel = dynamic(() => import('./visuals/dharma-wheel'), { ssr: false });
+const MeditationMudras = dynamic(() => import('./visuals/meditation-mudras'), { ssr: false });
+const PeacockBloom = dynamic(() => import('./visuals/peacock-bloom'), { ssr: false });
+
+
+
+
+
+
+
+
+
+
 
 export default function NewLayoutsHero() {
   const { layout } = useLayout();
