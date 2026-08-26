@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const MODALITIES = [
   { id: 'astrology', name: 'Astrology' }, { id: 'tarot', name: 'Tarot' },
@@ -12,6 +13,7 @@ const MODALITIES = [
 
 export default function AuroraBlob() {
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
   useEffect(() => setMounted(true), []);
 
   if (!mounted) return null;
@@ -53,6 +55,7 @@ export default function AuroraBlob() {
           return (
             <div 
               key={mod.id}
+              onClick={() => router.push(`/modalities/${mod.id}`)}
               className="absolute transform -translate-x-1/2 -translate-y-1/2"
               style={{ left: x, top: y }}
             >

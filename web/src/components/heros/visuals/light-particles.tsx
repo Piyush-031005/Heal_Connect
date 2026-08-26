@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const MODALITIES = [
   { id: 'astrology', name: 'Astrology' }, { id: 'tarot', name: 'Tarot' },
@@ -12,6 +13,7 @@ const MODALITIES = [
 
 export default function LightParticles() {
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
   useEffect(() => setMounted(true), []);
 
   if (!mounted) return null;
@@ -48,6 +50,7 @@ export default function LightParticles() {
           return (
             <div 
               key={mod.id}
+            onClick={() => router.push(`/modalities/${mod.id}`)}
               className="absolute flex flex-col items-center cursor-pointer group"
               style={{ transform: `rotate(${angle}deg) translateY(-${radius}px)` }}
             >
