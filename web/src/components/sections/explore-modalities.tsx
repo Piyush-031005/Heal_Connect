@@ -136,15 +136,15 @@ export default function ExploreModalities() {
             <div 
               key={mod.id} 
               id={mod.id} 
-              className="group bg-gradient-to-br from-[#E2D4FF] to-[#D5B6DC] text-[#3A247A] rounded-3xl p-6 border border-primary/5 hover:border-primary/20 transition-all duration-300 text-center flex flex-col items-center shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] cursor-pointer"
+              className="group bg-gradient-to-br from-[#E0E7FF] to-[#C7D2FE] text-[#3A247A] rounded-3xl p-6 border border-primary/5 hover:border-primary/20 transition-all duration-300 text-center flex flex-col items-center shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] cursor-pointer"
             >
               <div className="w-40 h-40 rounded-full bg-primary/[0.03] border-4 border-primary/10 flex items-center justify-center mb-6 group-hover:scale-[1.15] transition-transform duration-700 shadow-xl relative overflow-hidden">
                 <div className="absolute inset-2 border border-dashed border-primary/30 rounded-full animate-[spin_30s_linear_infinite]" />
                 <img src={`${mod.image}?v=2`} alt={mod.name} className="w-full h-full object-cover rounded-full mix-blend-multiply" />
               </div>
-              <h3 className="text-xl font-medium text-foreground mb-3">{mod.name}</h3>
+              <h3 className="text-xl font-medium text-[#1E2059] font-bold mb-3">{mod.name}</h3>
               <div className="w-8 h-0.5 bg-primary/20 rounded-full mb-4 group-hover:w-16 transition-all duration-300" />
-              <p className="text-sm text-muted-foreground font-light leading-relaxed mb-6">{mod.desc}</p>
+              <p className="text-sm text-[#3730A3] font-medium leading-relaxed mb-6">{mod.desc}</p>
               
               <Link href="/signup" className="mt-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary group-hover:translate-x-1 transition-transform">
                 Explore <ArrowRight className="w-3.5 h-3.5" />

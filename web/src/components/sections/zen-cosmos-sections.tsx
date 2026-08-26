@@ -876,7 +876,7 @@ export function YourNextDiscovery() {
             const isHov = hovered === path.id;
             return (
               <div key={path.id}
-                                className={`relative rounded-3xl p-8 border transition-all duration-500 cursor-pointer group overflow-hidden bg-gradient-to-br from-[#E2D4FF] to-[#D5B6DC]`}
+                                className={`relative rounded-3xl p-8 border transition-all duration-500 cursor-pointer group overflow-hidden bg-gradient-to-br from-[#E0E7FF] to-[#C7D2FE]`}
                 style={{
                   borderColor: isHov ? path.color : 'var(--border)',
                   transform: isHov ? 'translateY(-8px)' : 'translateY(0)',
@@ -891,8 +891,8 @@ export function YourNextDiscovery() {
                 )}
                 <div className="text-4xl mb-6 font-serif" style={{ color: path.color }}>{path.icon}</div>
                 <div className="text-[10px] font-black uppercase tracking-widest mb-2" style={{ color: path.color }}>{path.label}</div>
-                <h3 className="text-2xl font-serif font-medium text-[#3A247A] mb-4">{path.title}</h3>
-                <p className="text-sm text-[#5F3BA9] leading-relaxed mb-6 font-medium">{path.desc}</p>
+                <h3 className="text-2xl font-serif font-medium text-[#1E2059] font-bold mb-4">{path.title}</h3>
+                <p className="text-sm text-[#3730A3] font-medium leading-relaxed mb-6 font-medium">{path.desc}</p>
                 <div className="space-y-2 mb-8">
                   {path.items.map(item => (
                     <div key={item} className="flex items-center gap-3 text-sm text-muted-foreground font-medium">

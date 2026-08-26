@@ -106,7 +106,7 @@ export default function AuroraBlob() {
         })}
       </div>
       <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-        <div className="relative w-36 h-36 md:w-48 md:h-48 rounded-full flex items-center justify-center pointer-events-auto shadow-[0_0_40px_rgba(255,255,255,0.9)] overflow-hidden bg-white group transition-transform duration-700 hover:scale-105">
+        <div className="relative w-48 h-48 md:w-72 md:h-72 -mt-16 rounded-full flex items-center justify-center pointer-events-auto  overflow-hidden  group transition-transform duration-700 hover:scale-105">
           <img src="/main centre logo/girl.png" alt="ZenAuraa" className="w-[100%] h-[100%] object-cover scale-[1.0] group-hover:scale-[1.1] transition-transform duration-700 mt-2 ml-1" />
         </div>
       </div>
