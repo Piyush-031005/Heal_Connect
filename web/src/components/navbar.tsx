@@ -291,7 +291,7 @@ export default function Navbar() {
               </button>
               <Link href="/" className="flex items-center gap-2">
                 <Image src={theme === 'theme-royal-indigo' ? '/center_logo_final.png' : '/center_logo_final.png'} alt="ZenAuraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
-                <span className="text-2xl font-serif font-black bg-clip-text text-transparent bg-gradient-to-r from-[#B79AE6] via-[#E5D9F2] to-[#B79AE6] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105">ZenAuraa</span>
+                <span className="text-2xl font-serif font-black bg-clip-text text-transparent bg-gradient-to-r from-[#3A247A] via-[#5F3BA9] to-[#3A247A] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105">ZenAuraa</span>
               </Link>
             </div>
 
