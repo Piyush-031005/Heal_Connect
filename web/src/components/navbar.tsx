@@ -298,14 +298,14 @@ export default function Navbar() {
             {/* Links for Final Hybrid layout sit next to the logo */}
             {isFinalHybrid && (
               <nav className="hidden md:flex items-center gap-4 ml-4">
-                <Link href="/practitioners" className="text-sm font-semibold text-foreground/90 hover:text-[#B79AE6] transition-colors">
+                <Link href="/practitioners" className="text-sm font-semibold text-[#8982D0] hover:text-[#B79AE6] transition-colors">
                   Find Expert
                 </Link>
-                <Link href="#free-services" className="text-sm font-semibold text-foreground/90 hover:text-[#B79AE6] transition-colors">
+                <Link href="#free-services" className="text-sm font-semibold text-[#8982D0] hover:text-[#B79AE6] transition-colors">
                   Free Services
                 </Link>
                   <div className="relative group cursor-pointer">
-                  <span className="text-sm font-semibold text-foreground/90 group-hover:text-[#B79AE6] transition-colors flex items-center gap-1">
+                  <span className="text-sm font-semibold text-[#8982D0] group-hover:text-[#B79AE6] transition-colors flex items-center gap-1">
                     Free Insights
                     <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </span>
@@ -324,7 +324,7 @@ export default function Navbar() {
                     <Link href="/modalities/sound-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Sound Healing</Link>
                   </div>
                 </div>
-                <Link href="#reviews" className="text-sm font-semibold text-foreground/90 hover:text-[#B79AE6] transition-colors">
+                <Link href="#reviews" className="text-sm font-semibold text-[#8982D0] hover:text-[#B79AE6] transition-colors">
                   Reviews
                 </Link>
               </nav>
@@ -341,7 +341,7 @@ export default function Navbar() {
                   className={`relative text-sm font-medium transition-all px-4 py-1.5 rounded-full flex items-center gap-1.5 ${
                     activeSection === id
                       ? 'bg-primary/10 text-primary shadow-sm'
-                      : 'text-foreground/80 hover:text-primary hover:bg-white/5'
+                      : 'text-[#8982D0]/80 hover:text-primary hover:bg-white/5'
                   }`}
                 >
                   {label}
@@ -353,7 +353,7 @@ export default function Navbar() {
           {/* Right: theme toggle + lang dropdown + profile */}
           <div className="flex items-center gap-2">
             {isFinalHybrid && (
-              <Link href="/modalities/astrology" className="md:hidden text-[10px] sm:text-xs font-semibold text-foreground border border-border rounded-full px-2.5 py-1 whitespace-nowrap bg-[#694091]/30">
+              <Link href="/modalities/astrology" className="md:hidden text-[10px] sm:text-xs font-semibold text-[#8982D0] border border-border rounded-full px-2.5 py-1 whitespace-nowrap bg-[#694091]/30">
                 Free Insights
               </Link>
             )}
@@ -503,7 +503,7 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
-                <Link href="/login" className={`hidden md:block text-sm font-medium transition-colors px-2 ${isFinalHybrid ? 'text-foreground/90 hover:text-[#B79AE6]' : 'text-foreground hover:text-primary'}`}>
+                <Link href="/login" className={`hidden md:block text-sm font-medium transition-colors px-2 ${isFinalHybrid ? 'text-[#8982D0] hover:text-[#B79AE6]' : 'text-[#8982D0] hover:text-primary'}`}>
                   Login
                 </Link>
                 {isFinalHybrid && (
