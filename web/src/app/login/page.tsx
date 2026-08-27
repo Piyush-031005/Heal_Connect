@@ -80,14 +80,10 @@ function LoginInner() {
     setLoading(true);
     try {
       if (role === 'expert') {
-        // Expert login using astrologer API
-        const res = await fetch('/api/auth/astrologer/login-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
-        }).then(r => r.json());
+        // Expert login
+        const res = await authApi.practitionerLogin(email, password);
 
-        if (!res.success) {
+        if (!res.success || !res.data) {
           setError(res.message || 'Invalid email or password.');
           return;
         }
@@ -95,14 +91,14 @@ function LoginInner() {
         // Store expert tokens
         tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
         localStorage.setItem('hc_role', 'practitioner');
-        if (res.data.astrologer) {
-          localStorage.setItem('hc_practitioner_id', res.data.astrologer.id);
-          localStorage.setItem('hc_pid', res.data.astrologer.id);
-          localStorage.setItem('hc_practitioner_name', res.data.astrologer.name ?? '');
+        if (res.data.practitioner) {
+          localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
+          localStorage.setItem('hc_pid', res.data.practitioner.id);
+          localStorage.setItem('hc_practitioner_name', res.data.practitioner.name ?? '');
         }
         
-        // Redirect to onboarding or dashboard based on profile status
-        router.push(res.data.redirect || '/astrologer/onboarding');
+        // Redirect to dashboard
+        router.push('/expert/dashboard');
       } else {
         // User login
         const res = await authApi.login({ email, password });

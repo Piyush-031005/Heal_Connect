@@ -4,10 +4,11 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { tokenStore, sessionsApi, practitionersApi, type PractitionerProfile } from '@/lib/api';
+import { tokenStore, sessionsApi, practitionersApi, availabilityApi, type PractitionerProfile } from '@/lib/api';
 import { getSocket, disconnectSocket } from '@/lib/socket';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import AvailabilityCalendar from '@/components/AvailabilityCalendar';
 import {
   MessageCircle, LogOut, Wifi, WifiOff, User, Clock,
   IndianRupee, Star, TrendingUp, Bell, ChevronRight,
@@ -452,7 +453,7 @@ export default function ExpertDashboardPage() {
                 <p className="text-sm text-amber-600 font-medium mb-3">{profile?.specialties?.slice(0, 2).join(' · ') || '—'}</p>
 
                 <div className="space-y-2 text-sm">
-                  <div className="flex items-center justify-between py-2">
+                  <div className="flex items-center justify-between py-2 border-b border-gray-100">
                     <span className="text-gray-500">Status</span>
                     <span className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
                       isBusy ? 'bg-orange-100 text-orange-700' :
@@ -462,14 +463,52 @@ export default function ExpertDashboardPage() {
                       {isBusy ? 'Busy' : isOnline ? 'Online' : 'Offline'}
                     </span>
                   </div>
+
+                  <div className="flex flex-col gap-2 py-3">
+                    <span className="text-gray-500 font-medium">Scheduling Calendar</span>
+                    <div className="flex items-center justify-between bg-gray-50 p-2 rounded-lg border border-gray-100">
+                      <span className="text-xs text-gray-600">Enable users to book free slots instantly</span>
+                      <Button 
+                        size="sm" 
+                        variant={profile?.schedulingEnabled ? "default" : "outline"}
+                        className={profile?.schedulingEnabled ? "bg-purple-600 hover:bg-purple-700 text-white" : ""}
+                        onClick={async () => {
+                          const token = tokenStore.getAccess();
+                          if (!token) return;
+                          try {
+                            const res = await availabilityApi.toggleScheduling(token, !profile?.schedulingEnabled);
+                            if (res.success && res.data) {
+                              setProfile(prev => prev ? { ...prev, schedulingEnabled: res.data!.schedulingEnabled } : prev);
+                            }
+                          } catch (err) {
+                            console.error('Failed to toggle scheduling', err);
+                          }
+                        }}
+                      >
+                        {profile?.schedulingEnabled ? 'Enabled' : 'Disabled'}
+                      </Button>
+                    </div>
+                  </div>
                 </div>
 
               </CardContent>
             </Card>
-
-
           </div>
         </div>
+        
+        {/* Availability Calendar Full Width */}
+        {profile?.schedulingEnabled && practitionerId && (
+          <div className="mt-8">
+            <div className="mb-4">
+              <p className="text-xs font-bold uppercase tracking-widest text-emerald-700 mb-0.5">Manage Time</p>
+              <h2 className="text-xl font-extrabold text-gray-900">Your Availability</h2>
+            </div>
+            <AvailabilityCalendar 
+              practitionerId={practitionerId} 
+              isExpertMode={true} 
+            />
+          </div>
+        )}
       </main>
     </div>
   );

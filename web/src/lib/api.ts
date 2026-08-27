@@ -58,6 +58,7 @@ export interface PractitionerProfile {
   isVerified: boolean;
   isOnline: boolean;
   isBusy?: boolean;
+  schedulingEnabled?: boolean;
   avgRating?: number;
   reviewCount?: number;
 }
@@ -69,6 +70,23 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<ApiR
     headers: { 'Content-Type': 'application/json', ...headers },
     ...restOptions,
   });
+
+  if (res.status === 401 && !path.includes('/login')) {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('hc_access');
+      localStorage.removeItem('hc_refresh');
+      localStorage.removeItem('hc_role');
+      localStorage.removeItem('hc_practitioner_id');
+      localStorage.removeItem('hc_pid');
+      
+      // Avoid redirecting if we are already on the login page
+      if (!window.location.pathname.includes('/login')) {
+        window.location.href = '/login';
+      }
+    }
+    return { success: false, message: 'Invalid or expired token' };
+  }
+
   const data = await res.json() as ApiResponse<T>;
   return data;
 }
@@ -255,11 +273,11 @@ export const sessionsApi = {
   connect: (token: string, sessionId: string) =>
     request<{ session: any }>(`/api/sessions/${sessionId}/connect`, { method: 'POST', headers: authHeader(token) }),
 
-  requestSession: (token: string, practitionerId: string, type?: string) =>
-    request<{ session: any }>('/api/sessions/request', { method: 'POST', headers: authHeader(token), body: JSON.stringify({ practitionerId, type }) }),
+  requestSession: (token: string, practitionerId: string, type?: string, availabilitySlotId?: string) =>
+    request<{ session: any }>('/api/schedules/request', { method: 'POST', headers: authHeader(token), body: JSON.stringify({ practitionerId, type, availabilitySlotId }) }),
 
   getRequests: (token: string) =>
-    request<{ sessions: any[] }>('/api/sessions/requests', { headers: authHeader(token) }),
+    request<{ sessions: any[] }>('/api/schedules/requests', { headers: authHeader(token) }),
 
   selectTime: (token: string, requestId: string, time: string) =>
     request(`/api/sessions/requests/${requestId}/select-time`, { method: 'POST', headers: authHeader(token), body: JSON.stringify({ time }) }),
@@ -737,8 +755,22 @@ export const ticketsApi = {
     }),
 
   close: (token: string, id: string) =>
-    request<{ ticket: SupportTicketEntry }>(`/api/tickets/${id}/close`, {
+    request<{ ticket: any }>(`/api/tickets/${id}/close`, {
       method: 'POST',
       headers: authHeader(token),
     }),
+};
+
+export const availabilityApi = {
+  getAvailability: (practitionerId: string, startDate?: string, endDate?: string) => {
+    let url = `/api/availability/${practitionerId}`;
+    if (startDate && endDate) url += `?startDate=${startDate}&endDate=${endDate}`;
+    return request<{ slots: any[] }>(url);
+  },
+  createAvailability: (token: string, startTime: string, endTime: string) =>
+    request<{ slot: any }>('/api/availability', { method: 'POST', headers: authHeader(token), body: JSON.stringify({ startTime, endTime }) }),
+  deleteAvailability: (token: string, slotId: string) =>
+    request(`/api/availability/${slotId}`, { method: 'DELETE', headers: authHeader(token) }),
+  toggleScheduling: (token: string, schedulingEnabled: boolean) =>
+    request<{ schedulingEnabled: boolean }>('/api/availability/toggle', { method: 'PUT', headers: authHeader(token), body: JSON.stringify({ schedulingEnabled }) }),
 };
