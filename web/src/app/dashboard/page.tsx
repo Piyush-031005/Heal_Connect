@@ -8,13 +8,12 @@ import {
   Wallet, MessageCircle, Phone, Star, Bell, LogOut,
   Search, ChevronRight, Zap, TrendingUp, Clock, Shield, User,
   HeartHandshake, Headphones, Sparkles, ArrowRight,
-  Waves, Check, FileText, LifeBuoy, Calendar
+  Waves, Check
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { authApi, practitionersApi, walletApi, sessionsApi, tokenStore, type PractitionerProfile } from '@/lib/api';
-import { toast } from 'react-hot-toast';
 import { getSocket } from '@/lib/socket';
 import { RechargeModal } from '@/components/wallet/RechargeModal';
 import { getPractitionerAvatar } from '@/lib/utils';
@@ -43,14 +42,7 @@ export default function DashboardPage() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const notificationRef = useRef<HTMLDivElement>(null);
   const profileMenuRef = useRef<HTMLDivElement>(null);
-  const [sessionsDone, setSessionsDone] = useState(0);
-  const [minutesUsed, setMinutesUsed] = useState(0);
-  const [upcomingSessions, setUpcomingSessions] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [suggestions, setSuggestions] = useState<PractitionerProfile[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [searchLoading, setSearchLoading] = useState(false);
-  const searchBoxRef = useRef<HTMLDivElement>(null);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -61,46 +53,14 @@ export default function DashboardPage() {
       if (profileMenuRef.current && !profileMenuRef.current.contains(e.target as Node)) {
         setShowProfileMenu(false);
       }
-      if (searchBoxRef.current && !searchBoxRef.current.contains(e.target as Node)) {
-        setShowSuggestions(false);
-      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Debounced expert search autocomplete
-  useEffect(() => {
-    const query = searchQuery.trim();
-    if (query.length < 2) {
-      setSuggestions([]);
-      setSearchLoading(false);
-      return;
-    }
-    setSearchLoading(true);
-    const timer = setTimeout(() => {
-      practitionersApi.list({ search: query, limit: 6 }).then((res) => {
-        if (res.success && res.data) {
-          setSuggestions(res.data.practitioners);
-          setShowSuggestions(true);
-        }
-      }).finally(() => setSearchLoading(false));
-    }, 300);
-    return () => clearTimeout(timer);
-  }, [searchQuery]);
-
-  const goToPractitioner = (id: string) => {
-    setShowSuggestions(false);
-    setSearchQuery('');
-    router.push(`/practitioners/${id}`);
-  };
-
   const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && searchQuery.trim()) {
-      setShowSuggestions(false);
       router.push(`/practitioners?search=${encodeURIComponent(searchQuery.trim())}`);
-    } else if (e.key === 'Escape') {
-      setShowSuggestions(false);
     }
   };
 
@@ -114,21 +74,7 @@ export default function DashboardPage() {
     if (res.success && res.data) {
       router.push(`/session/${res.data.session.id}`);
     } else {
-      toast.error(res.message || 'Could not start session. Please recharge your wallet.');
-    }
-  };
-
-  const startCallSession = async (practitionerId: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    const token = tokenStore.getAccess();
-    if (!token) { router.push('/login'); return; }
-    setStartingSession(practitionerId);
-    const res = await sessionsApi.create(token, practitionerId, 'AUDIO');
-    setStartingSession(null);
-    if (res.success && res.data) {
-      router.push(`/session/${res.data.session.id}`);
-    } else {
-      toast.error(res.message || 'Could not start call. Please recharge your wallet.');
+      alert(res.message || 'Could not start session. Please recharge your wallet.');
     }
   };
 
@@ -166,27 +112,16 @@ export default function DashboardPage() {
 
     fetchWallet();
 
-    sessionsApi.userHistory(token).then((res) => {
-      if (res.success && res.data) {
-        // Real lifetime total, not res.data.sessions.length — that list is
-        // capped at the last 20 by the backend, which silently stuck this
-        // stat at a max of 20 for anyone past that point.
-        setSessionsDone(res.data.totalSessionsCompleted);
-        setMinutesUsed(res.data.totalMinutes || 0);
-      }
-    });
-
-    sessionsApi.getRequests(token).then((res) => {
-      if (res.success && res.data) {
-        setUpcomingSessions(res.data.sessions.filter((s: any) => s.status === 'CONFIRMED'));
-      }
-    });
-
     // Real-time expert online/offline updates
     const socket = getSocket(token);
-    socket.on('practitioner_status', ({ practitionerId, isOnline, isBusy }: { practitionerId: string; isOnline: boolean; isBusy?: boolean }) => {
+    socket.on('practitioner_status', ({ practitionerId, isOnline }: { practitionerId: string; isOnline: boolean }) => {
+      setExperts((prev) => prev.map((e) => e.id === practitionerId ? { ...e, isOnline } : e));
+      setOnlineCount((prev) => {
+        // recalculate from updated list
+        return prev; // will be recalculated below
+      });
       setExperts((prev) => {
-        const updated = prev.map((e) => e.id === practitionerId ? { ...e, isOnline, isBusy } : e);
+        const updated = prev.map((e) => e.id === practitionerId ? { ...e, isOnline } : e);
         setOnlineCount(updated.filter((e) => e.isOnline).length);
         return updated;
       });
@@ -207,8 +142,8 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <Image src="/logo.png" alt="ZenAuraa" width={48} height={48} className="rounded-full animate-pulse" />
-          <p className="text-gray-500">Loading your dashboard...</p>
+          <Image src="/logo.png" alt="Zenauraa" width={48} height={48} className="rounded-full animate-pulse" />
+          <p className="text-muted-foreground">Loading your dashboard...</p>
         </div>
       </div>
     );
@@ -223,71 +158,29 @@ export default function DashboardPage() {
       <header className="sticky top-0 z-50 w-full border-b border-amber-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
-            <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
+            <Image src="/logo.png" alt="Zenauraa" width={32} height={32} className="rounded-full" />
+            <span className="text-xl font-extrabold text-purple-400">Zenauraa</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-2 flex-1 max-w-md mx-8">
-            <div className="relative w-full" ref={searchBoxRef}>
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search experts, specialties..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={handleSearchKeyDown}
-                onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
-                className="w-full pl-9 pr-4 py-2 text-sm rounded-full bg-amber-50 border border-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-400/40 text-[#1a1a1a] placeholder:text-gray-400"
-              />
-
-              {/* Autocomplete dropdown */}
-              {showSuggestions && searchQuery.trim().length >= 2 && (
-                <div className="absolute left-0 right-0 mt-2 bg-white border border-amber-100 rounded-2xl shadow-xl overflow-hidden z-50">
-                  {searchLoading ? (
-                    <div className="p-4 text-center text-sm text-gray-400">Searching...</div>
-                  ) : suggestions.length === 0 ? (
-                    <div className="p-4 text-center text-sm text-gray-400">No experts found for &ldquo;{searchQuery}&rdquo;</div>
-                  ) : (
-                    <>
-                      {suggestions.map((exp) => (
-                        <button
-                          key={exp.id}
-                          onClick={() => goToPractitioner(exp.id)}
-                          className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-amber-50 transition-colors text-left border-b border-gray-50 last:border-b-0"
-                        >
-                          <img src={getPractitionerAvatar(exp.photoUrl, exp.name)} alt={exp.name} className="w-8 h-8 rounded-full object-cover shrink-0" />
-                          <div className="min-w-0 flex-1">
-                            <p className="text-sm font-semibold text-gray-900 truncate">{exp.name}</p>
-                            <p className="text-xs text-gray-500 truncate">{exp.specialties.slice(0, 2).join(' · ') || '—'}</p>
-                          </div>
-                          {exp.isOnline && <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />}
-                        </button>
-                      ))}
-                      <button
-                        onClick={() => { setShowSuggestions(false); router.push(`/practitioners?search=${encodeURIComponent(searchQuery.trim())}`); }}
-                        className="w-full text-center px-4 py-2.5 text-xs font-semibold text-amber-600 hover:bg-amber-50 transition-colors"
-                      >
-                        See all results for &ldquo;{searchQuery}&rdquo;
-                      </button>
-                    </>
-                  )}
-                </div>
-              )}
+            <div className="relative w-full">
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+              <input type="text" placeholder="Search experts, specialties..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} onKeyDown={handleSearchKeyDown} className="w-full pl-9 pr-4 py-2 text-sm rounded-full bg-purple-50 border border-amber-200 focus:outline-none focus:ring-2 focus:ring-purple-300/40 text-[#1a1a1a] placeholder:text-muted-foreground" />
             </div>
           </div>
 
           <div className="flex items-center gap-3">
             <div className="relative" ref={notificationRef}>
-              <Button variant="ghost" size="icon" className="relative rounded-full hover:bg-amber-50" onClick={() => setShowNotification(!showNotification)}>
-                <Bell className="h-5 w-5 text-gray-500" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-amber-500 rounded-full" />
+              <Button variant="ghost" size="icon" className="relative rounded-full hover:bg-purple-50" onClick={() => setShowNotification(!showNotification)}>
+                <Bell className="h-5 w-5 text-muted-foreground" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-purple-400 rounded-full" />
               </Button>
               {showNotification && (
                 <div className="absolute right-0 mt-2 w-72 bg-white border border-amber-100 rounded-2xl shadow-xl overflow-hidden z-50" onClick={() => setShowNotification(false)}>
                   <div className="p-4 border-b border-gray-100">
                     <p className="font-semibold text-gray-900 text-sm">Notifications</p>
                   </div>
-                  <div className="p-4 text-center text-gray-400 text-sm py-8">
+                  <div className="p-4 text-center text-muted-foreground text-sm py-8">
                     <Bell className="w-8 h-8 mx-auto mb-2 opacity-40" />
                     No new notifications
                   </div>
@@ -295,15 +188,15 @@ export default function DashboardPage() {
               )}
             </div>
             <Link href="/dashboard/wallet">
-              <div className="hidden sm:flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-full px-3 py-1.5 cursor-pointer hover:bg-amber-100 transition-colors">
-                <Wallet className="h-4 w-4 text-amber-500" />
+              <div className="hidden sm:flex items-center gap-2 bg-purple-50 border border-amber-200 rounded-full px-3 py-1.5 cursor-pointer hover:bg-amber-100 transition-colors">
+                <Wallet className="h-4 w-4 text-purple-400" />
                 <span className="text-sm font-semibold text-amber-700">
                   {walletBalance !== null ? `₹${walletBalance.toFixed(2)}` : '...'}
                 </span>
               </div>
             </Link>
             <div className="relative" ref={profileMenuRef}>
-              <button onClick={() => setShowProfileMenu(!showProfileMenu)} className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white text-sm font-bold hover:opacity-90 transition-opacity overflow-hidden" title="My Profile">
+              <button onClick={() => setShowProfileMenu(!showProfileMenu)} className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-400 to-orange-500 flex items-center justify-center text-foreground text-sm font-bold hover:opacity-90 transition-opacity overflow-hidden" title="My Profile">
                 {user?.photoUrl ? (
                   <img src={user.photoUrl} alt={user.name || 'Profile'} className="w-full h-full object-cover" />
                 ) : user?.name ? (
@@ -315,27 +208,9 @@ export default function DashboardPage() {
               {showProfileMenu && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-amber-100 rounded-2xl shadow-xl overflow-hidden z-50">
                   <Link href="/dashboard/profile" onClick={() => setShowProfileMenu(false)}>
-                    <div className="px-4 py-3 hover:bg-amber-50 transition-colors flex items-center gap-3 border-b border-gray-100">
-                      <User className="w-4 h-4 text-amber-500" />
+                    <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-gray-100">
+                      <User className="w-4 h-4 text-purple-400" />
                       <span className="text-sm font-medium text-gray-900">My Profile</span>
-                    </div>
-                  </Link>
-                  <Link href="/dashboard/transcripts" onClick={() => setShowProfileMenu(false)}>
-                    <div className="px-4 py-3 hover:bg-amber-50 transition-colors flex items-center gap-3 border-b border-gray-100">
-                      <FileText className="w-4 h-4 text-amber-500" />
-                      <span className="text-sm font-medium text-gray-900">Call Transcripts</span>
-                    </div>
-                  </Link>
-                  <Link href="/dashboard/schedules" onClick={() => setShowProfileMenu(false)}>
-                    <div className="px-4 py-3 hover:bg-amber-50 transition-colors flex items-center gap-3 border-b border-gray-100">
-                      <Calendar className="w-4 h-4 text-amber-500" />
-                      <span className="text-sm font-medium text-gray-900">Scheduled Sessions</span>
-                    </div>
-                  </Link>
-                  <Link href="/dashboard/support" onClick={() => setShowProfileMenu(false)}>
-                    <div className="px-4 py-3 hover:bg-amber-50 transition-colors flex items-center gap-3 border-b border-gray-100">
-                      <LifeBuoy className="w-4 h-4 text-amber-500" />
-                      <span className="text-sm font-medium text-gray-900">Support</span>
                     </div>
                   </Link>
                   <button onClick={() => { tokenStore.clear(); router.push('/login'); }} className="w-full px-4 py-3 hover:bg-red-50 transition-colors flex items-center gap-3">
@@ -352,7 +227,7 @@ export default function DashboardPage() {
       <main className="flex-1 container mx-auto px-4 py-8 space-y-8">
 
         {/* ═══ WELCOME BANNER ═══ */}
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 p-6 md:p-8">
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-purple-400 via-orange-500 to-amber-600 p-6 md:p-8">
           <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-amber-300/20 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -361,20 +236,20 @@ export default function DashboardPage() {
                 <HeartHandshake className="w-4 h-4" />
                 <span>Welcome back</span>
               </div>
-              <h1 className="text-2xl md:text-3xl font-extrabold text-white mb-2">Hello, {firstName}!</h1>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-foreground mb-2">Hello, {firstName}!</h1>
               <p className="text-amber-100 max-w-md flex items-start gap-2">
                 <Sparkles className="w-4 h-4 mt-0.5 shrink-0" />
                 <span>Your first session is free. Connect with a verified expert and start your healing journey today.</span>
               </p>
               {!user?.isEmailVerified && (
-                <div className="mt-3 flex items-center gap-2 text-white text-sm bg-white/20 border border-white/30 rounded-lg px-3 py-2 w-fit">
+                <div className="mt-3 flex items-center gap-2 text-foreground text-sm bg-white/20 border border-border rounded-lg px-3 py-2 w-fit">
                   <Shield className="h-4 w-4 flex-shrink-0" />
                   Please verify your email to unlock all features.
                 </div>
               )}
             </div>
             <Link href="/practitioners">
-              <Button className="bg-white text-amber-700 hover:bg-amber-50 border-0 rounded-full px-6 shrink-0 font-bold shadow-lg shadow-amber-900/20">
+              <Button className="bg-white text-amber-700 hover:bg-purple-50 border-0 rounded-full px-6 shrink-0 font-bold shadow-lg shadow-amber-900/20">
                 <Zap className="h-4 w-4 mr-2" /> Start Free Session
               </Button>
             </Link>
@@ -384,9 +259,9 @@ export default function DashboardPage() {
         {/* ═══ STATS ROW ═══ */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: 'Wallet Balance', value: walletBalance !== null ? `₹${walletBalance.toFixed(2)}` : '...', icon: Wallet, color: 'text-amber-500', bg: 'bg-amber-50', shadow: 'shadow-amber-200/30' },
-            { label: 'Sessions Done', value: String(sessionsDone), icon: MessageCircle, color: 'text-emerald-600', bg: 'bg-emerald-50', shadow: 'shadow-emerald-200/30' },
-            { label: 'Minutes Used', value: `${minutesUsed} min`, icon: Clock, color: 'text-orange-500', bg: 'bg-orange-50', shadow: 'shadow-orange-200/30' },
+            { label: 'Wallet Balance', value: walletBalance !== null ? `₹${walletBalance.toFixed(2)}` : '...', icon: Wallet, color: 'text-purple-400', bg: 'bg-purple-50', shadow: 'shadow-amber-200/30' },
+            { label: 'Sessions Done', value: '0', icon: MessageCircle, color: 'text-emerald-600', bg: 'bg-emerald-50', shadow: 'shadow-emerald-200/30' },
+            { label: 'Minutes Used', value: '0 min', icon: Clock, color: 'text-orange-500', bg: 'bg-orange-50', shadow: 'shadow-orange-200/30' },
             { label: 'Experts Online', value: onlineCount > 0 ? String(onlineCount) : '—', icon: TrendingUp, color: 'text-blue-500', bg: 'bg-blue-50', shadow: 'shadow-blue-200/30' },
           ].map((stat) => (
             <Card key={stat.label} className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 rounded-2xl overflow-hidden">
@@ -396,64 +271,17 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <p className="text-xl font-bold text-gray-900">{stat.value}</p>
-                  <p className="text-xs text-gray-500">{stat.label}</p>
+                  <p className="text-xs text-muted-foreground">{stat.label}</p>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        {/* ═══ UPCOMING SESSIONS ═══ */}
-        {upcomingSessions.length > 0 && (
-          <div className="mt-8 mb-4 space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-blue-700 mb-0.5">Scheduled</p>
-                <h2 className="text-xl font-extrabold text-gray-900">Upcoming Sessions</h2>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {upcomingSessions.map((session: any) => {
-                const nextTime = session.timeProposals?.find((t: any) => t.isConfirmed);
-                return (
-                  <Card
-                    key={session.id}
-                    className="bg-white border border-blue-100 shadow-sm hover:shadow-md transition-all cursor-pointer rounded-2xl overflow-hidden"
-                    onClick={() => router.push(`/scheduled-sessions/${session.id}`)}
-                  >
-                    <CardContent className="p-4 flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-lg shrink-0 overflow-hidden">
-                        {session.practitioner?.photoUrl
-                          ? <img src={session.practitioner.photoUrl} alt={session.practitioner.name ?? ''} className="w-full h-full object-cover" />
-                          : <User className="w-6 h-6" />}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-gray-900 truncate">{session.practitioner?.name ?? 'Expert'}</p>
-                        <div className="flex items-center gap-2 mt-0.5">
-                          <span className="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-600">
-                            <Calendar className="w-3 h-3" />
-                            Scheduled
-                          </span>
-                          <span className="text-gray-300">·</span>
-                          <Clock className="w-3 h-3 text-gray-400" />
-                          <span className="text-xs text-gray-400 truncate">
-                            {nextTime ? new Date(nextTime.startTime).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : 'Time TBD'}
-                          </span>
-                        </div>
-                      </div>
-                      <ChevronRight className="w-5 h-5 text-gray-300 shrink-0" />
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
         {/* ═══ QUICK ACTIONS ═══ */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
-            { icon: MessageCircle, label: 'Live Chat', desc: 'Text with an expert now', color: 'text-amber-500', bg: 'bg-amber-50', border: 'hover:border-amber-400', action: () => document.getElementById('experts-section')?.scrollIntoView({ behavior: 'smooth' }) },
+            { icon: MessageCircle, label: 'Live Chat', desc: 'Text with an expert now', color: 'text-purple-400', bg: 'bg-purple-50', border: 'hover:border-purple-300', action: () => document.getElementById('experts-section')?.scrollIntoView({ behavior: 'smooth' }) },
             { icon: Headphones, label: 'Audio Call', desc: 'Voice consultation', color: 'text-orange-500', bg: 'bg-orange-50', border: 'hover:border-orange-400', action: () => document.getElementById('experts-section')?.scrollIntoView({ behavior: 'smooth' }) },
             { icon: Wallet, label: 'Add Money', desc: 'Recharge your wallet', color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'hover:border-emerald-400', action: () => setIsRechargeModalOpen(true) },
           ].map((item) => (
@@ -464,9 +292,9 @@ export default function DashboardPage() {
                 </div>
                 <div className="flex-1">
                   <p className="font-semibold text-gray-900">{item.label}</p>
-                  <p className="text-sm text-gray-500">{item.desc}</p>
+                  <p className="text-sm text-muted-foreground">{item.desc}</p>
                 </div>
-                <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-amber-500 transition-colors" />
+                <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-purple-400 transition-colors" />
               </CardContent>
             </Card>
           ))}
@@ -478,7 +306,7 @@ export default function DashboardPage() {
             <div>
               <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1">Browse Experts</p>
               <h2 className="text-2xl font-extrabold text-gray-900">Find Your Healer</h2>
-              <p className="text-sm text-gray-500">500+ verified practitioners online</p>
+              <p className="text-sm text-muted-foreground">500+ verified practitioners online</p>
             </div>
             <Link href="/practitioners">
               <Button variant="ghost" className="text-amber-600 hover:text-amber-700 text-sm font-semibold">
@@ -490,14 +318,14 @@ export default function DashboardPage() {
           {/* Tabs */}
           <div className="flex gap-2 mb-6 overflow-x-auto pb-1">
             {(['all', 'astrology', 'tarot', 'vastu', 'numerology'] as const).map((tab) => (
-              <button key={tab} onClick={() => handleTabChange(tab)} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${activeTab === tab ? 'bg-amber-500 text-white shadow-sm' : 'bg-white text-gray-600 hover:text-gray-900 border border-gray-200 hover:border-amber-200'}`}>
+              <button key={tab} onClick={() => handleTabChange(tab)} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${activeTab === tab ? 'bg-purple-400 text-foreground shadow-sm' : 'bg-white text-muted-foreground hover:text-gray-900 border border-gray-200 hover:border-amber-200'}`}>
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
               </button>
             ))}
           </div>
 
           {experts.length === 0 ? (
-            <div className="text-center py-16 text-gray-400">
+            <div className="text-center py-16 text-muted-foreground">
               <Image src="/logo.png" alt="" width={48} height={48} className="mx-auto mb-3 opacity-30 rounded-full" />
               <p className="text-lg font-medium">No practitioners found</p>
               <p className="text-sm mt-1">Check back soon or try adjusting your filters</p>
@@ -505,26 +333,22 @@ export default function DashboardPage() {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
               {experts.map((expert) => {
-                const avatarSrc = getPractitionerAvatar(expert.photoUrl, expert.name);
+                const avatarSrc = getPractitionerAvatar(expert.photoUrl, expert.id);
                 return (
                   <Link key={expert.id} href={`/practitioners/${expert.id}`} className="h-full">
                     <Card className="bg-white border border-gray-100 hover:border-amber-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 cursor-pointer rounded-2xl overflow-hidden group h-full">
                       <CardContent className="p-0 flex flex-col h-full">
                         {/* Top strip with avatar */}
-                        <div className="relative h-14 bg-gradient-to-r from-amber-50 to-orange-50">
+                        <div className="relative h-14 bg-gradient-to-r from-purple-50 to-orange-50">
                           <div className="absolute -bottom-6 left-5">
                             <img src={avatarSrc} alt={expert.name} className="w-12 h-12 rounded-xl object-cover shadow-md border-2 border-white" />
                           </div>
                           <div className="absolute top-3 right-4">
                             <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
-                              expert.isBusy ? 'bg-orange-100 text-orange-700' : 
-                              expert.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'
+                              expert.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-muted-foreground'
                             }`}>
-                              <span className={`w-1.5 h-1.5 rounded-full ${
-                                expert.isBusy ? 'bg-orange-500' : 
-                                expert.isOnline ? 'bg-emerald-500' : 'bg-gray-400'
-                              }`} />
-                              {expert.isBusy ? 'Busy' : expert.isOnline ? 'Online' : 'Offline'}
+                              <span className={`w-1.5 h-1.5 rounded-full ${expert.isOnline ? 'bg-emerald-500' : 'bg-gray-400'}`} />
+                              {expert.isOnline ? 'Online' : 'Offline'}
                             </span>
                           </div>
                         </div>
@@ -540,26 +364,26 @@ export default function DashboardPage() {
 
                           <div className="flex items-center gap-3 mt-2 mb-3">
                             <div className="flex items-center gap-1">
-                              <Star className="w-3.5 h-3.5 text-amber-400 fill-current" />
+                              <Star className="w-3.5 h-3.5 text-purple-300 fill-current" />
                               <span className="text-sm font-semibold text-gray-900">{expert.avgRating || '—'}</span>
-                              <span className="text-xs text-gray-400">({expert.reviewCount})</span>
+                              <span className="text-xs text-muted-foreground">({expert.reviewCount})</span>
                             </div>
                             <span className="text-gray-200">|</span>
-                            <span className="text-xs text-gray-500">{expert.experienceYrs} yrs exp</span>
+                            <span className="text-xs text-muted-foreground">{expert.experienceYrs} yrs exp</span>
                           </div>
 
-                          <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed flex-1">{expert.bio || ''}</p>
+                          <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed flex-1">{expert.bio || ''}</p>
 
                           <div className="flex items-center justify-between pt-3 mt-3 border-t border-gray-100">
                             <div>
                               <span className="text-lg font-bold text-gray-900">₹{expert.perMinuteRate}</span>
-                              <span className="text-xs text-gray-400">/min</span>
+                              <span className="text-xs text-muted-foreground">/min</span>
                             </div>
                             <div className="flex gap-2">
-                              <Button size="sm" variant="outline" className="h-8 px-3 border-gray-200 hover:border-amber-300 hover:text-amber-700 text-xs gap-1" onClick={(e) => { e.preventDefault(); startChatSession(expert.id, e); }} disabled={!expert.isOnline || expert.isBusy || startingSession === expert.id}>
+                              <Button size="sm" variant="outline" className="h-8 px-3 border-gray-200 hover:border-amber-300 hover:text-amber-700 text-xs gap-1" onClick={(e) => { e.preventDefault(); startChatSession(expert.id, e); }} disabled={startingSession === expert.id}>
                                 <MessageCircle className="h-3.5 w-3.5" /> Chat
                               </Button>
-                              <Button size="sm" disabled={!expert.isOnline || expert.isBusy || startingSession === expert.id} className="h-8 px-3 bg-amber-500 hover:bg-amber-600 text-white border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => { e.preventDefault(); startCallSession(expert.id, e); }}>
+                              <Button size="sm" disabled={!expert.isOnline} className="h-8 px-3 bg-purple-400 hover:bg-amber-600 text-foreground border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => e.preventDefault()}>
                                 <Phone className="h-3.5 w-3.5" /> Call
                               </Button>
                             </div>
@@ -575,15 +399,15 @@ export default function DashboardPage() {
         </div>
 
         {/* ═══ RECHARGE CTA ═══ */}
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 p-6 md:p-8">
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-purple-300 via-purple-400 to-yellow-500 p-6 md:p-8">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-start gap-4">
               <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center shrink-0">
-                <Wallet className="w-7 h-7 text-white" />
+                <Wallet className="w-7 h-7 text-foreground" />
               </div>
               <div>
-                <h3 className="text-xl font-extrabold text-white mb-1">Top up your wallet</h3>
+                <h3 className="text-xl font-extrabold text-foreground mb-1">Top up your wallet</h3>
                 <p className="text-amber-100 text-sm max-w-md">Add money and start connecting with experts instantly. No hidden fees.</p>
                 <div className="flex items-center gap-4 mt-3">
                   <div className="flex items-center gap-1.5 text-amber-100 text-xs">
@@ -600,7 +424,7 @@ export default function DashboardPage() {
             </div>
             <Button 
               onClick={() => setIsRechargeModalOpen(true)}
-              className="bg-white text-amber-700 hover:bg-amber-50 border-0 rounded-full px-8 shrink-0 font-bold shadow-lg shadow-amber-900/20 whitespace-nowrap"
+              className="bg-white text-amber-700 hover:bg-purple-50 border-0 rounded-full px-8 shrink-0 font-bold shadow-lg shadow-amber-900/20 whitespace-nowrap"
             >
               <Waves className="h-4 w-4 mr-2" /> Add Funds
             </Button>

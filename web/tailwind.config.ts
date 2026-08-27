@@ -51,6 +51,10 @@ const config = {
           DEFAULT: "var(--card)",
           foreground: "var(--card-foreground)",
         },
+        success: {
+          DEFAULT: "var(--success)",
+          foreground: "var(--success-foreground)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -58,7 +62,9 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["var(--font-sans)"],
+        sans: ["var(--font-inter)", "sans-serif"],
+        heading: ["var(--font-playfair)", "serif"],
+        serif: ["var(--font-cormorant)", "serif"],
       },
     },
   },

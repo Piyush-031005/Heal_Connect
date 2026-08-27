@@ -60,23 +60,13 @@ export function useSessionChat(sessionId: string, currentUserId: string): UseSes
       setSessionStatus('connecting'); // Wait for peer before becoming active
     });
 
-    socket.on('session_started', ({ startTime }: { sessionId: string; startTime?: string }) => {
+    socket.on('session_started', () => {
       setSessionStatus('active');
       // Stop any existing timers before starting new ones (Strict Mode safety)
       if (timerRef.current) clearInterval(timerRef.current);
       if (walletPollRef.current) clearInterval(walletPollRef.current);
-      
-      // Start session timer synced to backend time
-      if (startTime) {
-        const startTs = new Date(startTime).getTime();
-        setElapsedSeconds(Math.max(0, Math.floor((Date.now() - startTs) / 1000)));
-        timerRef.current = setInterval(() => {
-          setElapsedSeconds(Math.max(0, Math.floor((Date.now() - startTs) / 1000)));
-        }, 1000);
-      } else {
-        timerRef.current = setInterval(() => setElapsedSeconds((s) => s + 1), 1000);
-      }
-
+      // Start session timer
+      timerRef.current = setInterval(() => setElapsedSeconds((s) => s + 1), 1000);
       // Start wallet polling
       fetchWallet();
       walletPollRef.current = setInterval(fetchWallet, 15000);
@@ -111,12 +101,6 @@ export function useSessionChat(sessionId: string, currentUserId: string): UseSes
       disconnectSocket();
     });
 
-    socket.on('session_disconnected', () => {
-      stopTimers();
-      setSessionStatus('ended');
-      disconnectSocket();
-    });
-
     return () => {
       socket.off('joined_room');
       socket.off('session_started');
@@ -126,7 +110,6 @@ export function useSessionChat(sessionId: string, currentUserId: string): UseSes
       socket.off('receipt_update');
       socket.off('low_balance');
       socket.off('session_terminated');
-      socket.off('session_disconnected');
       stopTimers();
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -162,17 +145,11 @@ export function useSessionChat(sessionId: string, currentUserId: string): UseSes
     getSocket(token).emit('message_read', { sessionId, messageId });
   }, [sessionId]);
 
-  const endSession = useCallback(async () => {
+  const endSession = useCallback(() => {
     stopTimers();
     setSessionStatus('ended');
-    const token = tokenStore.getAccess();
-    if (token) {
-      import('@/lib/api').then(({ sessionsApi }) => {
-        sessionsApi.end(token, sessionId).catch(console.error);
-      });
-    }
     disconnectSocket();
-  }, [sessionId]);
+  }, []);
 
   return { messages, sessionStatus, otherTyping, elapsedSeconds, walletBalance, sendMessage, emitTypingStart, emitTypingStop, markRead, endSession };
 }

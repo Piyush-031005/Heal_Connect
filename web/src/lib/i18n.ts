@@ -148,7 +148,7 @@ export const translations = {
     testimonialBadge: 'Testimonials',
     testimonialTitle: 'Real people. Real reviews.',
     testimonialRating: 'Based on 5L+ reviews',
-    testimonialSubtext: 'Join millions of satisfied users who trust ZenAuraa for accurate predictions and life guidance.',
+    testimonialSubtext: 'Join millions of satisfied users who trust Zenauraa for accurate predictions and life guidance.',
 
     // ─── Pricing (new specific keys) ───
     pricingHeading: 'Simple Pricing',
@@ -161,7 +161,7 @@ export const translations = {
     pricingGetStarted: 'Get Started',
 
     // ─── App Download ───
-    appBadge: 'The ZenAuraa app',
+    appBadge: 'The Zenauraa app',
     appTitle: 'Astrology made simpler, and available to you',
     appTitleEm: '24×7',
     appDesc: 'Connect with an astrologer anytime, and find the solutions to all your love, marriage, career, and finance related problems instantly.',
@@ -196,22 +196,22 @@ export const translations = {
     faqTitleRest: 'these first.',
     faqs: [
       { q: 'Why Is Astrology So Accurate?', a: 'Astrology accuracy comes from thousands of years of careful observation linking planetary movements to human experiences. Experienced astrologers study birth charts that map cosmic influences at your exact birth moment, providing personalized insights rather than generic predictions.' },
-      { q: 'Why Should You Choose ZenAuraa For An Astrology Horoscope?', a: 'ZenAuraa offers verified astrologers, transparent pricing, and instant consultations via chat or call. Every expert undergoes a rigorous 4-step verification process.' },
+      { q: 'Why Should You Choose Zenauraa For An Astrology Horoscope?', a: 'Zenauraa offers verified astrologers, transparent pricing, and instant consultations via chat or call. Every expert undergoes a rigorous 4-step verification process.' },
       { q: 'Is Astrology Prediction True?', a: 'Astrology offers guidance based on planetary positions and their influences. While it provides valuable insights, it\'s a tool for self-reflection and guidance rather than absolute prediction.' },
       { q: 'How Can Online Astrology Help Me In Predicting The Future?', a: 'Online astrology connects you with expert astrologers who analyze your birth chart and current planetary transits to provide personalized guidance for life decisions.' },
-      { q: 'How reliable is the Astrotalk app?', a: 'The app is built with enterprise-grade security, verified practitioners, and transparent user reviews to ensure a reliable and trustworthy experience.' },
-      { q: 'How much does Astrotalk cost?', a: 'Prices start from just ₹10/min for chat consultations. We offer transparent pricing with no hidden charges. Your first consultation is absolutely free.' },
+      { q: 'How reliable is the Zenauraa app?', a: 'The app is built with enterprise-grade security, verified practitioners, and transparent user reviews to ensure a reliable and trustworthy experience.' },
+      { q: 'How much does Zenauraa cost?', a: 'Prices start from just ₹10/min for chat consultations. We offer transparent pricing with no hidden charges. Your first consultation is absolutely free.' },
     ],
 
     // ─── Footer ───
-    footerBrandDesc: 'ZenAuraa is the best astrology website for online Astrology predictions. Talk to Astrologer on call and get answers to all your worries by seeing the future life through Astrology Kundli Predictions from the best Astrologers from India.',
+    footerBrandDesc: 'Zenauraa is the best astrology website for online Astrology predictions. Talk to Astrologer on call and get answers to all your worries by seeing the future life through Astrology Kundli Predictions from the best Astrologers from India.',
     footerColumns: [
       { title: 'Horoscope', links: ['Daily Horoscope', 'Weekly Horoscope', 'Monthly Horoscope', 'Yearly Horoscope'] },
       { title: 'Free Services', links: ['Free Kundli', 'Kundli Matching', 'Love Calculator'] },
       { title: 'Consultations', links: ['Chat with Astrologer', 'Talk to Astrologer'] },
       { title: 'Important Links', links: ['About Us', 'Privacy Policy', 'Refund Policy', 'Terms & Conditions'] },
     ],
-    footerCopyright: '© 2026 ZenAuraa (Powered by Tara Infotech). All Rights Reserved',
+    footerCopyright: '© 2026 Zenauraa (Powered by Tara Infotech). All Rights Reserved',
   },
   hi: {
     // ─── Existing keys ───
@@ -362,7 +362,7 @@ export const translations = {
     testimonialBadge: 'प्रशंसापत्र',
     testimonialTitle: 'वास्तविक लोग। वास्तविक समीक्षाएं।',
     testimonialRating: '5L+ समीक्षाओं के आधार पर',
-    testimonialSubtext: 'सटीक भविष्यवाणियों और जीवन मार्गदर्शन के लिए ZenAuraa पर भरोसा करने वाले लाखों संतुष्ट उपयोगकर्ताओं से जुड़ें।',
+    testimonialSubtext: 'सटीक भविष्यवाणियों और जीवन मार्गदर्शन के लिए Zenauraa पर भरोसा करने वाले लाखों संतुष्ट उपयोगकर्ताओं से जुड़ें।',
 
     // ─── Pricing (new specific keys) ───
     pricingHeading: 'सरल मूल्य निर्धारण',
@@ -375,7 +375,7 @@ export const translations = {
     pricingGetStarted: 'शुरू करें',
 
     // ─── App Download ───
-    appBadge: 'ZenAuraa ऐप',
+    appBadge: 'Zenauraa ऐप',
     appTitle: 'ज्योतिष को सरल बनाया गया, और आपके लिए उपलब्ध',
     appTitleEm: '24×7',
     appDesc: 'कभी भी ज्योतिषी से जुड़ें, और अपने प्रेम, विवाह, करियर और वित्त से संबंधित सभी समस्याओं का तुरंत समाधान खोजें।',
@@ -410,22 +410,22 @@ export const translations = {
     faqTitleRest: 'पहले पढ़ें।',
     faqs: [
       { q: 'ज्योतिष इतना सटीक क्यों है?', a: 'ज्योतिष की सटीकता हजारों वर्षों के सावधानीपूर्वक अवलोकन से आती है जो ग्रहों की गतिविधियों को मानव अनुभवों से जोड़ती है। अनुभवी ज्योतिषी जन्म कुंडली का अध्ययन करते हैं जो आपके जन्म के सटीक क्षण पर ब्रह्मांडीय प्रभावों का मानचित्रण करते हैं, सामान्य भविष्यवाणियों के बजाय व्यक्तिगत अंतर्दृष्टि प्रदान करते हैं।' },
-      { q: 'आपको ZenAuraa क्यों चुनना चाहिए?', a: 'ZenAuraa सत्यापित ज्योतिषी, पारदर्शी मूल्य निर्धारण और चैट या कॉल के माध्यम से तत्काल परामर्श प्रदान करता है। प्रत्येक विशेषज्ञ कठोर 4-चरणीय सत्यापन प्रक्रिया से गुज़रता है।' },
+      { q: 'आपको Zenauraa क्यों चुनना चाहिए?', a: 'Zenauraa सत्यापित ज्योतिषी, पारदर्शी मूल्य निर्धारण और चैट या कॉल के माध्यम से तत्काल परामर्श प्रदान करता है। प्रत्येक विशेषज्ञ कठोर 4-चरणीय सत्यापन प्रक्रिया से गुज़रता है।' },
       { q: 'क्या ज्योतिष भविष्यवाणी सच है?', a: 'ज्योतिष ग्रहों की स्थिति और उनके प्रभावों के आधार पर मार्गदर्शन प्रदान करता है। यह मूल्यवान अंतर्दृष्टि प्रदान करता है, लेकिन यह पूर्ण भविष्यवाणी के बजाय आत्म-चिंतन और मार्गदर्शन का एक उपकरण है।' },
       { q: 'ऑनलाइन ज्योतिष भविष्य की भविष्यवाणी में कैसे मदद कर सकता है?', a: 'ऑनलाइन ज्योतिष आपको विशेषज्ञ ज्योतिषियों से जोड़ता है जो जीवन के निर्णयों के लिए व्यक्तिगत मार्गदर्शन प्रदान करने के लिए आपकी जन्म कुंडली और वर्तमान ग्रह गोचर का विश्लेषण करते हैं।' },
-      { q: 'Astrotalk ऐप कितना विश्वसनीय है?', a: 'ऐप एंटरप्राइज़-ग्रेड सुरक्षा, सत्यापित प्रैक्टिशनर और पारदर्शी उपयोगकर्ता समीक्षाओं के साथ बनाया गया है ताकि एक विश्वसनीय और भरोसेमंद अनुभव सुनिश्चित हो सके।' },
-      { q: 'Astrotalk की लागत कितनी है?', a: 'चैट परामर्श के लिए कीमतें सिर्फ ₹10/मिनट से शुरू होती हैं। हम बिना किसी छिपे शुल्क के पारदर्शी मूल्य निर्धारण प्रदान करते हैं। आपका पहला परामर्श पूरी तरह से मुफ़्त है।' },
+      { q: 'Zenauraa ऐप कितना विश्वसनीय है?', a: 'ऐप एंटरप्राइज़-ग्रेड सुरक्षा, सत्यापित प्रैक्टिशनर और पारदर्शी उपयोगकर्ता समीक्षाओं के साथ बनाया गया है ताकि एक विश्वसनीय और भरोसेमंद अनुभव सुनिश्चित हो सके।' },
+      { q: 'Zenauraa की लागत कितनी है?', a: 'चैट परामर्श के लिए कीमतें सिर्फ ₹10/मिनट से शुरू होती हैं। हम बिना किसी छिपे शुल्क के पारदर्शी मूल्य निर्धारण प्रदान करते हैं। आपका पहला परामर्श पूरी तरह से मुफ़्त है।' },
     ],
 
     // ─── Footer ───
-    footerBrandDesc: 'ZenAuraa ऑनलाइन ज्योतिष भविष्यवाणियों के लिए सबसे अच्छी ज्योतिष वेबसाइट है। कॉल पर ज्योतिषी से बात करें और भारत के सर्वश्रेष्ठ ज्योतिषियों से ज्योतिष कुंडली भविष्यवाणियों के माध्यम से भविष्य के जीवन को देखकर अपनी सभी चिंताओं के उत्तर प्राप्त करें।',
+    footerBrandDesc: 'Zenauraa ऑनलाइन ज्योतिष भविष्यवाणियों के लिए सबसे अच्छी ज्योतिष वेबसाइट है। कॉल पर ज्योतिषी से बात करें और भारत के सर्वश्रेष्ठ ज्योतिषियों से ज्योतिष कुंडली भविष्यवाणियों के माध्यम से भविष्य के जीवन को देखकर अपनी सभी चिंताओं के उत्तर प्राप्त करें।',
     footerColumns: [
       { title: 'राशिफल', links: ['दैनिक राशिफल', 'साप्ताहिक राशिफल', 'मासिक राशिफल', 'वार्षिक राशिफल'] },
       { title: 'मुफ़्त सेवाएं', links: ['मुफ़्त कुंडली', 'कुंडली मिलान', 'प्रेम कैलकुलेटर'] },
       { title: 'परामर्श', links: ['ज्योतिषी से चैट', 'ज्योतिषी से बात'] },
       { title: 'महत्वपूर्ण लिंक', links: ['हमारे बारे में', 'गोपनीयता नीति', 'रिफंड नीति', 'नियम और शर्तें'] },
     ],
-    footerCopyright: '© 2026 ZenAuraa (Tara Infotech द्वारा संचालित)। सर्वाधिकार सुरक्षित',
+    footerCopyright: '© 2026 Zenauraa (Tara Infotech द्वारा संचालित)। सर्वाधिकार सुरक्षित',
   },
 } as const;
 

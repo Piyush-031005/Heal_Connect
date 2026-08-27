@@ -20,103 +20,36 @@ function LoginInner() {
   const searchParams = useSearchParams();
   const [role, setRole] = useState<Role>('user');
 
-  // Redirect already-logged-in users
   useEffect(() => {
-    const token = localStorage.getItem('hc_access');
-    if (!token) return;
-    const isExpert = localStorage.getItem('hc_role') === 'practitioner';
-    router.replace(isExpert ? '/expert/dashboard' : '/dashboard');
-  }, [router]);
-
+    if (searchParams.get('role') === 'expert') setRole('expert');
+  }, [searchParams]);
   const [mode, setMode] = useState<Mode>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [verifyUrl, setVerifyUrl] = useState<string | null>(null);
-  const [loginMethod, setLoginMethod] = useState<'password' | 'otp'>('password');
-
-  // Check for error parameters from Google OAuth callback
-  useEffect(() => {
-    if (searchParams) {
-      const errorType = searchParams.get('error');
-      const errorDetails = searchParams.get('details');
-      
-      if (errorType) {
-        let errorMessage = 'Authentication failed';
-        switch (errorType) {
-          case 'oauth_error':
-            errorMessage = `Google OAuth error: ${errorDetails || 'Access denied'}`;
-            break;
-          case 'no_token':
-            errorMessage = 'Google authentication did not return a valid token';
-            break;
-          case 'auth_failed':
-            errorMessage = `Authentication failed: ${errorDetails || 'Invalid credentials'}`;
-            break;
-          case 'callback_failed':
-            errorMessage = `Callback processing failed: ${errorDetails || 'Unknown error'}`;
-            break;
-        }
-        setError(errorMessage);
-        
-        // Clear the error from URL
-        const newUrl = new URL(window.location.href);
-        newUrl.searchParams.delete('error');
-        newUrl.searchParams.delete('details');
-        window.history.replaceState({}, '', newUrl.toString());
-      }
-    }
-  }, [searchParams]);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setError('');
-    setSuccess('');
-    setVerifyUrl(null);
     setLoading(true);
     try {
       if (role === 'expert') {
-        // Expert login using astrologer API
-        const res = await fetch('/api/auth/astrologer/login-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
-        }).then(r => r.json());
-
-        if (!res.success) {
-          setError(res.message || 'Invalid email or password.');
-          return;
-        }
-
-        // Store expert tokens
+        const res = await authApi.practitionerLogin(email, password);
+        if (!res.success || !res.data) { setError(res.message || 'Login failed'); return; }
         tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
         localStorage.setItem('hc_role', 'practitioner');
-        if (res.data.astrologer) {
-          localStorage.setItem('hc_practitioner_id', res.data.astrologer.id);
-          localStorage.setItem('hc_pid', res.data.astrologer.id);
-          localStorage.setItem('hc_practitioner_name', res.data.astrologer.name ?? '');
-        }
-        
-        // Redirect to onboarding or dashboard based on profile status
-        router.push(res.data.redirect || '/astrologer/onboarding');
+        localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
+        localStorage.setItem('hc_practitioner_name', res.data.practitioner.name ?? '');
+        router.push('/expert/dashboard');
       } else {
-        // User login
         const res = await authApi.login({ email, password });
-        if (!res.success || !res.data) {
-          setError(res.message || 'Login failed');
-          if (res.code === 'UNVERIFIED_ACCOUNT' && (res as any).data?.verifyUrl) {
-            setVerifyUrl((res as any).data.verifyUrl);
-          }
-          return;
-        }
+        if (!res.success || !res.data) { setError(res.message || 'Login failed'); return; }
         tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
         localStorage.removeItem('hc_role');
         localStorage.removeItem('hc_practitioner_id');
-        localStorage.removeItem('hc_pid');
         localStorage.removeItem('hc_practitioner_name');
         router.push('/dashboard');
       }
@@ -126,58 +59,13 @@ function LoginInner() {
 
   async function handleForgotPassword(e: React.FormEvent) {
     e.preventDefault();
-    setLoading(true);
     setError('');
-    setSuccess('');
+    setLoading(true);
     try {
       const res = await authApi.forgotPassword(email);
-      if (res.success) {
-        setSuccess(res.message);
-      } else {
-        setError(res.message);
-      }
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function handleSendOtp(e: React.FormEvent) {
-    e.preventDefault();
-    if (!phone) return setError('Please enter a phone number.');
-    setLoading(true);
-    setError('');
-    try {
-      const cleanPhone = phone.replace(/\s+/g, '');
-      
-      if (role === 'expert') {
-        // Expert OTP login
-        const res = await fetch('/api/auth/astrologer/request-otp', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phone: cleanPhone }),
-        }).then(r => r.json());
-        
-        if (!res.success) {
-          setError(res.message || 'Failed to send OTP.');
-          return;
-        }
-        router.push(`/verify-otp?phone=${encodeURIComponent(cleanPhone)}&type=login&role=expert`);
-      } else {
-        // User OTP login
-        const res = await (authApi as any).requestLoginOtp(cleanPhone, 'user');
-        if (!res.success) {
-          setError(res.message || 'Failed to send OTP.');
-          return;
-        }
-        router.push(`/verify-otp?phone=${encodeURIComponent(cleanPhone)}&type=login&role=user`);
-      }
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong sending OTP.');
-    } finally {
-      setLoading(false);
-    }
+      setSuccess(res.message || 'Check your email for a reset link.');
+    } catch { setError('Something went wrong. Please try again.'); }
+    finally { setLoading(false); }
   }
 
   function handleGoogleSignIn() {
@@ -185,8 +73,7 @@ function LoginInner() {
     if (!clientId) { setError('Google Sign-In is not configured yet.'); return; }
     const redirectUri = encodeURIComponent(`${window.location.origin}/auth/google/callback`);
     const scope = encodeURIComponent('openid email profile');
-    const state = role === 'expert' ? 'expert' : 'user';
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&state=${state}&nonce=${Math.random().toString(36)}`;
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&nonce=${Math.random().toString(36)}`;
   }
 
   function handleAppleSignIn() {
@@ -194,201 +81,138 @@ function LoginInner() {
   }
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] flex flex-col md:flex-row font-sans">
+    <div className="min-h-screen bg-gradient-to-br from-[#E6E6FA] via-[#D8BFD8] to-[#E6E6FA] text-foreground flex flex-col md:flex-row font-sans relative overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(214,180,107,0.15)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(46,196,182,0.1)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
+      </div>
 
       {/* Left — Branding */}
-      <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-gradient-to-br from-[#f59e0b] via-[#d97706] to-[#b45309] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
-
+      <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-black/5 dark:bg-black/20 backdrop-blur-md relative z-10 border-r border-border">
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
-            <Image src="/logo.png" alt="ZenAuraa" width={36} height={36} className="rounded-full" />
-            <span className="text-2xl font-extrabold text-white">ZenAuraa</span>
+            <Image src="/logo.png" alt="Zenauraa" width={36} height={36} className="rounded-full shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
+            <span className="text-2xl font-extrabold text-foreground tracking-wide uppercase">Zenauraa</span>
           </Link>
-          <h1 className="text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">
-            Begin your journey <br /> to inner peace.
+          <h1 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-6 leading-tight">
+            Begin your journey <br /> <span className="text-primary">to inner peace.</span>
           </h1>
-          <p className="text-lg text-yellow-100 max-w-md leading-relaxed mb-12">
+          <p className="text-lg text-muted-foreground max-w-md leading-relaxed mb-12">
             Join 50,000+ members receiving guidance from world-class verified practitioners.
           </p>
-          <div className="space-y-6">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                <ShieldCheck className="w-5 h-5 text-white" />
+          <div className="space-y-8">
+            <div className="flex items-center gap-5">
+              <div className="w-12 h-12 rounded-full bg-white/5 border border-border flex items-center justify-center shadow-[0_0_15px_rgba(46,196,182,0.2)]">
+                <ShieldCheck className="w-6 h-6 text-accent" />
               </div>
               <div>
-                <p className="text-white font-semibold">100% Private & Secure</p>
-                <p className="text-sm text-yellow-100">Your data and conversations are encrypted.</p>
+                <p className="text-foreground font-semibold text-lg tracking-wide">100% Private & Secure</p>
+                <p className="text-sm text-muted-foreground mt-1">Your data and conversations are encrypted.</p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                <Star className="w-5 h-5 text-white" />
+            <div className="flex items-center gap-5">
+              <div className="w-12 h-12 rounded-full bg-white/5 border border-border flex items-center justify-center shadow-[0_0_15px_rgba(214,180,107,0.2)]">
+                <Star className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <p className="text-white font-semibold">Verified Experts</p>
-                <p className="text-sm text-yellow-100">Rigorous 5-step background checks.</p>
+                <p className="text-foreground font-semibold text-lg tracking-wide">Verified Experts</p>
+                <p className="text-sm text-muted-foreground mt-1">Rigorous 5-step background checks.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 mt-auto pt-12 border-t border-white/20">
-          <p className="text-yellow-100 text-sm">© 2026 Tara Infotech. All rights reserved.</p>
+        <div className="relative z-10 mt-auto pt-12 border-t border-border">
+          <p className="text-muted-foreground text-sm tracking-wider uppercase">© 2026 Tara Infotech. All rights reserved.</p>
         </div>
       </div>
 
       {/* Right — Form */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative">
+      <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative z-10">
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
-            <span className="text-xl font-extrabold text-[#f59e0b]">ZenAuraa</span>
+            <Image src="/logo.png" alt="Zenauraa" width={28} height={28} className="rounded-full shadow-[0_0_10px_rgba(214,180,107,0.5)]" />
+            <span className="text-xl font-extrabold text-primary uppercase tracking-wide">Zenauraa</span>
           </Link>
         </div>
 
-        <Card className="w-full max-w-md bg-white border border-yellow-100 shadow-xl">
-          <CardHeader className="space-y-2 pb-6">
-            <CardTitle className="text-2xl font-extrabold text-[#1a1a1a]">
+        <Card className="w-full max-w-md bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-border shadow-2xl rounded-2xl overflow-hidden">
+          <CardHeader className="space-y-2 pb-6 border-b border-border bg-black/5 dark:bg-white/5">
+            <CardTitle className="text-2xl font-bold text-foreground tracking-wide">
               {mode === 'login' ? 'Log in to your account' : 'Reset your password'}
             </CardTitle>
-            <CardDescription className="text-gray-500 text-base">
+            <CardDescription className="text-muted-foreground text-base">
               {mode === 'login' ? 'Welcome back! Enter your credentials to continue.' : 'Enter your email to receive a password reset link.'}
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="space-y-5">
-            {error && (
-              <div className="rounded-xl bg-red-50 border border-red-200 p-4 text-sm text-red-700 space-y-2">
-                <p className="font-semibold">{error}</p>
-                {verifyUrl && (
-                  <a
-                    href={verifyUrl}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold text-xs shadow-md transition-all"
-                  >
-                    ✦ Click Here to Verify Email Now →
-                  </a>
-                )}
+          <CardContent className="space-y-6 pt-6">
+            {/* Role Toggle */}
+            {mode === 'login' && (
+              <div className="flex rounded-xl border border-border overflow-hidden bg-black/5 dark:bg-black/50 p-1 gap-1">
+                <button type="button" onClick={() => { setRole('user'); setError(''); }}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                    role === 'user' ? 'bg-primary text-primary-foreground shadow-[0_0_15px_rgba(214,180,107,0.4)]' : 'text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                  <User className="w-4 h-4" /> User
+                </button>
+                <button type="button" onClick={() => { setRole('expert'); setError(''); }}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                    role === 'expert' ? 'bg-primary text-primary-foreground shadow-[0_0_15px_rgba(214,180,107,0.4)]' : 'text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                  <Sparkles className="w-4 h-4" /> Expert
+                </button>
               </div>
             )}
-            {success && <div className="rounded-lg bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-700">{success}</div>}
+
+            {error && <div className="rounded-lg bg-red-900/20 border border-red-500/50 px-4 py-3 text-sm text-red-400 flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"/>{error}</div>}
+            {success && <div className="rounded-lg bg-green-900/20 border border-green-500/50 px-4 py-3 text-sm text-green-400 flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"/>{success}</div>}
 
             {mode === 'login' && (
-              <>
-                {/* User/Expert Toggle - Bold & Prominent */}
-                <div className="space-y-1.5">
-                  <label className="block text-xs font-medium text-gray-500 uppercase tracking-wide">Account Type</label>
-                  <div className="flex rounded-2xl border-2 border-[#f59e0b]/20 overflow-hidden bg-gradient-to-br from-[#fffbf0] to-white p-1.5 gap-2 shadow-sm">
-                    <button
-                      type="button"
-                      onClick={() => setRole('user')}
-                      className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-base font-bold transition-all ${
-                        role === 'user' 
-                          ? 'bg-gradient-to-br from-[#f59e0b] to-[#d97706] text-white shadow-lg scale-[1.02]' 
-                          : 'text-gray-600 hover:text-[#f59e0b] hover:bg-white/50'
-                      }`}
-                    >
-                      {role === 'user' && '✦ '}User
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setRole('expert')}
-                      className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-base font-bold transition-all ${
-                        role === 'expert' 
-                          ? 'bg-gradient-to-br from-[#f59e0b] to-[#d97706] text-white shadow-lg scale-[1.02]' 
-                          : 'text-gray-600 hover:text-[#f59e0b] hover:bg-white/50'
-                      }`}
-                    >
-                      {role === 'expert' && '✦ '}Expert
-                    </button>
-                  </div>
-                </div>
-
-                {/* Email/Phone Toggle - Subtle & Clean */}
-                <div className="space-y-1.5">
-                  <label className="block text-xs font-medium text-gray-500">Login Method</label>
-                  <div className="inline-flex rounded-lg border border-gray-200 overflow-hidden bg-gray-50 p-0.5 gap-0.5">
-                    <button 
-                      type="button" 
-                      onClick={() => { setLoginMethod('password'); setError(''); setSuccess(''); }}
-                      className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
-                        loginMethod === 'password' 
-                          ? 'bg-white text-gray-900 shadow-sm' 
-                          : 'text-gray-500 hover:text-gray-700'
-                      }`}
-                    >
-                      Email
-                    </button>
-                    <button 
-                      type="button" 
-                      onClick={() => { setLoginMethod('otp'); setError(''); setSuccess(''); }}
-                      className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
-                        loginMethod === 'otp' 
-                          ? 'bg-white text-gray-900 shadow-sm' 
-                          : 'text-gray-500 hover:text-gray-700'
-                      }`}
-                    >
-                      Phone
-                    </button>
-                  </div>
-                </div>
-              </>
-            )}
-
-            {mode === 'login' && loginMethod === 'password' && (
-              <form onSubmit={handleLogin} className="space-y-4">
+              <form onSubmit={handleLogin} className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-[#1a1a1a]">Email</Label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
-                    <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" className="pl-10 h-12 border-yellow-200 focus-visible:ring-[#f59e0b] bg-[#fffbf0] text-[#1a1a1a]" />
+                  <Label className="text-foreground">Email address</Label>
+                  <div className="relative group">
+                    <Mail className="absolute left-3 top-3 h-5 w-5 text-muted-foreground group-focus-within:text-accent transition-colors" />
+                    <Input type="email" required placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)}
+                      className="pl-10 py-6 bg-input/50 border-input text-foreground placeholder:text-muted-foreground focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <Label htmlFor="password" className="text-[#1a1a1a]">Password</Label>
-                    <button type="button" onClick={() => { setMode('forgot'); setError(''); setSuccess(''); }} className="text-sm text-[#f59e0b] hover:underline">Forgot password?</button>
+                    <Label className="text-foreground">Password</Label>
+                    <button type="button" onClick={() => { setMode('forgot'); setError(''); setSuccess(''); }} className="text-sm font-semibold text-accent hover:text-accent/80 transition-colors">
+                      Forgot password?
+                    </button>
                   </div>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
-                    <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password" className="pl-10 pr-10 h-12 border-yellow-200 focus-visible:ring-[#f59e0b] bg-[#fffbf0] text-[#1a1a1a]" />
-                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600" tabIndex={-1}>
+                  <div className="relative group">
+                    <Lock className="absolute left-3 top-3 h-5 w-5 text-muted-foreground group-focus-within:text-accent transition-colors" />
+                    <Input type={showPassword ? 'text' : 'password'} required placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)}
+                      className="pl-10 pr-10 py-6 bg-input/50 border-input text-foreground placeholder:text-muted-foreground focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-muted-foreground hover:text-foreground transition-colors">
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
                   </div>
                 </div>
-                <Button type="submit" disabled={loading} className="w-full bg-[#f59e0b] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full border-0 shadow-lg">
-                  {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>Log in <ArrowRight className="ml-2 h-4 w-4" /></>}
-                </Button>
-              </form>
-            )}
-
-            {mode === 'login' && loginMethod === 'otp' && (
-              <form onSubmit={handleSendOtp} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-[#1a1a1a]">Phone Number</Label>
-                  <Input id="phone" type="tel" placeholder="+919876543210" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 border-yellow-200 focus-visible:ring-[#f59e0b] bg-[#fffbf0] text-[#1a1a1a]" />
-                </div>
-                <Button type="submit" disabled={loading} className="w-full bg-[#f59e0b] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full border-0 shadow-lg">
-                  {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>Send OTP <ArrowRight className="ml-2 h-4 w-4" /></>}
+                <Button type="submit" disabled={loading} className={`w-full py-6 text-base font-bold rounded-xl border-0 shadow-lg transition-all duration-300 ${role === 'expert' ? 'bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_0_20px_var(--accent)]/30 hover:shadow-[0_0_25px_var(--accent)]/50' : 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_0_20px_var(--primary)]/30 hover:shadow-[0_0_25px_var(--primary)]/50'}`}>
+                  {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>{role === 'expert' ? 'Log in as Expert' : 'Log in'} <ArrowRight className="ml-2 h-5 w-5" /></>}
                 </Button>
               </form>
             )}
 
             {mode === 'forgot' && (
-              <form onSubmit={handleForgotPassword} className="space-y-4">
+              <form onSubmit={handleForgotPassword} className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="reset-email" className="text-[#1a1a1a]">Email</Label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
-                    <Input id="reset-email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required className="pl-10 h-12 border-yellow-200 focus-visible:ring-[#f59e0b] bg-[#fffbf0] text-[#1a1a1a]" />
+                  <Label className="text-foreground">Email address</Label>
+                  <div className="relative group">
+                    <Mail className="absolute left-3 top-3 h-5 w-5 text-muted-foreground group-focus-within:text-accent transition-colors" />
+                    <Input type="email" required placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)}
+                      className="pl-10 py-6 bg-input/50 border-input text-foreground placeholder:text-muted-foreground focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
                   </div>
                 </div>
-                <Button type="submit" disabled={loading} className="w-full bg-[#f59e0b] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full border-0">
+                <Button type="submit" disabled={loading} className="w-full py-6 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-lg shadow-[0_0_20px_rgba(214,180,107,0.3)] transition-all group">
                   {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Send Reset Link'}
                 </Button>
-                <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-[#f59e0b] hover:underline">
+                <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-muted-foreground hover:text-foreground transition-colors">
                   ← Back to login
                 </button>
               </form>
@@ -396,14 +220,14 @@ function LoginInner() {
 
             {mode === 'login' && (
               <>
-                <div className="relative flex items-center py-1">
-                  <div className="flex-grow border-t border-yellow-100" />
-                  <span className="flex-shrink-0 mx-4 text-gray-400 text-sm uppercase tracking-wider">Or continue with</span>
-                  <div className="flex-grow border-t border-yellow-100" />
+                <div className="relative flex items-center py-2">
+                  <div className="flex-grow border-t border-border" />
+                  <span className="flex-shrink-0 mx-4 text-muted-foreground text-xs uppercase tracking-widest font-semibold">Or continue with</span>
+                  <div className="flex-grow border-t border-border" />
                 </div>
                 <div className="space-y-3">
-                  <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full h-12 bg-white border border-gray-200 hover:bg-gray-50 text-[#1a1a1a] shadow-sm">
-                    <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
+                  <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full py-6 bg-input/50 border-input hover:bg-white/10 text-foreground shadow-sm transition-all rounded-xl">
+                    <svg className="mr-3 h-5 w-5" viewBox="0 0 24 24">
                       <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                       <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
                       <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
@@ -411,16 +235,16 @@ function LoginInner() {
                     </svg>
                     Continue with Google
                   </Button>
-                  <Button type="button" variant="outline" onClick={handleAppleSignIn} className="w-full h-12 bg-white border border-gray-200 hover:bg-gray-50 text-[#1a1a1a] shadow-sm">
-                    <svg className="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <Button type="button" variant="outline" onClick={handleAppleSignIn} className="w-full py-6 bg-input/50 border-input hover:bg-white/10 text-foreground shadow-sm transition-all rounded-xl">
+                    <svg className="mr-3 h-5 w-5 fill-current" viewBox="0 0 24 24">
                       <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.65.04 2.9.72 3.68 1.9-3.28 1.95-2.73 5.75.52 7.02-.75 1.86-1.74 3.2-2.87 3.99zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.32 2.38-2.07 4.29-3.74 4.25z" />
                     </svg>
                     Continue with Apple
                   </Button>
                 </div>
-                <p className="text-center text-sm text-gray-500 pt-1">
+                <p className="text-center text-sm text-muted-foreground pt-4">
                   Don&apos;t have an account?{' '}
-                  <Link href="/signup" className="text-[#f59e0b] font-semibold hover:underline">Sign up</Link>
+                  <Link href="/signup" className="text-primary font-semibold hover:text-foreground transition-colors hover:underline">Sign up</Link>
                 </p>
               </>
             )}

@@ -3,16 +3,11 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
-import { ArrowLeft, MessageSquare, Phone } from 'lucide-react';
 import ChatWindow from '@/components/chat/ChatWindow';
-import { Button } from '@/components/ui/button';
-import { toast } from 'react-hot-toast';
+import AudioCallScreen from '@/components/chat/AudioCallScreen';
 import { tokenStore, agoraApi, sessionsApi, type PractitionerProfile } from '@/lib/api';
-import { useScreenshotProtection } from '@/hooks/useScreenshotProtection';
-
-// Agora SDK uses `window` at import time — must never be SSR'd
-const AudioCallScreen = dynamic(() => import('@/components/chat/AudioCallScreen'), { ssr: false });
+import { ArrowLeft, MessageSquare, Phone } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 type Tab = 'chat' | 'call';
 
@@ -25,9 +20,6 @@ export default function SessionPage() {
   const [isExpert, setIsExpert] = useState(false);
   const [activeSession, setActiveSession] = useState<any>(null);
   const [tab, setTab] = useState<Tab>('chat');
-  const [startingCall, setStartingCall] = useState(false);
-
-  useScreenshotProtection(true);
 
   useEffect(() => {
     const token = tokenStore.getAccess();
@@ -35,9 +27,7 @@ export default function SessionPage() {
 
     let currentJwtUserId = '';
     try {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const payload = JSON.parse(atob(base64));
+      const payload = JSON.parse(atob(token.split('.')[1]));
       currentJwtUserId = payload.userId;
       setUserId(currentJwtUserId);
     } catch {
@@ -48,9 +38,6 @@ export default function SessionPage() {
     agoraApi.getChannel(token, sessionId).then((res) => {
       if (res.success && res.data) {
         setSessionType(res.data.sessionType);
-        if (res.data.sessionType === 'AUDIO' || res.data.sessionType === 'VIDEO') {
-          setTab('call');
-        }
       }
     });
 
@@ -64,9 +51,7 @@ export default function SessionPage() {
         // Wait, sessions API returns practitioner { id, name ... } and user { id, name ... }
         // The practitioner ID is NOT the user ID. But wait! The JWT payload has userId and practitionerId.
         // It's safer to just parse practitionerId from JWT, or check if currentJwtUserId === session.userId.
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const tokenPayload = JSON.parse(atob(base64));
+        const tokenPayload = JSON.parse(atob(token.split('.')[1]));
         const isPractitioner = tokenPayload.practitionerId === session.practitionerId;
         setIsExpert(isPractitioner);
         
@@ -79,29 +64,9 @@ export default function SessionPage() {
     });
   }, [router, sessionId]);
 
-  const handleSwitchToCall = async () => {
-    const token = tokenStore.getAccess();
-    if (!token || !activeSession?.practitionerId || startingCall) return;
-    setStartingCall(true);
-    try {
-      const res = await sessionsApi.create(token, activeSession.practitionerId, 'AUDIO');
-      if (res.success && res.data?.session) {
-        router.push(`/session/${res.data.session.id}`);
-      } else {
-        toast.error(res.message || 'Could not start a call. Please recharge your wallet.');
-      }
-    } catch {
-      toast.error('Unable to start the call. Please try again.');
-    } finally {
-      setStartingCall(false);
-    }
-  };
-
   if (!userId || !peer) return null;
 
   const showCallTab = sessionType === 'AUDIO' || sessionType === 'VIDEO';
-  // Chat-only session, viewed by the consumer — offer a one-tap way to escalate to a call.
-  const showSwitchToCall = sessionType === 'CHAT' && !isExpert;
   const initials = peer?.name
     ? peer.name.split(' ').map((w: string) => w[0]).slice(0, 2).join('').toUpperCase()
     : '?';
@@ -173,31 +138,13 @@ export default function SessionPage() {
               Call
             </Button>
           )}
-          {showSwitchToCall && (
-            <Button
-              size="icon"
-              onClick={handleSwitchToCall}
-              disabled={startingCall}
-              aria-label="Start a call with this expert"
-              title="Switch to a call"
-              className="h-8 w-8 rounded-full bg-emerald-500 hover:bg-emerald-600 border-0 text-white disabled:opacity-50 shrink-0"
-            >
-              <Phone className={cn('h-3.5 w-3.5', startingCall ? 'animate-pulse' : '')} />
-            </Button>
-          )}
         </div>
       </header>
 
       {/* Content */}
       <div className="flex-1 overflow-hidden">
         {tab === 'chat' ? (
-          <ChatWindow
-            sessionId={sessionId}
-            currentUserId={isExpert ? activeSession?.practitionerId : userId}
-            isExpert={isExpert}
-            practitionerId={activeSession?.practitionerId ?? ''}
-            practitionerName={isExpert ? '' : (peer?.name ?? 'the expert')}
-          />
+          <ChatWindow sessionId={sessionId} currentUserId={isExpert ? activeSession?.practitionerId : userId} />
         ) : (
           <AudioCallScreen sessionId={sessionId} />
         )}

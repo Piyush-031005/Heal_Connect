@@ -11,7 +11,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import {
   MessageCircle, LogOut, Wifi, WifiOff, User, Clock,
   IndianRupee, Star, TrendingUp, Bell, ChevronRight,
-  Sparkles, HeartHandshake, Phone, Activity, Loader2, FileText, LifeBuoy, Calendar
+  Sparkles, HeartHandshake, Phone,
 } from 'lucide-react';
 
 interface ActiveSession {
@@ -27,11 +27,9 @@ export default function ExpertDashboardPage() {
   const [practitionerId, setPractitionerId] = useState<string | null>(null);
   const [profile, setProfile] = useState<PractitionerProfile | null>(null);
   const [isOnline, setIsOnline] = useState(false);
-  const [isBusy, setIsBusy] = useState(false);
   const [sessions, setSessions] = useState<ActiveSession[]>([]);
   const [totalEarnings, setTotalEarnings] = useState(0);
   const [sessionsDone, setSessionsDone] = useState(0);
-  const [upcomingSessions, setUpcomingSessions] = useState<any[]>([]);
   const [togglingOnline, setTogglingOnline] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
@@ -56,29 +54,10 @@ export default function ExpertDashboardPage() {
   useEffect(() => {
     const token = tokenStore.getAccess();
     const role = localStorage.getItem('hc_role');
-    const pid = localStorage.getItem('hc_practitioner_id') || localStorage.getItem('hc_pid');
+    const pid = localStorage.getItem('hc_practitioner_id');
 
     if (!token || role !== 'practitioner' || !pid) {
-      router.replace('/login?role=expert');
-      return;
-    }
-
-    // Verify the token actually has practitionerId embedded
-    try {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jwtPayload = JSON.parse(atob(base64));
-      if (!jwtPayload.practitionerId) {
-        // Token is a user token, not a practitioner token — force re-login
-        tokenStore.clear();
-        localStorage.removeItem('hc_role');
-        localStorage.removeItem('hc_practitioner_id');
-        localStorage.removeItem('hc_pid');
-        router.replace('/login?role=expert');
-        return;
-      }
-    } catch {
-      router.replace('/login?role=expert');
+      router.replace('/expert/login');
       return;
     }
 
@@ -88,7 +67,6 @@ export default function ExpertDashboardPage() {
       if (res.success && res.data) {
         setProfile(res.data.practitioner);
         setIsOnline(res.data.practitioner.isOnline);
-        setIsBusy(res.data.practitioner.isBusy ?? false);
       }
     });
 
@@ -97,32 +75,20 @@ export default function ExpertDashboardPage() {
     sessionsApi.practitionerHistory(token).then((res) => {
       if (res.success && res.data) {
         setTotalEarnings(res.data.totalEarnings);
-        // Real lifetime total, not res.data.sessions.length — that list is
-        // capped at the last 20 by the backend, which silently stuck this
-        // stat at a max of 20 for any practitioner past that point.
-        setSessionsDone(res.data.totalSessionsCompleted);
-      }
-    });
-
-    sessionsApi.getRequests(token).then((res) => {
-      if (res.success && res.data) {
-        setUpcomingSessions(res.data.sessions.filter((s: any) => s.status === 'CONFIRMED'));
+        setSessionsDone(res.data.sessions.length);
       }
     });
 
     const socket = getSocket(token);
     socket.on('new_session_request', (data: ActiveSession) => {
       setSessions((prev) => prev.find((s) => s.id === data.id) ? prev : [data, ...prev]);
-      // Immediately refresh from server to ensure accuracy
-      fetchSessions();
     });
     
     socket.on('session_terminated', ({ sessionId }: { sessionId: string }) => {
       setSessions((prev) => prev.filter((s) => s.id !== sessionId));
     });
 
-    // Poll every 10s to catch any missed socket events
-    const poll = setInterval(fetchSessions, 10000);
+    const poll = setInterval(fetchSessions, 15000);
     return () => {
       clearInterval(poll);
       socket.off('new_session_request');
@@ -153,38 +119,36 @@ export default function ExpertDashboardPage() {
   const initials = profile?.name?.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase() || 'E';
 
   return (
-    <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
+    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans relative overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none fixed">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(214,180,107,0.15)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(46,196,182,0.1)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
+      </div>
 
       {/* ── Navbar ── */}
-      <header className="sticky top-0 z-50 w-full border-b border-amber-100 bg-white/80 backdrop-blur">
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-white/40 dark:bg-black/40 backdrop-blur-md">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
-            <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
-            <span className="hidden sm:inline-flex items-center gap-1 ml-1 text-xs font-semibold text-amber-600 bg-amber-50 border border-amber-200 rounded-full px-2 py-0.5">
+            <Image src="/logo.png" alt="Zenauraa" width={32} height={32} className="rounded-full shadow-[0_0_10px_rgba(214,180,107,0.5)]" />
+            <span className="text-xl font-extrabold text-primary uppercase tracking-wide">Zenauraa</span>
+            <span className="hidden sm:inline-flex items-center gap-1 ml-2 text-xs font-semibold text-accent bg-accent/10 border border-accent/30 rounded-full px-2 py-0.5 shadow-[0_0_10px_rgba(46,196,182,0.1)]">
               <Sparkles className="w-3 h-3" /> Expert
             </span>
           </Link>
 
           <div className="flex items-center gap-3">
-            {/* Session Requests Link */}
-            <Link href="/expert/requests" className="relative p-2 text-amber-600 hover:bg-amber-50 rounded-full transition-colors">
-              <Bell className="w-5 h-5" />
-              {/* Optional: You could add a red dot here if there are pending requests */}
-              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-            </Link>
-
             {/* Online toggle */}
             <button
               onClick={toggleOnline}
               disabled={togglingOnline}
               className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all border ${
                 isOnline
-                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
-                  : 'bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100'
+                  ? 'bg-accent/20 text-accent border-accent/30 shadow-[0_0_15px_rgba(46,196,182,0.2)]'
+                  : 'bg-secondary text-muted-foreground border-border hover:bg-white/10 hover:text-foreground'
               }`}
             >
-              <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-emerald-500 animate-pulse' : 'bg-gray-400'}`} />
+              <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-accent animate-pulse' : 'bg-gray-500'}`} />
               {isOnline ? 'Online' : 'Go Online'}
             </button>
 
@@ -192,37 +156,25 @@ export default function ExpertDashboardPage() {
             <div className="relative" ref={profileMenuRef}>
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white text-sm font-bold hover:opacity-90 transition-opacity overflow-hidden"
+                className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-all overflow-hidden shadow-[0_0_15px_rgba(214,180,107,0.4)]"
               >
                 {profile?.photoUrl
                   ? <img src={profile.photoUrl} alt={profile.name} className="w-full h-full object-cover" />
                   : initials}
               </button>
               {showProfileMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-amber-100 rounded-2xl shadow-xl overflow-hidden z-50">
-                  <div className="px-4 py-3 border-b border-gray-100">
-                    <p className="text-sm font-semibold text-gray-900 truncate">{profile?.name}</p>
-                    <p className="text-xs text-gray-400 truncate">{profile?.specialties?.[0] || 'Expert'}</p>
+                <div className="absolute right-0 mt-2 w-48 bg-[#121420] border border-border rounded-2xl shadow-2xl overflow-hidden z-50">
+                  <div className="px-4 py-3 border-b border-border bg-secondary">
+                    <p className="text-sm font-bold text-foreground truncate tracking-wide">{profile?.name}</p>
+                    <p className="text-xs text-primary truncate">{profile?.specialties?.[0] || 'Expert'}</p>
                   </div>
-                  <Link href="/expert/profile" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-amber-50 transition-colors flex items-center gap-3">
-                    <User className="w-4 h-4 text-amber-500" />
-                    <span className="text-sm font-medium text-gray-700">My Profile</span>
+                  <Link href="/expert/profile" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-secondary transition-colors flex items-center gap-3">
+                    <User className="w-4 h-4 text-primary" />
+                    <span className="text-sm font-medium text-muted-foreground">My Profile</span>
                   </Link>
-                  <Link href="/expert/requests" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-amber-50 transition-colors flex items-center gap-3">
-                    <Bell className="w-4 h-4 text-amber-500" />
-                    <span className="text-sm font-medium text-gray-700">Scheduled Sessions</span>
-                  </Link>
-                  <Link href="/expert/transcripts" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-amber-50 transition-colors flex items-center gap-3">
-                    <FileText className="w-4 h-4 text-amber-500" />
-                    <span className="text-sm font-medium text-gray-700">Call Transcripts</span>
-                  </Link>
-                  <Link href="/expert/support" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-amber-50 transition-colors flex items-center gap-3">
-                    <LifeBuoy className="w-4 h-4 text-amber-500" />
-                    <span className="text-sm font-medium text-gray-700">Support</span>
-                  </Link>
-                  <button onClick={handleLogout} className="w-full px-4 py-3 hover:bg-red-50 transition-colors flex items-center gap-3">
+                  <button onClick={handleLogout} className="w-full px-4 py-3 hover:bg-red-900/20 transition-colors flex items-center gap-3">
                     <LogOut className="w-4 h-4 text-red-500" />
-                    <span className="text-sm font-medium text-red-600">Sign out</span>
+                    <span className="text-sm font-medium text-red-400">Sign out</span>
                   </button>
                 </div>
               )}
@@ -231,57 +183,42 @@ export default function ExpertDashboardPage() {
         </div>
       </header>
 
-      <main className="flex-1 container mx-auto px-4 py-8 space-y-6">
+      <main className="flex-1 container mx-auto px-4 py-8 space-y-8 relative z-10">
 
         {/* ── Welcome Banner ── */}
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 p-6 md:p-8">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-amber-300/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-primary/20 via-primary/10 to-transparent p-6 md:p-8 border border-primary/20 backdrop-blur-sm">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl bg-white/20 border-2 border-white/30 flex items-center justify-center text-white text-2xl font-extrabold overflow-hidden shrink-0">
+            <div className="flex items-center gap-5">
+              <div className="w-20 h-20 rounded-2xl bg-secondary border border-border flex items-center justify-center text-foreground text-3xl font-extrabold overflow-hidden shrink-0 shadow-[0_0_20px_rgba(214,180,107,0.2)]">
                 {profile?.photoUrl
                   ? <img src={profile.photoUrl} alt={profile.name} className="w-full h-full object-cover" />
                   : initials}
               </div>
               <div>
-                <div className="flex items-center gap-2 text-amber-100 text-sm font-medium mb-1">
+                <div className="flex items-center gap-2 text-primary text-sm font-medium mb-1 tracking-wide uppercase">
                   <HeartHandshake className="w-4 h-4" />
                   <span>Expert Dashboard</span>
                 </div>
-                <h1 className="text-2xl md:text-3xl font-extrabold text-white">Hello, {firstName}!</h1>
-                <p className="text-amber-100 text-sm mt-1">
-                  {profile?.specialties?.slice(0, 2).join(' · ') || 'Wellness Expert'} · ₹{profile?.perMinuteRate}/min
+                <h1 className="text-3xl md:text-4xl font-extrabold text-foreground">Hello, {firstName}!</h1>
+                <p className="text-muted-foreground text-sm mt-2 flex items-center gap-2">
+                  <Sparkles className="w-3.5 h-3.5 text-accent" />
+                  {profile?.specialties?.slice(0, 2).join(' · ') || 'Wellness Expert'} <span className="text-muted-foreground">|</span> <span className="text-foreground font-semibold">₹{profile?.perMinuteRate}/min</span>
                 </p>
               </div>
             </div>
-            <div className="flex flex-col items-end gap-4">
-              <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold shadow-lg ${
-                isBusy ? 'bg-orange-500 text-white shadow-orange-500/30' :
-                isOnline ? 'bg-emerald-500 text-white shadow-emerald-500/30' : 'bg-white/20 text-white shadow-black/10'
+            <div className="flex flex-col items-end gap-3 mt-4 md:mt-0">
+              <div className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg transition-all ${
+                isOnline ? 'bg-accent text-primary-foreground shadow-[0_0_15px_rgba(46,196,182,0.3)]' : 'bg-secondary border border-border text-muted-foreground'
               }`}>
-                {isBusy ? <Activity className="w-4 h-4 animate-pulse" /> : isOnline ? <Wifi className="w-4 h-4 animate-pulse" /> : <WifiOff className="w-4 h-4" />}
-                {isBusy ? 'Busy (In Session)' : isOnline ? 'Accepting Sessions' : 'Currently Offline'}
+                {isOnline ? <Wifi className="w-4 h-4" /> : <WifiOff className="w-4 h-4" />}
+                {isOnline ? 'Accepting Sessions' : 'Currently Offline'}
               </div>
-              <Button
-                onClick={toggleOnline}
-                disabled={togglingOnline || isBusy}
-                size="lg"
-                className={`rounded-2xl font-extrabold shadow-xl transition-all hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100 ${
-                  isOnline 
-                    ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' 
-                    : 'bg-white text-orange-600 hover:bg-orange-50 border-0'
-                }`}
-              >
-                {togglingOnline ? (
-                  <Loader2 className="w-5 h-5 animate-spin mr-2" />
-                ) : isOnline ? (
-                  <WifiOff className="w-5 h-5 mr-2" />
-                ) : (
-                  <Wifi className="w-5 h-5 mr-2" />
-                )}
-                {isOnline ? 'Go Offline' : 'Go Online Now'}
-              </Button>
+              {!isOnline && (
+                <button onClick={toggleOnline} className="text-xs text-primary hover:text-foreground transition-colors underline underline-offset-4">
+                  Go online to receive sessions →
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -289,185 +226,149 @@ export default function ExpertDashboardPage() {
         {/* ── Stats Row ── */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: 'Total Earnings', value: `₹${totalEarnings.toFixed(2)}`, icon: IndianRupee, color: 'text-amber-500', bg: 'bg-amber-50' },
-            { label: 'Sessions Done', value: String(sessionsDone), icon: MessageCircle, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-            { label: 'Avg Rating', value: profile?.avgRating ? String(profile.avgRating) : '—', icon: Star, color: 'text-yellow-500', bg: 'bg-yellow-50' },
-            { label: 'Active Now', value: sessions.length > 0 ? String(sessions.length) : '0', icon: TrendingUp, color: 'text-blue-500', bg: 'bg-blue-50' },
+            { label: 'Total Earnings', value: `₹${totalEarnings.toFixed(2)}`, icon: IndianRupee, color: 'text-primary', bg: 'bg-primary/10', border: 'border-primary/20' },
+            { label: 'Sessions Done', value: String(sessionsDone), icon: MessageCircle, color: 'text-accent', bg: 'bg-accent/10', border: 'border-accent/20' },
+            { label: 'Avg Rating', value: profile?.avgRating ? String(profile.avgRating) : '—', icon: Star, color: 'text-purple-400', bg: 'bg-purple-400/10', border: 'border-purple-400/20' },
+            { label: 'Active Now', value: sessions.length > 0 ? String(sessions.length) : '0', icon: TrendingUp, color: 'text-blue-400', bg: 'bg-blue-400/10', border: 'border-blue-400/20' },
           ].map((stat) => (
-            <Card key={stat.label} className="bg-white border-0 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 rounded-2xl">
+            <Card key={stat.label} className="bg-secondary border border-border shadow-lg backdrop-blur-sm rounded-2xl overflow-hidden hover:bg-white/10 transition-colors">
               <CardContent className="p-5 flex items-center gap-4">
-                <div className={`w-12 h-12 rounded-xl ${stat.bg} flex items-center justify-center shrink-0`}>
+                <div className={`w-12 h-12 rounded-xl ${stat.bg} ${stat.border} border flex items-center justify-center shrink-0`}>
                   <stat.icon className={`w-6 h-6 ${stat.color}`} />
                 </div>
                 <div>
-                  <p className="text-xl font-bold text-gray-900">{stat.value}</p>
-                  <p className="text-xs text-gray-500">{stat.label}</p>
+                  <p className="text-xl font-bold text-foreground">{stat.value}</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</p>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-8">
 
           {/* ── Active Sessions (left 2/3) ── */}
-          <div className="md:col-span-2 space-y-4">
+          <div className="md:col-span-2 space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-0.5">Incoming</p>
-                <h2 className="text-xl font-extrabold text-gray-900">Active Sessions</h2>
+                <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">Incoming</p>
+                <h2 className="text-2xl font-extrabold text-foreground">Active Sessions</h2>
               </div>
               {sessions.length > 0 && (
-                <span className="flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="flex items-center gap-2 text-xs font-bold text-accent bg-accent/10 border border-accent/30 rounded-full px-4 py-1.5 shadow-[0_0_10px_rgba(46,196,182,0.1)]">
+                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
                   {sessions.length} waiting
                 </span>
               )}
             </div>
 
             {sessions.length === 0 ? (
-              <div className="bg-white rounded-2xl border border-dashed border-amber-200 p-12 text-center">
-                <div className="w-16 h-16 rounded-2xl bg-amber-50 flex items-center justify-center mx-auto mb-4">
-                  <MessageCircle className="w-8 h-8 text-amber-300" />
+              <div className="bg-secondary rounded-3xl border border-dashed border-border p-16 text-center backdrop-blur-sm">
+                <div className="w-20 h-20 rounded-full bg-secondary border border-border flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(214,180,107,0.05)]">
+                  <MessageCircle className="w-10 h-10 text-muted-foreground" />
                 </div>
-                <p className="font-semibold text-gray-700 mb-1">No active sessions</p>
-                <p className="text-sm text-gray-400">
-                  {isOnline ? 'Waiting for users to connect...' : 'Go online to start receiving sessions'}
+                <p className="text-lg font-bold text-muted-foreground mb-2">No active sessions</p>
+                <p className="text-sm text-muted-foreground max-w-sm mx-auto">
+                  {isOnline ? 'Waiting for users to connect. Keep this page open.' : 'Go online to start receiving session requests from users.'}
                 </p>
                 {!isOnline && (
                   <button
                     onClick={toggleOnline}
-                    className="mt-4 inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold px-5 py-2 rounded-full transition-colors"
+                    className="mt-6 inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold px-6 py-3 rounded-xl transition-all shadow-[0_0_20px_rgba(214,180,107,0.3)]"
                   >
                     <Wifi className="w-4 h-4" /> Go Online Now
                   </button>
                 )}
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {sessions.map((session) => (
                   <div
                     key={session.id}
-                    className="bg-white rounded-2xl border border-amber-100 p-4 flex items-center gap-4 shadow-sm hover:shadow-md hover:border-amber-200 transition-all"
+                    className="bg-white/40 dark:bg-black/40 backdrop-blur-xl rounded-2xl border border-border p-5 flex flex-col sm:flex-row sm:items-center gap-5 shadow-lg hover:border-primary/50 transition-all group"
                   >
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-bold text-lg shrink-0 overflow-hidden">
+                    <div className="w-14 h-14 rounded-2xl bg-[#121420] border border-border flex items-center justify-center text-foreground font-bold text-xl shrink-0 overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.3)]">
                       {session.user.photoUrl
                         ? <img src={session.user.photoUrl} alt={session.user.name ?? ''} className="w-full h-full object-cover" />
-                        : <User className="w-6 h-6" />}
+                        : <User className="w-6 h-6 text-muted-foreground" />}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-gray-900">{session.user.name ?? 'Anonymous User'}</p>
-                      <div className="flex items-center gap-2 mt-0.5">
-                        <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full ${
-                          session.type === 'CHAT' ? 'bg-blue-50 text-blue-600' : 'bg-purple-50 text-purple-600'
+                      <p className="font-bold text-foreground text-lg tracking-wide">{session.user.name ?? 'Anonymous User'}</p>
+                      <div className="flex flex-wrap items-center gap-3 mt-2">
+                        <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-lg border ${
+                          session.type === 'CHAT' ? 'bg-blue-400/10 text-blue-400 border-blue-400/20' : 'bg-purple-400/10 text-purple-400 border-purple-400/20'
                         }`}>
-                          {session.type === 'CHAT' ? <MessageCircle className="w-3 h-3" /> : <Phone className="w-3 h-3" />}
+                          {session.type === 'CHAT' ? <MessageCircle className="w-3.5 h-3.5" /> : <Phone className="w-3.5 h-3.5" />}
                           {session.type}
                         </span>
-                        <span className="text-gray-300">·</span>
-                        <Clock className="w-3 h-3 text-gray-400" />
-                        <span className="text-xs text-gray-400">
-                          {new Date(session.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                        </span>
+                        <span className="text-gray-700">|</span>
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground bg-secondary px-3 py-1 rounded-lg border border-border">
+                          <Clock className="w-3.5 h-3.5" />
+                          <span>{new Date(session.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
                       </div>
                     </div>
                     <Button
-                      onClick={async () => {
-                        const token = tokenStore.getAccess();
-                        if (token) await sessionsApi.accept(token, session.id).catch(console.error);
-                        router.push(`/session/${session.id}`);
-                      }}
-                      size="sm"
-                      className="bg-amber-500 hover:bg-amber-600 text-white border-0 rounded-full px-5 font-semibold shrink-0"
+                      onClick={() => router.push(`/session/${session.id}`)}
+                      className="bg-accent hover:bg-accent/90 text-primary-foreground border-0 rounded-xl px-8 h-12 font-bold shadow-[0_0_20px_rgba(46,196,182,0.3)] shrink-0 w-full sm:w-auto transition-all"
                     >
-                      Join
+                      Join Session
                     </Button>
                   </div>
                 ))}
               </div>
             )}
-
-            {/* ── Upcoming Sessions ── */}
-            {upcomingSessions.length > 0 && (
-              <div className="mt-8 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-widest text-blue-700 mb-0.5">Scheduled</p>
-                    <h2 className="text-xl font-extrabold text-gray-900">Upcoming Sessions</h2>
-                  </div>
-                </div>
-                <div className="space-y-3">
-                  {upcomingSessions.map((session) => {
-                    const nextTime = session.timeProposals?.find((t: any) => t.isConfirmed);
-                    return (
-                      <div
-                        key={session.id}
-                        className="bg-white rounded-2xl border border-blue-100 p-4 flex items-center gap-4 shadow-sm hover:shadow-md transition-all cursor-pointer"
-                        onClick={() => router.push(`/scheduled-sessions/${session.id}`)}
-                      >
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-lg shrink-0 overflow-hidden">
-                          {session.user?.photoUrl
-                            ? <img src={session.user.photoUrl} alt={session.user.name ?? ''} className="w-full h-full object-cover" />
-                            : <User className="w-6 h-6" />}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-gray-900">{session.user?.name ?? 'Anonymous User'}</p>
-                          <div className="flex items-center gap-2 mt-0.5">
-                            <span className="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-600">
-                              <Calendar className="w-3 h-3" />
-                              Scheduled
-                            </span>
-                            <span className="text-gray-300">·</span>
-                            <Clock className="w-3 h-3 text-gray-400" />
-                            <span className="text-xs text-gray-400">
-                              {nextTime ? new Date(nextTime.startTime).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : 'Time TBD'}
-                            </span>
-                          </div>
-                        </div>
-                        <ChevronRight className="w-5 h-5 text-gray-300 shrink-0" />
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
           </div>
 
           {/* ── Profile Card (right 1/3) ── */}
-          <div className="space-y-4">
+          <div className="space-y-6">
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-0.5">Your Profile</p>
-              <h2 className="text-xl font-extrabold text-gray-900">Overview</h2>
+              <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">Your Profile</p>
+              <h2 className="text-2xl font-extrabold text-foreground">Overview</h2>
             </div>
 
-            <Card className="bg-white border-0 shadow-md rounded-2xl overflow-hidden">
-              <div className="h-16 bg-gradient-to-r from-amber-400 to-orange-400" />
-              <CardContent className="px-5 pb-5 -mt-8">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 border-4 border-white flex items-center justify-center text-white text-xl font-extrabold overflow-hidden shadow-md mb-3">
+            <Card className="bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-border shadow-2xl rounded-2xl overflow-hidden relative z-10">
+              <div className="h-24 bg-gradient-to-r from-white/5 to-white/10 border-b border-border relative">
+                 <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(214,180,107,0.2)_0%,rgba(0,0,0,0)_60%)]" />
+              </div>
+              <CardContent className="px-6 pb-6 -mt-10 relative z-10">
+                <div className="w-20 h-20 rounded-2xl bg-[#121420] border-2 border-border flex items-center justify-center text-foreground text-2xl font-extrabold overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] mb-4">
                   {profile?.photoUrl
                     ? <img src={profile.photoUrl} alt={profile?.name} className="w-full h-full object-cover" />
                     : initials}
                 </div>
-                <p className="font-bold text-gray-900 text-base">{profile?.name}</p>
-                <p className="text-sm text-amber-600 font-medium mb-3">{profile?.specialties?.slice(0, 2).join(' · ') || '—'}</p>
+                <p className="font-bold text-foreground text-xl tracking-wide">{profile?.name}</p>
+                <p className="text-sm text-primary font-medium mt-1 mb-5">{profile?.specialties?.slice(0, 2).join(' · ') || '—'}</p>
 
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center justify-between py-2">
-                    <span className="text-gray-500">Status</span>
-                    <span className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
-                      isBusy ? 'bg-orange-100 text-orange-700' :
-                      isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'
+                <div className="space-y-3 pt-5 border-t border-border">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground font-medium">Status</span>
+                    <span className={`flex items-center gap-2 text-xs font-bold px-3 py-1 rounded-lg border ${
+                      isOnline ? 'bg-accent/10 text-accent border-accent/20' : 'bg-gray-800 text-muted-foreground border-gray-700'
                     }`}>
-                      <span className={`w-1.5 h-1.5 rounded-full ${isBusy ? 'bg-orange-500' : isOnline ? 'bg-emerald-500' : 'bg-gray-400'}`} />
-                      {isBusy ? 'Busy' : isOnline ? 'Online' : 'Offline'}
+                      <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-accent' : 'bg-gray-500'}`} />
+                      {isOnline ? 'Online' : 'Offline'}
                     </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground font-medium">Rate</span>
+                    <span className="text-sm font-bold text-foreground">₹{profile?.perMinuteRate}/min</span>
                   </div>
                 </div>
 
+                <button
+                  onClick={toggleOnline}
+                  disabled={togglingOnline}
+                  className={`w-full mt-6 py-3.5 rounded-xl text-sm font-bold transition-all shadow-lg border-0 ${
+                    isOnline
+                      ? 'bg-white/10 text-foreground hover:bg-white/20'
+                      : 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_20px_rgba(214,180,107,0.3)]'
+                  }`}
+                >
+                  {isOnline ? 'Go Offline' : 'Go Online'}
+                </button>
               </CardContent>
             </Card>
-
-
           </div>
         </div>
       </main>
