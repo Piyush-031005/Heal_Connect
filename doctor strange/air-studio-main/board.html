@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Air Board ✍️</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✍️</text></svg>" />
+    <link rel="stylesheet" href="/src/board.css" />
+  </head>
+  <body>
+    <video id="webcam" playsinline muted></video>
+    <canvas id="stage"></canvas>
+
+    <nav id="modes">
+      <a href="./">🏠 Home</a>
+      <a href="board.html" class="cur">✍️ Board</a>
+      <a href="mandala.html">🌀 Mandala</a>
+      <a href="studio.html">🪄 Strange</a>
+    </nav>
+
+    <div id="toolbar">
+      <div class="group">
+        <span class="glabel">🎨 Color</span>
+        <div class="swatches">
+          <button class="sw active" data-color="#ff2d95" style="--c:#ff2d95" title="Pink"></button>
+          <button class="sw" data-color="#00e5ff" style="--c:#00e5ff" title="Cyan"></button>
+          <button class="sw" data-color="#39ff14" style="--c:#39ff14" title="Green"></button>
+          <button class="sw" data-color="#ffe600" style="--c:#ffe600" title="Yellow"></button>
+          <button class="sw" data-color="#b14aff" style="--c:#b14aff" title="Violet"></button>
+          <button class="sw" data-color="#ffffff" style="--c:#ffffff" title="White"></button>
+        </div>
+      </div>
+      <div class="sep"></div>
+      <div class="group">
+        <span class="glabel">✏️ Size</span>
+        <div class="sizes">
+          <button class="tool size" data-size="4"><span class="dot" style="width:6px;height:6px"></span></button>
+          <button class="tool size active" data-size="9"><span class="dot" style="width:11px;height:11px"></span></button>
+          <button class="tool size" data-size="18"><span class="dot" style="width:18px;height:18px"></span></button>
+        </div>
+      </div>
+      <div class="sep"></div>
+      <div class="group tools">
+        <button class="tool" data-action="eraser" title="Eraser"><span class="ico">🧽</span><span class="cap">Erase</span></button>
+        <button class="tool" data-action="undo" title="Undo last stroke"><span class="ico">↩️</span><span class="cap">Undo</span></button>
+        <button class="tool" data-action="clear" title="Clear the board"><span class="ico">🗑️</span><span class="cap">Clear</span></button>
+        <button class="tool" data-action="camera" title="Toggle camera / clean black board"><span class="ico">🎥</span><span class="cap">Board</span></button>
+        <button class="tool" data-action="download" title="Save as PNG"><span class="ico">💾</span><span class="cap">Save</span></button>
+      </div>
+    </div>
+
+    <div id="debug">starting…</div>
+
+    <div id="hud">
+      <h1>Air Board</h1>
+      <p>🤏 <b>Pinch</b> thumb + index to write · release to lift the pen.<br />
+         Hover a tool and <b>hold</b> to select it · draw a <b>❤️ ⭐ ⬤ ▲ ⬛</b> and it snaps clean · 🎥 toggles a black board.</p>
+    </div>
+
+    <div id="gate">
+      <div class="gate-card">
+        <div class="gate-emoji">✍️</div>
+        <h2 id="gateTitle">Write in the air</h2>
+        <p id="gateMsg">Uses your webcam locally to track your hand — nothing leaves your device.</p>
+        <button id="startBtn">Enable camera &amp; begin</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/board.js"></script>
+  </body>
+</html>

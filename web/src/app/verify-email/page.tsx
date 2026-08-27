@@ -6,7 +6,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Loader2, CheckCircle2, XCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import { tokenStore } from '@/lib/api';
 
 // Uses Next.js proxy rewrite — same as the rest of the app (see next.config.mjs)
 const API_URL = '';
@@ -32,14 +31,11 @@ function VerifyEmailContent() {
 
     fetch(`${API_URL}/api/auth/verify-email?token=${encodeURIComponent(token)}`)
       .then((r) => r.json())
-      .then((data: any) => {
+      .then((data: { success: boolean; message: string }) => {
         if (data.success) {
-          if (data.data?.accessToken && data.data?.refreshToken) {
-            tokenStore.setTokens(data.data.accessToken, data.data.refreshToken);
-          }
           setStatus('success');
           setMessage(data.message || 'Email verified successfully!');
-          setTimeout(() => router.push('/dashboard'), 1500);
+          setTimeout(() => router.push('/login'), 3000);
         } else {
           setStatus('error');
           setMessage(data.message || 'Verification failed. The link may have expired.');
@@ -57,8 +53,8 @@ function VerifyEmailContent() {
 
         {/* Logo */}
         <div className="flex items-center justify-center gap-2">
-          <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-[#f59e0b]">ZenAuraa</span>
+          <Image src="/logo.png" alt="Zenauraa" width={32} height={32} className="rounded-full" />
+          <span className="text-xl font-extrabold text-[#f59e0b]">Zenauraa</span>
         </div>
 
         {/* Loading */}
@@ -75,10 +71,10 @@ function VerifyEmailContent() {
             <CheckCircle2 className="h-16 w-16 text-emerald-500 mx-auto" />
             <h1 className="text-2xl font-extrabold text-[#1a1a1a]">Email Verified!</h1>
             <p className="text-gray-500">{message}</p>
-            <p className="text-sm text-gray-400">Opening your dashboard now…</p>
-            <Link href="/dashboard"
+            <p className="text-sm text-gray-400">Redirecting you to login in 3 seconds…</p>
+            <Link href="/login"
               className="flex items-center justify-center w-full bg-[#f59e0b] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
-              Go to Dashboard
+              Go to Login
             </Link>
           </div>
         )}
