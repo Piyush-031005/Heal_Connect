@@ -195,11 +195,7 @@ router.post(
           console.error('Verification email failed:', e)
         );
       } else if (phone) {
-        if (phone.startsWith('+91')) {
-          console.warn('MSG91 configuration pending — skipping OTP for Indian number during registration.');
-        } else {
-          void sendOtpSms(phone).catch((e) => console.error('OTP SMS failed:', e));
-        }
+        void sendOtpSms(phone).catch((e) => console.error('OTP SMS failed:', e));
       }
 
       const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
@@ -947,10 +943,6 @@ router.post(
         return;
       }
 
-      if (phone.startsWith('+91')) {
-        throw new Error('MSG91 configuration pending.');
-      }
-
       await sendOtpSms(phone);
 
       res.json({ success: true, message: 'OTP sent successfully.' });
@@ -984,10 +976,6 @@ router.post(
       if (user.isPhoneVerified) {
         res.json({ success: true, message: 'Phone already verified.' });
         return;
-      }
-
-      if (phone.startsWith('+91')) {
-        throw new Error('MSG91 configuration pending.');
       }
 
       const isValid = await verifyOtpSms(phone, otp);
@@ -1030,9 +1018,6 @@ router.post(
       const user = await prisma.user.findUnique({ where: { phone } });
 
       if (user && !user.isPhoneVerified) {
-        if (phone.startsWith('+91')) {
-          throw new Error('MSG91 configuration pending.');
-        }
         await sendOtpSms(phone);
       }
 

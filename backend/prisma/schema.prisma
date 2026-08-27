@@ -117,12 +117,15 @@ model Practitioner {
 
   // GDPR: see User.erasedAt for the same rationale (anonymize, don't hard-delete).
   erasedAt DateTime?
+  
+  schedulingEnabled Boolean @default(false)
 
-  sessions       Session[]
-  reviews        Review[]
-  supportTickets SupportTicket[]
-  consents       Consent[]
-  deviceTokens   DeviceToken[]
+  sessions          Session[]
+  reviews           Review[]
+  supportTickets    SupportTicket[]
+  consents          Consent[]
+  deviceTokens      DeviceToken[]
+  availabilitySlots AvailabilitySlot[]
 }
 
 model Wallet {
@@ -169,12 +172,13 @@ model Session {
   createdAt          DateTime     @default(now())
   updatedAt          DateTime     @updatedAt
 
-  review        Review?
-  messages      ChatMessage[]
-  callFeedback  CallFeedback?
-  transcript    CallTranscript?
-  timeProposals SessionTimeProposal[]
-  reminders     SessionReminder[]
+  review           Review?
+  messages         ChatMessage[]
+  callFeedback     CallFeedback?
+  transcript       CallTranscript?
+  timeProposals    SessionTimeProposal[]
+  reminders        SessionReminder[]
+  availabilitySlot AvailabilitySlot?
 }
 
 model Review {
@@ -693,4 +697,22 @@ model AdminUser {
   createdById   String?
 
   @@index([email])
+}
+
+
+// --- Expert Availability --------------------------------------------------------
+
+model AvailabilitySlot {
+  id              String       @id @default(uuid())
+  practitionerId  String
+  practitioner    Practitioner @relation(fields: [practitionerId], references: [id], onDelete: Cascade)
+  startTime       DateTime
+  endTime         DateTime
+  isBooked        Boolean      @default(false)
+  sessionId       String?      @unique
+  session         Session?     @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@index([practitionerId, startTime])
 }

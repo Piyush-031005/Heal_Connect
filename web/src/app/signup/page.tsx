@@ -74,44 +74,28 @@ function SignupInner() {
     if (!pwdOk) { setError('Password does not meet the required criteria.'); setLoading(false); return; }
     try {
       if (role === 'expert') {
-        // Expert registration using astrologer API
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('email', email);
-        formData.append('password', password);
-        formData.append('dob', dob);
+        const res = await authApi.practitionerRegister(name, email, password, dob, {
+          acceptTerms: true,
+          acceptPrivacy: true,
+          emailMarketingOptIn: false
+        });
         
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/auth/astrologer/register', true);
-
-        xhr.onload = () => {
+        if (!res.success || !res.data) {
+          setError(res.message || 'Registration failed.');
           setLoading(false);
-          try {
-            const res = JSON.parse(xhr.responseText);
-            if (!res.success) {
-              setError(res.message || 'Registration failed.');
-              return;
-            }
-            tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-            localStorage.setItem('hc_role', 'practitioner');
-            if (res.data.astrologer) {
-              localStorage.setItem('hc_practitioner_id', res.data.astrologer.id);
-              localStorage.setItem('hc_pid', res.data.astrologer.id);
-              localStorage.setItem('hc_practitioner_name', res.data.astrologer.name ?? name);
-            }
-            setSuccess('Expert account created!');
-            setTimeout(() => router.push('/astrologer/onboarding'), 1200);
-          } catch {
-            setError('Failed to parse response.');
-          }
-        };
+          return;
+        }
 
-        xhr.onerror = () => {
-          setLoading(false);
-          setError('Registration failed. Please check your network connection.');
-        };
-
-        xhr.send(formData);
+        tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+        localStorage.setItem('hc_role', 'practitioner');
+        if (res.data.practitioner) {
+          localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
+          localStorage.setItem('hc_pid', res.data.practitioner.id);
+          localStorage.setItem('hc_practitioner_name', res.data.practitioner.name ?? name);
+        }
+        
+        setSuccess('Expert account created!');
+        setTimeout(() => router.push('/expert/dashboard'), 1200);
         return;
       } else {
         const res = await authApi.register({ name, email, password, dob, acceptTerms, acceptPrivacy, emailMarketingOptIn });
