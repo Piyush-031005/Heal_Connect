@@ -24,7 +24,7 @@ router.post(
   handleValidation,
   async (req: AuthRequest, res: Response) => {
     const userId = req.user!.userId;
-    const { practitionerId } = req.body;
+    const { practitionerId, availabilitySlotId } = req.body;
 
     // A user shouldn't be booking a session if they are a practitioner
     if (req.user!.practitionerId) {
@@ -33,28 +33,101 @@ router.post(
     }
 
     try {
-      // Create session as PENDING
-      const session = await prisma.session.create({
-        data: {
-          userId,
-          practitionerId,
-          type: 'CHAT', // default for now, can be updated later
-          status: 'PENDING',
+      if (availabilitySlotId) {
+        // Instant booking flow
+        const result = await prisma.$transaction(async (tx) => {
+          const slot = await tx.availabilitySlot.findFirst({
+            where: { id: availabilitySlotId, practitionerId, isBooked: false }
+          });
+
+          if (!slot) {
+            throw new Error('SLOT_UNAVAILABLE');
+          }
+
+          const session = await tx.session.create({
+            data: {
+              userId,
+              practitionerId,
+              type: 'CHAT',
+              status: 'CONFIRMED',
+              scheduledStartTime: slot.startTime,
+              scheduledEndTime: slot.endTime,
+            }
+          });
+
+          await tx.availabilitySlot.update({
+            where: { id: slot.id },
+            data: { isBooked: true, sessionId: session.id }
+          });
+
+          return { session, slot };
+        });
+
+        const { session, slot } = result;
+
+        const scheduledTime = slot.startTime.getTime();
+        await prisma.sessionReminder.createMany({
+          data: [
+            { sessionId: session.id, participantId: userId, reminderType: '24_HOURS', scheduledFor: new Date(scheduledTime - 24 * 60 * 60 * 1000) },
+            { sessionId: session.id, participantId: userId, reminderType: '30_MINUTES', scheduledFor: new Date(scheduledTime - 30 * 60 * 1000) },
+            { sessionId: session.id, participantId: practitionerId, reminderType: '24_HOURS', scheduledFor: new Date(scheduledTime - 24 * 60 * 60 * 1000) },
+            { sessionId: session.id, participantId: practitionerId, reminderType: '30_MINUTES', scheduledFor: new Date(scheduledTime - 30 * 60 * 1000) },
+          ],
+          skipDuplicates: true
+        });
+
+        try {
+          await scheduleSessionReminders(session.id, slot.startTime);
+        } catch (schedulerErr) {
+          console.warn('Failed to schedule BullMQ reminders:', schedulerErr);
         }
-      });
 
-      // Notify practitioner
-      await sendNotificationToPractitioner(practitionerId, {
-        type: 'SESSION_REQUESTED',
-        title: 'New Session Request',
-        body: 'You have received a new session request.',
-        entityId: session.id,
-      });
+        const formatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+        const timeStr = formatter.format(slot.startTime);
 
-      res.status(201).json({ success: true, data: { session } });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ success: false, message: 'Server error' });
+        await sendNotificationToUser(userId, {
+          type: 'SESSION_CONFIRMED',
+          title: 'Session Confirmed',
+          body: `Your session is confirmed for ${timeStr}.`,
+          entityId: session.id,
+        });
+
+        await sendNotificationToPractitioner(practitionerId, {
+          type: 'SESSION_CONFIRMED',
+          title: 'New Session Booked',
+          body: `A user booked a session with you for ${timeStr}.`,
+          entityId: session.id,
+        });
+
+        res.status(201).json({ success: true, data: { session } });
+      } else {
+        // Legacy flow: Create session as PENDING
+        const session = await prisma.session.create({
+          data: {
+            userId,
+            practitionerId,
+            type: 'CHAT', // default for now, can be updated later
+            status: 'PENDING',
+          }
+        });
+
+        // Notify practitioner
+        await sendNotificationToPractitioner(practitionerId, {
+          type: 'SESSION_REQUESTED',
+          title: 'New Session Request',
+          body: 'You have received a new session request.',
+          entityId: session.id,
+        });
+
+        res.status(201).json({ success: true, data: { session } });
+      }
+    } catch (err: any) {
+      if (err.message === 'SLOT_UNAVAILABLE') {
+        res.status(409).json({ success: false, message: 'This slot is no longer available.' });
+      } else {
+        console.error(err);
+        res.status(500).json({ success: false, message: 'Server error' });
+      }
     }
   }
 );

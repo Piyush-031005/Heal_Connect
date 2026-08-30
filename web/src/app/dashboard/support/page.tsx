@@ -208,7 +208,7 @@ export default function SupportTicketsPage() {
                             }`}
                           >
                             <p className="text-[10px] font-bold uppercase tracking-wide text-gray-400 mb-1">
-                              {m.senderType === 'ADMIN' ? 'HealConnect Support' : 'You'}
+                              {m.senderType === 'ADMIN' ? 'ZenAuraa Support' : 'You'}
                             </p>
                             <p className="text-gray-700 whitespace-pre-wrap">{m.message}</p>
                           </div>

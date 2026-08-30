@@ -130,29 +130,56 @@ function VerifyOtpContent() {
     setTimeout(async () => {
       setLoading(true);
       try {
-        const endpoint = type === 'login' ? `${API_URL}/api/auth/login-otp/verify` : `${API_URL}/api/auth/verify-otp`;
-        const body = type === 'login' ? JSON.stringify({ phone, otp: otpCode, role }) : JSON.stringify({ phone, otp: otpCode });
+        let endpoint, body;
+        
+        if (role === 'expert') {
+          // Use practitioner OTP verification endpoint
+          endpoint = `${API_URL}/api/auth/login-otp/verify`;
+          body = JSON.stringify({ phone, otp: otpCode, role: 'expert' });
+        } else if (type === 'login') {
+          endpoint = `${API_URL}/api/auth/login-otp/verify`;
+          body = JSON.stringify({ phone, otp: otpCode, role });
+        } else {
+          endpoint = `${API_URL}/api/auth/verify-otp`;
+          body = JSON.stringify({ phone, otp: otpCode });
+        }
         
         const res  = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body
         });
-        const data = await res.json() as { success: boolean; message: string; data?: { accessToken: string; refreshToken: string; role?: string; practitioner?: any } };
+        const data = await res.json() as { success: boolean; message: string; data?: { accessToken: string; refreshToken: string; role?: string; practitioner?: any; astrologer?: any; redirect?: string } };
 
         if (data.success) {
-          if (type === 'login' && data.data) {
-            localStorage.setItem('hc_access_token', data.data.accessToken);
-            localStorage.setItem('hc_refresh_token', data.data.refreshToken);
-            if (role === 'expert' && data.data.practitioner) {
+          if (data.data) {
+            if (role === 'expert') {
+              // Handle expert login/signup - use practitioner token store
+              localStorage.setItem('hc_access', data.data.accessToken);
+              localStorage.setItem('hc_refresh', data.data.refreshToken);
               localStorage.setItem('hc_role', 'practitioner');
-              localStorage.setItem('hc_pid', data.data.practitioner.id);
+              if (data.data.practitioner) {
+                localStorage.setItem('hc_practitioner_id', data.data.practitioner.id);
+                localStorage.setItem('hc_pid', data.data.practitioner.id);
+                localStorage.setItem('hc_practitioner_name', data.data.practitioner.name ?? '');
+              }
+            } else {
+              // Handle user login
+              localStorage.setItem('hc_access', data.data.accessToken);
+              localStorage.setItem('hc_refresh', data.data.refreshToken);
+              if (data.data.practitioner) {
+                localStorage.setItem('hc_role', 'practitioner');
+                localStorage.setItem('hc_pid', data.data.practitioner.id);
+              }
             }
           }
           setSuccess(true);
           setTimeout(() => {
-            if (type === 'login') {
-              router.push(role === 'expert' ? '/expert/dashboard' : '/dashboard');
+            if (type === 'login' || (role === 'expert' && data.data?.redirect)) {
+              router.push(role === 'expert' ? (data.data?.redirect || '/expert/dashboard') : '/dashboard');
+            } else if (role === 'expert') {
+              // Expert phone signup completed, redirect to dashboard
+              router.push('/expert/dashboard');
             } else {
               router.push('/login');
             }
@@ -259,8 +286,8 @@ function VerifyOtpContent() {
 
         <CardHeader className="space-y-2 pb-4">
           <div className="flex items-center gap-2 mb-2">
-            <Image src="/logo.png" alt="HealConnect" width={32} height={32} className="rounded-full" />
-            <span className="text-xl font-extrabold text-[#f59e0b]">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+            <span className="text-xl font-extrabold text-[#f59e0b]">ZenAuraa</span>
           </div>
           <div className="flex items-center gap-2">
             <Phone className="h-5 w-5 text-[#f59e0b]" />

@@ -142,7 +142,7 @@ export default function AdminLoginPage() {
               <QrCode className="w-8 h-8 text-white" />
             )}
           </div>
-          <h1 className="text-2xl font-black text-white mb-1">HealConnect Admin</h1>
+          <h1 className="text-2xl font-black text-white mb-1">ZenAuraa Admin</h1>
           <p className="text-white/50 text-sm font-medium">
             {step === 'password' && 'Secure Admin Panel — Authorized Access Only'}
             {step === 'mfa' && 'Enter your 6-digit authenticator code'}

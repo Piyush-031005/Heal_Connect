@@ -718,10 +718,10 @@ export default function AdminUsersPage() {
                         </div>
                       )}
 
-                      {/* Why HealConnect (previousPlatformExperience) */}
+                      {/* Why ZenAuraa (previousPlatformExperience) */}
                       {viewApp.previousPlatformExperience && (
                         <div>
-                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Why HealConnect</p>
+                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Why ZenAuraa</p>
                           <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-white/5 rounded-xl p-3">{viewApp.previousPlatformExperience}</p>
                         </div>
                       )}
@@ -858,10 +858,10 @@ export default function AdminUsersPage() {
                         </div>
                       )}
 
-                      {/* Why HealConnect */}
+                      {/* Why ZenAuraa */}
                       {viewPractProfile?.previousPlatformExperience && (
                         <div>
-                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Why HealConnect</p>
+                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Why ZenAuraa</p>
                           <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-white/5 rounded-xl p-3">
                             {viewPractProfile.previousPlatformExperience}
                           </p>

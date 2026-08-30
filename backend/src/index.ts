@@ -64,7 +64,7 @@ app.use(express.json({
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 // ─── Health Check (Before Rate Limiter) ───────────────────────────────────────
-app.get('/', (_req, res) => res.send('HealConnect API is running'));
+app.get('/', (_req, res) => res.send('ZenAuraa API is running'));
 app.disable('x-powered-by'); // Belt-and-suspenders (helmet already removes this)
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
@@ -134,6 +134,9 @@ app.get('/api/run-prisma-migrate', async (_req, res) => {
 // Apply general rate limiter to all routes
 app.use(generalLimiter);
 
+import availabilityRouter from './routes/availability';
+import schedulesRouter from './routes/schedules';
+
 app.use('/api/auth', authRouter);
 app.use('/api/auth/astrologer', astrologerAuthRouter);
 app.use('/api/astrologers', astrologersRouter);
@@ -144,6 +147,7 @@ app.use('/api/wallet', walletRouter);
 app.use('/api/chat', chatRouter);
 app.use('/api/agora', agoraRouter);
 app.use('/api/sessions', sessionsRouter);
+app.use('/api/schedules', schedulesRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/admin-auth', adminAuthRouter);
 app.use('/api/contact', contactRouter);
@@ -151,6 +155,7 @@ app.use('/api/tickets', ticketsRouter);
 app.use('/api/consent', consentRouter);
 app.use('/api/deepgram', deepgramRouter);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/availability', availabilityRouter);
 
 // Serve local uploads when Azure Storage is not configured
 if (!process.env.AZURE_STORAGE_CONNECTION_STRING) {
@@ -230,6 +235,6 @@ import { createServer } from 'http';
 const httpServer = createServer(app);
 initSocketServer(httpServer);
 httpServer.listen(port, () => {
-  console.log(`✦ HealConnect API running on port ${port}`);
+  console.log(`✦ ZenAuraa API running on port ${port}`);
   startBillingEngine();
 });

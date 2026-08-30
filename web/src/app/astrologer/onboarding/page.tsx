@@ -64,7 +64,7 @@ export default function AstrologerOnboardingPage() {
 
   useEffect(() => {
     const token = astrologerTokenStore.getAccess();
-    if (!token) { router.replace('/astrologer/login'); return; }
+    if (!token) { router.replace('/login'); return; }
 
     // Use cached profile for redirect check only — skip the API call
     const cached = astrologerTokenStore.getProfile();
@@ -76,7 +76,7 @@ export default function AstrologerOnboardingPage() {
     }
 
     astrologerApi.getApplication(token).then((res) => {
-      if (!res.success) { astrologerTokenStore.clear(); router.replace('/astrologer/login'); return; }
+      if (!res.success) { astrologerTokenStore.clear(); router.replace('/login'); return; }
       const p = res.data?.profile;
       if (p) {
         if (p.applicationStatus === 'APPROVED' && p.accountStatus === 'ACTIVE') { router.replace('/astrologer/dashboard'); return; }
@@ -87,7 +87,7 @@ export default function AstrologerOnboardingPage() {
         if (p.city || p.country) set('location', [p.city, p.country].filter(Boolean).join(', '));
       }
       setLoading(false);
-    }).catch(() => router.replace('/astrologer/login'));
+    }).catch(() => router.replace('/login'));
   }, [router]);
 
   const handleNext = async () => {
@@ -95,7 +95,7 @@ export default function AstrologerOnboardingPage() {
     if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) { setError('Valid email is required.'); return; }
     if (!form.location.trim()) { setError('Please tell us where you are based.'); return; }
     const token = astrologerTokenStore.getAccess();
-    if (!token) { router.replace('/astrologer/login'); return; }
+    if (!token) { router.replace('/login'); return; }
     setSaving(true); setError('');
     try {
       await astrologerApi.updateApplication(token, {
@@ -125,8 +125,8 @@ export default function AstrologerOnboardingPage() {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
-            <Image src="/logo.png" alt="HealConnect" width={36} height={36} className="rounded-full" />
-            <span className="text-2xl font-extrabold text-white">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={36} height={36} className="rounded-full" />
+            <span className="text-2xl font-extrabold text-white">ZenAuraa</span>
           </Link>
           <div className="mb-3 inline-flex items-center gap-2 bg-white/15 text-white text-xs font-semibold px-3 py-1.5 rounded-full">
             STEP 1 OF 3
@@ -143,7 +143,7 @@ export default function AstrologerOnboardingPage() {
           </p>
         </div>
         <div className="relative z-10 border-t border-white/20 pt-6">
-          <p className="text-amber-100/60 text-xs">© 2026 HealConnect. All rights reserved.</p>
+          <p className="text-amber-100/60 text-xs">© 2026 ZenAuraa. All rights reserved.</p>
         </div>
       </div>
 
@@ -152,8 +152,8 @@ export default function AstrologerOnboardingPage() {
 
         {/* Mobile logo */}
         <div className="flex items-center gap-2 mb-8 md:hidden">
-          <Image src="/logo.png" alt="HealConnect" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-amber-500">HealConnect</span>
+          <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+          <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
         </div>
 
         <div className="w-full max-w-2xl">
@@ -194,7 +194,7 @@ export default function AstrologerOnboardingPage() {
 
           <p className="text-center text-sm text-gray-500 mt-5">
             Already registered?{' '}
-            <Link href="/astrologer/login" className="text-amber-600 font-semibold hover:underline">Sign in</Link>
+            <Link href="/login" className="text-amber-600 font-semibold hover:underline">Sign in</Link>
           </p>
         </div>
       </div>

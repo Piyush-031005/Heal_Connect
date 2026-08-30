@@ -126,7 +126,7 @@ export default function AdminDashboard() {
           </div>
           <div className="relative z-10">
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-black">HealConnect Live Operations</h2>
+              <h2 className="text-xl font-black">ZenAuraa Live Operations</h2>
               <span className="w-2.5 h-2.5 rounded-full bg-green-300 animate-ping" />
             </div>
             <p className="text-white/80 text-xs font-semibold mt-0.5">

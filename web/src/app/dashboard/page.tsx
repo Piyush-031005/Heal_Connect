@@ -18,6 +18,8 @@ import { toast } from 'react-hot-toast';
 import { getSocket } from '@/lib/socket';
 import { RechargeModal } from '@/components/wallet/RechargeModal';
 import { getPractitionerAvatar } from '@/lib/utils';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import AvailabilityCalendar from '@/components/AvailabilityCalendar';
 
 interface UserData {
   id: string;
@@ -38,7 +40,10 @@ export default function DashboardPage() {
   // Wallet State
   const [walletBalance, setWalletBalance] = useState<number | null>(null);
   const [isRechargeModalOpen, setIsRechargeModalOpen] = useState(false);
+  // Session State
   const [startingSession, setStartingSession] = useState<string | null>(null);
+  const [schedulingExpert, setSchedulingExpert] = useState<PractitionerProfile | null>(null);
+  const [requesting, setRequesting] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const notificationRef = useRef<HTMLDivElement>(null);
@@ -113,6 +118,9 @@ export default function DashboardPage() {
     setStartingSession(null);
     if (res.success && res.data) {
       router.push(`/session/${res.data.session.id}`);
+    } else if (res.message === 'Invalid or expired token' || res.message === 'No token provided') {
+      tokenStore.clear();
+      router.push('/login');
     } else {
       toast.error(res.message || 'Could not start session. Please recharge your wallet.');
     }
@@ -127,8 +135,39 @@ export default function DashboardPage() {
     setStartingSession(null);
     if (res.success && res.data) {
       router.push(`/session/${res.data.session.id}`);
+    } else if (res.message === 'Invalid or expired token' || res.message === 'No token provided') {
+      tokenStore.clear();
+      router.push('/login');
     } else {
       toast.error(res.message || 'Could not start call. Please recharge your wallet.');
+    }
+  };
+
+  const handleRequestSession = async (availabilitySlotId?: string) => {
+    if (!schedulingExpert) return;
+    const token = tokenStore.getAccess();
+    if (!token) { router.push('/login'); return; }
+
+    setRequesting(true);
+    try {
+      const res = await sessionsApi.requestSession(token, schedulingExpert.id, 'CHAT', availabilitySlotId);
+      if (res.success) {
+        if (availabilitySlotId) {
+          toast.success('Session booked successfully!');
+          setSchedulingExpert(null);
+        } else {
+          toast.success('Session request sent! The expert will propose available times shortly.');
+        }
+      } else if (res.message === 'Invalid or expired token' || res.message === 'No token provided') {
+        tokenStore.clear();
+        router.push('/login');
+      } else {
+        toast.error(res.message || 'Failed to request session.');
+      }
+    } catch {
+      toast.error('Network error while requesting session.');
+    } finally {
+      setRequesting(false);
     }
   };
 
@@ -207,7 +246,7 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <Image src="/logo.png" alt="HealConnect" width={48} height={48} className="rounded-full animate-pulse" />
+          <Image src="/logo.png" alt="ZenAuraa" width={48} height={48} className="rounded-full animate-pulse" />
           <p className="text-gray-500">Loading your dashboard...</p>
         </div>
       </div>
@@ -223,8 +262,8 @@ export default function DashboardPage() {
       <header className="sticky top-0 z-50 w-full border-b border-amber-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="HealConnect" width={32} height={32} className="rounded-full" />
-            <span className="text-xl font-extrabold text-amber-500">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+            <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-2 flex-1 max-w-md mx-8">
@@ -555,11 +594,14 @@ export default function DashboardPage() {
                               <span className="text-lg font-bold text-gray-900">₹{expert.perMinuteRate}</span>
                               <span className="text-xs text-gray-400">/min</span>
                             </div>
-                            <div className="flex gap-2">
-                              <Button size="sm" variant="outline" className="h-8 px-3 border-gray-200 hover:border-amber-300 hover:text-amber-700 text-xs gap-1" onClick={(e) => { e.preventDefault(); startChatSession(expert.id, e); }} disabled={!expert.isOnline || expert.isBusy || startingSession === expert.id}>
+                            <div className="flex flex-wrap justify-end gap-2">
+                              <Button size="sm" variant="outline" className="h-8 px-3 border-purple-200 text-purple-700 hover:border-purple-300 hover:bg-purple-50 text-xs gap-1" onClick={(e) => { e.preventDefault(); setSchedulingExpert(expert); }}>
+                                <Calendar className="h-3.5 w-3.5" /> See Calendar
+                              </Button>
+                              <Button size="sm" variant="outline" className="h-8 px-3 border-gray-200 hover:border-amber-300 hover:text-amber-700 text-xs gap-1" onClick={(e) => { e.preventDefault(); startChatSession(expert.id, e); }}>
                                 <MessageCircle className="h-3.5 w-3.5" /> Chat
                               </Button>
-                              <Button size="sm" disabled={!expert.isOnline || expert.isBusy || startingSession === expert.id} className="h-8 px-3 bg-amber-500 hover:bg-amber-600 text-white border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => { e.preventDefault(); startCallSession(expert.id, e); }}>
+                              <Button size="sm" className="h-8 px-3 bg-amber-500 hover:bg-amber-600 text-white border-0 text-xs gap-1" onClick={(e) => { e.preventDefault(); startCallSession(expert.id, e); }}>
                                 <Phone className="h-3.5 w-3.5" /> Call
                               </Button>
                             </div>
@@ -618,6 +660,25 @@ export default function DashboardPage() {
           setTimeout(fetchWallet, 2000);
         }} 
       />
+
+      <Dialog open={!!schedulingExpert} onOpenChange={(open) => !open && setSchedulingExpert(null)}>
+        <DialogContent className="max-w-4xl border border-purple-100/50 p-6 md:p-8 rounded-[2rem] shadow-2xl shadow-purple-900/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-[0.98] data-[state=open]:zoom-in-[0.98] data-[state=closed]:slide-out-to-top-[10px] data-[state=open]:slide-in-from-bottom-[10px] duration-300 ease-out">
+          <DialogHeader className="mb-2">
+            <DialogTitle className="text-2xl font-extrabold text-gray-900 flex items-center gap-3">
+              <span className="bg-purple-50 border border-purple-100 p-2 rounded-xl text-[#7C3AED] shadow-sm"><Calendar className="w-5 h-5"/></span>
+              Schedule with {schedulingExpert?.name}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="pt-2">
+            {schedulingExpert && (
+              <AvailabilityCalendar 
+                practitionerId={schedulingExpert.id} 
+                onBookSlot={(slotId) => handleRequestSession(slotId)} 
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

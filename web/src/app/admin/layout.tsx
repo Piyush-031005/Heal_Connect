@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'HealConnect Admin Panel',
-  description: 'Admin dashboard for HealConnect platform management',
+  title: 'ZenAuraa Admin Panel',
+  description: 'Admin dashboard for ZenAuraa platform management',
 };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

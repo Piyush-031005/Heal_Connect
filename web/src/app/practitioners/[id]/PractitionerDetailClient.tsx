@@ -9,6 +9,8 @@ import { toast } from 'react-hot-toast';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import AvailabilityCalendar from '@/components/AvailabilityCalendar';
 import { practitionersApi, sessionsApi, tokenStore } from '@/lib/api';
 import { getAvatarUrl } from '@/lib/utils';
 
@@ -35,6 +37,7 @@ interface PractitionerDetail {
   isBusy?: boolean;
   avgRating: number;
   reviewCount: number;
+  schedulingEnabled?: boolean;
   reviews: Review[];
 }
 
@@ -48,6 +51,7 @@ export default function PractitionerDetailPage() {
   const [chatting, setChatting] = useState(false);
   const [requesting, setRequesting] = useState(false);
   const [shared, setShared] = useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -86,8 +90,8 @@ export default function PractitionerDetailPage() {
     if (!p) return;
     const url = `${window.location.origin}/practitioners/${p.id}`;
     const shareData = {
-      title: `${p.name} on HealConnect`,
-      text: `Check out ${p.name}'s profile on HealConnect${p.specialties[0] ? ` — ${p.specialties[0]} expert` : ''}.`,
+      title: `${p.name} on ZenAuraa`,
+      text: `Check out ${p.name}'s profile on ZenAuraa${p.specialties[0] ? ` — ${p.specialties[0]} expert` : ''}.`,
       url,
     };
 
@@ -174,7 +178,22 @@ export default function PractitionerDetailPage() {
     }
   };
 
-  const handleRequestSession = async () => {
+  const handleScheduleClick = () => {
+    if (!p) return;
+    const token = tokenStore.getAccess();
+    if (!token) {
+      router.push(`/login?returnUrl=/practitioners/${p.id}`);
+      return;
+    }
+    
+    if (p.schedulingEnabled) {
+      setIsCalendarOpen(true);
+    } else {
+      handleRequestSession(); // fallback to legacy
+    }
+  };
+
+  const handleRequestSession = async (availabilitySlotId?: string) => {
     if (!p) return;
     const token = tokenStore.getAccess();
 
@@ -186,11 +205,17 @@ export default function PractitionerDetailPage() {
     setRequesting(true);
 
     try {
-      const res = await sessionsApi.requestSession(token, p.id);
+      const res = await sessionsApi.requestSession(token, p.id, 'CHAT', availabilitySlotId);
 
       if (res.success) {
-        toast.success('Session request sent! The expert will propose available times shortly.');
-        router.push('/dashboard/schedules');
+        if (availabilitySlotId) {
+          toast.success('Session booked successfully!');
+          setIsCalendarOpen(false);
+          router.push('/dashboard/sessions');
+        } else {
+          toast.success('Session request sent! The expert will propose available times shortly.');
+          router.push('/dashboard/schedules');
+        }
       } else {
         toast.error(res.message || 'Failed to request session.');
       }
@@ -231,8 +256,8 @@ export default function PractitionerDetailPage() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <button onClick={() => router.back()} className="flex items-center gap-2 text-gray-600 hover:text-[#f59e0b] transition-colors group bg-transparent border-none cursor-pointer">
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            <Image src="/logo.png" alt="HealConnect" width={28} height={28} className="rounded-full shadow-sm" />
-            <span className="font-extrabold text-[#f59e0b] tracking-tight">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full shadow-sm" />
+            <span className="font-extrabold text-[#f59e0b] tracking-tight">ZenAuraa</span>
           </button>
         </div>
       </header>
@@ -330,7 +355,7 @@ export default function PractitionerDetailPage() {
                   )}
                 </Button>
                 <Button
-                  onClick={handleRequestSession}
+                  onClick={handleScheduleClick}
                   disabled={requesting}
                   variant="outline" 
                   className="border-indigo-200 text-indigo-700 hover:border-indigo-400 hover:bg-indigo-50 gap-2 rounded-2xl px-5 font-semibold transition-all disabled:opacity-40"
@@ -428,6 +453,23 @@ export default function PractitionerDetailPage() {
           </div>
         )}
       </main>
+
+      <Dialog open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+        <DialogContent className="max-w-4xl border border-purple-100/50 p-6 md:p-8 rounded-[2rem] shadow-2xl shadow-purple-900/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-[0.98] data-[state=open]:zoom-in-[0.98] data-[state=closed]:slide-out-to-top-[10px] data-[state=open]:slide-in-from-bottom-[10px] duration-300 ease-out">
+          <DialogHeader className="mb-2">
+            <DialogTitle className="text-2xl font-extrabold text-gray-900 flex items-center gap-3">
+              <span className="bg-purple-50 border border-purple-100 p-2 rounded-xl text-[#7C3AED] shadow-sm"><Calendar className="w-5 h-5"/></span>
+              Schedule with {p.name}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="pt-2">
+            <AvailabilityCalendar 
+              practitionerId={p.id} 
+              onBookSlot={(slotId) => handleRequestSession(slotId)} 
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

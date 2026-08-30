@@ -85,7 +85,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         </div>
         {sidebarOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="overflow-hidden">
-            <p className={`text-sm font-black leading-tight ${dark ? 'text-white' : 'text-gray-900'}`}>HealConnect</p>
+            <p className={`text-sm font-black leading-tight ${dark ? 'text-white' : 'text-gray-900'}`}>ZenAuraa</p>
             <p className="text-[10px] font-bold text-amber-500 uppercase tracking-widest">Admin Panel</p>
           </motion.div>
         )}
@@ -187,7 +187,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             </button>
             <div>
               <h1 className={`text-base font-extrabold ${dark ? 'text-white' : 'text-gray-900'}`}>{pageTitle}</h1>
-              <p className={`text-[10px] font-medium ${dark ? 'text-white/40' : 'text-gray-400'}`}>HealConnect Admin Panel</p>
+              <p className={`text-[10px] font-medium ${dark ? 'text-white/40' : 'text-gray-400'}`}>ZenAuraa Admin Panel</p>
             </div>
           </div>
           <div className="flex items-center gap-2">

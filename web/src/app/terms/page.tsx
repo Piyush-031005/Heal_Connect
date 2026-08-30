@@ -5,7 +5,7 @@ import { FileText } from 'lucide-react';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Terms of Service',
-  description: 'The terms that govern your use of HealConnect, for both customers and practitioners.',
+  description: 'The terms that govern your use of ZenAuraa, for both customers and practitioners.',
   path: '/terms',
 });
 
@@ -38,7 +38,7 @@ export default function TermsOfServicePage() {
           </div>
 
           <p className="text-gray-700 leading-relaxed mb-10 text-[15px]">
-            These terms govern your use of HealConnect ("we", "us") — a marketplace connecting customers with
+            These terms govern your use of ZenAuraa ("we", "us") — a marketplace connecting customers with
             independent astrologers and wellness practitioners for chat, audio, and video consultations. By creating
             an account you agree to these terms; if you don't agree, please don't use the service. See also our{' '}
             <span className="font-semibold">Privacy Policy</span> for how we handle your data.
@@ -61,7 +61,7 @@ export default function TermsOfServicePage() {
 
           <Section n={3} title="Not medical, legal, or financial advice">
             <p>
-              Consultations offered through HealConnect — astrology, numerology, and related wellness guidance — are
+              Consultations offered through ZenAuraa — astrology, numerology, and related wellness guidance — are
               for informational and entertainment purposes. They are not a substitute for professional medical,
               mental-health, legal, or financial advice. If you're experiencing a medical or mental-health emergency,
               contact emergency services or a qualified professional directly, not a practitioner on this platform.
@@ -70,7 +70,7 @@ export default function TermsOfServicePage() {
 
           <Section n={4} title="Practitioners are independent">
             <p>
-              Practitioners on HealConnect are independent professionals, not our employees. We verify certain
+              Practitioners on ZenAuraa are independent professionals, not our employees. We verify certain
               profile information but don't guarantee the accuracy of any specific reading, prediction, or advice a
               practitioner gives. Your consultation is between you and the practitioner; we provide the platform that
               connects you.
@@ -88,7 +88,7 @@ export default function TermsOfServicePage() {
 
           <Section n={6} title="Acceptable use">
             <p>
-              Don't use HealConnect to harass, threaten, or abuse another user or practitioner; to share content that
+              Don't use ZenAuraa to harass, threaten, or abuse another user or practitioner; to share content that
               is illegal, sexually exploitative of minors, or infringes someone else's rights; to attempt to access
               another account; or to circumvent the platform (for example, arranging to pay a practitioner directly
               to avoid platform fees). Chats and call transcripts may be reviewed if flagged for a safety or abuse
@@ -98,7 +98,7 @@ export default function TermsOfServicePage() {
 
           <Section n={7} title="Content and intellectual property">
             <p>
-              HealConnect's branding, design, and software are our property or licensed to us. You keep ownership of
+              ZenAuraa's branding, design, and software are our property or licensed to us. You keep ownership of
               what you write in chat, but you grant us a limited license to store and process it as needed to
               deliver the service (for example, showing you your own session history) and as described in the
               Privacy Policy.
@@ -124,7 +124,7 @@ export default function TermsOfServicePage() {
           <Section n={10} title="Changes to these terms">
             <p>
               We may update these terms from time to time. If we make a material change, we'll take reasonable steps
-              to notify you (for example, in-app) before it takes effect. Continuing to use HealConnect after a
+              to notify you (for example, in-app) before it takes effect. Continuing to use ZenAuraa after a
               change takes effect means you accept the updated terms.
             </p>
           </Section>
@@ -132,7 +132,7 @@ export default function TermsOfServicePage() {
           <Section n={11} title="Governing law">
             <p>
               [Placeholder — the governing jurisdiction and dispute-resolution process should be confirmed with legal
-              counsel based on where HealConnect is incorporated and where its users are located, before this page
+              counsel based on where ZenAuraa is incorporated and where its users are located, before this page
               is relied on in production.]
             </p>
           </Section>

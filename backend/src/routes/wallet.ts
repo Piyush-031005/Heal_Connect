@@ -283,7 +283,7 @@ router.post(
             price_data: {
               currency: 'usd',
               product_data: {
-                name: 'HealConnect Wallet Recharge',
+                name: 'ZenAuraa Wallet Recharge',
                 description: `Recharge wallet with ₹${amount}`,
               },
               unit_amount: amountInCents,

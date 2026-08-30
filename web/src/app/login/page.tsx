@@ -20,10 +20,6 @@ function LoginInner() {
   const searchParams = useSearchParams();
   const [role, setRole] = useState<Role>('user');
 
-  useEffect(() => {
-    if (searchParams.get('role') === 'expert') setRole('expert');
-  }, [searchParams]);
-
   // Redirect already-logged-in users
   useEffect(() => {
     const token = localStorage.getItem('hc_access');
@@ -43,6 +39,39 @@ function LoginInner() {
   const [verifyUrl, setVerifyUrl] = useState<string | null>(null);
   const [loginMethod, setLoginMethod] = useState<'password' | 'otp'>('password');
 
+  // Check for error parameters from Google OAuth callback
+  useEffect(() => {
+    if (searchParams) {
+      const errorType = searchParams.get('error');
+      const errorDetails = searchParams.get('details');
+      
+      if (errorType) {
+        let errorMessage = 'Authentication failed';
+        switch (errorType) {
+          case 'oauth_error':
+            errorMessage = `Google OAuth error: ${errorDetails || 'Access denied'}`;
+            break;
+          case 'no_token':
+            errorMessage = 'Google authentication did not return a valid token';
+            break;
+          case 'auth_failed':
+            errorMessage = `Authentication failed: ${errorDetails || 'Invalid credentials'}`;
+            break;
+          case 'callback_failed':
+            errorMessage = `Callback processing failed: ${errorDetails || 'Unknown error'}`;
+            break;
+        }
+        setError(errorMessage);
+        
+        // Clear the error from URL
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.delete('error');
+        newUrl.searchParams.delete('details');
+        window.history.replaceState({}, '', newUrl.toString());
+      }
+    }
+  }, [searchParams]);
+
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setError('');
@@ -51,15 +80,27 @@ function LoginInner() {
     setLoading(true);
     try {
       if (role === 'expert') {
+        // Expert login
         const res = await authApi.practitionerLogin(email, password);
-        if (!res.success || !res.data) { setError(res.message || 'Login failed'); return; }
+
+        if (!res.success || !res.data) {
+          setError(res.message || 'Invalid email or password.');
+          return;
+        }
+
+        // Store expert tokens
         tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
         localStorage.setItem('hc_role', 'practitioner');
-        localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
-        localStorage.setItem('hc_pid', res.data.practitioner.id);
-        localStorage.setItem('hc_practitioner_name', res.data.practitioner.name ?? '');
+        if (res.data.practitioner) {
+          localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
+          localStorage.setItem('hc_pid', res.data.practitioner.id);
+          localStorage.setItem('hc_practitioner_name', res.data.practitioner.name ?? '');
+        }
+        
+        // Redirect to dashboard
         router.push('/expert/dashboard');
       } else {
+        // User login
         const res = await authApi.login({ email, password });
         if (!res.success || !res.data) {
           setError(res.message || 'Login failed');
@@ -105,12 +146,29 @@ function LoginInner() {
     setError('');
     try {
       const cleanPhone = phone.replace(/\s+/g, '');
-      const res = await (authApi as any).requestLoginOtp(cleanPhone, 'user');
-      if (!res.success) {
-        setError(res.message || 'Failed to send OTP.');
-        return;
+      
+      if (role === 'expert') {
+        // Expert OTP login
+        const res = await fetch('/api/auth/astrologer/request-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: cleanPhone }),
+        }).then(r => r.json());
+        
+        if (!res.success) {
+          setError(res.message || 'Failed to send OTP.');
+          return;
+        }
+        router.push(`/verify-otp?phone=${encodeURIComponent(cleanPhone)}&type=login&role=expert`);
+      } else {
+        // User OTP login
+        const res = await (authApi as any).requestLoginOtp(cleanPhone, 'user');
+        if (!res.success) {
+          setError(res.message || 'Failed to send OTP.');
+          return;
+        }
+        router.push(`/verify-otp?phone=${encodeURIComponent(cleanPhone)}&type=login&role=user`);
       }
-      router.push(`/verify-otp?phone=${encodeURIComponent(cleanPhone)}&type=login&role=user`);
     } catch (err: any) {
       setError(err.message || 'Something went wrong sending OTP.');
     } finally {
@@ -141,8 +199,8 @@ function LoginInner() {
 
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
-            <Image src="/logo.png" alt="HealConnect" width={36} height={36} className="rounded-full" />
-            <span className="text-2xl font-extrabold text-white">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={36} height={36} className="rounded-full" />
+            <span className="text-2xl font-extrabold text-white">ZenAuraa</span>
           </Link>
           <h1 className="text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">
             Begin your journey <br /> to inner peace.
@@ -181,8 +239,8 @@ function LoginInner() {
       <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative">
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="HealConnect" width={28} height={28} className="rounded-full" />
-            <span className="text-xl font-extrabold text-[#f59e0b]">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
+            <span className="text-xl font-extrabold text-[#f59e0b]">ZenAuraa</span>
           </Link>
         </div>
 
@@ -213,18 +271,65 @@ function LoginInner() {
             {success && <div className="rounded-lg bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-700">{success}</div>}
 
             {mode === 'login' && (
-              <div className="flex rounded-xl border border-yellow-200 overflow-hidden bg-[#fffbf0] p-1 gap-1 mb-4">
-                <button type="button" onClick={() => { setLoginMethod('password'); setError(''); setSuccess(''); }}
-                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                    loginMethod === 'password' ? 'bg-[#f59e0b] text-white shadow' : 'text-gray-500 hover:text-[#f59e0b]'}`}>
-                  Email & Password
-                </button>
-                <button type="button" onClick={() => { setLoginMethod('otp'); setError(''); setSuccess(''); }}
-                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                    loginMethod === 'otp' ? 'bg-[#f59e0b] text-white shadow' : 'text-gray-500 hover:text-[#f59e0b]'}`}>
-                  Phone & OTP
-                </button>
-              </div>
+              <>
+                {/* User/Expert Toggle - Bold & Prominent */}
+                <div className="space-y-1.5">
+                  <label className="block text-xs font-medium text-gray-500 uppercase tracking-wide">Account Type</label>
+                  <div className="flex rounded-2xl border-2 border-[#f59e0b]/20 overflow-hidden bg-gradient-to-br from-[#fffbf0] to-white p-1.5 gap-2 shadow-sm">
+                    <button
+                      type="button"
+                      onClick={() => setRole('user')}
+                      className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-base font-bold transition-all ${
+                        role === 'user' 
+                          ? 'bg-gradient-to-br from-[#f59e0b] to-[#d97706] text-white shadow-lg scale-[1.02]' 
+                          : 'text-gray-600 hover:text-[#f59e0b] hover:bg-white/50'
+                      }`}
+                    >
+                      {role === 'user' && '✦ '}User
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setRole('expert')}
+                      className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-base font-bold transition-all ${
+                        role === 'expert' 
+                          ? 'bg-gradient-to-br from-[#f59e0b] to-[#d97706] text-white shadow-lg scale-[1.02]' 
+                          : 'text-gray-600 hover:text-[#f59e0b] hover:bg-white/50'
+                      }`}
+                    >
+                      {role === 'expert' && '✦ '}Expert
+                    </button>
+                  </div>
+                </div>
+
+                {/* Email/Phone Toggle - Subtle & Clean */}
+                <div className="space-y-1.5">
+                  <label className="block text-xs font-medium text-gray-500">Login Method</label>
+                  <div className="inline-flex rounded-lg border border-gray-200 overflow-hidden bg-gray-50 p-0.5 gap-0.5">
+                    <button 
+                      type="button" 
+                      onClick={() => { setLoginMethod('password'); setError(''); setSuccess(''); }}
+                      className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
+                        loginMethod === 'password' 
+                          ? 'bg-white text-gray-900 shadow-sm' 
+                          : 'text-gray-500 hover:text-gray-700'
+                      }`}
+                    >
+                      Email
+                    </button>
+                    <button 
+                      type="button" 
+                      onClick={() => { setLoginMethod('otp'); setError(''); setSuccess(''); }}
+                      className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
+                        loginMethod === 'otp' 
+                          ? 'bg-white text-gray-900 shadow-sm' 
+                          : 'text-gray-500 hover:text-gray-700'
+                      }`}
+                    >
+                      Phone
+                    </button>
+                  </div>
+                </div>
+              </>
             )}
 
             {mode === 'login' && loginMethod === 'password' && (
@@ -313,13 +418,6 @@ function LoginInner() {
                   Don&apos;t have an account?{' '}
                   <Link href="/signup" className="text-[#f59e0b] font-semibold hover:underline">Sign up</Link>
                 </p>
-                
-                <div className="mt-4 pt-4 border-t border-yellow-100">
-                  <p className="text-center text-sm font-medium text-gray-600">
-                    Are you a wellness practitioner?{' '}
-                    <Link href="/astrologer/login" className="text-[#f59e0b] font-bold hover:underline">Log in here</Link>
-                  </p>
-                </div>
               </>
             )}
           </CardContent>

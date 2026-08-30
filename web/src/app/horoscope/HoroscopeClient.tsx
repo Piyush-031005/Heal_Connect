@@ -577,11 +577,11 @@ const BENEFITS = [
 const FAQS = [
   { q: 'What is a daily horoscope?', a: 'A daily horoscope is an astrological forecast based on the current positions of the Sun, Moon, and other planets, calculated to see how their energies interact with each of the 12 zodiac signs.' },
   { q: 'How accurate are horoscope predictions?', a: 'General daily horoscopes provide overall thematic trends. For highly precise personal predictions, we recommend getting a personalized Kundli Analysis from a verified expert based on your exact birth time and location.' },
-  { q: 'How are HealConnect horoscopes generated?', a: 'HealConnect combines classical Vedic and Western astrology rules with intelligent planetary transit analysis to produce highly accurate and encouraging wellness predictions daily.' },
+  { q: 'How are ZenAuraa horoscopes generated?', a: 'ZenAuraa combines classical Vedic and Western astrology rules with intelligent planetary transit analysis to produce highly accurate and encouraging wellness predictions daily.' },
   { q: 'Can horoscopes predict the future?', a: 'Horoscopes do not predict absolute events; instead, they map out the energetic currents and timings, allowing you to make conscious, empowered decisions.' },
   { q: 'Which zodiac sign am I?', a: 'Your zodiac sign is determined by the date range of your birth. For example, if you were born on April 15th, you are an Aries.' },
   { q: 'How often are horoscopes updated?', a: 'All daily horoscopes, affirmations, and lucky insights are updated automatically every day at 12:00 AM local time.' },
-  { q: 'Does HealConnect provide AI guidance?', a: 'Yes! HealConnect features an intelligent AI Wellness Companion designed to support you with emotional check-ins, mindful journaling, and personalized growth insights.' },
+  { q: 'Does ZenAuraa provide AI guidance?', a: 'Yes! ZenAuraa features an intelligent AI Wellness Companion designed to support you with emotional check-ins, mindful journaling, and personalized growth insights.' },
   { q: 'Are consultations private?', a: 'Absolutely. All chats, calls, and session histories with our verified experts or the AI companion are 100% private, encrypted, and secure.' }
 ];
 
@@ -1008,7 +1008,7 @@ export default function HoroscopePage() {
           </div>
           <div className="flex-1 text-center md:text-left space-y-1">
             <h3 className="text-xl font-extrabold text-gray-900">Need Personalized Guidance?</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">Continue your wellness journey with HealConnect AI for emotional support, journaling, and personalized insights.</p>
+            <p className="text-sm text-gray-600 leading-relaxed">Continue your wellness journey with ZenAuraa AI for emotional support, journaling, and personalized insights.</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
             <Link href="/" className="flex-grow md:flex-grow-0">
@@ -1109,7 +1109,7 @@ export default function HoroscopePage() {
           </div>
         </section>
 
-        {/* ═══ 11. About HealConnect Section ═══ */}
+        {/* ═══ 11. About ZenAuraa Section ═══ */}
         <section className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-amber-50 via-amber-50/20 to-white border border-amber-100 p-6 md:p-10 shadow-sm">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             
@@ -1122,15 +1122,15 @@ export default function HoroscopePage() {
               />
             </div>
 
-            {/* Right Side: HealConnect Info */}
+            {/* Right Side: ZenAuraa Info */}
             <div className="space-y-6">
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1">About HealConnect</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1">About ZenAuraa</p>
                 <h2 className="text-3xl font-extrabold text-gray-900 leading-tight">Your Trusted AI-Powered Wellness Companion</h2>
               </div>
               
               <p className="text-sm text-gray-600 leading-relaxed">
-                HealConnect is your trusted AI-powered wellness companion designed to support every stage of your life journey. We combine trusted astrologers, AI-powered emotional guidance, personalized journaling, mindfulness tools, and holistic wellness resources into one seamless platform.
+                ZenAuraa is your trusted AI-powered wellness companion designed to support every stage of your life journey. We combine trusted astrologers, AI-powered emotional guidance, personalized journaling, mindfulness tools, and holistic wellness resources into one seamless platform.
               </p>
               
               {/* Highlight Checkmarks */}
@@ -1174,8 +1174,8 @@ export default function HoroscopePage() {
             {/* Brand */}
             <div className="w-full lg:w-72 text-center lg:text-left">
               <div className="flex items-center gap-2 mb-4 justify-center lg:justify-start">
-                <Image src="/logo.png" alt="HealConnect" width={28} height={28} className="rounded-full" />
-                <span className="text-lg font-extrabold text-amber-600">HealConnect</span>
+                <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
+                <span className="text-lg font-extrabold text-amber-600">ZenAuraa</span>
               </div>
               <p className="text-xs text-gray-500 leading-relaxed mb-4">
                 Your trusted companion for mental peace, emotional guidance, and classical astrology wellness.
@@ -1198,7 +1198,7 @@ export default function HoroscopePage() {
                   links: ['Astrology Blog', 'Help Center', 'Privacy Policy']
                 },
                 {
-                  title: 'HealConnect',
+                  title: 'ZenAuraa',
                   links: ['About Us', 'Contact Support', 'Careers']
                 }
               ].map((col) => (
@@ -1218,7 +1218,7 @@ export default function HoroscopePage() {
 
           {/* Bottom Copyright */}
           <div className="border-t border-amber-200 pt-6 text-center text-xs text-gray-500">
-            <p>&copy; {new Date().getFullYear()} HealConnect. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} ZenAuraa. All rights reserved.</p>
           </div>
         </div>
       </footer>

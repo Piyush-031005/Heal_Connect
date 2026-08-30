@@ -214,6 +214,7 @@ router.get('/:id', async (req: Request, res: Response) => {
         id: true, name: true, bio: true, specialties: true, languages: true,
         certifications: true, experienceYrs: true, perMinuteRate: true,
         photoUrl: true, isVerified: true, isOnline: true, isBusy: true, email: true, phone: true,
+        schedulingEnabled: true,
         // Denormalized, transactionally-accurate stats maintained over ALL
         // reviews (see routes/reviews.ts) — used directly instead of being
         // recomputed from the capped list below, which previously caused

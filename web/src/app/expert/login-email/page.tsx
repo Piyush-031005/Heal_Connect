@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Loader2, Eye, EyeOff } from 'lucide-react';
-import { astrologerTokenStore } from '@/lib/api';
+import { authApi, tokenStore } from '@/lib/api';
 
 export default function ExpertLoginEmailPage() {
   const router = useRouter();
@@ -21,20 +21,20 @@ export default function ExpertLoginEmailPage() {
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('/api/auth/astrologer/login-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: form.email, password: form.password }),
-      }).then(r => r.json());
-
-      if (!res.success) {
+      const res = await authApi.practitionerLogin(form.email, form.password);
+      
+      if (!res.success || !res.data) {
         setError(res.message || 'Login failed.');
         return;
       }
 
-      astrologerTokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-      if (res.data.astrologer) astrologerTokenStore.setProfile(res.data.astrologer);
-      router.push(res.data.redirect || '/astrologer/onboarding');
+      tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+      localStorage.setItem('hc_role', 'practitioner');
+      localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
+      localStorage.setItem('hc_pid', res.data.practitioner.id);
+      localStorage.setItem('hc_practitioner_name', res.data.practitioner.name ?? '');
+      
+      router.push('/expert/dashboard');
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -50,8 +50,8 @@ export default function ExpertLoginEmailPage() {
         <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
-            <Image src="/logo.png" alt="HealConnect" width={36} height={36} className="rounded-full" />
-            <span className="text-2xl font-extrabold text-white">HealConnect</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={36} height={36} className="rounded-full" />
+            <span className="text-2xl font-extrabold text-white">ZenAuraa</span>
           </Link>
           <h1 className="text-4xl font-extrabold text-white mb-4 leading-tight">Welcome back,<br />Practitioner</h1>
           <p className="text-amber-100/80 text-sm leading-relaxed mt-4 max-w-xs">
@@ -59,14 +59,14 @@ export default function ExpertLoginEmailPage() {
           </p>
         </div>
         <div className="relative z-10 border-t border-white/20 pt-6">
-          <p className="text-amber-100/60 text-xs">© 2026 HealConnect. All rights reserved.</p>
+          <p className="text-amber-100/60 text-xs">© 2026 ZenAuraa. All rights reserved.</p>
         </div>
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-12">
         <div className="flex items-center gap-2 mb-8 md:hidden">
-          <Image src="/logo.png" alt="HealConnect" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-amber-500">HealConnect</span>
+          <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+          <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
         </div>
 
         <div className="w-full max-w-md">

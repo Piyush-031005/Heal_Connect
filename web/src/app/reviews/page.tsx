@@ -5,7 +5,7 @@ import ReviewsClient from './ReviewsClient';
 export const metadata: Metadata = buildMetadata({
   title: 'Client Reviews & Testimonials',
   description:
-    'Read real reviews from HealConnect clients about their sessions with our astrologers, energy healers, and wellness experts.',
+    'Read real reviews from ZenAuraa clients about their sessions with our astrologers, energy healers, and wellness experts.',
   path: '/reviews',
 });
 

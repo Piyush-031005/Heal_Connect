@@ -1,7 +1,7 @@
 'use client';
 
 import Lottie from 'lottie-react';
-import animationData from '../../public/HealConnect.json';
+import animationData from '../../public/Zenauraa.json';
 
 export default function HeroAnimation() {
   return (

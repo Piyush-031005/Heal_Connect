@@ -1,5 +1,5 @@
 /**
- * Safety guidelines and content policy for HealConnect.
+ * Safety guidelines and content policy for ZenAuraa.
  *
  * These texts are returned to the client when initiating sessions and chats
  * so the frontend can display them before the call/chat begins.
@@ -19,19 +19,19 @@ export interface SafetyGuidelines {
  * Guidelines shown to users before starting any session (call or chat).
  */
 export const SESSION_SAFETY_GUIDELINES: SafetyGuidelines = {
-  title: 'HealConnect Community Safety Guidelines',
+  title: 'ZenAuraa Community Safety Guidelines',
   version: '1.0',
   disclaimer:
-    'HealConnect connects you with wellness practitioners for general guidance and support. ' +
+    'ZenAuraa connects you with wellness practitioners for general guidance and support. ' +
     'Sessions on this platform are NOT a substitute for emergency medical care, crisis intervention, ' +
     'or licensed clinical therapy. Practitioners cannot prescribe medication or provide diagnoses.',
   rules: [
     'Do not share personal contact information (phone numbers, email, social media) during sessions. ' +
-      'All communication must remain on the HealConnect platform.',
+      'All communication must remain on the ZenAuraa platform.',
     'Treat all participants with respect. Harassment, hate speech, or threatening language is strictly prohibited.',
     'Do not record sessions without the express consent of all participants.',
     'Practitioners provide wellness guidance only — they are not crisis counselors.',
-    'HealConnect monitors sessions for safety policy violations and may flag content for human review.',
+    'ZenAuraa monitors sessions for safety policy violations and may flag content for human review.',
   ],
   emergencyNote:
     'If you or someone you know is in immediate danger or experiencing a mental health crisis, ' +
@@ -43,7 +43,7 @@ export const SESSION_SAFETY_GUIDELINES: SafetyGuidelines = {
  * Frontend should display this before the user enters the call/chat room.
  */
 export const SESSION_DISCLAIMER =
-  'By joining this session you agree to HealConnect\'s Community Safety Guidelines. ' +
+  'By joining this session you agree to ZenAuraa\'s Community Safety Guidelines. ' +
   'Do not share phone numbers or personal contact details in-session. ' +
   'This platform is for wellness support only — not emergency care.';
 

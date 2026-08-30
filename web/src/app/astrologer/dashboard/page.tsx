@@ -14,12 +14,12 @@ export default function AstrologerDashboardPage() {
 
   useEffect(() => {
     const token = astrologerTokenStore.getAccess();
-    if (!token) { router.replace('/astrologer/login'); return; }
+    if (!token) { router.replace('/login'); return; }
 
     astrologerApi.getDashboard(token).then((res) => {
       if (res.success && res.data) setProfile(res.data.dashboard);
-      else router.replace('/astrologer/login');
-    }).catch(() => router.replace('/astrologer/login'))
+      else router.replace('/login');
+    }).catch(() => router.replace('/login'))
       .finally(() => setLoading(false));
   }, [router]);
 
@@ -34,7 +34,7 @@ export default function AstrologerDashboardPage() {
 
   const handleLogout = () => {
     astrologerTokenStore.clear();
-    router.replace('/astrologer/login');
+    router.replace('/login');
   };
 
   if (loading) {

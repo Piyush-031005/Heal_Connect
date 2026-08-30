@@ -526,7 +526,7 @@ export default function BlogPage() {
           <div className="max-w-xl mx-auto space-y-3 relative z-10">
             <Mail className="w-10 h-10 mx-auto text-yellow-200 animate-bounce" />
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">Never Miss an Astrology Update</h2>
-            <p className="text-white/90 text-xs md:text-sm font-medium">Subscribe to HealConnect daily astrological forecast newsletter and receive planetary transit guides directly in your inbox.</p>
+            <p className="text-white/90 text-xs md:text-sm font-medium">Subscribe to ZenAuraa daily astrological forecast newsletter and receive planetary transit guides directly in your inbox.</p>
           </div>
 
           <div className="max-w-md mx-auto relative z-10">
@@ -623,7 +623,7 @@ export default function BlogPage() {
       {/* ══ FOOTER ══ */}
       <footer className="bg-gradient-to-b from-amber-50 to-yellow-50 text-gray-700 pt-12 pb-6 border-t border-amber-100 mt-16">
         <div className="container mx-auto px-4 max-w-6xl text-center text-xs text-gray-500">
-          <p>&copy; {new Date().getFullYear()} HealConnect Blog. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} ZenAuraa Blog. All rights reserved.</p>
         </div>
       </footer>
     </div>
