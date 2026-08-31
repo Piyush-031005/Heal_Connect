@@ -18,16 +18,36 @@ const BACKEND = process.env['BACKEND_URL'] ?? process.env['NEXT_PUBLIC_API_URL']
 
 export async function GET(req: NextRequest) {
   const token = req.cookies.get(SESSION_COOKIE)?.value;
-  const identity = decodeSessionToken(token);
-  if (!identity) {
+  if (!token) {
     return NextResponse.json({ authenticated: false });
   }
-  return NextResponse.json({
-    authenticated: true,
-    email: identity.email,
-    role: identity.role,
-    id: identity.id,
-  });
+
+  // Proxy to backend to verify the token, avoiding any secret mismatch issues between frontend/backend
+  try {
+    const backendRes = await fetch(`${BACKEND}/api/admin-auth/me`, {
+      headers: {
+        'Cookie': `${SESSION_COOKIE}=${token}`
+      }
+    });
+    
+    if (!backendRes.ok) {
+      return NextResponse.json({ authenticated: false });
+    }
+    
+    const data = await backendRes.json();
+    if (data.success && data.data) {
+      return NextResponse.json({
+        authenticated: true,
+        email: data.data.email,
+        role: data.data.role,
+        id: data.data.id,
+      });
+    }
+  } catch (err) {
+    console.error('Failed to verify session with backend:', err);
+  }
+
+  return NextResponse.json({ authenticated: false });
 }
 
 export async function POST(req: NextRequest) {
