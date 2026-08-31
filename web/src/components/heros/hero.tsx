@@ -680,7 +680,7 @@ function Layout2Hero() {
         className="absolute top-20 left-1/2 -translate-x-1/2 w-full text-center z-0 pointer-events-none select-none opacity-10 mix-blend-overlay"
       >
         <h1 className="text-[15vw] font-serif font-bold tracking-tighter text-primary leading-none whitespace-nowrap">
-          ZENAURAA
+          ZenAuraa
         </h1>
       </motion.div>
 
@@ -918,9 +918,9 @@ function FinalHybridHero() {
                   { img: '/final_ensights/tarot.png',            label: 'Tarot',         id: 'tarot' },
                   { img: '/12-modalities-updates/facereading.png',      label: 'Face Reading',  id: 'face-reading' },
                   { img: '/12-modalities-updates/plamreading.png',      label: 'Palm Reading',  id: 'palm-reading' },
-                  { img: '/final_ensights/sound healing.png',            label: 'Sound Healing', id: 'sound-healing' },
-                  { img: '/12-modalities-updates/medidation.png',       label: 'Meditation',    id: 'meditation' },
-                  { img: '/final_ensights/spiritual  guidance.png',        label: 'Spiritual',     id: 'spiritual' },
+                  { img: '/final_ensights/sound-healing.png',            label: 'Sound Healing', id: 'sound-healing' },
+                  { img: '/12-modalities-updates/meditation.png',       label: 'Meditation',    id: 'meditation' },
+                  { img: '/final_ensights/spiritual-guidance.png',        label: 'Spiritual',     id: 'spiritual' },
                   { img: '/12-modalities-updates/chakrahealing.png',    label: 'Chakra',        id: 'chakra-healing' },
                   { img: '/final_ensights/breathwork.png',       label: 'Breathwork',    id: 'breathwork' },
                   { img: '/12-modalities-updates/dream_prediction.png', label: 'Dreams',        id: 'dreams' },
@@ -1047,9 +1047,9 @@ function FinalHybridHero() {
                   { img: '/final_ensights/tarot.png',            label: 'Tarot',         id: 'tarot' },
                   { img: '/12-modalities-updates/facereading.png',      label: 'Face Reading',  id: 'face-reading' },
                   { img: '/12-modalities-updates/plamreading.png',      label: 'Palm Reading',  id: 'palm-reading' },
-                  { img: '/final_ensights/sound healing.png',            label: 'Sound Healing', id: 'sound-healing' },
-                  { img: '/12-modalities-updates/medidation.png',       label: 'Meditation',    id: 'meditation' },
-                  { img: '/final_ensights/spiritual  guidance.png',        label: 'Spiritual',     id: 'spiritual' },
+                  { img: '/final_ensights/sound-healing.png',            label: 'Sound Healing', id: 'sound-healing' },
+                  { img: '/12-modalities-updates/meditation.png',       label: 'Meditation',    id: 'meditation' },
+                  { img: '/final_ensights/spiritual-guidance.png',        label: 'Spiritual',     id: 'spiritual' },
                   { img: '/12-modalities-updates/chakrahealing.png',    label: 'Chakra',        id: 'chakra-healing' },
                   { img: '/final_ensights/breathwork.png',       label: 'Breathwork',    id: 'breathwork' },
                   { img: '/12-modalities-updates/dream_prediction.png', label: 'Dreams',        id: 'dreams' },

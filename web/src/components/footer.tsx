@@ -20,7 +20,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="text-center text-muted-foreground text-sm border-t border-border pt-8">
-          &copy; {new Date().getFullYear()} Zenauraa Wellness. All rights reserved.
+          &copy; {new Date().getFullYear()} ZenAuraa Wellness. All rights reserved.
         </div>
       </div>
     </footer>

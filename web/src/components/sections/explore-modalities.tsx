@@ -22,15 +22,15 @@ import { useTheme } from 'next-themes';
 const MODALITIES = [
   { id: 'astrology', name: 'Astrology', desc: 'Gain cosmic insights and life path guidance.', image: '/final_ensights/astrology.png' },
   { id: 'tarot', name: 'Tarot', desc: 'Unveil hidden truths through symbolic cards.', image: '/final_ensights/tarot.png' },
-  { id: 'face-reading', name: 'Face Reading', desc: 'Understand personality and health markers.', image: '/final_ensights/face reading.png' },
-  { id: 'palm-reading', name: 'Palm Reading', desc: 'Discover destiny written in your hands.', image: '/final_ensights/palm reading.png' },
-  { id: 'sound-healing', name: 'Sound Healing', desc: 'Harmonize your body with therapeutic frequencies.', image: '/final_ensights/sound healing.png' },
-  { id: 'meditation', name: 'Meditation', desc: 'Cultivate mindfulness and inner peace.', image: '/final_ensights/medidation.png' },
-  { id: 'spiritual', name: 'Spiritual Guidance', desc: 'Connect with higher purpose and wisdom.', image: '/final_ensights/spiritual  guidance.png' },
-  { id: 'chakra-healing', name: 'Chakra Healing', desc: 'Restore balance and clear energy blockages.', image: '/final_ensights/chakra healing.png' },
+  { id: 'face-reading', name: 'Face Reading', desc: 'Understand personality and health markers.', image: '/final_ensights/face-reading.png' },
+  { id: 'palm-reading', name: 'Palm Reading', desc: 'Discover destiny written in your hands.', image: '/final_ensights/palm-reading.png' },
+  { id: 'sound-healing', name: 'Sound Healing', desc: 'Harmonize your body with therapeutic frequencies.', image: '/final_ensights/sound-healing.png' },
+  { id: 'meditation', name: 'Meditation', desc: 'Cultivate mindfulness and inner peace.', image: '/final_ensights/meditation.png' },
+  { id: 'spiritual', name: 'Spiritual Guidance', desc: 'Connect with higher purpose and wisdom.', image: '/final_ensights/spiritual-guidance.png' },
+  { id: 'chakra-healing', name: 'Chakra Healing', desc: 'Restore balance and clear energy blockages.', image: '/final_ensights/chakra-healing.png' },
   { id: 'breathwork', name: 'Breathwork', desc: 'Align mind, body, and spirit through mindful breathing.', image: '/final_ensights/breathwork.png' },
-  { id: 'dreams', name: 'Dream Prediction', desc: 'Unlock the power of your subconscious dreams.', image: '/final_ensights/dream interpretetion.png' },
-  { id: 'space-harmony', name: 'Space Harmony', desc: 'Harmonize your living and working spaces.', image: '/final_ensights/space harmony.png' },
+  { id: 'dreams', name: 'Dream Prediction', desc: 'Unlock the power of your subconscious dreams.', image: '/final_ensights/dream-interpretation.png' },
+  { id: 'space-harmony', name: 'Space Harmony', desc: 'Harmonize your living and working spaces.', image: '/final_ensights/space-harmony.png' },
   { id: 'numerology', name: 'Numerology', desc: 'Uncover the hidden vibrations of numbers.', image: '/final_ensights/numerology.png' },
 ];
 

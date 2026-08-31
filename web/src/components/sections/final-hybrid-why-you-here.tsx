@@ -66,7 +66,7 @@ export function FinalHybridWhyYouHere() {
           <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#B79AE6]">What Brings You Here</span>
         </div>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#F8F7FA] mb-2">What Are You Seeking?</h2>
-        <p className="text-[#B79AE6] text-sm font-bold max-w-lg">Every star is a question someone asked. Hover to explore what Zenauraa can answer for you. Drag to navigate.</p>
+        <p className="text-[#B79AE6] text-sm font-bold max-w-lg">Every star is a question someone asked. Hover to explore what ZenAuraa can answer for you. Drag to navigate.</p>
       </div>
 
       <div className="container mx-auto px-6 lg:px-16 z-10 flex gap-5 flex-wrap mb-4">

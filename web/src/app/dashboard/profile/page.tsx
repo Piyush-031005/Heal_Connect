@@ -86,7 +86,7 @@ export default function ProfilePage() {
     return (
       <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <Image src="/logo.png" alt="Zenauraa" width={48} height={48} className="rounded-full animate-pulse" />
+          <Image src="/logo.png" alt="ZenAuraa" width={48} height={48} className="rounded-full animate-pulse" />
           <p className="text-gray-500">Loading profile...</p>
         </div>
       </div>
@@ -102,8 +102,8 @@ export default function ProfilePage() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-2 text-gray-500 hover:text-purple-400 transition-colors">
             <ArrowLeft className="h-4 w-4" />
-            <Image src="/logo.png" alt="Zenauraa" width={28} height={28} className="rounded-full" />
-            <span className="font-extrabold text-purple-400">Zenauraa</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
+            <span className="font-extrabold text-purple-400">ZenAuraa</span>
           </Link>
           <div className="text-sm font-semibold text-gray-600">My Profile</div>
         </div>

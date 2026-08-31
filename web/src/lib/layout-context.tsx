@@ -12,12 +12,12 @@ interface LayoutContextType {
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
-  const [layout, setLayoutState] = useState<LayoutMode>('final-hybrid');
+  const [layout, setLayoutState] = useState<LayoutMode>('layout-9');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const stored = localStorage.getItem('hc_layout') as LayoutMode;
+    const stored = localStorage.getItem('hc_layout_v2') as LayoutMode;
     if (stored) {
       setLayoutState(stored);
     }
@@ -25,11 +25,11 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
 
   const setLayout = (mode: LayoutMode) => {
     setLayoutState(mode);
-    localStorage.setItem('hc_layout', mode);
+    localStorage.setItem('hc_layout_v2', mode);
   };
 
   return (
-    <LayoutContext.Provider value={{ layout: mounted ? layout : 'final-hybrid', setLayout }}>
+    <LayoutContext.Provider value={{ layout: mounted ? layout : 'layout-9', setLayout }}>
       {children}
     </LayoutContext.Provider>
   );

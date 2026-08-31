@@ -171,8 +171,8 @@ export default function PractitionerDetailPage() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <button onClick={() => router.back()} className="flex items-center gap-2 text-gray-600 hover:text-[#f59e0b] transition-colors group bg-transparent border-none cursor-pointer">
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            <Image src="/logo.png" alt="Zenauraa" width={28} height={28} className="rounded-full shadow-sm" />
-            <span className="font-extrabold text-[#f59e0b] tracking-tight">Zenauraa</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full shadow-sm" />
+            <span className="font-extrabold text-[#f59e0b] tracking-tight">ZenAuraa</span>
           </button>
         </div>
       </header>

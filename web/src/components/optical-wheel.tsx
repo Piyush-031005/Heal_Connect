@@ -7,15 +7,15 @@ import { useLayout } from '@/lib/layout-context';
 const MODALITIES = [
   { id: 'astrology',      name: 'Astrology',        image: '/final_ensights/astrology.png' },
   { id: 'tarot',          name: 'Tarot',            image: '/final_ensights/tarot.png' },
-  { id: 'face-reading',   name: 'Face Reading',     image: '/final_ensights/face reading.png' },
-  { id: 'palm-reading',   name: 'Palm Reading',     image: '/final_ensights/palm reading.png' },
-  { id: 'sound-healing',  name: 'Sound Healing',    image: '/final_ensights/sound healing.png' },
-  { id: 'meditation',     name: 'Meditation',       image: '/final_ensights/medidation.png' },
-  { id: 'spiritual',      name: 'Spiritual',        image: '/final_ensights/spiritual  guidance.png' },
-  { id: 'chakra-healing', name: 'Chakra Healing',   image: '/final_ensights/chakra healing.png' },
+  { id: 'face-reading',   name: 'Face Reading',     image: '/final_ensights/face-reading.png' },
+  { id: 'palm-reading',   name: 'Palm Reading',     image: '/final_ensights/palm-reading.png' },
+  { id: 'sound-healing',  name: 'Sound Healing',    image: '/final_ensights/sound-healing.png' },
+  { id: 'meditation',     name: 'Meditation',       image: '/final_ensights/meditation.png' },
+  { id: 'spiritual',      name: 'Spiritual',        image: '/final_ensights/spiritual-guidance.png' },
+  { id: 'chakra-healing', name: 'Chakra Healing',   image: '/final_ensights/chakra-healing.png' },
   { id: 'breathwork',     name: 'Breathwork',       image: '/final_ensights/breathwork.png' },
-  { id: 'dreams',         name: 'Dream Predict',    image: '/final_ensights/dream interpretetion.png' },
-  { id: 'space-harmony',  name: 'Space Harmony',    image: '/final_ensights/space harmony.png' },
+  { id: 'dreams',         name: 'Dream Predict',    image: '/final_ensights/dream-interpretation.png' },
+  { id: 'space-harmony',  name: 'Space Harmony',    image: '/final_ensights/space-harmony.png' },
   { id: 'numerology',     name: 'Numerology',       image: '/final_ensights/numerology.png' },
 ];
 

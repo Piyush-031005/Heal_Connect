@@ -53,8 +53,8 @@ function PendingContent() {
     <Card className="w-full max-w-md bg-white border border-yellow-100 shadow-xl">
       <CardHeader className="space-y-3 pb-4">
         <div className="flex items-center gap-2 mb-1">
-          <Image src="/logo.png" alt="Zenauraa" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-[#f59e0b]">Zenauraa</span>
+          <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+          <span className="text-xl font-extrabold text-[#f59e0b]">ZenAuraa</span>
         </div>
 
         {/* Envelope icon */}
@@ -77,7 +77,7 @@ function PendingContent() {
         {/* Steps */}
         <ol className="space-y-3 text-sm text-gray-600">
           {[
-            'Open the email from Zenauraa.',
+            'Open the email from ZenAuraa.',
             'Click the "Verify Email" button in the email.',
             'You\'ll be redirected to the login page.',
           ].map((step, i) => (

@@ -37,7 +37,7 @@ export const ZODIAC_SIGNS = [
 ];
 
 export const TESTIMONIALS = [
-  { name: 'Amar Thakur', loc: 'Pune · India', text: 'This app helped me to get a job in my dream company. I was stressed about not getting a career opportunity after my graduation. One prediction from an astrologer gave me a ray of hope and within a few months, I had a job offer in hand. Thank you so much Zenauraa for helping me out.' },
+  { name: 'Amar Thakur', loc: 'Pune · India', text: 'This app helped me to get a job in my dream company. I was stressed about not getting a career opportunity after my graduation. One prediction from an astrologer gave me a ray of hope and within a few months, I had a job offer in hand. Thank you so much ZenAuraa for helping me out.' },
   { name: 'Sneha Patel', loc: 'Mumbai · India', text: 'I was going through a tough phase in my marriage. The tarot reading session gave me clarity and helped me understand my partner better. Highly recommend!' },
   { name: 'Rahul Verma', loc: 'Delhi · India', text: 'The Kundli matching feature helped me find the perfect match for my son. The astrologers were very detailed and professional in their analysis.' },
   { name: 'Priya Sharma', loc: 'Bangalore · India', text: 'My career horoscope reading was spot on. I got the guidance I needed to make a major career transition. The astrologer understood my situation perfectly and gave me actionable advice.' },

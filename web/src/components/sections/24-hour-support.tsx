@@ -22,7 +22,7 @@ export function FinalHybridSupport() {
           <div className="lg:w-1/2">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-8 h-[2px] bg-[#B79AE6]" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#B79AE6]">The Zenauraa App</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#B79AE6]">The ZenAuraa App</span>
             </div>
             
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-[#F8F7FA] mb-6 leading-tight drop-shadow-md">

@@ -142,7 +142,7 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <Image src="/logo.png" alt="Zenauraa" width={48} height={48} className="rounded-full animate-pulse" />
+          <Image src="/logo.png" alt="ZenAuraa" width={48} height={48} className="rounded-full animate-pulse" />
           <p className="text-muted-foreground">Loading your dashboard...</p>
         </div>
       </div>
@@ -158,8 +158,8 @@ export default function DashboardPage() {
       <header className="sticky top-0 z-50 w-full border-b border-amber-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="Zenauraa" width={32} height={32} className="rounded-full" />
-            <span className="text-xl font-extrabold text-purple-400">Zenauraa</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+            <span className="text-xl font-extrabold text-purple-400">ZenAuraa</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-2 flex-1 max-w-md mx-8">
