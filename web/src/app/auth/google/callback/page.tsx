@@ -60,6 +60,9 @@ function GoogleCallbackInner() {
           localStorage.setItem('hc_role', 'practitioner');
           localStorage.setItem('hc_practitioner_id', res.data.user.id);
           localStorage.setItem('hc_pid', res.data.user.id);
+          localStorage.setItem('hc_practitioner_name', res.data.user.name ?? '');
+          localStorage.setItem('hc_practitioner_id', res.data.user.id);
+          localStorage.setItem('hc_pid', res.data.user.id);
           localStorage.setItem('hc_practitioner_name', res.data.user.name || '');
           router.push('/expert/dashboard');
         } else {
