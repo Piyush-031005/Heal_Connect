@@ -78,10 +78,12 @@ export async function POST(req: NextRequest) {
   // technique the /mfa route uses. Without this the browser gets no cookie at
   // all and every subsequent request looks unauthenticated.
   if (!data.mfaRequired) {
-    const setCookie = backendRes.headers.get('set-cookie');
+    const setCookies = backendRes.headers.getSetCookie();
     const nextRes = NextResponse.json({ success: true, mfaRequired: false, mfaSetupRequired: false });
-    if (setCookie) {
-      nextRes.headers.set('set-cookie', setCookie);
+    if (setCookies.length > 0) {
+      for (const c of setCookies) {
+        nextRes.headers.append('set-cookie', c);
+      }
     } else {
       console.error('Admin login: backend did not return a Set-Cookie header for the no-MFA path');
     }

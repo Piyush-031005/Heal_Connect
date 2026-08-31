@@ -66,10 +66,10 @@ export async function POST(req: NextRequest) {
 
   // Backend set its own hc_admin_session cookie — relay the Set-Cookie header
   // so the browser also gets it for this (Next.js) domain if they differ.
-  const setCookie = backendRes.headers.get('set-cookie');
+  const setCookies = backendRes.headers.getSetCookie();
   const nextRes = NextResponse.json({ success: true });
-  if (setCookie) {
-    nextRes.headers.set('set-cookie', setCookie);
+  for (const c of setCookies) {
+    nextRes.headers.append('set-cookie', c);
   }
   return nextRes;
 }
