@@ -27,7 +27,7 @@ const NAV_ITEMS = [
   { label: 'Analytics',       href: '/admin/analytics',      icon: BarChart3 },
   { label: 'Settings',        href: '/admin/settings',       icon: Settings },
 ];
-
+  
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();

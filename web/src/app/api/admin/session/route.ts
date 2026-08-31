@@ -79,15 +79,28 @@ export async function POST(req: NextRequest) {
   // all and every subsequent request looks unauthenticated.
   if (!data.mfaRequired) {
     const setCookies = backendRes.headers.getSetCookie();
-    const nextRes = NextResponse.json({ success: true, mfaRequired: false, mfaSetupRequired: false });
-    if (setCookies.length > 0) {
-      for (const c of setCookies) {
-        nextRes.headers.append('set-cookie', c);
+    let sessionToken = '';
+    for (const c of setCookies) {
+      const match = c.match(/(?:^|;\s*)hc_admin_session=([^;]+)/);
+      if (match) {
+        sessionToken = match[1];
+        break;
       }
+    }
+    
+    if (sessionToken) {
+      const { cookies } = await import('next/headers');
+      cookies().set(SESSION_COOKIE, sessionToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        path: '/',
+        maxAge: SESSION_TTL_MS / 1000,
+      });
     } else {
       console.error('Admin login: backend did not return a Set-Cookie header for the no-MFA path');
     }
-    return nextRes;
+    return NextResponse.json({ success: true, mfaRequired: false, mfaSetupRequired: false });
   }
 
   // MFA step required — return loginToken to the client (no cookie yet)
