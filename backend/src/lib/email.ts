@@ -4,7 +4,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
 
 const FROM_EMAIL   = process.env.SENDGRID_FROM_EMAIL || 'noreply@Zenauraa.app';
 const FROM_NAME    = process.env.SENDGRID_FROM_NAME  || 'Zenauraa';
-const FRONTEND_URL = process.env.FRONTEND_URL        || 'https://blue-plant-0d21bc900.7.azurestaticapps.net';
+const FRONTEND_URL = process.env.FRONTEND_URL        || 'https://healconnect-frontend-f2dfc3gfe9bsa4hv.centralindia-01.azurewebsites.net';
 const APP_URL      = process.env.APP_URL             || FRONTEND_URL;
 
 // ─── Shared layout helpers ────────────────────────────────────────────────────
