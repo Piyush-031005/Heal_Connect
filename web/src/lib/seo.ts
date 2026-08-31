@@ -76,7 +76,7 @@ export function buildMetadata({
  * next.config.mjs's rewrites() so local dev and Azure builds stay consistent.
  */
 export function getApiBaseUrl(): string {
-  return process.env.NEXT_PUBLIC_API_URL || process.env.BACKEND_URL || 'http://localhost:8080';
+  return process.env.BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || 'http://backend:8082';
 }
 
 /** Truncate long free-text content down to a clean meta description length. */

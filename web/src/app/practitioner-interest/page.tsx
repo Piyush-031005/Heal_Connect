@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { ChevronRight, ChevronLeft, CheckCircle2, Sparkles } from 'lucide-react';
+import { contactApi } from '@/lib/api';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -333,10 +334,40 @@ export default function PractitionerInterestPage() {
     if (err) { setError(err); return; }
     setError('');
     setSubmitting(true);
-    // TODO: wire to backend API
-    await new Promise(r => setTimeout(r, 1000));
-    setSubmitting(false);
-    setSubmitted(true);
+    try {
+      const summary = [
+        `Business/professional name: ${form.businessName || '—'}`,
+        `Location: ${form.location}`,
+        `Website/social: ${form.website || '—'}`,
+        `Practice areas: ${form.selectedAreas.join(', ') || '—'}${form.otherPractice ? ` (other: ${form.otherPractice})` : ''}`,
+        `Main area: ${form.mainArea}`,
+        `Experience: ${form.experience}`,
+        `How expertise was developed: ${form.expertiseDevelopment}`,
+        `Offerings: ${form.offerings.join(', ')}`,
+        `Practice bio: ${form.practiceBio}`,
+        `Why ZenAuraa: ${form.whyZenAuraa}`,
+        `Anything else: ${form.anythingElse || '—'}`,
+        `Comfortable with verification: ${form.verificationComfort}`,
+      ].join('\n');
+
+      const res = await contactApi.submit({
+        name: form.fullName,
+        email: form.email,
+        subject: 'Practitioner Application — ZenAuraa',
+        message: summary,
+      });
+
+      if (res.success) {
+        setSubmitted(true);
+      } else {
+        setError(res.message || 'Something went wrong submitting your application. Please try again.');
+      }
+    } catch (err) {
+      console.error('Practitioner application submit failed:', err);
+      setError('Something went wrong submitting your application. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {

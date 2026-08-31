@@ -5,10 +5,10 @@ const nextConfig = {
   typescript: { ignoreBuildErrors: true },
   reactStrictMode: false,
   async rewrites() {
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL ||
+    const backendUrl = process.env.BACKEND_URL ||
+      process.env.NEXT_PUBLIC_BACKEND_URL ||
       process.env.NEXT_PUBLIC_API_URL ||
-      process.env.BACKEND_URL ||
-      'http://localhost:8082';
+      'http://backend:8082';
     return {
       fallback: [
         {
