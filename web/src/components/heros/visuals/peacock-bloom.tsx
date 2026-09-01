@@ -46,18 +46,18 @@ export default function PeacockBloom() {
         </motion.div>
 
         {/* Layer 11: Floor Shadow */}
-        <div className="absolute bottom-[20px] w-[400px] h-[80px] blur-[30px]" style={{
+        <div className="absolute bottom-[120px] w-[400px] h-[80px] blur-[30px]" style={{
           background: 'radial-gradient(ellipse, rgba(74,45,163,.28), transparent 70%)'
         }} />
 
         {/* Layer 4: Lotus Glow */}
-        <div className="absolute w-[700px] h-[700px] opacity-70 blur-[80px] mix-blend-screen" style={{
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] opacity-70 blur-[80px] mix-blend-screen" style={{
           background: 'radial-gradient(circle, rgba(255,255,255,.45) 0%, rgba(201,167,255,.18) 40%, transparent 70%)'
         }} />
 
         {/* LOTUS GROUP (Layer 13 Animation) */}
         <motion.div 
-          className="absolute flex items-center justify-center bottom-[150px] scale-[1.7]"
+          className="absolute flex items-center justify-center bottom-[250px] scale-[1.7]"
           animate={{ scale: [1.7, 1.72, 1.7], rotate: [0, 360] }}
           transition={{ scale: { duration: 6, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 180, repeat: Infinity, ease: "linear" } }}
         >
@@ -84,7 +84,7 @@ export default function PeacockBloom() {
         <div className="absolute bottom-[80px] w-[200px] h-[250px] backdrop-blur-[25px] opacity-[0.08] rounded-[100px]" />
 
         {/* Layer 7: Girl Image */}
-        <div className="absolute bottom-[50px] w-[500px] h-[650px] flex items-end justify-center pointer-events-none">
+        <div className="absolute bottom-[150px] w-[500px] h-[650px] flex items-end justify-center pointer-events-none">
           
           <div className="relative w-full h-full flex items-end justify-center">
             {/* Base Girl Image */}
@@ -108,7 +108,7 @@ export default function PeacockBloom() {
 
         {/* Magic Formula: Petals ABOVE the girl's shoulders */}
         <motion.div 
-          className="absolute flex items-center justify-center bottom-[150px] scale-[1.7]"
+          className="absolute flex items-center justify-center bottom-[250px] scale-[1.7]"
           animate={{ scale: [1.7, 1.72, 1.7], rotate: [0, 360] }}
           transition={{ scale: { duration: 6, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 180, repeat: Infinity, ease: "linear" } }}
         >
