@@ -15,28 +15,6 @@ export default function PeacockBloom() {
   return (
     <>
       {/* LAYER 1: Background Gradient & LAYER 17: Vignette & LAYER 2: Noise Texture */}
-      <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden" style={{ width: '100vw', left: '50%', transform: 'translateX(-50%)' }}>
-        {/* Layer 1: Background */}
-        <div className="absolute inset-0" style={{
-          background: `
-            radial-gradient(circle at 80% 40%, rgba(149,109,255,.18), transparent 45%),
-            radial-gradient(circle at 50% 60%, rgba(255,255,255,.5), transparent 55%),
-            radial-gradient(circle at 90% 80%, rgba(110,80,255,.12), transparent 45%),
-            linear-gradient(180deg, #F7F0FF, #F0E5FF, #E9DBFF)
-          `
-        }} />
-        
-        {/* Layer 2: Noise Texture */}
-        <div className="absolute inset-0 mix-blend-overlay opacity-[0.03]" style={{
-          backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")'
-        }} />
-
-        {/* Layer 17: Vignette */}
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,.06) 100%)'
-        }} />
-      </div>
-
       {/* Hero Visual Container */}
       <div className="relative w-full h-[600px] lg:h-[750px] flex items-center justify-center pointer-events-none">
         

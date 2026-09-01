@@ -38,7 +38,28 @@ export default function NewLayoutsHero() {
 
   return (
     <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-transparent min-h-[90vh] flex items-center">
+      {/* Background Layer for layout-9 */}
+      {layout === 'layout-9' && (
+        <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+          <div className="absolute inset-0" style={{
+            background: `
+              radial-gradient(circle at 80% 40%, rgba(149,109,255,.18), transparent 45%),
+              radial-gradient(circle at 50% 60%, rgba(255,255,255,.5), transparent 55%),
+              radial-gradient(circle at 90% 80%, rgba(110,80,255,.12), transparent 45%),
+              linear-gradient(180deg, #F7F0FF, #F0E5FF, #E9DBFF)
+            `
+          }} />
+          <div className="absolute inset-0 mix-blend-overlay opacity-[0.03]" style={{
+            backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")'
+          }} />
+          <div className="absolute inset-0" style={{
+            background: 'radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,.06) 100%)'
+          }} />
+        </div>
+      )}
+      
       {/* Container */}
+
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           
