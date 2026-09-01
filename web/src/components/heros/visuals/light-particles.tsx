@@ -161,18 +161,23 @@ export default function LightParticles() {
         })}
       </div>
 
+      
       {/* Center Logo */}
-      <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-[0_0_40px_rgba(137,130,208,0.5)] flex items-center justify-center p-3 backdrop-blur-sm border border-white/40 cursor-pointer hover:scale-105 transition-transform">
-        <img src="/main centre logo/new.png" alt="ZenAuraa" className="w-full h-full object-cover scale-[1.25] mt-2 ml-1"
-        style={{
-                opacity: 0.88,
-                filter: 'brightness(0.95) contrast(1.1) saturate(1.1) drop-shadow(0 0 40px rgba(160,120,255,0.4))',
-                WebkitMaskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%)',
-                maskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%)',
-                mixBlendMode: 'normal'
-              }}
-      />
+      <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+        <img 
+          src="/main centre logo/new.png" 
+          alt="ZenAuraa" 
+          className="w-[600px] object-contain"
+          style={{
+            opacity: 0.95,
+            filter: 'brightness(1.05) contrast(1.1) saturate(1.2) drop-shadow(0 0 50px rgba(160,120,255,0.6))',
+            WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 65%)',
+            maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 65%)',
+            mixBlendMode: 'normal'
+          }}
+        />
       </div>
+
     </div>
   );
 }
