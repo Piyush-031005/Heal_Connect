@@ -167,7 +167,7 @@ export default function LightParticles() {
         <img 
           src="/main centre logo/new.png" 
           alt="ZenAuraa" 
-          className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] -translate-y-16"
+          className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] -translate-y-4"
           style={{
             opacity: 0.85,
             filter: 'brightness(0.9) contrast(1.15) saturate(1.2) drop-shadow(0 0 50px rgba(160,120,255,0.6))',
