@@ -57,8 +57,8 @@ export default function PeacockBloom() {
 
         {/* LOTUS GROUP (Layer 13 Animation) */}
         <motion.div 
-          className="absolute flex items-center justify-center bottom-[150px] scale-[1.3]"
-          animate={{ scale: [1.3, 1.32, 1.3], rotate: [0, 360] }}
+          className="absolute flex items-center justify-center bottom-[150px] scale-[1.7]"
+          animate={{ scale: [1.7, 1.72, 1.7], rotate: [0, 360] }}
           transition={{ scale: { duration: 6, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 180, repeat: Infinity, ease: "linear" } }}
         >
           {/* Layer 14: Inner Glow */}
@@ -78,36 +78,26 @@ export default function PeacockBloom() {
 
         </motion.div>
 
-        {/* Layer 10: Reflection Floor */}
-        <div className="absolute -bottom-[20px] w-[300px] h-[300px] scale-y-[-1] opacity-10 blur-[18px] flex justify-center items-start overflow-hidden origin-top">
-          <img src="/main centre logo/girl.png" className="w-[300px] h-[400px] object-cover object-top" style={{ filter: 'brightness(0.58) contrast(1.2) saturate(0.8) hue-rotate(-8deg)' }} />
-        </div>
+        
 
         {/* Layer 16: Glass Blur */}
         <div className="absolute bottom-[80px] w-[200px] h-[250px] backdrop-blur-[25px] opacity-[0.08] rounded-[100px]" />
 
         {/* Layer 7: Girl Image */}
-        <div className="absolute bottom-[50px] w-[400px] h-[550px] flex items-end justify-center pointer-events-none">
+        <div className="absolute bottom-[50px] w-[500px] h-[650px] flex items-end justify-center pointer-events-none">
           
           <div className="relative w-full h-full flex items-end justify-center">
             {/* Base Girl Image */}
             <img 
               src="/main centre logo/girl.png" 
               alt="Meditating Silhouette" 
-              className="absolute bottom-0 w-[350px] object-contain"
+              className="absolute bottom-0 w-[420px] object-contain"
               style={{
                 filter: 'brightness(0.58) contrast(1.2) saturate(0.8) hue-rotate(-8deg) drop-shadow(0 25px 40px rgba(0,0,0,.28))'
               }}
             />
             
-            {/* Layer 8: Color Matching Overlay */}
-            <div className="absolute inset-x-[25px] bottom-0 h-[300px] mix-blend-soft-light" style={{
-              background: 'linear-gradient(180deg, rgba(133,94,255,.18), rgba(255,255,255,.06))',
-              WebkitMaskImage: 'url(/main centre logo/girl.png)',
-              WebkitMaskSize: 'contain',
-              WebkitMaskPosition: 'bottom',
-              WebkitMaskRepeat: 'no-repeat'
-            }} />
+            
           </div>
 
           {/* Layer 9: Head Aura */}
@@ -118,8 +108,8 @@ export default function PeacockBloom() {
 
         {/* Magic Formula: Petals ABOVE the girl's shoulders */}
         <motion.div 
-          className="absolute flex items-center justify-center bottom-[150px] scale-[1.3]"
-          animate={{ scale: [1.3, 1.32, 1.3], rotate: [0, 360] }}
+          className="absolute flex items-center justify-center bottom-[150px] scale-[1.7]"
+          animate={{ scale: [1.7, 1.72, 1.7], rotate: [0, 360] }}
           transition={{ scale: { duration: 6, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 180, repeat: Infinity, ease: "linear" } }}
         >
           <svg width="300" height="200" viewBox="0 0 300 200" className="opacity-80">
