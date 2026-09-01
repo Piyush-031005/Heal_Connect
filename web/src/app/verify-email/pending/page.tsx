@@ -54,12 +54,12 @@ function PendingContent() {
       <CardHeader className="space-y-3 pb-4">
         <div className="flex items-center gap-2 mb-1">
           <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-[#f59e0b]">ZenAuraa</span>
+          <span className="text-xl font-extrabold text-[#4f46e5]">ZenAuraa</span>
         </div>
 
         {/* Envelope icon */}
         <div className="flex items-center justify-center w-16 h-16 rounded-full bg-yellow-50 border-2 border-yellow-200 mx-auto">
-          <Mail className="h-8 w-8 text-[#f59e0b]" />
+          <Mail className="h-8 w-8 text-[#4f46e5]" />
         </div>
 
         <CardTitle className="text-2xl font-extrabold text-[#1a1a1a] text-center">
@@ -100,7 +100,7 @@ function PendingContent() {
           <button
             onClick={handleResend}
             disabled={resending || cooldown > 0}
-            className="flex items-center gap-1.5 mx-auto text-sm text-[#f59e0b] hover:underline disabled:opacity-50 disabled:no-underline font-semibold"
+            className="flex items-center gap-1.5 mx-auto text-sm text-[#4f46e5] hover:underline disabled:opacity-50 disabled:no-underline font-semibold"
           >
             {resending
               ? <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -113,13 +113,13 @@ function PendingContent() {
         </div>
 
         <Link href="/login"
-          className="flex items-center justify-center w-full bg-[#f59e0b] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
+          className="flex items-center justify-center w-full bg-[#4f46e5] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
           Go to Login
         </Link>
 
         <p className="text-center text-xs text-gray-400">
           Wrong email?{' '}
-          <Link href="/signup" className="text-[#f59e0b] hover:underline font-semibold">
+          <Link href="/signup" className="text-[#4f46e5] hover:underline font-semibold">
             Sign up again
           </Link>
         </p>
@@ -133,7 +133,7 @@ export default function VerifyEmailPendingPage() {
     <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center p-6">
       <Suspense fallback={
         <div className="flex flex-col items-center gap-4">
-          <Loader2 className="h-8 w-8 animate-spin text-[#f59e0b]" />
+          <Loader2 className="h-8 w-8 animate-spin text-[#4f46e5]" />
           <p className="text-gray-500">Loading…</p>
         </div>
       }>

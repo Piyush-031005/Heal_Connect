@@ -114,7 +114,7 @@ function VerifyOtpContent() {
         <h1 className="text-2xl font-bold text-[#1a1a1a]">Phone Verified!</h1>
         <p className="text-gray-500">Your number has been verified. Redirecting to login...</p>
         <Link href="/login">
-          <Button className="bg-[#f59e0b] hover:bg-[#d97706] text-white border-0 rounded-full px-8">
+          <Button className="bg-[#4f46e5] hover:bg-[#d97706] text-white border-0 rounded-full px-8">
             Go to Login
           </Button>
         </Link>
@@ -127,10 +127,10 @@ function VerifyOtpContent() {
       <CardHeader className="space-y-2 pb-4">
         <div className="flex items-center gap-2 mb-2">
           <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-[#f59e0b]">ZenAuraa</span>
+          <span className="text-xl font-extrabold text-[#4f46e5]">ZenAuraa</span>
         </div>
         <div className="flex items-center gap-2">
-          <Phone className="h-5 w-5 text-[#f59e0b]" />
+          <Phone className="h-5 w-5 text-[#4f46e5]" />
           <CardTitle className="text-2xl font-extrabold text-[#1a1a1a]">Enter your OTP</CardTitle>
         </div>
         <CardDescription className="text-gray-500">
@@ -160,8 +160,8 @@ function VerifyOtpContent() {
                 onChange={(e) => handleDigit(i, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(i, e)}
                 className="w-11 h-14 text-center text-xl font-bold rounded-xl border-2 border-yellow-200
-                           bg-[#fffbf0] text-[#1a1a1a] focus:border-[#f59e0b] focus:outline-none
-                           focus:ring-2 focus:ring-[#f59e0b]/30 transition-all"
+                           bg-[#fffbf0] text-[#1a1a1a] focus:border-[#4f46e5] focus:outline-none
+                           focus:ring-2 focus:ring-[#4f46e5]/30 transition-all"
               />
             ))}
           </div>
@@ -169,7 +169,7 @@ function VerifyOtpContent() {
           <Button
             type="submit"
             disabled={loading || otp.length !== 6}
-            className="w-full bg-[#f59e0b] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full border-0 shadow-lg disabled:opacity-50"
+            className="w-full bg-[#4f46e5] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full border-0 shadow-lg disabled:opacity-50"
           >
             {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Verify OTP'}
           </Button>
@@ -180,7 +180,7 @@ function VerifyOtpContent() {
           <button
             onClick={handleResend}
             disabled={resending || cooldown > 0}
-            className="flex items-center gap-1.5 mx-auto text-sm text-[#f59e0b] hover:underline disabled:opacity-50 disabled:no-underline"
+            className="flex items-center gap-1.5 mx-auto text-sm text-[#4f46e5] hover:underline disabled:opacity-50 disabled:no-underline"
           >
             <RotateCcw className="h-3.5 w-3.5" />
             {cooldown > 0 ? `Resend in ${cooldown}s` : resending ? 'Sending...' : 'Resend OTP'}
@@ -188,7 +188,7 @@ function VerifyOtpContent() {
         </div>
 
         <p className="text-center text-sm text-gray-500">
-          <Link href="/login" className="text-[#f59e0b] hover:underline">← Back to login</Link>
+          <Link href="/login" className="text-[#4f46e5] hover:underline">← Back to login</Link>
         </p>
       </CardContent>
     </Card>
@@ -200,7 +200,7 @@ export default function VerifyOtpPage() {
     <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center p-6">
       <Suspense fallback={
         <div className="flex flex-col items-center gap-4">
-          <Loader2 className="h-8 w-8 animate-spin text-[#f59e0b]" />
+          <Loader2 className="h-8 w-8 animate-spin text-[#4f46e5]" />
           <p className="text-gray-500">Loading...</p>
         </div>
       }>

@@ -79,7 +79,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
           name: 'ZenAuraa User',
         },
         theme: {
-          color: '#f59e0b',
+          color: '#4f46e5',
         },
       };
 
@@ -103,7 +103,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
       <DialogContent className="sm:max-w-md bg-white border border-yellow-100 font-sans">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-xl font-extrabold text-[#1a1a1a]">
-            <Wallet className="w-5 h-5 text-[#f59e0b]" /> Recharge Wallet
+            <Wallet className="w-5 h-5 text-[#4f46e5]" /> Recharge Wallet
           </DialogTitle>
           <DialogDescription className="text-gray-500">
             Add funds to your wallet to seamlessly connect with experts.
@@ -115,7 +115,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
             <Button
               key={preset}
               variant="outline"
-              className={`border-yellow-200 text-[#d97706] bg-yellow-50 hover:bg-yellow-100 hover:text-[#b45309] font-bold ${amount === preset ? 'ring-2 ring-[#f59e0b] border-transparent' : ''}`}
+              className={`border-yellow-200 text-[#d97706] bg-yellow-50 hover:bg-yellow-100 hover:text-[#b45309] font-bold ${amount === preset ? 'ring-2 ring-[#4f46e5] border-transparent' : ''}`}
               onClick={() => setAmount(preset)}
             >
               ₹{preset}
@@ -128,14 +128,14 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
           <div className="grid grid-cols-2 gap-3">
             <Button
               variant="outline"
-              className={`h-12 border-gray-200 font-medium ${paymentMethod === 'razorpay' ? 'ring-2 ring-[#f59e0b] bg-yellow-50 text-[#d97706] border-transparent' : 'text-gray-600 hover:bg-gray-50'}`}
+              className={`h-12 border-gray-200 font-medium ${paymentMethod === 'razorpay' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-gray-600 hover:bg-gray-50'}`}
               onClick={() => setPaymentMethod('razorpay')}
             >
               Domestic (INR)
             </Button>
             <Button
               variant="outline"
-              className={`h-12 border-gray-200 font-medium ${paymentMethod === 'stripe' ? 'ring-2 ring-[#f59e0b] bg-yellow-50 text-[#d97706] border-transparent' : 'text-gray-600 hover:bg-gray-50'}`}
+              className={`h-12 border-gray-200 font-medium ${paymentMethod === 'stripe' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-gray-600 hover:bg-gray-50'}`}
               onClick={() => setPaymentMethod('stripe')}
             >
               International (USD)
@@ -156,14 +156,14 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
             placeholder="e.g. 500"
             value={amount}
             onChange={(e) => setAmount(e.target.value === '' ? '' : Number(e.target.value))}
-            className="border-gray-200 focus:ring-[#f59e0b]/40 focus:border-[#f59e0b]"
+            className="border-gray-200 focus:ring-[#4f46e5]/40 focus:border-[#4f46e5]"
           />
           {error && <p className="text-sm text-red-500 font-medium">{error}</p>}
         </div>
 
         <div className="pt-2">
           <Button
-            className="w-full bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold h-12 rounded-xl"
+            className="w-full bg-[#4f46e5] hover:bg-[#d97706] text-white font-bold h-12 rounded-xl"
             disabled={loading || !amount || amount < 10}
             onClick={() => handleRecharge(amount as number)}
           >

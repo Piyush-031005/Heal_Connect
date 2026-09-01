@@ -155,7 +155,7 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
 
       {/* Top Nav */}
-      <header className="sticky top-0 z-50 w-full border-b border-amber-100 bg-white/80 backdrop-blur">
+      <header className="sticky top-0 z-50 w-full border-b border-indigo-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
@@ -165,7 +165,7 @@ export default function DashboardPage() {
           <div className="hidden md:flex items-center gap-2 flex-1 max-w-md mx-8">
             <div className="relative w-full">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-              <input type="text" placeholder="Search experts, specialties..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} onKeyDown={handleSearchKeyDown} className="w-full pl-9 pr-4 py-2 text-sm rounded-full bg-purple-50 border border-amber-200 focus:outline-none focus:ring-2 focus:ring-purple-300/40 text-[#1a1a1a] placeholder:text-muted-foreground" />
+              <input type="text" placeholder="Search experts, specialties..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} onKeyDown={handleSearchKeyDown} className="w-full pl-9 pr-4 py-2 text-sm rounded-full bg-purple-50 border border-indigo-200 focus:outline-none focus:ring-2 focus:ring-purple-300/40 text-[#1a1a1a] placeholder:text-muted-foreground" />
             </div>
           </div>
 
@@ -176,7 +176,7 @@ export default function DashboardPage() {
                 <span className="absolute top-1 right-1 w-2 h-2 bg-purple-400 rounded-full" />
               </Button>
               {showNotification && (
-                <div className="absolute right-0 mt-2 w-72 bg-white border border-amber-100 rounded-2xl shadow-xl overflow-hidden z-50" onClick={() => setShowNotification(false)}>
+                <div className="absolute right-0 mt-2 w-72 bg-white border border-indigo-100 rounded-2xl shadow-xl overflow-hidden z-50" onClick={() => setShowNotification(false)}>
                   <div className="p-4 border-b border-gray-100">
                     <p className="font-semibold text-gray-900 text-sm">Notifications</p>
                   </div>
@@ -188,15 +188,15 @@ export default function DashboardPage() {
               )}
             </div>
             <Link href="/dashboard/wallet">
-              <div className="hidden sm:flex items-center gap-2 bg-purple-50 border border-amber-200 rounded-full px-3 py-1.5 cursor-pointer hover:bg-amber-100 transition-colors">
+              <div className="hidden sm:flex items-center gap-2 bg-purple-50 border border-indigo-200 rounded-full px-3 py-1.5 cursor-pointer hover:bg-indigo-100 transition-colors">
                 <Wallet className="h-4 w-4 text-purple-400" />
-                <span className="text-sm font-semibold text-amber-700">
+                <span className="text-sm font-semibold text-indigo-700">
                   {walletBalance !== null ? `₹${walletBalance.toFixed(2)}` : '...'}
                 </span>
               </div>
             </Link>
             <div className="relative" ref={profileMenuRef}>
-              <button onClick={() => setShowProfileMenu(!showProfileMenu)} className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-400 to-orange-500 flex items-center justify-center text-foreground text-sm font-bold hover:opacity-90 transition-opacity overflow-hidden" title="My Profile">
+              <button onClick={() => setShowProfileMenu(!showProfileMenu)} className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center text-foreground text-sm font-bold hover:opacity-90 transition-opacity overflow-hidden" title="My Profile">
                 {user?.photoUrl ? (
                   <img src={user.photoUrl} alt={user.name || 'Profile'} className="w-full h-full object-cover" />
                 ) : user?.name ? (
@@ -206,7 +206,7 @@ export default function DashboardPage() {
                 )}
               </button>
               {showProfileMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-amber-100 rounded-2xl shadow-xl overflow-hidden z-50">
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-indigo-100 rounded-2xl shadow-xl overflow-hidden z-50">
                   <Link href="/dashboard/profile" onClick={() => setShowProfileMenu(false)}>
                     <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-gray-100">
                       <User className="w-4 h-4 text-purple-400" />
@@ -227,17 +227,17 @@ export default function DashboardPage() {
       <main className="flex-1 container mx-auto px-4 py-8 space-y-8">
 
         {/* ═══ WELCOME BANNER ═══ */}
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-purple-400 via-orange-500 to-amber-600 p-6 md:p-8">
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-purple-400 via-purple-500 to-indigo-600 p-6 md:p-8">
           <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-amber-300/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-indigo-300/20 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 text-amber-100 text-sm font-medium mb-2">
+              <div className="flex items-center gap-2 text-indigo-100 text-sm font-medium mb-2">
                 <HeartHandshake className="w-4 h-4" />
                 <span>Welcome back</span>
               </div>
               <h1 className="text-2xl md:text-3xl font-extrabold text-foreground mb-2">Hello, {firstName}!</h1>
-              <p className="text-amber-100 max-w-md flex items-start gap-2">
+              <p className="text-indigo-100 max-w-md flex items-start gap-2">
                 <Sparkles className="w-4 h-4 mt-0.5 shrink-0" />
                 <span>Your first session is free. Connect with a verified expert and start your healing journey today.</span>
               </p>
@@ -249,7 +249,7 @@ export default function DashboardPage() {
               )}
             </div>
             <Link href="/practitioners">
-              <Button className="bg-white text-amber-700 hover:bg-purple-50 border-0 rounded-full px-6 shrink-0 font-bold shadow-lg shadow-amber-900/20">
+              <Button className="bg-white text-indigo-700 hover:bg-purple-50 border-0 rounded-full px-6 shrink-0 font-bold shadow-lg shadow-indigo-900/20">
                 <Zap className="h-4 w-4 mr-2" /> Start Free Session
               </Button>
             </Link>
@@ -259,9 +259,9 @@ export default function DashboardPage() {
         {/* ═══ STATS ROW ═══ */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: 'Wallet Balance', value: walletBalance !== null ? `₹${walletBalance.toFixed(2)}` : '...', icon: Wallet, color: 'text-purple-400', bg: 'bg-purple-50', shadow: 'shadow-amber-200/30' },
+            { label: 'Wallet Balance', value: walletBalance !== null ? `₹${walletBalance.toFixed(2)}` : '...', icon: Wallet, color: 'text-purple-400', bg: 'bg-purple-50', shadow: 'shadow-indigo-200/30' },
             { label: 'Sessions Done', value: '0', icon: MessageCircle, color: 'text-emerald-600', bg: 'bg-emerald-50', shadow: 'shadow-emerald-200/30' },
-            { label: 'Minutes Used', value: '0 min', icon: Clock, color: 'text-orange-500', bg: 'bg-orange-50', shadow: 'shadow-orange-200/30' },
+            { label: 'Minutes Used', value: '0 min', icon: Clock, color: 'text-purple-500', bg: 'bg-purple-50', shadow: 'shadow-purple-200/30' },
             { label: 'Experts Online', value: onlineCount > 0 ? String(onlineCount) : '—', icon: TrendingUp, color: 'text-blue-500', bg: 'bg-blue-50', shadow: 'shadow-blue-200/30' },
           ].map((stat) => (
             <Card key={stat.label} className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 rounded-2xl overflow-hidden">
@@ -282,7 +282,7 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             { icon: MessageCircle, label: 'Live Chat', desc: 'Text with an expert now', color: 'text-purple-400', bg: 'bg-purple-50', border: 'hover:border-purple-300', action: () => document.getElementById('experts-section')?.scrollIntoView({ behavior: 'smooth' }) },
-            { icon: Headphones, label: 'Audio Call', desc: 'Voice consultation', color: 'text-orange-500', bg: 'bg-orange-50', border: 'hover:border-orange-400', action: () => document.getElementById('experts-section')?.scrollIntoView({ behavior: 'smooth' }) },
+            { icon: Headphones, label: 'Audio Call', desc: 'Voice consultation', color: 'text-purple-500', bg: 'bg-purple-50', border: 'hover:border-purple-400', action: () => document.getElementById('experts-section')?.scrollIntoView({ behavior: 'smooth' }) },
             { icon: Wallet, label: 'Add Money', desc: 'Recharge your wallet', color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'hover:border-emerald-400', action: () => setIsRechargeModalOpen(true) },
           ].map((item) => (
             <Card key={item.label} onClick={item.action} className={`bg-white border border-gray-100 ${item.border} transition-all duration-300 cursor-pointer group shadow-sm hover:shadow-md hover:-translate-y-0.5 rounded-2xl overflow-hidden`}>
@@ -304,12 +304,12 @@ export default function DashboardPage() {
         <div id="experts-section">
           <div className="flex items-center justify-between mb-5">
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1">Browse Experts</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-indigo-700 mb-1">Browse Experts</p>
               <h2 className="text-2xl font-extrabold text-gray-900">Find Your Healer</h2>
               <p className="text-sm text-muted-foreground">500+ verified practitioners online</p>
             </div>
             <Link href="/practitioners">
-              <Button variant="ghost" className="text-amber-600 hover:text-amber-700 text-sm font-semibold">
+              <Button variant="ghost" className="text-indigo-600 hover:text-indigo-700 text-sm font-semibold">
                 See all <ArrowRight className="h-4 w-4 ml-1" />
               </Button>
             </Link>
@@ -318,7 +318,7 @@ export default function DashboardPage() {
           {/* Tabs */}
           <div className="flex gap-2 mb-6 overflow-x-auto pb-1">
             {(['all', 'astrology', 'tarot', 'vastu', 'numerology'] as const).map((tab) => (
-              <button key={tab} onClick={() => handleTabChange(tab)} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${activeTab === tab ? 'bg-purple-400 text-foreground shadow-sm' : 'bg-white text-muted-foreground hover:text-gray-900 border border-gray-200 hover:border-amber-200'}`}>
+              <button key={tab} onClick={() => handleTabChange(tab)} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${activeTab === tab ? 'bg-purple-400 text-foreground shadow-sm' : 'bg-white text-muted-foreground hover:text-gray-900 border border-gray-200 hover:border-indigo-200'}`}>
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
               </button>
             ))}
@@ -336,10 +336,10 @@ export default function DashboardPage() {
                 const avatarSrc = getPractitionerAvatar(expert.photoUrl, expert.id);
                 return (
                   <Link key={expert.id} href={`/practitioners/${expert.id}`} className="h-full">
-                    <Card className="bg-white border border-gray-100 hover:border-amber-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 cursor-pointer rounded-2xl overflow-hidden group h-full">
+                    <Card className="bg-white border border-gray-100 hover:border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 cursor-pointer rounded-2xl overflow-hidden group h-full">
                       <CardContent className="p-0 flex flex-col h-full">
                         {/* Top strip with avatar */}
-                        <div className="relative h-14 bg-gradient-to-r from-purple-50 to-orange-50">
+                        <div className="relative h-14 bg-gradient-to-r from-purple-50 to-purple-50">
                           <div className="absolute -bottom-6 left-5">
                             <img src={avatarSrc} alt={expert.name} className="w-12 h-12 rounded-xl object-cover shadow-md border-2 border-white" />
                           </div>
@@ -358,7 +358,7 @@ export default function DashboardPage() {
                           <div className="flex items-start justify-between mb-1">
                             <div>
                               <p className="font-bold text-gray-900 text-base">{expert.name}</p>
-                              <p className="text-sm text-amber-600 font-medium">{expert.specialties.slice(0, 2).join(' · ') || '—'}</p>
+                              <p className="text-sm text-indigo-600 font-medium">{expert.specialties.slice(0, 2).join(' · ') || '—'}</p>
                             </div>
                           </div>
 
@@ -380,10 +380,10 @@ export default function DashboardPage() {
                               <span className="text-xs text-muted-foreground">/min</span>
                             </div>
                             <div className="flex gap-2">
-                              <Button size="sm" variant="outline" className="h-8 px-3 border-gray-200 hover:border-amber-300 hover:text-amber-700 text-xs gap-1" onClick={(e) => { e.preventDefault(); startChatSession(expert.id, e); }} disabled={startingSession === expert.id}>
+                              <Button size="sm" variant="outline" className="h-8 px-3 border-gray-200 hover:border-indigo-300 hover:text-indigo-700 text-xs gap-1" onClick={(e) => { e.preventDefault(); startChatSession(expert.id, e); }} disabled={startingSession === expert.id}>
                                 <MessageCircle className="h-3.5 w-3.5" /> Chat
                               </Button>
-                              <Button size="sm" disabled={!expert.isOnline} className="h-8 px-3 bg-purple-400 hover:bg-amber-600 text-foreground border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => e.preventDefault()}>
+                              <Button size="sm" disabled={!expert.isOnline} className="h-8 px-3 bg-purple-400 hover:bg-indigo-600 text-foreground border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => e.preventDefault()}>
                                 <Phone className="h-3.5 w-3.5" /> Call
                               </Button>
                             </div>
@@ -408,15 +408,15 @@ export default function DashboardPage() {
               </div>
               <div>
                 <h3 className="text-xl font-extrabold text-foreground mb-1">Top up your wallet</h3>
-                <p className="text-amber-100 text-sm max-w-md">Add money and start connecting with experts instantly. No hidden fees.</p>
+                <p className="text-indigo-100 text-sm max-w-md">Add money and start connecting with experts instantly. No hidden fees.</p>
                 <div className="flex items-center gap-4 mt-3">
-                  <div className="flex items-center gap-1.5 text-amber-100 text-xs">
+                  <div className="flex items-center gap-1.5 text-indigo-100 text-xs">
                     <Check className="w-3.5 h-3.5" /> Secure payments
                   </div>
-                  <div className="flex items-center gap-1.5 text-amber-100 text-xs">
+                  <div className="flex items-center gap-1.5 text-indigo-100 text-xs">
                     <Check className="w-3.5 h-3.5" /> Instant recharge
                   </div>
-                  <div className="flex items-center gap-1.5 text-amber-100 text-xs">
+                  <div className="flex items-center gap-1.5 text-indigo-100 text-xs">
                     <Check className="w-3.5 h-3.5" /> No expiry
                   </div>
                 </div>
@@ -424,7 +424,7 @@ export default function DashboardPage() {
             </div>
             <Button 
               onClick={() => setIsRechargeModalOpen(true)}
-              className="bg-white text-amber-700 hover:bg-purple-50 border-0 rounded-full px-8 shrink-0 font-bold shadow-lg shadow-amber-900/20 whitespace-nowrap"
+              className="bg-white text-indigo-700 hover:bg-purple-50 border-0 rounded-full px-8 shrink-0 font-bold shadow-lg shadow-indigo-900/20 whitespace-nowrap"
             >
               <Waves className="h-4 w-4 mr-2" /> Add Funds
             </Button>

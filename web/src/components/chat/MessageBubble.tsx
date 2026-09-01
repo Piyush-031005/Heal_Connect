@@ -17,7 +17,7 @@ export default function MessageBubble({ message, isMine }: Props) {
         className={cn(
           'max-w-[72%] px-4 py-2.5 text-sm shadow-sm',
           isMine
-            ? 'bg-[#f59e0b] text-white rounded-2xl rounded-br-sm'
+            ? 'bg-[#4f46e5] text-white rounded-2xl rounded-br-sm'
             : 'bg-white border border-yellow-100 text-[#1a1a1a] rounded-2xl rounded-bl-sm'
         )}
       >

@@ -179,7 +179,7 @@ export default function Navbar() {
       {/* Left Slide Drawer */}
       <aside className={`fixed top-0 left-0 h-full w-72 z-50 bg-white shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${drawerOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Gradient header */}
-        <div className="bg-gradient-to-br from-purple-300 to-orange-400 px-5 pt-6 pb-6">
+        <div className="bg-gradient-to-br from-purple-300 to-purple-400 px-5 pt-6 pb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
               <Image src={theme === 'theme-royal-indigo' ? '/center_logo_final.png' : '/center_logo_final.png'} alt="ZenAuraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
@@ -223,7 +223,7 @@ export default function Navbar() {
             className="block bg-white rounded-xl px-4 py-3.5 shadow-md hover:shadow-lg transition-all"
           >
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-300 to-orange-400 flex items-center justify-center shrink-0">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-300 to-purple-400 flex items-center justify-center shrink-0">
                 <svg className="w-5 h-5 text-[#2D1B69]" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
                   <circle cx="12" cy="8" r="4" />
                   <path strokeLinecap="round" d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
@@ -232,7 +232,7 @@ export default function Navbar() {
               <div className="flex-1">
                 <p className="text-sm font-bold text-gray-900">Sign In / Sign Up</p>
                 <p className="text-[11px] text-gray-700">
-                  Your 1st Chat is <strong className="text-amber-600">100% Free</strong>
+                  Your 1st Chat is <strong className="text-indigo-600">100% Free</strong>
                 </p>
               </div>
               <svg className="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -254,10 +254,10 @@ export default function Navbar() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setDrawerOpen(false)}
-                  className="flex items-center gap-3 px-4 py-2.5 mx-2 rounded-xl text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-amber-700 transition-all group"
+                  className="flex items-center gap-3 px-4 py-2.5 mx-2 rounded-xl text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-indigo-700 transition-all group"
                 >
-                  <span className="w-8 h-8 rounded-lg bg-gray-50 group-hover:bg-amber-100 flex items-center justify-center text-base transition-colors">
-                    <item.Icon className="w-4 h-4 text-gray-500 group-hover:text-amber-600" />
+                  <span className="w-8 h-8 rounded-lg bg-gray-50 group-hover:bg-indigo-100 flex items-center justify-center text-base transition-colors">
+                    <item.Icon className="w-4 h-4 text-gray-500 group-hover:text-indigo-600" />
                   </span>
                   {item.label}
                   <svg className="w-3.5 h-3.5 text-gray-300 group-hover:text-purple-300 ml-auto transition-colors" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -363,7 +363,7 @@ export default function Navbar() {
               <button
                 onClick={() => setLayoutOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
-                  isDark ? 'border-white/20 hover:bg-white/10 hover:text-[#2D1B69]' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50 hover:text-amber-600'
+                  isDark ? 'border-white/20 hover:bg-white/10 hover:text-[#2D1B69]' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50 hover:text-indigo-600'
                 }`}
               >
                 <Layout className="w-4 h-4" />
@@ -404,7 +404,7 @@ export default function Navbar() {
               <button
                 onClick={() => setThemeOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all ${
-                  isDark ? 'border-white/20 hover:bg-white/10 text-[#2D1B69]' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50 text-amber-600'
+                  isDark ? 'border-white/20 hover:bg-white/10 text-[#2D1B69]' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50 text-indigo-600'
                 }`}
                 title="Select Theme"
               >
@@ -448,7 +448,7 @@ export default function Navbar() {
               <button
                 onClick={() => setLangOpen((p) => !p)}
                 className={`flex items-center gap-0.5 px-2.5 py-1.5 rounded-full border text-[13px] font-black transition-all ${
-                  isDark ? 'border-white/20 hover:bg-white/10' : 'border-gray-200 hover:border-amber-300 hover:bg-purple-50'
+                  isDark ? 'border-white/20 hover:bg-white/10' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50'
                 }`}
               >
                 <svg className="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg><span className={isDark ? "text-gray-200 ml-1" : "text-gray-700 ml-1"}>{lang.toUpperCase()}</span>

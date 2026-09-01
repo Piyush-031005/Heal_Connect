@@ -54,13 +54,13 @@ function VerifyEmailContent() {
         {/* Logo */}
         <div className="flex items-center justify-center gap-2">
           <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-[#f59e0b]">ZenAuraa</span>
+          <span className="text-xl font-extrabold text-[#4f46e5]">ZenAuraa</span>
         </div>
 
         {/* Loading */}
         {status === 'loading' && (
           <div className="space-y-4 py-4">
-            <Loader2 className="h-14 w-14 animate-spin text-[#f59e0b] mx-auto" />
+            <Loader2 className="h-14 w-14 animate-spin text-[#4f46e5] mx-auto" />
             <p className="text-gray-500 text-base">Verifying your email…</p>
           </div>
         )}
@@ -73,7 +73,7 @@ function VerifyEmailContent() {
             <p className="text-gray-500">{message}</p>
             <p className="text-sm text-gray-400">Redirecting you to login in 3 seconds…</p>
             <Link href="/login"
-              className="flex items-center justify-center w-full bg-[#f59e0b] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
+              className="flex items-center justify-center w-full bg-[#4f46e5] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
               Go to Login
             </Link>
           </div>
@@ -87,12 +87,12 @@ function VerifyEmailContent() {
             <p className="text-gray-500">{message}</p>
             <div className="space-y-2">
               <Link href="/login"
-                className="flex items-center justify-center w-full bg-[#f59e0b] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
+                className="flex items-center justify-center w-full bg-[#4f46e5] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
                 Go to Login
               </Link>
               <p className="text-sm text-gray-400">
                 Need a new link?{' '}
-                <Link href="/login" className="text-[#f59e0b] hover:underline font-semibold">
+                <Link href="/login" className="text-[#4f46e5] hover:underline font-semibold">
                   Request from login page
                 </Link>
               </p>
@@ -110,7 +110,7 @@ export default function VerifyEmailPage() {
     <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center p-6">
       <Suspense fallback={
         <div className="flex flex-col items-center gap-4">
-          <Loader2 className="h-8 w-8 animate-spin text-[#f59e0b]" />
+          <Loader2 className="h-8 w-8 animate-spin text-[#4f46e5]" />
           <p className="text-gray-500">Loading…</p>
         </div>
       }>

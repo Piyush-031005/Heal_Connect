@@ -40,7 +40,7 @@ export default function WalletPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center">
-        <Clock className="w-6 h-6 text-[#f59e0b] animate-spin" />
+        <Clock className="w-6 h-6 text-[#4f46e5] animate-spin" />
       </div>
     );
   }
@@ -49,7 +49,7 @@ export default function WalletPage() {
     <div className="min-h-screen bg-[#fffbf0] text-[#1a1a1a] flex flex-col font-sans">
       <header className="sticky top-0 z-50 w-full border-b border-yellow-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center gap-4">
-          <Link href="/dashboard" className="text-gray-500 hover:text-[#f59e0b] transition-colors">
+          <Link href="/dashboard" className="text-gray-500 hover:text-[#4f46e5] transition-colors">
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <h1 className="text-xl font-extrabold text-[#1a1a1a]">My Wallet</h1>
@@ -59,7 +59,7 @@ export default function WalletPage() {
       <main className="flex-1 container mx-auto px-4 py-8 max-w-4xl space-y-8">
         
         {/* Balance Card */}
-        <Card className="bg-gradient-to-br from-[#f59e0b] to-[#ef4444] text-white border-0 shadow-lg relative overflow-hidden">
+        <Card className="bg-gradient-to-br from-[#4f46e5] to-[#ef4444] text-white border-0 shadow-lg relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" />
           <CardContent className="p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
             <div>
@@ -106,7 +106,7 @@ export default function WalletPage() {
                       <TableRow key={tx.id} className="border-yellow-100">
                         <TableCell>
                           <div className="flex items-center gap-2">
-                            <div className={`p-1.5 rounded-full ${isCredit ? 'bg-emerald-100 text-emerald-600' : 'bg-orange-100 text-orange-500'}`}>
+                            <div className={`p-1.5 rounded-full ${isCredit ? 'bg-emerald-100 text-emerald-600' : 'bg-purple-100 text-purple-500'}`}>
                               {isCredit ? <ArrowUpRight className="w-3.5 h-3.5" /> : <ArrowDownRight className="w-3.5 h-3.5" />}
                             </div>
                             <span className="font-medium">{tx.type}</span>
