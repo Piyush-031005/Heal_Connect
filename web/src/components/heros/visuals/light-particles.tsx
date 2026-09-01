@@ -163,7 +163,15 @@ export default function LightParticles() {
 
       {/* Center Logo */}
       <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-[0_0_40px_rgba(137,130,208,0.5)] flex items-center justify-center p-3 backdrop-blur-sm border border-white/40 cursor-pointer hover:scale-105 transition-transform">
-        <img src="/main centre logo/girl.png" alt="ZenAuraa" className="w-full h-full object-cover scale-[1.25] mt-2 ml-1" />
+        <img src="/main centre logo/new.png" alt="ZenAuraa" className="w-full h-full object-cover scale-[1.25] mt-2 ml-1"
+        style={{
+                opacity: 0.88,
+                filter: 'brightness(0.95) contrast(1.1) saturate(1.1) drop-shadow(0 0 40px rgba(160,120,255,0.4))',
+                WebkitMaskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%)',
+                maskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%)',
+                mixBlendMode: 'normal'
+              }}
+      />
       </div>
     </div>
   );

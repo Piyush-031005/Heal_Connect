@@ -89,11 +89,15 @@ export default function PeacockBloom() {
           <div className="relative w-full h-full flex items-end justify-center">
             {/* Base Girl Image */}
             <img 
-              src="/main centre logo/girl.png" 
+              src="/main centre logo/new.png" 
               alt="Meditating Silhouette" 
               className="absolute bottom-0 w-[420px] object-contain"
               style={{
-                filter: 'brightness(0.58) contrast(1.2) saturate(0.8) hue-rotate(-8deg) drop-shadow(0 25px 40px rgba(0,0,0,.28))'
+                opacity: 0.88,
+                filter: 'brightness(0.95) contrast(1.1) saturate(1.1) drop-shadow(0 0 40px rgba(160,120,255,0.4))',
+                WebkitMaskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%)',
+                maskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%)',
+                mixBlendMode: 'normal'
               }}
             />
             
