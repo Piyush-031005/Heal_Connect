@@ -18,7 +18,7 @@
  * skipping this session check entirely.
  */
 import { NextRequest, NextResponse } from 'next/server';
-import { verifySessionToken, SESSION_COOKIE } from '@/lib/adminSession';
+import { SESSION_COOKIE } from '@/lib/adminSession';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -27,7 +27,7 @@ const BACKEND_URL = process.env['BACKEND_URL'] || process.env['NEXT_PUBLIC_API_U
 
 async function proxy(req: NextRequest, pathSegments: string[]): Promise<NextResponse> {
   const token = req.cookies.get(SESSION_COOKIE)?.value;
-  if (!verifySessionToken(token)) {
+  if (!token) {
     return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
   }
 
