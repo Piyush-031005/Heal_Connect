@@ -151,7 +151,7 @@ export default function LightParticles() {
               >
                 <div className="flex items-center gap-2 px-3 py-1.5 transition-all duration-300 hover:scale-110">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#1E2059]/40 group-hover:bg-[#5F3BA9] shadow-[0_0_8px_rgba(95,59,169,0.5)] transition-colors" />
-                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#1E2059]/60 group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#1E2059]/90 group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
                     {mod.name}
                   </span>
                 </div>
@@ -167,7 +167,7 @@ export default function LightParticles() {
         <img 
           src="/main centre logo/new.png" 
           alt="ZenAuraa" 
-          className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] -translate-y-4"
+          className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] translate-y-8"
           style={{
             opacity: 0.85,
             filter: 'brightness(0.9) contrast(1.15) saturate(1.2) drop-shadow(0 0 50px rgba(160,120,255,0.6))',
