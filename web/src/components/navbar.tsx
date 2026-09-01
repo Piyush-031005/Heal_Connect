@@ -298,33 +298,33 @@ export default function Navbar() {
             {/* Links for Final Hybrid layout sit next to the logo */}
             {isFinalHybrid && (
               <nav className="hidden md:flex items-center gap-4 ml-4">
-                <Link href="/practitioners" className="text-sm font-semibold text-[#8982D0] hover:text-[#B79AE6] transition-colors">
+                <Link href="/practitioners" className="text-sm font-semibold text-[#2D1B69] hover:text-[#5F3BA9] transition-colors">
                   Find Expert
                 </Link>
-                <Link href="#free-services" className="text-sm font-semibold text-[#8982D0] hover:text-[#B79AE6] transition-colors">
+                <Link href="#free-services" className="text-sm font-semibold text-[#2D1B69] hover:text-[#5F3BA9] transition-colors">
                   Free Services
                 </Link>
                   <div className="relative group cursor-pointer">
-                  <span className="text-sm font-semibold text-[#8982D0] group-hover:text-[#B79AE6] transition-colors flex items-center gap-1">
+                  <span className="text-sm font-semibold text-[#2D1B69] group-hover:text-[#5F3BA9] transition-colors flex items-center gap-1">
                     Free Insights
                     <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </span>
                   <div className="absolute top-full left-0 mt-2 w-56 bg-[#7A48AB] border border-[#694091] rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2">
-                    <Link href="/modalities/astrology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Astrology</Link>
-                    <Link href="/modalities/tarot" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Tarot</Link>
-                    <Link href="/modalities/palm-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Palm Reading</Link>
-                    <Link href="/modalities/face-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Face Reading</Link>
-                    <Link href="/modalities/numerology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Numerology</Link>
-                    <Link href="/modalities/energy-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Energy Healing</Link>
-                    <Link href="/modalities/meditation" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Meditation</Link>
-                    <Link href="/modalities/yoga" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Yoga &amp; Mindfulness</Link>
-                    <Link href="/modalities/vastu" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Vastu &amp; Space Energy</Link>
-                    <Link href="/modalities/eft" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">EFT Tapping</Link>
-                    <Link href="/modalities/spiritual" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Spiritual Guidance</Link>
-                    <Link href="/modalities/sound-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#B79AE6]">Sound Healing</Link>
+                    <Link href="/modalities/astrology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Astrology</Link>
+                    <Link href="/modalities/tarot" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Tarot</Link>
+                    <Link href="/modalities/palm-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Palm Reading</Link>
+                    <Link href="/modalities/face-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Face Reading</Link>
+                    <Link href="/modalities/numerology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Numerology</Link>
+                    <Link href="/modalities/energy-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Energy Healing</Link>
+                    <Link href="/modalities/meditation" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Meditation</Link>
+                    <Link href="/modalities/yoga" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Yoga &amp; Mindfulness</Link>
+                    <Link href="/modalities/vastu" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Vastu &amp; Space Energy</Link>
+                    <Link href="/modalities/eft" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">EFT Tapping</Link>
+                    <Link href="/modalities/spiritual" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Spiritual Guidance</Link>
+                    <Link href="/modalities/sound-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Sound Healing</Link>
                   </div>
                 </div>
-                <Link href="#reviews" className="text-sm font-semibold text-[#8982D0] hover:text-[#B79AE6] transition-colors">
+                <Link href="#reviews" className="text-sm font-semibold text-[#2D1B69] hover:text-[#5F3BA9] transition-colors">
                   Reviews
                 </Link>
               </nav>
@@ -341,7 +341,7 @@ export default function Navbar() {
                   className={`relative text-sm font-medium transition-all px-4 py-1.5 rounded-full flex items-center gap-1.5 ${
                     activeSection === id
                       ? 'bg-primary/10 text-primary shadow-sm'
-                      : 'text-[#8982D0]/80 hover:text-primary hover:bg-white/5'
+                      : 'text-[#2D1B69]/80 hover:text-primary hover:bg-white/5'
                   }`}
                 >
                   {label}
@@ -353,7 +353,7 @@ export default function Navbar() {
           {/* Right: theme toggle + lang dropdown + profile */}
           <div className="flex items-center gap-2">
             {isFinalHybrid && (
-              <Link href="/modalities/astrology" className="md:hidden text-[10px] sm:text-xs font-semibold text-[#8982D0] border border-border rounded-full px-2.5 py-1 whitespace-nowrap bg-[#694091]/30">
+              <Link href="/modalities/astrology" className="md:hidden text-[10px] sm:text-xs font-semibold text-[#2D1B69] border border-border rounded-full px-2.5 py-1 whitespace-nowrap bg-[#694091]/30">
                 Free Insights
               </Link>
             )}
@@ -497,7 +497,7 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
-                <Link href="/login" className={`hidden md:block text-sm font-medium transition-colors px-2 ${isFinalHybrid ? 'text-[#8982D0] hover:text-[#B79AE6]' : 'text-[#8982D0] hover:text-primary'}`}>
+                <Link href="/login" className={`hidden md:block text-sm font-medium transition-colors px-2 ${isFinalHybrid ? 'text-[#2D1B69] hover:text-[#5F3BA9]' : 'text-[#2D1B69] hover:text-primary'}`}>
                   Login
                 </Link>
                 {isFinalHybrid && (
