@@ -32,7 +32,8 @@ export default function NewLayoutsHero() {
       case 'layout-1': return <FloatingPebbles />;
       case 'layout-5': return <AuroraBlob />;
       case 'layout-9': return <PeacockBloom />;
-      default: return null;
+      case 'layout-10': return <LightParticles />;
+      default: return <LightParticles />;
     }
   };
 
