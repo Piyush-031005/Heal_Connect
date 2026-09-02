@@ -98,7 +98,7 @@ export default function AdminTicketsPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
-                className="block w-full sm:w-40 pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="block w-full sm:w-40 pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="all">All Status</option>
                 <option value="OPEN">Open</option>
@@ -119,13 +119,13 @@ export default function AdminTicketsPage() {
                     <div
                       key={t.id}
                       onClick={() => openTicket(t)}
-                      className={`p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors ${selected?.id === t.id ? 'bg-amber-50 dark:bg-amber-900/10' : ''}`}
+                      className={`p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors ${selected?.id === t.id ? 'bg-indigo-50 dark:bg-indigo-900/10' : ''}`}
                     >
                       <div className="flex justify-between items-start mb-1">
                         <h4 className="text-sm font-medium text-gray-900 dark:text-white flex items-center gap-1.5">
                           <User className="w-3.5 h-3.5 text-gray-400" />
                           {t.user?.name || t.practitioner?.name || 'Unknown'}
-                          {t.practitioner && <span className="text-[10px] text-amber-600 font-bold uppercase">Expert</span>}
+                          {t.practitioner && <span className="text-[10px] text-indigo-600 font-bold uppercase">Expert</span>}
                         </h4>
                         <span className="text-xs text-gray-500 dark:text-gray-400">
                           {new Date(t.updatedAt).toLocaleDateString()}
@@ -203,7 +203,7 @@ export default function AdminTicketsPage() {
                         key={m.id}
                         className={`text-sm rounded-lg p-3 max-w-[85%] ${
                           m.senderType === 'ADMIN'
-                            ? 'bg-amber-50 dark:bg-amber-900/20 ml-auto'
+                            ? 'bg-indigo-50 dark:bg-indigo-900/20 ml-auto'
                             : 'bg-gray-50 dark:bg-gray-700/30 mr-auto'
                         }`}
                       >
@@ -223,13 +223,13 @@ export default function AdminTicketsPage() {
                     value={replyText}
                     onChange={(e) => setReplyText(e.target.value)}
                     placeholder="Type your response here..."
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-amber-500 dark:bg-gray-700 dark:text-white resize-none mb-3"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white resize-none mb-3"
                   />
                   <div className="flex justify-end">
                     <button
                       onClick={() => handleReply()}
                       disabled={!replyText.trim() || sending}
-                      className="flex items-center px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors disabled:opacity-50"
+                      className="flex items-center px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors disabled:opacity-50"
                     >
                       <Send className="h-4 w-4 mr-2" />
                       Send Reply

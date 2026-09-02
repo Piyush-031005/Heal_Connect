@@ -393,7 +393,7 @@ export default function AdminUsersPage() {
           {([['users', `Registered Users (${totalUsers})`], ['practitioners', `Registered Practitioners (${totalPract})`], ['applications', `Onboarding Applications (${totalApps})`]] as const).map(([t, label]) => (
             <button key={t} onClick={() => setTab(t)}
               className={`px-4 py-2.5 text-sm font-extrabold transition-all border-b-2 -mb-px ${
-                tab === t ? 'border-amber-500 text-amber-600' : 'border-transparent text-gray-500 hover:text-gray-700'
+                tab === t ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}>
               {label}
             </button>
@@ -426,7 +426,7 @@ export default function AdminUsersPage() {
                     </tr>
                   ) : (
                     users.map((u) => (
-                      <tr key={u.id} className="hover:bg-amber-50/30 dark:hover:bg-white/5 transition-colors">
+                      <tr key={u.id} className="hover:bg-indigo-50/30 dark:hover:bg-white/5 transition-colors">
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-2.5">
                             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center text-white text-xs font-extrabold shrink-0">
@@ -445,7 +445,7 @@ export default function AdminUsersPage() {
                         </td>
                         <td className="px-4 py-3 text-xs text-gray-600 dark:text-white/60">{u.email}</td>
                         <td className="px-4 py-3 text-xs text-gray-600 dark:text-white/60">{u.phone}</td>
-                        <td className="px-4 py-3 text-xs font-bold capitalize text-amber-700">{u.provider}</td>
+                        <td className="px-4 py-3 text-xs font-bold capitalize text-indigo-700">{u.provider}</td>
                         <td className="px-4 py-3"><StatusBadge status={u.isEmailVerified || u.isPhoneVerified ? 'verified' : 'unverified'} /></td>
                         <td className="px-4 py-3 text-xs font-extrabold text-gray-900 dark:text-white text-center">{u.sessionCount}</td>
                         <td className="px-4 py-3 text-xs font-bold text-emerald-600">₹{u.balance}</td>
@@ -501,7 +501,7 @@ export default function AdminUsersPage() {
                     </tr>
                   ) : (
                     practitioners.map((p) => (
-                      <tr key={p.id} className="hover:bg-amber-50/30 dark:hover:bg-white/5 transition-colors">
+                      <tr key={p.id} className="hover:bg-indigo-50/30 dark:hover:bg-white/5 transition-colors">
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-2.5">
                             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white text-xs font-extrabold shrink-0">
@@ -524,7 +524,7 @@ export default function AdminUsersPage() {
                         <td className="px-4 py-3 text-xs text-gray-600">{p.experienceYrs} yrs</td>
                         <td className="px-4 py-3 text-xs font-bold text-emerald-600">₹{p.perMinuteRate}/m</td>
                         <td className="px-4 py-3 text-xs font-extrabold text-gray-900 dark:text-white text-center">{p.sessionCount}</td>
-                        <td className="px-4 py-3 text-xs font-bold text-amber-600">{p.avgRating > 0 ? `${p.avgRating} ★` : 'N/A'}</td>
+                        <td className="px-4 py-3 text-xs font-bold text-indigo-600">{p.avgRating > 0 ? `${p.avgRating} ★` : 'N/A'}</td>
                         <td className="px-4 py-3"><StatusBadge status={p.isVerified ? 'verified' : 'pending'} /></td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1.5">
@@ -579,10 +579,10 @@ export default function AdminUsersPage() {
                   {loading ? Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} />) : apps.length === 0 ? (
                     <tr><td colSpan={8} className="text-center py-12 text-sm text-gray-400 font-medium">No applications yet</td></tr>
                   ) : apps.map(a => (
-                    <tr key={a.id} className="hover:bg-amber-50/30 dark:hover:bg-white/5 transition-colors">
+                    <tr key={a.id} className="hover:bg-indigo-50/30 dark:hover:bg-white/5 transition-colors">
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white text-xs font-extrabold shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-orange-500 flex items-center justify-center text-white text-xs font-extrabold shrink-0">
                             {(a.fullLegalName || a.displayName || '?').charAt(0)}
                           </div>
                           <div>
@@ -602,7 +602,7 @@ export default function AdminUsersPage() {
                             a.applicationStatus === 'REJECTED' ? 'bg-red-100 text-red-700' :
                             a.applicationStatus === 'ADMIN_REVIEW' ? 'bg-blue-100 text-blue-700' :
                             a.applicationStatus === 'SUBMITTED' ? 'bg-blue-100 text-blue-700' :
-                            'bg-amber-100 text-amber-700'
+                            'bg-indigo-100 text-indigo-700'
                           }`}>{a.applicationStatus}</span>
                           {a.applicationStatus === 'ADMIN_REVIEW' && (
                             <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold bg-orange-500 text-white w-fit animate-pulse">⚡ Needs Review</span>
@@ -632,7 +632,7 @@ export default function AdminUsersPage() {
               <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
                 <div className="sticky top-0 bg-white dark:bg-slate-800 flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-white/10 z-10">
                   <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-extrabold text-lg">
+                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-indigo-400 to-orange-500 flex items-center justify-center text-white font-extrabold text-lg">
                       {(viewApp?.fullLegalName || '?').charAt(0)}
                     </div>
                     <div>
@@ -645,7 +645,7 @@ export default function AdminUsersPage() {
                 <div className="p-6 space-y-5">
                   {viewAppLoading ? (
                     <div className="flex items-center justify-center py-10">
-                      <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+                      <div className="w-6 h-6 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
                       <span className="ml-3 text-sm text-gray-500">Loading application...</span>
                     </div>
                   ) : viewApp && (
@@ -656,7 +656,7 @@ export default function AdminUsersPage() {
                           viewApp.applicationStatus === 'APPROVED' ? 'bg-green-100 text-green-700' :
                           viewApp.applicationStatus === 'REJECTED' ? 'bg-red-100 text-red-700' :
                           viewApp.applicationStatus === 'SUBMITTED' ? 'bg-blue-100 text-blue-700' :
-                          'bg-amber-100 text-amber-700'
+                          'bg-indigo-100 text-indigo-700'
                         }`}>{viewApp.applicationStatus}</span>
                         <span className="px-3 py-1 rounded-full text-xs font-bold bg-gray-100 text-gray-600">{viewApp.accountStatus}</span>
                       </div>
@@ -684,7 +684,7 @@ export default function AdminUsersPage() {
                           <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Practice Areas</p>
                           <div className="flex flex-wrap gap-1.5">
                             {viewApp.specializations.map((s: string) => (
-                              <span key={s} className="px-2.5 py-1 bg-amber-50 text-amber-700 text-xs font-semibold rounded-full border border-amber-200">{s}</span>
+                              <span key={s} className="px-2.5 py-1 bg-indigo-50 text-indigo-700 text-xs font-semibold rounded-full border border-indigo-200">{s}</span>
                             ))}
                           </div>
                         </div>
@@ -775,14 +775,14 @@ export default function AdminUsersPage() {
                 <div className="p-6 space-y-5">
                   {viewPractLoading ? (
                     <div className="flex items-center justify-center py-10">
-                      <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+                      <div className="w-6 h-6 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
                       <span className="ml-3 text-sm text-gray-500">Loading details...</span>
                     </div>
                   ) : (
                     <>
                       {/* Status badges */}
                       <div className="flex flex-wrap gap-2">
-                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${viewPract.isVerified ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}`}>
+                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${viewPract.isVerified ? 'bg-green-100 text-green-700' : 'bg-indigo-100 text-indigo-700'}`}>
                           {viewPract.isVerified ? '✓ Verified' : '⏳ Pending'}
                         </span>
                         <span className={`px-3 py-1 rounded-full text-xs font-bold ${viewPract.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'}`}>
@@ -820,7 +820,7 @@ export default function AdminUsersPage() {
                           <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Specializations</p>
                           <div className="flex flex-wrap gap-1.5">
                             {(viewPractProfile?.specializations || viewPract.specialties).map((s: string) => (
-                              <span key={s} className="px-2.5 py-1 bg-amber-50 text-amber-700 text-xs font-semibold rounded-full border border-amber-200">{s}</span>
+                              <span key={s} className="px-2.5 py-1 bg-indigo-50 text-indigo-700 text-xs font-semibold rounded-full border border-indigo-200">{s}</span>
                             ))}
                           </div>
                         </div>

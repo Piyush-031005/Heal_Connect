@@ -70,7 +70,7 @@ export default function UserRequestsPage() {
             <div className="flex gap-2 mt-2">
               <button 
                 onClick={() => { toast.dismiss(t.id); router.push('/dashboard'); }}
-                className="px-3 py-1.5 bg-amber-500 text-white rounded-lg text-sm font-medium hover:bg-amber-600 transition-colors"
+                className="px-3 py-1.5 bg-indigo-500 text-white rounded-lg text-sm font-medium hover:bg-indigo-600 transition-colors"
               >
                 Go to Dashboard
               </button>
@@ -98,17 +98,17 @@ export default function UserRequestsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-amber-500" />
+      <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] p-6 lg:p-12 font-sans">
+    <div className="min-h-screen bg-[#faf9f6] p-6 lg:p-12 font-sans">
       <div className="max-w-4xl mx-auto space-y-8">
         <h1 className="text-3xl font-extrabold text-gray-900 flex items-center gap-3">
-          <Calendar className="h-8 w-8 text-amber-500" />
+          <Calendar className="h-8 w-8 text-indigo-500" />
           Session Requests
         </h1>
 
@@ -120,18 +120,18 @@ export default function UserRequestsPage() {
           <div className="grid gap-6">
             {requests.map((req) => (
               <Card key={req.id} className="border border-yellow-200/60 shadow-sm rounded-2xl overflow-hidden">
-                <CardHeader className="bg-amber-50/50 pb-4">
+                <CardHeader className="bg-indigo-50/50 pb-4">
                   <div className="flex justify-between items-center">
                     <CardTitle className="text-lg flex items-center gap-3">
                       {req.practitioner.photoUrl ? (
                         <img src={req.practitioner.photoUrl} alt="Practitioner" className="w-10 h-10 rounded-full object-cover" />
                       ) : (
-                        <div className="w-10 h-10 rounded-full bg-amber-200 flex items-center justify-center font-bold text-amber-700">
+                        <div className="w-10 h-10 rounded-full bg-indigo-200 flex items-center justify-center font-bold text-indigo-700">
                           {req.practitioner.name.charAt(0)}
                         </div>
                       )}
                       <div>
-                        Request with <span className="text-amber-600">{req.practitioner.name}</span>
+                        Request with <span className="text-indigo-600">{req.practitioner.name}</span>
                         <div className="text-sm font-normal text-gray-500 mt-0.5">
                           Requested on {new Date(req.createdAt).toLocaleDateString()}
                         </div>
@@ -160,12 +160,12 @@ export default function UserRequestsPage() {
                           const start = new Date(proposal.startTime);
                           const formatter = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
                           return (
-                            <div key={proposal.id} className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-xl hover:border-amber-300 transition-colors">
+                            <div key={proposal.id} className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-xl hover:border-indigo-300 transition-colors">
                               <span className="font-medium text-gray-800">{formatter.format(start)}</span>
                               <Button 
                                 onClick={() => handleSelectTime(req.id, proposal.id)}
                                 disabled={selecting !== null}
-                                className="bg-amber-500 hover:bg-amber-600 text-white rounded-lg px-6"
+                                className="bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg px-6"
                               >
                                 {selecting === proposal.id ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Confirm Time'}
                               </Button>

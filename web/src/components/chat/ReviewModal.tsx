@@ -64,8 +64,8 @@ export default function ReviewModal({ open, practitionerId, practitionerName, se
 
         {submitted ? (
           <div className="text-center py-6">
-            <div className="w-14 h-14 rounded-full bg-amber-50 flex items-center justify-center mx-auto mb-3">
-              <Star className="w-7 h-7 text-amber-500 fill-amber-500" />
+            <div className="w-14 h-14 rounded-full bg-indigo-50 flex items-center justify-center mx-auto mb-3">
+              <Star className="w-7 h-7 text-indigo-500 fill-indigo-500" />
             </div>
             <p className="font-bold text-lg text-gray-900">Review Submitted!</p>
             <p className="text-sm text-gray-500 mt-1">Thank you for your feedback.</p>
@@ -74,7 +74,7 @@ export default function ReviewModal({ open, practitionerId, practitionerName, se
           <>
             <div className="text-center mb-5">
               <p className="font-bold text-lg text-gray-900">Rate your session</p>
-              <p className="text-sm text-gray-500 mt-1">How was your experience with <span className="font-semibold text-amber-600">{practitionerName}</span>?</p>
+              <p className="text-sm text-gray-500 mt-1">How was your experience with <span className="font-semibold text-indigo-600">{practitionerName}</span>?</p>
             </div>
 
             {/* Stars */}
@@ -89,7 +89,7 @@ export default function ReviewModal({ open, practitionerId, practitionerName, se
                 >
                   <Star
                     className={`w-9 h-9 transition-colors ${
-                      star <= activeRating ? 'text-amber-400 fill-amber-400' : 'text-gray-200 fill-gray-200'
+                      star <= activeRating ? 'text-indigo-400 fill-indigo-400' : 'text-gray-200 fill-gray-200'
                     }`}
                   />
                 </button>
@@ -97,7 +97,7 @@ export default function ReviewModal({ open, practitionerId, practitionerName, se
             </div>
 
             {/* Rating label */}
-            <p className="text-center text-sm font-semibold text-amber-600 mb-4 h-5">
+            <p className="text-center text-sm font-semibold text-indigo-600 mb-4 h-5">
               {activeRating > 0 ? labels[activeRating] : ''}
             </p>
 
@@ -108,7 +108,7 @@ export default function ReviewModal({ open, practitionerId, practitionerName, se
               placeholder="Share your experience (optional)..."
               rows={3}
               maxLength={500}
-              className="w-full rounded-xl border border-amber-200 bg-amber-50 px-3 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400/40 resize-none"
+              className="w-full rounded-xl border border-indigo-200 bg-indigo-50 px-3 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/40 resize-none"
             />
             <p className="text-xs text-gray-400 text-right mt-1">{comment.length}/500</p>
 
@@ -124,7 +124,7 @@ export default function ReviewModal({ open, practitionerId, practitionerName, se
               <button
                 onClick={handleSubmit}
                 disabled={loading || rating === 0}
-                className="flex-1 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                className="flex-1 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-semibold transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><Send className="w-4 h-4" /> Submit</>}
               </button>

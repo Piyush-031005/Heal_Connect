@@ -78,7 +78,7 @@ export default function AudioCallScreen({ sessionId }: Props) {
         )}
         {callState === 'waiting' && (
           <>
-            <p className="font-semibold text-amber-500 animate-pulse">Waiting...</p>
+            <p className="font-semibold text-indigo-500 animate-pulse">Waiting...</p>
             <p className="text-xs text-muted-foreground">Waiting for other party to join...</p>
           </>
         )}

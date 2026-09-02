@@ -113,13 +113,13 @@ export default function ExpertSignupPage() {
     }
   };
 
-  const inputCls = "w-full h-12 rounded-xl border border-yellow-200 bg-[#fffbf0] px-4 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition";
+  const inputCls = "w-full h-12 rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition";
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] flex flex-col md:flex-row font-sans">
+    <div className="min-h-screen bg-[#faf9f6] flex flex-col md:flex-row font-sans">
 
       {/* Left panel */}
-      <div className="hidden md:flex flex-col justify-between w-5/12 p-12 bg-gradient-to-br from-amber-500 via-amber-600 to-orange-700 relative overflow-hidden">
+      <div className="hidden md:flex flex-col justify-between w-5/12 p-12 bg-gradient-to-br from-indigo-500 via-indigo-600 to-orange-700 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
@@ -130,7 +130,7 @@ export default function ExpertSignupPage() {
           <h1 className="text-4xl font-extrabold text-white mb-4 leading-tight">
             Join as an<br />Expert Practitioner
           </h1>
-          <p className="text-amber-100/80 text-sm leading-relaxed mt-4 max-w-xs">
+          <p className="text-indigo-100/80 text-sm leading-relaxed mt-4 max-w-xs">
             Create your account and complete a short onboarding form. Our team will review your application and get back to you.
           </p>
           <div className="mt-8 space-y-3">
@@ -140,7 +140,7 @@ export default function ExpertSignupPage() {
           </div>
         </div>
         <div className="relative z-10 border-t border-white/20 pt-6">
-          <p className="text-amber-100/60 text-xs">© 2026 ZenAuraa. All rights reserved.</p>
+          <p className="text-indigo-100/60 text-xs">© 2026 ZenAuraa. All rights reserved.</p>
         </div>
       </div>
 
@@ -148,7 +148,7 @@ export default function ExpertSignupPage() {
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 relative">
         <div className="flex items-center gap-2 mb-8 md:hidden">
           <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
+          <span className="text-xl font-extrabold text-indigo-500">ZenAuraa</span>
         </div>
 
         <div className="w-full max-w-md">
@@ -241,7 +241,7 @@ export default function ExpertSignupPage() {
               </div>
               
               <button type="submit" disabled={loading}
-                className="mt-3 w-full h-12 bg-amber-500 hover:bg-amber-600 disabled:opacity-60 text-white font-bold rounded-full text-sm shadow-lg flex items-center justify-center gap-2 transition-colors">
+                className="mt-3 w-full h-12 bg-indigo-500 hover:bg-indigo-600 disabled:opacity-60 text-white font-bold rounded-full text-sm shadow-lg flex items-center justify-center gap-2 transition-colors">
                 {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
                 {loading ? 'Creating account...' : <>Create Account & Continue <ArrowRight className="w-4 h-4" /></>}
               </button>
@@ -270,7 +270,7 @@ export default function ExpertSignupPage() {
 
           <p className="text-center text-sm text-gray-500 mt-5">
             Already have an account?{' '}
-            <Link href="/expert/login-email" className="text-amber-600 font-semibold hover:underline">Sign in</Link>
+            <Link href="/expert/login-email" className="text-indigo-600 font-semibold hover:underline">Sign in</Link>
           </p>
         </div>
       </div>

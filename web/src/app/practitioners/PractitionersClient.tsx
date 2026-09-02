@@ -41,7 +41,7 @@ const SPECIALTIES = ['Vedic Astrology', 'Tarot', 'Reiki', 'Vastu', 'Numerology',
 const LANGUAGES = ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Bengali', 'Marathi'];
 const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
-const SELECT_CLS = 'w-full text-sm rounded-lg bg-yellow-50 border border-yellow-200 px-3 py-2 text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#f59e0b]/40';
+const SELECT_CLS = 'w-full text-sm rounded-lg bg-yellow-50 border border-yellow-200 px-3 py-2 text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#4f46e5]/40';
 
 export default function PractitionersPage() {
   const router = useRouter();
@@ -112,7 +112,7 @@ export default function PractitionersPage() {
   const activeFilterCount = [filters.specialty, filters.language, filters.minRating, filters.maxRate].filter(Boolean).length + (filters.onlineOnly ? 1 : 0);
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] text-[#1a1a1a] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
       <Navbar />
 
       <main className="flex-1 container mx-auto px-4 pt-24 pb-8">
@@ -132,7 +132,7 @@ export default function PractitionersPage() {
               onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
               onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
               onKeyDown={(e) => { if (e.key === 'Escape') setShowSuggestions(false); }}
-              className="w-full pl-9 pr-4 py-2 text-sm rounded-full bg-yellow-50 border border-yellow-200 focus:outline-none focus:ring-2 focus:ring-[#f59e0b]/40 text-[#1a1a1a] placeholder:text-gray-400"
+              className="w-full pl-9 pr-4 py-2 text-sm rounded-full bg-yellow-50 border border-yellow-200 focus:outline-none focus:ring-2 focus:ring-[#4f46e5]/40 text-[#1a1a1a] placeholder:text-gray-400"
             />
 
             {/* Autocomplete dropdown */}
@@ -142,7 +142,7 @@ export default function PractitionersPage() {
                   <button
                     key={p.id}
                     onClick={() => { setShowSuggestions(false); router.push(`/practitioners/${p.id}`); }}
-                    className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-amber-50 transition-colors text-left border-b border-gray-50 last:border-b-0"
+                    className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 transition-colors text-left border-b border-gray-50 last:border-b-0"
                   >
                     <img src={getPractitionerAvatar(p.photoUrl, p.name)} alt={p.name} className="w-8 h-8 rounded-full object-cover shrink-0" />
                     <div className="min-w-0 flex-1">
@@ -158,7 +158,7 @@ export default function PractitionersPage() {
           <Button variant="outline" onClick={() => setShowFilters((v) => !v)} className="rounded-full gap-2 border-yellow-200 hover:bg-yellow-50 text-[#1a1a1a]">
             <SlidersHorizontal className="h-4 w-4" />
             Filters
-            {activeFilterCount > 0 && <span className="w-5 h-5 rounded-full bg-[#f59e0b] text-white text-xs flex items-center justify-center">{activeFilterCount}</span>}
+            {activeFilterCount > 0 && <span className="w-5 h-5 rounded-full bg-[#4f46e5] text-white text-xs flex items-center justify-center">{activeFilterCount}</span>}
           </Button>
         </div>
 
@@ -192,7 +192,7 @@ export default function PractitionersPage() {
             </div>
             <div className="flex flex-col justify-end gap-2">
               <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" checked={filters.onlineOnly} onChange={(e) => setFilters((f) => ({ ...f, onlineOnly: e.target.checked }))} className="w-4 h-4 accent-[#f59e0b]" />
+                <input type="checkbox" checked={filters.onlineOnly} onChange={(e) => setFilters((f) => ({ ...f, onlineOnly: e.target.checked }))} className="w-4 h-4 accent-[#4f46e5]" />
                 <span className="text-sm text-[#1a1a1a]">Online Now</span>
               </label>
               {activeFilterCount > 0 && (
@@ -207,10 +207,10 @@ export default function PractitionersPage() {
         {/* Active filter chips */}
         {activeFilterCount > 0 && (
           <div className="flex flex-wrap gap-2 mb-5">
-            {filters.specialty && <Badge variant="outline" className="border-yellow-300 text-[#d97706] bg-yellow-50 gap-1">{filters.specialty}<button onClick={() => setFilters((f) => ({ ...f, specialty: '' }))}><X className="h-3 w-3" /></button></Badge>}
-            {filters.language && <Badge variant="outline" className="border-yellow-300 text-[#d97706] bg-yellow-50 gap-1">{filters.language}<button onClick={() => setFilters((f) => ({ ...f, language: '' }))}><X className="h-3 w-3" /></button></Badge>}
-            {filters.minRating && <Badge variant="outline" className="border-yellow-300 text-[#d97706] bg-yellow-50 gap-1">⭐ {filters.minRating}+<button onClick={() => setFilters((f) => ({ ...f, minRating: '' }))}><X className="h-3 w-3" /></button></Badge>}
-            {filters.maxRate && <Badge variant="outline" className="border-yellow-300 text-[#d97706] bg-yellow-50 gap-1">≤ ₹{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))}><X className="h-3 w-3" /></button></Badge>}
+            {filters.specialty && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">{filters.specialty}<button onClick={() => setFilters((f) => ({ ...f, specialty: '' }))}><X className="h-3 w-3" /></button></Badge>}
+            {filters.language && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">{filters.language}<button onClick={() => setFilters((f) => ({ ...f, language: '' }))}><X className="h-3 w-3" /></button></Badge>}
+            {filters.minRating && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">⭐ {filters.minRating}+<button onClick={() => setFilters((f) => ({ ...f, minRating: '' }))}><X className="h-3 w-3" /></button></Badge>}
+            {filters.maxRate && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">≤ ₹{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))}><X className="h-3 w-3" /></button></Badge>}
             {filters.onlineOnly && <Badge variant="outline" className="border-emerald-300 text-emerald-600 bg-emerald-50 gap-1">Online Now<button onClick={() => setFilters((f) => ({ ...f, onlineOnly: false }))}><X className="h-3 w-3" /></button></Badge>}
           </div>
         )}
@@ -233,7 +233,7 @@ export default function PractitionersPage() {
             </div>
             {practitioners.length < total && (
               <div className="text-center mt-8">
-                <Button variant="outline" onClick={() => { const next = page + 1; setPage(next); fetchPractitioners(filters, next); }} disabled={loading} className="rounded-full px-8 border-yellow-300 text-[#d97706] hover:bg-yellow-50">
+                <Button variant="outline" onClick={() => { const next = page + 1; setPage(next); fetchPractitioners(filters, next); }} disabled={loading} className="rounded-full px-8 border-yellow-300 text-[#4338ca] hover:bg-yellow-50">
                   {loading ? 'Loading...' : 'Load more'}
                 </Button>
               </div>
@@ -250,10 +250,10 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
   const avatarSrc = getPractitionerAvatar(p.photoUrl, p.name);
 
   return (
-    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-white border border-gray-100 hover:border-amber-200 hover:shadow-lg transition-all cursor-pointer rounded-2xl overflow-hidden group h-full">
+    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-white border border-gray-100 hover:border-indigo-200 hover:shadow-lg transition-all cursor-pointer rounded-2xl overflow-hidden group h-full">
       <CardContent className="p-0 flex flex-col h-full">
         {/* Top strip with avatar */}
-        <div className="relative h-16 bg-gradient-to-r from-amber-50 to-orange-50 shrink-0">
+        <div className="relative h-16 bg-gradient-to-r from-indigo-50 to-orange-50 shrink-0">
           <div className="absolute -bottom-7 left-5">
             <img src={avatarSrc} alt={p.name} className="w-14 h-14 rounded-xl object-cover shadow-md border-2 border-white" />
           </div>
@@ -276,19 +276,19 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
           <div className="flex items-start justify-between mb-1">
             <div>
               <p className="font-bold text-gray-900 text-base">{p.name}</p>
-              <p className="text-sm text-amber-600 font-medium">{p.specialties.slice(0, 2).join(' · ') || '—'}</p>
+              <p className="text-sm text-indigo-600 font-medium">{p.specialties.slice(0, 2).join(' · ') || '—'}</p>
             </div>
             {p.isVerified && (
-              <div className="flex items-center gap-1 bg-amber-50 border border-amber-200 rounded-lg px-2 py-1 shrink-0">
-                <Shield className="w-3 h-3 text-amber-600" />
-                <span className="text-[10px] font-semibold text-amber-700">Verified</span>
+              <div className="flex items-center gap-1 bg-indigo-50 border border-indigo-200 rounded-lg px-2 py-1 shrink-0">
+                <Shield className="w-3 h-3 text-indigo-600" />
+                <span className="text-[10px] font-semibold text-indigo-700">Verified</span>
               </div>
             )}
           </div>
 
           <div className="flex items-center gap-3 mt-2 mb-3">
             <div className="flex items-center gap-1">
-              <Star className="w-3.5 h-3.5 text-amber-400 fill-current" />
+              <Star className="w-3.5 h-3.5 text-indigo-400 fill-current" />
               <span className="text-sm font-semibold text-gray-900">{p.avgRating || '—'}</span>
               <span className="text-xs text-gray-400">({p.reviewCount})</span>
             </div>
@@ -312,10 +312,10 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
               <span className="text-xs text-gray-400">/min</span>
             </div>
             <div className="flex gap-2">
-              <Button size="sm" variant="outline" className="h-8 px-3 border-gray-200 hover:border-amber-300 hover:text-amber-700 text-xs gap-1" disabled={!p.isOnline || p.isBusy} onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+              <Button size="sm" variant="outline" className="h-8 px-3 border-gray-200 hover:border-indigo-300 hover:text-indigo-700 text-xs gap-1" disabled={!p.isOnline || p.isBusy} onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
                 <MessageCircle className="h-3.5 w-3.5" /> Chat
               </Button>
-              <Button size="sm" disabled={!p.isOnline || p.isBusy} className="h-8 px-3 bg-amber-500 hover:bg-amber-600 text-white border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+              <Button size="sm" disabled={!p.isOnline || p.isBusy} className="h-8 px-3 bg-indigo-500 hover:bg-indigo-600 text-white border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
                 <Phone className="h-3.5 w-3.5" /> Call
               </Button>
             </div>

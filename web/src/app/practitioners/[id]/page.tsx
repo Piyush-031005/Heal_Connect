@@ -143,18 +143,18 @@ export default function PractitionerDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center font-sans">
-        <Loader2 className="h-9 w-9 text-[#f59e0b] animate-spin" />
+      <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center font-sans">
+        <Loader2 className="h-9 w-9 text-[#4f46e5] animate-spin" />
       </div>
     );
   }
 
   if (!p) {
     return (
-      <div className="min-h-screen bg-[#fffbf0] flex flex-col items-center justify-center gap-4 font-sans">
+      <div className="min-h-screen bg-[#faf9f6] flex flex-col items-center justify-center gap-4 font-sans">
         <p className="text-gray-500 font-medium">Practitioner not found.</p>
         <Link href="/practitioners">
-          <Button variant="outline" className="border-yellow-200 text-[#d97706] hover:bg-yellow-50 rounded-xl">
+          <Button variant="outline" className="border-yellow-200 text-[#4338ca] hover:bg-yellow-50 rounded-xl">
             Back to Directory
           </Button>
         </Link>
@@ -165,14 +165,14 @@ export default function PractitionerDetailPage() {
   const avatarUrl = getAvatarUrl(p.name, p.photoUrl);
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] text-[#1a1a1a] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-yellow-100/80 bg-white/80 backdrop-blur-md transition-all">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <button onClick={() => router.back()} className="flex items-center gap-2 text-gray-600 hover:text-[#f59e0b] transition-colors group bg-transparent border-none cursor-pointer">
+          <button onClick={() => router.back()} className="flex items-center gap-2 text-gray-600 hover:text-[#4f46e5] transition-colors group bg-transparent border-none cursor-pointer">
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            <Image src="/logo.png" alt="Zenauraa" width={28} height={28} className="rounded-full shadow-sm" />
-            <span className="font-extrabold text-[#f59e0b] tracking-tight">Zenauraa</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full shadow-sm" />
+            <span className="font-extrabold text-[#4f46e5] tracking-tight">ZenAuraa</span>
           </button>
         </div>
       </header>
@@ -207,17 +207,17 @@ export default function PractitionerDetailPage() {
                       {p.name}
                       <Sparkles className="w-5 h-5 text-purple-300" />
                     </h1>
-                    <p className="text-[#f59e0b] font-semibold text-sm mt-0.5">{p.specialties.join(' · ')}</p>
+                    <p className="text-[#4f46e5] font-semibold text-sm mt-0.5">{p.specialties.join(' · ')}</p>
                   </div>
                   {p.isVerified && (
-                    <Badge variant="outline" className="border-amber-300 text-[#d97706] bg-purple-50/80 gap-1.5 px-3 py-1 rounded-full shrink-0 shadow-sm mx-auto sm:mx-0">
+                    <Badge variant="outline" className="border-indigo-300 text-[#4338ca] bg-purple-50/80 gap-1.5 px-3 py-1 rounded-full shrink-0 shadow-sm mx-auto sm:mx-0">
                       <Shield className="h-3.5 w-3.5" /> Verified Practitioner
                     </Badge>
                   )}
                 </div>
 
                 <div className="flex items-center justify-center sm:justify-start gap-3 flex-wrap text-sm pt-1">
-                  <div className="flex items-center gap-1.5 bg-purple-50 px-2.5 py-1 rounded-full border border-amber-200/60">
+                  <div className="flex items-center gap-1.5 bg-purple-50 px-2.5 py-1 rounded-full border border-indigo-200/60">
                     <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                     <span className="font-extrabold text-gray-900">{p.avgRating || '5.0'}</span>
                     <span className="text-gray-400 text-xs">({p.reviewCount || 12} reviews)</span>
@@ -233,7 +233,7 @@ export default function PractitionerDetailPage() {
             </div>
 
             {p.bio && (
-              <p className="text-sm text-gray-600 mt-5 pt-4 border-t border-gray-100 leading-relaxed bg-purple-50/30 p-4 rounded-2xl border border-amber-100/50">
+              <p className="text-sm text-gray-600 mt-5 pt-4 border-t border-gray-100 leading-relaxed bg-purple-50/30 p-4 rounded-2xl border border-indigo-100/50">
                 {p.bio}
               </p>
             )}
@@ -249,7 +249,7 @@ export default function PractitionerDetailPage() {
                   onClick={handleStartChat}
                   disabled={!p.isOnline || chatting}
                   variant="outline" 
-                  className="border-yellow-200 hover:border-yellow-400 hover:text-[#d97706] hover:bg-purple-50 gap-2 rounded-2xl px-5 font-semibold transition-all disabled:opacity-40"
+                  className="border-yellow-200 hover:border-yellow-400 hover:text-[#4338ca] hover:bg-purple-50 gap-2 rounded-2xl px-5 font-semibold transition-all disabled:opacity-40"
                 >
                   {chatting ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -261,7 +261,7 @@ export default function PractitionerDetailPage() {
                 <Button
                   onClick={handleStartCall}
                   disabled={!p.isOnline || calling}
-                  className="bg-gradient-to-r from-purple-400 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-extrabold border-0 gap-2 rounded-2xl px-6 py-6 shadow-lg shadow-purple-400/25 hover:scale-105 active:scale-95 transition-all disabled:opacity-40"
+                  className="bg-gradient-to-r from-purple-400 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-extrabold border-0 gap-2 rounded-2xl px-6 py-6 shadow-lg shadow-purple-400/25 hover:scale-105 active:scale-95 transition-all disabled:opacity-40"
                 >
                   {calling ? (
                     <>
@@ -288,7 +288,7 @@ export default function PractitionerDetailPage() {
               </h2>
               <div className="flex flex-wrap gap-2">
                 {p.certifications.map((c) => (
-                  <Badge key={c} variant="outline" className="border-amber-200 text-[#d97706] bg-purple-50/60 px-3 py-1 rounded-xl text-xs font-semibold">
+                  <Badge key={c} variant="outline" className="border-indigo-200 text-[#4338ca] bg-purple-50/60 px-3 py-1 rounded-xl text-xs font-semibold">
                     {c}
                   </Badge>
                 ))}
@@ -310,7 +310,7 @@ export default function PractitionerDetailPage() {
                         <img
                           src={getAvatarUrl(r.user.name || 'User', r.user.photoUrl)}
                           alt={r.user.name || 'User'}
-                          className="w-8 h-8 rounded-full object-cover border border-amber-200"
+                          className="w-8 h-8 rounded-full object-cover border border-indigo-200"
                         />
                         <p className="font-bold text-sm text-gray-900">{r.user.name || 'Anonymous User'}</p>
                       </div>

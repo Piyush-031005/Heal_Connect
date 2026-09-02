@@ -87,7 +87,7 @@ export default function AdminFaqsPage() {
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">FAQs</h1>
             <p className="text-gray-500">Manage Frequently Asked Questions</p>
           </div>
-          <button onClick={() => openModal()} className="flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl font-bold shadow-md shadow-amber-600/20">
+          <button onClick={() => openModal()} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-bold shadow-md shadow-indigo-600/20">
             <Plus className="w-5 h-5" /> New FAQ
           </button>
         </div>
@@ -151,7 +151,7 @@ export default function AdminFaqsPage() {
               </div>
               <div className="flex justify-end gap-3 pt-4">
                 <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl font-bold">Cancel</button>
-                <button type="submit" className="px-4 py-2 bg-amber-600 text-white rounded-xl font-bold shadow-md">Save FAQ</button>
+                <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-xl font-bold shadow-md">Save FAQ</button>
               </div>
             </form>
           </div>

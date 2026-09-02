@@ -28,7 +28,7 @@ export default function NumerologyPage() {
       <div className="space-y-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Numerology Content</h1>
-          <button className="flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg transition-colors">
+          <button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-colors">
             <Plus size={20} />
             Add Content
           </button>
@@ -37,7 +37,7 @@ export default function NumerologyPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <StatCard label="Total Content" value="45" icon={<FileText size={20} />} />
           <StatCard label="Published" value="38" icon={<FileText size={20} />} color="text-green-600" />
-          <StatCard label="Drafts" value="7" icon={<FileText size={20} />} color="text-amber-600" />
+          <StatCard label="Drafts" value="7" icon={<FileText size={20} />} color="text-indigo-600" />
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
@@ -61,7 +61,7 @@ export default function NumerologyPage() {
                 {data.map(item => (
                   <motion.tr key={item.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
                     <td className="px-6 py-4">{item.type}</td>
-                    <td className="px-6 py-4 font-semibold text-amber-600">{item.number}</td>
+                    <td className="px-6 py-4 font-semibold text-indigo-600">{item.number}</td>
                     <td className="px-6 py-4">{item.title}</td>
                     <td className="px-6 py-4">
                       <StatusBadge status={item.status} />

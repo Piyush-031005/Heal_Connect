@@ -157,19 +157,19 @@ export default function ExpertDashboardPage() {
     <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
 
       {/* ── Navbar ── */}
-      <header className="sticky top-0 z-50 w-full border-b border-amber-100 bg-white/80 backdrop-blur">
+      <header className="sticky top-0 z-50 w-full border-b border-indigo-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
-            <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
-            <span className="hidden sm:inline-flex items-center gap-1 ml-1 text-xs font-semibold text-amber-600 bg-amber-50 border border-amber-200 rounded-full px-2 py-0.5">
+            <span className="text-xl font-extrabold text-indigo-500">ZenAuraa</span>
+            <span className="hidden sm:inline-flex items-center gap-1 ml-1 text-xs font-semibold text-indigo-600 bg-indigo-50 border border-indigo-200 rounded-full px-2 py-0.5">
               <Sparkles className="w-3 h-3" /> Expert
             </span>
           </Link>
 
           <div className="flex items-center gap-3">
             {/* Session Requests Link */}
-            <Link href="/expert/requests" className="relative p-2 text-amber-600 hover:bg-amber-50 rounded-full transition-colors">
+            <Link href="/expert/requests" className="relative p-2 text-indigo-600 hover:bg-indigo-50 rounded-full transition-colors">
               <Bell className="w-5 h-5" />
               {/* Optional: You could add a red dot here if there are pending requests */}
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
@@ -193,32 +193,32 @@ export default function ExpertDashboardPage() {
             <div className="relative" ref={profileMenuRef}>
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white text-sm font-bold hover:opacity-90 transition-opacity overflow-hidden"
+                className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-orange-500 flex items-center justify-center text-white text-sm font-bold hover:opacity-90 transition-opacity overflow-hidden"
               >
                 {profile?.photoUrl
                   ? <img src={profile.photoUrl} alt={profile.name} className="w-full h-full object-cover" />
                   : initials}
               </button>
               {showProfileMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-amber-100 rounded-2xl shadow-xl overflow-hidden z-50">
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-indigo-100 rounded-2xl shadow-xl overflow-hidden z-50">
                   <div className="px-4 py-3 border-b border-gray-100">
                     <p className="text-sm font-semibold text-gray-900 truncate">{profile?.name}</p>
                     <p className="text-xs text-gray-400 truncate">{profile?.specialties?.[0] || 'Expert'}</p>
                   </div>
-                  <Link href="/expert/profile" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-amber-50 transition-colors flex items-center gap-3">
-                    <User className="w-4 h-4 text-amber-500" />
+                  <Link href="/expert/profile" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-indigo-50 transition-colors flex items-center gap-3">
+                    <User className="w-4 h-4 text-indigo-500" />
                     <span className="text-sm font-medium text-gray-700">My Profile</span>
                   </Link>
-                  <Link href="/expert/requests" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-amber-50 transition-colors flex items-center gap-3">
-                    <Bell className="w-4 h-4 text-amber-500" />
+                  <Link href="/expert/requests" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-indigo-50 transition-colors flex items-center gap-3">
+                    <Bell className="w-4 h-4 text-indigo-500" />
                     <span className="text-sm font-medium text-gray-700">Scheduled Sessions</span>
                   </Link>
-                  <Link href="/expert/transcripts" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-amber-50 transition-colors flex items-center gap-3">
-                    <FileText className="w-4 h-4 text-amber-500" />
+                  <Link href="/expert/transcripts" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-indigo-50 transition-colors flex items-center gap-3">
+                    <FileText className="w-4 h-4 text-indigo-500" />
                     <span className="text-sm font-medium text-gray-700">Call Transcripts</span>
                   </Link>
-                  <Link href="/expert/support" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-amber-50 transition-colors flex items-center gap-3">
-                    <LifeBuoy className="w-4 h-4 text-amber-500" />
+                  <Link href="/expert/support" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-indigo-50 transition-colors flex items-center gap-3">
+                    <LifeBuoy className="w-4 h-4 text-indigo-500" />
                     <span className="text-sm font-medium text-gray-700">Support</span>
                   </Link>
                   <button onClick={handleLogout} className="w-full px-4 py-3 hover:bg-red-50 transition-colors flex items-center gap-3">
@@ -235,9 +235,9 @@ export default function ExpertDashboardPage() {
       <main className="flex-1 container mx-auto px-4 py-8 space-y-6">
 
         {/* ── Welcome Banner ── */}
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 p-6 md:p-8">
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-indigo-500 via-orange-500 to-indigo-600 p-6 md:p-8">
           <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-amber-300/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-indigo-300/20 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <div className="w-16 h-16 rounded-2xl bg-white/20 border-2 border-white/30 flex items-center justify-center text-white text-2xl font-extrabold overflow-hidden shrink-0">
@@ -246,12 +246,12 @@ export default function ExpertDashboardPage() {
                   : initials}
               </div>
               <div>
-                <div className="flex items-center gap-2 text-amber-100 text-sm font-medium mb-1">
+                <div className="flex items-center gap-2 text-indigo-100 text-sm font-medium mb-1">
                   <HeartHandshake className="w-4 h-4" />
                   <span>Expert Dashboard</span>
                 </div>
                 <h1 className="text-2xl md:text-3xl font-extrabold text-white">Hello, {firstName}!</h1>
-                <p className="text-amber-100 text-sm mt-1">
+                <p className="text-indigo-100 text-sm mt-1">
                   {profile?.specialties?.slice(0, 2).join(' · ') || 'Wellness Expert'} · ₹{profile?.perMinuteRate}/min
                 </p>
               </div>
@@ -290,7 +290,7 @@ export default function ExpertDashboardPage() {
         {/* ── Stats Row ── */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: 'Total Earnings', value: `₹${totalEarnings.toFixed(2)}`, icon: IndianRupee, color: 'text-amber-500', bg: 'bg-amber-50' },
+            { label: 'Total Earnings', value: `₹${totalEarnings.toFixed(2)}`, icon: IndianRupee, color: 'text-indigo-500', bg: 'bg-indigo-50' },
             { label: 'Sessions Done', value: String(sessionsDone), icon: MessageCircle, color: 'text-emerald-600', bg: 'bg-emerald-50' },
             { label: 'Avg Rating', value: profile?.avgRating ? String(profile.avgRating) : '—', icon: Star, color: 'text-yellow-500', bg: 'bg-yellow-50' },
             { label: 'Active Now', value: sessions.length > 0 ? String(sessions.length) : '0', icon: TrendingUp, color: 'text-blue-500', bg: 'bg-blue-50' },
@@ -315,7 +315,7 @@ export default function ExpertDashboardPage() {
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-0.5">Incoming</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-indigo-700 mb-0.5">Incoming</p>
                 <h2 className="text-xl font-extrabold text-gray-900">Active Sessions</h2>
               </div>
               {sessions.length > 0 && (
@@ -327,9 +327,9 @@ export default function ExpertDashboardPage() {
             </div>
 
             {sessions.length === 0 ? (
-              <div className="bg-white rounded-2xl border border-dashed border-amber-200 p-12 text-center">
-                <div className="w-16 h-16 rounded-2xl bg-amber-50 flex items-center justify-center mx-auto mb-4">
-                  <MessageCircle className="w-8 h-8 text-amber-300" />
+              <div className="bg-white rounded-2xl border border-dashed border-indigo-200 p-12 text-center">
+                <div className="w-16 h-16 rounded-2xl bg-indigo-50 flex items-center justify-center mx-auto mb-4">
+                  <MessageCircle className="w-8 h-8 text-indigo-300" />
                 </div>
                 <p className="font-semibold text-gray-700 mb-1">No active sessions</p>
                 <p className="text-sm text-gray-400">
@@ -338,7 +338,7 @@ export default function ExpertDashboardPage() {
                 {!isOnline && (
                   <button
                     onClick={toggleOnline}
-                    className="mt-4 inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold px-5 py-2 rounded-full transition-colors"
+                    className="mt-4 inline-flex items-center gap-2 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-semibold px-5 py-2 rounded-full transition-colors"
                   >
                     <Wifi className="w-4 h-4" /> Go Online Now
                   </button>
@@ -349,9 +349,9 @@ export default function ExpertDashboardPage() {
                 {sessions.map((session) => (
                   <div
                     key={session.id}
-                    className="bg-white rounded-2xl border border-amber-100 p-4 flex items-center gap-4 shadow-sm hover:shadow-md hover:border-amber-200 transition-all"
+                    className="bg-white rounded-2xl border border-indigo-100 p-4 flex items-center gap-4 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all"
                   >
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-bold text-lg shrink-0 overflow-hidden">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-orange-500 flex items-center justify-center text-white font-bold text-lg shrink-0 overflow-hidden">
                       {session.user.photoUrl
                         ? <img src={session.user.photoUrl} alt={session.user.name ?? ''} className="w-full h-full object-cover" />
                         : <User className="w-6 h-6" />}
@@ -379,7 +379,7 @@ export default function ExpertDashboardPage() {
                         router.push(`/session/${session.id}`);
                       }}
                       size="sm"
-                      className="bg-amber-500 hover:bg-amber-600 text-white border-0 rounded-full px-5 font-semibold shrink-0"
+                      className="bg-indigo-500 hover:bg-indigo-600 text-white border-0 rounded-full px-5 font-semibold shrink-0"
                     >
                       Join
                     </Button>
@@ -437,20 +437,20 @@ export default function ExpertDashboardPage() {
           {/* ── Profile Card (right 1/3) ── */}
           <div className="space-y-4">
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-0.5">Your Profile</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-indigo-700 mb-0.5">Your Profile</p>
               <h2 className="text-xl font-extrabold text-gray-900">Overview</h2>
             </div>
 
             <Card className="bg-white border-0 shadow-md rounded-2xl overflow-hidden">
-              <div className="h-16 bg-gradient-to-r from-amber-400 to-orange-400" />
+              <div className="h-16 bg-gradient-to-r from-indigo-400 to-orange-400" />
               <CardContent className="px-5 pb-5 -mt-8">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 border-4 border-white flex items-center justify-center text-white text-xl font-extrabold overflow-hidden shadow-md mb-3">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-orange-500 border-4 border-white flex items-center justify-center text-white text-xl font-extrabold overflow-hidden shadow-md mb-3">
                   {profile?.photoUrl
                     ? <img src={profile.photoUrl} alt={profile?.name} className="w-full h-full object-cover" />
                     : initials}
                 </div>
                 <p className="font-bold text-gray-900 text-base">{profile?.name}</p>
-                <p className="text-sm text-amber-600 font-medium mb-3">{profile?.specialties?.slice(0, 2).join(' · ') || '—'}</p>
+                <p className="text-sm text-indigo-600 font-medium mb-3">{profile?.specialties?.slice(0, 2).join(' · ') || '—'}</p>
 
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center justify-between py-2 border-b border-gray-100">

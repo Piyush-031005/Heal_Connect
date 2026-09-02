@@ -106,7 +106,7 @@ export default function AdminReviewsPage() {
 
   const renderStars = (rating: number) =>
     Array.from({ length: 5 }).map((_, i) => (
-      <Star key={i} className={`h-4 w-4 ${i < rating ? 'text-amber-500 fill-amber-500' : 'text-gray-300 dark:text-gray-600'}`} />
+      <Star key={i} className={`h-4 w-4 ${i < rating ? 'text-indigo-500 fill-indigo-500' : 'text-gray-300 dark:text-gray-600'}`} />
     ));
 
   return (
@@ -119,7 +119,7 @@ export default function AdminReviewsPage() {
           </div>
           <button
             onClick={fetchReviews}
-            className="flex items-center gap-2 text-sm text-gray-500 hover:text-amber-600 transition-colors"
+            className="flex items-center gap-2 text-sm text-gray-500 hover:text-indigo-600 transition-colors"
           >
             <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
             Refresh
@@ -129,7 +129,7 @@ export default function AdminReviewsPage() {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard label="Total Reviews" value={loading ? '…' : stats.total} icon={MessageSquare} />
-          <StatCard label="Average Rating" value={loading ? '…' : stats.avgRating.toFixed(1)} icon={Star} color="text-amber-500" />
+          <StatCard label="Average Rating" value={loading ? '…' : stats.avgRating.toFixed(1)} icon={Star} color="text-indigo-500" />
           <StatCard label="5 Star Reviews" value={loading ? '…' : reviews.filter(r => r.rating === 5).length} icon={Star} color="text-green-500" />
           <StatCard label="1 Star Reviews" value={loading ? '…' : reviews.filter(r => r.rating === 1).length} icon={Flag} color="text-red-500" />
         </div>
@@ -142,7 +142,7 @@ export default function AdminReviewsPage() {
               <select
                 value={ratingFilter}
                 onChange={(e) => { setRatingFilter(e.target.value); setPage(1); }}
-                className="block w-full sm:w-32 pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="block w-full sm:w-32 pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="all">All Ratings</option>
                 <option value="5">5 Stars</option>

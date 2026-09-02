@@ -6,7 +6,7 @@ export default function TypingIndicator() {
       {[0, 150, 300].map((delay) => (
         <span
           key={delay}
-          className="w-2 h-2 rounded-full bg-[#f59e0b] animate-bounce"
+          className="w-2 h-2 rounded-full bg-[#4f46e5] animate-bounce"
           style={{ animationDelay: `${delay}ms` }}
         />
       ))}

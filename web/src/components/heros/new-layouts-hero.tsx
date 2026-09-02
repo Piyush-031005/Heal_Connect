@@ -32,13 +32,35 @@ export default function NewLayoutsHero() {
       case 'layout-1': return <FloatingPebbles />;
       case 'layout-5': return <AuroraBlob />;
       case 'layout-9': return <PeacockBloom />;
-      default: return null;
+      case 'layout-10': return <LightParticles />;
+      default: return <LightParticles />;
     }
   };
 
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-transparent min-h-[90vh] flex items-center">
+    <section className="relative overflow-hidden pt-8 pb-12 lg:pt-12 lg:pb-20 bg-transparent min-h-[90vh] flex items-center">
+      {/* Background Layer for layout-9 */}
+      {layout === 'layout-9' && (
+        <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+          <div className="absolute inset-0" style={{
+            background: `
+              radial-gradient(circle at 80% 40%, rgba(149,109,255,.18), transparent 45%),
+              radial-gradient(circle at 50% 60%, rgba(255,255,255,.5), transparent 55%),
+              radial-gradient(circle at 90% 80%, rgba(110,80,255,.12), transparent 45%),
+              linear-gradient(180deg, #F7F0FF, #F0E5FF, #E9DBFF)
+            `
+          }} />
+          <div className="absolute inset-0 mix-blend-overlay opacity-[0.03]" style={{
+            backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")'
+          }} />
+          <div className="absolute inset-0" style={{
+            background: 'radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,.06) 100%)'
+          }} />
+        </div>
+      )}
+      
       {/* Container */}
+
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           
@@ -46,15 +68,21 @@ export default function NewLayoutsHero() {
           <div className="max-w-2xl">
             
             {/* Action Buttons (Yellowish) */}
-            <div className="flex items-center gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-100">
-              <button className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#F5DD97] hover:bg-[#e0c67e] shadow-lg shadow-[#F5DD97]/20 border-none text-[#1E2059] text-sm font-semibold transition-all">
-                <MessageCircle className="w-4 h-4 text-[#B48A28]" />
-                <span>Start Chat</span>
-              </button>
-              <button className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#F5DD97] hover:bg-[#e0c67e] text-[#1E2059] text-sm font-bold transition-all shadow-lg shadow-[#F5DD97]/20">
-                <Phone className="w-4 h-4" />
-                <span>Start Calling</span>
-              </button>
+            <div className="flex flex-col sm:flex-row gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-100">
+              <Link href="#" className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/40 hover:bg-white/60 backdrop-blur-md border border-white/50 text-[#1E2059] transition-all shadow-sm">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Apple_logo_white.svg" alt="Apple" className="w-5 h-5 invert brightness-0" />
+                <div className="flex flex-col items-start leading-none">
+                  <span className="text-[10px] font-medium opacity-80">Download on the</span>
+                  <span className="text-sm font-bold">App Store</span>
+                </div>
+              </Link>
+              <Link href="#" className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/40 hover:bg-white/60 backdrop-blur-md border border-white/50 text-[#1E2059] transition-all shadow-sm">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" alt="Play Store" className="w-5 h-5" />
+                <div className="flex flex-col items-start leading-none">
+                  <span className="text-[10px] font-medium opacity-80">GET IT ON</span>
+                  <span className="text-sm font-bold">Google Play</span>
+                </div>
+              </Link>
             </div>
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-medium not-italic tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000 text-[#1E2059]">
@@ -72,11 +100,7 @@ export default function NewLayoutsHero() {
                   Ask me Anything <ArrowRight className="w-5 h-5 ml-2 inline" />
                 </Button>
               </Link>
-              <Link href="/horoscope">
-                <Button size="lg" variant="outline" className="px-10 h-14 text-lg rounded-full font-semibold transition-all bg-[#1E2059] hover:bg-[#2A1658] border-none text-white shadow-lg shadow-[#1E2059]/20">
-                  Today's Horoscope
-                </Button>
-              </Link>
+              
             </div>
 
             {/* Avatar Review Block */}
@@ -112,3 +136,4 @@ export default function NewLayoutsHero() {
     </section>
   );
 }
+

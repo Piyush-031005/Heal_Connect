@@ -82,9 +82,9 @@ function GoogleCallbackInner() {
   }, [router, searchParams]);
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center">
+    <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
       <div className="text-center">
-        <Loader2 className="w-12 h-12 text-[#f59e0b] animate-spin mx-auto mb-4" />
+        <Loader2 className="w-12 h-12 text-[#4f46e5] animate-spin mx-auto mb-4" />
         <p className="text-gray-600 text-lg">Signing you in with Google...</p>
       </div>
     </div>
@@ -94,8 +94,8 @@ function GoogleCallbackInner() {
 export default function GoogleCallbackPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center">
-        <Loader2 className="w-12 h-12 text-[#f59e0b] animate-spin" />
+      <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
+        <Loader2 className="w-12 h-12 text-[#4f46e5] animate-spin" />
       </div>
     }>
       <GoogleCallbackInner />

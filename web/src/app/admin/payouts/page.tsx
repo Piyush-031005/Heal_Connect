@@ -132,7 +132,7 @@ export default function PayoutProcessingPage() {
             <div>
               <p className="text-sm font-extrabold text-gray-900 dark:text-white">
                 RazorpayX Integration
-                <span className="ml-2 px-2 py-0.5 text-xs font-medium rounded-full bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400">Coming Soon</span>
+                <span className="ml-2 px-2 py-0.5 text-xs font-medium rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-400">Coming Soon</span>
               </p>
               <p className="text-xs text-gray-400 dark:text-white/40 mt-0.5">Payout requests, bank transfers and UPI will be managed here once RazorpayX is configured.</p>
             </div>

@@ -19,15 +19,15 @@ function StepBar({ step }: { step: number }) {
           <div key={s} className="flex items-center">
             <div className="flex flex-col items-center gap-1.5">
               <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all ${
-                done    ? 'bg-amber-500 border-amber-500 text-white' :
-                active  ? 'bg-white border-amber-500 text-amber-600' :
+                done    ? 'bg-indigo-500 border-indigo-500 text-white' :
+                active  ? 'bg-white border-indigo-500 text-indigo-600' :
                           'bg-white border-gray-200 text-gray-400'
               }`}>
                 {done ? '✓' : s}
               </div>
-              <span className={`text-[11px] font-medium hidden sm:block ${active ? 'text-amber-600' : done ? 'text-amber-400' : 'text-gray-400'}`}>{label}</span>
+              <span className={`text-[11px] font-medium hidden sm:block ${active ? 'text-indigo-600' : done ? 'text-indigo-400' : 'text-gray-400'}`}>{label}</span>
             </div>
-            {s < 3 && <div className={`w-16 sm:w-24 h-0.5 mx-1 mb-5 rounded ${done ? 'bg-amber-400' : 'bg-gray-200'}`} />}
+            {s < 3 && <div className={`w-16 sm:w-24 h-0.5 mx-1 mb-5 rounded ${done ? 'bg-indigo-400' : 'bg-gray-200'}`} />}
           </div>
         );
       })}
@@ -51,7 +51,7 @@ const OFFERING_OPTIONS = ['1-to-1 sessions', 'Readings / Consultations', 'Coachi
 function SectionLabel({ num, title, subtitle }: { num: string; title: string; subtitle?: string }) {
   return (
     <div className="flex items-start gap-3 mb-3">
-      <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-600 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{num}</span>
+      <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{num}</span>
       <div>
         <p className="text-sm font-bold text-gray-800">{title}</p>
         {subtitle && <p className="text-xs text-gray-400 mt-0.5">{subtitle}</p>}
@@ -64,15 +64,15 @@ function Pill({ label, active, onClick }: { label: string; active: boolean; onCl
   return (
     <button type="button" onClick={onClick}
       className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
-        active ? 'bg-amber-500 text-white border-amber-500 shadow-sm' : 'border-gray-200 text-gray-600 hover:border-amber-300 hover:text-amber-600 bg-white'
+        active ? 'bg-indigo-500 text-white border-indigo-500 shadow-sm' : 'border-gray-200 text-gray-600 hover:border-indigo-300 hover:text-indigo-600 bg-white'
       }`}>
       {label}
     </button>
   );
 }
 
-const selectCls = "w-full h-12 rounded-xl border border-yellow-200 bg-[#fffbf0] px-4 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition appearance-none";
-const textareaCls = "w-full rounded-xl border border-yellow-200 bg-[#fffbf0] px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition resize-none";
+const selectCls = "w-full h-12 rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition appearance-none";
+const textareaCls = "w-full rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition resize-none";
 
 export default function AstrologerProfilePage() {
   const router = useRouter();
@@ -139,16 +139,16 @@ export default function AstrologerProfilePage() {
   };
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center bg-[#fffbf0]">
-      <Loader2 className="w-8 h-8 animate-spin text-amber-500" />
+    <div className="min-h-screen flex items-center justify-center bg-[#faf9f6]">
+      <Loader2 className="w-8 h-8 animate-spin text-indigo-500" />
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] flex flex-col md:flex-row font-sans">
+    <div className="min-h-screen bg-[#faf9f6] flex flex-col md:flex-row font-sans">
 
       {/* Left panel */}
-      <div className="hidden md:flex flex-col justify-start w-5/12 p-12 bg-gradient-to-br from-amber-500 via-amber-600 to-orange-700 relative overflow-hidden sticky top-0 h-screen">
+      <div className="hidden md:flex flex-col justify-start w-5/12 p-12 bg-gradient-to-br from-indigo-500 via-indigo-600 to-orange-700 relative overflow-hidden sticky top-0 h-screen">
         <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
@@ -162,7 +162,7 @@ export default function AstrologerProfilePage() {
           <h1 className="text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight">
             Your<br />Practice
           </h1>
-          <p className="text-amber-200 text-lg font-semibold mb-5">Share your expertise with us.</p>
+          <p className="text-indigo-200 text-lg font-semibold mb-5">Share your expertise with us.</p>
           <p className="text-white/80 text-sm leading-relaxed max-w-sm">
             We welcome practitioners from all backgrounds — formal training, certification, mentorship, lineage, or years of dedicated practice.
           </p>
@@ -173,7 +173,7 @@ export default function AstrologerProfilePage() {
           </div>
         </div>
         <div className="relative z-10 mt-auto pt-12 border-t border-white/20">
-          <p className="text-amber-100/60 text-xs">© 2026 ZenAuraa. All rights reserved.</p>
+          <p className="text-indigo-100/60 text-xs">© 2026 ZenAuraa. All rights reserved.</p>
         </div>
       </div>
 
@@ -182,7 +182,7 @@ export default function AstrologerProfilePage() {
 
         <div className="flex items-center gap-2 mb-8 md:hidden">
           <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
+          <span className="text-xl font-extrabold text-indigo-500">ZenAuraa</span>
         </div>
 
         <div className="w-full max-w-2xl">
@@ -274,7 +274,7 @@ export default function AstrologerProfilePage() {
                 <ChevronLeft className="w-4 h-4" /> Back
               </button>
               <button onClick={handleNext} disabled={saving}
-                className="flex items-center gap-2 px-7 h-11 rounded-full bg-amber-500 hover:bg-amber-600 disabled:opacity-60 text-white text-sm font-bold shadow-lg transition-colors">
+                className="flex items-center gap-2 px-7 h-11 rounded-full bg-indigo-500 hover:bg-indigo-600 disabled:opacity-60 text-white text-sm font-bold shadow-lg transition-colors">
                 {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
                 Continue <ChevronRight className="w-4 h-4" />
               </button>

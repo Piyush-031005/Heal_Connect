@@ -76,7 +76,7 @@ export default function AdminAnalyticsPage() {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-xl font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
-              <BarChart3 className="w-5 h-5 text-amber-500" /> PostgreSQL Real Analytics Dashboard
+              <BarChart3 className="w-5 h-5 text-indigo-500" /> PostgreSQL Real Analytics Dashboard
             </h2>
             <p className="text-xs text-gray-500 font-semibold mt-0.5">
               Every chart and metric is generated dynamically from the live PostgreSQL database.
@@ -84,7 +84,7 @@ export default function AdminAnalyticsPage() {
           </div>
           <button
             onClick={fetchAnalytics}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 text-xs font-extrabold transition-all"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-extrabold transition-all"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} /> Refresh Data
           </button>
@@ -195,7 +195,7 @@ export default function AdminAnalyticsPage() {
                 {data.statusDistribution.map((s) => (
                   <div key={s.status} className="flex items-center justify-between text-xs font-bold">
                     <span className="text-gray-700 dark:text-white/80">{s.status}</span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 font-extrabold">{s.count}</span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-extrabold">{s.count}</span>
                   </div>
                 ))}
               </div>
@@ -213,7 +213,7 @@ export default function AdminAnalyticsPage() {
                   <div key={d.date} className="flex-1 flex flex-col items-center gap-1 group relative">
                     <div
                       style={{ height: `${(d.messages / maxMessages) * 90}px` }}
-                      className="w-full bg-gradient-to-t from-amber-500 to-orange-400 rounded-t-sm min-h-[3px]"
+                      className="w-full bg-gradient-to-t from-indigo-500 to-orange-400 rounded-t-sm min-h-[3px]"
                     />
                     <span className="text-[9px] font-bold text-gray-400">{d.date.slice(8)}</span>
                   </div>

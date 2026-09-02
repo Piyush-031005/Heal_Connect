@@ -10,7 +10,7 @@ const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfa
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'], variable: '--font-cormorant' });
 
 export const metadata: Metadata = {
-  title: "Zenauraa - Professional Wellness",
+  title: "ZenAuraa - Professional Wellness",
   description: "Connect with verified energy healers, Vastu experts, numerologists, and tarot readers instantly.",
 };
 

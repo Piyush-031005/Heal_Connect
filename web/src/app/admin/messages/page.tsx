@@ -150,7 +150,7 @@ export default function AdminMessagesPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="block w-full sm:w-40 pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="block w-full sm:w-40 pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="all">All Status</option>
                 <option value="new">New</option>
@@ -172,7 +172,7 @@ export default function AdminMessagesPage() {
                     <div 
                       key={msg.id}
                       onClick={() => setSelectedMessage(msg)}
-                      className={`p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors ${selectedMessage?.id === msg.id ? 'bg-amber-50 dark:bg-amber-900/10' : ''}`}
+                      className={`p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors ${selectedMessage?.id === msg.id ? 'bg-indigo-50 dark:bg-indigo-900/10' : ''}`}
                     >
                       <div className="flex justify-between items-start mb-1">
                         <h4 className={`text-sm font-medium ${msg.status === 'new' ? 'text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'}`}>
@@ -252,8 +252,8 @@ export default function AdminMessagesPage() {
                   </div>
                   
                   {selectedMessage.status === 'replied' && (
-                    <div className="border-l-4 border-amber-500 pl-4 py-1">
-                      <div className="text-xs font-medium text-amber-600 dark:text-amber-500 mb-1">Replied by Support</div>
+                    <div className="border-l-4 border-indigo-500 pl-4 py-1">
+                      <div className="text-xs font-medium text-indigo-600 dark:text-indigo-500 mb-1">Replied by Support</div>
                       <div className="text-sm text-gray-600 dark:text-gray-400">Response has been sent to user's email.</div>
                     </div>
                   )}
@@ -266,13 +266,13 @@ export default function AdminMessagesPage() {
                     value={replyText}
                     onChange={(e) => setReplyText(e.target.value)}
                     placeholder="Type your response here..."
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-amber-500 dark:bg-gray-700 dark:text-white resize-none mb-3"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white resize-none mb-3"
                   />
                   <div className="flex justify-end">
                     <button
                       onClick={handleSendReply}
                       disabled={!replyText.trim()}
-                      className="flex items-center px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors disabled:opacity-50"
+                      className="flex items-center px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors disabled:opacity-50"
                     >
                       <Send className="h-4 w-4 mr-2" />
                       Send Reply

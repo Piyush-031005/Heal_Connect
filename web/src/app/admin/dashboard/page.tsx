@@ -119,7 +119,7 @@ export default function AdminDashboard() {
         {/* Welcome Banner */}
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-5 flex items-center justify-between text-white shadow-lg shadow-amber-200/40 overflow-hidden relative"
+          className="bg-gradient-to-r from-indigo-500 to-orange-500 rounded-2xl p-5 flex items-center justify-between text-white shadow-lg shadow-indigo-200/40 overflow-hidden relative"
         >
           <div className="absolute right-0 top-0 w-48 h-full opacity-10">
             <Sparkles className="w-full h-full" />
@@ -240,9 +240,9 @@ export default function AdminDashboard() {
             className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 p-5 shadow-sm lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
-                <Activity className="w-4 h-4 text-amber-500" /> Real-time Activity Feed
+                <Activity className="w-4 h-4 text-indigo-500" /> Real-time Activity Feed
               </h3>
-              <span className="text-[10px] font-bold text-amber-600 bg-amber-50 dark:bg-amber-500/10 px-2 py-0.5 rounded-full">
+              <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 dark:bg-indigo-500/10 px-2 py-0.5 rounded-full">
                 {activities.length} Events
               </span>
             </div>
@@ -252,8 +252,8 @@ export default function AdminDashboard() {
               <div className="space-y-3">
                 {activities.map((act, i) => (
                   <div key={i} className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
-                    <div className="w-7 h-7 rounded-lg bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center shrink-0">
-                      <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                    <div className="w-7 h-7 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center shrink-0">
+                      <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-bold text-gray-900 dark:text-white">{act.title}</p>
@@ -284,11 +284,11 @@ export default function AdminDashboard() {
                   <div key={c.category} className="space-y-1">
                     <div className="flex justify-between text-xs font-extrabold text-gray-800 dark:text-white">
                       <span>{c.category}</span>
-                      <span className="text-amber-600">{c.count}</span>
+                      <span className="text-indigo-600">{c.count}</span>
                     </div>
                     <div className="w-full bg-gray-100 dark:bg-white/10 h-2 rounded-full overflow-hidden">
                       <div
-                        className="bg-gradient-to-r from-amber-400 to-orange-500 h-full rounded-full"
+                        className="bg-gradient-to-r from-indigo-400 to-orange-500 h-full rounded-full"
                         style={{ width: `${Math.min(100, (c.count / Math.max(...topCategories.map((t) => t.count), 1)) * 100)}%` }}
                       />
                     </div>

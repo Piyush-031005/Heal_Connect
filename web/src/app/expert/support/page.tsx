@@ -19,7 +19,7 @@ const CATEGORIES = [
 
 const STATUS_STYLES: Record<string, string> = {
   OPEN: 'bg-blue-50 text-blue-600 border-blue-200',
-  IN_PROGRESS: 'bg-amber-50 text-amber-700 border-amber-200',
+  IN_PROGRESS: 'bg-indigo-50 text-indigo-700 border-indigo-200',
   RESOLVED: 'bg-emerald-50 text-emerald-600 border-emerald-200',
   CLOSED: 'bg-gray-100 text-gray-500 border-gray-200',
 };
@@ -100,18 +100,18 @@ export default function ExpertSupportTicketsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] text-[#1a1a1a] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
       <header className="sticky top-0 z-50 w-full border-b border-yellow-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <Link href="/expert/dashboard" className="text-gray-500 hover:text-[#f59e0b] transition-colors">
+            <Link href="/expert/dashboard" className="text-gray-500 hover:text-[#4f46e5] transition-colors">
               <ArrowLeft className="h-5 w-5" />
             </Link>
             <h1 className="text-xl font-extrabold text-[#1a1a1a]">Support</h1>
           </div>
           <Button
             onClick={() => setShowForm((s) => !s)}
-            className="bg-amber-500 hover:bg-amber-600 text-white border-0 rounded-full px-4 font-semibold gap-1.5"
+            className="bg-indigo-500 hover:bg-indigo-600 text-white border-0 rounded-full px-4 font-semibold gap-1.5"
           >
             {showForm ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
             {showForm ? 'Cancel' : 'Raise a Ticket'}
@@ -121,19 +121,19 @@ export default function ExpertSupportTicketsPage() {
 
       <main className="flex-1 container mx-auto px-4 py-8 max-w-3xl space-y-4">
         {showForm && (
-          <Card className="bg-white border border-amber-200 shadow-sm">
+          <Card className="bg-white border border-indigo-200 shadow-sm">
             <CardContent className="p-5 space-y-3">
               <input
                 type="text"
                 placeholder="Subject"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
-                className="w-full text-sm rounded-lg bg-amber-50/70 border border-amber-200 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-400/40"
+                className="w-full text-sm rounded-lg bg-indigo-50/70 border border-indigo-200 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-400/40"
               />
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full text-sm rounded-lg bg-amber-50/70 border border-amber-200 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-400/40"
+                className="w-full text-sm rounded-lg bg-indigo-50/70 border border-indigo-200 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-400/40"
               >
                 {CATEGORIES.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
               </select>
@@ -142,12 +142,12 @@ export default function ExpertSupportTicketsPage() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={4}
-                className="w-full text-sm rounded-lg bg-amber-50/70 border border-amber-200 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-400/40 resize-none"
+                className="w-full text-sm rounded-lg bg-indigo-50/70 border border-indigo-200 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-400/40 resize-none"
               />
               <Button
                 onClick={handleCreate}
                 disabled={submitting || !subject.trim() || !message.trim()}
-                className="bg-amber-500 hover:bg-amber-600 text-white border-0 rounded-full px-6 font-semibold disabled:opacity-40"
+                className="bg-indigo-500 hover:bg-indigo-600 text-white border-0 rounded-full px-6 font-semibold disabled:opacity-40"
               >
                 {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Submit Ticket'}
               </Button>
@@ -157,7 +157,7 @@ export default function ExpertSupportTicketsPage() {
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-6 h-6 text-[#f59e0b] animate-spin" />
+            <Loader2 className="w-6 h-6 text-[#4f46e5] animate-spin" />
           </div>
         ) : tickets.length === 0 ? (
           <Card className="bg-white border border-yellow-100 shadow-sm">
@@ -203,7 +203,7 @@ export default function ExpertSupportTicketsPage() {
                             key={m.id}
                             className={`text-sm rounded-xl p-3 max-w-[85%] ${
                               m.senderType === 'ADMIN'
-                                ? 'bg-amber-50 border border-amber-100 mr-auto'
+                                ? 'bg-indigo-50 border border-indigo-100 mr-auto'
                                 : 'bg-gray-50 border border-gray-100 ml-auto'
                             }`}
                           >
@@ -223,12 +223,12 @@ export default function ExpertSupportTicketsPage() {
                           value={replyText}
                           onChange={(e) => setReplyText(e.target.value)}
                           onKeyDown={(e) => { if (e.key === 'Enter') handleReply(t.id); }}
-                          className="flex-1 text-sm rounded-full bg-amber-50/70 border border-amber-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400/40"
+                          className="flex-1 text-sm rounded-full bg-indigo-50/70 border border-indigo-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400/40"
                         />
                         <button
                           onClick={() => handleReply(t.id)}
                           disabled={replying || !replyText.trim()}
-                          className="p-2 rounded-full bg-amber-500 hover:bg-amber-600 text-white disabled:opacity-40 border-none cursor-pointer"
+                          className="p-2 rounded-full bg-indigo-500 hover:bg-indigo-600 text-white disabled:opacity-40 border-none cursor-pointer"
                         >
                           <Send className="w-4 h-4" />
                         </button>

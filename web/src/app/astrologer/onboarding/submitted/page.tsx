@@ -6,10 +6,10 @@ import Link from 'next/link';
 
 export default function AstrologerSubmittedPage() {
   return (
-    <div className="min-h-screen bg-[#fffbf0] flex flex-col md:flex-row font-sans">
+    <div className="min-h-screen bg-[#faf9f6] flex flex-col md:flex-row font-sans">
 
       {/* Left panel */}
-      <div className="hidden md:flex flex-col justify-between w-5/12 p-12 bg-gradient-to-br from-amber-500 via-amber-600 to-orange-700 relative overflow-hidden">
+      <div className="hidden md:flex flex-col justify-between w-5/12 p-12 bg-gradient-to-br from-indigo-500 via-indigo-600 to-orange-700 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
@@ -18,12 +18,12 @@ export default function AstrologerSubmittedPage() {
             <span className="text-2xl font-extrabold text-white">ZenAuraa</span>
           </Link>
           <h1 className="text-4xl font-extrabold text-white mb-4 leading-tight">Thank you<br />for applying.</h1>
-          <p className="text-amber-100/80 text-sm leading-relaxed mt-4 max-w-xs">
+          <p className="text-indigo-100/80 text-sm leading-relaxed mt-4 max-w-xs">
             We carefully review every application to maintain the quality of our practitioner community.
           </p>
         </div>
         <div className="relative z-10 border-t border-white/20 pt-6">
-          <p className="text-amber-100/60 text-xs">© 2026 ZenAuraa. All rights reserved.</p>
+          <p className="text-indigo-100/60 text-xs">© 2026 ZenAuraa. All rights reserved.</p>
         </div>
       </div>
 
@@ -31,7 +31,7 @@ export default function AstrologerSubmittedPage() {
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-12">
         <div className="flex items-center gap-2 mb-8 md:hidden">
           <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
+          <span className="text-xl font-extrabold text-indigo-500">ZenAuraa</span>
         </div>
 
         <div className="w-full max-w-md text-center">
@@ -46,7 +46,7 @@ export default function AstrologerSubmittedPage() {
           </p>
           <button
             onClick={() => window.location.href = '/login'}
-            className="mt-8 text-sm text-amber-600 hover:text-amber-700 font-semibold hover:underline transition-colors"
+            className="mt-8 text-sm text-indigo-600 hover:text-indigo-700 font-semibold hover:underline transition-colors"
           >
             Sign in to check your status →
           </button>

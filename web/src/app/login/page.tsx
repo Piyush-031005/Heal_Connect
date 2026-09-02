@@ -190,10 +190,10 @@ function LoginInner() {
   }
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] flex flex-col md:flex-row font-sans">
+    <div className="min-h-screen bg-[#faf9f6] flex flex-col md:flex-row font-sans">
 
       {/* Left — Branding */}
-      <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-gradient-to-br from-[#f59e0b] via-[#d97706] to-[#b45309] relative overflow-hidden">
+      <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-gradient-to-br from-[#4f46e5] via-[#4338ca] to-[#b45309] relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -240,7 +240,7 @@ function LoginInner() {
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
-            <span className="text-xl font-extrabold text-[#f59e0b]">ZenAuraa</span>
+            <span className="text-xl font-extrabold text-[#4f46e5]">ZenAuraa</span>
           </Link>
         </div>
 
@@ -261,7 +261,7 @@ function LoginInner() {
                 {verifyUrl && (
                   <a
                     href={verifyUrl}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold text-xs shadow-md transition-all"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#4f46e5] hover:bg-[#4338ca] text-white font-bold text-xs shadow-md transition-all"
                   >
                     ✦ Click Here to Verify Email Now →
                   </a>
@@ -275,14 +275,14 @@ function LoginInner() {
                 {/* User/Expert Toggle - Bold & Prominent */}
                 <div className="space-y-1.5">
                   <label className="block text-xs font-medium text-gray-500 uppercase tracking-wide">Account Type</label>
-                  <div className="flex rounded-2xl border-2 border-[#f59e0b]/20 overflow-hidden bg-gradient-to-br from-[#fffbf0] to-white p-1.5 gap-2 shadow-sm">
+                  <div className="flex rounded-2xl border-2 border-[#4f46e5]/20 overflow-hidden bg-gradient-to-br from-[#faf9f6] to-white p-1.5 gap-2 shadow-sm">
                     <button
                       type="button"
                       onClick={() => setRole('user')}
                       className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-base font-bold transition-all ${
                         role === 'user' 
-                          ? 'bg-gradient-to-br from-[#f59e0b] to-[#d97706] text-white shadow-lg scale-[1.02]' 
-                          : 'text-gray-600 hover:text-[#f59e0b] hover:bg-white/50'
+                          ? 'bg-gradient-to-br from-[#4f46e5] to-[#4338ca] text-white shadow-lg scale-[1.02]' 
+                          : 'text-gray-600 hover:text-[#4f46e5] hover:bg-white/50'
                       }`}
                     >
                       {role === 'user' && '✦ '}User
@@ -292,8 +292,8 @@ function LoginInner() {
                       onClick={() => setRole('expert')}
                       className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-base font-bold transition-all ${
                         role === 'expert' 
-                          ? 'bg-gradient-to-br from-[#f59e0b] to-[#d97706] text-white shadow-lg scale-[1.02]' 
-                          : 'text-gray-600 hover:text-[#f59e0b] hover:bg-white/50'
+                          ? 'bg-gradient-to-br from-[#4f46e5] to-[#4338ca] text-white shadow-lg scale-[1.02]' 
+                          : 'text-gray-600 hover:text-[#4f46e5] hover:bg-white/50'
                       }`}
                     >
                       {role === 'expert' && '✦ '}Expert
@@ -338,23 +338,23 @@ function LoginInner() {
                   <Label htmlFor="email" className="text-[#1a1a1a]">Email</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
-                    <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" className="pl-10 h-12 border-yellow-200 focus-visible:ring-[#f59e0b] bg-[#fffbf0] text-[#1a1a1a]" />
+                    <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" className="pl-10 h-12 border-yellow-200 focus-visible:ring-[#4f46e5] bg-[#faf9f6] text-[#1a1a1a]" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Label htmlFor="password" className="text-[#1a1a1a]">Password</Label>
-                    <button type="button" onClick={() => { setMode('forgot'); setError(''); setSuccess(''); }} className="text-sm text-[#f59e0b] hover:underline">Forgot password?</button>
+                    <button type="button" onClick={() => { setMode('forgot'); setError(''); setSuccess(''); }} className="text-sm text-[#4f46e5] hover:underline">Forgot password?</button>
                   </div>
                   <div className="relative">
                     <Lock className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
-                    <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password" className="pl-10 pr-10 h-12 border-yellow-200 focus-visible:ring-[#f59e0b] bg-[#fffbf0] text-[#1a1a1a]" />
+                    <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password" className="pl-10 pr-10 h-12 border-yellow-200 focus-visible:ring-[#4f46e5] bg-[#faf9f6] text-[#1a1a1a]" />
                     <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600" tabIndex={-1}>
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
                   </div>
                 </div>
-                <Button type="submit" disabled={loading} className="w-full bg-[#f59e0b] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full border-0 shadow-lg">
+                <Button type="submit" disabled={loading} className="w-full bg-[#4f46e5] hover:bg-[#4338ca] text-white h-12 text-base font-bold rounded-full border-0 shadow-lg">
                   {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>Log in <ArrowRight className="ml-2 h-4 w-4" /></>}
                 </Button>
               </form>
@@ -364,9 +364,9 @@ function LoginInner() {
               <form onSubmit={handleSendOtp} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="phone" className="text-[#1a1a1a]">Phone Number</Label>
-                  <Input id="phone" type="tel" placeholder="+919876543210" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 border-yellow-200 focus-visible:ring-[#f59e0b] bg-[#fffbf0] text-[#1a1a1a]" />
+                  <Input id="phone" type="tel" placeholder="+919876543210" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 border-yellow-200 focus-visible:ring-[#4f46e5] bg-[#faf9f6] text-[#1a1a1a]" />
                 </div>
-                <Button type="submit" disabled={loading} className="w-full bg-[#f59e0b] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full border-0 shadow-lg">
+                <Button type="submit" disabled={loading} className="w-full bg-[#4f46e5] hover:bg-[#4338ca] text-white h-12 text-base font-bold rounded-full border-0 shadow-lg">
                   {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>Send OTP <ArrowRight className="ml-2 h-4 w-4" /></>}
                 </Button>
               </form>
@@ -378,13 +378,13 @@ function LoginInner() {
                   <Label htmlFor="reset-email" className="text-[#1a1a1a]">Email</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
-                    <Input id="reset-email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required className="pl-10 h-12 border-yellow-200 focus-visible:ring-[#f59e0b] bg-[#fffbf0] text-[#1a1a1a]" />
+                    <Input id="reset-email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required className="pl-10 h-12 border-yellow-200 focus-visible:ring-[#4f46e5] bg-[#faf9f6] text-[#1a1a1a]" />
                   </div>
                 </div>
-                <Button type="submit" disabled={loading} className="w-full bg-[#f59e0b] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full border-0">
+                <Button type="submit" disabled={loading} className="w-full bg-[#4f46e5] hover:bg-[#4338ca] text-white h-12 text-base font-bold rounded-full border-0">
                   {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Send Reset Link'}
                 </Button>
-                <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-[#f59e0b] hover:underline">
+                <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-[#4f46e5] hover:underline">
                   ← Back to login
                 </button>
               </form>
@@ -416,7 +416,7 @@ function LoginInner() {
                 </div>
                 <p className="text-center text-sm text-gray-500 pt-1">
                   Don&apos;t have an account?{' '}
-                  <Link href="/signup" className="text-[#f59e0b] font-semibold hover:underline">Sign up</Link>
+                  <Link href="/signup" className="text-[#4f46e5] font-semibold hover:underline">Sign up</Link>
                 </p>
               </>
             )}
