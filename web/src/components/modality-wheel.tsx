@@ -102,7 +102,7 @@ export default function ModalityWheel() {
               <g transform={`translate(${cx}, ${cy - (radius - 80)})`}>
                 <g style={{ animation: 'spin 40s linear infinite reverse' }}>
                   <image 
-                    href="/logo.png" 
+                    href="/center_logo_final.png" 
                     x="-24" 
                     y="-24" 
                     width="48" 
@@ -194,7 +194,7 @@ export default function ModalityWheel() {
           <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(214,180,107,0.15)_0%,transparent_70%)] animate-pulse" style={{ animationDuration: '4s' }} />
           
           <div className="relative z-10 flex items-center justify-center w-full h-full p-6">
-            <img src="/logo.png" alt="Main Logo" className="w-full h-full object-contain mix-blend-screen opacity-90 drop-shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
+            <img src="/center_logo_final.png" alt="Main Logo" className="w-full h-full object-contain mix-blend-screen opacity-90 drop-shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
           </div>
           
           {/* Minimal outer rings */}

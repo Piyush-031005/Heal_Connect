@@ -165,7 +165,7 @@ export default function PractitionersPage() {
           </div>
         ) : practitioners.length === 0 ? (
           <div className="text-center py-32 bg-card/80 dark:bg-card/80 rounded-3xl border border-border backdrop-blur-md">
-            <Image src="/logo.png" alt="" width={64} height={64} className="mx-auto mb-6 opacity-30 rounded-full grayscale" />
+            <Image src="/center_logo_final.png" alt="" width={64} height={64} className="mx-auto mb-6 opacity-30 rounded-full grayscale" />
             <p className="text-xl font-bold text-foreground mb-2">No practitioners found</p>
             <p className="text-muted-foreground">Try adjusting your filters or search terms</p>
           </div>

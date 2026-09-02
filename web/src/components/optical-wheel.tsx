@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { useLayout } from '@/lib/layout-context';
 
@@ -11,10 +12,10 @@ const MODALITIES = [
   { id: 'palm-reading',   name: 'Palm Reading',     image: '/final_ensights/palm-reading.png' },
   { id: 'sound-healing',  name: 'Sound Healing',    image: '/final_ensights/sound-healing.png' },
   { id: 'meditation',     name: 'Meditation',       image: '/final_ensights/meditation.png' },
-  { id: 'spiritual',      name: 'Spiritual',        image: '/final_ensights/spiritual-guidance.png' },
+  { id: 'spiritual',      name: 'Spiritual Guidance',        image: '/final_ensights/spiritual-guidance.png' },
   { id: 'chakra-healing', name: 'Chakra Healing',   image: '/final_ensights/chakra-healing.png' },
   { id: 'breathwork',     name: 'Breathwork',       image: '/final_ensights/breathwork.png' },
-  { id: 'dreams',         name: 'Dream Predict',    image: '/final_ensights/dream-interpretation.png' },
+  { id: 'dreams',         name: 'Dream Prediction',    image: '/final_ensights/dream-interpretation.png' },
   { id: 'space-harmony',  name: 'Space Harmony',    image: '/final_ensights/space-harmony.png' },
   { id: 'numerology',     name: 'Numerology',       image: '/final_ensights/numerology.png' },
 ];
@@ -24,6 +25,7 @@ const MODALITIES = [
 export default function OpticalWheel() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const { theme } = useTheme();
+  const router = useRouter();
   const { layout } = useLayout();
   const isNewLayout1 = layout === 'new-layout-1';
   const isZenLight = theme === 'theme-zen-light';
@@ -68,7 +70,7 @@ export default function OpticalWheel() {
           <circle cx={cx} cy={cy} r="580" fill="url(#outerGlowWhl)" />
 
           {/* ── WHEEL PATTERN ── */}
-          <g style={{ animation: 'spin 180s linear infinite', transformOrigin: '600px 600px', animationPlayState: playState }}>
+          <g style={{ animation: 'spin 180s linear infinite reverse', transformOrigin: '600px 600px', animationPlayState: playState }}>
             
             {/* Primary thin gold ring */}
             <circle cx={cx} cy={cy} r={outerR} fill="none" stroke={GOLD} opacity="0.4" strokeWidth="1" />
@@ -114,7 +116,7 @@ export default function OpticalWheel() {
                   transform={`translate(${nx}, ${ny})`}
                   onMouseEnter={() => setHoveredIdx(idx)}
                   onMouseLeave={() => setHoveredIdx(null)}
-                  onClick={() => handleScrollTo(mod.id)}
+                  onClick={() => router.push('/modalities/' + mod.id)}
                   className="cursor-pointer"
                 >
                   {/* Counter-spin so labels/icons stay upright (Fixed duration match) */}
@@ -135,9 +137,7 @@ export default function OpticalWheel() {
                   )}
 
                   <g style={{
-                    animation: 'spin 180s linear infinite reverse',
-                    animationPlayState: playState,
-                    transformOrigin: '0px 0px',
+                    animation: 'spin 180s linear infinite', animationPlayState: playState, transformOrigin: '0px 0px',
                   }}>
                     {/* Hit area */}
                     <circle cx="0" cy="0" r={imgH + 20} fill="transparent" pointerEvents="all" />

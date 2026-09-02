@@ -183,7 +183,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
               <Image src={theme === 'theme-royal-indigo' ? '/center_logo_final.png' : '/center_logo_final.png'} alt="ZenAuraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
-              <span className="text-2xl font-serif font-black text-[#2D1B69] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide">ZenAuraa</span>
+              <span className="text-2xl font-serif font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide">Zen<span className="text-purple-300">Auraa</span></span>
             </div>
             <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
               <svg className="w-4 h-4 text-[#2D1B69]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
@@ -291,7 +291,7 @@ export default function Navbar() {
               </button>
               <Link href="/" className="flex items-center gap-2">
                 <Image src={theme === 'theme-royal-indigo' ? '/center_logo_final.png' : '/center_logo_final.png'} alt="ZenAuraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
-                <span className="text-2xl font-serif font-black text-[#2D1B69] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105">ZenAuraa</span>
+                <span className="text-2xl font-serif font-black text-[#2D1B69] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105"><span className="text-white">Zen</span><span className="text-purple-300">Auraa</span></span>
               </Link>
             </div>
 
@@ -495,11 +495,11 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
-                <Link href="/login" className={`hidden md:block text-sm font-medium transition-colors px-2 ${isFinalHybrid ? 'text-[#2D1B69] hover:text-[#5F3BA9]' : 'text-[#2D1B69] hover:text-primary'}`}>
+                <Link href="/login" className={`hidden md:block text-sm font-bold px-4 py-1.5 rounded-full transition-colors ${isFinalHybrid ? 'text-[#2A1658] bg-[#F5C84C] hover:bg-[#E5B83C]' : 'text-primary bg-[#F5C84C] hover:bg-[#E5B83C]'}`}>
                   Login
                 </Link>
                 {isFinalHybrid && (
-                  <Link href="/register" className="hidden md:block text-sm font-semibold text-[#4D316B] bg-[#B79AE6] hover:bg-[#c9a000] transition-colors px-4 py-1.5 rounded-full ml-1">
+                  <Link href="/register" className="hidden md:block text-sm font-bold text-[#2A1658] bg-[#F5C84C] hover:bg-[#E5B83C] transition-colors px-4 py-1.5 rounded-full ml-1 shadow-sm">
                     Register
                   </Link>
                 )}

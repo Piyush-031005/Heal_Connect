@@ -130,7 +130,7 @@ export default function ExpertDashboardPage() {
       <header className="sticky top-0 z-50 w-full border-b border-border bg-white/40 dark:bg-black/40 backdrop-blur-md">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full shadow-[0_0_10px_rgba(214,180,107,0.5)]" />
+            <Image src="/center_logo_final.png" alt="ZenAuraa" width={32} height={32} className="rounded-full shadow-[0_0_10px_rgba(214,180,107,0.5)]" />
             <span className="text-xl font-extrabold text-primary uppercase tracking-wide">ZenAuraa</span>
             <span className="hidden sm:inline-flex items-center gap-1 ml-2 text-xs font-semibold text-accent bg-accent/10 border border-accent/30 rounded-full px-2 py-0.5 shadow-[0_0_10px_rgba(46,196,182,0.1)]">
               <Sparkles className="w-3 h-3" /> Expert
