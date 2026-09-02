@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, SafeAreaView, KeyboardAvoiding
 import { useRouter } from 'expo-router';
 import { Shield } from 'lucide-react-native';
 import * as SecureStore from 'expo-secure-store';
+import { authApi, tokenStore } from '../../lib/api';
 
 type Role = 'user' | 'expert';
 type Mode = 'login' | 'forgot';
@@ -32,28 +33,21 @@ export default function LoginScreen() {
     setError('');
     
     try {
-      const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-      const endpoint = role === 'expert' ? '/api/v1/auth/practitioner/login' : '/api/v1/auth/login';
+      let res;
+      if (role === 'expert') {
+        res = await authApi.practitionerLogin(email, password);
+      } else {
+        res = await authApi.login({ email, password });
+      }
       
-      const res = await fetch(`${apiUrl}${endpoint}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      
-      const data = await res.json();
-      
-      if (!res.ok || !data.success) {
-        throw new Error(data.message || 'Login failed');
+      if (!res.success || !res.data) {
+        throw new Error(res.message || 'Login failed');
       }
       
       // Store token
-      await SecureStore.setItemAsync('hc_access', data.data.accessToken);
-      if (data.data.refreshToken) {
-        await SecureStore.setItemAsync('hc_refresh', data.data.refreshToken);
-      }
+      const access = res.data.accessToken;
+      const refresh = res.data.refreshToken;
+      await tokenStore.setTokens(access, refresh);
       await SecureStore.setItemAsync('hc_role', role === 'expert' ? 'practitioner' : 'user');
       
       // Navigate to tabs
@@ -254,7 +248,9 @@ export default function LoginScreen() {
                 <View className="items-center mt-6">
                   <Text className="text-gray-500 text-sm">
                     Don't have an account?{' '}
-                    <Text className="text-amber-500 font-semibold">Sign up</Text>
+                    <TouchableOpacity onPress={() => router.push('/(auth)/signup')}>
+                      <Text className="text-amber-500 font-semibold">Sign up</Text>
+                    </TouchableOpacity>
                   </Text>
                 </View>
               </>
