@@ -129,7 +129,7 @@ export default function LightParticles() {
       {/* Revolving Minimal Ethereal Labels */}
       <div 
         className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
-        style={{ animation: 'spin 80s linear infinite reverse' }}
+        style={{ animation: 'spin 120s linear infinite' }}
       >
         {MODALITIES.map((mod, i) => {
           const total = MODALITIES.length;
@@ -146,7 +146,7 @@ export default function LightParticles() {
             >
               <div 
                 className="pointer-events-auto cursor-pointer group"
-                style={{ animation: 'spin 80s linear infinite' }}
+                style={{ animation: 'spin 120s linear infinite reverse' }}
                 onClick={() => window.location.href = `/modalities/${mod.id}`}
               >
                 <div className="flex items-center gap-2 px-3 py-1.5 transition-all duration-300 hover:scale-110">
@@ -167,7 +167,7 @@ export default function LightParticles() {
         <img 
           src="/main centre logo/new.png" 
           alt="ZenAuraa" 
-          className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] translate-y-48"
+          className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] translate-y-32"
           style={{
             opacity: 0.85,
             filter: 'brightness(0.9) contrast(1.15) saturate(1.2) drop-shadow(0 0 50px rgba(160,120,255,0.6))',
