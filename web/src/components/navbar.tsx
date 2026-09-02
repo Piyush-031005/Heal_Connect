@@ -373,8 +373,6 @@ export default function Navbar() {
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
                     { code: 'layout-10', label: ' Layout 10 (Light Particles)' },
-                    { code: 'layout-1', label: ' Layout 1 (Pebbles)' },
-                    { code: 'layout-5', label: ' Layout 5 (Nebula)' },
                     { code: 'layout-9', label: ' Layout 9 (Peacock)' },
                   ] as const).map((l) => (
                     <button
