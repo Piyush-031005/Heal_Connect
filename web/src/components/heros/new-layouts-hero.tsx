@@ -95,11 +95,11 @@ export default function NewLayoutsHero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-200 pointer-events-auto">
-              <button className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border border-[#F5C84C] bg-[#F5C84C]/10 hover:bg-[#F5C84C]/20 text-[#F5C84C] text-sm font-semibold transition-all">
+              <button className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#FAD058] hover:bg-[#F0C240] text-[#2A1658] text-sm font-bold transition-all shadow-lg shadow-[#FAD058]/20">
                 <MessageCircle className="w-4 h-4" />
                 <span>Start Chat</span>
               </button>
-              <button className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#F5C84C] hover:bg-[#E5B83C] text-[#2A1658] text-sm font-bold transition-all shadow-lg shadow-[#F5C84C]/20">
+              <button className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#FAD058] hover:bg-[#F0C240] text-[#2A1658] text-sm font-bold transition-all shadow-lg shadow-[#FAD058]/20">
                 <Phone className="w-4 h-4" />
                 <span>Start Calling</span>
               </button>
