@@ -10,8 +10,8 @@ const MODALITIES = [
   {id:'astrology',name:'Astrology'},{id:'tarot',name:'Tarot'},
   {id:'face-reading',name:'Face Reading'},{id:'palm-reading',name:'Palm Reading'},
   {id:'sound-healing',name:'Sound Healing'},{id:'meditation',name:'Meditation'},
-  {id:'spiritual',name:'Spiritual'},{id:'chakra-healing',name:'Chakra Healing'},
-  {id:'breathwork',name:'Breathwork'},{id:'dreams',name:'Dream Predict'},
+  {id:'spiritual',name:'Spiritual Guidance'},{id:'chakra-healing',name:'Chakra Healing'},
+  {id:'breathwork',name:'Breathwork'},{id:'dreams',name:'Dream Prediction'},
   {id:'space-harmony',name:'Space Harmony'},{id:'numerology',name:'Numerology'},
 ];
 
@@ -20,8 +20,8 @@ function ParticleNebula() {
   
   // Generate random particles in a sphere
   const sphere = useMemo(() => {
-    const positions = new Float32Array(3000 * 3);
-    for (let i = 0; i < 3000; i++) {
+    const positions = new Float32Array(1500 * 3);
+    for (let i = 0; i < 1500; i++) {
       const r = 2.5 * Math.cbrt(Math.random()); // Radius 2.5
       const theta = Math.random() * 2 * Math.PI;
       const phi = Math.acos(2 * Math.random() - 1);
@@ -60,7 +60,7 @@ function ConstellationLines() {
   
   useFrame((state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.z += delta * 0.05;
+      groupRef.current.rotation.z -= delta * 0.05;
       groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
       groupRef.current.rotation.y = Math.cos(state.clock.elapsedTime * 0.2) * 0.1;
     }
@@ -129,7 +129,7 @@ export default function LightParticles() {
       {/* Revolving Minimal Ethereal Labels */}
       <div 
         className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
-        style={{ animation: 'spin 80s linear infinite' }}
+        style={{ animation: 'spin 80s linear infinite reverse' }}
       >
         {MODALITIES.map((mod, i) => {
           const total = MODALITIES.length;
@@ -146,8 +146,8 @@ export default function LightParticles() {
             >
               <div 
                 className="pointer-events-auto cursor-pointer group"
-                style={{ animation: 'spin 80s linear infinite reverse' }}
-                onClick={() => router.push(`/modalities/${mod.id}`)}
+                style={{ animation: 'spin 80s linear infinite' }}
+                onClick={() => window.location.href = `/modalities/${mod.id}`}
               >
                 <div className="flex items-center gap-2 px-3 py-1.5 transition-all duration-300 hover:scale-110">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#1E2059]/40 group-hover:bg-[#5F3BA9] shadow-[0_0_8px_rgba(95,59,169,0.5)] transition-colors" />
@@ -167,7 +167,7 @@ export default function LightParticles() {
         <img 
           src="/main centre logo/new.png" 
           alt="ZenAuraa" 
-          className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] translate-y-28"
+          className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] translate-y-48"
           style={{
             opacity: 0.85,
             filter: 'brightness(0.9) contrast(1.15) saturate(1.2) drop-shadow(0 0 50px rgba(160,120,255,0.6))',

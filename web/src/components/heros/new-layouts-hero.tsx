@@ -33,7 +33,7 @@ export default function NewLayoutsHero() {
       case 'layout-5': return <AuroraBlob />;
       case 'layout-9': return <PeacockBloom />;
       case 'layout-10': return <LightParticles />;
-      default: return <AuroraBlob />;
+      default: return <LightParticles />;
     }
   };
 

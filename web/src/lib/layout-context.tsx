@@ -12,7 +12,7 @@ interface LayoutContextType {
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
-  const [layout, setLayoutState] = useState<LayoutMode>('layout-5');
+  const [layout, setLayoutState] = useState<LayoutMode>('layout-10');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
