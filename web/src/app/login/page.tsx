@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { authApi, tokenStore } from '@/lib/api';
+import { countryCodes } from '@/lib/country-codes';
 
 type Role = 'user' | 'expert';
 type Mode = 'login' | 'forgot';
@@ -31,6 +32,7 @@ function LoginInner() {
   const [mode, setMode] = useState<Mode>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [countryCode, setCountryCode] = useState('+91');
   const [phone, setPhone] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -142,10 +144,11 @@ function LoginInner() {
   async function handleSendOtp(e: React.FormEvent) {
     e.preventDefault();
     if (!phone) return setError('Please enter a phone number.');
+    if (!countryCode) return setError('Please select a country code.');
     setLoading(true);
     setError('');
     try {
-      const cleanPhone = phone.replace(/\s+/g, '');
+      const cleanPhone = countryCode + phone.replace(/\s+/g, '');
       
       if (role === 'expert') {
         // Expert OTP login
@@ -363,8 +366,25 @@ function LoginInner() {
             {mode === 'login' && loginMethod === 'otp' && (
               <form onSubmit={handleSendOtp} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-[#1a1a1a]">Phone Number</Label>
-                  <Input id="phone" type="tel" placeholder="+919876543210" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 border-yellow-200 focus-visible:ring-[#4f46e5] bg-[#faf9f6] text-[#1a1a1a]" />
+                  <Label className="text-[#1a1a1a]">Phone Number</Label>
+                  <div className="flex gap-2">
+                    <div className="relative w-1/3">
+                      <Input 
+                        list="country-codes"
+                        value={countryCode} 
+                        onChange={(e) => setCountryCode(e.target.value)} 
+                        placeholder="Country"
+                        required 
+                        className="h-12 border-yellow-200 focus-visible:ring-[#4f46e5] bg-[#faf9f6] text-[#1a1a1a]" 
+                      />
+                      <datalist id="country-codes">
+                        {countryCodes.map((c, i) => (
+                          <option key={i} value={c.code}>{c.flag} {c.name} ({c.code})</option>
+                        ))}
+                      </datalist>
+                    </div>
+                    <Input id="phone" type="tel" placeholder="9876543210" value={phone} onChange={(e) => setPhone(e.target.value)} required className="flex-1 h-12 border-yellow-200 focus-visible:ring-[#4f46e5] bg-[#faf9f6] text-[#1a1a1a]" />
+                  </div>
                 </div>
                 <Button type="submit" disabled={loading} className="w-full bg-[#4f46e5] hover:bg-[#4338ca] text-white h-12 text-base font-bold rounded-full border-0 shadow-lg">
                   {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>Send OTP <ArrowRight className="ml-2 h-4 w-4" /></>}
