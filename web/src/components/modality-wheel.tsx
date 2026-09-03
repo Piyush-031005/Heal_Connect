@@ -23,7 +23,7 @@ const MODALITIES = [
   { id: 'face-reading', name: 'Face Reading', image: '/12-modalities-updates/facereading.png' },
   { id: 'numerology', name: 'Numerology', image: '/12-modalities-updates/numeriology.png' },
   { id: 'energy-healing', name: 'Energy Healing', image: '/12-modalities-updates/energy healing.png' },
-  { id: 'meditation', name: 'Meditation', image: '/12-modalities-updates/medidation.png' },
+  { id: 'meditation', name: 'Meditation', image: '/12-modalities-updates/meditation.png' },
   { id: 'yoga', name: 'Yoga', image: '/12-modalities-updates/yoga.png' },
   { id: 'chakra-healing', name: 'Chakra', image: '/12-modalities-updates/chakrahealing.png' },
   { id: 'eft', name: 'EFT Tapping', image: '/12-modalities-updates/eft.png' },
@@ -102,7 +102,7 @@ export default function ModalityWheel() {
               <g transform={`translate(${cx}, ${cy - (radius - 80)})`}>
                 <g style={{ animation: 'spin 40s linear infinite reverse' }}>
                   <image 
-                    href="/logo.png" 
+                    href="/center_logo_final.png" 
                     x="-24" 
                     y="-24" 
                     width="48" 
@@ -194,7 +194,7 @@ export default function ModalityWheel() {
           <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(214,180,107,0.15)_0%,transparent_70%)] animate-pulse" style={{ animationDuration: '4s' }} />
           
           <div className="relative z-10 flex items-center justify-center w-full h-full p-6">
-            <img src="/logo.png" alt="Main Logo" className="w-full h-full object-contain mix-blend-screen opacity-90 drop-shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
+            <img src="/center_logo_final.png" alt="Main Logo" className="w-full h-full object-contain mix-blend-screen opacity-90 drop-shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
           </div>
           
           {/* Minimal outer rings */}
