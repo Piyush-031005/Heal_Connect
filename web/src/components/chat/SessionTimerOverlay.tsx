@@ -19,8 +19,8 @@ export default function SessionTimerOverlay({ elapsedSeconds, walletBalance, onE
     <div className="flex items-center gap-2 px-3 py-2 bg-white border-b border-yellow-100">
       {/* Timer */}
       <div className="flex items-center gap-1.5 bg-yellow-50 border border-yellow-200 rounded-full px-3 py-1">
-        <Clock className="h-3.5 w-3.5 text-[#f59e0b]" />
-        <span className="text-xs font-mono font-semibold text-[#d97706]">{mm}:{ss}</span>
+        <Clock className="h-3.5 w-3.5 text-[#4f46e5]" />
+        <span className="text-xs font-mono font-semibold text-[#4338ca]">{mm}:{ss}</span>
       </div>
 
       {/* Wallet balance */}

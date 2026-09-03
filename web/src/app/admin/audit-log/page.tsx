@@ -76,7 +76,7 @@ export default function AuditLogPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Shield className="w-6 h-6 text-amber-600" />
+          <Shield className="w-6 h-6 text-indigo-600" />
           <div>
             <h1 className="text-xl font-bold text-gray-900">Admin Audit Log</h1>
             <p className="text-sm text-gray-500">{total} total entries — immutable record of admin actions</p>
@@ -101,7 +101,7 @@ export default function AuditLogPage() {
           id="audit-filter-action"
           value={filterAction}
           onChange={(e) => { setPage(1); setFilterAction(e.target.value); }}
-          className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400"
+          className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
         >
           {ACTION_OPTIONS.map((a) => (
             <option key={a} value={a}>{a || 'All actions'}</option>
@@ -111,7 +111,7 @@ export default function AuditLogPage() {
           id="audit-filter-target"
           value={filterTarget}
           onChange={(e) => { setPage(1); setFilterTarget(e.target.value); }}
-          className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400"
+          className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
         >
           {TARGET_OPTIONS.map((t) => (
             <option key={t} value={t}>{t || 'All targets'}</option>
@@ -121,7 +121,7 @@ export default function AuditLogPage() {
           <button
             type="button"
             onClick={() => { setPage(1); setFilterAction(''); setFilterTarget(''); }}
-            className="text-sm text-amber-600 hover:text-amber-800 font-medium"
+            className="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
           >
             Clear filters
           </button>
@@ -165,7 +165,7 @@ export default function AuditLogPage() {
                       {e.targetId && (
                         <button
                           type="button"
-                          className="ml-1.5 text-amber-600 hover:underline font-mono text-xs"
+                          className="ml-1.5 text-indigo-600 hover:underline font-mono text-xs"
                           title={e.targetId}
                           onClick={() => {
                             if (e.targetType === 'USER')         router.push(`/admin/users?highlight=${e.targetId}`);

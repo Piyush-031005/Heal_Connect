@@ -86,7 +86,7 @@ export default function AdminFAQPage() {
               setFormData({ category: 'Vedic Astrology', question: '', answer: '' });
               setIsModalOpen(true);
             }}
-            className="flex items-center px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors"
+            className="flex items-center px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors"
           >
             <Plus className="h-5 w-5 mr-2" />
             Add FAQ
@@ -101,7 +101,7 @@ export default function AdminFAQPage() {
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
-              className="block w-full sm:w-48 pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="block w-full sm:w-48 pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             >
               {CATEGORIES.map(c => (
                 <option key={c} value={c}>{c}</option>
@@ -122,7 +122,7 @@ export default function AdminFAQPage() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-500">
+                    <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-500">
                       {faq.category}
                     </span>
                   </div>
@@ -130,7 +130,7 @@ export default function AdminFAQPage() {
                   <p className="text-sm text-gray-500 dark:text-gray-400">{faq.answer}</p>
                 </div>
                 <div className="flex items-center gap-2 ml-4">
-                  <button onClick={() => openEditModal(faq)} className="p-1 text-gray-400 hover:text-amber-600 rounded">
+                  <button onClick={() => openEditModal(faq)} className="p-1 text-gray-400 hover:text-indigo-600 rounded">
                     <Edit2 className="h-5 w-5" />
                   </button>
                   <button onClick={() => setConfirmDelete(faq.id)} className="p-1 text-gray-400 hover:text-red-600 rounded">
@@ -168,7 +168,7 @@ export default function AdminFAQPage() {
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-amber-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white"
                 >
                   {CATEGORIES.filter(c => c !== 'All').map(c => (
                     <option key={c} value={c}>{c}</option>
@@ -181,7 +181,7 @@ export default function AdminFAQPage() {
                   type="text"
                   value={formData.question}
                   onChange={(e) => setFormData({ ...formData, question: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-amber-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white"
                   placeholder="e.g., What is Vedic Astrology?"
                 />
               </div>
@@ -191,7 +191,7 @@ export default function AdminFAQPage() {
                   rows={4}
                   value={formData.answer}
                   onChange={(e) => setFormData({ ...formData, answer: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-amber-500 dark:bg-gray-700 dark:text-white resize-none"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white resize-none"
                   placeholder="Provide the answer here..."
                 />
               </div>
@@ -206,7 +206,7 @@ export default function AdminFAQPage() {
               <button
                 onClick={handleSave}
                 disabled={!formData.question || !formData.answer}
-                className="px-4 py-2 text-sm font-medium text-white bg-amber-500 hover:bg-amber-600 rounded-lg disabled:opacity-50 transition-colors"
+                className="px-4 py-2 text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 rounded-lg disabled:opacity-50 transition-colors"
               >
                 Save
               </button>

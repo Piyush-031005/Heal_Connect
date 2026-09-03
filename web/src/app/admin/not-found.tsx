@@ -16,17 +16,17 @@ export const metadata: Metadata = {
 
 export default function AdminNotFound() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-amber-900 flex items-center justify-center p-4 relative overflow-hidden">
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 w-full max-w-md shadow-2xl text-center space-y-6">
-        <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto shadow-lg shadow-amber-500/30">
+        <div className="w-16 h-16 bg-gradient-to-br from-indigo-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto shadow-lg shadow-indigo-500/30">
           <Shield className="w-8 h-8 text-white" />
         </div>
 
         <div className="space-y-2">
-          <p className="text-6xl font-black bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
+          <p className="text-6xl font-black bg-gradient-to-r from-indigo-400 to-orange-500 bg-clip-text text-transparent">
             404
           </p>
           <h1 className="text-xl font-black text-white">Page Not Found</h1>
@@ -37,7 +37,7 @@ export default function AdminNotFound() {
 
         <div className="flex flex-col gap-3">
           <Link href="/admin/dashboard" className="w-full">
-            <Button className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-extrabold py-4 rounded-2xl shadow-lg shadow-amber-500/30 transition-all">
+            <Button className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-extrabold py-4 rounded-2xl shadow-lg shadow-indigo-500/30 transition-all">
               <LayoutDashboard className="w-4 h-4" />
               Go to Admin Dashboard
             </Button>

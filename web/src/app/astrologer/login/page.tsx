@@ -88,13 +88,13 @@ export default function AstrologerLoginPage() {
     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&state=${state}&nonce=${Math.random().toString(36)}`;
   };
 
-  const inputCls = "w-full h-12 rounded-xl border border-yellow-200 bg-[#fffbf0] px-4 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition";
+  const inputCls = "w-full h-12 rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition";
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] flex flex-col md:flex-row font-sans">
+    <div className="min-h-screen bg-[#faf9f6] flex flex-col md:flex-row font-sans">
 
       {/* Left — Branding */}
-      <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-gradient-to-br from-amber-500 via-orange-500 to-amber-700 relative overflow-hidden">
+      <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-gradient-to-br from-indigo-500 via-orange-500 to-indigo-700 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
@@ -139,13 +139,13 @@ export default function AstrologerLoginPage() {
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
-            <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
+            <span className="text-xl font-extrabold text-indigo-500">ZenAuraa</span>
           </Link>
         </div>
 
         <div className="w-full max-w-md mt-12 md:mt-0">
           <div className="mb-8">
-            <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4 md:hidden">
+            <div className="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4 md:hidden">
               <Star className="w-4 h-4" /> Astrologer Portal
             </div>
             <h1 className="text-2xl font-extrabold text-gray-900">Sign in to your account</h1>
@@ -158,12 +158,12 @@ export default function AstrologerLoginPage() {
             )}
 
             {/* Email/Phone Tabs */}
-            <div className="flex rounded-xl border border-yellow-200 overflow-hidden bg-[#fffbf0] p-1 gap-1 mb-5">
+            <div className="flex rounded-xl border border-yellow-200 overflow-hidden bg-[#faf9f6] p-1 gap-1 mb-5">
               <button
                 type="button"
                 onClick={() => { setLoginMethod('email'); setError(''); }}
                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                  loginMethod === 'email' ? 'bg-amber-500 text-white shadow' : 'text-gray-500 hover:text-amber-500'
+                  loginMethod === 'email' ? 'bg-indigo-500 text-white shadow' : 'text-gray-500 hover:text-indigo-500'
                 }`}
               >
                 Email
@@ -172,7 +172,7 @@ export default function AstrologerLoginPage() {
                 type="button"
                 onClick={() => { setLoginMethod('phone'); setError(''); }}
                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                  loginMethod === 'phone' ? 'bg-amber-500 text-white shadow' : 'text-gray-500 hover:text-amber-500'
+                  loginMethod === 'phone' ? 'bg-indigo-500 text-white shadow' : 'text-gray-500 hover:text-indigo-500'
                 }`}
               >
                 Phone
@@ -203,7 +203,7 @@ export default function AstrologerLoginPage() {
                 </div>
 
                 <button type="submit" disabled={loading}
-                  className="w-full h-12 bg-amber-500 hover:bg-amber-600 disabled:opacity-60 text-white font-bold rounded-full text-base shadow-lg flex items-center justify-center gap-2 transition-colors mt-2">
+                  className="w-full h-12 bg-indigo-500 hover:bg-indigo-600 disabled:opacity-60 text-white font-bold rounded-full text-base shadow-lg flex items-center justify-center gap-2 transition-colors mt-2">
                   {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : null}
                   Sign In <ArrowRight className="w-4 h-4" />
                 </button>
@@ -216,7 +216,7 @@ export default function AstrologerLoginPage() {
                 </div>
 
                 <button type="submit" disabled={loading}
-                  className="w-full h-12 bg-amber-500 hover:bg-amber-600 disabled:opacity-60 text-white font-bold rounded-full text-base shadow-lg flex items-center justify-center gap-2 transition-colors mt-2">
+                  className="w-full h-12 bg-indigo-500 hover:bg-indigo-600 disabled:opacity-60 text-white font-bold rounded-full text-base shadow-lg flex items-center justify-center gap-2 transition-colors mt-2">
                   {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : null}
                   Send OTP <ArrowRight className="w-4 h-4" />
                 </button>
@@ -246,7 +246,7 @@ export default function AstrologerLoginPage() {
 
           <p className="text-center text-sm text-gray-500 mt-5">
             New here?{' '}
-            <Link href="/expert/signup" className="text-amber-600 font-semibold hover:underline">Create an account</Link>
+            <Link href="/expert/signup" className="text-indigo-600 font-semibold hover:underline">Create an account</Link>
           </p>
 
           <div className="mt-4 flex items-center justify-center gap-2 text-xs text-gray-400">

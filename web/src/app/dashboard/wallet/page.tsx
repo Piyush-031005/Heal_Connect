@@ -39,17 +39,17 @@ export default function WalletPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center">
-        <Clock className="w-6 h-6 text-[#f59e0b] animate-spin" />
+      <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
+        <Clock className="w-6 h-6 text-[#4f46e5] animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] text-[#1a1a1a] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
       <header className="sticky top-0 z-50 w-full border-b border-yellow-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center gap-4">
-          <Link href="/dashboard" className="text-gray-500 hover:text-[#f59e0b] transition-colors">
+          <Link href="/dashboard" className="text-gray-500 hover:text-[#4f46e5] transition-colors">
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <h1 className="text-xl font-extrabold text-[#1a1a1a]">My Wallet</h1>
@@ -59,7 +59,7 @@ export default function WalletPage() {
       <main className="flex-1 container mx-auto px-4 py-8 max-w-4xl space-y-8">
         
         {/* Balance Card */}
-        <Card className="bg-gradient-to-br from-[#f59e0b] to-[#ef4444] text-white border-0 shadow-lg relative overflow-hidden">
+        <Card className="bg-gradient-to-br from-[#4f46e5] to-[#ef4444] text-white border-0 shadow-lg relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" />
           <CardContent className="p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
             <div>
@@ -72,7 +72,7 @@ export default function WalletPage() {
             </div>
             <Button 
               onClick={() => setIsRechargeModalOpen(true)}
-              className="bg-white text-[#d97706] hover:bg-yellow-50 border-0 rounded-full px-8 h-12 text-lg font-bold shadow-lg"
+              className="bg-white text-[#4338ca] hover:bg-yellow-50 border-0 rounded-full px-8 h-12 text-lg font-bold shadow-lg"
             >
               <Plus className="w-5 h-5 mr-2" /> Recharge Wallet
             </Button>

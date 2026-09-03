@@ -18,17 +18,17 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-[#fffbf0] text-[#1a1a1a] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
       <Navbar />
 
       <main className="flex-1 flex items-center justify-center px-4 py-24 sm:py-32">
         <div className="w-full max-w-lg text-center space-y-6">
-          <div className="mx-auto w-20 h-20 rounded-3xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/25">
+          <div className="mx-auto w-20 h-20 rounded-3xl bg-gradient-to-br from-indigo-400 to-orange-500 flex items-center justify-center shadow-lg shadow-indigo-500/25">
             <Compass className="h-10 w-10 text-white" />
           </div>
 
           <div className="space-y-2">
-            <p className="text-7xl sm:text-8xl font-extrabold tracking-tight bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
+            <p className="text-7xl sm:text-8xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-500 to-orange-500 bg-clip-text text-transparent">
               404
             </p>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">Page Not Found</h1>
@@ -39,12 +39,12 @@ export default function NotFound() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <Link href="/" className="w-full sm:w-auto">
-              <Button className="w-full sm:w-auto gap-2 rounded-2xl px-6 py-6 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-extrabold border-0 shadow-lg shadow-amber-500/25 hover:scale-105 active:scale-95 transition-all">
+              <Button className="w-full sm:w-auto gap-2 rounded-2xl px-6 py-6 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-extrabold border-0 shadow-lg shadow-indigo-500/25 hover:scale-105 active:scale-95 transition-all">
                 <Home className="h-4 w-4" />
                 Go to Home
               </Button>
             </Link>
-            <GoBackButton fallbackHref="/" className="w-full sm:w-auto border-yellow-200 hover:border-yellow-400 hover:text-[#d97706] hover:bg-amber-50" />
+            <GoBackButton fallbackHref="/" className="w-full sm:w-auto border-yellow-200 hover:border-yellow-400 hover:text-[#4338ca] hover:bg-indigo-50" />
           </div>
         </div>
       </main>

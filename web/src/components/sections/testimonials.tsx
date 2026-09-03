@@ -29,6 +29,7 @@ export function Testimonials() {
 
   return (
     <section 
+      id="testimonials"
       className={`py-24 relative z-10 ${(isFinalHybrid && !isNewColor) ? 'bg-fixed bg-center bg-cover border-none' : (isNewColor ? 'bg-background border-t border-primary/20' : 'bg-card border-t border-border')}`}
       style={(isFinalHybrid && !isNewColor) ? { backgroundImage: "url('/hands-star-bg.png')" } : {}}
     >

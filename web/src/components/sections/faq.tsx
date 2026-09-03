@@ -6,7 +6,7 @@ import { useLayout } from '@/lib/layout-context';
 
 const FAQS = [
   { q: "Why Is Astrology So Accurate?", a: "Astrology uses precise mathematical calculations of planetary positions at your exact time of birth. Our experts interpret these cosmic blueprints to provide deep, actionable insights into your life." },
-  { q: "Why Should You Choose Zenauraa?", a: "We curate only the top 1% of authentic and verified experts globally. Every practitioner goes through a rigorous multi-step interview and testing process before joining our platform." },
+  { q: "Why Should You Choose ZenAuraa?", a: "We curate only the top 1% of authentic and verified experts globally. Every practitioner goes through a rigorous multi-step interview and testing process before joining our platform." },
   { q: "Is my consultation completely confidential?", a: "100% yes. Your privacy is our highest priority. All chats and calls are end-to-end encrypted and we never share your personal details with third parties." },
   { q: "What is the difference between Tarot and Vedic Astrology?", a: "Vedic Astrology uses your birth details to map out a lifelong cosmic blueprint. Tarot relies on energy, intuition, and synchronicity to provide immediate guidance and answer specific current-life questions." },
   { q: "Can I get a refund if I'm not satisfied?", a: "Yes. We offer a 100% satisfaction guarantee for your first consultation. If you feel the connection wasn't right, our support team will refund the amount to your wallet immediately." },

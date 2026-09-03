@@ -131,15 +131,15 @@ export default function ScheduledSessionPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-amber-500" />
+      <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
       </div>
     );
   }
 
   if (!session || !session.scheduledStartTime) {
     return (
-      <div className="min-h-screen bg-[#fffbf0] flex flex-col items-center justify-center p-4 text-center">
+      <div className="min-h-screen bg-[#faf9f6] flex flex-col items-center justify-center p-4 text-center">
         <AlertCircle className="w-12 h-12 text-rose-500 mb-4" />
         <h2 className="text-xl font-bold text-gray-800">Session not found or not scheduled</h2>
       </div>
@@ -151,7 +151,7 @@ export default function ScheduledSessionPage() {
   const formatter = new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] p-6 lg:p-12 font-sans">
+    <div className="min-h-screen bg-[#faf9f6] p-6 lg:p-12 font-sans">
       <div className="max-w-2xl mx-auto space-y-8">
         
         <div className="flex items-center gap-3 mb-6">
@@ -161,7 +161,7 @@ export default function ScheduledSessionPage() {
         </div>
 
         <Card className="border border-yellow-200/60 shadow-sm rounded-3xl overflow-hidden">
-          <CardHeader className="bg-amber-50/50 pb-6 border-b border-yellow-100/50">
+          <CardHeader className="bg-indigo-50/50 pb-6 border-b border-yellow-100/50">
             <div className="flex items-center justify-between">
               <CardTitle className="text-2xl font-extrabold text-gray-900 flex items-center gap-2">
                 <CheckCircle2 className="w-6 h-6 text-emerald-500" />
@@ -176,9 +176,9 @@ export default function ScheduledSessionPage() {
             
             <div className="flex items-center gap-4">
               {peer.photoUrl ? (
-                <img src={peer.photoUrl} alt="Peer" className="w-16 h-16 rounded-full object-cover border-2 border-amber-200" />
+                <img src={peer.photoUrl} alt="Peer" className="w-16 h-16 rounded-full object-cover border-2 border-indigo-200" />
               ) : (
-                <div className="w-16 h-16 rounded-full bg-amber-200 border-2 border-amber-300 flex items-center justify-center font-extrabold text-amber-700 text-2xl">
+                <div className="w-16 h-16 rounded-full bg-indigo-200 border-2 border-indigo-300 flex items-center justify-center font-extrabold text-indigo-700 text-2xl">
                   {peer.name?.charAt(0) || '?'}
                 </div>
               )}
@@ -190,7 +190,7 @@ export default function ScheduledSessionPage() {
 
             <div className="bg-white border border-gray-200 rounded-2xl p-5 space-y-4">
               <div className="flex items-start gap-3">
-                <Calendar className="w-5 h-5 text-amber-500 mt-0.5" />
+                <Calendar className="w-5 h-5 text-indigo-500 mt-0.5" />
                 <div>
                   <p className="text-sm text-gray-500 font-medium">Scheduled Date & Time</p>
                   <p className="text-lg font-semibold text-gray-900">{formatter.format(start)}</p>

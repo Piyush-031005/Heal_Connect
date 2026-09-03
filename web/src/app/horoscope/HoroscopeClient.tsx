@@ -697,11 +697,11 @@ export default function HoroscopePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] text-[#1a1a1a] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
       <Navbar />
 
       {/* ═══ 1. Hero Section ═══ */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-amber-400 via-orange-400 to-amber-500 pt-28 pb-20 px-4 text-center text-white shrink-0">
+      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-400 via-orange-400 to-indigo-500 pt-28 pb-20 px-4 text-center text-white shrink-0">
         {/* Floating background decorative circles */}
         <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-white/10 blur-xl pointer-events-none" />
         <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-white/10 blur-2xl pointer-events-none" />
@@ -743,7 +743,7 @@ export default function HoroscopePage() {
           >
             <button
               onClick={() => document.getElementById('zodiac-signs')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 bg-white hover:bg-amber-50 text-amber-600 font-extrabold text-base rounded-full shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 mx-auto"
+              className="px-8 py-4 bg-white hover:bg-indigo-50 text-indigo-600 font-extrabold text-base rounded-full shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 mx-auto"
             >
               View Today&apos;s Horoscope
               <ArrowRight className="w-4 h-4" />
@@ -763,7 +763,7 @@ export default function HoroscopePage() {
             transition={{ duration: 0.6 }}
             className="text-center space-y-2"
           >
-            <h2 className="text-5xl md:text-7xl font-normal text-amber-600 font-cursive tracking-wide drop-shadow-sm py-2">
+            <h2 className="text-5xl md:text-7xl font-normal text-indigo-600 font-cursive tracking-wide drop-shadow-sm py-2">
               Choose Your Zodiac Sign
             </h2>
             <p className="text-gray-500 font-medium max-w-lg mx-auto">Click on your zodiac sign to reveal your personalized daily insights, planet, and element.</p>
@@ -788,11 +788,11 @@ export default function HoroscopePage() {
                 onClick={() => setSelectedSign(sign)}
                 className="bg-white border-2 border-orange-100 hover:border-orange-400 rounded-3xl p-6 text-center cursor-pointer transition-all duration-300 group flex flex-col items-center gap-4 relative overflow-hidden shadow-sm"
               >
-                <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-orange-200/80 flex items-center justify-center overflow-hidden group-hover:scale-105 group-hover:rotate-3 transition-all duration-300 relative shadow-md">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-br from-indigo-50 to-orange-50 border-2 border-orange-200/80 flex items-center justify-center overflow-hidden group-hover:scale-105 group-hover:rotate-3 transition-all duration-300 relative shadow-md">
                   {sign.image ? (
                     <img src={sign.image} alt={sign.name} className="w-full h-full object-cover rounded-3xl" />
                   ) : (
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500 font-extrabold text-5xl select-none">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-orange-500 font-extrabold text-5xl select-none">
                       {sign.icon + '\uFE0E'}
                     </span>
                   )}
@@ -824,7 +824,7 @@ export default function HoroscopePage() {
                 placeholder="Search sign, element, planet..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 text-sm rounded-full bg-yellow-50/50 border border-yellow-100 focus:outline-none focus:ring-2 focus:ring-[#f59e0b]/40 text-[#1a1a1a] placeholder:text-gray-400 font-medium"
+                className="w-full pl-10 pr-4 py-2.5 text-sm rounded-full bg-yellow-50/50 border border-yellow-100 focus:outline-none focus:ring-2 focus:ring-[#4f46e5]/40 text-[#1a1a1a] placeholder:text-gray-400 font-medium"
               />
             </div>
           </div>
@@ -839,8 +839,8 @@ export default function HoroscopePage() {
                   onClick={() => handleFilterClick(filter)}
                   className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all border ${
                     active
-                      ? 'bg-amber-500 border-amber-500 text-white shadow-sm'
-                      : 'bg-yellow-50/50 border-yellow-100 text-gray-600 hover:border-amber-300 hover:bg-amber-50'
+                      ? 'bg-indigo-500 border-indigo-500 text-white shadow-sm'
+                      : 'bg-yellow-50/50 border-yellow-100 text-gray-600 hover:border-indigo-300 hover:bg-indigo-50'
                   }`}
                 >
                   {filter}
@@ -854,9 +854,9 @@ export default function HoroscopePage() {
             <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-gray-50 text-xs">
               <span className="text-gray-400 font-bold uppercase tracking-wider text-[10px]">Active:</span>
               {selectedFilters.map(f => (
-                <span key={f} className="inline-flex items-center gap-1 bg-amber-50 border border-amber-200 text-amber-700 px-3 py-1 rounded-full font-bold">
+                <span key={f} className="inline-flex items-center gap-1 bg-indigo-50 border border-indigo-200 text-indigo-700 px-3 py-1 rounded-full font-bold">
                   {f}
-                  <button onClick={() => handleFilterClick(f)}><X className="w-3 h-3 text-amber-600 hover:text-amber-800" /></button>
+                  <button onClick={() => handleFilterClick(f)}><X className="w-3 h-3 text-indigo-600 hover:text-indigo-800" /></button>
                 </span>
               ))}
               <button onClick={clearFilters} className="ml-auto text-red-500 font-bold hover:underline">
@@ -870,31 +870,31 @@ export default function HoroscopePage() {
         <section className="space-y-6">
           <div className="text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-3">
             <div>
-              <h2 className="text-4xl md:text-6xl font-normal text-amber-600 font-cursive tracking-wide">Today&apos;s Predictions</h2>
+              <h2 className="text-4xl md:text-6xl font-normal text-indigo-600 font-cursive tracking-wide">Today&apos;s Predictions</h2>
               <p className="text-gray-500 font-medium mt-1">Explore daily energy levels, wellness trends, and guidance details.</p>
             </div>
             <div className="text-xs text-gray-400 font-bold tracking-wide flex items-center gap-1.5 justify-center md:justify-start">
-              <RefreshCw className="w-3.5 h-3.5 text-amber-500 animate-spin" />
+              <RefreshCw className="w-3.5 h-3.5 text-indigo-500 animate-spin" />
               <span>UPDATED DAILY AT 12:00 AM</span>
             </div>
           </div>
 
           {filteredSigns.length === 0 ? (
             <div className="text-center py-16 bg-white rounded-3xl border border-yellow-100/50 text-gray-400">
-              <Sparkles className="w-12 h-12 mx-auto text-amber-200 mb-3" />
+              <Sparkles className="w-12 h-12 mx-auto text-indigo-200 mb-3" />
               <p className="text-lg font-bold">No predictions match your search or filters.</p>
               <p className="text-sm mt-1">Try resetting filters to show all zodiac signs.</p>
-              <button onClick={clearFilters} className="mt-4 px-6 py-2 bg-amber-500 text-white font-bold rounded-full text-xs">
+              <button onClick={clearFilters} className="mt-4 px-6 py-2 bg-indigo-500 text-white font-bold rounded-full text-xs">
                 Reset Filters
               </button>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredSigns.map((sign) => (
-                <Card key={sign.name} className="bg-white border border-yellow-100 hover:border-amber-200 hover:shadow-lg transition-all rounded-3xl overflow-hidden flex flex-col h-full">
+                <Card key={sign.name} className="bg-white border border-yellow-100 hover:border-indigo-200 hover:shadow-lg transition-all rounded-3xl overflow-hidden flex flex-col h-full">
                   <CardContent className="p-6 flex flex-col h-full space-y-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 border border-orange-100/50 flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-orange-50 border border-orange-100/50 flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
                         {sign.image ? (
                           <img src={sign.image} alt={sign.name} className="w-full h-full object-cover rounded-xl" />
                         ) : (
@@ -921,7 +921,7 @@ export default function HoroscopePage() {
                       </div>
                       <button
                         onClick={() => setSelectedSign(sign)}
-                        className="text-xs text-amber-600 hover:text-amber-800 font-extrabold flex items-center gap-1"
+                        className="text-xs text-indigo-600 hover:text-indigo-800 font-extrabold flex items-center gap-1"
                       >
                         Read More
                         <ChevronDown className="w-4 h-4" />
@@ -937,7 +937,7 @@ export default function HoroscopePage() {
         {/* ═══ 5. More Daily Horoscopes Section ═══ */}
         <section className="space-y-6">
           <div className="text-center space-y-1">
-            <h2 className="text-4xl md:text-6xl font-normal text-amber-600 font-cursive tracking-wide">More Daily Horoscopes</h2>
+            <h2 className="text-4xl md:text-6xl font-normal text-indigo-600 font-cursive tracking-wide">More Daily Horoscopes</h2>
             <p className="text-gray-500 font-medium">Explore specific fields of interest or view longer term forecasts.</p>
           </div>
 
@@ -947,14 +947,14 @@ export default function HoroscopePage() {
                 key={cat.id}
                 whileHover={{ y: -4, scale: 1.01 }}
                 onClick={() => setSelectedCategory(cat)}
-                className="bg-white border border-yellow-100 hover:border-amber-200 hover:shadow-md rounded-3xl p-5 cursor-pointer transition-all flex flex-col justify-between h-full space-y-3"
+                className="bg-white border border-yellow-100 hover:border-indigo-200 hover:shadow-md rounded-3xl p-5 cursor-pointer transition-all flex flex-col justify-between h-full space-y-3"
               >
                 <div className="space-y-2">
                   <div className="text-2xl">{cat.icon}</div>
                   <h3 className="font-extrabold text-gray-900 text-sm">{cat.name}</h3>
                   <p className="text-xs text-gray-500 leading-relaxed">{cat.desc}</p>
                 </div>
-                <span className="text-[11px] text-amber-600 font-extrabold flex items-center gap-0.5 self-start">
+                <span className="text-[11px] text-indigo-600 font-extrabold flex items-center gap-0.5 self-start">
                   Explore Insights <ChevronRight className="w-3 h-3" />
                 </span>
               </motion.div>
@@ -963,7 +963,7 @@ export default function HoroscopePage() {
         </section>
 
         {/* ═══ 6. Daily Insights Widget ═══ */}
-        <section className="rounded-3xl bg-gradient-to-br from-amber-500 to-orange-500 p-6 md:p-8 text-white relative overflow-hidden shadow-lg">
+        <section className="rounded-3xl bg-gradient-to-br from-indigo-500 to-orange-500 p-6 md:p-8 text-white relative overflow-hidden shadow-lg">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-2xl pointer-events-none" />
           
           <div className="grid md:grid-cols-3 gap-8 items-center relative z-10">
@@ -1003,8 +1003,8 @@ export default function HoroscopePage() {
 
         {/* ═══ 7. AI Guidance Section ═══ */}
         <section className="rounded-3xl bg-white border border-yellow-100 p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 shadow-sm">
-          <div className="w-16 h-16 rounded-2xl bg-amber-50 flex items-center justify-center shrink-0">
-            <Brain className="w-8 h-8 text-amber-500" />
+          <div className="w-16 h-16 rounded-2xl bg-indigo-50 flex items-center justify-center shrink-0">
+            <Brain className="w-8 h-8 text-indigo-500" />
           </div>
           <div className="flex-1 text-center md:text-left space-y-1">
             <h3 className="text-xl font-extrabold text-gray-900">Need Personalized Guidance?</h3>
@@ -1012,12 +1012,12 @@ export default function HoroscopePage() {
           </div>
           <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
             <Link href="/" className="flex-grow md:flex-grow-0">
-              <button className="w-full px-6 py-3 rounded-full bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-sm transition-all shadow-md">
+              <button className="w-full px-6 py-3 rounded-full bg-indigo-500 hover:bg-indigo-600 text-white font-extrabold text-sm transition-all shadow-md">
                 Chat with AI
               </button>
             </Link>
             <Link href="/dashboard" className="flex-grow md:flex-grow-0">
-              <button className="w-full px-6 py-3 rounded-full bg-white hover:bg-amber-50 border border-amber-200 text-amber-600 font-extrabold text-sm transition-all shadow-sm">
+              <button className="w-full px-6 py-3 rounded-full bg-white hover:bg-indigo-50 border border-indigo-200 text-indigo-600 font-extrabold text-sm transition-all shadow-sm">
                 Start Journaling
               </button>
             </Link>
@@ -1027,15 +1027,15 @@ export default function HoroscopePage() {
         {/* ═══ 8. Educational Section ═══ */}
         <section className="space-y-6">
           <div className="text-center space-y-1">
-            <h2 className="text-4xl md:text-6xl font-normal text-amber-600 font-cursive tracking-wide">How to Read Your Horoscope</h2>
+            <h2 className="text-4xl md:text-6xl font-normal text-indigo-600 font-cursive tracking-wide">How to Read Your Horoscope</h2>
             <p className="text-gray-500 font-medium max-w-lg mx-auto">Astrology is more than just your Sun sign. Understand the building blocks of your natal chart.</p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {EDUCATIONAL_TOPICS.map((topic, i) => (
-              <div key={i} className="bg-white border border-yellow-100 rounded-3xl p-5 space-y-2 hover:border-amber-100 transition-colors">
+              <div key={i} className="bg-white border border-yellow-100 rounded-3xl p-5 space-y-2 hover:border-indigo-100 transition-colors">
                 <h3 className="font-extrabold text-gray-900 text-base flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-xs shrink-0">
+                  <span className="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs shrink-0">
                     {i + 1}
                   </span>
                   {topic.title}
@@ -1051,7 +1051,7 @@ export default function HoroscopePage() {
         {/* ═══ 9. Benefits Section ═══ */}
         <section className="space-y-6">
           <div className="text-center space-y-1">
-            <h2 className="text-4xl md:text-6xl font-normal text-amber-600 font-cursive tracking-wide">Benefits of Daily Horoscope</h2>
+            <h2 className="text-4xl md:text-6xl font-normal text-indigo-600 font-cursive tracking-wide">Benefits of Daily Horoscope</h2>
             <p className="text-gray-500 font-medium">Aligning yourself with cosmic cycles yields practical benefits for daily life.</p>
           </div>
 
@@ -1069,7 +1069,7 @@ export default function HoroscopePage() {
         {/* ═══ 10. FAQ Section (Accordion) ═══ */}
         <section className="space-y-6">
           <div className="text-center space-y-1">
-            <h2 className="text-4xl md:text-6xl font-normal text-amber-600 font-cursive tracking-wide">Frequently Asked Questions</h2>
+            <h2 className="text-4xl md:text-6xl font-normal text-indigo-600 font-cursive tracking-wide">Frequently Asked Questions</h2>
             <p className="text-gray-500 font-medium">Have questions about horoscopes, privacy, or accuracy? We have answers.</p>
           </div>
 
@@ -1077,14 +1077,14 @@ export default function HoroscopePage() {
             {FAQS.map((faq, i) => {
               const isOpen = openFaq === i;
               return (
-                <div key={i} className="bg-white rounded-2xl border border-yellow-100 overflow-hidden transition-all duration-300 hover:border-amber-200">
+                <div key={i} className="bg-white rounded-2xl border border-yellow-100 overflow-hidden transition-all duration-300 hover:border-indigo-200">
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : i)}
                     className="w-full flex items-center justify-between p-5 text-left font-extrabold text-sm text-gray-900"
                   >
                     <span>{faq.q}</span>
                     {isOpen ? (
-                      <ChevronUp className="w-4 h-4 text-amber-500 shrink-0 ml-2" />
+                      <ChevronUp className="w-4 h-4 text-indigo-500 shrink-0 ml-2" />
                     ) : (
                       <ChevronDown className="w-4 h-4 text-gray-400 shrink-0 ml-2" />
                     )}
@@ -1110,7 +1110,7 @@ export default function HoroscopePage() {
         </section>
 
         {/* ═══ 11. About ZenAuraa Section ═══ */}
-        <section className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-amber-50 via-amber-50/20 to-white border border-amber-100 p-6 md:p-10 shadow-sm">
+        <section className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-indigo-50 via-indigo-50/20 to-white border border-indigo-100 p-6 md:p-10 shadow-sm">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             
             {/* Left side: Premium AI Generated Astrology Companion Image */}
@@ -1118,14 +1118,14 @@ export default function HoroscopePage() {
               <img
                 src="/astrology_companion.jpg"
                 alt="AI Astrology & Wellness Companion"
-                className="w-full max-w-[360px] md:max-w-[420px] h-auto rounded-3xl shadow-2xl border-4 border-amber-200/80 hover:scale-105 transition-all duration-500 object-cover"
+                className="w-full max-w-[360px] md:max-w-[420px] h-auto rounded-3xl shadow-2xl border-4 border-indigo-200/80 hover:scale-105 transition-all duration-500 object-cover"
               />
             </div>
 
             {/* Right Side: ZenAuraa Info */}
             <div className="space-y-6">
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1">About ZenAuraa</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-indigo-700 mb-1">About ZenAuraa</p>
                 <h2 className="text-3xl font-extrabold text-gray-900 leading-tight">Your Trusted AI-Powered Wellness Companion</h2>
               </div>
               
@@ -1144,7 +1144,7 @@ export default function HoroscopePage() {
                   'Personalized Guidance'
                 ].map(feat => (
                   <div key={feat} className="flex items-center gap-2">
-                    <div className="w-4 h-4 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 shrink-0">
+                    <div className="w-4 h-4 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 shrink-0">
                       <Check className="w-3.5 h-3.5" />
                     </div>
                     <span>{feat}</span>
@@ -1155,7 +1155,7 @@ export default function HoroscopePage() {
               {/* Start Journey CTA Button */}
               <button 
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="mt-4 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-sm transition-all shadow-lg hover:shadow-amber-500/20 hover:scale-105 active:scale-95"
+                className="mt-4 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-indigo-500 hover:bg-indigo-600 text-white font-extrabold text-sm transition-all shadow-lg hover:shadow-indigo-500/20 hover:scale-105 active:scale-95"
               >
                 Start Your Healing Journey
                 <ArrowRight className="w-4 h-4" />
@@ -1167,7 +1167,7 @@ export default function HoroscopePage() {
       </main>
 
       {/* ═══ Shared Footer ═══ */}
-      <footer className="bg-gradient-to-b from-amber-50 to-yellow-50 text-gray-700 pt-12 pb-6 border-t border-amber-100 mt-16">
+      <footer className="bg-gradient-to-b from-indigo-50 to-yellow-50 text-gray-700 pt-12 pb-6 border-t border-indigo-100 mt-16">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Top: Brand + Links */}
           <div className="flex flex-wrap gap-8 mb-10">
@@ -1175,7 +1175,7 @@ export default function HoroscopePage() {
             <div className="w-full lg:w-72 text-center lg:text-left">
               <div className="flex items-center gap-2 mb-4 justify-center lg:justify-start">
                 <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
-                <span className="text-lg font-extrabold text-amber-600">ZenAuraa</span>
+                <span className="text-lg font-extrabold text-indigo-600">ZenAuraa</span>
               </div>
               <p className="text-xs text-gray-500 leading-relaxed mb-4">
                 Your trusted companion for mental peace, emotional guidance, and classical astrology wellness.
@@ -1203,11 +1203,11 @@ export default function HoroscopePage() {
                 }
               ].map((col) => (
                 <div key={col.title}>
-                  <h4 className="text-amber-800 font-bold text-sm mb-3">{col.title}</h4>
+                  <h4 className="text-indigo-800 font-bold text-sm mb-3">{col.title}</h4>
                   <ul className="space-y-1.5">
                     {col.links.map((link) => (
                       <li key={link}>
-                        <Link href={link === 'Privacy Policy' ? '/privacy' : '/signup'} className="text-xs text-gray-500 hover:text-amber-600 transition-colors">{link}</Link>
+                        <Link href={link === 'Privacy Policy' ? '/privacy' : '/signup'} className="text-xs text-gray-500 hover:text-indigo-600 transition-colors">{link}</Link>
                       </li>
                     ))}
                   </ul>
@@ -1217,7 +1217,7 @@ export default function HoroscopePage() {
           </div>
 
           {/* Bottom Copyright */}
-          <div className="border-t border-amber-200 pt-6 text-center text-xs text-gray-500">
+          <div className="border-t border-indigo-200 pt-6 text-center text-xs text-gray-500">
             <p>&copy; {new Date().getFullYear()} ZenAuraa. All rights reserved.</p>
           </div>
         </div>
@@ -1242,7 +1242,7 @@ export default function HoroscopePage() {
               className="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl relative z-10 border border-yellow-100 max-h-[85vh] flex flex-col"
             >
               {/* Modal Header */}
-              <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white p-6 shrink-0 relative">
+              <div className="bg-gradient-to-r from-indigo-500 to-orange-500 text-white p-6 shrink-0 relative">
                 <button
                   onClick={() => setSelectedSign(null)}
                   className="absolute top-4 right-4 p-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"
@@ -1258,7 +1258,7 @@ export default function HoroscopePage() {
                     )}
                   </div>
                   <div>
-                    <h2 className="text-2xl font-extrabold font-sans">{selectedSign.name} <span className="font-cursive text-3xl font-normal text-amber-100">Today&apos;s Horoscope</span></h2>
+                    <h2 className="text-2xl font-extrabold font-sans">{selectedSign.name} <span className="font-cursive text-3xl font-normal text-indigo-100">Today&apos;s Horoscope</span></h2>
                     <p className="text-white/80 text-sm font-bold">{selectedSign.dates}</p>
                   </div>
                 </div>
@@ -1269,7 +1269,7 @@ export default function HoroscopePage() {
                 {/* General prediction */}
                 <div className="space-y-2">
                   <h3 className="font-extrabold text-gray-900 text-base flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-amber-500" />
+                    <Sparkles className="w-4 h-4 text-indigo-500" />
                     General Forecast
                   </h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
@@ -1285,7 +1285,7 @@ export default function HoroscopePage() {
                     { title: 'Money & Finance', icon: Coins, val: selectedSign.prediction.finance, color: 'text-emerald-500', bg: 'bg-emerald-50' },
                     { title: 'Health & Vitality', icon: Activity, val: selectedSign.prediction.health, color: 'text-green-500', bg: 'bg-green-50' },
                     { title: 'Studies & Focus', icon: BookOpen, val: selectedSign.prediction.education, color: 'text-purple-500', bg: 'bg-purple-50' },
-                    { title: 'Spiritual Guide', icon: Compass, val: selectedSign.prediction.spiritual, color: 'text-amber-500', bg: 'bg-amber-50' }
+                    { title: 'Spiritual Guide', icon: Compass, val: selectedSign.prediction.spiritual, color: 'text-indigo-500', bg: 'bg-indigo-50' }
                   ].map((cat, idx) => (
                     <div key={idx} className="p-4 rounded-2xl bg-gray-50 border border-gray-100 space-y-2">
                       <h4 className="font-extrabold text-sm text-gray-900 flex items-center gap-2">
@@ -1302,21 +1302,21 @@ export default function HoroscopePage() {
                 </div>
 
                 {/* Insights block */}
-                <div className="p-5 rounded-2xl bg-amber-50/50 border border-amber-100 grid grid-cols-2 gap-4 text-xs font-semibold text-gray-600">
+                <div className="p-5 rounded-2xl bg-indigo-50/50 border border-indigo-100 grid grid-cols-2 gap-4 text-xs font-semibold text-gray-600">
                   <div className="space-y-1">
-                    <p className="text-[10px] text-amber-700 font-bold uppercase tracking-wider">Lucky Number</p>
+                    <p className="text-[10px] text-indigo-700 font-bold uppercase tracking-wider">Lucky Number</p>
                     <p className="text-gray-900 text-sm font-extrabold">{selectedSign.insights.luckyNumber}</p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-[10px] text-amber-700 font-bold uppercase tracking-wider">Lucky Color</p>
+                    <p className="text-[10px] text-indigo-700 font-bold uppercase tracking-wider">Lucky Color</p>
                     <p className="text-gray-900 text-sm font-extrabold">{selectedSign.insights.luckyColor}</p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-[10px] text-amber-700 font-bold uppercase tracking-wider">Planet</p>
+                    <p className="text-[10px] text-indigo-700 font-bold uppercase tracking-wider">Planet</p>
                     <p className="text-gray-900 text-sm font-extrabold">{selectedSign.planet}</p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-[10px] text-amber-700 font-bold uppercase tracking-wider">Best Time</p>
+                    <p className="text-[10px] text-indigo-700 font-bold uppercase tracking-wider">Best Time</p>
                     <p className="text-gray-900 text-sm font-extrabold">{selectedSign.insights.bestTime}</p>
                   </div>
                 </div>
@@ -1347,7 +1347,7 @@ export default function HoroscopePage() {
               className="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl relative z-10 border border-yellow-100 max-h-[85vh] flex flex-col"
             >
               {/* Modal Header */}
-              <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white p-6 relative shrink-0">
+              <div className="bg-gradient-to-r from-indigo-500 via-orange-500 to-indigo-600 text-white p-6 relative shrink-0">
                 <button
                   onClick={() => setSelectedCategory(null)}
                   className="absolute top-4 right-4 p-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"
@@ -1369,7 +1369,7 @@ export default function HoroscopePage() {
                       <span>Updated Today • {new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}</span>
                     </div>
                     <h2 className="text-2xl md:text-3xl font-extrabold font-sans tracking-tight">
-                      {selectedCategorySign.name} <span className="text-amber-100 font-normal">• {selectedCategory.name}</span>
+                      {selectedCategorySign.name} <span className="text-indigo-100 font-normal">• {selectedCategory.name}</span>
                     </h2>
                     <p className="text-white/90 text-xs font-bold">
                       {selectedCategorySign.dates} — Planet: {selectedCategorySign.planet} ({selectedCategorySign.element} Element)
@@ -1388,11 +1388,11 @@ export default function HoroscopePage() {
                 {/* ══ ZODIAC SIGN SELECTOR ══ */}
                 <div className="space-y-2.5 pb-4 border-b border-gray-100">
                   <div className="flex items-center justify-between">
-                    <label className="text-xs font-extrabold uppercase tracking-wider text-amber-800 flex items-center gap-1.5">
-                      <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                    <label className="text-xs font-extrabold uppercase tracking-wider text-indigo-800 flex items-center gap-1.5">
+                      <Star className="w-3.5 h-3.5 text-indigo-500 fill-indigo-500" />
                       Select Zodiac Sign for Personal Forecast:
                     </label>
-                    <span className="text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
+                    <span className="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-200">
                       {selectedCategorySign.name} ({selectedCategorySign.dates})
                     </span>
                   </div>
@@ -1406,8 +1406,8 @@ export default function HoroscopePage() {
                           onClick={() => setSelectedCategorySign(sign)}
                           className={`p-2 rounded-xl text-center border transition-all flex flex-col items-center gap-1 ${
                             isSelected
-                              ? 'bg-gradient-to-br from-amber-500 to-orange-500 text-white border-amber-500 shadow-md scale-105 font-bold'
-                              : 'bg-amber-50/50 hover:bg-amber-100/70 text-gray-800 border-amber-200/60 hover:border-amber-300'
+                              ? 'bg-gradient-to-br from-indigo-500 to-orange-500 text-white border-indigo-500 shadow-md scale-105 font-bold'
+                              : 'bg-indigo-50/50 hover:bg-indigo-100/70 text-gray-800 border-indigo-200/60 hover:border-indigo-300'
                           }`}
                         >
                           <div className="w-7 h-7 rounded-lg overflow-hidden shrink-0 flex items-center justify-center bg-white/30">
@@ -1426,11 +1426,11 @@ export default function HoroscopePage() {
 
                 {/* Detailed Overview */}
                 <div className="space-y-2">
-                  <h3 className="font-extrabold text-gray-900 text-sm flex items-center gap-2 uppercase tracking-wider text-amber-700">
-                    <Sparkles className="w-4 h-4 text-amber-500" />
+                  <h3 className="font-extrabold text-gray-900 text-sm flex items-center gap-2 uppercase tracking-wider text-indigo-700">
+                    <Sparkles className="w-4 h-4 text-indigo-500" />
                     {selectedCategorySign.name} {selectedCategory.name} Forecast
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed bg-amber-50/40 p-4 rounded-2xl border border-amber-100/70">
+                  <p className="text-sm text-gray-600 leading-relaxed bg-indigo-50/40 p-4 rounded-2xl border border-indigo-100/70">
                     For <strong>{selectedCategorySign.name}</strong> ({selectedCategorySign.dates}), ruling planet {selectedCategorySign.planet} in element {selectedCategorySign.element} influences your {selectedCategory.name.toLowerCase()} today.{' '}
                     {selectedCategorySign.prediction[selectedCategory.id === 'weekly' || selectedCategory.id === 'monthly' ? 'general' : (selectedCategory.id as keyof ZodiacSign['prediction'])] || selectedCategorySign.prediction.general}{' '}
                     {selectedCategory.overview}
@@ -1497,13 +1497,13 @@ export default function HoroscopePage() {
                 </div>
 
                 {/* Daily Affirmation */}
-                <div className="p-4 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 text-center italic text-xs md:text-sm font-extrabold text-amber-800">
+                <div className="p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-orange-50 border border-indigo-200 text-center italic text-xs md:text-sm font-extrabold text-indigo-800">
                   📌 {selectedCategorySign.name} Daily Affirmation: &ldquo;{selectedCategorySign.insights.affirmation}&rdquo;
                 </div>
 
                 <button
                   onClick={() => setSelectedCategory(null)}
-                  className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-extrabold text-sm rounded-full transition-all shadow-md active:scale-95"
+                  className="w-full py-3.5 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-extrabold text-sm rounded-full transition-all shadow-md active:scale-95"
                 >
                   Close {selectedCategorySign.name} Forecast
                 </button>

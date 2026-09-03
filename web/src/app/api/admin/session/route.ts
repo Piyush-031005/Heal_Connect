@@ -18,16 +18,36 @@ const BACKEND = process.env['BACKEND_URL'] ?? process.env['NEXT_PUBLIC_API_URL']
 
 export async function GET(req: NextRequest) {
   const token = req.cookies.get(SESSION_COOKIE)?.value;
-  const identity = decodeSessionToken(token);
-  if (!identity) {
+  if (!token) {
     return NextResponse.json({ authenticated: false });
   }
-  return NextResponse.json({
-    authenticated: true,
-    email: identity.email,
-    role: identity.role,
-    id: identity.id,
-  });
+
+  // Proxy to backend to verify the token, avoiding any secret mismatch issues between frontend/backend
+  try {
+    const backendRes = await fetch(`${BACKEND}/api/admin-auth/me`, {
+      headers: {
+        'Cookie': `${SESSION_COOKIE}=${token}`
+      }
+    });
+    
+    if (!backendRes.ok) {
+      return NextResponse.json({ authenticated: false });
+    }
+    
+    const data = await backendRes.json();
+    if (data.success && data.data) {
+      return NextResponse.json({
+        authenticated: true,
+        email: data.data.email,
+        role: data.data.role,
+        id: data.data.id,
+      });
+    }
+  } catch (err) {
+    console.error('Failed to verify session with backend:', err);
+  }
+
+  return NextResponse.json({ authenticated: false });
 }
 
 export async function POST(req: NextRequest) {
@@ -78,14 +98,29 @@ export async function POST(req: NextRequest) {
   // technique the /mfa route uses. Without this the browser gets no cookie at
   // all and every subsequent request looks unauthenticated.
   if (!data.mfaRequired) {
-    const setCookie = backendRes.headers.get('set-cookie');
-    const nextRes = NextResponse.json({ success: true, mfaRequired: false, mfaSetupRequired: false });
-    if (setCookie) {
-      nextRes.headers.set('set-cookie', setCookie);
+    const setCookies = backendRes.headers.getSetCookie();
+    let sessionToken = '';
+    for (const c of setCookies) {
+      const match = c.match(/(?:^|;\s*)hc_admin_session=([^;]+)/);
+      if (match) {
+        sessionToken = match[1];
+        break;
+      }
+    }
+    
+    if (sessionToken) {
+      const { cookies } = await import('next/headers');
+      cookies().set(SESSION_COOKIE, sessionToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        path: '/',
+        maxAge: SESSION_TTL_MS / 1000,
+      });
     } else {
       console.error('Admin login: backend did not return a Set-Cookie header for the no-MFA path');
     }
-    return nextRes;
+    return NextResponse.json({ success: true, mfaRequired: false, mfaSetupRequired: false });
   }
 
   // MFA step required — return loginToken to the client (no cookie yet)

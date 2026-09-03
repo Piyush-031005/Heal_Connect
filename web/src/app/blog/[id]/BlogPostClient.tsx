@@ -40,7 +40,7 @@ export default function SingleBlogPage() {
       <div className="min-h-screen bg-[#faf9f6] flex flex-col font-sans">
         <Navbar />
         <div className="flex-1 flex items-center justify-center pt-24">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500"></div>
         </div>
       </div>
     );
@@ -57,7 +57,7 @@ export default function SingleBlogPage() {
       <main className="flex-1 pt-24 pb-16">
         <article className="container mx-auto px-4 max-w-4xl">
           
-          <Link href="/blog" className="inline-flex items-center text-amber-600 hover:text-amber-700 font-medium mb-8 transition-colors">
+          <Link href="/blog" className="inline-flex items-center text-indigo-600 hover:text-indigo-700 font-medium mb-8 transition-colors">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Articles
           </Link>
@@ -68,7 +68,7 @@ export default function SingleBlogPage() {
             </h1>
             
             <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-gray-500 mb-8">
-              <span className="flex items-center gap-1.5 bg-amber-50 text-amber-700 px-3 py-1 rounded-full font-medium">
+              <span className="flex items-center gap-1.5 bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-medium">
                 <User className="w-4 h-4" />
                 {blog.author || 'Heal Connect Admin'}
               </span>
@@ -89,7 +89,7 @@ export default function SingleBlogPage() {
             )}
           </header>
 
-          <div className="prose prose-lg prose-amber max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-amber-600">
+          <div className="prose prose-lg prose-amber max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-indigo-600">
             <ReactMarkdown>{blog.content}</ReactMarkdown>
           </div>
 
@@ -97,7 +97,7 @@ export default function SingleBlogPage() {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-xl">
+              <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-xl">
                 {(blog.author || 'H')[0].toUpperCase()}
               </div>
               <div>

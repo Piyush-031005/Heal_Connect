@@ -101,7 +101,7 @@ export default function ExpertRequestsPage() {
             <div className="flex gap-2 mt-2">
               <button 
                 onClick={() => { toast.dismiss(t.id); router.push('/expert/dashboard'); }}
-                className="px-3 py-1.5 bg-amber-500 text-white rounded-lg text-sm font-medium hover:bg-amber-600 transition-colors"
+                className="px-3 py-1.5 bg-indigo-500 text-white rounded-lg text-sm font-medium hover:bg-indigo-600 transition-colors"
               >
                 Go to Dashboard
               </button>
@@ -143,17 +143,17 @@ export default function ExpertRequestsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-amber-500" />
+      <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] p-6 lg:p-12 font-sans">
+    <div className="min-h-screen bg-[#faf9f6] p-6 lg:p-12 font-sans">
       <div className="max-w-4xl mx-auto space-y-8">
         <h1 className="text-3xl font-extrabold text-gray-900 flex items-center gap-3">
-          <Calendar className="h-8 w-8 text-amber-500" />
+          <Calendar className="h-8 w-8 text-indigo-500" />
           Client Session Requests
         </h1>
 
@@ -165,18 +165,18 @@ export default function ExpertRequestsPage() {
           <div className="grid gap-6">
             {requests.map((req) => (
               <Card key={req.id} className="border border-yellow-200/60 shadow-sm rounded-2xl overflow-hidden">
-                <CardHeader className="bg-amber-50/50 pb-4">
+                <CardHeader className="bg-indigo-50/50 pb-4">
                   <div className="flex justify-between items-center">
                     <CardTitle className="text-lg flex items-center gap-3">
                       {req.user.photoUrl ? (
                         <img src={req.user.photoUrl} alt="User" className="w-10 h-10 rounded-full object-cover" />
                       ) : (
-                        <div className="w-10 h-10 rounded-full bg-amber-200 flex items-center justify-center font-bold text-amber-700">
+                        <div className="w-10 h-10 rounded-full bg-indigo-200 flex items-center justify-center font-bold text-indigo-700">
                           {req.user.name?.charAt(0) || 'U'}
                         </div>
                       )}
                       <div>
-                        Request from <span className="text-amber-600">{req.user.name || 'User'}</span>
+                        Request from <span className="text-indigo-600">{req.user.name || 'User'}</span>
                         <div className="text-sm font-normal text-gray-500 mt-0.5">
                           Received on {new Date(req.createdAt).toLocaleDateString()}
                         </div>
@@ -218,7 +218,7 @@ export default function ExpertRequestsPage() {
                   ) : activeReqId !== req.id ? (
                     <Button 
                       onClick={() => { setActiveReqId(req.id); setSlots([{ date: '', time: '' }]); }}
-                      className="bg-amber-500 hover:bg-amber-600 text-white rounded-lg px-6"
+                      className="bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg px-6"
                     >
                       Suggest Available Times
                     </Button>
@@ -234,7 +234,7 @@ export default function ExpertRequestsPage() {
                                 type="date" 
                                 value={slot.date} 
                                 onChange={(e) => updateSlot(index, 'date', e.target.value)}
-                                className="w-full border-gray-300 rounded-lg p-2.5 text-sm focus:ring-amber-500 focus:border-amber-500"
+                                className="w-full border-gray-300 rounded-lg p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500"
                               />
                             </div>
                             <div className="flex-1 w-full sm:w-1/2">
@@ -242,7 +242,7 @@ export default function ExpertRequestsPage() {
                               <select 
                                 value={slot.time} 
                                 onChange={(e) => updateSlot(index, 'time', e.target.value)}
-                                className="w-full border-gray-300 rounded-lg p-2.5 text-sm focus:ring-amber-500 focus:border-amber-500 bg-white"
+                                className="w-full border-gray-300 rounded-lg p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500 bg-white"
                               >
                                 <option value="" disabled>Select Time</option>
                                 {TIME_OPTIONS.map(opt => (
@@ -261,7 +261,7 @@ export default function ExpertRequestsPage() {
                         ))}
                       </div>
                       <div className="flex justify-between items-center pt-2">
-                        <Button variant="outline" size="sm" onClick={addSlot} className="text-amber-600 border-amber-200 hover:bg-amber-50">
+                        <Button variant="outline" size="sm" onClick={addSlot} className="text-indigo-600 border-indigo-200 hover:bg-indigo-50">
                           <Plus className="w-4 h-4 mr-1" /> Add Another Slot
                         </Button>
                         <div className="space-x-3">
@@ -269,7 +269,7 @@ export default function ExpertRequestsPage() {
                           <Button 
                             onClick={() => handleProposeTimes(req.id)}
                             disabled={proposing === req.id}
-                            className="bg-amber-500 hover:bg-amber-600 text-white"
+                            className="bg-indigo-500 hover:bg-indigo-600 text-white"
                           >
                             {proposing === req.id ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Send Time Options'}
                           </Button>

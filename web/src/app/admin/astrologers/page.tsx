@@ -14,7 +14,7 @@ const ADMIN_KEY =
 const STATUS_COLORS: Record<string, string> = {
   APPROVED: 'bg-green-100 text-green-700',
   REJECTED: 'bg-red-100 text-red-700',
-  ADMIN_REVIEW: 'bg-amber-100 text-amber-700',
+  ADMIN_REVIEW: 'bg-indigo-100 text-indigo-700',
   SUSPENDED: 'bg-orange-100 text-orange-700',
   BLOCKED: 'bg-red-200 text-red-800',
   DRAFT: 'bg-gray-100 text-gray-500',
@@ -111,7 +111,7 @@ export default function AdminAstrologersPage() {
         <div className="flex gap-2 flex-wrap">
           {['ADMIN_REVIEW', 'APPROVED', 'REJECTED', 'SUSPENDED', ''].map((s) => (
             <button key={s} onClick={() => setStatusFilter(s)}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${statusFilter === s ? 'bg-amber-500 text-white border-amber-500' : 'border-gray-200 text-gray-600 hover:border-amber-300'}`}>
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${statusFilter === s ? 'bg-indigo-500 text-white border-indigo-500' : 'border-gray-200 text-gray-600 hover:border-indigo-300'}`}>
               {s || 'All'}
             </button>
           ))}
@@ -121,7 +121,7 @@ export default function AdminAstrologersPage() {
       {/* Table */}
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
         {loading ? (
-          <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-amber-500" /></div>
+          <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-indigo-500" /></div>
         ) : astrologers.length === 0 ? (
           <div className="text-center py-16 text-gray-400">No astrologers found.</div>
         ) : (
@@ -176,7 +176,7 @@ export default function AdminAstrologersPage() {
         <div className="flex justify-center gap-2 mt-4">
           {Array.from({ length: pagination.pages }, (_, i) => i + 1).map((p) => (
             <button key={p} onClick={() => load(p)}
-              className={`w-8 h-8 rounded-full text-sm font-medium ${p === pagination.page ? 'bg-amber-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+              className={`w-8 h-8 rounded-full text-sm font-medium ${p === pagination.page ? 'bg-indigo-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
               {p}
             </button>
           ))}
@@ -188,7 +188,7 @@ export default function AdminAstrologersPage() {
         <div className="fixed inset-0 bg-black/50 z-40 flex items-start justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl my-8">
             {detailLoading ? (
-              <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-amber-500" /></div>
+              <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-indigo-500" /></div>
             ) : selected && (
               <>
                 <div className="p-6 border-b border-gray-100">
@@ -220,7 +220,7 @@ export default function AdminAstrologersPage() {
                     <div className="bg-gray-50 rounded-lg p-3 text-sm space-y-1">
                       <div className="flex justify-between"><span className="text-gray-500">ID Doc Type</span><span className="font-medium">{selected.profile.kycVerification?.idDocType || '—'}</span></div>
                       <div className="flex justify-between"><span className="text-gray-500">KYC Status</span>
-                        <span className={`font-medium ${selected.profile.kycVerification?.verificationStatus === 'VERIFIED' ? 'text-green-600' : 'text-amber-600'}`}>
+                        <span className={`font-medium ${selected.profile.kycVerification?.verificationStatus === 'VERIFIED' ? 'text-green-600' : 'text-indigo-600'}`}>
                           {selected.profile.kycVerification?.verificationStatus || 'NOT SUBMITTED'}
                         </span>
                       </div>
@@ -236,13 +236,13 @@ export default function AdminAstrologersPage() {
                         <div className="flex justify-between items-center">
                           <span className="text-gray-500">Profile URL</span>
                           <a href={selected.profile.professionalVerification.platformProfileUrl} target="_blank" rel="noopener noreferrer"
-                            className="text-amber-600 hover:underline flex items-center gap-1 text-xs">
+                            className="text-indigo-600 hover:underline flex items-center gap-1 text-xs">
                             Open <ExternalLink className="w-3 h-3" />
                           </a>
                         </div>
                       )}
                       <div className="flex justify-between"><span className="text-gray-500">Status</span>
-                        <span className={`font-medium ${selected.profile.professionalVerification?.status === 'APPROVED' ? 'text-green-600' : 'text-amber-600'}`}>
+                        <span className={`font-medium ${selected.profile.professionalVerification?.status === 'APPROVED' ? 'text-green-600' : 'text-indigo-600'}`}>
                           {selected.profile.professionalVerification?.status || 'NOT SUBMITTED'}
                         </span>
                       </div>
@@ -266,7 +266,7 @@ export default function AdminAstrologersPage() {
                               </div>
                             </div>
                             <a href={doc.blobUrl ?? '#'} target="_blank" rel="noopener noreferrer"
-                              className="text-xs text-amber-600 hover:underline flex items-center gap-1 font-medium">
+                              className="text-xs text-indigo-600 hover:underline flex items-center gap-1 font-medium">
                               View <ExternalLink className="w-3 h-3" />
                             </a>
                           </div>

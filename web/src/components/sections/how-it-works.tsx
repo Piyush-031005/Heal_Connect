@@ -22,7 +22,7 @@ export function HowItWorks() {
             <div className="lg:col-span-6 flex flex-col justify-center">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold uppercase tracking-[0.2em] text-[#CDE9F4] mb-6 w-fit">
                 <Sparkles className="w-3.5 h-3.5 text-[#63BFE4]" />
-                The Zenauraa App
+                The ZenAuraa App
               </div>
 
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-[1.1]">
@@ -165,7 +165,7 @@ export function HowItWorks() {
           {/* Left Column: App Info */}
           <div className="lg:col-span-6 flex flex-col justify-center">
             <span className="text-xs font-black uppercase tracking-[0.25em] text-[#D1BDEB] mb-4 block">
-              THE Zenauraa APP
+              THE ZenAuraa APP
             </span>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-white mb-6 leading-[1.15]">

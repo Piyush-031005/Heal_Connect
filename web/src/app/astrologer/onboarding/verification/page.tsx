@@ -19,15 +19,15 @@ function StepBar({ step }: { step: number }) {
           <div key={s} className="flex items-center">
             <div className="flex flex-col items-center gap-1.5">
               <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all ${
-                done    ? 'bg-amber-500 border-amber-500 text-white' :
-                active  ? 'bg-white border-amber-500 text-amber-600' :
+                done    ? 'bg-indigo-500 border-indigo-500 text-white' :
+                active  ? 'bg-white border-indigo-500 text-indigo-600' :
                           'bg-white border-gray-200 text-gray-400'
               }`}>
                 {done ? '✓' : s}
               </div>
-              <span className={`text-[11px] font-medium hidden sm:block ${active ? 'text-amber-600' : done ? 'text-amber-400' : 'text-gray-400'}`}>{label}</span>
+              <span className={`text-[11px] font-medium hidden sm:block ${active ? 'text-indigo-600' : done ? 'text-indigo-400' : 'text-gray-400'}`}>{label}</span>
             </div>
-            {s < 3 && <div className={`w-16 sm:w-24 h-0.5 mx-1 mb-5 rounded ${done ? 'bg-amber-400' : 'bg-gray-200'}`} />}
+            {s < 3 && <div className={`w-16 sm:w-24 h-0.5 mx-1 mb-5 rounded ${done ? 'bg-indigo-400' : 'bg-gray-200'}`} />}
           </div>
         );
       })}
@@ -36,7 +36,7 @@ function StepBar({ step }: { step: number }) {
 }
 
 const VERIFICATION_OPTIONS = ['Yes', 'No', "I'd like to discuss this"];
-const textareaCls = "w-full rounded-xl border border-yellow-200 bg-[#fffbf0] px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition resize-none";
+const textareaCls = "w-full rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition resize-none";
 
 export default function AstrologerVerificationPage() {
   const router = useRouter();
@@ -77,16 +77,16 @@ export default function AstrologerVerificationPage() {
   };
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center bg-[#fffbf0]">
-      <Loader2 className="w-8 h-8 animate-spin text-amber-500" />
+    <div className="min-h-screen flex items-center justify-center bg-[#faf9f6]">
+      <Loader2 className="w-8 h-8 animate-spin text-indigo-500" />
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-[#fffbf0] flex flex-col md:flex-row font-sans">
+    <div className="min-h-screen bg-[#faf9f6] flex flex-col md:flex-row font-sans">
 
       {/* Left panel */}
-      <div className="hidden md:flex flex-col justify-start w-5/12 p-12 bg-gradient-to-br from-amber-500 via-amber-600 to-orange-700 relative overflow-hidden sticky top-0 h-screen">
+      <div className="hidden md:flex flex-col justify-start w-5/12 p-12 bg-gradient-to-br from-indigo-500 via-indigo-600 to-orange-700 relative overflow-hidden sticky top-0 h-screen">
         <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
@@ -100,7 +100,7 @@ export default function AstrologerVerificationPage() {
           <h1 className="text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight">
             Almost<br />There
           </h1>
-          <p className="text-amber-200 text-lg font-semibold mb-5">One last step.</p>
+          <p className="text-indigo-200 text-lg font-semibold mb-5">One last step.</p>
           <p className="text-white/80 text-sm leading-relaxed max-w-sm">
             We won't ask you to upload documents at this stage. Any further verification will depend on the nature of your practice.
           </p>
@@ -109,7 +109,7 @@ export default function AstrologerVerificationPage() {
           </p>
         </div>
         <div className="relative z-10 mt-auto pt-12 border-t border-white/20">
-          <p className="text-amber-100/60 text-xs">© 2026 ZenAuraa. All rights reserved.</p>
+          <p className="text-indigo-100/60 text-xs">© 2026 ZenAuraa. All rights reserved.</p>
         </div>
       </div>
 
@@ -117,7 +117,7 @@ export default function AstrologerVerificationPage() {
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-12">
         <div className="flex items-center gap-2 mb-8 md:hidden">
           <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
-          <span className="text-xl font-extrabold text-amber-500">ZenAuraa</span>
+          <span className="text-xl font-extrabold text-indigo-500">ZenAuraa</span>
         </div>
 
         <div className="w-full max-w-2xl">
@@ -151,11 +151,11 @@ export default function AstrologerVerificationPage() {
                 {VERIFICATION_OPTIONS.map(opt => (
                   <label key={opt} className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer transition-all ${
                     verificationComfort === opt
-                      ? 'border-amber-400 bg-amber-50'
-                      : 'border-gray-200 hover:border-amber-200 bg-white'
+                      ? 'border-indigo-400 bg-indigo-50'
+                      : 'border-gray-200 hover:border-indigo-200 bg-white'
                   }`}>
                     <input type="radio" name="verification" value={opt} checked={verificationComfort === opt}
-                      onChange={() => setVerificationComfort(opt)} className="accent-amber-500 w-4 h-4" />
+                      onChange={() => setVerificationComfort(opt)} className="accent-indigo-500 w-4 h-4" />
                     <span className="text-sm font-medium text-gray-700">{opt}</span>
                   </label>
                 ))}
@@ -172,7 +172,7 @@ export default function AstrologerVerificationPage() {
                 <ChevronLeft className="w-4 h-4" /> Back
               </button>
               <button onClick={handleSubmit} disabled={submitting}
-                className="flex items-center gap-2 px-7 h-11 rounded-full bg-amber-500 hover:bg-amber-600 disabled:opacity-60 text-white text-sm font-bold shadow-lg transition-colors">
+                className="flex items-center gap-2 px-7 h-11 rounded-full bg-indigo-500 hover:bg-indigo-600 disabled:opacity-60 text-white text-sm font-bold shadow-lg transition-colors">
                 {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
                 {submitting ? 'Submitting...' : 'Submit'}
               </button>

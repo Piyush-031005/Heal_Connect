@@ -62,7 +62,7 @@ export default function ConsultationsPage() {
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
                         <TypeIcon type={item.type} />
-                        <span className="font-medium text-amber-600">{item.id}</span>
+                        <span className="font-medium text-indigo-600">{item.id}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{item.user}</td>
@@ -74,7 +74,7 @@ export default function ConsultationsPage() {
                     </td>
                     <td className="px-6 py-4">
                       {item.rating ? (
-                        <div className="flex items-center text-amber-500">
+                        <div className="flex items-center text-indigo-500">
                           <span className="font-medium mr-1">{item.rating}</span>
                           <span className="text-sm">⭐</span>
                         </div>

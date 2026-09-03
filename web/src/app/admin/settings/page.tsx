@@ -24,7 +24,7 @@ export default function SettingsPage() {
           <button 
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 bg-amber-600 hover:bg-amber-700 disabled:opacity-70 text-white px-6 py-2 rounded-lg transition-colors"
+            className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-70 text-white px-6 py-2 rounded-lg transition-colors"
           >
             <Save size={20} />
             {saving ? 'Saving...' : 'Save Changes'}
@@ -39,11 +39,11 @@ export default function SettingsPage() {
           <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Platform Name</label>
-              <input type="text" defaultValue="ZenAuraa" className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 outline-none" />
+              <input type="text" defaultValue="ZenAuraa" className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Logo URL</label>
-              <input type="text" defaultValue="https://example.com/logo.png" className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 outline-none" />
+              <input type="text" defaultValue="https://example.com/logo.png" className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none" />
             </div>
           </div>
         </div>
@@ -58,14 +58,14 @@ export default function SettingsPage() {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Support Email</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-2.5 text-gray-400" size={18} />
-                <input type="email" defaultValue="support@healconnect.com" className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 outline-none" />
+                <input type="email" defaultValue="support@healconnect.com" className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none" />
               </div>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Support Phone</label>
               <div className="relative">
                 <Phone className="absolute left-3 top-2.5 text-gray-400" size={18} />
-                <input type="text" defaultValue="+1 (555) 123-4567" className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 outline-none" />
+                <input type="text" defaultValue="+1 (555) 123-4567" className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none" />
               </div>
             </div>
           </div>
@@ -79,7 +79,7 @@ export default function SettingsPage() {
           <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Platform Commission (%)</label>
-              <input type="number" defaultValue="20" className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 outline-none" />
+              <input type="number" defaultValue="20" className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none" />
               <p className="text-xs text-gray-500 mt-1">Percentage taken from each consultation.</p>
             </div>
             <div className="flex items-center">

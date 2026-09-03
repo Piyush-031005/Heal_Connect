@@ -174,7 +174,7 @@ export default function AdminModerationPage() {
                 </tr>
               ) : (
                 flags.map((flag) => (
-                  <tr key={flag.id} className="hover:bg-amber-50/30 dark:hover:bg-white/5 transition-colors">
+                  <tr key={flag.id} className="hover:bg-indigo-50/30 dark:hover:bg-white/5 transition-colors">
                     <td className="px-4 py-3 text-xs text-gray-500">{new Date(flag.createdAt).toLocaleDateString()}</td>
                     <td className="px-4 py-3 text-xs font-bold text-gray-900 dark:text-white">System Auto-Flag</td>
                     <td className="px-4 py-3">

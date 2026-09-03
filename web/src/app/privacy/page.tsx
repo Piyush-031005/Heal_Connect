@@ -16,7 +16,7 @@ function Section({ n, title, children }: { n: number; title: string; children: R
   return (
     <section className="mb-10">
       <h2 className="text-xl font-extrabold text-gray-900 mb-3 flex items-baseline gap-2">
-        <span className="text-amber-500">{n}.</span> {title}
+        <span className="text-indigo-500">{n}.</span> {title}
       </h2>
       <div className="text-gray-700 leading-relaxed space-y-3 text-[15px]">{children}</div>
     </section>
@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
       <main className="flex-1 pt-32 pb-24">
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="text-center mb-14">
-            <div className="w-16 h-16 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <ShieldCheck className="w-8 h-8" />
             </div>
             <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">Privacy Policy</h1>

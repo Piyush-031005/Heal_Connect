@@ -90,7 +90,7 @@ function StarDisplay({ rating, size = 'sm' }: { rating: number; size?: 'sm' | 'm
       {[1, 2, 3, 4, 5].map((i) => (
         <Star
           key={i}
-          className={`${cls} ${i <= rating ? 'fill-amber-400 text-amber-400' : 'text-gray-200 fill-gray-200'}`}
+          className={`${cls} ${i <= rating ? 'fill-indigo-400 text-indigo-400' : 'text-gray-200 fill-gray-200'}`}
         />
       ))}
     </div>
@@ -113,7 +113,7 @@ function StarPicker({ value, onChange }: { value: number; onChange: (v: number) 
         >
           <Star
             className={`w-8 h-8 transition-colors ${
-              i <= (hovered || value) ? 'fill-amber-400 text-amber-400' : 'text-gray-300 fill-gray-100'
+              i <= (hovered || value) ? 'fill-indigo-400 text-indigo-400' : 'text-gray-300 fill-gray-100'
             }`}
           />
         </button>
@@ -125,11 +125,11 @@ function StarPicker({ value, onChange }: { value: number; onChange: (v: number) 
 // --- AVATAR HELPER ---
 function Avatar({ name, photoUrl, size = 'md' }: { name: string; photoUrl?: string; size?: 'sm' | 'md' | 'lg' }) {
   const sizeClass = size === 'lg' ? 'w-14 h-14 text-lg' : size === 'sm' ? 'w-8 h-8 text-xs' : 'w-11 h-11 text-sm';
-  const colors = ['from-amber-400 to-orange-500', 'from-purple-400 to-pink-500', 'from-blue-400 to-cyan-500', 'from-green-400 to-teal-500'];
+  const colors = ['from-indigo-400 to-orange-500', 'from-purple-400 to-pink-500', 'from-blue-400 to-cyan-500', 'from-green-400 to-teal-500'];
   const colorIdx = name.charCodeAt(0) % colors.length;
-  if (photoUrl) return <img src={photoUrl} alt={name} className={`${sizeClass} rounded-full object-cover border-2 border-amber-200`} />;
+  if (photoUrl) return <img src={photoUrl} alt={name} className={`${sizeClass} rounded-full object-cover border-2 border-indigo-200`} />;
   return (
-    <div className={`${sizeClass} rounded-full bg-gradient-to-br ${colors[colorIdx]} flex items-center justify-center font-extrabold text-white border-2 border-amber-200 shrink-0`}>
+    <div className={`${sizeClass} rounded-full bg-gradient-to-br ${colors[colorIdx]} flex items-center justify-center font-extrabold text-white border-2 border-indigo-200 shrink-0`}>
       {name.charAt(0).toUpperCase()}
     </div>
   );
@@ -141,13 +141,13 @@ function RatingBar({ star, count, total }: { star: number; count: number; total:
   return (
     <div className="flex items-center gap-2">
       <span className="text-xs font-bold text-gray-600 w-3">{star}</span>
-      <Star className="w-3 h-3 fill-amber-400 text-amber-400 shrink-0" />
+      <Star className="w-3 h-3 fill-indigo-400 text-indigo-400 shrink-0" />
       <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="h-full bg-gradient-to-r from-amber-400 to-orange-400 rounded-full"
+          className="h-full bg-gradient-to-r from-indigo-400 to-orange-400 rounded-full"
         />
       </div>
       <span className="text-xs text-gray-500 w-6 text-right">{count}</span>
@@ -250,22 +250,22 @@ export default function ReviewsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-orange-50">
       <Navbar />
 
       {/* ── HERO HEADER ── */}
       <section className="pt-28 pb-12 px-4 text-center relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-80 h-80 bg-amber-200/20 rounded-full blur-3xl" />
+          <div className="absolute top-0 left-1/4 w-80 h-80 bg-indigo-200/20 rounded-full blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-orange-200/20 rounded-full blur-3xl" />
         </div>
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-amber-100 border border-amber-200 text-amber-700 text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">
+          <div className="inline-flex items-center gap-2 bg-indigo-100 border border-indigo-200 text-indigo-700 text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">
             <Sparkles className="w-3.5 h-3.5" /> Community Reviews
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-4">
             What Our Community<br />
-            <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">Is Saying</span>
+            <span className="bg-gradient-to-r from-indigo-500 to-orange-500 bg-clip-text text-transparent">Is Saying</span>
           </h1>
           <p className="text-gray-600 text-lg font-medium max-w-xl mx-auto">
             Real experiences from real people. Discover why thousands trust ZenAuraa for their spiritual journey.
@@ -283,7 +283,7 @@ export default function ReviewsPage() {
           className="grid md:grid-cols-3 gap-6 mb-10"
         >
           {/* Overall Score */}
-          <div className="md:col-span-1 bg-gradient-to-br from-amber-500 to-orange-500 rounded-3xl p-6 text-white shadow-xl shadow-amber-200/50 flex flex-col items-center justify-center text-center">
+          <div className="md:col-span-1 bg-gradient-to-br from-indigo-500 to-orange-500 rounded-3xl p-6 text-white shadow-xl shadow-indigo-200/50 flex flex-col items-center justify-center text-center">
             <p className="text-white/80 text-sm font-bold uppercase tracking-wider mb-1">Overall Rating</p>
             <p className="text-7xl font-black leading-none mb-2">{avg.toFixed(1)}</p>
             <StarDisplay rating={Math.round(avg)} size="md" />
@@ -291,7 +291,7 @@ export default function ReviewsPage() {
           </div>
 
           {/* Distribution */}
-          <div className="md:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-amber-100">
+          <div className="md:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-indigo-100">
             <h3 className="text-sm font-extrabold uppercase tracking-wider text-gray-500 mb-4">Rating Distribution</h3>
             <div className="space-y-3">
               {dist.map(({ star, count }) => (
@@ -299,10 +299,10 @@ export default function ReviewsPage() {
                   key={star}
                   type="button"
                   onClick={() => setFilterStar(filterStar === star ? null : star)}
-                  className={`w-full flex items-center gap-2 rounded-xl px-2 py-1 transition-all ${filterStar === star ? 'bg-amber-50' : 'hover:bg-gray-50'}`}
+                  className={`w-full flex items-center gap-2 rounded-xl px-2 py-1 transition-all ${filterStar === star ? 'bg-indigo-50' : 'hover:bg-gray-50'}`}
                 >
                   <RatingBar star={star} count={count} total={total} />
-                  {filterStar === star && <Check className="w-3.5 h-3.5 text-amber-500 shrink-0" />}
+                  {filterStar === star && <Check className="w-3.5 h-3.5 text-indigo-500 shrink-0" />}
                 </button>
               ))}
             </div>
@@ -322,9 +322,9 @@ export default function ReviewsPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.25 }}
-              className="bg-white rounded-2xl p-4 shadow-sm border border-amber-100 text-center"
+              className="bg-white rounded-2xl p-4 shadow-sm border border-indigo-100 text-center"
             >
-              <Icon className="w-5 h-5 text-amber-500 mx-auto mb-1" />
+              <Icon className="w-5 h-5 text-indigo-500 mx-auto mb-1" />
               <p className="text-xl font-black text-gray-900">{val}</p>
               <p className="text-xs text-gray-500 font-medium">{label}</p>
             </motion.div>
@@ -340,7 +340,7 @@ export default function ReviewsPage() {
           >
             <button
               onClick={openAdd}
-              className="flex items-center gap-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-extrabold px-7 py-3.5 rounded-2xl shadow-lg shadow-amber-200/60 transition-all hover:scale-105 hover:shadow-xl"
+              className="flex items-center gap-2.5 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-extrabold px-7 py-3.5 rounded-2xl shadow-lg shadow-indigo-200/60 transition-all hover:scale-105 hover:shadow-xl"
             >
               <Plus className="w-5 h-5" />
               Write a Review
@@ -358,11 +358,11 @@ export default function ReviewsPage() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -16, scale: 0.98 }}
               transition={{ duration: 0.35 }}
-              className="bg-white rounded-3xl border border-amber-200 shadow-xl shadow-amber-100/40 p-6 mb-10"
+              className="bg-white rounded-3xl border border-indigo-200 shadow-xl shadow-indigo-100/40 p-6 mb-10"
             >
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 bg-gradient-to-br from-amber-400 to-orange-400 rounded-xl flex items-center justify-center">
+                  <div className="w-9 h-9 bg-gradient-to-br from-indigo-400 to-orange-400 rounded-xl flex items-center justify-center">
                     <Edit2 className="w-4.5 h-4.5 text-white" />
                   </div>
                   <div>
@@ -381,7 +381,7 @@ export default function ReviewsPage() {
                   <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-2">Your Rating *</label>
                   <StarPicker value={formRating} onChange={setFormRating} />
                   {formRating > 0 && (
-                    <p className="text-xs text-amber-600 font-semibold mt-1">
+                    <p className="text-xs text-indigo-600 font-semibold mt-1">
                       {['', 'Poor', 'Fair', 'Good', 'Very Good', 'Excellent'][formRating]}
                     </p>
                   )}
@@ -396,7 +396,7 @@ export default function ReviewsPage() {
                     onChange={(e) => setFormTitle(e.target.value)}
                     placeholder="Summarise your experience..."
                     maxLength={80}
-                    className="w-full px-4 py-3 rounded-2xl bg-amber-50/40 border border-amber-200 text-gray-900 text-sm font-semibold placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500/40 transition-all"
+                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-semibold placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                   />
                 </div>
 
@@ -408,7 +408,7 @@ export default function ReviewsPage() {
                     onChange={(e) => setFormBody(e.target.value)}
                     placeholder="Describe your experience in detail... (min 20 characters)"
                     rows={4}
-                    className="w-full px-4 py-3 rounded-2xl bg-amber-50/40 border border-amber-200 text-gray-900 text-sm font-medium placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500/40 transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-medium placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all resize-none"
                   />
                   <p className="text-xs text-gray-400 mt-1 text-right">{formBody.length}/500</p>
                 </div>
@@ -421,7 +421,7 @@ export default function ReviewsPage() {
                     value={formAstrologer}
                     onChange={(e) => setFormAstrologer(e.target.value)}
                     placeholder="e.g. Pandit Rameshwar"
-                    className="w-full px-4 py-3 rounded-2xl bg-amber-50/40 border border-amber-200 text-gray-900 text-sm font-semibold placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500/40 transition-all"
+                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-semibold placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                   />
                 </div>
 
@@ -434,7 +434,7 @@ export default function ReviewsPage() {
                 <div className="flex gap-3 pt-1">
                   <button
                     type="submit"
-                    className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-extrabold py-3 rounded-2xl shadow-md transition-all hover:shadow-lg"
+                    className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-extrabold py-3 rounded-2xl shadow-md transition-all hover:shadow-lg"
                   >
                     <Check className="w-4 h-4" />
                     {editingId ? 'Save Changes' : 'Submit Review'}
@@ -462,7 +462,7 @@ export default function ReviewsPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search reviews, astrologers..."
-              className="w-full pl-10 pr-4 py-3 rounded-2xl bg-white border border-amber-100 text-gray-900 text-sm font-medium placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500/30 shadow-sm transition-all"
+              className="w-full pl-10 pr-4 py-3 rounded-2xl bg-white border border-indigo-100 text-gray-900 text-sm font-medium placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 shadow-sm transition-all"
             />
           </div>
 
@@ -474,8 +474,8 @@ export default function ReviewsPage() {
                 onClick={() => setFilterStar(filterStar === s ? null : s)}
                 className={`flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-extrabold border transition-all ${
                   filterStar === s
-                    ? 'bg-amber-500 text-white border-amber-500 shadow-md'
-                    : 'bg-white text-gray-600 border-gray-200 hover:border-amber-300 hover:bg-amber-50'
+                    ? 'bg-indigo-500 text-white border-indigo-500 shadow-md'
+                    : 'bg-white text-gray-600 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50'
                 }`}
               >
                 <Star className="w-3 h-3 fill-current" /> {s}
@@ -487,9 +487,9 @@ export default function ReviewsPage() {
           <div className="relative">
             <button
               onClick={() => setFilterOpen((p) => !p)}
-              className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white border border-amber-100 text-sm font-extrabold text-gray-700 shadow-sm hover:border-amber-300 transition-all"
+              className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white border border-indigo-100 text-sm font-extrabold text-gray-700 shadow-sm hover:border-indigo-300 transition-all"
             >
-              <SlidersHorizontal className="w-4 h-4 text-amber-500" />
+              <SlidersHorizontal className="w-4 h-4 text-indigo-500" />
               {SORT_OPTIONS.find((o) => o.val === sortBy)?.label}
               <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${filterOpen ? 'rotate-180' : ''}`} />
             </button>
@@ -506,12 +506,12 @@ export default function ReviewsPage() {
                       key={val}
                       onClick={() => { setSortBy(val); setFilterOpen(false); }}
                       className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-sm font-semibold transition-colors ${
-                        sortBy === val ? 'bg-amber-50 text-amber-700' : 'text-gray-700 hover:bg-gray-50'
+                        sortBy === val ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50'
                       }`}
                     >
-                      <Icon className="w-3.5 h-3.5 text-amber-500" />
+                      <Icon className="w-3.5 h-3.5 text-indigo-500" />
                       {label}
-                      {sortBy === val && <Check className="w-3.5 h-3.5 ml-auto text-amber-500" />}
+                      {sortBy === val && <Check className="w-3.5 h-3.5 ml-auto text-indigo-500" />}
                     </button>
                   ))}
                 </motion.div>
@@ -525,9 +525,9 @@ export default function ReviewsPage() {
           <div className="flex items-center gap-2 mb-4">
             <span className="text-xs text-gray-500 font-semibold">Active filters:</span>
             {filterStar !== null && (
-              <span className="flex items-center gap-1.5 bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full">
-                <Star className="w-3 h-3 fill-amber-500" /> {filterStar} Stars
-                <button onClick={() => setFilterStar(null)} className="ml-0.5 hover:text-amber-900"><X className="w-3 h-3" /></button>
+              <span className="flex items-center gap-1.5 bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full">
+                <Star className="w-3 h-3 fill-indigo-500" /> {filterStar} Stars
+                <button onClick={() => setFilterStar(null)} className="ml-0.5 hover:text-indigo-900"><X className="w-3 h-3" /></button>
               </span>
             )}
             {searchQuery && (
@@ -541,7 +541,7 @@ export default function ReviewsPage() {
 
         {/* ── RESULTS COUNT ── */}
         <p className="text-xs text-gray-500 font-semibold mb-4">
-          Showing <span className="text-amber-600 font-extrabold">{filtered.length}</span> of {total} reviews
+          Showing <span className="text-indigo-600 font-extrabold">{filtered.length}</span> of {total} reviews
         </p>
 
         {/* ── REVIEW CARDS ── */}
@@ -549,10 +549,10 @@ export default function ReviewsPage() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-20 bg-white rounded-3xl border border-dashed border-amber-200"
+            className="text-center py-20 bg-white rounded-3xl border border-dashed border-indigo-200"
           >
-            <div className="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4">
-              <MessageSquare className="w-8 h-8 text-amber-400" />
+            <div className="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-4">
+              <MessageSquare className="w-8 h-8 text-indigo-400" />
             </div>
             <h3 className="text-lg font-extrabold text-gray-800 mb-2">No reviews found</h3>
             <p className="text-gray-500 text-sm max-w-xs mx-auto mb-6">
@@ -563,7 +563,7 @@ export default function ReviewsPage() {
             {!showForm && (
               <button
                 onClick={openAdd}
-                className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-2.5 rounded-xl transition-all"
+                className="inline-flex items-center gap-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold px-6 py-2.5 rounded-xl transition-all"
               >
                 <Plus className="w-4 h-4" /> Write a Review
               </button>
@@ -582,7 +582,7 @@ export default function ReviewsPage() {
                     exit={{ opacity: 0, scale: 0.96 }}
                     transition={{ delay: idx * 0.05, duration: 0.4 }}
                     className={`bg-white rounded-3xl border shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex flex-col overflow-hidden ${
-                      isOwn ? 'border-amber-300 ring-1 ring-amber-200' : 'border-amber-100 hover:border-amber-200'
+                      isOwn ? 'border-indigo-300 ring-1 ring-indigo-200' : 'border-indigo-100 hover:border-indigo-200'
                     }`}
                   >
                     {/* Card Header */}
@@ -597,7 +597,7 @@ export default function ReviewsPage() {
                             </span>
                           )}
                           {isOwn && (
-                            <span className="text-[10px] font-bold bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full">Your Review</span>
+                            <span className="text-[10px] font-bold bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded-full">Your Review</span>
                           )}
                         </div>
                         <div className="flex items-center gap-2 mt-1">
@@ -608,7 +608,7 @@ export default function ReviewsPage() {
                           </span>
                         </div>
                         {review.astrologerName && (
-                          <p className="text-xs text-amber-600 font-semibold mt-0.5">
+                          <p className="text-xs text-indigo-600 font-semibold mt-0.5">
                             <Sparkles className="w-3 h-3 inline mr-0.5 -mt-px" />
                             Consulted: {review.astrologerName}
                           </p>
@@ -620,7 +620,7 @@ export default function ReviewsPage() {
                         <div className="flex gap-1 shrink-0">
                           <button
                             onClick={() => openEdit(review)}
-                            className="p-1.5 rounded-lg hover:bg-amber-50 text-amber-500 hover:text-amber-700 transition-colors"
+                            className="p-1.5 rounded-lg hover:bg-indigo-50 text-indigo-500 hover:text-indigo-700 transition-colors"
                             title="Edit review"
                           >
                             <Edit2 className="w-3.5 h-3.5" />
@@ -647,15 +647,15 @@ export default function ReviewsPage() {
                       <button
                         onClick={() => toggleLike(review.id)}
                         className={`flex items-center gap-1.5 text-xs font-bold transition-all px-3 py-1.5 rounded-xl ${
-                          review.liked ? 'bg-amber-50 text-amber-600' : 'text-gray-400 hover:bg-gray-50 hover:text-gray-600'
+                          review.liked ? 'bg-indigo-50 text-indigo-600' : 'text-gray-400 hover:bg-gray-50 hover:text-gray-600'
                         }`}
                       >
-                        <ThumbsUp className={`w-3.5 h-3.5 ${review.liked ? 'fill-amber-400 text-amber-400' : ''}`} />
+                        <ThumbsUp className={`w-3.5 h-3.5 ${review.liked ? 'fill-indigo-400 text-indigo-400' : ''}`} />
                         Helpful ({review.likes})
                       </button>
                       <div className="flex items-center gap-0.5">
                         {[...Array(review.rating)].map((_, i) => (
-                          <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
+                          <Star key={i} className="w-3 h-3 fill-indigo-400 text-indigo-400" />
                         ))}
                       </div>
                     </div>
@@ -699,16 +699,16 @@ export default function ReviewsPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="mt-12 text-center bg-gradient-to-r from-amber-500 to-orange-500 rounded-3xl p-8 shadow-xl shadow-amber-200/50 text-white"
+          className="mt-12 text-center bg-gradient-to-r from-indigo-500 to-orange-500 rounded-3xl p-8 shadow-xl shadow-indigo-200/50 text-white"
         >
           <h2 className="text-2xl font-black mb-2">Had a great experience?</h2>
           <p className="text-white/80 text-sm font-medium mb-5">Help others discover ZenAuraa by sharing your story.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={openAdd}
-              className="inline-flex items-center gap-2 bg-white text-amber-700 font-extrabold px-6 py-3 rounded-2xl hover:bg-amber-50 transition-all shadow-md"
+              className="inline-flex items-center gap-2 bg-white text-indigo-700 font-extrabold px-6 py-3 rounded-2xl hover:bg-indigo-50 transition-all shadow-md"
             >
-              <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
+              <Star className="w-4 h-4 fill-indigo-500 text-indigo-500" />
               Write a Review
             </button>
             <Link

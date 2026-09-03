@@ -40,7 +40,7 @@ export default function AstrologerDashboardPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-amber-500" />
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-500" />
       </div>
     );
   }
@@ -55,8 +55,8 @@ export default function AstrologerDashboardPage() {
           {profile.profilePhotoUrl ? (
             <img src={profile.profilePhotoUrl} alt={profile.displayName} className="w-10 h-10 rounded-full object-cover" />
           ) : (
-            <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
-              <Star className="w-5 h-5 text-amber-500" />
+            <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center">
+              <Star className="w-5 h-5 text-indigo-500" />
             </div>
           )}
           <div>
@@ -101,13 +101,13 @@ export default function AstrologerDashboardPage() {
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <h2 className="font-semibold text-gray-900 mb-4">Pricing</h2>
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-amber-50 rounded-lg p-4">
+            <div className="bg-indigo-50 rounded-lg p-4">
               <p className="text-xs text-gray-500">Chat / min</p>
-              <p className="text-xl font-bold text-amber-600">₹{profile.chatPricePerMin}</p>
+              <p className="text-xl font-bold text-indigo-600">₹{profile.chatPricePerMin}</p>
             </div>
-            <div className="bg-amber-50 rounded-lg p-4">
+            <div className="bg-indigo-50 rounded-lg p-4">
               <p className="text-xs text-gray-500">Call / min</p>
-              <p className="text-xl font-bold text-amber-600">₹{profile.callPricePerMin}</p>
+              <p className="text-xl font-bold text-indigo-600">₹{profile.callPricePerMin}</p>
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default function AstrologerDashboardPage() {
             <h2 className="font-semibold text-gray-900 mb-3">Specializations</h2>
             <div className="flex flex-wrap gap-2">
               {profile.specializations.map((s) => (
-                <span key={s} className="bg-amber-100 text-amber-700 text-sm px-3 py-1 rounded-full">{s}</span>
+                <span key={s} className="bg-indigo-100 text-indigo-700 text-sm px-3 py-1 rounded-full">{s}</span>
               ))}
             </div>
           </div>
@@ -126,7 +126,7 @@ export default function AstrologerDashboardPage() {
 
         {/* Contact support */}
         <div className="bg-white rounded-xl border border-gray-200 p-6 flex items-center gap-3 text-sm text-gray-600">
-          <Phone className="w-4 h-4 text-amber-500 shrink-0" />
+          <Phone className="w-4 h-4 text-indigo-500 shrink-0" />
           <span>Need help? Contact support at <strong>support@healconnect.in</strong></span>
         </div>
       </main>

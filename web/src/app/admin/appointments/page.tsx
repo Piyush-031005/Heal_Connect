@@ -60,7 +60,7 @@ export default function AppointmentsPage() {
               <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                 {data.map(item => (
                   <motion.tr key={item.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
-                    <td className="px-6 py-4 text-amber-600 font-medium">{item.id}</td>
+                    <td className="px-6 py-4 text-indigo-600 font-medium">{item.id}</td>
                     <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{item.user}</td>
                     <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{item.provider}</td>
                     <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{item.type}</td>

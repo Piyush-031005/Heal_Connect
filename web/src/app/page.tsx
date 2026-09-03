@@ -66,7 +66,7 @@ export default function LandingPage() {
             <ZodiacOrbitRing />
             {/* 05 - Tarot Reading (premium zodiac-art cards) */}
             <TarotTable />
-            {/* 06 - Zenauraa Global Distribution Map */}
+            {/* 06 - ZenAuraa Global Distribution Map */}
             <GlobalGuidanceMap />
             {/* 07 - Your Next Discovery (3-path CTA) */}
             <YourNextDiscovery />

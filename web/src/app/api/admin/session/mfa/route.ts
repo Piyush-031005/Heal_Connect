@@ -66,12 +66,28 @@ export async function POST(req: NextRequest) {
 
   // Backend set its own hc_admin_session cookie — relay the Set-Cookie header
   // so the browser also gets it for this (Next.js) domain if they differ.
-  const setCookie = backendRes.headers.get('set-cookie');
-  const nextRes = NextResponse.json({ success: true });
-  if (setCookie) {
-    nextRes.headers.set('set-cookie', setCookie);
+  const setCookies = backendRes.headers.getSetCookie();
+  let sessionToken = '';
+  for (const c of setCookies) {
+    const match = c.match(/(?:^|;\s*)hc_admin_session=([^;]+)/);
+    if (match) {
+      sessionToken = match[1];
+      break;
+    }
   }
-  return nextRes;
+
+  if (sessionToken) {
+    const { cookies } = await import('next/headers');
+    cookies().set(SESSION_COOKIE, sessionToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      path: '/',
+      maxAge: SESSION_TTL_MS / 1000,
+    });
+  }
+
+  return NextResponse.json({ success: true });
 }
 
 // GET /api/admin/session/mfa — returns QR setup data (loginToken in header)

@@ -69,7 +69,7 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
   const isConnecting = sessionStatus === 'connecting';
 
   return (
-    <div className="flex flex-col h-full bg-[#fffbf0]">
+    <div className="flex flex-col h-full bg-[#faf9f6]">
 
       {/* Timer + wallet overlay (only when active) */}
       {!isConnecting && !isEnded && (
@@ -93,7 +93,7 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
       {/* Connecting state */}
       {isConnecting && (
         <div className="flex-1 flex flex-col items-center justify-center gap-3 text-gray-400">
-          <Wifi className="h-8 w-8 animate-pulse text-[#f59e0b]" />
+          <Wifi className="h-8 w-8 animate-pulse text-[#4f46e5]" />
           <p className="text-sm">Connecting to session...</p>
         </div>
       )}
@@ -102,8 +102,8 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
       {isEnded && (
         <div className="flex-1 overflow-y-auto px-4 py-6">
           <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
-            <div className="w-16 h-16 rounded-full bg-amber-50 flex items-center justify-center shrink-0">
-              <WifiOff className="h-7 w-7 text-amber-400" />
+            <div className="w-16 h-16 rounded-full bg-indigo-50 flex items-center justify-center shrink-0">
+              <WifiOff className="h-7 w-7 text-indigo-400" />
             </div>
             <div className="text-center">
               <p className="font-bold text-lg text-[#1a1a1a]">Session Completed</p>
@@ -117,14 +117,14 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
               {!isExpert && practitionerId && (
                 <button
                   onClick={() => setShowReview(true)}
-                  className="w-full text-center bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2.5 rounded-full text-sm transition-colors flex items-center justify-center gap-2"
+                  className="w-full text-center bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2.5 rounded-full text-sm transition-colors flex items-center justify-center gap-2"
                 >
                   ⭐ Rate this Session
                 </button>
               )}
               <a
                 href="/practitioners"
-                className="w-full text-center bg-white border border-amber-200 hover:bg-amber-50 text-amber-700 font-semibold py-2.5 rounded-full text-sm transition-colors"
+                className="w-full text-center bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-semibold py-2.5 rounded-full text-sm transition-colors"
               >
                 Book Another Session
               </a>
@@ -141,7 +141,7 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
           {messages.length > 0 && (
             <div className="max-w-md mx-auto mt-8">
               <div className="flex items-center gap-2 mb-3 px-1">
-                <MessagesSquare className="h-4 w-4 text-amber-500 shrink-0" />
+                <MessagesSquare className="h-4 w-4 text-indigo-500 shrink-0" />
                 <h3 className="font-bold text-sm text-[#1a1a1a]">Chat History</h3>
                 <span className="text-xs text-gray-400">({messages.length} message{messages.length === 1 ? '' : 's'})</span>
               </div>
@@ -201,7 +201,7 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
               disabled={isEnded}
               className={cn(
                 'flex-1 resize-none rounded-2xl border border-yellow-200 bg-yellow-50 px-4 py-2.5 text-sm text-[#1a1a1a] placeholder:text-gray-400',
-                'focus:outline-none focus:ring-2 focus:ring-[#f59e0b]/40 focus:border-[#f59e0b]',
+                'focus:outline-none focus:ring-2 focus:ring-[#4f46e5]/40 focus:border-[#4f46e5]',
                 'max-h-32 overflow-y-auto transition-colors',
                 'disabled:opacity-50 disabled:cursor-not-allowed'
               )}
@@ -211,7 +211,7 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
               size="icon"
               onClick={handleSend}
               disabled={!input.trim() || isEnded}
-              className="h-10 w-10 rounded-full bg-[#f59e0b] hover:bg-[#d97706] border-0 text-white shrink-0 disabled:opacity-40"
+              className="h-10 w-10 rounded-full bg-[#4f46e5] hover:bg-[#4338ca] border-0 text-white shrink-0 disabled:opacity-40"
             >
               <Send className="h-4 w-4" />
             </Button>

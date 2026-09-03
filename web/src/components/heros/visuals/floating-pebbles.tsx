@@ -97,9 +97,20 @@ export default function FloatingPebbles() {
       </div>
 
       {/* Center Logo */}
-      <div className="absolute z-10 w-28 h-28 rounded-full bg-white shadow-[0_0_40px_rgba(255,255,255,0.9)] flex items-center justify-center overflow-hidden">
-        <img src="/main centre logo/girl.png" alt="ZenAuraa" className="w-full h-full object-cover scale-[1.25] mt-2 ml-1" />
-      </div>
+      <div className="absolute z-10 w-64 h-80 flex items-end justify-center pointer-events-none mt-16">
+          <img 
+          src="/main centre logo/new.png" 
+          alt="ZenAuraa" 
+          className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] translate-y-28"
+          style={{
+            opacity: 0.85,
+            filter: 'brightness(0.9) contrast(1.15) saturate(1.2) drop-shadow(0 0 50px rgba(160,120,255,0.6))',
+            WebkitMaskImage: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%)',
+            maskImage: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%)',
+            mixBlendMode: 'lighten'
+          }}
+        />
+        </div>
     </div>
   );
 }

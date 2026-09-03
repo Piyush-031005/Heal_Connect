@@ -186,11 +186,11 @@ export default function AdminSessionsPage() {
                   </tr>
                 ) : (
                   sessions.map((s) => (
-                    <tr key={s.id} className="hover:bg-amber-50/30 dark:hover:bg-white/5 transition-colors">
+                    <tr key={s.id} className="hover:bg-indigo-50/30 dark:hover:bg-white/5 transition-colors">
                       <td className="px-4 py-3 font-mono text-xs font-bold text-gray-500">{s.id.slice(0, 10)}...</td>
                       <td className="px-4 py-3 text-xs font-extrabold text-gray-900 dark:text-white">{s.user}</td>
                       <td className="px-4 py-3 text-xs font-bold text-purple-600">{s.practitioner}</td>
-                      <td className="px-4 py-3 text-xs font-bold uppercase text-amber-700">
+                      <td className="px-4 py-3 text-xs font-bold uppercase text-indigo-700">
                         {s.type === 'VIDEO' ? '📹 Video' : s.type === 'AUDIO' ? '📞 Voice' : '💬 Chat'}
                       </td>
                       <td className="px-4 py-3 text-xs font-extrabold text-gray-900 dark:text-white text-center">
@@ -246,7 +246,7 @@ export default function AdminSessionsPage() {
                 </div>
                 <div className="p-3 bg-gray-50 dark:bg-white/5 rounded-xl">
                   <span className="text-gray-400 font-bold block">Calculated Duration</span>
-                  <span className="font-extrabold text-amber-600">{selectedSession.durationMinutes} minutes</span>
+                  <span className="font-extrabold text-indigo-600">{selectedSession.durationMinutes} minutes</span>
                 </div>
                 <div className="p-3 bg-gray-50 dark:bg-white/5 rounded-xl">
                   <span className="text-gray-400 font-bold block">Total Billed</span>
@@ -286,7 +286,7 @@ export default function AdminSessionsPage() {
               <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 dark:bg-slate-900">
                 {chatLoading ? (
                   <div className="flex items-center justify-center h-full">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-600"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
                   </div>
                 ) : chatMessages.length === 0 ? (
                   <div className="flex items-center justify-center h-full text-sm text-gray-400 font-medium">No messages found in this session.</div>
@@ -335,7 +335,7 @@ export default function AdminSessionsPage() {
               <div className="flex-1 overflow-y-auto p-6 bg-white dark:bg-slate-900 text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap leading-relaxed">
                 {transcriptLoading ? (
                   <div className="flex items-center justify-center h-full">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-600"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
                   </div>
                 ) : !transcriptData ? (
                   <div className="flex flex-col items-center justify-center h-full text-gray-400">
