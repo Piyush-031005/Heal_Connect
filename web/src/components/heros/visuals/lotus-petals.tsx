@@ -44,7 +44,7 @@ export default function LotusPetals() {
                   <linearGradient id={`lp-${i}`} x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor={isAlt ? '#3B1A77' : '#2A43A6'} />
                     <stop offset="50%" stopColor={isAlt ? '#5F3BA9' : '#4E67CC'} />
-                    <stop offset="100%" stopColor={isAlt ? '#B9A0E4' : '#8982D0'} />
+                    <stop offset="100%" stopColor={isAlt ? '#9bc9d5' : '#8982D0'} />
                   </linearGradient>
                 </defs>
                 <path d="M30,0 C55,35 55,105 30,140 C5,105 5,35 30,0Z" fill={`url(#lp-${i})`} opacity="0.88" />

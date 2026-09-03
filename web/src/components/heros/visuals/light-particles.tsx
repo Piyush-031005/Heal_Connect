@@ -44,7 +44,7 @@ function ParticleNebula() {
       <Points ref={ref} positions={sphere} stride={3} frustumCulled={false}>
         <PointMaterial
           transparent
-          color="#B9A0E4"
+          color="#9bc9d5"
           size={0.03}
           sizeAttenuation={true}
           depthWrite={false}
@@ -94,7 +94,7 @@ function ConstellationLines() {
       {points.map((p, i) => (
         <mesh key={`node-${i}`} position={p}>
           <sphereGeometry args={[0.06, 16, 16]} />
-          <meshBasicMaterial color={i % 2 === 0 ? "#8982D0" : "#B9A0E4"} transparent opacity={0.8} />
+          <meshBasicMaterial color={i % 2 === 0 ? "#8982D0" : "#9bc9d5"} transparent opacity={0.8} />
           {/* Subtle halo */}
           <mesh>
             <sphereGeometry args={[0.15, 16, 16]} />

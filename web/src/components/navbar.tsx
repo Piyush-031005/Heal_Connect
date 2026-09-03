@@ -495,11 +495,11 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
-                <Link href="/login" className={`hidden md:block text-sm font-bold px-4 py-1.5 rounded-full transition-colors ${isFinalHybrid ? 'text-[#2A1658] bg-[#F5C84C] hover:bg-[#E5B83C]' : 'text-primary bg-[#F5C84C] hover:bg-[#E5B83C]'}`}>
+                <Link href="/login" className={`hidden md:block text-sm font-bold px-4 py-1.5 rounded-full transition-colors ${isFinalHybrid ? 'text-[#2A1658] bg-[#9bc9d5] hover:bg-[#E5B83C]' : 'text-primary bg-[#9bc9d5] hover:bg-[#E5B83C]'}`}>
                   Login
                 </Link>
                 {isFinalHybrid && (
-                  <Link href="/register" className="hidden md:block text-sm font-bold text-[#2A1658] bg-[#F5C84C] hover:bg-[#E5B83C] transition-colors px-4 py-1.5 rounded-full ml-1 shadow-sm">
+                  <Link href="/register" className="hidden md:block text-sm font-bold text-[#2A1658] bg-[#9bc9d5] hover:bg-[#E5B83C] transition-colors px-4 py-1.5 rounded-full ml-1 shadow-sm">
                     Register
                   </Link>
                 )}
