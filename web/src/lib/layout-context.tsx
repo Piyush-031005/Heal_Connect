@@ -12,14 +12,14 @@ interface LayoutContextType {
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
-  const [layout, setLayoutState] = useState<LayoutMode>('layout-10');
+  const [layout, setLayoutState] = useState<LayoutMode>('layout-5');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const stored = localStorage.getItem('hc_layout_v2') as LayoutMode;
     if (stored) {
-      setLayoutState(stored);
+      // setLayoutState(stored); // Disabled to force default layout
     }
   }, []);
 
