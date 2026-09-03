@@ -621,7 +621,7 @@ router.post(
           message: 'Signed in with Google as Expert',
           data: {
             user: {
-              id: pract.id, email: pract.email, name: pract.name, role: 'practitioner'
+              id: pract.id, email: pract.email, name: pract.name, role: 'practitioner', isVerified: pract.isVerified
             },
             accessToken,
             refreshToken,

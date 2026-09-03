@@ -54,17 +54,21 @@ function GoogleCallbackInner() {
         // Check role and redirect
         const isExpert = state === 'expert' || (res.data.user as any)?.role === 'practitioner';
         
-        console.log('Authentication successful, redirecting...', { isExpert, state });
+        console.log('Authentication successful, redirecting...', { isExpert, state, isVerified: (res.data.user as any)?.isVerified });
         
         if (isExpert) {
+          // Store tokens temporarily
           localStorage.setItem('hc_role', 'practitioner');
           localStorage.setItem('hc_practitioner_id', res.data.user.id);
           localStorage.setItem('hc_pid', res.data.user.id);
           localStorage.setItem('hc_practitioner_name', res.data.user.name ?? '');
-          localStorage.setItem('hc_practitioner_id', res.data.user.id);
-          localStorage.setItem('hc_pid', res.data.user.id);
-          localStorage.setItem('hc_practitioner_name', res.data.user.name || '');
-          router.push('/expert/dashboard');
+          
+          // Redirect to expert signup with Google auth flag
+          localStorage.setItem('hc_google_auth', 'true');
+          localStorage.setItem('hc_google_name', res.data.user.name ?? '');
+          localStorage.setItem('hc_google_email', res.data.user.email ?? '');
+          
+          router.push('/expert/signup');
         } else {
           localStorage.removeItem('hc_role');
           localStorage.removeItem('hc_practitioner_id');
