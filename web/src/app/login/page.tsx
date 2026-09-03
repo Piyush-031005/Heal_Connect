@@ -193,7 +193,7 @@ function LoginInner() {
                     </button>
                   </div>
                 </div>
-                <Button type="submit" disabled={loading} className={`w-full py-6 text-base font-bold rounded-xl border-0 shadow-lg transition-all duration-300 ${role === 'expert' ? 'bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_0_20px_var(--accent)]/30 hover:shadow-[0_0_25px_var(--accent)]/50' : 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_0_20px_var(--primary)]/30 hover:shadow-[0_0_25px_var(--primary)]/50'}`}>
+                <Button type="submit" disabled={loading} className={`w-full py-6 text-base font-bold rounded-md border-0 shadow-lg transition-all duration-300 ${role === 'expert' ? 'bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_0_20px_var(--accent)]/30 hover:shadow-[0_0_25px_var(--accent)]/50' : 'bg-gradient-to-r from-[#5F3BA9] to-[#9B6BCA] text-white shadow-lg hover:opacity-90'}`}>
                   {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>{role === 'expert' ? 'Log in as Expert' : 'Log in'} <ArrowRight className="ml-2 h-5 w-5" /></>}
                 </Button>
               </form>

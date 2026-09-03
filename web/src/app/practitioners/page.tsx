@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Search, Star, MessageCircle, Phone, SlidersHorizontal, X, Shield, Globe } from 'lucide-react';
+import { Search, Star, MessageCircle, Phone, SlidersHorizontal, X, Shield, Globe, CalendarDays } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -251,12 +251,15 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
               <span className="text-xs text-muted-foreground ml-1">/min</span>
             </div>
             <div className="flex gap-2">
-              <Button size="sm" className="h-9 rounded-xl px-4 bg-primary/20 text-primary hover:bg-primary/30 border-0 text-xs font-semibold transition-all" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
-                <MessageCircle className="h-4 w-4 mr-1.5" /> Chat
-              </Button>
-              <Button size="sm" disabled={!p.isOnline} className="h-9 rounded-xl px-4 bg-accent hover:bg-accent/90 text-accent-foreground border-0 text-xs font-bold transition-all disabled:opacity-30 disabled:hover:bg-accent" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
-                <Phone className="h-4 w-4 mr-1.5" /> Call
-              </Button>
+              <Button size="sm" className="h-9 rounded-md px-4 bg-[#5F3BA9] text-white hover:opacity-90 border-0 text-xs font-semibold transition-all" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+                  <CalendarDays className="h-4 w-4 mr-1.5" /> See Calendar
+                </Button>
+                <Button size="sm" className="h-9 rounded-md px-4 bg-gradient-to-r from-[#5F3BA9] to-[#9B6BCA] text-white hover:opacity-90 border-0 text-xs font-semibold transition-all" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+                  <MessageCircle className="h-4 w-4 mr-1.5" /> Chat
+                </Button>
+              <Button size="sm" disabled={!p.isOnline} className="h-9 rounded-md px-4 bg-gradient-to-r from-[#5F3BA9] to-[#9B6BCA] text-white hover:opacity-90 border-0 text-xs font-bold transition-all disabled:opacity-30 disabled:hover:opacity-100" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+                  <Phone className="h-4 w-4 mr-1.5" /> Call
+                </Button>
             </div>
           </div>
         </div>
