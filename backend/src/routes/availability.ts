@@ -70,6 +70,12 @@ router.post(
       return;
     }
 
+    const diffHours = (end.getTime() - start.getTime()) / (1000 * 60 * 60);
+    if (diffHours > 2) {
+      res.status(400).json({ success: false, message: 'A single slot cannot be longer than 2 hours' });
+      return;
+    }
+
     try {
       // Check for overlap
       const overlap = await prisma.availabilitySlot.findFirst({

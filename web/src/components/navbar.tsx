@@ -497,7 +497,7 @@ export default function Navbar() {
                   Login
                 </Link>
                 {isFinalHybrid && (
-                  <Link href="/register" className="hidden md:block text-sm font-semibold text-[#4D316B] bg-[#B79AE6] hover:bg-[#c9a000] transition-colors px-4 py-1.5 rounded-full ml-1">
+                  <Link href="/signup" className="hidden md:block text-sm font-semibold text-[#4D316B] bg-[#B79AE6] hover:bg-[#c9a000] transition-colors px-4 py-1.5 rounded-full ml-1">
                     Register
                   </Link>
                 )}

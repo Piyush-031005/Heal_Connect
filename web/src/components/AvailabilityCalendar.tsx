@@ -86,6 +86,13 @@ export default function AvailabilityCalendar({ practitionerId, isExpertMode = fa
         return;
       }
 
+      const diffHours = (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60);
+      if (diffHours > 2) {
+        toast.error('A single slot cannot be longer than 2 hours');
+        setCreating(false);
+        return;
+      }
+
       const res = await availabilityApi.createAvailability(token, startDate.toISOString(), endDate.toISOString());
       if (res && (res as any).success) {
         toast.success('Availability added');

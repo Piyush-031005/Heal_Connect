@@ -74,10 +74,11 @@ async function sendEmail({ to, subject, html, textFallback }: { to: string; subj
     });
   } catch (err: any) {
     console.log('\n==================================================');
-    console.log('✉️  [LOCAL EMAIL FALLBACK]');
+    console.log('🚨  [LOCAL EMAIL FALLBACK]');
     console.log(`TO: ${to}`);
     console.log(`SUBJECT: ${subject}`);
     console.log(`INFO: ${textFallback}`);
+    console.error('SendGrid Error:', err?.response?.body || err?.message || err);
     console.log('==================================================\n');
   }
 }
