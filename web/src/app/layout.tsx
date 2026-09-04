@@ -23,17 +23,43 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+              pageLanguage: 'en',
+              includedLanguages: 'en,hi,ta,te,bn,mr,gu,kn,pa,ur,es,fr,de,ar,zh-CN,ja,ko',
+              autoDisplay: false
+            }, 'google_translate_element');
+          }
+          window.__translateTo = function(langCode) {
+            var tries = 0;
+            var interval = setInterval(function() {
+              var select = document.querySelector('.goog-te-combo');
+              if (select) {
+                clearInterval(interval);
+                select.value = langCode;
+                select.dispatchEvent(new Event('change'));
+              } else if (++tries > 20) {
+                clearInterval(interval);
+              }
+            }, 300);
+          };
+        `}} />
+        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async />
+      </head>
       <body className={`${inter.variable} ${playfair.variable} ${cormorant.variable} font-sans antialiased theme`}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="theme-new-color"
-            themes={['theme-new-color']}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="theme-new-color"
+          themes={['theme-new-color']}
           enableSystem={false}
           disableTransitionOnChange
         >
           <LangProvider>
             <LayoutProvider>
               <SmoothScroll>
+                <div id="google_translate_element" style={{ display: 'none' }} />
                 {children}
               </SmoothScroll>
             </LayoutProvider>
