@@ -278,12 +278,16 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
               <p className="font-bold text-gray-900 text-base">{p.name}</p>
               <p className="text-sm text-indigo-600 font-medium">{p.specialties.slice(0, 2).join(' · ') || '—'}</p>
             </div>
-            {p.isVerified && (
-              <div className="flex items-center gap-1 bg-indigo-50 border border-indigo-200 rounded-lg px-2 py-1 shrink-0">
-                <Shield className="w-3 h-3 text-indigo-600" />
-                <span className="text-[10px] font-semibold text-indigo-700">Verified</span>
-              </div>
-            )}
+            <div className={`flex items-center gap-1 rounded-lg px-2 py-1 shrink-0 border ${
+              p.isVerified
+                ? 'bg-indigo-50 border-indigo-200'
+                : 'bg-yellow-50 border-yellow-200'
+            }`}>
+              <Shield className={`w-3 h-3 ${p.isVerified ? 'text-indigo-600' : 'text-yellow-500'}`} />
+              <span className={`text-[10px] font-semibold ${p.isVerified ? 'text-indigo-700' : 'text-yellow-600'}`}>
+                {p.isVerified ? 'Verified' : 'Unverified'}
+              </span>
+            </div>
           </div>
 
           <div className="flex items-center gap-3 mt-2 mb-3">
