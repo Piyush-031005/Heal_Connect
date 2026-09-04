@@ -327,21 +327,22 @@ router.post(
   [
     body('phone').notEmpty().withMessage('Phone number required'),
     body('role').optional().isIn(['user', 'practitioner']).withMessage('Role must be user or practitioner'),
+    body('intent').optional().isIn(['login', 'signup', 'register']).withMessage('Invalid intent'),
   ],
   handleValidation,
   async (req: Request, res: Response) => {
-    const { phone, role = 'user' } = req.body as { phone: string; role?: 'user' | 'practitioner' };
+    const { phone, role = 'user', intent = 'login' } = req.body as { phone: string; role?: 'user' | 'practitioner'; intent?: 'login' | 'signup' | 'register' };
 
     try {
       if (role === 'practitioner') {
         const practitioner = await prisma.practitioner.findUnique({ where: { phone } });
-        if (!practitioner) {
+        if (!practitioner && intent === 'login') {
           res.status(404).json({ success: false, message: 'Practitioner not found with this phone number' });
           return;
         }
       } else {
         const user = await prisma.user.findUnique({ where: { phone } });
-        if (!user) {
+        if (intent === 'login' && !user) {
           res.status(404).json({ success: false, message: 'User not found with this phone number' });
           return;
         }
@@ -402,24 +403,31 @@ router.post(
           },
         });
       } else {
-        const user = await prisma.user.findUnique({ where: { phone } });
+        let user = await prisma.user.findUnique({ where: { phone } });
         if (!user) {
-          res.status(404).json({ success: false, message: 'User not found' });
-          return;
-        }
-        
-        if (isActivelyBanned(user)) {
-          bannedResponse(res, user);
-          return;
-        }
-
-        // Mark phone verified just in case it wasn't
-        if (!user.isPhoneVerified) {
-          await prisma.user.update({
-            where: { id: user.id },
-            data: { isPhoneVerified: true },
+          // Automatic account creation for phone OTP signup
+          user = await prisma.user.create({
+            data: {
+              phone,
+              isPhoneVerified: true,
+              provider: 'phone',
+              wallet: { create: { balance: 0 } },
+            },
           });
-          user.isPhoneVerified = true;
+        } else {
+          if (isActivelyBanned(user)) {
+            bannedResponse(res, user);
+            return;
+          }
+
+          // Mark phone verified just in case it wasn't
+          if (!user.isPhoneVerified) {
+            await prisma.user.update({
+              where: { id: user.id },
+              data: { isPhoneVerified: true },
+            });
+            user.isPhoneVerified = true;
+          }
         }
 
         const { accessToken, refreshToken } = await issueTokens(user.id, user.email);

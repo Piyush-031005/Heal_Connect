@@ -132,7 +132,12 @@ function SignupInner() {
     setLoading(true);
     setError('');
     try {
-      const cleanPhone = countryCode + phone.replace(/\s+/g, '');
+      let rawNumber = phone.replace(/\s+/g, '').replace(/^\+/, '');
+      const codeDigits = countryCode.replace('+', '');
+      if (rawNumber.startsWith(codeDigits)) {
+        rawNumber = rawNumber.slice(codeDigits.length);
+      }
+      const cleanPhone = `${countryCode}${rawNumber}`;
       
       if (role === 'expert') {
         // Expert OTP signup - redirect to expert signup page
@@ -141,7 +146,7 @@ function SignupInner() {
       }
       
       // User OTP signup
-      const res = await (authApi as any).requestLoginOtp(cleanPhone, 'user');
+      const res = await authApi.requestLoginOtp(cleanPhone, 'user', 'signup');
       if (!res.success) {
         setError(res.message || 'Failed to send OTP.');
         return;
