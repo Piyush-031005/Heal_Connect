@@ -1095,6 +1095,7 @@ router.post(
     body('name').trim().notEmpty().withMessage('Name is required'),
     body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
     body('password').optional().isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
+    body('dob')
       .notEmpty().withMessage('Date of birth is required')
       .isISO8601().withMessage('Date of birth must be a valid date (YYYY-MM-DD)'),
     body('acceptTerms')
