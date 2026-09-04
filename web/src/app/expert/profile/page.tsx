@@ -62,6 +62,7 @@ export default function ExpertProfilePage() {
     practitionersApi.get(pid).then((res) => {
       if (!res.success || !res.data) { router.replace('/expert/login'); return; }
       const p = res.data.practitioner as ExpertProfile;
+      if (!p.isVerified) { router.replace('/expert/verification-pending'); return; }
       setProfile(p);
       setForm({ name: p.name, bio: p.bio || '', experienceYrs: String(p.experienceYrs), perMinuteRate: String(p.perMinuteRate), certInput: '' });
       setSpecialties(p.specialties);

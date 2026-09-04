@@ -57,8 +57,13 @@ function GoogleCallbackInner() {
               localStorage.setItem('hc_google_email', res.data.user.email ?? '');
               router.push('/expert/signup');
             } else {
-              // Already registered — show message, no tokens stored
-              router.push('/expert/signup?already_registered=true');
+              // Already registered via Google signup — log them in directly
+              tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+              localStorage.setItem('hc_role', 'practitioner');
+              localStorage.setItem('hc_practitioner_id', res.data.user.id);
+              localStorage.setItem('hc_pid', res.data.user.id);
+              localStorage.setItem('hc_practitioner_name', res.data.user.name ?? '');
+              router.push('/expert/dashboard');
             }
           } else {
             // ── LOGIN FLOW (expert_login or legacy expert) ───────────

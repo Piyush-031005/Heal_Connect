@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { authApi, tokenStore } from '@/lib/api';
-import { countryCodes } from '@/lib/country-codes';
+import { CountryCodeSelect } from '@/components/ui/country-code-select';
 
 type Role = 'user' | 'expert';
 
@@ -132,7 +132,12 @@ function SignupInner() {
     setLoading(true);
     setError('');
     try {
-      const cleanPhone = countryCode + phone.replace(/\s+/g, '');
+      let rawNumber = phone.replace(/\s+/g, '').replace(/^\+/, '');
+      const codeDigits = countryCode.replace('+', '');
+      if (rawNumber.startsWith(codeDigits)) {
+        rawNumber = rawNumber.slice(codeDigits.length);
+      }
+      const cleanPhone = `${countryCode}${rawNumber}`;
       
       if (role === 'expert') {
         // Expert OTP signup - redirect to expert signup page
@@ -141,7 +146,7 @@ function SignupInner() {
       }
       
       // User OTP signup
-      const res = await (authApi as any).requestLoginOtp(cleanPhone, 'user');
+      const res = await authApi.requestLoginOtp(cleanPhone, 'user', 'signup');
       if (!res.success) {
         setError(res.message || 'Failed to send OTP.');
         return;
@@ -302,21 +307,11 @@ function SignupInner() {
                 <div className="space-y-2">
                   <Label className="text-[#1a1a1a]">Phone Number</Label>
                   <div className="flex gap-2">
-                    <div className="relative w-1/3">
-                      <Input 
-                        list="country-codes"
-                        value={countryCode} 
-                        onChange={(e) => setCountryCode(e.target.value)} 
-                        placeholder="Country"
-                        required 
-                        className="h-12 border-yellow-200 focus-visible:ring-[#4f46e5] bg-[#faf9f6] text-[#1a1a1a]" 
-                      />
-                      <datalist id="country-codes">
-                        {countryCodes.map((c, i) => (
-                          <option key={i} value={c.code}>{c.flag} {c.name} ({c.code})</option>
-                        ))}
-                      </datalist>
-                    </div>
+                    <CountryCodeSelect
+                      value={countryCode}
+                      onChange={setCountryCode}
+                      className="w-[125px] sm:w-[135px] flex-shrink-0"
+                    />
                     <Input id="phone" type="tel" placeholder="9876543210" value={phone} onChange={(e) => setPhone(e.target.value)} required className="flex-1 h-12 border-yellow-200 focus-visible:ring-[#4f46e5] bg-[#faf9f6] text-[#1a1a1a]" />
                   </div>
                 </div>

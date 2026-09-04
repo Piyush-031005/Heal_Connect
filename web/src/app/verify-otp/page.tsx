@@ -135,13 +135,10 @@ function VerifyOtpContent() {
         if (role === 'expert') {
           // Use practitioner OTP verification endpoint
           endpoint = `${API_URL}/api/auth/login-otp/verify`;
-          body = JSON.stringify({ phone, otp: otpCode, role: 'expert' });
-        } else if (type === 'login') {
-          endpoint = `${API_URL}/api/auth/login-otp/verify`;
-          body = JSON.stringify({ phone, otp: otpCode, role });
+          body = JSON.stringify({ phone, otp: otpCode, role: 'practitioner' });
         } else {
-          endpoint = `${API_URL}/api/auth/verify-otp`;
-          body = JSON.stringify({ phone, otp: otpCode });
+          endpoint = `${API_URL}/api/auth/login-otp/verify`;
+          body = JSON.stringify({ phone, otp: otpCode, role: 'user' });
         }
         
         const res  = await fetch(endpoint, {

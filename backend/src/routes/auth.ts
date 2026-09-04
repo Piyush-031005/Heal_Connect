@@ -327,21 +327,22 @@ router.post(
   [
     body('phone').notEmpty().withMessage('Phone number required'),
     body('role').optional().isIn(['user', 'practitioner']).withMessage('Role must be user or practitioner'),
+    body('intent').optional().isIn(['login', 'signup', 'register']).withMessage('Invalid intent'),
   ],
   handleValidation,
   async (req: Request, res: Response) => {
-    const { phone, role = 'user' } = req.body as { phone: string; role?: 'user' | 'practitioner' };
+    const { phone, role = 'user', intent = 'login' } = req.body as { phone: string; role?: 'user' | 'practitioner'; intent?: 'login' | 'signup' | 'register' };
 
     try {
       if (role === 'practitioner') {
         const practitioner = await prisma.practitioner.findUnique({ where: { phone } });
-        if (!practitioner) {
+        if (!practitioner && intent === 'login') {
           res.status(404).json({ success: false, message: 'Practitioner not found with this phone number' });
           return;
         }
       } else {
         const user = await prisma.user.findUnique({ where: { phone } });
-        if (!user) {
+        if (intent === 'login' && !user) {
           res.status(404).json({ success: false, message: 'User not found with this phone number' });
           return;
         }
@@ -402,24 +403,31 @@ router.post(
           },
         });
       } else {
-        const user = await prisma.user.findUnique({ where: { phone } });
+        let user = await prisma.user.findUnique({ where: { phone } });
         if (!user) {
-          res.status(404).json({ success: false, message: 'User not found' });
-          return;
-        }
-        
-        if (isActivelyBanned(user)) {
-          bannedResponse(res, user);
-          return;
-        }
-
-        // Mark phone verified just in case it wasn't
-        if (!user.isPhoneVerified) {
-          await prisma.user.update({
-            where: { id: user.id },
-            data: { isPhoneVerified: true },
+          // Automatic account creation for phone OTP signup
+          user = await prisma.user.create({
+            data: {
+              phone,
+              isPhoneVerified: true,
+              provider: 'phone',
+              wallet: { create: { balance: 0 } },
+            },
           });
-          user.isPhoneVerified = true;
+        } else {
+          if (isActivelyBanned(user)) {
+            bannedResponse(res, user);
+            return;
+          }
+
+          // Mark phone verified just in case it wasn't
+          if (!user.isPhoneVerified) {
+            await prisma.user.update({
+              where: { id: user.id },
+              data: { isPhoneVerified: true },
+            });
+            user.isPhoneVerified = true;
+          }
         }
 
         const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
@@ -1086,9 +1094,7 @@ router.post(
   [
     body('name').trim().notEmpty().withMessage('Name is required'),
     body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
-    body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
-    // CHILD-02: also required for practitioners — they handle health data and
-    // must be adults.
+    body('password').optional().isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
     body('dob')
       .notEmpty().withMessage('Date of birth is required')
       .isISO8601().withMessage('Date of birth must be a valid date (YYYY-MM-DD)'),
@@ -1106,7 +1112,7 @@ router.post(
   handleValidation,
   async (req: Request, res: Response) => {
     const { name, email, password, dob, emailMarketingOptIn } = req.body as {
-      name: string; email: string; password: string; dob: string;
+      name: string; email: string; password?: string; dob: string;
       acceptTerms: boolean; acceptPrivacy: boolean; emailMarketingOptIn?: boolean;
     };
 
@@ -1124,9 +1130,26 @@ router.post(
     }
     try {
       const existing = await prisma.practitioner.findUnique({ where: { email } });
-      if (existing) { res.status(409).json({ success: false, message: 'Email already registered' }); return; }
+      if (existing) {
+        // If Google account already exists, just return tokens (idempotent)
+        if (!password && existing.googleId) {
+          const payload: import('../lib/jwt').JwtPayload = { userId: existing.id, practitionerId: existing.id, ...(existing.email ? { email: existing.email } : {}) };
+          const accessToken = signAccessToken(payload);
+          const refreshToken = signRefreshToken(payload);
+          res.status(200).json({
+            success: true,
+            message: 'Expert account ready.',
+            data: {
+              practitioner: { id: existing.id, name: existing.name, email: existing.email, isVerified: existing.isVerified },
+              accessToken, refreshToken, role: 'practitioner',
+            },
+          });
+          return;
+        }
+        res.status(409).json({ success: false, message: 'Email already registered' }); return;
+      }
 
-      const passwordHash = await bcrypt.hash(password, 12);
+      const passwordHash = password ? await bcrypt.hash(password, 12) : null;
       const practitioner = await prisma.$transaction(async (tx) => {
         const created = await tx.practitioner.create({
           data: { name, email, passwordHash, isVerified: false },
