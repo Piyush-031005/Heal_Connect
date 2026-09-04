@@ -51,7 +51,7 @@ export function CountryCodeSelect({ value, onChange, className = '' }: CountryCo
   }
 
   return (
-    <div ref={containerRef} className={elative }>
+    <div ref={containerRef} className={`relative ${className}`}>
       {/* Trigger Button */}
       <button
         type="button"
@@ -63,7 +63,9 @@ export function CountryCodeSelect({ value, onChange, className = '' }: CountryCo
           <span className="text-[#4f46e5] font-bold">{selected.code}</span>
         </span>
         <ChevronDown
-          className={w-4 h-4 text-gray-400 transition-transform duration-200 }
+          className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
+            isOpen ? 'rotate-180 text-[#4f46e5]' : ''
+          }`}
         />
       </button>
 
@@ -96,17 +98,25 @@ export function CountryCodeSelect({ value, onChange, className = '' }: CountryCo
                 const isSelected = c.code === value;
                 return (
                   <button
-                    key={${c.code}-}
+                    key={`${c.code}-${i}`}
                     type="button"
                     onClick={() => handleSelect(c.code)}
-                    className={w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-xl text-left transition-all }
+                    className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
+                      isSelected
+                        ? 'bg-gradient-to-r from-purple-100 to-indigo-100/70 text-[#4f46e5] font-semibold'
+                        : 'hover:bg-purple-50/80 text-gray-700'
+                    }`}
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
                       <span className="text-lg flex-shrink-0">{c.flag}</span>
                       <span className="text-xs font-medium truncate">{c.name}</span>
                     </div>
                     <span
-                      className={	ext-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0 }
+                      className={`text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0 ${
+                        isSelected
+                          ? 'bg-[#4f46e5] text-white'
+                          : 'bg-purple-50 text-[#4f46e5]'
+                      }`}
                     >
                       {c.code}
                     </span>
