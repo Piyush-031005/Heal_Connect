@@ -579,7 +579,7 @@ router.post(
       console.log('Google token verified for user:', { googleId: googleId.substring(0, 10) + '...', email, name });
 
       // Support both 'role' and 'state' parameters for expert authentication
-      const isExpert = role === 'expert' || state === 'expert';
+      const isExpert = role === 'expert' || state === 'expert' || state === 'expert_login' || state === 'expert_signup';
       console.log('Authentication type determined:', { isExpert, role, state });
 
       if (isExpert) {
@@ -587,14 +587,23 @@ router.post(
         let pract = await prisma.practitioner.findUnique({ where: { googleId } });
         if (!pract && email) pract = await prisma.practitioner.findUnique({ where: { email } });
 
+        // If state is 'expert_login', don't create new practitioners — login only
+        const isLoginOnly = state === 'expert_login' || state === 'expert';
+        if (!pract && isLoginOnly) {
+          res.status(404).json({ success: false, message: 'No expert account found. Please sign up first.', code: 'NOT_REGISTERED' });
+          return;
+        }
+
+        let isNew = false;
         if (!pract) {
+          isNew = true;
           console.log('Creating new practitioner account for:', email);
           pract = await prisma.practitioner.create({
             data: {
               googleId,
               email: email ?? null,
               name: name || 'Expert',
-              isVerified: false, // Must be verified by admin
+              isVerified: false,
             },
           });
           if (email && name) sendWelcomeEmail(email, name).catch(err => console.error('Welcome email failed:', err));
@@ -622,7 +631,7 @@ router.post(
           message: 'Signed in with Google as Expert',
           data: {
             user: {
-              id: pract.id, email: pract.email, name: pract.name, role: 'practitioner', isVerified: pract.isVerified
+              id: pract.id, email: pract.email, name: pract.name, role: 'practitioner', isVerified: pract.isVerified, isNew
             },
             accessToken,
             refreshToken,

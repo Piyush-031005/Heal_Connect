@@ -15,9 +15,12 @@ interface AuthData {
     id: string;
     email: string | null;
     name: string | null;
-    phone: string | null;
-    isEmailVerified: boolean;
-    isPhoneVerified: boolean;
+    phone?: string | null;
+    isEmailVerified?: boolean;
+    isPhoneVerified?: boolean;
+    role?: string;
+    isVerified?: boolean;
+    isNew?: boolean;
   };
   accessToken: string;
   refreshToken: string;

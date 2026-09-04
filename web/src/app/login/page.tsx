@@ -19,15 +19,31 @@ type Mode = 'login' | 'forgot';
 function LoginInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [role, setRole] = useState<Role>('user');
+  const [role, setRole] = useState<Role>(() => {
+    // Will be updated from searchParams in useEffect
+    return 'user';
+  });
 
-  // Redirect already-logged-in users
+  // Redirect already-logged-in users & read role from URL
   useEffect(() => {
+    // Don't auto-redirect if there's an error param (e.g. not_registered from Google)
+    if (searchParams?.get('error')) {
+      if (searchParams.get('role') === 'expert') setRole('expert');
+      return;
+    }
     const token = localStorage.getItem('hc_access');
-    if (!token) return;
-    const isExpert = localStorage.getItem('hc_role') === 'practitioner';
-    router.replace(isExpert ? '/expert/dashboard' : '/dashboard');
-  }, [router]);
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+        if (payload.exp && payload.exp * 1000 > Date.now()) {
+          const isExpert = localStorage.getItem('hc_role') === 'practitioner';
+          router.replace(isExpert ? '/expert/dashboard' : '/dashboard');
+          return;
+        }
+      } catch {}
+    }
+    if (searchParams?.get('role') === 'expert') setRole('expert');
+  }, [router, searchParams]);
 
   const [mode, setMode] = useState<Mode>('login');
   const [email, setEmail] = useState('');
@@ -61,6 +77,9 @@ function LoginInner() {
             break;
           case 'callback_failed':
             errorMessage = `Callback processing failed: ${errorDetails || 'Unknown error'}`;
+            break;
+          case 'not_registered':
+            errorMessage = 'No expert account found for this Google account. Please sign up first.';
             break;
         }
         setError(errorMessage);
@@ -184,7 +203,7 @@ function LoginInner() {
     if (!clientId) { setError('Google Sign-In is not configured yet.'); return; }
     const redirectUri = encodeURIComponent(`${window.location.origin}/auth/google/callback`);
     const scope = encodeURIComponent('openid email profile');
-    const state = role === 'expert' ? 'expert' : 'user';
+    const state = role === 'expert' ? 'expert_login' : 'user';
     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&state=${state}&nonce=${Math.random().toString(36)}`;
   }
 

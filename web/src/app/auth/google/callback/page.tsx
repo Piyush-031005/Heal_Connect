@@ -12,64 +12,72 @@ function GoogleCallbackInner() {
   useEffect(() => {
     async function handleCallback() {
       try {
-        console.log('Google callback started');
-        
-        // Get ID token from hash fragment (Google OAuth returns it there)
         const hash = window.location.hash.substring(1);
         const params = new URLSearchParams(hash);
         const idToken = params.get('id_token');
         const state = params.get('state') || searchParams.get('state');
         const error = params.get('error');
 
-        console.log('Callback params:', { hasIdToken: !!idToken, state, error });
-
         if (error) {
-          console.error('Google OAuth error:', error);
           router.push(`/login?error=oauth_error&details=${encodeURIComponent(error)}`);
           return;
         }
-
         if (!idToken) {
-          console.error('No ID token in callback');
           router.push('/login?error=no_token');
           return;
         }
 
-        console.log('Calling backend with ID token');
-        
-        // Send to backend with both state and role for compatibility
         const res = await authApi.googleSignIn(idToken, state || undefined);
 
-        console.log('Backend response:', res);
-
         if (!res.success || !res.data) {
-          console.error('Google sign-in failed:', res.message);
-          router.push(`/login?error=auth_failed&details=${encodeURIComponent(res.message || 'Unknown error')}`);
+          // Backend blocked login-only flow for unregistered expert
+          if ((res as any).code === 'NOT_REGISTERED' || res.message?.includes('sign up')) {
+            router.push('/login?role=expert&error=not_registered');
+          } else {
+            router.push(`/login?error=auth_failed&details=${encodeURIComponent(res.message || 'Unknown error')}`);
+          }
           return;
         }
 
-        // Store tokens
-        tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+        const isExpertFlow = state === 'expert_login' || state === 'expert_signup' || state === 'expert';
+        const isSignupFlow = state === 'expert_signup';
 
-        // Check role and redirect
-        const isExpert = state === 'expert' || (res.data.user as any)?.role === 'practitioner';
-        
-        console.log('Authentication successful, redirecting...', { isExpert, state, isVerified: (res.data.user as any)?.isVerified });
-        
-        if (isExpert) {
-          // Store tokens temporarily
-          localStorage.setItem('hc_role', 'practitioner');
-          localStorage.setItem('hc_practitioner_id', res.data.user.id);
-          localStorage.setItem('hc_pid', res.data.user.id);
-          localStorage.setItem('hc_practitioner_name', res.data.user.name ?? '');
-          
-          // Redirect to expert signup with Google auth flag
-          localStorage.setItem('hc_google_auth', 'true');
-          localStorage.setItem('hc_google_name', res.data.user.name ?? '');
-          localStorage.setItem('hc_google_email', res.data.user.email ?? '');
-          
-          router.push('/expert/signup');
+        if (isExpertFlow) {
+          if (isSignupFlow) {
+            // ── SIGNUP FLOW ──────────────────────────────────────────
+            if (res.data.user?.isNew) {
+              // New expert — store tokens, go to onboarding form
+              tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+              localStorage.setItem('hc_role', 'practitioner');
+              localStorage.setItem('hc_practitioner_id', res.data.user.id);
+              localStorage.setItem('hc_pid', res.data.user.id);
+              localStorage.setItem('hc_practitioner_name', res.data.user.name ?? '');
+              localStorage.setItem('hc_google_auth', 'true');
+              localStorage.setItem('hc_google_name', res.data.user.name ?? '');
+              localStorage.setItem('hc_google_email', res.data.user.email ?? '');
+              router.push('/expert/signup');
+            } else {
+              // Already registered — show message, no tokens stored
+              router.push('/expert/signup?already_registered=true');
+            }
+          } else {
+            // ── LOGIN FLOW (expert_login or legacy expert) ───────────
+            if (res.data.user?.isNew) {
+              // Never registered before — tell them to sign up first
+              router.push('/expert/login?error=not_registered');
+            } else {
+              // Existing expert — direct dashboard
+              tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+              localStorage.setItem('hc_role', 'practitioner');
+              localStorage.setItem('hc_practitioner_id', res.data.user.id);
+              localStorage.setItem('hc_pid', res.data.user.id);
+              localStorage.setItem('hc_practitioner_name', res.data.user.name ?? '');
+              router.push('/expert/dashboard');
+            }
+          }
         } else {
+          // ── USER FLOW ────────────────────────────────────────────
+          tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
           localStorage.removeItem('hc_role');
           localStorage.removeItem('hc_practitioner_id');
           localStorage.removeItem('hc_pid');
@@ -77,7 +85,6 @@ function GoogleCallbackInner() {
           router.push('/dashboard');
         }
       } catch (err) {
-        console.error('Google callback error:', err);
         router.push(`/login?error=callback_failed&details=${encodeURIComponent((err as Error).message || 'Unknown error')}`);
       }
     }

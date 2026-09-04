@@ -83,7 +83,11 @@ function SignupInner() {
         });
         
         if (!res.success || !res.data) {
-          setError(res.message || 'Registration failed.');
+          if (res.message?.toLowerCase().includes('already registered') || res.message?.toLowerCase().includes('already exists')) {
+            setError('An expert account with this email already exists. Please log in instead.');
+          } else {
+            setError(res.message || 'Registration failed.');
+          }
           setLoading(false);
           return;
         }
@@ -155,7 +159,7 @@ function SignupInner() {
     if (!clientId) { setError('Google Sign-In is not configured yet.'); return; }
     const redirectUri = encodeURIComponent(`${window.location.origin}/auth/google/callback`);
     const scope = encodeURIComponent('openid email profile');
-    const state = role === 'expert' ? 'expert' : 'user';
+    const state = role === 'expert' ? 'expert_signup' : 'user';
     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&state=${state}&nonce=${Math.random().toString(36)}`;
   }
 
