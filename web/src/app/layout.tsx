@@ -33,6 +33,13 @@ export default function RootLayout({
             }, 'google_translate_element');
           }
           window.__translateTo = function(langCode) {
+            if (!langCode || langCode === 'en') {
+              document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+              document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + location.hostname;
+              var select = document.querySelector('.goog-te-combo');
+              if (select) { select.value = ''; select.dispatchEvent(new Event('change')); }
+              return;
+            }
             var tries = 0;
             var interval = setInterval(function() {
               var select = document.querySelector('.goog-te-combo');
