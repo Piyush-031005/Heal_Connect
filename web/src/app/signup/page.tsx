@@ -103,6 +103,7 @@ function SignupInner() {
         const res = await authApi.register({ name, email, password, dob, acceptTerms, acceptPrivacy, emailMarketingOptIn });
         if (!res.success || !res.data) {
           setError(res.errors?.length ? res.errors.map((e) => e.message).join(' · ') : res.message || 'Registration failed');
+          setLoading(false);
           return;
         }
         tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
@@ -113,7 +114,10 @@ function SignupInner() {
         setSuccess('Account created!');
         setTimeout(() => router.push(`/verify-email/pending?email=${encodeURIComponent(email)}`), 1200);
       }
-    } catch { setError('Something went wrong. Please try again.'); }
+    } catch (err: any) { 
+      setError(err.message || 'Something went wrong. Please try again.');
+      setLoading(false);
+    }
     finally { setLoading(false); }
   }
 
@@ -436,7 +440,7 @@ function SignupInner() {
 
               <Button
                 type="submit"
-                disabled={loading || !!success || !acceptTerms || !acceptPrivacy}
+                disabled={loading || !acceptTerms || !acceptPrivacy}
                 className="w-full bg-[#4f46e5] hover:bg-[#4338ca] text-white h-12 text-base font-bold rounded-full border-0 shadow-lg disabled:opacity-50"
               >
                 {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>Create Account <ArrowRight className="ml-2 h-4 w-4" /></>}

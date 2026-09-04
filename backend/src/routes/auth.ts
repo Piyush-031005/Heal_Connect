@@ -606,11 +606,12 @@ router.post(
           });
         }
 
-        console.log('Practitioner authenticated successfully:', pract.id);
         if (isActivelyBanned(pract)) {
           bannedResponse(res, pract);
           return;
         }
+
+        console.log('Practitioner authenticated successfully:', pract.id);
 
         const payload: import('../lib/jwt').JwtPayload = { userId: pract.id, practitionerId: pract.id, ...(pract.email ? { email: pract.email } : {}) };
         const accessToken = signAccessToken(payload);
@@ -621,7 +622,7 @@ router.post(
           message: 'Signed in with Google as Expert',
           data: {
             user: {
-              id: pract.id, email: pract.email, name: pract.name, role: 'practitioner'
+              id: pract.id, email: pract.email, name: pract.name, role: 'practitioner', isVerified: pract.isVerified
             },
             accessToken,
             refreshToken,

@@ -768,6 +768,18 @@ export const ticketsApi = {
     }),
 };
 
+// No dedicated backend endpoint exists yet for the practitioner-interest
+// application form — it reuses the existing ContactMessage inbox (same one
+// admins already review at /admin/messages) rather than requiring a new
+// Prisma model + migration for what is, structurally, a lead-capture form.
+export const contactApi = {
+  submit: (body: { name: string; email: string; subject: string; message: string }) =>
+    request('/api/contact', {
+      method: 'POST',
+      body: JSON.stringify(body),
+    }),
+};
+
 export const availabilityApi = {
   getAvailability: (practitionerId: string, startDate?: string, endDate?: string) => {
     let url = `/api/availability/${practitionerId}`;
@@ -780,16 +792,4 @@ export const availabilityApi = {
     request(`/api/availability/${slotId}`, { method: 'DELETE', headers: authHeader(token) }),
   toggleScheduling: (token: string, schedulingEnabled: boolean) =>
     request<{ schedulingEnabled: boolean }>('/api/availability/toggle', { method: 'PUT', headers: authHeader(token), body: JSON.stringify({ schedulingEnabled }) }),
-};
-
-// No dedicated backend endpoint exists yet for the practitioner-interest
-// application form — it reuses the existing ContactMessage inbox (same one
-// admins already review at /admin/messages) rather than requiring a new
-// Prisma model + migration for what is, structurally, a lead-capture form.
-export const contactApi = {
-  submit: (body: { name: string; email: string; subject: string; message: string }) =>
-    request('/api/contact', {
-      method: 'POST',
-      body: JSON.stringify(body),
-    }),
 };

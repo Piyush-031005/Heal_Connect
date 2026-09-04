@@ -324,9 +324,13 @@ export default function Navbar() {
                     <Link href="/modalities/sound-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Sound Healing</Link>
                   </div>
                 </div>
-                <Link href="#reviews" className="text-sm font-semibold text-[#2D1B69] hover:text-[#5F3BA9] transition-colors">
+                <a href="/#testimonials" onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById('testimonials');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }} className="text-sm font-semibold text-[#2D1B69] hover:text-[#5F3BA9] transition-colors cursor-pointer">
                   Reviews
-                </Link>
+                </a>
               </nav>
             )}
           </div>

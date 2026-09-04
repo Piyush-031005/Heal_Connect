@@ -14,6 +14,7 @@ export default function ExpertSignupPage() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isGoogleAuth, setIsGoogleAuth] = useState(false);
 
   const rules = [
     { label: '1 uppercase letter', test: (p: string) => /[A-Z]/.test(p) },
@@ -27,17 +28,36 @@ export default function ExpertSignupPage() {
 
   const set = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }));
 
+  // Check if coming from Google auth
+  useEffect(() => {
+    const googleAuth = localStorage.getItem('hc_google_auth');
+    const googleName = localStorage.getItem('hc_google_name');
+    const googleEmail = localStorage.getItem('hc_google_email');
+    
+    if (googleAuth && googleName && googleEmail) {
+      setIsGoogleAuth(true);
+      setForm(f => ({
+        ...f,
+        name: googleName,
+        email: googleEmail,
+      }));
+    }
+  }, []);
+
   const handleEmailSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     
-    if (!allPassed) { 
-      setError('Password does not meet the required criteria.'); 
-      return; 
-    }
-    if (form.password !== form.confirm) { 
-      setError('Passwords do not match.'); 
-      return; 
+    // Skip password validation for Google auth
+    if (!isGoogleAuth) {
+      if (!allPassed) { 
+        setError('Password does not meet the required criteria.'); 
+        return; 
+      }
+      if (form.password !== form.confirm) { 
+        setError('Passwords do not match.'); 
+        return; 
+      }
     }
     
     // Age validation
@@ -55,6 +75,18 @@ export default function ExpertSignupPage() {
 
     setLoading(true);
     try {
+      // For Google auth, just proceed to verification
+      if (isGoogleAuth) {
+        // Clear Google auth flags
+        localStorage.removeItem('hc_google_auth');
+        localStorage.removeItem('hc_google_name');
+        localStorage.removeItem('hc_google_email');
+        
+        // Go to verification pending
+        router.push('/expert/verification-pending');
+        return;
+      }
+
       const res = await authApi.practitionerRegister(
         form.name,
         form.email,
