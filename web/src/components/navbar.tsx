@@ -460,7 +460,7 @@ export default function Navbar() {
               </button>
 
               {langOpen && (
-                <div className={`absolute right-0 mt-2 w-36 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
+                <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-64 overflow-y-auto ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi', sub: 'HI' }, { code: 'ta', label: 'Tamil', sub: 'TA' }, { code: 'te', label: 'Telugu', sub: 'TE' }, { code: 'bn', label: 'Bengali', sub: 'BN' }, { code: 'mr', label: 'Marathi', sub: 'MR' }, { code: 'gu', label: 'Gujarati', sub: 'GU' }, { code: 'kn', label: 'Kannada', sub: 'KN' }, { code: 'pa', label: 'Punjabi', sub: 'PA' }, { code: 'ur', label: 'Urdu', sub: 'UR' }, { code: 'es', label: 'Spanish', sub: 'ES' }, { code: 'fr', label: 'French', sub: 'FR' }, { code: 'de', label: 'German', sub: 'DE' }, { code: 'ar', label: 'Arabic', sub: 'AR' }, { code: 'zh-CN', label: 'Chinese', sub: 'ZH' }, { code: 'ja', label: 'Japanese', sub: 'JA' }] as const).map((l) => (
                     <button
                       key={l.code}
@@ -468,7 +468,7 @@ export default function Navbar() {
                         setLang(l.code);
                         setLangOpen(false);
                         if (typeof window !== 'undefined' && (window as any).__translateTo) {
-                          (window as any).__translateTo(l.code === 'en' ? '' : l.code);
+                          (window as any).__translateTo(l.code);
                         }
                       }}
                       className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
