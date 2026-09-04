@@ -199,7 +199,7 @@ export default function BlogPage() {
       <Navbar />
 
       {/* ══ HERO SECTION ══ */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-500 via-orange-500 to-indigo-600 pt-28 pb-20 px-4 text-center text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-500 to-indigo-600 pt-28 pb-20 px-4 text-center text-white">
         <div className="absolute top-10 left-10 w-40 h-40 rounded-full bg-white/10 blur-2xl pointer-events-none" />
         <div className="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-white/10 blur-3xl pointer-events-none" />
         <div className="container mx-auto max-w-4xl relative z-10 space-y-6">
@@ -259,7 +259,7 @@ export default function BlogPage() {
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
           onClick={openWriteForm}
-          className="fixed bottom-8 right-8 z-40 flex items-center gap-2.5 bg-gradient-to-r from-indigo-500 to-orange-500 text-white font-extrabold px-6 py-4 rounded-2xl shadow-2xl shadow-indigo-300/60 hover:from-indigo-600 hover:to-orange-600 transition-all"
+          className="fixed bottom-8 right-8 z-40 flex items-center gap-2.5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-extrabold px-6 py-4 rounded-2xl shadow-2xl shadow-indigo-300/60 hover:from-indigo-600 hover:to-purple-600 transition-all"
         >
           <Plus className="w-5 h-5" />
           Write Post
@@ -277,7 +277,7 @@ export default function BlogPage() {
               transition={{ duration: 0.3 }}
               className="bg-white rounded-3xl max-w-2xl w-full shadow-2xl my-8 overflow-hidden"
             >
-              <div className="bg-gradient-to-r from-indigo-500 to-orange-500 px-6 py-5 flex items-center justify-between">
+              <div className="bg-gradient-to-r from-indigo-500 to-purple-500 px-6 py-5 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center">
                     <BookOpen className="w-5 h-5 text-white" />
@@ -342,7 +342,7 @@ export default function BlogPage() {
                 )}
                 <div className="flex gap-3 pt-1">
                   <button type="submit"
-                    className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-extrabold py-3.5 rounded-2xl shadow-md transition-all hover:shadow-lg">
+                    className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-extrabold py-3.5 rounded-2xl shadow-md transition-all hover:shadow-lg">
                     <Check className="w-4 h-4" />
                     {editingArticleId ? 'Save Changes' : 'Publish Article'}
                   </button>
@@ -521,7 +521,7 @@ export default function BlogPage() {
         </section>
 
         {/* ══ NEWSLETTER SUBSCRIPTION SECTION ══ */}
-        <section className="rounded-3xl bg-gradient-to-br from-indigo-500 via-orange-500 to-indigo-600 p-8 md:p-12 text-center text-white relative overflow-hidden shadow-xl space-y-6">
+        <section className="rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-indigo-600 p-8 md:p-12 text-center text-white relative overflow-hidden shadow-xl space-y-6">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" />
           <div className="max-w-xl mx-auto space-y-3 relative z-10">
             <Mail className="w-10 h-10 mx-auto text-yellow-200 animate-bounce" />
@@ -601,7 +601,7 @@ export default function BlogPage() {
                   </div>
                 </div>
 
-                <div className="prose prose-amber max-w-none text-xs md:text-sm text-gray-700 space-y-4"
+                <div className="prose prose-indigo max-w-none text-xs md:text-sm text-gray-700 space-y-4"
                   dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
 
                 <div className="pt-6 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4">

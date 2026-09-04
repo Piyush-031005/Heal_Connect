@@ -342,7 +342,7 @@ export default function DashboardPage() {
               </div>
             </Link>
             <div className="relative" ref={profileMenuRef}>
-              <button onClick={() => setShowProfileMenu(!showProfileMenu)} className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-orange-500 flex items-center justify-center text-white text-sm font-bold hover:opacity-90 transition-opacity overflow-hidden" title="My Profile">
+              <button onClick={() => setShowProfileMenu(!showProfileMenu)} className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white text-sm font-bold hover:opacity-90 transition-opacity overflow-hidden" title="My Profile">
                 {user?.photoUrl ? (
                   <img src={user.photoUrl} alt={user.name || 'Profile'} className="w-full h-full object-cover" />
                 ) : user?.name ? (
@@ -391,7 +391,7 @@ export default function DashboardPage() {
       <main className="flex-1 container mx-auto px-4 py-8 space-y-8">
 
         {/* ═══ WELCOME BANNER ═══ */}
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-indigo-500 via-orange-500 to-indigo-600 p-6 md:p-8">
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 p-6 md:p-8">
           <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-indigo-300/20 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -425,7 +425,7 @@ export default function DashboardPage() {
           {[
             { label: 'Wallet Balance', value: walletBalance !== null ? `₹${walletBalance.toFixed(2)}` : '...', icon: Wallet, color: 'text-indigo-500', bg: 'bg-indigo-50', shadow: 'shadow-indigo-200/30' },
             { label: 'Sessions Done', value: String(sessionsDone), icon: MessageCircle, color: 'text-emerald-600', bg: 'bg-emerald-50', shadow: 'shadow-emerald-200/30' },
-            { label: 'Minutes Used', value: `${minutesUsed} min`, icon: Clock, color: 'text-orange-500', bg: 'bg-orange-50', shadow: 'shadow-orange-200/30' },
+            { label: 'Minutes Used', value: `${minutesUsed} min`, icon: Clock, color: 'text-purple-500', bg: 'bg-purple-50', shadow: 'shadow-purple-200/30' },
             { label: 'Experts Online', value: onlineCount > 0 ? String(onlineCount) : '—', icon: TrendingUp, color: 'text-blue-500', bg: 'bg-blue-50', shadow: 'shadow-blue-200/30' },
           ].map((stat) => (
             <Card key={stat.label} className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 rounded-2xl overflow-hidden">
@@ -493,7 +493,7 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
           {[
             { icon: MessageCircle, label: 'Live Chat', desc: 'Text with an expert now', color: 'text-indigo-500', bg: 'bg-indigo-50', border: 'hover:border-indigo-400', action: () => document.getElementById('experts-section')?.scrollIntoView({ behavior: 'smooth' }) },
-            { icon: Headphones, label: 'Audio Call', desc: 'Voice consultation', color: 'text-orange-500', bg: 'bg-orange-50', border: 'hover:border-orange-400', action: () => document.getElementById('experts-section')?.scrollIntoView({ behavior: 'smooth' }) },
+            { icon: Headphones, label: 'Audio Call', desc: 'Voice consultation', color: 'text-purple-500', bg: 'bg-purple-50', border: 'hover:border-purple-400', action: () => document.getElementById('experts-section')?.scrollIntoView({ behavior: 'smooth' }) },
             { icon: Wallet, label: 'Add Money', desc: 'Recharge your wallet', color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'hover:border-emerald-400', action: () => setIsRechargeModalOpen(true) },
           ].map((item) => (
             <Card key={item.label} onClick={item.action} className={`bg-white border border-gray-100 ${item.border} transition-all duration-300 cursor-pointer group shadow-sm hover:shadow-md hover:-translate-y-0.5 rounded-2xl overflow-hidden`}>
@@ -550,17 +550,17 @@ export default function DashboardPage() {
                     <Card className="bg-white border border-gray-100 hover:border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 cursor-pointer rounded-2xl overflow-hidden group h-full">
                       <CardContent className="p-0 flex flex-col h-full">
                         {/* Top strip with avatar */}
-                        <div className="relative h-14 bg-gradient-to-r from-indigo-50 to-orange-50">
+                        <div className="relative h-14 bg-gradient-to-r from-indigo-50 to-purple-50">
                           <div className="absolute -bottom-6 left-5">
                             <img src={avatarSrc} alt={expert.name} className="w-12 h-12 rounded-xl object-cover shadow-md border-2 border-white" />
                           </div>
                           <div className="absolute top-3 right-4">
                             <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
-                              expert.isBusy ? 'bg-orange-100 text-orange-700' : 
+                              expert.isBusy ? 'bg-purple-100 text-purple-700' : 
                               expert.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'
                             }`}>
                               <span className={`w-1.5 h-1.5 rounded-full ${
-                                expert.isBusy ? 'bg-orange-500' : 
+                                expert.isBusy ? 'bg-purple-500' : 
                                 expert.isOnline ? 'bg-emerald-500' : 'bg-gray-400'
                               }`} />
                               {expert.isBusy ? 'Busy' : expert.isOnline ? 'Online' : 'Offline'}

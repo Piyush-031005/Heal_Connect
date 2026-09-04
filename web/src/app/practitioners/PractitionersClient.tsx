@@ -253,17 +253,17 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
     <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-white border border-gray-100 hover:border-indigo-200 hover:shadow-lg transition-all cursor-pointer rounded-2xl overflow-hidden group h-full">
       <CardContent className="p-0 flex flex-col h-full">
         {/* Top strip with avatar */}
-        <div className="relative h-16 bg-gradient-to-r from-indigo-50 to-orange-50 shrink-0">
+        <div className="relative h-16 bg-gradient-to-r from-indigo-50 to-purple-50 shrink-0">
           <div className="absolute -bottom-7 left-5">
             <img src={avatarSrc} alt={p.name} className="w-14 h-14 rounded-xl object-cover shadow-md border-2 border-white" />
           </div>
           <div className="absolute top-3 right-4">
             <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
-              p.isBusy ? 'bg-orange-100 text-orange-700' : 
+              p.isBusy ? 'bg-purple-100 text-purple-700' : 
               p.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'
             }`}>
               <span className={`w-1.5 h-1.5 rounded-full ${
-                p.isBusy ? 'bg-orange-500' : 
+                p.isBusy ? 'bg-purple-500' : 
                 p.isOnline ? 'bg-emerald-500' : 'bg-gray-400'
               }`} />
               {p.isBusy ? 'Busy' : p.isOnline ? 'Online' : 'Offline'}

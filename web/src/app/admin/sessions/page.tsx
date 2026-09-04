@@ -145,7 +145,7 @@ export default function AdminSessionsPage() {
           <StatCard label="Total Database Sessions" value={totalSessions} icon={CalendarClock} color="indigo" />
           <StatCard label="Active Sessions (Live)" value={activeCount} icon={Activity} color="green" change="Live Sync" />
           <StatCard label="Completed Sessions" value={completedCount} icon={CheckCircle} color="blue" />
-          <StatCard label="Avg Duration" value="Calculated from DB" icon={Clock} color="amber" />
+          <StatCard label="Avg Duration" value="Calculated from DB" icon={Clock} color="indigo" />
         </div>
 
         {/* Real Data Sessions Table */}

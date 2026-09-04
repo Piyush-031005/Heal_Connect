@@ -40,8 +40,8 @@ export default function ExpertVerificationPendingPage() {
 
           {/* Clock Icon */}
           <div className="flex justify-center">
-            <div className="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center">
-              <Clock className="w-8 h-8 text-amber-600 animate-pulse" />
+            <div className="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center">
+              <Clock className="w-8 h-8 text-indigo-600 animate-pulse" />
             </div>
           </div>
 
@@ -62,10 +62,10 @@ export default function ExpertVerificationPendingPage() {
             </div>
 
             <div className="flex items-start gap-3">
-              <Clock className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+              <Clock className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
               <div className="text-sm text-left">
-                <p className="font-semibold text-amber-900">Waiting for Verification</p>
-                <p className="text-amber-700">Our admin team will review and verify your account within 24-48 hours.</p>
+                <p className="font-semibold text-indigo-900">Waiting for Verification</p>
+                <p className="text-indigo-700">Our admin team will review and verify your account within 24-48 hours.</p>
               </div>
             </div>
           </div>

@@ -165,7 +165,7 @@ const PLANETS = [
 
 // --- DOSHAS & REMEDIES ---
 const DOSHAS = [
-  { title: 'Mangal Dosha (Manglik)', icon: Flame, color: 'text-orange-500', text: 'Occurs when Mars is placed in the 1st, 4th, 7th, 8th, or 12th house. Can cause delays in marriage. Remedied through Hanuman Chalisa recitation, Kumbh Vivah, or coral gemstones.' },
+  { title: 'Mangal Dosha (Manglik)', icon: Flame, color: 'text-purple-500', text: 'Occurs when Mars is placed in the 1st, 4th, 7th, 8th, or 12th house. Can cause delays in marriage. Remedied through Hanuman Chalisa recitation, Kumbh Vivah, or coral gemstones.' },
   { title: 'Kaal Sarp Dosha', icon: Shield, color: 'text-indigo-600', text: 'Formed when all seven planets are hemmed between Rahu and Ketu. Causes initial struggles followed by sudden success after age 33. Remedied through Rahu-Ketu mantra chanting.' },
   { title: 'Pitra Dosha', icon: Star, color: 'text-blue-500', text: 'Occurs when Sun is afflicted by Rahu or Ketu. Indicates unresolved ancestral karma. Remedied through Pitra Paksha donations, Tarpan rituals, and charity.' },
   { title: 'Shani Sade Sati', icon: RefreshCw, color: 'text-purple-500', text: 'A 7.5-year Saturn transit over your Moon Sign and adjacent signs. A period of hard work, lessons, and transformation followed by lasting rewards.' }
@@ -222,7 +222,7 @@ export default function KundliPage() {
       <Navbar />
 
       {/* ══ HERO SECTION ══ */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-500 via-orange-500 to-indigo-600 pt-28 pb-20 px-4 text-center text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-500 to-indigo-600 pt-28 pb-20 px-4 text-center text-white">
         <div className="absolute top-10 left-10 w-40 h-40 rounded-full bg-white/10 blur-2xl pointer-events-none" />
         <div className="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-white/10 blur-3xl pointer-events-none" />
         <div className="container mx-auto max-w-4xl relative z-10 space-y-6">
@@ -323,7 +323,7 @@ export default function KundliPage() {
               </div>
 
               <button type="submit" disabled={isLoading}
-                className="w-full py-4 rounded-full bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-extrabold text-base shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-75">
+                className="w-full py-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-extrabold text-base shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-75">
                 {isLoading ? (<><RefreshCw className="w-5 h-5 animate-spin" /> Calculating Charts...</>) : (<><Sparkles className="w-5 h-5" /> Generate Kundli</>)}
               </button>
             </form>
@@ -334,7 +334,7 @@ export default function KundliPage() {
         {generatedKundli && (
           <section id="kundli-results" className="space-y-6 pt-4">
             <div className="bg-white border-2 border-indigo-300 rounded-3xl p-6 md:p-8 shadow-2xl space-y-6">
-              <div className="bg-gradient-to-r from-indigo-500 to-orange-500 text-white p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-md">
+              <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-md">
                 <div className="space-y-1">
                   <span className="text-[10px] font-extrabold uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full">Janam Kundli Report</span>
                   <h2 className="text-2xl md:text-3xl font-black">{generatedKundli.name}</h2>
@@ -452,9 +452,9 @@ export default function KundliPage() {
                         <p className="text-xs text-gray-600 font-medium">Duration: 2020 to 2036 (16 Years)</p>
                         <p className="text-xs text-gray-500">Brings wisdom, expansion, spiritual growth, and prosperity in career and family life.</p>
                       </div>
-                      <div className="p-5 rounded-2xl bg-orange-50 border border-orange-200 space-y-2">
-                        <span className="text-[10px] font-bold text-orange-700 uppercase tracking-widest">Active Antardasha</span>
-                        <h4 className="text-xl font-black text-orange-900">Mercury (Budh)</h4>
+                      <div className="p-5 rounded-2xl bg-purple-50 border border-purple-200 space-y-2">
+                        <span className="text-[10px] font-bold text-purple-700 uppercase tracking-widest">Active Antardasha</span>
+                        <h4 className="text-xl font-black text-purple-900">Mercury (Budh)</h4>
                         <p className="text-xs text-gray-600 font-medium">Duration: Oct 2024 to Jan 2027</p>
                         <p className="text-xs text-gray-500">Excellent period for communication, technology, business deals, and intellectual achievements.</p>
                       </div>
@@ -564,7 +564,7 @@ export default function KundliPage() {
         </section>
 
         {/* ══ DOSHAS KNOWLEDGE ══ */}
-        <section className="bg-gradient-to-br from-indigo-50 to-orange-50 border border-indigo-200 rounded-3xl p-6 md:p-10 space-y-6">
+        <section className="bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200 rounded-3xl p-6 md:p-10 space-y-6">
           <h2 className="text-3xl font-extrabold text-indigo-900">Major Vedic Doshas and Remedies</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {DOSHAS.map((d, i) => (
@@ -606,7 +606,7 @@ export default function KundliPage() {
         </section>
 
         {/* ══ FINAL CTA ══ */}
-        <section className="rounded-3xl bg-gradient-to-br from-indigo-500 via-orange-500 to-indigo-600 p-8 md:p-12 text-center text-white relative overflow-hidden shadow-xl space-y-6">
+        <section className="rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-indigo-600 p-8 md:p-12 text-center text-white relative overflow-hidden shadow-xl space-y-6">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" />
           <div className="max-w-2xl mx-auto space-y-3 relative z-10">
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">Ready to Discover Your Birth Chart?</h2>
@@ -657,7 +657,7 @@ export default function KundliPage() {
                   </span>
                 </div>
 
-                <div className="prose prose-amber max-w-none text-xs md:text-sm text-gray-700 space-y-3 leading-relaxed"
+                <div className="prose prose-indigo max-w-none text-xs md:text-sm text-gray-700 space-y-3 leading-relaxed"
                   dangerouslySetInnerHTML={{ __html: selectedGuide.guideContent }} />
 
                 <div className="pt-4 border-t border-gray-100 flex justify-end">

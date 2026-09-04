@@ -277,7 +277,7 @@ export default function PractitionerDetailPage() {
                     className="w-28 h-28 md:w-32 md:h-32 rounded-3xl object-cover shadow-md border-2 border-yellow-100 transition-transform duration-300 hover:scale-105"
                   />
                   {p.isBusy ? (
-                    <span className="absolute -bottom-2 right-1 flex items-center gap-1.5 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg border-2 border-white">
+                    <span className="absolute -bottom-2 right-1 flex items-center gap-1.5 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg border-2 border-white">
                       <span className="w-2 h-2 bg-white rounded-full" /> Busy
                     </span>
                   ) : p.isOnline ? (
@@ -383,7 +383,7 @@ export default function PractitionerDetailPage() {
                 <Button
                   onClick={handleStartCall}
                   disabled={!p.isOnline || p.isBusy || calling}
-                  className="bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-extrabold border-0 gap-2 rounded-2xl px-6 py-6 shadow-lg shadow-indigo-500/25 hover:scale-105 active:scale-95 transition-all disabled:opacity-40"
+                  className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-extrabold border-0 gap-2 rounded-2xl px-6 py-6 shadow-lg shadow-indigo-500/25 hover:scale-105 active:scale-95 transition-all disabled:opacity-40"
                 >
                   {calling ? (
                     <>

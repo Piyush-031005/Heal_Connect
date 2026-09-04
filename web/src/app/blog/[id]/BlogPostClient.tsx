@@ -89,7 +89,7 @@ export default function SingleBlogPage() {
             )}
           </header>
 
-          <div className="prose prose-lg prose-amber max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-indigo-600">
+          <div className="prose prose-lg prose-indigo max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-indigo-600">
             <ReactMarkdown>{blog.content}</ReactMarkdown>
           </div>
 

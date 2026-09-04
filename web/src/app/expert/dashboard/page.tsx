@@ -193,7 +193,7 @@ export default function ExpertDashboardPage() {
             <div className="relative" ref={profileMenuRef}>
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-orange-500 flex items-center justify-center text-white text-sm font-bold hover:opacity-90 transition-opacity overflow-hidden"
+                className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white text-sm font-bold hover:opacity-90 transition-opacity overflow-hidden"
               >
                 {profile?.photoUrl
                   ? <img src={profile.photoUrl} alt={profile.name} className="w-full h-full object-cover" />
@@ -235,7 +235,7 @@ export default function ExpertDashboardPage() {
       <main className="flex-1 container mx-auto px-4 py-8 space-y-6">
 
         {/* ── Welcome Banner ── */}
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-indigo-500 via-orange-500 to-indigo-600 p-6 md:p-8">
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 p-6 md:p-8">
           <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-indigo-300/20 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -258,7 +258,7 @@ export default function ExpertDashboardPage() {
             </div>
             <div className="flex flex-col items-end gap-4">
               <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold shadow-lg ${
-                isBusy ? 'bg-orange-500 text-white shadow-orange-500/30' :
+                isBusy ? 'bg-purple-500 text-white shadow-purple-500/30' :
                 isOnline ? 'bg-emerald-500 text-white shadow-emerald-500/30' : 'bg-white/20 text-white shadow-black/10'
               }`}>
                 {isBusy ? <Activity className="w-4 h-4 animate-pulse" /> : isOnline ? <Wifi className="w-4 h-4 animate-pulse" /> : <WifiOff className="w-4 h-4" />}
@@ -271,7 +271,7 @@ export default function ExpertDashboardPage() {
                 className={`rounded-2xl font-extrabold shadow-xl transition-all hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100 ${
                   isOnline 
                     ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' 
-                    : 'bg-white text-orange-600 hover:bg-orange-50 border-0'
+                    : 'bg-white text-purple-600 hover:bg-purple-50 border-0'
                 }`}
               >
                 {togglingOnline ? (
@@ -351,7 +351,7 @@ export default function ExpertDashboardPage() {
                     key={session.id}
                     className="bg-white rounded-2xl border border-indigo-100 p-4 flex items-center gap-4 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all"
                   >
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-orange-500 flex items-center justify-center text-white font-bold text-lg shrink-0 overflow-hidden">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold text-lg shrink-0 overflow-hidden">
                       {session.user.photoUrl
                         ? <img src={session.user.photoUrl} alt={session.user.name ?? ''} className="w-full h-full object-cover" />
                         : <User className="w-6 h-6" />}
@@ -442,9 +442,9 @@ export default function ExpertDashboardPage() {
             </div>
 
             <Card className="bg-white border-0 shadow-md rounded-2xl overflow-hidden">
-              <div className="h-16 bg-gradient-to-r from-indigo-400 to-orange-400" />
+              <div className="h-16 bg-gradient-to-r from-indigo-400 to-purple-400" />
               <CardContent className="px-5 pb-5 -mt-8">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-orange-500 border-4 border-white flex items-center justify-center text-white text-xl font-extrabold overflow-hidden shadow-md mb-3">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 border-4 border-white flex items-center justify-center text-white text-xl font-extrabold overflow-hidden shadow-md mb-3">
                   {profile?.photoUrl
                     ? <img src={profile.photoUrl} alt={profile?.name} className="w-full h-full object-cover" />
                     : initials}
@@ -456,10 +456,10 @@ export default function ExpertDashboardPage() {
                   <div className="flex items-center justify-between py-2 border-b border-gray-100">
                     <span className="text-gray-500">Status</span>
                     <span className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
-                      isBusy ? 'bg-orange-100 text-orange-700' :
+                      isBusy ? 'bg-purple-100 text-purple-700' :
                       isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'
                     }`}>
-                      <span className={`w-1.5 h-1.5 rounded-full ${isBusy ? 'bg-orange-500' : isOnline ? 'bg-emerald-500' : 'bg-gray-400'}`} />
+                      <span className={`w-1.5 h-1.5 rounded-full ${isBusy ? 'bg-purple-500' : isOnline ? 'bg-emerald-500' : 'bg-gray-400'}`} />
                       {isBusy ? 'Busy' : isOnline ? 'Online' : 'Offline'}
                     </span>
                   </div>

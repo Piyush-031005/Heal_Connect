@@ -384,7 +384,7 @@ export default function AdminUsersPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <StatCard label="Database Users" value={totalUsers} icon={Users} color="blue" />
           <StatCard label="Database Practitioners" value={totalPract} icon={UserCheck} color="purple" />
-          <StatCard label="Onboarding Applications" value={totalApps} icon={TrendingUp} color="amber" />
+          <StatCard label="Onboarding Applications" value={totalApps} icon={TrendingUp} color="indigo" />
           <StatCard label="Verified Practitioners" value={practitioners.filter((p) => p.isVerified).length} icon={Award} color="green" />
         </div>
 
@@ -532,7 +532,7 @@ export default function AdminUsersPage() {
                               onClick={() => toggleVerification(p.id, p.isVerified)}
                               title={p.isVerified ? 'Mark Pending' : 'Verify Practitioner'}
                               className={`px-2.5 py-1 rounded-lg text-xs font-extrabold transition-all ${
-                                p.isVerified ? 'bg-orange-50 text-orange-600 hover:bg-orange-100' : 'bg-green-50 text-green-600 hover:bg-green-100'
+                                p.isVerified ? 'bg-purple-50 text-purple-600 hover:bg-purple-100' : 'bg-green-50 text-green-600 hover:bg-green-100'
                               }`}
                             >
                               {p.isVerified ? 'Unverify' : '✓ Verify'}
@@ -582,7 +582,7 @@ export default function AdminUsersPage() {
                     <tr key={a.id} className="hover:bg-indigo-50/30 dark:hover:bg-white/5 transition-colors">
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-orange-500 flex items-center justify-center text-white text-xs font-extrabold shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white text-xs font-extrabold shrink-0">
                             {(a.fullLegalName || a.displayName || '?').charAt(0)}
                           </div>
                           <div>
@@ -605,7 +605,7 @@ export default function AdminUsersPage() {
                             'bg-indigo-100 text-indigo-700'
                           }`}>{a.applicationStatus}</span>
                           {a.applicationStatus === 'ADMIN_REVIEW' && (
-                            <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold bg-orange-500 text-white w-fit animate-pulse">⚡ Needs Review</span>
+                            <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold bg-purple-500 text-white w-fit animate-pulse">⚡ Needs Review</span>
                           )}
                         </div>
                       </td>
@@ -632,7 +632,7 @@ export default function AdminUsersPage() {
               <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
                 <div className="sticky top-0 bg-white dark:bg-slate-800 flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-white/10 z-10">
                   <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-indigo-400 to-orange-500 flex items-center justify-center text-white font-extrabold text-lg">
+                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-extrabold text-lg">
                       {(viewApp?.fullLegalName || '?').charAt(0)}
                     </div>
                     <div>
@@ -883,7 +883,7 @@ export default function AdminUsersPage() {
                         <button
                           onClick={() => { toggleVerification(viewPract.id, viewPract.isVerified); setViewPract(null); setViewPractProfile(null); }}
                           className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-all ${
-                            viewPract.isVerified ? 'bg-orange-50 text-orange-600 hover:bg-orange-100 border border-orange-200' : 'bg-green-500 text-white hover:bg-green-600'
+                            viewPract.isVerified ? 'bg-purple-50 text-purple-600 hover:bg-purple-100 border border-purple-200' : 'bg-green-500 text-white hover:bg-green-600'
                           }`}>
                           {viewPract.isVerified ? 'Mark as Pending' : '✓ Verify Practitioner'}
                         </button>

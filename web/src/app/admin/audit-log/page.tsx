@@ -8,8 +8,8 @@ import { auditLogApi, type AuditLogEntry } from '@/lib/adminApi';
 const ACTION_COLORS: Record<string, string> = {
   BAN:                    'bg-red-100 text-red-700',
   UNBAN:                  'bg-green-100 text-green-700',
-  DELETE_USER:            'bg-orange-100 text-orange-700',
-  DELETE_PRACTITIONER:    'bg-orange-100 text-orange-700',
+  DELETE_USER:            'bg-purple-100 text-purple-700',
+  DELETE_PRACTITIONER:    'bg-purple-100 text-purple-700',
   VERIFY_PRACTITIONER:    'bg-blue-100 text-blue-700',
   ADJUST_WALLET:          'bg-purple-100 text-purple-700',
   MIGRATE:                'bg-yellow-100 text-yellow-800',

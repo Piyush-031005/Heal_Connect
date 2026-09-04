@@ -119,7 +119,7 @@ export default function PayoutProcessingPage() {
           <StatCard label="Total Earned (all)"  value={`₹${totalEarned.toLocaleString()}`} icon={Wallet} color="green" />
           <StatCard label="With Sessions"       value={withSessions}      icon={CheckCircle} color="blue"   />
           <StatCard label="KYC Verified"        value={verified}          icon={AlertCircle} color="indigo" />
-          <StatCard label="Pending KYC"         value={payouts.length - verified} icon={Clock} color="amber" />
+          <StatCard label="Pending KYC"         value={payouts.length - verified} icon={Clock} color="indigo" />
           <StatCard label="No Sessions Yet"     value={payouts.length - withSessions} icon={XCircle} color="red" />
         </div>
 
