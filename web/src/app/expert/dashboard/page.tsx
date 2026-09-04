@@ -186,7 +186,7 @@ export default function ExpertDashboardPage() {
       <main className="flex-1 container mx-auto px-4 py-8 space-y-8 relative z-10">
 
         {/* ── Welcome Banner ── */}
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-primary/20 via-primary/10 to-transparent p-6 md:p-8 border border-primary/20 backdrop-blur-sm">
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#301368] via-[#5F3BA9] to-[#D5B6DC] text-white p-6 md:p-8 border border-primary/20 backdrop-blur-sm">
           <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex items-center gap-5">
@@ -200,8 +200,8 @@ export default function ExpertDashboardPage() {
                   <HeartHandshake className="w-4 h-4" />
                   <span>Expert Dashboard</span>
                 </div>
-                <h1 className="text-3xl md:text-4xl font-extrabold text-foreground">Hello, {firstName}!</h1>
-                <p className="text-muted-foreground text-sm mt-2 flex items-center gap-2">
+                <h1 className="text-3xl md:text-4xl font-extrabold text-white">Hello, {firstName}!</h1>
+                <p className="text-white/80 text-sm mt-2 flex items-center gap-2">
                   <Sparkles className="w-3.5 h-3.5 text-accent" />
                   {profile?.specialties?.slice(0, 2).join(' · ') || 'Wellness Expert'} <span className="text-muted-foreground">|</span> <span className="text-foreground font-semibold">₹{profile?.perMinuteRate}/min</span>
                 </p>
@@ -328,7 +328,7 @@ export default function ExpertDashboardPage() {
             </div>
 
             <Card className="bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-border shadow-2xl rounded-2xl overflow-hidden relative z-10">
-              <div className="h-24 bg-gradient-to-r from-white/5 to-white/10 border-b border-border relative">
+              <div className="h-24 bg-gradient-to-r from-[#301368] via-[#5F3BA9] to-[#D5B6DC] border-b border-border relative">
                  <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(214,180,107,0.2)_0%,rgba(0,0,0,0)_60%)]" />
               </div>
               <CardContent className="px-6 pb-6 -mt-10 relative z-10">

@@ -183,10 +183,10 @@ export default function Navbar() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
               <Image src={theme === 'theme-royal-indigo' ? '/center_logo_final.png' : '/center_logo_final.png'} alt="ZenAuraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
-              <span className="text-2xl font-serif font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide">Zen<span className="text-purple-300">Auraa</span></span>
+              <span className="text-2xl font-serif font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide">Zen<span className="text-[#D5B6DC]">Auraa</span></span>
             </div>
             <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
-              <svg className="w-4 h-4 text-[#2D1B69]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-[#1C0D40]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -198,7 +198,7 @@ export default function Navbar() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400" />
             </span>
-            <span className="text-[#2D1B69] text-xs font-semibold">1,240 astrologers online now</span>
+            <span className="text-[#1C0D40] text-xs font-semibold">1,240 astrologers online now</span>
           </div>
 
           {/* Avatar row */}
@@ -210,10 +210,10 @@ export default function Navbar() {
                 </div>
               ))}
               <div className="w-7 h-7 rounded-full border-2 border-white/60 bg-white/20 flex items-center justify-center">
-                <span className="text-[10px] font-bold text-[#2D1B69]">+3</span>
+                <span className="text-[10px] font-bold text-[#1C0D40]">+3</span>
               </div>
             </div>
-            <span className="text-[#2D1B69]/70 text-[11px] ml-1">Astrologer</span>
+            <span className="text-[#1C0D40]/70 text-[11px] ml-1">Astrologer</span>
           </div>
 
           {/* Sign in CTA */}
@@ -224,7 +224,7 @@ export default function Navbar() {
           >
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-300 to-purple-400 flex items-center justify-center shrink-0">
-                <svg className="w-5 h-5 text-[#2D1B69]" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-[#1C0D40]" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
                   <circle cx="12" cy="8" r="4" />
                   <path strokeLinecap="round" d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                 </svg>
@@ -291,21 +291,21 @@ export default function Navbar() {
               </button>
               <Link href="/" className="flex items-center gap-2">
                 <Image src={theme === 'theme-royal-indigo' ? '/center_logo_final.png' : '/center_logo_final.png'} alt="ZenAuraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
-                <span className="text-2xl font-serif font-black text-[#2D1B69] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105"><span className="text-white">Zen</span><span className="text-purple-300">Auraa</span></span>
+                <span className="text-2xl font-serif font-black text-[#1C0D40] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105"><span className="text-white">Zen</span><span className="text-[#D5B6DC]">Auraa</span></span>
               </Link>
             </div>
 
             {/* Links for Final Hybrid layout sit next to the logo */}
             {isFinalHybrid && (
               <nav className="hidden md:flex items-center gap-4 ml-4">
-                <Link href="/practitioners" className="text-sm font-semibold text-[#2D1B69] hover:text-[#5F3BA9] transition-colors">
+                <Link href="/practitioners" className="text-sm font-semibold text-[#1C0D40] hover:text-[#5F3BA9] transition-colors">
                   Find Expert
                 </Link>
-                <Link href="#free-services" className="text-sm font-semibold text-[#2D1B69] hover:text-[#5F3BA9] transition-colors">
+                <Link href="#free-services" className="text-sm font-semibold text-[#1C0D40] hover:text-[#5F3BA9] transition-colors">
                   Free Services
                 </Link>
                   <div className="relative group cursor-pointer">
-                  <span className="text-sm font-semibold text-[#2D1B69] group-hover:text-[#5F3BA9] transition-colors flex items-center gap-1">
+                  <span className="text-sm font-semibold text-[#1C0D40] group-hover:text-[#5F3BA9] transition-colors flex items-center gap-1">
                     Free Insights
                     <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </span>
@@ -324,7 +324,7 @@ export default function Navbar() {
                     <Link href="/modalities/sound-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Sound Healing</Link>
                   </div>
                 </div>
-                <Link href="#reviews" className="text-sm font-semibold text-[#2D1B69] hover:text-[#5F3BA9] transition-colors">
+                <Link href="#reviews" className="text-sm font-semibold text-[#1C0D40] hover:text-[#5F3BA9] transition-colors">
                   Reviews
                 </Link>
               </nav>
@@ -341,7 +341,7 @@ export default function Navbar() {
                   className={`relative text-sm font-medium transition-all px-4 py-1.5 rounded-full flex items-center gap-1.5 ${
                     activeSection === id
                       ? 'bg-primary/10 text-primary shadow-sm'
-                      : 'text-[#2D1B69]/80 hover:text-primary hover:bg-white/5'
+                      : 'text-[#1C0D40]/80 hover:text-primary hover:bg-white/5'
                   }`}
                 >
                   {label}
@@ -353,7 +353,7 @@ export default function Navbar() {
           {/* Right: theme toggle + lang dropdown + profile */}
           <div className="flex items-center gap-2">
             {isFinalHybrid && (
-              <Link href="/modalities/astrology" className="md:hidden text-[10px] sm:text-xs font-semibold text-[#2D1B69] border border-border rounded-full px-2.5 py-1 whitespace-nowrap bg-[#694091]/30">
+              <Link href="/modalities/astrology" className="md:hidden text-[10px] sm:text-xs font-semibold text-[#1C0D40] border border-border rounded-full px-2.5 py-1 whitespace-nowrap bg-[#694091]/30">
                 Free Insights
               </Link>
             )}
@@ -363,7 +363,7 @@ export default function Navbar() {
               <button
                 onClick={() => setLayoutOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
-                  isDark ? 'border-white/20 hover:bg-white/10 hover:text-[#2D1B69]' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50 hover:text-indigo-600'
+                  isDark ? 'border-white/20 hover:bg-white/10 hover:text-[#1C0D40]' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50 hover:text-indigo-600'
                 }`}
               >
                 <Layout className="w-4 h-4" />
@@ -404,7 +404,7 @@ export default function Navbar() {
               <button
                 onClick={() => setThemeOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all ${
-                  isDark ? 'border-white/20 hover:bg-white/10 text-[#2D1B69]' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50 text-indigo-600'
+                  isDark ? 'border-white/20 hover:bg-white/10 text-[#1C0D40]' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50 text-indigo-600'
                 }`}
                 title="Select Theme"
               >
@@ -495,11 +495,11 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
-                <Link href="/login" className={`hidden md:block text-sm font-bold px-4 py-1.5 rounded-full transition-colors ${isFinalHybrid ? 'text-[#2A1658] bg-[#9bc9d5] hover:bg-[#E5B83C]' : 'text-primary bg-[#9bc9d5] hover:bg-[#E5B83C]'}`}>
+                <Link href="/login" className={`hidden md:block text-sm font-bold px-4 py-1.5 rounded-full transition-colors ${isFinalHybrid ? 'text-[#2A1658] bg-[#FAD058] hover:bg-[#E5B83C]' : 'text-primary bg-[#FAD058] hover:bg-[#E5B83C]'}`}>
                   Login
                 </Link>
                 {isFinalHybrid && (
-                  <Link href="/register" className="hidden md:block text-sm font-bold text-[#2A1658] bg-[#9bc9d5] hover:bg-[#E5B83C] transition-colors px-4 py-1.5 rounded-full ml-1 shadow-sm">
+                  <Link href="/register" className="hidden md:block text-sm font-bold text-[#2A1658] bg-[#FAD058] hover:bg-[#E5B83C] transition-colors px-4 py-1.5 rounded-full ml-1 shadow-sm">
                     Register
                   </Link>
                 )}

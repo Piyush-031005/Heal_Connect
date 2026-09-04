@@ -71,43 +71,40 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col md:flex-row font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#301368] via-[#5F3BA9] to-[#D5B6DC] text-white flex flex-col md:flex-row font-sans relative overflow-hidden">
       {/* Background Ambience */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(214,180,107,0.15)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(46,196,182,0.1)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
-      </div>
+      
 
       {/* Left — Branding */}
       <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-black/5 dark:bg-black/20 backdrop-blur-md relative z-10 border-r border-border">
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
             <Image src="/center_logo_final.png" alt="ZenAuraa" width={36} height={36} className="rounded-full shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
-            <span className="text-2xl font-extrabold text-foreground tracking-wide uppercase">ZenAuraa</span>
+            <span className="text-2xl font-extrabold text-white tracking-wide uppercase">ZenAuraa</span>
           </Link>
           <h1 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-6 leading-tight">
             Create your space <br /> <span className="text-primary">for healing.</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-md leading-relaxed mb-12">
+          <p className="text-lg text-white/90 max-w-md leading-relaxed mb-12">
             Join 50,000+ members receiving guidance from world-class verified practitioners.
           </p>
           <div className="space-y-8">
             <div className="flex items-center gap-5">
-              <div className="w-12 h-12 rounded-full bg-white/5 border border-border flex items-center justify-center shadow-[0_0_15px_rgba(46,196,182,0.2)]">
-                <ShieldCheck className="w-6 h-6 text-accent" />
+              <div className="w-12 h-12 rounded-full bg-white/10 border border-border flex items-center justify-center shadow-[0_0_15px_rgba(214,180,107,0.2)]">
+                <ShieldCheck className="w-6 h-6 text-[#FAD058]" />
               </div>
               <div>
-                <p className="text-foreground font-semibold text-lg tracking-wide">100% Private & Secure</p>
-                <p className="text-sm text-muted-foreground mt-1">Your data and conversations are encrypted.</p>
+                <p className="text-white font-semibold text-lg tracking-wide">100% Private & Secure</p>
+                <p className="text-sm text-white/80 mt-1">Your data and conversations are encrypted.</p>
               </div>
             </div>
             <div className="flex items-center gap-5">
-              <div className="w-12 h-12 rounded-full bg-white/5 border border-border flex items-center justify-center shadow-[0_0_15px_rgba(214,180,107,0.2)]">
-                <Star className="w-6 h-6 text-primary" />
+              <div className="w-12 h-12 rounded-full bg-white/10 border border-border flex items-center justify-center shadow-[0_0_15px_rgba(214,180,107,0.2)]">
+                <Star className="w-6 h-6 text-[#FAD058]" />
               </div>
               <div>
-                <p className="text-foreground font-semibold text-lg tracking-wide">Verified Experts</p>
-                <p className="text-sm text-muted-foreground mt-1">Rigorous 5-step background checks.</p>
+                <p className="text-white font-semibold text-lg tracking-wide">Verified Experts</p>
+                <p className="text-sm text-white/80 mt-1">Rigorous 5-step background checks.</p>
               </div>
             </div>
           </div>
@@ -138,12 +135,12 @@ export default function SignupPage() {
             <div className="flex rounded-xl border border-border overflow-hidden bg-black/5 dark:bg-black/50 p-1 gap-1">
               <button type="button" onClick={() => { setRole('user'); setError(''); }}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                  role === 'user' ? 'bg-primary text-primary-foreground shadow-[0_0_15px_rgba(214,180,107,0.4)]' : 'text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                  role === 'user' ? 'bg-[#5F3BA9] text-white shadow-lg' : 'text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5'}`}>
                 <User className="w-4 h-4" /> User
               </button>
               <button type="button" onClick={() => { setRole('expert'); setError(''); }}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                  role === 'expert' ? 'bg-primary text-primary-foreground shadow-[0_0_15px_rgba(214,180,107,0.4)]' : 'text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                  role === 'expert' ? 'bg-[#5F3BA9] text-white shadow-lg' : 'text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5'}`}>
                 <Sparkles className="w-4 h-4" /> Expert
               </button>
             </div>
@@ -187,7 +184,7 @@ export default function SignupPage() {
                   <p className="text-xs text-destructive mt-1">Password must be at least 8 characters</p>
                 )}
               </div>
-              <Button type="submit" disabled={loading || !!success} className="w-full h-12 text-base font-bold rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg transition-all duration-300">
+              <Button type="submit" disabled={loading || !!success} className="w-full py-6 text-base font-bold rounded-md border-0 shadow-lg transition-all duration-300 bg-[#FAD058] hover:bg-[#F0C240] text-[#2A1658]">
                 {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>{role === 'expert' ? 'Join as Expert' : 'Create Account'} <ArrowRight className="ml-2 h-5 w-5" /></>}
               </Button>
             </form>

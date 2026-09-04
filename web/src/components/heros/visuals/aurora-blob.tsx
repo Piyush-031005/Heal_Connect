@@ -62,7 +62,7 @@ function FeatherMandala() {
             key={i}
             rotation={[0, 0, -angle]}
             position={[Math.cos(angle) * 1.5, Math.sin(angle) * 1.5, 0]}
-            color={i % 2 === 0 ? "#8982D0" : "#9bc9d5"}
+            color={i % 2 === 0 ? "#8982D0" : "#5F3BA9"}
             scale={0.8}
           />
         );

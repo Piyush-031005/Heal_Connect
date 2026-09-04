@@ -81,7 +81,7 @@ export default function MeditationMudras() {
           
           <EtherealCrystals />
           
-          <Sparkles count={200} scale={10} size={1.5} speed={0.2} opacity={0.4} color="#9bc9d5" />
+          <Sparkles count={200} scale={10} size={1.5} speed={0.2} opacity={0.4} color="#D5B6DC" />
           <Environment resolution={64}>
             <group>
               <mesh scale={100}>
@@ -94,7 +94,7 @@ export default function MeditationMudras() {
               </mesh>
               <mesh position={[-10, -10, -10]}>
                 <planeGeometry args={[20, 20]} />
-                <meshBasicMaterial color="#9bc9d5" />
+                <meshBasicMaterial color="#D5B6DC" />
               </mesh>
             </group>
           </Environment>

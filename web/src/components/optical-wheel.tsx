@@ -32,7 +32,7 @@ export default function OpticalWheel() {
   const isNewShadeUpdate = theme === 'theme-new-shade-update';
   const isZenAlign = theme === 'theme-zen-align';
   
-  const GOLD = (isZenLight || isNewShadeUpdate || isZenAlign) ? (isZenAlign ? '#5F3BA9' : '#7A48AB') : '#9bc9d5';
+  const GOLD = (isZenLight || isNewShadeUpdate || isZenAlign) ? (isZenAlign ? '#5F3BA9' : '#7A48AB') : '#5F3BA9';
   const TEXT_COLOR = (isZenLight || isNewShadeUpdate || isZenAlign) ? (isZenAlign ? '#1E2059' : '#2A1658') : '#FFFFFF';
   
   // Pause animation only when hovering over a specific logo
