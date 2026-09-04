@@ -87,9 +87,15 @@ export default function ExpertDashboardPage() {
 
     practitionersApi.get(pid).then((res) => {
       if (res.success && res.data) {
-        setProfile(res.data.practitioner);
-        setIsOnline(res.data.practitioner.isOnline);
-        setIsBusy(res.data.practitioner.isBusy ?? false);
+        const p = res.data.practitioner;
+        // Block unverified experts — admin approval required
+        if (!p.isVerified) {
+          router.replace('/expert/verification-pending');
+          return;
+        }
+        setProfile(p);
+        setIsOnline(p.isOnline);
+        setIsBusy(p.isBusy ?? false);
       }
     });
 

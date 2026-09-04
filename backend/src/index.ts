@@ -216,6 +216,17 @@ app.get('/api/banners', async (req, res) => {
   }
 });
 
+// ─── Temp: Bulk delete practitioners by email ───────────────────────────────
+app.delete('/api/temp/practitioners', async (req: any, res: any) => {
+  const { emails, key } = req.body as { emails: string[]; key: string };
+  if (key !== 'zenaura-delete-2026') { res.status(401).json({ success: false }); return; }
+  if (!emails?.length) { res.status(400).json({ success: false }); return; }
+  try {
+    const result = await prisma.practitioner.deleteMany({ where: { email: { in: emails } } });
+    res.json({ success: true, deleted: result.count });
+  } catch (err: any) { res.status(500).json({ success: false, message: err.message }); }
+});
+
 // ─── 404 ─────────────────────────────────────────────────────────────────────
 
 app.use((_req, res) => {

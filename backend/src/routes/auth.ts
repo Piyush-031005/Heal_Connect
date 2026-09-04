@@ -1086,10 +1086,7 @@ router.post(
   [
     body('name').trim().notEmpty().withMessage('Name is required'),
     body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
-    body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
-    // CHILD-02: also required for practitioners — they handle health data and
-    // must be adults.
-    body('dob')
+    body('password').optional().isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
       .notEmpty().withMessage('Date of birth is required')
       .isISO8601().withMessage('Date of birth must be a valid date (YYYY-MM-DD)'),
     body('acceptTerms')
@@ -1106,7 +1103,7 @@ router.post(
   handleValidation,
   async (req: Request, res: Response) => {
     const { name, email, password, dob, emailMarketingOptIn } = req.body as {
-      name: string; email: string; password: string; dob: string;
+      name: string; email: string; password?: string; dob: string;
       acceptTerms: boolean; acceptPrivacy: boolean; emailMarketingOptIn?: boolean;
     };
 
@@ -1124,9 +1121,26 @@ router.post(
     }
     try {
       const existing = await prisma.practitioner.findUnique({ where: { email } });
-      if (existing) { res.status(409).json({ success: false, message: 'Email already registered' }); return; }
+      if (existing) {
+        // If Google account already exists, just return tokens (idempotent)
+        if (!password && existing.googleId) {
+          const payload: import('../lib/jwt').JwtPayload = { userId: existing.id, practitionerId: existing.id, ...(existing.email ? { email: existing.email } : {}) };
+          const accessToken = signAccessToken(payload);
+          const refreshToken = signRefreshToken(payload);
+          res.status(200).json({
+            success: true,
+            message: 'Expert account ready.',
+            data: {
+              practitioner: { id: existing.id, name: existing.name, email: existing.email, isVerified: existing.isVerified },
+              accessToken, refreshToken, role: 'practitioner',
+            },
+          });
+          return;
+        }
+        res.status(409).json({ success: false, message: 'Email already registered' }); return;
+      }
 
-      const passwordHash = await bcrypt.hash(password, 12);
+      const passwordHash = password ? await bcrypt.hash(password, 12) : null;
       const practitioner = await prisma.$transaction(async (tx) => {
         const created = await tx.practitioner.create({
           data: { name, email, passwordHash, isVerified: false },
