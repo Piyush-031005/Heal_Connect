@@ -40,19 +40,21 @@ function ExpertSignupInner() {
       return;
     }
 
-    // Clear any stale expert session — user should not be blocked by old tokens
-    localStorage.removeItem('hc_role');
-    localStorage.removeItem('hc_practitioner_id');
-    localStorage.removeItem('hc_pid');
-    localStorage.removeItem('hc_practitioner_name');
-    tokenStore.clear();
-
     const googleAuth  = localStorage.getItem('hc_google_auth');
     const googleName  = localStorage.getItem('hc_google_name');
     const googleEmail = localStorage.getItem('hc_google_email');
+
     if (googleAuth && googleName && googleEmail) {
+      // Google flow — keep tokens, just pre-fill name/email
       setIsGoogleAuth(true);
       setForm(f => ({ ...f, name: googleName, email: googleEmail }));
+    } else {
+      // Manual flow — clear any stale session
+      localStorage.removeItem('hc_role');
+      localStorage.removeItem('hc_practitioner_id');
+      localStorage.removeItem('hc_pid');
+      localStorage.removeItem('hc_practitioner_name');
+      tokenStore.clear();
     }
   }, [searchParams]);
 
@@ -76,14 +78,6 @@ function ExpertSignupInner() {
 
     setLoading(true);
     try {
-      if (isGoogleAuth) {
-        localStorage.removeItem('hc_google_auth');
-        localStorage.removeItem('hc_google_name');
-        localStorage.removeItem('hc_google_email');
-        router.push('/expert/verification-pending');
-        return;
-      }
-
       const res = await authApi.practitionerRegister(
         form.name, form.email, form.password, form.dob,
         { acceptTerms: true, acceptPrivacy: true, emailMarketingOptIn: false }
@@ -98,6 +92,9 @@ function ExpertSignupInner() {
         return;
       }
 
+      localStorage.removeItem('hc_google_auth');
+      localStorage.removeItem('hc_google_name');
+      localStorage.removeItem('hc_google_email');
       tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
       localStorage.setItem('hc_role', 'practitioner');
       localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
@@ -190,11 +187,11 @@ function ExpertSignupInner() {
                 <form onSubmit={handleEmailSignup} className="space-y-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name <span className="text-red-500">*</span></label>
-                    <input className={inputCls} placeholder="Your full name" value={form.name} onChange={e => set('name', e.target.value)} required />
+                    <input className={inputCls} placeholder="Your full name" value={form.name} onChange={e => set('name', e.target.value)} required readOnly={isGoogleAuth} />
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email <span className="text-red-500">*</span></label>
-                    <input className={inputCls} type="email" placeholder="you@example.com" value={form.email} onChange={e => set('email', e.target.value)} required />
+                    <input className={inputCls + ' bg-gray-50 text-gray-500'} type="email" placeholder="you@example.com" value={form.email} readOnly />
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Date of Birth <span className="text-red-500">*</span></label>
@@ -207,6 +204,7 @@ function ExpertSignupInner() {
                       max={(() => { const d = new Date(); d.setFullYear(d.getFullYear() - 18); return d.toISOString().split('T')[0]; })()}
                     />
                   </div>
+                  {!isGoogleAuth && (<>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Password <span className="text-red-500">*</span></label>
                     <div className="relative">
@@ -247,6 +245,8 @@ function ExpertSignupInner() {
                       </div>
                     )}
                   </div>
+                  </>)}
+                  {!isGoogleAuth && (<>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Confirm Password <span className="text-red-500">*</span></label>
                     <div className="relative">
@@ -263,6 +263,7 @@ function ExpertSignupInner() {
                       </button>
                     </div>
                   </div>
+                  </>)}
                   <button type="submit" disabled={loading}
                     className="mt-3 w-full h-12 bg-indigo-500 hover:bg-indigo-600 disabled:opacity-60 text-white font-bold rounded-full text-sm shadow-lg flex items-center justify-center gap-2 transition-colors">
                     {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
