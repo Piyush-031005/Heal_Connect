@@ -29,7 +29,7 @@ router.post(
         OR: [{ userId }, { practitionerId: userId }],
         // Task 1: Accept all statuses between session creation and active call.
         // Users fetch the Agora token after ACCEPTED (before /connect is called).
-        status: { in: ['INITIATED', 'ACCEPTED', 'WALLET_VERIFIED', 'JOINING_CHANNEL', 'ACTIVE'] },
+        status: { in: ['INITIATED', 'CONFIRMED', 'ACCEPTED', 'WALLET_VERIFIED', 'JOINING_CHANNEL', 'ACTIVE'] },
       },
     });
 

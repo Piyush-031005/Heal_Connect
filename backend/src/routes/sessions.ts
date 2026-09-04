@@ -388,7 +388,7 @@ router.post('/:id/connect', requireAuth, async (req: AuthRequest, res: Response)
       where: {
         id: sessionId,
         OR: [{ userId }, { practitionerId: userId }],
-        status: { in: ['ACCEPTED', 'WALLET_VERIFIED', 'JOINING_CHANNEL'] },
+        status: { in: ['INITIATED', 'CONFIRMED', 'ACCEPTED', 'WALLET_VERIFIED', 'JOINING_CHANNEL'] },
       },
     });
 

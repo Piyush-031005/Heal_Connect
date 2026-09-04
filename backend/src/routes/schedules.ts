@@ -187,14 +187,23 @@ router.post(
         return;
       }
 
-      // Check conflicts (basic check for existing CONFIRMED sessions)
+      // Check conflicts and 2-hour limit
       for (const slot of slots) {
+        const start = new Date(slot.startTime);
+        const end = new Date(slot.endTime);
+        const diffHours = (end.getTime() - start.getTime()) / (1000 * 60 * 60);
+
+        if (diffHours > 2) {
+          res.status(400).json({ success: false, message: 'A session cannot be longer than 2 hours.' });
+          return;
+        }
+
         const conflict = await prisma.session.findFirst({
           where: {
             practitionerId,
             status: 'CONFIRMED',
-            scheduledStartTime: { lt: slot.endTime },
-            scheduledEndTime: { gt: slot.startTime }
+            scheduledStartTime: { lt: end },
+            scheduledEndTime: { gt: start }
           }
         });
         if (conflict) {
