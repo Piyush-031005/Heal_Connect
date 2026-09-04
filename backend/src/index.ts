@@ -70,7 +70,7 @@ app.disable('x-powered-by'); // Belt-and-suspenders (helmet already removes this
 // ─── Routes ───────────────────────────────────────────────────────────────────
 
 app.get('/health', (_req, res) => {
-  res.json({ status: 'healthy', service: 'healconnect-api' });
+  res.json({ status: 'healthy', service: 'ZenAuraa-api' });
 });
 
 import { exec } from 'child_process';
@@ -101,7 +101,7 @@ app.get('/api/run-prisma-migrate', async (_req, res) => {
       const count = Number(adminCount[0]?.count ?? 0);
       
       // We will hardcode the fallback if env vars are missing so the user isn't locked out
-      const bootstrapEmail = process.env['ADMIN_LOGIN_EMAIL'] || 'admin@healconnect.com';
+      const bootstrapEmail = process.env['ADMIN_LOGIN_EMAIL'] || 'admin@ZenAuraa.com';
       const bootstrapPassword = process.env['ADMIN_LOGIN_PASSWORD'] || 'HealAdmin@2026';
 
       if (count === 0) {

@@ -8,8 +8,8 @@ import { Loader2, CheckCircle, XCircle, Eye, FileText, ExternalLink, Search } fr
 
 const ADMIN_KEY =
   typeof window !== 'undefined'
-    ? (process.env['NEXT_PUBLIC_ADMIN_KEY'] ?? 'healconnect-admin-2026')
-    : 'healconnect-admin-2026';
+    ? (process.env['NEXT_PUBLIC_ADMIN_KEY'] ?? 'ZenAuraa-admin-2026')
+    : 'ZenAuraa-admin-2026';
 
 const STATUS_COLORS: Record<string, string> = {
   APPROVED: 'bg-green-100 text-green-700',

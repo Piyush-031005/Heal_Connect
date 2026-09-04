@@ -139,7 +139,7 @@ export default function TermsOfServicePage() {
 
           <Section n={12} title="Contact">
             <p>
-              Questions about these terms? Email <span className="font-semibold">support@healconnect.app</span>.
+              Questions about these terms? Email <span className="font-semibold">support@ZenAuraa.app</span>.
             </p>
           </Section>
 
