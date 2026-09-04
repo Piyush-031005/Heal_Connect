@@ -65,7 +65,7 @@ router.get(
     const take = parseInt(limit);
 
     try {
-      const where: Record<string, unknown> = { isVerified: true };
+      const where: Record<string, unknown> = {};
       if (specialty != null) where['specialties'] = { has: specialty };
       if (language != null) where['languages'] = { has: language };
       if (maxRate != null) where['perMinuteRate'] = { lte: parseFloat(maxRate) };
@@ -84,7 +84,7 @@ router.get(
         // set), then match practitioners against that resolved list — this is
         // what makes typing "yoga" actually find someone tagged "Yoga".
         const matchingSpecialties = await prisma.practitioner.findMany({
-          where: { isVerified: true },
+          where: {},
           select: { specialties: true },
         }).then((rows) => {
           const all = new Set<string>();
