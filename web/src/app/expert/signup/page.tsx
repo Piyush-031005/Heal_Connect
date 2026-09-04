@@ -40,22 +40,19 @@ function ExpertSignupInner() {
       return;
     }
 
+    // Clear any stale expert session — user should not be blocked by old tokens
+    localStorage.removeItem('hc_role');
+    localStorage.removeItem('hc_practitioner_id');
+    localStorage.removeItem('hc_pid');
+    localStorage.removeItem('hc_practitioner_name');
+    tokenStore.clear();
+
     const googleAuth  = localStorage.getItem('hc_google_auth');
     const googleName  = localStorage.getItem('hc_google_name');
     const googleEmail = localStorage.getItem('hc_google_email');
     if (googleAuth && googleName && googleEmail) {
       setIsGoogleAuth(true);
       setForm(f => ({ ...f, name: googleName, email: googleEmail }));
-    }
-
-    const token = localStorage.getItem('hc_access');
-    const role  = localStorage.getItem('hc_role');
-    // Only block if logged in as practitioner — user tokens are irrelevant here
-    if (token && role === 'practitioner') {
-      try {
-        const payload = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
-        if (payload.practitionerId && payload.exp * 1000 > Date.now()) setAlreadyRegistered(true);
-      } catch {}
     }
   }, [searchParams]);
 
