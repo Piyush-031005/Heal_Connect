@@ -127,7 +127,7 @@ export default function AstrologerDashboardPage() {
         {/* Contact support */}
         <div className="bg-white rounded-xl border border-gray-200 p-6 flex items-center gap-3 text-sm text-gray-600">
           <Phone className="w-4 h-4 text-indigo-500 shrink-0" />
-          <span>Need help? Contact support at <strong>support@healconnect.in</strong></span>
+          <span>Need help? Contact support at <strong>support@ZenAuraa.in</strong></span>
         </div>
       </main>
     </div>

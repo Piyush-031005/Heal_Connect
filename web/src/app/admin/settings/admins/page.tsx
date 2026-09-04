@@ -267,7 +267,7 @@ export default function AdminAccountsPage() {
                     type="email" required
                     value={createEmail}
                     onChange={(e) => setCreateEmail(e.target.value)}
-                    placeholder="newadmin@healconnect.com"
+                    placeholder="newadmin@ZenAuraa.com"
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-white/30 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
                   />
                 </div>

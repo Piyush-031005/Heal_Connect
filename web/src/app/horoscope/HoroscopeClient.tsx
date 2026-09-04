@@ -714,7 +714,7 @@ export default function HoroscopePage() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-sm font-semibold tracking-wide"
           >
             <Sparkles className="w-4 h-4 text-yellow-200 animate-pulse" />
-            <span>HEALCONNECT DAILY INSIGHTS</span>
+            <span>ZenAuraa DAILY INSIGHTS</span>
           </motion.div>
 
           <motion.h1

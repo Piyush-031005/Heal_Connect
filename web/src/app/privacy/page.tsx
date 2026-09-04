@@ -48,7 +48,7 @@ export default function PrivacyPolicyPage() {
           <Section n={1} title="Who we are">
             <p>
               ZenAuraa operates this platform. For any privacy question, correction request, or complaint,
-              contact us at <span className="font-semibold">privacy@healconnect.app</span>.
+              contact us at <span className="font-semibold">privacy@ZenAuraa.app</span>.
             </p>
           </Section>
 
@@ -112,7 +112,7 @@ export default function PrivacyPolicyPage() {
               You can access and download a copy of your data, correct inaccurate details, delete (erase) your
               account, and withdraw consent for analytics/marketing at any time. To download your data or delete
               your account, use the options in your account settings. To exercise any other right, email{' '}
-              <span className="font-semibold">privacy@healconnect.app</span>.
+              <span className="font-semibold">privacy@ZenAuraa.app</span>.
             </p>
           </Section>
 
@@ -128,7 +128,7 @@ export default function PrivacyPolicyPage() {
           <Section n={10} title="Complaints">
             <p>
               If you're unhappy with how we've handled your data, you can contact us first at{' '}
-              <span className="font-semibold">privacy@healconnect.app</span>, or lodge a complaint with your local
+              <span className="font-semibold">privacy@ZenAuraa.app</span>, or lodge a complaint with your local
               data protection authority.
             </p>
           </Section>

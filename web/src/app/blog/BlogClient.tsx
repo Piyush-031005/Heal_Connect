@@ -206,7 +206,7 @@ export default function BlogPage() {
           <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-sm font-semibold tracking-wide">
             <Sparkles className="w-4 h-4 text-yellow-200 animate-pulse" />
-            <span>ASTROLOGY KNOWLEDGE HUB • HEALCONNECT BLOG</span>
+            <span>ASTROLOGY KNOWLEDGE HUB • ZenAuraa BLOG</span>
           </motion.div>
 
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
