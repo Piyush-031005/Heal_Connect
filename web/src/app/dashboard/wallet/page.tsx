@@ -106,7 +106,7 @@ export default function WalletPage() {
                       <TableRow key={tx.id} className="border-yellow-100">
                         <TableCell>
                           <div className="flex items-center gap-2">
-                            <div className={`p-1.5 rounded-full ${isCredit ? 'bg-emerald-100 text-emerald-600' : 'bg-orange-100 text-orange-500'}`}>
+                            <div className={`p-1.5 rounded-full ${isCredit ? 'bg-emerald-100 text-emerald-600' : 'bg-purple-100 text-purple-500'}`}>
                               {isCredit ? <ArrowUpRight className="w-3.5 h-3.5" /> : <ArrowDownRight className="w-3.5 h-3.5" />}
                             </div>
                             <span className="font-medium">{tx.type}</span>

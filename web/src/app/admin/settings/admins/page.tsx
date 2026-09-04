@@ -161,7 +161,7 @@ export default function AdminAccountsPage() {
           </div>
           <button
             onClick={() => { setShowCreate(true); setTempPassword(''); setCreateEmail(''); setCreateError(''); }}
-            className="flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-bold px-5 py-2.5 rounded-2xl shadow-lg shadow-indigo-500/30 transition-all"
+            className="flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-bold px-5 py-2.5 rounded-2xl shadow-lg shadow-indigo-500/30 transition-all"
           >
             <UserPlus className="w-4 h-4" /> Create Admin
           </button>
@@ -291,7 +291,7 @@ export default function AdminAccountsPage() {
                 <button
                   type="submit"
                   disabled={creating}
-                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 disabled:opacity-60 text-white font-extrabold py-4 rounded-2xl transition-all"
+                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 disabled:opacity-60 text-white font-extrabold py-4 rounded-2xl transition-all"
                 >
                   {creating ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <><UserPlus className="w-4 h-4" /> Create</>}
                 </button>

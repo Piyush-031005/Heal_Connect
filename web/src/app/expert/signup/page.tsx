@@ -151,9 +151,9 @@ export default function ExpertSignupPage() {
     <div className="min-h-screen bg-[#faf9f6] flex flex-col md:flex-row font-sans">
 
       {/* Left panel */}
-      <div className="hidden md:flex flex-col justify-between w-5/12 p-12 bg-gradient-to-br from-indigo-500 via-indigo-600 to-orange-700 relative overflow-hidden">
+      <div className="hidden md:flex flex-col justify-between w-5/12 p-12 bg-gradient-to-br from-indigo-500 via-indigo-600 to-purple-700 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-900/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
             <Image src="/logo.png" alt="ZenAuraa" width={36} height={36} className="rounded-full" />

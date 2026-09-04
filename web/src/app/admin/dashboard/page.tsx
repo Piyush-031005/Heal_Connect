@@ -99,11 +99,11 @@ export default function AdminDashboard() {
     { label: 'Total Users',              value: stats.totalUsers,               icon: Users,        color: 'blue',   change: `+${stats.dau} today` },
     { label: 'Total Practitioners',      value: stats.totalPractitioners,       icon: UserCheck,    color: 'purple' },
     { label: 'Active Sessions',          value: stats.activeSessions,           icon: Activity,     color: 'green',  change: 'Live' },
-    { label: 'Pending Verifications',    value: stats.pendingKyc,               icon: AlertCircle,  color: 'amber' },
+    { label: 'Pending Verifications',    value: stats.pendingKyc,               icon: AlertCircle,  color: 'indigo' },
     { label: 'Verified Practitioners',   value: stats.verifiedPractitioners,    icon: CheckCircle,  color: 'indigo' },
     { label: 'Completed Sessions',       value: stats.completedSessions,        icon: CalendarClock,color: 'teal' },
     { label: 'Total Revenue',            value: `₹${stats.totalRevenue.toLocaleString()}`, icon: Wallet, color: 'rose' },
-    { label: 'Avg Session Duration',     value: `${stats.avgSessionDuration}m`, icon: Clock,        color: 'amber' },
+    { label: 'Avg Session Duration',     value: `${stats.avgSessionDuration}m`, icon: Clock,        color: 'indigo' },
     { label: 'Avg Rating',               value: stats.avgRating > 0 ? `${stats.avgRating} ★` : 'N/A', icon: Star, color: 'purple' },
     { label: 'Daily Active Users (DAU)', value: stats.dau,                      icon: TrendingUp,   color: 'teal' },
     { label: 'Weekly Active (WAU)',      value: stats.wau,                      icon: Users,        color: 'blue' },
@@ -119,7 +119,7 @@ export default function AdminDashboard() {
         {/* Welcome Banner */}
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-indigo-500 to-orange-500 rounded-2xl p-5 flex items-center justify-between text-white shadow-lg shadow-indigo-200/40 overflow-hidden relative"
+          className="bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl p-5 flex items-center justify-between text-white shadow-lg shadow-indigo-200/40 overflow-hidden relative"
         >
           <div className="absolute right-0 top-0 w-48 h-full opacity-10">
             <Sparkles className="w-full h-full" />
@@ -288,7 +288,7 @@ export default function AdminDashboard() {
                     </div>
                     <div className="w-full bg-gray-100 dark:bg-white/10 h-2 rounded-full overflow-hidden">
                       <div
-                        className="bg-gradient-to-r from-indigo-400 to-orange-500 h-full rounded-full"
+                        className="bg-gradient-to-r from-indigo-400 to-purple-500 h-full rounded-full"
                         style={{ width: `${Math.min(100, (c.count / Math.max(...topCategories.map((t) => t.count), 1)) * 100)}%` }}
                       />
                     </div>

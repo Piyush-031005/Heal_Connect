@@ -113,13 +113,13 @@ export default function ProfilePage() {
 
         {/* ═══ PROFILE HEADER CARD ═══ */}
         <Card className="bg-white border-0 shadow-lg rounded-2xl overflow-hidden">
-          <div className="h-20 bg-gradient-to-r from-purple-400 via-orange-500 to-indigo-600 relative">
+          <div className="h-20 bg-gradient-to-r from-purple-400 via-purple-500 to-indigo-600 relative">
             <div className="absolute -bottom-12 left-6">
               <div className="relative w-24 h-24 rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-white">
                 {profile.photoUrl ? (
                   <img src={profile.photoUrl} alt={profile.name || ''} className="w-full h-full object-cover" />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-purple-300 to-orange-500 flex items-center justify-center text-white text-3xl font-bold">
+                  <div className="w-full h-full bg-gradient-to-br from-purple-300 to-purple-500 flex items-center justify-center text-white text-3xl font-bold">
                     {initials}
                   </div>
                 )}

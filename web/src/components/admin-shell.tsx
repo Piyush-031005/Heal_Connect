@@ -80,7 +80,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
     <div className={`flex flex-col h-full ${dark ? 'bg-slate-900' : 'bg-white'} border-r ${dark ? 'border-white/10' : 'border-gray-100'}`}>
       {/* Logo */}
       <div className={`flex items-center gap-3 px-5 py-5 border-b ${dark ? 'border-white/10' : 'border-gray-100'}`}>
-        <div className="w-9 h-9 bg-gradient-to-br from-indigo-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-200/50 shrink-0">
+        <div className="w-9 h-9 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-200/50 shrink-0">
           <Shield className="w-5 h-5 text-white" />
         </div>
         {sidebarOpen && (
@@ -102,7 +102,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
               onClick={() => setMobileSidebarOpen(false)}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all group ${
                 active
-                  ? 'bg-gradient-to-r from-indigo-500 to-orange-500 text-white shadow-md shadow-indigo-200/40'
+                  ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-md shadow-indigo-200/40'
                   : dark
                   ? 'text-white/60 hover:bg-white/5 hover:text-white'
                   : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700'
@@ -195,7 +195,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
               {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
             <div className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold ${dark ? 'border-white/10 bg-white/5 text-white' : 'border-indigo-200 bg-indigo-50 text-indigo-700'}`}>
-              <div className="w-6 h-6 bg-gradient-to-br from-indigo-400 to-orange-500 rounded-lg flex items-center justify-center">
+              <div className="w-6 h-6 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-lg flex items-center justify-center">
                 <Shield className="w-3.5 h-3.5 text-white" />
               </div>
               <span>{adminUser?.role === 'SUPERADMIN' ? 'Superadmin' : adminUser?.role === 'MODERATOR' ? 'Moderator' : 'Admin'}</span>
@@ -223,11 +223,11 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
 // ── Reusable Admin Components ──
 
-export function StatCard({ label, value, icon: Icon, color = 'amber', change }: {
+export function StatCard({ label, value, icon: Icon, color = 'indigo', change }: {
   label: string; value: string | number; icon: any; color?: string; change?: string;
 }) {
   const colors: Record<string, string> = {
-    amber: 'from-indigo-400 to-orange-500',
+    indigo: 'from-indigo-400 to-purple-500',
     blue: 'from-blue-400 to-cyan-500',
     green: 'from-green-400 to-emerald-500',
     purple: 'from-purple-400 to-pink-500',
@@ -243,7 +243,7 @@ export function StatCard({ label, value, icon: Icon, color = 'amber', change }: 
       className="bg-white dark:bg-slate-800/90 backdrop-blur-md rounded-2xl p-5 border border-gray-100 dark:border-white/10 shadow-sm hover:shadow-xl hover:border-indigo-200 dark:hover:border-indigo-500/30 transition-all duration-300"
     >
       <div className="flex items-start justify-between mb-3">
-        <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${colors[color] ?? colors.amber} flex items-center justify-center shadow-md shadow-indigo-500/10`}>
+        <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${colors[color] ?? colors.indigo} flex items-center justify-center shadow-md shadow-indigo-500/10`}>
           <Icon className="w-5 h-5 text-white" />
         </div>
         {change && (
@@ -267,7 +267,7 @@ export function StatusBadge({ status }: { status: string }) {
     suspended: 'bg-red-50 text-red-700 border-red-200',
     blocked: 'bg-red-50 text-red-700 border-red-200',
     cancelled: 'bg-gray-50 text-gray-700 border-gray-200',
-    disputed: 'bg-orange-50 text-orange-700 border-orange-200',
+    disputed: 'bg-purple-50 text-purple-700 border-purple-200',
     paid: 'bg-emerald-50 text-emerald-700 border-emerald-200',
     rejected: 'bg-red-50 text-red-700 border-red-200',
     flagged: 'bg-yellow-50 text-yellow-700 border-yellow-200',

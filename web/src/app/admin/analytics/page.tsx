@@ -94,7 +94,7 @@ export default function AdminAnalyticsPage() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           <StatCard label="Total Chat Sessions" value={chatData?.totalConversations ?? 0} icon={MessageSquare} color="blue" />
           <StatCard label="Messages Today" value={chatData?.messagesToday ?? 0} icon={Sparkles} color="green" />
-          <StatCard label="Messages This Week" value={chatData?.messagesThisWeek ?? 0} icon={TrendingUp} color="amber" />
+          <StatCard label="Messages This Week" value={chatData?.messagesThisWeek ?? 0} icon={TrendingUp} color="indigo" />
           <StatCard label="Avg Msgs / Session" value={chatData?.avgMessagesPerSession ?? 0} icon={Layers} color="purple" />
           <StatCard label="Active Conversations" value={chatData?.activeConversations ?? 0} icon={CalendarClock} color="rose" />
         </div>
@@ -213,7 +213,7 @@ export default function AdminAnalyticsPage() {
                   <div key={d.date} className="flex-1 flex flex-col items-center gap-1 group relative">
                     <div
                       style={{ height: `${(d.messages / maxMessages) * 90}px` }}
-                      className="w-full bg-gradient-to-t from-indigo-500 to-orange-400 rounded-t-sm min-h-[3px]"
+                      className="w-full bg-gradient-to-t from-indigo-500 to-purple-400 rounded-t-sm min-h-[3px]"
                     />
                     <span className="text-[9px] font-bold text-gray-400">{d.date.slice(8)}</span>
                   </div>

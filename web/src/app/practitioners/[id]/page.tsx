@@ -261,7 +261,7 @@ export default function PractitionerDetailPage() {
                 <Button
                   onClick={handleStartCall}
                   disabled={!p.isOnline || calling}
-                  className="bg-gradient-to-r from-purple-400 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-extrabold border-0 gap-2 rounded-2xl px-6 py-6 shadow-lg shadow-purple-400/25 hover:scale-105 active:scale-95 transition-all disabled:opacity-40"
+                  className="bg-gradient-to-r from-purple-400 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-extrabold border-0 gap-2 rounded-2xl px-6 py-6 shadow-lg shadow-purple-400/25 hover:scale-105 active:scale-95 transition-all disabled:opacity-40"
                 >
                   {calling ? (
                     <>

@@ -249,7 +249,7 @@ router.post(
   '/',
   [
     body('name').trim().notEmpty(),
-    body('email').optional().isEmail().normalizeEmail(),
+    body('email').optional().isEmail().normalizeEmail({ gmail_remove_dots: false }),
     body('bio').optional().trim(),
     body('specialties').optional().isArray(),
     body('certifications').optional().isArray(),

@@ -122,7 +122,7 @@ export default function AdminLoginPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Background orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
 
       <motion.div
         key={step}
@@ -133,7 +133,7 @@ export default function AdminLoginPage() {
       >
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-indigo-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-500/30">
+          <div className="w-16 h-16 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-500/30">
             {step === 'password' ? (
               <Shield className="w-8 h-8 text-white" />
             ) : step === 'mfa' ? (
@@ -208,7 +208,7 @@ export default function AdminLoginPage() {
                 id="admin-login-submit"
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 disabled:opacity-60 text-white font-extrabold py-4 rounded-2xl shadow-lg shadow-indigo-500/30 transition-all hover:shadow-xl"
+                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 disabled:opacity-60 text-white font-extrabold py-4 rounded-2xl shadow-lg shadow-indigo-500/30 transition-all hover:shadow-xl"
               >
                 {loading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <>
                   <Shield className="w-4 h-4" /> Sign in to Admin Panel
@@ -254,7 +254,7 @@ export default function AdminLoginPage() {
                 id="admin-mfa-submit"
                 type="submit"
                 disabled={loading || mfaCode.length !== 6}
-                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 disabled:opacity-40 text-white font-extrabold py-4 rounded-2xl shadow-lg shadow-indigo-500/30 transition-all"
+                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 disabled:opacity-40 text-white font-extrabold py-4 rounded-2xl shadow-lg shadow-indigo-500/30 transition-all"
               >
                 {loading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <>
                   <CheckCircle2 className="w-4 h-4" /> Verify & Sign In
@@ -325,7 +325,7 @@ export default function AdminLoginPage() {
                   id="admin-mfa-setup-confirm"
                   type="submit"
                   disabled={loading || mfaCode.length !== 6}
-                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 disabled:opacity-40 text-white font-extrabold py-4 rounded-2xl shadow-lg shadow-indigo-500/30 transition-all"
+                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 disabled:opacity-40 text-white font-extrabold py-4 rounded-2xl shadow-lg shadow-indigo-500/30 transition-all"
                 >
                   {loading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <>
                     <CheckCircle2 className="w-4 h-4" /> Enable MFA & Sign In

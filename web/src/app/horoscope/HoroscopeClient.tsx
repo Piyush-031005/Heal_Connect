@@ -701,7 +701,7 @@ export default function HoroscopePage() {
       <Navbar />
 
       {/* ═══ 1. Hero Section ═══ */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-400 via-orange-400 to-indigo-500 pt-28 pb-20 px-4 text-center text-white shrink-0">
+      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-400 via-purple-400 to-indigo-500 pt-28 pb-20 px-4 text-center text-white shrink-0">
         {/* Floating background decorative circles */}
         <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-white/10 blur-xl pointer-events-none" />
         <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-white/10 blur-2xl pointer-events-none" />
@@ -786,22 +786,22 @@ export default function HoroscopePage() {
                   boxShadow: '0 25px 30px -5px rgba(245, 158, 11, 0.25), 0 10px 12px -6px rgba(245, 158, 11, 0.15)'
                 }}
                 onClick={() => setSelectedSign(sign)}
-                className="bg-white border-2 border-orange-100 hover:border-orange-400 rounded-3xl p-6 text-center cursor-pointer transition-all duration-300 group flex flex-col items-center gap-4 relative overflow-hidden shadow-sm"
+                className="bg-white border-2 border-purple-100 hover:border-purple-400 rounded-3xl p-6 text-center cursor-pointer transition-all duration-300 group flex flex-col items-center gap-4 relative overflow-hidden shadow-sm"
               >
-                <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-br from-indigo-50 to-orange-50 border-2 border-orange-200/80 flex items-center justify-center overflow-hidden group-hover:scale-105 group-hover:rotate-3 transition-all duration-300 relative shadow-md">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-purple-200/80 flex items-center justify-center overflow-hidden group-hover:scale-105 group-hover:rotate-3 transition-all duration-300 relative shadow-md">
                   {sign.image ? (
                     <img src={sign.image} alt={sign.name} className="w-full h-full object-cover rounded-3xl" />
                   ) : (
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-orange-500 font-extrabold text-5xl select-none">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500 font-extrabold text-5xl select-none">
                       {sign.icon + '\uFE0E'}
                     </span>
                   )}
                 </div>
                 <div>
-                  <h3 className="font-extrabold text-gray-900 group-hover:text-orange-600 transition-colors text-lg md:text-xl font-sans tracking-tight">{sign.name}</h3>
+                  <h3 className="font-extrabold text-gray-900 group-hover:text-purple-600 transition-colors text-lg md:text-xl font-sans tracking-tight">{sign.name}</h3>
                   <p className="text-xs text-gray-400 font-semibold mt-1">{sign.dates}</p>
                 </div>
-                <span className="text-xs bg-orange-50 px-3 py-1 rounded-full text-orange-700 font-bold tracking-wide uppercase border border-orange-200">
+                <span className="text-xs bg-purple-50 px-3 py-1 rounded-full text-purple-700 font-bold tracking-wide uppercase border border-purple-200">
                   {sign.element}
                 </span>
               </motion.div>
@@ -894,7 +894,7 @@ export default function HoroscopePage() {
                 <Card key={sign.name} className="bg-white border border-yellow-100 hover:border-indigo-200 hover:shadow-lg transition-all rounded-3xl overflow-hidden flex flex-col h-full">
                   <CardContent className="p-6 flex flex-col h-full space-y-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-orange-50 border border-orange-100/50 flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 border border-purple-100/50 flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
                         {sign.image ? (
                           <img src={sign.image} alt={sign.name} className="w-full h-full object-cover rounded-xl" />
                         ) : (
@@ -905,7 +905,7 @@ export default function HoroscopePage() {
                         <h3 className="font-extrabold text-gray-900 text-base font-sans">{sign.name}</h3>
                         <p className="text-xs text-gray-400 font-bold">{sign.dates}</p>
                       </div>
-                      <span className="ml-auto text-xs bg-orange-50 border border-orange-100 text-orange-700 font-extrabold px-2.5 py-0.5 rounded-full shrink-0">
+                      <span className="ml-auto text-xs bg-purple-50 border border-purple-100 text-purple-700 font-extrabold px-2.5 py-0.5 rounded-full shrink-0">
                         ⚡ {sign.insights.energy}
                       </span>
                     </div>
@@ -963,7 +963,7 @@ export default function HoroscopePage() {
         </section>
 
         {/* ═══ 6. Daily Insights Widget ═══ */}
-        <section className="rounded-3xl bg-gradient-to-br from-indigo-500 to-orange-500 p-6 md:p-8 text-white relative overflow-hidden shadow-lg">
+        <section className="rounded-3xl bg-gradient-to-br from-indigo-500 to-purple-500 p-6 md:p-8 text-white relative overflow-hidden shadow-lg">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-2xl pointer-events-none" />
           
           <div className="grid md:grid-cols-3 gap-8 items-center relative z-10">
@@ -1242,7 +1242,7 @@ export default function HoroscopePage() {
               className="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl relative z-10 border border-yellow-100 max-h-[85vh] flex flex-col"
             >
               {/* Modal Header */}
-              <div className="bg-gradient-to-r from-indigo-500 to-orange-500 text-white p-6 shrink-0 relative">
+              <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white p-6 shrink-0 relative">
                 <button
                   onClick={() => setSelectedSign(null)}
                   className="absolute top-4 right-4 p-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"
@@ -1322,7 +1322,7 @@ export default function HoroscopePage() {
                 </div>
 
                 {/* Affirmation */}
-                <div className="p-4 rounded-xl bg-orange-50 border border-orange-100 text-center italic text-xs md:text-sm font-bold text-orange-700">
+                <div className="p-4 rounded-xl bg-purple-50 border border-purple-100 text-center italic text-xs md:text-sm font-bold text-purple-700">
                   Daily Affirmation: &ldquo;{selectedSign.insights.affirmation}&rdquo;
                 </div>
               </div>
@@ -1347,7 +1347,7 @@ export default function HoroscopePage() {
               className="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl relative z-10 border border-yellow-100 max-h-[85vh] flex flex-col"
             >
               {/* Modal Header */}
-              <div className="bg-gradient-to-r from-indigo-500 via-orange-500 to-indigo-600 text-white p-6 relative shrink-0">
+              <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white p-6 relative shrink-0">
                 <button
                   onClick={() => setSelectedCategory(null)}
                   className="absolute top-4 right-4 p-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"
@@ -1406,7 +1406,7 @@ export default function HoroscopePage() {
                           onClick={() => setSelectedCategorySign(sign)}
                           className={`p-2 rounded-xl text-center border transition-all flex flex-col items-center gap-1 ${
                             isSelected
-                              ? 'bg-gradient-to-br from-indigo-500 to-orange-500 text-white border-indigo-500 shadow-md scale-105 font-bold'
+                              ? 'bg-gradient-to-br from-indigo-500 to-purple-500 text-white border-indigo-500 shadow-md scale-105 font-bold'
                               : 'bg-indigo-50/50 hover:bg-indigo-100/70 text-gray-800 border-indigo-200/60 hover:border-indigo-300'
                           }`}
                         >
@@ -1438,12 +1438,12 @@ export default function HoroscopePage() {
                 </div>
 
                 {/* Key Guidance */}
-                <div className="p-4 rounded-2xl bg-orange-50/60 border border-orange-100 space-y-1.5">
-                  <h4 className="font-extrabold text-xs text-orange-900 uppercase tracking-wider flex items-center gap-1.5">
-                    <Zap className="w-4 h-4 text-orange-500" />
+                <div className="p-4 rounded-2xl bg-purple-50/60 border border-purple-100 space-y-1.5">
+                  <h4 className="font-extrabold text-xs text-purple-900 uppercase tracking-wider flex items-center gap-1.5">
+                    <Zap className="w-4 h-4 text-purple-500" />
                     Actionable Focus & Timing for {selectedCategorySign.name}
                   </h4>
-                  <p className="text-xs md:text-sm text-orange-950 font-medium leading-relaxed">
+                  <p className="text-xs md:text-sm text-purple-950 font-medium leading-relaxed">
                     Today, {selectedCategorySign.name} will experience peak clarity during peak cosmic hours (<strong>{selectedCategorySign.insights.bestTime}</strong>). Leverage your {selectedCategorySign.insights.mood.toLowerCase()} energy mindset. Compatible interaction sign: <strong>{selectedCategorySign.insights.compatibleSign}</strong>.{' '}
                     {selectedCategory.guidance}
                   </p>
@@ -1497,13 +1497,13 @@ export default function HoroscopePage() {
                 </div>
 
                 {/* Daily Affirmation */}
-                <div className="p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-orange-50 border border-indigo-200 text-center italic text-xs md:text-sm font-extrabold text-indigo-800">
+                <div className="p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 text-center italic text-xs md:text-sm font-extrabold text-indigo-800">
                   📌 {selectedCategorySign.name} Daily Affirmation: &ldquo;{selectedCategorySign.insights.affirmation}&rdquo;
                 </div>
 
                 <button
                   onClick={() => setSelectedCategory(null)}
-                  className="w-full py-3.5 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-extrabold text-sm rounded-full transition-all shadow-md active:scale-95"
+                  className="w-full py-3.5 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-extrabold text-sm rounded-full transition-all shadow-md active:scale-95"
                 >
                   Close {selectedCategorySign.name} Forecast
                 </button>

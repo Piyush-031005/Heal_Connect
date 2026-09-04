@@ -125,7 +125,7 @@ function StarPicker({ value, onChange }: { value: number; onChange: (v: number) 
 // --- AVATAR HELPER ---
 function Avatar({ name, photoUrl, size = 'md' }: { name: string; photoUrl?: string; size?: 'sm' | 'md' | 'lg' }) {
   const sizeClass = size === 'lg' ? 'w-14 h-14 text-lg' : size === 'sm' ? 'w-8 h-8 text-xs' : 'w-11 h-11 text-sm';
-  const colors = ['from-indigo-400 to-orange-500', 'from-purple-400 to-pink-500', 'from-blue-400 to-cyan-500', 'from-green-400 to-teal-500'];
+  const colors = ['from-indigo-400 to-purple-500', 'from-purple-400 to-pink-500', 'from-blue-400 to-cyan-500', 'from-green-400 to-teal-500'];
   const colorIdx = name.charCodeAt(0) % colors.length;
   if (photoUrl) return <img src={photoUrl} alt={name} className={`${sizeClass} rounded-full object-cover border-2 border-indigo-200`} />;
   return (
@@ -147,7 +147,7 @@ function RatingBar({ star, count, total }: { star: number; count: number; total:
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="h-full bg-gradient-to-r from-indigo-400 to-orange-400 rounded-full"
+          className="h-full bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"
         />
       </div>
       <span className="text-xs text-gray-500 w-6 text-right">{count}</span>
@@ -250,14 +250,14 @@ export default function ReviewsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-orange-50">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
       <Navbar />
 
       {/* ── HERO HEADER ── */}
       <section className="pt-28 pb-12 px-4 text-center relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-80 h-80 bg-indigo-200/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-orange-200/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-purple-200/20 rounded-full blur-3xl" />
         </div>
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 bg-indigo-100 border border-indigo-200 text-indigo-700 text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">
@@ -265,7 +265,7 @@ export default function ReviewsPage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-4">
             What Our Community<br />
-            <span className="bg-gradient-to-r from-indigo-500 to-orange-500 bg-clip-text text-transparent">Is Saying</span>
+            <span className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">Is Saying</span>
           </h1>
           <p className="text-gray-600 text-lg font-medium max-w-xl mx-auto">
             Real experiences from real people. Discover why thousands trust ZenAuraa for their spiritual journey.
@@ -283,7 +283,7 @@ export default function ReviewsPage() {
           className="grid md:grid-cols-3 gap-6 mb-10"
         >
           {/* Overall Score */}
-          <div className="md:col-span-1 bg-gradient-to-br from-indigo-500 to-orange-500 rounded-3xl p-6 text-white shadow-xl shadow-indigo-200/50 flex flex-col items-center justify-center text-center">
+          <div className="md:col-span-1 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-3xl p-6 text-white shadow-xl shadow-indigo-200/50 flex flex-col items-center justify-center text-center">
             <p className="text-white/80 text-sm font-bold uppercase tracking-wider mb-1">Overall Rating</p>
             <p className="text-7xl font-black leading-none mb-2">{avg.toFixed(1)}</p>
             <StarDisplay rating={Math.round(avg)} size="md" />
@@ -340,7 +340,7 @@ export default function ReviewsPage() {
           >
             <button
               onClick={openAdd}
-              className="flex items-center gap-2.5 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-extrabold px-7 py-3.5 rounded-2xl shadow-lg shadow-indigo-200/60 transition-all hover:scale-105 hover:shadow-xl"
+              className="flex items-center gap-2.5 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-extrabold px-7 py-3.5 rounded-2xl shadow-lg shadow-indigo-200/60 transition-all hover:scale-105 hover:shadow-xl"
             >
               <Plus className="w-5 h-5" />
               Write a Review
@@ -362,7 +362,7 @@ export default function ReviewsPage() {
             >
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 bg-gradient-to-br from-indigo-400 to-orange-400 rounded-xl flex items-center justify-center">
+                  <div className="w-9 h-9 bg-gradient-to-br from-indigo-400 to-purple-400 rounded-xl flex items-center justify-center">
                     <Edit2 className="w-4.5 h-4.5 text-white" />
                   </div>
                   <div>
@@ -434,7 +434,7 @@ export default function ReviewsPage() {
                 <div className="flex gap-3 pt-1">
                   <button
                     type="submit"
-                    className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-orange-500 hover:from-indigo-600 hover:to-orange-600 text-white font-extrabold py-3 rounded-2xl shadow-md transition-all hover:shadow-lg"
+                    className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-extrabold py-3 rounded-2xl shadow-md transition-all hover:shadow-lg"
                   >
                     <Check className="w-4 h-4" />
                     {editingId ? 'Save Changes' : 'Submit Review'}
@@ -699,7 +699,7 @@ export default function ReviewsPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="mt-12 text-center bg-gradient-to-r from-indigo-500 to-orange-500 rounded-3xl p-8 shadow-xl shadow-indigo-200/50 text-white"
+          className="mt-12 text-center bg-gradient-to-r from-indigo-500 to-purple-500 rounded-3xl p-8 shadow-xl shadow-indigo-200/50 text-white"
         >
           <h2 className="text-2xl font-black mb-2">Had a great experience?</h2>
           <p className="text-white/80 text-sm font-medium mb-5">Help others discover ZenAuraa by sharing your story.</p>

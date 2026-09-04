@@ -79,7 +79,7 @@ router.post(
   '/register',
   authLimiter,
   [
-    body('email').isEmail().normalizeEmail().withMessage('Valid email required'),
+    body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
     body('password')
       .isLength({ min: 8 }).withMessage('Password must be at least 8 characters')
       .matches(/[A-Z]/).withMessage('Password must contain at least one uppercase letter')
@@ -232,7 +232,7 @@ router.post(
   '/login',
   authLimiter,
   [
-    body('email').isEmail().normalizeEmail().withMessage('Valid email required'),
+    body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
     body('password').notEmpty().withMessage('Password required'),
   ],
   handleValidation,
@@ -799,7 +799,7 @@ router.get('/verify-email', async (req: Request, res: Response) => {
 router.post(
   '/resend-verification',
   emailLimiter,
-  [body('email').isEmail().normalizeEmail().withMessage('Valid email required')],
+  [body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required')],
   handleValidation,
   async (req: Request, res: Response) => {
     const { email } = req.body as { email: string };
@@ -839,7 +839,7 @@ router.post(
 router.post(
   '/forgot-password',
   emailLimiter,
-  [body('email').isEmail().normalizeEmail().withMessage('Valid email required')],
+  [body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required')],
   handleValidation,
   async (req: Request, res: Response) => {
     const { email } = req.body as { email: string };
@@ -1076,7 +1076,7 @@ router.post(
   authLimiter,
   [
     body('name').trim().notEmpty().withMessage('Name is required'),
-    body('email').isEmail().normalizeEmail().withMessage('Valid email required'),
+    body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
     body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
     // CHILD-02: also required for practitioners — they handle health data and
     // must be adults.
@@ -1168,7 +1168,7 @@ router.post(
   '/practitioner/login',
   authLimiter,
   [
-    body('email').isEmail().normalizeEmail().withMessage('Valid email required'),
+    body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
     body('password').notEmpty().withMessage('Password required'),
   ],
   handleValidation,
