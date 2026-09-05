@@ -448,7 +448,7 @@ export default function AdminUsersPage() {
                         <td className="px-4 py-3 text-xs font-bold capitalize text-indigo-700">{u.provider}</td>
                         <td className="px-4 py-3"><StatusBadge status={u.isEmailVerified || u.isPhoneVerified ? 'verified' : 'unverified'} /></td>
                         <td className="px-4 py-3 text-xs font-extrabold text-gray-900 dark:text-white text-center">{u.sessionCount}</td>
-                        <td className="px-4 py-3 text-xs font-bold text-emerald-600">₹{u.balance}</td>
+                        <td className="px-4 py-3 text-xs font-bold text-emerald-600">£{u.balance}</td>
                         <td className="px-4 py-3 text-xs text-gray-500">{new Date(u.createdAt).toLocaleDateString()}</td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1.5">
@@ -487,7 +487,7 @@ export default function AdminUsersPage() {
               <table className="w-full text-sm">
                 <thead className="bg-gray-50 dark:bg-white/5 border-b border-gray-100 dark:border-white/10">
                   <tr>
-                    {['Practitioner', 'Specialties', 'Exp', 'Rate (₹/m)', 'Sessions', 'Rating', 'KYC Status', 'Actions'].map((h) => (
+                    {['Practitioner', 'Specialties', 'Exp', 'Rate (£/m)', 'Sessions', 'Rating', 'KYC Status', 'Actions'].map((h) => (
                       <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-gray-500 dark:text-white/50 uppercase tracking-wide whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
@@ -522,7 +522,7 @@ export default function AdminUsersPage() {
                           {p.specialties.slice(0, 2).join(', ') || 'Vedic Astrology'}
                         </td>
                         <td className="px-4 py-3 text-xs text-gray-600">{p.experienceYrs} yrs</td>
-                        <td className="px-4 py-3 text-xs font-bold text-emerald-600">₹{p.perMinuteRate}/m</td>
+                        <td className="px-4 py-3 text-xs font-bold text-emerald-600">£{p.perMinuteRate}/m</td>
                         <td className="px-4 py-3 text-xs font-extrabold text-gray-900 dark:text-white text-center">{p.sessionCount}</td>
                         <td className="px-4 py-3 text-xs font-bold text-indigo-600">{p.avgRating > 0 ? `${p.avgRating} ★` : 'N/A'}</td>
                         <td className="px-4 py-3"><StatusBadge status={p.isVerified ? 'verified' : 'pending'} /></td>
@@ -668,7 +668,7 @@ export default function AdminUsersPage() {
                           { label: 'Phone', value: viewApp.user?.phone || '—' },
                           { label: 'Location', value: [viewApp.city, viewApp.state, viewApp.country].filter(Boolean).join(', ') || '—' },
                           { label: 'Experience', value: `${viewApp.astrologyExperienceYears} years` },
-                          { label: 'Chat Rate', value: viewApp.chatPricePerMin > 0 ? `₹${viewApp.chatPricePerMin}/min` : '—' },
+                          { label: 'Chat Rate', value: viewApp.chatPricePerMin > 0 ? `£${viewApp.chatPricePerMin}/min` : '—' },
                           { label: 'Submitted', value: new Date(viewApp.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) },
                         ].map(({ label, value }) => (
                           <div key={label} className="bg-gray-50 dark:bg-white/5 rounded-xl p-3">
@@ -801,7 +801,7 @@ export default function AdminUsersPage() {
                           { label: 'Phone', value: viewPract.phone || '—' },
                           { label: 'Location', value: [viewPractProfile?.city, viewPractProfile?.country].filter(Boolean).join(', ') || '—' },
                           { label: 'Experience', value: viewPractProfile?.astrologyExperienceYears != null ? `${viewPractProfile.astrologyExperienceYears} years` : `${viewPract.experienceYrs} years` },
-                          { label: 'Rate', value: `₹${viewPract.perMinuteRate}/min` },
+                          { label: 'Rate', value: `£${viewPract.perMinuteRate}/min` },
                           { label: 'Sessions', value: viewPract.sessionCount },
                           { label: 'Rating', value: viewPract.avgRating > 0 ? `${viewPract.avgRating} ★` : 'No ratings yet' },
                           { label: 'Joined', value: new Date(viewPract.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) },
@@ -939,7 +939,7 @@ export default function AdminUsersPage() {
                   <div>
                     <label className="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Wallet Balance (INR)</label>
                     <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold">₹</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold">£</span>
                       <input
                         type="number"
                         required

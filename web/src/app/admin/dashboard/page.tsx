@@ -102,7 +102,7 @@ export default function AdminDashboard() {
     { label: 'Pending Verifications',    value: stats.pendingKyc,               icon: AlertCircle,  color: 'indigo' },
     { label: 'Verified Practitioners',   value: stats.verifiedPractitioners,    icon: CheckCircle,  color: 'indigo' },
     { label: 'Completed Sessions',       value: stats.completedSessions,        icon: CalendarClock,color: 'teal' },
-    { label: 'Total Revenue',            value: `₹${stats.totalRevenue.toLocaleString()}`, icon: Wallet, color: 'rose' },
+    { label: 'Total Revenue',            value: `£${stats.totalRevenue.toLocaleString()}`, icon: Wallet, color: 'rose' },
     { label: 'Avg Session Duration',     value: `${stats.avgSessionDuration}m`, icon: Clock,        color: 'indigo' },
     { label: 'Avg Rating',               value: stats.avgRating > 0 ? `${stats.avgRating} ★` : 'N/A', icon: Star, color: 'purple' },
     { label: 'Daily Active Users (DAU)', value: stats.dau,                      icon: TrendingUp,   color: 'teal' },
@@ -206,7 +206,7 @@ export default function AdminDashboard() {
                 <h3 className="text-sm font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
                   <Wallet className="w-4 h-4 text-emerald-500" /> Revenue Trend (Real PostgreSQL Data)
                 </h3>
-                <p className="text-[10px] text-gray-400 font-semibold mt-0.5">Daily session payments (₹)</p>
+                <p className="text-[10px] text-gray-400 font-semibold mt-0.5">Daily session payments (£)</p>
               </div>
             </div>
             {chartData.length === 0 || chartData.every((d) => d.revenue === 0) ? (
@@ -224,7 +224,7 @@ export default function AdminDashboard() {
                     <span className="text-[9px] font-bold text-gray-400 truncate">{d.date.slice(8)}</span>
                     {/* Tooltip */}
                     <div className="absolute -top-7 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 text-white text-[10px] px-2 py-0.5 rounded shadow pointer-events-none whitespace-nowrap">
-                      {d.date}: ₹{d.revenue}
+                      {d.date}: £{d.revenue}
                     </div>
                   </div>
                 ))}

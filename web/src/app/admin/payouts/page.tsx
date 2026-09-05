@@ -79,9 +79,9 @@ export default function PayoutProcessingPage() {
                   { label: 'Name', value: viewPayout.name },
                   { label: 'Email', value: viewPayout.email ?? '—' },
                   { label: 'Phone', value: viewPayout.phone ?? '—' },
-                  { label: 'Rate/min', value: `₹${viewPayout.perMinuteRate.toFixed(2)}` },
+                  { label: 'Rate/min', value: `£${viewPayout.perMinuteRate.toFixed(2)}` },
                   { label: 'Completed Sessions', value: String(viewPayout.completedSessionCount) },
-                  { label: 'Total Earned', value: `₹${viewPayout.totalEarned.toLocaleString()}` },
+                  { label: 'Total Earned', value: `£${viewPayout.totalEarned.toLocaleString()}` },
                   { label: 'KYC', value: viewPayout.isVerified ? 'Verified' : 'Pending' },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex justify-between py-1.5 border-b border-gray-50 dark:border-white/5">
@@ -116,7 +116,7 @@ export default function PayoutProcessingPage() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           <StatCard label="Total Practitioners" value={payouts.length}    icon={User}        color="purple" />
-          <StatCard label="Total Earned (all)"  value={`₹${totalEarned.toLocaleString()}`} icon={Wallet} color="green" />
+          <StatCard label="Total Earned (all)"  value={`£${totalEarned.toLocaleString()}`} icon={Wallet} color="green" />
           <StatCard label="With Sessions"       value={withSessions}      icon={CheckCircle} color="blue"   />
           <StatCard label="KYC Verified"        value={verified}          icon={AlertCircle} color="indigo" />
           <StatCard label="Pending KYC"         value={payouts.length - verified} icon={Clock} color="indigo" />
@@ -170,9 +170,9 @@ export default function PayoutProcessingPage() {
                     <tr key={p.id} className="hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
                       <td className="px-4 py-3 font-semibold text-gray-900 dark:text-white">{p.name}</td>
                       <td className="px-4 py-3 text-gray-500 dark:text-white/50">{p.email ?? '—'}</td>
-                      <td className="px-4 py-3 text-gray-700 dark:text-white/70">₹{p.perMinuteRate.toFixed(2)}</td>
+                      <td className="px-4 py-3 text-gray-700 dark:text-white/70">£{p.perMinuteRate.toFixed(2)}</td>
                       <td className="px-4 py-3 font-bold text-gray-900 dark:text-white">{p.completedSessionCount}</td>
-                      <td className="px-4 py-3 font-extrabold text-emerald-600">₹{p.totalEarned.toLocaleString()}</td>
+                      <td className="px-4 py-3 font-extrabold text-emerald-600">£{p.totalEarned.toLocaleString()}</td>
                       <td className="px-4 py-3"><StatusBadge status={p.isVerified ? 'verified' : 'pending'} /></td>
                       <td className="px-4 py-3">
                         <button onClick={() => setViewPayout(p)} className="p-1.5 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-500/10 text-blue-500 transition-colors" title="View">

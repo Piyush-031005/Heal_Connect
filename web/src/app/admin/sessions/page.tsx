@@ -196,7 +196,7 @@ export default function AdminSessionsPage() {
                       <td className="px-4 py-3 text-xs font-extrabold text-gray-900 dark:text-white text-center">
                         {s.durationMinutes > 0 ? `${s.durationMinutes} min` : 'N/A'}
                       </td>
-                      <td className="px-4 py-3 text-xs font-bold text-emerald-600">₹{s.totalCost}</td>
+                      <td className="px-4 py-3 text-xs font-bold text-emerald-600">£{s.totalCost}</td>
                       <td className="px-4 py-3"><StatusBadge status={s.status} /></td>
                       <td className="px-4 py-3 text-xs text-gray-500">
                         {s.scheduledStartTime ? new Date(s.scheduledStartTime).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }) : 'N/A'}
@@ -250,7 +250,7 @@ export default function AdminSessionsPage() {
                 </div>
                 <div className="p-3 bg-gray-50 dark:bg-white/5 rounded-xl">
                   <span className="text-gray-400 font-bold block">Total Billed</span>
-                  <span className="font-extrabold text-emerald-600">₹{selectedSession.totalCost}</span>
+                  <span className="font-extrabold text-emerald-600">£{selectedSession.totalCost}</span>
                 </div>
               </div>
               <div className="mt-5 space-y-2">

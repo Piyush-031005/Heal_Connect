@@ -162,7 +162,7 @@ export default function AdminAnalyticsPage() {
 
           {/* Revenue per Day */}
           <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 p-5 shadow-sm space-y-4">
-            <h3 className="text-sm font-extrabold text-gray-900 dark:text-white">Revenue Trend (₹)</h3>
+            <h3 className="text-sm font-extrabold text-gray-900 dark:text-white">Revenue Trend (£)</h3>
             {chartPoints.length === 0 || chartPoints.every((d) => d.revenue === 0) ? (
               <div className="h-40 flex items-center justify-center border border-dashed border-gray-200 dark:border-white/10 rounded-xl">
                 <p className="text-xs text-gray-400 font-medium">No revenue data available yet</p>
