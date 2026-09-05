@@ -20,7 +20,7 @@ router.get('/me', requireAuth, async (req: AuthRequest, res: Response) => {
       where: { id: req.user!.userId },
       select: {
         id: true, email: true, name: true, phone: true, dob: true,
-        birthPlace: true, gender: true, wellnessInterests: true,
+        birthPlace: true, timeOfBirth: true, gender: true, wellnessInterests: true,
         photoUrl: true, isEmailVerified: true, provider: true, createdAt: true,
       },
     });
@@ -40,6 +40,7 @@ router.patch(
     body('name').optional().trim().notEmpty(),
     body('dob').optional().isISO8601().toDate(),
     body('birthPlace').optional().trim(),
+    body('timeOfBirth').optional().trim(),
     body('gender').optional().isIn(['male', 'female', 'non-binary', 'prefer_not_to_say']),
     body('wellnessInterests').optional().isArray(),
     body('phone').optional().isMobilePhone('any'),
@@ -47,7 +48,7 @@ router.patch(
   handleValidation,
   async (req: AuthRequest, res: Response) => {
     const body = (req.body || {}) as {
-      name?: string; dob?: Date; birthPlace?: string;
+      name?: string; dob?: Date; birthPlace?: string; timeOfBirth?: string;
       gender?: string; wellnessInterests?: string[]; phone?: string;
     };
 
@@ -56,6 +57,7 @@ router.patch(
     if (body.name !== undefined) data.name = body.name;
     if (body.dob !== undefined) data.dob = body.dob;
     if (body.birthPlace !== undefined) data.birthPlace = body.birthPlace;
+    if (body.timeOfBirth !== undefined) data.timeOfBirth = body.timeOfBirth;
     if (body.gender !== undefined) data.gender = body.gender;
     if (body.wellnessInterests !== undefined) data.wellnessInterests = { set: body.wellnessInterests };
     if (body.phone !== undefined) data.phone = body.phone;
@@ -66,7 +68,7 @@ router.patch(
         data,
         select: {
           id: true, email: true, name: true, phone: true, dob: true,
-          birthPlace: true, gender: true, wellnessInterests: true,
+          birthPlace: true, timeOfBirth: true, gender: true, wellnessInterests: true,
           photoUrl: true, isEmailVerified: true,
         },
       });

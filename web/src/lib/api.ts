@@ -41,6 +41,7 @@ export interface UserProfile {
   phone: string | null;
   dob: string | null;
   birthPlace: string | null;
+  timeOfBirth: string | null;
   gender: string | null;
   wellnessInterests: string[];
   photoUrl: string | null;

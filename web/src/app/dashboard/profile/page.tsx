@@ -25,6 +25,7 @@ interface UserProfile {
   phone: string | null;
   dob: string | null;
   birthPlace: string | null;
+  timeOfBirth: string | null;
   gender: string | null;
   wellnessInterests: string[];
   photoUrl: string | null;
@@ -35,7 +36,7 @@ export default function ProfilePage() {
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [form, setForm] = useState({ name: '', dob: '', birthPlace: '', gender: '', phone: '' });
+  const [form, setForm] = useState({ name: '', dob: '', birthPlace: '', timeOfBirth: '', gender: '', phone: '' });
   const [interests, setInterests] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -49,7 +50,7 @@ export default function ProfilePage() {
       if (!res.success || !res.data) { router.replace('/login'); return; }
       const u = res.data.user;
       setProfile(u);
-      setForm({ name: u.name || '', dob: u.dob ? u.dob.split('T')[0] : '', birthPlace: u.birthPlace || '', gender: u.gender || '', phone: u.phone || '' });
+      setForm({ name: u.name || '', dob: u.dob ? u.dob.split('T')[0] : '', birthPlace: u.birthPlace || '', timeOfBirth: u.timeOfBirth || '', gender: u.gender || '', phone: u.phone || '' });
       setInterests(u.wellnessInterests || []);
     });
   }, [router]);
@@ -60,7 +61,7 @@ export default function ProfilePage() {
     setSaving(true); setError('');
     const res = await usersApi.updateProfile(token, {
       name: form.name || undefined, dob: form.dob || undefined,
-      birthPlace: form.birthPlace || undefined, gender: form.gender || undefined,
+      birthPlace: form.birthPlace || undefined, timeOfBirth: form.timeOfBirth || undefined, gender: form.gender || undefined,
       phone: form.phone || undefined, wellnessInterests: interests,
     });
     setSaving(false);
@@ -230,6 +231,19 @@ export default function ProfilePage() {
                   <option value="non-binary">Non-binary</option>
                   <option value="prefer_not_to_say">Prefer not to say</option>
                 </select>
+              </div>
+            </div>
+
+            {/* Time of Birth Row */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className={LABEL_CLS}><CalendarDays className="w-3 h-3 inline mr-1 text-purple-400" /> Time of Birth (Optional)</label>
+                <input
+                  type="time"
+                  value={form.timeOfBirth}
+                  onChange={(e) => setForm((f) => ({ ...f, timeOfBirth: e.target.value }))}
+                  className={INPUT_CLS}
+                />
               </div>
             </div>
           </div>
