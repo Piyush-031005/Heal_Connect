@@ -11,8 +11,9 @@ import { Badge } from '@/components/ui/badge';
 import { usersApi, tokenStore } from '@/lib/api';
 
 const WELLNESS_OPTIONS = [
-  'Astrology', 'Tarot', 'Reiki', 'Vastu', 'Numerology',
-  'Meditation', 'Crystal Healing', 'Palmistry', 'Energy Healing', 'Chakra Balancing',
+  'Astrology', 'Tarot', 'Palm Reading', 'Face Reading', 'Numerology',
+  'Energy Healing', 'Meditation', 'Yoga & Mindfulness', 'Vastu & Space Energy',
+  'EFT Tapping', 'Spiritual Guidance', 'Sound Healing',
 ];
 
 const INPUT_CLS = 'w-full text-sm rounded-lg bg-purple-50/70 border border-indigo-200 px-4 py-2.5 text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-purple-300/40 focus:border-purple-300 transition-all';
