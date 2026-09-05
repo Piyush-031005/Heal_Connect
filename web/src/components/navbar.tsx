@@ -465,7 +465,7 @@ export default function Navbar() {
                     <button
                       key={l.code}
                       onClick={() => {
-                        setLang(l.code);
+                        setLang(l.code as any);
                         setLangOpen(false);
                         if (typeof window !== 'undefined' && (window as any).__translateTo) {
                           (window as any).__translateTo(l.code);

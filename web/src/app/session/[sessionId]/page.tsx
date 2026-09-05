@@ -7,7 +7,6 @@ import dynamic from 'next/dynamic';
 import { ArrowLeft, MessageSquare, Phone } from 'lucide-react';
 import ChatWindow from '@/components/chat/ChatWindow';
 import { Button } from '@/components/ui/button';
-import { toast } from 'react-hot-toast';
 import { tokenStore, agoraApi, sessionsApi, type PractitionerProfile } from '@/lib/api';
 import { useScreenshotProtection } from '@/hooks/useScreenshotProtection';
 
@@ -80,26 +79,15 @@ export default function SessionPage() {
   }, [router, sessionId]);
 
   const handleSwitchToCall = async () => {
-    const token = tokenStore.getAccess();
-    if (!token || !activeSession?.practitionerId || startingCall) return;
+    if (startingCall) return;
     setStartingCall(true);
-    try {
-      const res = await sessionsApi.create(token, activeSession.practitionerId, 'AUDIO');
-      if (res.success && res.data?.session) {
-        router.push(`/session/${res.data.session.id}`);
-      } else {
-        toast.error(res.message || 'Could not start a call. Please recharge your wallet.');
-      }
-    } catch {
-      toast.error('Unable to start the call. Please try again.');
-    } finally {
-      setStartingCall(false);
-    }
+    setTab('call');
+    setStartingCall(false);
   };
 
   if (!userId || !peer) return null;
 
-  const showCallTab = sessionType === 'AUDIO' || sessionType === 'VIDEO';
+  const showCallTab = sessionType === 'AUDIO' || sessionType === 'VIDEO' || sessionType === 'CHAT';
   // Chat-only session, viewed by the consumer — offer a one-tap way to escalate to a call.
   const showSwitchToCall = sessionType === 'CHAT' && !isExpert;
   const initials = peer?.name
@@ -188,9 +176,26 @@ export default function SessionPage() {
         </div>
       </header>
 
-      {/* Content */}
-      <div className="flex-1 overflow-hidden">
-        {tab === 'chat' ? (
+      {/* Persistent Call Banner when on Chat tab during an Audio session */}
+      {showCallTab && tab === 'chat' && (
+        <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-4 py-2 flex items-center justify-between text-xs shadow-md z-20">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+            <span className="font-semibold">Audio call in progress</span>
+          </div>
+          <button
+            onClick={() => setTab('call')}
+            className="bg-white/20 hover:bg-white/30 text-white font-bold px-3 py-1 rounded-full transition-colors flex items-center gap-1"
+          >
+            <Phone className="w-3 h-3" />
+            <span>Return to Call</span>
+          </button>
+        </div>
+      )}
+
+      {/* Content — Both screens remain mounted so switching tabs preserves call & socket state */}
+      <div className="flex-1 overflow-hidden relative">
+        <div className={cn('h-full', tab === 'chat' ? 'flex flex-col' : 'hidden')}>
           <ChatWindow
             sessionId={sessionId}
             currentUserId={isExpert ? activeSession?.practitionerId : userId}
@@ -198,8 +203,18 @@ export default function SessionPage() {
             practitionerId={activeSession?.practitionerId ?? ''}
             practitionerName={isExpert ? '' : (peer?.name ?? 'the expert')}
           />
-        ) : (
-          <AudioCallScreen sessionId={sessionId} />
+        </div>
+
+        {showCallTab && (
+          <div className={cn('h-full', tab === 'call' ? 'flex flex-col' : 'hidden')}>
+            <AudioCallScreen
+              sessionId={sessionId}
+              isExpert={isExpert}
+              peerName={peer?.name}
+              peerPhoto={peer?.photoUrl}
+              onReturnToChat={() => setTab('chat')}
+            />
+          </div>
         )}
       </div>
     </div>

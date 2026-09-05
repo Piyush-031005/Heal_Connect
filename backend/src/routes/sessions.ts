@@ -87,13 +87,18 @@ router.post(
       const { session } = result;
 
       // Notify the practitioner in real-time
-      getIO()?.to(`practitioner_${practitionerId}`).emit('new_session_request', {
+      const sessionPayload = {
         id: session.id,
+        sessionId: session.id,
         type: session.type,
         status: session.status,
         createdAt: session.createdAt,
         user: session.user,
-      });
+      };
+      getIO()?.to(`practitioner_${practitionerId}`).emit('new_session_request', sessionPayload);
+      if (session.type === 'AUDIO' || session.type === 'VIDEO') {
+        getIO()?.to(`practitioner_${practitionerId}`).emit('call_incoming', sessionPayload);
+      }
 
       // Send Push Notification
       await sendNotificationToPractitioner(practitionerId, {
@@ -311,11 +316,22 @@ router.post('/:id/accept', requireAuth, async (req: AuthRequest, res: Response) 
 
   try {
     const session = await prisma.session.findFirst({
-      where: { id: sessionId, practitionerId, status: 'INITIATED' },
+      where: { id: sessionId, practitionerId, status: { in: ['INITIATED', 'ACCEPTED'] } },
     });
 
     if (!session) {
-      res.status(404).json({ success: false, message: 'Session not found or not in INITIATED state' });
+      res.status(404).json({ success: false, message: 'Session not found or cannot be accepted in current state' });
+      return;
+    }
+
+    if (session.status === 'ACCEPTED') {
+      import('../lib/socket').then(({ emitConsultationEvent }) => {
+        emitConsultationEvent('session_accepted', sessionId, { sessionId, status: 'ACCEPTED' }, {
+          userId: session.userId,
+          practitionerId,
+        });
+      });
+      res.json({ success: true, data: { session } });
       return;
     }
 
@@ -378,7 +394,7 @@ router.post('/:id/reject', requireAuth, async (req: AuthRequest, res: Response) 
   }
 });
 
-// ─── POST /api/sessions/:id/connect — mark session ACTIVE once both join (Task 1)
+// ─── POST /api/sessions/:id/connect — mark session ACTIVE once connected ─────────
 router.post('/:id/connect', requireAuth, async (req: AuthRequest, res: Response) => {
   const userId = req.user!.userId;
   const sessionId = req.params.id as string;
@@ -387,31 +403,42 @@ router.post('/:id/connect', requireAuth, async (req: AuthRequest, res: Response)
     const session = await prisma.session.findFirst({
       where: {
         id: sessionId,
-        OR: [{ userId }, { practitionerId: userId }],
-        status: { in: ['INITIATED', 'CONFIRMED', 'ACCEPTED', 'WALLET_VERIFIED', 'JOINING_CHANNEL'] },
+        OR: [{ userId }, ...(req.user!.practitionerId ? [{ practitionerId: req.user!.practitionerId }] : [])],
       },
     });
 
     if (!session) {
-      res.status(404).json({ success: false, message: 'Session not found or cannot connect in current state' });
+      res.status(404).json({ success: false, message: 'Session not found' });
       return;
     }
 
+    if (session.status === 'COMPLETED' || session.status === 'CANCELLED' || session.status === 'REJECTED') {
+      res.status(400).json({ success: false, message: `Cannot connect to session in ${session.status} state` });
+      return;
+    }
+
+    // If already active, return current state with startTime
+    if (session.status === 'ACTIVE') {
+      res.json({ success: true, data: { session } });
+      return;
+    }
+
+    const startTime = session.startTime ?? new Date();
     const updated = await prisma.session.update({
       where: { id: sessionId },
       data: {
         status: 'ACTIVE',
-        startTime: session.startTime ?? new Date(),
+        startTime,
       },
     });
 
     await prisma.practitioner.update({
       where: { id: session.practitionerId },
       data: { isBusy: true },
-    });
+    }).catch(console.error);
 
     import('../lib/socket').then(({ emitConsultationEvent, getIO }) => {
-      emitConsultationEvent('session_connected', sessionId, { sessionId, status: 'ACTIVE' }, {
+      emitConsultationEvent('session_connected', sessionId, { sessionId, status: 'ACTIVE', startTime }, {
         userId: session.userId,
         practitionerId: session.practitionerId,
       });
@@ -434,24 +461,35 @@ router.post('/:id/end', requireAuth, async (req: AuthRequest, res: Response) => 
   const sessionId = req.params.id as string;
 
   const session = await prisma.session.findFirst({
-    where: { id: sessionId, OR: [{ userId }, { practitionerId: userId }] },
+    where: { id: sessionId, OR: [{ userId }, ...(req.user!.practitionerId ? [{ practitionerId: req.user!.practitionerId }] : [])] },
   });
 
   if (!session) { res.status(404).json({ success: false, message: 'Session not found' }); return; }
-  if (session.status !== 'ACTIVE' && session.status !== 'DISCONNECTED') { res.status(400).json({ success: false, message: 'Session already ended' }); return; }
+
+  // If already in a terminal state, return cleanly with idempotent success
+  if (session.status === 'COMPLETED' || session.status === 'CANCELLED' || session.status === 'REJECTED') {
+    res.json({ success: true, message: 'Session already ended', data: { session } });
+    return;
+  }
+
+  // If not yet active (e.g. INITIATED, ACCEPTED), mark CANCELLED; if ACTIVE or DISCONNECTED, mark COMPLETED
+  const targetStatus = (session.status === 'INITIATED' || session.status === 'ACCEPTED') ? 'CANCELLED' : 'COMPLETED';
 
   const updated = await prisma.session.update({
     where: { id: sessionId },
-    data: { status: 'COMPLETED', endTime: new Date() },
+    data: { status: targetStatus, endTime: new Date() },
   });
 
   await prisma.practitioner.update({
     where: { id: session.practitionerId },
     data: { isBusy: false },
-  });
+  }).catch(console.error);
 
   import('../lib/socket').then(({ emitConsultationEvent, getIO }) => {
-    emitConsultationEvent('session_terminated', sessionId, { sessionId, reason: 'ended_by_user' }, {
+    emitConsultationEvent('session_terminated', sessionId, {
+      sessionId,
+      reason: targetStatus === 'CANCELLED' ? 'cancelled' : 'ended_by_user',
+    }, {
       userId: session.userId,
       practitionerId: session.practitionerId
     });

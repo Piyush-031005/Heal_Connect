@@ -269,7 +269,7 @@ export const sessionsApi = {
     }),
 
   get: (token: string, sessionId: string) =>
-    request<{ session: { id: string; status: string; type: string; practitionerId?: string; practitioner: PractitionerProfile; userId?: string; user?: any } }>(
+    request<{ session: { id: string; status: string; type: string; startTime?: string | null; endTime?: string | null; practitionerId?: string; practitioner: PractitionerProfile; userId?: string; user?: any } }>(
       `/api/sessions/${sessionId}`,
       { headers: authHeader(token) }
     ),
@@ -280,6 +280,12 @@ export const sessionsApi = {
   connect: (token: string, sessionId: string) =>
     request<{ session: any }>(`/api/sessions/${sessionId}/connect`, { method: 'POST', headers: authHeader(token) }),
 
+  accept: (token: string, sessionId: string) =>
+    request<{ session: any }>(`/api/sessions/${sessionId}/accept`, { method: 'POST', headers: authHeader(token) }),
+
+  reject: (token: string, sessionId: string) =>
+    request<{ session: any }>(`/api/sessions/${sessionId}/reject`, { method: 'POST', headers: authHeader(token) }),
+
   requestSession: (token: string, practitionerId: string, type?: string, availabilitySlotId?: string) =>
     request<{ session: any }>('/api/schedules/request', { method: 'POST', headers: authHeader(token), body: JSON.stringify({ practitionerId, type, availabilitySlotId }) }),
 
@@ -289,7 +295,7 @@ export const sessionsApi = {
   selectTime: (token: string, requestId: string, time: string) =>
     request(`/api/sessions/requests/${requestId}/select-time`, { method: 'POST', headers: authHeader(token), body: JSON.stringify({ time }) }),
 
-  accept: (token: string, requestId: string) =>
+  acceptRequest: (token: string, requestId: string) =>
     request(`/api/sessions/requests/${requestId}/accept`, { method: 'POST', headers: authHeader(token) }),
 
   proposeTimes: (token: string, requestId: string, times: { startTime: string; endTime: string }[]) =>

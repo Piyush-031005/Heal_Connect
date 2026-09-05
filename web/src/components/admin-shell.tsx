@@ -232,7 +232,7 @@ export function StatCard({ label, value, icon: Icon, color = 'indigo', change }:
     green: 'from-green-400 to-emerald-500',
     purple: 'from-purple-400 to-pink-500',
     red: 'from-red-400 to-rose-500',
-    indigo: 'from-indigo-400 to-violet-500',
+    violet: 'from-indigo-400 to-violet-500',
     teal: 'from-teal-400 to-cyan-500',
     rose: 'from-rose-400 to-pink-500',
   };

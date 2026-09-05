@@ -12,7 +12,8 @@ import AvailabilityCalendar from '@/components/AvailabilityCalendar';
 import {
   MessageCircle, LogOut, Wifi, WifiOff, User, Clock,
   IndianRupee, Star, TrendingUp, Bell, ChevronRight,
-  Sparkles, HeartHandshake, Phone, Activity, Loader2, FileText, LifeBuoy, Calendar
+  Sparkles, HeartHandshake, Phone, Activity, Loader2, FileText, LifeBuoy, Calendar,
+  PhoneCall, PhoneOff
 } from 'lucide-react';
 
 interface ActiveSession {
@@ -33,6 +34,7 @@ export default function ExpertDashboardPage() {
   const [totalEarnings, setTotalEarnings] = useState(0);
   const [sessionsDone, setSessionsDone] = useState(0);
   const [upcomingSessions, setUpcomingSessions] = useState<any[]>([]);
+  const [incomingCall, setIncomingCall] = useState<ActiveSession | null>(null);
   const [togglingOnline, setTogglingOnline] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
@@ -118,24 +120,63 @@ export default function ExpertDashboardPage() {
     });
 
     const socket = getSocket(token);
-    socket.on('new_session_request', (data: ActiveSession) => {
-      setSessions((prev) => prev.find((s) => s.id === data.id) ? prev : [data, ...prev]);
-      // Immediately refresh from server to ensure accuracy
+
+    const handleNewSession = (data: ActiveSession) => {
+      setSessions((prev) => (prev.find((s) => s.id === data.id) ? prev : [data, ...prev]));
+      if (data.type === 'AUDIO' || data.type === 'VIDEO') {
+        setIncomingCall(data);
+      }
       fetchSessions();
-    });
-    
-    socket.on('session_terminated', ({ sessionId }: { sessionId: string }) => {
+    };
+
+    const handleCallIncoming = (data: ActiveSession) => {
+      setSessions((prev) => (prev.find((s) => s.id === data.id) ? prev : [data, ...prev]));
+      setIncomingCall(data);
+      fetchSessions();
+    };
+
+    const handleTerminated = ({ sessionId }: { sessionId: string }) => {
       setSessions((prev) => prev.filter((s) => s.id !== sessionId));
-    });
+      setIncomingCall((curr) => (curr?.id === sessionId ? null : curr));
+    };
+
+    socket.on('new_session_request', handleNewSession);
+    socket.on('call_incoming', handleCallIncoming);
+    socket.on('session_terminated', handleTerminated);
+    socket.on('session_rejected', handleTerminated);
 
     // Poll every 10s to catch any missed socket events
     const poll = setInterval(fetchSessions, 10000);
     return () => {
       clearInterval(poll);
-      socket.off('new_session_request');
-      socket.off('session_terminated');
+      socket.off('new_session_request', handleNewSession);
+      socket.off('call_incoming', handleCallIncoming);
+      socket.off('session_terminated', handleTerminated);
+      socket.off('session_rejected', handleTerminated);
     };
   }, [router, fetchSessions]);
+
+  const handleAcceptIncomingCall = async () => {
+    if (!incomingCall) return;
+    const token = tokenStore.getAccess();
+    const callSession = incomingCall;
+    setIncomingCall(null);
+    if (token) {
+      await sessionsApi.accept(token, callSession.id).catch(console.error);
+    }
+    router.push(`/session/${callSession.id}`);
+  };
+
+  const handleDeclineIncomingCall = async () => {
+    if (!incomingCall) return;
+    const token = tokenStore.getAccess();
+    const callSession = incomingCall;
+    setIncomingCall(null);
+    if (token) {
+      await sessionsApi.reject(token, callSession.id).catch(console.error);
+    }
+    setSessions((prev) => prev.filter((s) => s.id !== callSession.id));
+  };
 
   const toggleOnline = async () => {
     const token = tokenStore.getAccess();
@@ -516,6 +557,62 @@ export default function ExpertDashboardPage() {
           </div>
         )}
       </main>
+
+      {/* ── Incoming Audio Call Modal ── */}
+      {incomingCall && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl p-6 md:p-8 max-w-sm w-full shadow-2xl border border-indigo-100 flex flex-col items-center text-center space-y-6 animate-in zoom-in-95 duration-200">
+            <div className="relative flex items-center justify-center">
+              <div className="absolute w-28 h-28 rounded-full bg-indigo-500/20 animate-ping" />
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-orange-500 flex items-center justify-center text-white text-2xl font-bold overflow-hidden shadow-xl z-10 border-2 border-white">
+                {incomingCall.user?.photoUrl ? (
+                  <img
+                    src={incomingCall.user.photoUrl}
+                    alt={incomingCall.user.name || 'User'}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  (incomingCall.user?.name || 'U')[0].toUpperCase()
+                )}
+              </div>
+            </div>
+
+            <div>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 animate-pulse mb-2">
+                <PhoneCall className="w-3 h-3" /> Incoming {incomingCall.type} Call
+              </span>
+              <h3 className="text-xl font-extrabold text-gray-900">
+                {incomingCall.user?.name || 'Anonymous Client'}
+              </h3>
+              <p className="text-xs text-gray-500 mt-1">
+                Requesting an immediate audio consultation
+              </p>
+            </div>
+
+            <div className="flex items-center gap-6 w-full justify-center pt-2">
+              <button
+                onClick={handleDeclineIncomingCall}
+                className="flex flex-col items-center gap-1 text-xs font-semibold text-gray-600 hover:text-red-600 transition-colors"
+              >
+                <div className="w-14 h-14 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all">
+                  <PhoneOff className="w-6 h-6" />
+                </div>
+                <span>Decline</span>
+              </button>
+
+              <button
+                onClick={handleAcceptIncomingCall}
+                className="flex flex-col items-center gap-1 text-xs font-semibold text-gray-600 hover:text-emerald-600 transition-colors"
+              >
+                <div className="w-16 h-16 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all animate-bounce">
+                  <Phone className="w-7 h-7" />
+                </div>
+                <span>Accept</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

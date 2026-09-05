@@ -60,7 +60,7 @@ export function useSessionChat(sessionId: string, currentUserId: string): UseSes
       setSessionStatus('connecting'); // Wait for peer before becoming active
     });
 
-    socket.on('session_started', ({ startTime }: { sessionId: string; startTime?: string }) => {
+    const handleSessionStarted = ({ startTime }: { sessionId: string; startTime?: string }) => {
       setSessionStatus('active');
       // Stop any existing timers before starting new ones (Strict Mode safety)
       if (timerRef.current) clearInterval(timerRef.current);
@@ -80,7 +80,10 @@ export function useSessionChat(sessionId: string, currentUserId: string): UseSes
       // Start wallet polling
       fetchWallet();
       walletPollRef.current = setInterval(fetchWallet, 15000);
-    });
+    };
+
+    socket.on('session_started', handleSessionStarted);
+    socket.on('session_connected', handleSessionStarted);
 
     socket.on('message_history', ({ messages: hist }: { messages: Message[] }) => {
       setMessages(hist);
@@ -119,7 +122,8 @@ export function useSessionChat(sessionId: string, currentUserId: string): UseSes
 
     return () => {
       socket.off('joined_room');
-      socket.off('session_started');
+      socket.off('session_started', handleSessionStarted);
+      socket.off('session_connected', handleSessionStarted);
       socket.off('message_history');
       socket.off('new_message');
       socket.off('typing_update');

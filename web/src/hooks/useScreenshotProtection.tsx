@@ -15,14 +15,7 @@ export function useScreenshotProtection(enabled = true) {
       
       // Print Screen key
       if (e.key === 'PrintScreen' || e.code === 'PrintScreen') {
-        // We can't actually prevent the OS from taking the screenshot,
-        // but we can try to clear the clipboard or show a warning.
         toast.error('Screenshots are disabled for privacy reasons.');
-        try {
-          navigator.clipboard.writeText('Screenshots are disabled on this platform.');
-        } catch (err) {
-          // Ignore
-        }
       }
 
       // Cmd/Ctrl + S or Cmd/Ctrl + P
