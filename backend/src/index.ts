@@ -87,6 +87,9 @@ app.get('/api/run-prisma-migrate', async (_req, res) => {
     await prisma.$executeRawUnsafe(`UPDATE "Consent" SET "userId" = NULL WHERE "userId" IS NOT NULL AND "userId" NOT IN (SELECT id FROM "User")`);
     await prisma.$executeRawUnsafe(`UPDATE "Consent" SET "practitionerId" = NULL WHERE "practitionerId" IS NOT NULL AND "practitionerId" NOT IN (SELECT id FROM "Practitioner")`);
 
+    res.write('Applying schema updates for timeOfBirth...\n');
+    await prisma.$executeRawUnsafe(`ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "timeOfBirth" TEXT;`);
+
     const { stdout, stderr } = await execPromise('npx prisma db push --accept-data-loss');
     res.write('--- STDOUT ---\n');
       res.write(stdout);
