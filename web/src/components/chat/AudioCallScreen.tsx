@@ -22,10 +22,20 @@ export default function AudioCallScreen({ sessionId }: Props) {
     return () => clearInterval(t);
   }, [callState]);
 
-  // Show feedback modal after call ends
+  // Show feedback modal and end session on backend after call ends
   useEffect(() => {
-    if (callState === 'ended') setShowFeedback(true);
-  }, [callState]);
+    if (callState === 'ended') {
+      setShowFeedback(true);
+      const token = tokenStore.getAccess();
+      if (token) {
+        // Trigger backend session end + auto-transcription with test audio URL
+        const testAudioUrl = "https://static.deepgram.com/examples/Bueller-Life-moves-pretty-fast.wav";
+        import('@/lib/api').then(({ sessionsApi }) => {
+          sessionsApi.end(token, sessionId, testAudioUrl).catch(console.error);
+        });
+      }
+    }
+  }, [callState, sessionId]);
 
   const formatTime = (s: number) =>
     `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
