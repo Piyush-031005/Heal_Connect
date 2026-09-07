@@ -1,3 +1,4 @@
+// @ts-ignore
 import { createClient } from '@deepgram/sdk';
 import { prisma } from '../lib/prisma';
 import { flagContentIfNeeded } from '../lib/moderation';
@@ -82,7 +83,7 @@ export async function transcribeFromRecordingUrl(
     
     if (paragraphs && paragraphs.length > 0) {
       formattedText = paragraphs
-        .map(p => `Speaker ${p.speaker}: ${p.sentences.map(s => s.text).join(' ')}`)
+        .map((p: any) => `Speaker ${p.speaker}: ${p.sentences.map((s: any) => s.text).join(' ')}`)
         .join('\n\n');
     } else {
       // Fallback if diarization/paragraphs didn't yield expected structure
