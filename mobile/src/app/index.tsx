@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ScrollView, Image, TextInput, TouchableOpacity, SafeAreaView, StatusBar, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors } from '@/constants/theme';
-import { Search, Bell, Sparkles, ChevronRight, Moon, Sun, Wind, Activity } from 'lucide-react-native';
+import { Search, Bell, Sparkles, ChevronRight, Moon, Sun, Wind, Activity, Star } from 'lucide-react-native';
 
 export default function HomeScreen() {
   const theme = Colors.light;
