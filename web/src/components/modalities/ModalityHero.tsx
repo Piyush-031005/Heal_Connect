@@ -22,11 +22,11 @@ export default function ModalityHero({ data }: Props) {
   }, [data.heroImages.length]);
 
   return (
-    <section className="relative w-full h-[60vh] md:h-[75vh] flex items-center justify-center overflow-hidden bg-[#F9F5FF]">
+    <section className="relative w-full h-[60vh] md:h-[75vh] flex items-center justify-center overflow-hidden bg-[#F3E8FF]">
       {/* Background Slideshow */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence initial={false}>
-          <motion.img
+          <motion.img fetchPriority="high"
             key={currentSlide}
             src={data.heroImages[currentSlide]}
             alt={`${data.name} visual`}
@@ -40,7 +40,7 @@ export default function ModalityHero({ data }: Props) {
         
         {/* Deep overlay to ensure text readability while maintaining theme color */}
         <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] transition-colors duration-500" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#F9F5FF] to-transparent transition-colors duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#F3E8FF] to-transparent transition-colors duration-500" />
       </div>
 
       {/* Content */}

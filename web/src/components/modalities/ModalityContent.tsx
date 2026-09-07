@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { ModalityData } from '@/data/modalities-content';
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 export default function ModalityContent({ data }: Props) {
   if (!data.contentSections || data.contentSections.length === 0) {
     return (
-      <section className="py-24 bg-[#F9F5FF]">
+      <section className="py-24 bg-[#F3E8FF]">
         <div className="container mx-auto px-6 text-center">
           <p className="text-muted-foreground text-lg italic">
             Detailed insights for {data.name} are coming soon.
@@ -21,7 +22,7 @@ export default function ModalityContent({ data }: Props) {
   }
 
   return (
-    <section className="py-24 bg-[#F9F5FF] overflow-hidden">
+    <section className="py-24 bg-[#F3E8FF] overflow-hidden">
       <div className="container mx-auto px-6 lg:px-16 max-w-7xl">
         
         {/* Alternating Sections */}
@@ -43,11 +44,7 @@ export default function ModalityContent({ data }: Props) {
                   className="w-full lg:w-1/2"
                 >
                   <div className="relative aspect-[4/5] w-full max-w-md mx-auto rounded-3xl overflow-hidden shadow-2xl border border-primary/20 group">
-                    <img 
-                      src={section.image} 
-                      alt={section.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+                    <Image src={section.image} alt={section.title} fill unoptimized sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                     <div className="absolute inset-0 ring-1 ring-inset ring-foreground/10 rounded-3xl" />
                   </div>
                 </motion.div>
