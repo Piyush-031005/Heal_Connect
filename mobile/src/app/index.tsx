@@ -4,11 +4,11 @@ import { Colors } from '@/constants/theme';
 import { Search, Bell, Sparkles, ChevronRight, Moon, Sun, Wind, Activity } from 'lucide-react-native';
 
 export default function HomeScreen() {
-  const theme = Colors.dark;
+  const theme = Colors.light;
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         
         {/* Header */}
@@ -19,7 +19,7 @@ export default function HomeScreen() {
               style={styles.avatar} 
             />
             <View>
-              <Text style={styles.greeting}>Good Evening,</Text>
+              <Text style={styles.greeting}>Good Morning,</Text>
               <Text style={styles.userName}>Piyush 👋</Text>
             </View>
           </View>
@@ -41,7 +41,7 @@ export default function HomeScreen() {
 
         {/* Feature Card */}
         <LinearGradient
-          colors={['#4A2A85', '#301368', '#1A0B2E']}
+          colors={['#C084FC', '#A855F7', '#9333EA']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.featureCard}
@@ -52,27 +52,27 @@ export default function HomeScreen() {
           </View>
           {/* Placeholder for Meditation Image */}
           <View style={styles.meditationImagePlaceholder}>
-            <Moon color={theme.primary} size={48} opacity={0.8} />
+            <Moon color="#FFFFFF" size={48} opacity={0.3} />
           </View>
         </LinearGradient>
 
         {/* Ask ZenAuraa Banner */}
         <TouchableOpacity>
           <LinearGradient
-            colors={['rgba(78,205,196,0.15)', 'rgba(183,154,230,0.15)']}
+            colors={['rgba(192,132,252,0.15)', 'rgba(78,205,196,0.15)']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.aiBanner}
           >
             <View style={styles.aiBannerIconWrapper}>
-              <Sparkles color={theme.accent} size={20} />
+              <Sparkles color={theme.primary} size={20} />
             </View>
             <View style={styles.aiBannerTextWrapper}>
               <Text style={styles.aiBannerTitle}>Ask ZenAuraa</Text>
               <Text style={styles.aiBannerSubtitle}>Your AI guide for life's questions</Text>
             </View>
             <View style={styles.aiBannerArrow}>
-              <ChevronRight color={theme.text} size={20} />
+              <ChevronRight color={theme.primary} size={20} />
             </View>
           </LinearGradient>
         </TouchableOpacity>
@@ -117,7 +117,7 @@ export default function HomeScreen() {
                 <Text style={styles.expertName}>{expert.name}</Text>
                 <Text style={styles.expertTitle}>{expert.title}</Text>
                 <View style={styles.ratingWrapper}>
-                  <Star color={theme.primary} size={12} fill={theme.primary} />
+                  <Star color="#FAD058" size={12} fill="#FAD058" />
                   <Text style={styles.ratingText}>{expert.rating}</Text>
                 </View>
               </View>
@@ -135,44 +135,44 @@ const styles = StyleSheet.create({
   scrollContent: { paddingHorizontal: 20, paddingTop: 20 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 25 },
   headerLeft: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  avatar: { width: 44, height: 44, borderRadius: 22, borderWidth: 1, borderColor: Colors.dark.border },
-  greeting: { color: Colors.dark.textSecondary, fontSize: 13, fontWeight: '500' },
-  userName: { color: Colors.dark.text, fontSize: 18, fontWeight: 'bold', marginTop: 2 },
-  bellIcon: { width: 44, height: 44, borderRadius: 22, backgroundColor: Colors.dark.backgroundElement, justifyContent: 'center', alignItems: 'center' },
-  notificationDot: { position: 'absolute', top: 12, right: 12, width: 8, height: 8, borderRadius: 4, backgroundColor: Colors.dark.accent },
+  avatar: { width: 44, height: 44, borderRadius: 22, borderWidth: 1, borderColor: Colors.light.border },
+  greeting: { color: Colors.light.textSecondary, fontSize: 13, fontWeight: '500' },
+  userName: { color: Colors.light.text, fontSize: 18, fontWeight: 'bold', marginTop: 2 },
+  bellIcon: { width: 44, height: 44, borderRadius: 22, backgroundColor: Colors.light.backgroundElement, justifyContent: 'center', alignItems: 'center', shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 5, shadowOffset: { width: 0, height: 2 }, elevation: 2 },
+  notificationDot: { position: 'absolute', top: 12, right: 12, width: 8, height: 8, borderRadius: 4, backgroundColor: '#EF4444' },
   
-  searchContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: Colors.dark.backgroundElement, borderRadius: 16, paddingHorizontal: 16, height: 55, marginBottom: 25, borderWidth: 1, borderColor: Colors.dark.border },
+  searchContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: Colors.light.backgroundElement, borderRadius: 16, paddingHorizontal: 16, height: 55, marginBottom: 25, shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 8, shadowOffset: { width: 0, height: 4 }, elevation: 3 },
   searchIcon: { marginRight: 10 },
-  searchInput: { flex: 1, color: Colors.dark.text, fontSize: 16, height: '100%' },
+  searchInput: { flex: 1, color: Colors.light.text, fontSize: 16, height: '100%' },
 
-  featureCard: { borderRadius: 24, padding: 25, marginBottom: 20, flexDirection: 'row', overflow: 'hidden', height: 160, borderWidth: 1, borderColor: Colors.dark.border },
+  featureCard: { borderRadius: 24, padding: 25, marginBottom: 20, flexDirection: 'row', overflow: 'hidden', height: 160, shadowColor: '#9333EA', shadowOpacity: 0.3, shadowRadius: 15, shadowOffset: { width: 0, height: 8 }, elevation: 10 },
   featureCardContent: { flex: 1, justifyContent: 'center', zIndex: 2 },
-  featureCardTitle: { color: Colors.dark.text, fontSize: 24, fontWeight: '800', marginBottom: 8, lineHeight: 30 },
-  featureCardSubtitle: { color: Colors.dark.textSecondary, fontSize: 14, lineHeight: 20 },
-  meditationImagePlaceholder: { position: 'absolute', right: -10, bottom: -20, width: 140, height: 140, borderRadius: 70, backgroundColor: 'rgba(255,255,255,0.03)', justifyContent: 'center', alignItems: 'center', zIndex: 1 },
+  featureCardTitle: { color: '#FFFFFF', fontSize: 24, fontWeight: '800', marginBottom: 8, lineHeight: 30 },
+  featureCardSubtitle: { color: 'rgba(255,255,255,0.85)', fontSize: 14, lineHeight: 20 },
+  meditationImagePlaceholder: { position: 'absolute', right: -10, bottom: -20, width: 140, height: 140, borderRadius: 70, backgroundColor: 'rgba(255,255,255,0.1)', justifyContent: 'center', alignItems: 'center', zIndex: 1 },
 
-  aiBanner: { flexDirection: 'row', alignItems: 'center', borderRadius: 20, padding: 16, marginBottom: 30, borderWidth: 1, borderColor: 'rgba(255,255,255,0.1)' },
-  aiBannerIconWrapper: { width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(78,205,196,0.2)', justifyContent: 'center', alignItems: 'center', marginRight: 15 },
+  aiBanner: { flexDirection: 'row', alignItems: 'center', borderRadius: 20, padding: 16, marginBottom: 30, backgroundColor: 'rgba(255,255,255,0.7)', borderWidth: 1, borderColor: '#F3E8FF' },
+  aiBannerIconWrapper: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#F3E8FF', justifyContent: 'center', alignItems: 'center', marginRight: 15 },
   aiBannerTextWrapper: { flex: 1 },
-  aiBannerTitle: { color: Colors.dark.text, fontSize: 16, fontWeight: 'bold', marginBottom: 2 },
-  aiBannerSubtitle: { color: Colors.dark.textSecondary, fontSize: 13 },
-  aiBannerArrow: { width: 32, height: 32, borderRadius: 16, backgroundColor: Colors.dark.backgroundSelected, justifyContent: 'center', alignItems: 'center' },
+  aiBannerTitle: { color: Colors.light.text, fontSize: 16, fontWeight: 'bold', marginBottom: 2 },
+  aiBannerSubtitle: { color: Colors.light.textSecondary, fontSize: 13 },
+  aiBannerArrow: { width: 32, height: 32, borderRadius: 16, backgroundColor: '#F3E8FF', justifyContent: 'center', alignItems: 'center' },
 
   sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 },
-  sectionTitle: { color: Colors.dark.text, fontSize: 18, fontWeight: 'bold' },
-  seeAllText: { color: Colors.dark.primary, fontSize: 14, fontWeight: '600' },
+  sectionTitle: { color: Colors.light.text, fontSize: 18, fontWeight: 'bold' },
+  seeAllText: { color: Colors.light.primary, fontSize: 14, fontWeight: '600' },
 
   servicesGrid: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 30 },
   serviceItem: { alignItems: 'center', width: '23%' },
-  serviceIconWrapper: { width: 60, height: 60, borderRadius: 20, backgroundColor: Colors.dark.backgroundElement, justifyContent: 'center', alignItems: 'center', marginBottom: 8, borderWidth: 1, borderColor: Colors.dark.border },
-  serviceName: { color: Colors.dark.text, fontSize: 12, fontWeight: '500', textAlign: 'center' },
+  serviceIconWrapper: { width: 60, height: 60, borderRadius: 20, backgroundColor: Colors.light.backgroundElement, justifyContent: 'center', alignItems: 'center', marginBottom: 8, shadowColor: '#000', shadowOpacity: 0.03, shadowRadius: 5, shadowOffset: { width: 0, height: 2 }, elevation: 2 },
+  serviceName: { color: Colors.light.text, fontSize: 12, fontWeight: '600', textAlign: 'center' },
 
   expertsScroll: { gap: 15 },
-  expertCard: { flexDirection: 'row', alignItems: 'center', backgroundColor: Colors.dark.backgroundElement, borderRadius: 20, padding: 12, paddingRight: 20, borderWidth: 1, borderColor: Colors.dark.border },
+  expertCard: { flexDirection: 'row', alignItems: 'center', backgroundColor: Colors.light.backgroundElement, borderRadius: 20, padding: 12, paddingRight: 20, shadowColor: '#000', shadowOpacity: 0.03, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 3 },
   expertImage: { width: 50, height: 50, borderRadius: 16, marginRight: 15 },
   expertInfo: { justifyContent: 'center' },
-  expertName: { color: Colors.dark.text, fontSize: 15, fontWeight: 'bold', marginBottom: 4 },
-  expertTitle: { color: Colors.dark.textSecondary, fontSize: 12, marginBottom: 6 },
+  expertName: { color: Colors.light.text, fontSize: 15, fontWeight: 'bold', marginBottom: 4 },
+  expertTitle: { color: Colors.light.textSecondary, fontSize: 12, marginBottom: 6 },
   ratingWrapper: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  ratingText: { color: Colors.dark.primary, fontSize: 12, fontWeight: 'bold' },
+  ratingText: { color: '#FAD058', fontSize: 12, fontWeight: 'bold' },
 });

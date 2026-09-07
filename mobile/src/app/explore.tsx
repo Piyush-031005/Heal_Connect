@@ -3,7 +3,7 @@ import { Colors } from '@/constants/theme';
 import { Search, Sun, Moon, Eye, Hand, Wind, Heart, Music, Hash } from 'lucide-react-native';
 
 export default function ExploreScreen() {
-  const theme = Colors.dark;
+  const theme = Colors.light;
 
   const services = [
     { id: 1, name: 'Astrology', desc: 'Gain cosmic insights', icon: <Sun color={theme.primary} size={32} /> },
@@ -61,29 +61,29 @@ export default function ExploreScreen() {
   );
 }
 
-// Dummy Bell component to satisfy the UI without importing if unused
+// Dummy Bell component
 const BellIcon = ({ color, size }: any) => (
-  <View style={{ width: size, height: size, borderRadius: size/2, backgroundColor: Colors.dark.backgroundElement }} />
+  <View style={{ width: size, height: size, borderRadius: size/2, backgroundColor: Colors.light.backgroundElement, shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 5, shadowOffset: { width: 0, height: 2 }, elevation: 2 }} />
 );
 
 const styles = StyleSheet.create({
   container: { flex: 1, paddingTop: Platform.OS === 'android' ? 40 : 0 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 15 },
-  title: { color: Colors.dark.text, fontSize: 28, fontWeight: 'bold' },
+  title: { color: Colors.light.text, fontSize: 28, fontWeight: 'bold' },
   
-  searchContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: Colors.dark.backgroundElement, borderRadius: 16, paddingHorizontal: 16, height: 55, marginHorizontal: 20, marginBottom: 20, borderWidth: 1, borderColor: Colors.dark.border },
+  searchContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: Colors.light.backgroundElement, borderRadius: 16, paddingHorizontal: 16, height: 55, marginHorizontal: 20, marginBottom: 20, shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 8, shadowOffset: { width: 0, height: 4 }, elevation: 3 },
   searchIcon: { marginRight: 10 },
-  searchInput: { flex: 1, color: Colors.dark.text, fontSize: 16, height: '100%' },
+  searchInput: { flex: 1, color: Colors.light.text, fontSize: 16, height: '100%' },
 
   pillsContainer: { paddingHorizontal: 20, gap: 10, height: 45, marginBottom: 20 },
-  pill: { paddingHorizontal: 20, paddingVertical: 10, borderRadius: 20, backgroundColor: Colors.dark.backgroundElement, borderWidth: 1, borderColor: Colors.dark.border, height: 40, justifyContent: 'center' },
-  pillActive: { backgroundColor: Colors.dark.primary, borderColor: Colors.dark.primary },
-  pillText: { color: Colors.dark.textSecondary, fontSize: 14, fontWeight: '600' },
-  pillTextActive: { color: Colors.dark.background, fontWeight: 'bold' },
+  pill: { paddingHorizontal: 20, paddingVertical: 10, borderRadius: 20, backgroundColor: Colors.light.backgroundElement, height: 40, justifyContent: 'center', shadowColor: '#000', shadowOpacity: 0.02, shadowRadius: 3, shadowOffset: { width: 0, height: 1 }, elevation: 1 },
+  pillActive: { backgroundColor: Colors.light.primary },
+  pillText: { color: Colors.light.textSecondary, fontSize: 14, fontWeight: '600' },
+  pillTextActive: { color: '#FFFFFF', fontWeight: 'bold' },
 
   grid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', paddingHorizontal: 20, gap: 15 },
-  card: { width: '47%', backgroundColor: Colors.dark.backgroundElement, borderRadius: 24, padding: 20, alignItems: 'center', borderWidth: 1, borderColor: Colors.dark.border },
-  iconWrapper: { width: 64, height: 64, borderRadius: 20, backgroundColor: 'rgba(250, 208, 88, 0.1)', justifyContent: 'center', alignItems: 'center', marginBottom: 15 },
-  cardTitle: { color: Colors.dark.text, fontSize: 16, fontWeight: 'bold', marginBottom: 5, textAlign: 'center' },
-  cardDesc: { color: Colors.dark.textSecondary, fontSize: 12, textAlign: 'center', lineHeight: 16 },
+  card: { width: '47%', backgroundColor: Colors.light.backgroundElement, borderRadius: 24, padding: 20, alignItems: 'center', shadowColor: '#000', shadowOpacity: 0.03, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 3 },
+  iconWrapper: { width: 64, height: 64, borderRadius: 20, backgroundColor: '#F3E8FF', justifyContent: 'center', alignItems: 'center', marginBottom: 15 },
+  cardTitle: { color: Colors.light.text, fontSize: 16, fontWeight: 'bold', marginBottom: 5, textAlign: 'center' },
+  cardDesc: { color: Colors.light.textSecondary, fontSize: 12, textAlign: 'center', lineHeight: 16 },
 });

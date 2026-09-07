@@ -3,7 +3,7 @@ import { Colors } from '@/constants/theme';
 import { Settings, Calendar, Heart, Wallet, Bell, HelpCircle, ChevronRight, Crown } from 'lucide-react-native';
 
 export default function ProfileScreen() {
-  const theme = Colors.dark;
+  const theme = Colors.light;
 
   const menuItems = [
     { id: 1, title: 'My Appointments', icon: <Calendar color={theme.textSecondary} size={20} /> },
@@ -36,7 +36,7 @@ export default function ProfileScreen() {
           <Text style={styles.userEmail}>piyush@example.com</Text>
           
           <View style={styles.premiumBadge}>
-            <Crown color={theme.primary} size={16} />
+            <Crown color="#F59E0B" size={16} />
             <Text style={styles.premiumText}>Premium Member</Text>
           </View>
         </View>
@@ -66,21 +66,21 @@ const styles = StyleSheet.create({
   container: { flex: 1, paddingTop: Platform.OS === 'android' ? 40 : 0 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 15 },
   headerSpacer: { width: 24 },
-  title: { color: Colors.dark.text, fontSize: 18, fontWeight: 'bold' },
+  title: { color: Colors.light.text, fontSize: 18, fontWeight: 'bold' },
   settingsIcon: { padding: 4 },
 
   scrollContent: { paddingHorizontal: 20 },
   
   userInfoContainer: { alignItems: 'center', marginTop: 20, marginBottom: 40 },
-  avatar: { width: 90, height: 90, borderRadius: 45, borderWidth: 2, borderColor: Colors.dark.border, marginBottom: 15 },
-  userName: { color: Colors.dark.text, fontSize: 24, fontWeight: 'bold', marginBottom: 4 },
-  userEmail: { color: Colors.dark.textSecondary, fontSize: 14, marginBottom: 15 },
+  avatar: { width: 90, height: 90, borderRadius: 45, borderWidth: 4, borderColor: Colors.light.backgroundElement, marginBottom: 15, shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 10, shadowOffset: { width: 0, height: 5 } },
+  userName: { color: Colors.light.text, fontSize: 24, fontWeight: 'bold', marginBottom: 4 },
+  userEmail: { color: Colors.light.textSecondary, fontSize: 14, marginBottom: 15 },
   
-  premiumBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(250, 208, 88, 0.1)', paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20, borderWidth: 1, borderColor: 'rgba(250, 208, 88, 0.3)', gap: 8 },
-  premiumText: { color: Colors.dark.primary, fontWeight: 'bold', fontSize: 13 },
+  premiumBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#FEF3C7', paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20, gap: 8 },
+  premiumText: { color: '#D97706', fontWeight: 'bold', fontSize: 13 },
 
-  menuContainer: { backgroundColor: Colors.dark.backgroundElement, borderRadius: 24, overflow: 'hidden', borderWidth: 1, borderColor: Colors.dark.border },
-  menuItem: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 18, paddingHorizontal: 20, borderBottomWidth: 1, borderBottomColor: Colors.dark.border },
+  menuContainer: { backgroundColor: Colors.light.backgroundElement, borderRadius: 24, overflow: 'hidden', shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 15, shadowOffset: { width: 0, height: 5 }, elevation: 5 },
+  menuItem: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 18, paddingHorizontal: 20, borderBottomWidth: 1, borderBottomColor: '#F3F4F6' },
   menuItemLeft: { flexDirection: 'row', alignItems: 'center', gap: 15 },
-  menuItemText: { color: Colors.dark.text, fontSize: 16, fontWeight: '500' },
+  menuItemText: { color: Colors.light.text, fontSize: 16, fontWeight: '600' },
 });
