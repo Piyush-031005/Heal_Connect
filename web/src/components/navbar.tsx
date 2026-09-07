@@ -182,7 +182,7 @@ export default function Navbar() {
         <div className="bg-gradient-to-br from-purple-300 to-purple-400 px-5 pt-6 pb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
-              <Image src={theme === 'theme-royal-indigo' ? '/center_logo_final.png' : '/center_logo_final.png'} alt="ZenAuraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
+              <Image src={theme === 'theme-royal-indigo' ? '/main centre logo/main_logo.png' : '/main centre logo/main_logo.png'} alt="ZenAuraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
               <span className="text-2xl font-serif font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide">Zen<span className="text-[#D5B6DC]">Auraa</span></span>
             </div>
             <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
@@ -290,7 +290,7 @@ export default function Navbar() {
                 </svg>
               </button>
               <Link href="/" className="flex items-center gap-2">
-                <Image src={theme === 'theme-royal-indigo' ? '/center_logo_final.png' : '/center_logo_final.png'} alt="ZenAuraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
+                <Image src={theme === 'theme-royal-indigo' ? '/main centre logo/main_logo.png' : '/main centre logo/main_logo.png'} alt="ZenAuraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
                 <span className="text-2xl font-serif font-black text-[#1C0D40] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105"><span className="text-white">Zen</span><span className="text-[#D5B6DC]">Auraa</span></span>
               </Link>
             </div>
@@ -310,18 +310,18 @@ export default function Navbar() {
                     <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </span>
                   <div className="absolute top-full left-0 mt-2 w-56 bg-[#7A48AB] border border-[#694091] rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2">
-                    <Link href="/modalities/astrology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Astrology</Link>
-                    <Link href="/modalities/tarot" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Tarot</Link>
-                    <Link href="/modalities/palm-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Palm Reading</Link>
-                    <Link href="/modalities/face-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Face Reading</Link>
                     <Link href="/modalities/numerology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Numerology</Link>
-                    <Link href="/modalities/energy-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Energy Healing</Link>
-                    <Link href="/modalities/meditation" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Meditation</Link>
-                    <Link href="/modalities/yoga" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Yoga &amp; Mindfulness</Link>
-                    <Link href="/modalities/vastu" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Vastu &amp; Space Energy</Link>
-                    <Link href="/modalities/eft" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">EFT Tapping</Link>
-                    <Link href="/modalities/spiritual" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Spiritual Guidance</Link>
+                    <Link href="/modalities/astrology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Astrology</Link>
+                    <Link href="/modalities/space-harmony" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Space Harmony</Link>
+                    <Link href="/modalities/tarot" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Tarot</Link>
+                    <Link href="/modalities/dreams" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Dream Predict</Link>
+                    <Link href="/modalities/face-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Face Reading</Link>
+                    <Link href="/modalities/breathwork" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Breathwork</Link>
+                    <Link href="/modalities/palm-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Palm Reading</Link>
+                    <Link href="/modalities/chakra-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Chakra Healing</Link>
                     <Link href="/modalities/sound-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Sound Healing</Link>
+                    <Link href="/modalities/spiritual" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Spiritual</Link>
+                    <Link href="/modalities/meditation" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Meditation</Link>
                   </div>
                 </div>
                 <Link href="#reviews" className="text-sm font-semibold text-[#1C0D40] hover:text-[#5F3BA9] transition-colors">
@@ -459,7 +459,7 @@ export default function Navbar() {
 
               {langOpen && (
                 <div className={`absolute right-0 mt-2 w-36 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
-                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi (हिन्दी)', sub: 'HI' }, { code: 'es', label: 'Spanish (Español)', sub: 'ES' }, { code: 'fr', label: 'French (Français)', sub: 'FR' }, { code: 'de', label: 'German (Deutsch)', sub: 'DE' }] as const).map((l) => (
+                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi (à¤¹à¤¿à¤¨à¥à¤¦à¥€)', sub: 'HI' }, { code: 'es', label: 'Spanish (EspaÃ±ol)', sub: 'ES' }, { code: 'fr', label: 'French (FranÃ§ais)', sub: 'FR' }, { code: 'de', label: 'German (Deutsch)', sub: 'DE' }] as const).map((l) => (
                     <button
                       key={l.code}
                       onClick={() => { setLang(l.code); setLangOpen(false); }}
