@@ -11,9 +11,9 @@ export default function ModalityScrollGallery({ data }: Props) {
   if (!data.scrollGallery || data.scrollGallery.length === 0) return null;
 
   return (
-    <section className="py-24 bg-background border-t border-primary/10 overflow-hidden relative">
+    <section className="py-24 bg-[#F9F5FF] border-t border-primary/10 overflow-hidden relative">
       <div className="container mx-auto px-6 lg:px-16 mb-16 text-center">
-        <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-4">
+        <h2 className="text-3xl md:text-5xl font-serif text-[#2A1658] mb-4">
           Visual Journey
         </h2>
         <div className="w-16 h-1 bg-primary/40 rounded-full mx-auto" />
@@ -26,8 +26,8 @@ export default function ModalityScrollGallery({ data }: Props) {
       <div className="relative w-full flex overflow-hidden py-10">
         
         {/* Left and Right Fade masks for a clean integration into the background */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#F9F5FF] to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#F9F5FF] to-transparent z-10" />
 
         <motion.div
           animate={{ x: ['0%', '-50%'] }}
