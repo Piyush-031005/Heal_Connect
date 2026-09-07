@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, , Platform } from 'react-native';
 import { Colors } from '@/constants/theme';
 import { Search, Sun, Moon, Eye, Hand, Wind, Heart, Music, Hash } from 'lucide-react-native';
 

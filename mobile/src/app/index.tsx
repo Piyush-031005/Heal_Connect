@@ -1,15 +1,86 @@
-import { View, Text, StyleSheet, ScrollView, Image, TextInput, TouchableOpacity, SafeAreaView, StatusBar, Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, StyleSheet, ScrollView, Image, TextInput, TouchableOpacity, StatusBar, Platform, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors } from '@/constants/theme';
 import { Search, Bell, Sparkles, ChevronRight, Moon, Sun, Wind, Activity, Star } from 'lucide-react-native';
+import Animated, { useSharedValue, useAnimatedStyle, withTiming, withDelay, Easing, runOnJS } from 'react-native-reanimated';
+import { useEffect, useState } from 'react';
+
+const { width, height } = Dimensions.get('window');
 
 export default function HomeScreen() {
   const theme = Colors.light;
+  const [showIntro, setShowIntro] = useState(true);
+
+  // Animation values for Intro
+  const introOpacity = useSharedValue(1);
+  const logoScale = useSharedValue(0.5);
+  const logoOpacity = useSharedValue(0);
+  const contentOpacity = useSharedValue(0);
+  const contentTranslateY = useSharedValue(50);
+
+  useEffect(() => {
+    // Intro Animation Sequence
+    logoOpacity.value = withTiming(1, { duration: 1000 });
+    logoScale.value = withTiming(1, { duration: 1000, easing: Easing.out(Easing.back(1.5)) });
+    
+    // Fade out intro and show content
+    setTimeout(() => {
+      introOpacity.value = withTiming(0, { duration: 800 }, (finished) => {
+        if (finished) {
+          runOnJS(setShowIntro)(false);
+        }
+      });
+      contentOpacity.value = withDelay(400, withTiming(1, { duration: 800 }));
+      contentTranslateY.value = withDelay(400, withTiming(0, { duration: 800, easing: Easing.out(Easing.cubic) }));
+    }, 2500);
+  }, []);
+
+  const animatedIntroStyle = useAnimatedStyle(() => ({
+    opacity: introOpacity.value,
+    zIndex: showIntro ? 100 : -1,
+  }));
+
+  const animatedLogoStyle = useAnimatedStyle(() => ({
+    opacity: logoOpacity.value,
+    transform: [{ scale: logoScale.value }],
+  }));
+
+  const animatedContentStyle = useAnimatedStyle(() => ({
+    opacity: contentOpacity.value,
+    transform: [{ translateY: contentTranslateY.value }],
+  }));
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]}>
       <StatusBar barStyle="dark-content" />
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+      
+      {/* INTRO SPLASH SCREEN */}
+      {showIntro && (
+        <Animated.View style={[StyleSheet.absoluteFill, styles.introContainer, animatedIntroStyle]}>
+          <LinearGradient
+            colors={['#F9F5FF', '#E9D5FF', '#C084FC']}
+            style={StyleSheet.absoluteFill}
+          />
+          <Animated.View style={[styles.introLogoWrapper, animatedLogoStyle]}>
+            <LinearGradient
+              colors={['#FFFFFF', '#F3E8FF']}
+              style={styles.introLogoCircle}
+            >
+              <Text style={styles.introLogoIcon}>🪷</Text>
+            </LinearGradient>
+            <Text style={styles.introTitle}>Zen<Text style={{color: '#FFFFFF'}}>Auraa</Text></Text>
+            <Text style={styles.introSubtitle}>Your Journey to Inner Peace</Text>
+          </Animated.View>
+        </Animated.View>
+      )}
+
+      {/* MAIN CONTENT */}
+      <Animated.ScrollView 
+        contentContainerStyle={styles.scrollContent} 
+        showsVerticalScrollIndicator={false}
+        style={animatedContentStyle}
+      >
         
         {/* Header */}
         <View style={styles.header}>
@@ -24,7 +95,7 @@ export default function HomeScreen() {
             </View>
           </View>
           <TouchableOpacity style={styles.bellIcon}>
-            <Bell color={theme.text} size={24} />
+            <Bell color={theme.text} size={22} />
             <View style={styles.notificationDot} />
           </TouchableOpacity>
         </View>
@@ -50,14 +121,13 @@ export default function HomeScreen() {
             <Text style={styles.featureCardTitle}>Your Peace{'\n'}Our Purpose</Text>
             <Text style={styles.featureCardSubtitle}>Find clarity, healing{'\n'}and balance.</Text>
           </View>
-          {/* Placeholder for Meditation Image */}
           <View style={styles.meditationImagePlaceholder}>
-            <Moon color="#FFFFFF" size={48} opacity={0.3} />
+            <Moon color="#FFFFFF" size={60} opacity={0.2} />
           </View>
         </LinearGradient>
 
         {/* Ask ZenAuraa Banner */}
-        <TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.8}>
           <LinearGradient
             colors={['rgba(192,132,252,0.15)', 'rgba(78,205,196,0.15)']}
             start={{ x: 0, y: 0 }}
@@ -85,10 +155,10 @@ export default function HomeScreen() {
         
         <View style={styles.servicesGrid}>
           {[
-            { id: 1, name: 'Astrology', icon: <Sun color={theme.primary} size={28} /> },
-            { id: 2, name: 'Tarot', icon: <Moon color={theme.primary} size={28} /> },
-            { id: 3, name: 'Meditation', icon: <Wind color={theme.primary} size={28} /> },
-            { id: 4, name: 'Healing', icon: <Activity color={theme.primary} size={28} /> },
+            { id: 1, name: 'Astrology', icon: <Sun color={theme.primary} size={26} /> },
+            { id: 2, name: 'Tarot', icon: <Moon color={theme.primary} size={26} /> },
+            { id: 3, name: 'Meditation', icon: <Wind color={theme.primary} size={26} /> },
+            { id: 4, name: 'Healing', icon: <Activity color={theme.primary} size={26} /> },
           ].map((service) => (
             <TouchableOpacity key={service.id} style={styles.serviceItem}>
               <View style={styles.serviceIconWrapper}>
@@ -124,55 +194,65 @@ export default function HomeScreen() {
             </TouchableOpacity>
           ))}
         </ScrollView>
-        <View style={{ height: 40 }} />
-      </ScrollView>
+        <View style={{ height: 100 }} />
+      </Animated.ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, paddingTop: Platform.OS === 'android' ? 40 : 0 },
-  scrollContent: { paddingHorizontal: 20, paddingTop: 20 },
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 25 },
-  headerLeft: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  avatar: { width: 44, height: 44, borderRadius: 22, borderWidth: 1, borderColor: Colors.light.border },
-  greeting: { color: Colors.light.textSecondary, fontSize: 13, fontWeight: '500' },
-  userName: { color: Colors.light.text, fontSize: 18, fontWeight: 'bold', marginTop: 2 },
-  bellIcon: { width: 44, height: 44, borderRadius: 22, backgroundColor: Colors.light.backgroundElement, justifyContent: 'center', alignItems: 'center', shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 5, shadowOffset: { width: 0, height: 2 }, elevation: 2 },
-  notificationDot: { position: 'absolute', top: 12, right: 12, width: 8, height: 8, borderRadius: 4, backgroundColor: '#EF4444' },
+  container: { flex: 1 },
   
-  searchContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: Colors.light.backgroundElement, borderRadius: 16, paddingHorizontal: 16, height: 55, marginBottom: 25, shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 8, shadowOffset: { width: 0, height: 4 }, elevation: 3 },
-  searchIcon: { marginRight: 10 },
-  searchInput: { flex: 1, color: Colors.light.text, fontSize: 16, height: '100%' },
+  // Intro Styles
+  introContainer: { justifyContent: 'center', alignItems: 'center' },
+  introLogoWrapper: { alignItems: 'center' },
+  introLogoCircle: { width: 120, height: 120, borderRadius: 60, justifyContent: 'center', alignItems: 'center', shadowColor: '#9333EA', shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.3, shadowRadius: 20, elevation: 10, marginBottom: 20 },
+  introLogoIcon: { fontSize: 50 },
+  introTitle: { fontSize: 42, fontWeight: '900', color: '#2A1658', letterSpacing: 1 },
+  introSubtitle: { fontSize: 16, color: '#FFFFFF', fontWeight: '600', marginTop: 8, letterSpacing: 0.5, opacity: 0.9 },
 
-  featureCard: { borderRadius: 24, padding: 25, marginBottom: 20, flexDirection: 'row', overflow: 'hidden', height: 160, shadowColor: '#9333EA', shadowOpacity: 0.3, shadowRadius: 15, shadowOffset: { width: 0, height: 8 }, elevation: 10 },
+  // Main Content Styles
+  scrollContent: { paddingHorizontal: 24, paddingTop: 10 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 30 },
+  headerLeft: { flexDirection: 'row', alignItems: 'center', gap: 14 },
+  avatar: { width: 48, height: 48, borderRadius: 24, borderWidth: 2, borderColor: Colors.light.border },
+  greeting: { color: Colors.light.textSecondary, fontSize: 14, fontWeight: '500' },
+  userName: { color: Colors.light.text, fontSize: 20, fontWeight: '800', marginTop: 2 },
+  bellIcon: { width: 44, height: 44, borderRadius: 22, backgroundColor: Colors.light.backgroundElement, justifyContent: 'center', alignItems: 'center', shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 2 },
+  notificationDot: { position: 'absolute', top: 12, right: 12, width: 8, height: 8, borderRadius: 4, backgroundColor: '#EF4444', borderWidth: 1, borderColor: '#FFFFFF' },
+  
+  searchContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: Colors.light.backgroundElement, borderRadius: 20, paddingHorizontal: 18, height: 58, marginBottom: 25, shadowColor: '#9333EA', shadowOpacity: 0.06, shadowRadius: 15, shadowOffset: { width: 0, height: 8 }, elevation: 4 },
+  searchIcon: { marginRight: 12 },
+  searchInput: { flex: 1, color: Colors.light.text, fontSize: 16, height: '100%', fontWeight: '500' },
+
+  featureCard: { borderRadius: 28, padding: 28, marginBottom: 25, flexDirection: 'row', overflow: 'hidden', height: 170, shadowColor: '#9333EA', shadowOpacity: 0.4, shadowRadius: 20, shadowOffset: { width: 0, height: 10 }, elevation: 12 },
   featureCardContent: { flex: 1, justifyContent: 'center', zIndex: 2 },
-  featureCardTitle: { color: '#FFFFFF', fontSize: 24, fontWeight: '800', marginBottom: 8, lineHeight: 30 },
-  featureCardSubtitle: { color: 'rgba(255,255,255,0.85)', fontSize: 14, lineHeight: 20 },
-  meditationImagePlaceholder: { position: 'absolute', right: -10, bottom: -20, width: 140, height: 140, borderRadius: 70, backgroundColor: 'rgba(255,255,255,0.1)', justifyContent: 'center', alignItems: 'center', zIndex: 1 },
+  featureCardTitle: { color: '#FFFFFF', fontSize: 26, fontWeight: '900', marginBottom: 8, lineHeight: 32, letterSpacing: 0.5 },
+  featureCardSubtitle: { color: 'rgba(255,255,255,0.9)', fontSize: 14, lineHeight: 22, fontWeight: '500' },
+  meditationImagePlaceholder: { position: 'absolute', right: -15, bottom: -25, width: 150, height: 150, borderRadius: 75, backgroundColor: 'rgba(255,255,255,0.15)', justifyContent: 'center', alignItems: 'center', zIndex: 1, transform: [{rotate: '-15deg'}] },
 
-  aiBanner: { flexDirection: 'row', alignItems: 'center', borderRadius: 20, padding: 16, marginBottom: 30, backgroundColor: 'rgba(255,255,255,0.7)', borderWidth: 1, borderColor: '#F3E8FF' },
-  aiBannerIconWrapper: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#F3E8FF', justifyContent: 'center', alignItems: 'center', marginRight: 15 },
+  aiBanner: { flexDirection: 'row', alignItems: 'center', borderRadius: 24, padding: 18, marginBottom: 35, backgroundColor: 'rgba(255,255,255,0.9)', borderWidth: 1, borderColor: '#F3E8FF', shadowColor: '#9333EA', shadowOpacity: 0.08, shadowRadius: 15, shadowOffset: { width: 0, height: 6 }, elevation: 3 },
+  aiBannerIconWrapper: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#F3E8FF', justifyContent: 'center', alignItems: 'center', marginRight: 16 },
   aiBannerTextWrapper: { flex: 1 },
-  aiBannerTitle: { color: Colors.light.text, fontSize: 16, fontWeight: 'bold', marginBottom: 2 },
-  aiBannerSubtitle: { color: Colors.light.textSecondary, fontSize: 13 },
-  aiBannerArrow: { width: 32, height: 32, borderRadius: 16, backgroundColor: '#F3E8FF', justifyContent: 'center', alignItems: 'center' },
+  aiBannerTitle: { color: Colors.light.text, fontSize: 17, fontWeight: '800', marginBottom: 2 },
+  aiBannerSubtitle: { color: Colors.light.textSecondary, fontSize: 13, fontWeight: '500' },
+  aiBannerArrow: { width: 36, height: 36, borderRadius: 18, backgroundColor: '#F3E8FF', justifyContent: 'center', alignItems: 'center' },
 
-  sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 },
-  sectionTitle: { color: Colors.light.text, fontSize: 18, fontWeight: 'bold' },
-  seeAllText: { color: Colors.light.primary, fontSize: 14, fontWeight: '600' },
+  sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 },
+  sectionTitle: { color: Colors.light.text, fontSize: 20, fontWeight: '800' },
+  seeAllText: { color: Colors.light.primary, fontSize: 15, fontWeight: '700' },
 
-  servicesGrid: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 30 },
+  servicesGrid: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 35 },
   serviceItem: { alignItems: 'center', width: '23%' },
-  serviceIconWrapper: { width: 60, height: 60, borderRadius: 20, backgroundColor: Colors.light.backgroundElement, justifyContent: 'center', alignItems: 'center', marginBottom: 8, shadowColor: '#000', shadowOpacity: 0.03, shadowRadius: 5, shadowOffset: { width: 0, height: 2 }, elevation: 2 },
-  serviceName: { color: Colors.light.text, fontSize: 12, fontWeight: '600', textAlign: 'center' },
+  serviceIconWrapper: { width: 64, height: 64, borderRadius: 22, backgroundColor: Colors.light.backgroundElement, justifyContent: 'center', alignItems: 'center', marginBottom: 10, shadowColor: '#9333EA', shadowOpacity: 0.08, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 3 },
+  serviceName: { color: Colors.light.text, fontSize: 13, fontWeight: '700', textAlign: 'center' },
 
-  expertsScroll: { gap: 15 },
-  expertCard: { flexDirection: 'row', alignItems: 'center', backgroundColor: Colors.light.backgroundElement, borderRadius: 20, padding: 12, paddingRight: 20, shadowColor: '#000', shadowOpacity: 0.03, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 3 },
-  expertImage: { width: 50, height: 50, borderRadius: 16, marginRight: 15 },
+  expertsScroll: { gap: 16, paddingBottom: 10, paddingRight: 20 },
+  expertCard: { flexDirection: 'row', alignItems: 'center', backgroundColor: Colors.light.backgroundElement, borderRadius: 24, padding: 14, paddingRight: 24, shadowColor: '#9333EA', shadowOpacity: 0.06, shadowRadius: 12, shadowOffset: { width: 0, height: 5 }, elevation: 4 },
+  expertImage: { width: 56, height: 56, borderRadius: 18, marginRight: 16 },
   expertInfo: { justifyContent: 'center' },
-  expertName: { color: Colors.light.text, fontSize: 15, fontWeight: 'bold', marginBottom: 4 },
-  expertTitle: { color: Colors.light.textSecondary, fontSize: 12, marginBottom: 6 },
-  ratingWrapper: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  ratingText: { color: '#FAD058', fontSize: 12, fontWeight: 'bold' },
+  expertName: { color: Colors.light.text, fontSize: 16, fontWeight: '800', marginBottom: 4 },
+  expertTitle: { color: Colors.light.textSecondary, fontSize: 13, fontWeight: '500', marginBottom: 6 },
+  ratingWrapper: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  ratingText: { color: '#FAD058', fontSize: 13, fontWeight: '800' },
 });

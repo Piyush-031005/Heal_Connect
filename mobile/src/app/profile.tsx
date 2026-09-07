@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, , Platform } from 'react-native';
 import { Colors } from '@/constants/theme';
 import { Settings, Calendar, Heart, Wallet, Bell, HelpCircle, ChevronRight, Crown } from 'lucide-react-native';
 

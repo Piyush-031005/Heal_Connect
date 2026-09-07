@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, , Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors } from '@/constants/theme';
 import { Mic } from 'lucide-react-native';
@@ -51,7 +52,7 @@ export default function ChatScreen() {
               end={{ x: 0.8, y: 0.8 }}
               style={styles.orbInner}
             >
-              <Text style={{ fontSize: 40 }}>🪷</Text>
+              <Text style={{ fontSize: 40 }}>ðŸª·</Text>
             </LinearGradient>
           </LinearGradient>
         </Animated.View>
