@@ -253,8 +253,12 @@ export const sessionsApi = {
       { headers: authHeader(token) }
     ),
 
-  end: (token: string, sessionId: string) =>
-    request(`/api/sessions/${sessionId}/end`, { method: 'POST', headers: authHeader(token) }),
+  end: (token: string, sessionId: string, recordingUrl?: string) =>
+    request(`/api/sessions/${sessionId}/end`, {
+      method: 'POST',
+      headers: authHeader(token),
+      body: JSON.stringify({ recordingUrl })
+    }),
 
   practitionerActive: (token: string) =>
     request<{ sessions: { id: string; type: string; status: string; createdAt: string; user: { id: string; name: string | null; photoUrl: string | null } }[] }>(

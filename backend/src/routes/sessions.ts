@@ -486,6 +486,18 @@ router.post('/:id/end', requireAuth, async (req: AuthRequest, res: Response) => 
     data: { status: targetStatus, endTime: new Date() },
   });
 
+  // Task 2: Trigger Deepgram transcription if an Agora recording URL was provided
+  if (targetStatus === 'COMPLETED' && req.body.recordingUrl) {
+    import('../services/transcription.service').then(({ transcribeFromRecordingUrl }) => {
+      transcribeFromRecordingUrl(
+        sessionId,
+        req.body.recordingUrl,
+        session.userId,
+        session.practitionerId
+      ).catch(console.error);
+    });
+  }
+
   await prisma.practitioner.update({
     where: { id: session.practitionerId },
     data: { isBusy: false },
