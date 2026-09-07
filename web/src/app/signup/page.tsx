@@ -71,7 +71,7 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#301368] via-[#5F3BA9] to-[#D5B6DC] text-white flex flex-col md:flex-row font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#F9F5FF] via-[#E9D5FF] to-[#D8B4FE] text-[#2A1658] flex flex-col md:flex-row font-sans relative overflow-hidden">
       {/* Background Ambience */}
       
 
