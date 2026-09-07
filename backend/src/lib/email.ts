@@ -194,13 +194,14 @@ export async function sendPasswordChangedEmail(to: string, name: string): Promis
     textFallback: `Password changed notification for ${name}. Login Link: ${loginUrl}`,
   });
 }
+
 export async function sendExpertOnboardingEmail(to: string, name: string): Promise<void> {
-  const dashboardUrl = \\/expert/dashboard\;
-  const html = wrap(\
+  const dashboardUrl = `${FRONTEND_URL}/expert/dashboard`;
+  const html = wrap(`
     <tr>
       <td style="padding:40px;">
         <h2 style="color:#1a1a1a;font-size:22px;margin:0 0 12px;">
-          ?? Congratulations, \! You're officially a Zenauraa Expert.
+          🎉 Congratulations, ${name}! You're officially a Zenauraa Expert.
         </h2>
         <p style="color:#6b7280;font-size:16px;line-height:1.7;margin:0 0 16px;">
           Your profile has been reviewed and <strong style="color:#d97706;">verified by our admin team</strong>.
@@ -211,19 +212,19 @@ export async function sendExpertOnboardingEmail(to: string, name: string): Promi
           <li>Log in to your <strong>Expert Dashboard</strong></li>
           <li>Go <strong>Online</strong> to start receiving session requests</li>
           <li>Set up your <strong>Availability Calendar</strong> for scheduled bookings</li>
-          <li>Complete your profile � add a photo, bio, and certifications</li>
+          <li>Complete your profile — add a photo, bio, and certifications</li>
         </ul>
-        <p style="text-align:center;">\</p>
+        <p style="text-align:center;">${btn(dashboardUrl, 'Go to Expert Dashboard')}</p>
         <p style="color:#9ca3af;font-size:13px;margin:32px 0 0;text-align:center;">
-          Welcome to the Zenauraa family. We're excited to have you on board! ??
+          Welcome to the Zenauraa family. We're excited to have you on board! 🌿
         </p>
       </td>
-    </tr>\);
+    </tr>`);
 
   await sendEmail({
     to,
-    subject: "?? You're verified! Welcome to Zenauraa as an Expert",
+    subject: "🎉 You're verified! Welcome to Zenauraa as an Expert",
     html,
-    textFallback: \Congratulations \! Your Zenauraa expert account has been verified. Log in at \\,
+    textFallback: `Congratulations ${name}! Your Zenauraa expert account has been verified. Log in at ${dashboardUrl}`,
   });
 }
