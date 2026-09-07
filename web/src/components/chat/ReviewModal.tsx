@@ -5,10 +5,13 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 interface ReviewModalProps {
   open: boolean;
   practitionerId?: string;
+  practitionerName?: string;
+  sessionId?: string;
   onClose: () => void;
+  onSubmitted?: () => void;
 }
 
-export default function ReviewModal({ open, practitionerId, onClose }: ReviewModalProps) {
+export default function ReviewModal({ open, practitionerId, practitionerName, sessionId, onClose, onSubmitted }: ReviewModalProps) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent>
