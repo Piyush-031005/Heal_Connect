@@ -6,6 +6,7 @@
 import { Router, type Request, type Response } from 'express';
 import { body } from 'express-validator';
 import { prisma } from '../lib/prisma';
+import { sendExpertOnboardingEmail } from '../lib/email';
 import { handleValidation } from '../middleware/validate';
 import { canGoLiveAsAstrologer } from '../middleware/astrologer';
 
@@ -173,6 +174,18 @@ router.post(
         previousStatus: profile.applicationStatus,
         newStatus: 'APPROVED',
       });
+
+      // Send onboarding email to the expert (best-effort, don't fail the request)
+      (async () => {
+        try {
+          const user = await prisma.user.findUnique({ where: { id: profile.userId } });
+          const to = user?.email;
+          const name = user?.name || user?.email || 'Expert';
+          if (to) await sendExpertOnboardingEmail(to, name);
+        } catch (err) {
+          console.error('Error sending expert onboarding email:', err);
+        }
+      })();
 
       res.json({ success: true, message: 'Astrologer approved.', data: { applicationStatus: updated.applicationStatus } });
     } catch (err) {
