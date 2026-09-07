@@ -459,10 +459,10 @@ export default function Navbar() {
 
               {langOpen && (
                 <div className={`absolute right-0 mt-2 w-36 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
-                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi (à¤¹à¤¿à¤¨à¥à¤¦à¥€)', sub: 'HI' }, { code: 'es', label: 'Spanish (EspaÃ±ol)', sub: 'ES' }, { code: 'fr', label: 'French (FranÃ§ais)', sub: 'FR' }, { code: 'de', label: 'German (Deutsch)', sub: 'DE' }] as const).map((l) => (
+                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi (ÃƒÂ Ã‚Â¤Ã‚Â¹ÃƒÂ Ã‚Â¤Ã‚Â¿ÃƒÂ Ã‚Â¤Ã‚Â¨ÃƒÂ Ã‚Â¥Ã‚ÂÃƒÂ Ã‚Â¤Ã‚Â¦ÃƒÂ Ã‚Â¥Ã¢â€šÂ¬)', sub: 'HI' }, { code: 'es', label: 'Spanish (EspaÃƒÆ’Ã‚Â±ol)', sub: 'ES' }, { code: 'fr', label: 'French (FranÃƒÆ’Ã‚Â§ais)', sub: 'FR' }, { code: 'de', label: 'German (Deutsch)', sub: 'DE' }] as const).map((l) => (
                     <button
                       key={l.code}
-                      onClick={() => { setLang(l.code); setLangOpen(false); }}
+                      onClick={() => { setLang(l.code as 'en' | 'hi'); setLangOpen(false); }}
                       className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
                         lang === l.code
                           ? 'bg-purple-50 text-[#d97706] font-semibold'
