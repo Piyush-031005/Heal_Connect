@@ -73,42 +73,13 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
       // Notify the other party that someone joined
       socket.to(`room:${sessionId}`).emit('peer_joined', { sessionId });
 
-      // Start session as soon as the first party joins (don't wait for both)
-      // If both are already in room, just emit; otherwise set startTime on first join
+      // Joining the Socket.IO room is only signaling. The audio client calls
+      // /connect after Agora has joined and published successfully.
       const room = io!.sockets.adapter.rooms.get(`room:${sessionId}`);
       const roomSize = room ? room.size : 1;
-
-      prisma.session.findUnique({ where: { id: sessionId } }).then((sess: Awaited<ReturnType<typeof prisma.session.findUnique>>) => {
-        if (!sess) return;
-        
-        // Timer only starts if the expert has accepted, and both are in the room.
-        if (sess.status === 'INITIATED') return;
-        if (sess.status === 'COMPLETED' || sess.status === 'REJECTED' || sess.status === 'CANCELLED') return;
-        
-        if (!sess.startTime) {
-          if (roomSize < 2) return; // Wait for both parties
-
-          // Both joined — start timer, set ACTIVE, fire session_started
-          const startTime = new Date();
-          prisma.session.update({
-            where: { id: sessionId },
-            data: { startTime, status: 'ACTIVE' },
-          }).then(async () => {
-            io!.to(`room:${sessionId}`).emit('session_started', { sessionId, startTime });
-            
-            // Set practitioner to busy
-            await prisma.practitioner.update({
-              where: { id: sess.practitionerId },
-              data: { isBusy: true },
-            });
-            io!.emit('practitioner_status', { practitionerId: sess.practitionerId, isOnline: true, isBusy: true });
-            
-          }).catch(console.error);
-        } else {
-          // Session already started (reconnection) — just notify them
-          io!.to(`room:${sessionId}`).emit('session_started', { sessionId, startTime: sess.startTime });
-        }
-      }).catch(console.error);
+      if (roomSize > 1) {
+        socket.to(`room:${sessionId}`).emit('peer_joined', { sessionId });
+      }
     });
 
     // ── Send message ─────────────────────────────────────────────────────────
@@ -150,6 +121,12 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
 
     socket.on('typing_stop', ({ sessionId }: { sessionId: string }) => {
       socket.to(`room:${sessionId}`).emit('typing_update', { userId, isTyping: false });
+    });
+
+    // ── Call event synchronization ──────────────────────────────────────────
+    socket.on('call_mute_toggle', ({ sessionId, isMuted }: { sessionId: string; isMuted: boolean }) => {
+      // Broadcast mute state to all participants in the session room
+      socket.to(`room:${sessionId}`).emit('call_mute_update', { sessionId, userId, isMuted });
     });
 
     // ── Read receipts ────────────────────────────────────────────────────────

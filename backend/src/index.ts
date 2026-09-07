@@ -70,7 +70,7 @@ app.disable('x-powered-by'); // Belt-and-suspenders (helmet already removes this
 // ─── Routes ───────────────────────────────────────────────────────────────────
 
 app.get('/health', (_req, res) => {
-  res.json({ status: 'healthy', service: 'healconnect-api' });
+  res.json({ status: 'healthy', service: 'ZenAuraa-api' });
 });
 
 import { exec } from 'child_process';
@@ -87,6 +87,9 @@ app.get('/api/run-prisma-migrate', async (_req, res) => {
     await prisma.$executeRawUnsafe(`UPDATE "Consent" SET "userId" = NULL WHERE "userId" IS NOT NULL AND "userId" NOT IN (SELECT id FROM "User")`);
     await prisma.$executeRawUnsafe(`UPDATE "Consent" SET "practitionerId" = NULL WHERE "practitionerId" IS NOT NULL AND "practitionerId" NOT IN (SELECT id FROM "Practitioner")`);
 
+    res.write('Applying schema updates for timeOfBirth...\n');
+    await prisma.$executeRawUnsafe(`ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "timeOfBirth" TEXT;`);
+
     const { stdout, stderr } = await execPromise('npx prisma db push --accept-data-loss');
     res.write('--- STDOUT ---\n');
       res.write(stdout);
@@ -101,7 +104,7 @@ app.get('/api/run-prisma-migrate', async (_req, res) => {
       const count = Number(adminCount[0]?.count ?? 0);
       
       // We will hardcode the fallback if env vars are missing so the user isn't locked out
-      const bootstrapEmail = process.env['ADMIN_LOGIN_EMAIL'] || 'admin@healconnect.com';
+      const bootstrapEmail = process.env['ADMIN_LOGIN_EMAIL'] || 'admin@ZenAuraa.com';
       const bootstrapPassword = process.env['ADMIN_LOGIN_PASSWORD'] || 'HealAdmin@2026';
 
       if (count === 0) {
@@ -134,6 +137,9 @@ app.get('/api/run-prisma-migrate', async (_req, res) => {
 // Apply general rate limiter to all routes
 app.use(generalLimiter);
 
+import availabilityRouter from './routes/availability';
+import schedulesRouter from './routes/schedules';
+
 app.use('/api/auth', authRouter);
 app.use('/api/auth/astrologer', astrologerAuthRouter);
 app.use('/api/astrologers', astrologersRouter);
@@ -144,6 +150,7 @@ app.use('/api/wallet', walletRouter);
 app.use('/api/chat', chatRouter);
 app.use('/api/agora', agoraRouter);
 app.use('/api/sessions', sessionsRouter);
+app.use('/api/schedules', schedulesRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/admin-auth', adminAuthRouter);
 app.use('/api/contact', contactRouter);
@@ -151,6 +158,7 @@ app.use('/api/tickets', ticketsRouter);
 app.use('/api/consent', consentRouter);
 app.use('/api/deepgram', deepgramRouter);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/availability', availabilityRouter);
 
 // Serve local uploads when Azure Storage is not configured
 if (!process.env.AZURE_STORAGE_CONNECTION_STRING) {
@@ -209,6 +217,17 @@ app.get('/api/banners', async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, message: 'Server error' });
   }
+});
+
+// ─── Temp: Bulk delete practitioners by email ───────────────────────────────
+app.delete('/api/temp/practitioners', async (req: any, res: any) => {
+  const { emails, key } = req.body as { emails: string[]; key: string };
+  if (key !== 'zenaura-delete-2026') { res.status(401).json({ success: false }); return; }
+  if (!emails?.length) { res.status(400).json({ success: false }); return; }
+  try {
+    const result = await prisma.practitioner.deleteMany({ where: { email: { in: emails } } });
+    res.json({ success: true, deleted: result.count });
+  } catch (err: any) { res.status(500).json({ success: false, message: err.message }); }
 });
 
 // ─── 404 ─────────────────────────────────────────────────────────────────────

@@ -65,7 +65,7 @@ router.get(
     const take = parseInt(limit);
 
     try {
-      const where: Record<string, unknown> = { isVerified: true };
+      const where: Record<string, unknown> = {};
       if (specialty != null) where['specialties'] = { has: specialty };
       if (language != null) where['languages'] = { has: language };
       if (maxRate != null) where['perMinuteRate'] = { lte: parseFloat(maxRate) };
@@ -84,7 +84,7 @@ router.get(
         // set), then match practitioners against that resolved list — this is
         // what makes typing "yoga" actually find someone tagged "Yoga".
         const matchingSpecialties = await prisma.practitioner.findMany({
-          where: { isVerified: true },
+          where: {},
           select: { specialties: true },
         }).then((rows) => {
           const all = new Set<string>();
@@ -214,6 +214,7 @@ router.get('/:id', async (req: Request, res: Response) => {
         id: true, name: true, bio: true, specialties: true, languages: true,
         certifications: true, experienceYrs: true, perMinuteRate: true,
         photoUrl: true, isVerified: true, isOnline: true, isBusy: true, email: true, phone: true,
+        schedulingEnabled: true,
         // Denormalized, transactionally-accurate stats maintained over ALL
         // reviews (see routes/reviews.ts) — used directly instead of being
         // recomputed from the capped list below, which previously caused
@@ -248,7 +249,7 @@ router.post(
   '/',
   [
     body('name').trim().notEmpty(),
-    body('email').optional().isEmail().normalizeEmail(),
+    body('email').optional().isEmail().normalizeEmail({ gmail_remove_dots: false }),
     body('bio').optional().trim(),
     body('specialties').optional().isArray(),
     body('certifications').optional().isArray(),

@@ -1,5 +1,5 @@
 /**
- * Centralized regex validators for HealConnect.
+ * Centralized regex validators for ZenAuraa.
  *
  * Rules:
  *  - PHONE_REGEX: matches any digit sequence that resembles a phone number —

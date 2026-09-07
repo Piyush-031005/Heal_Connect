@@ -212,6 +212,8 @@ CREATE TABLE IF NOT EXISTS "AdminUser" (
 );
 CREATE UNIQUE INDEX IF NOT EXISTS "AdminUser_email_key" ON "AdminUser"("email");
 CREATE INDEX IF NOT EXISTS "AdminUser_email_idx" ON "AdminUser"("email");
+
+ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "timeOfBirth" TEXT;
 `;
 
 /**

@@ -79,7 +79,7 @@ router.post(
   '/register',
   authLimiter,
   [
-    body('email').isEmail().normalizeEmail().withMessage('Valid email required'),
+    body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
     body('password')
       .isLength({ min: 8 }).withMessage('Password must be at least 8 characters')
       .matches(/[A-Z]/).withMessage('Password must contain at least one uppercase letter')
@@ -195,11 +195,7 @@ router.post(
           console.error('Verification email failed:', e)
         );
       } else if (phone) {
-        if (phone.startsWith('+91')) {
-          console.warn('MSG91 configuration pending — skipping OTP for Indian number during registration.');
-        } else {
-          void sendOtpSms(phone).catch((e) => console.error('OTP SMS failed:', e));
-        }
+        void sendOtpSms(phone).catch((e) => console.error('OTP SMS failed:', e));
       }
 
       const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
@@ -236,7 +232,7 @@ router.post(
   '/login',
   authLimiter,
   [
-    body('email').isEmail().normalizeEmail().withMessage('Valid email required'),
+    body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
     body('password').notEmpty().withMessage('Password required'),
   ],
   handleValidation,
@@ -331,21 +327,22 @@ router.post(
   [
     body('phone').notEmpty().withMessage('Phone number required'),
     body('role').optional().isIn(['user', 'practitioner']).withMessage('Role must be user or practitioner'),
+    body('intent').optional().isIn(['login', 'signup', 'register']).withMessage('Invalid intent'),
   ],
   handleValidation,
   async (req: Request, res: Response) => {
-    const { phone, role = 'user' } = req.body as { phone: string; role?: 'user' | 'practitioner' };
+    const { phone, role = 'user', intent = 'login' } = req.body as { phone: string; role?: 'user' | 'practitioner'; intent?: 'login' | 'signup' | 'register' };
 
     try {
       if (role === 'practitioner') {
         const practitioner = await prisma.practitioner.findUnique({ where: { phone } });
-        if (!practitioner) {
+        if (!practitioner && intent === 'login') {
           res.status(404).json({ success: false, message: 'Practitioner not found with this phone number' });
           return;
         }
       } else {
         const user = await prisma.user.findUnique({ where: { phone } });
-        if (!user) {
+        if (intent === 'login' && !user) {
           res.status(404).json({ success: false, message: 'User not found with this phone number' });
           return;
         }
@@ -406,24 +403,31 @@ router.post(
           },
         });
       } else {
-        const user = await prisma.user.findUnique({ where: { phone } });
+        let user = await prisma.user.findUnique({ where: { phone } });
         if (!user) {
-          res.status(404).json({ success: false, message: 'User not found' });
-          return;
-        }
-        
-        if (isActivelyBanned(user)) {
-          bannedResponse(res, user);
-          return;
-        }
-
-        // Mark phone verified just in case it wasn't
-        if (!user.isPhoneVerified) {
-          await prisma.user.update({
-            where: { id: user.id },
-            data: { isPhoneVerified: true },
+          // Automatic account creation for phone OTP signup
+          user = await prisma.user.create({
+            data: {
+              phone,
+              isPhoneVerified: true,
+              provider: 'phone',
+              wallet: { create: { balance: 0 } },
+            },
           });
-          user.isPhoneVerified = true;
+        } else {
+          if (isActivelyBanned(user)) {
+            bannedResponse(res, user);
+            return;
+          }
+
+          // Mark phone verified just in case it wasn't
+          if (!user.isPhoneVerified) {
+            await prisma.user.update({
+              where: { id: user.id },
+              data: { isPhoneVerified: true },
+            });
+            user.isPhoneVerified = true;
+          }
         }
 
         const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
@@ -583,7 +587,7 @@ router.post(
       console.log('Google token verified for user:', { googleId: googleId.substring(0, 10) + '...', email, name });
 
       // Support both 'role' and 'state' parameters for expert authentication
-      const isExpert = role === 'expert' || state === 'expert';
+      const isExpert = role === 'expert' || state === 'expert' || state === 'expert_login' || state === 'expert_signup';
       console.log('Authentication type determined:', { isExpert, role, state });
 
       if (isExpert) {
@@ -591,14 +595,23 @@ router.post(
         let pract = await prisma.practitioner.findUnique({ where: { googleId } });
         if (!pract && email) pract = await prisma.practitioner.findUnique({ where: { email } });
 
+        // If state is 'expert_login', don't create new practitioners — login only
+        const isLoginOnly = state === 'expert_login' || state === 'expert';
+        if (!pract && isLoginOnly) {
+          res.status(404).json({ success: false, message: 'No expert account found. Please sign up first.', code: 'NOT_REGISTERED' });
+          return;
+        }
+
+        let isNew = false;
         if (!pract) {
+          isNew = true;
           console.log('Creating new practitioner account for:', email);
           pract = await prisma.practitioner.create({
             data: {
               googleId,
               email: email ?? null,
               name: name || 'Expert',
-              isVerified: false, // Must be verified by admin
+              isVerified: false,
             },
           });
           if (email && name) sendWelcomeEmail(email, name).catch(err => console.error('Welcome email failed:', err));
@@ -608,6 +621,11 @@ router.post(
             where: { id: pract.id },
             data: { googleId },
           });
+        }
+
+        if (isActivelyBanned(pract)) {
+          bannedResponse(res, pract);
+          return;
         }
 
         console.log('Practitioner authenticated successfully:', pract.id);
@@ -621,7 +639,7 @@ router.post(
           message: 'Signed in with Google as Expert',
           data: {
             user: {
-              id: pract.id, email: pract.email, name: pract.name, role: 'practitioner'
+              id: pract.id, email: pract.email, name: pract.name, role: 'practitioner', isVerified: pract.isVerified, isNew
             },
             accessToken,
             refreshToken,
@@ -651,6 +669,11 @@ router.post(
           where: { id: user.id },
           data: { googleId, isEmailVerified: true },
         });
+      }
+
+      if (isActivelyBanned(user)) {
+        bannedResponse(res, user);
+        return;
       }
 
       const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
@@ -705,6 +728,11 @@ router.post(
         if (email && name) sendWelcomeEmail(email, name).catch(() => {});
       } else if (!user.appleId) {
         user = await prisma.user.update({ where: { id: user.id }, data: { appleId } });
+      }
+
+      if (isActivelyBanned(user)) {
+        bannedResponse(res, user);
+        return;
       }
 
       const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
@@ -788,7 +816,7 @@ router.get('/verify-email', async (req: Request, res: Response) => {
 router.post(
   '/resend-verification',
   emailLimiter,
-  [body('email').isEmail().normalizeEmail().withMessage('Valid email required')],
+  [body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required')],
   handleValidation,
   async (req: Request, res: Response) => {
     const { email } = req.body as { email: string };
@@ -828,7 +856,7 @@ router.post(
 router.post(
   '/forgot-password',
   emailLimiter,
-  [body('email').isEmail().normalizeEmail().withMessage('Valid email required')],
+  [body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required')],
   handleValidation,
   async (req: Request, res: Response) => {
     const { email } = req.body as { email: string };
@@ -947,10 +975,6 @@ router.post(
         return;
       }
 
-      if (phone.startsWith('+91')) {
-        throw new Error('MSG91 configuration pending.');
-      }
-
       await sendOtpSms(phone);
 
       res.json({ success: true, message: 'OTP sent successfully.' });
@@ -984,10 +1008,6 @@ router.post(
       if (user.isPhoneVerified) {
         res.json({ success: true, message: 'Phone already verified.' });
         return;
-      }
-
-      if (phone.startsWith('+91')) {
-        throw new Error('MSG91 configuration pending.');
       }
 
       const isValid = await verifyOtpSms(phone, otp);
@@ -1030,9 +1050,6 @@ router.post(
       const user = await prisma.user.findUnique({ where: { phone } });
 
       if (user && !user.isPhoneVerified) {
-        if (phone.startsWith('+91')) {
-          throw new Error('MSG91 configuration pending.');
-        }
         await sendOtpSms(phone);
       }
 
@@ -1076,10 +1093,8 @@ router.post(
   authLimiter,
   [
     body('name').trim().notEmpty().withMessage('Name is required'),
-    body('email').isEmail().normalizeEmail().withMessage('Valid email required'),
-    body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
-    // CHILD-02: also required for practitioners — they handle health data and
-    // must be adults.
+    body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
+    body('password').optional().isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
     body('dob')
       .notEmpty().withMessage('Date of birth is required')
       .isISO8601().withMessage('Date of birth must be a valid date (YYYY-MM-DD)'),
@@ -1097,7 +1112,7 @@ router.post(
   handleValidation,
   async (req: Request, res: Response) => {
     const { name, email, password, dob, emailMarketingOptIn } = req.body as {
-      name: string; email: string; password: string; dob: string;
+      name: string; email: string; password?: string; dob: string;
       acceptTerms: boolean; acceptPrivacy: boolean; emailMarketingOptIn?: boolean;
     };
 
@@ -1115,9 +1130,26 @@ router.post(
     }
     try {
       const existing = await prisma.practitioner.findUnique({ where: { email } });
-      if (existing) { res.status(409).json({ success: false, message: 'Email already registered' }); return; }
+      if (existing) {
+        // If Google account already exists, just return tokens (idempotent)
+        if (!password && existing.googleId) {
+          const payload: import('../lib/jwt').JwtPayload = { userId: existing.id, practitionerId: existing.id, ...(existing.email ? { email: existing.email } : {}) };
+          const accessToken = signAccessToken(payload);
+          const refreshToken = signRefreshToken(payload);
+          res.status(200).json({
+            success: true,
+            message: 'Expert account ready.',
+            data: {
+              practitioner: { id: existing.id, name: existing.name, email: existing.email, isVerified: existing.isVerified },
+              accessToken, refreshToken, role: 'practitioner',
+            },
+          });
+          return;
+        }
+        res.status(409).json({ success: false, message: 'Email already registered' }); return;
+      }
 
-      const passwordHash = await bcrypt.hash(password, 12);
+      const passwordHash = password ? await bcrypt.hash(password, 12) : null;
       const practitioner = await prisma.$transaction(async (tx) => {
         const created = await tx.practitioner.create({
           data: { name, email, passwordHash, isVerified: false },
@@ -1168,7 +1200,7 @@ router.post(
   '/practitioner/login',
   authLimiter,
   [
-    body('email').isEmail().normalizeEmail().withMessage('Valid email required'),
+    body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
     body('password').notEmpty().withMessage('Password required'),
   ],
   handleValidation,

@@ -72,12 +72,15 @@ async function sendOtpMsg91(phone: string): Promise<void> {
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   console.log(`\n📲 [MSG91 OTP FOR ${phone}]: ${otp}\n`);
 
+  const MSG91_SENDER_ID = process.env['MSG91_SENDER_ID'] ?? 'ZENAUR'; // Must be exactly 6 letters for Indian DLT
+
   const url = 'https://control.msg91.com/api/v5/otp';
   const params = new URLSearchParams({
     template_id: MSG91_TEMPLATE_ID,
     mobile,
     authkey: MSG91_AUTH_KEY,
     otp, // MSG91 will use this instead of generating one
+    sender: MSG91_SENDER_ID, // Pass exactly 6 characters to comply with DLT
   });
 
   const response = await fetch(`${url}?${params.toString()}`, {
