@@ -16,22 +16,28 @@ For security reasons, `.env` files are ignored in `.gitignore`. To run the proje
 
 Drop these files into their respective folders before starting!
 
-### 1. Backend Setup
-```bash
-cd backend
-npm install
-npm run dev
-```
-*Note: Because our Azure PostgreSQL Database is locked behind an Azure VNet, `npx prisma db push` will time out locally. To apply schema changes, see the **Database Migrations** section below.*
+### Local Development Stack (Docker)
+This repository is fully containerized for local development using Docker. It spins up the Frontend, Backend, PostgreSQL, and Redis in isolated containers with hot-reloading enabled.
 
-### 2. Frontend Setup
+**Prerequisite:** Ensure Docker Desktop is installed and running.
+
+To start the entire stack:
 ```bash
-cd web
-npm install
-npm run dev
+docker-compose up --build
 ```
-The application will be available at `http://localhost:3000`. 
-*Note: All API requests to `/api/*` are automatically proxied to the live Azure Backend in `next.config.mjs`!*
+*(Note: Use `--build` the first time or when package dependencies change. For regular starts, just `docker-compose up` is enough).*
+
+**Run Database Migrations (First time only):**
+Once the containers are running, you need to push the Prisma schema to the local Postgres database. Open a new terminal and run:
+```bash
+docker-compose exec backend npx prisma db push
+```
+
+**Access Points:**
+- **Frontend App**: `http://localhost:3000`
+- **Backend API**: `http://localhost:8082`
+- **Postgres DB**: `localhost:5432` (User: `postgres`, Pass: `test`)
+- **Redis Cache**: `localhost:6379`
 
 ---
 
@@ -64,3 +70,4 @@ If testing Google Auth locally, ensure that `http://localhost:3000/auth/google/c
 - Beautiful Light and Dark modes with smooth transitions.
 - Authentication screens (Login/Signup) ready for integration.
 - PostgreSQL database schema for Practitioners, Users, Wallets, and Sessions.
+

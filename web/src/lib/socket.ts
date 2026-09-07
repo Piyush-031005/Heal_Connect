@@ -3,7 +3,7 @@ import { io, Socket } from 'socket.io-client';
 // WebSocket connects directly to backend — Next.js rewrites only handle HTTP
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_BACKEND_WS_URL ||
-  'https://Zenauraa-backend-dqcsaqf4a6baffaz.centralindia-01.azurewebsites.net';
+  'https://ZenAuraa-backend-dqcsaqf4a6baffaz.centralindia-01.azurewebsites.net';
 
 let socket: Socket | null = null;
 

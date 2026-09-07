@@ -18,17 +18,48 @@ import {
   sendPasswordResetEmail,
   sendPasswordChangedEmail,
 } from '../lib/email';
-import { isOtpConfigured } from '../lib/sms';
-import { sendTwilioOTP, verifyTwilioOTP } from '../services/twilio.service';
+
+import { sendOtpSms, verifyOtpSms, isOtpConfigured } from '../lib/sms';
 import { handleValidation } from '../middleware/validate';
 import { authLimiter, emailLimiter } from '../middleware/rateLimiter';
 import { requireAuth, type AuthRequest } from '../middleware/auth';
 import { blacklistToken } from '../lib/redis';
+import { buildRegistrationConsentRows } from '../lib/consentPolicy';
 
 const router = Router();
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
+// Debug endpoint to check OAuth configuration
+router.get('/debug/oauth-config', (req: Request, res: Response) => {
+  res.json({
+    success: true,
+    data: {
+      googleClientIdConfigured: !!process.env.GOOGLE_CLIENT_ID,
+      googleClientIdPrefix: process.env.GOOGLE_CLIENT_ID?.substring(0, 20) + '...',
+      frontendUrl: process.env.FRONTEND_URL,
+      appUrl: process.env.APP_URL,
+    }
+  });
+});
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
+
+/** A ban is active if isBanned is set and (banUntil is unset [permanent] or still in the future). */
+function isActivelyBanned(account: { isBanned: boolean; banUntil: Date | null }): boolean {
+  if (!account.isBanned) return false;
+  if (!account.banUntil) return true; // permanent
+  return account.banUntil.getTime() > Date.now();
+}
+
+function bannedResponse(res: Response, account: { banReason: string | null; banUntil: Date | null }) {
+  res.status(403).json({
+    success: false,
+    message: account.banUntil
+      ? `Your account is suspended until ${account.banUntil.toISOString()}.${account.banReason ? ` Reason: ${account.banReason}` : ''}`
+      : `Your account has been suspended.${account.banReason ? ` Reason: ${account.banReason}` : ''}`,
+    code: 'ACCOUNT_SUSPENDED',
+  });
+}
 
 async function issueTokens(userId: string, email?: string | null) {
   const payload = { userId, ...(email ? { email } : {}) };
@@ -48,31 +79,55 @@ router.post(
   '/register',
   authLimiter,
   [
-    body('email').isEmail().normalizeEmail().withMessage('Valid email required'),
+    body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
     body('password')
       .isLength({ min: 8 }).withMessage('Password must be at least 8 characters')
       .matches(/[A-Z]/).withMessage('Password must contain at least one uppercase letter')
       .matches(/[0-9]/).withMessage('Password must contain at least one number'),
     body('name').trim().notEmpty().withMessage('Name is required'),
     body('phone').optional({ nullable: true }).isMobilePhone('any').withMessage('Valid phone number required'),
+    // CHILD-02: DOB is required so we can enforce the 18+ age gate server-side.
+    // The frontend adds a date picker — the server validates independently and
+    // rejects under-18 registrations regardless of what the client sends.
+    body('dob')
+      .notEmpty().withMessage('Date of birth is required')
+      .isISO8601().withMessage('Date of birth must be a valid date (YYYY-MM-DD)'),
     body('verifyMethod')
       .optional()
       .isIn(['email', 'sms'])
       .withMessage('verifyMethod must be "email" or "sms"'),
+    // Two separate required checkboxes, not one bundled "I agree to
+    // everything" — see lib/consentPolicy.ts.
+    body('acceptTerms')
+      .custom((v) => v === true)
+      .withMessage('You must accept the Terms of Service to create an account'),
+    body('acceptPrivacy')
+      .custom((v) => v === true)
+      .withMessage('You must acknowledge the Privacy Notice to create an account'),
+    body('emailMarketingOptIn')
+      .optional()
+      .isBoolean()
+      .withMessage('emailMarketingOptIn must be a boolean'),
   ],
   handleValidation,
   async (req: Request, res: Response) => {
-    const { email, password, name, phone, verifyMethod = 'email' } =
+    const { email, password, name, phone, dob, verifyMethod = 'email', emailMarketingOptIn } =
       req.body as {
-        email: string; password: string; name: string;
+        email: string; password: string; name: string; dob: string;
         phone?: string; verifyMethod?: 'email' | 'sms';
+        acceptTerms: boolean; acceptPrivacy: boolean; emailMarketingOptIn?: boolean;
       };
 
-    // SMS + +91 → MSG91 not ready yet, tell the user to use email instead
-    if (verifyMethod === 'sms' && phone?.startsWith('+91')) {
-      res.status(503).json({
+    // CHILD-02: server-authoritative age check — the client date picker is UX
+    // only; this is the real enforcement.
+    const dobDate = new Date(dob);
+    const minBirthDate = new Date();
+    minBirthDate.setFullYear(minBirthDate.getFullYear() - 18);
+    if (isNaN(dobDate.getTime()) || dobDate > minBirthDate) {
+      res.status(422).json({
         success: false,
-        message: 'SMS OTP for Indian numbers (+91) is coming soon. Please use Email verification for now.',
+        message: 'You must be at least 18 years old to create an account.',
+        code: 'AGE_GATE',
       });
       return;
     }
@@ -102,33 +157,45 @@ router.post(
       const emailVerifyToken = hashToken(rawEmailToken);
       const emailVerifyExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24h
 
-      const user = await prisma.user.create({
-        data: {
-          email,
-          name,
-          passwordHash,
-          phone: phone ?? null,
-          emailVerifyToken,
-          emailVerifyExpiry,
-          provider: 'email',
-          wallet: { create: { balance: 0 } },
-        },
+      // User creation and its consent evidence are written atomically — an
+      // account should never exist without a record of what it agreed to.
+      const user = await prisma.$transaction(async (tx) => {
+        const created = await tx.user.create({
+          data: {
+            email,
+            name,
+            passwordHash,
+            phone: phone ?? null,
+            dob: dobDate,
+            emailVerifyToken,
+            emailVerifyExpiry,
+            provider: 'email',
+            wallet: { create: { balance: 0 } },
+          },
+        });
+        await tx.consent.createMany({
+          data: buildRegistrationConsentRows({
+            userId: created.id,
+            acceptTerms: true, // validated above — registration fails otherwise
+            acceptPrivacy: true,
+            emailMarketingOptIn,
+            ipAddress: req.ip ?? null,
+            userAgent: req.headers['user-agent'] ?? null,
+          }),
+        });
+        return created;
       });
 
       // Send welcome email (non-blocking — never crash registration)
       void sendWelcomeEmail(email, name).catch((e) => console.error('Welcome email failed:', e));
 
       if (useEmail) {
-        // Send email verification (non-blocking — never crash registration)
+        console.log(`\n✉️  [VERIFICATION LINK FOR ${email}]: https://blue-plant-0d21bc900.7.azurestaticapps.net/verify-email?token=${rawEmailToken}\n`);
         void sendVerificationEmail(email, rawEmailToken).catch((e) =>
           console.error('Verification email failed:', e)
         );
       } else if (phone) {
-        if (phone.startsWith('+91')) {
-          console.warn('MSG91 configuration pending — skipping OTP for Indian number during registration.');
-        } else {
-          void sendTwilioOTP(phone).catch((e) => console.error('OTP SMS failed:', e));
-        }
+        void sendOtpSms(phone).catch((e) => console.error('OTP SMS failed:', e));
       }
 
       const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
@@ -165,7 +232,7 @@ router.post(
   '/login',
   authLimiter,
   [
-    body('email').isEmail().normalizeEmail().withMessage('Valid email required'),
+    body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
     body('password').notEmpty().withMessage('Password required'),
   ],
   handleValidation,
@@ -174,8 +241,19 @@ router.post(
 
     try {
       const user = await prisma.user.findUnique({ where: { email } });
-      if (!user || !user.passwordHash) {
+      if (!user) {
         res.status(401).json({ success: false, message: 'Invalid credentials' });
+        return;
+      }
+
+      if (!user.passwordHash) {
+        if (user.googleId) {
+          res.status(401).json({ success: false, message: 'You signed up using Google. Please click "Sign in with Google" to log in, or use Forgot Password to set a manual password.' });
+        } else if (user.appleId) {
+          res.status(401).json({ success: false, message: 'You signed up using Apple. Please click "Sign in with Apple" to log in.' });
+        } else {
+          res.status(401).json({ success: false, message: 'Invalid credentials' });
+        }
         return;
       }
 
@@ -185,14 +263,33 @@ router.post(
         return;
       }
 
+      if (isActivelyBanned(user)) {
+        bannedResponse(res, user);
+        return;
+      }
+
       // ── Block login until account is verified ──────────────────────────────
       const isVerified = user.isEmailVerified || user.isPhoneVerified;
       if (!isVerified) {
+        // Generate fresh verification token for unverified user attempting login
+        const rawToken = generateSecureToken();
+        const tokenHash = hashToken(rawToken);
+        const emailVerifyExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000);
+        await prisma.user.update({
+          where: { id: user.id },
+          data: { emailVerifyToken: tokenHash, emailVerifyExpiry },
+        });
+
+        console.log(`\n✉️  [LOGIN VERIFICATION LINK FOR ${user.email}]: https://blue-plant-0d21bc900.7.azurestaticapps.net/verify-email?token=${rawToken}\n`);
+        if (user.email) {
+          void sendVerificationEmail(user.email, rawToken).catch((e) => console.error('Verification email failed:', e));
+        }
+
         res.status(403).json({
           success: false,
-          message: 'Please verify your email or phone before logging in.',
+          message: `Please verify your email (${user.email}) before logging in. A new verification link has been sent to your email.`,
           code: 'UNVERIFIED_ACCOUNT',
-          data: { email: user.email, phone: user.phone },
+          data: { email: user.email, phone: user.phone, verifyUrl: `https://blue-plant-0d21bc900.7.azurestaticapps.net/verify-email?token=${rawToken}` },
         });
         return;
       }
@@ -222,6 +319,143 @@ router.post(
   }
 );
 
+// ─── OTP Login ───────────────────────────────────────────────────────────────
+
+router.post(
+  '/login-otp/request',
+  authLimiter,
+  [
+    body('phone').notEmpty().withMessage('Phone number required'),
+    body('role').optional().isIn(['user', 'practitioner']).withMessage('Role must be user or practitioner'),
+    body('intent').optional().isIn(['login', 'signup', 'register']).withMessage('Invalid intent'),
+  ],
+  handleValidation,
+  async (req: Request, res: Response) => {
+    const { phone, role = 'user', intent = 'login' } = req.body as { phone: string; role?: 'user' | 'practitioner'; intent?: 'login' | 'signup' | 'register' };
+
+    try {
+      if (role === 'practitioner') {
+        const practitioner = await prisma.practitioner.findUnique({ where: { phone } });
+        if (!practitioner && intent === 'login') {
+          res.status(404).json({ success: false, message: 'Practitioner not found with this phone number' });
+          return;
+        }
+      } else {
+        const user = await prisma.user.findUnique({ where: { phone } });
+        if (intent === 'login' && !user) {
+          res.status(404).json({ success: false, message: 'User not found with this phone number' });
+          return;
+        }
+      }
+
+      await sendOtpSms(phone);
+
+      res.json({ success: true, message: 'OTP sent to your phone' });
+    } catch (err: any) {
+      console.error('Login OTP Request Error:', err);
+      res.status(500).json({ success: false, message: 'Failed to send OTP' });
+    }
+  }
+);
+
+router.post(
+  '/login-otp/verify',
+  authLimiter,
+  [
+    body('phone').notEmpty().withMessage('Phone number required'),
+    body('otp').notEmpty().withMessage('OTP required'),
+    body('role').optional().isIn(['user', 'practitioner']).withMessage('Role must be user or practitioner'),
+  ],
+  handleValidation,
+  async (req: Request, res: Response) => {
+    const { phone, otp, role = 'user' } = req.body as { phone: string; otp: string; role?: 'user' | 'practitioner' };
+
+    try {
+      const isValid = await verifyOtpSms(phone, otp);
+      if (!isValid) {
+        res.status(401).json({ success: false, message: 'Invalid or expired OTP' });
+        return;
+      }
+
+      if (role === 'practitioner') {
+        const practitioner = await prisma.practitioner.findUnique({ where: { phone } });
+        if (!practitioner) {
+          res.status(404).json({ success: false, message: 'Practitioner not found' });
+          return;
+        }
+        
+        if (isActivelyBanned(practitioner)) {
+          bannedResponse(res, practitioner);
+          return;
+        }
+
+        const payload: import('../lib/jwt').JwtPayload = { userId: practitioner.id, practitionerId: practitioner.id, ...(practitioner.email ? { email: practitioner.email } : {}) };
+        const accessToken = signAccessToken(payload);
+        const refreshToken = signRefreshToken(payload);
+
+        res.json({
+          success: true,
+          message: 'Login successful',
+          data: {
+            practitioner,
+            accessToken,
+            refreshToken,
+          },
+        });
+      } else {
+        let user = await prisma.user.findUnique({ where: { phone } });
+        if (!user) {
+          // Automatic account creation for phone OTP signup
+          user = await prisma.user.create({
+            data: {
+              phone,
+              isPhoneVerified: true,
+              provider: 'phone',
+              wallet: { create: { balance: 0 } },
+            },
+          });
+        } else {
+          if (isActivelyBanned(user)) {
+            bannedResponse(res, user);
+            return;
+          }
+
+          // Mark phone verified just in case it wasn't
+          if (!user.isPhoneVerified) {
+            await prisma.user.update({
+              where: { id: user.id },
+              data: { isPhoneVerified: true },
+            });
+            user.isPhoneVerified = true;
+          }
+        }
+
+        const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
+
+        res.json({
+          success: true,
+          message: 'Login successful',
+          data: {
+            user: {
+              id: user.id,
+              email: user.email,
+              name: user.name,
+              phone: user.phone,
+              isEmailVerified: user.isEmailVerified,
+              isPhoneVerified: user.isPhoneVerified,
+            },
+            accessToken,
+            refreshToken,
+          },
+        });
+      }
+    } catch (err: any) {
+      console.error('Login OTP Verify Error:', err);
+      res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+  }
+);
+
 // ─── Refresh Token Rotation ───────────────────────────────────────────────────
 
 router.post('/refresh', async (req: Request, res: Response) => {
@@ -235,15 +469,46 @@ router.post('/refresh', async (req: Request, res: Response) => {
   try {
     const payload = verifyRefreshToken(refreshToken);
 
+    // Bypass DB check for practitioners (we don't store their refresh tokens in the DB yet)
+    if (payload.practitionerId) {
+      const practitioner = await prisma.practitioner.findUnique({
+        where: { id: payload.practitionerId },
+        select: { isBanned: true, banReason: true, banUntil: true },
+      });
+      if (practitioner && isActivelyBanned(practitioner)) {
+        bannedResponse(res, practitioner);
+        return;
+      }
+
+      const newPayload: import('../lib/jwt').JwtPayload = {
+        userId: payload.userId,
+        ...(payload.email ? { email: payload.email } : {}),
+        practitionerId: payload.practitionerId
+      };
+
+      const accessToken = signAccessToken(newPayload);
+      const newRefreshToken = signRefreshToken(newPayload);
+      res.json({ success: true, data: { accessToken, refreshToken: newRefreshToken } });
+      return;
+    }
+
     const stored = await prisma.refreshToken.findUnique({ where: { token: refreshToken } });
     if (!stored || stored.isRevoked || stored.expiresAt < new Date()) {
       res.status(401).json({ success: false, message: 'Invalid or expired refresh token' });
       return;
     }
 
+    const refreshingUser = await prisma.user.findUnique({
+      where: { id: payload.userId },
+      select: { isBanned: true, banReason: true, banUntil: true },
+    });
+    if (refreshingUser && isActivelyBanned(refreshingUser)) {
+      bannedResponse(res, refreshingUser);
+      return;
+    }
+
     await prisma.refreshToken.update({ where: { id: stored.id }, data: { isRevoked: true } });
     
-    // Preserve practitionerId if it exists in the original payload
     const newPayload: import('../lib/jwt').JwtPayload = { 
       userId: payload.userId, 
       ...(payload.email ? { email: payload.email } : {}),
@@ -252,7 +517,7 @@ router.post('/refresh', async (req: Request, res: Response) => {
     
     const accessToken = signAccessToken(newPayload);
     const newRefreshToken = signRefreshToken(newPayload);
-    
+
     await prisma.refreshToken.create({
       data: { userId: payload.userId, token: newRefreshToken, expiresAt: getRefreshTokenExpiry() },
     });
@@ -296,9 +561,16 @@ router.post(
   [body('idToken').notEmpty().withMessage('Google ID token required')],
   handleValidation,
   async (req: Request, res: Response) => {
-    const { idToken } = req.body as { idToken: string };
+    const { idToken, role, state } = req.body as { idToken: string; role?: string; state?: string };
 
     try {
+      console.log('Google auth request received:', { 
+        hasIdToken: !!idToken, 
+        role, 
+        state,
+        audience: process.env.GOOGLE_CLIENT_ID?.substring(0, 20) + '...'
+      });
+
       const ticket = await googleClient.verifyIdToken({
         idToken,
         audience: process.env.GOOGLE_CLIENT_ID ?? '',
@@ -306,11 +578,75 @@ router.post(
 
       const gPayload = ticket.getPayload();
       if (!gPayload?.sub) {
-        res.status(400).json({ success: false, message: 'Invalid Google token' });
+        console.error('Invalid Google token payload:', gPayload);
+        res.status(400).json({ success: false, message: 'Invalid Google token payload' });
         return;
       }
 
       const { sub: googleId, email, name, email_verified } = gPayload;
+      console.log('Google token verified for user:', { googleId: googleId.substring(0, 10) + '...', email, name });
+
+      // Support both 'role' and 'state' parameters for expert authentication
+      const isExpert = role === 'expert' || state === 'expert' || state === 'expert_login' || state === 'expert_signup';
+      console.log('Authentication type determined:', { isExpert, role, state });
+
+      if (isExpert) {
+        console.log('Processing expert authentication...');
+        let pract = await prisma.practitioner.findUnique({ where: { googleId } });
+        if (!pract && email) pract = await prisma.practitioner.findUnique({ where: { email } });
+
+        // If state is 'expert_login', don't create new practitioners — login only
+        const isLoginOnly = state === 'expert_login' || state === 'expert';
+        if (!pract && isLoginOnly) {
+          res.status(404).json({ success: false, message: 'No expert account found. Please sign up first.', code: 'NOT_REGISTERED' });
+          return;
+        }
+
+        let isNew = false;
+        if (!pract) {
+          isNew = true;
+          console.log('Creating new practitioner account for:', email);
+          pract = await prisma.practitioner.create({
+            data: {
+              googleId,
+              email: email ?? null,
+              name: name || 'Expert',
+              isVerified: false,
+            },
+          });
+          if (email && name) sendWelcomeEmail(email, name).catch(err => console.error('Welcome email failed:', err));
+        } else if (!pract.googleId) {
+          console.log('Linking Google account to existing practitioner:', pract.id);
+          pract = await prisma.practitioner.update({
+            where: { id: pract.id },
+            data: { googleId },
+          });
+        }
+
+        if (isActivelyBanned(pract)) {
+          bannedResponse(res, pract);
+          return;
+        }
+
+        console.log('Practitioner authenticated successfully:', pract.id);
+
+        const payload: import('../lib/jwt').JwtPayload = { userId: pract.id, practitionerId: pract.id, ...(pract.email ? { email: pract.email } : {}) };
+        const accessToken = signAccessToken(payload);
+        const refreshToken = signRefreshToken(payload);
+
+        res.json({
+          success: true,
+          message: 'Signed in with Google as Expert',
+          data: {
+            user: {
+              id: pract.id, email: pract.email, name: pract.name, role: 'practitioner', isVerified: pract.isVerified, isNew
+            },
+            accessToken,
+            refreshToken,
+          },
+        });
+        return;
+      }
 
       let user = await prisma.user.findUnique({ where: { googleId } });
       if (!user && email) user = await prisma.user.findUnique({ where: { email } });
@@ -333,6 +669,11 @@ router.post(
           where: { id: user.id },
           data: { googleId, isEmailVerified: true },
         });
+      }
+
+      if (isActivelyBanned(user)) {
+        bannedResponse(res, user);
+        return;
       }
 
       const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
@@ -389,6 +730,11 @@ router.post(
         user = await prisma.user.update({ where: { id: user.id }, data: { appleId } });
       }
 
+      if (isActivelyBanned(user)) {
+        bannedResponse(res, user);
+        return;
+      }
+
       const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
 
       res.json({
@@ -443,7 +789,22 @@ router.get('/verify-email', async (req: Request, res: Response) => {
       data: { isEmailVerified: true, emailVerifyToken: null, emailVerifyExpiry: null },
     });
 
-    res.json({ success: true, message: 'Email verified successfully. You can now log in.' });
+    const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
+
+    res.json({
+      success: true,
+      message: 'Email verified successfully!',
+      data: {
+        accessToken,
+        refreshToken,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          isEmailVerified: true,
+        },
+      },
+    });
   } catch (err) {
     console.error('Email verification error:', err);
     res.status(500).json({ success: false, message: 'Internal server error' });
@@ -455,7 +816,7 @@ router.get('/verify-email', async (req: Request, res: Response) => {
 router.post(
   '/resend-verification',
   emailLimiter,
-  [body('email').isEmail().normalizeEmail().withMessage('Valid email required')],
+  [body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required')],
   handleValidation,
   async (req: Request, res: Response) => {
     const { email } = req.body as { email: string };
@@ -495,7 +856,7 @@ router.post(
 router.post(
   '/forgot-password',
   emailLimiter,
-  [body('email').isEmail().normalizeEmail().withMessage('Valid email required')],
+  [body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required')],
   handleValidation,
   async (req: Request, res: Response) => {
     const { email } = req.body as { email: string };
@@ -614,11 +975,7 @@ router.post(
         return;
       }
 
-      if (phone.startsWith('+91')) {
-        throw new Error('MSG91 configuration pending.');
-      }
-
-      await sendTwilioOTP(phone);
+      await sendOtpSms(phone);
 
       res.json({ success: true, message: 'OTP sent successfully.' });
     } catch (err) {
@@ -653,13 +1010,9 @@ router.post(
         return;
       }
 
-      if (phone.startsWith('+91')) {
-        throw new Error('MSG91 configuration pending.');
-      }
+      const isValid = await verifyOtpSms(phone, otp);
 
-      const result = await verifyTwilioOTP(phone, otp);
-
-      if (result.status !== 'approved') {
+      if (!isValid) {
         res.status(400).json({ success: false, message: 'Invalid OTP' });
         return;
       }
@@ -697,10 +1050,7 @@ router.post(
       const user = await prisma.user.findUnique({ where: { phone } });
 
       if (user && !user.isPhoneVerified) {
-        if (phone.startsWith('+91')) {
-          throw new Error('MSG91 configuration pending.');
-        }
-        await sendTwilioOTP(phone);
+        await sendOtpSms(phone);
       }
 
       res.json({ success: true, message: 'If this number is registered, a new OTP has been sent.' });
@@ -743,24 +1093,89 @@ router.post(
   authLimiter,
   [
     body('name').trim().notEmpty().withMessage('Name is required'),
-    body('email').isEmail().normalizeEmail().withMessage('Valid email required'),
-    body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
+    body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
+    body('password').optional().isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
+    body('dob')
+      .notEmpty().withMessage('Date of birth is required')
+      .isISO8601().withMessage('Date of birth must be a valid date (YYYY-MM-DD)'),
+    body('acceptTerms')
+      .custom((v) => v === true)
+      .withMessage('You must accept the Terms of Service to create an account'),
+    body('acceptPrivacy')
+      .custom((v) => v === true)
+      .withMessage('You must acknowledge the Privacy Notice to create an account'),
+    body('emailMarketingOptIn')
+      .optional()
+      .isBoolean()
+      .withMessage('emailMarketingOptIn must be a boolean'),
   ],
   handleValidation,
   async (req: Request, res: Response) => {
-    const { name, email, password } = req.body as { name: string; email: string; password: string };
+    const { name, email, password, dob, emailMarketingOptIn } = req.body as {
+      name: string; email: string; password?: string; dob: string;
+      acceptTerms: boolean; acceptPrivacy: boolean; emailMarketingOptIn?: boolean;
+    };
+
+    // CHILD-02: server-authoritative age check
+    const dobDate = new Date(dob);
+    const minBirthDate = new Date();
+    minBirthDate.setFullYear(minBirthDate.getFullYear() - 18);
+    if (isNaN(dobDate.getTime()) || dobDate > minBirthDate) {
+      res.status(422).json({
+        success: false,
+        message: 'You must be at least 18 years old to register as a practitioner.',
+        code: 'AGE_GATE',
+      });
+      return;
+    }
     try {
       const existing = await prisma.practitioner.findUnique({ where: { email } });
-      if (existing) { res.status(409).json({ success: false, message: 'Email already registered' }); return; }
+      if (existing) {
+        // If Google account already exists, just return tokens (idempotent)
+        if (!password && existing.googleId) {
+          const payload: import('../lib/jwt').JwtPayload = { userId: existing.id, practitionerId: existing.id, ...(existing.email ? { email: existing.email } : {}) };
+          const accessToken = signAccessToken(payload);
+          const refreshToken = signRefreshToken(payload);
+          res.status(200).json({
+            success: true,
+            message: 'Expert account ready.',
+            data: {
+              practitioner: { id: existing.id, name: existing.name, email: existing.email, isVerified: existing.isVerified },
+              accessToken, refreshToken, role: 'practitioner',
+            },
+          });
+          return;
+        }
+        res.status(409).json({ success: false, message: 'Email already registered' }); return;
+      }
 
-      const passwordHash = await bcrypt.hash(password, 12);
-      const practitioner = await prisma.practitioner.create({
-        data: { name, email, passwordHash, isVerified: false },
+      const passwordHash = password ? await bcrypt.hash(password, 12) : null;
+      const practitioner = await prisma.$transaction(async (tx) => {
+        const created = await tx.practitioner.create({
+          data: { name, email, passwordHash, isVerified: false },
+        });
+        await tx.consent.createMany({
+          data: buildRegistrationConsentRows({
+            practitionerId: created.id,
+            acceptTerms: true,
+            acceptPrivacy: true,
+            emailMarketingOptIn,
+            ipAddress: req.ip ?? null,
+            userAgent: req.headers['user-agent'] ?? null,
+          }),
+        });
+        return created;
       });
 
       const payload: import('../lib/jwt').JwtPayload = { userId: practitioner.id, practitionerId: practitioner.id, ...(practitioner.email ? { email: practitioner.email } : {}) };
       const accessToken = signAccessToken(payload);
       const refreshToken = signRefreshToken(payload);
+
+      // NOTE: intentionally not persisted to RefreshToken — that table's userId is FK'd
+      // to User.id, not Practitioner.id, so writing practitioner.id here throws a foreign
+      // key constraint violation (this exact bug was fixed once already in ce17307).
+      // POST /auth/refresh already bypasses the DB lookup for practitioners via
+      // payload.practitionerId, so nothing currently reads this row anyway.
 
       res.status(201).json({
         success: true,
@@ -785,7 +1200,7 @@ router.post(
   '/practitioner/login',
   authLimiter,
   [
-    body('email').isEmail().normalizeEmail().withMessage('Valid email required'),
+    body('email').isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email required'),
     body('password').notEmpty().withMessage('Password required'),
   ],
   handleValidation,
@@ -794,8 +1209,14 @@ router.post(
 
     try {
       const practitioner = await prisma.practitioner.findUnique({ where: { email } });
-      if (!practitioner || !practitioner.passwordHash) {
+      if (!practitioner) {
         res.status(401).json({ success: false, message: 'Invalid credentials' });
+        return;
+      }
+
+      if (!practitioner.passwordHash) {
+        // Since we added Google login for experts
+        res.status(401).json({ success: false, message: 'You signed up using Google. Please click "Sign in with Google" to log in, or use Forgot Password to set a manual password.' });
         return;
       }
 
@@ -805,10 +1226,18 @@ router.post(
         return;
       }
 
+      if (isActivelyBanned(practitioner)) {
+        bannedResponse(res, practitioner);
+        return;
+      }
+
       // Embed practitionerId in JWT so socket middleware can identify expert
       const payload: import('../lib/jwt').JwtPayload = { userId: practitioner.id, practitionerId: practitioner.id, ...(practitioner.email ? { email: practitioner.email } : {}) };
       const accessToken = signAccessToken(payload);
       const refreshToken = signRefreshToken(payload);
+
+      // NOTE: intentionally not persisted to RefreshToken — see comment in
+      // /practitioner/register above.
 
       res.json({
         success: true,
@@ -825,9 +1254,9 @@ router.post(
           role: 'practitioner',
         },
       });
-    } catch (err) {
+    } catch (err: any) {
       console.error('Practitioner login error:', err);
-      res.status(500).json({ success: false, message: 'Internal server error' });
+      res.status(500).json({ success: false, message: 'Internal server error: ' + (err?.message || String(err)), stack: err?.stack });
     }
   }
 );

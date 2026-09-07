@@ -80,7 +80,7 @@ export default function ChatWindow({ sessionId, currentUserId }: Props) {
       {/* Connecting state */}
       {isConnecting && (
         <div className="flex-1 flex flex-col items-center justify-center gap-3 text-gray-400">
-          <Wifi className="h-8 w-8 animate-pulse text-[#f59e0b]" />
+          <Wifi className="h-8 w-8 animate-pulse text-[#4f46e5]" />
           <p className="text-sm">Connecting to session...</p>
         </div>
       )}
@@ -142,7 +142,7 @@ export default function ChatWindow({ sessionId, currentUserId }: Props) {
               disabled={isEnded}
               className={cn(
                 'flex-1 resize-none rounded-2xl border border-yellow-200 bg-yellow-50 px-4 py-2.5 text-sm text-[#1a1a1a] placeholder:text-gray-400',
-                'focus:outline-none focus:ring-2 focus:ring-[#f59e0b]/40 focus:border-[#f59e0b]',
+                'focus:outline-none focus:ring-2 focus:ring-[#4f46e5]/40 focus:border-[#4f46e5]',
                 'max-h-32 overflow-y-auto transition-colors',
                 'disabled:opacity-50 disabled:cursor-not-allowed'
               )}
@@ -152,7 +152,7 @@ export default function ChatWindow({ sessionId, currentUserId }: Props) {
               size="icon"
               onClick={handleSend}
               disabled={!input.trim() || isEnded}
-              className="h-10 w-10 rounded-full bg-[#f59e0b] hover:bg-[#d97706] border-0 text-white shrink-0 disabled:opacity-40"
+              className="h-10 w-10 rounded-full bg-[#4f46e5] hover:bg-[#d97706] border-0 text-white shrink-0 disabled:opacity-40"
             >
               <Send className="h-4 w-4" />
             </Button>

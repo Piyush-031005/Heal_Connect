@@ -4,7 +4,7 @@ import Razorpay from 'razorpay';
 import Stripe from 'stripe';
 import crypto from 'crypto';
 import { prisma } from '../lib/prisma';
-import { requireAuth, type AuthRequest } from '../middleware/auth';
+import { requireAuth, requireAdmin, type AuthRequest } from '../middleware/auth';
 import { handleValidation } from '../middleware/validate';
 
 const router = Router();
@@ -49,32 +49,43 @@ router.get('/', requireAuth, async (req: AuthRequest, res: Response) => {
 router.post(
   '/dev-recharge',
   requireAuth,
+  requireAdmin,
   [body('amount').isNumeric().withMessage('Amount must be a number')],
   handleValidation,
   async (req: AuthRequest, res: Response) => {
+    if (process.env['NODE_ENV'] === 'production') {
+      res.status(403).json({ success: false, message: 'Not available in production' });
+      return;
+    }
     const { amount } = req.body as { amount: number };
     try {
-      const wallet = await prisma.wallet.findUnique({ where: { userId: req.user!.userId } });
-      if (!wallet) {
+      // Tasks 8/9: Wrap balance update in a single atomic $transaction to prevent
+      // concurrent dev-recharge calls from double-crediting the wallet.
+      const updatedWallet = await prisma.$transaction(async (tx) => {
+        const wallet = await tx.wallet.findUnique({ where: { userId: req.user!.userId } });
+        if (!wallet) return null;
+
+        await tx.transaction.create({
+          data: {
+            walletId: wallet.id,
+            amount,
+            type: 'RECHARGE',
+            status: 'SUCCESS',
+            referenceId: `dev_recharge_${Date.now()}_${Math.random().toString(36).slice(2)}`,
+          }
+        });
+
+        return tx.wallet.update({
+          where: { id: wallet.id },
+          data: { balance: { increment: amount } },
+        });
+      });
+
+      if (!updatedWallet) {
         res.status(404).json({ success: false, message: 'Wallet not found' });
         return;
       }
-      
-      const updatedWallet = await prisma.wallet.update({
-        where: { id: wallet.id },
-        data: { balance: wallet.balance + amount }
-      });
-      
-      await prisma.transaction.create({
-        data: {
-          walletId: wallet.id,
-          amount,
-          type: 'RECHARGE',
-          status: 'SUCCESS',
-          referenceId: `dev_recharge_${Date.now()}`,
-        }
-      });
-      
+
       res.json({ success: true, message: 'Dev recharge successful', data: { balance: updatedWallet.balance } });
     } catch (err) {
       console.error('Dev recharge error:', err);
@@ -144,21 +155,43 @@ router.post(
 // ─── Razorpay Webhook (Payment Captured) ──────────────────────────────────────
 
 router.post('/webhook', async (req: Request, res: Response) => {
-  const secret = process.env.RAZORPAY_WEBHOOK_SECRET || 'dummy_webhook_secret';
-  
-  // Verify Webhook Signature
-  const signature = req.headers['x-razorpay-signature'] as string;
-  if (!signature) {
+  const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
+  if (!secret) {
+    // Fail closed: no hardcoded fallback. A missing secret used to silently fall
+    // back to a known string ('dummy_webhook_secret') that's sitting in this
+    // public repo, which would let anyone forge a valid payment.captured event
+    // and credit any wallet. Refuse instead.
+    console.error('RAZORPAY_WEBHOOK_SECRET is not set — rejecting webhook (see .env.example)');
+    res.status(500).send('Webhook not configured');
+    return;
+  }
+
+  // Verify Webhook Signature — must be computed over the exact raw bytes Razorpay
+  // sent, not a re-serialized JSON.stringify(req.body). The two can differ (key
+  // order, number formatting, escaping) after Express has parsed the body, which
+  // was silently failing signature checks for otherwise-legitimate webhooks and
+  // leaving paid-for wallet recharges stuck at PENDING. req.rawBody is captured
+  // globally in index.ts's express.json({ verify }) — same mechanism the Stripe
+  // webhook below already uses correctly.
+  const signature = req.headers['x-razorpay-signature'] as string | undefined;
+  const rawBody = (req as any).rawBody as Buffer | undefined;
+  if (!signature || !rawBody) {
     res.status(400).send('Invalid signature');
     return;
   }
 
   const expectedSignature = crypto
     .createHmac('sha256', secret)
-    .update(JSON.stringify(req.body))
+    .update(rawBody)
     .digest('hex');
 
-  if (expectedSignature !== signature) {
+  const expectedBuffer = Buffer.from(expectedSignature, 'utf8');
+  const signatureBuffer = Buffer.from(signature, 'utf8');
+  const signatureValid =
+    expectedBuffer.length === signatureBuffer.length &&
+    crypto.timingSafeEqual(expectedBuffer, signatureBuffer);
+
+  if (!signatureValid) {
     res.status(400).send('Invalid signature');
     return;
   }
@@ -169,26 +202,35 @@ router.post('/webhook', async (req: Request, res: Response) => {
     if (event.event === 'payment.captured') {
       const payment = event.payload.payment.entity;
       const orderId = payment.order_id; // e.g., order_Jg1...
-      
-      // Look up the pending transaction by orderId
-      const transaction = await prisma.transaction.findFirst({
-        where: { referenceId: orderId, status: 'PENDING', type: 'RECHARGE' },
-      });
 
-      if (transaction) {
-        // Perform an atomic update: mark transaction SUCCESS and add to balance
-        await prisma.$transaction([
-          prisma.transaction.update({
-            where: { id: transaction.id },
-            data: { status: 'SUCCESS' },
-          }),
-          prisma.wallet.update({
-            where: { id: transaction.walletId },
-            data: { balance: { increment: transaction.amount } },
-          }),
-        ]);
+      // Tasks 8/9: Idempotency — wrap in $transaction and guard on status=PENDING.
+      // If the webhook fires twice for the same orderId, the second call finds
+      // status='SUCCESS' and exits cleanly without a second credit.
+      await prisma.$transaction(async (tx) => {
+        // Look up the pending transaction by orderId — re-read inside tx for consistency
+        const transaction = await tx.transaction.findFirst({
+          where: { referenceId: orderId, status: 'PENDING', type: 'RECHARGE' },
+        });
+
+        if (!transaction) {
+          // Either already processed (idempotent) or unknown orderId — safe to ignore
+          return;
+        }
+
+        // Mark transaction SUCCESS first
+        await tx.transaction.update({
+          where: { id: transaction.id },
+          data: { status: 'SUCCESS' },
+        });
+
+        // Then credit the wallet
+        await tx.wallet.update({
+          where: { id: transaction.walletId },
+          data: { balance: { increment: transaction.amount } },
+        });
+
         console.log(`Successfully recharged wallet ${transaction.walletId} by ₹${transaction.amount}`);
-      }
+      });
     }
 
     res.status(200).send('Webhook processed');
@@ -241,7 +283,7 @@ router.post(
             price_data: {
               currency: 'usd',
               product_data: {
-                name: 'HealConnect Wallet Recharge',
+                name: 'ZenAuraa Wallet Recharge',
                 description: `Recharge wallet with ₹${amount}`,
               },
               unit_amount: amountInCents,
@@ -279,14 +321,16 @@ router.post(
 
 router.post('/stripe-webhook', async (req: Request, res: Response) => {
   const sig = req.headers['stripe-signature'];
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || 'dummy_webhook_secret';
-  
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
   // Notice we use req.rawBody which we set in index.ts
   const rawBody = (req as any).rawBody;
 
   let event;
 
   try {
+    // Fail closed instead of falling back to a hardcoded, publicly-visible secret.
+    if (!webhookSecret) throw new Error('STRIPE_WEBHOOK_SECRET is not set');
     if (!sig || !rawBody) throw new Error('Missing stripe signature or raw body');
     event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
   } catch (err: any) {

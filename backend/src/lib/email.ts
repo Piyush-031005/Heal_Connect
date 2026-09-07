@@ -2,9 +2,10 @@ import sgMail from '@sendgrid/mail';
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
 
-const FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL || 'noreply@healconnect.app';
-const FROM_NAME  = process.env.SENDGRID_FROM_NAME  || 'HealConnect';
-const APP_URL    = process.env.APP_URL             || 'https://blue-plant-0d21bc900.7.azurestaticapps.net';
+const FROM_EMAIL   = process.env.SENDGRID_FROM_EMAIL || 'noreply@Zenauraa.app';
+const FROM_NAME    = process.env.SENDGRID_FROM_NAME  || 'Zenauraa';
+const FRONTEND_URL = process.env.FRONTEND_URL        || 'https://healconnect-frontend-f2dfc3gfe9bsa4hv.centralindia-01.azurewebsites.net';
+const APP_URL      = process.env.APP_URL             || FRONTEND_URL;
 
 // ─── Shared layout helpers ────────────────────────────────────────────────────
 
@@ -25,7 +26,7 @@ function wrap(body: string): string {
           <tr>
             <td style="background:linear-gradient(135deg,#f59e0b,#d97706);padding:32px 40px;text-align:center;">
               <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:800;letter-spacing:-0.3px;">
-                ✦ HealConnect
+                ✦ Zenauraa
               </h1>
               <p style="margin:6px 0 0;color:#fef3c7;font-size:13px;">Your wellness journey starts here</p>
             </td>
@@ -58,14 +59,38 @@ function btn(url: string, label: string): string {
   </a>`;
 }
 
+// ─── Unified Send Email Helper with Local Fallback ───────────────────────────
+
+async function sendEmail({ to, subject, html, textFallback }: { to: string; subject: string; html: string; textFallback: string }) {
+  try {
+    if (!process.env.SENDGRID_API_KEY || process.env.SENDGRID_API_KEY.includes('placeholder')) {
+      throw new Error('SendGrid API key not set or is placeholder');
+    }
+    await sgMail.send({
+      to,
+      from: { email: FROM_EMAIL, name: FROM_NAME },
+      subject,
+      html,
+    });
+  } catch (err: any) {
+    console.log('\n==================================================');
+    console.log('🚨  [LOCAL EMAIL FALLBACK]');
+    console.log(`TO: ${to}`);
+    console.log(`SUBJECT: ${subject}`);
+    console.log(`INFO: ${textFallback}`);
+    console.error('SendGrid Error:', err?.response?.body || err?.message || err);
+    console.log('==================================================\n');
+  }
+}
+
 // ─── Welcome Email ─────────────────────────────────────────────────────────────
 
 export async function sendWelcomeEmail(to: string, name: string): Promise<void> {
-  const dashboardUrl = `${APP_URL}/dashboard`;
+  const dashboardUrl = `${FRONTEND_URL}/dashboard`;
   const html = wrap(`
     <tr>
       <td style="padding:40px;">
-        <h2 style="color:#1a1a1a;font-size:22px;margin:0 0 12px;">Welcome to HealConnect, ${name}! 🎉</h2>
+        <h2 style="color:#1a1a1a;font-size:22px;margin:0 0 12px;">Welcome to Zenauraa, ${name}! 🎉</h2>
         <p style="color:#6b7280;font-size:16px;line-height:1.7;margin:0 0 24px;">
           We're so glad you're here. Your account is ready — connect with verified wellness
           experts for astrology, tarot, vastu, and more.
@@ -80,18 +105,18 @@ export async function sendWelcomeEmail(to: string, name: string): Promise<void> 
       </td>
     </tr>`);
 
-  await sgMail.send({
+  await sendEmail({
     to,
-    from: { email: FROM_EMAIL, name: FROM_NAME },
-    subject: 'Welcome to HealConnect 🌟',
+    subject: 'Welcome to Zenauraa 🌟',
     html,
+    textFallback: `Welcome email for ${name}. Dashboard link: ${dashboardUrl}`,
   });
 }
 
 // ─── Email Verification ────────────────────────────────────────────────────────
 
 export async function sendVerificationEmail(to: string, rawToken: string): Promise<void> {
-  const verifyUrl = `${APP_URL}/verify-email?token=${rawToken}`;
+  const verifyUrl = `${FRONTEND_URL}/verify-email?token=${rawToken}`;
   const html = wrap(`
     <tr>
       <td style="padding:40px;">
@@ -106,24 +131,24 @@ export async function sendVerificationEmail(to: string, rawToken: string): Promi
       </td>
     </tr>`);
 
-  await sgMail.send({
+  await sendEmail({
     to,
-    from: { email: FROM_EMAIL, name: FROM_NAME },
-    subject: 'Verify your HealConnect email',
+    subject: 'Verify your Zenauraa email',
     html,
+    textFallback: `Verification Link: ${verifyUrl}`,
   });
 }
 
 // ─── Password Reset ────────────────────────────────────────────────────────────
 
 export async function sendPasswordResetEmail(to: string, rawToken: string): Promise<void> {
-  const resetUrl = `${APP_URL}/reset-password?token=${rawToken}`;
+  const resetUrl = `${FRONTEND_URL}/reset-password?token=${rawToken}`;
   const html = wrap(`
     <tr>
       <td style="padding:40px;">
         <h2 style="color:#1a1a1a;font-size:22px;margin:0 0 16px;">Reset your password</h2>
         <p style="color:#6b7280;font-size:16px;line-height:1.7;margin:0 0 32px;">
-          We received a request to reset your HealConnect password.
+          We received a request to reset your Zenauraa password.
           Click below to choose a new one.
         </p>
         <p style="text-align:center;">${btn(resetUrl, 'Reset Password')}</p>
@@ -134,11 +159,11 @@ export async function sendPasswordResetEmail(to: string, rawToken: string): Prom
       </td>
     </tr>`);
 
-  await sgMail.send({
+  await sendEmail({
     to,
-    from: { email: FROM_EMAIL, name: FROM_NAME },
-    subject: 'Reset your HealConnect password',
+    subject: 'Reset your Zenauraa password',
     html,
+    textFallback: `Password Reset Link: ${resetUrl}`,
   });
 }
 
@@ -151,7 +176,7 @@ export async function sendPasswordChangedEmail(to: string, name: string): Promis
       <td style="padding:40px;">
         <h2 style="color:#1a1a1a;font-size:22px;margin:0 0 16px;">Your password was changed ✓</h2>
         <p style="color:#6b7280;font-size:16px;line-height:1.7;margin:0 0 24px;">
-          Hi ${name}, your HealConnect password was successfully updated.
+          Hi ${name}, your Zenauraa password was successfully updated.
         </p>
         <p style="color:#6b7280;font-size:16px;line-height:1.7;margin:0 0 32px;">
           If you made this change, great — you're all set!<br/>
@@ -162,10 +187,10 @@ export async function sendPasswordChangedEmail(to: string, name: string): Promis
       </td>
     </tr>`);
 
-  await sgMail.send({
+  await sendEmail({
     to,
-    from: { email: FROM_EMAIL, name: FROM_NAME },
-    subject: 'Your HealConnect password was changed',
+    subject: 'Your Zenauraa password was changed',
     html,
+    textFallback: `Password changed notification for ${name}. Login Link: ${loginUrl}`,
   });
 }

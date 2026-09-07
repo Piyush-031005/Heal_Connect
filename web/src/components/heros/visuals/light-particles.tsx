@@ -10,8 +10,8 @@ const MODALITIES = [
   {id:'astrology',name:'Astrology'},{id:'tarot',name:'Tarot'},
   {id:'face-reading',name:'Face Reading'},{id:'palm-reading',name:'Palm Reading'},
   {id:'sound-healing',name:'Sound Healing'},{id:'meditation',name:'Meditation'},
-  {id:'spiritual',name:'Spiritual'},{id:'chakra-healing',name:'Chakra Healing'},
-  {id:'breathwork',name:'Breathwork'},{id:'dreams',name:'Dream Predict'},
+  {id:'spiritual',name:'Spiritual Guidance'},{id:'chakra-healing',name:'Chakra Healing'},
+  {id:'breathwork',name:'Breathwork'},{id:'dreams',name:'Dream Prediction'},
   {id:'space-harmony',name:'Space Harmony'},{id:'numerology',name:'Numerology'},
 ];
 
@@ -20,8 +20,8 @@ function ParticleNebula() {
   
   // Generate random particles in a sphere
   const sphere = useMemo(() => {
-    const positions = new Float32Array(3000 * 3);
-    for (let i = 0; i < 3000; i++) {
+    const positions = new Float32Array(1500 * 3);
+    for (let i = 0; i < 1500; i++) {
       const r = 2.5 * Math.cbrt(Math.random()); // Radius 2.5
       const theta = Math.random() * 2 * Math.PI;
       const phi = Math.acos(2 * Math.random() - 1);
@@ -44,7 +44,7 @@ function ParticleNebula() {
       <Points ref={ref} positions={sphere} stride={3} frustumCulled={false}>
         <PointMaterial
           transparent
-          color="#B9A0E4"
+          color="#D5B6DC"
           size={0.03}
           sizeAttenuation={true}
           depthWrite={false}
@@ -60,7 +60,7 @@ function ConstellationLines() {
   
   useFrame((state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.z += delta * 0.05;
+      groupRef.current.rotation.z -= delta * 0.05;
       groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
       groupRef.current.rotation.y = Math.cos(state.clock.elapsedTime * 0.2) * 0.1;
     }
@@ -94,7 +94,7 @@ function ConstellationLines() {
       {points.map((p, i) => (
         <mesh key={`node-${i}`} position={p}>
           <sphereGeometry args={[0.06, 16, 16]} />
-          <meshBasicMaterial color={i % 2 === 0 ? "#8982D0" : "#B9A0E4"} transparent opacity={0.8} />
+          <meshBasicMaterial color={i % 2 === 0 ? "#8982D0" : "#D5B6DC"} transparent opacity={0.8} />
           {/* Subtle halo */}
           <mesh>
             <sphereGeometry args={[0.15, 16, 16]} />
@@ -129,7 +129,7 @@ export default function LightParticles() {
       {/* Revolving Minimal Ethereal Labels */}
       <div 
         className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
-        style={{ animation: 'spin 80s linear infinite' }}
+        style={{ animation: 'spin 120s linear infinite' }}
       >
         {MODALITIES.map((mod, i) => {
           const total = MODALITIES.length;
@@ -146,12 +146,12 @@ export default function LightParticles() {
             >
               <div 
                 className="pointer-events-auto cursor-pointer group"
-                style={{ animation: 'spin 80s linear infinite reverse' }}
-                onClick={() => router.push(`/modalities/${mod.id}`)}
+                style={{ animation: 'spin 120s linear infinite reverse' }}
+                onClick={() => window.location.href = `/modalities/${mod.id}`}
               >
                 <div className="flex items-center gap-2 px-3 py-1.5 transition-all duration-300 hover:scale-110">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#1E2059]/40 group-hover:bg-[#5F3BA9] shadow-[0_0_8px_rgba(95,59,169,0.5)] transition-colors" />
-                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#1E2059]/60 group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#1E2059] font-black drop-shadow-[0_2px_4px_rgba(255,255,255,0.9)] group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
                     {mod.name}
                   </span>
                 </div>
@@ -161,10 +161,23 @@ export default function LightParticles() {
         })}
       </div>
 
+      
       {/* Center Logo */}
-      <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-[0_0_40px_rgba(137,130,208,0.5)] flex items-center justify-center p-3 backdrop-blur-sm border border-white/40 cursor-pointer hover:scale-105 transition-transform">
-        <img src="/main centre logo/girl.png" alt="ZenAuraa" className="w-full h-full object-cover scale-[1.25] mt-2 ml-1" />
+      <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+        <img 
+          src="/main centre logo/new.png" 
+          alt="ZenAuraa" 
+          className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] translate-y-32"
+          style={{
+            opacity: 0.85,
+            filter: 'brightness(0.9) contrast(1.15) saturate(1.2) drop-shadow(0 0 50px rgba(160,120,255,0.6))',
+            WebkitMaskImage: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%)',
+            maskImage: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%)',
+            mixBlendMode: 'lighten'
+          }}
+        />
       </div>
+
     </div>
   );
 }

@@ -1,221 +1,66 @@
-export interface ModalityContentSection {
-  title: string;
-  text: string;
-  image: string;
-  imagePosition: 'left' | 'right';
-}
-
-export interface ModalityData {
-  id: string;
-  name: string;
-  heroTitle: string;
-  heroDescription: string;
-  heroImages: string[];
-  contentSections: ModalityContentSection[];
-  scrollGallery: string[];
-  remedies: string[];
-}
-
-export const MODALITIES_CONTENT: Record<string, ModalityData> = {
+export const MODALITIES_CONTENT: Record<string, any> = {
   astrology: {
     id: 'astrology',
     name: 'Astrology',
-    heroTitle: 'Cosmic Blueprint & Guidance',
-    heroDescription: 'Understand the profound influence of the cosmos on your life path, personality, and soul purpose.',
+    heroTitle: 'Decode Your Cosmic Blueprint',
+    heroDescription: 'Understand the profound influence of the planets on your personality, life path, and relationships.',
     heroImages: [
-      '/insights_page/astrology/greg-rakozy-oMpAz-DN-9I-unsplash.jpg',
-      '/insights_page/astrology/miracosic-astrology-993127_1920.jpg',
+      '/insights_page/astrology/daniel-carmona-4FvSpxyxIb0-unsplash.jpg',
+      '/insights_page/astrology/farzad-mohsenvand-TbuescuqMjA-unsplash.jpg',
     ],
     contentSections: [
       {
-        title: 'The Blueprint of Your Soul',
-        text: 'Astrology is an ancient practice that maps the positions of celestial bodies at the exact moment of your birth. This unique map, known as your natal chart, serves as a profound blueprint for your life. It reveals your innate strengths, potential challenges, and the underlying themes of your personal journey. By understanding your astrological makeup, you can navigate life with greater clarity, aligning your actions with your cosmic design to achieve harmony and fulfillment.',
-        image: '/insights_page/astrology/viva-luna-studios-r_-onuwuWAU-unsplash.jpg',
+        title: 'The Language of the Stars',
+        text: 'Astrology is an ancient practice that studies the movements and relative positions of celestial bodies interpreted as having an influence on human affairs and the natural world. Your birth chart is a snapshot of the sky at the exact moment of your birth, revealing your unique cosmic blueprint.',
+        image: '/insights_page/astrology/daniel-carmona-4FvSpxyxIb0-unsplash.jpg',
         imagePosition: 'left'
       },
       {
-        title: 'Timing and Transformation',
-        text: 'Beyond personality analysis, astrology provides powerful insights into the cycles and timing of your life. As the planets continue their eternal dance, they form aspects with your natal chart, triggering periods of growth, challenge, and transformation. Understanding these planetary transits empowers you to anticipate major life shifts, make informed decisions, and flow with the universal currents rather than resisting them.',
-        image: '/insights_page/astrology/the-new-york-public-library-FcI-z6bfq4g-unsplash.jpg',
+        title: 'Navigating Life with Cosmic Wisdom',
+        text: 'By understanding the positions of the sun, moon, and planets in your chart, you can gain deep insights into your strengths, challenges, career path, and romantic compatibility. Astrology provides a powerful framework for self-discovery and personal growth.',
+        image: '/insights_page/astrology/farzad-mohsenvand-TbuescuqMjA-unsplash.jpg',
         imagePosition: 'right'
       }
     ],
     scrollGallery: [
-      '/insights_page/astrology/greg-rakozy-oMpAz-DN-9I-unsplash.jpg',
-      '/insights_page/astrology/miracosic-astrology-993127_1920.jpg',
-      '/insights_page/astrology/viva-luna-studios-r_-onuwuWAU-unsplash.jpg',
+      '/insights_page/astrology/daniel-carmona-4FvSpxyxIb0-unsplash.jpg',
+      '/insights_page/astrology/farzad-mohsenvand-TbuescuqMjA-unsplash.jpg',
     ],
     remedies: [
-      'Wear specific gemstones aligned with your ruling planets to enhance positive cosmic energies.',
-      'Perform daily affirmations tailored to your Moon sign to nurture emotional balance.',
-      'Engage in planetary fasting or charity on specific days to appease challenging planetary transits.'
-    ]
-  },
-
-  tarot: {
-    id: 'tarot',
-    name: 'Tarot',
-    heroTitle: 'Intuitive Card Reading',
-    heroDescription: 'Unlock hidden truths and gain profound clarity on your past, present, and future through the ancient symbolism of the Tarot.',
-    heroImages: [
-      '/insights_page/tarot/edz-norton-eUX74J_IpXw-unsplash.jpg',
-      '/insights_page/tarot/viva-luna-studios-XZhILkqs2mk-unsplash.jpg',
-      '/insights_page/tarot/subarasikiai-tarot-cards-7395644_1920.jpg',
-    ],
-    contentSections: [
-      {
-        title: 'The Mirror of the Subconscious',
-        text: 'The Tarot is a deck of 78 cards rich in esoteric symbolism, archetypes, and spiritual wisdom. It acts as a powerful mirror reflecting the deepest truths of your subconscious mind. A skilled Tarot reading taps into your energy field, drawing out insights regarding your current circumstances, hidden influences, and potential future trajectories. It is not merely fortune-telling, but a tool for profound psychological and spiritual introspection.',
-        image: '/insights_page/tarot/petr-sidorov-D3SzBCAeMhQ-unsplash.jpg',
-        imagePosition: 'left'
-      },
-      {
-        title: 'Navigating Crossroads',
-        text: 'When faced with difficult choices or confusing situations, Tarot provides clarity and perspective. The cards highlight the energies surrounding your relationships, career, and personal growth, offering guidance on the best path forward. By understanding the archetypal lessons presented by the cards, you can make empowered decisions, release limiting patterns, and consciously co-create your destiny.',
-        image: '/insights_page/tarot/viva-luna-studios-zu_hPWH32wA-unsplash.jpg',
-        imagePosition: 'right'
-      }
-    ],
-    scrollGallery: [
-      '/insights_page/tarot/lower scroll image.jpg',
-      '/insights_page/tarot/lower_scroll inmage.jpg',
-      '/insights_page/tarot/edz-norton-IAvYkUPm-lI-unsplash.jpg',
-    ],
-    remedies: [
-      'Meditate on the archetype of the Major Arcana card that frequently appears in your readings.',
-      'Keep a daily Tarot journal to track intuitive insights and recurring themes in your life.',
-      'Cleanse your personal space with sage or palo santo to clear stagnant energies before making major decisions.'
-    ]
-  },
-
-  'face-reading': {
-    id: 'face-reading',
-    name: 'Face Reading',
-    heroTitle: 'The Map of Your Character',
-    heroDescription: 'Discover the profound connections between your physical features, personality traits, and life experiences through the ancient art of Physiognomy.',
-    heroImages: [
-      '/insights_page/face-reading/pexels-mart-production-7334335.jpg',
-      '/insights_page/face-reading/pexels-pavel-danilyuk-7222018.jpg',
-    ],
-    contentSections: [
-      {
-        title: 'Decoding Facial Micro-Expressions',
-        text: 'Face Reading, or Physiognomy, is the ancient practice of assessing a person\'s character, personality, and even health markers based on their facial features. Every line, contour, and proportion of your face tells a story about your past experiences, inherent strengths, and emotional tendencies. By learning to decode these subtle markers, we gain profound insights into our authentic selves and the true nature of those around us.',
-        image: '/insights_page/face-reading/pexels-mart-production-7334335.jpg',
-        imagePosition: 'left'
-      },
-      {
-        title: 'Health and Vitality Markers',
-        text: 'Beyond personality, the face serves as a diagnostic map in many holistic traditions. Changes in skin tone, the emergence of specific lines, or imbalances in facial symmetry can indicate underlying energetic or physical health conditions. Face reading provides early clues to internal imbalances, empowering you to take proactive steps in your wellness journey.',
-        image: '/insights_page/face-reading/pexels-pavel-danilyuk-7222018.jpg',
-        imagePosition: 'right'
-      }
-    ],
-    scrollGallery: [
-      '/insights_page/face-reading/lower scroll.jpg',
-      '/insights_page/face-reading/scroll image.jpg',
-    ],
-    remedies: [
-      'Practice daily facial massage to release tension and improve energy flow (Qi) in the face.',
-      'Incorporate cooling foods into your diet if redness or inflammation appears in specific facial zones.',
-      'Engage in regular emotional release techniques to soften harsh worry lines or tension held in the jaw.'
-    ]
-  },
-
-  'palm-reading': {
-    id: 'palm-reading',
-    name: 'Palm Reading',
-    heroTitle: 'The Destiny in Your Hands',
-    heroDescription: 'Uncover the unique blueprint of your character, talents, and potential life events etched into the lines of your palms.',
-    heroImages: [
-      '/insights_page/palm-reading/sunday-oludare-UjDgsnG9LWo-unsplash.jpg',
-      '/insights_page/palm-reading/use this image horizontal.jpg',
-    ],
-    contentSections: [
-      {
-        title: 'The Topography of the Hand',
-        text: 'Palmistry, or Chiromancy, involves the detailed analysis of the hands to evaluate a person\'s character and predict their future. The major lines—the Heart, Head, and Life lines—provide a foundational understanding of your emotional landscape, intellectual inclinations, and overall vitality. The shape of the hand and the mounts (the fleshy pads) further reveal your elemental nature and inherent talents.',
-        image: '/insights_page/palm-reading/pexels-pavel-danilyuk-7221659.jpg',
-        imagePosition: 'left'
-      },
-      {
-        title: 'A Dynamic Map of Life',
-        text: 'Unlike astrology, which is fixed at birth, the lines on your palm are dynamic and can change over time. They reflect the neuro-pathways of the brain and the choices you make. A palm reading not only illuminates your current path but also empowers you to consciously alter your trajectory by highlighting areas of potential growth and cautioning against detrimental habits.',
-        image: '/insights_page/palm-reading/kira-auf-der-heide-QyCH5jwrD_A-unsplash.jpg',
-        imagePosition: 'right'
-      }
-    ],
-    scrollGallery: [
-      '/insights_page/palm-reading/pexels-pavel-danilyuk-7221656.jpg',
-      '/insights_page/palm-reading/sunday-oludare-UjDgsnG9LWo-unsplash.jpg',
-    ],
-    remedies: [
-      'If your Head Line shows stress, practice daily grounding exercises like walking barefoot on grass.',
-      'To strengthen a weak Sun Mount (creativity/success), wear a gold ring on your ring finger.',
-      'Regularly massage your hands with warm sesame oil to soothe nervous tension reflected in the minor lines.'
-    ]
-  },
-
-  'sound-healing': {
-    id: 'sound-healing',
-    name: 'Sound Healing',
-    heroTitle: 'Vibrational Harmony',
-    heroDescription: 'Restore balance to your mind, body, and spirit through the therapeutic application of sound frequencies and resonant vibrations.',
-    heroImages: [
-      '/insights_page/sound-healing/pexels-cottonbro-5602498.jpg',
-      '/insights_page/sound-healing/sound heal.jpg',
-    ],
-    contentSections: [
-      {
-        title: 'The Science of Resonance',
-        text: 'Sound Healing operates on the principle that everything in the universe, including our bodies, is in a state of vibration. When we are stressed or unwell, our natural resonant frequencies become distorted. Using instruments like singing bowls, tuning forks, and gongs, sound healing introduces specific frequencies that entrain the brainwaves, shifting them from active beta states into deeply relaxing alpha and theta states, promoting cellular repair.',
-        image: '/insights_page/sound-healing/thlt-lcx-VsI_74zRzAo-unsplash.jpg',
-        imagePosition: 'left'
-      },
-      {
-        title: 'Emotional and Physical Release',
-        text: 'The vibrations from sound healing instruments penetrate deeply into the body, acting like an internal massage. This process helps to dislodge emotional trauma and energetic blockages stored in the tissues. Participants often experience profound emotional releases, reduced anxiety, lowered blood pressure, and a deep sense of inner peace following a sound bath session.',
-        image: '/insights_page/sound-healing/pexels-shkrabaanthony-6252163.jpg',
-        imagePosition: 'right'
-      }
-    ],
-    scrollGallery: [
-      '/insights_page/sound-healing/scroll image.jpg',
-      '/insights_page/sound-healing/pexels-anastasia-shuraeva-6013501.jpg',
-    ],
-    remedies: [
-      'Listen to 528Hz frequency music (the "Miracle" tone) daily to promote DNA repair and stress reduction.',
-      'Humming softly for 5 minutes a day can stimulate the vagus nerve, immediately calming the nervous system.',
-      'Place a Tibetan singing bowl on your chest or stomach and play it to directly transmit healing vibrations into your body.'
+      'Read your rising sign horoscopes along with your sun sign for a more accurate daily picture.',
+      'Track the moon phases to understand shifts in your emotional energy.',
+      'Reflect on major life events and see how they correlate with significant astrological transits.'
     ]
   },
 
   meditation: {
     id: 'meditation',
-    name: 'Meditation',
-    heroTitle: 'The Path to Inner Stillness',
-    heroDescription: 'Cultivate profound mindfulness, mental clarity, and inner peace through guided practices that quiet the mind and awaken the spirit.',
+    name: 'Meditation & Breathing',
+    heroTitle: 'Find Stillness in the Chaos',
+    heroDescription: 'Unlock inner peace, reduce stress, and cultivate profound mental clarity through the ancient art of meditation.',
     heroImages: [
-      '/insights_page/meditation/activedia-meditation-1384758_1920.jpg',
-      '/insights_page/meditation/pexels-arthousestudio-7363287.jpg',
+      '/insights_page/meditation/pexels-abhayaranya-35338412.jpg',
+      '/insights_page/meditation/pexels-cup-of-couple-6962536.jpg',
     ],
     contentSections: [
       {
-        title: 'Mastering the Mind',
+        title: 'The Power of Presence',
         text: 'Meditation is the profound practice of training your attention and awareness. In our modern, hyper-stimulated world, the mind is often scattered and anxious. Through consistent meditation techniques—such as breath awareness, mantra repetition, or loving-kindness—you learn to observe your thoughts without attachment. This creates a spaciousness in the mind, leading to reduced stress, enhanced focus, and a profound sense of inner calm.',
         image: '/insights_page/meditation/pexels-thomas-benedetti-949290600-25358278.jpg',
         imagePosition: 'left'
       },
       {
         title: 'Neurological Transformation',
-        text: 'Scientific research has demonstrated that regular meditation physically changes the brain. It thickens the prefrontal cortex (responsible for decision-making and emotional regulation) and shrinks the amygdala (the brain\'s fear center). This neuroplasticity means that through meditation, you are literally rewiring your brain for greater happiness, resilience, and compassion.',
-        image: '/insights_page/meditation/activedia-meditation-1384758_1920.jpg',
+        text: 'Scientific research has demonstrated that regular meditation physically changes the brain. It thickens the prefrontal cortex (responsible for decision-making and emotional regulation) and shrinks the amygdala (the brains fear center). This neuroplasticity means that through meditation, you are literally rewiring your brain for greater happiness, resilience, and compassion.',
+        image: '/insights_page/meditation/pexels-vlada-karpovich-8939958.jpg',
         imagePosition: 'right'
       }
     ],
     scrollGallery: [
       '/insights_page/meditation/scroll image.jpg',
       '/insights_page/meditation/scroll image1.jpg',
+      '/insights_page/meditation/pexels-n-voitkevich-7078130.jpg',
+      '/insights_page/meditation/pexels-yogendras31-14237832.jpg'
     ],
     remedies: [
       'Create a dedicated, quiet "zen space" in your home specifically for daily meditation.',
@@ -230,32 +75,29 @@ export const MODALITIES_CONTENT: Record<string, ModalityData> = {
     heroTitle: 'Balancing the Energy Centers',
     heroDescription: 'Identify and clear blockages within your seven primary energy centers to restore vitality, emotional stability, and spiritual connection.',
     heroImages: [
-      '/insights_page/chakra-healing/pexels-arina-krasnikova-6998231.jpg',
-      '/insights_page/chakra-healing/b-cole-to62lwqrbdk-unsplash.jpg',
+      '/lavender_logo.png'
     ],
     contentSections: [
       {
         title: 'The Anatomy of Energy',
-        text: 'The Chakras are seven spinning wheels of energy located along the spine, from the base to the crown of the head. Each chakra corresponds to specific physical organs, emotional states, and spiritual themes. When these energy centers are open and balanced, life force energy (Prana or Qi) flows freely, resulting in vibrant health and emotional well-being. When blocked by stress or trauma, physical and emotional symptoms arise.',
-        image: '/insights_page/chakra-healing/esther-verdu-G3ttEY6r7J0-unsplash.jpg',
+        text: 'The Chakras are seven spinning wheels of energy located along the spine, from the base to the crown of the head. Each chakra corresponds to specific physical organs, emotional states, and spiritual themes. When these energy centers are open and balanced, life force energy (Prana or Qi) flows freely, resulting in vibrant health and emotional well-being.',
+        image: '/lavender_logo.png',
         imagePosition: 'left'
       },
       {
         title: 'Clearing and Restoring Flow',
-        text: 'Chakra healing utilizes various techniques—including crystal therapy, Reiki, specific yoga postures, and sound frequencies—to clear stagnant energy. By addressing the root energetic cause of an issue, rather than just the symptoms, this modality facilitates deep, holistic healing. You will learn to recognize which chakras are deficient or overactive and how to bring them back into harmonious alignment.',
-        image: '/insights_page/chakra-healing/esther-verdu-z3I6QNClKLk-unsplash.jpg',
+        text: 'Chakra healing utilizes various techniques—including crystal therapy, Reiki, specific yoga postures, and sound frequencies—to clear stagnant energy. By addressing the root energetic cause of an issue, rather than just the symptoms, this modality facilitates deep, holistic healing.',
+        image: '/lavender_logo.png',
         imagePosition: 'right'
       }
     ],
     scrollGallery: [
-      '/insights_page/chakra-healing/scroll image.jpg',
-      '/insights_page/chakra-healing/scroll image1.jpg',
-      '/insights_page/chakra-healing/scroll image2.jpg',
+      '/lavender_logo.png',
     ],
     remedies: [
-      'Wear or carry specific crystals (e.g., Amethyst for Crown, Citrine for Solar Plexus) to support deficient chakras.',
-      'Eat foods that match the color of the chakra you are trying to balance (e.g., root vegetables for the Root chakra).',
-      'Use essential oils like lavender or frankincense on your pulse points to gently stimulate energy flow.'
+      'Wear or carry specific crystals to support deficient chakras.',
+      'Eat foods that match the color of the chakra you are trying to balance.',
+      'Use essential oils like lavender or frankincense on your pulse points.'
     ]
   },
 
@@ -265,20 +107,20 @@ export const MODALITIES_CONTENT: Record<string, ModalityData> = {
     heroTitle: 'The Mathematics of the Soul',
     heroDescription: 'Uncover the hidden vibrations and profound meanings behind the numbers in your life, birthdate, and name.',
     heroImages: [
-      '/insights_page/numerology/superko-ai-generated-8888074_1920.jpg',
-      '/insights_page/numerology/istockphoto-1334201626-1024x1024.jpg',
+      '/insights_page/numerology/markus-krisetya-Vkp9wg-VAsQ-unsplash.jpg',
+      '/insights_page/numerology/pexels-ann-h-45017-32417524.jpg',
     ],
     contentSections: [
       {
         title: 'The Universal Language of Numbers',
-        text: 'Numerology is the ancient study of the spiritual significance of numbers. It is based on the premise that the universe is a system and, once broken down, we are left with the basic elements: numbers. Your birth date and the name given to you at birth are not random; they possess specific vibrational frequencies. By calculating your Life Path Number, Expression Number, and Soul Urge Number, you gain a profound roadmap of your character and destiny.',
-        image: '/insights_page/numerology/istockphoto-1334201626-1024x1024.jpg',
+        text: 'Numerology is the ancient study of the spiritual significance of numbers. It is based on the premise that the universe is a system and, once broken down, we are left with the basic elements: numbers. Your birth date and the name given to you at birth possess specific vibrational frequencies.',
+        image: '/insights_page/numerology/markus-krisetya-Vkp9wg-VAsQ-unsplash.jpg',
         imagePosition: 'left'
       },
       {
         title: 'Aligning with Your Vibrational Path',
-        text: 'Understanding your numerological profile helps you make sense of your inherent talents, underlying motivations, and the recurring cycles in your life. It provides clarity on career choices, relationship compatibility, and optimal timing for major life events. By consciously aligning your actions with your core numerological vibrations, you can experience greater flow, purpose, and success.',
-        image: '/insights_page/numerology/superko-ai-generated-8888074_1920.jpg',
+        text: 'Understanding your numerological profile helps you make sense of your inherent talents, underlying motivations, and the recurring cycles in your life. It provides clarity on career choices, relationship compatibility, and optimal timing for major life events.',
+        image: '/insights_page/numerology/pexels-ann-h-45017-32417524.jpg',
         imagePosition: 'right'
       }
     ],
@@ -287,23 +129,220 @@ export const MODALITIES_CONTENT: Record<string, ModalityData> = {
       '/insights_page/numerology/scroll image1.jpg',
     ],
     remedies: [
-      'Surround yourself with colors associated with your Life Path number to amplify your natural strengths.',
-      'If you are experiencing a challenging Personal Year cycle, focus on the specific lessons of that number rather than forcing outward success.',
-      'Ensure the total numerical value of your house or business address harmonizes with your personal numbers for better energy flow.'
+      'Surround yourself with colors associated with your Life Path number.',
+      'If you are experiencing a challenging Personal Year cycle, focus on the specific lessons of that number.',
+      'Ensure the total numerical value of your house harmonizes with your personal numbers.'
     ]
   },
-  
-  // Default fallbacks for the other 4
+
+  'palm-reading': {
+    id: 'palm-reading',
+    name: 'Palm Reading',
+    heroTitle: 'Your Destiny in Your Hands',
+    heroDescription: 'Discover the fascinating world of chiromancy and learn how the lines on your hands reveal your unique character and destiny.',
+    heroImages: [
+      '/insights_page/palm-reading/pexels-alexander-suhorucov-6457564.jpg',
+      '/insights_page/palm-reading/pexels-cottonbro-7182585.jpg',
+    ],
+    contentSections: [
+      {
+        title: 'The Map of Your Life',
+        text: 'Palmistry, or chiromancy, is the art of evaluating a person character or future life by "reading" the palm of that person hand. Various lines, mounts, and shapes on the hand represent different aspects of your life—from your heart line indicating emotional health to your life line revealing vitality.',
+        image: '/insights_page/palm-reading/pexels-devvishu-8229081.jpg',
+        imagePosition: 'left'
+      },
+      {
+        title: 'Changing Destiny',
+        text: 'While palm reading offers a snapshot of your potential and inherent traits, it also teaches that the lines on our hands can change over time. As we evolve, make new choices, and shift our mindset, our hands reflect this growth, showing that our destiny is ultimately in our own hands.',
+        image: '/insights_page/palm-reading/pexels-pavel-danilyuk-7221646.jpg',
+        imagePosition: 'right'
+      }
+    ],
+    scrollGallery: [
+      '/insights_page/palm-reading/shreyas-shah-Ka-speuU7W4-unsplash.jpg',
+      '/insights_page/palm-reading/sunday-oludare-UjDgsnG9LWo-unsplash (1).jpg',
+      '/insights_page/palm-reading/use this image horizontal.jpg'
+    ],
+    remedies: [
+      'Massage your hands regularly to stimulate the acupressure points connected to your vital organs.',
+      'Pay attention to any temporary marks or spots on your palm, as they can indicate passing energy shifts.',
+      'Compare your dominant and non-dominant hands to see the difference between your potential and your actualized life.'
+    ]
+  },
+
+  'sound-healing': {
+    id: 'sound-healing',
+    name: 'Sound Healing',
+    heroTitle: 'Vibrational Therapy',
+    heroDescription: 'Immerse yourself in therapeutic frequencies to restore harmony, clear energetic blockages, and promote deep relaxation.',
+    heroImages: [
+      '/insights_page/sound-healing/pexels-cottonbro-5602498.jpg',
+      '/insights_page/sound-healing/pexels-shkrabaanthony-6252163.jpg',
+    ],
+    contentSections: [
+      {
+        title: 'The Resonance of Health',
+        text: 'Sound healing is based on the principle that everything in the universe, including our bodies, is in a state of vibration. When we are sick or stressed, our optimal frequencies become discordant. Therapeutic instruments like singing bowls, tuning forks, and gongs can entrain our brainwaves to a deeply restorative state.',
+        image: '/insights_page/sound-healing/pexels-anastasia-shuraeva-6013501.jpg',
+        imagePosition: 'left'
+      },
+      {
+        title: 'A Cellular Massage',
+        text: 'As the sound waves wash over and through you, they act as a cellular massage, releasing tension, improving circulation, and stimulating the bodys natural healing mechanisms. Sound therapy can alleviate anxiety, improve sleep quality, and foster a profound sense of inner peace.',
+        image: '/insights_page/sound-healing/thlt-lcx-VsI_74zRzAo-unsplash.jpg',
+        imagePosition: 'right'
+      }
+    ],
+    scrollGallery: [
+      '/insights_page/sound-healing/scroll image.jpg',
+      '/insights_page/sound-healing/sound heal.jpg',
+    ],
+    remedies: [
+      'Listen to binaural beats or solfeggio frequencies while working or resting to passively receive sound therapy.',
+      'Hum or chant a simple mantra (like "Om") to feel the vibration internally and stimulate the vagus nerve.',
+      'Attend a local sound bath to experience the immersive power of live therapeutic instruments.'
+    ]
+  },
+
   'spiritual': {
     id: 'spiritual',
     name: 'Spiritual Guidance',
     heroTitle: 'Connect with Higher Wisdom',
     heroDescription: 'Embark on a profound journey of self-discovery, connecting with universal wisdom and your highest self.',
-    heroImages: ['/lavender_logo.png'],
-    contentSections: [],
-    scrollGallery: [],
-    remedies: ['Take a moment to sit quietly and connect with your breath each morning.', 'Keep a gratitude journal to raise your vibrational frequency.']
+    heroImages: [
+      '/insights_page/spiritual-guidance/pexels-ajan-yogi-311175-9271141.jpg',
+      '/insights_page/spiritual-guidance/pexels-amychandra-773013.jpg',
+    ],
+    contentSections: [
+      {
+        title: 'The Inner Journey',
+        text: 'Spiritual guidance is not about following a strict dogma, but rather uncovering the divine truth that already resides within you. It involves connecting with your intuition, understanding the deeper meaning behind life events, and aligning your actions with your soul purpose.',
+        image: '/insights_page/spiritual-guidance/pexels-arina-krasnikova-6998232.jpg',
+        imagePosition: 'left'
+      },
+      {
+        title: 'Navigating the Awakening',
+        text: 'The path of spiritual awakening can sometimes be confusing or isolating. A spiritual guide can help you navigate this transition, offering tools to manage energetic sensitivities, heal past traumas, and integrate higher states of consciousness into your daily life.',
+        image: '/insights_page/spiritual-guidance/pexels-cottonbro-5386075.jpg',
+        imagePosition: 'right'
+      }
+    ],
+    scrollGallery: [
+      '/insights_page/spiritual-guidance/aamir-suhail-ATlRqTCbvV4-unsplash.jpg',
+      '/insights_page/spiritual-guidance/pexels-anete-lusina-4790557.jpg',
+      '/insights_page/spiritual-guidance/pexels-ekaterina-bolovtsova-7113558.jpg',
+      '/insights_page/spiritual-guidance/pexels-mikhail-nilov-6931773.jpg',
+    ],
+    remedies: [
+      'Take a moment to sit quietly and connect with your breath each morning.',
+      'Keep a gratitude journal to raise your vibrational frequency.',
+      'Spend time in nature to ground your energy and reconnect with the rhythms of the earth.'
+    ]
   },
+
+  'tarot': {
+    id: 'tarot',
+    name: 'Tarot',
+    heroTitle: 'The Mirror of the Soul',
+    heroDescription: 'Tap into archetypal imagery to access deep intuition, clarify your present circumstances, and explore future potentials.',
+    heroImages: [
+      '/insights_page/tarot/edz-norton-eUX74J_IpXw-unsplash.jpg',
+      '/insights_page/tarot/subarasikiai-tarot-cards-7395644_1920.jpg',
+    ],
+    contentSections: [
+      {
+        title: 'Archetypes and Intuition',
+        text: 'The Tarot is a deck of 78 cards featuring symbolic imagery that reflects the human experience. Rather than simply predicting the future, the Tarot acts as a mirror, reflecting your subconscious thoughts, hidden fears, and true desires. It is a powerful tool for unlocking intuition and gaining clarity on complex situations.',
+        image: '/insights_page/tarot/petr-sidorov-D3SzBCAeMhQ-unsplash.jpg',
+        imagePosition: 'left'
+      },
+      {
+        title: 'Empowered Decision Making',
+        text: 'A Tarot reading provides a narrative framework to view your life from a higher perspective. It highlights potential outcomes based on your current trajectory, empowering you to make conscious choices. The cards offer guidance, validation, and a profound sense of connection to universal wisdom.',
+        image: '/insights_page/tarot/viva-luna-studios-XZhILkqs2mk-unsplash.jpg',
+        imagePosition: 'right'
+      }
+    ],
+    scrollGallery: [
+      '/insights_page/tarot/lower scroll image.jpg',
+      '/insights_page/tarot/viva-luna-studios-zu_hPWH32wA-unsplash.jpg',
+    ],
+    remedies: [
+      'Pull a "card of the day" each morning to set a theme or focus for your activities.',
+      'When faced with a difficult decision, draw three cards representing the past, present, and potential future of the situation.',
+      'Take time to simply study the imagery on the cards without referencing a guidebook to develop your own intuitive associations.'
+    ]
+  },
+
+  'face-reading': {
+    id: 'face-reading',
+    name: 'Face Reading',
+    heroTitle: 'The Story Written on Your Features',
+    heroDescription: 'Discover how the unique contours of your face reveal your personality, health, and life potential through the ancient art of Physiognomy.',
+    heroImages: [
+      '/insights_page/face-reading/pexels-algrey-5891868.jpg',
+      '/insights_page/face-reading/pexels-cottonbro-8090286.jpg',
+    ],
+    contentSections: [
+      {
+        title: 'Mapping the Microcosm',
+        text: 'Face reading, or physiognomy, is the ancient practice of assessing a persons character or destiny from their outer appearance, especially the face. Traditional Chinese Medicine teaches that the face is a map of the internal organs, and every feature—from the shape of the eyes to the lines on the forehead—holds significance.',
+        image: '/insights_page/face-reading/pexels-andy-lee-1453672476-36126957.jpg',
+        imagePosition: 'left'
+      },
+      {
+        title: 'Understanding Innate Traits',
+        text: 'By analyzing the five facial features (eyes, eyebrows, nose, mouth, and ears), a face reader can discern your inherent strengths, communication style, and emotional tendencies. This knowledge fosters deeper self-acceptance and improves interpersonal relationships by helping you understand others at a glance.',
+        image: '/insights_page/face-reading/pexels-chloe-amaya-1047565-4079238.jpg',
+        imagePosition: 'right'
+      }
+    ],
+    scrollGallery: [
+      '/insights_page/face-reading/pexels-eric-quinones-2149843819-35725745.jpg',
+    ],
+    remedies: [
+      'Observe the faces of people you admire and note the common features that correspond to their positive traits.',
+      'Pay attention to the health of your skin, as it reflects the condition of your corresponding internal organs according to face reading principles.',
+      'Practice making conscious, positive facial expressions, as habitual expressions eventually form the permanent lines on your face.'
+    ]
+  },
+
+  'space-harmony': {
+    id: 'space-harmony',
+    name: 'Space Harmony',
+    heroTitle: 'Vastu & Feng Shui',
+    heroDescription: 'Align your living and working environments with the natural flow of universal energy to attract abundance and peace.',
+    heroImages: [
+      '/insights_page/space-harmony/pexels-allison-pang-2163709073-39148302.jpg',
+      '/insights_page/space-harmony/pexels-artbovich-6489106.jpg',
+    ],
+    contentSections: [
+      {
+        title: 'The Energy of Your Environment',
+        text: 'Your physical space is an extension of your energy field. Practices like Vastu Shastra and Feng Shui teach that the layout, colors, and objects in your home profoundly impact your health, wealth, and relationships. When a space is in harmony, energy (Chi or Prana) flows smoothly, nourishing all aspects of your life.',
+        image: '/insights_page/space-harmony/pexels-homelane-com-492179-1776574.jpg',
+        imagePosition: 'left'
+      },
+      {
+        title: 'Creating Sanctuary',
+        text: 'By applying simple principles of spatial arrangement, you can transform your home into a supportive sanctuary. This involves clearing clutter, balancing the five elements (wood, fire, earth, metal, water), and ensuring that the placement of furniture facilitates rather than blocks the flow of positive energy.',
+        image: '/insights_page/space-harmony/pexels-joeofcochin-6593988.jpg',
+        imagePosition: 'right'
+      }
+    ],
+    scrollGallery: [
+      '/insights_page/space-harmony/pexels-devansh-raniwala-1888270-18633512.jpg',
+      '/insights_page/space-harmony/pexels-gokul-purushothaman-125319319-13099442.jpg',
+      '/insights_page/space-harmony/pexels-golboo-33210282.jpg',
+      '/insights_page/space-harmony/pexels-jan-vee-2150834267-31352325.jpg',
+    ],
+    remedies: [
+      'Declutter your physical space to allow for the free flow of new, positive energy.',
+      'Ensure the entrance to your home is well-lit and welcoming to attract beneficial opportunities.',
+      'Place living plants in areas of stagnant energy to revitalize the space.'
+    ]
+  },
+  
   'breathwork': {
     id: 'breathwork',
     name: 'Breathwork',
@@ -323,15 +362,5 @@ export const MODALITIES_CONTENT: Record<string, ModalityData> = {
     contentSections: [],
     scrollGallery: [],
     remedies: ['Keep a dream journal by your bed and write down whatever you remember immediately upon waking.']
-  },
-  'space-harmony': {
-    id: 'space-harmony',
-    name: 'Space Harmony',
-    heroTitle: 'Vastu & Feng Shui',
-    heroDescription: 'Align your living and working environments with the natural flow of universal energy to attract abundance and peace.',
-    heroImages: ['/lavender_logo.png'],
-    contentSections: [],
-    scrollGallery: [],
-    remedies: ['Declutter your physical space to allow for the free flow of new, positive energy.']
   }
 };

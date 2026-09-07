@@ -2,30 +2,37 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
+import { initSocketServer } from './lib/socket';
 import cors from 'cors';
+import path from 'path';
 import helmet from 'helmet';
-import { createServer } from 'http';
 import { generalLimiter } from './middleware/rateLimiter';
 import authRouter from './routes/auth';
+import astrologerAuthRouter from './routes/astrologerAuth';
+import astrologersRouter from './routes/astrologers';
+import adminAstrologersRouter from './routes/adminAstrologers';
 import usersRouter from './routes/users';
 import practitionersRouter from './routes/practitioners';
 import walletRouter from './routes/wallet';
-import sessionsRouter from './routes/sessions';
 import chatRouter from './routes/chat';
 import agoraRouter from './routes/agora';
+import adminRouter from './routes/admin';
+import migrateRouter from './routes/migrate';
+import sessionsRouter from './routes/sessions';
+import adminAuthRouter from './routes/adminAuth';
+import contactRouter from './routes/contact';
+import ticketsRouter from './routes/tickets';
+import consentRouter from './routes/consent';
+import deepgramRouter from './routes/deepgram';
+import notificationRoutes from './routes/notifications';
 import { startBillingEngine } from './workers/billingEngine';
-import { initSocketServer } from './lib/socket';
 
 const app = express();
-const server = createServer(app);
 
 // Trust the Azure App Service reverse proxy to parse X-Forwarded-For correctly
 // This strips the port number from the IP address, fixing express-rate-limit
 app.set('trust proxy', 1);
 const port = process.env.PORT || 8080;
-
-// ─── Initialize Socket.IO ─────────────────────────────────────────────────────
-initSocketServer(server);
 
 // ─── Security Middleware ──────────────────────────────────────────────────────
 
@@ -57,143 +64,171 @@ app.use(express.json({
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 // ─── Health Check (Before Rate Limiter) ───────────────────────────────────────
-app.get('/', (_req, res) => res.send('HealConnect API is running'));
+app.get('/', (_req, res) => res.send('ZenAuraa API is running'));
 app.disable('x-powered-by'); // Belt-and-suspenders (helmet already removes this)
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
 
 app.get('/health', (_req, res) => {
-  res.json({ status: 'healthy', service: 'healconnect-api' });
+  res.json({ status: 'healthy', service: 'ZenAuraa-api' });
 });
-
-import fs from 'fs';
-import path from 'path';
-import { Client } from 'pg';
 
 import { exec } from 'child_process';
 import util from 'util';
 const execPromise = util.promisify(exec);
 
+import { prisma } from './lib/prisma';
+
 app.get('/api/run-prisma-migrate', async (_req, res) => {
-  // Trigger build to apply Prisma migration fixes
   res.setHeader('Content-Type', 'text/plain');
   res.write('Starting prisma db push...\n');
-  
   try {
+    res.write('Cleaning up orphaned Consent records to prevent foreign key errors...\n');
+    await prisma.$executeRawUnsafe(`UPDATE "Consent" SET "userId" = NULL WHERE "userId" IS NOT NULL AND "userId" NOT IN (SELECT id FROM "User")`);
+    await prisma.$executeRawUnsafe(`UPDATE "Consent" SET "practitionerId" = NULL WHERE "practitionerId" IS NOT NULL AND "practitionerId" NOT IN (SELECT id FROM "Practitioner")`);
+
+    res.write('Applying schema updates for timeOfBirth...\n');
+    await prisma.$executeRawUnsafe(`ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "timeOfBirth" TEXT;`);
+
     const { stdout, stderr } = await execPromise('npx prisma db push --accept-data-loss');
     res.write('--- STDOUT ---\n');
-    res.write(stdout);
-    res.write('\n--- STDERR ---\n');
-    res.write(stderr);
-    res.write('\nMigration completely finished!\n');
-    res.end();
+      res.write(stdout);
+      res.write('\n--- STDERR ---\n');
+      res.write(stderr);
+
+      // Seed the admin user since npx prisma db push doesn't do it automatically
+      res.write('\nSeeding admin user...\n');
+      const adminCount = await prisma.$queryRaw<[{ count: bigint }]>`
+        SELECT COUNT(*)::bigint as count FROM "AdminUser"
+      `;
+      const count = Number(adminCount[0]?.count ?? 0);
+      
+      // We will hardcode the fallback if env vars are missing so the user isn't locked out
+      const bootstrapEmail = process.env['ADMIN_LOGIN_EMAIL'] || 'admin@ZenAuraa.com';
+      const bootstrapPassword = process.env['ADMIN_LOGIN_PASSWORD'] || 'HealAdmin@2026';
+
+      if (count === 0) {
+        const bcrypt = require('bcryptjs');
+        const { randomUUID } = require('crypto');
+        const passwordHash = await bcrypt.hash(bootstrapPassword, 12);
+        const now = new Date().toISOString();
+        await prisma.$executeRawUnsafe(
+          `INSERT INTO "AdminUser" ("id","email","passwordHash","role","mfaEnabled","createdAt","updatedAt")
+           VALUES ($1, $2, $3, 'SUPERADMIN', false, $4, $4)
+           ON CONFLICT ("email") DO NOTHING`,
+          randomUUID(),
+          bootstrapEmail,
+          passwordHash,
+          now
+        );
+        res.write('Admin user seeded successfully with email: ' + bootstrapEmail + '\n');
+      } else {
+        res.write('Admin user already exists, skipping seed.\n');
+      }
+
+      res.write('\nMigration completely finished!\n');
+      res.end();
   } catch (error) {
     res.write('\nFATAL ERROR: ' + String(error) + '\n');
     res.end();
-  }
-});
-
-app.get('/api/run-seed', async (_req, res) => {
-  res.setHeader('Content-Type', 'text/plain');
-  res.write('Starting db seed directly...\n');
-  try {
-    const { prisma } = require('./lib/prisma');
-    
-    res.write('Seeding Dr. Sarah Jenkins...\n');
-    await prisma.practitioner.create({
-      data: {
-        name: 'Dr. Sarah Jenkins',
-        email: 'sarah@healconnect.com',
-        bio: 'A compassionate healer with 10 years of experience in cognitive behavioral therapy and mindfulness.',
-        specialties: ['Anxiety', 'Depression', 'Mindfulness'],
-        certifications: ['Licensed Clinical Social Worker (LCSW)', 'CBT Certified'],
-        languages: ['English', 'Spanish'],
-        experienceYrs: 10,
-        perMinuteRate: 50,
-        isVerified: true,
-        isOnline: true,
-        photoUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah'
-      }
-    });
-
-    res.write('Seeding Yogi Ananda...\n');
-    await prisma.practitioner.create({
-      data: {
-        name: 'Yogi Ananda',
-        email: 'ananda@healconnect.com',
-        bio: 'Spiritual guide and meditation expert focused on holistic well-being and inner peace.',
-        specialties: ['Meditation', 'Spiritual Guidance', 'Stress Relief'],
-        certifications: ['Certified Yoga Instructor', 'Vipassana Master'],
-        languages: ['English', 'Hindi', 'Sanskrit'],
-        experienceYrs: 15,
-        perMinuteRate: 35,
-        isVerified: true,
-        isOnline: false,
-        photoUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ananda'
-      }
-    });
-
-    res.write('Seeding Dr. Michael Chen...\n');
-    await prisma.practitioner.create({
-      data: {
-        name: 'Dr. Michael Chen',
-        email: 'michael@healconnect.com',
-        bio: 'Clinical psychologist specializing in relationship counseling and career-related stress.',
-        specialties: ['Relationships', 'Career Stress', 'Life Transitions'],
-        certifications: ['Psy.D in Clinical Psychology'],
-        languages: ['English', 'Mandarin'],
-        experienceYrs: 8,
-        perMinuteRate: 60,
-        isVerified: true,
-        isOnline: true,
-        photoUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Michael'
-      }
-    });
-
-    res.write('\nSeed completely finished!\n');
-    res.end();
-  } catch (error) {
-    res.write('\nFATAL ERROR: ' + String(error) + '\n');
-    res.end();
-  }
-});
-
-app.get('/api/admin/exec', async (req, res) => {
-  try {
-    const { exec } = require('child_process');
-    const cmd = req.query.cmd ? String(req.query.cmd) : 'npx prisma db push --accept-data-loss';
-    exec(cmd, (error: any, stdout: any, stderr: any) => {
-      if (error) {
-        res.status(500).json({ error: error.message, stderr, stdout });
-        return;
-      }
-      res.json({ success: true, stdout });
-    });
-  } catch (error) {
-    res.status(500).json({ error: String(error) });
-  }
-});
-
-app.get('/api/admin/online', async (req, res) => {
-  try {
-    const { prisma } = require('./lib/prisma');
-    await prisma.practitioner.updateMany({ data: { isOnline: true } });
-    res.json({ success: true, message: 'All practitioners set to online' });
-  } catch (error) {
-    res.status(500).json({ error: String(error) });
   }
 });
 
 // Apply general rate limiter to all routes
 app.use(generalLimiter);
 
+import availabilityRouter from './routes/availability';
+import schedulesRouter from './routes/schedules';
+
 app.use('/api/auth', authRouter);
+app.use('/api/auth/astrologer', astrologerAuthRouter);
+app.use('/api/astrologers', astrologersRouter);
+app.use('/api/admin/astrologers', adminAstrologersRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/practitioners', practitionersRouter);
 app.use('/api/wallet', walletRouter);
-app.use('/api/sessions', sessionsRouter);
 app.use('/api/chat', chatRouter);
 app.use('/api/agora', agoraRouter);
+app.use('/api/sessions', sessionsRouter);
+app.use('/api/schedules', schedulesRouter);
+app.use('/api/admin', adminRouter);
+app.use('/api/admin-auth', adminAuthRouter);
+app.use('/api/contact', contactRouter);
+app.use('/api/tickets', ticketsRouter);
+app.use('/api/consent', consentRouter);
+app.use('/api/deepgram', deepgramRouter);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/availability', availabilityRouter);
+
+// Serve local uploads when Azure Storage is not configured
+if (!process.env.AZURE_STORAGE_CONNECTION_STRING) {
+  app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+}
+
+// ─── Public Content Endpoints ────────────────────────────────────────────────
+app.get('/api/blogs', async (req, res) => {
+  try {
+    const { prisma } = require('./lib/prisma');
+    const blogs = await prisma.blog.findMany({
+      where: { published: true },
+      orderBy: { createdAt: 'desc' }
+    });
+    res.json({ success: true, data: { blogs } });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+app.get('/api/blogs/:id', async (req, res) => {
+  try {
+    const { id } = req.params as { id: string };
+    const { prisma } = require('./lib/prisma');
+    const blog = await prisma.blog.findUnique({
+      where: { id }
+    });
+    if (!blog || !blog.published) {
+      res.status(404).json({ success: false, message: 'Blog not found' });
+      return;
+    }
+    res.json({ success: true, data: { blog } });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+app.get('/api/faqs', async (req, res) => {
+  try {
+    const { prisma } = require('./lib/prisma');
+    const faqs = await prisma.faq.findMany({ orderBy: { createdAt: 'asc' } });
+    res.json({ success: true, data: { faqs } });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+app.get('/api/banners', async (req, res) => {
+  try {
+    const { prisma } = require('./lib/prisma');
+    const banners = await prisma.banner.findMany({
+      where: { isActive: true },
+      orderBy: { createdAt: 'desc' }
+    });
+    res.json({ success: true, data: { banners } });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// ─── Temp: Bulk delete practitioners by email ───────────────────────────────
+app.delete('/api/temp/practitioners', async (req: any, res: any) => {
+  const { emails, key } = req.body as { emails: string[]; key: string };
+  if (key !== 'zenaura-delete-2026') { res.status(401).json({ success: false }); return; }
+  if (!emails?.length) { res.status(400).json({ success: false }); return; }
+  try {
+    const result = await prisma.practitioner.deleteMany({ where: { email: { in: emails } } });
+    res.json({ success: true, deleted: result.count });
+  } catch (err: any) { res.status(500).json({ success: false, message: err.message }); }
+});
 
 // ─── 404 ─────────────────────────────────────────────────────────────────────
 
@@ -210,9 +245,10 @@ app.use((err: Error, _req: express.Request, res: express.Response, _next: expres
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 
-server.listen(port, () => {
-  console.log(`✦ HealConnect API running on port ${port}`);
-  
-  // Start the background workers
+import { createServer } from 'http';
+const httpServer = createServer(app);
+initSocketServer(httpServer);
+httpServer.listen(port, () => {
+  console.log(`✦ ZenAuraa API running on port ${port}`);
   startBillingEngine();
 });

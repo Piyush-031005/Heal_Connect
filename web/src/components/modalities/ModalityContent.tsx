@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { ModalityData } from '@/data/modalities-content';
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 export default function ModalityContent({ data }: Props) {
   if (!data.contentSections || data.contentSections.length === 0) {
     return (
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-[#F3E8FF]">
         <div className="container mx-auto px-6 text-center">
           <p className="text-muted-foreground text-lg italic">
             Detailed insights for {data.name} are coming soon.
@@ -21,7 +22,7 @@ export default function ModalityContent({ data }: Props) {
   }
 
   return (
-    <section className="py-24 bg-background overflow-hidden">
+    <section className="py-24 bg-[#F3E8FF] overflow-hidden">
       <div className="container mx-auto px-6 lg:px-16 max-w-7xl">
         
         {/* Alternating Sections */}
@@ -43,11 +44,7 @@ export default function ModalityContent({ data }: Props) {
                   className="w-full lg:w-1/2"
                 >
                   <div className="relative aspect-[4/5] w-full max-w-md mx-auto rounded-3xl overflow-hidden shadow-2xl border border-primary/20 group">
-                    <img 
-                      src={section.image} 
-                      alt={section.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+                    <Image src={section.image} alt={section.title} fill unoptimized sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                     <div className="absolute inset-0 ring-1 ring-inset ring-foreground/10 rounded-3xl" />
                   </div>
                 </motion.div>
@@ -60,7 +57,7 @@ export default function ModalityContent({ data }: Props) {
                   transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                   className="w-full lg:w-1/2 space-y-6 text-center lg:text-left"
                 >
-                  <h2 className="text-3xl md:text-5xl font-serif text-foreground leading-tight">
+                  <h2 className="text-3xl md:text-5xl font-serif text-[#2A1658] leading-tight">
                     {section.title}
                   </h2>
                   <div className={`w-16 h-1 bg-primary/40 rounded-full mx-auto lg:mx-0`} />
@@ -86,7 +83,7 @@ export default function ModalityContent({ data }: Props) {
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
             
             <div className="relative z-10">
-              <h3 className="text-2xl md:text-4xl font-serif text-foreground mb-8 text-center">
+              <h3 className="text-2xl md:text-4xl font-serif text-[#2A1658] mb-8 text-center">
                 Healing Remedies & Practices
               </h3>
               
@@ -103,7 +100,7 @@ export default function ModalityContent({ data }: Props) {
                     <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs">
                       {idx + 1}
                     </div>
-                    <p className="text-foreground/90 font-medium leading-relaxed">
+                    <p className="text-[#2A1658]/90 font-medium leading-relaxed">
                       {remedy}
                     </p>
                   </motion.li>

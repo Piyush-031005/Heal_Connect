@@ -2,6 +2,7 @@ import { Server as HttpServer } from 'http';
 import { Server as SocketIOServer, Socket } from 'socket.io';
 import { verifyAccessToken } from './jwt';
 import { prisma } from './prisma';
+import { flagContentIfNeeded } from './moderation';
 
 let io: SocketIOServer | null = null;
 
@@ -21,9 +22,11 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
     try {
       const payload = verifyAccessToken(token);
       (socket as any).userId = payload.userId;
-      (socket as any).practitionerId = (payload as any).practitionerId ?? null;
+      (socket as any).practitionerId = payload.practitionerId ?? null;
+      console.log(`🔐 Socket auth: userId=${payload.userId} practitionerId=${payload.practitionerId ?? 'none'}`);
       next();
-    } catch {
+    } catch (err) {
+      console.error('Socket auth error:', err);
       next(new Error('Invalid token'));
     }
   });
@@ -42,6 +45,8 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
     // User joins their personal room
     socket.join(`user_${userId}`);
 
+    const joinedSessions = new Set<string>(); // Track which session rooms this socket is in
+
     // ── Join a session room ──────────────────────────────────────────────────
     socket.on('join_room', async ({ sessionId }: { sessionId: string }) => {
       // Verify this socket belongs to this session
@@ -54,6 +59,7 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
       if (!session) { socket.emit('error', { message: 'Session not found' }); return; }
 
       socket.join(`room:${sessionId}`);
+      joinedSessions.add(sessionId); // Track for disconnect cleanup
 
       // Send message history
       const messages = await prisma.chatMessage.findMany({
@@ -67,21 +73,12 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
       // Notify the other party that someone joined
       socket.to(`room:${sessionId}`).emit('peer_joined', { sessionId });
 
-      // Check if both users are in the room to start the timer
+      // Joining the Socket.IO room is only signaling. The audio client calls
+      // /connect after Agora has joined and published successfully.
       const room = io!.sockets.adapter.rooms.get(`room:${sessionId}`);
-      if (room && room.size >= 2) {
-        prisma.session.findUnique({ where: { id: sessionId } }).then((session) => {
-          if (session && !session.startTime) {
-            prisma.session.update({
-              where: { id: sessionId },
-              data: { startTime: new Date() },
-            }).then(() => {
-              io!.to(`room:${sessionId}`).emit('session_started', { sessionId });
-            }).catch(console.error);
-          } else {
-            io!.to(`room:${sessionId}`).emit('session_started', { sessionId });
-          }
-        }).catch(console.error);
+      const roomSize = room ? room.size : 1;
+      if (roomSize > 1) {
+        socket.to(`room:${sessionId}`).emit('peer_joined', { sessionId });
       }
     });
 
@@ -106,6 +103,14 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
         data: { sessionId, senderId, senderType, content: content.trim() },
       });
 
+      // Task 7: scan message for phone numbers / policy violations (async, non-blocking)
+      flagContentIfNeeded(content.trim(), 'CHAT', {
+        sessionId,
+        userId: senderId,
+        practitionerId: senderType === 'PRACTITIONER' ? senderId : session.practitionerId,
+        chatMessageId: message.id,
+      }).catch((err) => console.error('[moderation] chat scan error:', err));
+
       io!.to(`room:${sessionId}`).emit('new_message', { message });
     });
 
@@ -118,6 +123,12 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
       socket.to(`room:${sessionId}`).emit('typing_update', { userId, isTyping: false });
     });
 
+    // ── Call event synchronization ──────────────────────────────────────────
+    socket.on('call_mute_toggle', ({ sessionId, isMuted }: { sessionId: string; isMuted: boolean }) => {
+      // Broadcast mute state to all participants in the session room
+      socket.to(`room:${sessionId}`).emit('call_mute_update', { sessionId, userId, isMuted });
+    });
+
     // ── Read receipts ────────────────────────────────────────────────────────
     socket.on('message_read', async ({ sessionId, messageId }: { sessionId: string; messageId: string }) => {
       const readAt = new Date();
@@ -128,19 +139,55 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
       io!.to(`room:${sessionId}`).emit('receipt_update', { messageId, readAt: readAt.toISOString() });
     });
 
-    // ── Disconnect: expert goes offline ──────────────────────────────────────
+    // ── Disconnect: handle dropped calls + expert offline ───────────────────
     socket.on('disconnect', () => {
       console.log(`🔌 Disconnected: ${socket.id}`);
-      if (practitionerId) {
-        // Only set offline if no other sockets are connected for this practitioner
-        const roomSize = io!.sockets.adapter.rooms.get(`practitioner_${practitionerId}`)?.size || 0;
-        if (roomSize === 0) {
-          prisma.practitioner.update({ where: { id: practitionerId }, data: { isOnline: false } })
-            .then(() => {
-              io!.emit('practitioner_status', { practitionerId, isOnline: false });
-            })
-            .catch(console.error);
+
+      // Task 1: Mark any ACTIVE session this socket was in as DISCONNECTED.
+      // This handles failed/dropped calls so the other party is notified.
+      if (joinedSessions.size > 0) {
+        for (const sessionId of joinedSessions) {
+          prisma.session.findFirst({
+            where: { id: sessionId, status: 'ACTIVE' },
+          }).then((session: Awaited<ReturnType<typeof prisma.session.findFirst>>) => {
+            if (!session) return;
+            // Only mark DISCONNECTED if the disconnecting party actually owns this session
+            const isParticipant =
+              session.userId === userId ||
+              (practitionerId != null && session.practitionerId === practitionerId);
+            if (!isParticipant) return;
+
+            return prisma.session.update({
+              where: { id: sessionId },
+              data: { status: 'DISCONNECTED', endTime: new Date() },
+            }).then(() => {
+              // Notify the remaining party in the room
+              io!.to(`room:${sessionId}`).emit('session_disconnected', {
+                sessionId,
+                reason: 'participant_disconnected',
+                disconnectedUserId: userId,
+              });
+              console.log(`Session ${sessionId} marked DISCONNECTED (socket drop)`);
+            });
+          }).catch((err: unknown) => {
+            console.error(`[socket] disconnect session cleanup error for ${sessionId}:`, err);
+          });
         }
+      }
+
+      if (practitionerId) {
+        // Add a 5 second grace period for page navigations/reloads
+        setTimeout(() => {
+          // Only set offline if no other sockets are connected for this practitioner
+          const roomSize = io!.sockets.adapter.rooms.get(`practitioner_${practitionerId}`)?.size || 0;
+          if (roomSize === 0) {
+            prisma.practitioner.update({ where: { id: practitionerId }, data: { isOnline: false } })
+              .then(() => {
+                io!.emit('practitioner_status', { practitionerId, isOnline: false });
+              })
+              .catch(console.error);
+          }
+        }, 5000);
       }
     });
   });

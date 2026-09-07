@@ -7,56 +7,69 @@ datasource db {
 }
 
 model User {
-  id                    String    @id @default(uuid())
-  phone                 String?   @unique
-  email                 String?   @unique
-  passwordHash          String?
-  name                  String?
-  dob                   DateTime?
-  birthPlace            String?
-  gender                String?
-  wellnessInterests     String[]
-  photoUrl              String?
+  id                String    @id @default(uuid())
+  phone             String?   @unique
+  email             String?   @unique
+  passwordHash      String?
+  name              String?
+  dob               DateTime?
+  birthPlace        String?
+  timeOfBirth       String?
+  gender            String?
+  wellnessInterests String[]
+  photoUrl          String?
 
   // Email verification
-  isEmailVerified       Boolean   @default(false)
-  emailVerifyToken      String?   // stores SHA-256 hash of the raw token
-  emailVerifyExpiry     DateTime?
+  isEmailVerified   Boolean   @default(false)
+  emailVerifyToken  String? // stores SHA-256 hash of the raw token
+  emailVerifyExpiry DateTime?
 
   // Phone / OTP verification
-  isPhoneVerified       Boolean   @default(false)
+  isPhoneVerified Boolean @default(false)
 
   // Password reset
-  passwordResetToken    String?   // stores SHA-256 hash of the raw token
-  passwordResetExpiry   DateTime?
+  passwordResetToken  String? // stores SHA-256 hash of the raw token
+  passwordResetExpiry DateTime?
 
   // OAuth
-  googleId              String?   @unique
-  appleId               String?   @unique
-  provider              String    @default("email")
+  googleId String? @unique
+  appleId  String? @unique
+  provider String  @default("email")
 
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  wallet                Wallet?
-  sessions              Session[]
-  reviews               Review[]
-  refreshTokens         RefreshToken[]
-  otps                  Otp[]
+  // Moderation: temporary/permanent suspension
+  isBanned  Boolean   @default(false)
+  banReason String?
+  banUntil  DateTime? // null = permanent (while isBanned is true)
+
+  // GDPR: set when the account has been erased via the right-to-erasure flow.
+  erasedAt DateTime?
+
+  wallet            Wallet?
+  sessions          Session[]
+  reviews           Review[]
+  refreshTokens     RefreshToken[]
+  otps              Otp[]
+  supportTickets    SupportTicket[]
+  consents          Consent[]
+  deviceTokens      DeviceToken[]
+  astrologerProfile AstrologerProfile?
 }
 
 // ─── OTP model for SMS verification ──────────────────────────────────────────
 
 model Otp {
-  id          String   @id @default(uuid())
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  otpHash     String   // SHA-256 hash of the 6-digit OTP
-  purpose     String   // "phone_verify" | "login" | "password_reset"
-  expiresAt   DateTime
-  attempts    Int      @default(0)
-  isUsed      Boolean  @default(false)
-  createdAt   DateTime @default(now())
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  otpHash   String // SHA-256 hash of the 6-digit OTP
+  purpose   String // "phone_verify" | "login" | "password_reset"
+  expiresAt DateTime
+  attempts  Int      @default(0)
+  isUsed    Boolean  @default(false)
+  createdAt DateTime @default(now())
 
   @@index([userId])
 }
@@ -74,25 +87,46 @@ model RefreshToken {
 }
 
 model Practitioner {
-  id             String   @id @default(uuid())
-  phone          String?  @unique
-  email          String?  @unique
-  passwordHash   String?
-  name           String
-  bio            String?
-  specialties    String[]
-  certifications String[]
-  languages      String[]
-  experienceYrs  Int      @default(0)
-  perMinuteRate  Float    @default(0)
-  photoUrl       String?
-  isVerified     Boolean  @default(false)
-  isOnline       Boolean  @default(false)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id              String   @id @default(uuid())
+  phone           String?  @unique
+  email           String?  @unique
+  googleId        String?  @unique
+  passwordHash    String?
+  name            String
+  bio             String?
+  specialties     String[]
+  certifications  String[]
+  languages       String[]
+  experienceYrs   Int      @default(0)
+  perMinuteRate   Float    @default(0)
+  photoUrl        String?
+  kycDocumentUrl  String?
+  certificateUrls String[]
+  isVerified      Boolean  @default(false)
+  isOnline        Boolean  @default(false)
+  isBusy          Boolean  @default(false)
+  // Denormalized rating stats — updated atomically on each review submission
+  avgRating       Float    @default(0)
+  reviewCount     Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
-  sessions       Session[]
-  reviews        Review[]
+  // Moderation: temporary/permanent suspension
+  isBanned  Boolean   @default(false)
+  banReason String?
+  banUntil  DateTime? // null = permanent (while isBanned is true)
+
+  // GDPR: see User.erasedAt for the same rationale (anonymize, don't hard-delete).
+  erasedAt DateTime?
+  
+  schedulingEnabled Boolean @default(false)
+
+  sessions          Session[]
+  reviews           Review[]
+  supportTickets    SupportTicket[]
+  consents          Consent[]
+  deviceTokens      DeviceToken[]
+  availabilitySlots AvailabilitySlot[]
 }
 
 model Wallet {
@@ -112,74 +146,574 @@ model Transaction {
   walletId    String
   wallet      Wallet   @relation(fields: [walletId], references: [id])
   amount      Float
-  type        String   // "RECHARGE" | "DEBIT" | "REFUND"
-  status      String   // "SUCCESS" | "PENDING" | "FAILED"
-  referenceId String?
+  type        String // "RECHARGE" | "DEBIT" | "REFUND"
+  status      String // "SUCCESS" | "PENDING" | "FAILED"
+  referenceId String?  @unique // idempotency: unique when set (partial index in migration)
   createdAt   DateTime @default(now())
 }
 
 model Session {
-  id             String   @id @default(uuid())
-  userId         String
-  user           User     @relation(fields: [userId], references: [id])
-  practitionerId String
-  practitioner   Practitioner @relation(fields: [practitionerId], references: [id])
-  type           String   // "CHAT" | "AUDIO" | "VIDEO"
-  status         String   // "INITIATED" | "PENDING_ACCEPTANCE" | "ACCEPTED" | "WALLET_VERIFIED" | "JOINING_CHANNEL" | "ACTIVE" | "ENDING" | "ENDED" | "BILLING_GENERATED" | "RATING_PENDING" | "COMPLETED" | "REJECTED" | "CANCELLED" | "DISCONNECTED"
-  channelName    String?
-  agoraUid       Int?
-  perMinuteRate  Float    @default(0)
-  walletDeduction Float   @default(0)
-  duration       Int      @default(0)
-  startTime      DateTime?
-  endTime        DateTime?
-  totalCost      Float    @default(0)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id                 String       @id @default(uuid())
+  userId             String
+  user               User         @relation(fields: [userId], references: [id])
+  practitionerId     String
+  practitioner       Practitioner @relation(fields: [practitionerId], references: [id])
+  type               String // "CHAT" | "AUDIO" | "VIDEO"
+  status             String // "INITIATED" | "PENDING_ACCEPTANCE" | "ACCEPTED" | "WALLET_VERIFIED" | "JOINING_CHANNEL" | "ACTIVE" | "ENDING" | "ENDED" | "BILLING_GENERATED" | "RATING_PENDING" | "COMPLETED" | "REJECTED" | "CANCELLED" | "DISCONNECTED"
+  channelName        String?
+  agoraUid           Int?
+  perMinuteRate      Float        @default(0)
+  walletDeduction    Float        @default(0)
+  duration           Int          @default(0)
+  startTime          DateTime?
+  endTime            DateTime?
+  scheduledStartTime DateTime?
+  scheduledEndTime   DateTime?
+  totalCost          Float        @default(0)
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
 
-  review         Review?
-  messages       ChatMessage[]
-  callFeedback   CallFeedback?
+  review           Review?
+  messages         ChatMessage[]
+  callFeedback     CallFeedback?
+  transcript       CallTranscript?
+  timeProposals    SessionTimeProposal[]
+  reminders        SessionReminder[]
+  availabilitySlot AvailabilitySlot?
 }
 
 model Review {
-  id             String   @id @default(uuid())
-  sessionId      String   @unique
-  session        Session  @relation(fields: [sessionId], references: [id])
+  id             String       @id @default(uuid())
+  sessionId      String       @unique
+  session        Session      @relation(fields: [sessionId], references: [id])
   userId         String
-  user           User     @relation(fields: [userId], references: [id])
+  user           User         @relation(fields: [userId], references: [id])
   practitionerId String
   practitioner   Practitioner @relation(fields: [practitionerId], references: [id])
-  rating         Int      // 1-5
+  rating         Int // 1-5
   comment        String?
-  createdAt      DateTime @default(now())
+  createdAt      DateTime     @default(now())
 }
 
 model ChatMessage {
-  id           String    @id @default(uuid())
-  sessionId    String
-  session      Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  senderId     String
-  senderType   String    // "USER" | "PRACTITIONER"
-  content      String
-  isRead       Boolean   @default(false)
-  readAt       DateTime?
-  createdAt    DateTime  @default(now())
+  id         String    @id @default(uuid())
+  sessionId  String
+  session    Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  senderId   String
+  senderType String // "USER" | "PRACTITIONER"
+  content    String
+  isRead     Boolean   @default(false)
+  readAt     DateTime?
+  createdAt  DateTime  @default(now())
+
+  // GDPR: set when `content` has been overwritten by the 90-day retention purge
+  // (or immediate erasure request). Row is kept for session/thread integrity;
+  // only the message text is removed.
+  purgedAt DateTime?
 
   @@index([sessionId])
   @@index([senderId])
 }
 
 model CallFeedback {
-  id           String   @id @default(uuid())
-  sessionId    String   @unique
-  session      Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  userId       String
-  audioQuality Int      // 1-5
-  overallRating Int     // 1-5
-  issues       String[] // e.g. ["echo", "lag", "dropped"]
-  comment      String?
-  createdAt    DateTime @default(now())
+  id            String   @id @default(uuid())
+  sessionId     String   @unique
+  session       Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  userId        String
+  audioQuality  Int // 1-5
+  overallRating Int // 1-5
+  issues        String[] // e.g. ["echo", "lag", "dropped"]
+  comment       String?
+  createdAt     DateTime @default(now())
 
   @@index([userId])
+}
+
+// ─── Task 2: Call Transcript ──────────────────────────────────────────────────
+
+model CallTranscript {
+  id             String   @id @default(uuid())
+  sessionId      String   @unique
+  session        Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  transcriptText String
+  userId         String
+  practitionerId String
+  submittedAt    DateTime @default(now())
+  createdAt      DateTime @default(now())
+
+  // GDPR: set when `transcriptText` has been overwritten by the 90-day retention
+  // purge (or immediate erasure request). See ChatMessage.purgedAt.
+  purgedAt DateTime?
+
+  flaggedContent FlaggedContent[]
+
+  @@index([sessionId])
+}
+
+// ─── Tasks 3 & 4: Flagged Content (moderation queue) ─────────────────────────
+
+model FlaggedContent {
+  id             String          @id @default(uuid())
+  source         String // "CHAT" | "CALL_TRANSCRIPT"
+  contentSnippet String
+  reason         String // "PHONE_NUMBER" | "HARASSMENT" | "SELF_HARM" | "OFF_PLATFORM_CONTACT"
+  status         String          @default("PENDING") // "PENDING" | "RESOLVED" | "DISMISSED"
+  userId         String?
+  practitionerId String?
+  sessionId      String?
+  chatMessageId  String?
+  transcriptId   String?
+  transcript     CallTranscript? @relation(fields: [transcriptId], references: [id], onDelete: SetNull)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@index([status])
+  @@index([source])
+  @@index([sessionId])
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  status    String   @default("new") // "new" | "replied" | "resolved"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Phase 4: Content Management ──────────────────────────────────────────────
+
+model Blog {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  author    String
+  imageUrl  String?
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Faq {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String
+  category  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Banner {
+  id        String   @id @default(uuid())
+  title     String
+  imageUrl  String
+  linkUrl   String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Support Tickets ───────────────────────────────────────────────────────────
+// Authenticated ticketing system for users/experts (distinct from the anonymous
+// public ContactMessage form). One of userId/practitionerId is set, never both.
+
+model SupportTicket {
+  id             String        @id @default(uuid())
+  userId         String?
+  user           User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  practitionerId String?
+  practitioner   Practitioner? @relation(fields: [practitionerId], references: [id], onDelete: Cascade)
+  subject        String
+  category       String        @default("OTHER") // "BILLING" | "TECHNICAL" | "ACCOUNT" | "SESSION" | "OTHER"
+  status         String        @default("OPEN") // "OPEN" | "IN_PROGRESS" | "RESOLVED" | "CLOSED"
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  messages TicketMessage[]
+
+  @@index([userId])
+  @@index([practitionerId])
+  @@index([status])
+}
+
+model TicketMessage {
+  id         String        @id @default(uuid())
+  ticketId   String
+  ticket     SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  senderType String // "USER" | "PRACTITIONER" | "ADMIN"
+  message    String
+  createdAt  DateTime      @default(now())
+
+  @@index([ticketId])
+}
+
+// ─── GDPR: Consent (immutable audit log) ─────────────────────────────────────
+// Every consent decision (grant or withdraw) is inserted as a NEW row — existing
+// rows are never updated or deleted. "Current" consent for a subject+category is
+// the most recent row by createdAt. This gives us the immutable audit trail the
+// guide requires without a separate log table for this specific right.
+
+model Consent {
+  id             String        @id @default(uuid())
+  userId         String?
+  // SetNull (not Cascade): this is an audit log — if an admin hard-deletes a User
+  // row via DELETE /api/admin/users/:id, the consent history should still survive
+  // as evidence of what was agreed to and when, just detached from the account.
+  user           User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  practitionerId String?
+  practitioner   Practitioner? @relation(fields: [practitionerId], references: [id], onDelete: SetNull)
+  // For consent captured before login (banner shown to anonymous visitors), we key
+  // off a random id stored in a first-party cookie instead of a user/practitioner id.
+  visitorId      String?
+  // "TERMS" | "PRIVACY_NOTICE" | "SENSITIVE_DATA" | "ANALYTICS" | "EMAIL_MARKETING"
+  // | "SMS_MARKETING" | "PUSH_MARKETING"  (necessary/functional cookies need no
+  // consent, so there's no category for those). Kept as a plain string rather
+  // than a Prisma enum so a new category never requires a migration — validated
+  // in application code instead (see routes/consent.ts CONSENT_CATEGORIES and
+  // lib/consentPolicy.ts). "MARKETING" was the old name for EMAIL_MARKETING —
+  // renamed in migration add_consent_categories_and_policy_version.
+  category       String
+  granted        Boolean
+  source         String        @default("BANNER") // "BANNER" | "SETTINGS" | "REGISTRATION"
+  // Version stamp of whichever Terms/Privacy Notice wording was in effect when
+  // this decision was recorded (see lib/consentPolicy.ts CURRENT_POLICY_VERSION).
+  // Nullable because rows recorded before this field existed have no value.
+  policyVersion  String?
+  ipAddress      String?
+  userAgent      String?
+  createdAt      DateTime      @default(now())
+
+  @@index([userId])
+  @@index([practitionerId])
+  @@index([visitorId])
+  @@index([category])
+}
+
+// ─── GDPR: Privacy request audit log (export / erasure) ──────────────────────
+// Standalone (no FK) so the record survives even after an erasure request has
+// anonymized the User/Practitioner row it refers to.
+
+model PrivacyRequestLog {
+  id          String   @id @default(uuid())
+  subjectType String // "USER" | "PRACTITIONER"
+  subjectId   String
+  type        String // "EXPORT" | "ERASURE"
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+
+  @@index([subjectId])
+}
+
+// ─── SEC-10: Admin Audit Log ──────────────────────────────────────────────────
+// Append-only. Every admin action that modifies data is recorded here.
+// No FK to User/Practitioner — the log must survive even if those rows are
+// later deleted (erasure). adminLabel is the email/name string taken from env
+// so single-admin installs still produce human-readable logs; when per-admin
+// accounts are added (SEC-04/05 future work) this becomes a real foreign key.
+
+model AdminAuditLog {
+  id         String   @id @default(uuid())
+  // WHO — label from env (ADMIN_LOGIN_EMAIL) until per-admin accounts exist
+  adminLabel String
+  // WHAT — coarse action type for filtering
+  action     String // "BAN" | "UNBAN" | "DELETE_USER" | "DELETE_PRACTITIONER"
+  // | "VERIFY_PRACTITIONER" | "ADJUST_WALLET" | "MIGRATE"
+  // | "MODERATE" | "TICKET_REPLY" | "CUSTOM"
+  // ON WHAT
+  targetType String // "USER" | "PRACTITIONER" | "SESSION" | "WALLET" | "SYSTEM"
+  targetId   String? // null for system-level actions (MIGRATE, etc.)
+  // DETAIL — arbitrary JSON blob (ban reason, amount, old/new value, etc.)
+  meta       String? // JSON string; keep as String to avoid Prisma Json type issues
+  createdAt  DateTime @default(now())
+
+  @@index([action])
+  @@index([targetType, targetId])
+  @@index([createdAt])
+}
+
+// ─── Phase 6: Push Notifications ──────────────────────────────────────────────
+
+model DeviceToken {
+  id             String   @id @default(uuid())
+  userId         String?
+  practitionerId String?
+  token          String   @unique
+  platform       String // "android" | "ios" | "web"
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  practitioner Practitioner? @relation(fields: [practitionerId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([practitionerId])
+}
+
+model NotificationLog {
+  id            String   @id @default(uuid())
+  recipientId   String // userId or practitionerId
+  recipientType String // "USER" | "PRACTITIONER"
+  type          String // "SESSION_REQUEST", "SESSION_REMINDER_24H", "WALLET_LOW", "PAYOUT"
+  title         String
+  body          String
+  entityId      String? // Reference ID (Session ID, Wallet ID, etc.)
+  status        String // "SENT" | "FAILED"
+  errorMsg      String?
+  createdAt     DateTime @default(now())
+}
+
+// ─── Phase 7: Session Scheduling ──────────────────────────────────────────────
+
+model SessionTimeProposal {
+  id         String    @id @default(uuid())
+  sessionId  String
+  session    Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  proposedBy String // "PRACTITIONER" | "USER"
+  startTime  DateTime
+  endTime    DateTime
+  status     String    @default("PENDING") // "PENDING", "SELECTED", "EXPIRED", "CANCELLED"
+  createdAt  DateTime  @default(now())
+  expiresAt  DateTime?
+
+  @@index([sessionId])
+}
+
+// ─── Astrologer Onboarding ────────────────────────────────────────────────────
+
+model AstrologerOtp {
+  id        String   @id @default(uuid())
+  phone     String
+  otpHash   String
+  purpose   String   @default("login")
+  expiresAt DateTime
+  attempts  Int      @default(0)
+  isUsed    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([phone])
+}
+
+model AstrologerProfile {
+  id                            String    @id @default(uuid())
+  userId                        String    @unique
+  user                          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullLegalName                 String    @default("")
+  displayName                   String    @default("")
+  profilePhotoUrl               String?
+  dateOfBirth                   DateTime?
+  gender                        String?
+  country                       String?   @default("India")
+  state                         String?
+  city                          String?
+  specializations               String[]
+  languages                     String[]
+  astrologyExperienceYears      Int       @default(0)
+  professionalConsultationYears Int       @default(0)
+  previousPlatformExperience    String?
+  professionalBio               String?
+  consultationApproach          String?
+  completedAstrologyCourse      Boolean   @default(false)
+  instituteName                 String?
+  courseName                    String?
+  completionYear                Int?
+  chatPricePerMin               Float     @default(0)
+  callPricePerMin               Float     @default(0)
+  isOnline                      Boolean   @default(false)
+  isChatAvailable               Boolean   @default(false)
+  isCallAvailable               Boolean   @default(false)
+  avgRating                     Float     @default(0)
+  reviewCount                   Int       @default(0)
+  totalConsultations            Int       @default(0)
+  totalEarnings                 Float     @default(0)
+  phoneVerified                 Boolean   @default(false)
+  emailVerified                 Boolean   @default(false)
+  identityVerified              Boolean   @default(false)
+  professionalVerified          Boolean   @default(false)
+  adminVerified                 Boolean   @default(false)
+  applicationStatus             String    @default("DRAFT")
+  accountStatus                 String    @default("INACTIVE")
+  rejectionReason               String?
+  approvedAt                    DateTime?
+  approvedBy                    String?
+  suspensionReason              String?
+  createdAt                     DateTime  @default(now())
+  updatedAt                     DateTime  @updatedAt
+
+  application              AstrologerApplication?
+  auditLogs                AstrologerAuditLog[]
+  documents                AstrologerDocument[]
+  kycVerification          AstrologerKycVerification?
+  professionalVerification AstrologerProfessionalVerification?
+  interviewVerification    AstrologerInterviewVerification?
+  adminReviews             AstrologerAdminReview[]
+
+  @@index([userId])
+}
+
+model AstrologerApplication {
+  id                  String            @id @default(uuid())
+  astrologerProfileId String            @unique
+  astrologerProfile   AstrologerProfile @relation(fields: [astrologerProfileId], references: [id], onDelete: Cascade)
+  step                Int               @default(1)
+  lastSavedAt         DateTime?
+  submittedAt         DateTime?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+}
+
+model AstrologerDocument {
+  id                  String            @id @default(uuid())
+  astrologerProfileId String
+  astrologerProfile   AstrologerProfile @relation(fields: [astrologerProfileId], references: [id], onDelete: Cascade)
+  documentType        String
+  originalName        String
+  storedName          String
+  blobUrl             String
+  mimeType            String
+  sizeBytes           Int
+  isPrivate           Boolean           @default(true)
+  uploadedAt          DateTime          @default(now())
+
+  @@index([astrologerProfileId])
+}
+
+model AstrologerKycVerification {
+  id                  String            @id @default(uuid())
+  astrologerProfileId String            @unique
+  astrologerProfile   AstrologerProfile @relation(fields: [astrologerProfileId], references: [id], onDelete: Cascade)
+  verificationStatus  String            @default("PENDING")
+  idDocType           String?
+  panLast4            String?
+  submittedAt         DateTime?
+  verifiedAt          DateTime?
+  failureReason       String?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+}
+
+model AstrologerProfessionalVerification {
+  id                  String            @id @default(uuid())
+  astrologerProfileId String            @unique
+  astrologerProfile   AstrologerProfile @relation(fields: [astrologerProfileId], references: [id], onDelete: Cascade)
+  status              String            @default("PENDING")
+  verificationType    String?
+  platformProfileUrl  String?
+  professionalWebsite String?
+  notes               String?
+  submittedAt         DateTime?
+  reviewedAt          DateTime?
+  rejectionReason     String?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+}
+
+model AstrologerInterviewVerification {
+  id                  String            @id @default(uuid())
+  astrologerProfileId String            @unique
+  astrologerProfile   AstrologerProfile @relation(fields: [astrologerProfileId], references: [id], onDelete: Cascade)
+  status              String            @default("PENDING")
+  scheduledAt         DateTime?
+  completedAt         DateTime?
+  notes               String?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+}
+
+model AstrologerAdminReview {
+  id                  String            @id @default(uuid())
+  astrologerProfileId String
+  astrologerProfile   AstrologerProfile @relation(fields: [astrologerProfileId], references: [id], onDelete: Cascade)
+  adminId             String
+  action              String
+  reason              String?
+  notes               String?
+  previousStatus      String?
+  newStatus           String?
+  createdAt           DateTime          @default(now())
+
+  @@index([astrologerProfileId])
+}
+
+model AstrologerAuditLog {
+  id                  String             @id @default(uuid())
+  astrologerProfileId String?
+  astrologerProfile   AstrologerProfile? @relation(fields: [astrologerProfileId], references: [id], onDelete: SetNull)
+  actorId             String?
+  actorType           String             @default("ASTROLOGER")
+  action              String
+  ipAddress           String?
+  userAgent           String?
+  previousState       String?
+  newState            String?
+  targetId            String?
+  createdAt           DateTime           @default(now())
+
+  @@index([astrologerProfileId])
+  @@index([actorId])
+}
+
+model SessionReminder {
+  id            String    @id @default(uuid())
+  sessionId     String
+  session       Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  participantId String // userId or practitionerId
+  reminderType  String // "24_HOURS", "30_MINUTES"
+  scheduledFor  DateTime
+  enabled       Boolean   @default(true)
+  sent          Boolean   @default(false)
+  sentAt        DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([sessionId, participantId, reminderType])
+  @@index([sessionId])
+  @@index([participantId])
+}
+
+// ─── SEC-04/05: Per-admin accounts, RBAC & MFA ────────────────────────────────
+// Standalone table — no FK to User/Practitioner. Admin accounts are managed
+// separately from the customer-facing auth system.
+//
+// role:      "SUPERADMIN" | "MODERATOR"
+// mfaSecret: base32 TOTP secret (Google Authenticator / Authy compatible)
+// loginToken: short-lived one-time token issued after password auth, consumed
+//             by MFA verify. Cleared once the full session cookie is granted.
+
+model AdminUser {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String
+  role          String    @default("MODERATOR") // "SUPERADMIN" | "MODERATOR"
+  mfaSecret     String? // base32 TOTP secret
+  mfaEnabled    Boolean   @default(false)
+  // Short-lived token issued after password auth; consumed by POST /mfa/verify
+  loginToken    String?
+  loginTokenExp DateTime?
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  // Who created this admin account (null for bootstrap / self-seeded rows)
+  createdById   String?
+
+  @@index([email])
+}
+
+
+// --- Expert Availability --------------------------------------------------------
+
+model AvailabilitySlot {
+  id              String       @id @default(uuid())
+  practitionerId  String
+  practitioner    Practitioner @relation(fields: [practitionerId], references: [id], onDelete: Cascade)
+  startTime       DateTime
+  endTime         DateTime
+  isBooked        Boolean      @default(false)
+  sessionId       String?      @unique
+  session         Session?     @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@index([practitionerId, startTime])
 }

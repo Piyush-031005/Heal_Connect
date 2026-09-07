@@ -22,7 +22,7 @@ export function FinalHybridSupport() {
           <div className="lg:w-1/2">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-8 h-[2px] bg-[#B79AE6]" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#B79AE6]">The Zenauraa App</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#B79AE6]">The ZenAuraa App</span>
             </div>
             
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-[#F8F7FA] mb-6 leading-tight drop-shadow-md">
@@ -100,7 +100,7 @@ export function FinalHybridSupport() {
                   
                   <div className="flex gap-2 flex-row-reverse">
                     <div>
-                      <div className="bg-gradient-to-r from-orange-400 to-purple-300 text-white p-3 rounded-2xl rounded-tr-none shadow-sm text-xs">
+                      <div className="bg-gradient-to-r from-purple-400 to-purple-300 text-white p-3 rounded-2xl rounded-tr-none shadow-sm text-xs">
                         I need guidance about my career
                       </div>
                       <p className="text-[9px] text-gray-400 mt-1 mr-1 text-right">9:42 AM ✓</p>
@@ -123,7 +123,7 @@ export function FinalHybridSupport() {
                   <div className="flex-1 bg-gray-100 rounded-full h-8 flex items-center px-3">
                     <span className="text-[11px] text-gray-400">Type a message...</span>
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-orange-400 flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-purple-400 flex items-center justify-center shrink-0">
                     <svg className="w-3.5 h-3.5 text-white ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                   </div>
                 </div>

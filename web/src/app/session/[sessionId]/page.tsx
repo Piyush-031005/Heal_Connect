@@ -91,7 +91,7 @@ export default function SessionPage() {
               className="rounded-full object-cover"
             />
           ) : (
-            <div className="w-[38px] h-[38px] rounded-full bg-gradient-to-br from-[#f59e0b] to-[#ef4444] flex items-center justify-center text-white text-sm font-bold">
+            <div className="w-[38px] h-[38px] rounded-full bg-gradient-to-br from-[#4f46e5] to-[#ef4444] flex items-center justify-center text-white text-sm font-bold">
               {initials}
             </div>
           )}
@@ -118,7 +118,7 @@ export default function SessionPage() {
             onClick={() => setTab('chat')}
             className={cn(
               'h-8 px-3 rounded-full text-xs gap-1',
-              tab === 'chat' ? 'bg-[#f59e0b] hover:bg-[#d97706] border-0 text-white' : 'hover:bg-yellow-50'
+              tab === 'chat' ? 'bg-[#4f46e5] hover:bg-[#d97706] border-0 text-white' : 'hover:bg-yellow-50'
             )}
           >
             <MessageSquare className="h-3.5 w-3.5" />
@@ -131,7 +131,7 @@ export default function SessionPage() {
               onClick={() => setTab('call')}
               className={cn(
                 'h-8 px-3 rounded-full text-xs gap-1',
-                tab === 'call' ? 'bg-[#f59e0b] hover:bg-[#d97706] border-0 text-white' : 'hover:bg-yellow-50'
+                tab === 'call' ? 'bg-[#4f46e5] hover:bg-[#d97706] border-0 text-white' : 'hover:bg-yellow-50'
               )}
             >
               <Phone className="h-3.5 w-3.5" />

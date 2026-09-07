@@ -44,7 +44,7 @@ export default function LotusPetals() {
                   <linearGradient id={`lp-${i}`} x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor={isAlt ? '#3B1A77' : '#2A43A6'} />
                     <stop offset="50%" stopColor={isAlt ? '#5F3BA9' : '#4E67CC'} />
-                    <stop offset="100%" stopColor={isAlt ? '#B9A0E4' : '#8982D0'} />
+                    <stop offset="100%" stopColor={isAlt ? '#D5B6DC' : '#8982D0'} />
                   </linearGradient>
                 </defs>
                 <path d="M30,0 C55,35 55,105 30,140 C5,105 5,35 30,0Z" fill={`url(#lp-${i})`} opacity="0.88" />
@@ -79,7 +79,7 @@ export default function LotusPetals() {
 
       {/* Center */}
       <div className="absolute z-10 w-28 h-28 rounded-full bg-white/90 shadow-2xl flex items-center justify-center p-3 border-2 border-[#8982D0]/30">
-        <img src="/main centre logo/girl.png" alt="ZenAuraa" className="w-full h-full object-cover scale-[1.25] mt-2 ml-1" />
+        <img src="/main centre logo/new.png" alt="ZenAuraa" className="w-full h-full object-cover scale-[1.25] mt-2 ml-1" />
       </div>
     </div>
   );

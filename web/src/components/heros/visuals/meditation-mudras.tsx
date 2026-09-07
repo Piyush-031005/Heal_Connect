@@ -81,7 +81,7 @@ export default function MeditationMudras() {
           
           <EtherealCrystals />
           
-          <Sparkles count={200} scale={10} size={1.5} speed={0.2} opacity={0.4} color="#B9A0E4" />
+          <Sparkles count={200} scale={10} size={1.5} speed={0.2} opacity={0.4} color="#D5B6DC" />
           <Environment resolution={64}>
             <group>
               <mesh scale={100}>
@@ -94,7 +94,7 @@ export default function MeditationMudras() {
               </mesh>
               <mesh position={[-10, -10, -10]}>
                 <planeGeometry args={[20, 20]} />
-                <meshBasicMaterial color="#B9A0E4" />
+                <meshBasicMaterial color="#D5B6DC" />
               </mesh>
             </group>
           </Environment>
@@ -126,7 +126,7 @@ export default function MeditationMudras() {
               >
                 <div className="flex items-center gap-2 px-3 py-1.5 transition-all duration-300 hover:scale-110">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#1E2059]/40 group-hover:bg-[#5F3BA9] shadow-[0_0_8px_rgba(95,59,169,0.5)] transition-colors" />
-                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#1E2059]/60 group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#1E2059] font-black drop-shadow-[0_2px_4px_rgba(255,255,255,0.9)] group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">
                     {mod.name}
                   </span>
                 </div>
@@ -138,7 +138,7 @@ export default function MeditationMudras() {
 
       {/* Center Logo */}
       <div className="absolute z-20 w-28 h-28 rounded-full bg-white/95 shadow-[0_0_50px_rgba(255,255,255,0.7)] flex items-center justify-center p-3 border-2 border-[#8982D0]/20 cursor-pointer hover:scale-105 transition-transform">
-        <img src="/main centre logo/girl.png" alt="ZenAuraa" className="w-full h-full object-cover scale-[1.25] mt-2 ml-1" />
+        <img src="/main centre logo/new.png" alt="ZenAuraa" className="w-full h-full object-cover scale-[1.25] mt-2 ml-1" />
       </div>
     </div>
   );
