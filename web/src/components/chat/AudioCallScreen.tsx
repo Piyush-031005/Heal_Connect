@@ -328,7 +328,6 @@ export default function AudioCallScreen({
         sessionId={sessionId}
         open={showFeedback}
         onClose={() => setShowFeedback(false)}
-        transcriptStatus={transcriptStatus}
       />
     </div>
   );

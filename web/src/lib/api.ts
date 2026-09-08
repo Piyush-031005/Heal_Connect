@@ -250,7 +250,7 @@ export const sessionsApi = {
     }),
 
   get: (token: string, sessionId: string) =>
-    request<{ session: { id: string; status: string; type: string; practitionerId: string; userId: string; practitioner: PractitionerProfile; user: { id: string; name: string | null; photoUrl: string | null } } }>(
+    request<{ session: { id: string; status: string; type: string; startTime?: string | null; endTime?: string | null; practitionerId: string; userId: string; practitioner: PractitionerProfile; user: { id: string; name: string | null; photoUrl: string | null } } }>(
       `/api/sessions/${sessionId}`,
       { headers: authHeader(token) }
     ),
@@ -279,6 +279,21 @@ export const sessionsApi = {
       '/api/sessions/user/history',
       { headers: authHeader(token) }
     ),
+
+  connect: (token: string, sessionId: string) =>
+    request<{ session: any }>(`/api/sessions/${sessionId}/connect`, { method: 'POST', headers: authHeader(token) }),
+
+  accept: (token: string, sessionId: string) =>
+    request<{ session: any }>(`/api/sessions/${sessionId}/accept`, { method: 'POST', headers: authHeader(token) }),
+
+  reject: (token: string, sessionId: string) =>
+    request<{ session: any }>(`/api/sessions/${sessionId}/reject`, { method: 'POST', headers: authHeader(token) }),
+
+  requestSession: (token: string, practitionerId: string, type?: string, availabilitySlotId?: string) =>
+    request<{ session: any }>('/api/schedules/request', { method: 'POST', headers: authHeader(token), body: JSON.stringify({ practitionerId, type, availabilitySlotId }) }),
+
+  getRequests: (token: string) =>
+    request<{ sessions: any[] }>('/api/schedules/requests', { headers: authHeader(token) }),
 };
 
 export const agoraApi = {
