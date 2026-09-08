@@ -177,26 +177,6 @@ export default function AudioCallScreen({
                 </div>
               )}
 
-              {/* Live STT Status Badge */}
-              <div className="pt-1">
-                {isTranscribing ? (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm animate-pulse">
-                    <Radio className="h-3 w-3 text-emerald-600 animate-spin" />
-                    <span>Live Audio Transcription Active</span>
-                  </div>
-                ) : transcriptStatus === 'unavailable' ? (
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs text-gray-400 bg-gray-100 border border-gray-200/60">
-                    <span>📝 Audio transcription unavailable</span>
-                  </div>
-                ) : null}
-              </div>
-
-              {/* Live speech snippet preview */}
-              {isTranscribing && liveSnippet && (
-                <div className="pt-2 px-3 py-1.5 bg-white/90 backdrop-blur border rounded-lg text-xs text-gray-600 italic truncate max-w-xs mx-auto shadow-sm">
-                  &ldquo;{liveSnippet}&rdquo;
-                </div>
-              )}
             </div>
           )}
 
