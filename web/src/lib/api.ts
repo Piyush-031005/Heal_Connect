@@ -32,6 +32,7 @@ export interface UserProfile {
   phone: string | null;
   dob: string | null;
   birthPlace: string | null;
+  timeOfBirth: string | null;
   gender: string | null;
   wellnessInterests: string[];
   photoUrl: string | null;
@@ -51,6 +52,7 @@ export interface PractitionerProfile {
   photoUrl: string | null;
   isVerified: boolean;
   isOnline: boolean;
+  schedulingEnabled?: boolean;
   avgRating?: number;
   reviewCount?: number;
 }
@@ -248,7 +250,7 @@ export const sessionsApi = {
     }),
 
   get: (token: string, sessionId: string) =>
-    request<{ session: { id: string; status: string; type: string; practitionerId: string; userId: string; practitioner: PractitionerProfile; user: { id: string; name: string | null; photoUrl: string | null } } }>(
+    request<{ session: { id: string; status: string; type: string; startTime?: string | null; endTime?: string | null; practitionerId: string; userId: string; practitioner: PractitionerProfile; user: { id: string; name: string | null; photoUrl: string | null } } }>(
       `/api/sessions/${sessionId}`,
       { headers: authHeader(token) }
     ),
@@ -277,6 +279,21 @@ export const sessionsApi = {
       '/api/sessions/user/history',
       { headers: authHeader(token) }
     ),
+
+  connect: (token: string, sessionId: string) =>
+    request<{ session: any }>(`/api/sessions/${sessionId}/connect`, { method: 'POST', headers: authHeader(token) }),
+
+  accept: (token: string, sessionId: string) =>
+    request<{ session: any }>(`/api/sessions/${sessionId}/accept`, { method: 'POST', headers: authHeader(token) }),
+
+  reject: (token: string, sessionId: string) =>
+    request<{ session: any }>(`/api/sessions/${sessionId}/reject`, { method: 'POST', headers: authHeader(token) }),
+
+  requestSession: (token: string, practitionerId: string, type?: string, availabilitySlotId?: string) =>
+    request<{ session: any }>('/api/schedules/request', { method: 'POST', headers: authHeader(token), body: JSON.stringify({ practitionerId, type, availabilitySlotId }) }),
+
+  getRequests: (token: string) =>
+    request<{ sessions: any[] }>('/api/schedules/requests', { headers: authHeader(token) }),
 };
 
 export const agoraApi = {
@@ -341,4 +358,18 @@ export const tokenStore = {
       localStorage.removeItem('hc_refresh');
     }
   },
+};
+
+export const availabilityApi = {
+  getAvailability: (practitionerId: string, startDate?: string, endDate?: string) => {
+    let url = `/api/availability/${practitionerId}`;
+    if (startDate && endDate) url += `?startDate=${startDate}&endDate=${endDate}`;
+    return request<{ slots: any[] }>(url);
+  },
+  createAvailability: (token: string, startTime: string, endTime: string) =>
+    request<{ slot: any }>('/api/availability', { method: 'POST', headers: authHeader(token), body: JSON.stringify({ startTime, endTime }) }),
+  deleteAvailability: (token: string, slotId: string) =>
+    request(`/api/availability/${slotId}`, { method: 'DELETE', headers: authHeader(token) }),
+  toggleScheduling: (token: string, schedulingEnabled: boolean) =>
+    request<{ schedulingEnabled: boolean }>('/api/availability/toggle', { method: 'PUT', headers: authHeader(token), body: JSON.stringify({ schedulingEnabled }) }),
 };

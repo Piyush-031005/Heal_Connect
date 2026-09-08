@@ -1,3 +1,8 @@
+/* Hide Google Translate top bar */
+.goog-te-banner-frame, .skiptranslate { display: none !important; }
+body { top: 0 !important; }
+.goog-te-gadget { font-size: 0 !important; }
+
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @tailwind base;

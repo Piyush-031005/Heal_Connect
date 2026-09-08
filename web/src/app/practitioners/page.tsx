@@ -38,7 +38,7 @@ interface Filters {
 
 const SPECIALTIES = ['Vedic Astrology', 'Tarot', 'Reiki', 'Vastu', 'Numerology', 'Palmistry', 'Energy Healing'];
 const LANGUAGES = ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Bengali', 'Marathi'];
-const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
+const API_URL = '';
 
 const SELECT_CLS = 'w-full text-sm rounded-xl bg-card/80 dark:bg-card/80 border border-border px-4 py-2.5 text-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-all hover:bg-secondary';
 

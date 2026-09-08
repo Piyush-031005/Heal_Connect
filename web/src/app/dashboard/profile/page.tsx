@@ -11,8 +11,9 @@ import { Badge } from '@/components/ui/badge';
 import { usersApi, tokenStore } from '@/lib/api';
 
 const WELLNESS_OPTIONS = [
-  'Astrology', 'Tarot', 'Reiki', 'Vastu', 'Numerology',
-  'Meditation', 'Crystal Healing', 'Palmistry', 'Energy Healing', 'Chakra Balancing',
+  'Astrology', 'Tarot', 'Palm Reading', 'Face Reading', 'Numerology',
+  'Energy Healing', 'Meditation', 'Yoga & Mindfulness', 'Vastu & Space Energy',
+  'EFT Tapping', 'Spiritual Guidance', 'Sound Healing',
 ];
 
 const INPUT_CLS = 'w-full text-sm rounded-lg bg-purple-50/70 border border-indigo-200 px-4 py-2.5 text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-purple-300/40 focus:border-purple-300 transition-all';
@@ -25,6 +26,7 @@ interface UserProfile {
   phone: string | null;
   dob: string | null;
   birthPlace: string | null;
+  timeOfBirth: string | null;
   gender: string | null;
   wellnessInterests: string[];
   photoUrl: string | null;
@@ -35,7 +37,7 @@ export default function ProfilePage() {
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [form, setForm] = useState({ name: '', dob: '', birthPlace: '', gender: '', phone: '' });
+  const [form, setForm] = useState({ name: '', dob: '', birthPlace: '', timeOfBirth: '', gender: '', phone: '' });
   const [interests, setInterests] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -49,7 +51,7 @@ export default function ProfilePage() {
       if (!res.success || !res.data) { router.replace('/login'); return; }
       const u = res.data.user;
       setProfile(u);
-      setForm({ name: u.name || '', dob: u.dob ? u.dob.split('T')[0] : '', birthPlace: u.birthPlace || '', gender: u.gender || '', phone: u.phone || '' });
+      setForm({ name: u.name || '', dob: u.dob ? u.dob.split('T')[0] : '', birthPlace: u.birthPlace || '', timeOfBirth: u.timeOfBirth || '', gender: u.gender || '', phone: u.phone || '' });
       setInterests(u.wellnessInterests || []);
     });
   }, [router]);
@@ -60,7 +62,7 @@ export default function ProfilePage() {
     setSaving(true); setError('');
     const res = await usersApi.updateProfile(token, {
       name: form.name || undefined, dob: form.dob || undefined,
-      birthPlace: form.birthPlace || undefined, gender: form.gender || undefined,
+      birthPlace: form.birthPlace || undefined, timeOfBirth: form.timeOfBirth || undefined, gender: form.gender || undefined,
       phone: form.phone || undefined, wellnessInterests: interests,
     });
     setSaving(false);
@@ -86,7 +88,7 @@ export default function ProfilePage() {
     return (
       <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <Image src="/center_logo_final.png" alt="ZenAuraa" width={48} height={48} className="rounded-full animate-pulse" />
+          <Image src="/logo.png" alt="ZenAuraa" width={48} height={48} className="rounded-full animate-pulse" />
           <p className="text-gray-500">Loading profile...</p>
         </div>
       </div>
@@ -102,7 +104,7 @@ export default function ProfilePage() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-2 text-gray-500 hover:text-purple-400 transition-colors">
             <ArrowLeft className="h-4 w-4" />
-            <Image src="/center_logo_final.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
+            <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
             <span className="font-extrabold text-purple-400">ZenAuraa</span>
           </Link>
           <div className="text-sm font-semibold text-gray-600">My Profile</div>
@@ -230,6 +232,19 @@ export default function ProfilePage() {
                   <option value="non-binary">Non-binary</option>
                   <option value="prefer_not_to_say">Prefer not to say</option>
                 </select>
+              </div>
+            </div>
+
+            {/* Time of Birth Row */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className={LABEL_CLS}><CalendarDays className="w-3 h-3 inline mr-1 text-purple-400" /> Time of Birth (Optional)</label>
+                <input
+                  type="time"
+                  value={form.timeOfBirth}
+                  onChange={(e) => setForm((f) => ({ ...f, timeOfBirth: e.target.value }))}
+                  className={INPUT_CLS}
+                />
               </div>
             </div>
           </div>

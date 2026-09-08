@@ -8,10 +8,8 @@ import SessionTimerOverlay from './SessionTimerOverlay';
 import EndSessionConfirmDialog from './EndSessionConfirmDialog';
 import ReviewModal from './ReviewModal';
 import { Button } from '@/components/ui/button';
-import { Send, Wifi, WifiOff, MessagesSquare, ShieldAlert, RefreshCw } from 'lucide-react';
+import { Send, Wifi, WifiOff, MessagesSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { getSocket } from '@/lib/socket';
-import { tokenStore } from '@/lib/api';
 
 interface Props {
   sessionId: string;
@@ -31,8 +29,6 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
   const [input, setInput] = useState('');
   const [showConfirm, setShowConfirm] = useState(false);
   const [showReview, setShowReview] = useState(false);
-  const [blockedWarning, setBlockedWarning] = useState<string | null>(null);
-  const blockedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const typingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -48,24 +44,6 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
       return () => clearTimeout(timer);
     }
   }, [sessionStatus, isExpert, practitionerId]);
-
-  // Listen for message_blocked events from the server
-  useEffect(() => {
-    const token = tokenStore.getAccess();
-    if (!token) return;
-    const socket = getSocket(token);
-    const handleBlocked = ({ reason }: { reason: string; type: string }) => {
-      setBlockedWarning(reason);
-      if (blockedTimerRef.current) clearTimeout(blockedTimerRef.current);
-      blockedTimerRef.current = setTimeout(() => setBlockedWarning(null), 5000);
-    };
-    socket.on('message_blocked', handleBlocked);
-    return () => {
-      socket.off('message_blocked', handleBlocked);
-      if (blockedTimerRef.current) clearTimeout(blockedTimerRef.current);
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput(e.target.value);
@@ -89,15 +67,6 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
   const isEnded = sessionStatus === 'ended';
   const isLowBalance = sessionStatus === 'low_balance';
   const isConnecting = sessionStatus === 'connecting';
-  const isConnectFailed = sessionStatus === 'connect_failed';
-
-  // Retry: re-emit join_room so the server re-evaluates and (for CHAT sessions)
-  // auto-starts the session again if it's still in a startable state.
-  const handleRetry = () => {
-    const token = tokenStore.getAccess();
-    if (!token) return;
-    getSocket(token).emit('join_room', { sessionId });
-  };
 
   return (
     <div className="flex flex-col h-full bg-[#faf9f6]">
@@ -126,24 +95,6 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
         <div className="flex-1 flex flex-col items-center justify-center gap-3 text-gray-400">
           <Wifi className="h-8 w-8 animate-pulse text-[#4f46e5]" />
           <p className="text-sm">Connecting to session...</p>
-        </div>
-      )}
-
-      {/* Connect-failed state — show a visible error instead of hanging forever */}
-      {isConnectFailed && (
-        <div className="flex-1 flex flex-col items-center justify-center gap-4 text-gray-500 px-6">
-          <WifiOff className="h-10 w-10 text-red-400" />
-          <div className="text-center">
-            <p className="font-semibold text-[#1a1a1a]">Failed to connect</p>
-            <p className="text-sm mt-1 text-gray-400">Could not establish a session. Check your connection and try again.</p>
-          </div>
-          <Button
-            onClick={handleRetry}
-            className="gap-2 bg-[#4f46e5] hover:bg-[#4338ca] text-white rounded-2xl px-6"
-          >
-            <RefreshCw className="h-4 w-4" />
-            Retry
-          </Button>
         </div>
       )}
 
@@ -209,7 +160,7 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
       )}
 
       {/* Messages list (active session) */}
-      {!isConnecting && !isConnectFailed && !isEnded && (
+      {!isConnecting && !isEnded && (
         <div className="overflow-y-auto px-4 py-4 space-y-2 flex-1">
           {messages.length === 0 && (
             <div className="flex flex-col items-center justify-center h-full gap-2 text-gray-400 pt-16">
@@ -237,17 +188,8 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
         </div>
       )}
 
-      {/* Message blocked warning banner */}
-      {blockedWarning && (
-        <div className="flex items-start gap-2 bg-red-50 border-b border-red-200 px-4 py-2.5 animate-in slide-in-from-top-2 duration-200">
-          <ShieldAlert className="h-4 w-4 text-red-500 shrink-0 mt-0.5" />
-          <p className="text-xs text-red-700 font-medium flex-1">{blockedWarning}</p>
-          <button onClick={() => setBlockedWarning(null)} className="text-red-400 hover:text-red-600 text-xs font-bold">✕</button>
-        </div>
-      )}
-
       {/* Input area */}
-      {!isEnded && !isConnecting && !isConnectFailed && (
+      {!isEnded && !isConnecting && (
         <div className="border-t border-yellow-100 bg-white px-3 py-3">
           <div className="flex items-end gap-2">
             <textarea
