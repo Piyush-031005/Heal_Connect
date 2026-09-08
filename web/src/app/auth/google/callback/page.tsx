@@ -1,120 +1,53 @@
 'use client';
 
-import { useEffect, Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 import { authApi, tokenStore } from '@/lib/api';
 
-function GoogleCallbackInner() {
+export default function GoogleCallbackPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const [error, setError] = useState('');
+  const calledRef = useRef(false);
 
   useEffect(() => {
-    async function handleCallback() {
-      try {
-        const hash = window.location.hash.substring(1);
-        const params = new URLSearchParams(hash);
-        const idToken = params.get('id_token');
-        const state = params.get('state') || searchParams.get('state');
-        const error = params.get('error');
+    if (calledRef.current) return;
+    calledRef.current = true;
 
-        if (error) {
-          router.push(`/login?error=oauth_error&details=${encodeURIComponent(error)}`);
-          return;
-        }
-        if (!idToken) {
-          router.push('/login?error=no_token');
-          return;
-        }
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    const idToken = params.get('id_token');
 
-        const res = await authApi.googleSignIn(idToken, state || undefined);
-
-        if (!res.success || !res.data) {
-          // Backend blocked login-only flow for unregistered expert
-          if ((res as any).code === 'NOT_REGISTERED' || res.message?.includes('sign up')) {
-            router.push('/login?role=expert&error=not_registered');
-          } else {
-            router.push(`/login?error=auth_failed&details=${encodeURIComponent(res.message || 'Unknown error')}`);
-          }
-          return;
-        }
-
-        const isExpertFlow = state === 'expert_login' || state === 'expert_signup' || state === 'expert';
-        const isSignupFlow = state === 'expert_signup';
-
-        if (isExpertFlow) {
-          if (isSignupFlow) {
-            // ── SIGNUP FLOW ──────────────────────────────────────────
-            if (res.data.user?.isNew) {
-              // New expert — store tokens, go to onboarding form
-              tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-              localStorage.setItem('hc_role', 'practitioner');
-              localStorage.setItem('hc_practitioner_id', res.data.user.id);
-              localStorage.setItem('hc_pid', res.data.user.id);
-              localStorage.setItem('hc_practitioner_name', res.data.user.name ?? '');
-              localStorage.setItem('hc_google_auth', 'true');
-              localStorage.setItem('hc_google_name', res.data.user.name ?? '');
-              localStorage.setItem('hc_google_email', res.data.user.email ?? '');
-              router.push('/expert/signup');
-            } else {
-              // Already registered via Google signup — log them in directly
-              tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-              localStorage.setItem('hc_role', 'practitioner');
-              localStorage.setItem('hc_practitioner_id', res.data.user.id);
-              localStorage.setItem('hc_pid', res.data.user.id);
-              localStorage.setItem('hc_practitioner_name', res.data.user.name ?? '');
-              router.push('/expert/dashboard');
-            }
-          } else {
-            // ── LOGIN FLOW (expert_login or legacy expert) ───────────
-            if (res.data.user?.isNew) {
-              // Never registered before — tell them to sign up first
-              router.push('/expert/login?error=not_registered');
-            } else {
-              // Existing expert — direct dashboard
-              tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-              localStorage.setItem('hc_role', 'practitioner');
-              localStorage.setItem('hc_practitioner_id', res.data.user.id);
-              localStorage.setItem('hc_pid', res.data.user.id);
-              localStorage.setItem('hc_practitioner_name', res.data.user.name ?? '');
-              router.push('/expert/dashboard');
-            }
-          }
-        } else {
-          // ── USER FLOW ────────────────────────────────────────────
-          tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-          localStorage.removeItem('hc_role');
-          localStorage.removeItem('hc_practitioner_id');
-          localStorage.removeItem('hc_pid');
-          localStorage.removeItem('hc_practitioner_name');
-          router.push('/dashboard');
-        }
-      } catch (err) {
-        router.push(`/login?error=callback_failed&details=${encodeURIComponent((err as Error).message || 'Unknown error')}`);
-      }
+    if (!idToken) {
+      setError('No token received from Google. Please try again.');
+      return;
     }
 
-    handleCallback();
-  }, [router, searchParams]);
+    authApi.googleSignIn(idToken).then((res) => {
+      if (!res.success || !res.data) {
+        setError(res.message || 'Google sign-in failed');
+        return;
+      }
+      tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+      router.replace('/dashboard');
+    }).catch((err) => {
+      setError(`Google sign-in failed. Please try again. [${err.message || String(err)}]`);
+    });
+  }, [router]);
 
   return (
-    <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
-      <div className="text-center">
-        <Loader2 className="w-12 h-12 text-[#4f46e5] animate-spin mx-auto mb-4" />
-        <p className="text-gray-600 text-lg">Signing you in with Google...</p>
-      </div>
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      {error ? (
+        <div className="text-center space-y-4">
+          <p className="text-red-400 text-lg">{error}</p>
+          <a href="/login" className="text-indigo-400 hover:underline">Back to login</a>
+        </div>
+      ) : (
+        <div className="flex flex-col items-center gap-4 text-muted-foreground">
+          <Loader2 className="h-8 w-8 animate-spin text-indigo-400" />
+          <p>Completing sign-in...</p>
+        </div>
+      )}
     </div>
-  );
-}
-
-export default function GoogleCallbackPage() {
-  return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
-        <Loader2 className="w-12 h-12 text-[#4f46e5] animate-spin" />
-      </div>
-    }>
-      <GoogleCallbackInner />
-    </Suspense>
   );
 }

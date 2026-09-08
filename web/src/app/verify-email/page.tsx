@@ -35,7 +35,7 @@ function VerifyEmailContent() {
         if (data.success) {
           setStatus('success');
           setMessage(data.message || 'Email verified successfully!');
-          setTimeout(() => router.push('/login'), 3000);
+          setTimeout(() => router.push('/dashboard'), 3000);
         } else {
           setStatus('error');
           setMessage(data.message || 'Verification failed. The link may have expired.');
@@ -53,7 +53,7 @@ function VerifyEmailContent() {
 
         {/* Logo */}
         <div className="flex items-center justify-center gap-2">
-          <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+          <Image src="/center_logo_final.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
           <span className="text-xl font-extrabold text-[#4f46e5]">ZenAuraa</span>
         </div>
 
@@ -73,7 +73,7 @@ function VerifyEmailContent() {
             <p className="text-gray-500">{message}</p>
             <p className="text-sm text-gray-400">Redirecting you to login in 3 seconds…</p>
             <Link href="/login"
-              className="flex items-center justify-center w-full bg-[#4f46e5] hover:bg-[#4338ca] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
+              className="flex items-center justify-center w-full bg-[#4f46e5] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
               Go to Login
             </Link>
           </div>
@@ -87,7 +87,7 @@ function VerifyEmailContent() {
             <p className="text-gray-500">{message}</p>
             <div className="space-y-2">
               <Link href="/login"
-                className="flex items-center justify-center w-full bg-[#4f46e5] hover:bg-[#4338ca] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
+                className="flex items-center justify-center w-full bg-[#4f46e5] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
                 Go to Login
               </Link>
               <p className="text-sm text-gray-400">
@@ -107,7 +107,7 @@ function VerifyEmailContent() {
 
 export default function VerifyEmailPage() {
   return (
-    <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center p-6">
+    <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center p-6">
       <Suspense fallback={
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="h-8 w-8 animate-spin text-[#4f46e5]" />

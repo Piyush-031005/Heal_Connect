@@ -5,7 +5,26 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-const defaultAvatarSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239CA3AF'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E`;
+const FEMALE_AI_AVATARS = [
+  '/avatars/astrologer_1.jpg',
+  '/avatars/astrologer_3.jpg',
+  '/avatars/astrologer_6.jpg',
+];
+
+const MALE_AI_AVATARS = [
+  '/avatars/astrologer_2.jpg',
+  '/avatars/astrologer_4.jpg',
+  '/avatars/astrologer_5.jpg',
+];
+
+const ALL_AI_AVATARS = [
+  '/avatars/astrologer_1.jpg',
+  '/avatars/astrologer_2.jpg',
+  '/avatars/astrologer_3.jpg',
+  '/avatars/astrologer_4.jpg',
+  '/avatars/astrologer_5.jpg',
+  '/avatars/astrologer_6.jpg',
+];
 
 export function getAvatarUrl(name?: string | null, photoUrl?: string | null): string {
   // Respect valid custom photo URLs
@@ -16,22 +35,69 @@ export function getAvatarUrl(name?: string | null, photoUrl?: string | null): st
     !photoUrl.includes('robohash') &&
     !photoUrl.includes('multiavatar') &&
     !photoUrl.includes('githubusercontent') &&
-    !photoUrl.includes('ui-avatars.com') &&
     !photoUrl.includes('svg')
   ) {
     return photoUrl;
   }
-  return defaultAvatarSvg;
+
+  const str = name || 'Astrologer';
+  const lower = str.toLowerCase();
+
+  // Detect male names / titles
+  const isMale =
+    lower.includes('michael') ||
+    lower.includes('chen') ||
+    lower.includes('rahul') ||
+    lower.includes('david') ||
+    lower.includes('john') ||
+    lower.includes('arjun') ||
+    lower.includes('vikram') ||
+    lower.includes('raj') ||
+    lower.includes('amit') ||
+    lower.includes('sharma') ||
+    lower.includes('pt.') ||
+    lower.includes('pandit');
+
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  if (isMale) {
+    const idx = Math.abs(hash) % MALE_AI_AVATARS.length;
+    return MALE_AI_AVATARS[idx]!;
+  }
+
+  const isFemale =
+    lower.includes('priya') ||
+    lower.includes('ananya') ||
+    lower.includes('sarah') ||
+    lower.includes('sunita') ||
+    lower.includes('dr. m') ||
+    lower.includes('meenakshi') ||
+    lower.includes('pooja') ||
+    lower.includes('divya');
+
+  if (isFemale) {
+    const idx = Math.abs(hash) % FEMALE_AI_AVATARS.length;
+    return FEMALE_AI_AVATARS[idx]!;
+  }
+
+  const idx = Math.abs(hash) % ALL_AI_AVATARS.length;
+  return ALL_AI_AVATARS[idx]!;
 }
 
-export function getPractitionerAvatar(photoUrl: string | null | undefined, name: string = 'Expert'): string {
-  if (
-    photoUrl &&
-    (photoUrl.startsWith('/') || photoUrl.startsWith('http')) &&
-    !photoUrl.includes('dicebear') &&
-    !photoUrl.includes('ui-avatars.com')
-  ) {
-    return photoUrl;
-  }
-  return defaultAvatarSvg;
+const LOCAL_AVATARS = [
+  '/avatars/astrologer_1.jpg',
+  '/avatars/astrologer_2.jpg',
+  '/avatars/astrologer_3.jpg',
+  '/avatars/astrologer_4.jpg',
+  '/avatars/astrologer_5.jpg',
+  '/avatars/astrologer_6.jpg',
+];
+
+export function getPractitionerAvatar(photoUrl: string | null | undefined, id: string): string {
+  if (photoUrl && (photoUrl.startsWith('/') || photoUrl.startsWith('http'))) return photoUrl;
+  const hash = id.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  return LOCAL_AVATARS[hash % LOCAL_AVATARS.length];
 }

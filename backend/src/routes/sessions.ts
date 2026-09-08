@@ -412,7 +412,7 @@ router.post('/:id/connect', requireAuth, async (req: AuthRequest, res: Response)
       return;
     }
 
-    if (session.status === 'COMPLETED' || session.status === 'CANCELLED' || session.status === 'REJECTED') {
+    if (!['ACCEPTED', 'WALLET_VERIFIED', 'JOINING_CHANNEL', 'ACTIVE'].includes(session.status)) {
       res.status(400).json({ success: false, message: `Cannot connect to session in ${session.status} state` });
       return;
     }
@@ -472,13 +472,31 @@ router.post('/:id/end', requireAuth, async (req: AuthRequest, res: Response) => 
     return;
   }
 
-  // If not yet active (e.g. INITIATED, ACCEPTED), mark CANCELLED; if ACTIVE or DISCONNECTED, mark COMPLETED
-  const targetStatus = (session.status === 'INITIATED' || session.status === 'ACCEPTED') ? 'CANCELLED' : 'COMPLETED';
+  // If not yet active (e.g. INITIATED, ACCEPTED, WALLET_VERIFIED, JOINING_CHANNEL), mark CANCELLED;
+  // if ACTIVE or DISCONNECTED, mark COMPLETED (billable session occurred)
+  const targetStatus = (
+    session.status === 'INITIATED' ||
+    session.status === 'ACCEPTED' ||
+    session.status === 'WALLET_VERIFIED' ||
+    session.status === 'JOINING_CHANNEL'
+  ) ? 'CANCELLED' : 'COMPLETED';
 
   const updated = await prisma.session.update({
     where: { id: sessionId },
     data: { status: targetStatus, endTime: new Date() },
   });
+
+  // Task 2: Trigger Deepgram transcription if an Agora recording URL was provided
+  if (targetStatus === 'COMPLETED' && req.body.recordingUrl) {
+    import('../services/transcription.service').then(({ transcribeFromRecordingUrl }) => {
+      transcribeFromRecordingUrl(
+        sessionId,
+        req.body.recordingUrl,
+        session.userId,
+        session.practitionerId
+      ).catch(console.error);
+    });
+  }
 
   await prisma.practitioner.update({
     where: { id: session.practitionerId },

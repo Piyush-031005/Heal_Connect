@@ -22,11 +22,11 @@ export default function ModalityHero({ data }: Props) {
   }, [data.heroImages.length]);
 
   return (
-    <section className="relative w-full h-[60vh] md:h-[75vh] flex items-center justify-center overflow-hidden bg-background">
+    <section className="relative w-full h-[60vh] md:h-[75vh] flex items-center justify-center overflow-hidden bg-[#F3E8FF]">
       {/* Background Slideshow */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence initial={false}>
-          <motion.img
+          <motion.img fetchPriority="high"
             key={currentSlide}
             src={data.heroImages[currentSlide]}
             alt={`${data.name} visual`}
@@ -39,8 +39,8 @@ export default function ModalityHero({ data }: Props) {
         </AnimatePresence>
         
         {/* Deep overlay to ensure text readability while maintaining theme color */}
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] transition-colors duration-500" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent transition-colors duration-500" />
+        <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] transition-colors duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#F3E8FF] to-transparent transition-colors duration-500" />
       </div>
 
       {/* Content */}
@@ -58,11 +58,11 @@ export default function ModalityHero({ data }: Props) {
             <div className="w-10 h-[2px] bg-primary" />
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-serif font-medium text-foreground mb-6 drop-shadow-lg leading-tight">
+          <h1 className="text-5xl md:text-7xl font-serif font-medium text-[#2A1658] mb-6 drop-shadow-lg leading-tight">
             {data.heroTitle}
           </h1>
           
-          <p className="text-lg md:text-xl text-foreground/90 font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+          <p className="text-lg md:text-xl text-[#2A1658]/90 font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-md">
             {data.heroDescription}
           </p>
         </motion.div>

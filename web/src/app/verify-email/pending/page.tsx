@@ -53,7 +53,7 @@ function PendingContent() {
     <Card className="w-full max-w-md bg-white border border-yellow-100 shadow-xl">
       <CardHeader className="space-y-3 pb-4">
         <div className="flex items-center gap-2 mb-1">
-          <Image src="/logo.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
+          <Image src="/center_logo_final.png" alt="ZenAuraa" width={32} height={32} className="rounded-full" />
           <span className="text-xl font-extrabold text-[#4f46e5]">ZenAuraa</span>
         </div>
 
@@ -82,7 +82,7 @@ function PendingContent() {
             'You\'ll be redirected to the login page.',
           ].map((step, i) => (
             <li key={i} className="flex items-start gap-3">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-yellow-100 text-[#4338ca] font-bold text-xs flex items-center justify-center mt-0.5">
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-yellow-100 text-[#d97706] font-bold text-xs flex items-center justify-center mt-0.5">
                 {i + 1}
               </span>
               <span>{step}</span>
@@ -113,7 +113,7 @@ function PendingContent() {
         </div>
 
         <Link href="/login"
-          className="flex items-center justify-center w-full bg-[#4f46e5] hover:bg-[#4338ca] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
+          className="flex items-center justify-center w-full bg-[#4f46e5] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
           Go to Login
         </Link>
 
@@ -130,7 +130,7 @@ function PendingContent() {
 
 export default function VerifyEmailPendingPage() {
   return (
-    <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center p-6">
+    <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center p-6">
       <Suspense fallback={
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="h-8 w-8 animate-spin text-[#4f46e5]" />

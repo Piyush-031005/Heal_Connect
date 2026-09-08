@@ -182,11 +182,11 @@ export default function Navbar() {
         <div className="bg-gradient-to-br from-purple-300 to-purple-400 px-5 pt-6 pb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
-              <Image src={theme === 'theme-royal-indigo' ? '/brand-icon.png' : '/brand-icon.png'} alt="ZenAuraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
-              <span className="text-2xl font-serif font-black text-[#2D1B69] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide">ZenAuraa</span>
+              <Image src={theme === 'theme-royal-indigo' ? '/main centre logo/main_logo.png' : '/main centre logo/main_logo.png'} alt="ZenAuraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
+              <span className="text-2xl font-serif font-black text-[#2A1658] drop-shadow-[0_2px_4px_rgba(0,0,0,0.1)] tracking-wide">Zen<span className="text-[#5F3BA9]">Auraa</span></span>
             </div>
             <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
-              <svg className="w-4 h-4 text-[#2D1B69]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-[#1C0D40]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -198,7 +198,7 @@ export default function Navbar() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400" />
             </span>
-            <span className="text-[#2D1B69] text-xs font-semibold">1,240 astrologers online now</span>
+            <span className="text-[#1C0D40] text-xs font-semibold">1,240 astrologers online now</span>
           </div>
 
           {/* Avatar row */}
@@ -210,10 +210,10 @@ export default function Navbar() {
                 </div>
               ))}
               <div className="w-7 h-7 rounded-full border-2 border-white/60 bg-white/20 flex items-center justify-center">
-                <span className="text-[10px] font-bold text-[#2D1B69]">+3</span>
+                <span className="text-[10px] font-bold text-[#1C0D40]">+3</span>
               </div>
             </div>
-            <span className="text-[#2D1B69]/70 text-[11px] ml-1">Astrologer</span>
+            <span className="text-[#1C0D40]/70 text-[11px] ml-1">Astrologer</span>
           </div>
 
           {/* Sign in CTA */}
@@ -224,7 +224,7 @@ export default function Navbar() {
           >
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-300 to-purple-400 flex items-center justify-center shrink-0">
-                <svg className="w-5 h-5 text-[#2D1B69]" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-[#1C0D40]" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
                   <circle cx="12" cy="8" r="4" />
                   <path strokeLinecap="round" d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                 </svg>
@@ -290,47 +290,43 @@ export default function Navbar() {
                 </svg>
               </button>
               <Link href="/" className="flex items-center gap-2">
-                <Image src={theme === 'theme-royal-indigo' ? '/brand-icon.png' : '/brand-icon.png'} alt="ZenAuraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
-                <span className="text-2xl font-serif font-black text-[#2D1B69] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105">ZenAuraa</span>
+                <Image src={theme === 'theme-royal-indigo' ? '/main centre logo/main_logo.png' : '/main centre logo/main_logo.png'} alt="ZenAuraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
+                <span className="text-2xl font-serif font-black text-[#1C0D40] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105"><span className="text-[#2A1658]">Zen</span><span className="text-[#5F3BA9]">Auraa</span></span>
               </Link>
             </div>
 
             {/* Links for Final Hybrid layout sit next to the logo */}
             {isFinalHybrid && (
               <nav className="hidden md:flex items-center gap-4 ml-4">
-                <Link href="/practitioners" className="text-sm font-semibold text-[#2D1B69] hover:text-[#5F3BA9] transition-colors">
+                <Link href="/practitioners" className="text-sm font-semibold text-[#1C0D40] hover:text-[#5F3BA9] transition-colors">
                   Find Expert
                 </Link>
-                <Link href="#free-services" className="text-sm font-semibold text-[#2D1B69] hover:text-[#5F3BA9] transition-colors">
+                <Link href="#free-services" className="text-sm font-semibold text-[#1C0D40] hover:text-[#5F3BA9] transition-colors">
                   Free Services
                 </Link>
                   <div className="relative group cursor-pointer">
-                  <span className="text-sm font-semibold text-[#2D1B69] group-hover:text-[#5F3BA9] transition-colors flex items-center gap-1">
+                  <span className="text-sm font-semibold text-[#1C0D40] group-hover:text-[#5F3BA9] transition-colors flex items-center gap-1">
                     Free Insights
                     <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </span>
                   <div className="absolute top-full left-0 mt-2 w-56 bg-[#7A48AB] border border-[#694091] rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2">
-                    <Link href="/modalities/astrology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Astrology</Link>
-                    <Link href="/modalities/tarot" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Tarot</Link>
-                    <Link href="/modalities/palm-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Palm Reading</Link>
-                    <Link href="/modalities/face-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Face Reading</Link>
                     <Link href="/modalities/numerology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Numerology</Link>
-                    <Link href="/modalities/energy-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Energy Healing</Link>
-                    <Link href="/modalities/meditation" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Meditation</Link>
-                    <Link href="/modalities/yoga" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Yoga &amp; Mindfulness</Link>
-                    <Link href="/modalities/vastu" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Vastu &amp; Space Energy</Link>
-                    <Link href="/modalities/eft" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">EFT Tapping</Link>
-                    <Link href="/modalities/spiritual" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Spiritual Guidance</Link>
+                    <Link href="/modalities/astrology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Astrology</Link>
+                    <Link href="/modalities/space-harmony" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Space Harmony</Link>
+                    <Link href="/modalities/tarot" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Tarot</Link>
+                    <Link href="/modalities/dreams" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Dream Predict</Link>
+                    <Link href="/modalities/face-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Face Reading</Link>
+                    <Link href="/modalities/breathwork" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Breathwork</Link>
+                    <Link href="/modalities/palm-reading" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Palm Reading</Link>
+                    <Link href="/modalities/chakra-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Chakra Healing</Link>
                     <Link href="/modalities/sound-healing" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Sound Healing</Link>
+                    <Link href="/modalities/spiritual" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Spiritual</Link>
+                    <Link href="/modalities/meditation" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Meditation</Link>
                   </div>
                 </div>
-                <a href="/#testimonials" onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.getElementById('testimonials');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }} className="text-sm font-semibold text-[#2D1B69] hover:text-[#5F3BA9] transition-colors cursor-pointer">
+                <Link href="#reviews" className="text-sm font-semibold text-[#1C0D40] hover:text-[#5F3BA9] transition-colors">
                   Reviews
-                </a>
+                </Link>
               </nav>
             )}
           </div>
@@ -345,7 +341,7 @@ export default function Navbar() {
                   className={`relative text-sm font-medium transition-all px-4 py-1.5 rounded-full flex items-center gap-1.5 ${
                     activeSection === id
                       ? 'bg-primary/10 text-primary shadow-sm'
-                      : 'text-[#2D1B69]/80 hover:text-primary hover:bg-white/5'
+                      : 'text-[#1C0D40]/80 hover:text-primary hover:bg-white/5'
                   }`}
                 >
                   {label}
@@ -357,7 +353,7 @@ export default function Navbar() {
           {/* Right: theme toggle + lang dropdown + profile */}
           <div className="flex items-center gap-2">
             {isFinalHybrid && (
-              <Link href="/modalities/astrology" className="md:hidden text-[10px] sm:text-xs font-semibold text-[#2D1B69] border border-border rounded-full px-2.5 py-1 whitespace-nowrap bg-[#694091]/30">
+              <Link href="/modalities/astrology" className="md:hidden text-[10px] sm:text-xs font-semibold text-[#1C0D40] border border-border rounded-full px-2.5 py-1 whitespace-nowrap bg-[#694091]/30">
                 Free Insights
               </Link>
             )}
@@ -367,7 +363,7 @@ export default function Navbar() {
               <button
                 onClick={() => setLayoutOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
-                  isDark ? 'border-white/20 hover:bg-white/10 hover:text-[#2D1B69]' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50 hover:text-indigo-600'
+                  isDark ? 'border-white/20 hover:bg-white/10 hover:text-[#1C0D40]' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50 hover:text-indigo-600'
                 }`}
               >
                 <Layout className="w-4 h-4" />
@@ -376,8 +372,10 @@ export default function Navbar() {
               {layoutOpen && (
                 <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
-                    { code: 'layout-10', label: ' Layout 10 (Light Particles)' },
-                    { code: 'layout-9', label: ' Layout 9 (Peacock)' },
+                    
+                    { code: 'layout-1', label: ' Layout 1 (Pebbles)' },
+                                                                                { code: 'layout-5', label: ' Layout 5 (Nebula)' },
+                                                                                { code: 'layout-9', label: ' Layout 9 (Peacock)' },
                   ] as const).map((l) => (
                     <button
                       key={l.code}
@@ -406,7 +404,7 @@ export default function Navbar() {
               <button
                 onClick={() => setThemeOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all ${
-                  isDark ? 'border-white/20 hover:bg-white/10 text-[#2D1B69]' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50 text-indigo-600'
+                  isDark ? 'border-white/20 hover:bg-white/10 text-[#1C0D40]' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50 text-indigo-600'
                 }`}
                 title="Select Theme"
               >
@@ -460,17 +458,11 @@ export default function Navbar() {
               </button>
 
               {langOpen && (
-                <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-64 overflow-y-auto ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
-                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi', sub: 'HI' }, { code: 'ta', label: 'Tamil', sub: 'TA' }, { code: 'te', label: 'Telugu', sub: 'TE' }, { code: 'bn', label: 'Bengali', sub: 'BN' }, { code: 'mr', label: 'Marathi', sub: 'MR' }, { code: 'gu', label: 'Gujarati', sub: 'GU' }, { code: 'kn', label: 'Kannada', sub: 'KN' }, { code: 'pa', label: 'Punjabi', sub: 'PA' }, { code: 'ur', label: 'Urdu', sub: 'UR' }, { code: 'es', label: 'Spanish', sub: 'ES' }, { code: 'fr', label: 'French', sub: 'FR' }, { code: 'de', label: 'German', sub: 'DE' }, { code: 'ar', label: 'Arabic', sub: 'AR' }, { code: 'zh-CN', label: 'Chinese', sub: 'ZH' }, { code: 'ja', label: 'Japanese', sub: 'JA' }] as const).map((l) => (
+                <div className={`absolute right-0 mt-2 w-36 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
+                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi (ÃƒÂ Ã‚Â¤Ã‚Â¹ÃƒÂ Ã‚Â¤Ã‚Â¿ÃƒÂ Ã‚Â¤Ã‚Â¨ÃƒÂ Ã‚Â¥Ã‚ÂÃƒÂ Ã‚Â¤Ã‚Â¦ÃƒÂ Ã‚Â¥Ã¢â€šÂ¬)', sub: 'HI' }, { code: 'es', label: 'Spanish (EspaÃƒÆ’Ã‚Â±ol)', sub: 'ES' }, { code: 'fr', label: 'French (FranÃƒÆ’Ã‚Â§ais)', sub: 'FR' }, { code: 'de', label: 'German (Deutsch)', sub: 'DE' }] as const).map((l) => (
                     <button
                       key={l.code}
-                      onClick={() => {
-                        setLang(l.code as any);
-                        setLangOpen(false);
-                        if (typeof window !== 'undefined' && (window as any).__translateTo) {
-                          (window as any).__translateTo(l.code);
-                        }
-                      }}
+                      onClick={() => { setLang(l.code as 'en' | 'hi'); setLangOpen(false); }}
                       className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
                         lang === l.code
                           ? 'bg-purple-50 text-[#d97706] font-semibold'
@@ -503,11 +495,11 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
-                <Link href="/login" className={`hidden md:block text-sm font-medium transition-colors px-2 ${isFinalHybrid ? 'text-[#2D1B69] hover:text-[#5F3BA9]' : 'text-[#2D1B69] hover:text-primary'}`}>
+                <Link href="/login" className={`hidden md:block text-sm font-bold px-4 py-1.5 rounded-full transition-colors ${isFinalHybrid ? 'text-[#2A1658] bg-[#FAD058] hover:bg-[#E5B83C]' : 'text-primary bg-[#FAD058] hover:bg-[#E5B83C]'}`}>
                   Login
                 </Link>
                 {isFinalHybrid && (
-                  <Link href="/signup" className="hidden md:block text-sm font-semibold text-[#4D316B] bg-[#B79AE6] hover:bg-[#c9a000] transition-colors px-4 py-1.5 rounded-full ml-1">
+                  <Link href="/register" className="hidden md:block text-sm font-bold text-[#2A1658] bg-[#FAD058] hover:bg-[#E5B83C] transition-colors px-4 py-1.5 rounded-full ml-1 shadow-sm">
                     Register
                   </Link>
                 )}

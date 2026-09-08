@@ -33,7 +33,7 @@ export default function NewLayoutsHero() {
       case 'layout-5': return <AuroraBlob />;
       case 'layout-9': return <PeacockBloom />;
       case 'layout-10': return <LightParticles />;
-      default: return <AuroraBlob />;
+      default: return <LightParticles />;
     }
   };
 
@@ -93,6 +93,17 @@ export default function NewLayoutsHero() {
             <p className="text-xl lg:text-2xl text-[#1E2059]/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
               Find trusted guidance for every stage of life.<br/>Connect with verified experts instantly.
             </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-200 pointer-events-auto">
+              <button className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#FAD058] hover:bg-[#F0C240] text-[#2A1658] text-sm font-bold transition-all shadow-lg shadow-[#FAD058]/20">
+                <MessageCircle className="w-4 h-4" />
+                <span>Start Chat</span>
+              </button>
+              <button className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#FAD058] hover:bg-[#F0C240] text-[#2A1658] text-sm font-bold transition-all shadow-lg shadow-[#FAD058]/20">
+                <Phone className="w-4 h-4" />
+                <span>Start Calling</span>
+              </button>
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-in slide-in-from-left duration-1000 delay-300 pointer-events-auto">
               <Link href="/practitioners">

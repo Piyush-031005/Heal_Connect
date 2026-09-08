@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, Star, MessageCircle, Phone, Shield, Loader2, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Star, MessageCircle, Phone, Shield, Loader2, Sparkles, CheckCircle2, Share } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -141,9 +141,33 @@ export default function PractitionerDetailPage() {
     }
   };
 
+  const handleShare = async () => {
+    if (!p) return;
+    const url = `${window.location.origin}/practitioners/${p.id}`;
+    const text = `Consult with ${p.name}, Expert in ${p.specialties.join(', ')}.\nRating: ${p.avgRating || '5.0'} ⭐\n\n${p.bio ? p.bio.slice(0, 100) + '...' : ''}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `${p.name} on ZenAuraa`,
+          text: text,
+          url: url,
+        });
+      } catch (err) {
+        // AbortError is expected if user cancels the share sheet
+        if ((err as Error).name !== 'AbortError') {
+          console.error('Share failed', err);
+        }
+      }
+    } else {
+      navigator.clipboard.writeText(`${text}\n${url}`);
+      alert('Profile link copied to clipboard!');
+    }
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center font-sans">
+      <div className="min-h-screen bg-[#fffbf0] flex items-center justify-center font-sans">
         <Loader2 className="h-9 w-9 text-[#4f46e5] animate-spin" />
       </div>
     );
@@ -151,10 +175,10 @@ export default function PractitionerDetailPage() {
 
   if (!p) {
     return (
-      <div className="min-h-screen bg-[#faf9f6] flex flex-col items-center justify-center gap-4 font-sans">
+      <div className="min-h-screen bg-[#fffbf0] flex flex-col items-center justify-center gap-4 font-sans">
         <p className="text-gray-500 font-medium">Practitioner not found.</p>
         <Link href="/practitioners">
-          <Button variant="outline" className="border-yellow-200 text-[#4338ca] hover:bg-yellow-50 rounded-xl">
+          <Button variant="outline" className="border-yellow-200 text-[#d97706] hover:bg-yellow-50 rounded-xl">
             Back to Directory
           </Button>
         </Link>
@@ -165,13 +189,13 @@ export default function PractitionerDetailPage() {
   const avatarUrl = getAvatarUrl(p.name, p.photoUrl);
 
   return (
-    <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#fffbf0] text-[#1a1a1a] flex flex-col font-sans">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-yellow-100/80 bg-white/80 backdrop-blur-md transition-all">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="container mx-auto px-4 h-16 flex items-center">
           <button onClick={() => router.back()} className="flex items-center gap-2 text-gray-600 hover:text-[#4f46e5] transition-colors group bg-transparent border-none cursor-pointer">
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full shadow-sm" />
+            <Image src="/center_logo_final.png" alt="ZenAuraa" width={28} height={28} className="rounded-full shadow-sm" />
             <span className="font-extrabold text-[#4f46e5] tracking-tight">ZenAuraa</span>
           </button>
         </div>
@@ -210,9 +234,19 @@ export default function PractitionerDetailPage() {
                     <p className="text-[#4f46e5] font-semibold text-sm mt-0.5">{p.specialties.join(' · ')}</p>
                   </div>
                   {p.isVerified && (
-                    <Badge variant="outline" className="border-indigo-300 text-[#4338ca] bg-purple-50/80 gap-1.5 px-3 py-1 rounded-full shrink-0 shadow-sm mx-auto sm:mx-0">
-                      <Shield className="h-3.5 w-3.5" /> Verified Practitioner
-                    </Badge>
+                    <div className="flex flex-col items-center sm:items-end gap-1.5 shrink-0 mx-auto sm:mx-0">
+                      <Badge variant="outline" className="border-indigo-300 text-[#d97706] bg-purple-50/80 gap-1.5 px-3 py-1 rounded-full shadow-sm">
+                        <Shield className="h-3.5 w-3.5" /> Verified Practitioner
+                      </Badge>
+                      <Button
+                        onClick={handleShare}
+                        variant="ghost"
+                        size="sm"
+                        className="text-[#4f46e5] hover:bg-purple-50 rounded-full gap-1.5 h-7 text-xs px-3"
+                      >
+                        <Share className="h-3 w-3" /> Share Profile
+                      </Button>
+                    </div>
                   )}
                 </div>
 
@@ -245,11 +279,11 @@ export default function PractitionerDetailPage() {
                 <span className="text-sm text-gray-400 font-medium"> / minute</span>
               </div>
               <div className="flex gap-3">
-                <Button 
+                <Button
                   onClick={handleStartChat}
                   disabled={!p.isOnline || chatting}
-                  variant="outline" 
-                  className="border-yellow-200 hover:border-yellow-400 hover:text-[#4338ca] hover:bg-purple-50 gap-2 rounded-2xl px-5 font-semibold transition-all disabled:opacity-40"
+                  variant="outline"
+                  className="border-yellow-200 hover:border-yellow-400 hover:text-[#d97706] hover:bg-purple-50 gap-2 rounded-2xl px-5 font-semibold transition-all disabled:opacity-40"
                 >
                   {chatting ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -288,7 +322,7 @@ export default function PractitionerDetailPage() {
               </h2>
               <div className="flex flex-wrap gap-2">
                 {p.certifications.map((c) => (
-                  <Badge key={c} variant="outline" className="border-indigo-200 text-[#4338ca] bg-purple-50/60 px-3 py-1 rounded-xl text-xs font-semibold">
+                  <Badge key={c} variant="outline" className="border-indigo-200 text-[#d97706] bg-purple-50/60 px-3 py-1 rounded-xl text-xs font-semibold">
                     {c}
                   </Badge>
                 ))}

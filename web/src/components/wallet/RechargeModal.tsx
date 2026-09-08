@@ -115,7 +115,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
             <Button
               key={preset}
               variant="outline"
-              className={`border-yellow-200 text-[#4338ca] bg-yellow-50 hover:bg-yellow-100 hover:text-[#b45309] font-bold ${amount === preset ? 'ring-2 ring-[#4f46e5] border-transparent' : ''}`}
+              className={`border-yellow-200 text-[#d97706] bg-yellow-50 hover:bg-yellow-100 hover:text-[#b45309] font-bold ${amount === preset ? 'ring-2 ring-[#4f46e5] border-transparent' : ''}`}
               onClick={() => setAmount(preset)}
             >
               ₹{preset}
@@ -128,14 +128,14 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
           <div className="grid grid-cols-2 gap-3">
             <Button
               variant="outline"
-              className={`h-12 border-gray-200 font-medium ${paymentMethod === 'razorpay' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#4338ca] border-transparent' : 'text-gray-600 hover:bg-gray-50'}`}
+              className={`h-12 border-gray-200 font-medium ${paymentMethod === 'razorpay' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-gray-600 hover:bg-gray-50'}`}
               onClick={() => setPaymentMethod('razorpay')}
             >
               Domestic (INR)
             </Button>
             <Button
               variant="outline"
-              className={`h-12 border-gray-200 font-medium ${paymentMethod === 'stripe' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#4338ca] border-transparent' : 'text-gray-600 hover:bg-gray-50'}`}
+              className={`h-12 border-gray-200 font-medium ${paymentMethod === 'stripe' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-gray-600 hover:bg-gray-50'}`}
               onClick={() => setPaymentMethod('stripe')}
             >
               International (USD)
@@ -163,7 +163,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
 
         <div className="pt-2">
           <Button
-            className="w-full bg-[#4f46e5] hover:bg-[#4338ca] text-white font-bold h-12 rounded-xl"
+            className="w-full bg-[#4f46e5] hover:bg-[#d97706] text-white font-bold h-12 rounded-xl"
             disabled={loading || !amount || amount < 10}
             onClick={() => handleRecharge(amount as number)}
           >
