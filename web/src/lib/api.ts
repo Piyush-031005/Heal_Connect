@@ -32,6 +32,7 @@ export interface UserProfile {
   phone: string | null;
   dob: string | null;
   birthPlace: string | null;
+  timeOfBirth: string | null;
   gender: string | null;
   wellnessInterests: string[];
   photoUrl: string | null;
@@ -51,6 +52,7 @@ export interface PractitionerProfile {
   photoUrl: string | null;
   isVerified: boolean;
   isOnline: boolean;
+  schedulingEnabled?: boolean;
   avgRating?: number;
   reviewCount?: number;
 }
@@ -341,4 +343,18 @@ export const tokenStore = {
       localStorage.removeItem('hc_refresh');
     }
   },
+};
+
+export const availabilityApi = {
+  getAvailability: (practitionerId: string, startDate?: string, endDate?: string) => {
+    let url = `/api/availability/${practitionerId}`;
+    if (startDate && endDate) url += `?startDate=${startDate}&endDate=${endDate}`;
+    return request<{ slots: any[] }>(url);
+  },
+  createAvailability: (token: string, startTime: string, endTime: string) =>
+    request<{ slot: any }>('/api/availability', { method: 'POST', headers: authHeader(token), body: JSON.stringify({ startTime, endTime }) }),
+  deleteAvailability: (token: string, slotId: string) =>
+    request(`/api/availability/${slotId}`, { method: 'DELETE', headers: authHeader(token) }),
+  toggleScheduling: (token: string, schedulingEnabled: boolean) =>
+    request<{ schedulingEnabled: boolean }>('/api/availability/toggle', { method: 'PUT', headers: authHeader(token), body: JSON.stringify({ schedulingEnabled }) }),
 };

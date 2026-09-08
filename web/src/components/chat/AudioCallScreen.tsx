@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useAgoraCall } from '@/hooks/useAgoraCall';
-import { useDeepgramTranscription } from '@/hooks/useDeepgramTranscription';
+
 import CallFeedbackModal from './CallFeedbackModal';
 import { Button } from '@/components/ui/button';
 import {
@@ -49,12 +49,6 @@ export default function AudioCallScreen({
     elapsed,
   } = useAgoraCall(sessionId, isExpert);
 
-  const { transcriptStatus, liveSnippet, isTranscribing } = useDeepgramTranscription({
-    sessionId,
-    callState,
-    localTrack,
-    remoteUsers,
-  });
 
   const [showFeedback, setShowFeedback] = useState(false);
 

@@ -8,7 +8,7 @@ import { ArrowLeft, MessageSquare, Phone } from 'lucide-react';
 import ChatWindow from '@/components/chat/ChatWindow';
 import { Button } from '@/components/ui/button';
 import { tokenStore, agoraApi, sessionsApi, type PractitionerProfile } from '@/lib/api';
-import { useScreenshotProtection } from '@/hooks/useScreenshotProtection';
+
 
 // Agora SDK uses `window` at import time — must never be SSR'd
 const AudioCallScreen = dynamic(() => import('@/components/chat/AudioCallScreen'), { ssr: false });
@@ -26,7 +26,7 @@ export default function SessionPage() {
   const [tab, setTab] = useState<Tab>('chat');
   const [startingCall, setStartingCall] = useState(false);
 
-  useScreenshotProtection(true);
+
 
   useEffect(() => {
     const token = tokenStore.getAccess();
