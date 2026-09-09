@@ -110,7 +110,7 @@ export async function POST(req: NextRequest) {
     
     if (sessionToken) {
       const { cookies } = await import('next/headers');
-      cookies().set(SESSION_COOKIE, sessionToken, {
+      (await cookies()).set(SESSION_COOKIE, sessionToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
