@@ -73,7 +73,8 @@ function LoginInner() {
     if (!clientId) { setError('Google Sign-In is not configured yet.'); return; }
     const redirectUri = encodeURIComponent(`${window.location.origin}/auth/google/callback`);
     const scope = encodeURIComponent('openid email profile');
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&nonce=${Math.random().toString(36)}`;
+    const stateParam = role === 'expert' ? 'expert_login' : 'user_login';
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&state=${stateParam}&nonce=${Math.random().toString(36)}`;
   }
 
   function handleAppleSignIn() {
