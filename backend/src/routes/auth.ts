@@ -136,8 +136,9 @@ router.post(
     const useEmail = verifyMethod === 'email' || (phone ? !isOtpConfigured(phone) : true);
 
     try {
-      const existing = await prisma.user.findUnique({ where: { email } });
-      if (existing) {
+      const existingUser = await prisma.user.findUnique({ where: { email } });
+      const existingPractitioner = await prisma.practitioner.findUnique({ where: { email } });
+      if (existingUser || existingPractitioner) {
         res.status(409).json({ success: false, message: 'Email already registered' });
         return;
       }
@@ -604,6 +605,14 @@ router.post(
 
         let isNew = false;
         if (!pract) {
+          // Check if this email/GoogleID is already registered as a regular user
+          const existingUser = await prisma.user.findUnique({ where: { googleId } });
+          const existingUserEmail = email ? await prisma.user.findUnique({ where: { email } }) : null;
+          if (existingUser || existingUserEmail) {
+            res.status(409).json({ success: false, message: 'Account already registered as a regular user. Please log in as a user.' });
+            return;
+          }
+
           isNew = true;
           console.log('Creating new practitioner account for:', email);
           pract = await prisma.practitioner.create({
@@ -652,6 +661,14 @@ router.post(
       if (!user && email) user = await prisma.user.findUnique({ where: { email } });
 
       if (!user) {
+        // Check if this email/GoogleID is already registered as an expert
+        const existingPract = await prisma.practitioner.findUnique({ where: { googleId } });
+        const existingPractEmail = email ? await prisma.practitioner.findUnique({ where: { email } }) : null;
+        if (existingPract || existingPractEmail) {
+          res.status(409).json({ success: false, message: 'Account already registered as an expert. Please log in as an expert.' });
+          return;
+        }
+
         user = await prisma.user.create({
           data: {
             googleId,
@@ -1129,6 +1146,12 @@ router.post(
       return;
     }
     try {
+      const existingUser = await prisma.user.findUnique({ where: { email } });
+      if (existingUser) {
+        res.status(409).json({ success: false, message: 'Email already registered as a regular user' });
+        return;
+      }
+
       const existing = await prisma.practitioner.findUnique({ where: { email } });
       if (existing) {
         // If Google account already exists, just return tokens (idempotent)
