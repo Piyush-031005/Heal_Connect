@@ -3,7 +3,9 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/components/*": ["./components/*"],`n      "@/constants/*": ["./constants/*"],`n      "@/*": [
+      "@/components/*": ["./components/*"],
+      "@/constants/*": ["./constants/*"],
+      "@/*": [
         "./src/*"
       ],
       "@/assets/*": [

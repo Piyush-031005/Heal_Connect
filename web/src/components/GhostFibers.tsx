@@ -54,6 +54,7 @@ uniform float uTwist;
 uniform float uTwistFrequency;
 uniform float uLineFrequency;
 uniform float uGlowIntensity;
+uniform bool uLightMode;
 
 varying vec2 vUv;
 
@@ -81,8 +82,8 @@ void main() {
   float edge = 1.0 - abs(uv.x - 0.5) * 2.0;
   edge = smoothstep(0.0, 1.0, edge);
   
-  vec3 color = mix(uGlowColor, uLineColor, fiber) * fiber * uGlowIntensity;
-  color *= edge; // Fade out at edges
+  vec3 color = mix(uGlowColor, uLineColor, fiber);
+  if (!uLightMode) { color = color * fiber * uGlowIntensity * edge; } // Fade out at edges
   
   gl_FragColor = vec4(color, fiber * edge);
 }
@@ -103,6 +104,7 @@ function FibersMaterial(props: any) {
     uTwistFrequency: { value: props.twistFrequency || 5.0 },
     uLineFrequency: { value: props.lineFrequency || 50.0 },
     uGlowIntensity: { value: props.glowIntensity || 1.6 },
+    uLightMode: { value: props.lightMode || false },
   }), []);
 
   useFrame((state) => {
@@ -119,7 +121,7 @@ function FibersMaterial(props: any) {
       fragmentShader={fragmentShader}
       uniforms={uniforms}
       transparent={true}
-      blending={THREE.AdditiveBlending}
+      blending={props.lightMode ? THREE.NormalBlending : THREE.AdditiveBlending}
       depthWrite={false}
     />
   );
