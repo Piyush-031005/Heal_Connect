@@ -81,8 +81,19 @@ export default function SessionPage() {
   const handleSwitchToCall = async () => {
     if (startingCall) return;
     setStartingCall(true);
-    setTab('call');
-    setStartingCall(false);
+    try {
+      const token = tokenStore.getAccess();
+      if (!token || !activeSession?.practitionerId) return;
+      // Create a new AUDIO session with the same practitioner
+      const res = await sessionsApi.create(token, activeSession.practitionerId, 'AUDIO');
+      if (res.success && res.data?.session?.id) {
+        router.push(`/session/${res.data.session.id}`);
+      }
+    } catch (err) {
+      console.error('Failed to start audio call:', err);
+    } finally {
+      setStartingCall(false);
+    }
   };
 
   if (!userId || !peer) return null;
@@ -198,7 +209,7 @@ export default function SessionPage() {
         <div className={cn('h-full', tab === 'chat' ? 'flex flex-col' : 'hidden')}>
           <ChatWindow
             sessionId={sessionId}
-            currentUserId={isExpert ? activeSession?.practitionerId : userId}
+            currentUserId={userId}
             isExpert={isExpert}
             practitionerId={activeSession?.practitionerId ?? ''}
             practitionerName={isExpert ? '' : (peer?.name ?? 'the expert')}

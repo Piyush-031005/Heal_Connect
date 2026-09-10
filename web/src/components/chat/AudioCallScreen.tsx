@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useAgoraCall } from '@/hooks/useAgoraCall';
+import { useDeepgramTranscription } from '@/hooks/useDeepgramTranscription';
 
 import CallFeedbackModal from './CallFeedbackModal';
 import { Button } from '@/components/ui/button';
@@ -17,6 +18,7 @@ import {
   VolumeX,
   RotateCcw,
   MessageSquare,
+  FileText,
 } from 'lucide-react';
 
 interface Props {
@@ -49,6 +51,13 @@ export default function AudioCallScreen({
     elapsed,
   } = useAgoraCall(sessionId, isExpert);
 
+  // Live transcription — starts automatically when connected, auto-submits on call end
+  const { transcriptStatus, liveSnippet, isTranscribing } = useDeepgramTranscription({
+    sessionId,
+    callState,
+    localTrack,
+    remoteUsers,
+  });
 
   const [showFeedback, setShowFeedback] = useState(false);
 
@@ -168,6 +177,26 @@ export default function AudioCallScreen({
                   {formatTime(elapsed)}
                 </span>
               </div>
+
+              {/* Transcription status badge */}
+              {isTranscribing && (
+                <div className="flex items-center justify-center gap-1 text-xs text-indigo-600 bg-indigo-50 border border-indigo-200 rounded-full px-3 py-0.5">
+                  <FileText className="w-3 h-3" />
+                  <span>Transcribing</span>
+                  <span className="inline-flex gap-0.5">
+                    {[0, 1, 2].map((i) => (
+                      <span key={i} className="w-1 h-1 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
+                    ))}
+                  </span>
+                </div>
+              )}
+
+              {transcriptStatus === 'saved' && (
+                <div className="flex items-center justify-center gap-1 text-xs text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-0.5">
+                  <FileText className="w-3 h-3" />
+                  <span>Transcript saved</span>
+                </div>
+              )}
 
               {/* Remote Muted Notice */}
               {isRemoteMuted && (

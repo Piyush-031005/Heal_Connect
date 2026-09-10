@@ -132,11 +132,28 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
       const senderType = practitionerId && session.practitionerId === practitionerId ? 'PRACTITIONER' : 'USER';
       const senderId = senderType === 'PRACTITIONER' ? practitionerId! : userId;
 
+      // ── Contact-info moderation: run BEFORE saving ──────────────────────────
+      // If a phone number or email is detected, block the message, flag the session,
+      // and apply a temporary ban — without storing the content.
+      const modResult = await flagContentIfNeeded(content.trim(), 'CHAT', {
+        sessionId,
+        userId: senderId,
+        practitionerId: senderType === 'PRACTITIONER' ? senderId : session.practitionerId,
+      });
+
+      if (modResult.blocked) {
+        socket.emit('message_blocked', {
+          sessionId,
+          reason: modResult.reason ?? 'Message blocked by moderation.',
+        });
+        return; // Do NOT save or broadcast the message
+      }
+
       const message = await prisma.chatMessage.create({
         data: { sessionId, senderId, senderType, content: content.trim() },
       });
 
-      // Task 7: scan message for phone numbers / policy violations (async, non-blocking)
+      // Non-blocking async scan for other keyword violations (abuse, fraud, etc.)
       flagContentIfNeeded(content.trim(), 'CHAT', {
         sessionId,
         userId: senderId,

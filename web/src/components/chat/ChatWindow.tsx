@@ -22,8 +22,8 @@ interface Props {
 export default function ChatWindow({ sessionId, currentUserId, isExpert = false, practitionerId = '', practitionerName = 'the expert' }: Props) {
   const {
     messages, sessionStatus, otherTyping,
-    elapsedSeconds, walletBalance,
-    sendMessage, emitTypingStart, emitTypingStop, endSession,
+    elapsedSeconds, walletBalance, blockedMessage,
+    sendMessage, emitTypingStart, emitTypingStop, endSession, clearBlockedMessage,
   } = useSessionChat(sessionId, currentUserId);
 
   const [input, setInput] = useState('');
@@ -68,9 +68,10 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
     if (!input.trim() || sessionStatus === 'ended') return;
     sendMessage(input.trim());
     setInput('');
+    clearBlockedMessage(); // dismiss any previous block warning
     if (typingTimeout.current) clearTimeout(typingTimeout.current);
     emitTypingStop();
-  }, [input, sessionStatus, sendMessage, emitTypingStop]);
+  }, [input, sessionStatus, sendMessage, emitTypingStop, clearBlockedMessage]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
@@ -222,6 +223,15 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
       {/* Input area */}
       {!isEnded && !isConnecting && (
         <div className="border-t border-yellow-100 bg-white px-3 py-3">
+
+          {/* Blocked message warning */}
+          {blockedMessage && (
+            <div className="flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl px-3 py-2 mb-2">
+              <span className="shrink-0 mt-0.5">🚫</span>
+              <span className="flex-1">{blockedMessage}</span>
+              <button onClick={clearBlockedMessage} className="shrink-0 text-red-400 hover:text-red-600 font-bold">✕</button>
+            </div>
+          )}
           <div className="flex items-end gap-2">
             <textarea
               value={input}
