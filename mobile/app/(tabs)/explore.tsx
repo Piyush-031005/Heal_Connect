@@ -1,6 +1,6 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, Platform } from 'react-native';
-import { Colors } from '@/constants/theme';
+import Colors from '@/constants/Colors';
 import { Search, Sun, Moon, Eye, Hand, Wind, Heart, Music, Hash, Bell } from 'lucide-react-native';
 import PrismView from '../../src/components/PrismView';
 

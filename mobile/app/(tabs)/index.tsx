@@ -1,7 +1,7 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Text, StyleSheet, ScrollView, Image, TextInput, TouchableOpacity, StatusBar, Platform, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Colors } from '@/constants/theme';
+import Colors from '@/constants/Colors';
 import { Search, Bell, Sparkles, ChevronRight, Moon, Sun, Wind, Activity, Star } from 'lucide-react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, withDelay, Easing, runOnJS } from 'react-native-reanimated';
 import { useEffect, useState } from 'react';
@@ -67,7 +67,7 @@ export default function HomeScreen() {
               colors={['#FFFFFF', '#F3E8FF']}
               style={styles.introLogoCircle}
             >
-              <Text style={styles.introLogoIcon}>🪷</Text>
+              <Text style={styles.introLogoIcon}>ðŸª·</Text>
             </LinearGradient>
             <Text style={styles.introTitle}>Zen<Text style={{color: '#FFFFFF'}}>Auraa</Text></Text>
             <Text style={styles.introSubtitle}>Your Journey to Inner Peace</Text>
@@ -91,7 +91,7 @@ export default function HomeScreen() {
             />
             <View>
               <Text style={styles.greeting}>Good Morning,</Text>
-              <Text style={styles.userName}>Piyush 👋</Text>
+              <Text style={styles.userName}>Piyush ðŸ‘‹</Text>
             </View>
           </View>
           <TouchableOpacity style={styles.bellIcon}>

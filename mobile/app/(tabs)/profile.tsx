@@ -1,6 +1,6 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Platform } from 'react-native';
-import { Colors } from '@/constants/theme';
+import Colors from '@/constants/Colors';
 import { Settings, Calendar, Heart, Wallet, Bell, HelpCircle, ChevronRight, Crown } from 'lucide-react-native';
 
 export default function ProfileScreen() {
