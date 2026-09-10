@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, FileText, ChevronDown, ChevronUp, Loader2, Phone, Video, MessageCircle } from 'lucide-react';
+import { ArrowLeft, FileText, Loader2, Phone, Video, MessageCircle, Lock } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { sessionsApi, tokenStore } from '@/lib/api';
 import type { TranscriptEntry } from '@/lib/api';
@@ -19,7 +19,6 @@ export default function MyTranscriptsPage() {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
-  const [expanded, setExpanded] = useState<string | null>(null);
 
   useEffect(() => {
     const token = tokenStore.getAccess();
@@ -42,7 +41,7 @@ export default function MyTranscriptsPage() {
           <Link href="/dashboard" className="text-gray-500 hover:text-[#4f46e5] transition-colors">
             <ArrowLeft className="h-5 w-5" />
           </Link>
-          <h1 className="text-xl font-extrabold text-[#1a1a1a]">My Call Transcripts</h1>
+          <h1 className="text-xl font-extrabold text-[#1a1a1a]">My Call History</h1>
         </div>
       </header>
 
@@ -62,14 +61,10 @@ export default function MyTranscriptsPage() {
         ) : (
           <>
             {transcripts.map((t) => {
-              const isOpen = expanded === t.id;
               const practitioner = t.session.practitioner;
               return (
                 <Card key={t.id} className="bg-white border border-yellow-100 shadow-sm overflow-hidden">
-                  <button
-                    onClick={() => setExpanded(isOpen ? null : t.id)}
-                    className="w-full text-left p-4 flex items-center gap-3 bg-transparent border-none cursor-pointer"
-                  >
+                  <div className="p-4 flex items-center gap-3">
                     <img
                       src={getAvatarUrl(practitioner?.name || 'Expert', practitioner?.photoUrl ?? null)}
                       alt={practitioner?.name || 'Expert'}
@@ -86,15 +81,14 @@ export default function MyTranscriptsPage() {
                         </span>
                       </div>
                     </div>
-                    {isOpen ? <ChevronUp className="w-4 h-4 text-gray-400 shrink-0" /> : <ChevronDown className="w-4 h-4 text-gray-400 shrink-0" />}
-                  </button>
-                  {isOpen && (
-                    <CardContent className="px-4 pb-4 pt-0">
-                      <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-4 text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
-                        {t.transcriptText}
-                      </div>
-                    </CardContent>
-                  )}
+                  </div>
+                  {/* Privacy notice — transcript text is admin-only */}
+                  <CardContent className="px-4 pb-4 pt-0">
+                    <div className="flex items-start gap-2 bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-xs text-gray-500">
+                      <Lock className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gray-400" />
+                      <span>This call was recorded and transcribed for quality and safety review. Transcript content is reviewed privately by our team and is not available to view.</span>
+                    </div>
+                  </CardContent>
                 </Card>
               );
             })}

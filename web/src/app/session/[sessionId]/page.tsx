@@ -98,7 +98,10 @@ export default function SessionPage() {
 
   if (!userId || !peer) return null;
 
-  const showCallTab = sessionType === 'AUDIO' || sessionType === 'VIDEO' || sessionType === 'CHAT';
+  // showCallTab: only true for AUDIO/VIDEO sessions — NEVER for CHAT.
+  // Mounting AudioCallScreen for a CHAT session causes useAgoraCall to auto-join
+  // the Agora channel and start billing, even when no call was requested.
+  const showCallTab = sessionType === 'AUDIO' || sessionType === 'VIDEO';
   // Chat-only session, viewed by the consumer — offer a one-tap way to escalate to a call.
   const showSwitchToCall = sessionType === 'CHAT' && !isExpert;
   const initials = peer?.name
@@ -187,7 +190,7 @@ export default function SessionPage() {
         </div>
       </header>
 
-      {/* Persistent Call Banner when on Chat tab during an Audio session */}
+      {/* Persistent Call Banner — only shown when viewing chat tab during an active AUDIO/VIDEO session */}
       {showCallTab && tab === 'chat' && (
         <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-4 py-2 flex items-center justify-between text-xs shadow-md z-20">
           <div className="flex items-center gap-2">
