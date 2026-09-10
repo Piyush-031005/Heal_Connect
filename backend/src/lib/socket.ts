@@ -79,24 +79,30 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
       // CHAT sessions have no equivalent "channel join" step, so we do it here:
       // the moment either participant joins the socket room, transition to ACTIVE
       // and broadcast session_connected so both UIs exit "Connecting..." state.
-      if (
-        session.type === 'CHAT' &&
-        !['ACTIVE', 'COMPLETED', 'CANCELLED', 'REJECTED', 'DISCONNECTED'].includes(session.status)
-      ) {
-        try {
-          const startTime = session.startTime ?? new Date();
-          const activated = await prisma.session.update({
-            where: { id: sessionId },
-            data: { status: 'ACTIVE', startTime },
-          });
-          console.log(`💬 CHAT session ${sessionId} auto-started (ACTIVE)`);
-          io!.to(`room:${sessionId}`).emit('session_connected', {
+      if (session.type === 'CHAT') {
+        if (!['ACTIVE', 'COMPLETED', 'CANCELLED', 'REJECTED', 'DISCONNECTED'].includes(session.status)) {
+          try {
+            const startTime = session.startTime ?? new Date();
+            const activated = await prisma.session.update({
+              where: { id: sessionId },
+              data: { status: 'ACTIVE', startTime },
+            });
+            console.log(`💬 CHAT session ${sessionId} auto-started (ACTIVE)`);
+            io!.to(`room:${sessionId}`).emit('session_connected', {
+              sessionId,
+              status: 'ACTIVE',
+              startTime: activated.startTime,
+            });
+          } catch (err) {
+            console.error(`[socket] Failed to auto-start CHAT session ${sessionId}:`, err);
+          }
+        } else if (session.status === 'ACTIVE') {
+          // Send to this joining socket so it doesn't get stuck on "Connecting..."
+          socket.emit('session_connected', {
             sessionId,
             status: 'ACTIVE',
-            startTime: activated.startTime,
+            startTime: session.startTime,
           });
-        } catch (err) {
-          console.error(`[socket] Failed to auto-start CHAT session ${sessionId}:`, err);
         }
       }
 

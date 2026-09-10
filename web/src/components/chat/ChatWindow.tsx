@@ -29,8 +29,20 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
   const [input, setInput] = useState('');
   const [showConfirm, setShowConfirm] = useState(false);
   const [showReview, setShowReview] = useState(false);
+  const [connectionTimeout, setConnectionTimeout] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const typingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Connection timeout handler
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    if (sessionStatus === 'connecting') {
+      timeoutId = setTimeout(() => setConnectionTimeout(true), 15000);
+    } else {
+      setConnectionTimeout(false);
+    }
+    return () => clearTimeout(timeoutId);
+  }, [sessionStatus]);
 
   // Auto-scroll on new messages / typing
   useEffect(() => {
@@ -93,8 +105,27 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
       {/* Connecting state */}
       {isConnecting && (
         <div className="flex-1 flex flex-col items-center justify-center gap-3 text-gray-400">
-          <Wifi className="h-8 w-8 animate-pulse text-[#4f46e5]" />
-          <p className="text-sm">Connecting to session...</p>
+          {!connectionTimeout ? (
+            <>
+              <Wifi className="h-8 w-8 animate-pulse text-[#4f46e5]" />
+              <p className="text-sm">Connecting to session...</p>
+            </>
+          ) : (
+            <>
+              <WifiOff className="h-8 w-8 text-red-400" />
+              <p className="text-sm text-red-500 font-medium px-4 text-center">
+                Connection is taking longer than expected.
+              </p>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => window.location.reload()}
+                className="mt-2 border-red-200 text-red-600 hover:bg-red-50 rounded-full"
+              >
+                Refresh Page
+              </Button>
+            </>
+          )}
         </div>
       )}
 

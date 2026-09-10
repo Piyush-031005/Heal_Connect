@@ -591,7 +591,7 @@ router.get('/:id', requireAuth, async (req: AuthRequest, res: Response) => {
   const session = await prisma.session.findFirst({
     where: {
       id: req.params.id as string,
-      OR: [{ userId }, { practitionerId: userId }],
+      OR: [{ userId }, ...(req.user!.practitionerId ? [{ practitionerId: req.user!.practitionerId }] : [])],
     },
     include: {
       practitioner: {
