@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import { useColorScheme, View } from 'react-native';
-import { Colors } from '@/constants/theme';
+import Colors from '@/constants/Colors';
 import { Home, Compass, MessageCircle, User } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
