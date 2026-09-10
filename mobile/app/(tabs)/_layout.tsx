@@ -1,70 +1,58 @@
-import { SymbolView } from 'expo-symbols';
-import { Link, Tabs } from 'expo-router';
-import { Platform, Pressable } from 'react-native';
-
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import { Tabs } from 'expo-router';
+import { useColorScheme, View } from 'react-native';
+import { Colors } from '@/constants/theme';
+import { Home, Compass, MessageCircle, User } from 'lucide-react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const scheme = useColorScheme();
+  const theme = scheme === 'light' ? Colors.light : Colors.dark;
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => (
-            <SymbolView
-              name={{
-                ios: 'chevron.left.forwardslash.chevron.right',
-                android: 'code',
-                web: 'code',
-              }}
-              tintColor={color}
-              size={28}
-            />
-          ),
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable style={{ marginRight: 15 }}>
-                {({ pressed }) => (
-                  <SymbolView
-                    name={{ ios: 'info.circle', android: 'info', web: 'info' }}
-                    size={25}
-                    tintColor={Colors[colorScheme].text}
-                    style={{ opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Profile',
-          tabBarIcon: ({ color }) => (
-            <SymbolView
-              name={{
-                ios: 'person.fill',
-                android: 'person',
-                web: 'person',
-              }}
-              tintColor={color}
-              size={28}
-            />
-          ),
-        }}
-      />
-    </Tabs>
+    <View style={{ flex: 1, backgroundColor: theme.background }}>
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            backgroundColor: theme.backgroundElement,
+            borderTopColor: theme.border,
+            borderTopWidth: 1,
+            height: 60,
+            paddingBottom: 8,
+            paddingTop: 8,
+          },
+          tabBarActiveTintColor: theme.primary,
+          tabBarInactiveTintColor: theme.textSecondary,
+        }}>
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: 'Home',
+            tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
+          }}
+        />
+        <Tabs.Screen
+          name="explore"
+          options={{
+            title: 'Explore',
+            tabBarIcon: ({ color, size }) => <Compass color={color} size={size} />,
+          }}
+        />
+        <Tabs.Screen
+          name="chat"
+          options={{
+            title: 'AI Guide',
+            tabBarIcon: ({ color, size }) => <MessageCircle color={color} size={size} />,
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: 'Profile',
+            tabBarIcon: ({ color, size }) => <User color={color} size={size} />,
+          }}
+        />
+      </Tabs>
+    </View>
   );
 }

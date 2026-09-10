@@ -1,7 +1,8 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, Platform } from 'react-native';
 import { Colors } from '@/constants/theme';
-import { Search, Sun, Moon, Eye, Hand, Wind, Heart, Music, Hash } from 'lucide-react-native';
+import { Search, Sun, Moon, Eye, Hand, Wind, Heart, Music, Hash, Bell } from 'lucide-react-native';
+import PrismView from '../../src/components/PrismView';
 
 export default function ExploreScreen() {
   const theme = Colors.light;
@@ -22,7 +23,7 @@ export default function ExploreScreen() {
       <View style={styles.header}>
         <Text style={styles.title}>Explore</Text>
         <TouchableOpacity>
-          <BellIcon color={theme.text} size={24} />
+          <Bell color={theme.text} size={24} />
         </TouchableOpacity>
       </View>
 
@@ -49,6 +50,10 @@ export default function ExploreScreen() {
       </ScrollView>
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.grid}>
+        <View style={{ width: '100%', marginBottom: 20 }}>
+          <Text style={[styles.title, { paddingHorizontal: 20, marginBottom: 10, fontSize: 18 }]}>3D Prism Animation</Text>
+          <PrismView height={250} />
+        </View>
         {services.map((service) => (
           <TouchableOpacity key={service.id} style={styles.card}>
             <View style={styles.iconWrapper}>{service.icon}</View>

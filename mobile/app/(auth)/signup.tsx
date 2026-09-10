@@ -81,11 +81,11 @@ export default function SignupScreen() {
           dob,
           acceptTerms,
           acceptPrivacy,
-          emailMarketingOptIn: false
+          
         });
 
         if (!res.success || !res.data) {
-          throw new Error(res.errors?.length ? res.errors.map((e: any) => e.message).join(' · ') : res.message || 'Signup failed');
+          throw new Error((res as any).errors?.length ? (res as any).errors.map((e: any) => e.message).join(' Â· ') : res.message || 'Signup failed');
         }
 
         await tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
