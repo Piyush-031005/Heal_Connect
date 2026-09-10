@@ -1,5 +1,6 @@
 'use client';
 
+import GhostFibers from '@/components/GhostFibers';
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -82,10 +83,11 @@ function LoginInner() {
   }
 
   return (
-    <div className="min-h-screen bg-transparent text-white flex flex-col md:flex-row font-sans relative overflow-hidden">
+    <div className="min-h-screen text-white flex flex-col md:flex-row font-sans relative overflow-hidden" style={{background:'#12093a'}}>
+      <GhostFibers lineColor="#8345bd" glowColor="#7c41e0" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={4} waveAmplitude={0.015} waveFrequency={3} waveSpeed={0.15} layerSpeed={0.08} twist={0.1} twistFrequency={5} twistSpeed={1.2} lineFrequency={5} lineSpacing={2} lineSharpness={16} glowFalloff={10} glowIntensity={1.6} brightness={2} blueBoost={1.25} vignette={0.8} grain={0.05} dpr={1} lightMode={false} fps={60} paused={false} />
 
 
-      {/* Left Ãƒâ€šÃ¢â‚¬â€ Branding */}
+      {/* Left ÃƒÆ’Ã¢â‚¬Å¡ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Branding */}
       <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-black/5 dark:bg-black/20 backdrop-blur-md relative z-10 border-r border-border">
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
@@ -121,11 +123,11 @@ function LoginInner() {
         </div>
 
         <div className="relative z-10 mt-auto pt-12 border-t border-border">
-          <p className="text-white/70 text-sm tracking-wider uppercase">Ãƒâ€šÃ‚Â© 2026 Tara Infotech. All rights reserved.</p>
+          <p className="text-white/70 text-sm tracking-wider uppercase">ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© 2026 Tara Infotech. All rights reserved.</p>
         </div>
       </div>
 
-      {/* Right Ãƒâ€šÃ¢â‚¬â€ Form */}
+      {/* Right ÃƒÆ’Ã¢â‚¬Å¡ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Form */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative z-10">
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
@@ -183,8 +185,7 @@ function LoginInner() {
                   </div>
                   <div className="relative group">
                     <Lock className="absolute left-3 top-3 h-5 w-5 text-white/70 group-focus-within:text-accent transition-colors" />
-                    <Input type={showPassword ? 'text' : 'password'} required placeholder="Ãƒâ€šÃ¢â‚¬Â¢Ãƒâ€šÃ¢â‚¬Â¢Ãƒâ€šÃ¢â‚¬Â¢Ãƒâ€šÃ¢â‚¬Â¢Ãƒâ€šÃ¢â‚¬Â¢Ãƒâ€šÃ¢â‚¬Â¢Ãƒâ€šÃ¢â‚¬Â¢Ãƒâ€šÃ¢â‚¬Â¢" value={password} onChange={e => setPassword(e.target.value)}
-                      className="pl-10 pr-10 py-6 bg-white/40 backdrop-blur-md border-white/10 border-white/20 text-white placeholder:text-white/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
+                    <Input type={showPassword ? 'text' : 'password'} required placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} className="pl-10 pr-10 py-6 bg-white/10 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
                     <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-white/70 hover:text-white transition-colors">
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>

@@ -1,4 +1,6 @@
 'use client';
+import GhostFibers from '@/components/GhostFibers';
+
 import NewLayoutsHero from './new-layouts-hero';
 
 import Link from 'next/link';
@@ -13,8 +15,9 @@ import OpticalWheel from '@/components/optical-wheel';
 // --- PRIMARY LAYOUT HERO (Locked) ---
 function PrimaryHero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-transparent min-h-[90vh] flex items-center">
-      {/* Scattered star particles ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â like ZenAuraa reference */}
+    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 min-h-[90vh] flex items-center" style={{background:'#12093a'}}>
+      <GhostFibers lineColor="#8345bd" glowColor="#7c41e0" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={4} waveAmplitude={0.015} waveFrequency={3} waveSpeed={0.15} layerSpeed={0.08} twist={0.1} twistFrequency={5} twistSpeed={1.2} lineFrequency={5} lineSpacing={2} lineSharpness={16} glowFalloff={10} glowIntensity={1.6} brightness={2} blueBoost={1.25} vignette={0.8} grain={0.05} dpr={1} lightMode={false} fps={60} paused={false} />
+      {/* Scattered star particles ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â like ZenAuraa reference */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
         {[
           [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
@@ -103,8 +106,9 @@ function PrimaryHero() {
 // --- NEW LAYOUT 1 HERO ---
 function NewLayout1Hero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-transparent min-h-[90vh] flex items-center">
-      {/* Scattered star particles ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â like ZenAuraa reference */}
+    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 min-h-[90vh] flex items-center" style={{background:'#12093a'}}>
+      
+      {/* Scattered star particles ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â like ZenAuraa reference */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
         {[
           [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
@@ -202,7 +206,7 @@ function EditorialHero() {
               <span className="italic text-primary">Wellness</span> Begins Here.
             </h1>
             <p className="text-lg md:text-2xl text-white/70 mb-10 max-w-2xl font-light leading-relaxed">
-              Connect with trusted holistic health, astrological and wellness practitioners from around the worldÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Âall in one place.
+              Connect with trusted holistic health, astrological and wellness practitioners from around the worldÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âall in one place.
             </p>
             
             {/* Search Bar matching Zen Align reference */}
@@ -472,7 +476,7 @@ function ZenAlignHero() {
       {/* Constellation SVG overlay */}
       <ConstellationLines />
 
-      {/* Large radial glow ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â center-right */}
+      {/* Large radial glow ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â center-right */}
       <div className="absolute right-0 top-0 w-[70vw] h-full bg-[radial-gradient(ellipse_at_70%_40%,rgba(32,166,220,0.18)_0%,transparent_65%)] pointer-events-none z-0" />
       <div className="absolute left-0 bottom-0 w-[50vw] h-1/2 bg-[radial-gradient(ellipse_at_30%_80%,rgba(23,97,154,0.10)_0%,transparent_60%)] pointer-events-none z-0" />
 
@@ -503,7 +507,7 @@ function ZenAlignHero() {
               </span>
             </motion.div>
 
-            {/* Main heading ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â High-end elegant editorial typography */}
+            {/* Main heading ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â High-end elegant editorial typography */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -524,7 +528,7 @@ function ZenAlignHero() {
               Discover vetted astrologers, energy healers, and spiritual guides. Reconnect with the universe.
             </motion.p>
 
-            {/* Search Bar ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â glassmorphism */}
+            {/* Search Bar ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â glassmorphism */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -561,7 +565,7 @@ function ZenAlignHero() {
               </div>
               <div className="w-px h-8 bg-[#9FD6EE]/60" />
               <div>
-                <p className="text-2xl font-black text-[#12527F]">4.9ÃƒÂ¢Ã‹Å“Ã¢â‚¬Â¦</p>
+                <p className="text-2xl font-black text-[#12527F]">4.9ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã¢â‚¬Â¹Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦</p>
                 <p className="text-[10px] font-bold uppercase tracking-widest text-[#1A92C6]/70">Avg Rating</p>
               </div>
             </motion.div>
@@ -907,7 +911,7 @@ function FinalHybridHero() {
               {/* Inner Thin Ring */}
               <div className={`absolute w-[75%] h-[75%] rounded-full border pointer-events-none ${isNewColor ? 'border-white/20' : 'border-[#B79AE6]/20'}`} />
 
-              {/* THE REVOLVING ORBIT ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the whole ring spins, icons counter-rotate to stay upright */}
+              {/* THE REVOLVING ORBIT ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
@@ -995,7 +999,7 @@ function FinalHybridHero() {
               className={`flex items-center gap-3 sm:gap-6 lg:gap-8 pt-8 border-t transition-colors duration-500 w-full overflow-x-auto scrollbar-hide pb-2 ${isNewColor ? 'border-white/30' : 'border-primary/30'}`}
             >
               <div className="shrink-0">
-                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-white'}`}>4.9ÃƒÂ¢Ã‹Å“Ã¢â‚¬Â¦</p>
+                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-white'}`}>4.9ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã¢â‚¬Â¹Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦</p>
                 <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-white/70'}`}>Rating</p>
               </div>
               <div className={`w-px h-8 shrink-0 ${isNewColor ? 'bg-white/30' : 'bg-primary/30'}`} />
@@ -1036,7 +1040,7 @@ function FinalHybridHero() {
               {/* Inner Thin Ring */}
               <div className={`absolute w-[75%] h-[75%] rounded-full border pointer-events-none ${isNewColor ? 'border-white/20' : 'border-[#B79AE6]/20'}`} />
 
-              {/* THE REVOLVING ORBIT ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the whole ring spins, icons counter-rotate to stay upright */}
+              {/* THE REVOLVING ORBIT ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
