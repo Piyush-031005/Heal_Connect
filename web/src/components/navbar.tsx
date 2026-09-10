@@ -177,7 +177,7 @@ export default function Navbar() {
       )}
 
       {/* Left Slide Drawer */}
-      <aside className={`fixed top-0 left-0 h-full w-72 z-50 bg-[#1C1625] shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${drawerOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside className={`fixed top-0 left-0 h-full w-72 z-50 bg-white shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${drawerOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Gradient header */}
         <div className="bg-gradient-to-br from-purple-300 to-purple-400 px-5 pt-6 pb-6">
           <div className="flex items-center justify-between mb-4">
@@ -185,8 +185,8 @@ export default function Navbar() {
               <Image src={theme === 'theme-royal-indigo' ? '/main centre logo/main_logo.png' : '/main centre logo/main_logo.png'} alt="ZenAuraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
               <span className="text-2xl font-serif font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.1)] tracking-wide">Zen<span className="text-[#5F3BA9]">Auraa</span></span>
             </div>
-            <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-[#1C1625]/20 hover:bg-[#1C1625]/30 transition-colors">
-              <svg className="w-4 h-4 text-white/90" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+            <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+              <svg className="w-4 h-4 text-[#2A1658]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -198,7 +198,7 @@ export default function Navbar() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400" />
             </span>
-            <span className="text-white/90 text-xs font-semibold">1,240 astrologers online now</span>
+            <span className="text-[#2A1658] text-xs font-semibold">1,240 astrologers online now</span>
           </div>
 
           {/* Avatar row */}
@@ -209,33 +209,33 @@ export default function Navbar() {
                   <img src={src} alt="" className="w-full h-full object-cover" />
                 </div>
               ))}
-              <div className="w-7 h-7 rounded-full border-2 border-white/60 bg-[#1C1625]/20 flex items-center justify-center">
-                <span className="text-[10px] font-bold text-white/90">+3</span>
+              <div className="w-7 h-7 rounded-full border-2 border-white/60 bg-white/20 flex items-center justify-center">
+                <span className="text-[10px] font-bold text-[#2A1658]">+3</span>
               </div>
             </div>
-            <span className="text-white/90/70 text-[11px] ml-1">Astrologer</span>
+            <span className="text-[#2A1658]/70 text-[11px] ml-1">Astrologer</span>
           </div>
 
           {/* Sign in CTA */}
           <Link
             href="/login"
             onClick={() => setDrawerOpen(false)}
-            className="block bg-[#1C1625] rounded-xl px-4 py-3.5 shadow-md hover:shadow-lg transition-all"
+            className="block bg-white rounded-xl px-4 py-3.5 shadow-md hover:shadow-lg transition-all"
           >
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-300 to-purple-400 flex items-center justify-center shrink-0">
-                <svg className="w-5 h-5 text-white/90" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-[#2A1658]" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
                   <circle cx="12" cy="8" r="4" />
                   <path strokeLinecap="round" d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                 </svg>
               </div>
               <div className="flex-1">
                 <p className="text-sm font-bold text-white">Sign In / Sign Up</p>
-                <p className="text-[11px] text-white/80">
+                <p className="text-[11px] text-[#3730a3]">
                   Your 1st Chat is <strong className="text-indigo-600">100% Free</strong>
                 </p>
               </div>
-              <svg className="w-4 h-4 text-white/40" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </div>
@@ -246,7 +246,7 @@ export default function Navbar() {
         <div className="flex-1 overflow-y-auto py-3">
           {MENU_SECTIONS.map((section, si) => (
             <div key={si} className={si > 0 ? 'mt-1' : ''}>
-              <p className="px-5 pt-3 pb-1.5 text-[10px] font-bold uppercase tracking-widest text-white/50">
+              <p className="px-5 pt-3 pb-1.5 text-[10px] font-bold uppercase tracking-widest text-gray-500">
                 {section.title}
               </p>
               {section.items.map((item) => (
@@ -254,13 +254,13 @@ export default function Navbar() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setDrawerOpen(false)}
-                  className="flex items-center gap-3 px-4 py-2.5 mx-2 rounded-xl text-sm font-medium text-white/80 hover:bg-white/10 hover:text-indigo-700 transition-all group"
+                  className="flex items-center gap-3 px-4 py-2.5 mx-2 rounded-xl text-sm font-medium text-[#3730a3] hover:bg-purple-50 hover:text-indigo-700 transition-all group"
                 >
-                  <span className="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-indigo-100 flex items-center justify-center text-base transition-colors">
-                    <item.Icon className="w-4 h-4 text-white/60 group-hover:text-indigo-600" />
+                  <span className="w-8 h-8 rounded-lg bg-gray-50 group-hover:bg-indigo-100 flex items-center justify-center text-base transition-colors">
+                    <item.Icon className="w-4 h-4 text-gray-600 group-hover:text-indigo-600" />
                   </span>
                   {item.label}
-                  <svg className="w-3.5 h-3.5 text-white/40 group-hover:text-purple-300 ml-auto transition-colors" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 text-gray-400 group-hover:text-purple-300 ml-auto transition-colors" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
@@ -283,7 +283,7 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setDrawerOpen(true)}
-                className={`p-1.5 rounded-lg transition-colors ${isDark ? 'hover:bg-[#1C1625]/10 text-white/40' : 'hover:bg-gray-100 text-gray-600'}`}
+                className={`p-1.5 rounded-lg transition-colors ${isDark ? 'hover:bg-purple-50 text-gray-400' : 'hover:bg-gray-100 text-gray-600'}`}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -291,21 +291,21 @@ export default function Navbar() {
               </button>
               <Link href="/" className="flex items-center gap-2">
                 <Image src={theme === 'theme-royal-indigo' ? '/main centre logo/main_logo.png' : '/main centre logo/main_logo.png'} alt="ZenAuraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
-                <span className="text-2xl font-serif font-black text-white/90 drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105"><span className="text-white">Zen</span><span className="text-[#5F3BA9]">Auraa</span></span>
+                <span className="text-2xl font-serif font-black text-[#2A1658] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105"><span className="text-white">Zen</span><span className="text-[#5F3BA9]">Auraa</span></span>
               </Link>
             </div>
 
             {/* Links for Final Hybrid layout sit next to the logo */}
             {isFinalHybrid && (
               <nav className="hidden md:flex items-center gap-4 ml-4">
-                <Link href="/practitioners" className="text-sm font-semibold text-white/90 hover:text-[#5F3BA9] transition-colors">
+                <Link href="/practitioners" className="text-sm font-semibold text-[#2A1658] hover:text-[#5F3BA9] transition-colors">
                   Find Expert
                 </Link>
-                <Link href="#free-services" className="text-sm font-semibold text-white/90 hover:text-[#5F3BA9] transition-colors">
+                <Link href="#free-services" className="text-sm font-semibold text-[#2A1658] hover:text-[#5F3BA9] transition-colors">
                   Free Services
                 </Link>
                   <div className="relative group cursor-pointer">
-                  <span className="text-sm font-semibold text-white/90 group-hover:text-[#5F3BA9] transition-colors flex items-center gap-1">
+                  <span className="text-sm font-semibold text-[#2A1658] group-hover:text-[#5F3BA9] transition-colors flex items-center gap-1">
                     Free Insights
                     <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </span>
@@ -324,7 +324,7 @@ export default function Navbar() {
                     <Link href="/modalities/meditation" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Meditation</Link>
                   </div>
                 </div>
-                <Link href="#reviews" className="text-sm font-semibold text-white/90 hover:text-[#5F3BA9] transition-colors">
+                <Link href="#reviews" className="text-sm font-semibold text-[#2A1658] hover:text-[#5F3BA9] transition-colors">
                   Reviews
                 </Link>
               </nav>
@@ -341,7 +341,7 @@ export default function Navbar() {
                   className={`relative text-sm font-medium transition-all px-4 py-1.5 rounded-full flex items-center gap-1.5 ${
                     activeSection === id
                       ? 'bg-primary/10 text-primary shadow-sm'
-                      : 'text-white/90/80 hover:text-primary hover:bg-[#1C1625]/5'
+                      : 'text-[#2A1658]/80 hover:text-primary hover:bg-gray-50'
                   }`}
                 >
                   {label}
@@ -353,7 +353,7 @@ export default function Navbar() {
           {/* Right: theme toggle + lang dropdown + profile */}
           <div className="flex items-center gap-2">
             {isFinalHybrid && (
-              <Link href="/modalities/astrology" className="md:hidden text-[10px] sm:text-xs font-semibold text-white/90 border border-border rounded-full px-2.5 py-1 whitespace-nowrap bg-[#694091]/30">
+              <Link href="/modalities/astrology" className="md:hidden text-[10px] sm:text-xs font-semibold text-[#2A1658] border border-border rounded-full px-2.5 py-1 whitespace-nowrap bg-[#694091]/30">
                 Free Insights
               </Link>
             )}
@@ -363,14 +363,14 @@ export default function Navbar() {
               <button
                 onClick={() => setLayoutOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
-                  isDark ? 'border-white/20 hover:bg-[#1C1625]/10 hover:text-white/90' : 'border-gray-200 hover:border-indigo-300 hover:bg-white/10 hover:text-indigo-600'
+                  isDark ? 'border-white/20 hover:bg-purple-50 hover:text-[#2A1658]' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50 hover:text-indigo-600'
                 }`}
               >
                 <Layout className="w-4 h-4" />
               </button>
 
               {layoutOpen && (
-                <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-[#1C1625] border-gray-100'}`}>
+                <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-[70vh] overflow-y-auto scrollbar-hide ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
                     
                     { code: 'layout-1', label: ' Layout 1 (Pebbles)' },
@@ -383,7 +383,7 @@ export default function Navbar() {
                       className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-[13px] transition-colors ${
                         layout === l.code
                           ? 'bg-primary/20 text-primary font-semibold'
-                          : isDark ? 'text-white/40 hover:bg-[#1C1625]/10' : 'text-white/80 hover:bg-white/5'
+                          : isDark ? 'text-gray-400 hover:bg-purple-50' : 'text-[#3730a3] hover:bg-gray-50'
                       }`}
                     >
                       <Layout className="w-3.5 h-3.5 opacity-70" />
@@ -404,7 +404,7 @@ export default function Navbar() {
               <button
                 onClick={() => setThemeOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all ${
-                  isDark ? 'border-white/20 hover:bg-[#1C1625]/10 text-white/90' : 'border-gray-200 hover:border-indigo-300 hover:bg-white/10 text-indigo-600'
+                  isDark ? 'border-white/20 hover:bg-purple-50 text-[#2A1658]' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50 text-indigo-600'
                 }`}
                 title="Select Theme"
               >
@@ -412,7 +412,7 @@ export default function Navbar() {
               </button>
 
               {themeOpen && (
-                <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-[#1C1625] border-gray-100'}`}>
+                <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
                   {([
                     { code: 'dark', label: ' Dark' },
                     { code: 'theme-new-color', label: ' Medium' },
@@ -427,7 +427,7 @@ export default function Navbar() {
                       className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-[13px] transition-colors ${
                         theme === t.code
                           ? 'bg-primary/20 text-primary font-semibold'
-                          : isDark ? 'text-white/40 hover:bg-[#1C1625]/10' : 'text-white/80 hover:bg-white/5'
+                          : isDark ? 'text-gray-400 hover:bg-purple-50' : 'text-[#3730a3] hover:bg-gray-50'
                       }`}
                     >
                       <Palette className="w-3.5 h-3.5 opacity-70" />
@@ -448,25 +448,25 @@ export default function Navbar() {
               <button
                 onClick={() => setLangOpen((p) => !p)}
                 className={`flex items-center gap-0.5 px-2.5 py-1.5 rounded-full border text-[13px] font-black transition-all ${
-                  isDark ? 'border-white/20 hover:bg-[#1C1625]/10' : 'border-gray-200 hover:border-indigo-300 hover:bg-white/10'
+                  isDark ? 'border-white/20 hover:bg-purple-50' : 'border-gray-200 hover:border-indigo-300 hover:bg-purple-50'
                 }`}
               >
-                <svg className="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg><span className={isDark ? "text-gray-200 ml-1" : "text-white/80 ml-1"}>{lang.toUpperCase()}</span>
-                <svg className={`w-3 h-3 ml-0.5 transition-transform ${langOpen ? 'rotate-180' : ''} ${isDark ? 'text-white/50' : 'text-white/60'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg><span className={isDark ? "text-gray-200 ml-1" : "text-[#3730a3] ml-1"}>{lang.toUpperCase()}</span>
+                <svg className={`w-3 h-3 ml-0.5 transition-transform ${langOpen ? 'rotate-180' : ''} ${isDark ? 'text-gray-500' : 'text-gray-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
               {langOpen && (
-                <div className={`absolute right-0 mt-2 w-36 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-[#1C1625] border-gray-100'}`}>
-                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi (ÃƒÆ’Ã‚Â Ãƒâ€šÃ‚Â¤Ãƒâ€šÃ‚Â¹ÃƒÆ’Ã‚Â Ãƒâ€šÃ‚Â¤Ãƒâ€šÃ‚Â¿ÃƒÆ’Ã‚Â Ãƒâ€šÃ‚Â¤Ãƒâ€šÃ‚Â¨ÃƒÆ’Ã‚Â Ãƒâ€šÃ‚Â¥Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â Ãƒâ€šÃ‚Â¤Ãƒâ€šÃ‚Â¦ÃƒÆ’Ã‚Â Ãƒâ€šÃ‚Â¥ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬)', sub: 'HI' }, { code: 'es', label: 'Spanish (EspaÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â±ol)', sub: 'ES' }, { code: 'fr', label: 'French (FranÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§ais)', sub: 'FR' }, { code: 'de', label: 'German (Deutsch)', sub: 'DE' }] as const).map((l) => (
+                <div className={`absolute right-0 mt-2 w-36 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
+                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi (ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¿ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¨ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¥ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¥ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬)', sub: 'HI' }, { code: 'es', label: 'Spanish (EspaÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±ol)', sub: 'ES' }, { code: 'fr', label: 'French (FranÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ais)', sub: 'FR' }, { code: 'de', label: 'German (Deutsch)', sub: 'DE' }] as const).map((l) => (
                     <button
                       key={l.code}
                       onClick={() => { setLang(l.code as 'en' | 'hi'); setLangOpen(false); }}
                       className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
                         lang === l.code
-                          ? 'bg-white/10 text-[#d97706] font-semibold'
-                          : isDark ? 'text-white/40 hover:bg-[#1C1625]/10' : 'text-white/80 hover:bg-white/5'
+                          ? 'bg-purple-50 text-[#d97706] font-semibold'
+                          : isDark ? 'text-gray-400 hover:bg-purple-50' : 'text-[#3730a3] hover:bg-gray-50'
                       }`}
                     >
                       <span className="font-bold text-purple-400">{l.sub}</span>
