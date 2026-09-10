@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { 
   View, Text, TextInput, TouchableOpacity, SafeAreaView, 
-  KeyboardAvoidingView, Platform, ScrollView, Alert, ActivityIndicator
+  KeyboardAvoidingView, Platform, ScrollView, Alert, ActivityIndicator, StatusBar
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Shield, Mail, Lock, User, Check, Eye, EyeOff, ShieldCheck } from 'lucide-react-native';
 
@@ -85,7 +86,7 @@ export default function SignupScreen() {
         });
 
         if (!res.success || !res.data) {
-          throw new Error((res as any).errors?.length ? (res as any).errors.map((e: any) => e.message).join(' Â· ') : res.message || 'Signup failed');
+          throw new Error((res as any).errors?.length ? (res as any).errors.map((e: any) => e.message).join(' Ã‚Â· ') : res.message || 'Signup failed');
         }
 
         await tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
@@ -117,15 +118,15 @@ export default function SignupScreen() {
       onPress={() => onValueChange(!value)} 
       className="flex-row items-start mb-3 pr-4"
     >
-      <View className={`w-5 h-5 rounded border mt-0.5 mr-2 items-center justify-center ${value ? 'bg-[#4f46e5] border-[#4f46e5]' : 'border-gray-300 bg-white'}`}>
+      <View className={`w-5 h-5 rounded border mt-0.5 mr-2 items-center justify-center ${value ? 'bg-[#4f46e5] border-[#4f46e5]' : 'border-gray-300 bg-[#0F0B2A]'}`}>
         {value && <Check size={14} color="white" strokeWidth={3} />}
       </View>
-      <Text className="text-gray-600 text-sm flex-1 leading-5">{label}</Text>
+      <Text className="text-purple-200 text-sm flex-1 leading-5">{label}</Text>
     </TouchableOpacity>
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-[#faf9f6]">
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#0F0B2A' }} className="flex-1 bg-[#faf9f6]">
       <KeyboardAvoidingView 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         className="flex-1"
@@ -136,11 +137,11 @@ export default function SignupScreen() {
             <View className="bg-indigo-100 p-4 rounded-3xl mb-4">
               <ShieldCheck size={40} color="#4f46e5" />
             </View>
-            <Text className="text-3xl font-black text-[#1a1a1a] tracking-tight">Create an account</Text>
-            <Text className="text-gray-500 mt-2 font-medium">Sign up and get your first session free.</Text>
+            <Text className="text-3xl font-black text-white tracking-tight">Create an account</Text>
+            <Text className="text-purple-300 mt-2 font-medium">Sign up and get your first session free.</Text>
           </View>
 
-          <View className="bg-white rounded-3xl p-6 border border-indigo-50 shadow-xl shadow-indigo-100/50 w-full max-w-md self-center">
+          <View className="bg-[#0F0B2A] rounded-3xl p-6 border border-indigo-50 shadow-xl shadow-indigo-100/50 w-full max-w-md self-center">
             
             {error ? (
               <View className="bg-red-50 border border-red-200 p-3 rounded-xl mb-4">
@@ -150,19 +151,19 @@ export default function SignupScreen() {
 
             {/* Role Toggle */}
             <View className="mb-5">
-              <Text className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2 ml-1">Account Type</Text>
+              <Text className="text-xs font-semibold text-purple-300 uppercase tracking-wide mb-2 ml-1">Account Type</Text>
               <View className="flex-row bg-[#faf9f6] border border-indigo-100 p-1 rounded-2xl">
                 <TouchableOpacity 
                   onPress={() => setRole('user')}
                   className={`flex-1 py-3 items-center justify-center rounded-xl ${role === 'user' ? 'bg-[#4f46e5] shadow-md shadow-indigo-500/30' : ''}`}
                 >
-                  <Text className={`font-bold ${role === 'user' ? 'text-white' : 'text-gray-600'}`}>User</Text>
+                  <Text className={`font-bold ${role === 'user' ? 'text-white' : 'text-purple-200'}`}>User</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                   onPress={() => setRole('expert')}
                   className={`flex-1 py-3 items-center justify-center rounded-xl ${role === 'expert' ? 'bg-[#4f46e5] shadow-md shadow-indigo-500/30' : ''}`}
                 >
-                  <Text className={`font-bold ${role === 'expert' ? 'text-white' : 'text-gray-600'}`}>Expert</Text>
+                  <Text className={`font-bold ${role === 'expert' ? 'text-white' : 'text-purple-200'}`}>Expert</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -172,15 +173,15 @@ export default function SignupScreen() {
               <View className="flex-row bg-gray-50 border border-gray-200 p-0.5 rounded-lg">
                 <TouchableOpacity 
                   onPress={() => setLoginMethod('password')}
-                  className={`px-6 py-2 rounded-md ${loginMethod === 'password' ? 'bg-white shadow-sm' : ''}`}
+                  className={`px-6 py-2 rounded-md ${loginMethod === 'password' ? 'bg-[#0F0B2A] shadow-sm' : ''}`}
                 >
-                  <Text className={`text-sm font-semibold ${loginMethod === 'password' ? 'text-[#1a1a1a]' : 'text-gray-500'}`}>Email</Text>
+                  <Text className={`text-sm font-semibold ${loginMethod === 'password' ? 'text-white' : 'text-purple-300'}`}>Email</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                   onPress={() => setLoginMethod('otp')}
-                  className={`px-6 py-2 rounded-md ${loginMethod === 'otp' ? 'bg-white shadow-sm' : ''}`}
+                  className={`px-6 py-2 rounded-md ${loginMethod === 'otp' ? 'bg-[#0F0B2A] shadow-sm' : ''}`}
                 >
-                  <Text className={`text-sm font-semibold ${loginMethod === 'otp' ? 'text-[#1a1a1a]' : 'text-gray-500'}`}>Phone</Text>
+                  <Text className={`text-sm font-semibold ${loginMethod === 'otp' ? 'text-white' : 'text-purple-300'}`}>Phone</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -190,12 +191,12 @@ export default function SignupScreen() {
               {loginMethod === 'otp' ? (
                 <>
                   <View>
-                    <Text className="text-sm font-semibold text-[#1a1a1a] mb-1.5 ml-1">Phone Number</Text>
+                    <Text className="text-sm font-semibold text-white mb-1.5 ml-1">Phone Number</Text>
                     <View className="flex-row gap-2">
                       <TextInput 
                         value={countryCode}
                         onChangeText={setCountryCode}
-                        className="w-20 bg-[#faf9f6] px-4 h-14 rounded-xl border border-indigo-100 text-[#1a1a1a] font-medium"
+                        className="w-20 bg-[#faf9f6] px-4 h-14 rounded-xl border border-indigo-100 text-white font-medium"
                       />
                       <TextInput 
                         placeholder="9876543210"
@@ -203,7 +204,7 @@ export default function SignupScreen() {
                         value={phone}
                         onChangeText={setPhone}
                         keyboardType="phone-pad"
-                        className="flex-1 bg-[#faf9f6] px-4 h-14 rounded-xl border border-indigo-100 text-[#1a1a1a] font-medium"
+                        className="flex-1 bg-[#faf9f6] px-4 h-14 rounded-xl border border-indigo-100 text-white font-medium"
                       />
                     </View>
                   </View>
@@ -211,7 +212,7 @@ export default function SignupScreen() {
               ) : (
                 <>
                   <View>
-                    <Text className="text-sm font-semibold text-[#1a1a1a] mb-1.5 ml-1">Full Name</Text>
+                    <Text className="text-sm font-semibold text-white mb-1.5 ml-1">Full Name</Text>
                     <View className="relative justify-center">
                       <View className="absolute left-4 z-10"><User size={20} color="#9ca3af" /></View>
                       <TextInput 
@@ -219,13 +220,13 @@ export default function SignupScreen() {
                         placeholderTextColor="#9ca3af"
                         value={name}
                         onChangeText={setName}
-                        className="w-full bg-[#faf9f6] pl-12 pr-4 h-14 rounded-xl border border-indigo-100 text-[#1a1a1a] font-medium"
+                        className="w-full bg-[#faf9f6] pl-12 pr-4 h-14 rounded-xl border border-indigo-100 text-white font-medium"
                       />
                     </View>
                   </View>
 
                   <View>
-                    <Text className="text-sm font-semibold text-[#1a1a1a] mb-1.5 ml-1">Email</Text>
+                    <Text className="text-sm font-semibold text-white mb-1.5 ml-1">Email</Text>
                     <View className="relative justify-center">
                       <View className="absolute left-4 z-10"><Mail size={20} color="#9ca3af" /></View>
                       <TextInput 
@@ -235,13 +236,13 @@ export default function SignupScreen() {
                         onChangeText={setEmail}
                         keyboardType="email-address"
                         autoCapitalize="none"
-                        className="w-full bg-[#faf9f6] pl-12 pr-4 h-14 rounded-xl border border-indigo-100 text-[#1a1a1a] font-medium"
+                        className="w-full bg-[#faf9f6] pl-12 pr-4 h-14 rounded-xl border border-indigo-100 text-white font-medium"
                       />
                     </View>
                   </View>
 
                   <View>
-                    <Text className="text-sm font-semibold text-[#1a1a1a] mb-1.5 ml-1">Password</Text>
+                    <Text className="text-sm font-semibold text-white mb-1.5 ml-1">Password</Text>
                     <View className="relative justify-center">
                       <View className="absolute left-4 z-10"><Lock size={20} color="#9ca3af" /></View>
                       <TextInput 
@@ -250,7 +251,7 @@ export default function SignupScreen() {
                         value={password}
                         onChangeText={setPassword}
                         secureTextEntry={!showPassword}
-                        className="w-full bg-[#faf9f6] pl-12 pr-12 h-14 rounded-xl border border-indigo-100 text-[#1a1a1a] font-medium"
+                        className="w-full bg-[#faf9f6] pl-12 pr-12 h-14 rounded-xl border border-indigo-100 text-white font-medium"
                       />
                       <TouchableOpacity 
                         className="absolute right-4 z-10"
@@ -262,13 +263,13 @@ export default function SignupScreen() {
                   </View>
 
                   <View>
-                    <Text className="text-sm font-semibold text-[#1a1a1a] mb-1.5 ml-1">Date of Birth <Text className="font-normal text-gray-400">(must be 18+)</Text></Text>
+                    <Text className="text-sm font-semibold text-white mb-1.5 ml-1">Date of Birth <Text className="font-normal text-purple-300">(must be 18+)</Text></Text>
                     <TextInput 
                       placeholder="YYYY-MM-DD"
                       placeholderTextColor="#9ca3af"
                       value={dob}
                       onChangeText={setDob}
-                      className="w-full bg-[#faf9f6] px-4 h-14 rounded-xl border border-indigo-100 text-[#1a1a1a] font-medium"
+                      className="w-full bg-[#faf9f6] px-4 h-14 rounded-xl border border-indigo-100 text-white font-medium"
                     />
                   </View>
                 </>
@@ -306,21 +307,21 @@ export default function SignupScreen() {
 
             <View className="flex-row items-center my-6">
               <View className="flex-1 h-[1px] bg-indigo-50" />
-              <Text className="mx-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Or continue with</Text>
+              <Text className="mx-4 text-xs font-semibold text-purple-300 uppercase tracking-wider">Or continue with</Text>
               <View className="flex-1 h-[1px] bg-indigo-50" />
             </View>
 
             <View className="space-y-3">
-              <TouchableOpacity className="w-full h-14 bg-white border border-gray-200 rounded-xl items-center justify-center flex-row">
-                <Text className="text-[#1a1a1a] font-bold text-base">Continue with Google</Text>
+              <TouchableOpacity className="w-full h-14 bg-[#0F0B2A] border border-gray-200 rounded-xl items-center justify-center flex-row">
+                <Text className="text-white font-bold text-base">Continue with Google</Text>
               </TouchableOpacity>
-              <TouchableOpacity className="w-full h-14 bg-white border border-gray-200 rounded-xl items-center justify-center flex-row">
-                <Text className="text-[#1a1a1a] font-bold text-base">Continue with Apple</Text>
+              <TouchableOpacity className="w-full h-14 bg-[#0F0B2A] border border-gray-200 rounded-xl items-center justify-center flex-row">
+                <Text className="text-white font-bold text-base">Continue with Apple</Text>
               </TouchableOpacity>
             </View>
 
             <View className="items-center mt-8">
-              <Text className="text-gray-500 text-sm font-medium">
+              <Text className="text-purple-300 text-sm font-medium">
                 Already have an account?{' '}
                 <Text 
                   onPress={() => router.push('/(auth)/login')}

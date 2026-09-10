@@ -1,261 +1,228 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, Platform, ActivityIndicator, Alert, ScrollView } from 'react-native';
+﻿import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  ActivityIndicator,
+  ScrollView,
+  StatusBar,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { Shield } from 'lucide-react-native';
-import * as SecureStore from 'expo-secure-store';
 import { authApi, tokenStore } from '../../lib/api';
+import * as SecureStore from 'expo-secure-store';
 
 type Role = 'user' | 'expert';
 type Mode = 'login' | 'forgot';
-type LoginMethod = 'password' | 'otp';
+
+const PURPLE = '#7C3AED';
+const PURPLE_DARK = '#5B21B6';
+const PURPLE_LIGHT = '#EDE9FE';
+const LAVENDER = '#A78BFA';
+const BG = '#0F0B2A';
+const CARD_BG = 'rgba(255,255,255,0.06)';
+const BORDER = 'rgba(167,139,250,0.3)';
+const TEXT = '#F5F3FF';
+const TEXT_MUTED = 'rgba(245,243,255,0.6)';
 
 export default function LoginScreen() {
   const router = useRouter();
-  
+
   const [role, setRole] = useState<Role>('user');
   const [mode, setMode] = useState<Mode>('login');
-  const [loginMethod, setLoginMethod] = useState<LoginMethod>('password');
-  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
-  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleLogin = async () => {
-    if (!email || !password) {
-      setError('Please fill in all fields');
-      return;
-    }
-    
-    setLoading(true);
+    if (!email || !password) { setError('Please fill in all fields'); return; }
     setError('');
-    
+    setLoading(true);
     try {
-      let res;
       if (role === 'expert') {
-        res = await authApi.practitionerLogin(email, password);
+        const res = await authApi.practitionerLogin(email, password);
+        if (!res.success || !res.data) { setError(res.message || 'Login failed'); return; }
+        tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+        await SecureStore.setItemAsync('hc_role', 'practitioner');
+        await SecureStore.setItemAsync('hc_practitioner_id', res.data.practitioner.id);
+        router.replace('/(tabs)');
       } else {
-        res = await authApi.login({ email, password });
+        const res = await authApi.login({ email, password });
+        if (!res.success || !res.data) { setError(res.message || 'Login failed'); return; }
+        tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+        await SecureStore.setItemAsync('hc_role', 'user');
+        router.replace('/(tabs)');
       }
-      
-      if (!res.success || !res.data) {
-        throw new Error(res.message || 'Login failed');
-      }
-      
-      // Store token
-      const access = res.data.accessToken;
-      const refresh = res.data.refreshToken;
-      await tokenStore.setTokens(access, refresh);
-      await SecureStore.setItemAsync('hc_role', role === 'expert' ? 'practitioner' : 'user');
-      
-      // Navigate to tabs
-      router.replace('/(tabs)');
-      
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+    } catch { setError('Something went wrong. Please try again.'); }
+    finally { setLoading(false); }
   };
 
-  const handleGoogleSignIn = () => {
-    Alert.alert('Google Sign-In', 'Google Sign-In will be implemented shortly.');
+  const handleForgotPassword = async () => {
+    if (!email) { setError('Enter your email first'); return; }
+    setError('');
+    setLoading(true);
+    try {
+      await authApi.forgotPassword(email);
+      setSuccess('Reset link sent! Check your email.');
+    } catch { setError('Failed to send reset email.'); }
+    finally { setLoading(false); }
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-[#fffbf0]">
-      <KeyboardAvoidingView 
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        className="flex-1"
-      >
-        <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', padding: 24 }}>
-          
-          {/* Header Branding */}
-          <View className="items-center mb-8 mt-4">
-            <View className="bg-amber-100 p-4 rounded-3xl mb-4">
-              <Shield size={40} color="#d97706" />
+    <SafeAreaView style={{ flex: 1, backgroundColor: BG }}>
+      <StatusBar barStyle="light-content" backgroundColor={BG} />
+
+      {/* Gradient glow orbs */}
+      <View style={{ position: 'absolute', top: -80, left: -80, width: 300, height: 300, borderRadius: 150, backgroundColor: 'rgba(124,58,237,0.25)', opacity: 0.8 }} />
+      <View style={{ position: 'absolute', top: 200, right: -60, width: 220, height: 220, borderRadius: 110, backgroundColor: 'rgba(79,70,229,0.2)', opacity: 0.7 }} />
+
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', paddingHorizontal: 24, paddingVertical: 40 }} keyboardShouldPersistTaps="handled">
+
+          {/* Logo area */}
+          <View style={{ alignItems: 'center', marginBottom: 36 }}>
+            <View style={{ width: 64, height: 64, borderRadius: 20, backgroundColor: PURPLE, alignItems: 'center', justifyContent: 'center', marginBottom: 16, shadowColor: PURPLE, shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.6, shadowRadius: 20, elevation: 10 }}>
+              <Text style={{ fontSize: 28 }}>✦</Text>
             </View>
-            <Text className="text-3xl font-black text-[#1a1a1a] tracking-tight">ZenAuraa</Text>
-            <Text className="text-gray-500 mt-2 font-medium">Log in to your account</Text>
+            <Text style={{ fontSize: 28, fontWeight: '800', color: TEXT, letterSpacing: -0.5 }}>ZenAuraa</Text>
+            <Text style={{ fontSize: 14, color: TEXT_MUTED, marginTop: 4 }}>
+              {mode === 'login' ? 'Welcome back, begin your journey' : 'Reset your password'}
+            </Text>
           </View>
 
-          {/* White Card container just like web */}
-          <View className="bg-white rounded-3xl p-6 border border-yellow-100 shadow-sm w-full max-w-md self-center">
-            
-            {error ? (
-              <View className="bg-red-50 border border-red-200 p-3 rounded-xl mb-4">
-                <Text className="text-red-700 font-semibold text-sm">{error}</Text>
-              </View>
-            ) : null}
-
-            {mode === 'login' && (
-              <>
-                {/* Role Toggle */}
-                <View className="mb-5">
-                  <Text className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2 ml-1">Account Type</Text>
-                  <View className="flex-row bg-[#fffbf0] border-2 border-amber-500/20 p-1 rounded-2xl">
-                    <TouchableOpacity 
-                      onPress={() => setRole('user')}
-                      className={`flex-1 py-3 items-center justify-center rounded-xl ${role === 'user' ? 'bg-amber-500 shadow-sm' : ''}`}
-                    >
-                      <Text className={`font-bold ${role === 'user' ? 'text-white' : 'text-gray-600'}`}>
-                        {role === 'user' ? '✦ ' : ''}User
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                      onPress={() => setRole('expert')}
-                      className={`flex-1 py-3 items-center justify-center rounded-xl ${role === 'expert' ? 'bg-amber-500 shadow-sm' : ''}`}
-                    >
-                      <Text className={`font-bold ${role === 'expert' ? 'text-white' : 'text-gray-600'}`}>
-                        {role === 'expert' ? '✦ ' : ''}Expert
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-
-                {/* Login Method Toggle */}
-                <View className="mb-5">
-                  <Text className="text-xs font-semibold text-gray-400 mb-2 ml-1">Login Method</Text>
-                  <View className="flex-row bg-gray-50 border border-gray-200 p-0.5 rounded-lg self-start">
-                    <TouchableOpacity 
-                      onPress={() => { setLoginMethod('password'); setError(''); }}
-                      className={`px-6 py-2 rounded-md ${loginMethod === 'password' ? 'bg-white shadow-sm' : ''}`}
-                    >
-                      <Text className={`text-sm font-medium ${loginMethod === 'password' ? 'text-gray-900' : 'text-gray-500'}`}>Email</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                      onPress={() => { setLoginMethod('otp'); setError(''); }}
-                      className={`px-6 py-2 rounded-md ${loginMethod === 'otp' ? 'bg-white shadow-sm' : ''}`}
-                    >
-                      <Text className={`text-sm font-medium ${loginMethod === 'otp' ? 'text-gray-900' : 'text-gray-500'}`}>Phone</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </>
-            )}
-
-            {mode === 'login' && loginMethod === 'password' && (
-              <View className="space-y-4">
-                <View>
-                  <Text className="text-sm font-semibold text-[#1a1a1a] mb-1.5 ml-1">Email</Text>
-                  <TextInput 
-                    placeholder="you@example.com"
-                    placeholderTextColor="#9ca3af"
-                    value={email}
-                    onChangeText={setEmail}
-                    className="w-full bg-[#fffbf0] px-5 h-14 rounded-full border border-yellow-200 text-[#1a1a1a] font-medium"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                  />
-                </View>
-
-                <View>
-                  <View className="flex-row justify-between items-center mb-1.5 ml-1">
-                    <Text className="text-sm font-semibold text-[#1a1a1a]">Password</Text>
-                    <TouchableOpacity onPress={() => setMode('forgot')}>
-                      <Text className="text-sm text-amber-500 font-medium">Forgot password?</Text>
-                    </TouchableOpacity>
-                  </View>
-                  <TextInput 
-                    placeholder="••••••••"
-                    placeholderTextColor="#9ca3af"
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry
-                    className="w-full bg-[#fffbf0] px-5 h-14 rounded-full border border-yellow-200 text-[#1a1a1a] font-medium"
-                  />
-                </View>
-
-                <TouchableOpacity 
-                  onPress={handleLogin}
-                  disabled={loading}
-                  className="w-full bg-amber-500 mt-4 h-14 rounded-full shadow-md shadow-amber-500/30 items-center justify-center flex-row"
+          {/* Role toggle */}
+          {mode === 'login' && (
+            <View style={{ flexDirection: 'row', backgroundColor: CARD_BG, borderRadius: 16, padding: 4, marginBottom: 24, borderWidth: 1, borderColor: BORDER }}>
+              {(['user', 'expert'] as Role[]).map((r) => (
+                <TouchableOpacity
+                  key={r}
+                  onPress={() => { setRole(r); setError(''); }}
+                  style={{
+                    flex: 1, paddingVertical: 12, borderRadius: 12, alignItems: 'center',
+                    backgroundColor: role === r ? PURPLE : 'transparent',
+                    shadowColor: role === r ? PURPLE : 'transparent',
+                    shadowOffset: { width: 0, height: 4 },
+                    shadowOpacity: role === r ? 0.5 : 0,
+                    shadowRadius: 8, elevation: role === r ? 6 : 0,
+                  }}
                 >
-                  {loading ? (
-                    <ActivityIndicator color="white" />
-                  ) : (
-                    <Text className="text-white font-bold text-lg">Sign In</Text>
-                  )}
-                </TouchableOpacity>
-              </View>
-            )}
-
-            {mode === 'login' && loginMethod === 'otp' && (
-              <View className="space-y-4">
-                <View>
-                  <Text className="text-sm font-semibold text-[#1a1a1a] mb-1.5 ml-1">Phone Number</Text>
-                  <TextInput 
-                    placeholder="+919876543210"
-                    placeholderTextColor="#9ca3af"
-                    value={phone}
-                    onChangeText={setPhone}
-                    className="w-full bg-[#fffbf0] px-5 h-14 rounded-full border border-yellow-200 text-[#1a1a1a] font-medium"
-                    keyboardType="phone-pad"
-                  />
-                </View>
-                <TouchableOpacity 
-                  disabled={loading}
-                  className="w-full bg-amber-500 mt-4 h-14 rounded-full shadow-md shadow-amber-500/30 items-center justify-center"
-                >
-                  <Text className="text-white font-bold text-lg">Send OTP</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-
-            {mode === 'forgot' && (
-              <View className="space-y-4">
-                <View>
-                  <Text className="text-sm font-semibold text-[#1a1a1a] mb-1.5 ml-1">Email</Text>
-                  <TextInput 
-                    placeholder="you@example.com"
-                    placeholderTextColor="#9ca3af"
-                    value={email}
-                    onChangeText={setEmail}
-                    className="w-full bg-[#fffbf0] px-5 h-14 rounded-full border border-yellow-200 text-[#1a1a1a] font-medium"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                  />
-                </View>
-                <TouchableOpacity 
-                  disabled={loading}
-                  className="w-full bg-amber-500 mt-4 h-14 rounded-full shadow-md shadow-amber-500/30 items-center justify-center"
-                >
-                  <Text className="text-white font-bold text-lg">Send Reset Link</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { setMode('login'); setError(''); }} className="items-center mt-2">
-                  <Text className="text-amber-500 font-medium">← Back to login</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-
-            {mode === 'login' && (
-              <>
-                <View className="flex-row items-center my-6">
-                  <View className="flex-1 h-px bg-amber-100" />
-                  <Text className="mx-4 text-gray-400 font-medium text-xs tracking-wider">OR CONTINUE WITH</Text>
-                  <View className="flex-1 h-px bg-amber-100" />
-                </View>
-
-                <TouchableOpacity 
-                  onPress={handleGoogleSignIn}
-                  className="w-full bg-white h-14 rounded-full border border-gray-200 shadow-sm items-center flex-row justify-center"
-                >
-                  <Text className="text-[#1a1a1a] font-bold text-base">Continue with Google</Text>
-                </TouchableOpacity>
-
-                <View className="items-center mt-6">
-                  <Text className="text-gray-500 text-sm">
-                    Don't have an account?{' '}
-                    <TouchableOpacity onPress={() => router.push('/(auth)/signup')}>
-                      <Text className="text-amber-500 font-semibold">Sign up</Text>
-                    </TouchableOpacity>
+                  <Text style={{ fontWeight: '700', fontSize: 14, color: role === r ? '#fff' : TEXT_MUTED }}>
+                    {r === 'user' ? '⊙ User' : '✦ Expert'}
                   </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          )}
+
+          {/* Error / success */}
+          {error !== '' && (
+            <View style={{ backgroundColor: 'rgba(239,68,68,0.15)', borderColor: 'rgba(239,68,68,0.4)', borderWidth: 1, borderRadius: 12, padding: 12, marginBottom: 16 }}>
+              <Text style={{ color: '#FCA5A5', fontSize: 13, textAlign: 'center' }}>{error}</Text>
+            </View>
+          )}
+          {success !== '' && (
+            <View style={{ backgroundColor: 'rgba(52,211,153,0.15)', borderColor: 'rgba(52,211,153,0.4)', borderWidth: 1, borderRadius: 12, padding: 12, marginBottom: 16 }}>
+              <Text style={{ color: '#6EE7B7', fontSize: 13, textAlign: 'center' }}>{success}</Text>
+            </View>
+          )}
+
+          {/* Login form */}
+          {mode === 'login' && (
+            <View style={{ gap: 16 }}>
+              <View>
+                <Text style={{ fontSize: 13, fontWeight: '600', color: TEXT_MUTED, marginBottom: 8, marginLeft: 4 }}>Email address</Text>
+                <TextInput
+                  placeholder="you@example.com"
+                  placeholderTextColor="rgba(167,139,250,0.4)"
+                  value={email}
+                  onChangeText={setEmail}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  style={{ backgroundColor: CARD_BG, borderWidth: 1, borderColor: BORDER, borderRadius: 14, paddingHorizontal: 18, height: 56, color: TEXT, fontSize: 15 }}
+                />
+              </View>
+              <View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8, paddingHorizontal: 4 }}>
+                  <Text style={{ fontSize: 13, fontWeight: '600', color: TEXT_MUTED }}>Password</Text>
+                  <TouchableOpacity onPress={() => setMode('forgot')}>
+                    <Text style={{ fontSize: 13, color: LAVENDER, fontWeight: '600' }}>Forgot password?</Text>
+                  </TouchableOpacity>
                 </View>
-              </>
-            )}
-          </View>
+                <TextInput
+                  placeholder="••••••••"
+                  placeholderTextColor="rgba(167,139,250,0.4)"
+                  value={password}
+                  onChangeText={setPassword}
+                  secureTextEntry
+                  style={{ backgroundColor: CARD_BG, borderWidth: 1, borderColor: BORDER, borderRadius: 14, paddingHorizontal: 18, height: 56, color: TEXT, fontSize: 15 }}
+                />
+              </View>
+              <TouchableOpacity
+                onPress={handleLogin}
+                disabled={loading}
+                style={{ backgroundColor: PURPLE, borderRadius: 14, height: 56, alignItems: 'center', justifyContent: 'center', marginTop: 8, shadowColor: PURPLE, shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.5, shadowRadius: 16, elevation: 10 }}
+              >
+                {loading ? <ActivityIndicator color="white" /> : (
+                  <Text style={{ color: '#fff', fontWeight: '800', fontSize: 16 }}>
+                    {role === 'expert' ? 'Log in as Expert →' : 'Log in →'}
+                  </Text>
+                )}
+              </TouchableOpacity>
+            </View>
+          )}
+
+          {/* Forgot password form */}
+          {mode === 'forgot' && (
+            <View style={{ gap: 16 }}>
+              <View>
+                <Text style={{ fontSize: 13, fontWeight: '600', color: TEXT_MUTED, marginBottom: 8, marginLeft: 4 }}>Email address</Text>
+                <TextInput
+                  placeholder="you@example.com"
+                  placeholderTextColor="rgba(167,139,250,0.4)"
+                  value={email}
+                  onChangeText={setEmail}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  style={{ backgroundColor: CARD_BG, borderWidth: 1, borderColor: BORDER, borderRadius: 14, paddingHorizontal: 18, height: 56, color: TEXT, fontSize: 15 }}
+                />
+              </View>
+              <TouchableOpacity
+                onPress={handleForgotPassword}
+                disabled={loading}
+                style={{ backgroundColor: PURPLE, borderRadius: 14, height: 56, alignItems: 'center', justifyContent: 'center', shadowColor: PURPLE, shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.5, shadowRadius: 16, elevation: 10 }}
+              >
+                {loading ? <ActivityIndicator color="white" /> : <Text style={{ color: '#fff', fontWeight: '800', fontSize: 16 }}>Send Reset Link</Text>}
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { setMode('login'); setError(''); setSuccess(''); }} style={{ alignItems: 'center', paddingVertical: 8 }}>
+                <Text style={{ color: LAVENDER, fontWeight: '600', fontSize: 14 }}>← Back to login</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+
+          {/* Divider + Google */}
+          {mode === 'login' && (
+            <>
+              <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 24 }}>
+                <View style={{ flex: 1, height: 1, backgroundColor: BORDER }} />
+                <Text style={{ marginHorizontal: 16, color: TEXT_MUTED, fontSize: 12, fontWeight: '600', letterSpacing: 1 }}>OR CONTINUE WITH</Text>
+                <View style={{ flex: 1, height: 1, backgroundColor: BORDER }} />
+              </View>
+              <TouchableOpacity style={{ backgroundColor: CARD_BG, borderWidth: 1, borderColor: BORDER, borderRadius: 14, height: 56, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                <Text style={{ color: TEXT, fontWeight: '700', fontSize: 15 }}>🌐  Continue with Google</Text>
+              </TouchableOpacity>
+              <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 28 }}>
+                <Text style={{ color: TEXT_MUTED, fontSize: 14 }}>Don't have an account? </Text>
+                <TouchableOpacity onPress={() => router.push('/(auth)/signup')}>
+                  <Text style={{ color: LAVENDER, fontWeight: '700', fontSize: 14 }}>Sign up</Text>
+                </TouchableOpacity>
+              </View>
+            </>
+          )}
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
