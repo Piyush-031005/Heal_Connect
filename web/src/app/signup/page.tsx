@@ -46,7 +46,7 @@ export default function SignupPage() {
       } else {
         const res = await authApi.register({ name, email, password });
         if (!res.success || !res.data) {
-          setError(res.errors?.length ? res.errors.map((e) => e.message).join(' Ãƒâ€šÃ‚Â· ') : res.message || 'Registration failed');
+          setError(res.errors?.length ? res.errors.map((e) => e.message).join(' ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· ') : res.message || 'Registration failed');
           return;
         }
         tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
@@ -75,7 +75,7 @@ export default function SignupPage() {
       {/* Background Ambience */}
       
 
-      {/* Left ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Branding */}
+      {/* Left ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Branding */}
       <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-black/5 dark:bg-black/20 backdrop-blur-md relative z-10 border-r border-border">
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
@@ -111,11 +111,11 @@ export default function SignupPage() {
         </div>
 
         <div className="relative z-10 mt-auto pt-12 border-t border-border">
-          <p className="text-white/70 text-sm tracking-wider uppercase">Ãƒâ€šÃ‚Â© 2026 Tara Infotech. All rights reserved.</p>
+          <p className="text-white/70 text-sm tracking-wider uppercase">ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© 2026 Tara Infotech. All rights reserved.</p>
         </div>
       </div>
 
-      {/* Right ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Form */}
+      {/* Right ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Form */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative z-10">
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
@@ -159,7 +159,7 @@ export default function SignupPage() {
                 <div className="relative group">
                   <User className="absolute left-3 top-3.5 h-5 w-5 text-white/70 group-focus-within:text-accent transition-colors" />
                   <Input id="name" type="text" placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} required autoComplete="name" 
-                    className="pl-10 h-12 border-border focus-visible:ring-accent focus-visible:border-accent bg-background text-white placeholder:text-white/70 transition-all" />
+                    className="pl-10 h-12 border-border focus-visible:ring-accent focus-visible:border-accent bg-white/10 backdrop-blur-md text-white placeholder:text-white/70 transition-all" />
                 </div>
               </div>
               <div className="space-y-2">
@@ -167,7 +167,7 @@ export default function SignupPage() {
                 <div className="relative group">
                   <Mail className="absolute left-3 top-3.5 h-5 w-5 text-white/70 group-focus-within:text-accent transition-colors" />
                   <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" 
-                    className="pl-10 h-12 border-border focus-visible:ring-accent focus-visible:border-accent bg-background text-white placeholder:text-white/70 transition-all" />
+                    className="pl-10 h-12 border-border focus-visible:ring-accent focus-visible:border-accent bg-white/10 backdrop-blur-md text-white placeholder:text-white/70 transition-all" />
                 </div>
               </div>
               <div className="space-y-2">
@@ -175,7 +175,7 @@ export default function SignupPage() {
                 <div className="relative group">
                   <Lock className="absolute left-3 top-3.5 h-5 w-5 text-white/70 group-focus-within:text-accent transition-colors" />
                   <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="Min. 8 chars, 1 uppercase, 1 number" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="new-password" 
-                    className="pl-10 pr-10 h-12 border-border focus-visible:ring-accent focus-visible:border-accent bg-background text-white placeholder:text-white/70 transition-all" />
+                    className="pl-10 pr-10 h-12 border-border focus-visible:ring-accent focus-visible:border-accent bg-white/10 backdrop-blur-md text-white placeholder:text-white/70 transition-all" />
                   <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-white/70 hover:text-white transition-colors" tabIndex={-1}>
                     {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
