@@ -1,6 +1,6 @@
 ﻿'use client';
 
-import Lightfall from '@/components/Lightfall';
+import GhostFibers from '@/components/GhostFibers';
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -84,7 +84,7 @@ function LoginInner() {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row font-sans relative overflow-hidden" style={{background:'#0F0723',color:'#fff'}}>
-      <Lightfall colors={["#A6C8FF", "#5227FF", "#FF9FFC"]} backgroundColor="#8e6dc6" speed={0.5} streakCount={2} streakWidth={1} streakLength={1} glow={1} density={0.6} twinkle={1} zoom={3} backgroundGlow={0.5} opacity={1} mouseInteraction={true} mouseStrength={0.5} mouseRadius={1} lightMode={true} />
+      <GhostFibers lineColor="#8345bd" glowColor="#7c41e0" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={4} waveAmplitude={0.015} waveFrequency={3} waveSpeed={0.15} layerSpeed={0.08} twist={0.1} twistFrequency={5} twistSpeed={1.2} lineFrequency={5} lineSpacing={2} lineSharpness={16} glowFalloff={10} glowIntensity={1.6} brightness={2} blueBoost={1.25} vignette={0.8} grain={0.05} dpr={1} lightMode={true} fps={60} paused={false} />
 
 
       {/* Left Branding */}
