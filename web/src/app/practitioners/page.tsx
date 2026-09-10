@@ -41,7 +41,7 @@ const SPECIALTIES = ['Vedic Astrology', 'Tarot', 'Reiki', 'Vastu', 'Numerology',
 const LANGUAGES = ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Bengali', 'Marathi'];
 const API_URL = '';
 
-const SELECT_CLS = 'w-full text-sm rounded-xl bg-card/80 dark:bg-card/80 border border-border px-4 py-2.5 text-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-all hover:bg-secondary';
+const SELECT_CLS = 'w-full text-sm rounded-xl bg-card/80 dark:bg-card/80 border border-border px-4 py-2.5 text-[#2d1b69] focus:outline-none focus:ring-1 focus:ring-primary transition-all hover:bg-secondary';
 
 export default function PractitionersPage() {
   const [practitioners, setPractitioners] = useState<Practitioner[]>([]);
@@ -76,17 +76,21 @@ export default function PractitionersPage() {
   const activeFilterCount = [filters.specialty, filters.language, filters.minRating, filters.maxRate].filter(Boolean).length + (filters.onlineOnly ? 1 : 0);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans relative overflow-hidden">
+    <div className="min-h-screen flex flex-col font-sans relative overflow-hidden" style={{background:"linear-gradient(145deg, #F5F0FF 0%, #EDE9FE 20%, #DDD6FE 45%, #C4B5FD 70%, #A5B4FC 100%)"}}>
+      {/* Glowing orbs for positive vibe */}
+      <div style={{position:"absolute",top:"-10%",left:"-5%",width:"40%",height:"40%",borderRadius:"50%",background:"radial-gradient(circle, rgba(167,139,250,0.35) 0%, transparent 70%)",filter:"blur(80px)",pointerEvents:"none"}} />
+      <div style={{position:"absolute",bottom:"-10%",right:"-5%",width:"50%",height:"50%",borderRadius:"50%",background:"radial-gradient(circle, rgba(129,140,248,0.3) 0%, transparent 70%)",filter:"blur(100px)",pointerEvents:"none"}} />
+      <div style={{position:"absolute",top:"40%",right:"20%",width:"30%",height:"30%",borderRadius:"50%",background:"radial-gradient(circle, rgba(196,181,253,0.25) 0%, transparent 70%)",filter:"blur(60px)",pointerEvents:"none"}} />
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none fixed">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(214,180,107,0.1)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(46,196,182,0.1)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(167,139,250,0.2)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(129,140,248,0.2)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
       </div>
 
       <Navbar />
 
       <main className="flex-1 container mx-auto px-4 pt-24 pb-12 relative z-10">
         <div className="mb-10 text-center md:text-left">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-foreground mb-2 tracking-tight">Find Your Healer</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-[#2d1b69] mb-2 tracking-tight">Find Your Healer</h1>
           <p className="text-muted-foreground text-lg">{total} verified practitioners available</p>
         </div>
 
@@ -94,9 +98,9 @@ export default function PractitionersPage() {
         <div className="flex gap-4 mb-8">
           <div className="relative flex-1">
             <Search className="absolute left-4 top-3.5 h-5 w-5 text-muted-foreground" />
-            <input type="text" placeholder="Search by name or specialty..." value={filters.search} onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))} className="w-full pl-12 pr-4 py-3 text-base rounded-2xl bg-card/80 dark:bg-card/80 border border-border focus:outline-none focus:ring-1 focus:ring-primary text-foreground placeholder:text-muted-foreground transition-all backdrop-blur-sm" />
+            <input type="text" placeholder="Search by name or specialty..." value={filters.search} onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))} className="w-full pl-12 pr-4 py-3 text-base rounded-2xl bg-card/80 dark:bg-card/80 border border-border focus:outline-none focus:ring-1 focus:ring-primary text-[#2d1b69] placeholder:text-muted-foreground transition-all backdrop-blur-sm" />
           </div>
-          <Button variant="outline" onClick={() => setShowFilters((v) => !v)} className={`rounded-2xl px-6 gap-2 border-border hover:bg-secondary hover:border-border text-foreground h-[50px] transition-all backdrop-blur-sm ${showFilters ? 'bg-secondary border-border' : 'bg-card/80 dark:bg-card/80'}`}>
+          <Button variant="outline" onClick={() => setShowFilters((v) => !v)} className={`rounded-2xl px-6 gap-2 border-border hover:bg-secondary hover:border-border text-[#2d1b69] h-[50px] transition-all backdrop-blur-sm ${showFilters ? 'bg-secondary border-border' : 'bg-card/80 dark:bg-card/80'}`}>
             <SlidersHorizontal className="h-4 w-4" />
             <span className="hidden sm:inline">Filters</span>
             {activeFilterCount > 0 && <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center shadow-[0_0_10px_rgba(214,180,107,0.3)]">{activeFilterCount}</span>}
@@ -124,11 +128,11 @@ export default function PractitionersPage() {
               <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Min Rating</label>
               <select value={filters.minRating} onChange={(e) => setFilters((f) => ({ ...f, minRating: e.target.value }))} className={SELECT_CLS}>
                 <option value="" className="bg-card">Any</option>
-                {['3', '3.5', '4', '4.5'].map((r) => <option key={r} value={r} className="bg-card">â­ {r}+</option>)}
+                {['3', '3.5', '4', '4.5'].map((r) => <option key={r} value={r} className="bg-card">Ã¢Â­Â {r}+</option>)}
               </select>
             </div>
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Max â‚¹/min</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Max Ã¢â€šÂ¹/min</label>
               <input type="number" min={0} placeholder="e.g. 50" value={filters.maxRate} onChange={(e) => setFilters((f) => ({ ...f, maxRate: e.target.value }))} className={SELECT_CLS} />
             </div>
             <div className="flex flex-col justify-end gap-3">
@@ -137,7 +141,7 @@ export default function PractitionersPage() {
                   <input type="checkbox" checked={filters.onlineOnly} onChange={(e) => setFilters((f) => ({ ...f, onlineOnly: e.target.checked }))} className="w-5 h-5 appearance-none border border-border rounded-md checked:bg-accent checked:border-accent transition-colors cursor-pointer" />
                   {filters.onlineOnly && <svg className="absolute w-3 h-3 text-primary-foreground pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
                 </div>
-                <span className="text-sm font-medium text-foreground">Online Now</span>
+                <span className="text-sm font-medium text-[#2d1b69]">Online Now</span>
               </label>
               {activeFilterCount > 0 && (
                 <button onClick={() => setFilters({ search: filters.search, specialty: '', language: '', minRating: '', maxRate: '', onlineOnly: false })} className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-red-400 transition-colors px-2">
@@ -153,8 +157,8 @@ export default function PractitionersPage() {
           <div className="flex flex-wrap gap-3 mb-8">
             {filters.specialty && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">{filters.specialty}<button onClick={() => setFilters((f) => ({ ...f, specialty: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
             {filters.language && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">{filters.language}<button onClick={() => setFilters((f) => ({ ...f, language: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
-            {filters.minRating && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">â­ {filters.minRating}+<button onClick={() => setFilters((f) => ({ ...f, minRating: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
-            {filters.maxRate && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">â‰¤ â‚¹{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
+            {filters.minRating && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">Ã¢Â­Â {filters.minRating}+<button onClick={() => setFilters((f) => ({ ...f, minRating: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
+            {filters.maxRate && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">Ã¢â€°Â¤ Ã¢â€šÂ¹{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
             {filters.onlineOnly && <Badge variant="outline" className="border-accent/30 text-accent bg-accent/10 gap-1.5 py-1 px-3 rounded-full shadow-[0_0_10px_rgba(46,196,182,0.1)]">Online Now<button onClick={() => setFilters((f) => ({ ...f, onlineOnly: false }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
           </div>
         )}
@@ -167,7 +171,7 @@ export default function PractitionersPage() {
         ) : practitioners.length === 0 ? (
           <div className="text-center py-32 bg-card/80 dark:bg-card/80 rounded-3xl border border-border backdrop-blur-md">
             <Image src="/center_logo_final.png" alt="" width={64} height={64} className="mx-auto mb-6 opacity-30 rounded-full grayscale" />
-            <p className="text-xl font-bold text-foreground mb-2">No practitioners found</p>
+            <p className="text-xl font-bold text-[#2d1b69] mb-2">No practitioners found</p>
             <p className="text-muted-foreground">Try adjusting your filters or search terms</p>
           </div>
         ) : (
@@ -177,7 +181,7 @@ export default function PractitionersPage() {
             </div>
             {practitioners.length < total && (
               <div className="text-center mt-12">
-                <Button variant="outline" onClick={() => { const next = page + 1; setPage(next); fetchPractitioners(filters, next); }} disabled={loading} className="rounded-xl px-10 h-12 border-border text-foreground hover:bg-white/10 hover:border-border transition-all font-bold">
+                <Button variant="outline" onClick={() => { const next = page + 1; setPage(next); fetchPractitioners(filters, next); }} disabled={loading} className="rounded-xl px-10 h-12 border-border text-[#2d1b69] hover:bg-white/10 hover:border-border transition-all font-bold">
                   {loading ? 'Loading...' : 'Load more experts'}
                 </Button>
               </div>
@@ -215,8 +219,8 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
         <div className="pt-10 px-6 pb-6 flex flex-col flex-1 relative z-0">
           <div className="flex items-start justify-between mb-1">
             <div>
-              <p className="font-bold text-foreground text-lg tracking-wide group-hover:text-primary transition-colors">{p.name}</p>
-              <p className="text-sm text-primary font-medium">{p.specialties.slice(0, 2).join(' Â· ') || 'â€”'}</p>
+              <p className="font-bold text-[#2d1b69] text-lg tracking-wide group-hover:text-primary transition-colors">{p.name}</p>
+              <p className="text-sm text-primary font-medium">{p.specialties.slice(0, 2).join(' Ã‚Â· ') || 'Ã¢â‚¬â€'}</p>
             </div>
             {p.isVerified && (
               <div className="flex items-center gap-1 bg-primary/10 border border-primary/30 rounded-lg px-2 py-1 shrink-0 mt-1 shadow-[0_0_10px_rgba(214,180,107,0.1)]">
@@ -229,7 +233,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
           <div className="flex flex-wrap items-center gap-3 mt-3 mb-4">
             <div className="flex items-center gap-1 px-2 py-1 bg-secondary rounded-lg border border-border">
               <Star className="w-3.5 h-3.5 text-primary fill-current" />
-              <span className="text-sm font-bold text-foreground">{p.avgRating || 'â€”'}</span>
+              <span className="text-sm font-bold text-[#2d1b69]">{p.avgRating || 'Ã¢â‚¬â€'}</span>
               <span className="text-xs text-muted-foreground">({p.reviewCount})</span>
             </div>
             <span className="text-muted-foreground">|</span>
@@ -237,7 +241,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
             <span className="text-muted-foreground hidden sm:inline">|</span>
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground bg-secondary px-2 py-1 rounded-lg border border-border">
               <Globe className="w-3 h-3 text-muted-foreground" />
-              <span className="truncate max-w-[80px]">{p.languages.slice(0, 2).join(', ') || 'â€”'}</span>
+              <span className="truncate max-w-[80px]">{p.languages.slice(0, 2).join(', ') || 'Ã¢â‚¬â€'}</span>
             </div>
           </div>
 
@@ -248,7 +252,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
 
           <div className="flex items-center justify-between pt-4 mt-auto border-t border-border">
             <div>
-              <span className="text-xl font-bold text-foreground">â‚¹{p.perMinuteRate}</span>
+              <span className="text-xl font-bold text-[#2d1b69]">Ã¢â€šÂ¹{p.perMinuteRate}</span>
               <span className="text-xs text-muted-foreground ml-1">/min</span>
             </div>
             <div className="flex gap-2">
