@@ -206,7 +206,8 @@ router.get('/user/history', requireAuth, async (req: AuthRequest, res: Response)
   res.json({ success: true, data: { sessions, totalSpent, totalMinutes, totalSessionsCompleted } });
 });
 
-// ─── GET /api/sessions/user/transcripts — user's own call transcripts ────────
+// ─── GET /api/sessions/user/transcripts — user's call history (NO transcript text)
+// transcriptText is admin-only. This endpoint returns session metadata only.
 router.get('/user/transcripts', requireAuth, async (req: AuthRequest, res: Response) => {
   const userId = req.user!.userId;
   const page = parseInt(String(req.query.page ?? '1'));
@@ -222,7 +223,7 @@ router.get('/user/transcripts', requireAuth, async (req: AuthRequest, res: Respo
         take: limit,
         select: {
           id: true,
-          transcriptText: true,
+          // transcriptText intentionally excluded — admin-only field
           submittedAt: true,
           session: {
             select: {
@@ -245,7 +246,8 @@ router.get('/user/transcripts', requireAuth, async (req: AuthRequest, res: Respo
   }
 });
 
-// ─── GET /api/sessions/practitioner/transcripts — practitioner's own call transcripts
+// ─── GET /api/sessions/practitioner/transcripts — practitioner's call history (NO transcript text)
+// transcriptText is admin-only. This endpoint returns session metadata only.
 router.get('/practitioner/transcripts', requireAuth, async (req: AuthRequest, res: Response) => {
   const practitionerId = req.user!.practitionerId;
   if (!practitionerId) {
@@ -265,7 +267,7 @@ router.get('/practitioner/transcripts', requireAuth, async (req: AuthRequest, re
         take: limit,
         select: {
           id: true,
-          transcriptText: true,
+          // transcriptText intentionally excluded — admin-only field
           submittedAt: true,
           session: {
             select: {
@@ -286,6 +288,17 @@ router.get('/practitioner/transcripts', requireAuth, async (req: AuthRequest, re
     console.error('Practitioner transcripts fetch error:', err);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
+});
+
+// ─── GET /api/sessions/:id/transcript — explicit 403 for non-admin callers ───
+// Admin-only transcript content is served via /api/admin/sessions/:id/transcript.
+// This route exists purely to return a clear 403 (not an empty 200) if any
+// user or expert-authenticated client tries to read transcript content directly.
+router.get('/:id/transcript', requireAuth, (req: AuthRequest, res: Response) => {
+  res.status(403).json({
+    success: false,
+    message: 'Transcript content is restricted to administrators. This call may be reviewed for quality and safety purposes.',
+  });
 });
 
 // DEV TEMP: Clear stuck active sessions

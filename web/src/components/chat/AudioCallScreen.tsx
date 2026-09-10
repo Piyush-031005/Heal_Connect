@@ -178,6 +178,12 @@ export default function AudioCallScreen({
                 </span>
               </div>
 
+              {/* Recording consent notice — shown to both parties during connected call */}
+              <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 bg-gray-50 border border-gray-100 rounded-full px-3 py-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-400 shrink-0" />
+                <span>This call is being recorded &amp; transcribed for quality and safety review</span>
+              </div>
+
               {/* Transcription status badge */}
               {isTranscribing && (
                 <div className="flex items-center justify-center gap-1 text-xs text-indigo-600 bg-indigo-50 border border-indigo-200 rounded-full px-3 py-0.5">
