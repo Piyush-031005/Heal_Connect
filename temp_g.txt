@@ -119,7 +119,7 @@ function FibersMaterial(props: any) {
       fragmentShader={fragmentShader}
       uniforms={uniforms}
       transparent={true}
-      blending={THREE.AdditiveBlending}
+      blending={THREE.NormalBlending}
       depthWrite={false}
     />
   );
