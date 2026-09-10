@@ -182,7 +182,7 @@ export default function AdminFAQPage() {
                   value={formData.question}
                   onChange={(e) => setFormData({ ...formData, question: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white"
-                  placeholder="e.g., What is Vedic Astrology?"
+                  placeholder="e.g., What is Vedic Astrology—
                 />
               </div>
               <div>

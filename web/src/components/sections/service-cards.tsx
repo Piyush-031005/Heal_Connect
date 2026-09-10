@@ -64,7 +64,7 @@ export function ServiceCards({ variant }: { variant: string }) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {t.servicesList.slice(0, 4).map((svc: any, idx: number) => (
-              <div key={idx} className="group p-10 rounded-[2rem] border border-pink-100 bg-white shadow-[0_10px_40px_rgba(236,72,153,0.03)] hover:shadow-[0_30px_60px_rgba(236,72,153,0.1)] hover:-translate-y-2 transition-all duration-700 cursor-pointer flex flex-col relative overflow-hidden">
+              <div key={idx} className="group p-10 rounded-[2rem] border border-pink-100 bg-white shadow-[0_10px_40px_rgba(236,72₹53,0.03)] hover:shadow-[0_30px_60px_rgba(236,72₹53,0.1)] hover:-translate-y-2 transition-all duration-700 cursor-pointer flex flex-col relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-300 to-fuchsia-400 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <div className="w-16 h-16 rounded-full border border-pink-200 bg-pink-50 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-700">
                   <Zap className="w-6 h-6 text-pink-500" />

@@ -291,7 +291,7 @@ export default function Navbar() {
               </button>
               <Link href="/" className="flex items-center gap-2">
                 <Image src={theme === 'theme-royal-indigo' ? '/main centre logo/main_logo.png' : '/main centre logo/main_logo.png'} alt="ZenAuraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
-                <span className="text-2xl font-serif font-black text-[#2A1658] drop-shadow-[0_2px_10px_rgba(183,154,230,0.3)] tracking-wide transition-all hover:scale-105"><span className="text-white">Zen</span><span className="text-[#5F3BA9]">Auraa</span></span>
+                <span className="text-2xl font-serif font-black text-[#2A1658] drop-shadow-[0_2px_10px_rgba(183₹54,230,0.3)] tracking-wide transition-all hover:scale-105"><span className="text-white">Zen</span><span className="text-[#5F3BA9]">Auraa</span></span>
               </Link>
             </div>
 
@@ -459,7 +459,7 @@ export default function Navbar() {
 
               {langOpen && (
                 <div className={`absolute right-0 mt-2 w-36 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
-                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi (ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¿ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¨ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¥ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¥ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬)', sub: 'HI' }, { code: 'es', label: 'Spanish (EspaÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±ol)', sub: 'ES' }, { code: 'fr', label: 'French (FranÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ais)', sub: 'FR' }, { code: 'de', label: 'German (Deutsch)', sub: 'DE' }] as const).map((l) => (
+                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi (íÆ’Ã†’í”šÃ‚Â íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¤íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¹íÆ’Ã†’í”šÃ‚Â íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¤íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¿íÆ’Ã†’í”šÃ‚Â íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¤íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¨íÆ’Ã†’í”šÃ‚Â íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¥íÆ’Ã¢â‚¬Å¡í”šÃ‚ÂíÆ’Ã†’í”šÃ‚Â íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¤íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¦íÆ’Ã†’í”šÃ‚Â íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¥íÆ’Ã‚Â¢íÂ¢Ã¢”šÂ¬Ã…Â¡í”šÃ‚Â¬)', sub: 'HI' }, { code: 'es', label: 'Spanish (EspaíÆ’Ã†’í” ’íÆ’Ã¢â‚¬Å¡í”šÃ‚Â±ol)', sub: 'ES' }, { code: 'fr', label: 'French (FraníÆ’Ã†’í” ’íÆ’Ã¢â‚¬Å¡í”šÃ‚Â§ais)', sub: 'FR' }, { code: 'de', label: 'German (Deutsch)', sub: 'DE' }] as const).map((l) => (
                     <button
                       key={l.code}
                       onClick={() => { setLang(l.code as 'en' | 'hi'); setLangOpen(false); }}

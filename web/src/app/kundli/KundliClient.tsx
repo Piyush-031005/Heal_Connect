@@ -364,7 +364,7 @@ export default function KundliPage() {
                         <rect x="10" y="10" width="380" height="380" stroke="#4338ca" strokeWidth="3" fill="#faf9f6" />
                         <line x1="10" y1="10" x2="390" y2="390" stroke="#4338ca" strokeWidth="2" />
                         <line x1="390" y1="10" x2="10" y2="390" stroke="#4338ca" strokeWidth="2" />
-                        <polygon points="200,10 390,200 200,390 10,200" stroke="#b45309" strokeWidth="2.5" fill="none" />
+                        <polygon points="200₹0 390,200 200,390 10,200" stroke="#b45309" strokeWidth="2.5" fill="none" />
                         <text x="200" y="110" textAnchor="middle" fill="#b45309" fontSize="13" fontWeight="bold">1 (Asc) Aries</text>
                         <text x="295" y="70" textAnchor="middle" fill="#78350f" fontSize="11">2 Moon</text>
                         <text x="345" y="140" textAnchor="middle" fill="#78350f" fontSize="11">3 Mars</text>
@@ -404,7 +404,7 @@ export default function KundliPage() {
                         <rect x="10" y="10" width="380" height="380" stroke="#4338ca" strokeWidth="3" fill="#faf9f6" />
                         <line x1="10" y1="10" x2="390" y2="390" stroke="#4338ca" strokeWidth="2" />
                         <line x1="390" y1="10" x2="10" y2="390" stroke="#4338ca" strokeWidth="2" />
-                        <polygon points="200,10 390,200 200,390 10,200" stroke="#b45309" strokeWidth="2.5" fill="none" />
+                        <polygon points="200₹0 390,200 200,390 10,200" stroke="#b45309" strokeWidth="2.5" fill="none" />
                         <text x="200" y="195" textAnchor="middle" fill="#b45309" fontSize="14" fontWeight="bold">D9 Navamsa</text>
                         <text x="200" y="215" textAnchor="middle" fill="#78350f" fontSize="11">Spousal Harmony Chart</text>
                       </svg>

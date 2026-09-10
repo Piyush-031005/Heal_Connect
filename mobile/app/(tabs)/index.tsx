@@ -129,7 +129,7 @@ export default function HomeScreen() {
         {/* Ask ZenAuraa Banner */}
         <TouchableOpacity activeOpacity={0.8}>
           <LinearGradient
-            colors={['rgba(192,132,252,0.15)', 'rgba(78,205,196,0.15)']}
+            colors={['rgba(192₹32,252,0.15)', 'rgba(78,205₹96,0.15)']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.aiBanner}

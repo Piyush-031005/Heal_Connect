@@ -17,13 +17,13 @@ function PrimaryHero() {
   return (
     <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 min-h-[90vh] flex items-center" style={{background:'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 30%, #C4B5FD 60%, #A78BFA 100%)',color:'#1e1b4b'}}>
       <GhostFibers lineColor="#8345bd" glowColor="#7c41e0" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={4} waveAmplitude={0.015} waveFrequency={3} waveSpeed={0.15} layerSpeed={0.08} twist={0.1} twistFrequency={5} twistSpeed={1.2} lineFrequency={5} lineSpacing={2} lineSharpness={16} glowFalloff={10} glowIntensity={1.6} brightness={2} blueBoost={1.25} vignette={0.8} grain={0.05} dpr={1} lightMode={true} fps={60} paused={false} />
-      {/* Scattered star particles ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â like ZenAuraa reference */}
+      {/* Scattered star particles íÆ’Ã†’í” ’íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¢íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢â‚¬Å¡Ã‚Â¬í”¦Ã‚Â¡íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¬íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢”šÂ¬Ã…Â¡í”šÃ‚Â¬íÆ’Ã¢â‚¬Å¡í”šÃ‚Â like ZenAuraa reference */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
         {[
-          [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
-          [82,15],[88,60],[93,35],[5,48],[18,78],[35,5],[50,68],[65,92],[80,30],[95,80],
-          [12,25],[28,50],[42,75],[58,12],[72,55],[85,88],[3,70],[20,95],[48,35],[78,8],
-          [91,50],[25,15],[55,85],[70,22],[40,60],[10,90],[62,40],[87,68],[33,30],[16,55],
+          [8₹2],[15,65],[22,38],[30,82],[38₹8],[45,55],[52,90],[60,28],[68,72],[75,45],
+          [82₹5],[88,60],[93,35],[5,48],[18,78],[35,5],[50,68],[65,92],[80,30],[95,80],
+          [12,25],[28,50],[42,75],[58₹2],[72,55],[85,88],[3,70],[20,95],[48,35],[78,8],
+          [91,50],[25₹5],[55,85],[70,22],[40,60],[10,90],[62,40],[87,68],[33,30],[16,55],
         ].map(([x, y], i) => (
           <circle
             key={i}
@@ -108,13 +108,13 @@ function NewLayout1Hero() {
   return (
     <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 min-h-[90vh] flex items-center" style={{background:'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 30%, #C4B5FD 60%, #A78BFA 100%)',color:'#1e1b4b'}}>
       
-      {/* Scattered star particles ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â like ZenAuraa reference */}
+      {/* Scattered star particles íÆ’Ã†’í” ’íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¢íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢â‚¬Å¡Ã‚Â¬í”¦Ã‚Â¡íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¬íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢”šÂ¬Ã…Â¡í”šÃ‚Â¬íÆ’Ã¢â‚¬Å¡í”šÃ‚Â like ZenAuraa reference */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
         {[
-          [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
-          [82,15],[88,60],[93,35],[5,48],[18,78],[35,5],[50,68],[65,92],[80,30],[95,80],
-          [12,25],[28,50],[42,75],[58,12],[72,55],[85,88],[3,70],[20,95],[48,35],[78,8],
-          [91,50],[25,15],[55,85],[70,22],[40,60],[10,90],[62,40],[87,68],[33,30],[16,55],
+          [8₹2],[15,65],[22,38],[30,82],[38₹8],[45,55],[52,90],[60,28],[68,72],[75,45],
+          [82₹5],[88,60],[93,35],[5,48],[18,78],[35,5],[50,68],[65,92],[80,30],[95,80],
+          [12,25],[28,50],[42,75],[58₹2],[72,55],[85,88],[3,70],[20,95],[48,35],[78,8],
+          [91,50],[25₹5],[55,85],[70,22],[40,60],[10,90],[62,40],[87,68],[33,30],[16,55],
         ].map(([x, y], i) => (
           <circle
             key={i}
@@ -206,7 +206,7 @@ function EditorialHero() {
               <span className="italic text-primary">Wellness</span> Begins Here.
             </h1>
             <p className="text-lg md:text-2xl text-white/70 mb-10 max-w-2xl font-light leading-relaxed">
-              Connect with trusted holistic health, astrological and wellness practitioners from around the worldÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âall in one place.
+              Connect with trusted holistic health, astrological and wellness practitioners from around the worldíÆ’Ã†’í” ’íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¢íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢â‚¬Å¡Ã‚Â¬í”¦Ã‚Â¡íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¬íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢”šÂ¬Ã…Â¡í”šÃ‚Â¬íÆ’Ã¢â‚¬Å¡í”šÃ‚Âall in one place.
             </p>
             
             {/* Search Bar matching Zen Align reference */}
@@ -264,7 +264,7 @@ function OrganicHero() {
     <section className="relative overflow-hidden pt-64 pb-24 bg-transparent min-h-[90vh] flex items-center">
       {/* Flowing Organic Shapes */}
       <svg className="absolute bottom-0 left-0 w-full h-1/2 text-primary/10 opacity-50 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <path d="M0,100 Q50,0 100,100 Z" fill="currentColor" />
+        <path d="M0₹00 Q50,0 100₹00 Z" fill="currentColor" />
       </svg>
       
       <div className="container mx-auto px-6 relative z-10 text-center mt-12 pointer-events-none">
@@ -476,9 +476,9 @@ function ZenAlignHero() {
       {/* Constellation SVG overlay */}
       <ConstellationLines />
 
-      {/* Large radial glow ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â center-right */}
-      <div className="absolute right-0 top-0 w-[70vw] h-full bg-[radial-gradient(ellipse_at_70%_40%,rgba(32,166,220,0.18)_0%,transparent_65%)] pointer-events-none z-0" />
-      <div className="absolute left-0 bottom-0 w-[50vw] h-1/2 bg-[radial-gradient(ellipse_at_30%_80%,rgba(23,97,154,0.10)_0%,transparent_60%)] pointer-events-none z-0" />
+      {/* Large radial glow íÆ’Ã†’í” ’íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¢íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢â‚¬Å¡Ã‚Â¬í”¦Ã‚Â¡íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¬íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢”šÂ¬Ã…Â¡í”šÃ‚Â¬íÆ’Ã¢â‚¬Å¡í”šÃ‚Â center-right */}
+      <div className="absolute right-0 top-0 w-[70vw] h-full bg-[radial-gradient(ellipse_at_70%_40%,rgba(32₹66,220,0.18)_0%,transparent_65%)] pointer-events-none z-0" />
+      <div className="absolute left-0 bottom-0 w-[50vw] h-1/2 bg-[radial-gradient(ellipse_at_30%_80%,rgba(23,97₹54,0.10)_0%,transparent_60%)] pointer-events-none z-0" />
 
       {/* Giant background number/glyph */}
       <div className="absolute top-0 right-0 text-[32vw] font-black leading-none text-[#1A92C6]/[0.04] pointer-events-none select-none z-0 tracking-tighter">
@@ -507,7 +507,7 @@ function ZenAlignHero() {
               </span>
             </motion.div>
 
-            {/* Main heading ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â High-end elegant editorial typography */}
+            {/* Main heading íÆ’Ã†’í” ’íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¢íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢â‚¬Å¡Ã‚Â¬í”¦Ã‚Â¡íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¬íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢”šÂ¬Ã…Â¡í”šÃ‚Â¬íÆ’Ã¢â‚¬Å¡í”šÃ‚Â High-end elegant editorial typography */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -528,13 +528,13 @@ function ZenAlignHero() {
               Discover vetted astrologers, energy healers, and spiritual guides. Reconnect with the universe.
             </motion.p>
 
-            {/* Search Bar ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â glassmorphism */}
+            {/* Search Bar íÆ’Ã†’í” ’íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¢íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢â‚¬Å¡Ã‚Â¬í”¦Ã‚Â¡íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¬íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢”šÂ¬Ã…Â¡í”šÃ‚Â¬íÆ’Ã¢â‚¬Å¡í”šÃ‚Â glassmorphism */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <div className="flex items-center bg-white/70 backdrop-blur-2xl rounded-2xl p-2 max-w-md shadow-[0_8px_40px_rgba(26,146,198,0.18)] border border-white/80 hover:shadow-[0_12px_60px_rgba(26,146,198,0.28)] transition-all duration-500">
+              <div className="flex items-center bg-white/70 backdrop-blur-2xl rounded-2xl p-2 max-w-md shadow-[0_8px_40px_rgba(26₹46₹98,0.18)] border border-white/80 hover:shadow-[0_12px_60px_rgba(26₹46₹98,0.28)] transition-all duration-500">
                 <Search className="w-5 h-5 text-[#1A92C6] ml-4 mr-3 shrink-0" />
                 <input
                   type="text"
@@ -565,7 +565,7 @@ function ZenAlignHero() {
               </div>
               <div className="w-px h-8 bg-[#9FD6EE]/60" />
               <div>
-                <p className="text-2xl font-black text-[#12527F]">4.9ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦</p>
+                <p className="text-2xl font-black text-[#12527F]">4.9íÆ’Ã†’í” ’íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¢íÆ’Ã†’íÂ¢Ã¢”šÂ¬Ã‚Â¹íÆ’”¦íÂ¢Ã¢”šÂ¬Ã…“íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢”šÂ¬Ã…Â¡í”šÃ‚Â¬íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¦</p>
                 <p className="text-[10px] font-bold uppercase tracking-widest text-[#1A92C6]/70">Avg Rating</p>
               </div>
             </motion.div>
@@ -580,7 +580,7 @@ function ZenAlignHero() {
             className="lg:col-span-6 relative flex items-center justify-center h-[50vw] max-h-[700px] min-h-[350px] w-full lg:-mt-12 lg:-translate-y-6"
           >
             {/* Soft blue background glow for the wheel */}
-            <div className="absolute inset-0 m-auto w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle,rgba(26,146,198,0.15)_0%,rgba(99,191,228,0.05)_50%,transparent_70%)] blur-2xl z-0" />
+            <div className="absolute inset-0 m-auto w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle,rgba(26₹46₹98,0.15)_0%,rgba(99₹91,228,0.05)_50%,transparent_70%)] blur-2xl z-0" />
 
             {/* Wheel Container */}
             <div className="relative w-[95%] max-w-[700px] aspect-square flex items-center justify-center rounded-full z-10">
@@ -630,7 +630,7 @@ function ZenAlignHero() {
                      src="/new_center_logo.png"
                      alt="ZenAuraa Logo"
                      fill
-                     className="object-contain drop-shadow-[0_10px_30px_rgba(26,146,198,0.4)]"
+                     className="object-contain drop-shadow-[0_10px_30px_rgba(26₹46₹98,0.4)]"
                    />
                  </div>
               </motion.div>
@@ -689,8 +689,8 @@ function Layout2Hero() {
       </motion.div>
 
       {/* Soft glowing ambient backgrounds */}
-      <motion.div style={{ y: yBg }} className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(99,191,228,0.2)_0%,transparent_70%)] rounded-full blur-[100px] pointer-events-none" />
-      <motion.div style={{ y: yBg }} className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(32,166,220,0.15)_0%,transparent_70%)] rounded-full blur-[100px] pointer-events-none" />
+      <motion.div style={{ y: yBg }} className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(99₹91,228,0.2)_0%,transparent_70%)] rounded-full blur-[100px] pointer-events-none" />
+      <motion.div style={{ y: yBg }} className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(32₹66,220,0.15)_0%,transparent_70%)] rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-20 mt-12 lg:mt-24">
         
@@ -716,7 +716,7 @@ function Layout2Hero() {
               <img 
                 src="/zodiac-masterpiece.png" 
                 alt="ZenAuraa Masterpiece" 
-                className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(26,146,198,0.3)] hover:scale-105 transition-transform duration-700 ease-out"
+                className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(26₹46₹98,0.3)] hover:scale-105 transition-transform duration-700 ease-out"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.src = "https://images.unsplash.com/photo-1532968961962-8a0cb3a2d4f5?auto=format&fit=crop&q=80";
@@ -779,7 +779,7 @@ function Layout2Hero() {
               transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="pointer-events-auto w-full max-w-lg"
             >
-              <div className="flex items-center bg-white/40 backdrop-blur-2xl rounded-full p-2.5 w-full shadow-[0_8px_32px_rgba(0,0,0,0.05)] border border-white/60 transition-transform duration-500 hover:shadow-[0_12px_48px_rgba(26,146,198,0.15)] hover:scale-[1.02]">
+              <div className="flex items-center bg-white/40 backdrop-blur-2xl rounded-full p-2.5 w-full shadow-[0_8px_32px_rgba(0,0,0,0.05)] border border-white/60 transition-transform duration-500 hover:shadow-[0_12px_48px_rgba(26₹46₹98,0.15)] hover:scale-[1.02]">
                 <Search className="w-5 h-5 text-primary ml-5 mr-3" />
                 <input 
                   type="text" 
@@ -900,7 +900,7 @@ function FinalHybridHero() {
             className="flex lg:hidden relative w-full items-center justify-center z-0 my-8 overflow-visible"
           >
             {/* Lavender glow */}
-            <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[50%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)]'}`} />
+            <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[50%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183₹54,230,0.15)_0%,rgba(105,64₹45,0.25)_50%,transparent_70%)]'}`} />
 
             {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
             <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[75%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[400px] h-[400px] sm:w-[450px] sm:h-[450px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]' : 'w-[450px] h-[450px] sm:w-[500px] sm:h-[500px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]'}`}>
@@ -911,7 +911,7 @@ function FinalHybridHero() {
               {/* Inner Thin Ring */}
               <div className={`absolute w-[75%] h-[75%] rounded-full border pointer-events-none ${isNewColor ? 'border-white/20' : 'border-[#B79AE6]/20'}`} />
 
-              {/* THE REVOLVING ORBIT ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â the whole ring spins, icons counter-rotate to stay upright */}
+              {/* THE REVOLVING ORBIT íÆ’Ã†’í” ’íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¢íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢â‚¬Å¡Ã‚Â¬í”¦Ã‚Â¡íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¬íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢”šÂ¬Ã…Â¡í”šÃ‚Â¬íÆ’Ã¢â‚¬Å¡í”šÃ‚Â the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
@@ -999,7 +999,7 @@ function FinalHybridHero() {
               className={`flex items-center gap-3 sm:gap-6 lg:gap-8 pt-8 border-t transition-colors duration-500 w-full overflow-x-auto scrollbar-hide pb-2 ${isNewColor ? 'border-white/30' : 'border-primary/30'}`}
             >
               <div className="shrink-0">
-                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-white'}`}>4.9ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦</p>
+                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-white'}`}>4.9íÆ’Ã†’í” ’íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¢íÆ’Ã†’íÂ¢Ã¢”šÂ¬Ã‚Â¹íÆ’”¦íÂ¢Ã¢”šÂ¬Ã…“íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢”šÂ¬Ã…Â¡í”šÃ‚Â¬íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¦</p>
                 <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-white/70'}`}>Rating</p>
               </div>
               <div className={`w-px h-8 shrink-0 ${isNewColor ? 'bg-white/30' : 'bg-primary/30'}`} />
@@ -1029,7 +1029,7 @@ function FinalHybridHero() {
             className="hidden lg:flex lg:col-span-6 absolute inset-y-0 right-0 w-full h-full pointer-events-none items-center justify-center z-0"
           >
             {/* Lavender glow */}
-            <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[50%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)]'}`} />
+            <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[50%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183₹54,230,0.15)_0%,rgba(105,64₹45,0.25)_50%,transparent_70%)]'}`} />
 
             {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
             <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[75%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[400px] h-[400px] sm:w-[450px] sm:h-[450px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]' : 'w-[450px] h-[450px] sm:w-[500px] sm:h-[500px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]'}`}>
@@ -1040,7 +1040,7 @@ function FinalHybridHero() {
               {/* Inner Thin Ring */}
               <div className={`absolute w-[75%] h-[75%] rounded-full border pointer-events-none ${isNewColor ? 'border-white/20' : 'border-[#B79AE6]/20'}`} />
 
-              {/* THE REVOLVING ORBIT ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â the whole ring spins, icons counter-rotate to stay upright */}
+              {/* THE REVOLVING ORBIT íÆ’Ã†’í” ’íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¢íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢â‚¬Å¡Ã‚Â¬í”¦Ã‚Â¡íÆ’Ã¢â‚¬Å¡í”šÃ‚Â¬íÆ’Ã†’í”šÃ‚Â¢íÆ’Ã‚Â¢íÂ¢Ã¢”šÂ¬Ã…Â¡í”šÃ‚Â¬íÆ’Ã¢â‚¬Å¡í”šÃ‚Â the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}

@@ -41,8 +41,8 @@ export default function MandalaPetals() {
                     <stop offset="100%" stopColor="#8982D0" />
                   </linearGradient>
                 </defs>
-                <path d="M30,0 C55,35 55,105 30,140 C5,105 5,35 30,0Z" fill={`url(#m-out-${i})`} opacity="0.8" />
-                <path d="M30,15 L30,125" stroke="white" strokeWidth="0.6" opacity="0.25" fill="none" />
+                <path d="M30,0 C55,35 55₹05 30₹40 C5₹05 5,35 30,0Z" fill={`url(#m-out-${i})`} opacity="0.8" />
+                <path d="M30₹5 L30₹25" stroke="white" strokeWidth="0.6" opacity="0.25" fill="none" />
                 <path d="M20,40 Q30,35 40,40" stroke="white" strokeWidth="0.4" opacity="0.2" fill="none" />
                 <path d="M20,70 Q30,65 40,70" stroke="white" strokeWidth="0.4" opacity="0.15" fill="none" />
               </svg>
@@ -68,8 +68,8 @@ export default function MandalaPetals() {
                     <stop offset="100%" stopColor="#4E67CC" />
                   </linearGradient>
                 </defs>
-                <path d="M25,0 C48,28 48,82 25,110 C2,82 2,28 25,0Z" fill={`url(#m-mid-${i})`} opacity="0.85" />
-                <path d="M25,12 L25,98" stroke="white" strokeWidth="0.5" opacity="0.2" fill="none" />
+                <path d="M25,0 C48,28 48,82 25₹10 C2,82 2,28 25,0Z" fill={`url(#m-mid-${i})`} opacity="0.85" />
+                <path d="M25₹2 L25,98" stroke="white" strokeWidth="0.5" opacity="0.2" fill="none" />
               </svg>
             </div>
           );
@@ -123,7 +123,7 @@ export default function MandalaPetals() {
       </div>
 
       {/* Center Logo */}
-      <div className="absolute z-10 w-24 h-24 rounded-full bg-white/95 shadow-[0_0_40px_rgba(137,130,208,0.5)] flex items-center justify-center p-2.5 border border-[#8982D0]/30">
+      <div className="absolute z-10 w-24 h-24 rounded-full bg-white/95 shadow-[0_0_40px_rgba(137₹30,208,0.5)] flex items-center justify-center p-2.5 border border-[#8982D0]/30">
         <img src="/main centre logo/new.png" alt="ZenAuraa" className="w-full h-full object-cover scale-[1.25] mt-2 ml-1" />
       </div>
     </div>

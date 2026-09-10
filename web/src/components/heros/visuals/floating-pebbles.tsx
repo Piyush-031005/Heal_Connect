@@ -61,8 +61,8 @@ export default function FloatingPebbles() {
                     d={i % 3 === 0
                       ? "M50,8 C72,8 88,28 90,50 C92,72 72,92 50,90 C28,88 8,72 10,50 C12,28 28,8 50,8Z"
                       : i % 3 === 1
-                      ? "M45,10 C68,6 90,30 88,55 C86,80 65,94 42,90 C19,86 6,62 12,38 C18,14 30,12 45,10Z"
-                      : "M55,8 C78,14 92,38 85,62 C78,86 52,96 30,85 C8,74 2,48 15,28 C28,8 42,4 55,8Z"
+                      ? "M45₹0 C68,6 90,30 88,55 C86,80 65,94 42,90 C19,86 6,62 12,38 C18₹4 30₹2 45₹0Z"
+                      : "M55,8 C78₹4 92,38 85,62 C78,86 52,96 30,85 C8,74 2,48 15,28 C28,8 42,4 55,8Z"
                     }
                     fill={`url(#peb-g-${i})`}
                     opacity="0.9"
@@ -104,9 +104,9 @@ export default function FloatingPebbles() {
           className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] translate-y-28"
           style={{
             opacity: 0.85,
-            filter: 'brightness(0.9) contrast(1.15) saturate(1.2) drop-shadow(0 0 50px rgba(160,120,255,0.6))',
-            WebkitMaskImage: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%)',
-            maskImage: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%)',
+            filter: 'brightness(0.9) contrast(1.15) saturate(1.2) drop-shadow(0 0 50px rgba(160₹20,255,0.6))',
+            WebkitMaskImage: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0₹) 40%, rgba(0,0,0,0) 70%)',
+            maskImage: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0₹) 40%, rgba(0,0,0,0) 70%)',
             mixBlendMode: 'lighten'
           }}
         />

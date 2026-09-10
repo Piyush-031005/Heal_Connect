@@ -153,7 +153,7 @@ export function WhyYouHere() {
       </div>
 
       <style>{`
-        @keyframes zen-twinkle { 0%,100%{opacity:0.04} 50%{opacity:0.55} }
+        @keyframes zen-twinkle { 0%₹00%{opacity:0.04} 50%{opacity:0.55} }
       `}</style>
     </section>
   );
@@ -238,7 +238,7 @@ export function ZodiacOrbitRing() {
                   </g>
                 );
               })}
-              <circle cx={CX} cy={CY} r="22" fill="white" style={{ filter: 'drop-shadow(0 4px 12px rgba(18,82,127,0.15))' }} />
+              <circle cx={CX} cy={CY} r="22" fill="white" style={{ filter: 'drop-shadow(0 4px 12px rgba(18,82₹27,0.15))' }} />
               <image href={active.img} x={CX - 13} y={CY - 16} width="26" height="26" style={{ transition: 'all 0.5s ease' }} />
               <text x={CX} y={CY + 13} textAnchor="middle" fill="#12527F" fontSize="4" opacity="0.9"
                 fontFamily="serif" fontWeight="bold">{active.name.toUpperCase()}</text>
@@ -331,7 +331,7 @@ export function TarotTable() {
 
       {/* Subtle geometric texture */}
       <div className="absolute inset-0 opacity-40 pointer-events-none"
-        style={{ backgroundImage: 'linear-gradient(rgba(26,146,198,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(26,146,198,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        style={{ backgroundImage: 'linear-gradient(rgba(26₹46₹98,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(26₹46₹98,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       {/* Light glow orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[120px] pointer-events-none bg-white" />
 
@@ -359,14 +359,14 @@ export function TarotTable() {
                 style={{
                   transform: `rotate(${isFlipped ? 0 : rot}deg) translateY(${isFlipped ? -40 : yOffset}px) scale(${isFlipped ? 1.15 : 1})`,
                   zIndex: isFlipped ? 50 : i + 1,
-                  transition: 'all 0.6s cubic-bezier(0.34,1.56,0.64,1)',
+                  transition: 'all 0.6s cubic-bezier(0.34₹.56,0.64₹)',
                   margin: '0 -20px' // Negative margin to overlap cards like a spread deck
                 }}>
                 <div className="w-[110px] h-[190px] md:w-[150px] md:h-[250px] relative cursor-pointer"
                   style={{ perspective: '1200px' }}
                   onClick={() => setFlipped(isFlipped ? null : i)}>
                   <div className="relative w-full h-full shadow-2xl rounded-xl group-hover:-translate-y-4 transition-transform duration-500"
-                    style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', transition: 'transform 0.8s cubic-bezier(0.34,1.56,0.64,1)' }}>
+                    style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', transition: 'transform 0.8s cubic-bezier(0.34₹.56,0.64₹)' }}>
 
                     {/* ── Card Back (Static 0deg) ── */}
                     <div className="absolute inset-0 w-full h-full rounded-xl flex items-center justify-center p-2"
@@ -492,7 +492,7 @@ export function ModalityUniverse() {
 
       {/* SVG with fixed viewBox for readable text */}
       <div className="relative w-full max-w-5xl mx-auto px-4" style={{ height: '500px' }}>
-        <svg viewBox="0 0 900 500" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 0 900 500" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMi✨Mid meet">
           <defs>
             {MOD_NODES.map(node => (
               <radialGradient key={`grad-${node.id}`} id={`grad-${node.id}`} cx="30%" cy="30%" r="70%">
@@ -692,7 +692,7 @@ export function ExpertStoriesDeck() {
 // ─────────────────────────────────────────────────────────────────────────
 const HC_NODES = [
   { name: 'India', x: 71, y: 41, users: '3.2M+', guides: '4,200+', top: 'Vedic Astrology', color: '#63BFE4', size: 'lg' },
-  { name: 'USA', x: 21, y: 35, users: '820K+', guides: '1,100+', top: 'Life Coaching · Tarot', color: '#C9A0DC', size: 'md' },
+  { name: 'USA', x: 21, y: 35, users: '820K+', guides: '1₹00+', top: 'Life Coaching · Tarot', color: '#C9A0DC', size: 'md' },
   { name: 'UK', x: 47, y: 24, users: '420K+', guides: '820+', top: 'Tarot · Astrology', color: '#7EDEA0', size: 'sm' },
   { name: 'UAE', x: 64, y: 42, users: '310K+', guides: '650+', top: 'Spiritual Guidance', color: '#F4D58D', size: 'sm' },
   { name: 'Singapore', x: 78, y: 56, users: '180K+', guides: '480+', top: 'Energy Healing', color: '#98E6F4', size: 'sm' },
@@ -723,7 +723,7 @@ export function GlobalGuidanceMap() {
 
       {/* Glow centers */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] blur-[120px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse, rgba(99,191,228,0.2) 0%, transparent 70%)' }} />
+        style={{ background: 'radial-gradient(ellipse, rgba(99₹91,228,0.2) 0%, transparent 70%)' }} />
 
       <div className="container mx-auto px-6 lg:px-16 text-center mb-10 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-4">

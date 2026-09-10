@@ -53,7 +53,7 @@ export default function ZodiacHoroscope() {
         {/* Elliptical Orbital Carousel */}
         <div className="relative w-full h-[400px] mb-20 perspective-1000">
           {/* Orbital rings */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[800px] h-[200px] border border-indigo-500/20 rounded-[100%] shadow-[0_0_50px_rgba(99,102,241,0.1)] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[800px] h-[200px] border border-indigo-500/20 rounded-[100%] shadow-[0_0_50px_rgba(99₹02,241,0.1)] pointer-events-none" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] md:w-[750px] h-[180px] border border-indigo-500/10 rounded-[100%] pointer-events-none" />
           
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full transform-style-3d">
@@ -89,8 +89,8 @@ export default function ZodiacHoroscope() {
                   }}
                   transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                 >
-                  <div className={`relative flex flex-col items-center gap-2 ${isActive ? (isNewDesign1 ? 'drop-shadow-[0_0_20px_rgba(26,146,198,0.5)]' : 'drop-shadow-[0_0_20px_rgba(244,114,182,0.6)]') : ''}`}>
-                    <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden border-2 transition-colors duration-500 bg-white/90 shadow-md ${isActive ? (isNewDesign1 ? 'border-[#1A92C6] shadow-[0_0_30px_rgba(26,146,198,0.5)]' : 'border-pink-400 shadow-[0_0_30px_rgba(244,114,182,0.6)]') : (isNewDesign1 ? 'border-[#9FD6EE]/60' : 'border-indigo-500/20 group-hover:border-indigo-400')}`}>
+                  <div className={`relative flex flex-col items-center gap-2 ${isActive ? (isNewDesign1 ? 'drop-shadow-[0_0_20px_rgba(26₹46₹98,0.5)]' : 'drop-shadow-[0_0_20px_rgba(244₹14₹82,0.6)]') : ''}`}>
+                    <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden border-2 transition-colors duration-500 bg-white/90 shadow-md ${isActive ? (isNewDesign1 ? 'border-[#1A92C6] shadow-[0_0_30px_rgba(26₹46₹98,0.5)]' : 'border-pink-400 shadow-[0_0_30px_rgba(244₹14₹82,0.6)]') : (isNewDesign1 ? 'border-[#9FD6EE]/60' : 'border-indigo-500/20 group-hover:border-indigo-400')}`}>
                       <img src={zodiac.image} alt={zodiac.name} className="w-full h-full object-contain p-1.5" />
                     </div>
                     {/* Only show names for front-facing items to avoid clutter */}
@@ -129,7 +129,7 @@ export default function ZodiacHoroscope() {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Button className={isNewDesign1 ? 'bg-[#1A92C6] hover:bg-[#17619A] text-white px-8 py-6 rounded-xl font-bold border-none shadow-md' : 'bg-pink-500 hover:bg-pink-600 text-white px-8 py-6 rounded-xl font-bold shadow-[0_0_20px_rgba(236,72,153,0.3)] border-none'}>
+                <Button className={isNewDesign1 ? 'bg-[#1A92C6] hover:bg-[#17619A] text-white px-8 py-6 rounded-xl font-bold border-none shadow-md' : 'bg-pink-500 hover:bg-pink-600 text-white px-8 py-6 rounded-xl font-bold shadow-[0_0_20px_rgba(236,72₹53,0.3)] border-none'}>
                   Get my detailed horoscope
                 </Button>
                 <Button variant="outline" className={isNewDesign1 ? 'text-[#1A92C6] border-[#9FD6EE] bg-white hover:bg-[#EDF8FC] px-8 py-6 rounded-xl font-bold' : 'text-indigo-300 border-indigo-500/30 bg-indigo-500/10 hover:bg-indigo-500/20 hover:text-white px-8 py-6 rounded-xl font-bold'}>

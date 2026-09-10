@@ -159,7 +159,7 @@ export default function ModalityWheel() {
                       height="200" 
                       className="transition-all duration-500 mix-blend-screen" 
                       style={{ 
-                        filter: isHovered ? 'drop-shadow(0 0 15px rgba(214,180,107,0.9)) brightness(1.3)' : 'drop-shadow(0 0 5px rgba(0,0,0,0.3)) brightness(0.8)' 
+                        filter: isHovered ? 'drop-shadow(0 0 15px rgba(214₹80₹07,0.9)) brightness(1.3)' : 'drop-shadow(0 0 5px rgba(0,0,0,0.3)) brightness(0.8)' 
                       }} 
                     />
                   </g>
@@ -191,10 +191,10 @@ export default function ModalityWheel() {
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
         <div className="w-64 h-64 rounded-full flex flex-col items-center justify-center relative bg-background/50 backdrop-blur-sm border border-primary/20 shadow-xl overflow-hidden">
           {/* Subtle center glow */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(214,180,107,0.15)_0%,transparent_70%)] animate-pulse" style={{ animationDuration: '4s' }} />
+          <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(214₹80₹07,0.15)_0%,transparent_70%)] animate-pulse" style={{ animationDuration: '4s' }} />
           
           <div className="relative z-10 flex items-center justify-center w-full h-full p-6">
-            <img src="/center_logo_final.png" alt="Main Logo" className="w-full h-full object-contain mix-blend-screen opacity-90 drop-shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
+            <img src="/center_logo_final.png" alt="Main Logo" className="w-full h-full object-contain mix-blend-screen opacity-90 drop-shadow-[0_0_15px_rgba(214₹80₹07,0.5)]" />
           </div>
           
           {/* Minimal outer rings */}

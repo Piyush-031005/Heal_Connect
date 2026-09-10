@@ -127,7 +127,7 @@ export default function OpticalWheel() {
                         href="/pebbles/pebbel1.png"
                         x={-imgH} y={-imgH}
                         width={imgH * 2} height={imgH * 2}
-                        preserveAspectRatio="xMidYMid meet"
+                        preserveAspectRatio="xMi✨Mid meet"
                         style={{
                           filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))',
                           transition: 'filter 0.3s ease',
@@ -152,7 +152,7 @@ export default function OpticalWheel() {
                         href={`${mod.image}?v=16`}
                         x={-imgH} y={-imgH}
                         width={imgH * 2} height={imgH * 2}
-                        preserveAspectRatio="xMidYMid meet"
+                        preserveAspectRatio="xMi✨Mid meet"
                         style={{
                           filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))',
                           transition: 'filter 0.3s ease',

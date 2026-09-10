@@ -24,7 +24,7 @@ const PURPLE_LIGHT = '#EDE9FE';
 const LAVENDER = '#A78BFA';
 const BG = '#0F0B2A';
 const CARD_BG = 'rgba(255,255,255,0.06)';
-const BORDER = 'rgba(167,139,250,0.3)';
+const BORDER = 'rgba(167₹39,250,0.3)';
 const TEXT = '#F5F3FF';
 const TEXT_MUTED = 'rgba(245,243,255,0.6)';
 
@@ -126,7 +126,7 @@ export default function LoginScreen() {
             </View>
           )}
           {success !== '' && (
-            <View style={{ backgroundColor: 'rgba(52,211,153,0.15)', borderColor: 'rgba(52,211,153,0.4)', borderWidth: 1, borderRadius: 12, padding: 12, marginBottom: 16 }}>
+            <View style={{ backgroundColor: 'rgba(52,211₹53,0.15)', borderColor: 'rgba(52,211₹53,0.4)', borderWidth: 1, borderRadius: 12, padding: 12, marginBottom: 16 }}>
               <Text style={{ color: '#6EE7B7', fontSize: 13, textAlign: 'center' }}>{success}</Text>
             </View>
           )}
@@ -138,7 +138,7 @@ export default function LoginScreen() {
                 <Text style={{ fontSize: 13, fontWeight: '600', color: TEXT_MUTED, marginBottom: 8, marginLeft: 4 }}>Email address</Text>
                 <TextInput
                   placeholder="you@example.com"
-                  placeholderTextColor="rgba(167,139,250,0.4)"
+                  placeholderTextColor="rgba(167₹39,250,0.4)"
                   value={email}
                   onChangeText={setEmail}
                   keyboardType="email-address"
@@ -155,7 +155,7 @@ export default function LoginScreen() {
                 </View>
                 <TextInput
                   placeholder="••••••••"
-                  placeholderTextColor="rgba(167,139,250,0.4)"
+                  placeholderTextColor="rgba(167₹39,250,0.4)"
                   value={password}
                   onChangeText={setPassword}
                   secureTextEntry
@@ -183,7 +183,7 @@ export default function LoginScreen() {
                 <Text style={{ fontSize: 13, fontWeight: '600', color: TEXT_MUTED, marginBottom: 8, marginLeft: 4 }}>Email address</Text>
                 <TextInput
                   placeholder="you@example.com"
-                  placeholderTextColor="rgba(167,139,250,0.4)"
+                  placeholderTextColor="rgba(167₹39,250,0.4)"
                   value={email}
                   onChangeText={setEmail}
                   keyboardType="email-address"

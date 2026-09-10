@@ -185,17 +185,17 @@ export default function ExpertDashboardPage() {
       )}
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none fixed">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(214,180,107,0.15)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(46,196,182,0.1)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(214₹80₹07,0.15)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(46₹96₹82,0.1)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
       </div>
 
       {/* ── Navbar ── */}
       <header className="sticky top-0 z-50 w-full border-b border-border bg-white/40 dark:bg-black/40 backdrop-blur-md">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/center_logo_final.png" alt="ZenAuraa" width={32} height={32} className="rounded-full shadow-[0_0_10px_rgba(214,180,107,0.5)]" />
+            <Image src="/center_logo_final.png" alt="ZenAuraa" width={32} height={32} className="rounded-full shadow-[0_0_10px_rgba(214₹80₹07,0.5)]" />
             <span className="text-xl font-extrabold text-primary uppercase tracking-wide">ZenAuraa</span>
-            <span className="hidden sm:inline-flex items-center gap-1 ml-2 text-xs font-semibold text-accent bg-accent/10 border border-accent/30 rounded-full px-2 py-0.5 shadow-[0_0_10px_rgba(46,196,182,0.1)]">
+            <span className="hidden sm:inline-flex items-center gap-1 ml-2 text-xs font-semibold text-accent bg-accent/10 border border-accent/30 rounded-full px-2 py-0.5 shadow-[0_0_10px_rgba(46₹96₹82,0.1)]">
               <Sparkles className="w-3 h-3" /> Expert
             </span>
           </Link>
@@ -207,7 +207,7 @@ export default function ExpertDashboardPage() {
               disabled={togglingOnline}
               className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all border ${
                 isOnline
-                  ? 'bg-accent/20 text-accent border-accent/30 shadow-[0_0_15px_rgba(46,196,182,0.2)]'
+                  ? 'bg-accent/20 text-accent border-accent/30 shadow-[0_0_15px_rgba(46₹96₹82,0.2)]'
                   : 'bg-secondary text-muted-foreground border-border hover:bg-white/10 hover:text-foreground'
               }`}
             >
@@ -219,7 +219,7 @@ export default function ExpertDashboardPage() {
             <div className="relative" ref={profileMenuRef}>
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-all overflow-hidden shadow-[0_0_15px_rgba(214,180,107,0.4)]"
+                className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-all overflow-hidden shadow-[0_0_15px_rgba(214₹80₹07,0.4)]"
               >
                 {profile?.photoUrl
                   ? <img src={profile.photoUrl} alt={profile.name} className="w-full h-full object-cover" />
@@ -265,7 +265,7 @@ export default function ExpertDashboardPage() {
           <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex items-center gap-5">
-              <div className="w-20 h-20 rounded-2xl bg-secondary border border-border flex items-center justify-center text-foreground text-3xl font-extrabold overflow-hidden shrink-0 shadow-[0_0_20px_rgba(214,180,107,0.2)]">
+              <div className="w-20 h-20 rounded-2xl bg-secondary border border-border flex items-center justify-center text-foreground text-3xl font-extrabold overflow-hidden shrink-0 shadow-[0_0_20px_rgba(214₹80₹07,0.2)]">
                 {profile?.photoUrl
                   ? <img src={profile.photoUrl} alt={profile.name} className="w-full h-full object-cover" />
                   : initials}
@@ -284,7 +284,7 @@ export default function ExpertDashboardPage() {
             </div>
             <div className="flex flex-col items-end gap-3 mt-4 md:mt-0">
               <div className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg transition-all ${
-                isOnline ? 'bg-accent text-primary-foreground shadow-[0_0_15px_rgba(46,196,182,0.3)]' : 'bg-secondary border border-border text-muted-foreground'
+                isOnline ? 'bg-accent text-primary-foreground shadow-[0_0_15px_rgba(46₹96₹82,0.3)]' : 'bg-secondary border border-border text-muted-foreground'
               }`}>
                 {isOnline ? <Wifi className="w-4 h-4" /> : <WifiOff className="w-4 h-4" />}
                 {isOnline ? 'Accepting Sessions' : 'Currently Offline'}
@@ -330,7 +330,7 @@ export default function ExpertDashboardPage() {
                 <h2 className="text-2xl font-extrabold text-foreground">Active Sessions</h2>
               </div>
               {sessions.length > 0 && (
-                <span className="flex items-center gap-2 text-xs font-bold text-accent bg-accent/10 border border-accent/30 rounded-full px-4 py-1.5 shadow-[0_0_10px_rgba(46,196,182,0.1)]">
+                <span className="flex items-center gap-2 text-xs font-bold text-accent bg-accent/10 border border-accent/30 rounded-full px-4 py-1.5 shadow-[0_0_10px_rgba(46₹96₹82,0.1)]">
                   <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
                   {sessions.length} waiting
                 </span>
@@ -339,7 +339,7 @@ export default function ExpertDashboardPage() {
 
             {sessions.length === 0 ? (
               <div className="bg-secondary rounded-3xl border border-dashed border-border p-16 text-center backdrop-blur-sm">
-                <div className="w-20 h-20 rounded-full bg-secondary border border-border flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(214,180,107,0.05)]">
+                <div className="w-20 h-20 rounded-full bg-secondary border border-border flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(214₹80₹07,0.05)]">
                   <MessageCircle className="w-10 h-10 text-muted-foreground" />
                 </div>
                 <p className="text-lg font-bold text-muted-foreground mb-2">No active sessions</p>
@@ -349,7 +349,7 @@ export default function ExpertDashboardPage() {
                 {!isOnline && (
                   <button
                     onClick={toggleOnline}
-                    className="mt-6 inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold px-6 py-3 rounded-xl transition-all shadow-[0_0_20px_rgba(214,180,107,0.3)]"
+                    className="mt-6 inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold px-6 py-3 rounded-xl transition-all shadow-[0_0_20px_rgba(214₹80₹07,0.3)]"
                   >
                     <Wifi className="w-4 h-4" /> Go Online Now
                   </button>
@@ -385,7 +385,7 @@ export default function ExpertDashboardPage() {
                     </div>
                     <Button
                       onClick={() => router.push(`/session/${session.id}`)}
-                      className="bg-accent hover:bg-accent/90 text-primary-foreground border-0 rounded-xl px-8 h-12 font-bold shadow-[0_0_20px_rgba(46,196,182,0.3)] shrink-0 w-full sm:w-auto transition-all"
+                      className="bg-accent hover:bg-accent/90 text-primary-foreground border-0 rounded-xl px-8 h-12 font-bold shadow-[0_0_20px_rgba(46₹96₹82,0.3)] shrink-0 w-full sm:w-auto transition-all"
                     >
                       Join Session
                     </Button>
@@ -404,7 +404,7 @@ export default function ExpertDashboardPage() {
 
             <Card className="bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-border shadow-2xl rounded-2xl overflow-hidden relative z-10">
               <div className="h-24 bg-gradient-to-r from-[#301368] via-[#5F3BA9] to-[#D5B6DC] border-b border-border relative">
-                 <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(214,180,107,0.2)_0%,rgba(0,0,0,0)_60%)]" />
+                 <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(214₹80₹07,0.2)_0%,rgba(0,0,0,0)_60%)]" />
               </div>
               <CardContent className="px-6 pb-6 -mt-10 relative z-10">
                 <div className="w-20 h-20 rounded-2xl bg-[#121420] border-2 border-border flex items-center justify-center text-foreground text-2xl font-extrabold overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] mb-4">
@@ -437,7 +437,7 @@ export default function ExpertDashboardPage() {
                   className={`w-full mt-6 py-3.5 rounded-xl text-sm font-bold transition-all shadow-lg border-0 ${
                     isOnline
                       ? 'bg-white/10 text-foreground hover:bg-white/20'
-                      : 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_20px_rgba(214,180,107,0.3)]'
+                      : 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_20px_rgba(214₹80₹07,0.3)]'
                   }`}
                 >
                   {isOnline ? 'Go Offline' : 'Go Online'}

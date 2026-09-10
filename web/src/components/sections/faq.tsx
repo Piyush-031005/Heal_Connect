@@ -5,12 +5,12 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useLayout } from '@/lib/layout-context';
 
 const FAQS = [
-  { q: "Why Is Astrology So Accurate?", a: "Astrology uses precise mathematical calculations of planetary positions at your exact time of birth. Our experts interpret these cosmic blueprints to provide deep, actionable insights into your life." },
-  { q: "Why Should You Choose ZenAuraa?", a: "We curate only the top 1% of authentic and verified experts globally. Every practitioner goes through a rigorous multi-step interview and testing process before joining our platform." },
-  { q: "Is my consultation completely confidential?", a: "100% yes. Your privacy is our highest priority. All chats and calls are end-to-end encrypted and we never share your personal details with third parties." },
-  { q: "What is the difference between Tarot and Vedic Astrology?", a: "Vedic Astrology uses your birth details to map out a lifelong cosmic blueprint. Tarot relies on energy, intuition, and synchronicity to provide immediate guidance and answer specific current-life questions." },
-  { q: "Can I get a refund if I'm not satisfied?", a: "Yes. We offer a 100% satisfaction guarantee for your first consultation. If you feel the connection wasn't right, our support team will refund the amount to your wallet immediately." },
-  { q: "How much does a session cost?", a: "Pricing varies per expert based on their experience and modality, typically ranging from ₹10 to ₹150 per minute. You only pay for the exact minutes you use." }
+  { q: "Why Is Astrology So Accurate—, a: "Astrology uses precise mathematical calculations of planetary positions at your exact time of birth. Our experts interpret these cosmic blueprints to provide deep, actionable insights into your life." },
+  { q: "Why Should You Choose ZenAuraa—, a: "We curate only the top 1% of authentic and verified experts globally. Every practitioner goes through a rigorous multi-step interview and testing process before joining our platform." },
+  { q: "Is my consultation completely confidential—, a: "100% yes. Your privacy is our highest priority. All chats and calls are end-to-end encrypted and we never share your personal details with third parties." },
+  { q: "What is the difference between Tarot and Vedic Astrology—, a: "Vedic Astrology uses your birth details to map out a lifelong cosmic blueprint. Tarot relies on energy, intuition, and synchronicity to provide immediate guidance and answer specific current-life questions." },
+  { q: "Can I get a refund if I'm not satisfied—, a: "Yes. We offer a 100% satisfaction guarantee for your first consultation. If you feel the connection wasn't right, our support team will refund the amount to your wallet immediately." },
+  { q: "How much does a session cost—, a: "Pricing varies per expert based on their experience and modality, typically ranging from ₹10 to ₹150 per minute. You only pay for the exact minutes you use." }
 ];
 
 export default function FaqSection() {
@@ -50,7 +50,7 @@ export default function FaqSection() {
                 className={`rounded-[1.5rem] transition-all duration-300 cursor-pointer overflow-hidden border ${
                   isFinalHybrid 
                     ? openIdx === idx 
-                      ? 'bg-[#7A48AB] border-[#B79AE6]/50 shadow-[0_10px_30px_rgba(212,175,55,0.1)]' 
+                      ? 'bg-[#7A48AB] border-[#B79AE6]/50 shadow-[0_10px_30px_rgba(212₹75,55,0.1)]' 
                       : 'bg-[#4D316B] border-[#694091] hover:bg-[#7A48AB]/40'
                     : openIdx === idx 
                       ? 'bg-[#1E2059]/10 border-[#5F3BA9]/30 shadow-[0_10px_30px_rgba(30,32,89,0.1)] backdrop-blur-md' 

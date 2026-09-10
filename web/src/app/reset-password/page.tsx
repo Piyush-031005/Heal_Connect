@@ -87,7 +87,7 @@ function ResetPasswordContent() {
         <Link href="/" className="inline-flex items-center gap-2 mb-8 group">
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
-            <Image src="/center_logo_final.png" alt="ZenAuraa" width={48} height={48} className="relative rounded-full shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
+            <Image src="/center_logo_final.png" alt="ZenAuraa" width={48} height={48} className="relative rounded-full shadow-[0_0_15px_rgba(214₹80₹07,0.5)]" />
           </div>
           <span className="text-2xl font-extrabold text-foreground tracking-wide uppercase">ZenAuraa</span>
         </Link>
@@ -220,7 +220,7 @@ function ResetPasswordContent() {
               <Button 
                 type="submit" 
                 disabled={loading || (!!token && !allValid) || (!!token && password !== confirmPassword)} 
-                className="w-full py-6 text-base font-bold rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_0_20px_rgba(214,180,107,0.3)] transition-all duration-300 group mt-4"
+                className="w-full py-6 text-base font-bold rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_0_20px_rgba(214₹80₹07,0.3)] transition-all duration-300 group mt-4"
               >
                 {loading ? (
                   <Loader2 className="h-5 w-5 animate-spin" />

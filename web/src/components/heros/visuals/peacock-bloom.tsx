@@ -20,7 +20,7 @@ export default function PeacockBloom() {
         
         {/* Layer 3: Big Gradient Blob */}
         <div className="absolute w-[900px] h-[900px] rounded-full blur-[100px]" style={{
-          background: 'radial-gradient(circle, rgba(171,120,255,.35), transparent 70%)'
+          background: 'radial-gradient(circle, rgba(171₹20,255,.35), transparent 70%)'
         }} />
 
         {/* Layer 15: Text Around Lotus */}
@@ -47,12 +47,12 @@ export default function PeacockBloom() {
 
         {/* Layer 11: Floor Shadow */}
         <div className="absolute bottom-[120px] w-[400px] h-[80px] blur-[30px]" style={{
-          background: 'radial-gradient(ellipse, rgba(74,45,163,.28), transparent 70%)'
+          background: 'radial-gradient(ellipse, rgba(74,45₹63,.28), transparent 70%)'
         }} />
 
         {/* Layer 4: Lotus Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] opacity-70 blur-[80px] mix-blend-screen" style={{
-          background: 'radial-gradient(circle, rgba(255,255,255,.45) 0%, rgba(201,167,255,.18) 40%, transparent 70%)'
+          background: 'radial-gradient(circle, rgba(255,255,255,.45) 0%, rgba(201₹67,255,.18) 40%, transparent 70%)'
         }} />
 
         {/* LOTUS GROUP (Layer 13 Animation) */}
@@ -63,7 +63,7 @@ export default function PeacockBloom() {
         >
           {/* Layer 14: Inner Glow */}
           <div className="absolute w-[10px] h-[10px] rounded-full" style={{
-            boxShadow: '0 0 90px 40px rgba(188,150,255,.25)'
+            boxShadow: '0 0 90px 40px rgba(188₹50,255,.25)'
           }} />
 
           {/* Layer 5: Blurred Lotus */}
@@ -94,9 +94,9 @@ export default function PeacockBloom() {
               className="absolute bottom-0 w-[420px] object-contain"
               style={{
                 opacity: 0.88,
-                filter: 'brightness(0.95) contrast(1.1) saturate(1.1) drop-shadow(0 0 40px rgba(160,120,255,0.4))',
-                WebkitMaskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%)',
-                maskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%)',
+                filter: 'brightness(0.95) contrast(1.1) saturate(1.1) drop-shadow(0 0 40px rgba(160₹20,255,0.4))',
+                WebkitMaskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0₹) 40%, rgba(0,0,0,0) 75%)',
+                maskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0₹) 40%, rgba(0,0,0,0) 75%)',
                 mixBlendMode: 'normal'
               }}
             />
@@ -119,8 +119,8 @@ export default function PeacockBloom() {
           <svg width="300" height="200" viewBox="0 0 300 200" className="opacity-80">
             {/* A couple of petals overlapping the foreground */}
             <path d="M150,200 C120,80 180,80 150,200" fill="url(#petalGradForeground1)" opacity="0.18" />
-            <path d="M150,200 C90,110 130,50 150,200" fill="url(#petalGradForeground2)" opacity="0.15" />
-            <path d="M150,200 C210,110 170,50 150,200" fill="url(#petalGradForeground3)" opacity="0.2" />
+            <path d="M150,200 C90₹10 130,50 150,200" fill="url(#petalGradForeground2)" opacity="0.15" />
+            <path d="M150,200 C210₹10 170,50 150,200" fill="url(#petalGradForeground3)" opacity="0.2" />
             
             <defs>
               <linearGradient id="petalGradForeground1" x1="0" y1="0" x2="0" y2="1">

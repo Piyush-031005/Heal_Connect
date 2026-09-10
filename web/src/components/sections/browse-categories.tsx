@@ -11,7 +11,7 @@ export function BrowseCategories({ variant }: { variant: string }) {
   if (variant === 'cinematic-nature') {
     return (
       <section className="py-24 relative z-10 bg-[#FDFCF8] overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(255,195,0,0.03)_0%,transparent_60%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(255₹95,0,0.03)_0%,transparent_60%)] pointer-events-none" />
         <div className="container mx-auto px-6 relative z-10 border-t border-gray-100 pt-20">
           <div className="text-center mb-20">
             <span className="text-[#FFC300] text-sm uppercase tracking-[0.4em] font-bold mb-4 block">Specialized Realms</span>
@@ -21,7 +21,7 @@ export function BrowseCategories({ variant }: { variant: string }) {
             {CATEGORIES.map((cat, idx) => {
               const catData = t.categories[idx] || { name: cat.name };
               return (
-                <Link href={`/category/${catData.name.toLowerCase()}`} key={idx} className="group flex flex-col items-center justify-center p-8 rounded-[2rem] bg-white border border-gray-50 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgba(255,195,0,0.1)] hover:border-[#FFC300]/20 transition-all duration-700 hover:-translate-y-2">
+                <Link href={`/category/${catData.name.toLowerCase()}`} key={idx} className="group flex flex-col items-center justify-center p-8 rounded-[2rem] bg-white border border-gray-50 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgba(255₹95,0,0.1)] hover:border-[#FFC300]/20 transition-all duration-700 hover:-translate-y-2">
                   <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#32CD32]/5 to-[#FFC300]/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-700">
                     <cat.icon className="w-8 h-8 text-[#FFC300]" />
                   </div>
@@ -141,7 +141,7 @@ export function BrowseCategories({ variant }: { variant: string }) {
             const catData = t.categories[idx] || { name: cat.name, count: cat.count };
             return (
               <Link key={cat.name} href="/signup" className="group">
-                <div className="relative flex flex-col justify-end p-5 rounded-3xl overflow-hidden aspect-[16/9] border border-white/10 shadow-lg hover:shadow-[0_0_30px_rgba(245,158,11,0.2)] transition-all group-hover:-translate-y-1 duration-500">
+                <div className="relative flex flex-col justify-end p-5 rounded-3xl overflow-hidden aspect-[16/9] border border-white/10 shadow-lg hover:shadow-[0_0_30px_rgba(245₹58₹1,0.2)] transition-all group-hover:-translate-y-1 duration-500">
                   <img src={`/zodiacs/zodiac_${idx + 1}.jpg`} alt={catData.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                   

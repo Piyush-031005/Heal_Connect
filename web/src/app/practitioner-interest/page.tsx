@@ -140,7 +140,7 @@ function Step1({ form, set }: { form: FormData; set: (k: keyof FormData, v: stri
       <Field label="Email" required>
         <input className={inputCls} type="email" placeholder="you@example.com" value={form.email} onChange={e => set('email', e.target.value)} />
       </Field>
-      <Field label="Where are you based?" required>
+      <Field label="Where are you based— required>
         <input className={inputCls} placeholder="Country / City" value={form.location} onChange={e => set('location', e.target.value)} />
       </Field>
       <Field label="Website or social media">
@@ -166,7 +166,7 @@ function Step2({ form, setField, toggleArea, toggleOffering }: {
       </div>
 
       {/* Practice Areas */}
-      <Field label="Which area(s) best describe your practice?" required>
+      <Field label="Which area(s) best describe your practice— required>
         <div className="space-y-3 mt-1">
           {PRACTICE_AREAS.map(group => (
             <div key={group.group}>
@@ -186,7 +186,7 @@ function Step2({ form, setField, toggleArea, toggleOffering }: {
       </Field>
 
       {/* Main Area */}
-      <Field label="What is your main area of practice?" required>
+      <Field label="What is your main area of practice— required>
         <select className={inputCls} value={form.mainArea} onChange={e => setField('mainArea', e.target.value)}>
           <option value="">Select one</option>
           {[...allItems, 'Other'].map(item => (
@@ -196,7 +196,7 @@ function Step2({ form, setField, toggleArea, toggleOffering }: {
       </Field>
 
       {/* Experience */}
-      <Field label="How long have you been practising?" required>
+      <Field label="How long have you been practising— required>
         <div className="flex flex-wrap gap-2 mt-1">
           {EXPERIENCE_OPTIONS.map(opt => (
             <Toggle key={opt} label={opt} active={form.experience === opt} onClick={() => setField('experience', opt)} />
@@ -205,14 +205,14 @@ function Step2({ form, setField, toggleArea, toggleOffering }: {
       </Field>
 
       {/* Expertise Development */}
-      <Field label="How did you develop your expertise?" required>
+      <Field label="How did you develop your expertise— required>
         <textarea className={textareaCls} rows={3}
           placeholder="e.g. formal training, certification, apprenticeship, mentorship, lineage, self-study, professional experience or a combination."
           value={form.expertiseDevelopment} onChange={e => setField('expertiseDevelopment', e.target.value)} />
       </Field>
 
       {/* Offerings */}
-      <Field label="How do you work with clients online?" required>
+      <Field label="How do you work with clients online— required>
         <p className="text-xs text-gray-400 mb-2">What would you like to offer through ZenAuraa?</p>
         <div className="flex flex-wrap gap-2">
           {OFFERING_OPTIONS.map(opt => (
@@ -224,12 +224,12 @@ function Step2({ form, setField, toggleArea, toggleOffering }: {
       {/* Practice Bio */}
       <Field label="Tell us about your practice" required>
         <textarea className={textareaCls} rows={4}
-          placeholder="What can someone expect when they work with you?"
+          placeholder="What can someone expect when they work with you—
           value={form.practiceBio} onChange={e => setField('practiceBio', e.target.value)} />
       </Field>
 
       {/* Why ZenAuraa */}
-      <Field label="What interests you about ZenAuraa?" required>
+      <Field label="What interests you about ZenAuraa— required>
         <textarea className={textareaCls} rows={3}
           placeholder="Tell us why you'd like to join our community..."
           value={form.whyZenAuraa} onChange={e => setField('whyZenAuraa', e.target.value)} />
@@ -246,7 +246,7 @@ function Step3({ form, setField }: { form: FormData; setField: (k: keyof FormDat
         <p className="text-sm text-gray-500 mt-1">Almost done — just a couple more things.</p>
       </div>
 
-      <Field label="Anything else you'd like us to know?">
+      <Field label="Anything else you'd like us to know—>
         <textarea className={textareaCls} rows={4} placeholder="Optional." value={form.anythingElse} onChange={e => setField('anythingElse', e.target.value)} />
       </Field>
 

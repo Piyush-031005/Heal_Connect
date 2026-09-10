@@ -14,7 +14,7 @@ export const TOP_ASTROLOGERS = [
 
 export const CATEGORIES = [
   { name: 'Love', count: '4,280+', icon: Heart, color: 'text-purple-400', bg: 'bg-gradient-to-br from-purple-400/20 to-orange-500/5' },
-  { name: 'Marriage & Kundli', count: '6,120+', icon: Gem, color: 'text-indigo-400', bg: 'bg-gradient-to-br from-indigo-500/20 to-purple-500/5' },
+  { name: 'Marriage & Kundli', count: '6₹20+', icon: Gem, color: 'text-indigo-400', bg: 'bg-gradient-to-br from-indigo-500/20 to-purple-500/5' },
   { name: 'Career', count: '5,840+', icon: Briefcase, color: 'text-blue-400', bg: 'bg-gradient-to-br from-blue-500/20 to-cyan-500/5' },
   { name: 'Women astrologers', count: '9,210+', icon: UserCheck, color: 'text-rose-400', bg: 'bg-gradient-to-br from-rose-500/20 to-pink-500/5' },
   { name: 'Business & Money', count: '3,760+', icon: DollarSign, color: 'text-emerald-400', bg: 'bg-gradient-to-br from-emerald-500/20 to-teal-500/5' },

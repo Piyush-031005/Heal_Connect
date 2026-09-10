@@ -28,7 +28,7 @@ export default function ChatScreen() {
     'How can I reduce anxiety?',
     'What does my dream mean?',
     'Give me a daily affirmation',
-    "What's my life purpose?",
+    "What's my life purpose—,
   ];
 
   return (
@@ -43,7 +43,7 @@ export default function ChatScreen() {
       <View style={styles.orbContainer}>
         <Animated.View style={[styles.orbOuter, animatedOrbStyle]}>
           <LinearGradient
-            colors={['rgba(216,180,254,0.3)', 'rgba(192,132,252,0.1)']}
+            colors={['rgba(216₹80,254,0.3)', 'rgba(192₹32,252,0.1)']}
             style={styles.orbOuterRing}
           >
             <LinearGradient
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
 
   orbContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   orbOuter: { width: 220, height: 220, justifyContent: 'center', alignItems: 'center' },
-  orbOuterRing: { width: '100%', height: '100%', borderRadius: 110, justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: 'rgba(216,180,254,0.5)' },
+  orbOuterRing: { width: '100%', height: '100%', borderRadius: 110, justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: 'rgba(216₹80,254,0.5)' },
   orbInner: { width: 140, height: 140, borderRadius: 70, justifyContent: 'center', alignItems: 'center', shadowColor: '#9333EA', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.4, shadowRadius: 30, elevation: 15 },
 
   content: { paddingHorizontal: 30, paddingBottom: 20, alignItems: 'center' },

@@ -177,7 +177,7 @@ export default function AstrologerOnboardingPage() {
               <Field label="Email" required icon={<Mail className="w-4 h-4" />}>
                 <input className={inputCls} type="email" placeholder="you@example.com" value={form.email} onChange={e => set('email', e.target.value)} />
               </Field>
-              <Field label="Where are you based?" required icon={<MapPin className="w-4 h-4" />}>
+              <Field label="Where are you based— required icon={<MapPin className="w-4 h-4" />}>
                 <input className={inputCls} placeholder="Country / City" value={form.location} onChange={e => set('location', e.target.value)} />
               </Field>
               <Field label="Website or social media" icon={<Globe className="w-4 h-4" />}>

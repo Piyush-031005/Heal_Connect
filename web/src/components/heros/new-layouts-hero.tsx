@@ -44,7 +44,7 @@ export default function NewLayoutsHero() {
         <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
           <div className="absolute inset-0" style={{
             background: `
-              radial-gradient(circle at 80% 40%, rgba(149,109,255,.18), transparent 45%),
+              radial-gradient(circle at 80% 40%, rgba(149₹09,255,.18), transparent 45%),
               radial-gradient(circle at 50% 60%, rgba(255,255,255,.5), transparent 55%),
               radial-gradient(circle at 90% 80%, rgba(110,80,255,.12), transparent 45%),
               linear-gradient(180deg, #F7F0FF, #F0E5FF, #E9DBFF)

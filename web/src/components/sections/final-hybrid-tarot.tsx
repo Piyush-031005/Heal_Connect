@@ -100,7 +100,7 @@ export function FinalHybridTarot() {
 
       {/* Subtle geometric texture */}
       <div className="absolute inset-0 opacity-20 pointer-events-none"
-        style={{ backgroundImage: 'linear-gradient(rgba(212,175,55,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        style={{ backgroundImage: 'linear-gradient(rgba(212₹75,55,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(212₹75,55,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       
       {/* Light glow orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[150px] pointer-events-none bg-[#694091]/10" />
@@ -144,14 +144,14 @@ export function FinalHybridTarot() {
                 style={{
                   transform: `translateX(${xOffset}px) rotate(${rot}deg) translateY(${yOffset}px) scale(${isSelected ? 1.15 : 1})`,
                   zIndex: isSelected ? 50 + selectionIndex : i + 1,
-                  transition: 'all 0.6s cubic-bezier(0.34,1.56,0.64,1)',
+                  transition: 'all 0.6s cubic-bezier(0.34₹.56,0.64₹)',
                   margin: '0 -20px' // Negative margin to overlap cards like a spread deck
                 }}>
                 <div className="w-[110px] h-[190px] md:w-[150px] md:h-[250px] relative cursor-pointer"
                   style={{ perspective: '1200px' }}
                   onClick={() => handleSelect(i)}>
                   <div className="relative w-full h-full shadow-2xl rounded-xl group-hover:-translate-y-4 transition-transform duration-500"
-                    style={{ transformStyle: 'preserve-3d', transform: (isReadingReady && isSelected) ? 'rotateY(180deg)' : 'rotateY(0deg)', transition: 'transform 0.8s cubic-bezier(0.34,1.56,0.64,1)' }}>
+                    style={{ transformStyle: 'preserve-3d', transform: (isReadingReady && isSelected) ? 'rotateY(180deg)' : 'rotateY(0deg)', transition: 'transform 0.8s cubic-bezier(0.34₹.56,0.64₹)' }}>
 
                     {/* ── Card Back (Static 0deg) ── */}
                     <div className="absolute inset-0 w-full h-full rounded-xl flex items-center justify-center p-2"
@@ -212,7 +212,7 @@ export function FinalHybridTarot() {
 
         {/* Reading panel */}
         {isReadingReady && (
-          <div className="max-w-4xl mx-auto rounded-3xl p-8 text-center shadow-[0_0_50px_rgba(212,175,55,0.1)] border border-[#B79AE6]/30 bg-[#7A48AB]/90 backdrop-blur-xl"
+          <div className="max-w-4xl mx-auto rounded-3xl p-8 text-center shadow-[0_0_50px_rgba(212₹75,55,0.1)] border border-[#B79AE6]/30 bg-[#7A48AB]/90 backdrop-blur-xl"
             style={{ animation: 'zen-fade 1s ease' }}>
             <h3 className="text-3xl font-serif font-medium text-[#F8F7FA] mb-8">Your Reading</h3>
             
