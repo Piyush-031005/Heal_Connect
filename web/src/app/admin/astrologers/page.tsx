@@ -17,7 +17,7 @@ const STATUS_COLORS: Record<string, string> = {
   ADMIN_REVIEW: 'bg-indigo-100 text-indigo-700',
   SUSPENDED: 'bg-purple-100 text-purple-700',
   BLOCKED: 'bg-red-200 text-red-800',
-  DRAFT: 'bg-gray-100 text-gray-500',
+  DRAFT: 'bg-purple-50 text-purple-500',
   PHONE_VERIFIED: 'bg-blue-100 text-blue-600',
   PROFILE_COMPLETED: 'bg-indigo-100 text-indigo-600',
 };
@@ -86,20 +86,20 @@ export default function AdminAstrologersPage() {
   return (
     <div className="p-6 max-w-7xl mx-auto">
       {toast && (
-        <div className="fixed top-4 right-4 z-50 bg-gray-900 text-white px-4 py-2 rounded-lg shadow-lg text-sm">{toast}</div>
+        <div className="fixed top-4 right-4 z-50 bg-indigo-950 text-white px-4 py-2 rounded-lg shadow-lg text-sm">{toast}</div>
       )}
 
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Astrologer Applications</h1>
-          <p className="text-sm text-gray-500 mt-0.5">{pagination.total} total</p>
+          <h1 className="text-2xl font-bold text-indigo-950">Astrologer Applications</h1>
+          <p className="text-sm text-purple-500 mt-0.5">{pagination.total} total</p>
         </div>
       </div>
 
       {/* Filters */}
       <div className="flex flex-wrap gap-3 mb-6">
         <div className="relative">
-          <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-2.5 w-4 h-4 text-purple-400" />
           <Input
             placeholder="Search name / phone..."
             value={search}
@@ -111,7 +111,7 @@ export default function AdminAstrologersPage() {
         <div className="flex gap-2 flex-wrap">
           {['ADMIN_REVIEW', 'APPROVED', 'REJECTED', 'SUSPENDED', ''].map((s) => (
             <button key={s} onClick={() => setStatusFilter(s)}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${statusFilter === s ? 'bg-indigo-500 text-white border-indigo-500' : 'border-gray-200 text-gray-600 hover:border-indigo-300'}`}>
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${statusFilter === s ? 'bg-indigo-500 text-white border-indigo-500' : 'border-violet-200 text-purple-700 hover:border-indigo-300'}`}>
               {s || 'All'}
             </button>
           ))}
@@ -119,33 +119,33 @@ export default function AdminAstrologersPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-violet-200 overflow-hidden">
         {loading ? (
           <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-indigo-500" /></div>
         ) : astrologers.length === 0 ? (
-          <div className="text-center py-16 text-gray-400">No astrologers found.</div>
+          <div className="text-center py-16 text-purple-400">No astrologers found.</div>
         ) : (
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-purple-50 border-b border-violet-200">
               <tr>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">Name</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">Phone</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">Status</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">Docs</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">Submitted</th>
+                <th className="text-left px-4 py-3 font-semibold text-purple-700">Name</th>
+                <th className="text-left px-4 py-3 font-semibold text-purple-700">Phone</th>
+                <th className="text-left px-4 py-3 font-semibold text-purple-700">Status</th>
+                <th className="text-left px-4 py-3 font-semibold text-purple-700">Docs</th>
+                <th className="text-left px-4 py-3 font-semibold text-purple-700">Submitted</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-purple-100">
               {astrologers.map((a) => (
-                <tr key={a.id} className="hover:bg-gray-50 transition-colors">
+                <tr key={a.id} className="hover:bg-purple-50 transition-colors">
                   <td className="px-4 py-3">
-                    <p className="font-medium text-gray-900">{a.displayName || a.fullLegalName || '—'}</p>
-                    <p className="text-xs text-gray-400">{a.fullLegalName}</p>
+                    <p className="font-medium text-indigo-950">{a.displayName || a.fullLegalName || '—'}</p>
+                    <p className="text-xs text-purple-400">{a.fullLegalName}</p>
                   </td>
-                  <td className="px-4 py-3 text-gray-600">{a.user?.phone || '—'}</td>
+                  <td className="px-4 py-3 text-purple-700">{a.user?.phone || '—'}</td>
                   <td className="px-4 py-3">
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${STATUS_COLORS[a.applicationStatus] ?? 'bg-gray-100 text-gray-500'}`}>
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${STATUS_COLORS[a.applicationStatus] ?? 'bg-purple-50 text-purple-500'}`}>
                       {a.applicationStatus}
                     </span>
                   </td>
@@ -153,10 +153,10 @@ export default function AdminAstrologersPage() {
                     <div className="flex gap-1">
                       {a.identityVerified && <span className="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">ID ✓</span>}
                       {a.professionalVerified && <span className="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">Prof ✓</span>}
-                      {!a.identityVerified && <span className="text-xs bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded">ID ?</span>}
+                      {!a.identityVerified && <span className="text-xs bg-purple-50 text-purple-400 px-1.5 py-0.5 rounded">ID ?</span>}
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-gray-400 text-xs">
+                  <td className="px-4 py-3 text-purple-400 text-xs">
                     {a.application?.submittedAt ? new Date(a.application.submittedAt).toLocaleDateString('en-IN') : '—'}
                   </td>
                   <td className="px-4 py-3">
@@ -176,7 +176,7 @@ export default function AdminAstrologersPage() {
         <div className="flex justify-center gap-2 mt-4">
           {Array.from({ length: pagination.pages }, (_, i) => i + 1).map((p) => (
             <button key={p} onClick={() => load(p)}
-              className={`w-8 h-8 rounded-full text-sm font-medium ${p === pagination.page ? 'bg-indigo-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+              className={`w-8 h-8 rounded-full text-sm font-medium ${p === pagination.page ? 'bg-indigo-500 text-white' : 'bg-purple-50 text-purple-700 hover:bg-violet-100'}`}>
               {p}
             </button>
           ))}
@@ -191,13 +191,13 @@ export default function AdminAstrologersPage() {
               <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-indigo-500" /></div>
             ) : selected && (
               <>
-                <div className="p-6 border-b border-gray-100">
+                <div className="p-6 border-b border-purple-100">
                   <div className="flex items-start justify-between">
                     <div>
-                      <h2 className="text-xl font-bold text-gray-900">{selected.profile.displayName || selected.profile.fullLegalName}</h2>
-                      <p className="text-sm text-gray-500">{selected.profile.user?.phone} · {selected.profile.user?.email || 'No email'}</p>
+                      <h2 className="text-xl font-bold text-indigo-950">{selected.profile.displayName || selected.profile.fullLegalName}</h2>
+                      <p className="text-sm text-purple-500">{selected.profile.user?.phone} · {selected.profile.user?.email || 'No email'}</p>
                     </div>
-                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${STATUS_COLORS[selected.profile.applicationStatus] ?? 'bg-gray-100 text-gray-500'}`}>
+                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${STATUS_COLORS[selected.profile.applicationStatus] ?? 'bg-purple-50 text-purple-500'}`}>
                       {selected.profile.applicationStatus}
                     </span>
                   </div>
@@ -206,20 +206,20 @@ export default function AdminAstrologersPage() {
                 <div className="p-6 space-y-5">
                   {/* Profile info */}
                   <div className="grid grid-cols-2 gap-3 text-sm">
-                    <div><span className="text-gray-400">Experience:</span> <span className="font-medium">{selected.profile.astrologyExperienceYears} yrs</span></div>
-                    <div><span className="text-gray-400">City:</span> <span className="font-medium">{selected.profile.city || '—'}, {selected.profile.state || '—'}</span></div>
-                    <div className="col-span-2"><span className="text-gray-400">Specializations:</span> <span className="font-medium">{selected.profile.specializations?.join(', ') || '—'}</span></div>
+                    <div><span className="text-purple-400">Experience:</span> <span className="font-medium">{selected.profile.astrologyExperienceYears} yrs</span></div>
+                    <div><span className="text-purple-400">City:</span> <span className="font-medium">{selected.profile.city || '—'}, {selected.profile.state || '—'}</span></div>
+                    <div className="col-span-2"><span className="text-purple-400">Specializations:</span> <span className="font-medium">{selected.profile.specializations?.join(', ') || '—'}</span></div>
                     {selected.profile.professionalBio && (
-                      <div className="col-span-2"><span className="text-gray-400">Bio:</span> <p className="text-gray-700 mt-0.5 text-xs leading-relaxed">{selected.profile.professionalBio}</p></div>
+                      <div className="col-span-2"><span className="text-purple-400">Bio:</span> <p className="text-purple-800 mt-0.5 text-xs leading-relaxed">{selected.profile.professionalBio}</p></div>
                     )}
                   </div>
 
                   {/* KYC */}
                   <div>
-                    <h3 className="font-semibold text-gray-800 mb-2 text-sm">KYC Verification</h3>
-                    <div className="bg-gray-50 rounded-lg p-3 text-sm space-y-1">
-                      <div className="flex justify-between"><span className="text-gray-500">ID Doc Type</span><span className="font-medium">{selected.profile.kycVerification?.idDocType || '—'}</span></div>
-                      <div className="flex justify-between"><span className="text-gray-500">KYC Status</span>
+                    <h3 className="font-semibold text-purple-900 mb-2 text-sm">KYC Verification</h3>
+                    <div className="bg-purple-50 rounded-lg p-3 text-sm space-y-1">
+                      <div className="flex justify-between"><span className="text-purple-500">ID Doc Type</span><span className="font-medium">{selected.profile.kycVerification?.idDocType || '—'}</span></div>
+                      <div className="flex justify-between"><span className="text-purple-500">KYC Status</span>
                         <span className={`font-medium ${selected.profile.kycVerification?.verificationStatus === 'VERIFIED' ? 'text-green-600' : 'text-indigo-600'}`}>
                           {selected.profile.kycVerification?.verificationStatus || 'NOT SUBMITTED'}
                         </span>
@@ -229,19 +229,19 @@ export default function AdminAstrologersPage() {
 
                   {/* Professional Verification */}
                   <div>
-                    <h3 className="font-semibold text-gray-800 mb-2 text-sm">Professional Verification</h3>
-                    <div className="bg-gray-50 rounded-lg p-3 text-sm space-y-1">
-                      <div className="flex justify-between"><span className="text-gray-500">Type</span><span className="font-medium">{selected.profile.professionalVerification?.verificationType || '—'}</span></div>
+                    <h3 className="font-semibold text-purple-900 mb-2 text-sm">Professional Verification</h3>
+                    <div className="bg-purple-50 rounded-lg p-3 text-sm space-y-1">
+                      <div className="flex justify-between"><span className="text-purple-500">Type</span><span className="font-medium">{selected.profile.professionalVerification?.verificationType || '—'}</span></div>
                       {selected.profile.professionalVerification?.platformProfileUrl && (
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-500">Profile URL</span>
+                          <span className="text-purple-500">Profile URL</span>
                           <a href={selected.profile.professionalVerification.platformProfileUrl} target="_blank" rel="noopener noreferrer"
                             className="text-indigo-600 hover:underline flex items-center gap-1 text-xs">
                             Open <ExternalLink className="w-3 h-3" />
                           </a>
                         </div>
                       )}
-                      <div className="flex justify-between"><span className="text-gray-500">Status</span>
+                      <div className="flex justify-between"><span className="text-purple-500">Status</span>
                         <span className={`font-medium ${selected.profile.professionalVerification?.status === 'APPROVED' ? 'text-green-600' : 'text-indigo-600'}`}>
                           {selected.profile.professionalVerification?.status || 'NOT SUBMITTED'}
                         </span>
@@ -251,18 +251,18 @@ export default function AdminAstrologersPage() {
 
                   {/* Documents */}
                   <div>
-                    <h3 className="font-semibold text-gray-800 mb-2 text-sm">Uploaded Documents</h3>
+                    <h3 className="font-semibold text-purple-900 mb-2 text-sm">Uploaded Documents</h3>
                     {selected.profile.documents?.length === 0 ? (
-                      <p className="text-sm text-gray-400 italic">No documents uploaded yet.</p>
+                      <p className="text-sm text-purple-400 italic">No documents uploaded yet.</p>
                     ) : (
                       <div className="space-y-2">
                         {selected.profile.documents?.map((doc: any) => (
-                          <div key={doc.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
+                          <div key={doc.id} className="flex items-center justify-between p-3 bg-purple-50 rounded-lg border border-violet-200">
                             <div className="flex items-center gap-2">
-                              <FileText className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                              <FileText className="w-4 h-4 text-purple-400 flex-shrink-0" />
                               <div>
-                                <p className="text-sm font-medium text-gray-700">{doc.originalName}</p>
-                                <p className="text-xs text-gray-400">{doc.documentType} · {(doc.sizeBytes / 1024).toFixed(0)} KB</p>
+                                <p className="text-sm font-medium text-purple-800">{doc.originalName}</p>
+                                <p className="text-xs text-purple-400">{doc.documentType} · {(doc.sizeBytes / 1024).toFixed(0)} KB</p>
                               </div>
                             </div>
                             <a href={doc.blobUrl ?? '#'} target="_blank" rel="noopener noreferrer"
@@ -283,7 +283,7 @@ export default function AdminAstrologersPage() {
                       { label: 'Professional', val: selected.profile.professionalVerified },
                       { label: 'Admin', val: selected.profile.adminVerified },
                     ].map(({ label, val }) => (
-                      <div key={label} className={`flex items-center gap-1 px-2 py-1 rounded-full font-medium ${val ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-400'}`}>
+                      <div key={label} className={`flex items-center gap-1 px-2 py-1 rounded-full font-medium ${val ? 'bg-green-100 text-green-700' : 'bg-purple-50 text-purple-400'}`}>
                         {val ? <CheckCircle className="w-3 h-3" /> : <XCircle className="w-3 h-3" />} {label}
                       </div>
                     ))}
@@ -292,20 +292,20 @@ export default function AdminAstrologersPage() {
                   {/* Reject reason input */}
                   {showReject && (
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-700">Rejection Reason <span className="text-red-500">*</span></label>
+                      <label className="text-sm font-medium text-purple-800">Rejection Reason <span className="text-red-500">*</span></label>
                       <textarea
                         rows={3}
                         placeholder="Explain why this application is being rejected..."
                         value={rejectReason}
                         onChange={(e) => setRejectReason(e.target.value)}
-                        className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-300 resize-none"
+                        className="w-full rounded-lg border border-violet-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-300 resize-none"
                       />
                     </div>
                   )}
                 </div>
 
                 {/* Actions */}
-                <div className="p-6 border-t border-gray-100 flex flex-wrap gap-3 justify-between">
+                <div className="p-6 border-t border-purple-100 flex flex-wrap gap-3 justify-between">
                   <Button variant="outline" onClick={() => { setSelected(null); setShowReject(false); }}>Close</Button>
                   <div className="flex gap-2">
                     {!showReject ? (

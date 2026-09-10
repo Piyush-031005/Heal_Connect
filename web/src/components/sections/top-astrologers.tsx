@@ -12,12 +12,12 @@ export function TopAstrologers({ variant }: { variant: string }) {
 
   if (variant === 'cosmic-future') {
     return (
-      <section className="py-24 relative z-10 bg-white border-t border-gray-100 font-sans selection:bg-sky-200">
+      <section className="py-24 relative z-10 bg-white border-t border-purple-100 font-sans selection:bg-sky-200">
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
             <div>
-              <span className="text-gray-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block">Verified Network</span>
-              <h2 className="text-4xl md:text-5xl font-medium text-[#111111] tracking-tight">Meet the <span className="text-gray-400">Experts.</span></h2>
+              <span className="text-purple-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block">Verified Network</span>
+              <h2 className="text-4xl md:text-5xl font-medium text-[#111111] tracking-tight">Meet the <span className="text-purple-400">Experts.</span></h2>
             </div>
             <Link href="/practitioners" className="group flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#111111] text-sm font-medium text-white hover:scale-105 transition-all shadow-md">
               View All Experts <ArrowRight className="w-4 h-4" />
@@ -25,29 +25,29 @@ export function TopAstrologers({ variant }: { variant: string }) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {TOP_ASTROLOGERS.slice(0, 3).map((a, idx) => (
-              <div key={idx} className="group relative bg-white rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-700 p-8 flex flex-col overflow-hidden border border-gray-100">
-                <div className="absolute top-0 right-0 px-6 py-2 font-bold text-[10px] text-gray-900 bg-gray-100 rounded-bl-2xl tracking-widest uppercase">{a.online ? 'Online' : 'Offline'}</div>
+              <div key={idx} className="group relative bg-white rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-700 p-8 flex flex-col overflow-hidden border border-purple-100">
+                <div className="absolute top-0 right-0 px-6 py-2 font-bold text-[10px] text-indigo-950 bg-purple-50 rounded-bl-2xl tracking-widest uppercase">{a.online ? 'Online' : 'Offline'}</div>
                 <div className="flex flex-col items-center text-center mt-6 mb-8">
-                  <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-50 shadow-sm group-hover:scale-105 transition-all duration-700 mb-6 shrink-0 relative">
+                  <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-purple-50 shadow-sm group-hover:scale-105 transition-all duration-700 mb-6 shrink-0 relative">
                      <img src={a.img} alt={a.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-medium text-gray-900 mb-2">{a.name}</h3>
+                    <h3 className="text-2xl font-medium text-indigo-950 mb-2">{a.name}</h3>
                     <div className="flex items-center justify-center gap-3 mt-2">
-                      <span className="text-sm font-light text-gray-500">{a.exp}</span>
-                      <span className="text-gray-200">•</span>
-                      <span className="text-gray-900 text-sm font-bold">★ {a.rating}</span>
+                      <span className="text-sm font-light text-purple-500">{a.exp}</span>
+                      <span className="text-purple-200">•</span>
+                      <span className="text-indigo-950 text-sm font-bold">★ {a.rating}</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-wrap justify-center gap-2 mb-8">
                   {a.tags.slice(0, 3).map((s: string) => (
-                    <span key={s} className="px-4 py-1.5 bg-gray-50 rounded-full text-[10px] font-bold text-gray-500 uppercase tracking-widest border border-gray-100">
+                    <span key={s} className="px-4 py-1.5 bg-purple-50 rounded-full text-[10px] font-bold text-purple-500 uppercase tracking-widest border border-purple-100">
                       {s}
                     </span>
                   ))}
                 </div>
-                <Button className="w-full h-14 rounded-full bg-white border border-gray-200 text-gray-900 hover:bg-gray-50 font-medium text-base transition-all duration-500">
+                <Button className="w-full h-14 rounded-full bg-white border border-violet-200 text-indigo-950 hover:bg-purple-50 font-medium text-base transition-all duration-500">
                   Connect
                 </Button>
               </div>
@@ -85,7 +85,7 @@ export function TopAstrologers({ variant }: { variant: string }) {
                   <div>
                     <h3 className="text-2xl font-serif text-[#1A0B16] group-hover:text-pink-600 transition-colors mb-2">{a.name}</h3>
                     <div className="flex items-center justify-center gap-3 mt-2">
-                      <span className="text-sm font-light text-gray-500">{a.exp}</span>
+                      <span className="text-sm font-light text-purple-500">{a.exp}</span>
                       <span className="text-pink-200">•</span>
                       <span className="text-pink-500 text-sm font-bold">★ {a.rating}</span>
                     </div>
@@ -93,7 +93,7 @@ export function TopAstrologers({ variant }: { variant: string }) {
                 </div>
                 <div className="flex flex-wrap justify-center gap-2 mb-8">
                   {a.tags.slice(0, 3).map((s: string) => (
-                    <span key={s} className="px-4 py-1.5 bg-pink-50/50 rounded-full text-[10px] font-bold text-gray-500 uppercase tracking-widest border border-pink-100 group-hover:bg-pink-100 group-hover:text-pink-700 transition-colors">
+                    <span key={s} className="px-4 py-1.5 bg-pink-50/50 rounded-full text-[10px] font-bold text-purple-500 uppercase tracking-widest border border-pink-100 group-hover:bg-pink-100 group-hover:text-pink-700 transition-colors">
                       {s}
                     </span>
                   ))}
@@ -125,7 +125,7 @@ export function TopAstrologers({ variant }: { variant: string }) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {TOP_ASTROLOGERS.slice(0, 3).map((a, idx) => (
-              <div key={idx} className="group relative bg-white rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_40px_80px_rgba(255₹95,0,0.15)] hover:-translate-y-2 transition-all duration-700 p-8 flex flex-col overflow-hidden border border-gray-50">
+              <div key={idx} className="group relative bg-white rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_40px_80px_rgba(255₹95,0,0.15)] hover:-translate-y-2 transition-all duration-700 p-8 flex flex-col overflow-hidden border border-purple-50">
                 <div className="absolute top-0 right-0 px-6 py-3 font-bold text-[10px] text-[#1A1A1A] bg-[#FFC300] rounded-bl-3xl tracking-widest uppercase shadow-md">{a.online ? 'Online' : 'Offline'}</div>
                 <div className="flex flex-col items-center text-center mt-4 mb-8">
                   <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-[0_10px_20px_rgba(50,205,50,0.1)] group-hover:scale-105 group-hover:border-[#32CD32]/20 transition-all duration-700 mb-6 shrink-0">
@@ -134,20 +134,20 @@ export function TopAstrologers({ variant }: { variant: string }) {
                   <div>
                     <h3 className="text-2xl font-serif text-[#1A1A1A] group-hover:text-[#32CD32] transition-colors mb-2">{a.name}</h3>
                     <div className="flex items-center justify-center gap-3 mt-2">
-                      <span className="text-sm font-light text-gray-500">{a.exp}</span>
-                      <span className="text-gray-200">•</span>
+                      <span className="text-sm font-light text-purple-500">{a.exp}</span>
+                      <span className="text-purple-200">•</span>
                       <span className="text-[#FFC300] text-sm font-bold">★ {a.rating}</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-wrap justify-center gap-2 mb-8">
                   {a.tags.slice(0, 3).map((s: string) => (
-                    <span key={s} className="px-4 py-1.5 bg-gray-50 rounded-full text-[10px] font-bold text-gray-400 uppercase tracking-widest border border-gray-100 group-hover:bg-[#FFC300]/10 group-hover:text-[#FFC300] group-hover:border-[#FFC300]/20 transition-colors">
+                    <span key={s} className="px-4 py-1.5 bg-purple-50 rounded-full text-[10px] font-bold text-purple-400 uppercase tracking-widest border border-purple-100 group-hover:bg-[#FFC300]/10 group-hover:text-[#FFC300] group-hover:border-[#FFC300]/20 transition-colors">
                       {s}
                     </span>
                   ))}
                 </div>
-                <Button className="w-full h-14 rounded-2xl bg-[#FAFAFA] text-[#1A1A1A] hover:bg-[#32CD32] hover:text-white font-bold uppercase tracking-widest text-xs transition-all duration-500 border border-gray-100 group-hover:border-transparent">
+                <Button className="w-full h-14 rounded-2xl bg-[#FAFAFA] text-[#1A1A1A] hover:bg-[#32CD32] hover:text-white font-bold uppercase tracking-widest text-xs transition-all duration-500 border border-purple-100 group-hover:border-transparent">
                   Initiate Link
                 </Button>
               </div>

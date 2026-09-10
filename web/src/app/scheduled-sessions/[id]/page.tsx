@@ -141,7 +141,7 @@ export default function ScheduledSessionPage() {
     return (
       <div className="min-h-screen bg-[#faf9f6] flex flex-col items-center justify-center p-4 text-center">
         <AlertCircle className="w-12 h-12 text-rose-500 mb-4" />
-        <h2 className="text-xl font-bold text-gray-800">Session not found or not scheduled</h2>
+        <h2 className="text-xl font-bold text-purple-900">Session not found or not scheduled</h2>
       </div>
     );
   }
@@ -155,7 +155,7 @@ export default function ScheduledSessionPage() {
       <div className="max-w-2xl mx-auto space-y-8">
         
         <div className="flex items-center gap-3 mb-6">
-          <Button variant="ghost" onClick={() => router.back()} className="text-gray-500 hover:text-gray-800">
+          <Button variant="ghost" onClick={() => router.back()} className="text-purple-500 hover:text-purple-900">
             &larr; Back
           </Button>
         </div>
@@ -163,7 +163,7 @@ export default function ScheduledSessionPage() {
         <Card className="border border-yellow-200/60 shadow-sm rounded-3xl overflow-hidden">
           <CardHeader className="bg-indigo-50/50 pb-6 border-b border-yellow-100/50">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-2xl font-extrabold text-gray-900 flex items-center gap-2">
+              <CardTitle className="text-2xl font-extrabold text-indigo-950 flex items-center gap-2">
                 <CheckCircle2 className="w-6 h-6 text-emerald-500" />
                 Session Confirmed
               </CardTitle>
@@ -183,39 +183,39 @@ export default function ScheduledSessionPage() {
                 </div>
               )}
               <div>
-                <p className="text-sm text-gray-500 font-medium">{isExpert ? 'Client' : 'Expert'}</p>
-                <p className="text-xl font-bold text-gray-900">{peer.name}</p>
+                <p className="text-sm text-purple-500 font-medium">{isExpert ? 'Client' : 'Expert'}</p>
+                <p className="text-xl font-bold text-indigo-950">{peer.name}</p>
               </div>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-2xl p-5 space-y-4">
+            <div className="bg-white border border-violet-200 rounded-2xl p-5 space-y-4">
               <div className="flex items-start gap-3">
                 <Calendar className="w-5 h-5 text-indigo-500 mt-0.5" />
                 <div>
-                  <p className="text-sm text-gray-500 font-medium">Scheduled Date & Time</p>
-                  <p className="text-lg font-semibold text-gray-900">{formatter.format(start)}</p>
+                  <p className="text-sm text-purple-500 font-medium">Scheduled Date & Time</p>
+                  <p className="text-lg font-semibold text-indigo-950">{formatter.format(start)}</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-2xl p-5 space-y-5">
+            <div className="bg-white border border-violet-200 rounded-2xl p-5 space-y-5">
               <div className="flex items-center gap-2 mb-2">
                 <Bell className="w-5 h-5 text-blue-500" />
-                <h3 className="font-bold text-gray-900 text-lg">Push Notifications</h3>
+                <h3 className="font-bold text-indigo-950 text-lg">Push Notifications</h3>
               </div>
               
-              <div className="flex items-center justify-between py-2 border-b border-gray-100">
+              <div className="flex items-center justify-between py-2 border-b border-purple-100">
                 <div>
-                  <p className="font-semibold text-gray-800">24 Hours Before</p>
-                  <p className="text-xs text-gray-500">Get a reminder a day before the session.</p>
+                  <p className="font-semibold text-purple-900">24 Hours Before</p>
+                  <p className="text-xs text-purple-500">Get a reminder a day before the session.</p>
                 </div>
                 <Switch checked={rem24h} onCheckedChange={setRem24h} />
               </div>
 
               <div className="flex items-center justify-between py-2">
                 <div>
-                  <p className="font-semibold text-gray-800">30 Minutes Before</p>
-                  <p className="text-xs text-gray-500">Get a reminder right before the session starts.</p>
+                  <p className="font-semibold text-purple-900">30 Minutes Before</p>
+                  <p className="text-xs text-purple-500">Get a reminder right before the session starts.</p>
                 </div>
                 <Switch checked={rem30m} onCheckedChange={setRem30m} />
               </div>
@@ -230,7 +230,7 @@ export default function ScheduledSessionPage() {
               </Button>
             </div>
 
-            <div className="pt-4 border-t border-gray-100">
+            <div className="pt-4 border-t border-purple-100">
               <Button 
                 onClick={initiateReschedule}
                 variant="outline" 

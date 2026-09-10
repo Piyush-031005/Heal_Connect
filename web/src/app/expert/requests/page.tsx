@@ -97,7 +97,7 @@ export default function ExpertRequestsPage() {
       if (res.success) {
         toast((t) => (
           <div className="flex flex-col gap-2">
-            <span className="font-bold text-gray-900">Time slots proposed successfully!</span>
+            <span className="font-bold text-indigo-950">Time slots proposed successfully!</span>
             <div className="flex gap-2 mt-2">
               <button 
                 onClick={() => { toast.dismiss(t.id); router.push('/expert/dashboard'); }}
@@ -107,7 +107,7 @@ export default function ExpertRequestsPage() {
               </button>
               <button 
                 onClick={() => toast.dismiss(t.id)}
-                className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+                className="px-3 py-1.5 bg-purple-50 text-purple-800 rounded-lg text-sm font-medium hover:bg-violet-100 transition-colors"
               >
                 Stay Here
               </button>
@@ -152,14 +152,14 @@ export default function ExpertRequestsPage() {
   return (
     <div className="min-h-screen bg-[#faf9f6] p-6 lg:p-12 font-sans">
       <div className="max-w-4xl mx-auto space-y-8">
-        <h1 className="text-3xl font-extrabold text-gray-900 flex items-center gap-3">
+        <h1 className="text-3xl font-extrabold text-indigo-950 flex items-center gap-3">
           <Calendar className="h-8 w-8 text-indigo-500" />
           Client Session Requests
         </h1>
 
         {requests.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-3xl shadow-sm border border-yellow-100">
-            <p className="text-gray-500">You have no pending session requests.</p>
+            <p className="text-purple-500">You have no pending session requests.</p>
           </div>
         ) : (
           <div className="grid gap-6">
@@ -177,7 +177,7 @@ export default function ExpertRequestsPage() {
                       )}
                       <div>
                         Request from <span className="text-indigo-600">{req.user.name || 'User'}</span>
-                        <div className="text-sm font-normal text-gray-500 mt-0.5">
+                        <div className="text-sm font-normal text-purple-500 mt-0.5">
                           Received on {new Date(req.createdAt).toLocaleDateString()}
                         </div>
                       </div>
@@ -201,8 +201,8 @@ export default function ExpertRequestsPage() {
                       <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-3">
                         <CheckCircle2 className="w-6 h-6 text-green-600" />
                       </div>
-                      <h4 className="font-bold text-gray-900 text-lg mb-1">Session Scheduled</h4>
-                      <p className="text-gray-600 mb-2">
+                      <h4 className="font-bold text-indigo-950 text-lg mb-1">Session Scheduled</h4>
+                      <p className="text-purple-700 mb-2">
                         Your session with {req.user.name || 'User'} is confirmed for:
                       </p>
                       <p className="font-bold text-green-700 text-xl">
@@ -212,7 +212,7 @@ export default function ExpertRequestsPage() {
                       </p>
                     </div>
                   ) : req.status === 'TIME_PROPOSED' ? (
-                    <div className="text-gray-600">
+                    <div className="text-purple-700">
                       You have suggested times for this session. Waiting for {req.user.name || 'the client'} to select one.
                     </div>
                   ) : activeReqId !== req.id ? (
@@ -225,24 +225,24 @@ export default function ExpertRequestsPage() {
                   ) : (
                     <div className="space-y-4">
                       <div className="space-y-3">
-                        <label className="text-sm font-semibold text-gray-700">Add Date & Time Slots</label>
+                        <label className="text-sm font-semibold text-purple-800">Add Date & Time Slots</label>
                         {slots.map((slot, index) => (
                           <div key={index} className="flex flex-col sm:flex-row gap-3 items-center">
                             <div className="flex-1 w-full sm:w-1/2">
-                              <span className="text-xs text-gray-500 mb-1 block">Date</span>
+                              <span className="text-xs text-purple-500 mb-1 block">Date</span>
                               <input 
                                 type="date" 
                                 value={slot.date} 
                                 onChange={(e) => updateSlot(index, 'date', e.target.value)}
-                                className="w-full border-gray-300 rounded-lg p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                className="w-full border-violet-300 rounded-lg p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500"
                               />
                             </div>
                             <div className="flex-1 w-full sm:w-1/2">
-                              <span className="text-xs text-gray-500 mb-1 block">Time</span>
+                              <span className="text-xs text-purple-500 mb-1 block">Time</span>
                               <select 
                                 value={slot.time} 
                                 onChange={(e) => updateSlot(index, 'time', e.target.value)}
-                                className="w-full border-gray-300 rounded-lg p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500 bg-white"
+                                className="w-full border-violet-300 rounded-lg p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500 bg-white"
                               >
                                 <option value="" disabled>Select Time</option>
                                 {TIME_OPTIONS.map(opt => (

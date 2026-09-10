@@ -21,14 +21,14 @@ function StepBar({ step }: { step: number }) {
               <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all ${
                 done    ? 'bg-indigo-500 border-indigo-500 text-white' :
                 active  ? 'bg-white border-indigo-500 text-indigo-600' :
-                          'bg-white border-gray-200 text-gray-400'
+                          'bg-white border-violet-200 text-purple-400'
               }`}>
                 {done ? '✓' : s}
               </div>
-              <span className={`text-[11px] font-medium hidden sm:block ${active ? 'text-indigo-600' : done ? 'text-indigo-400' : 'text-gray-400'}`}>{label}</span>
+              <span className={`text-[11px] font-medium hidden sm:block ${active ? 'text-indigo-600' : done ? 'text-indigo-400' : 'text-purple-400'}`}>{label}</span>
             </div>
             {s < 3 && (
-              <div className={`w-16 sm:w-24 h-0.5 mx-1 mb-5 rounded ${done ? 'bg-indigo-400' : 'bg-gray-200'}`} />
+              <div className={`w-16 sm:w-24 h-0.5 mx-1 mb-5 rounded ${done ? 'bg-indigo-400' : 'bg-violet-100'}`} />
             )}
           </div>
         );
@@ -37,16 +37,16 @@ function StepBar({ step }: { step: number }) {
   );
 }
 
-const inputCls = "w-full h-12 rounded-xl border border-yellow-200 bg-[#faf9f6] pl-11 pr-4 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition";
+const inputCls = "w-full h-12 rounded-xl border border-yellow-200 bg-[#faf9f6] pl-11 pr-4 text-sm text-purple-900 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition";
 
 function Field({ label, required, icon, children }: { label: string; required?: boolean; icon: React.ReactNode; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
-      <label className="block text-sm font-semibold text-gray-700">
+      <label className="block text-sm font-semibold text-purple-800">
         {label}{required && <span className="text-red-500 ml-0.5">*</span>}
       </label>
       <div className="relative">
-        <span className="absolute left-3.5 top-3.5 text-gray-400">{icon}</span>
+        <span className="absolute left-3.5 top-3.5 text-purple-400">{icon}</span>
         {children}
       </div>
     </div>
@@ -160,8 +160,8 @@ export default function AstrologerOnboardingPage() {
           <StepBar step={1} />
 
           <div className="bg-white rounded-2xl shadow-xl border border-yellow-100 p-8">
-            <h2 className="text-xl font-extrabold text-gray-900 mb-1">Tell us about you</h2>
-            <p className="text-sm text-gray-500 mb-6">Basic contact information so we can get in touch.</p>
+            <h2 className="text-xl font-extrabold text-indigo-950 mb-1">Tell us about you</h2>
+            <p className="text-sm text-purple-500 mb-6">Basic contact information so we can get in touch.</p>
 
             {error && (
               <div className="mb-5 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">{error}</div>
@@ -192,7 +192,7 @@ export default function AstrologerOnboardingPage() {
             </button>
           </div>
 
-          <p className="text-center text-sm text-gray-500 mt-5">
+          <p className="text-center text-sm text-purple-500 mt-5">
             Already registered?{' '}
             <Link href="/login" className="text-indigo-600 font-semibold hover:underline">Sign in</Link>
           </p>

@@ -652,12 +652,12 @@ export function ExpertStoriesDeck() {
               {expert.name}
             </h2>
             <p className="text-base text-[#B79AE6] mb-6 font-medium">{expert.role} · {expert.years}</p>
-            <blockquote className="text-xl font-light text-gray-700 mb-8 leading-relaxed border-l-4 pl-6 italic"
+            <blockquote className="text-xl font-light text-purple-800 mb-8 leading-relaxed border-l-4 pl-6 italic"
               style={{ borderColor: expert.color }}>
               &ldquo;{expert.quote}&rdquo;
             </blockquote>
             <div className="mb-6">
-              <p className="text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Style</p>
+              <p className="text-xs font-black uppercase tracking-widest text-purple-400 mb-3">Style</p>
               <div className="flex gap-3 flex-wrap">
                 {expert.style.map(s => (
                   <span key={s} className="px-4 py-2 rounded-full text-xs font-bold"
@@ -668,7 +668,7 @@ export function ExpertStoriesDeck() {
               </div>
             </div>
             <div className="mb-10">
-              <p className="text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Languages</p>
+              <p className="text-xs font-black uppercase tracking-widest text-purple-400 mb-3">Languages</p>
               <div className="flex gap-4">
                 {expert.langs.map(l => (<span key={l} className="text-sm font-bold text-[#B79AE6]">{l}</span>))}
               </div>

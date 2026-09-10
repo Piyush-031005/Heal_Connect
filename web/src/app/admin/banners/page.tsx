@@ -84,8 +84,8 @@ export default function AdminBannersPage() {
       <div className="space-y-6">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Banners</h1>
-            <p className="text-gray-500">Manage promotional banners on the platform</p>
+            <h1 className="text-2xl font-bold text-indigo-950 dark:text-white">Banners</h1>
+            <p className="text-purple-500">Manage promotional banners on the platform</p>
           </div>
           <button onClick={() => openModal()} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-bold shadow-md shadow-indigo-600/20">
             <Plus className="w-5 h-5" /> New Banner
@@ -94,26 +94,26 @@ export default function AdminBannersPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {loading ? (
-            <div className="col-span-full text-center py-8 text-gray-500">Loading banners...</div>
+            <div className="col-span-full text-center py-8 text-purple-500">Loading banners...</div>
           ) : banners.length === 0 ? (
-            <div className="col-span-full text-center py-8 text-gray-500">No banners found</div>
+            <div className="col-span-full text-center py-8 text-purple-500">No banners found</div>
           ) : (
             banners.map(banner => (
-              <div key={banner.id} className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 shadow-sm overflow-hidden flex flex-col">
-                <div className="h-40 bg-gray-100 dark:bg-slate-700 relative overflow-hidden group">
+              <div key={banner.id} className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 shadow-sm overflow-hidden flex flex-col">
+                <div className="h-40 bg-purple-50 dark:bg-indigo-800 relative overflow-hidden group">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={banner.imageUrl} alt={banner.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   <div className="absolute top-2 right-2">
-                    <span className={`px-2 py-1 rounded-full text-xs font-bold shadow-sm ${banner.isActive ? 'bg-green-500 text-white' : 'bg-gray-500 text-white'}`}>
+                    <span className={`px-2 py-1 rounded-full text-xs font-bold shadow-sm ${banner.isActive ? 'bg-green-500 text-white' : 'bg-violet-400 text-white'}`}>
                       {banner.isActive ? 'Active' : 'Inactive'}
                     </span>
                   </div>
                 </div>
                 <div className="p-4 flex-1 flex flex-col">
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-1 truncate">{banner.title}</h3>
+                  <h3 className="font-bold text-indigo-950 dark:text-white mb-1 truncate">{banner.title}</h3>
                   <p className="text-xs text-blue-500 truncate mb-4">{banner.linkUrl || 'No link'}</p>
                   
-                  <div className="mt-auto flex gap-2 pt-4 border-t border-gray-100 dark:border-white/10">
+                  <div className="mt-auto flex gap-2 pt-4 border-t border-purple-100 dark:border-white/10">
                     <button onClick={() => openModal(banner)} className="flex-1 flex justify-center items-center gap-2 p-2 bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 rounded-xl font-bold transition-colors hover:bg-blue-100">
                       <Edit className="w-4 h-4" /> Edit
                     </button>
@@ -130,18 +130,18 @@ export default function AdminBannersPage() {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl p-6">
+          <div className="bg-white dark:bg-indigo-900 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl p-6">
             <h3 className="text-lg font-bold mb-4">{editingBanner ? 'Edit Banner' : 'Create Banner'}</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-bold mb-1">Internal Title</label>
-                <input required type="text" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} className="w-full p-2 border rounded-xl dark:bg-slate-700 dark:border-slate-600" />
+                <input required type="text" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} className="w-full p-2 border rounded-xl dark:bg-indigo-800 dark:border-slate-600" />
               </div>
               <div>
                 <label className="block text-sm font-bold mb-1">Image URL</label>
-                <input required type="text" value={formData.imageUrl} onChange={e => setFormData({...formData, imageUrl: e.target.value})} className="w-full p-2 border rounded-xl dark:bg-slate-700 dark:border-slate-600" placeholder="https://example.com/image.jpg" />
+                <input required type="text" value={formData.imageUrl} onChange={e => setFormData({...formData, imageUrl: e.target.value})} className="w-full p-2 border rounded-xl dark:bg-indigo-800 dark:border-slate-600" placeholder="https://example.com/image.jpg" />
                 {formData.imageUrl && (
-                  <div className="mt-2 h-32 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-600">
+                  <div className="mt-2 h-32 rounded-xl overflow-hidden border border-violet-200 dark:border-slate-600">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={formData.imageUrl} alt="Preview" className="w-full h-full object-cover" onError={(e) => (e.currentTarget.style.display = 'none')} />
                   </div>
@@ -149,14 +149,14 @@ export default function AdminBannersPage() {
               </div>
               <div>
                 <label className="block text-sm font-bold mb-1">Link URL (Optional)</label>
-                <input type="text" value={formData.linkUrl} onChange={e => setFormData({...formData, linkUrl: e.target.value})} className="w-full p-2 border rounded-xl dark:bg-slate-700 dark:border-slate-600" placeholder="https://example.com/promo" />
+                <input type="text" value={formData.linkUrl} onChange={e => setFormData({...formData, linkUrl: e.target.value})} className="w-full p-2 border rounded-xl dark:bg-indigo-800 dark:border-slate-600" placeholder="https://example.com/promo" />
               </div>
               <div className="flex items-center gap-2">
                 <input type="checkbox" id="isActive" checked={formData.isActive} onChange={e => setFormData({...formData, isActive: e.target.checked})} />
                 <label htmlFor="isActive" className="font-bold cursor-pointer">Active</label>
               </div>
               <div className="flex justify-end gap-3 pt-4">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl font-bold">Cancel</button>
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-purple-50 text-purple-800 rounded-xl font-bold">Cancel</button>
                 <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-xl font-bold shadow-md">Save Banner</button>
               </div>
             </form>

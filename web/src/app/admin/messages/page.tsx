@@ -136,21 +136,21 @@ export default function AdminMessagesPage() {
     <AdminShell>
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Contact Messages</h1>
-          <p className="text-gray-500 dark:text-gray-400">Manage and reply to user inquiries</p>
+          <h1 className="text-2xl font-bold text-indigo-950 dark:text-white">Contact Messages</h1>
+          <p className="text-purple-500 dark:text-purple-400">Manage and reply to user inquiries</p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Messages List */}
-          <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col h-[calc(100vh-200px)] min-h-[500px]">
-            <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row gap-4">
+          <div className="flex-1 bg-white dark:bg-indigo-900 rounded-lg shadow-sm border border-violet-200 dark:border-violet-700 overflow-hidden flex flex-col h-[calc(100vh-200px)] min-h-[500px]">
+            <div className="p-4 border-b border-violet-200 dark:border-violet-700 flex flex-col sm:flex-row gap-4">
               <div className="flex-1">
                 <SearchBar value={search} onChange={setSearch} placeholder="Search messages..." />
               </div>
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="block w-full sm:w-40 pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="block w-full sm:w-40 pl-3 pr-10 py-2 text-base border-violet-300 dark:border-violet-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-white dark:bg-violet-700 text-indigo-950 dark:text-white"
               >
                 <option value="all">All Status</option>
                 <option value="new">New</option>
@@ -160,11 +160,11 @@ export default function AdminMessagesPage() {
             </div>
 
             <div className="flex-1 overflow-y-auto">
-              <div className="divide-y divide-gray-200 dark:divide-gray-700">
+              <div className="divide-y divide-violet-200 dark:divide-violet-700">
                 {loading ? (
-                  <div className="p-8 text-center text-gray-500">Loading messages...</div>
+                  <div className="p-8 text-center text-purple-500">Loading messages...</div>
                 ) : paginatedMessages.length === 0 ? (
-                  <div className="p-8 text-center text-gray-500 dark:text-gray-400">
+                  <div className="p-8 text-center text-purple-500 dark:text-purple-400">
                     No messages found.
                   </div>
                 ) : (
@@ -172,19 +172,19 @@ export default function AdminMessagesPage() {
                     <div 
                       key={msg.id}
                       onClick={() => setSelectedMessage(msg)}
-                      className={`p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors ${selectedMessage?.id === msg.id ? 'bg-indigo-50 dark:bg-indigo-900/10' : ''}`}
+                      className={`p-4 cursor-pointer hover:bg-purple-50 dark:hover:bg-indigo-900/80 transition-colors ${selectedMessage?.id === msg.id ? 'bg-indigo-50 dark:bg-indigo-900/10' : ''}`}
                     >
                       <div className="flex justify-between items-start mb-1">
-                        <h4 className={`text-sm font-medium ${msg.status === 'new' ? 'text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'}`}>
+                        <h4 className={`text-sm font-medium ${msg.status === 'new' ? 'text-indigo-950 dark:text-white' : 'text-purple-800 dark:text-purple-300'}`}>
                           {msg.name}
                         </h4>
-                        <span className="text-xs text-gray-500 dark:text-gray-400">{new Date(msg.createdAt).toLocaleDateString()}</span>
+                        <span className="text-xs text-purple-500 dark:text-purple-400">{new Date(msg.createdAt).toLocaleDateString()}</span>
                       </div>
-                      <div className="text-sm text-gray-800 dark:text-gray-200 font-medium mb-1 truncate">
+                      <div className="text-sm text-purple-900 dark:text-purple-200 font-medium mb-1 truncate">
                         {msg.subject}
                       </div>
                       <div className="flex justify-between items-center mt-2">
-                        <span className="text-xs text-gray-500 dark:text-gray-400 truncate max-w-[70%]">
+                        <span className="text-xs text-purple-500 dark:text-purple-400 truncate max-w-[70%]">
                           {msg.message}
                         </span>
                         <StatusBadge status={msg.status} />
@@ -195,25 +195,25 @@ export default function AdminMessagesPage() {
               </div>
             </div>
             
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+            <div className="p-4 border-t border-violet-200 dark:border-violet-700 bg-purple-50 dark:bg-indigo-900">
               <Pagination page={page} total={totalPages} perPage={perPage} onChange={setPage} />
             </div>
           </div>
 
           {/* Message Detail & Reply */}
-          <div className="flex-1 lg:max-w-md xl:max-w-lg bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 flex flex-col h-[calc(100vh-200px)] min-h-[500px]">
+          <div className="flex-1 lg:max-w-md xl:max-w-lg bg-white dark:bg-indigo-900 rounded-lg shadow-sm border border-violet-200 dark:border-violet-700 flex flex-col h-[calc(100vh-200px)] min-h-[500px]">
             {selectedMessage ? (
               <>
-                <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-800">
-                  <h3 className="font-medium text-gray-900 dark:text-white flex items-center">
-                    <Mail className="h-5 w-5 mr-2 text-gray-400" />
+                <div className="p-4 border-b border-violet-200 dark:border-violet-700 flex justify-between items-center bg-purple-50 dark:bg-indigo-900">
+                  <h3 className="font-medium text-indigo-950 dark:text-white flex items-center">
+                    <Mail className="h-5 w-5 mr-2 text-purple-400" />
                     Message Details
                   </h3>
                   <div className="flex gap-2">
                     {selectedMessage.status !== 'resolved' && (
                       <button 
                         onClick={() => handleAction(selectedMessage.id, 'resolve')}
-                        className="p-1.5 text-gray-500 hover:text-green-600 rounded-md hover:bg-green-50 dark:hover:bg-green-900/20"
+                        className="p-1.5 text-purple-500 hover:text-green-600 rounded-md hover:bg-green-50 dark:hover:bg-green-900/20"
                         title="Mark Resolved"
                       >
                         <CheckCircle className="h-5 w-5" />
@@ -221,14 +221,14 @@ export default function AdminMessagesPage() {
                     )}
                     <button 
                       onClick={() => handleAction(selectedMessage.id, 'delete')}
-                      className="p-1.5 text-gray-500 hover:text-red-600 rounded-md hover:bg-red-50 dark:hover:bg-red-900/20"
+                      className="p-1.5 text-purple-500 hover:text-red-600 rounded-md hover:bg-red-50 dark:hover:bg-red-900/20"
                       title="Delete Message"
                     >
                       <Trash2 className="h-5 w-5" />
                     </button>
                     <button 
                       onClick={() => setSelectedMessage(null)}
-                      className="p-1.5 text-gray-500 hover:text-gray-900 dark:hover:text-white rounded-md lg:hidden"
+                      className="p-1.5 text-purple-500 hover:text-indigo-950 dark:hover:text-white rounded-md lg:hidden"
                     >
                       <X className="h-5 w-5" />
                     </button>
@@ -239,14 +239,14 @@ export default function AdminMessagesPage() {
                   <div>
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{selectedMessage.subject}</h2>
-                        <div className="text-sm font-medium text-gray-900 dark:text-white mt-2">{selectedMessage.name}</div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">{selectedMessage.email}</div>
+                        <h2 className="text-lg font-semibold text-indigo-950 dark:text-white">{selectedMessage.subject}</h2>
+                        <div className="text-sm font-medium text-indigo-950 dark:text-white mt-2">{selectedMessage.name}</div>
+                        <div className="text-xs text-purple-500 dark:text-purple-400">{selectedMessage.email}</div>
                       </div>
                       <StatusBadge status={selectedMessage.status} />
                     </div>
                     
-                    <div className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
+                    <div className="bg-purple-50 dark:bg-violet-700/30 p-4 rounded-lg text-sm text-purple-900 dark:text-purple-200 whitespace-pre-wrap">
                       {selectedMessage.message}
                     </div>
                   </div>
@@ -254,19 +254,19 @@ export default function AdminMessagesPage() {
                   {selectedMessage.status === 'replied' && (
                     <div className="border-l-4 border-indigo-500 pl-4 py-1">
                       <div className="text-xs font-medium text-indigo-600 dark:text-indigo-500 mb-1">Replied by Support</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Response has been sent to user's email.</div>
+                      <div className="text-sm text-purple-700 dark:text-purple-400">Response has been sent to user's email.</div>
                     </div>
                   )}
                 </div>
                 
-                <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Reply to user</label>
+                <div className="p-4 border-t border-violet-200 dark:border-violet-700">
+                  <label className="block text-sm font-medium text-purple-800 dark:text-purple-300 mb-2">Reply to user</label>
                   <textarea
                     rows={4}
                     value={replyText}
                     onChange={(e) => setReplyText(e.target.value)}
                     placeholder="Type your response here..."
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white resize-none mb-3"
+                    className="w-full px-3 py-2 border border-violet-300 dark:border-violet-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-violet-700 dark:text-white resize-none mb-3"
                   />
                   <div className="flex justify-end">
                     <button
@@ -281,7 +281,7 @@ export default function AdminMessagesPage() {
                 </div>
               </>
             ) : (
-              <div className="flex-1 flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 p-8">
+              <div className="flex-1 flex flex-col items-center justify-center text-purple-500 dark:text-purple-400 p-8">
                 <Mail className="h-12 w-12 mb-4 opacity-20" />
                 <p>Select a message from the list to view details</p>
               </div>

@@ -38,10 +38,10 @@ export default function AstrologerSubmittedPage() {
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-10 h-10 text-green-500" />
           </div>
-          <h1 className="text-2xl font-extrabold text-gray-900 mb-3">
+          <h1 className="text-2xl font-extrabold text-indigo-950 mb-3">
             Thank you for your interest in ZenAuraa.
           </h1>
-          <p className="text-gray-500 text-sm leading-relaxed">
+          <p className="text-purple-500 text-sm leading-relaxed">
             We'll review your application and be in touch if we'd like to invite you to the next stage.
           </p>
           <button

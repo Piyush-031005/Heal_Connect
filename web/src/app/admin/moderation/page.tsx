@@ -130,8 +130,8 @@ export default function AdminModerationPage() {
     <AdminShell>
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Content Moderation</h1>
-          <p className="text-gray-500 dark:text-gray-400">Review flagged content and take action</p>
+          <h1 className="text-2xl font-bold text-indigo-950 dark:text-white">Content Moderation</h1>
+          <p className="text-purple-500 dark:text-purple-400">Review flagged content and take action</p>
         </div>
 
         {/* Stats */}
@@ -146,7 +146,7 @@ export default function AdminModerationPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-white/10 font-medium"
+            className="px-4 py-2 rounded-xl bg-white dark:bg-indigo-900 border border-violet-200 dark:border-white/10 font-medium"
           >
             <option value="all">All Flags</option>
             <option value="PENDING">Pending</option>
@@ -156,12 +156,12 @@ export default function AdminModerationPage() {
         </div>
 
         {/* List */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 shadow-sm overflow-hidden">
+        <div className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 shadow-sm overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 dark:bg-white/5 border-b border-gray-100 dark:border-white/10">
+            <thead className="bg-purple-50 dark:bg-white/5 border-b border-purple-100 dark:border-white/10">
               <tr>
                 {['Date', 'Reporter', 'Target', 'Reason', 'Snippet', 'Status', 'Actions'].map((h) => (
-                  <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-gray-500 uppercase tracking-wide">{h}</th>
+                  <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-purple-500 uppercase tracking-wide">{h}</th>
                 ))}
               </tr>
             </thead>
@@ -170,22 +170,22 @@ export default function AdminModerationPage() {
                 Array.from({ length: 3 }).map((_, i) => <SkeletonRow key={i} />)
               ) : flags.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="text-center py-12 text-sm text-gray-400 font-medium">No flagged content found</td>
+                  <td colSpan={7} className="text-center py-12 text-sm text-purple-400 font-medium">No flagged content found</td>
                 </tr>
               ) : (
                 flags.map((flag) => (
                   <tr key={flag.id} className="hover:bg-indigo-50/30 dark:hover:bg-white/5 transition-colors">
-                    <td className="px-4 py-3 text-xs text-gray-500">{new Date(flag.createdAt).toLocaleDateString()}</td>
-                    <td className="px-4 py-3 text-xs font-bold text-gray-900 dark:text-white">System Auto-Flag</td>
+                    <td className="px-4 py-3 text-xs text-purple-500">{new Date(flag.createdAt).toLocaleDateString()}</td>
+                    <td className="px-4 py-3 text-xs font-bold text-indigo-950 dark:text-white">System Auto-Flag</td>
                     <td className="px-4 py-3">
                       {flag.user ? (
                         <div className="text-xs font-bold text-blue-600">User: {flag.user.name}</div>
                       ) : flag.practitioner ? (
                         <div className="text-xs font-bold text-purple-600">Expert: {flag.practitioner.name}</div>
-                      ) : <span className="text-xs text-gray-500">Unknown</span>}
+                      ) : <span className="text-xs text-purple-500">Unknown</span>}
                     </td>
                     <td className="px-4 py-3 text-xs font-bold text-red-600">{flag.reason.replace(/_/g, ' ')}</td>
-                    <td className="px-4 py-3 text-xs italic text-gray-700 dark:text-gray-300 max-w-xs truncate">"{flag.contentSnippet}"</td>
+                    <td className="px-4 py-3 text-xs italic text-purple-800 dark:text-purple-300 max-w-xs truncate">"{flag.contentSnippet}"</td>
                     <td className="px-4 py-3"><StatusBadge status={flag.status} /></td>
                     <td className="px-4 py-3 flex gap-2">
                       {flag.status === 'PENDING' && (
@@ -208,7 +208,7 @@ export default function AdminModerationPage() {
                           </button>
                           <button
                             onClick={() => handleUpdateStatus(flag.id, 'DISMISSED')}
-                            className="p-1.5 rounded-lg bg-gray-50 text-gray-600 hover:bg-gray-100"
+                            className="p-1.5 rounded-lg bg-purple-50 text-purple-700 hover:bg-purple-50"
                             title="Dismiss (False Alarm)"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -230,42 +230,42 @@ export default function AdminModerationPage() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="w-full max-w-sm rounded-2xl bg-white dark:bg-slate-800 p-5 shadow-xl"
+            className="w-full max-w-sm rounded-2xl bg-white dark:bg-indigo-900 p-5 shadow-xl"
           >
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2">
+              <h3 className="text-base font-bold text-indigo-950 dark:text-white flex items-center gap-2">
                 <UserX className="w-4 h-4 text-red-600" /> Suspend {banTarget.type === 'user' ? 'User' : 'Expert'}
               </h3>
-              <button onClick={() => setBanTarget(null)} className="text-gray-400 hover:text-gray-600">
+              <button onClick={() => setBanTarget(null)} className="text-purple-400 hover:text-purple-700">
                 <X className="w-4 h-4" />
               </button>
             </div>
-            <p className="text-xs text-gray-500 mb-4">
+            <p className="text-xs text-purple-500 mb-4">
               This temporarily suspends <span className="font-bold">{banTarget.name}</span> from logging in. They can be unsuspended anytime from the {banTarget.type === 'user' ? 'Users' : 'Practitioners'} page.
             </p>
 
-            <label className="block text-xs font-bold text-gray-600 dark:text-gray-300 mb-1">Duration (days)</label>
+            <label className="block text-xs font-bold text-purple-700 dark:text-purple-300 mb-1">Duration (days)</label>
             <input
               type="number"
               min={1}
               value={banDays}
               onChange={(e) => setBanDays(e.target.value)}
               placeholder="Leave blank for permanent"
-              className="w-full mb-3 px-3 py-2 rounded-lg border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900 text-sm"
+              className="w-full mb-3 px-3 py-2 rounded-lg border border-violet-200 dark:border-white/10 bg-white dark:bg-indigo-950 text-sm"
             />
 
-            <label className="block text-xs font-bold text-gray-600 dark:text-gray-300 mb-1">Reason</label>
+            <label className="block text-xs font-bold text-purple-700 dark:text-purple-300 mb-1">Reason</label>
             <textarea
               value={banReason}
               onChange={(e) => setBanReason(e.target.value)}
               rows={2}
-              className="w-full mb-4 px-3 py-2 rounded-lg border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900 text-sm"
+              className="w-full mb-4 px-3 py-2 rounded-lg border border-violet-200 dark:border-white/10 bg-white dark:bg-indigo-950 text-sm"
             />
 
             <div className="flex gap-2 justify-end">
               <button
                 onClick={() => setBanTarget(null)}
-                className="px-4 py-2 rounded-lg text-sm font-bold text-gray-600 hover:bg-gray-100 dark:hover:bg-white/5"
+                className="px-4 py-2 rounded-lg text-sm font-bold text-purple-700 hover:bg-purple-50 dark:hover:bg-white/5"
               >
                 Cancel
               </button>

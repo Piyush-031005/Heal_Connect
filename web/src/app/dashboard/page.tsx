@@ -177,8 +177,8 @@ export default function DashboardPage() {
               </Button>
               {showNotification && (
                 <div className="absolute right-0 mt-2 w-72 bg-white border border-indigo-100 rounded-2xl shadow-xl overflow-hidden z-50" onClick={() => setShowNotification(false)}>
-                  <div className="p-4 border-b border-gray-100">
-                    <p className="font-semibold text-gray-900 text-sm">Notifications</p>
+                  <div className="p-4 border-b border-purple-100">
+                    <p className="font-semibold text-indigo-950 text-sm">Notifications</p>
                   </div>
                   <div className="p-4 text-center text-muted-foreground text-sm py-8">
                     <Bell className="w-8 h-8 mx-auto mb-2 opacity-40" />
@@ -208,27 +208,27 @@ export default function DashboardPage() {
               {showProfileMenu && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-indigo-100 rounded-2xl shadow-xl overflow-hidden z-50">
                   <Link href="/dashboard/profile" onClick={() => setShowProfileMenu(false)}>
-                    <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-gray-100">
+                    <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-purple-100">
                       <User className="w-4 h-4 text-purple-400" />
-                      <span className="text-sm font-medium text-gray-900">My Profile</span>
+                      <span className="text-sm font-medium text-indigo-950">My Profile</span>
                     </div>
                   </Link>
                   <Link href="/dashboard/transcripts" onClick={() => setShowProfileMenu(false)}>
-                    <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-gray-100">
+                    <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-purple-100">
                       <FileText className="w-4 h-4 text-purple-400" />
-                      <span className="text-sm font-medium text-gray-900">Call Transcripts</span>
+                      <span className="text-sm font-medium text-indigo-950">Call Transcripts</span>
                     </div>
                   </Link>
                   <Link href="/dashboard/schedules" onClick={() => setShowProfileMenu(false)}>
-                    <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-gray-100">
+                    <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-purple-100">
                       <Calendar className="w-4 h-4 text-purple-400" />
-                      <span className="text-sm font-medium text-gray-900">Scheduled Sessions</span>
+                      <span className="text-sm font-medium text-indigo-950">Scheduled Sessions</span>
                     </div>
                   </Link>
                   <Link href="/dashboard/support" onClick={() => setShowProfileMenu(false)}>
-                    <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-gray-100">
+                    <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-purple-100">
                       <LifeBuoy className="w-4 h-4 text-purple-400" />
-                      <span className="text-sm font-medium text-gray-900">Support</span>
+                      <span className="text-sm font-medium text-indigo-950">Support</span>
                     </div>
                   </Link>
                   <button onClick={() => { tokenStore.clear(); router.push('/login'); }} className="w-full px-4 py-3 hover:bg-red-50 transition-colors flex items-center gap-3">
@@ -288,7 +288,7 @@ export default function DashboardPage() {
                   <stat.icon className={`w-6 h-6 ${stat.color}`} />
                 </div>
                 <div>
-                  <p className="text-xl font-bold text-gray-900">{stat.value}</p>
+                  <p className="text-xl font-bold text-indigo-950">{stat.value}</p>
                   <p className="text-xs text-muted-foreground">{stat.label}</p>
                 </div>
               </CardContent>
@@ -303,13 +303,13 @@ export default function DashboardPage() {
             { icon: Headphones, label: 'Audio Call', desc: 'Voice consultation', color: 'text-purple-500', bg: 'bg-purple-50', border: 'hover:border-purple-400', action: () => document.getElementById('experts-section')?.scrollIntoView({ behavior: 'smooth' }) },
             { icon: Wallet, label: 'Add Money', desc: 'Recharge your wallet', color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'hover:border-emerald-400', action: () => setIsRechargeModalOpen(true) },
           ].map((item) => (
-            <Card key={item.label} onClick={item.action} className={`bg-white border border-gray-100 ${item.border} transition-all duration-300 cursor-pointer group shadow-sm hover:shadow-md hover:-translate-y-0.5 rounded-2xl overflow-hidden`}>
+            <Card key={item.label} onClick={item.action} className={`bg-white border border-purple-100 ${item.border} transition-all duration-300 cursor-pointer group shadow-sm hover:shadow-md hover:-translate-y-0.5 rounded-2xl overflow-hidden`}>
               <CardContent className="p-5 flex items-center gap-4">
                 <div className={`w-12 h-12 rounded-xl ${item.bg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
                   <item.icon className={`w-6 h-6 ${item.color}`} />
                 </div>
                 <div className="flex-1">
-                  <p className="font-semibold text-gray-900">{item.label}</p>
+                  <p className="font-semibold text-indigo-950">{item.label}</p>
                   <p className="text-sm text-muted-foreground">{item.desc}</p>
                 </div>
                 <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-purple-400 transition-colors" />
@@ -323,7 +323,7 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between mb-5">
             <div>
               <p className="text-xs font-bold uppercase tracking-widest text-indigo-700 mb-1">Browse Experts</p>
-              <h2 className="text-2xl font-extrabold text-gray-900">Find Your Healer</h2>
+              <h2 className="text-2xl font-extrabold text-indigo-950">Find Your Healer</h2>
               <p className="text-sm text-muted-foreground">500+ verified practitioners online</p>
             </div>
             <Link href="/practitioners">
@@ -336,7 +336,7 @@ export default function DashboardPage() {
           {/* Tabs */}
           <div className="flex gap-2 mb-6 overflow-x-auto pb-1">
             {(['all', 'astrology', 'tarot', 'vastu', 'numerology'] as const).map((tab) => (
-              <button key={tab} onClick={() => handleTabChange(tab)} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${activeTab === tab ? 'bg-purple-400 text-foreground shadow-sm' : 'bg-white text-muted-foreground hover:text-gray-900 border border-gray-200 hover:border-indigo-200'}`}>
+              <button key={tab} onClick={() => handleTabChange(tab)} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${activeTab === tab ? 'bg-purple-400 text-foreground shadow-sm' : 'bg-white text-muted-foreground hover:text-indigo-950 border border-violet-200 hover:border-indigo-200'}`}>
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
               </button>
             ))}
@@ -354,7 +354,7 @@ export default function DashboardPage() {
                 const avatarSrc = getPractitionerAvatar(expert.photoUrl, expert.id);
                 return (
                   <Link key={expert.id} href={`/practitioners/${expert.id}`} className="h-full">
-                    <Card className="bg-white border border-gray-100 hover:border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 cursor-pointer rounded-2xl overflow-hidden group h-full">
+                    <Card className="bg-white border border-purple-100 hover:border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 cursor-pointer rounded-2xl overflow-hidden group h-full">
                       <CardContent className="p-0 flex flex-col h-full">
                         {/* Top strip with avatar */}
                         <div className="relative h-14 bg-gradient-to-r from-purple-50 to-purple-50">
@@ -363,9 +363,9 @@ export default function DashboardPage() {
                           </div>
                           <div className="absolute top-3 right-4">
                             <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
-                              expert.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-muted-foreground'
+                              expert.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-purple-50 text-muted-foreground'
                             }`}>
-                              <span className={`w-1.5 h-1.5 rounded-full ${expert.isOnline ? 'bg-emerald-500' : 'bg-gray-400'}`} />
+                              <span className={`w-1.5 h-1.5 rounded-full ${expert.isOnline ? 'bg-emerald-500' : 'bg-violet-300'}`} />
                               {expert.isOnline ? 'Online' : 'Offline'}
                             </span>
                           </div>
@@ -375,7 +375,7 @@ export default function DashboardPage() {
                         <div className="pt-8 px-5 pb-5 flex flex-col flex-1">
                           <div className="flex items-start justify-between mb-1">
                             <div>
-                              <p className="font-bold text-gray-900 text-base">{expert.name}</p>
+                              <p className="font-bold text-indigo-950 text-base">{expert.name}</p>
                               <p className="text-sm text-indigo-600 font-medium">{expert.specialties.slice(0, 2).join(' · ') || '—'}</p>
                             </div>
                           </div>
@@ -383,22 +383,22 @@ export default function DashboardPage() {
                           <div className="flex items-center gap-3 mt-2 mb-3">
                             <div className="flex items-center gap-1">
                               <Star className="w-3.5 h-3.5 text-purple-300 fill-current" />
-                              <span className="text-sm font-semibold text-gray-900">{expert.avgRating || '—'}</span>
+                              <span className="text-sm font-semibold text-indigo-950">{expert.avgRating || '—'}</span>
                               <span className="text-xs text-muted-foreground">({expert.reviewCount})</span>
                             </div>
-                            <span className="text-gray-200">|</span>
+                            <span className="text-purple-200">|</span>
                             <span className="text-xs text-muted-foreground">{expert.experienceYrs} yrs exp</span>
                           </div>
 
                           <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed flex-1">{expert.bio || ''}</p>
 
-                          <div className="flex items-center justify-between pt-3 mt-3 border-t border-gray-100">
+                          <div className="flex items-center justify-between pt-3 mt-3 border-t border-purple-100">
                             <div>
-                              <span className="text-lg font-bold text-gray-900">₹{expert.perMinuteRate}</span>
+                              <span className="text-lg font-bold text-indigo-950">₹{expert.perMinuteRate}</span>
                               <span className="text-xs text-muted-foreground">/min</span>
                             </div>
                             <div className="flex gap-2">
-                              <Button size="sm" variant="outline" className="h-8 px-3 border-gray-200 hover:border-indigo-300 hover:text-indigo-700 text-xs gap-1" onClick={(e) => { e.preventDefault(); startChatSession(expert.id, e); }} disabled={startingSession === expert.id}>
+                              <Button size="sm" variant="outline" className="h-8 px-3 border-violet-200 hover:border-indigo-300 hover:text-indigo-700 text-xs gap-1" onClick={(e) => { e.preventDefault(); startChatSession(expert.id, e); }} disabled={startingSession === expert.id}>
                                 <MessageCircle className="h-3.5 w-3.5" /> Chat
                               </Button>
                               <Button size="sm" disabled={!expert.isOnline} className="h-8 px-3 bg-purple-400 hover:bg-indigo-600 text-foreground border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => e.preventDefault()}>

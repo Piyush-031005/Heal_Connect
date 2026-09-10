@@ -110,7 +110,7 @@ function ExpertSignupInner() {
     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&state=expert_signup&nonce=${nonce}&prompt=select_account`;
   };
 
-  const inputCls = 'w-full h-12 rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition';
+  const inputCls = 'w-full h-12 rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 text-sm text-purple-900 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition';
 
   return (
     <div className="min-h-screen bg-[#faf9f6] flex flex-col md:flex-row font-sans">
@@ -150,8 +150,8 @@ function ExpertSignupInner() {
 
         <div className="w-full max-w-md">
           <div className="bg-white rounded-2xl shadow-xl border border-yellow-100 p-8">
-            <h2 className="text-xl font-extrabold text-gray-900 mb-1">Create your expert account</h2>
-            <p className="text-sm text-gray-500 mb-6">Step 1 of 2 — Account setup</p>
+            <h2 className="text-xl font-extrabold text-indigo-950 mb-1">Create your expert account</h2>
+            <p className="text-sm text-purple-500 mb-6">Step 1 of 2 — Account setup</p>
 
             {alreadyRegistered ? (
               <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl">
@@ -179,15 +179,15 @@ function ExpertSignupInner() {
 
                 <form onSubmit={handleEmailSignup} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name <span className="text-red-500">*</span></label>
+                    <label className="block text-sm font-semibold text-purple-800 mb-1.5">Full Name <span className="text-red-500">*</span></label>
                     <input className={inputCls} placeholder="Your full name" value={form.name} onChange={e => set('name', e.target.value)} required readOnly={isGoogleAuth} />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email <span className="text-red-500">*</span></label>
-                    <input className={inputCls + (isGoogleAuth ? ' bg-gray-50 text-gray-500' : '')} type="email" placeholder="you@example.com" value={form.email} onChange={e => !isGoogleAuth && set('email', e.target.value)} readOnly={isGoogleAuth} required />
+                    <label className="block text-sm font-semibold text-purple-800 mb-1.5">Email <span className="text-red-500">*</span></label>
+                    <input className={inputCls + (isGoogleAuth ? ' bg-purple-50 text-purple-500' : '')} type="email" placeholder="you@example.com" value={form.email} onChange={e => !isGoogleAuth && set('email', e.target.value)} readOnly={isGoogleAuth} required />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Date of Birth <span className="text-red-500">*</span></label>
+                    <label className="block text-sm font-semibold text-purple-800 mb-1.5">Date of Birth <span className="text-red-500">*</span></label>
                     <input
                       className={inputCls}
                       type="date"
@@ -199,7 +199,7 @@ function ExpertSignupInner() {
                   </div>
                   {!isGoogleAuth && (<>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Password <span className="text-red-500">*</span></label>
+                    <label className="block text-sm font-semibold text-purple-800 mb-1.5">Password <span className="text-red-500">*</span></label>
                     <div className="relative">
                       <input
                         className={inputCls + ' pr-11'}
@@ -209,7 +209,7 @@ function ExpertSignupInner() {
                         onChange={e => set('password', e.target.value)}
                         required
                       />
-                      <button type="button" onClick={() => setShowPass(v => !v)} className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600">
+                      <button type="button" onClick={() => setShowPass(v => !v)} className="absolute right-3 top-3.5 text-purple-400 hover:text-purple-700">
                         {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
                     </div>
@@ -219,15 +219,15 @@ function ExpertSignupInner() {
                           {rules.map((r, i) => (
                             <div key={i} className={`h-1 flex-1 rounded-full transition-all duration-300 ${r.test(form.password)
                               ? passed <= 2 ? 'bg-red-400' : passed <= 3 ? 'bg-yellow-400' : passed <= 4 ? 'bg-blue-400' : 'bg-green-500'
-                              : 'bg-gray-200'}`} />
+                              : 'bg-violet-100'}`} />
                           ))}
                         </div>
                         <ul className="grid grid-cols-2 gap-x-3 gap-y-0.5">
                           {rules.map(r => {
                             const ok = r.test(form.password);
                             return (
-                              <li key={r.label} className={`flex items-center gap-1.5 text-xs transition-colors ${ok ? 'text-green-600' : 'text-gray-400'}`}>
-                                <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold flex-shrink-0 ${ok ? 'bg-green-500 text-white' : 'border border-gray-300'}`}>
+                              <li key={r.label} className={`flex items-center gap-1.5 text-xs transition-colors ${ok ? 'text-green-600' : 'text-purple-400'}`}>
+                                <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold flex-shrink-0 ${ok ? 'bg-green-500 text-white' : 'border border-violet-300'}`}>
                                   {ok ? '✓' : ''}
                                 </span>
                                 {r.label}
@@ -241,7 +241,7 @@ function ExpertSignupInner() {
                   </>)}
                   {!isGoogleAuth && (<>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Confirm Password <span className="text-red-500">*</span></label>
+                    <label className="block text-sm font-semibold text-purple-800 mb-1.5">Confirm Password <span className="text-red-500">*</span></label>
                     <div className="relative">
                       <input
                         className={inputCls + ' pr-11'}
@@ -251,7 +251,7 @@ function ExpertSignupInner() {
                         onChange={e => set('confirm', e.target.value)}
                         required
                       />
-                      <button type="button" onClick={() => setShowConfirm(v => !v)} className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600">
+                      <button type="button" onClick={() => setShowConfirm(v => !v)} className="absolute right-3 top-3.5 text-purple-400 hover:text-purple-700">
                         {showConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
                     </div>
@@ -267,7 +267,7 @@ function ExpertSignupInner() {
             )}
           </div>
 
-          <p className="text-center text-sm text-gray-500 mt-5">
+          <p className="text-center text-sm text-purple-500 mt-5">
             Already have an account?{' '}
             <Link href="/login?role=expert" className="text-indigo-600 font-semibold hover:underline">Sign in</Link>
           </p>

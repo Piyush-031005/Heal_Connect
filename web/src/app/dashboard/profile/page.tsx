@@ -17,7 +17,7 @@ const WELLNESS_OPTIONS = [
 ];
 
 const INPUT_CLS = 'w-full text-sm rounded-lg bg-purple-50/70 border border-indigo-200 px-4 py-2.5 text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-purple-300/40 focus:border-purple-300 transition-all';
-const LABEL_CLS = 'text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 block';
+const LABEL_CLS = 'text-xs font-semibold text-purple-500 uppercase tracking-wider mb-1.5 block';
 
 interface UserProfile {
   id: string;
@@ -112,7 +112,7 @@ export default function ProfilePage() {
       <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <Image src="/logo.png" alt="ZenAuraa" width={48} height={48} className="rounded-full animate-pulse" />
-          <p className="text-gray-500">Loading profile...</p>
+          <p className="text-purple-500">Loading profile...</p>
         </div>
       </div>
     );
@@ -125,12 +125,12 @@ export default function ProfilePage() {
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-indigo-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/dashboard" className="flex items-center gap-2 text-gray-500 hover:text-purple-400 transition-colors">
+          <Link href="/dashboard" className="flex items-center gap-2 text-purple-500 hover:text-purple-400 transition-colors">
             <ArrowLeft className="h-4 w-4" />
             <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
             <span className="font-extrabold text-purple-400">ZenAuraa</span>
           </Link>
-          <div className="text-sm font-semibold text-gray-600">My Profile</div>
+          <div className="text-sm font-semibold text-purple-700">My Profile</div>
         </div>
       </header>
 
@@ -162,10 +162,10 @@ export default function ProfilePage() {
           <div className="pt-16 px-6 pb-6">
             <div className="flex items-start justify-between">
               <div>
-                <h1 className="text-xl font-extrabold text-gray-900">{profile.name || 'Your Name'}</h1>
+                <h1 className="text-xl font-extrabold text-indigo-950">{profile.name || 'Your Name'}</h1>
                 <div className="flex items-center gap-2 mt-1">
-                  <Mail className="w-4 h-4 text-gray-400" />
-                  <span className="text-sm text-gray-500">{profile.email}</span>
+                  <Mail className="w-4 h-4 text-purple-400" />
+                  <span className="text-sm text-purple-500">{profile.email}</span>
                   {profile.isEmailVerified && (
                     <Badge className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold gap-1 rounded-full px-2">
                       <Check className="w-3 h-3" /> Verified
@@ -174,8 +174,8 @@ export default function ProfilePage() {
                 </div>
                 {profile.phone && (
                   <div className="flex items-center gap-2 mt-1">
-                    <Phone className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm text-gray-500">{profile.phone}</span>
+                    <Phone className="w-4 h-4 text-purple-400" />
+                    <span className="text-sm text-purple-500">{profile.phone}</span>
                   </div>
                 )}
               </div>
@@ -193,9 +193,9 @@ export default function ProfilePage() {
           <div className="px-6 pt-5 pb-3 border-b border-purple-50">
             <div className="flex items-center gap-2">
               <User className="w-5 h-5 text-purple-400" />
-              <h2 className="text-lg font-bold text-gray-900">Basic Information</h2>
+              <h2 className="text-lg font-bold text-indigo-950">Basic Information</h2>
             </div>
-            <p className="text-xs text-gray-400 mt-0.5 ml-7">Update your personal details</p>
+            <p className="text-xs text-purple-400 mt-0.5 ml-7">Update your personal details</p>
           </div>
           <div className="p-6 space-y-5">
             {/* Full Name */}
@@ -278,9 +278,9 @@ export default function ProfilePage() {
           <div className="px-6 pt-5 pb-3 border-b border-purple-50">
             <div className="flex items-center gap-2">
               <Heart className="w-5 h-5 text-purple-400" />
-              <h2 className="text-lg font-bold text-gray-900">Wellness Interests</h2>
+              <h2 className="text-lg font-bold text-indigo-950">Wellness Interests</h2>
             </div>
-            <p className="text-xs text-gray-400 mt-0.5 ml-7">Select topics you care about</p>
+            <p className="text-xs text-purple-400 mt-0.5 ml-7">Select topics you care about</p>
           </div>
           <div className="p-6">
             <div className="flex flex-wrap gap-2.5">
@@ -291,7 +291,7 @@ export default function ProfilePage() {
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
                     interests.includes(opt)
                       ? 'bg-purple-400 text-white border-purple-400 shadow-sm shadow-indigo-200'
-                      : 'bg-white text-gray-600 border-indigo-200 hover:border-purple-300 hover:text-indigo-700 hover:bg-purple-50'
+                      : 'bg-white text-purple-700 border-indigo-200 hover:border-purple-300 hover:text-indigo-700 hover:bg-purple-50'
                   }`}
                 >
                   {opt}
@@ -324,7 +324,7 @@ export default function ProfilePage() {
             )}
           </Button>
           <Link href="/dashboard">
-            <Button variant="outline" className="border-indigo-200 text-gray-600 hover:text-indigo-700 hover:bg-purple-50 rounded-full h-12 px-6">
+            <Button variant="outline" className="border-indigo-200 text-purple-700 hover:text-indigo-700 hover:bg-purple-50 rounded-full h-12 px-6">
               Cancel
             </Button>
           </Link>
@@ -332,7 +332,7 @@ export default function ProfilePage() {
 
         {/* Export Data */}
         <div className="border-t border-indigo-100 pt-4">
-          <p className="text-xs text-gray-400 mb-3">You can download a copy of all your data stored on ZenAuraa.</p>
+          <p className="text-xs text-purple-400 mb-3">You can download a copy of all your data stored on ZenAuraa.</p>
           <Button
             variant="outline"
             onClick={handleExportData}

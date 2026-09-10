@@ -149,14 +149,14 @@ export default function AdminSessionsPage() {
         </div>
 
         {/* Real Data Sessions Table */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 shadow-sm overflow-hidden">
-          <div className="flex flex-wrap items-center justify-between gap-3 p-4 border-b border-gray-100 dark:border-white/10">
+        <div className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 shadow-sm overflow-hidden">
+          <div className="flex flex-wrap items-center justify-between gap-3 p-4 border-b border-purple-100 dark:border-white/10">
             <SearchBar value={search} onChange={(v) => { setSearch(v); setPage(1); }} placeholder="Search sessions by ID, user, practitioner..." />
             <div className="flex items-center gap-3">
               <select
                 value={statusFilter}
                 onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
-                className="px-3 py-2 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-xs font-bold"
+                className="px-3 py-2 rounded-xl bg-purple-50 dark:bg-white/5 border border-violet-200 dark:border-white/10 text-xs font-bold"
               >
                 <option value="all">All Statuses</option>
                 <option value="active">Active</option>
@@ -164,16 +164,16 @@ export default function AdminSessionsPage() {
                 <option value="cancelled">Cancelled</option>
                 <option value="rejected">Rejected</option>
               </select>
-              <span className="text-xs font-semibold text-gray-500">{totalSessions} Sessions</span>
+              <span className="text-xs font-semibold text-purple-500">{totalSessions} Sessions</span>
             </div>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 dark:bg-white/5 border-b border-gray-100 dark:border-white/10">
+              <thead className="bg-purple-50 dark:bg-white/5 border-b border-purple-100 dark:border-white/10">
                 <tr>
                   {['Session ID', 'User', 'Practitioner', 'Type', 'Duration (Min)', 'Cost', 'Status', 'Scheduled For', 'Started At', 'Actions'].map((h) => (
-                    <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-gray-500 dark:text-white/50 uppercase tracking-wide whitespace-nowrap">{h}</th>
+                    <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-purple-500 dark:text-white/50 uppercase tracking-wide whitespace-nowrap">{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -182,26 +182,26 @@ export default function AdminSessionsPage() {
                   Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} />)
                 ) : sessions.length === 0 ? (
                   <tr>
-                    <td colSpan={9} className="text-center py-12 text-sm text-gray-400 font-medium">No data available yet</td>
+                    <td colSpan={9} className="text-center py-12 text-sm text-purple-400 font-medium">No data available yet</td>
                   </tr>
                 ) : (
                   sessions.map((s) => (
                     <tr key={s.id} className="hover:bg-indigo-50/30 dark:hover:bg-white/5 transition-colors">
-                      <td className="px-4 py-3 font-mono text-xs font-bold text-gray-500">{s.id.slice(0, 10)}...</td>
-                      <td className="px-4 py-3 text-xs font-extrabold text-gray-900 dark:text-white">{s.user}</td>
+                      <td className="px-4 py-3 font-mono text-xs font-bold text-purple-500">{s.id.slice(0, 10)}...</td>
+                      <td className="px-4 py-3 text-xs font-extrabold text-indigo-950 dark:text-white">{s.user}</td>
                       <td className="px-4 py-3 text-xs font-bold text-purple-600">{s.practitioner}</td>
                       <td className="px-4 py-3 text-xs font-bold uppercase text-indigo-700">
                         {s.type === 'VIDEO' ? '📹 Video' : s.type === 'AUDIO' ? '📞 Voice' : '💬 Chat'}
                       </td>
-                      <td className="px-4 py-3 text-xs font-extrabold text-gray-900 dark:text-white text-center">
+                      <td className="px-4 py-3 text-xs font-extrabold text-indigo-950 dark:text-white text-center">
                         {s.durationMinutes > 0 ? `${s.durationMinutes} min` : 'N/A'}
                       </td>
                       <td className="px-4 py-3 text-xs font-bold text-emerald-600">£{s.totalCost}</td>
                       <td className="px-4 py-3"><StatusBadge status={s.status} /></td>
-                      <td className="px-4 py-3 text-xs text-gray-500">
+                      <td className="px-4 py-3 text-xs text-purple-500">
                         {s.scheduledStartTime ? new Date(s.scheduledStartTime).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }) : 'N/A'}
                       </td>
-                      <td className="px-4 py-3 text-xs text-gray-500">
+                      <td className="px-4 py-3 text-xs text-purple-500">
                         {s.status === 'PENDING' || s.status === 'TIME_PROPOSED' || s.status === 'CONFIRMED' ? 'Not started' : new Date(s.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </td>
                       <td className="px-4 py-3">
@@ -224,32 +224,32 @@ export default function AdminSessionsPage() {
         {/* Session Detail Modal */}
         {selectedSession && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 max-w-md w-full shadow-2xl border border-gray-100 dark:border-white/10">
+            <div className="bg-white dark:bg-indigo-900 rounded-2xl p-6 max-w-md w-full shadow-2xl border border-purple-100 dark:border-white/10">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-base font-extrabold text-gray-900 dark:text-white">Session {selectedSession.id.slice(0, 8)}</h3>
-                <button onClick={() => setSelectedSession(null)} className="text-gray-400 hover:text-gray-600 font-bold">✕</button>
+                <h3 className="text-base font-extrabold text-indigo-950 dark:text-white">Session {selectedSession.id.slice(0, 8)}</h3>
+                <button onClick={() => setSelectedSession(null)} className="text-purple-400 hover:text-purple-700 font-bold">✕</button>
               </div>
               <div className="space-y-3 text-xs">
-                <div className="p-3 bg-gray-50 dark:bg-white/5 rounded-xl">
-                  <span className="text-gray-400 font-bold block">User</span>
-                  <span className="font-extrabold text-gray-900 dark:text-white">{selectedSession.user}</span>
+                <div className="p-3 bg-purple-50 dark:bg-white/5 rounded-xl">
+                  <span className="text-purple-400 font-bold block">User</span>
+                  <span className="font-extrabold text-indigo-950 dark:text-white">{selectedSession.user}</span>
                 </div>
-                <div className="p-3 bg-gray-50 dark:bg-white/5 rounded-xl">
-                  <span className="text-gray-400 font-bold block">Practitioner</span>
+                <div className="p-3 bg-purple-50 dark:bg-white/5 rounded-xl">
+                  <span className="text-purple-400 font-bold block">Practitioner</span>
                   <span className="font-extrabold text-purple-600">{selectedSession.practitioner}</span>
                 </div>
-                <div className="p-3 bg-gray-50 dark:bg-white/5 rounded-xl">
-                  <span className="text-gray-400 font-bold block">Scheduled For</span>
+                <div className="p-3 bg-purple-50 dark:bg-white/5 rounded-xl">
+                  <span className="text-purple-400 font-bold block">Scheduled For</span>
                   <span className="font-extrabold text-blue-600">
                     {selectedSession.scheduledStartTime ? new Date(selectedSession.scheduledStartTime).toLocaleString([], { dateStyle: 'long', timeStyle: 'short' }) : 'Instant Session'}
                   </span>
                 </div>
-                <div className="p-3 bg-gray-50 dark:bg-white/5 rounded-xl">
-                  <span className="text-gray-400 font-bold block">Calculated Duration</span>
+                <div className="p-3 bg-purple-50 dark:bg-white/5 rounded-xl">
+                  <span className="text-purple-400 font-bold block">Calculated Duration</span>
                   <span className="font-extrabold text-indigo-600">{selectedSession.durationMinutes} minutes</span>
                 </div>
-                <div className="p-3 bg-gray-50 dark:bg-white/5 rounded-xl">
-                  <span className="text-gray-400 font-bold block">Total Billed</span>
+                <div className="p-3 bg-purple-50 dark:bg-white/5 rounded-xl">
+                  <span className="text-purple-400 font-bold block">Total Billed</span>
                   <span className="font-extrabold text-emerald-600">£{selectedSession.totalCost}</span>
                 </div>
               </div>
@@ -263,7 +263,7 @@ export default function AdminSessionsPage() {
                     <FileText className="w-4 h-4" /> View Transcript
                   </button>
                 )}
-                <button onClick={() => setSelectedSession(null)} className="w-full py-2.5 bg-gray-100 hover:bg-gray-200 dark:bg-white/10 text-gray-700 dark:text-white font-extrabold rounded-xl text-xs">
+                <button onClick={() => setSelectedSession(null)} className="w-full py-2.5 bg-purple-50 hover:bg-violet-100 dark:bg-white/10 text-purple-800 dark:text-white font-extrabold rounded-xl text-xs">
                   Close
                 </button>
               </div>
@@ -274,22 +274,22 @@ export default function AdminSessionsPage() {
         {/* Chat Log Modal */}
         {viewChat && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-            <div className="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-2xl h-[80vh] shadow-2xl border border-gray-100 dark:border-white/10 flex flex-col overflow-hidden">
-              <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-white/5">
+            <div className="bg-white dark:bg-indigo-900 rounded-2xl w-full max-w-2xl h-[80vh] shadow-2xl border border-purple-100 dark:border-white/10 flex flex-col overflow-hidden">
+              <div className="flex items-center justify-between p-4 border-b border-purple-100 dark:border-white/10 bg-purple-50 dark:bg-white/5">
                 <div>
-                  <h3 className="text-base font-extrabold text-gray-900 dark:text-white">Chat Transcript: {viewChat.id.slice(0, 8)}</h3>
-                  <p className="text-xs text-gray-500 font-medium mt-1">Between {viewChat.user} and {viewChat.practitioner}</p>
+                  <h3 className="text-base font-extrabold text-indigo-950 dark:text-white">Chat Transcript: {viewChat.id.slice(0, 8)}</h3>
+                  <p className="text-xs text-purple-500 font-medium mt-1">Between {viewChat.user} and {viewChat.practitioner}</p>
                 </div>
-                <button onClick={() => setViewChat(null)} className="text-gray-400 hover:text-gray-600 p-2 rounded-full hover:bg-black/5">✕</button>
+                <button onClick={() => setViewChat(null)} className="text-purple-400 hover:text-purple-700 p-2 rounded-full hover:bg-black/5">✕</button>
               </div>
               
-              <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 dark:bg-slate-900">
+              <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-purple-50 dark:bg-indigo-950">
                 {chatLoading ? (
                   <div className="flex items-center justify-center h-full">
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
                   </div>
                 ) : chatMessages.length === 0 ? (
-                  <div className="flex items-center justify-center h-full text-sm text-gray-400 font-medium">No messages found in this session.</div>
+                  <div className="flex items-center justify-center h-full text-sm text-purple-400 font-medium">No messages found in this session.</div>
                 ) : (
                   chatMessages.map(msg => {
                     const isPractitioner = msg.senderType === 'PRACTITIONER';
@@ -298,13 +298,13 @@ export default function AdminSessionsPage() {
                         <div className={`max-w-[70%] rounded-2xl px-4 py-3 shadow-sm ${
                           isPractitioner 
                             ? 'bg-blue-600 text-white rounded-br-none' 
-                            : 'bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 border border-gray-100 dark:border-white/5 rounded-bl-none'
+                            : 'bg-white dark:bg-indigo-900 text-indigo-950 dark:text-purple-100 border border-purple-100 dark:border-white/5 rounded-bl-none'
                         }`}>
                           <div className="text-[10px] font-bold opacity-70 mb-1 uppercase tracking-wider">
                             {isPractitioner ? viewChat.practitioner : viewChat.user}
                           </div>
                           <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
-                          <div className={`text-[10px] mt-2 font-medium ${isPractitioner ? 'text-blue-100' : 'text-gray-400'}`}>
+                          <div className={`text-[10px] mt-2 font-medium ${isPractitioner ? 'text-blue-100' : 'text-purple-400'}`}>
                             {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </div>
                         </div>
@@ -320,25 +320,25 @@ export default function AdminSessionsPage() {
         {/* Transcript Modal */}
         {viewTranscript && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-            <div className="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-2xl h-[80vh] shadow-2xl border border-gray-100 dark:border-white/10 flex flex-col overflow-hidden">
-              <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-white/5">
+            <div className="bg-white dark:bg-indigo-900 rounded-2xl w-full max-w-2xl h-[80vh] shadow-2xl border border-purple-100 dark:border-white/10 flex flex-col overflow-hidden">
+              <div className="flex items-center justify-between p-4 border-b border-purple-100 dark:border-white/10 bg-purple-50 dark:bg-white/5">
                 <div>
-                  <h3 className="text-base font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
+                  <h3 className="text-base font-extrabold text-indigo-950 dark:text-white flex items-center gap-2">
                     <FileText className="w-4 h-4 text-indigo-500" />
                     Call Transcript: {viewTranscript.id.slice(0, 8)}
                   </h3>
-                  <p className="text-xs text-gray-500 font-medium mt-1">Between {viewTranscript.user} and {viewTranscript.practitioner}</p>
+                  <p className="text-xs text-purple-500 font-medium mt-1">Between {viewTranscript.user} and {viewTranscript.practitioner}</p>
                 </div>
-                <button onClick={() => setViewTranscript(null)} className="text-gray-400 hover:text-gray-600 p-2 rounded-full hover:bg-black/5">✕</button>
+                <button onClick={() => setViewTranscript(null)} className="text-purple-400 hover:text-purple-700 p-2 rounded-full hover:bg-black/5">✕</button>
               </div>
               
-              <div className="flex-1 overflow-y-auto p-6 bg-white dark:bg-slate-900 text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap leading-relaxed">
+              <div className="flex-1 overflow-y-auto p-6 bg-white dark:bg-indigo-950 text-sm text-purple-800 dark:text-purple-300 whitespace-pre-wrap leading-relaxed">
                 {transcriptLoading ? (
                   <div className="flex items-center justify-center h-full">
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
                   </div>
                 ) : !transcriptData ? (
-                  <div className="flex flex-col items-center justify-center h-full text-gray-400">
+                  <div className="flex flex-col items-center justify-center h-full text-purple-400">
                     <FileText className="w-12 h-12 mb-2 opacity-50" />
                     <span className="font-medium">No transcript available for this session.</span>
                   </div>
@@ -363,8 +363,8 @@ export default function AdminSessionsPage() {
               </div>
               
               {transcriptData && (
-                <div className="p-4 border-t border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-white/5 flex justify-end gap-3">
-                  <button onClick={() => setViewTranscript(null)} className="px-5 py-2 rounded-xl text-sm font-bold text-gray-600 hover:bg-gray-200 transition-colors">
+                <div className="p-4 border-t border-purple-100 dark:border-white/10 bg-purple-50 dark:bg-white/5 flex justify-end gap-3">
+                  <button onClick={() => setViewTranscript(null)} className="px-5 py-2 rounded-xl text-sm font-bold text-purple-700 hover:bg-violet-100 transition-colors">
                     Close
                   </button>
                   <button onClick={() => scanTranscript(viewTranscript.id)} className="px-5 py-2 rounded-xl text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 shadow-md transition-colors flex items-center gap-2">

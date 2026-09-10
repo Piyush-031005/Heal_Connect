@@ -218,7 +218,7 @@ export default function KundliPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#faf9f6] text-gray-900 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#faf9f6] text-indigo-950 flex flex-col font-sans">
       <Navbar />
 
       {/* ══ HERO SECTION ══ */}
@@ -257,27 +257,27 @@ export default function KundliPage() {
         <section id="kundli-form" className="space-y-6">
           <div className="text-center space-y-2">
             <h2 className="text-4xl md:text-6xl font-normal text-indigo-600 font-cursive tracking-wide">Enter Your Birth Details</h2>
-            <p className="text-gray-500 font-medium max-w-lg mx-auto text-sm">Provide exact birth information for precise Lagna Chart and Planetary calculations.</p>
+            <p className="text-purple-500 font-medium max-w-lg mx-auto text-sm">Provide exact birth information for precise Lagna Chart and Planetary calculations.</p>
           </div>
 
           <div className="bg-white/80 backdrop-blur-md border border-indigo-200/80 rounded-3xl p-6 md:p-8 shadow-xl max-w-3xl mx-auto">
             <form onSubmit={handleGenerate} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-xs font-extrabold uppercase tracking-wider text-gray-700 flex items-center gap-1.5">
+                  <label className="text-xs font-extrabold uppercase tracking-wider text-purple-800 flex items-center gap-1.5">
                     <User className="w-3.5 h-3.5 text-indigo-500" /> Full Name *
                   </label>
                   <input type="text" required placeholder="Enter your full name" value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all" />
+                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-indigo-950 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all" />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-extrabold uppercase tracking-wider text-gray-700">Gender *</label>
+                  <label className="text-xs font-extrabold uppercase tracking-wider text-purple-800">Gender *</label>
                   <div className="grid grid-cols-2 gap-3">
                     {['Male', 'Female'].map((g) => (
                       <button type="button" key={g} onClick={() => setFormData({ ...formData, gender: g })}
-                        className={`py-3 rounded-2xl text-xs font-bold transition-all border ${formData.gender === g ? 'bg-indigo-500 text-white border-indigo-500 shadow-md' : 'bg-indigo-50/40 border-indigo-200 text-gray-700 hover:bg-indigo-100/50'}`}>
+                        className={`py-3 rounded-2xl text-xs font-bold transition-all border ${formData.gender === g ? 'bg-indigo-500 text-white border-indigo-500 shadow-md' : 'bg-indigo-50/40 border-indigo-200 text-purple-800 hover:bg-indigo-100/50'}`}>
                         {g}
                       </button>
                     ))}
@@ -285,26 +285,26 @@ export default function KundliPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-extrabold uppercase tracking-wider text-gray-700 flex items-center gap-1.5">
+                  <label className="text-xs font-extrabold uppercase tracking-wider text-purple-800 flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5 text-indigo-500" /> Birth Date *
                   </label>
                   <input type="date" required value={formData.dob}
                     onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all" />
+                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-indigo-950 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all" />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-extrabold uppercase tracking-wider text-gray-700 flex items-center gap-1.5">
+                  <label className="text-xs font-extrabold uppercase tracking-wider text-purple-800 flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5 text-indigo-500" /> Birth Time *
                   </label>
                   <div className="flex gap-2">
                     <input type="time" required value={formData.tob}
                       onChange={(e) => setFormData({ ...formData, tob: e.target.value })}
-                      className="flex-1 px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all" />
+                      className="flex-1 px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-indigo-950 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all" />
                     <div className="flex p-1 bg-indigo-50/60 border border-indigo-200 rounded-2xl gap-1 shrink-0">
                       {['AM', 'PM'].map((period) => (
                         <button type="button" key={period} onClick={() => setTimeAmPm(period as 'AM' | 'PM')}
-                          className={`px-3 py-2 rounded-xl text-xs font-extrabold transition-all ${timeAmPm === period ? 'bg-indigo-500 text-white shadow-md' : 'text-gray-600 hover:bg-indigo-100/60'}`}>
+                          className={`px-3 py-2 rounded-xl text-xs font-extrabold transition-all ${timeAmPm === period ? 'bg-indigo-500 text-white shadow-md' : 'text-purple-700 hover:bg-indigo-100/60'}`}>
                           {period}
                         </button>
                       ))}
@@ -314,12 +314,12 @@ export default function KundliPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-extrabold uppercase tracking-wider text-gray-700 flex items-center gap-1.5">
+                <label className="text-xs font-extrabold uppercase tracking-wider text-purple-800 flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-indigo-500" /> Birth Place *
                 </label>
                 <input type="text" required placeholder="e.g. New Delhi, India" value={formData.pob}
                   onChange={(e) => setFormData({ ...formData, pob: e.target.value })}
-                  className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all" />
+                  className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-indigo-950 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all" />
               </div>
 
               <button type="submit" disabled={isLoading}
@@ -341,16 +341,16 @@ export default function KundliPage() {
                   <p className="text-white/90 text-xs font-semibold">{generatedKundli.dob} • {generatedKundli.tob} • {generatedKundli.pob}</p>
                 </div>
                 <div className="grid grid-cols-3 gap-3 text-xs font-bold text-indigo-950 bg-white/90 p-3 rounded-xl">
-                  <div><span className="text-[10px] text-gray-500 font-semibold uppercase block">Lagna</span><span className="text-indigo-800 font-extrabold">{generatedKundli.lagnaSign}</span></div>
-                  <div><span className="text-[10px] text-gray-500 font-semibold uppercase block">Moon Sign</span><span className="text-indigo-800 font-extrabold">{generatedKundli.moonSign}</span></div>
-                  <div><span className="text-[10px] text-gray-500 font-semibold uppercase block">Nakshatra</span><span className="text-indigo-800 font-extrabold">{generatedKundli.nakshatra}</span></div>
+                  <div><span className="text-[10px] text-purple-500 font-semibold uppercase block">Lagna</span><span className="text-indigo-800 font-extrabold">{generatedKundli.lagnaSign}</span></div>
+                  <div><span className="text-[10px] text-purple-500 font-semibold uppercase block">Moon Sign</span><span className="text-indigo-800 font-extrabold">{generatedKundli.moonSign}</span></div>
+                  <div><span className="text-[10px] text-purple-500 font-semibold uppercase block">Nakshatra</span><span className="text-indigo-800 font-extrabold">{generatedKundli.nakshatra}</span></div>
                 </div>
               </div>
 
               <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-indigo-100">
                 {TABS.map((tab) => (
                   <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-                    className={`px-4 py-2.5 rounded-full text-xs font-extrabold transition-all flex items-center gap-1.5 shrink-0 border ${activeTab === tab.id ? 'bg-indigo-500 text-white border-indigo-500 shadow-md' : 'bg-indigo-50/50 text-gray-700 border-indigo-200 hover:bg-indigo-100'}`}>
+                    className={`px-4 py-2.5 rounded-full text-xs font-extrabold transition-all flex items-center gap-1.5 shrink-0 border ${activeTab === tab.id ? 'bg-indigo-500 text-white border-indigo-500 shadow-md' : 'bg-indigo-50/50 text-purple-800 border-indigo-200 hover:bg-indigo-100'}`}>
                     <tab.icon className="w-3.5 h-3.5" />{tab.label}
                   </button>
                 ))}
@@ -380,9 +380,9 @@ export default function KundliPage() {
                       </svg>
                     </div>
                     <div className="space-y-4">
-                      <h3 className="text-xl font-extrabold text-gray-900">Lagna Chart (D1) Summary</h3>
-                      <p className="text-sm text-gray-600 leading-relaxed">Your Ascendant is in <strong>Aries (Mesha)</strong>, ruled by Mars. This gives you a bold, energetic, and leadership-driven personality with strong executive instincts.</p>
-                      <div className="space-y-2 text-xs font-semibold text-gray-700">
+                      <h3 className="text-xl font-extrabold text-indigo-950">Lagna Chart (D1) Summary</h3>
+                      <p className="text-sm text-purple-700 leading-relaxed">Your Ascendant is in <strong>Aries (Mesha)</strong>, ruled by Mars. This gives you a bold, energetic, and leadership-driven personality with strong executive instincts.</p>
+                      <div className="space-y-2 text-xs font-semibold text-purple-800">
                         {[
                           '1st House (Lagna): Aries — Sun exalted, conferring strong vitality.',
                           '5th House (Intellect): Jupiter giving Budhaditya Yoga for wisdom.',
@@ -410,8 +410,8 @@ export default function KundliPage() {
                       </svg>
                     </div>
                     <div className="space-y-4">
-                      <h3 className="text-xl font-extrabold text-gray-900">Navamsa Chart (D9) Analysis</h3>
-                      <p className="text-sm text-gray-600 leading-relaxed">The D9 Chart reveals inner spiritual strength, destiny after marriage, and the long-term fruits of your planetary positions.</p>
+                      <h3 className="text-xl font-extrabold text-indigo-950">Navamsa Chart (D9) Analysis</h3>
+                      <p className="text-sm text-purple-700 leading-relaxed">The D9 Chart reveals inner spiritual strength, destiny after marriage, and the long-term fruits of your planetary positions.</p>
                       <div className="p-4 bg-indigo-50 rounded-2xl border border-indigo-200 text-xs font-bold text-indigo-900 space-y-1.5">
                         <p>Primary Navamsa Benefic: Venus in 7th House</p>
                         <p>Marital Compatibility Score: 85% High Harmony</p>
@@ -427,10 +427,10 @@ export default function KundliPage() {
                       <thead className="bg-indigo-50 text-indigo-900 uppercase font-extrabold border-b border-indigo-200">
                         <tr><th className="p-3">Planet</th><th className="p-3">Rashi</th><th className="p-3">Degree</th><th className="p-3">House</th><th className="p-3">Status</th></tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-100 font-semibold text-gray-700">
+                      <tbody className="divide-y divide-purple-100 font-semibold text-purple-800">
                         {PLANETS.map((row, i) => (
                           <tr key={i} className="hover:bg-indigo-50/40">
-                            <td className="p-3 font-extrabold text-gray-900">{row.planet}</td>
+                            <td className="p-3 font-extrabold text-indigo-950">{row.planet}</td>
                             <td className="p-3">{row.sign}</td>
                             <td className="p-3">{row.deg}</td>
                             <td className="p-3">House {row.house}</td>
@@ -444,19 +444,19 @@ export default function KundliPage() {
 
                 {activeTab === 'dasha' && (
                   <div className="space-y-4">
-                    <h3 className="text-xl font-extrabold text-gray-900">Current Vimshottari Dasha Cycle</h3>
+                    <h3 className="text-xl font-extrabold text-indigo-950">Current Vimshottari Dasha Cycle</h3>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="p-5 rounded-2xl bg-indigo-50 border border-indigo-200 space-y-2">
                         <span className="text-[10px] font-bold text-indigo-700 uppercase tracking-widest">Active Mahadasha</span>
                         <h4 className="text-xl font-black text-indigo-900">Jupiter (Guru)</h4>
-                        <p className="text-xs text-gray-600 font-medium">Duration: 2020 to 2036 (16 Years)</p>
-                        <p className="text-xs text-gray-500">Brings wisdom, expansion, spiritual growth, and prosperity in career and family life.</p>
+                        <p className="text-xs text-purple-700 font-medium">Duration: 2020 to 2036 (16 Years)</p>
+                        <p className="text-xs text-purple-500">Brings wisdom, expansion, spiritual growth, and prosperity in career and family life.</p>
                       </div>
                       <div className="p-5 rounded-2xl bg-purple-50 border border-purple-200 space-y-2">
                         <span className="text-[10px] font-bold text-purple-700 uppercase tracking-widest">Active Antardasha</span>
                         <h4 className="text-xl font-black text-purple-900">Mercury (Budh)</h4>
-                        <p className="text-xs text-gray-600 font-medium">Duration: Oct 2024 to Jan 2027</p>
-                        <p className="text-xs text-gray-500">Excellent period for communication, technology, business deals, and intellectual achievements.</p>
+                        <p className="text-xs text-purple-700 font-medium">Duration: Oct 2024 to Jan 2027</p>
+                        <p className="text-xs text-purple-500">Excellent period for communication, technology, business deals, and intellectual achievements.</p>
                       </div>
                     </div>
                   </div>
@@ -466,19 +466,19 @@ export default function KundliPage() {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2">
                       <h4 className="font-extrabold text-sm text-emerald-900 flex items-center gap-2"><Check className="w-4 h-4 text-emerald-600" />Gajakesari Raj Yoga</h4>
-                      <p className="text-xs text-gray-600 leading-relaxed">Jupiter and Moon form a favorable angle, blessing with intellectual wisdom, financial gains, and high reputation.</p>
+                      <p className="text-xs text-purple-700 leading-relaxed">Jupiter and Moon form a favorable angle, blessing with intellectual wisdom, financial gains, and high reputation.</p>
                     </div>
                     <div className="p-4 rounded-2xl bg-indigo-50 border border-indigo-200 space-y-2">
                       <h4 className="font-extrabold text-sm text-indigo-900 flex items-center gap-2"><Info className="w-4 h-4 text-indigo-600" />Mild Mangal Dosha</h4>
-                      <p className="text-xs text-gray-600 leading-relaxed">Mars in 8th house creates mild Mangal Dosha. Easily resolved through matching with a compatible partner chart.</p>
+                      <p className="text-xs text-purple-700 leading-relaxed">Mars in 8th house creates mild Mangal Dosha. Easily resolved through matching with a compatible partner chart.</p>
                     </div>
                     <div className="p-4 rounded-2xl bg-blue-50 border border-blue-200 space-y-2">
                       <h4 className="font-extrabold text-sm text-blue-900 flex items-center gap-2"><Sparkles className="w-4 h-4 text-blue-500" />Budhaditya Yoga</h4>
-                      <p className="text-xs text-gray-600 leading-relaxed">Sun and Mercury together create sharp intelligence, excellent communication, and analytical mastery.</p>
+                      <p className="text-xs text-purple-700 leading-relaxed">Sun and Mercury together create sharp intelligence, excellent communication, and analytical mastery.</p>
                     </div>
                     <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 space-y-2">
                       <h4 className="font-extrabold text-sm text-rose-900 flex items-center gap-2"><Shield className="w-4 h-4 text-rose-500" />No Kaal Sarp Dosha</h4>
-                      <p className="text-xs text-gray-600 leading-relaxed">Planets are NOT hemmed between Rahu and Ketu. This is a positive indicator for steady life growth.</p>
+                      <p className="text-xs text-purple-700 leading-relaxed">Planets are NOT hemmed between Rahu and Ketu. This is a positive indicator for steady life growth.</p>
                     </div>
                   </div>
                 )}
@@ -490,9 +490,9 @@ export default function KundliPage() {
                       { title: 'Marriage & Love', icon: Heart, text: 'Exalted 12th House Venus promises a supportive, emotionally attuned partner. Marriage is likely between ages 26-31.' },
                       { title: 'Wealth & Prosperity', icon: Coins, text: 'Jupiter in 9th House opens multiple passive revenue streams and long-term asset growth after age 35.' },
                     ].map((p, i) => (
-                      <div key={i} className="p-4 rounded-2xl bg-gray-50 border border-gray-100 flex items-start gap-3">
+                      <div key={i} className="p-4 rounded-2xl bg-purple-50 border border-purple-100 flex items-start gap-3">
                         <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0"><p.icon className="w-5 h-5" /></div>
-                        <div><h4 className="font-extrabold text-sm text-gray-900">{p.title}</h4><p className="text-xs text-gray-600 leading-relaxed mt-1">{p.text}</p></div>
+                        <div><h4 className="font-extrabold text-sm text-indigo-950">{p.title}</h4><p className="text-xs text-purple-700 leading-relaxed mt-1">{p.text}</p></div>
                       </div>
                     ))}
                   </div>
@@ -505,8 +505,8 @@ export default function KundliPage() {
         {/* ══ RELATED GUIDES SECTION ══ */}
         <section className="space-y-6">
           <div className="text-center space-y-1">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight">Astrology Learning Guides</h2>
-            <p className="text-gray-500 font-medium text-xs">Master Vedic Astrology charts, planetary aspects, and dosha remedies.</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-indigo-950 tracking-tight">Astrology Learning Guides</h2>
+            <p className="text-purple-500 font-medium text-xs">Master Vedic Astrology charts, planetary aspects, and dosha remedies.</p>
           </div>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
             {RELATED_GUIDES.map((guide) => (
@@ -524,9 +524,9 @@ export default function KundliPage() {
                       <div className="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
                         <guide.icon className="w-4 h-4" />
                       </div>
-                      <h3 className="font-extrabold text-gray-900 text-base leading-snug">{guide.title}</h3>
+                      <h3 className="font-extrabold text-indigo-950 text-base leading-snug">{guide.title}</h3>
                     </div>
-                    <p className="text-xs text-gray-500 leading-relaxed">{guide.desc}</p>
+                    <p className="text-xs text-purple-500 leading-relaxed">{guide.desc}</p>
                   </div>
                 </div>
                 <div className="p-5 pt-0">
@@ -543,8 +543,8 @@ export default function KundliPage() {
         {/* ══ 12 HOUSES EXPLAINED ══ */}
         <section className="bg-white border border-indigo-100 rounded-3xl p-6 md:p-10 space-y-8 shadow-sm">
           <div className="space-y-3 max-w-3xl">
-            <h2 className="text-3xl font-extrabold text-gray-900">What is Janam Kundli?</h2>
-            <p className="text-sm text-gray-600 leading-relaxed">In classical Vedic Astrology (Jyotish), a Janam Kundli is your personalized birth chart calculated using the exact positions of the Sun, Moon, and planets at your birth time. It acts as a divine blueprint mapping your core personality, health tendencies, career achievements, marriage timing, and karmic life path across 12 distinct houses.</p>
+            <h2 className="text-3xl font-extrabold text-indigo-950">What is Janam Kundli?</h2>
+            <p className="text-sm text-purple-700 leading-relaxed">In classical Vedic Astrology (Jyotish), a Janam Kundli is your personalized birth chart calculated using the exact positions of the Sun, Moon, and planets at your birth time. It acts as a divine blueprint mapping your core personality, health tendencies, career achievements, marriage timing, and karmic life path across 12 distinct houses.</p>
           </div>
           <div className="space-y-4">
             <h3 className="text-2xl md:text-3xl font-extrabold text-indigo-800 tracking-tight">The 12 Houses of Kundli Explained</h3>
@@ -553,9 +553,9 @@ export default function KundliPage() {
                 <div key={h.num} className="bg-indigo-50/40 border border-indigo-100 rounded-2xl p-4 space-y-3 hover:border-indigo-300 transition-colors shadow-sm flex flex-col items-start">
                   <img src="/house_icon.jpg" alt="Vedic House Icon" className="w-12 h-12 rounded-xl object-cover shadow-md border-2 border-indigo-300 shrink-0" />
                   <div className="space-y-1">
-                    <h4 className="font-extrabold text-sm text-gray-900">{h.name}</h4>
+                    <h4 className="font-extrabold text-sm text-indigo-950">{h.name}</h4>
                     <p className="text-[11px] text-indigo-700 font-bold">{h.domain}</p>
-                    <p className="text-xs text-gray-500 leading-relaxed">{h.desc}</p>
+                    <p className="text-xs text-purple-500 leading-relaxed">{h.desc}</p>
                   </div>
                 </div>
               ))}
@@ -569,8 +569,8 @@ export default function KundliPage() {
           <div className="grid md:grid-cols-2 gap-6">
             {DOSHAS.map((d, i) => (
               <div key={i} className="bg-white p-5 rounded-2xl border border-indigo-100 space-y-2">
-                <h3 className="font-extrabold text-sm text-gray-900 flex items-center gap-2"><d.icon className={`w-4 h-4 ${d.color}`} />{d.title}</h3>
-                <p className="text-xs text-gray-600 leading-relaxed">{d.text}</p>
+                <h3 className="font-extrabold text-sm text-indigo-950 flex items-center gap-2"><d.icon className={`w-4 h-4 ${d.color}`} />{d.title}</h3>
+                <p className="text-xs text-purple-700 leading-relaxed">{d.text}</p>
               </div>
             ))}
           </div>
@@ -580,7 +580,7 @@ export default function KundliPage() {
         <section className="space-y-6">
           <div className="text-center space-y-1">
             <h2 className="text-4xl md:text-6xl font-normal text-indigo-600 font-cursive tracking-wide">Frequently Asked Questions</h2>
-            <p className="text-gray-500 font-medium text-xs">Common questions about birth charts, accuracy, and Vedic astrology predictions.</p>
+            <p className="text-purple-500 font-medium text-xs">Common questions about birth charts, accuracy, and Vedic astrology predictions.</p>
           </div>
           <div className="max-w-3xl mx-auto space-y-3">
             {FAQS.map((faq, i) => {
@@ -588,14 +588,14 @@ export default function KundliPage() {
               return (
                 <div key={i} className="bg-white rounded-2xl border border-yellow-100 overflow-hidden hover:border-indigo-200 transition-all">
                   <button onClick={() => setOpenFaq(isOpen ? null : i)}
-                    className="w-full flex items-center justify-between p-5 text-left font-extrabold text-sm text-gray-900">
+                    className="w-full flex items-center justify-between p-5 text-left font-extrabold text-sm text-indigo-950">
                     <span>{faq.q}</span>
-                    {isOpen ? <ChevronUp className="w-4 h-4 text-indigo-500 shrink-0 ml-2" /> : <ChevronDown className="w-4 h-4 text-gray-400 shrink-0 ml-2" />}
+                    {isOpen ? <ChevronUp className="w-4 h-4 text-indigo-500 shrink-0 ml-2" /> : <ChevronDown className="w-4 h-4 text-purple-400 shrink-0 ml-2" />}
                   </button>
                   <AnimatePresence initial={false}>
                     {isOpen && (
                       <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}>
-                        <div className="px-5 pb-5 text-xs md:text-sm text-gray-500 leading-relaxed pt-1 border-t border-gray-50">{faq.a}</div>
+                        <div className="px-5 pb-5 text-xs md:text-sm text-purple-500 leading-relaxed pt-1 border-t border-purple-50">{faq.a}</div>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -648,7 +648,7 @@ export default function KundliPage() {
               </div>
 
               <div className="p-6 md:p-8 space-y-4">
-                <div className="flex items-center justify-between text-xs font-bold text-gray-400 border-b border-gray-100 pb-3">
+                <div className="flex items-center justify-between text-xs font-bold text-purple-400 border-b border-purple-100 pb-3">
                   <span className="flex items-center gap-1.5 text-indigo-700 font-extrabold">
                     <BookOpen className="w-4 h-4" /> ZenAuraa Guide
                   </span>
@@ -657,10 +657,10 @@ export default function KundliPage() {
                   </span>
                 </div>
 
-                <div className="prose prose-indigo max-w-none text-xs md:text-sm text-gray-700 space-y-3 leading-relaxed"
+                <div className="prose prose-indigo max-w-none text-xs md:text-sm text-purple-800 space-y-3 leading-relaxed"
                   dangerouslySetInnerHTML={{ __html: selectedGuide.guideContent }} />
 
-                <div className="pt-4 border-t border-gray-100 flex justify-end">
+                <div className="pt-4 border-t border-purple-100 flex justify-end">
                   <button onClick={() => setSelectedGuide(null)} className="px-6 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white font-extrabold text-xs rounded-full shadow-md transition-all">
                     Close Guide
                   </button>
@@ -672,7 +672,7 @@ export default function KundliPage() {
       </AnimatePresence>
 
       {/* ══ FOOTER ══ */}
-      <footer className="bg-gradient-to-b from-indigo-50 to-yellow-50 text-gray-700 pt-12 pb-6 border-t border-indigo-100 mt-16">
+      <footer className="bg-gradient-to-b from-indigo-50 to-yellow-50 text-purple-800 pt-12 pb-6 border-t border-indigo-100 mt-16">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="flex flex-wrap gap-8 mb-10">
             <div className="w-full lg:w-72 text-center lg:text-left space-y-3">
@@ -680,7 +680,7 @@ export default function KundliPage() {
                 <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
                 <span className="text-lg font-extrabold text-indigo-600">ZenAuraa</span>
               </div>
-              <p className="text-xs text-gray-500 leading-relaxed">Your trusted companion for Janam Kundli calculations, Vedic Astrology insights, and emotional wellness.</p>
+              <p className="text-xs text-purple-500 leading-relaxed">Your trusted companion for Janam Kundli calculations, Vedic Astrology insights, and emotional wellness.</p>
             </div>
             <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-6">
               {[
@@ -693,14 +693,14 @@ export default function KundliPage() {
                   <h4 className="text-indigo-800 font-bold text-sm mb-3">{col.title}</h4>
                   <ul className="space-y-1.5">
                     {col.links.map((link) => (
-                      <li key={link}><Link href={link === 'Privacy Policy' ? '/privacy' : '/kundli'} className="text-xs text-gray-500 hover:text-indigo-600 transition-colors">{link}</Link></li>
+                      <li key={link}><Link href={link === 'Privacy Policy' ? '/privacy' : '/kundli'} className="text-xs text-purple-500 hover:text-indigo-600 transition-colors">{link}</Link></li>
                     ))}
                   </ul>
                 </div>
               ))}
             </div>
           </div>
-          <div className="border-t border-indigo-200 pt-6 text-center text-xs text-gray-500">
+          <div className="border-t border-indigo-200 pt-6 text-center text-xs text-purple-500">
             <p>&copy; {new Date().getFullYear()} ZenAuraa. All rights reserved.</p>
           </div>
         </div>

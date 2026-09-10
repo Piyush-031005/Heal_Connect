@@ -114,8 +114,8 @@ export default function UserSchedulesPage() {
     <div className="flex-1 p-6 lg:p-8 max-w-5xl mx-auto w-full">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Scheduled Sessions</h1>
-          <p className="text-gray-500 mt-1">Manage your upcoming consultation sessions.</p>
+          <h1 className="text-2xl font-bold text-indigo-950">Scheduled Sessions</h1>
+          <p className="text-purple-500 mt-1">Manage your upcoming consultation sessions.</p>
         </div>
       </div>
 
@@ -125,8 +125,8 @@ export default function UserSchedulesPage() {
             <div className="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center mb-4">
               <Calendar className="w-8 h-8 text-indigo-500" />
             </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">No Scheduled Sessions</h3>
-            <p className="text-gray-500 max-w-md mx-auto mb-6">
+            <h3 className="text-lg font-bold text-indigo-950 mb-2">No Scheduled Sessions</h3>
+            <p className="text-purple-500 max-w-md mx-auto mb-6">
               You haven't requested any sessions yet. Browse our list of expert practitioners to book a consultation.
             </p>
             <Button onClick={() => router.push('/practitioners')} className="bg-indigo-500 hover:bg-indigo-600">
@@ -168,7 +168,7 @@ export default function UserSchedulesPage() {
                             {isProposed && 'Action Required'}
                             {isConfirmed && 'Confirmed'}
                           </span>
-                          <span className="text-xs text-gray-400">
+                          <span className="text-xs text-purple-400">
                             Requested {formatDate(req.createdAt)}
                           </span>
                         </div>
@@ -178,10 +178,10 @@ export default function UserSchedulesPage() {
                 </CardHeader>
                 <CardContent className="pt-6">
                   {isPending && (
-                    <div className="bg-gray-50 rounded-xl p-6 text-center border border-gray-100">
-                      <Clock className="w-8 h-8 text-gray-400 mx-auto mb-3" />
-                      <h4 className="font-bold text-gray-800 mb-1">Waiting for proposed times</h4>
-                      <p className="text-sm text-gray-500 max-w-sm mx-auto">
+                    <div className="bg-purple-50 rounded-xl p-6 text-center border border-purple-100">
+                      <Clock className="w-8 h-8 text-purple-400 mx-auto mb-3" />
+                      <h4 className="font-bold text-purple-900 mb-1">Waiting for proposed times</h4>
+                      <p className="text-sm text-purple-500 max-w-sm mx-auto">
                         {req.practitioner.name} has received your request and will propose available time slots shortly. We'll notify you when times are available.
                       </p>
                     </div>
@@ -189,14 +189,14 @@ export default function UserSchedulesPage() {
 
                   {isProposed && (
                     <div>
-                      <h4 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                      <h4 className="font-bold text-purple-900 mb-4 flex items-center gap-2">
                         <Calendar className="w-4 h-4 text-indigo-500" />
                         Please select a convenient time:
                       </h4>
                       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
                         {req.timeProposals.filter(p => p.status === 'PENDING').map(proposal => (
                           <div key={proposal.id} className="border rounded-xl p-4 hover:border-indigo-300 hover:shadow-md transition-all bg-white relative group">
-                            <p className="font-semibold text-gray-900 mb-3">{formatDate(proposal.startTime)}</p>
+                            <p className="font-semibold text-indigo-950 mb-3">{formatDate(proposal.startTime)}</p>
                             <Button 
                               onClick={() => handleSelectTime(req.id, proposal.id)}
                               disabled={selecting !== null}
@@ -216,8 +216,8 @@ export default function UserSchedulesPage() {
                       <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-3">
                         <Check className="w-6 h-6 text-green-600" />
                       </div>
-                      <h4 className="font-bold text-gray-900 text-lg mb-1">Session Scheduled</h4>
-                      <p className="text-gray-600 mb-2">
+                      <h4 className="font-bold text-indigo-950 text-lg mb-1">Session Scheduled</h4>
+                      <p className="text-purple-700 mb-2">
                         Your session with {req.practitioner.name} is confirmed for:
                       </p>
                       <p className="font-bold text-green-700 text-xl">

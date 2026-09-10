@@ -84,21 +84,21 @@ export default function AdminFaqsPage() {
       <div className="space-y-6">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">FAQs</h1>
-            <p className="text-gray-500">Manage Frequently Asked Questions</p>
+            <h1 className="text-2xl font-bold text-indigo-950 dark:text-white">FAQs</h1>
+            <p className="text-purple-500">Manage Frequently Asked Questions</p>
           </div>
           <button onClick={() => openModal()} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-bold shadow-md shadow-indigo-600/20">
             <Plus className="w-5 h-5" /> New FAQ
           </button>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 shadow-sm overflow-hidden">
+        <div className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 shadow-sm overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 dark:bg-white/5 border-b border-gray-100 dark:border-white/10">
+            <thead className="bg-purple-50 dark:bg-white/5 border-b border-purple-100 dark:border-white/10">
               <tr>
-                <th className="text-left px-4 py-3 font-extrabold text-gray-500 uppercase">Question</th>
-                <th className="text-left px-4 py-3 font-extrabold text-gray-500 uppercase">Category</th>
-                <th className="text-right px-4 py-3 font-extrabold text-gray-500 uppercase">Actions</th>
+                <th className="text-left px-4 py-3 font-extrabold text-purple-500 uppercase">Question</th>
+                <th className="text-left px-4 py-3 font-extrabold text-purple-500 uppercase">Category</th>
+                <th className="text-right px-4 py-3 font-extrabold text-purple-500 uppercase">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50 dark:divide-white/5">
@@ -108,7 +108,7 @@ export default function AdminFaqsPage() {
                 <tr><td colSpan={3} className="text-center py-8">No FAQs found</td></tr>
               ) : (
                 faqs.map(faq => (
-                  <tr key={faq.id} className="hover:bg-gray-50 dark:hover:bg-white/5">
+                  <tr key={faq.id} className="hover:bg-purple-50 dark:hover:bg-white/5">
                     <td className="px-4 py-3 font-bold max-w-md truncate">{faq.question}</td>
                     <td className="px-4 py-3">
                       <span className="px-2 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
@@ -129,16 +129,16 @@ export default function AdminFaqsPage() {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl p-6">
+          <div className="bg-white dark:bg-indigo-900 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl p-6">
             <h3 className="text-lg font-bold mb-4">{editingFaq ? 'Edit FAQ' : 'Create FAQ'}</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-bold mb-1">Question</label>
-                <input required type="text" value={formData.question} onChange={e => setFormData({...formData, question: e.target.value})} className="w-full p-2 border rounded-xl dark:bg-slate-700 dark:border-slate-600" />
+                <input required type="text" value={formData.question} onChange={e => setFormData({...formData, question: e.target.value})} className="w-full p-2 border rounded-xl dark:bg-indigo-800 dark:border-slate-600" />
               </div>
               <div>
                 <label className="block text-sm font-bold mb-1">Category</label>
-                <select value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} className="w-full p-2 border rounded-xl dark:bg-slate-700 dark:border-slate-600">
+                <select value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} className="w-full p-2 border rounded-xl dark:bg-indigo-800 dark:border-slate-600">
                   <option value="General">General</option>
                   <option value="Billing">Billing</option>
                   <option value="Technical">Technical</option>
@@ -147,10 +147,10 @@ export default function AdminFaqsPage() {
               </div>
               <div>
                 <label className="block text-sm font-bold mb-1">Answer</label>
-                <textarea required rows={5} value={formData.answer} onChange={e => setFormData({...formData, answer: e.target.value})} className="w-full p-2 border rounded-xl dark:bg-slate-700 dark:border-slate-600 font-sans text-sm"></textarea>
+                <textarea required rows={5} value={formData.answer} onChange={e => setFormData({...formData, answer: e.target.value})} className="w-full p-2 border rounded-xl dark:bg-indigo-800 dark:border-slate-600 font-sans text-sm"></textarea>
               </div>
               <div className="flex justify-end gap-3 pt-4">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl font-bold">Cancel</button>
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-purple-50 text-purple-800 rounded-xl font-bold">Cancel</button>
                 <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-xl font-bold shadow-md">Save FAQ</button>
               </div>
             </form>

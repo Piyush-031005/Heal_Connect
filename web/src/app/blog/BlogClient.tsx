@@ -153,7 +153,7 @@ export default function BlogPage() {
     const readTime = `${Math.max(1, Math.ceil(wordCount / 200))} min read`;
     const htmlContent = blogForm.content
       .split('\n\n').map((p) => p.trim()).filter(Boolean)
-      .map((p) => `<p class="leading-relaxed text-gray-700">${p}</p>`).join('\n');
+      .map((p) => `<p class="leading-relaxed text-purple-800">${p}</p>`).join('\n');
 
     if (editingArticleId) {
       setAllArticles((prev) => prev.map((a) =>
@@ -195,7 +195,7 @@ export default function BlogPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#faf9f6] text-gray-900 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#faf9f6] text-indigo-950 flex flex-col font-sans">
       <Navbar />
 
       {/* ══ HERO SECTION ══ */}
@@ -226,9 +226,9 @@ export default function BlogPage() {
               <Search className="w-5 h-5 text-indigo-500 absolute left-5 top-4" />
               <input type="text" placeholder="Let's find what you're looking for..." value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-14 pr-6 py-4 rounded-full bg-white text-gray-900 placeholder-gray-400 font-semibold text-sm shadow-2xl focus:outline-none focus:ring-4 focus:ring-indigo-300/50 transition-all" />
+                className="w-full pl-14 pr-6 py-4 rounded-full bg-white text-indigo-950 placeholder-purple-400 font-semibold text-sm shadow-2xl focus:outline-none focus:ring-4 focus:ring-indigo-300/50 transition-all" />
               {searchQuery && (
-                <button onClick={() => setSearchQuery('')} className="absolute right-5 top-4 text-gray-400 hover:text-gray-600">
+                <button onClick={() => setSearchQuery('')} className="absolute right-5 top-4 text-purple-400 hover:text-purple-700">
                   <X className="w-5 h-5" />
                 </button>
               )}
@@ -294,48 +294,48 @@ export default function BlogPage() {
               </div>
               <form onSubmit={handleBlogSubmit} className="p-6 space-y-5">
                 <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5">Article Title *</label>
+                  <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-800 mb-1.5">Article Title *</label>
                   <input type="text" value={blogForm.title} onChange={(e) => setBlogForm({ ...blogForm, title: e.target.value })}
                     placeholder="e.g. The Power of Jupiter Transit in 2026" maxLength={120}
-                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-semibold placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all" />
+                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-indigo-950 text-sm font-semibold placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5">Category *</label>
+                    <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-800 mb-1.5">Category *</label>
                     <select value={blogForm.category} onChange={(e) => setBlogForm({ ...blogForm, category: e.target.value })}
-                      className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all">
+                      className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-indigo-950 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all">
                       {CATEGORIES.filter((c) => c.id !== 'all').map((c) => (
                         <option key={c.id} value={c.id}>{c.label}</option>
                       ))}
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5">Cover Image URL (Optional)</label>
+                    <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-800 mb-1.5">Cover Image URL (Optional)</label>
                     <input type="text" value={blogForm.image} onChange={(e) => setBlogForm({ ...blogForm, image: e.target.value })}
                       placeholder="/guide_kundli_basics.jpg"
-                      className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-medium placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all" />
+                      className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-indigo-950 text-sm font-medium placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5">Short Excerpt * <span className="text-gray-400 font-normal normal-case">(min 30 chars)</span></label>
+                  <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-800 mb-1.5">Short Excerpt * <span className="text-purple-400 font-normal normal-case">(min 30 chars)</span></label>
                   <textarea value={blogForm.excerpt} onChange={(e) => setBlogForm({ ...blogForm, excerpt: e.target.value })}
                     placeholder="A compelling one-paragraph summary that appears on article cards..." rows={2}
-                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-medium placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all resize-none" />
+                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-indigo-950 text-sm font-medium placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all resize-none" />
                 </div>
                 <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5">
-                    Article Body * <span className="text-gray-400 font-normal normal-case">(min 100 chars — blank line = new paragraph)</span>
+                  <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-800 mb-1.5">
+                    Article Body * <span className="text-purple-400 font-normal normal-case">(min 100 chars — blank line = new paragraph)</span>
                   </label>
                   <textarea value={blogForm.content} onChange={(e) => setBlogForm({ ...blogForm, content: e.target.value })}
                     placeholder="Write your full article here. Use blank lines between paragraphs."
-                    rows={10} className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-medium placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all resize-y" />
-                  <p className="text-xs text-gray-400 mt-1 text-right">{blogForm.content.trim().split(/\s+/).filter(Boolean).length} words</p>
+                    rows={10} className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-indigo-950 text-sm font-medium placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all resize-y" />
+                  <p className="text-xs text-purple-400 mt-1 text-right">{blogForm.content.trim().split(/\s+/).filter(Boolean).length} words</p>
                 </div>
                 <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5">Tags <span className="text-gray-400 font-normal normal-case">(comma-separated)</span></label>
+                  <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-800 mb-1.5">Tags <span className="text-purple-400 font-normal normal-case">(comma-separated)</span></label>
                   <input type="text" value={blogForm.tags} onChange={(e) => setBlogForm({ ...blogForm, tags: e.target.value })}
                     placeholder="e.g. Jupiter, Transit, Career, Vedic Astrology"
-                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-medium placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all" />
+                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-indigo-950 text-sm font-medium placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all" />
                 </div>
                 {blogFormError && (
                   <p className="text-xs text-red-600 font-semibold bg-red-50 px-3 py-2 rounded-xl border border-red-200">{blogFormError}</p>
@@ -347,7 +347,7 @@ export default function BlogPage() {
                     {editingArticleId ? 'Save Changes' : 'Publish Article'}
                   </button>
                   <button type="button" onClick={() => { setShowBlogForm(false); setEditingArticleId(null); }}
-                    className="px-6 py-3.5 rounded-2xl border border-gray-200 text-gray-600 font-semibold hover:bg-gray-50 transition-all">
+                    className="px-6 py-3.5 rounded-2xl border border-violet-200 text-purple-700 font-semibold hover:bg-purple-50 transition-all">
                     Cancel
                   </button>
                 </div>
@@ -367,7 +367,7 @@ export default function BlogPage() {
                 const isActive = selectedCategory === cat.id;
                 return (
                   <button key={cat.id} onClick={() => setSelectedCategory(cat.id)}
-                    className={`px-4 py-2 rounded-full text-xs font-extrabold transition-all flex items-center gap-1.5 shrink-0 border ${isActive ? 'bg-indigo-500 text-white border-indigo-500 shadow-md' : 'bg-white text-gray-700 border-indigo-200 hover:bg-indigo-50'}`}>
+                    className={`px-4 py-2 rounded-full text-xs font-extrabold transition-all flex items-center gap-1.5 shrink-0 border ${isActive ? 'bg-indigo-500 text-white border-indigo-500 shadow-md' : 'bg-white text-purple-800 border-indigo-200 hover:bg-indigo-50'}`}>
                     <cat.icon className="w-3.5 h-3.5" /> {cat.label}
                   </button>
                 );
@@ -387,7 +387,7 @@ export default function BlogPage() {
           <section className="space-y-6">
             <div className="flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-indigo-500" />
-              <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">Trending Stories</h2>
+              <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-950">Trending Stories</h2>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -402,23 +402,23 @@ export default function BlogPage() {
                   </div>
                   <div className="p-6 space-y-3 flex-grow flex flex-col justify-between">
                     <div className="space-y-2">
-                      <div className="flex items-center gap-3 text-xs font-semibold text-gray-400">
+                      <div className="flex items-center gap-3 text-xs font-semibold text-purple-400">
                         <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" />{art.readTime}</span>
                         <span>•</span>
                         <span className="flex items-center gap-1"><Eye className="w-3.5 h-3.5" />{art.views} views</span>
                       </div>
-                      <h3 className="text-xl font-extrabold text-gray-900 leading-snug hover:text-indigo-600 transition-colors">{art.title}</h3>
-                      <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed">{art.excerpt}</p>
+                      <h3 className="text-xl font-extrabold text-indigo-950 leading-snug hover:text-indigo-600 transition-colors">{art.title}</h3>
+                      <p className="text-xs text-purple-700 line-clamp-2 leading-relaxed">{art.excerpt}</p>
                     </div>
 
-                    <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <div className="pt-4 border-t border-purple-100 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-extrabold text-xs flex items-center justify-center">
                           {art.author.name.charAt(0)}
                         </div>
                         <div>
-                          <p className="text-xs font-extrabold text-gray-900">{art.author.name}</p>
-                          <p className="text-[10px] text-gray-400 font-medium">{art.date}</p>
+                          <p className="text-xs font-extrabold text-indigo-950">{art.author.name}</p>
+                          <p className="text-[10px] text-purple-400 font-medium">{art.date}</p>
                         </div>
                       </div>
                       <span className="text-xs font-extrabold text-indigo-600 flex items-center gap-1 hover:gap-2 transition-all">
@@ -435,7 +435,7 @@ export default function BlogPage() {
         {/* ══ ARTICLES GRID ══ */}
         <section className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">Latest Articles</h2>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-950">Latest Articles</h2>
             <span className="text-xs font-extrabold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-full">
               Showing {filteredArticles.length} Articles
             </span>
@@ -444,8 +444,8 @@ export default function BlogPage() {
           {filteredArticles.length === 0 ? (
             <div className="text-center py-16 bg-white rounded-3xl border border-indigo-100 space-y-3">
               <Search className="w-12 h-12 mx-auto text-indigo-300" />
-              <h3 className="text-lg font-bold text-gray-800">No matching articles found</h3>
-              <p className="text-xs text-gray-500">Try searching for a different topic or select another category above.</p>
+              <h3 className="text-lg font-bold text-purple-900">No matching articles found</h3>
+              <p className="text-xs text-purple-500">Try searching for a different topic or select another category above.</p>
             </div>
           ) : (
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -478,14 +478,14 @@ export default function BlogPage() {
                       )}
                     </div>
                     <div className="p-5 space-y-2">
-                      <div className="flex items-center justify-between text-[11px] text-gray-400 font-semibold">
+                      <div className="flex items-center justify-between text-[11px] text-purple-400 font-semibold">
                         <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{art.readTime}</span>
                         <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{art.views}</span>
                       </div>
-                      <h3 className="text-base font-extrabold text-gray-900 line-clamp-2 leading-snug hover:text-indigo-600 transition-colors">
+                      <h3 className="text-base font-extrabold text-indigo-950 line-clamp-2 leading-snug hover:text-indigo-600 transition-colors">
                         {art.title}
                       </h3>
-                      <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">{art.excerpt}</p>
+                      <p className="text-xs text-purple-500 line-clamp-2 leading-relaxed">{art.excerpt}</p>
                     </div>
                   </div>
 
@@ -504,13 +504,13 @@ export default function BlogPage() {
                             <button onClick={() => handleDeleteArticle(art.id)}
                               className="flex-1 bg-red-500 text-white text-xs font-extrabold py-1.5 rounded-xl hover:bg-red-600 transition-all">Delete</button>
                             <button onClick={() => setDeleteConfirmId(null)}
-                              className="flex-1 bg-white text-gray-600 text-xs font-semibold py-1.5 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all">Cancel</button>
+                              className="flex-1 bg-white text-purple-700 text-xs font-semibold py-1.5 rounded-xl border border-violet-200 hover:bg-purple-50 transition-all">Cancel</button>
                           </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
-                    <div onClick={() => setSelectedArticle(art)} className="cursor-pointer pt-3 border-t border-gray-50 flex items-center justify-between">
-                      <span className="text-[11px] font-semibold text-gray-400">{art.date}</span>
+                    <div onClick={() => setSelectedArticle(art)} className="cursor-pointer pt-3 border-t border-purple-50 flex items-center justify-between">
+                      <span className="text-[11px] font-semibold text-purple-400">{art.date}</span>
                       <span className="text-xs font-extrabold text-indigo-600 flex items-center gap-1">Read Article <ArrowRight className="w-3 h-3" /></span>
                     </div>
                   </div>
@@ -538,7 +538,7 @@ export default function BlogPage() {
               <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row items-center gap-2 bg-white/20 p-2 rounded-full backdrop-blur-md border border-white/30">
                 <input type="email" required placeholder="Enter your email address" value={subscribedEmail}
                   onChange={(e) => setSubscribedEmail(e.target.value)}
-                  className="w-full px-5 py-3 rounded-full bg-white text-gray-900 text-xs font-semibold placeholder-gray-400 focus:outline-none" />
+                  className="w-full px-5 py-3 rounded-full bg-white text-indigo-950 text-xs font-semibold placeholder-purple-400 focus:outline-none" />
                 <button type="submit" className="w-full sm:w-auto px-6 py-3 bg-white hover:bg-indigo-50 text-indigo-600 font-extrabold text-xs rounded-full shrink-0 shadow-md transition-all">
                   Subscribe
                 </button>
@@ -585,32 +585,32 @@ export default function BlogPage() {
               </div>
 
               <div className="p-6 md:p-8 space-y-6">
-                <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-gray-100 text-xs font-semibold text-gray-500">
+                <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-purple-100 text-xs font-semibold text-purple-500">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 font-extrabold text-sm flex items-center justify-center">
                       {selectedArticle.author.name.charAt(0)}
                     </div>
                     <div>
-                      <p className="font-extrabold text-gray-900 text-sm">{selectedArticle.author.name}</p>
-                      <p className="text-[10px] text-gray-400">{selectedArticle.author.role}</p>
+                      <p className="font-extrabold text-indigo-950 text-sm">{selectedArticle.author.name}</p>
+                      <p className="text-[10px] text-purple-400">{selectedArticle.author.role}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4 text-gray-400">
+                  <div className="flex items-center gap-4 text-purple-400">
                     <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" />{selectedArticle.readTime}</span>
                     <span className="flex items-center gap-1"><Eye className="w-3.5 h-3.5" />{selectedArticle.views} Views</span>
                   </div>
                 </div>
 
-                <div className="prose prose-indigo max-w-none text-xs md:text-sm text-gray-700 space-y-4"
+                <div className="prose prose-indigo max-w-none text-xs md:text-sm text-purple-800 space-y-4"
                   dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
 
-                <div className="pt-6 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4">
+                <div className="pt-6 border-t border-purple-100 flex flex-wrap items-center justify-between gap-4">
                   <div className="flex flex-wrap gap-2">
                     {selectedArticle.tags.map((t: string) => (
                       <span key={t} className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-[11px] font-bold">#{t}</span>
                     ))}
                   </div>
-                  <button onClick={() => toast.success('Article link copied to clipboard!')} className="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-extrabold flex items-center gap-1.5 transition-colors">
+                  <button onClick={() => toast.success('Article link copied to clipboard!')} className="px-4 py-2 rounded-full bg-purple-50 hover:bg-violet-100 text-purple-900 text-xs font-extrabold flex items-center gap-1.5 transition-colors">
                     <Share2 className="w-3.5 h-3.5" /> Share Article
                   </button>
                 </div>
@@ -621,8 +621,8 @@ export default function BlogPage() {
       </AnimatePresence>
 
       {/* ══ FOOTER ══ */}
-      <footer className="bg-gradient-to-b from-indigo-50 to-yellow-50 text-gray-700 pt-12 pb-6 border-t border-indigo-100 mt-16">
-        <div className="container mx-auto px-4 max-w-6xl text-center text-xs text-gray-500">
+      <footer className="bg-gradient-to-b from-indigo-50 to-yellow-50 text-purple-800 pt-12 pb-6 border-t border-indigo-100 mt-16">
+        <div className="container mx-auto px-4 max-w-6xl text-center text-xs text-purple-500">
           <p>&copy; {new Date().getFullYear()} ZenAuraa Blog. All rights reserved.</p>
         </div>
       </footer>

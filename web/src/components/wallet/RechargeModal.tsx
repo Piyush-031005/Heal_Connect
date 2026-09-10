@@ -105,7 +105,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
           <DialogTitle className="flex items-center gap-2 text-xl font-extrabold text-[#1a1a1a]">
             <Wallet className="w-5 h-5 text-[#4f46e5]" /> Recharge Wallet
           </DialogTitle>
-          <DialogDescription className="text-gray-500">
+          <DialogDescription className="text-purple-500">
             Add funds to your wallet to seamlessly connect with experts.
           </DialogDescription>
         </DialogHeader>
@@ -128,21 +128,21 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
           <div className="grid grid-cols-2 gap-3">
             <Button
               variant="outline"
-              className={`h-12 border-gray-200 font-medium ${paymentMethod === 'razorpay' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-gray-600 hover:bg-gray-50'}`}
+              className={`h-12 border-violet-200 font-medium ${paymentMethod === 'razorpay' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-purple-700 hover:bg-purple-50'}`}
               onClick={() => setPaymentMethod('razorpay')}
             >
               Domestic (INR)
             </Button>
             <Button
               variant="outline"
-              className={`h-12 border-gray-200 font-medium ${paymentMethod === 'stripe' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-gray-600 hover:bg-gray-50'}`}
+              className={`h-12 border-violet-200 font-medium ${paymentMethod === 'stripe' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-purple-700 hover:bg-purple-50'}`}
               onClick={() => setPaymentMethod('stripe')}
             >
               International (USD)
             </Button>
           </div>
           {paymentMethod === 'stripe' && (
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-purple-500">
               * International payments are converted to USD (approx ${((amount || 0) / 83).toFixed(2)}) and processed securely via Stripe.
             </p>
           )}
@@ -156,7 +156,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
             placeholder="e.g. 500"
             value={amount}
             onChange={(e) => setAmount(e.target.value === '' ? '' : Number(e.target.value))}
-            className="border-gray-200 focus:ring-[#4f46e5]/40 focus:border-[#4f46e5]"
+            className="border-violet-200 focus:ring-[#4f46e5]/40 focus:border-[#4f46e5]"
           />
           {error && <p className="text-sm text-red-500 font-medium">{error}</p>}
         </div>

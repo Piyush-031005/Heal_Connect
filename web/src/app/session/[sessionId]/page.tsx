@@ -114,7 +114,7 @@ export default function SessionPage() {
       {/* Header */}
       <header className="sticky top-0 z-10 bg-white border-b border-yellow-100 px-4 py-3 flex items-center gap-3">
         <Button variant="ghost" size="icon" onClick={() => router.back()} className="rounded-full hover:bg-yellow-50 shrink-0">
-          <ArrowLeft className="h-5 w-5 text-gray-600" />
+          <ArrowLeft className="h-5 w-5 text-purple-700" />
         </Button>
 
         {/* Peer avatar */}
@@ -142,7 +142,7 @@ export default function SessionPage() {
           <p className="font-semibold text-sm text-[#1a1a1a] truncate">
             {peer?.name ?? 'Loading...'}
           </p>
-          <p className="text-xs text-gray-400 truncate">
+          <p className="text-xs text-purple-400 truncate">
             {peer?.specialties?.slice(0, 2).join(' · ') ?? sessionId.slice(0, 8) + '...'}
           </p>
         </div>

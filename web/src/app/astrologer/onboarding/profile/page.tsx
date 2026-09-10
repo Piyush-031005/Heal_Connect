@@ -21,13 +21,13 @@ function StepBar({ step }: { step: number }) {
               <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all ${
                 done    ? 'bg-indigo-500 border-indigo-500 text-white' :
                 active  ? 'bg-white border-indigo-500 text-indigo-600' :
-                          'bg-white border-gray-200 text-gray-400'
+                          'bg-white border-violet-200 text-purple-400'
               }`}>
                 {done ? '✓' : s}
               </div>
-              <span className={`text-[11px] font-medium hidden sm:block ${active ? 'text-indigo-600' : done ? 'text-indigo-400' : 'text-gray-400'}`}>{label}</span>
+              <span className={`text-[11px] font-medium hidden sm:block ${active ? 'text-indigo-600' : done ? 'text-indigo-400' : 'text-purple-400'}`}>{label}</span>
             </div>
-            {s < 3 && <div className={`w-16 sm:w-24 h-0.5 mx-1 mb-5 rounded ${done ? 'bg-indigo-400' : 'bg-gray-200'}`} />}
+            {s < 3 && <div className={`w-16 sm:w-24 h-0.5 mx-1 mb-5 rounded ${done ? 'bg-indigo-400' : 'bg-violet-100'}`} />}
           </div>
         );
       })}
@@ -53,8 +53,8 @@ function SectionLabel({ num, title, subtitle }: { num: string; title: string; su
     <div className="flex items-start gap-3 mb-3">
       <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{num}</span>
       <div>
-        <p className="text-sm font-bold text-gray-800">{title}</p>
-        {subtitle && <p className="text-xs text-gray-400 mt-0.5">{subtitle}</p>}
+        <p className="text-sm font-bold text-purple-900">{title}</p>
+        {subtitle && <p className="text-xs text-purple-400 mt-0.5">{subtitle}</p>}
       </div>
     </div>
   );
@@ -64,15 +64,15 @@ function Pill({ label, active, onClick }: { label: string; active: boolean; onCl
   return (
     <button type="button" onClick={onClick}
       className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
-        active ? 'bg-indigo-500 text-white border-indigo-500 shadow-sm' : 'border-gray-200 text-gray-600 hover:border-indigo-300 hover:text-indigo-600 bg-white'
+        active ? 'bg-indigo-500 text-white border-indigo-500 shadow-sm' : 'border-violet-200 text-purple-700 hover:border-indigo-300 hover:text-indigo-600 bg-white'
       }`}>
       {label}
     </button>
   );
 }
 
-const selectCls = "w-full h-12 rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition appearance-none";
-const textareaCls = "w-full rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition resize-none";
+const selectCls = "w-full h-12 rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 text-sm text-purple-900 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition appearance-none";
+const textareaCls = "w-full rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 py-3 text-sm text-purple-900 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition resize-none";
 
 export default function AstrologerProfilePage() {
   const router = useRouter();
@@ -190,8 +190,8 @@ export default function AstrologerProfilePage() {
 
           <div className="bg-white rounded-2xl shadow-xl border border-yellow-100 p-8 space-y-8">
             <div>
-              <h2 className="text-xl font-extrabold text-gray-900 mb-1">Your Practice</h2>
-              <p className="text-sm text-gray-500">Select your areas, experience, and what you offer.</p>
+              <h2 className="text-xl font-extrabold text-indigo-950 mb-1">Your Practice</h2>
+              <p className="text-sm text-purple-500">Select your areas, experience, and what you offer.</p>
             </div>
 
             {error && <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">{error}</div>}
@@ -202,7 +202,7 @@ export default function AstrologerProfilePage() {
               <div className="space-y-4">
                 {PRACTICE_AREAS.map(group => (
                   <div key={group.group}>
-                    <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">{group.group}</p>
+                    <p className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2">{group.group}</p>
                     <div className="flex flex-wrap gap-2">
                       {group.items.map(item => (
                         <Pill key={item} label={item} active={form.selectedAreas.includes(item)} onClick={() => toggleArea(item)} />
@@ -211,7 +211,7 @@ export default function AstrologerProfilePage() {
                   </div>
                 ))}
                 <div>
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Other</p>
+                  <p className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2">Other</p>
                   <textarea className={textareaCls} rows={2} placeholder="Please tell us about your practice..." value={form.otherPractice} onChange={e => set('otherPractice', e.target.value)} />
                 </div>
               </div>
@@ -225,7 +225,7 @@ export default function AstrologerProfilePage() {
                   <option value="">Select one</option>
                   {[...ALL_ITEMS, 'Other'].map(item => <option key={item} value={item}>{item}</option>)}
                 </select>
-                <ChevronRight className="absolute right-3 top-3.5 w-4 h-4 text-gray-400 pointer-events-none rotate-90" />
+                <ChevronRight className="absolute right-3 top-3.5 w-4 h-4 text-purple-400 pointer-events-none rotate-90" />
               </div>
             </div>
 
@@ -270,7 +270,7 @@ export default function AstrologerProfilePage() {
             {/* Nav */}
             <div className="flex justify-between items-center pt-2">
               <button onClick={() => router.push('/astrologer/onboarding')}
-                className="flex items-center gap-1.5 px-5 py-2.5 rounded-full border border-gray-200 text-gray-600 text-sm font-semibold hover:bg-gray-50 transition-colors">
+                className="flex items-center gap-1.5 px-5 py-2.5 rounded-full border border-violet-200 text-purple-700 text-sm font-semibold hover:bg-purple-50 transition-colors">
                 <ChevronLeft className="w-4 h-4" /> Back
               </button>
               <button onClick={handleNext} disabled={saving}

@@ -88,7 +88,7 @@ export default function AstrologerLoginPage() {
     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&state=${state}&nonce=${Math.random().toString(36)}`;
   };
 
-  const inputCls = "w-full h-12 rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition";
+  const inputCls = "w-full h-12 rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 text-sm text-purple-900 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition";
 
   return (
     <div className="min-h-screen bg-[#faf9f6] flex flex-col md:flex-row font-sans">
@@ -148,8 +148,8 @@ export default function AstrologerLoginPage() {
             <div className="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4 md:hidden">
               <Star className="w-4 h-4" /> Astrologer Portal
             </div>
-            <h1 className="text-2xl font-extrabold text-gray-900">Sign in to your account</h1>
-            <p className="text-gray-500 text-sm mt-1">Welcome back, practitioner</p>
+            <h1 className="text-2xl font-extrabold text-indigo-950">Sign in to your account</h1>
+            <p className="text-purple-500 text-sm mt-1">Welcome back, practitioner</p>
           </div>
 
           <div className="bg-white rounded-2xl shadow-xl border border-yellow-100 p-8">
@@ -163,7 +163,7 @@ export default function AstrologerLoginPage() {
                 type="button"
                 onClick={() => { setLoginMethod('email'); setError(''); }}
                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                  loginMethod === 'email' ? 'bg-indigo-500 text-white shadow' : 'text-gray-500 hover:text-indigo-500'
+                  loginMethod === 'email' ? 'bg-indigo-500 text-white shadow' : 'text-purple-500 hover:text-indigo-500'
                 }`}
               >
                 Email
@@ -172,7 +172,7 @@ export default function AstrologerLoginPage() {
                 type="button"
                 onClick={() => { setLoginMethod('phone'); setError(''); }}
                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                  loginMethod === 'phone' ? 'bg-indigo-500 text-white shadow' : 'text-gray-500 hover:text-indigo-500'
+                  loginMethod === 'phone' ? 'bg-indigo-500 text-white shadow' : 'text-purple-500 hover:text-indigo-500'
                 }`}
               >
                 Phone
@@ -182,11 +182,11 @@ export default function AstrologerLoginPage() {
             {loginMethod === 'email' ? (
               <form onSubmit={handleEmailLogin} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email</label>
+                  <label className="block text-sm font-semibold text-purple-800 mb-1.5">Email</label>
                   <input className={inputCls} type="email" placeholder="you@example.com" value={form.email} onChange={e => set('email', e.target.value)} required />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Password</label>
+                  <label className="block text-sm font-semibold text-purple-800 mb-1.5">Password</label>
                   <div className="relative">
                     <input
                       className={inputCls + ' pr-11'}
@@ -196,7 +196,7 @@ export default function AstrologerLoginPage() {
                       onChange={e => set('password', e.target.value)}
                       required
                     />
-                    <button type="button" onClick={() => setShowPass(v => !v)} className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600">
+                    <button type="button" onClick={() => setShowPass(v => !v)} className="absolute right-3 top-3.5 text-purple-400 hover:text-purple-700">
                       {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
                   </div>
@@ -211,7 +211,7 @@ export default function AstrologerLoginPage() {
             ) : (
               <form onSubmit={handlePhoneLogin} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phone Number</label>
+                  <label className="block text-sm font-semibold text-purple-800 mb-1.5">Phone Number</label>
                   <input className={inputCls} type="tel" placeholder="+919876543210" value={form.phone} onChange={e => set('phone', e.target.value)} required />
                 </div>
 
@@ -225,14 +225,14 @@ export default function AstrologerLoginPage() {
 
             <div className="relative flex items-center py-4">
               <div className="flex-grow border-t border-yellow-100" />
-              <span className="flex-shrink-0 mx-4 text-gray-400 text-sm uppercase tracking-wider">Or continue with</span>
+              <span className="flex-shrink-0 mx-4 text-purple-400 text-sm uppercase tracking-wider">Or continue with</span>
               <div className="flex-grow border-t border-yellow-100" />
             </div>
 
             <button
               type="button"
               onClick={handleGoogleSignIn}
-              className="w-full h-12 bg-white border border-gray-200 hover:bg-gray-50 text-gray-800 rounded-xl font-semibold shadow-sm flex items-center justify-center gap-2 transition-colors"
+              className="w-full h-12 bg-white border border-violet-200 hover:bg-purple-50 text-purple-900 rounded-xl font-semibold shadow-sm flex items-center justify-center gap-2 transition-colors"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -244,12 +244,12 @@ export default function AstrologerLoginPage() {
             </button>
           </div>
 
-          <p className="text-center text-sm text-gray-500 mt-5">
+          <p className="text-center text-sm text-purple-500 mt-5">
             New here?{' '}
             <Link href="/expert/signup" className="text-indigo-600 font-semibold hover:underline">Create an account</Link>
           </p>
 
-          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-gray-400">
+          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-purple-400">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>Secure login · Your data is encrypted</span>
           </div>

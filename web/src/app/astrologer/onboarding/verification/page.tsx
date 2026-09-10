@@ -21,13 +21,13 @@ function StepBar({ step }: { step: number }) {
               <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all ${
                 done    ? 'bg-indigo-500 border-indigo-500 text-white' :
                 active  ? 'bg-white border-indigo-500 text-indigo-600' :
-                          'bg-white border-gray-200 text-gray-400'
+                          'bg-white border-violet-200 text-purple-400'
               }`}>
                 {done ? '✓' : s}
               </div>
-              <span className={`text-[11px] font-medium hidden sm:block ${active ? 'text-indigo-600' : done ? 'text-indigo-400' : 'text-gray-400'}`}>{label}</span>
+              <span className={`text-[11px] font-medium hidden sm:block ${active ? 'text-indigo-600' : done ? 'text-indigo-400' : 'text-purple-400'}`}>{label}</span>
             </div>
-            {s < 3 && <div className={`w-16 sm:w-24 h-0.5 mx-1 mb-5 rounded ${done ? 'bg-indigo-400' : 'bg-gray-200'}`} />}
+            {s < 3 && <div className={`w-16 sm:w-24 h-0.5 mx-1 mb-5 rounded ${done ? 'bg-indigo-400' : 'bg-violet-100'}`} />}
           </div>
         );
       })}
@@ -36,7 +36,7 @@ function StepBar({ step }: { step: number }) {
 }
 
 const VERIFICATION_OPTIONS = ['Yes', 'No', "I'd like to discuss this"];
-const textareaCls = "w-full rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition resize-none";
+const textareaCls = "w-full rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 py-3 text-sm text-purple-900 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition resize-none";
 
 export default function AstrologerVerificationPage() {
   const router = useRouter();
@@ -125,26 +125,26 @@ export default function AstrologerVerificationPage() {
 
           <div className="bg-white rounded-2xl shadow-xl border border-yellow-100 p-8 space-y-7">
             <div>
-              <h2 className="text-xl font-extrabold text-gray-900 mb-1">Final Details</h2>
-              <p className="text-sm text-gray-500">Almost done — just a couple more things.</p>
+              <h2 className="text-xl font-extrabold text-indigo-950 mb-1">Final Details</h2>
+              <p className="text-sm text-purple-500">Almost done — just a couple more things.</p>
             </div>
 
             {error && <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">{error}</div>}
 
             {/* Anything else */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">
-                Anything else you'd like us to know? <span className="text-gray-400 font-normal">(Optional)</span>
+              <label className="block text-sm font-bold text-purple-800 mb-2">
+                Anything else you'd like us to know? <span className="text-purple-400 font-normal">(Optional)</span>
               </label>
               <textarea className={textareaCls} rows={4} placeholder="Optional." value={anythingElse} onChange={e => setAnythingElse(e.target.value)} />
             </div>
 
             {/* Verification */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-1">
+              <label className="block text-sm font-bold text-purple-800 mb-1">
                 If we invite you to the next stage <span className="text-red-500">*</span>
               </label>
-              <p className="text-xs text-gray-500 mb-4 leading-relaxed">
+              <p className="text-xs text-purple-500 mb-4 leading-relaxed">
                 Would you be comfortable taking part in a short conversation and, if you progress further, providing appropriate identification and/or supporting information about your practice?
               </p>
               <div className="space-y-2.5">
@@ -152,15 +152,15 @@ export default function AstrologerVerificationPage() {
                   <label key={opt} className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer transition-all ${
                     verificationComfort === opt
                       ? 'border-indigo-400 bg-indigo-50'
-                      : 'border-gray-200 hover:border-indigo-200 bg-white'
+                      : 'border-violet-200 hover:border-indigo-200 bg-white'
                   }`}>
                     <input type="radio" name="verification" value={opt} checked={verificationComfort === opt}
                       onChange={() => setVerificationComfort(opt)} className="accent-indigo-500 w-4 h-4" />
-                    <span className="text-sm font-medium text-gray-700">{opt}</span>
+                    <span className="text-sm font-medium text-purple-800">{opt}</span>
                   </label>
                 ))}
               </div>
-              <p className="text-xs text-gray-400 mt-3">
+              <p className="text-xs text-purple-400 mt-3">
                 We won't ask you to upload documents at this stage.
               </p>
             </div>
@@ -168,7 +168,7 @@ export default function AstrologerVerificationPage() {
             {/* Nav */}
             <div className="flex justify-between items-center pt-2">
               <button onClick={() => router.push('/astrologer/onboarding/profile')} disabled={submitting}
-                className="flex items-center gap-1.5 px-5 py-2.5 rounded-full border border-gray-200 text-gray-600 text-sm font-semibold hover:bg-gray-50 transition-colors">
+                className="flex items-center gap-1.5 px-5 py-2.5 rounded-full border border-violet-200 text-purple-700 text-sm font-semibold hover:bg-purple-50 transition-colors">
                 <ChevronLeft className="w-4 h-4" /> Back
               </button>
               <button onClick={handleSubmit} disabled={submitting}

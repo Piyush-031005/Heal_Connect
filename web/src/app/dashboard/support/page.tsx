@@ -21,7 +21,7 @@ const STATUS_STYLES: Record<string, string> = {
   OPEN: 'bg-blue-50 text-blue-600 border-blue-200',
   IN_PROGRESS: 'bg-indigo-50 text-indigo-700 border-indigo-200',
   RESOLVED: 'bg-emerald-50 text-emerald-600 border-emerald-200',
-  CLOSED: 'bg-gray-100 text-gray-500 border-gray-200',
+  CLOSED: 'bg-purple-50 text-purple-500 border-violet-200',
 };
 
 export default function SupportTicketsPage() {
@@ -104,7 +104,7 @@ export default function SupportTicketsPage() {
       <header className="sticky top-0 z-50 w-full border-b border-yellow-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <Link href="/dashboard" className="text-gray-500 hover:text-[#4f46e5] transition-colors">
+            <Link href="/dashboard" className="text-purple-500 hover:text-[#4f46e5] transition-colors">
               <ArrowLeft className="h-5 w-5" />
             </Link>
             <h1 className="text-xl font-extrabold text-[#1a1a1a]">Support</h1>
@@ -161,7 +161,7 @@ export default function SupportTicketsPage() {
           </div>
         ) : tickets.length === 0 ? (
           <Card className="bg-white border border-yellow-100 shadow-sm">
-            <CardContent className="p-12 text-center text-gray-400">
+            <CardContent className="p-12 text-center text-purple-400">
               <LifeBuoy className="w-12 h-12 mx-auto mb-3 opacity-20" />
               <p>No support tickets yet.</p>
               <p className="text-sm mt-1">Need help with something? Raise a ticket and we'll get back to you.</p>
@@ -178,25 +178,25 @@ export default function SupportTicketsPage() {
                   className="w-full text-left p-4 flex items-center gap-3 bg-transparent border-none cursor-pointer"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="font-bold text-sm text-gray-900 truncate">{t.subject}</p>
+                    <p className="font-bold text-sm text-indigo-950 truncate">{t.subject}</p>
                     <div className="flex items-center gap-2 mt-1">
                       <span className={`text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full border ${STATUS_STYLES[t.status] || ''}`}>
                         {t.status.replace('_', ' ')}
                       </span>
-                      <span className="text-xs text-gray-400">{t.category}</span>
-                      <span className="text-xs text-gray-300">·</span>
-                      <span className="text-xs text-gray-400">
+                      <span className="text-xs text-purple-400">{t.category}</span>
+                      <span className="text-xs text-purple-300">·</span>
+                      <span className="text-xs text-purple-400">
                         {new Date(t.updatedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
                       </span>
                     </div>
                   </div>
-                  {isOpen ? <ChevronUp className="w-4 h-4 text-gray-400 shrink-0" /> : <ChevronDown className="w-4 h-4 text-gray-400 shrink-0" />}
+                  {isOpen ? <ChevronUp className="w-4 h-4 text-purple-400 shrink-0" /> : <ChevronDown className="w-4 h-4 text-purple-400 shrink-0" />}
                 </button>
                 {isOpen && (
                   <CardContent className="px-4 pb-4 pt-0 space-y-3">
                     <div className="space-y-2 max-h-72 overflow-y-auto">
                       {messages.length === 0 ? (
-                        <p className="text-xs text-gray-400 py-2">Loading conversation...</p>
+                        <p className="text-xs text-purple-400 py-2">Loading conversation...</p>
                       ) : (
                         messages.map((m) => (
                           <div
@@ -204,19 +204,19 @@ export default function SupportTicketsPage() {
                             className={`text-sm rounded-xl p-3 max-w-[85%] ${
                               m.senderType === 'ADMIN'
                                 ? 'bg-indigo-50 border border-indigo-100 mr-auto'
-                                : 'bg-gray-50 border border-gray-100 ml-auto'
+                                : 'bg-purple-50 border border-purple-100 ml-auto'
                             }`}
                           >
-                            <p className="text-[10px] font-bold uppercase tracking-wide text-gray-400 mb-1">
+                            <p className="text-[10px] font-bold uppercase tracking-wide text-purple-400 mb-1">
                               {m.senderType === 'ADMIN' ? 'ZenAuraa Support' : 'You'}
                             </p>
-                            <p className="text-gray-700 whitespace-pre-wrap">{m.message}</p>
+                            <p className="text-purple-800 whitespace-pre-wrap">{m.message}</p>
                           </div>
                         ))
                       )}
                     </div>
                     {t.status !== 'CLOSED' && (
-                      <div className="flex items-center gap-2 pt-2 border-t border-gray-100">
+                      <div className="flex items-center gap-2 pt-2 border-t border-purple-100">
                         <input
                           type="text"
                           placeholder="Type a reply..."

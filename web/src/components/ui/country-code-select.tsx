@@ -63,7 +63,7 @@ export function CountryCodeSelect({ value, onChange, className = '' }: CountryCo
           <span className="text-[#4f46e5] font-bold">{selected.code}</span>
         </span>
         <ChevronDown
-          className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
+          className={`w-4 h-4 text-purple-400 transition-transform duration-200 ${
             isOpen ? 'rotate-180 text-[#4f46e5]' : ''
           }`}
         />
@@ -82,7 +82,7 @@ export function CountryCodeSelect({ value, onChange, className = '' }: CountryCo
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search country or code..."
-                className="w-full pl-8 pr-3 py-1.5 text-xs font-medium rounded-xl border border-purple-200 bg-white text-[#1a1a1a] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#4f46e5]/40"
+                className="w-full pl-8 pr-3 py-1.5 text-xs font-medium rounded-xl border border-purple-200 bg-white text-[#1a1a1a] placeholder:text-purple-400 focus:outline-none focus:ring-2 focus:ring-[#4f46e5]/40"
               />
             </div>
           </div>
@@ -90,7 +90,7 @@ export function CountryCodeSelect({ value, onChange, className = '' }: CountryCo
           {/* List of Countries */}
           <div className="max-h-60 overflow-y-auto p-1.5 space-y-0.5 divide-y-0">
             {filtered.length === 0 ? (
-              <div className="py-6 text-center text-xs text-gray-400">
+              <div className="py-6 text-center text-xs text-purple-400">
                 No matching country found
               </div>
             ) : (
@@ -104,7 +104,7 @@ export function CountryCodeSelect({ value, onChange, className = '' }: CountryCo
                     className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
                       isSelected
                         ? 'bg-gradient-to-r from-purple-100 to-indigo-100/70 text-[#4f46e5] font-semibold'
-                        : 'hover:bg-purple-50/80 text-gray-700'
+                        : 'hover:bg-purple-50/80 text-purple-800'
                     }`}
                   >
                     <div className="flex items-center gap-2.5 min-w-0">

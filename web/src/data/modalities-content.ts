@@ -54,7 +54,7 @@ export const MODALITIES_CONTENT: Record<string, any> = {
     ],
     remedies: [
       'Read your rising sign horoscopes along with your sun sign for a more accurate daily picture.',
-      'Track the lunar cycles â€â€ start new projects on a new moon and reflect on a full moon.',
+      'Track the lunar cycles ”” start new projects on a new moon and reflect on a full moon.',
       'Meditate on your natal chart North Node to understand your soul purpose.',
       'Journal about planetary transits to channel their energy productively.'
     ]
@@ -150,7 +150,7 @@ export const MODALITIES_CONTENT: Record<string, any> = {
       '/insights_page/chakra-healing/scroll image2.jpg',
     ],
     remedies: [
-      'Practice the Seed (Bija) mantras for each chakra during meditation â€â€ LAM, VAM, RAM, YAM, HAM, OM.',
+      'Practice the Seed (Bija) mantras for each chakra during meditation ”” LAM, VAM, RAM, YAM, HAM, OM.',
       'Use color therapy: wear the color associated with the chakra you are working on.',
       'Place corresponding crystals on each chakra during a 20-minute lying-down meditation.',
       'Practice yoga poses that target specific chakras: mountain pose for root, cobra for heart.'
@@ -170,13 +170,13 @@ export const MODALITIES_CONTENT: Record<string, any> = {
     contentSections: [
       {
         title: 'Why Your Dreams Matter',
-        text: 'Dreams are the language of the subconscious mind. Every night, while your conscious mind rests, your deeper self processes emotions, rehearses scenarios, and communicates vital messages. Dream interpretation is the art of decoding this rich, symbolic language â€â€ offering unprecedented access to your inner world, fears, desires, and soul guidance.',
+        text: 'Dreams are the language of the subconscious mind. Every night, while your conscious mind rests, your deeper self processes emotions, rehearses scenarios, and communicates vital messages. Dream interpretation is the art of decoding this rich, symbolic language ”” offering unprecedented access to your inner world, fears, desires, and soul guidance.',
         image: '/insights_page/dream-interpretation/pexels-alexeydemidov-11472317.jpg',
         imagePosition: 'left'
       },
       {
         title: 'Symbols, Archetypes, and Meaning',
-        text: 'Carl Jung identified universal archetypes â€â€ the Shadow, the Anima, the Hero â€â€ that appear consistently in dream imagery across cultures. Water represents the unconscious; flying symbolizes liberation; falling indicates fear of failure. A skilled dream interpreter reads these symbols in the context of your unique life circumstances.',
+        text: 'Carl Jung identified universal archetypes ”” the Shadow, the Anima, the Hero ”” that appear consistently in dream imagery across cultures. Water represents the unconscious; flying symbolizes liberation; falling indicates fear of failure. A skilled dream interpreter reads these symbols in the context of your unique life circumstances.',
         image: '/insights_page/dream-interpretation/pexels-mikhail-nilov-6932881.jpg',
         imagePosition: 'right'
       },
@@ -248,7 +248,7 @@ export const MODALITIES_CONTENT: Record<string, any> = {
     ],
     remedies: [
       'Study the nine major face zones corresponding to different life areas like career and relationships.',
-      'Notice which features you lead with in conversation â€â€ this reveals your dominant interaction mode.',
+      'Notice which features you lead with in conversation ”” this reveals your dominant interaction mode.',
       'Use face reading as a self-compassion practice: understand your challenges as encoded in your features.',
       'Work with a certified face reader for a personalized, in-depth analysis of your unique facial map.'
     ]
@@ -267,7 +267,7 @@ export const MODALITIES_CONTENT: Record<string, any> = {
     contentSections: [
       {
         title: 'The Science Behind the Stillness',
-        text: 'Modern neuroscience has confirmed what ancient meditators knew for millennia: regular meditation literally changes the brain. Studies show it increases gray matter density in areas associated with self-awareness and compassion, while reducing the size of the amygdala â€â€ your brain stress alarm system. Just 8 weeks of daily practice produces measurable structural changes.',
+        text: 'Modern neuroscience has confirmed what ancient meditators knew for millennia: regular meditation literally changes the brain. Studies show it increases gray matter density in areas associated with self-awareness and compassion, while reducing the size of the amygdala ”” your brain stress alarm system. Just 8 weeks of daily practice produces measurable structural changes.',
         image: '/insights_page/meditation/pexels-cup-of-couple-6962536.jpg',
         imagePosition: 'left'
       },
@@ -334,7 +334,7 @@ export const MODALITIES_CONTENT: Record<string, any> = {
     ],
     remedies: [
       'Calculate your Life Path Number by adding all digits of your birth date to a single digit.',
-      'Notice recurring numbers in your daily life â€â€ these are often messages from the universe.',
+      'Notice recurring numbers in your daily life ”” these are often messages from the universe.',
       'Use your Personal Year Number to understand the overarching theme of each year of your life.',
       'Work with a numerologist to get a complete chart analysis covering name number and karmic lessons.'
     ]
@@ -353,7 +353,7 @@ export const MODALITIES_CONTENT: Record<string, any> = {
     contentSections: [
       {
         title: 'Reading the Map of Your Palm',
-        text: 'Palmistry has been practiced for over 5,000 years across cultures from India and China to ancient Greece and Rome. Your palm contains a unique map of lines, mounts, and features that reflect your personality, health, emotional life, and life journey. Unlike a fixed fate, your palm changes over time â€â€ reflecting your choices and evolution.',
+        text: 'Palmistry has been practiced for over 5,000 years across cultures from India and China to ancient Greece and Rome. Your palm contains a unique map of lines, mounts, and features that reflect your personality, health, emotional life, and life journey. Unlike a fixed fate, your palm changes over time ”” reflecting your choices and evolution.',
         image: '/insights_page/palm-reading/pexels-devvishu-8229081.jpg',
         imagePosition: 'left'
       },
@@ -380,7 +380,7 @@ export const MODALITIES_CONTENT: Record<string, any> = {
       '/insights_page/palm-reading/shreyas-shah-Ka-speuU7W4-unsplash.jpg',
     ],
     remedies: [
-      'Observe your dominant hand regularly â€â€ if lines deepen or new branches appear, your choices are creating new pathways.',
+      'Observe your dominant hand regularly ”” if lines deepen or new branches appear, your choices are creating new pathways.',
       'Compare your left and right hands side by side to identify areas of unrealized potential.',
       'Focus on the qualities shown by your Mercury finger for better communication and intuition.',
       'Seek a reading from a certified palmist who combines traditional lineage with psychological insight.'
@@ -391,7 +391,7 @@ export const MODALITIES_CONTENT: Record<string, any> = {
     id: 'sound-healing',
     name: 'Sound Healing',
     heroTitle: 'Heal with the Frequency of the Universe',
-    heroDescription: 'Harness the power of sacred sound â€â€ from Tibetan singing bowls to binaural beats â€â€ to restore harmony in body, mind, and soul.',
+    heroDescription: 'Harness the power of sacred sound ”” from Tibetan singing bowls to binaural beats ”” to restore harmony in body, mind, and soul.',
     heroImages: [
       '/insights_page/sound-healing/pexels-anastasia-shuraeva-6013501.jpg',
       '/insights_page/sound-healing/thlt-lcx-VsI_74zRzAo-unsplash.jpg',
@@ -400,13 +400,13 @@ export const MODALITIES_CONTENT: Record<string, any> = {
     contentSections: [
       {
         title: 'The Science of Sound as Medicine',
-        text: 'Sound healing is grounded in the scientific principle of resonance â€â€ the phenomenon by which one vibrating object causes another to vibrate at the same frequency. Your cells, organs, and even your DNA respond to sound frequencies. Research shows that sound therapy can reduce cortisol, lower blood pressure, improve sleep, and shift brainwaves into healing alpha and theta states.',
+        text: 'Sound healing is grounded in the scientific principle of resonance ”” the phenomenon by which one vibrating object causes another to vibrate at the same frequency. Your cells, organs, and even your DNA respond to sound frequencies. Research shows that sound therapy can reduce cortisol, lower blood pressure, improve sleep, and shift brainwaves into healing alpha and theta states.',
         image: '/insights_page/sound-healing/pexels-anastasia-shuraeva-6013501.jpg',
         imagePosition: 'left'
       },
       {
         title: 'Sacred Instruments and Their Healing Power',
-        text: 'Tibetan singing bowls produce rich, complex overtones that entrain brainwaves into meditative states. Crystal bowls, tuned to the frequencies of specific chakras, directly influence your energy centers. Gongs create powerful sound baths that dissolve tension in minutes. The human voice â€â€ through toning, chanting, and mantra â€â€ is perhaps the most accessible healing instrument of all.',
+        text: 'Tibetan singing bowls produce rich, complex overtones that entrain brainwaves into meditative states. Crystal bowls, tuned to the frequencies of specific chakras, directly influence your energy centers. Gongs create powerful sound baths that dissolve tension in minutes. The human voice ”” through toning, chanting, and mantra ”” is perhaps the most accessible healing instrument of all.',
         image: '/insights_page/sound-healing/pexels-cottonbro-5602498.jpg',
         imagePosition: 'right'
       }
@@ -421,7 +421,7 @@ export const MODALITIES_CONTENT: Record<string, any> = {
     remedies: [
       'Listen to 432Hz or 528Hz frequency music during meditation or sleep for deep cellular healing.',
       'Explore binaural beats to shift your brainwave state into deep relaxation on demand.',
-      'Chant the Om mantra for 10 minutes daily â€â€ its vibration harmonizes the nervous system.',
+      'Chant the Om mantra for 10 minutes daily ”” its vibration harmonizes the nervous system.',
       'Attend a live sound bath session with Tibetan bowls or gongs for a full-body energetic reset.'
     ]
   },
@@ -439,19 +439,19 @@ export const MODALITIES_CONTENT: Record<string, any> = {
     contentSections: [
       {
         title: 'The Ancient Science of Spatial Energy',
-        text: 'Vastu Shastra, the ancient Indian science of architecture and spatial harmony, and Feng Shui, its Chinese counterpart, teach that the spaces we inhabit are alive with energy. The orientation of rooms, placement of furniture, colors used, and flow of air and light all influence the quality of energy â€â€ and therefore the quality of life â€â€ of everyone who lives within.',
+        text: 'Vastu Shastra, the ancient Indian science of architecture and spatial harmony, and Feng Shui, its Chinese counterpart, teach that the spaces we inhabit are alive with energy. The orientation of rooms, placement of furniture, colors used, and flow of air and light all influence the quality of energy ”” and therefore the quality of life ”” of everyone who lives within.',
         image: '/insights_page/space-harmony/pexels-homelane-com-492179-1776574.jpg',
         imagePosition: 'left'
       },
       {
         title: 'Practical Principles for Your Home',
-        text: 'Clearing clutter is the single most powerful thing you can do for the energy of your space â€â€ clutter represents stuck energy and creates mental congestion. Orienting your bed so you can see the door promotes security. Introducing plants brings living energy and purifies the air. Natural light and specific colors in specific rooms can profoundly shift how a space feels.',
+        text: 'Clearing clutter is the single most powerful thing you can do for the energy of your space ”” clutter represents stuck energy and creates mental congestion. Orienting your bed so you can see the door promotes security. Introducing plants brings living energy and purifies the air. Natural light and specific colors in specific rooms can profoundly shift how a space feels.',
         image: '/insights_page/space-harmony/pexels-artbovich-6489106.jpg',
         imagePosition: 'right'
       },
       {
         title: 'Transforming Your Workspace for Success',
-        text: 'Your workspace is a mirror of your professional energy. A cluttered desk signals a cluttered mind. Positioning your desk to face the entrance, keeping your workspace clean and organized, and incorporating the five Feng Shui elements â€â€ wood, fire, earth, metal, and water â€â€ can dramatically elevate your professional energy and outcomes.',
+        text: 'Your workspace is a mirror of your professional energy. A cluttered desk signals a cluttered mind. Positioning your desk to face the entrance, keeping your workspace clean and organized, and incorporating the five Feng Shui elements ”” wood, fire, earth, metal, and water ”” can dramatically elevate your professional energy and outcomes.',
         image: '/insights_page/space-harmony/pexels-rdne-6806390.jpg',
         imagePosition: 'left'
       }
@@ -469,9 +469,9 @@ export const MODALITIES_CONTENT: Record<string, any> = {
       '/insights_page/space-harmony/pexels-rdne-6806390.jpg',
     ],
     remedies: [
-      'Declutter one room completely â€â€ donate anything that does not serve your current life chapter.',
+      'Declutter one room completely ”” donate anything that does not serve your current life chapter.',
       'Place a bowl of sea salt in the corners of rooms to absorb stagnant energy, replacing it monthly.',
-      'Introduce living plants â€â€ especially money plants or peace lilies â€â€ to purify energy and attract abundance.',
+      'Introduce living plants ”” especially money plants or peace lilies ”” to purify energy and attract abundance.',
       'Consult a Vastu or Feng Shui expert to analyze the energy map of your home.'
     ]
   },
@@ -518,9 +518,9 @@ export const MODALITIES_CONTENT: Record<string, any> = {
       '/insights_page/spiritual-guidance/pexels-visualkarsa-11393075.jpg',
     ],
     remedies: [
-      'Establish a daily contemplative practice â€â€ even 10 minutes of silence or journaling creates a foundation for growth.',
+      'Establish a daily contemplative practice ”” even 10 minutes of silence or journaling creates a foundation for growth.',
       'Read the texts of multiple wisdom traditions with an open mind, seeking universal truths.',
-      'Practice service (seva) â€â€ actively giving to others without expectation is one of the fastest paths to awakening.',
+      'Practice service (seva) ”” actively giving to others without expectation is one of the fastest paths to awakening.',
       'Find a teacher whose life embodies the qualities you aspire to and learn through their lived example.'
     ]
   },
@@ -538,7 +538,7 @@ export const MODALITIES_CONTENT: Record<string, any> = {
     contentSections: [
       {
         title: 'The 78-Card Journey of Self',
-        text: 'The Tarot deck is a profound symbolic system of 78 cards divided into the Major Arcana â€â€ 22 cards depicting life major archetypes and lessons â€â€ and the Minor Arcana depicting the everyday experiences of life across four suits. Together they form a complete map of the human experience, from the Fool innocent leap to the World completion.',
+        text: 'The Tarot deck is a profound symbolic system of 78 cards divided into the Major Arcana ”” 22 cards depicting life major archetypes and lessons ”” and the Minor Arcana depicting the everyday experiences of life across four suits. Together they form a complete map of the human experience, from the Fool innocent leap to the World completion.',
         image: '/insights_page/tarot/edz-norton-eUX74J_IpXw-unsplash.jpg',
         imagePosition: 'left'
       },
@@ -568,8 +568,8 @@ export const MODALITIES_CONTENT: Record<string, any> = {
     remedies: [
       'Pull a single card each morning and journal about how its energy might manifest in your day.',
       'Do a monthly Celtic Cross spread on a new or full moon to gain clarity on dominant life themes.',
-      'Study the Rider-Waite deck deeply â€â€ its rich symbolism reveals layers of meaning over years of study.',
-      'Trust your first instinct when reading cards â€â€ your initial emotional response is your intuition speaking.'
+      'Study the Rider-Waite deck deeply ”” its rich symbolism reveals layers of meaning over years of study.',
+      'Trust your first instinct when reading cards ”” your initial emotional response is your intuition speaking.'
     ]
   },
 };

@@ -14,24 +14,24 @@ export function ServiceCards({ variant }: { variant: string }) {
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
             <div>
-              <span className="text-gray-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block">Cosmic Toolbox</span>
-              <h2 className="text-4xl md:text-5xl font-medium text-[#111111] tracking-tight">Explore <span className="text-gray-400">Services.</span></h2>
+              <span className="text-purple-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block">Cosmic Toolbox</span>
+              <h2 className="text-4xl md:text-5xl font-medium text-[#111111] tracking-tight">Explore <span className="text-purple-400">Services.</span></h2>
             </div>
-            <Link href="/services" className="group flex items-center gap-2 px-6 py-2.5 rounded-full bg-gray-50 border border-gray-200 text-sm font-medium text-gray-900 hover:bg-gray-100 transition-colors">
+            <Link href="/services" className="group flex items-center gap-2 px-6 py-2.5 rounded-full bg-purple-50 border border-violet-200 text-sm font-medium text-indigo-950 hover:bg-purple-50 transition-colors">
               View All <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {t.servicesList.slice(0, 4).map((svc: any, idx: number) => (
-              <div key={idx} className="group p-8 rounded-3xl bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 cursor-pointer flex flex-col relative overflow-hidden">
-                <div className="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-gray-100 transition-all duration-500">
-                  <Zap className="w-5 h-5 text-gray-900" />
+              <div key={idx} className="group p-8 rounded-3xl bg-white border border-purple-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 cursor-pointer flex flex-col relative overflow-hidden">
+                <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-purple-50 transition-all duration-500">
+                  <Zap className="w-5 h-5 text-indigo-950" />
                 </div>
-                <h3 className="text-xl font-medium text-gray-900 mb-3">{svc.name}</h3>
-                <p className="text-gray-500 leading-relaxed text-sm">{svc.desc}</p>
-                <div className="mt-auto pt-8 flex justify-between items-center text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                <h3 className="text-xl font-medium text-indigo-950 mb-3">{svc.name}</h3>
+                <p className="text-purple-500 leading-relaxed text-sm">{svc.desc}</p>
+                <div className="mt-auto pt-8 flex justify-between items-center text-xs font-semibold text-purple-400 uppercase tracking-wider">
                    <span>Available</span>
-                   <span className="text-gray-900 group-hover:translate-x-2 transition-transform duration-500">Explore →</span>
+                   <span className="text-indigo-950 group-hover:translate-x-2 transition-transform duration-500">Explore →</span>
                 </div>
               </div>
             ))}
@@ -70,7 +70,7 @@ export function ServiceCards({ variant }: { variant: string }) {
                   <Zap className="w-6 h-6 text-pink-500" />
                 </div>
                 <h3 className="text-2xl font-serif text-[#1A0B16] mb-4 group-hover:text-pink-600 transition-colors">{svc.name}</h3>
-                <p className="text-gray-500 leading-relaxed text-sm font-light">{svc.desc}</p>
+                <p className="text-purple-500 leading-relaxed text-sm font-light">{svc.desc}</p>
                 <div className="mt-auto pt-8 flex justify-between items-center text-xs font-bold text-pink-300 uppercase tracking-widest">
                    <span>Available</span>
                    <span className="text-pink-500 group-hover:translate-x-2 transition-transform duration-500">Explore →</span>
@@ -87,7 +87,7 @@ export function ServiceCards({ variant }: { variant: string }) {
     return (
       <section className="py-24 relative z-10 bg-[#FDFCF8] overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(50,205,50,0.03)_0%,transparent_70%)] pointer-events-none" />
-        <div className="container mx-auto px-6 relative z-10 border-t border-gray-100 pt-20">
+        <div className="container mx-auto px-6 relative z-10 border-t border-purple-100 pt-20">
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
             <div>
               <span className="text-[#32CD32] text-xs uppercase tracking-[0.4em] font-bold mb-4 block">Universal Access</span>
@@ -99,13 +99,13 @@ export function ServiceCards({ variant }: { variant: string }) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {t.servicesList.slice(0, 4).map((svc: any, idx: number) => (
-              <div key={idx} className="group p-10 rounded-[2rem] border border-gray-100 bg-white shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_30px_60px_rgba(50,205,50,0.1)] hover:-translate-y-2 transition-all duration-700 cursor-pointer flex flex-col relative overflow-hidden">
+              <div key={idx} className="group p-10 rounded-[2rem] border border-purple-100 bg-white shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_30px_60px_rgba(50,205,50,0.1)] hover:-translate-y-2 transition-all duration-700 cursor-pointer flex flex-col relative overflow-hidden">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#32CD32]/10 to-[#FFC300]/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-700">
                   <Zap className="w-6 h-6 text-[#32CD32]" />
                 </div>
                 <h3 className="text-2xl font-serif text-[#1A1A1A] mb-4 group-hover:text-[#32CD32] transition-colors">{svc.name}</h3>
                 <p className="text-[#4A4A4A] leading-relaxed text-sm font-light">{svc.desc}</p>
-                <div className="mt-auto pt-8 flex justify-between items-center text-xs font-bold text-gray-400 uppercase tracking-widest">
+                <div className="mt-auto pt-8 flex justify-between items-center text-xs font-bold text-purple-400 uppercase tracking-widest">
                   <span>Available</span>
                   <span className="text-[#FFC300] group-hover:translate-x-2 transition-transform duration-500">Explore →</span>
                 </div>

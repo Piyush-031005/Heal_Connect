@@ -38,7 +38,7 @@ export default function ExpertTranscriptsPage() {
     <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
       <header className="sticky top-0 z-50 w-full border-b border-yellow-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center gap-4">
-          <Link href="/expert/dashboard" className="text-gray-500 hover:text-[#4f46e5] transition-colors">
+          <Link href="/expert/dashboard" className="text-purple-500 hover:text-[#4f46e5] transition-colors">
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <h1 className="text-xl font-extrabold text-[#1a1a1a]">Call History</h1>
@@ -52,7 +52,7 @@ export default function ExpertTranscriptsPage() {
           </div>
         ) : transcripts.length === 0 ? (
           <Card className="bg-white border border-yellow-100 shadow-sm">
-            <CardContent className="p-12 text-center text-gray-400">
+            <CardContent className="p-12 text-center text-purple-400">
               <FileText className="w-12 h-12 mx-auto mb-3 opacity-20" />
               <p>No call transcripts yet.</p>
               <p className="text-sm mt-1">Transcripts from your audio and video sessions will show up here.</p>
@@ -71,8 +71,8 @@ export default function ExpertTranscriptsPage() {
                       className="w-10 h-10 rounded-full object-cover border border-indigo-200 shrink-0"
                     />
                     <div className="flex-1 min-w-0">
-                      <p className="font-bold text-sm text-gray-900 truncate">{client?.name || 'Anonymous User'}</p>
-                      <div className="flex items-center gap-1.5 text-xs text-gray-400 mt-0.5">
+                      <p className="font-bold text-sm text-indigo-950 truncate">{client?.name || 'Anonymous User'}</p>
+                      <div className="flex items-center gap-1.5 text-xs text-purple-400 mt-0.5">
                         {typeIcon(t.session.type)}
                         <span>{t.session.type}</span>
                         <span>·</span>
@@ -84,8 +84,8 @@ export default function ExpertTranscriptsPage() {
                   </div>
                   {/* Privacy notice — transcript text is admin-only */}
                   <CardContent className="px-4 pb-4 pt-0">
-                    <div className="flex items-start gap-2 bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-xs text-gray-500">
-                      <Lock className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gray-400" />
+                    <div className="flex items-start gap-2 bg-purple-50 border border-purple-100 rounded-xl px-4 py-3 text-xs text-purple-500">
+                      <Lock className="w-3.5 h-3.5 mt-0.5 shrink-0 text-purple-400" />
                       <span>This call was recorded and transcribed for quality and safety review. Transcript content is reviewed privately by our team and is not available to view.</span>
                     </div>
                   </CardContent>
@@ -98,15 +98,15 @@ export default function ExpertTranscriptsPage() {
                 <button
                   disabled={page <= 1}
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  className="text-sm font-semibold text-gray-500 hover:text-[#4f46e5] disabled:opacity-30 disabled:cursor-not-allowed bg-transparent border-none cursor-pointer"
+                  className="text-sm font-semibold text-purple-500 hover:text-[#4f46e5] disabled:opacity-30 disabled:cursor-not-allowed bg-transparent border-none cursor-pointer"
                 >
                   Previous
                 </button>
-                <span className="text-xs text-gray-400">Page {page} of {pages}</span>
+                <span className="text-xs text-purple-400">Page {page} of {pages}</span>
                 <button
                   disabled={page >= pages}
                   onClick={() => setPage((p) => Math.min(pages, p + 1))}
-                  className="text-sm font-semibold text-gray-500 hover:text-[#4f46e5] disabled:opacity-30 disabled:cursor-not-allowed bg-transparent border-none cursor-pointer"
+                  className="text-sm font-semibold text-purple-500 hover:text-[#4f46e5] disabled:opacity-30 disabled:cursor-not-allowed bg-transparent border-none cursor-pointer"
                 >
                   Next
                 </button>

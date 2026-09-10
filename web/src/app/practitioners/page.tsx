@@ -128,11 +128,11 @@ export default function PractitionersPage() {
               <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Min Rating</label>
               <select value={filters.minRating} onChange={(e) => setFilters((f) => ({ ...f, minRating: e.target.value }))} className={SELECT_CLS}>
                 <option value="" className="bg-card">Any</option>
-                {['3', '3.5', '4', '4.5'].map((r) => <option key={r} value={r} className="bg-card">Ã¢Â­Â {r}+</option>)}
+                {['3', '3.5', '4', '4.5'].map((r) => <option key={r} value={r} className="bg-card">⭐ {r}+</option>)}
               </select>
             </div>
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Max Ã¢”šÂ¹/min</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Max ┚¹/min</label>
               <input type="number" min={0} placeholder="e.g. 50" value={filters.maxRate} onChange={(e) => setFilters((f) => ({ ...f, maxRate: e.target.value }))} className={SELECT_CLS} />
             </div>
             <div className="flex flex-col justify-end gap-3">
@@ -157,8 +157,8 @@ export default function PractitionersPage() {
           <div className="flex flex-wrap gap-3 mb-8">
             {filters.specialty && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">{filters.specialty}<button onClick={() => setFilters((f) => ({ ...f, specialty: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
             {filters.language && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">{filters.language}<button onClick={() => setFilters((f) => ({ ...f, language: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
-            {filters.minRating && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">Ã¢Â­Â {filters.minRating}+<button onClick={() => setFilters((f) => ({ ...f, minRating: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
-            {filters.maxRate && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">Ã¢”°Â¤ Ã¢”šÂ¹{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
+            {filters.minRating && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">⭐ {filters.minRating}+<button onClick={() => setFilters((f) => ({ ...f, minRating: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
+            {filters.maxRate && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">┰¤ ┚¹{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
             {filters.onlineOnly && <Badge variant="outline" className="border-accent/30 text-accent bg-accent/10 gap-1.5 py-1 px-3 rounded-full shadow-[0_0_10px_rgba(46₹96₹82,0.1)]">Online Now<button onClick={() => setFilters((f) => ({ ...f, onlineOnly: false }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
           </div>
         )}
@@ -220,7 +220,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
           <div className="flex items-start justify-between mb-1">
             <div>
               <p className="font-bold text-[#2d1b69] text-lg tracking-wide group-hover:text-primary transition-colors">{p.name}</p>
-              <p className="text-sm text-primary font-medium">{p.specialties.slice(0, 2).join(' Ã‚Â· ') || 'Ã¢â‚¬”'}</p>
+              <p className="text-sm text-primary font-medium">{p.specialties.slice(0, 2).join(' · ') || '—'}</p>
             </div>
             {p.isVerified && (
               <div className="flex items-center gap-1 bg-primary/10 border border-primary/30 rounded-lg px-2 py-1 shrink-0 mt-1 shadow-[0_0_10px_rgba(214₹80₹07,0.1)]">
@@ -233,7 +233,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
           <div className="flex flex-wrap items-center gap-3 mt-3 mb-4">
             <div className="flex items-center gap-1 px-2 py-1 bg-secondary rounded-lg border border-border">
               <Star className="w-3.5 h-3.5 text-primary fill-current" />
-              <span className="text-sm font-bold text-[#2d1b69]">{p.avgRating || 'Ã¢â‚¬”'}</span>
+              <span className="text-sm font-bold text-[#2d1b69]">{p.avgRating || '—'}</span>
               <span className="text-xs text-muted-foreground">({p.reviewCount})</span>
             </div>
             <span className="text-muted-foreground">|</span>
@@ -241,7 +241,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
             <span className="text-muted-foreground hidden sm:inline">|</span>
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground bg-secondary px-2 py-1 rounded-lg border border-border">
               <Globe className="w-3 h-3 text-muted-foreground" />
-              <span className="truncate max-w-[80px]">{p.languages.slice(0, 2).join(', ') || 'Ã¢â‚¬”'}</span>
+              <span className="truncate max-w-[80px]">{p.languages.slice(0, 2).join(', ') || '—'}</span>
             </div>
           </div>
 
@@ -252,7 +252,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
 
           <div className="flex items-center justify-between pt-4 mt-auto border-t border-border">
             <div>
-              <span className="text-xl font-bold text-[#2d1b69]">Ã¢”šÂ¹{p.perMinuteRate}</span>
+              <span className="text-xl font-bold text-[#2d1b69]">┚¹{p.perMinuteRate}</span>
               <span className="text-xs text-muted-foreground ml-1">/min</span>
             </div>
             <div className="flex gap-2">

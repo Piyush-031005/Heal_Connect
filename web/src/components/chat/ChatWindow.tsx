@@ -105,7 +105,7 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
 
       {/* Connecting state */}
       {isConnecting && (
-        <div className="flex-1 flex flex-col items-center justify-center gap-3 text-gray-400">
+        <div className="flex-1 flex flex-col items-center justify-center gap-3 text-purple-400">
           {!connectionTimeout ? (
             <>
               <Wifi className="h-8 w-8 animate-pulse text-[#4f46e5]" />
@@ -139,7 +139,7 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
             </div>
             <div className="text-center">
               <p className="font-bold text-lg text-[#1a1a1a]">Session Completed</p>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-purple-500 mt-1">
                 {elapsedSeconds > 0
                   ? `Duration: ${Math.floor(elapsedSeconds / 60)}m ${elapsedSeconds % 60}s`
                   : 'This session has been completed.'}
@@ -162,7 +162,7 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
               </a>
               <a
                 href="/dashboard"
-                className="w-full text-center text-gray-500 hover:text-gray-700 font-medium py-2 text-sm transition-colors"
+                className="w-full text-center text-purple-500 hover:text-purple-800 font-medium py-2 text-sm transition-colors"
               >
                 Back to Dashboard
               </a>
@@ -175,7 +175,7 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
               <div className="flex items-center gap-2 mb-3 px-1">
                 <MessagesSquare className="h-4 w-4 text-indigo-500 shrink-0" />
                 <h3 className="font-bold text-sm text-[#1a1a1a]">Chat History</h3>
-                <span className="text-xs text-gray-400">({messages.length} message{messages.length === 1 ? '' : 's'})</span>
+                <span className="text-xs text-purple-400">({messages.length} message{messages.length === 1 ? '' : 's'})</span>
               </div>
               <div className="bg-white border border-yellow-100 rounded-2xl shadow-sm p-4 space-y-2 max-h-[420px] overflow-y-auto">
                 {messages.map((msg) => (
@@ -195,7 +195,7 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
       {!isConnecting && !isEnded && (
         <div className="overflow-y-auto px-4 py-4 space-y-2 flex-1">
           {messages.length === 0 && (
-            <div className="flex flex-col items-center justify-center h-full gap-2 text-gray-400 pt-16">
+            <div className="flex flex-col items-center justify-center h-full gap-2 text-purple-400 pt-16">
               <p className="text-sm">No messages yet. Say hello! 👋</p>
             </div>
           )}
@@ -241,7 +241,7 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
               rows={1}
               disabled={isEnded}
               className={cn(
-                'flex-1 resize-none rounded-2xl border border-yellow-200 bg-yellow-50 px-4 py-2.5 text-sm text-[#1a1a1a] placeholder:text-gray-400',
+                'flex-1 resize-none rounded-2xl border border-yellow-200 bg-yellow-50 px-4 py-2.5 text-sm text-[#1a1a1a] placeholder:text-purple-400',
                 'focus:outline-none focus:ring-2 focus:ring-[#4f46e5]/40 focus:border-[#4f46e5]',
                 'max-h-32 overflow-y-auto transition-colors',
                 'disabled:opacity-50 disabled:cursor-not-allowed'
@@ -257,7 +257,7 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
               <Send className="h-4 w-4" />
             </Button>
           </div>
-          <p className="text-[10px] text-gray-400 mt-1.5 text-center">
+          <p className="text-[10px] text-purple-400 mt-1.5 text-center">
             Press Enter to send · Shift+Enter for new line
           </p>
         </div>

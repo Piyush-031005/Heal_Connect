@@ -211,7 +211,7 @@ export default function ExpertDashboardPage() {
                   : 'bg-secondary text-muted-foreground border-border hover:bg-white/10 hover:text-foreground'
               }`}
             >
-              <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-accent animate-pulse' : 'bg-gray-500'}`} />
+              <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-accent animate-pulse' : 'bg-violet-400'}`} />
               {isOnline ? 'Online' : 'Go Online'}
             </button>
 
@@ -376,7 +376,7 @@ export default function ExpertDashboardPage() {
                           {session.type === 'CHAT' ? <MessageCircle className="w-3.5 h-3.5" /> : <Phone className="w-3.5 h-3.5" />}
                           {session.type}
                         </span>
-                        <span className="text-gray-700">|</span>
+                        <span className="text-purple-800">|</span>
                         <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground bg-secondary px-3 py-1 rounded-lg border border-border">
                           <Clock className="w-3.5 h-3.5" />
                           <span>{new Date(session.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
@@ -419,9 +419,9 @@ export default function ExpertDashboardPage() {
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-muted-foreground font-medium">Status</span>
                     <span className={`flex items-center gap-2 text-xs font-bold px-3 py-1 rounded-lg border ${
-                      isOnline ? 'bg-accent/10 text-accent border-accent/20' : 'bg-gray-800 text-muted-foreground border-gray-700'
+                      isOnline ? 'bg-accent/10 text-accent border-accent/20' : 'bg-indigo-900 text-muted-foreground border-violet-700'
                     }`}>
-                      <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-accent' : 'bg-gray-500'}`} />
+                      <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-accent' : 'bg-violet-400'}`} />
                       {isOnline ? 'Online' : 'Offline'}
                     </span>
                   </div>

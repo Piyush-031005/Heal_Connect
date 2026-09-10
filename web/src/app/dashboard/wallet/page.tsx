@@ -49,7 +49,7 @@ export default function WalletPage() {
     <div className="min-h-screen bg-[#fffbf0] text-[#1a1a1a] flex flex-col font-sans">
       <header className="sticky top-0 z-50 w-full border-b border-yellow-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center gap-4">
-          <Link href="/dashboard" className="text-gray-500 hover:text-[#4f46e5] transition-colors">
+          <Link href="/dashboard" className="text-purple-500 hover:text-[#4f46e5] transition-colors">
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <h1 className="text-xl font-extrabold text-[#1a1a1a]">My Wallet</h1>
@@ -85,7 +85,7 @@ export default function WalletPage() {
           
           <Card className="bg-white border border-yellow-100 shadow-sm overflow-hidden">
             {!wallet?.transactions || wallet.transactions.length === 0 ? (
-              <div className="p-12 text-center text-gray-400">
+              <div className="p-12 text-center text-purple-400">
                 <Wallet className="w-12 h-12 mx-auto mb-3 opacity-20" />
                 <p>No transactions yet.</p>
               </div>
@@ -93,10 +93,10 @@ export default function WalletPage() {
               <Table>
                 <TableHeader className="bg-yellow-50/50">
                   <TableRow className="border-yellow-100 hover:bg-transparent">
-                    <TableHead className="font-semibold text-gray-600">Type</TableHead>
-                    <TableHead className="font-semibold text-gray-600">Date</TableHead>
-                    <TableHead className="font-semibold text-gray-600">Status</TableHead>
-                    <TableHead className="text-right font-semibold text-gray-600">Amount</TableHead>
+                    <TableHead className="font-semibold text-purple-700">Type</TableHead>
+                    <TableHead className="font-semibold text-purple-700">Date</TableHead>
+                    <TableHead className="font-semibold text-purple-700">Status</TableHead>
+                    <TableHead className="text-right font-semibold text-purple-700">Amount</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -112,7 +112,7 @@ export default function WalletPage() {
                             <span className="font-medium">{tx.type}</span>
                           </div>
                         </TableCell>
-                        <TableCell className="text-gray-500 text-sm">
+                        <TableCell className="text-purple-500 text-sm">
                           {new Date(tx.createdAt).toLocaleDateString('en-IN', {
                             day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'
                           })}

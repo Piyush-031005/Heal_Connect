@@ -14,10 +14,10 @@ const LAST_UPDATED = 'August 17, 2026';
 function Section({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
     <section className="mb-10">
-      <h2 className="text-xl font-extrabold text-gray-900 mb-3 flex items-baseline gap-2">
+      <h2 className="text-xl font-extrabold text-indigo-950 mb-3 flex items-baseline gap-2">
         <span className="text-indigo-500">{n}.</span> {title}
       </h2>
-      <div className="text-gray-700 leading-relaxed space-y-3 text-[15px]">{children}</div>
+      <div className="text-purple-800 leading-relaxed space-y-3 text-[15px]">{children}</div>
     </section>
   );
 }
@@ -33,11 +33,11 @@ export default function TermsOfServicePage() {
             <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <FileText className="w-8 h-8" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">Terms of Service</h1>
-            <p className="text-gray-500">Last updated: {LAST_UPDATED}</p>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-indigo-950 mb-4 tracking-tight">Terms of Service</h1>
+            <p className="text-purple-500">Last updated: {LAST_UPDATED}</p>
           </div>
 
-          <p className="text-gray-700 leading-relaxed mb-10 text-[15px]">
+          <p className="text-purple-800 leading-relaxed mb-10 text-[15px]">
             These terms govern your use of ZenAuraa ("we", "us") — a marketplace connecting customers with
             independent astrologers and wellness practitioners for chat, audio, and video consultations. By creating
             an account you agree to these terms; if you don't agree, please don't use the service. See also our{' '}
@@ -143,7 +143,7 @@ export default function TermsOfServicePage() {
             </p>
           </Section>
 
-          <p className="text-xs text-gray-400 mt-14 border-t border-gray-200 pt-6">
+          <p className="text-xs text-purple-400 mt-14 border-t border-violet-200 pt-6">
             This page is provided as a good-faith starting point and is not legal advice. It has not been reviewed by
             a lawyer — please have counsel review it (including the governing-law section above) before relying on
             it in production, consistent with the rest of the GDPR/legal workstream.

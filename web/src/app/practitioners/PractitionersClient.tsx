@@ -144,12 +144,12 @@ export default function PractitionersPage() {
                   <button
                     key={p.id}
                     onClick={() => { setShowSuggestions(false); router.push(`/practitioners/${p.id}`); }}
-                    className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 transition-colors text-left border-b border-gray-50 last:border-b-0"
+                    className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 transition-colors text-left border-b border-purple-50 last:border-b-0"
                   >
                     <img src={getPractitionerAvatar(p.photoUrl, p.name)} alt={p.name} className="w-8 h-8 rounded-full object-cover shrink-0" />
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-semibold text-[#2d1b69] truncate">{p.name}</p>
-                      <p className="text-xs text-[#6d28d9]/70 truncate">{p.specialties.slice(0, 2).join(' Â· ') || 'â€”'}</p>
+                      <p className="text-xs text-[#6d28d9]/70 truncate">{p.specialties.slice(0, 2).join(' · ') || '—'}</p>
                     </div>
                     {p.isOnline && <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />}
                   </button>
@@ -185,11 +185,11 @@ export default function PractitionersPage() {
               <label className="text-xs text-[#6d28d9]/70 mb-1 block">Min Rating</label>
               <select value={filters.minRating} onChange={(e) => setFilters((f) => ({ ...f, minRating: e.target.value }))} className={SELECT_CLS}>
                 <option value="">Any</option>
-                {['3', '3.5', '4', '4.5'].map((r) => <option key={r} value={r}>â­ {r}+</option>)}
+                {['3', '3.5', '4', '4.5'].map((r) => <option key={r} value={r}>⭐ {r}+</option>)}
               </select>
             </div>
             <div>
-              <label className="text-xs text-[#6d28d9]/70 mb-1 block">Max â‚¹/min</label>
+              <label className="text-xs text-[#6d28d9]/70 mb-1 block">Max ₹/min</label>
               <input type="number" min={0} placeholder="e.g. 50" value={filters.maxRate} onChange={(e) => setFilters((f) => ({ ...f, maxRate: e.target.value }))} className={SELECT_CLS} />
             </div>
             <div className="flex flex-col justify-end gap-2">
@@ -211,8 +211,8 @@ export default function PractitionersPage() {
           <div className="flex flex-wrap gap-2 mb-5">
             {filters.specialty && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">{filters.specialty}<button onClick={() => setFilters((f) => ({ ...f, specialty: '' }))}><X className="h-3 w-3" /></button></Badge>}
             {filters.language && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">{filters.language}<button onClick={() => setFilters((f) => ({ ...f, language: '' }))}><X className="h-3 w-3" /></button></Badge>}
-            {filters.minRating && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">â­ {filters.minRating}+<button onClick={() => setFilters((f) => ({ ...f, minRating: '' }))}><X className="h-3 w-3" /></button></Badge>}
-            {filters.maxRate && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">â‰¤ â‚¹{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))}><X className="h-3 w-3" /></button></Badge>}
+            {filters.minRating && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">⭐ {filters.minRating}+<button onClick={() => setFilters((f) => ({ ...f, minRating: '' }))}><X className="h-3 w-3" /></button></Badge>}
+            {filters.maxRate && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">≤ ₹{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))}><X className="h-3 w-3" /></button></Badge>}
             {filters.onlineOnly && <Badge variant="outline" className="border-emerald-300 text-emerald-600 bg-emerald-50 gap-1">Online Now<button onClick={() => setFilters((f) => ({ ...f, onlineOnly: false }))}><X className="h-3 w-3" /></button></Badge>}
           </div>
         )}
@@ -262,11 +262,11 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
           <div className="absolute top-3 right-4">
             <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
               p.isBusy ? 'bg-purple-100 text-purple-700' : 
-              p.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-[#6d28d9]/70'
+              p.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-purple-50 text-[#6d28d9]/70'
             }`}>
               <span className={`w-1.5 h-1.5 rounded-full ${
                 p.isBusy ? 'bg-purple-500' : 
-                p.isOnline ? 'bg-emerald-500' : 'bg-gray-400'
+                p.isOnline ? 'bg-emerald-500' : 'bg-violet-300'
               }`} />
               {p.isBusy ? 'Busy' : p.isOnline ? 'Online' : 'Offline'}
             </span>
@@ -278,7 +278,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
           <div className="flex items-start justify-between mb-1">
             <div>
               <p className="font-bold text-[#2d1b69] text-base">{p.name}</p>
-              <p className="text-sm text-indigo-600 font-medium">{p.specialties.slice(0, 2).join(' Â· ') || 'â€”'}</p>
+              <p className="text-sm text-indigo-600 font-medium">{p.specialties.slice(0, 2).join(' · ') || '—'}</p>
             </div>
             <div className={`flex items-center gap-1 rounded-lg px-2 py-1 shrink-0 border ${
               p.isVerified
@@ -295,26 +295,26 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
           <div className="flex items-center gap-3 mt-2 mb-3">
             <div className="flex items-center gap-1">
               <Star className="w-3.5 h-3.5 text-indigo-400 fill-current" />
-              <span className="text-sm font-semibold text-[#2d1b69]">{p.avgRating || 'â€”'}</span>
+              <span className="text-sm font-semibold text-[#2d1b69]">{p.avgRating || '—'}</span>
               <span className="text-xs text-purple-400">({p.reviewCount})</span>
             </div>
-            <span className="text-gray-200">|</span>
+            <span className="text-purple-200">|</span>
             <span className="text-xs text-[#6d28d9]/70">{p.experienceYrs} yrs exp</span>
-            <span className="text-gray-200">|</span>
+            <span className="text-purple-200">|</span>
             <div className="flex items-center gap-1">
               <Globe className="w-3 h-3 text-purple-400" />
-              <span className="text-xs text-[#6d28d9]/70 truncate max-w-[80px]">{p.languages.slice(0, 2).join(', ') || 'â€”'}</span>
+              <span className="text-xs text-[#6d28d9]/70 truncate max-w-[80px]">{p.languages.slice(0, 2).join(', ') || '—'}</span>
             </div>
           </div>
 
-          {/* Bio â€” always takes up space even if empty */}
+          {/* Bio — always takes up space even if empty */}
           <p className="text-xs text-[#6d28d9]/70 line-clamp-2 leading-relaxed flex-1">
             {p.bio || ''}
           </p>
 
           <div className="flex items-center justify-between pt-3 mt-3 border-t border-purple-100">
             <div>
-              <span className="text-lg font-bold text-[#2d1b69]">â‚¹{p.perMinuteRate}</span>
+              <span className="text-lg font-bold text-[#2d1b69]">₹{p.perMinuteRate}</span>
               <span className="text-xs text-purple-400">/min</span>
             </div>
             <div className="flex gap-2">

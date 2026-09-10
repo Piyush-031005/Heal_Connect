@@ -77,8 +77,8 @@ export default function AdminFAQPage() {
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">FAQ Management</h1>
-            <p className="text-gray-500 dark:text-gray-400">Manage Frequently Asked Questions</p>
+            <h1 className="text-2xl font-bold text-indigo-950 dark:text-white">FAQ Management</h1>
+            <p className="text-purple-500 dark:text-purple-400">Manage Frequently Asked Questions</p>
           </div>
           <button 
             onClick={() => {
@@ -93,7 +93,7 @@ export default function AdminFAQPage() {
           </button>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+        <div className="bg-white dark:bg-indigo-900 rounded-lg shadow-sm border border-violet-200 dark:border-violet-700 p-4">
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
             <div className="flex-1">
               <SearchBar value={search} onChange={setSearch} placeholder="Search FAQs..." />
@@ -101,7 +101,7 @@ export default function AdminFAQPage() {
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
-              className="block w-full sm:w-48 pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="block w-full sm:w-48 pl-3 pr-10 py-2 text-base border-violet-300 dark:border-violet-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-white dark:bg-violet-700 text-indigo-950 dark:text-white"
             >
               {CATEGORIES.map(c => (
                 <option key={c} value={c}>{c}</option>
@@ -115,9 +115,9 @@ export default function AdminFAQPage() {
                 key={faq.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-start p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className="flex items-start p-4 border border-violet-200 dark:border-violet-700 rounded-lg bg-purple-50 dark:bg-indigo-900/50 hover:bg-purple-50 dark:hover:bg-indigo-900 transition-colors"
               >
-                <div className="cursor-move text-gray-400 mt-1 mr-3">
+                <div className="cursor-move text-purple-400 mt-1 mr-3">
                   <GripVertical className="h-5 w-5" />
                 </div>
                 <div className="flex-1">
@@ -126,14 +126,14 @@ export default function AdminFAQPage() {
                       {faq.category}
                     </span>
                   </div>
-                  <h3 className="text-base font-medium text-gray-900 dark:text-white mb-1">{faq.question}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">{faq.answer}</p>
+                  <h3 className="text-base font-medium text-indigo-950 dark:text-white mb-1">{faq.question}</h3>
+                  <p className="text-sm text-purple-500 dark:text-purple-400">{faq.answer}</p>
                 </div>
                 <div className="flex items-center gap-2 ml-4">
-                  <button onClick={() => openEditModal(faq)} className="p-1 text-gray-400 hover:text-indigo-600 rounded">
+                  <button onClick={() => openEditModal(faq)} className="p-1 text-purple-400 hover:text-indigo-600 rounded">
                     <Edit2 className="h-5 w-5" />
                   </button>
-                  <button onClick={() => setConfirmDelete(faq.id)} className="p-1 text-gray-400 hover:text-red-600 rounded">
+                  <button onClick={() => setConfirmDelete(faq.id)} className="p-1 text-purple-400 hover:text-red-600 rounded">
                     <Trash2 className="h-5 w-5" />
                   </button>
                 </div>
@@ -141,7 +141,7 @@ export default function AdminFAQPage() {
             ))}
             
             {filteredFaqs.length === 0 && (
-              <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+              <div className="text-center py-8 text-purple-500 dark:text-purple-400">
                 No FAQs found matching your criteria.
               </div>
             )}
@@ -155,20 +155,20 @@ export default function AdminFAQPage() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-lg overflow-hidden"
+            className="bg-white dark:bg-indigo-900 rounded-xl shadow-xl w-full max-w-lg overflow-hidden"
           >
-            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+            <div className="px-6 py-4 border-b border-violet-200 dark:border-violet-700">
+              <h3 className="text-lg font-medium text-indigo-950 dark:text-white">
                 {editingFaq ? 'Edit FAQ' : 'Add New FAQ'}
               </h3>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category</label>
+                <label className="block text-sm font-medium text-purple-800 dark:text-purple-300 mb-1">Category</label>
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 py-2 border border-violet-300 dark:border-violet-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-violet-700 dark:text-white"
                 >
                   {CATEGORIES.filter(c => c !== 'All').map(c => (
                     <option key={c} value={c}>{c}</option>
@@ -176,30 +176,30 @@ export default function AdminFAQPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Question</label>
+                <label className="block text-sm font-medium text-purple-800 dark:text-purple-300 mb-1">Question</label>
                 <input
                   type="text"
                   value={formData.question}
                   onChange={(e) => setFormData({ ...formData, question: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 py-2 border border-violet-300 dark:border-violet-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-violet-700 dark:text-white"
                   placeholder="e.g., What is Vedic Astrology?"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Answer</label>
+                <label className="block text-sm font-medium text-purple-800 dark:text-purple-300 mb-1">Answer</label>
                 <textarea
                   rows={4}
                   value={formData.answer}
                   onChange={(e) => setFormData({ ...formData, answer: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white resize-none"
+                  className="w-full px-3 py-2 border border-violet-300 dark:border-violet-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-violet-700 dark:text-white resize-none"
                   placeholder="Provide the answer here..."
                 />
               </div>
             </div>
-            <div className="px-6 py-4 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700 flex justify-end gap-3">
+            <div className="px-6 py-4 bg-purple-50 dark:bg-indigo-900/50 border-t border-violet-200 dark:border-violet-700 flex justify-end gap-3">
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                className="px-4 py-2 text-sm font-medium text-purple-800 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-violet-700 rounded-lg transition-colors"
               >
                 Cancel
               </button>

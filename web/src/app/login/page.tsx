@@ -91,7 +91,7 @@ function LoginInner() {
       <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-white/5 backdrop-blur-md relative z-10 border-r border-purple-200">
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
-            <Image src="/center_logo_final.png" alt="ZenAuraa" width={36} height={36} className="rounded-full shadow-[0_0_15px_rgba(214â‚¹80â‚¹07,0.5)]" />
+            <Image src="/center_logo_final.png" alt="ZenAuraa" width={36} height={36} className="rounded-full shadow-[0_0_15px_rgba(214₹80₹07,0.5)]" />
             <span className="text-2xl font-extrabold text-[#2d1b69] tracking-wide uppercase">ZenAuraa</span>
           </Link>
           <h1 className="text-4xl lg:text-5xl font-extrabold text-[#2d1b69] mb-6 leading-tight">
@@ -102,7 +102,7 @@ function LoginInner() {
           </p>
           <div className="space-y-8">
             <div className="flex items-center gap-5">
-              <div className="w-12 h-12 rounded-full bg-white/20 border border-white/30 flex items-center justify-center shadow-[0_0_15px_rgba(46â‚¹96â‚¹82,0.2)]">
+              <div className="w-12 h-12 rounded-full bg-white/20 border border-white/30 flex items-center justify-center shadow-[0_0_15px_rgba(46₹96₹82,0.2)]">
                 <ShieldCheck className="w-6 h-6 text-accent" />
               </div>
               <div>
@@ -111,7 +111,7 @@ function LoginInner() {
               </div>
             </div>
             <div className="flex items-center gap-5">
-              <div className="w-12 h-12 rounded-full bg-white/20 border border-white/30 flex items-center justify-center shadow-[0_0_15px_rgba(214â‚¹80â‚¹07,0.2)]">
+              <div className="w-12 h-12 rounded-full bg-white/20 border border-white/30 flex items-center justify-center shadow-[0_0_15px_rgba(214₹80₹07,0.2)]">
                 <Star className="w-6 h-6 text-primary" />
               </div>
               <div>
@@ -127,11 +127,11 @@ function LoginInner() {
         </div>
       </div>
 
-      {/* Right Ã­Ã†â€™Ãƒâ€ â€™Ã­â€Â â€™Ã­Ã†â€™â€ Ã­Ã‚Â¢ÃƒÂ¢â€Å¡Ã‚Â¬ÃƒÂ¢â€Å¾Ã‚Â¢Ã­Ã†â€™Ãƒâ€ â€™Ã­â€Å¡Ãƒâ€šÃ‚Â¢Ã­Ã†â€™Ãƒâ€šÃ‚Â¢Ã­Ã‚Â¢ÃƒÂ¢â€Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡Ã­â€Å¡Ãƒâ€šÃ‚Â¬Ã­Ã†â€™â€Â¦Ã­â€Å¡Ãƒâ€šÃ‚Â¡Ã­Ã†â€™Ãƒâ€ â€™Ã­â€Â â€™Ã­Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ã­â€Å¡Ãƒâ€šÃ‚Â¢Ã­Ã†â€™Ãƒâ€ â€™Ã­â€Å¡Ãƒâ€šÃ‚Â¢Ã­Ã†â€™Ãƒâ€šÃ‚Â¢Ã­Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ã­â€Â¦Ãƒâ€šÃ‚Â¡Ã­Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ã­â€Å¡Ãƒâ€šÃ‚Â¬Ã­Ã†â€™Ãƒâ€ â€™Ã­â€Å¡Ãƒâ€šÃ‚Â¢Ã­Ã†â€™Ãƒâ€šÃ‚Â¢Ã­Ã‚Â¢ÃƒÂ¢â€Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡Ã­â€Å¡Ãƒâ€šÃ‚Â¬Ã­Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ã­â€Å¡Ãƒâ€šÃ‚Â Form */}
+      {/* Right íƒƒ픠’탔 í¢┚¬┞¢íƒƒ픚¢íƒ¢í¢┚¬š픚¬탔¦픚¡íƒƒ픠’íƒ‚픚¢íƒƒ픚¢íƒ¢í¢‚¬픦¡íƒ‚픚¬íƒƒ픚¢íƒ¢í¢┚¬š픚¬íƒ‚픚 Form */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative z-10">
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/center_logo_final.png" alt="ZenAuraa" width={28} height={28} className="rounded-full shadow-[0_0_10px_rgba(214â‚¹80â‚¹07,0.5)]" />
+            <Image src="/center_logo_final.png" alt="ZenAuraa" width={28} height={28} className="rounded-full shadow-[0_0_10px_rgba(214₹80₹07,0.5)]" />
             <span className="text-xl font-extrabold text-primary uppercase tracking-wide">ZenAuraa</span>
           </Link>
         </div>

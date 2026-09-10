@@ -14,8 +14,8 @@ const ACTION_COLORS: Record<string, string> = {
   ADJUST_WALLET:          'bg-purple-100 text-purple-700',
   MIGRATE:                'bg-yellow-100 text-yellow-800',
   MODERATE:               'bg-pink-100 text-pink-700',
-  TICKET_REPLY:           'bg-gray-100 text-gray-700',
-  CUSTOM:                 'bg-gray-100 text-gray-700',
+  TICKET_REPLY:           'bg-purple-50 text-purple-800',
+  CUSTOM:                 'bg-purple-50 text-purple-800',
 };
 
 const ACTION_OPTIONS = ['', 'BAN', 'UNBAN', 'DELETE_USER', 'DELETE_PRACTITIONER', 'VERIFY_PRACTITIONER', 'ADJUST_WALLET', 'MIGRATE', 'MODERATE'];
@@ -78,30 +78,30 @@ export default function AuditLogPage() {
         <div className="flex items-center gap-3">
           <Shield className="w-6 h-6 text-indigo-600" />
           <div>
-            <h1 className="text-xl font-bold text-gray-900">Admin Audit Log</h1>
-            <p className="text-sm text-gray-500">{total} total entries — immutable record of admin actions</p>
+            <h1 className="text-xl font-bold text-indigo-950">Admin Audit Log</h1>
+            <p className="text-sm text-purple-500">{total} total entries — immutable record of admin actions</p>
           </div>
         </div>
         <button
           id="audit-log-refresh"
           type="button"
           onClick={() => void fetchLog()}
-          className="flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-600"
+          className="flex items-center gap-2 px-3 py-2 text-sm border border-violet-200 rounded-lg hover:bg-purple-50 text-purple-700"
         >
           <RefreshCw className="w-4 h-4" /> Refresh
         </button>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-3 bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
-        <div className="flex items-center gap-2 text-sm text-gray-500">
+      <div className="flex flex-wrap gap-3 bg-white border border-purple-100 rounded-xl p-4 shadow-sm">
+        <div className="flex items-center gap-2 text-sm text-purple-500">
           <Filter className="w-4 h-4" /> Filter:
         </div>
         <select
           id="audit-filter-action"
           value={filterAction}
           onChange={(e) => { setPage(1); setFilterAction(e.target.value); }}
-          className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          className="text-sm border border-violet-200 rounded-lg px-3 py-1.5 text-purple-800 focus:outline-none focus:ring-2 focus:ring-indigo-400"
         >
           {ACTION_OPTIONS.map((a) => (
             <option key={a} value={a}>{a || 'All actions'}</option>
@@ -111,7 +111,7 @@ export default function AuditLogPage() {
           id="audit-filter-target"
           value={filterTarget}
           onChange={(e) => { setPage(1); setFilterTarget(e.target.value); }}
-          className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          className="text-sm border border-violet-200 rounded-lg px-3 py-1.5 text-purple-800 focus:outline-none focus:ring-2 focus:ring-indigo-400"
         >
           {TARGET_OPTIONS.map((t) => (
             <option key={t} value={t}>{t || 'All targets'}</option>
@@ -129,38 +129,38 @@ export default function AuditLogPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-white border border-purple-100 rounded-xl shadow-sm overflow-hidden">
         {loading ? (
-          <div className="py-16 text-center text-gray-400 text-sm">Loading…</div>
+          <div className="py-16 text-center text-purple-400 text-sm">Loading…</div>
         ) : entries.length === 0 ? (
-          <div className="py-16 text-center text-gray-400 text-sm">No audit log entries found.</div>
+          <div className="py-16 text-center text-purple-400 text-sm">No audit log entries found.</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b border-gray-100">
+              <thead className="bg-purple-50 border-b border-purple-100">
                 <tr>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-500 uppercase text-xs tracking-wide">When</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-500 uppercase text-xs tracking-wide">Admin</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-500 uppercase text-xs tracking-wide">Action</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-500 uppercase text-xs tracking-wide">Target</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-500 uppercase text-xs tracking-wide">Details</th>
+                  <th className="text-left py-3 px-4 font-semibold text-purple-500 uppercase text-xs tracking-wide">When</th>
+                  <th className="text-left py-3 px-4 font-semibold text-purple-500 uppercase text-xs tracking-wide">Admin</th>
+                  <th className="text-left py-3 px-4 font-semibold text-purple-500 uppercase text-xs tracking-wide">Action</th>
+                  <th className="text-left py-3 px-4 font-semibold text-purple-500 uppercase text-xs tracking-wide">Target</th>
+                  <th className="text-left py-3 px-4 font-semibold text-purple-500 uppercase text-xs tracking-wide">Details</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
                 {entries.map((e) => (
-                  <tr key={e.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="py-3 px-4 text-gray-400 whitespace-nowrap" title={new Date(e.createdAt).toLocaleString()}>
+                  <tr key={e.id} className="hover:bg-purple-50 transition-colors">
+                    <td className="py-3 px-4 text-purple-400 whitespace-nowrap" title={new Date(e.createdAt).toLocaleString()}>
                       {timeAgo(e.createdAt)}
                     </td>
-                    <td className="py-3 px-4 text-gray-600 font-mono text-xs max-w-[160px] truncate">
+                    <td className="py-3 px-4 text-purple-700 font-mono text-xs max-w-[160px] truncate">
                       {e.adminLabel}
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${ACTION_COLORS[e.action] ?? 'bg-gray-100 text-gray-700'}`}>
+                      <span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${ACTION_COLORS[e.action] ?? 'bg-purple-50 text-purple-800'}`}>
                         {e.action}
                       </span>
                     </td>
-                    <td className="py-3 px-4 text-gray-600">
+                    <td className="py-3 px-4 text-purple-700">
                       {e.targetType}
                       {e.targetId && (
                         <button
@@ -176,7 +176,7 @@ export default function AuditLogPage() {
                         </button>
                       )}
                     </td>
-                    <td className="py-3 px-4 text-gray-500 text-xs max-w-xs truncate" title={e.meta ?? ''}>
+                    <td className="py-3 px-4 text-purple-500 text-xs max-w-xs truncate" title={e.meta ?? ''}>
                       {formatMeta(e.meta)}
                     </td>
                   </tr>
@@ -188,14 +188,14 @@ export default function AuditLogPage() {
 
         {/* Pagination */}
         {pages > 1 && (
-          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-100 bg-gray-50">
-            <p className="text-xs text-gray-500">Page {page} of {pages}</p>
+          <div className="flex items-center justify-between px-4 py-3 border-t border-purple-100 bg-purple-50">
+            <p className="text-xs text-purple-500">Page {page} of {pages}</p>
             <div className="flex gap-2">
               <button
                 type="button"
                 disabled={page <= 1}
                 onClick={() => setPage((p) => p - 1)}
-                className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg disabled:opacity-40 hover:bg-white"
+                className="px-3 py-1.5 text-sm border border-violet-200 rounded-lg disabled:opacity-40 hover:bg-white"
               >
                 Previous
               </button>
@@ -203,7 +203,7 @@ export default function AuditLogPage() {
                 type="button"
                 disabled={page >= pages}
                 onClick={() => setPage((p) => p + 1)}
-                className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg disabled:opacity-40 hover:bg-white"
+                className="px-3 py-1.5 text-sm border border-violet-200 rounded-lg disabled:opacity-40 hover:bg-white"
               >
                 Next
               </button>

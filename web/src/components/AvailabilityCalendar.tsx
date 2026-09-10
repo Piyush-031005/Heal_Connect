@@ -164,7 +164,7 @@ export default function AvailabilityCalendar({ practitionerId, isExpertMode = fa
       initial={{ opacity: 0, y: 8, scale: 0.98 }} 
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
-      className="flex flex-col md:flex-row gap-8 bg-white p-6 rounded-2xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+      className="flex flex-col md:flex-row gap-8 bg-white p-6 rounded-2xl border border-purple-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
     >
       <div className="w-full md:w-1/2 flex flex-col">
         <div className="flex justify-between items-center mb-6 px-1">
@@ -172,10 +172,10 @@ export default function AvailabilityCalendar({ practitionerId, isExpertMode = fa
             {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
           </h3>
           <div className="flex gap-2">
-            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-purple-50 text-gray-500 hover:text-purple-700 transition-colors" onClick={handlePrevMonth}>
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-purple-50 text-purple-500 hover:text-purple-700 transition-colors" onClick={handlePrevMonth}>
               <ChevronLeft className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-purple-50 text-gray-500 hover:text-purple-700 transition-colors" onClick={handleNextMonth}>
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-purple-50 text-purple-500 hover:text-purple-700 transition-colors" onClick={handleNextMonth}>
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
@@ -214,7 +214,7 @@ export default function AvailabilityCalendar({ practitionerId, isExpertMode = fa
                 const status = getDayStatus(day);
                 const isPast = date < todayDate;
 
-                let statusClass = 'text-gray-700 hover:bg-purple-50 hover:text-purple-700 border border-transparent';
+                let statusClass = 'text-purple-800 hover:bg-purple-50 hover:text-purple-700 border border-transparent';
                 let indicator = null;
 
                 if (status === 'available') {
@@ -226,7 +226,7 @@ export default function AvailabilityCalendar({ practitionerId, isExpertMode = fa
                 }
 
                 if (isPast && !isSelected) {
-                  statusClass = 'opacity-40 cursor-not-allowed text-gray-400 hover:bg-transparent hover:text-gray-400 border-transparent hover:scale-100 font-normal';
+                  statusClass = 'opacity-40 cursor-not-allowed text-purple-400 hover:bg-transparent hover:text-purple-400 border-transparent hover:scale-100 font-normal';
                   indicator = null;
                 }
 
@@ -253,13 +253,13 @@ export default function AvailabilityCalendar({ practitionerId, isExpertMode = fa
           </AnimatePresence>
         </div>
         
-        <div className="flex items-center justify-center gap-6 text-xs text-gray-500 mt-4 px-2 border-t border-gray-50 pt-4">
-          <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-pink-500 shadow-[0_0_8px_rgba(236,72₹53,0.4)]"></span> <span className="font-medium text-gray-600">Available</span></div>
-          <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-red-400 opacity-70"></span> <span className="font-medium text-gray-600">Booked</span></div>
+        <div className="flex items-center justify-center gap-6 text-xs text-purple-500 mt-4 px-2 border-t border-purple-50 pt-4">
+          <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-pink-500 shadow-[0_0_8px_rgba(236,72₹53,0.4)]"></span> <span className="font-medium text-purple-700">Available</span></div>
+          <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-red-400 opacity-70"></span> <span className="font-medium text-purple-700">Booked</span></div>
         </div>
       </div>
 
-      <div className="w-px bg-gradient-to-b from-transparent via-gray-100 to-transparent hidden md:block" />
+      <div className="w-px bg-gradient-to-b from-transparent via-purple-100 to-transparent hidden md:block" />
 
       <div className="w-full md:w-1/2 flex flex-col relative">
         <AnimatePresence mode="wait">
@@ -285,11 +285,11 @@ export default function AvailabilityCalendar({ practitionerId, isExpertMode = fa
                 <div className="flex justify-center p-8"><Loader2 className="w-6 h-6 animate-spin text-purple-400" /></div>
               ) : slotsForSelectedDate.length === 0 ? (
                 <motion.div initial={{opacity:0}} animate={{opacity:1}} className="flex flex-col items-center justify-center py-10 text-center">
-                  <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center mb-3">
-                    <CalendarIcon className="w-5 h-5 text-gray-400" />
+                  <div className="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center mb-3">
+                    <CalendarIcon className="w-5 h-5 text-purple-400" />
                   </div>
-                  <p className="text-gray-500 font-medium text-sm">No available slots for this date.</p>
-                  <p className="text-gray-400 text-xs mt-1">Select another day or add new availability.</p>
+                  <p className="text-purple-500 font-medium text-sm">No available slots for this date.</p>
+                  <p className="text-purple-400 text-xs mt-1">Select another day or add new availability.</p>
                 </motion.div>
               ) : (
                 <AnimatePresence>
@@ -307,17 +307,17 @@ export default function AvailabilityCalendar({ practitionerId, isExpertMode = fa
                         transition={{ delay: idx * 0.04, duration: 0.2 }}
                         className={`flex items-center justify-between p-3.5 rounded-2xl border transition-all duration-200 group ${
                           slot.isBooked 
-                            ? 'bg-gray-50/50 border-gray-100 opacity-80' 
+                            ? 'bg-purple-50/50 border-purple-100 opacity-80' 
                             : isPast 
-                              ? 'bg-gray-50 border-gray-100 opacity-50' 
-                              : 'bg-white hover:bg-[#F5F3FF] border-gray-100 hover:border-[#DDD6FE] hover:shadow-sm hover:-translate-y-px'
+                              ? 'bg-purple-50 border-purple-100 opacity-50' 
+                              : 'bg-white hover:bg-[#F5F3FF] border-purple-100 hover:border-[#DDD6FE] hover:shadow-sm hover:-translate-y-px'
                         }`}
                       >
                         <div className="flex flex-col gap-0.5">
-                          <p className={`font-bold text-[15px] tracking-tight ${slot.isBooked ? 'text-gray-600' : isPast ? 'text-gray-400' : 'text-gray-900 group-hover:text-[#7C3AED] transition-colors'}`}>
+                          <p className={`font-bold text-[15px] tracking-tight ${slot.isBooked ? 'text-purple-700' : isPast ? 'text-purple-400' : 'text-indigo-950 group-hover:text-[#7C3AED] transition-colors'}`}>
                             {start} - {end}
                           </p>
-                          <p className={`text-[11px] font-semibold uppercase tracking-wider ${slot.isBooked ? 'text-gray-400' : isPast ? 'text-gray-400' : 'text-[#7C3AED]'}`}>
+                          <p className={`text-[11px] font-semibold uppercase tracking-wider ${slot.isBooked ? 'text-purple-400' : isPast ? 'text-purple-400' : 'text-[#7C3AED]'}`}>
                             {slot.isBooked ? 'Booked' : isPast ? 'Past' : 'Available'}
                           </p>
                         </div>
@@ -328,7 +328,7 @@ export default function AvailabilityCalendar({ practitionerId, isExpertMode = fa
                             size="icon" 
                             onClick={() => handleDeleteSlot(slot.id)} 
                             disabled={slot.isBooked} 
-                            className={`rounded-xl transition-all ${slot.isBooked ? 'opacity-0' : 'text-gray-400 hover:text-red-600 hover:bg-red-50 hover:scale-105 active:scale-95'}`}
+                            className={`rounded-xl transition-all ${slot.isBooked ? 'opacity-0' : 'text-purple-400 hover:text-red-600 hover:bg-red-50 hover:scale-105 active:scale-95'}`}
                           >
                             <Trash2 className="w-4 h-4" />
                           </Button>
@@ -339,7 +339,7 @@ export default function AvailabilityCalendar({ practitionerId, isExpertMode = fa
                             disabled={slot.isBooked || isPast} 
                             className={`rounded-xl px-5 font-semibold transition-all ${
                               slot.isBooked || isPast 
-                                ? 'bg-gray-100 text-gray-400' 
+                                ? 'bg-purple-50 text-purple-400' 
                                 : 'bg-[#7C3AED] hover:bg-[#6D28D9] text-white shadow-md shadow-purple-500/20 hover:shadow-lg hover:-translate-y-0.5 active:scale-95'
                             }`}
                           >
@@ -358,16 +358,16 @@ export default function AvailabilityCalendar({ practitionerId, isExpertMode = fa
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="mt-5 pt-5 border-t border-gray-100 bg-white"
+                className="mt-5 pt-5 border-t border-purple-100 bg-white"
               >
-                <h5 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3">Add Availability</h5>
+                <h5 className="text-xs font-bold uppercase tracking-widest text-purple-500 mb-3">Add Availability</h5>
                 <div className="flex gap-2.5 items-center">
-                  <div className="flex gap-1 items-center bg-gray-50 border border-gray-200 rounded-xl p-1.5 focus-within:border-[#7C3AED] focus-within:ring-1 focus-within:ring-[#7C3AED] transition-all flex-1 group hover:border-gray-300">
-                    <select value={startHour} onChange={e => setStartHour(e.target.value)} className="bg-transparent text-sm font-medium outline-none cursor-pointer text-gray-700 appearance-none text-center">
+                  <div className="flex gap-1 items-center bg-purple-50 border border-violet-200 rounded-xl p-1.5 focus-within:border-[#7C3AED] focus-within:ring-1 focus-within:ring-[#7C3AED] transition-all flex-1 group hover:border-violet-300">
+                    <select value={startHour} onChange={e => setStartHour(e.target.value)} className="bg-transparent text-sm font-medium outline-none cursor-pointer text-purple-800 appearance-none text-center">
                       {Array.from({length: 12}, (_, i) => String(i+1).padStart(2, '0')).map(h => <option key={h} value={h}>{h}</option>)}
                     </select>
-                    <span className="text-gray-400 font-bold">:</span>
-                    <select value={startMin} onChange={e => setStartMin(e.target.value)} className="bg-transparent text-sm font-medium outline-none cursor-pointer text-gray-700 appearance-none text-center">
+                    <span className="text-purple-400 font-bold">:</span>
+                    <select value={startMin} onChange={e => setStartMin(e.target.value)} className="bg-transparent text-sm font-medium outline-none cursor-pointer text-purple-800 appearance-none text-center">
                       {['00', '15', '30', '45'].map(m => <option key={m} value={m}>{m}</option>)}
                     </select>
                     <select value={startAmPm} onChange={e => setStartAmPm(e.target.value)} className="bg-transparent text-sm font-bold text-[#7C3AED] outline-none cursor-pointer appearance-none ml-1">
@@ -375,13 +375,13 @@ export default function AvailabilityCalendar({ practitionerId, isExpertMode = fa
                       <option value="PM">PM</option>
                     </select>
                   </div>
-                  <span className="text-gray-400 text-sm font-medium shrink-0">to</span>
-                  <div className="flex gap-1 items-center bg-gray-50 border border-gray-200 rounded-xl p-1.5 focus-within:border-[#7C3AED] focus-within:ring-1 focus-within:ring-[#7C3AED] transition-all flex-1 group hover:border-gray-300">
-                    <select value={endHour} onChange={e => setEndHour(e.target.value)} className="bg-transparent text-sm font-medium outline-none cursor-pointer text-gray-700 appearance-none text-center">
+                  <span className="text-purple-400 text-sm font-medium shrink-0">to</span>
+                  <div className="flex gap-1 items-center bg-purple-50 border border-violet-200 rounded-xl p-1.5 focus-within:border-[#7C3AED] focus-within:ring-1 focus-within:ring-[#7C3AED] transition-all flex-1 group hover:border-violet-300">
+                    <select value={endHour} onChange={e => setEndHour(e.target.value)} className="bg-transparent text-sm font-medium outline-none cursor-pointer text-purple-800 appearance-none text-center">
                       {Array.from({length: 12}, (_, i) => String(i+1).padStart(2, '0')).map(h => <option key={h} value={h}>{h}</option>)}
                     </select>
-                    <span className="text-gray-400 font-bold">:</span>
-                    <select value={endMin} onChange={e => setEndMin(e.target.value)} className="bg-transparent text-sm font-medium outline-none cursor-pointer text-gray-700 appearance-none text-center">
+                    <span className="text-purple-400 font-bold">:</span>
+                    <select value={endMin} onChange={e => setEndMin(e.target.value)} className="bg-transparent text-sm font-medium outline-none cursor-pointer text-purple-800 appearance-none text-center">
                       {['00', '15', '30', '45'].map(m => <option key={m} value={m}>{m}</option>)}
                     </select>
                     <select value={endAmPm} onChange={e => setEndAmPm(e.target.value)} className="bg-transparent text-sm font-bold text-[#7C3AED] outline-none cursor-pointer appearance-none ml-1">
