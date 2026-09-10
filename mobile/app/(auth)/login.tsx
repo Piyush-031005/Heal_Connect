@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import {
+import { Image,
   View,
   Text,
   TextInput,
@@ -18,15 +18,15 @@ import * as SecureStore from 'expo-secure-store';
 type Role = 'user' | 'expert';
 type Mode = 'login' | 'forgot';
 
-const PURPLE = '#7C3AED';
+const PURPLE = '#8B5CF6';
 const PURPLE_DARK = '#5B21B6';
 const PURPLE_LIGHT = '#EDE9FE';
-const LAVENDER = '#A78BFA';
-const BG = '#0F0B2A';
-const CARD_BG = 'rgba(255,255,255,0.06)';
-const BORDER = 'rgba(167₹39,250,0.3)';
-const TEXT = '#F5F3FF';
-const TEXT_MUTED = 'rgba(245,243,255,0.6)';
+const LAVENDER = '#6D28D9';
+const BG = '#F9F5FF';
+const CARD_BG = '#FFFFFF';
+const BORDER = '#E9D8FD';
+const TEXT = '#2D1B4E';
+const TEXT_MUTED = '#6B5E80';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -86,9 +86,7 @@ export default function LoginScreen() {
 
           {/* Logo area */}
           <View style={{ alignItems: 'center', marginBottom: 36 }}>
-            <View style={{ width: 64, height: 64, borderRadius: 20, backgroundColor: PURPLE, alignItems: 'center', justifyContent: 'center', marginBottom: 16, shadowColor: PURPLE, shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.6, shadowRadius: 20, elevation: 10 }}>
-              <Text style={{ fontSize: 28 }}>✦</Text>
-            </View>
+            <Image source={require('../../assets/images/main_logo.png')} style={{ width: 120, height: 60, resizeMode: 'contain', marginBottom: 16 }} />
             <Text style={{ fontSize: 28, fontWeight: '800', color: TEXT, letterSpacing: -0.5 }}>ZenAuraa</Text>
             <Text style={{ fontSize: 14, color: TEXT_MUTED, marginTop: 4 }}>
               {mode === 'login' ? 'Welcome back, begin your journey' : 'Reset your password'}
