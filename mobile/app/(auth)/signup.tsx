@@ -10,6 +10,7 @@ import { Image,
   ActivityIndicator,
   StatusBar,
 } from 'react-native';
+import Lightfall from '../../components/Lightfall';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { authApi } from '../../lib/api';
@@ -52,6 +53,25 @@ export default function SignupScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: BG }}>
       <StatusBar barStyle="light-content" backgroundColor={BG} />
+      <Lightfall
+        colors={['#A6C8FF', '#5227FF', '#FF9FFC']}
+        backgroundColor="#F9F5FF"
+        speed={0.5}
+        streakCount={2}
+        streakWidth={1}
+        streakLength={1}
+        glow={1}
+        density={0.6}
+        twinkle={1}
+        zoom={3}
+        backgroundGlow={0.5}
+        opacity={1}
+        mouseInteraction={true}
+        mouseStrength={0.5}
+        mouseRadius={1}
+        lightMode={true}
+      />
+    
       <View style={{ position: 'absolute', top: -60, right: -60, width: 250, height: 250, borderRadius: 125, backgroundColor: 'rgba(124,58,237,0.25)' }} />
       <View style={{ position: 'absolute', bottom: 100, left: -40, width: 180, height: 180, borderRadius: 90, backgroundColor: 'rgba(79,70,229,0.2)' }} />
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
