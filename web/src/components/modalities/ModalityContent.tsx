@@ -44,7 +44,7 @@ export default function ModalityContent({ data }: Props) {
                   className="w-full lg:w-1/2"
                 >
                   <div className="relative aspect-[4/5] w-full max-w-md mx-auto rounded-3xl overflow-hidden shadow-2xl border border-primary/20 group">
-                    <Image src={section.image} alt={section.title} fill unoptimized sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <Image src={section.image} alt={section.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                     <div className="absolute inset-0 ring-1 ring-inset ring-foreground/10 rounded-3xl" />
                   </div>
                 </motion.div>
