@@ -36,7 +36,8 @@ export function startBillingEngine() {
       const staleSessions = await prisma.session.findMany({
         where: {
           OR: [
-            { status: 'INITIATED', createdAt: { lt: twoMinutesAgo } },
+            // Extended to 5 minutes so expert has time to navigate to session page
+            { status: 'INITIATED', createdAt: { lt: fiveMinutesAgo } },
             { status: 'ACCEPTED', createdAt: { lt: fiveMinutesAgo } },
           ],
         },
@@ -183,7 +184,7 @@ async function processSessionBilling(session: any) {
       return;
     }
 
-    // Atomically debit wallet and update session cost
+    // Atomically debit user wallet, update session cost, and credit expert earnings
     await prisma.$transaction([
       prisma.wallet.update({
         where: { id: wallet.id },
@@ -192,6 +193,11 @@ async function processSessionBilling(session: any) {
       prisma.session.update({
         where: { id: session.id },
         data: { totalCost: { increment: ratePerMinute } },
+      }),
+      // Credit the expert's lifetime earnings — was missing, causing totalEarnings to never update
+      prisma.practitioner.update({
+        where: { id: session.practitionerId },
+        data: { totalEarnings: { increment: ratePerMinute } },
       }),
     ]);
 

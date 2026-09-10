@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, Camera, Loader2, Check, X, User, Mail, Phone, MapPin, CalendarDays, Shield, Heart, Sun } from 'lucide-react';
+import { ArrowLeft, Camera, Loader2, Check, X, User, Mail, Phone, MapPin, CalendarDays, Shield, Heart, Sun, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -43,6 +43,29 @@ export default function ProfilePage() {
   const [uploading, setUploading] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState('');
+  const [exporting, setExporting] = useState(false);
+
+  const handleExportData = async () => {
+    const token = tokenStore.getAccess();
+    if (!token) return;
+    setExporting(true);
+    try {
+      const res = await usersApi.exportData(token);
+      if (res.success && res.data) {
+        const blob = new Blob([JSON.stringify(res.data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `my-data-${new Date().toISOString().slice(0, 10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+    } catch (err) {
+      console.error('Export failed:', err);
+    } finally {
+      setExporting(false);
+    }
+  };
 
   useEffect(() => {
     const token = tokenStore.getAccess();
@@ -305,6 +328,20 @@ export default function ProfilePage() {
               Cancel
             </Button>
           </Link>
+        </div>
+
+        {/* Export Data */}
+        <div className="border-t border-indigo-100 pt-4">
+          <p className="text-xs text-gray-400 mb-3">You can download a copy of all your data stored on ZenAuraa.</p>
+          <Button
+            variant="outline"
+            onClick={handleExportData}
+            disabled={exporting}
+            className="w-full border-indigo-200 text-indigo-700 hover:bg-indigo-50 rounded-full h-11 gap-2 font-semibold"
+          >
+            {exporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+            {exporting ? 'Preparing export...' : 'Download My Data'}
+          </Button>
         </div>
 
       </main>

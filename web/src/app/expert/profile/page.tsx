@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {
   ArrowLeft, Camera, Loader2, Check, X,
-  User, Mail, Star, IndianRupee, BookOpen, Languages, Award, Calendar,
+  User, Mail, Star, IndianRupee, BookOpen, Languages, Award, Calendar, Download,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -51,7 +51,30 @@ export default function ExpertProfilePage() {
   const [uploading, setUploading] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState('');
+  const [exporting, setExporting] = useState(false);
   const [practitionerId, setPractitionerId] = useState<string | null>(null);
+
+  const handleExportData = async () => {
+    const token = tokenStore.getAccess();
+    if (!token) return;
+    setExporting(true);
+    try {
+      const res = await practitionersApi.exportData(token);
+      if (res.success && res.data) {
+        const blob = new Blob([JSON.stringify(res.data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `expert-data-${new Date().toISOString().slice(0, 10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+    } catch (err) {
+      console.error('Export failed:', err);
+    } finally {
+      setExporting(false);
+    }
+  };
 
   useEffect(() => {
     const token = tokenStore.getAccess();
@@ -352,7 +375,7 @@ export default function ExpertProfilePage() {
           </div>
         )}
 
-        <div className="flex items-center gap-3 pb-8">
+        <div className="flex items-center gap-3 pb-4">
           <Button onClick={handleSave} disabled={saving}
             className="flex-1 bg-purple-400 hover:bg-indigo-600 text-white border-0 rounded-full h-12 font-bold shadow-lg shadow-indigo-200 transition-all">
             {saving ? <Loader2 className="h-5 w-5 animate-spin" /> : saved ? <><Check className="h-5 w-5 mr-2" /> Saved!</> : 'Save Changes'}
@@ -360,6 +383,20 @@ export default function ExpertProfilePage() {
           <Link href="/expert/dashboard">
             <Button variant="outline" className="border-indigo-200 text-gray-600 hover:text-indigo-700 hover:bg-purple-50 rounded-full h-12 px-6">Cancel</Button>
           </Link>
+        </div>
+
+        {/* Export Data */}
+        <div className="border-t border-indigo-100 pt-4 pb-8">
+          <p className="text-xs text-gray-400 mb-3">Download a copy of all your expert account data stored on ZenAuraa.</p>
+          <Button
+            variant="outline"
+            onClick={handleExportData}
+            disabled={exporting}
+            className="w-full border-indigo-200 text-indigo-700 hover:bg-indigo-50 rounded-full h-11 gap-2 font-semibold"
+          >
+            {exporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+            {exporting ? 'Preparing export...' : 'Download My Data'}
+          </Button>
         </div>
 
       </main>

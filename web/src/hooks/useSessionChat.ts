@@ -22,11 +22,13 @@ interface UseSessionChatReturn {
   otherTyping: boolean;
   elapsedSeconds: number;
   walletBalance: number | null;
+  blockedMessage: string | null;
   sendMessage: (content: string) => void;
   emitTypingStart: () => void;
   emitTypingStop: () => void;
   markRead: (messageId: string) => void;
   endSession: () => void;
+  clearBlockedMessage: () => void;
 }
 
 export function useSessionChat(sessionId: string, currentUserId: string): UseSessionChatReturn {
@@ -35,6 +37,7 @@ export function useSessionChat(sessionId: string, currentUserId: string): UseSes
   const [otherTyping, setOtherTyping] = useState(false);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [walletBalance, setWalletBalance] = useState<number | null>(null);
+  const [blockedMessage, setBlockedMessage] = useState<string | null>(null);
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const walletPollRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -108,6 +111,10 @@ export function useSessionChat(sessionId: string, currentUserId: string): UseSes
 
     socket.on('low_balance', () => setSessionStatus('low_balance'));
 
+    socket.on('message_blocked', ({ reason }: { reason: string }) => {
+      setBlockedMessage(reason);
+    });
+
     socket.on('session_terminated', () => {
       stopTimers();
       setSessionStatus('ended');
@@ -129,6 +136,7 @@ export function useSessionChat(sessionId: string, currentUserId: string): UseSes
       socket.off('typing_update');
       socket.off('receipt_update');
       socket.off('low_balance');
+      socket.off('message_blocked');
       socket.off('session_terminated');
       socket.off('session_disconnected');
       stopTimers();
@@ -178,5 +186,7 @@ export function useSessionChat(sessionId: string, currentUserId: string): UseSes
     disconnectSocket();
   }, [sessionId]);
 
-  return { messages, sessionStatus, otherTyping, elapsedSeconds, walletBalance, sendMessage, emitTypingStart, emitTypingStop, markRead, endSession };
+  const clearBlockedMessage = useCallback(() => setBlockedMessage(null), []);
+
+  return { messages, sessionStatus, otherTyping, elapsedSeconds, walletBalance, blockedMessage, sendMessage, emitTypingStart, emitTypingStop, markRead, endSession, clearBlockedMessage };
 }

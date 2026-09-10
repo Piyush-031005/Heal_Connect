@@ -11,7 +11,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import {
   MessageCircle, LogOut, Wifi, WifiOff, User, Clock,
   IndianRupee, Star, TrendingUp, Bell, ChevronRight,
-  Sparkles, HeartHandshake, Phone, FileText, LifeBuoy
+  Sparkles, HeartHandshake, Phone, FileText, LifeBuoy, PhoneCall, PhoneOff
 } from 'lucide-react';
 
 interface ActiveSession {
@@ -19,6 +19,13 @@ interface ActiveSession {
   type: string;
   status: string;
   createdAt: string;
+  user: { id: string; name: string | null; photoUrl: string | null };
+}
+
+interface IncomingCall {
+  sessionId: string;
+  id: string;
+  type: string;
   user: { id: string; name: string | null; photoUrl: string | null };
 }
 
@@ -32,6 +39,7 @@ export default function ExpertDashboardPage() {
   const [sessionsDone, setSessionsDone] = useState(0);
   const [togglingOnline, setTogglingOnline] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [incomingCall, setIncomingCall] = useState<IncomingCall | null>(null);
   const profileMenuRef = useRef<HTMLDivElement>(null);
 
   const fetchSessions = useCallback(() => {
@@ -83,15 +91,23 @@ export default function ExpertDashboardPage() {
     socket.on('new_session_request', (data: ActiveSession) => {
       setSessions((prev) => prev.find((s) => s.id === data.id) ? prev : [data, ...prev]);
     });
+
+    // Incoming call notification — show in-page modal instead of requiring navigation
+    socket.on('call_incoming', (data: IncomingCall) => {
+      setIncomingCall({ ...data, sessionId: data.id ?? data.sessionId });
+    });
     
     socket.on('session_terminated', ({ sessionId }: { sessionId: string }) => {
       setSessions((prev) => prev.filter((s) => s.id !== sessionId));
+      // Dismiss incoming call modal if the call was cancelled before expert answered
+      setIncomingCall((prev) => (prev?.sessionId === sessionId ? null : prev));
     });
 
     const poll = setInterval(fetchSessions, 15000);
     return () => {
       clearInterval(poll);
       socket.off('new_session_request');
+      socket.off('call_incoming');
       socket.off('session_terminated');
     };
   }, [router, fetchSessions]);
@@ -120,6 +136,53 @@ export default function ExpertDashboardPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans relative overflow-hidden">
+
+      {/* ── Incoming Call Modal ── */}
+      {incomingCall && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+          <div className="bg-[#121420] border border-primary/30 rounded-3xl shadow-2xl p-8 max-w-sm w-full text-center space-y-6 animate-in zoom-in-95 duration-200">
+            <div className="flex flex-col items-center gap-3">
+              <div className="w-20 h-20 rounded-2xl bg-secondary border border-border flex items-center justify-center overflow-hidden">
+                {incomingCall.user.photoUrl
+                  ? <img src={incomingCall.user.photoUrl} alt="" className="w-full h-full object-cover" />
+                  : <User className="w-10 h-10 text-muted-foreground" />}
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-accent mb-1">Incoming Call</p>
+                <p className="text-2xl font-extrabold text-white">{incomingCall.user.name ?? 'A User'}</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {incomingCall.type === 'AUDIO' ? '🎙️ Audio Session Request' : '💬 Chat Session Request'}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center justify-center gap-4">
+              <Button
+                variant="destructive"
+                className="rounded-full w-14 h-14 bg-red-500 hover:bg-red-600 shadow-lg"
+                title="Decline"
+                onClick={async () => {
+                  const token = tokenStore.getAccess();
+                  if (token) await sessionsApi.reject(token, incomingCall.sessionId).catch(console.error);
+                  setIncomingCall(null);
+                }}
+              >
+                <PhoneOff className="h-6 w-6 text-white" />
+              </Button>
+              <Button
+                className="rounded-full w-16 h-16 bg-accent hover:bg-accent/90 shadow-xl animate-pulse"
+                title="Accept"
+                onClick={() => {
+                  setIncomingCall(null);
+                  router.push(`/session/${incomingCall.sessionId}`);
+                }}
+              >
+                <PhoneCall className="h-7 w-7 text-white" />
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground">Tap ✓ to open the session · Tap ✗ to decline</p>
+          </div>
+        </div>
+      )}
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none fixed">
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(214,180,107,0.15)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
