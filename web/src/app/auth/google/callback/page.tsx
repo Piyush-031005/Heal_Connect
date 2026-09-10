@@ -17,19 +17,40 @@ export default function GoogleCallbackPage() {
     const hash = window.location.hash.substring(1);
     const params = new URLSearchParams(hash);
     const idToken = params.get('id_token');
+    const state = params.get('state') || undefined;
 
     if (!idToken) {
       setError('No token received from Google. Please try again.');
       return;
     }
 
-    authApi.googleSignIn(idToken).then((res) => {
+    authApi.googleSignIn(idToken, state).then((res) => {
       if (!res.success || !res.data) {
         setError(res.message || 'Google sign-in failed');
         return;
       }
       tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-      router.replace('/dashboard');
+      
+      const user = res.data.user;
+      if (user && (user.role === 'practitioner' || user.role === 'expert')) {
+        localStorage.setItem('hc_role', 'practitioner');
+        localStorage.setItem('hc_practitioner_id', user.id);
+        localStorage.setItem('hc_practitioner_name', user.name ?? '');
+        
+        // Handle redirect from signup state
+        if (state === 'expert_signup' && user.isNew === false) {
+           router.replace('/expert/dashboard');
+        } else if (state === 'expert_signup') {
+           router.replace('/expert/onboarding'); // Let expert finish onboarding if they just signed up
+        } else {
+           router.replace('/expert/dashboard');
+        }
+      } else {
+        localStorage.removeItem('hc_role');
+        localStorage.removeItem('hc_practitioner_id');
+        localStorage.removeItem('hc_practitioner_name');
+        router.replace('/dashboard');
+      }
     }).catch((err) => {
       setError(`Google sign-in failed. Please try again. [${err.message || String(err)}]`);
     });

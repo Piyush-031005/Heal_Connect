@@ -6,11 +6,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {
   ArrowLeft, Camera, Loader2, Check, X,
-  User, Mail, Star, IndianRupee, BookOpen, Languages, Award,
+  User, Mail, Star, IndianRupee, BookOpen, Languages, Award, Calendar,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { practitionersApi, tokenStore } from '@/lib/api';
+import { practitionersApi, tokenStore, availabilityApi } from '@/lib/api';
+import AvailabilityCalendar from '@/components/AvailabilityCalendar';
 
 const SPECIALTIES = [
   'Astrology', 'Tarot', 'Reiki', 'Vastu', 'Numerology',
@@ -35,6 +36,7 @@ interface ExpertProfile {
   isVerified: boolean;
   avgRating?: number;
   reviewCount?: number;
+  schedulingEnabled?: boolean;
 }
 
 export default function ExpertProfilePage() {
@@ -60,6 +62,7 @@ export default function ExpertProfilePage() {
     practitionersApi.get(pid).then((res) => {
       if (!res.success || !res.data) { router.replace('/expert/login'); return; }
       const p = res.data.practitioner as ExpertProfile;
+      if (!p.isVerified) { router.replace('/expert/verification-pending'); return; }
       setProfile(p);
       setForm({ name: p.name, bio: p.bio || '', experienceYrs: String(p.experienceYrs), perMinuteRate: String(p.perMinuteRate), certInput: '' });
       setSpecialties(p.specialties);
@@ -113,7 +116,7 @@ export default function ExpertProfilePage() {
     return (
       <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <Image src="/center_logo_final.png" alt="ZenAuraa" width={48} height={48} className="rounded-full animate-pulse" />
+          <Image src="/logo.png" alt="ZenAuraa" width={48} height={48} className="rounded-full animate-pulse" />
           <p className="text-gray-500">Loading profile...</p>
         </div>
       </div>
@@ -128,7 +131,7 @@ export default function ExpertProfilePage() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/expert/dashboard" className="flex items-center gap-2 text-gray-500 hover:text-purple-400 transition-colors">
             <ArrowLeft className="h-4 w-4" />
-            <Image src="/center_logo_final.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
+            <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
             <span className="font-extrabold text-purple-400">ZenAuraa</span>
           </Link>
           <div className="text-sm font-semibold text-gray-600">Expert Profile</div>
@@ -287,6 +290,57 @@ export default function ExpertProfilePage() {
                     </button>
                   </span>
                 ))}
+              </div>
+            )}
+          </div>
+        </Card>
+
+        {/* Scheduling & Calendar */}
+        <Card className="bg-white border border-indigo-100 shadow-sm rounded-2xl overflow-hidden">
+          <div className="px-6 pt-5 pb-3 border-b border-purple-50 flex items-center gap-2">
+            <Calendar className="w-5 h-5 text-purple-400" />
+            <h2 className="text-lg font-bold text-gray-900">Scheduling & Availability</h2>
+          </div>
+          <div className="p-6 space-y-4">
+            <div className="flex items-center justify-between bg-purple-50/70 p-4 rounded-xl border border-indigo-200">
+              <div>
+                <p className="font-semibold text-gray-900 text-sm">Enable Scheduling</p>
+                <p className="text-xs text-gray-600 mt-0.5">Allow users to book your free slots instantly</p>
+              </div>
+              <Button 
+                size="sm" 
+                variant={profile?.schedulingEnabled ? "default" : "outline"}
+                className={profile?.schedulingEnabled ? "bg-purple-400 hover:bg-indigo-600 text-white" : "border-indigo-200 hover:border-purple-300"}
+                onClick={async () => {
+                  const token = tokenStore.getAccess();
+                  if (!token || !practitionerId) return;
+                  try {
+                    const res = await availabilityApi.toggleScheduling(token, !profile?.schedulingEnabled);
+                    if (res.success && res.data) {
+                      setProfile(prev => prev ? { ...prev, schedulingEnabled: res.data!.schedulingEnabled } : prev);
+                    }
+                  } catch (err) {
+                    console.error('Failed to toggle scheduling', err);
+                  }
+                }}
+              >
+                {profile?.schedulingEnabled ? 'Enabled' : 'Disabled'}
+              </Button>
+            </div>
+            
+            {profile?.schedulingEnabled && practitionerId && (
+              <div className="mt-6">
+                <div className="mb-4">
+                  <p className="text-xs font-bold uppercase tracking-widest text-emerald-700 mb-0.5">Manage Time</p>
+                  <h3 className="text-lg font-bold text-gray-900">Your Availability Calendar</h3>
+                  <p className="text-sm text-gray-600 mt-1">Set your available slots for users to book sessions</p>
+                </div>
+                <div className="border border-indigo-100 rounded-xl overflow-hidden bg-white">
+                  <AvailabilityCalendar 
+                    practitionerId={practitionerId} 
+                    isExpertMode={true} 
+                  />
+                </div>
               </div>
             )}
           </div>

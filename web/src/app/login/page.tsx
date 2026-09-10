@@ -73,7 +73,8 @@ function LoginInner() {
     if (!clientId) { setError('Google Sign-In is not configured yet.'); return; }
     const redirectUri = encodeURIComponent(`${window.location.origin}/auth/google/callback`);
     const scope = encodeURIComponent('openid email profile');
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&nonce=${Math.random().toString(36)}`;
+    const stateParam = role === 'expert' ? 'expert_login' : 'user_login';
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&state=${stateParam}&nonce=${Math.random().toString(36)}`;
   }
 
   function handleAppleSignIn() {
@@ -84,7 +85,7 @@ function LoginInner() {
     <div className="min-h-screen bg-gradient-to-br from-[#F9F5FF] via-[#E9D5FF] to-[#D8B4FE] text-[#2A1658] flex flex-col md:flex-row font-sans relative overflow-hidden">
 
 
-      {/* Left — Branding */}
+      {/* Left Â— Branding */}
       <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-black/5 dark:bg-black/20 backdrop-blur-md relative z-10 border-r border-border">
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
@@ -120,11 +121,11 @@ function LoginInner() {
         </div>
 
         <div className="relative z-10 mt-auto pt-12 border-t border-border">
-          <p className="text-muted-foreground text-sm tracking-wider uppercase">© 2026 Tara Infotech. All rights reserved.</p>
+          <p className="text-muted-foreground text-sm tracking-wider uppercase">Â© 2026 Tara Infotech. All rights reserved.</p>
         </div>
       </div>
 
-      {/* Right — Form */}
+      {/* Right Â— Form */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative z-10">
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
@@ -182,7 +183,7 @@ function LoginInner() {
                   </div>
                   <div className="relative group">
                     <Lock className="absolute left-3 top-3 h-5 w-5 text-muted-foreground group-focus-within:text-accent transition-colors" />
-                    <Input type={showPassword ? 'text' : 'password'} required placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)}
+                    <Input type={showPassword ? 'text' : 'password'} required placeholder="Â•Â•Â•Â•Â•Â•Â•Â•" value={password} onChange={e => setPassword(e.target.value)}
                       className="pl-10 pr-10 py-6 bg-input/50 border-input text-foreground placeholder:text-muted-foreground focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
                     <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-muted-foreground hover:text-foreground transition-colors">
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}

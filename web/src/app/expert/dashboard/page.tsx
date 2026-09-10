@@ -11,7 +11,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import {
   MessageCircle, LogOut, Wifi, WifiOff, User, Clock,
   IndianRupee, Star, TrendingUp, Bell, ChevronRight,
-  Sparkles, HeartHandshake, Phone,
+  Sparkles, HeartHandshake, Phone, FileText, LifeBuoy
 } from 'lucide-react';
 
 interface ActiveSession {
@@ -171,6 +171,18 @@ export default function ExpertDashboardPage() {
                   <Link href="/expert/profile" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-secondary transition-colors flex items-center gap-3">
                     <User className="w-4 h-4 text-primary" />
                     <span className="text-sm font-medium text-muted-foreground">My Profile</span>
+                  </Link>
+                  <Link href="/expert/requests" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-secondary transition-colors flex items-center gap-3">
+                    <Bell className="w-4 h-4 text-primary" />
+                    <span className="text-sm font-medium text-muted-foreground">Scheduled Sessions</span>
+                  </Link>
+                  <Link href="/expert/transcripts" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-secondary transition-colors flex items-center gap-3">
+                    <FileText className="w-4 h-4 text-primary" />
+                    <span className="text-sm font-medium text-muted-foreground">Call Transcripts</span>
+                  </Link>
+                  <Link href="/expert/support" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-secondary transition-colors flex items-center gap-3">
+                    <LifeBuoy className="w-4 h-4 text-primary" />
+                    <span className="text-sm font-medium text-muted-foreground">Support</span>
                   </Link>
                   <button onClick={handleLogout} className="w-full px-4 py-3 hover:bg-red-900/20 transition-colors flex items-center gap-3">
                     <LogOut className="w-4 h-4 text-red-500" />

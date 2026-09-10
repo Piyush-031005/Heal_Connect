@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   // Proxy /api/* → backend (browser calls /api/... → Next.js forwards to backend, no CORS issues)
   async rewrites() {
     return [

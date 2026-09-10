@@ -45,14 +45,14 @@ function PrimaryHero() {
           
           {/* Action Buttons */}
           <div className="flex items-center gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-100">
-            <button className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary text-sm font-medium transition-all">
+            <Link href="/login" className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary text-sm font-medium transition-all">
               <MessageCircle className="w-4 h-4" />
               <span>Start Chat</span>
-            </button>
-            <button className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all shadow-lg shadow-primary/20">
+            </Link>
+            <Link href="/login" className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all shadow-lg shadow-primary/20">
               <Phone className="w-4 h-4" />
               <span>Start Calling</span>
-            </button>
+            </Link>
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000">
@@ -135,14 +135,14 @@ function NewLayout1Hero() {
           
           {/* Action Buttons */}
           <div className="flex items-center gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-100">
-            <button className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary text-sm font-medium transition-all">
+            <Link href="/login" className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary text-sm font-medium transition-all">
               <MessageCircle className="w-4 h-4" />
               <span>Start Chat</span>
-            </button>
-            <button className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all shadow-lg shadow-primary/20">
+            </Link>
+            <Link href="/login" className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all shadow-lg shadow-primary/20">
               <Phone className="w-4 h-4" />
               <span>Start Calling</span>
-            </button>
+            </Link>
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000">

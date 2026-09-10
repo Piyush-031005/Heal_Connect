@@ -156,6 +156,9 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
       socket.to(`room:${sessionId}`).emit('call_mute_update', { sessionId, userId, isMuted });
     });
 
+    socket.on('end_call', async ({ sessionId }: { sessionId: string }) => {
+      io!.to(`room:${sessionId}`).emit('session_terminated', { sessionId, reason: 'ended_by_user' });
+    });
     // ── Read receipts ────────────────────────────────────────────────────────
     socket.on('message_read', async ({ sessionId, messageId }: { sessionId: string; messageId: string }) => {
       const readAt = new Date();

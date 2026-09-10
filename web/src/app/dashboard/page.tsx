@@ -8,7 +8,7 @@ import {
   Wallet, MessageCircle, Phone, Star, Bell, LogOut,
   Search, ChevronRight, Zap, TrendingUp, Clock, Shield, User,
   HeartHandshake, Headphones, Sparkles, ArrowRight,
-  Waves, Check
+  Waves, Check, FileText, Calendar, LifeBuoy
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -211,6 +211,24 @@ export default function DashboardPage() {
                     <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-gray-100">
                       <User className="w-4 h-4 text-purple-400" />
                       <span className="text-sm font-medium text-gray-900">My Profile</span>
+                    </div>
+                  </Link>
+                  <Link href="/dashboard/transcripts" onClick={() => setShowProfileMenu(false)}>
+                    <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-gray-100">
+                      <FileText className="w-4 h-4 text-purple-400" />
+                      <span className="text-sm font-medium text-gray-900">Call Transcripts</span>
+                    </div>
+                  </Link>
+                  <Link href="/dashboard/schedules" onClick={() => setShowProfileMenu(false)}>
+                    <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-gray-100">
+                      <Calendar className="w-4 h-4 text-purple-400" />
+                      <span className="text-sm font-medium text-gray-900">Scheduled Sessions</span>
+                    </div>
+                  </Link>
+                  <Link href="/dashboard/support" onClick={() => setShowProfileMenu(false)}>
+                    <div className="px-4 py-3 hover:bg-purple-50 transition-colors flex items-center gap-3 border-b border-gray-100">
+                      <LifeBuoy className="w-4 h-4 text-purple-400" />
+                      <span className="text-sm font-medium text-gray-900">Support</span>
                     </div>
                   </Link>
                   <button onClick={() => { tokenStore.clear(); router.push('/login'); }} className="w-full px-4 py-3 hover:bg-red-50 transition-colors flex items-center gap-3">

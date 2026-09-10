@@ -1,4 +1,19 @@
-﻿export const MODALITIES_CONTENT: Record<string, any> = {
+export interface ModalityData {
+  id: string;
+  name: string;
+  heroTitle: string;
+  heroDescription: string;
+  heroImages: string[];
+  contentSections: {
+    title: string;
+    text: string;
+    image: string;
+    imagePosition: 'left' | 'right';
+  }[];
+  scrollGallery: string[];
+  remedies: string[];
+}
+export const MODALITIES_CONTENT: Record<string, any> = {
   astrology: {
     id: 'astrology',
     name: 'Astrology',

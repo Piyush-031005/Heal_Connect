@@ -35,7 +35,7 @@ function VerifyEmailContent() {
         if (data.success) {
           setStatus('success');
           setMessage(data.message || 'Email verified successfully!');
-          setTimeout(() => router.push('/login'), 3000);
+          setTimeout(() => router.push('/dashboard'), 3000);
         } else {
           setStatus('error');
           setMessage(data.message || 'Verification failed. The link may have expired.');
