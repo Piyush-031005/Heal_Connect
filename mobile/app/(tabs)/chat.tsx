@@ -28,7 +28,7 @@ export default function ChatScreen() {
     'How can I reduce anxiety?',
     'What does my dream mean?',
     'Give me a daily affirmation',
-    "What's my life purpose—,
+    "What's my life purpose?",
   ];
 
   return (
