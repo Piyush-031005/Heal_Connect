@@ -1,4 +1,5 @@
 'use client';
+import GhostFibers from '@/components/GhostFibers';
 import NewLayoutsHero from './new-layouts-hero';
 
 import Link from 'next/link';
@@ -14,7 +15,7 @@ import OpticalWheel from '@/components/optical-wheel';
 function PrimaryHero() {
   return (
     <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-background min-h-[90vh] flex items-center">
-      {/* Scattered star particles — like ZenAuraa reference */}
+      {/* Scattered star particles Ã¢â‚¬â€ like ZenAuraa reference */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
         {[
           [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
@@ -103,8 +104,8 @@ function PrimaryHero() {
 // --- NEW LAYOUT 1 HERO ---
 function NewLayout1Hero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-gradient-to-b from-[#EDE5FC] via-[#EDE5FC] to-[#4E67CC]/40 min-h-[90vh] flex items-center">
-      {/* Scattered star particles — like ZenAuraa reference */}
+    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-[#F9F5FF] min-h-[90vh] flex items-center"><div className="absolute inset-0 z-0"><GhostFibers lineColor="#362d64" glowColor="#8b53c1" speed={0.2} scale={2} /></div>
+      {/* Scattered star particles Ã¢â‚¬â€ like ZenAuraa reference */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
         {[
           [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
@@ -202,7 +203,7 @@ function EditorialHero() {
               <span className="italic text-primary">Wellness</span> Begins Here.
             </h1>
             <p className="text-lg md:text-2xl text-foreground/70 mb-10 max-w-2xl font-light leading-relaxed">
-              Connect with trusted holistic health, astrological and wellness practitioners from around the world—all in one place.
+              Connect with trusted holistic health, astrological and wellness practitioners from around the worldÃ¢â‚¬â€all in one place.
             </p>
             
             {/* Search Bar matching Zen Align reference */}
@@ -472,7 +473,7 @@ function ZenAlignHero() {
       {/* Constellation SVG overlay */}
       <ConstellationLines />
 
-      {/* Large radial glow — center-right */}
+      {/* Large radial glow Ã¢â‚¬â€ center-right */}
       <div className="absolute right-0 top-0 w-[70vw] h-full bg-[radial-gradient(ellipse_at_70%_40%,rgba(32,166,220,0.18)_0%,transparent_65%)] pointer-events-none z-0" />
       <div className="absolute left-0 bottom-0 w-[50vw] h-1/2 bg-[radial-gradient(ellipse_at_30%_80%,rgba(23,97,154,0.10)_0%,transparent_60%)] pointer-events-none z-0" />
 
@@ -503,7 +504,7 @@ function ZenAlignHero() {
               </span>
             </motion.div>
 
-            {/* Main heading — High-end elegant editorial typography */}
+            {/* Main heading Ã¢â‚¬â€ High-end elegant editorial typography */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -524,7 +525,7 @@ function ZenAlignHero() {
               Discover vetted astrologers, energy healers, and spiritual guides. Reconnect with the universe.
             </motion.p>
 
-            {/* Search Bar — glassmorphism */}
+            {/* Search Bar Ã¢â‚¬â€ glassmorphism */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -561,7 +562,7 @@ function ZenAlignHero() {
               </div>
               <div className="w-px h-8 bg-[#9FD6EE]/60" />
               <div>
-                <p className="text-2xl font-black text-[#12527F]">4.9★</p>
+                <p className="text-2xl font-black text-[#12527F]">4.9Ã¢Ëœâ€¦</p>
                 <p className="text-[10px] font-bold uppercase tracking-widest text-[#1A92C6]/70">Avg Rating</p>
               </div>
             </motion.div>
@@ -907,7 +908,7 @@ function FinalHybridHero() {
               {/* Inner Thin Ring */}
               <div className={`absolute w-[75%] h-[75%] rounded-full border pointer-events-none ${isNewColor ? 'border-white/20' : 'border-[#B79AE6]/20'}`} />
 
-              {/* THE REVOLVING ORBIT — the whole ring spins, icons counter-rotate to stay upright */}
+              {/* THE REVOLVING ORBIT Ã¢â‚¬â€ the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
@@ -995,7 +996,7 @@ function FinalHybridHero() {
               className={`flex items-center gap-3 sm:gap-6 lg:gap-8 pt-8 border-t transition-colors duration-500 w-full overflow-x-auto scrollbar-hide pb-2 ${isNewColor ? 'border-white/30' : 'border-primary/30'}`}
             >
               <div className="shrink-0">
-                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-foreground'}`}>4.9★</p>
+                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-foreground'}`}>4.9Ã¢Ëœâ€¦</p>
                 <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-muted-foreground'}`}>Rating</p>
               </div>
               <div className={`w-px h-8 shrink-0 ${isNewColor ? 'bg-white/30' : 'bg-primary/30'}`} />
@@ -1036,7 +1037,7 @@ function FinalHybridHero() {
               {/* Inner Thin Ring */}
               <div className={`absolute w-[75%] h-[75%] rounded-full border pointer-events-none ${isNewColor ? 'border-white/20' : 'border-[#B79AE6]/20'}`} />
 
-              {/* THE REVOLVING ORBIT — the whole ring spins, icons counter-rotate to stay upright */}
+              {/* THE REVOLVING ORBIT Ã¢â‚¬â€ the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}

@@ -113,6 +113,7 @@ function FibersMaterial(props: any) {
 
   return (
     <shaderMaterial
+      attach="material"
       ref={materialRef}
       vertexShader={vertexShader}
       fragmentShader={fragmentShader}
