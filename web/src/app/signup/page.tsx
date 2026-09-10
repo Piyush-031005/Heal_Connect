@@ -47,7 +47,7 @@ export default function SignupPage() {
       } else {
         const res = await authApi.register({ name, email, password });
         if (!res.success || !res.data) {
-          setError(res.errors?.length ? res.errors.map((e) => e.message).join(' Â· ') : res.message || 'Registration failed');
+          setError(res.errors?.length ? res.errors.map((e) => e.message).join(' Ã‚Â· ') : res.message || 'Registration failed');
           return;
         }
         tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
@@ -114,8 +114,8 @@ export default function SignupPage() {
             <Image src="/center_logo_final.png" alt="ZenAuraa" width={36} height={36} className="rounded-full shadow-[0_0_15px_rgba(214,180,107,0.5)]" />
             <span className="text-2xl font-extrabold text-[#2A1658] tracking-wide uppercase">ZenAuraa</span>
           </Link>
-          <h1 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-6 leading-tight">
-            Create your space <br /> <span className="text-primary">for healing.</span>
+          <h1 className="text-4xl lg:text-5xl font-extrabold text-[#2A1658] mb-6 leading-tight">
+            Create your space <br /> <span className="text-[#FAD058]">for healing.</span>
           </h1>
           <p className="text-lg text-[#2A1658]/90 max-w-md leading-relaxed mb-12">
             Join 50,000+ members receiving guidance from world-class verified practitioners.
@@ -143,22 +143,22 @@ export default function SignupPage() {
         </div>
 
         <div className="relative z-10 mt-auto pt-12 border-t border-border">
-          <p className="text-muted-foreground text-sm tracking-wider uppercase">Â© 2026 Tara Infotech. All rights reserved.</p>
+          <p className="text-muted-foreground text-sm tracking-wider uppercase">Ã‚Â© 2026 Tara Infotech. All rights reserved.</p>
         </div>
       </div>
 
-      {/* Right â€” Form */}
+      {/* Right Ã¢â‚¬â€ Form */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative z-10">
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/center_logo_final.png" alt="ZenAuraa" width={28} height={28} className="rounded-full shadow-[0_0_10px_rgba(214,180,107,0.5)]" />
-            <span className="text-xl font-extrabold text-primary uppercase tracking-wide">ZenAuraa</span>
+            <span className="text-xl font-extrabold text-[#FAD058] uppercase tracking-wide">ZenAuraa</span>
           </Link>
         </div>
 
         <Card className="w-full max-w-md bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-border shadow-2xl rounded-2xl overflow-hidden">
           <CardHeader className="space-y-2 pb-6 border-b border-border bg-black/5 dark:bg-white/5">
-            <CardTitle className="text-2xl font-bold text-foreground tracking-wide">Create your account</CardTitle>
+            <CardTitle className="text-2xl font-bold text-[#2A1658] tracking-wide">Create your account</CardTitle>
             <CardDescription className="text-muted-foreground text-base">Enter your details to get started.</CardDescription>
           </CardHeader>
 
@@ -167,12 +167,12 @@ export default function SignupPage() {
             <div className="flex rounded-xl border border-border overflow-hidden bg-black/5 dark:bg-black/50 p-1 gap-1">
               <button type="button" onClick={() => { setRole('user'); setError(''); }}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                  role === 'user' ? 'bg-[#5F3BA9] text-[#2A1658] shadow-lg' : 'text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                  role === 'user' ? 'bg-[#5F3BA9] text-[#2A1658] shadow-lg' : 'text-muted-foreground hover:text-[#2A1658] hover:bg-black/5 dark:hover:bg-white/5'}`}>
                 <User className="w-4 h-4" /> User
               </button>
               <button type="button" onClick={() => { setRole('expert'); setError(''); }}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                  role === 'expert' ? 'bg-[#5F3BA9] text-[#2A1658] shadow-lg' : 'text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                  role === 'expert' ? 'bg-[#5F3BA9] text-[#2A1658] shadow-lg' : 'text-muted-foreground hover:text-[#2A1658] hover:bg-black/5 dark:hover:bg-white/5'}`}>
                 <Sparkles className="w-4 h-4" /> Expert
               </button>
             </div>
@@ -187,28 +187,28 @@ export default function SignupPage() {
 
             <form onSubmit={handleRegister} className="space-y-5">
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-foreground font-medium">Full Name</Label>
+                <Label htmlFor="name" className="text-[#2A1658] font-medium">Full Name</Label>
                 <div className="relative group">
                   <User className="absolute left-3 top-3.5 h-5 w-5 text-muted-foreground group-focus-within:text-accent transition-colors" />
                   <Input id="name" type="text" placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} required autoComplete="name" 
-                    className="pl-10 h-12 border-border focus-visible:ring-accent focus-visible:border-accent bg-background text-foreground placeholder:text-muted-foreground transition-all" />
+                    className="pl-10 h-12 border-border focus-visible:ring-accent focus-visible:border-accent bg-background text-[#2A1658] placeholder:text-muted-foreground transition-all" />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-foreground font-medium">Email</Label>
+                <Label htmlFor="email" className="text-[#2A1658] font-medium">Email</Label>
                 <div className="relative group">
                   <Mail className="absolute left-3 top-3.5 h-5 w-5 text-muted-foreground group-focus-within:text-accent transition-colors" />
                   <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" 
-                    className="pl-10 h-12 border-border focus-visible:ring-accent focus-visible:border-accent bg-background text-foreground placeholder:text-muted-foreground transition-all" />
+                    className="pl-10 h-12 border-border focus-visible:ring-accent focus-visible:border-accent bg-background text-[#2A1658] placeholder:text-muted-foreground transition-all" />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-foreground font-medium">Password</Label>
+                <Label htmlFor="password" className="text-[#2A1658] font-medium">Password</Label>
                 <div className="relative group">
                   <Lock className="absolute left-3 top-3.5 h-5 w-5 text-muted-foreground group-focus-within:text-accent transition-colors" />
                   <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="Min. 8 chars, 1 uppercase, 1 number" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="new-password" 
-                    className="pl-10 pr-10 h-12 border-border focus-visible:ring-accent focus-visible:border-accent bg-background text-foreground placeholder:text-muted-foreground transition-all" />
-                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-muted-foreground hover:text-foreground transition-colors" tabIndex={-1}>
+                    className="pl-10 pr-10 h-12 border-border focus-visible:ring-accent focus-visible:border-accent bg-background text-[#2A1658] placeholder:text-muted-foreground transition-all" />
+                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-muted-foreground hover:text-[#2A1658] transition-colors" tabIndex={-1}>
                     {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
                 </div>
@@ -228,7 +228,7 @@ export default function SignupPage() {
             </div>
 
             <div className="space-y-3">
-              <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full h-12 bg-background border-border hover:bg-accent/10 text-foreground shadow-sm transition-all rounded-xl">
+              <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full h-12 bg-background border-border hover:bg-accent/10 text-[#2A1658] shadow-sm transition-all rounded-xl">
                 <svg className="mr-3 h-5 w-5" viewBox="0 0 24 24">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                   <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
@@ -237,7 +237,7 @@ export default function SignupPage() {
                 </svg>
                 Continue with Google
               </Button>
-              <Button type="button" variant="outline" onClick={handleAppleSignIn} className="w-full h-12 bg-background border-border hover:bg-accent/10 text-foreground shadow-sm transition-all rounded-xl">
+              <Button type="button" variant="outline" onClick={handleAppleSignIn} className="w-full h-12 bg-background border-border hover:bg-accent/10 text-[#2A1658] shadow-sm transition-all rounded-xl">
                 <svg className="mr-3 h-5 w-5 fill-current" viewBox="0 0 24 24">
                   <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.65.04 2.9.72 3.68 1.9-3.28 1.95-2.73 5.75.52 7.02-.75 1.86-1.74 3.2-2.87 3.99zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.32 2.38-2.07 4.29-3.74 4.25z" />
                 </svg>
@@ -247,12 +247,12 @@ export default function SignupPage() {
 
             <p className="text-center text-sm text-muted-foreground pt-4">
               Already have an account?{' '}
-              <Link href="/login" className="text-primary font-semibold hover:text-primary/90 transition-colors hover:underline">Log in</Link>
+              <Link href="/login" className="text-[#FAD058] font-semibold hover:text-[#FAD058]/90 transition-colors hover:underline">Log in</Link>
             </p>
             <p className="text-center text-xs text-muted-foreground">
               By continuing, you agree to our{' '}
-              <Link href="#" className="hover:text-foreground hover:underline">Terms of Service</Link>{' '}and{' '}
-              <Link href="#" className="hover:text-foreground hover:underline">Privacy Policy</Link>.
+              <Link href="#" className="hover:text-[#2A1658] hover:underline">Terms of Service</Link>{' '}and{' '}
+              <Link href="#" className="hover:text-[#2A1658] hover:underline">Privacy Policy</Link>.
             </p>
           </CardContent>
         </Card>
