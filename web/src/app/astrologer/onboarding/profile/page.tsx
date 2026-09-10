@@ -198,7 +198,7 @@ export default function AstrologerProfilePage() {
 
             {/* Practice Areas */}
             <div>
-              <SectionLabel num="2" title="Which area(s) best describe your practice— subtitle="Select all that apply." />
+              <SectionLabel num="2" title="Which area(s) best describe your practice?" subtitle="Select all that apply." />
               <div className="space-y-4">
                 {PRACTICE_AREAS.map(group => (
                   <div key={group.group}>
@@ -219,7 +219,7 @@ export default function AstrologerProfilePage() {
 
             {/* Main Area */}
             <div>
-              <SectionLabel num="3" title="What is your main area of practice— />
+              <SectionLabel num="3" title="What is your main area of practice?" />
               <div className="relative">
                 <select className={selectCls} value={form.mainArea} onChange={e => set('mainArea', e.target.value)}>
                   <option value="">Select one</option>
@@ -231,7 +231,7 @@ export default function AstrologerProfilePage() {
 
             {/* Experience */}
             <div>
-              <SectionLabel num="4" title="How long have you been practising— />
+              <SectionLabel num="4" title="How long have you been practising?" />
               <div className="flex flex-wrap gap-2">
                 {EXPERIENCE_OPTIONS.map(opt => (
                   <Pill key={opt} label={opt} active={form.experience === opt} onClick={() => set('experience', opt)} />
@@ -241,13 +241,13 @@ export default function AstrologerProfilePage() {
 
             {/* Expertise */}
             <div>
-              <SectionLabel num="4" title="How did you develop your expertise— subtitle="e.g. formal training, certification, mentorship, lineage, self-study, or a combination." />
+              <SectionLabel num="4" title="How did you develop your expertise?" subtitle="e.g. formal training, certification, mentorship, lineage, self-study, or a combination." />
               <textarea className={textareaCls} rows={3} placeholder="Short paragraph." value={form.expertiseDevelopment} onChange={e => set('expertiseDevelopment', e.target.value)} />
             </div>
 
             {/* Offerings */}
             <div>
-              <SectionLabel num="5" title="How do you work with clients online— subtitle="What would you like to offer through ZenAuraa— />
+              <SectionLabel num="5" title="How do you work with clients online?" subtitle="What would you like to offer through ZenAuraa?" />
               <div className="flex flex-wrap gap-2">
                 {OFFERING_OPTIONS.map(opt => (
                   <Pill key={opt} label={opt} active={form.offerings.includes(opt)} onClick={() => toggleOffering(opt)} />
@@ -257,13 +257,13 @@ export default function AstrologerProfilePage() {
 
             {/* Practice Bio */}
             <div>
-              <SectionLabel num="6" title="Tell us about your practice" subtitle="What can someone expect when they work with you— />
+              <SectionLabel num="6" title="Tell us about your practice" subtitle="What can someone expect when they work with you?" />
               <textarea className={textareaCls} rows={4} placeholder="Short paragraph." value={form.practiceBio} onChange={e => set('practiceBio', e.target.value)} />
             </div>
 
             {/* Why ZenAuraa */}
             <div>
-              <SectionLabel num="7" title="What interests you about ZenAuraa— />
+              <SectionLabel num="7" title="What interests you about ZenAuraa?" />
               <textarea className={textareaCls} rows={3} placeholder="Short paragraph." value={form.whyZenAuraa} onChange={e => set('whyZenAuraa', e.target.value)} />
             </div>
 
