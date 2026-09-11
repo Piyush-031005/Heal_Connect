@@ -19,11 +19,11 @@
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { SESSION_COOKIE } from '@/lib/adminSession';
-``
+
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-const BACKEND_URL = process.env['BACKEND_URL'] || process.env['NEXT_PUBLIC_API_URL'] || 'http://localhost:8080';
+const BACKEND_URL = process.env['BACKEND_URL'] || process.env['NEXT_PUBLIC_API_URL'] || 'https://healconnect-backend-dqcsaqf4a6baffaz.centralindia-01.azurewebsites.net';
 
 async function proxy(req: NextRequest, pathSegments: string[]): Promise<NextResponse> {
   const token = req.cookies.get(SESSION_COOKIE)?.value;

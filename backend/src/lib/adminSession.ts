@@ -55,10 +55,17 @@ export function createAdminSessionToken(identity: AdminSessionIdentity): string 
  * needs this cookie (requireAdminAuth, adminAuth.ts's /me + requireAdminSession)
  * must go through this helper instead of `req.cookies`.
  */
-export function getAdminSessionCookie(req: { headers: { cookie?: string | undefined } }): string | undefined {
+export function getAdminSessionCookie(req: { headers: { cookie?: string | undefined; authorization?: string | undefined } }): string | undefined {
   const rawCookie = req.headers.cookie ?? '';
   const match = rawCookie.match(/(?:^|;\s*)hc_admin_session=([^;]+)/);
-  return match?.[1];
+  if (match?.[1]) return match[1];
+
+  const auth = req.headers.authorization;
+  if (auth && auth.startsWith('Bearer ')) {
+    return auth.slice(7).trim();
+  }
+
+  return undefined;
 }
 
 export function verifyAdminSessionToken(token: string | undefined | null): (AdminSessionIdentity & { exp: number }) | null {

@@ -951,7 +951,7 @@ router.get('/analytics/chat', async (_req: Request, res: Response) => {
 });
 
 // â”€â”€â”€ 8. Chat Session History â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-router.get('/sessions/:id/chat', requireAdmin, async (req: Request, res: Response) => {
+router.get('/sessions/:id/chat', requireAdminAuth(ALL_ROLES), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
     const messages = await prisma.chatMessage.findMany({
@@ -966,7 +966,7 @@ router.get('/sessions/:id/chat', requireAdmin, async (req: Request, res: Respons
 });
 
 // â”€â”€â”€ 8.1 View Call Transcript â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-router.get('/sessions/:id/transcript', requireAdmin, async (req: Request, res: Response) => {
+router.get('/sessions/:id/transcript', requireAdminAuth(ALL_ROLES), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
     const transcript = await prisma.callTranscript.findUnique({
