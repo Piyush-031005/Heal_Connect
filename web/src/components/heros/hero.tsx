@@ -42,13 +42,13 @@ function PrimaryHero() {
       </div>
 
       {/* Meditation image with gradient fade - blends into hero background */}
-      <div className="absolute right-0 top-0 bottom-0 w-[58%] pointer-events-none" style={{zIndex:5}}>
+      <div className="absolute right-0 top-0 bottom-0 w-[65%] lg:w-[60%] pointer-events-none" style={{zIndex:5}}>
         <div className="absolute inset-0" style={{
           backgroundImage: "url('/final_ensights/meditation.png')",
           backgroundSize: "cover",
           backgroundPosition: "center top",
-          WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 8%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.9) 35%, #000 55%)",
-          maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 8%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.9) 35%, #000 55%)",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.1) 10%, rgba(0,0,0,0.4) 25%, rgba(0,0,0,0.8) 40%, black 60%, black 100%)",
+          maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.1) 10%, rgba(0,0,0,0.4) 25%, rgba(0,0,0,0.8) 40%, black 60%, black 100%)",
         }} />
         <div className="absolute inset-0" style={{
           background: "linear-gradient(to bottom, rgba(196,181,253,0.35) 0%, transparent 12%, transparent 85%, rgba(196,181,253,0.35) 100%)"

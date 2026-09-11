@@ -72,19 +72,19 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row font-sans relative overflow-hidden" style={{background:'linear-gradient(135deg, #0F0723 0%, #1A0942 50%, #2D1065 100%)',color:'#fff'}}>
-      <GhostFibers lineColor="#7C3AED" glowColor="#6D28D9" speed={0.25} scale={1.8} rotation={0} rotationSpeed={0.3} layers={8} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={6} twistSpeed={1.4} lineFrequency={9} lineSpacing={1.2} lineSharpness={14} glowFalloff={8} glowIntensity={2.2} brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={false} fps={60} paused={false} />
+    <div className="min-h-screen flex flex-col md:flex-row font-sans relative overflow-hidden" style={{background:'linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 40%, #DDD6FE 100%)',color:'#1e1b4b'}}>
+      <GhostFibers lineColor="#7C3AED" glowColor="#6D28D9" speed={0.25} scale={1.8} rotation={0} rotationSpeed={0.3} layers={8} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={6} twistSpeed={1.4} lineFrequency={9} lineSpacing={1.2} lineSharpness={14} glowFalloff={8} glowIntensity={2.2} brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
       {/* Background Ambience */}
       
 
       {/* Left íƒƒ픠’탔 í¢┚¬┞¢íƒƒí¢┚¬ íƒ¢í¢‚¬í¢„¢íƒƒ픠’íƒ¢í¢‚¬픚 íƒƒ픚¢íƒ¢í¢┚¬š픚¬íƒ¢í¢┚¬ž픚¢íƒƒ픠’탔 í¢┚¬┞¢íƒƒ픚¢íƒ¢í¢┚¬š픚¬탔¦픚¡íƒƒ픠’íƒ¢í¢‚¬픦¡íƒƒí¢┚¬šíƒ‚픚¢íƒƒ픠’탔 í¢┚¬┞¢íƒƒí¢┚¬ íƒ¢í¢‚¬í¢„¢íƒƒ픠’íƒ¢í¢‚¬픦¡íƒƒí¢┚¬šíƒ‚픚¢íƒƒ픠’탔 í¢┚¬┞¢íƒƒí¢┚¬šíƒ‚픚¢íƒƒ픠’íƒ‚픚¢íƒƒ픚¢íƒ¢í¢┚¬š픚¬탔¦픚¡íƒƒí¢┚¬šíƒ‚픚¬íƒƒ픠’íƒ¢í¢‚¬픚¦íƒƒí¢┚¬šíƒ‚픚¡íƒƒ픠’탔 í¢┚¬┞¢íƒƒ픚¢íƒ¢í¢┚¬š픚¬탔¦픚¡íƒƒ픠’íƒ¢í¢‚¬픦¡íƒƒí¢┚¬šíƒ‚픚¬íƒƒ픠’탔 í¢┚¬┞¢íƒƒí¢┚¬ íƒ¢í¢‚¬í¢„¢íƒƒ픠’íƒ¢í¢‚¬픦¡íƒƒí¢┚¬šíƒ‚픚¢íƒƒ픠’탔 í¢┚¬┞¢íƒƒí¢┚¬šíƒ‚픚¢íƒƒ픠’íƒ‚픚¢íƒƒ픚¢íƒ¢í¢‚¬픦¡íƒ‚픚¬íƒƒí¢┚¬¦íƒ‚픚¡íƒƒ픠’íƒ¢í¢‚¬픦¡íƒƒí¢┚¬šíƒ‚픚¬íƒƒ픠’탔 í¢┚¬┞¢íƒƒ픚¢íƒ¢í¢┚¬š픚¬탔¦픚¡íƒƒ픠’íƒ¢í¢‚¬픦¡íƒƒí¢┚¬šíƒ‚픚 Branding */}
-      <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-white/5 backdrop-blur-md relative z-10 border-r border-white/20">
+      <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-white/60 backdrop-blur-md relative z-10 border-r border-purple-200">
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
             <Image src="/center_logo_final.png" alt="ZenAuraa" width={36} height={36} className="rounded-full shadow-[0_0_15px_rgba(214,80,07,0.5)]" />
-            <span className="text-2xl font-extrabold text-white tracking-wide uppercase">ZenAuraa</span>
+            <span className="text-2xl font-extrabold text-[#2d1b69] tracking-wide uppercase">ZenAuraa</span>
           </Link>
-          <h1 className="text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">
+          <h1 className="text-4xl lg:text-5xl font-extrabold text-[#2d1b69] mb-6 leading-tight">
             Create your space <br /> <span className="text-primary">for healing.</span>
           </h1>
           <p className="text-lg text-white/90 max-w-md leading-relaxed mb-12">
@@ -96,8 +96,8 @@ export default function SignupPage() {
                 <ShieldCheck className="w-6 h-6 text-[#FAD058]" />
               </div>
               <div>
-                <p className="text-white font-semibold text-lg tracking-wide">100% Private & Secure</p>
-                <p className="text-sm text-white/80 mt-1">Your data and conversations are encrypted.</p>
+                <p className="text-[#2d1b69] font-semibold text-lg tracking-wide">100% Private & Secure</p>
+                <p className="text-sm text-[#2d1b69]/80 mt-1">Your data and conversations are encrypted.</p>
               </div>
             </div>
             <div className="flex items-center gap-5">
@@ -105,15 +105,15 @@ export default function SignupPage() {
                 <Star className="w-6 h-6 text-[#FAD058]" />
               </div>
               <div>
-                <p className="text-white font-semibold text-lg tracking-wide">Verified Experts</p>
-                <p className="text-sm text-white/80 mt-1">Rigorous 5-step background checks.</p>
+                <p className="text-[#2d1b69] font-semibold text-lg tracking-wide">Verified Experts</p>
+                <p className="text-sm text-[#2d1b69]/80 mt-1">Rigorous 5-step background checks.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 mt-auto pt-12 border-t border-white/20">
-          <p className="text-white/70 text-sm tracking-wider uppercase">&copy; 2026 Tara Infotech. All rights reserved.</p>
+        <div className="relative z-10 mt-auto pt-12 border-t border-purple-200">
+          <p className="text-[#4c1d95]/70 text-sm tracking-wider uppercase">&copy; 2026 Tara Infotech. All rights reserved.</p>
         </div>
       </div>
 
@@ -127,9 +127,9 @@ export default function SignupPage() {
         </div>
 
         <Card className="w-full max-w-md bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-purple-200 shadow-2xl rounded-2xl overflow-hidden">
-          <CardHeader className="space-y-2 pb-6 border-b border-purple-200 bg-black/5 dark:bg-white/5">
+          <CardHeader className="space-y-2 pb-6 border-b border-purple-200 bg-white/50 border-b border-purple-200">
             <CardTitle className="text-2xl font-bold text-white tracking-wide">Create your account</CardTitle>
-            <CardDescription className="text-white/70 text-base">Enter your details to get started.</CardDescription>
+            <CardDescription className="text-[#4c1d95]/70 text-base">Enter your details to get started.</CardDescription>
           </CardHeader>
 
           <CardContent className="space-y-6 pt-6">
@@ -137,12 +137,12 @@ export default function SignupPage() {
             <div className="flex rounded-xl border border-purple-200 overflow-hidden bg-black/5 dark:bg-black/50 p-1 gap-1">
               <button type="button" onClick={() => { setRole('user'); setError(''); }}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                  role === 'user' ? 'bg-[#5F3BA9] text-white shadow-lg' : 'text-white/70 hover:text-white hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                  role === 'user' ? 'bg-[#5F3BA9] text-white shadow-lg' : 'text-[#4c1d95]/70 hover:text-white hover:bg-black/5 dark:hover:bg-white/5'}`}>
                 <User className="w-4 h-4" /> User
               </button>
               <button type="button" onClick={() => { setRole('expert'); setError(''); }}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                  role === 'expert' ? 'bg-[#5F3BA9] text-white shadow-lg' : 'text-white/70 hover:text-white hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                  role === 'expert' ? 'bg-[#5F3BA9] text-white shadow-lg' : 'text-[#4c1d95]/70 hover:text-white hover:bg-black/5 dark:hover:bg-white/5'}`}>
                 <Sparkles className="w-4 h-4" /> Expert
               </button>
             </div>
@@ -159,26 +159,26 @@ export default function SignupPage() {
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-white font-medium">Full Name</Label>
                 <div className="relative group">
-                  <User className="absolute left-3 top-3.5 h-5 w-5 text-white/70 group-focus-within:text-accent transition-colors" />
+                  <User className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                   <Input id="name" type="text" placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} required autoComplete="name" 
-                    className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-white/70 transition-all" />
+                    className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
                 </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-white font-medium">Email</Label>
                 <div className="relative group">
-                  <Mail className="absolute left-3 top-3.5 h-5 w-5 text-white/70 group-focus-within:text-accent transition-colors" />
+                  <Mail className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                   <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" 
-                    className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-white/70 transition-all" />
+                    className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
                 </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-white font-medium">Password</Label>
                 <div className="relative group">
-                  <Lock className="absolute left-3 top-3.5 h-5 w-5 text-white/70 group-focus-within:text-accent transition-colors" />
+                  <Lock className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                   <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="Min. 8 chars, 1 uppercase, 1 number" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="new-password" 
-                    className="pl-10 pr-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-white/70 transition-all" />
-                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-white/70 hover:text-white transition-colors" tabIndex={-1}>
+                    className="pl-10 pr-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
+                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-[#4c1d95]/70 hover:text-white transition-colors" tabIndex={-1}>
                     {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
                 </div>
@@ -192,9 +192,9 @@ export default function SignupPage() {
             </form>
 
             <div className="relative flex items-center py-2">
-              <div className="flex-grow border-t border-white/20" />
-              <span className="flex-shrink-0 mx-4 text-white/70 text-xs uppercase tracking-widest font-semibold">Or continue with</span>
-              <div className="flex-grow border-t border-white/20" />
+              <div className="flex-grow border-t border-purple-200" />
+              <span className="flex-shrink-0 mx-4 text-[#4c1d95]/70 text-xs uppercase tracking-widest font-semibold">Or continue with</span>
+              <div className="flex-grow border-t border-purple-200" />
             </div>
 
             <div className="space-y-3">
@@ -215,11 +215,11 @@ export default function SignupPage() {
               </Button>
             </div>
 
-            <p className="text-center text-sm text-white/70 pt-4">
+            <p className="text-center text-sm text-[#4c1d95]/70 pt-4">
               Already have an account?{' '}
               <Link href="/login" className="text-primary font-semibold hover:text-primary/90 transition-colors hover:underline">Log in</Link>
             </p>
-            <p className="text-center text-xs text-white/70">
+            <p className="text-center text-xs text-[#4c1d95]/70">
               By continuing, you agree to our{' '}
               <Link href="#" className="hover:text-white hover:underline">Terms of Service</Link>{' '}and{' '}
               <Link href="#" className="hover:text-white hover:underline">Privacy Policy</Link>.

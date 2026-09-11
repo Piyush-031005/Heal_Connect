@@ -83,21 +83,21 @@ function LoginInner() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row font-sans relative overflow-hidden" style={{background:'linear-gradient(135deg, #0F0723 0%, #1A0942 50%, #2D1065 100%)',color:'#fff'}}>
-      <GhostFibers lineColor="#7C3AED" glowColor="#6D28D9" speed={0.25} scale={1.8} rotation={0} rotationSpeed={0.3} layers={8} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={6} twistSpeed={1.4} lineFrequency={9} lineSpacing={1.2} lineSharpness={14} glowFalloff={8} glowIntensity={2.2} brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={false} fps={60} paused={false} />
+    <div className="min-h-screen flex flex-col md:flex-row font-sans relative overflow-hidden" style={{background:'linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 40%, #DDD6FE 100%)',color:'#1e1b4b'}}>
+      <GhostFibers lineColor="#7C3AED" glowColor="#6D28D9" speed={0.25} scale={1.8} rotation={0} rotationSpeed={0.3} layers={8} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={6} twistSpeed={1.4} lineFrequency={9} lineSpacing={1.2} lineSharpness={14} glowFalloff={8} glowIntensity={2.2} brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
 
 
       {/* Left Branding */}
-      <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-white/5 backdrop-blur-md relative z-10 border-r border-white/20">
+      <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-white/60 backdrop-blur-md relative z-10 border-r border-purple-200">
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
             <Image src="/center_logo_final.png" alt="ZenAuraa" width={36} height={36} className="rounded-full shadow-[0_0_15px_rgba(214,80,07,0.5)]" />
-            <span className="text-2xl font-extrabold text-white tracking-wide uppercase">ZenAuraa</span>
+            <span className="text-2xl font-extrabold text-[#2d1b69] tracking-wide uppercase">ZenAuraa</span>
           </Link>
-          <h1 className="text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">
+          <h1 className="text-4xl lg:text-5xl font-extrabold text-[#2d1b69] mb-6 leading-tight">
             Begin your journey <br /> <span className="text-[#FAD058]">to inner peace.</span>
           </h1>
-          <p className="text-lg text-white/80 max-w-md leading-relaxed mb-12">
+          <p className="text-lg text-[#2d1b69]/80 max-w-md leading-relaxed mb-12">
             Join 50,000+ members receiving guidance from world-class verified practitioners.
           </p>
           <div className="space-y-8">
@@ -106,8 +106,8 @@ function LoginInner() {
                 <ShieldCheck className="w-6 h-6 text-accent" />
               </div>
               <div>
-                <p className="text-white font-semibold text-lg tracking-wide">100% Private & Secure</p>
-                <p className="text-sm text-white/80 mt-1">Your data and conversations are encrypted.</p>
+                <p className="text-[#2d1b69] font-semibold text-lg tracking-wide">100% Private & Secure</p>
+                <p className="text-sm text-[#2d1b69]/80 mt-1">Your data and conversations are encrypted.</p>
               </div>
             </div>
             <div className="flex items-center gap-5">
@@ -115,15 +115,15 @@ function LoginInner() {
                 <Star className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <p className="text-white font-semibold text-lg tracking-wide">Verified Experts</p>
-                <p className="text-sm text-white/80 mt-1">Rigorous 5-step background checks.</p>
+                <p className="text-[#2d1b69] font-semibold text-lg tracking-wide">Verified Experts</p>
+                <p className="text-sm text-[#2d1b69]/80 mt-1">Rigorous 5-step background checks.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 mt-auto pt-12 border-t border-white/20">
-          <p className="text-white/70 text-sm tracking-wider uppercase">&copy; 2026 Tara Infotech. All rights reserved.</p>
+        <div className="relative z-10 mt-auto pt-12 border-t border-purple-200">
+          <p className="text-[#4c1d95]/70 text-sm tracking-wider uppercase">&copy; 2026 Tara Infotech. All rights reserved.</p>
         </div>
       </div>
 
@@ -137,11 +137,11 @@ function LoginInner() {
         </div>
 
         <Card className="w-full max-w-md bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-purple-200 shadow-2xl rounded-2xl overflow-hidden">
-          <CardHeader className="space-y-2 pb-6 border-b border-purple-200 bg-black/5 dark:bg-white/5">
+          <CardHeader className="space-y-2 pb-6 border-b border-purple-200 bg-white/50 border-b border-purple-200">
             <CardTitle className="text-2xl font-bold text-white tracking-wide">
               {mode === 'login' ? 'Log in to your account' : 'Reset your password'}
             </CardTitle>
-            <CardDescription className="text-white/70 text-base">
+            <CardDescription className="text-[#4c1d95]/70 text-base">
               {mode === 'login' ? 'Welcome back! Enter your credentials to continue.' : 'Enter your email to receive a password reset link.'}
             </CardDescription>
           </CardHeader>
@@ -152,12 +152,12 @@ function LoginInner() {
               <div className="flex rounded-xl border border-purple-200 overflow-hidden bg-black/5 dark:bg-black/50 p-1 gap-1">
                 <button type="button" onClick={() => { setRole('user'); setError(''); }}
                   className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                    role === 'user' ? 'bg-[#7C3AED] text-white shadow-lg' : 'text-white/70 hover:text-white hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                    role === 'user' ? 'bg-[#7C3AED] text-white shadow-lg' : 'text-[#4c1d95]/70 hover:text-white hover:bg-black/5 dark:hover:bg-white/5'}`}>
                   <User className="w-4 h-4" /> User
                 </button>
                 <button type="button" onClick={() => { setRole('expert'); setError(''); }}
                   className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                    role === 'expert' ? 'bg-[#7C3AED] text-white shadow-lg' : 'text-white/70 hover:text-white hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                    role === 'expert' ? 'bg-[#7C3AED] text-white shadow-lg' : 'text-[#4c1d95]/70 hover:text-white hover:bg-black/5 dark:hover:bg-white/5'}`}>
                   <Sparkles className="w-4 h-4" /> Expert
                 </button>
               </div>
@@ -171,9 +171,9 @@ function LoginInner() {
                 <div className="space-y-2">
                   <Label className="text-white">Email address</Label>
                   <div className="relative group">
-                    <Mail className="absolute left-3 top-3 h-5 w-5 text-white/70 group-focus-within:text-accent transition-colors" />
+                    <Mail className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                     <Input type="email" required placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)}
-                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-white/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
+                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-[#4c1d95]/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
                   </div>
                 </div>
                 <div className="space-y-2">
@@ -184,9 +184,9 @@ function LoginInner() {
                     </button>
                   </div>
                   <div className="relative group">
-                    <Lock className="absolute left-3 top-3 h-5 w-5 text-white/70 group-focus-within:text-accent transition-colors" />
+                    <Lock className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                     <Input type={showPassword ? 'text' : 'password'} required placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} className="pl-10 pr-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-white/40 focus-visible:ring-purple-400 focus-visible:border-purple-400 rounded-xl" />
-                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-white/70 hover:text-white transition-colors">
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-[#4c1d95]/70 hover:text-white transition-colors">
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
                   </div>
@@ -202,15 +202,15 @@ function LoginInner() {
                 <div className="space-y-2">
                   <Label className="text-white">Email address</Label>
                   <div className="relative group">
-                    <Mail className="absolute left-3 top-3 h-5 w-5 text-white/70 group-focus-within:text-accent transition-colors" />
+                    <Mail className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                     <Input type="email" required placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)}
-                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-white/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
+                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-[#4c1d95]/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
                   </div>
                 </div>
                 <Button type="submit" disabled={loading} className="w-full py-6 rounded-xl bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-bold text-lg shadow-lg transition-all group">
                   {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Send Reset Link'}
                 </Button>
-                <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-white/70 hover:text-white transition-colors">
+                <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-[#4c1d95]/70 hover:text-white transition-colors">
                   ? Back to login
                 </button>
               </form>
@@ -219,9 +219,9 @@ function LoginInner() {
             {mode === 'login' && (
               <>
                 <div className="relative flex items-center py-2">
-                  <div className="flex-grow border-t border-white/20" />
-                  <span className="flex-shrink-0 mx-4 text-white/70 text-xs uppercase tracking-widest font-semibold">Or continue with</span>
-                  <div className="flex-grow border-t border-white/20" />
+                  <div className="flex-grow border-t border-purple-200" />
+                  <span className="flex-shrink-0 mx-4 text-[#4c1d95]/70 text-xs uppercase tracking-widest font-semibold">Or continue with</span>
+                  <div className="flex-grow border-t border-purple-200" />
                 </div>
                 <div className="space-y-3">
                   <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full py-6 bg-white/40 backdrop-blur-sm border-purple-200 hover:bg-white/40 backdrop-blur-sm border-purple-200 text-white shadow-sm transition-all rounded-xl">
@@ -240,7 +240,7 @@ function LoginInner() {
                     Continue with Apple
                   </Button>
                 </div>
-                <p className="text-center text-sm text-white/70 pt-4">
+                <p className="text-center text-sm text-[#4c1d95]/70 pt-4">
                   Don&apos;t have an account?{' '}
                   <Link href="/signup" className="text-primary font-semibold hover:text-white transition-colors hover:underline">Sign up</Link>
                 </p>
