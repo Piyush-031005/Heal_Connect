@@ -10,7 +10,6 @@ import { Image,
   ScrollView,
   StatusBar,
 } from 'react-native';
-import Lightfall from '../../components/Lightfall';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { authApi, tokenStore } from '../../lib/api';
@@ -77,26 +76,6 @@ export default function LoginScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: BG }}>
       <StatusBar barStyle="light-content" backgroundColor={BG} />
-      <Lightfall
-        colors={['#A6C8FF', '#5227FF', '#FF9FFC']}
-        backgroundColor="#F9F5FF"
-        speed={0.5}
-        streakCount={2}
-        streakWidth={1}
-        streakLength={1}
-        glow={1}
-        density={0.6}
-        twinkle={1}
-        zoom={3}
-        backgroundGlow={0.5}
-        opacity={1}
-        mouseInteraction={true}
-        mouseStrength={0.5}
-        mouseRadius={1}
-        lightMode={true}
-      />
-    
-
       {/* Gradient glow orbs */}
       <View style={{ position: 'absolute', top: -80, left: -80, width: 300, height: 300, borderRadius: 150, backgroundColor: 'rgba(124,58,237,0.25)', opacity: 0.8 }} />
       <View style={{ position: 'absolute', top: 200, right: -60, width: 220, height: 220, borderRadius: 110, backgroundColor: 'rgba(79,70,229,0.2)', opacity: 0.7 }} />
