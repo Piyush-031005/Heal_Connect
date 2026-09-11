@@ -46,7 +46,7 @@ function setSessionCookie(res: Response, token: string): void {
   res.cookie(COOKIE_NAME, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: 'lax',
     path: '/',
     maxAge: COOKIE_TTL_SECONDS * 1000,
   });
@@ -56,7 +56,7 @@ function clearSessionCookie(res: Response): void {
   res.cookie(COOKIE_NAME, '', {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: 'lax',
     path: '/',
     maxAge: 0,
   });

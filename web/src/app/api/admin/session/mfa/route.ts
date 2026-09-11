@@ -18,7 +18,7 @@ import { SESSION_COOKIE, SESSION_TTL_MS } from '@/lib/adminSession';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-const BACKEND = process.env['BACKEND_URL'] ?? process.env['NEXT_PUBLIC_API_URL'] ?? 'http://backend:8082';
+const BACKEND = process.env['BACKEND_URL'] ?? process.env['NEXT_PUBLIC_API_URL'] ?? 'https://healconnect-backend-dqcsaqf4a6baffaz.centralindia-01.azurewebsites.net';
 
 // POST /api/admin/session/mfa — verify TOTP (or confirm setup)
 export async function POST(req: NextRequest) {
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
     (await cookies()).set(SESSION_COOKIE, sessionToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: 'lax',
       path: '/',
       maxAge: SESSION_TTL_MS / 1000,
     });
