@@ -98,7 +98,7 @@ export async function flagContentIfNeeded(
 
     return {
       blocked: true,
-      reason: 'Sharing contact information (phone numbers or email addresses) is not permitted. Your account has been temporarily suspended.',
+      reason: 'Sharing contact information (phone numbers or email addresses) is not permitted.',
     };
   }
 
