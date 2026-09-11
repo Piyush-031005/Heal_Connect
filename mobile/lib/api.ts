@@ -34,6 +34,7 @@ export interface PractitionerProfile {
   name: string;
   bio: string | null;
   specialties: string[];
+  languages?: string[];
   experienceYrs: number;
   perMinuteRate: number;
   photoUrl: string | null;
@@ -63,7 +64,7 @@ export const tokenStore = {
 async function request<T>(path: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
   const { headers, ...restOptions } = options;
   const token = await tokenStore.getAccess();
-  
+
   const defaultHeaders: any = {
     'Content-Type': 'application/json',
   };
@@ -92,12 +93,13 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<ApiR
 
 export const authApi = {
   login: (body: { email: string; password: string }) =>
-    request<AuthData>('/api/auth/login',
-  forgotPassword: (email: string) =>
-    request<void>('/api/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email }) }), { method: 'POST', body: JSON.stringify(body) }),
+    request<AuthData>('/api/auth/login', { method: 'POST', body: JSON.stringify(body) }),
 
   register: (body: { name: string; email: string; password: string; dob: string; acceptTerms: boolean; acceptPrivacy: boolean }) =>
     request<AuthData>('/api/auth/register', { method: 'POST', body: JSON.stringify(body) }),
+
+  forgotPassword: (email: string) =>
+    request<void>('/api/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email }) }),
 
   practitionerLogin: (email: string, password: string) =>
     request<{ practitioner: any; accessToken: string; refreshToken: string; role: string }>(
