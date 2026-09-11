@@ -384,7 +384,7 @@ export const agoraApi = {
 
 export const deepgramApi = {
   getToken: (token: string, sessionId: string) =>
-    request<{ apiKey?: string; isConfigured: boolean; isEphemeral?: boolean }>('/api/deepgram/token', {
+    request<{ apiKey?: string; isConfigured: boolean; isEphemeral?: boolean; message?: string }>('/api/deepgram/token', {
       method: 'POST',
       headers: authHeader(token),
       body: JSON.stringify({ sessionId }),

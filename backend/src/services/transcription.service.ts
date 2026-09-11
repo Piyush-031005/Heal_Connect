@@ -1,10 +1,9 @@
-// @ts-ignore
-import { createClient } from '@deepgram/sdk';
+import { DeepgramClient } from '@deepgram/sdk';
 import { prisma } from '../lib/prisma';
 import { flagContentIfNeeded } from '../lib/moderation';
 
 const deepgram = process.env.DEEPGRAM_API_KEY
-  ? createClient(process.env.DEEPGRAM_API_KEY)
+  ? new DeepgramClient({ apiKey: process.env.DEEPGRAM_API_KEY })
   : null;
 
 /**
@@ -61,20 +60,15 @@ export async function transcribeFromRecordingUrl(
   try {
     console.log(`[Transcription] Starting pre-recorded transcription for session ${sessionId}...`);
     
-    const { result, error } = await deepgram.listen.prerecorded.transcribeUrl(
-      { url: recordingUrl },
-      { 
-        model: 'nova-2', 
-        smart_format: true, 
-        diarize: true, 
-        detect_language: true 
-      }
-    );
+    const response = await deepgram.listen.v1.media.transcribeUrl({
+      url: recordingUrl,
+      model: 'nova-2',
+      smart_format: true,
+      diarize: true,
+      detect_language: true,
+    });
 
-    if (error) {
-      console.error('[Transcription] Deepgram API error:', error);
-      return;
-    }
+    const result = response as any;
 
     // Format the diarized transcript
     // We combine paragraphs and include speaker labels

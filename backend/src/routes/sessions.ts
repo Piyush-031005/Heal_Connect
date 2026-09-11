@@ -547,7 +547,9 @@ router.post(
     const { transcriptText } = req.body as { transcriptText: string };
 
     try {
-      // Verify the session belongs to this user/practitioner and is completed
+      console.log(`[Transcript] Received transcript submission for session ${sessionId} (length=${transcriptText?.length || 0})`);
+
+      // Verify the session belongs to this user/practitioner and is active or completed
       const session = await prisma.session.findFirst({
         where: {
           id: sessionId,
@@ -555,13 +557,14 @@ router.post(
             { userId },
             ...(req.user!.practitionerId ? [{ practitionerId: req.user!.practitionerId }] : [{ practitionerId: userId }]),
           ],
-          status: 'COMPLETED',
+          status: { in: ['ACTIVE', 'COMPLETED'] },
         },
-        select: { id: true, userId: true, practitionerId: true, type: true },
+        select: { id: true, userId: true, practitionerId: true, type: true, status: true },
       });
 
       if (!session) {
-        res.status(404).json({ success: false, message: 'Completed session not found' });
+        console.warn(`[Transcript] Session ${sessionId} not found or unauthorized for user ${userId}`);
+        res.status(404).json({ success: false, message: 'Active or completed session not found' });
         return;
       }
 
@@ -579,6 +582,8 @@ router.post(
         },
       });
 
+      console.log(`[Transcript] Successfully saved transcript ${transcript.id} for session ${sessionId} (status was ${session.status})`);
+
       // Task 3: scan transcript for policy violations (async, non-blocking)
       flagContentIfNeeded(transcriptText, 'CALL_TRANSCRIPT', {
         sessionId,
@@ -590,10 +595,11 @@ router.post(
       res.status(201).json({ success: true, data: { transcript } });
     } catch (err: any) {
       if (err.code === 'P2002') {
+        console.log(`[Transcript] Transcript already exists for session ${sessionId}`);
         res.status(409).json({ success: false, message: 'Transcript already submitted for this session' });
         return;
       }
-      console.error('Transcript submission error:', err);
+      console.error(`[Transcript] Transcript submission error for session ${sessionId}:`, err);
       res.status(500).json({ success: false, message: 'Internal server error' });
     }
   }

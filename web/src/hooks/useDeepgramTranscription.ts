@@ -100,9 +100,13 @@ export function useDeepgramTranscription({
 
     const token = tokenStore.getAccess();
     if (!token) {
+      console.warn('[STT] Cannot submit transcript: user access token missing.');
       setTranscriptStatus('failed');
+      hasSubmittedRef.current = false;
       return;
     }
+
+    console.log(`[STT] Submitting transcript for session ${sessionId} (${entries.length} entries, ${fullTranscriptText.length} chars)...`);
 
     // Attempt submission with retries (session might be transitioning to COMPLETED)
     let attempts = 0;
@@ -112,14 +116,17 @@ export function useDeepgramTranscription({
       try {
         const res = await sessionsApi.submitTranscript(token, sessionId, fullTranscriptText);
         if (res.success) {
+          console.log(`[STT] Transcript successfully saved to database for session ${sessionId}`);
           setTranscriptStatus('saved');
           return;
         }
         // If 409 / already submitted, treat as saved
         if (res.message && res.message.toLowerCase().includes('already submitted')) {
+          console.log(`[STT] Transcript was already saved previously for session ${sessionId}`);
           setTranscriptStatus('saved');
           return;
         }
+        console.warn(`[STT] Transcript submission attempt ${attempts} returned error:`, res.message);
       } catch (err) {
         console.warn(`[STT] Transcript submission attempt ${attempts} failed:`, err);
       }
@@ -129,7 +136,9 @@ export function useDeepgramTranscription({
       }
     }
 
+    console.error(`[STT] All ${maxAttempts} transcript submission attempts failed for session ${sessionId}`);
     setTranscriptStatus('failed');
+    hasSubmittedRef.current = false;
   }, [sessionId]);
 
   // Start live STT session
@@ -140,17 +149,22 @@ export function useDeepgramTranscription({
     try {
       const token = tokenStore.getAccess();
       if (!token) {
+        console.warn('[STT] Access token not found. Skipping live transcription.');
         setTranscriptStatus('unavailable');
         return;
       }
 
+      console.log(`[STT] Requesting Deepgram token for session ${sessionId}...`);
+
       // 1. Fetch Deepgram token from backend
       const tokenRes = await deepgramApi.getToken(token, sessionId);
       if (!tokenRes.success || !tokenRes.data?.isConfigured || !tokenRes.data?.apiKey) {
-        console.info('[STT] Deepgram STT is not configured on server. Falling back to manual entry.');
+        console.info('[STT] Deepgram STT is not configured on server or unavailable:', tokenRes?.message || tokenRes?.data?.message);
         setTranscriptStatus('unavailable');
         return;
       }
+
+      console.log(`[STT] Received Deepgram token (ephemeral: ${tokenRes.data.isEphemeral ?? false}). Initializing Web Audio & WebSocket...`);
 
       const apiKey = tokenRes.data.apiKey;
 
@@ -215,6 +229,7 @@ export function useDeepgramTranscription({
       socketRef.current = ws;
 
       ws.onopen = () => {
+        console.log(`[STT] Deepgram WebSocket connection opened for session ${sessionId}. Initializing MediaRecorder...`);
         setTranscriptStatus('transcribing');
 
         // Choose supported mimeType for MediaRecorder
@@ -240,8 +255,9 @@ export function useDeepgramTranscription({
           };
 
           recorder.start(250); // Stream in 250ms chunks
+          console.log(`[STT] MediaRecorder started with mimeType="${selectedMime || 'default'}". Streaming audio chunks.`);
         } catch (recErr) {
-          console.warn('[STT] Failed to start MediaRecorder:', recErr);
+          console.error('[STT] Failed to start MediaRecorder:', recErr);
           setTranscriptStatus('failed');
         }
       };
@@ -271,19 +287,22 @@ export function useDeepgramTranscription({
             transcriptEntriesRef.current.push(formatted);
             setTranscriptCount(transcriptEntriesRef.current.length);
             setLiveSnippet(transcript);
+            console.log(`[STT] Captured final entry #${transcriptEntriesRef.current.length}: ${formatted}`);
           } else {
             setLiveSnippet(transcript);
           }
-        } catch {}
+        } catch (msgErr) {
+          console.warn('[STT] Error parsing Deepgram message:', msgErr);
+        }
       };
 
       ws.onerror = (err) => {
-        console.warn('[STT] Deepgram WebSocket error:', err);
+        console.error('[STT] Deepgram WebSocket error:', err);
         setTranscriptStatus((prev) => (prev === 'transcribing' ? 'failed' : prev));
       };
 
-      ws.onclose = () => {
-        // Closed gracefully or on connection end
+      ws.onclose = (ev) => {
+        console.log(`[STT] Deepgram WebSocket closed (code: ${ev.code}, reason: ${ev.reason || 'normal'})`);
       };
     } catch (err) {
       console.warn('[STT] Initialization error:', err);
