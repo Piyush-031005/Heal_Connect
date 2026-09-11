@@ -293,7 +293,9 @@ export function useAgoraCall(initialSessionId?: string, isExpert = false): UseAg
 
     const handleSessionConnected = (data: { startTime?: string }) => {
       if (data?.startTime) setStartTime(data.startTime);
-      setCallState('connected');
+      if (clientRef.current && clientRef.current.remoteUsers.length > 0) {
+        setCallState('connected');
+      }
     };
 
     const handleSessionTerminated = () => {

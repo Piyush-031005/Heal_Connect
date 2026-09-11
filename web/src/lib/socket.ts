@@ -14,7 +14,19 @@ const BACKEND_URL =
 let socket: Socket | null = null;
 
 export function getSocket(token: string): Socket {
-  if (socket?.connected) return socket;
+  if (socket) {
+    const currentToken = (socket.auth as any)?.token;
+    if (currentToken === token && socket.connected) {
+      return socket;
+    }
+    // Token changed or socket not connected — disconnect previous instance
+    if (currentToken !== token) {
+      socket.disconnect();
+      socket = null;
+    } else if (socket.connected) {
+      return socket;
+    }
+  }
 
   socket = io(BACKEND_URL, {
     auth: { token },

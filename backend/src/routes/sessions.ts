@@ -96,8 +96,10 @@ router.post(
         user: session.user,
       };
       getIO()?.to(`practitioner_${practitionerId}`).emit('new_session_request', sessionPayload);
+      getIO()?.to(`user_${practitionerId}`).emit('new_session_request', sessionPayload);
       if (session.type === 'AUDIO' || session.type === 'VIDEO') {
         getIO()?.to(`practitioner_${practitionerId}`).emit('call_incoming', sessionPayload);
+        getIO()?.to(`user_${practitionerId}`).emit('call_incoming', sessionPayload);
       }
 
       // Send Push Notification

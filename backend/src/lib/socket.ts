@@ -43,7 +43,28 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
     }
 
     // User joins their personal room
-    socket.join(`user_${userId}`);
+    if (userId) {
+      socket.join(`user_${userId}`);
+      // If userId matches a practitioner or astrologer, also join the practitioner room
+      socket.join(`practitioner_${userId}`);
+    }
+
+    // Explicit room registration from frontend
+    socket.on('join_practitioner', ({ practitionerId: pid }: { practitionerId?: string } = {}) => {
+      const targetId = pid || practitionerId || userId;
+      if (targetId) {
+        socket.join(`practitioner_${targetId}`);
+        console.log(`🔌 Socket ${socket.id} explicitly joined practitioner_${targetId}`);
+      }
+    });
+
+    socket.on('register_expert', ({ practitionerId: pid }: { practitionerId?: string } = {}) => {
+      const targetId = pid || practitionerId || userId;
+      if (targetId) {
+        socket.join(`practitioner_${targetId}`);
+        console.log(`🔌 Socket ${socket.id} registered expert in practitioner_${targetId}`);
+      }
+    });
 
     const joinedSessions = new Set<string>(); // Track which session rooms this socket is in
 
@@ -73,31 +94,49 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
       // Notify the other party that someone joined
       socket.to(`room:${sessionId}`).emit('peer_joined', { sessionId });
 
-      // ── Auto-start CHAT sessions ─────────────────────────────────────────
-      // Audio/Video sessions call POST /api/sessions/:id/connect after Agora
-      // joins — that's what emits session_connected and sets status ACTIVE.
-      // CHAT sessions have no equivalent "channel join" step, so we do it here:
-      // the moment either participant joins the socket room, transition to ACTIVE
-      // and broadcast session_connected so both UIs exit "Connecting..." state.
+      // ── Start CHAT sessions ONLY when both user and expert have joined ───
       if (session.type === 'CHAT') {
-        if (!['ACTIVE', 'COMPLETED', 'CANCELLED', 'REJECTED', 'DISCONNECTED'].includes(session.status)) {
-          try {
-            const startTime = session.startTime ?? new Date();
-            const activated = await prisma.session.update({
-              where: { id: sessionId },
-              data: { status: 'ACTIVE', startTime },
-            });
-            console.log(`💬 CHAT session ${sessionId} auto-started (ACTIVE)`);
-            io!.to(`room:${sessionId}`).emit('session_connected', {
+        const room = io!.sockets.adapter.rooms.get(`room:${sessionId}`);
+        let hasUser = false;
+        let hasPractitioner = false;
+        if (room) {
+          for (const socketId of room) {
+            const s = io!.sockets.sockets.get(socketId) as any;
+            if (s) {
+              if (s.userId === session.userId) hasUser = true;
+              if (s.practitionerId === session.practitionerId || s.userId === session.practitionerId) {
+                hasPractitioner = true;
+              }
+            }
+          }
+        }
+
+        if (hasUser && hasPractitioner) {
+          if (!['ACTIVE', 'COMPLETED', 'CANCELLED', 'REJECTED', 'DISCONNECTED'].includes(session.status)) {
+            try {
+              const startTime = session.startTime ?? new Date();
+              const activated = await prisma.session.update({
+                where: { id: sessionId },
+                data: { status: 'ACTIVE', startTime },
+              });
+              console.log(`💬 CHAT session ${sessionId} activated: both user and practitioner joined`);
+              io!.to(`room:${sessionId}`).emit('session_connected', {
+                sessionId,
+                status: 'ACTIVE',
+                startTime: activated.startTime,
+              });
+            } catch (err) {
+              console.error(`[socket] Failed to activate CHAT session ${sessionId}:`, err);
+            }
+          } else if (session.status === 'ACTIVE') {
+            socket.emit('session_connected', {
               sessionId,
               status: 'ACTIVE',
-              startTime: activated.startTime,
+              startTime: session.startTime,
             });
-          } catch (err) {
-            console.error(`[socket] Failed to auto-start CHAT session ${sessionId}:`, err);
           }
         } else if (session.status === 'ACTIVE') {
-          // Send to this joining socket so it doesn't get stuck on "Connecting..."
+          // If session was already ACTIVE, sync this joining socket
           socket.emit('session_connected', {
             sessionId,
             status: 'ACTIVE',

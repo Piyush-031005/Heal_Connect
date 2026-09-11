@@ -184,7 +184,7 @@ async function processSessionBilling(session: any) {
       return;
     }
 
-    // Atomically debit user wallet, update session cost, and credit expert earnings
+    // Atomically debit user wallet and update session total cost
     await prisma.$transaction([
       prisma.wallet.update({
         where: { id: wallet.id },
@@ -193,11 +193,6 @@ async function processSessionBilling(session: any) {
       prisma.session.update({
         where: { id: session.id },
         data: { totalCost: { increment: ratePerMinute } },
-      }),
-      // Credit the expert's lifetime earnings — was missing, causing totalEarnings to never update
-      prisma.practitioner.update({
-        where: { id: session.practitionerId },
-        data: { totalEarnings: { increment: ratePerMinute } },
       }),
     ]);
 

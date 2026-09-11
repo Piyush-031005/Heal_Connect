@@ -22,19 +22,100 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'dummy_stripe_secret'
 
 router.get('/', requireAuth, async (req: AuthRequest, res: Response) => {
   try {
-    const wallet = await prisma.wallet.findUnique({
+    const practitionerId = req.user?.practitionerId || (req.user?.role === 'practitioner' ? req.user.userId : undefined);
+    
+    // Check if authenticated user is a practitioner
+    let practitioner = null;
+    if (practitionerId) {
+      practitioner = await prisma.practitioner.findUnique({
+        where: { id: practitionerId },
+      });
+    } else if (req.user?.userId) {
+      practitioner = await prisma.practitioner.findUnique({
+        where: { id: req.user.userId },
+      });
+    }
+
+    if (practitioner) {
+      const [aggregations, recentSessions] = await Promise.all([
+        prisma.session.aggregate({
+          where: { practitionerId: practitioner.id, status: 'COMPLETED' },
+          _sum: { totalCost: true },
+          _count: { _all: true },
+        }),
+        prisma.session.findMany({
+          where: { practitionerId: practitioner.id, status: 'COMPLETED' },
+          orderBy: { endTime: 'desc' },
+          take: 20,
+          include: { user: { select: { name: true } } },
+        }),
+      ]);
+
+      const earnings = aggregations._sum.totalCost || 0;
+      const transactions = recentSessions.map((s) => ({
+        id: s.id,
+        amount: s.totalCost,
+        type: 'EARNING',
+        status: 'SUCCESS',
+        description: `${s.type} session with ${s.user.name || 'Client'}`,
+        createdAt: s.endTime ? s.endTime.toISOString() : s.createdAt.toISOString(),
+      }));
+
+      res.json({
+        success: true,
+        data: {
+          wallet: {
+            id: practitioner.id,
+            balance: earnings,
+            currency: 'INR',
+            totalEarnings: earnings,
+            totalSessionsCompleted: aggregations._count._all,
+            transactions,
+          },
+        },
+      });
+      return;
+    }
+
+    // Normal User Wallet
+    let wallet = await prisma.wallet.findUnique({
       where: { userId: req.user!.userId },
       include: {
         transactions: {
           orderBy: { createdAt: 'desc' },
-          take: 20, // Return last 20 transactions
+          take: 20,
         },
       },
     });
 
     if (!wallet) {
-      res.status(404).json({ success: false, message: 'Wallet not found' });
-      return;
+      // Auto-create wallet for standard user if not found
+      try {
+        wallet = await prisma.wallet.create({
+          data: {
+            userId: req.user!.userId,
+            balance: 0,
+            currency: 'INR',
+          },
+          include: {
+            transactions: true,
+          },
+        });
+      } catch {
+        // Fallback response with zero balance if user table constraints fail
+        res.json({
+          success: true,
+          data: {
+            wallet: {
+              id: req.user!.userId,
+              balance: 0,
+              currency: 'INR',
+              transactions: [],
+            },
+          },
+        });
+        return;
+      }
     }
 
     res.json({ success: true, data: { wallet } });

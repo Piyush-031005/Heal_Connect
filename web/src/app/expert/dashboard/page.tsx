@@ -46,7 +46,22 @@ export default function ExpertDashboardPage() {
     const token = tokenStore.getAccess();
     if (!token) return;
     sessionsApi.practitionerActive(token).then((res) => {
-      if (res.success && res.data) setSessions(res.data.sessions);
+      if (res.success && res.data) {
+        setSessions(res.data.sessions);
+        // Fallback: If there is an INITIATED audio/video session created recently, surface as incoming call
+        const pendingCall = res.data.sessions.find(
+          (s) => s.status === 'INITIATED' && (s.type === 'AUDIO' || s.type === 'VIDEO') &&
+                 (Date.now() - new Date(s.createdAt).getTime() < 120000)
+        );
+        if (pendingCall) {
+          setIncomingCall((curr) => curr ? curr : {
+            id: pendingCall.id,
+            sessionId: pendingCall.id,
+            type: pendingCall.type,
+            user: pendingCall.user,
+          });
+        }
+      }
     });
   }, []);
 
@@ -88,6 +103,8 @@ export default function ExpertDashboardPage() {
     });
 
     const socket = getSocket(token);
+    socket.emit('join_practitioner', { practitionerId: pid });
+
     socket.on('new_session_request', (data: ActiveSession) => {
       setSessions((prev) => prev.find((s) => s.id === data.id) ? prev : [data, ...prev]);
     });
@@ -171,9 +188,15 @@ export default function ExpertDashboardPage() {
               <Button
                 className="rounded-full w-16 h-16 bg-accent hover:bg-accent/90 shadow-xl animate-pulse"
                 title="Accept"
-                onClick={() => {
+                onClick={async () => {
+                  const currentCall = incomingCall;
                   setIncomingCall(null);
-                  router.push(`/session/${incomingCall.sessionId}`);
+                  if (!currentCall) return;
+                  const token = tokenStore.getAccess();
+                  if (token) {
+                    await sessionsApi.accept(token, currentCall.sessionId).catch(console.error);
+                  }
+                  router.push(`/session/${currentCall.sessionId}`);
                 }}
               >
                 <PhoneCall className="h-7 w-7 text-white" />
