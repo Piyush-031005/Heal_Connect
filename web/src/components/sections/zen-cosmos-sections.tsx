@@ -331,7 +331,7 @@ export function TarotTable() {
 
       {/* Subtle geometric texture */}
       <div className="absolute inset-0 opacity-40 pointer-events-none"
-        style={{ backgroundImage: 'linear-gradient(rgba(26₹46₹98,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(26₹46₹98,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        style={{ backgroundImage: 'linear-gradient(rgba(26,46,98,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(26,46,98,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       {/* Light glow orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[120px] pointer-events-none bg-white" />
 
@@ -723,7 +723,7 @@ export function GlobalGuidanceMap() {
 
       {/* Glow centers */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] blur-[120px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse, rgba(99₹91,228,0.2) 0%, transparent 70%)' }} />
+        style={{ background: 'radial-gradient(ellipse, rgba(99,91,228,0.2) 0%, transparent 70%)' }} />
 
       <div className="container mx-auto px-6 lg:px-16 text-center mb-10 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-4">

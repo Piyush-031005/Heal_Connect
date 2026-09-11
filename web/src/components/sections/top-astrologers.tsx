@@ -112,7 +112,7 @@ export function TopAstrologers({ variant }: { variant: string }) {
   if (variant === 'cinematic-nature') {
     return (
       <section className="py-24 relative z-10 bg-[#FDFCF8] overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(255₹95,0,0.03)_0%,transparent_60%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(255,95,0,0.03)_0%,transparent_60%)] pointer-events-none" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
             <div>
@@ -125,7 +125,7 @@ export function TopAstrologers({ variant }: { variant: string }) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {TOP_ASTROLOGERS.slice(0, 3).map((a, idx) => (
-              <div key={idx} className="group relative bg-white rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_40px_80px_rgba(255₹95,0,0.15)] hover:-translate-y-2 transition-all duration-700 p-8 flex flex-col overflow-hidden border border-purple-50">
+              <div key={idx} className="group relative bg-white rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_40px_80px_rgba(255,95,0,0.15)] hover:-translate-y-2 transition-all duration-700 p-8 flex flex-col overflow-hidden border border-purple-50">
                 <div className="absolute top-0 right-0 px-6 py-3 font-bold text-[10px] text-[#1A1A1A] bg-[#FFC300] rounded-bl-3xl tracking-widest uppercase shadow-md">{a.online ? 'Online' : 'Offline'}</div>
                 <div className="flex flex-col items-center text-center mt-4 mb-8">
                   <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-[0_10px_20px_rgba(50,205,50,0.1)] group-hover:scale-105 group-hover:border-[#32CD32]/20 transition-all duration-700 mb-6 shrink-0">

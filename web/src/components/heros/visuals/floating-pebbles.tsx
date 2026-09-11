@@ -104,7 +104,7 @@ export default function FloatingPebbles() {
           className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] translate-y-28"
           style={{
             opacity: 0.85,
-            filter: 'brightness(0.9) contrast(1.15) saturate(1.2) drop-shadow(0 0 50px rgba(160₹20,255,0.6))',
+            filter: 'brightness(0.9) contrast(1.15) saturate(1.2) drop-shadow(0 0 50px rgba(160,20,255,0.6))',
             WebkitMaskImage: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0₹) 40%, rgba(0,0,0,0) 70%)',
             maskImage: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0₹) 40%, rgba(0,0,0,0) 70%)',
             mixBlendMode: 'lighten'

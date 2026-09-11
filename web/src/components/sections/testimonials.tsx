@@ -70,7 +70,7 @@ export function Testimonials() {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {TESTIMONIALS.map((testi, idx) => (
-            <div key={idx} className={`w-[280px] md:w-[400px] shrink-0 snap-start rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-8 border hover:-translate-y-1 transition-all duration-500 group flex flex-col bg-[#2D1B54] border-[#4B2F6E] shadow-xl hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(183₹54,230,0.15)] hover:border-[#B79AE6]/50`}>
+            <div key={idx} className={`w-[280px] md:w-[400px] shrink-0 snap-start rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-8 border hover:-translate-y-1 transition-all duration-500 group flex flex-col bg-[#2D1B54] border-[#4B2F6E] shadow-xl hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(183,54,230,0.15)] hover:border-[#B79AE6]/50`}>
               <div className="flex gap-1 mb-4 md:mb-6 text-primary">
                 {[1, 2, 3, 4, 5].map(s => (
                   <svg key={s} className="w-3.5 h-3.5 md:w-4 md:h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 20 20">

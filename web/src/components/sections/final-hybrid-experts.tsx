@@ -28,7 +28,7 @@ export function FinalHybridExperts() {
     <section className="relative py-24 overflow-hidden border-b border-primary/50" style={isNewLayout ? { background: 'transparent' } : isZenAlign ? { background: 'linear-gradient(135deg, #5F3BA9 0%, #4E67CC 100%)' } : isNewColor ? { backgroundColor: '#1E1144' } : { background: 'linear-gradient(135deg, #B79AE6 0%, #7A48AB 50%, #694091 100%)' }}>
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/8 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(158₹36₹99,0.4) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+      <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(158,36,99,0.4) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
@@ -52,7 +52,7 @@ export function FinalHybridExperts() {
             <div 
               key={idx} 
               onClick={() => router.push('/practitioners')}
-              className={`w-[260px] min-w-[260px] md:w-[320px] md:min-w-[320px] flex-shrink-0 snap-start rounded-[2rem] p-6 relative group transition-all hover:-translate-y-1 shadow-lg cursor-pointer border ${isZenAlign ? "bg-[#1E2059] border-[#4E67CC] hover:shadow-[0_10px_30px_rgba(78₹03,204,0.3)] hover:border-[#4E67CC]" : "bg-[#2D1B54] border-[#4B2F6E] hover:shadow-[0_10px_30px_rgba(183₹54,230,0.15)] hover:border-primary/50"}`}
+              className={`w-[260px] min-w-[260px] md:w-[320px] md:min-w-[320px] flex-shrink-0 snap-start rounded-[2rem] p-6 relative group transition-all hover:-translate-y-1 shadow-lg cursor-pointer border ${isZenAlign ? "bg-[#1E2059] border-[#4E67CC] hover:shadow-[0_10px_30px_rgba(78,03,204,0.3)] hover:border-[#4E67CC]" : "bg-[#2D1B54] border-[#4B2F6E] hover:shadow-[0_10px_30px_rgba(183,54,230,0.15)] hover:border-primary/50"}`}
             >
               {/* Badges */}
               {expert.badge && (

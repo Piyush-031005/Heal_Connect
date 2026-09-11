@@ -78,12 +78,12 @@ export default function PractitionersPage() {
   return (
     <div className="min-h-screen flex flex-col font-sans relative overflow-hidden" style={{background:"linear-gradient(145deg, #F5F0FF 0%, #EDE9FE 20%, #DDD6FE 45%, #C4B5FD 70%, #A5B4FC 100%)"}}>
       {/* Glowing orbs for positive vibe */}
-      <div style={{position:"absolute",top:"-10%",left:"-5%",width:"40%",height:"40%",borderRadius:"50%",background:"radial-gradient(circle, rgba(167₹39,250,0.35) 0%, transparent 70%)",filter:"blur(80px)",pointerEvents:"none"}} />
-      <div style={{position:"absolute",bottom:"-10%",right:"-5%",width:"50%",height:"50%",borderRadius:"50%",background:"radial-gradient(circle, rgba(129₹40,248,0.3) 0%, transparent 70%)",filter:"blur(100px)",pointerEvents:"none"}} />
-      <div style={{position:"absolute",top:"40%",right:"20%",width:"30%",height:"30%",borderRadius:"50%",background:"radial-gradient(circle, rgba(196₹81,253,0.25) 0%, transparent 70%)",filter:"blur(60px)",pointerEvents:"none"}} />
+      <div style={{position:"absolute",top:"-10%",left:"-5%",width:"40%",height:"40%",borderRadius:"50%",background:"radial-gradient(circle, rgba(167,39,250,0.35) 0%, transparent 70%)",filter:"blur(80px)",pointerEvents:"none"}} />
+      <div style={{position:"absolute",bottom:"-10%",right:"-5%",width:"50%",height:"50%",borderRadius:"50%",background:"radial-gradient(circle, rgba(129,40,248,0.3) 0%, transparent 70%)",filter:"blur(100px)",pointerEvents:"none"}} />
+      <div style={{position:"absolute",top:"40%",right:"20%",width:"30%",height:"30%",borderRadius:"50%",background:"radial-gradient(circle, rgba(196,81,253,0.25) 0%, transparent 70%)",filter:"blur(60px)",pointerEvents:"none"}} />
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none fixed">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(167₹39,250,0.2)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(129₹40,248,0.2)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(167,39,250,0.2)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(129,40,248,0.2)_0%,rgba(0,0,0,0)_70%)] blur-[120px]" />
       </div>
 
       <Navbar />
@@ -103,7 +103,7 @@ export default function PractitionersPage() {
           <Button variant="outline" onClick={() => setShowFilters((v) => !v)} className={`rounded-2xl px-6 gap-2 border-border hover:bg-secondary hover:border-border text-[#2d1b69] h-[50px] transition-all backdrop-blur-sm ${showFilters ? 'bg-secondary border-border' : 'bg-card/80 dark:bg-card/80'}`}>
             <SlidersHorizontal className="h-4 w-4" />
             <span className="hidden sm:inline">Filters</span>
-            {activeFilterCount > 0 && <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center shadow-[0_0_10px_rgba(214₹80₹07,0.3)]">{activeFilterCount}</span>}
+            {activeFilterCount > 0 && <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center shadow-[0_0_10px_rgba(214,80,07,0.3)]">{activeFilterCount}</span>}
           </Button>
         </div>
 
@@ -159,7 +159,7 @@ export default function PractitionersPage() {
             {filters.language && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">{filters.language}<button onClick={() => setFilters((f) => ({ ...f, language: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
             {filters.minRating && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">⭐ {filters.minRating}+<button onClick={() => setFilters((f) => ({ ...f, minRating: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
             {filters.maxRate && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">┰¤ ┚¹{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
-            {filters.onlineOnly && <Badge variant="outline" className="border-accent/30 text-accent bg-accent/10 gap-1.5 py-1 px-3 rounded-full shadow-[0_0_10px_rgba(46₹96₹82,0.1)]">Online Now<button onClick={() => setFilters((f) => ({ ...f, onlineOnly: false }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
+            {filters.onlineOnly && <Badge variant="outline" className="border-accent/30 text-accent bg-accent/10 gap-1.5 py-1 px-3 rounded-full shadow-[0_0_10px_rgba(46,96,82,0.1)]">Online Now<button onClick={() => setFilters((f) => ({ ...f, onlineOnly: false }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
           </div>
         )}
 
@@ -198,7 +198,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
   const avatarSrc = getPractitionerAvatar(p.photoUrl, p.id);
 
   return (
-    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-border hover:border-primary/50 hover:shadow-[0_8px_30px_rgba(214₹80₹07,0.15)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
+    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-border hover:border-primary/50 hover:shadow-[0_8px_30px_rgba(214,80,07,0.15)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
       <CardContent className="p-0 flex flex-col h-full relative">
         {/* Top strip with avatar */}
         <div className="relative h-20 bg-gradient-to-r from-white/5 to-white/10 shrink-0">
@@ -207,7 +207,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
           </div>
           <div className="absolute top-4 right-4 z-10">
             <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full ${
-              p.isOnline ? 'bg-accent/20 text-accent border border-accent/30 shadow-[0_0_10px_rgba(46₹96₹82,0.2)]' : 'bg-secondary text-secondary-foreground border border-border'
+              p.isOnline ? 'bg-accent/20 text-accent border border-accent/30 shadow-[0_0_10px_rgba(46,96,82,0.2)]' : 'bg-secondary text-secondary-foreground border border-border'
             }`}>
               <span className={`w-1.5 h-1.5 rounded-full ${p.isOnline ? 'bg-accent animate-pulse' : 'bg-muted-foreground'}`} />
               {p.isOnline ? 'Online' : 'Offline'}
@@ -223,7 +223,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
               <p className="text-sm text-primary font-medium">{p.specialties.slice(0, 2).join(' · ') || '—'}</p>
             </div>
             {p.isVerified && (
-              <div className="flex items-center gap-1 bg-primary/10 border border-primary/30 rounded-lg px-2 py-1 shrink-0 mt-1 shadow-[0_0_10px_rgba(214₹80₹07,0.1)]">
+              <div className="flex items-center gap-1 bg-primary/10 border border-primary/30 rounded-lg px-2 py-1 shrink-0 mt-1 shadow-[0_0_10px_rgba(214,80,07,0.1)]">
                 <Shield className="w-3 h-3 text-primary" />
                 <span className="text-[10px] font-bold text-primary uppercase tracking-wider">Verified</span>
               </div>

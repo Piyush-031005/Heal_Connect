@@ -100,7 +100,7 @@ export function FinalHybridTarot() {
 
       {/* Subtle geometric texture */}
       <div className="absolute inset-0 opacity-20 pointer-events-none"
-        style={{ backgroundImage: 'linear-gradient(rgba(212₹75,55,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(212₹75,55,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        style={{ backgroundImage: 'linear-gradient(rgba(212,75,55,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(212,75,55,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       
       {/* Light glow orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[150px] pointer-events-none bg-[#694091]/10" />
@@ -212,7 +212,7 @@ export function FinalHybridTarot() {
 
         {/* Reading panel */}
         {isReadingReady && (
-          <div className="max-w-4xl mx-auto rounded-3xl p-8 text-center shadow-[0_0_50px_rgba(212₹75,55,0.1)] border border-[#B79AE6]/30 bg-[#7A48AB]/90 backdrop-blur-xl"
+          <div className="max-w-4xl mx-auto rounded-3xl p-8 text-center shadow-[0_0_50px_rgba(212,75,55,0.1)] border border-[#B79AE6]/30 bg-[#7A48AB]/90 backdrop-blur-xl"
             style={{ animation: 'zen-fade 1s ease' }}>
             <h3 className="text-3xl font-serif font-medium text-[#F8F7FA] mb-8">Your Reading</h3>
             

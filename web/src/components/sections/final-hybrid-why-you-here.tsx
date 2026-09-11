@@ -123,7 +123,7 @@ export function FinalHybridWhyYouHere() {
           })}
         </svg>
         {hovered && (
-          <div className="absolute z-50 pointer-events-none backdrop-blur-xl border rounded-2xl p-5 w-60 shadow-[0_0_40px_rgba(212₹75,55,0.15)]"
+          <div className="absolute z-50 pointer-events-none backdrop-blur-xl border rounded-2xl p-5 w-60 shadow-[0_0_40px_rgba(212,75,55,0.15)]"
             style={{ left: Math.min(tipPos.x + 18, 600), top: tipPos.y - 80, backgroundColor: 'rgba(37,23,74,0.95)', borderColor: `${INTENTION_COLORS[hovered.cluster]}50` }}>
             <div className="text-[9px] font-black uppercase tracking-widest mb-2" style={{ color: INTENTION_COLORS[hovered.cluster] }}>{INTENTION_LABELS[hovered.cluster]}</div>
             <div className="text-base font-bold text-[#F8F7FA] mb-3">{hovered.name}</div>

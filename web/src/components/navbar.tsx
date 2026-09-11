@@ -183,7 +183,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
               <Image src={theme === 'theme-royal-indigo' ? '/main centre logo/main_logo.png' : '/main centre logo/main_logo.png'} alt="ZenAuraa" width={32} height={32} className="rounded-full border-2 border-white/40" />
-              <span className="text-2xl font-serif font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.1)] tracking-wide">Zen<span className="text-[#5F3BA9]">Auraa</span></span>
+              <span className="text-2xl font-serif font-black text-[#2A1658] drop-shadow-[0_2px_4px_rgba(0,0,0,0.1)] tracking-wide"><span className="text-[#7C3AED]">Zen</span><span className="text-[#5F3BA9]">Auraa</span></span>
             </div>
             <button onClick={() => setDrawerOpen(false)} className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
               <svg className="w-4 h-4 text-[#2A1658]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
@@ -291,7 +291,7 @@ export default function Navbar() {
               </button>
               <Link href="/" className="flex items-center gap-2">
                 <Image src={theme === 'theme-royal-indigo' ? '/main centre logo/main_logo.png' : '/main centre logo/main_logo.png'} alt="ZenAuraa" width={30} height={30} className="rounded-full shadow-sm" unoptimized />
-                <span className="text-2xl font-serif font-black text-[#2A1658] drop-shadow-[0_2px_10px_rgba(183₹54,230,0.3)] tracking-wide transition-all hover:scale-105"><span className="text-white">Zen</span><span className="text-[#5F3BA9]">Auraa</span></span>
+                <span className="text-2xl font-serif font-black text-[#2A1658] drop-shadow-[0_2px_10px_rgba(183,54,230,0.3)] tracking-wide transition-all hover:scale-105"><span className="text-[#7C3AED]">Zen</span><span className="text-[#5F3BA9]">Auraa</span></span>
               </Link>
             </div>
 
@@ -459,7 +459,7 @@ export default function Navbar() {
 
               {langOpen && (
                 <div className={`absolute right-0 mt-2 w-36 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-purple-100'}`}>
-                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi (탃픚 탂픚¤탂픚¹탃픚 탂픚¤탂픚¿탃픚 탂픚¤탂픚¨탃픚 탂픚¥탂픚탃픚 탂픚¤탂픚¦탃픚 탂픚¥탢í¢┚¬š픚¬)', sub: 'HI' }, { code: 'es', label: 'Spanish (Espa탃픠’탂픚±ol)', sub: 'ES' }, { code: 'fr', label: 'French (Fran탃픠’탂픚§ais)', sub: 'FR' }, { code: 'de', label: 'German (Deutsch)', sub: 'DE' }] as const).map((l) => (
+                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi', sub: 'HI' }, { code: 'es', label: 'Spanish (Espa탃픠’탂픚±ol)', sub: 'ES' }, { code: 'fr', label: 'French (Fran탃픠’탂픚§ais)', sub: 'FR' }, { code: 'de', label: 'German (Deutsch)', sub: 'DE' }] as const).map((l) => (
                     <button
                       key={l.code}
                       onClick={() => { setLang(l.code as 'en' | 'hi'); setLangOpen(false); }}

@@ -1,4 +1,4 @@
-﻿export interface ModalityData {
+export interface ModalityData {
   id: string;
   name: string;
   heroTitle: string;

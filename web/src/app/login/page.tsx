@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import GhostFibers from '@/components/GhostFibers';
 import { useState, useEffect, Suspense } from 'react';
@@ -84,14 +84,14 @@ function LoginInner() {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row font-sans relative overflow-hidden" style={{background:'#0F0723',color:'#fff'}}>
-      <GhostFibers lineColor="#8345bd" glowColor="#7c41e0" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={4} waveAmplitude={0.015} waveFrequency={3} waveSpeed={0.15} layerSpeed={0.08} twist={0.1} twistFrequency={5} twistSpeed={1.2} lineFrequency={5} lineSpacing={2} lineSharpness={16} glowFalloff={10} glowIntensity={1.6} brightness={2} blueBoost={1.25} vignette={0.8} grain={0.05} dpr={1} lightMode={true} fps={60} paused={false} />
+      <GhostFibers lineColor="#7C3AED" glowColor="#6D28D9" speed={0.25} scale={1.8} rotation={0} rotationSpeed={0.3} layers={8} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={6} twistSpeed={1.4} lineFrequency={9} lineSpacing={1.2} lineSharpness={14} glowFalloff={8} glowIntensity={2.2} brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
 
 
       {/* Left Branding */}
       <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-white/5 backdrop-blur-md relative z-10 border-r border-purple-200">
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
-            <Image src="/center_logo_final.png" alt="ZenAuraa" width={36} height={36} className="rounded-full shadow-[0_0_15px_rgba(214₹80₹07,0.5)]" />
+            <Image src="/center_logo_final.png" alt="ZenAuraa" width={36} height={36} className="rounded-full shadow-[0_0_15px_rgba(214,80,07,0.5)]" />
             <span className="text-2xl font-extrabold text-[#2d1b69] tracking-wide uppercase">ZenAuraa</span>
           </Link>
           <h1 className="text-4xl lg:text-5xl font-extrabold text-[#2d1b69] mb-6 leading-tight">
@@ -102,7 +102,7 @@ function LoginInner() {
           </p>
           <div className="space-y-8">
             <div className="flex items-center gap-5">
-              <div className="w-12 h-12 rounded-full bg-white/20 border border-white/30 flex items-center justify-center shadow-[0_0_15px_rgba(46₹96₹82,0.2)]">
+              <div className="w-12 h-12 rounded-full bg-white/20 border border-white/30 flex items-center justify-center shadow-[0_0_15px_rgba(46,96,82,0.2)]">
                 <ShieldCheck className="w-6 h-6 text-accent" />
               </div>
               <div>
@@ -111,7 +111,7 @@ function LoginInner() {
               </div>
             </div>
             <div className="flex items-center gap-5">
-              <div className="w-12 h-12 rounded-full bg-white/20 border border-white/30 flex items-center justify-center shadow-[0_0_15px_rgba(214₹80₹07,0.2)]">
+              <div className="w-12 h-12 rounded-full bg-white/20 border border-white/30 flex items-center justify-center shadow-[0_0_15px_rgba(214,80,07,0.2)]">
                 <Star className="w-6 h-6 text-primary" />
               </div>
               <div>
@@ -127,11 +127,11 @@ function LoginInner() {
         </div>
       </div>
 
-      {/* Right íƒƒ픠’탔 í¢┚¬┞¢íƒƒ픚¢íƒ¢í¢┚¬š픚¬탔¦픚¡íƒƒ픠’íƒ‚픚¢íƒƒ픚¢íƒ¢í¢‚¬픦¡íƒ‚픚¬íƒƒ픚¢íƒ¢í¢┚¬š픚¬íƒ‚픚 Form */}
+      {}
       <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative z-10">
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/center_logo_final.png" alt="ZenAuraa" width={28} height={28} className="rounded-full shadow-[0_0_10px_rgba(214₹80₹07,0.5)]" />
+            <Image src="/center_logo_final.png" alt="ZenAuraa" width={28} height={28} className="rounded-full shadow-[0_0_10px_rgba(214,80,07,0.5)]" />
             <span className="text-xl font-extrabold text-primary uppercase tracking-wide">ZenAuraa</span>
           </Link>
         </div>

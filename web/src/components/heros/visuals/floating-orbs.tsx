@@ -67,7 +67,7 @@ export default function FloatingOrbs() {
                   className="rounded-full relative group-hover:scale-110 transition-transform shadow-[0_4px_25px_rgba(95,59₹69,0.3)]"
                   style={{
                     width: size, height: size,
-                    background: `linear-gradient(135deg, rgba(137₹30,208,0.85), rgba(78₹03,204,0.85))`,
+                    background: `linear-gradient(135deg, rgba(137,30,208,0.85), rgba(78,03,204,0.85))`,
                     border: '1px solid rgba(255,255,255,0.5)',
                     backdropFilter: 'blur(10px)',
                   }}
