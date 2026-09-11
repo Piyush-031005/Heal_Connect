@@ -189,7 +189,7 @@ export default function PractitionersPage() {
               </select>
             </div>
             <div>
-              <label className="text-xs text-[#6d28d9]/70 mb-1 block">Max ₹/min</label>
+              <label className="text-xs text-[#6d28d9]/70 mb-1 block">Max <span style={{fontFamily:"Roboto,Arial,sans-serif"}}>&#x20B9;</span>/min</label>
               <input type="number" min={0} placeholder="e.g. 50" value={filters.maxRate} onChange={(e) => setFilters((f) => ({ ...f, maxRate: e.target.value }))} className={SELECT_CLS} />
             </div>
             <div className="flex flex-col justify-end gap-2">
@@ -212,7 +212,7 @@ export default function PractitionersPage() {
             {filters.specialty && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">{filters.specialty}<button onClick={() => setFilters((f) => ({ ...f, specialty: '' }))}><X className="h-3 w-3" /></button></Badge>}
             {filters.language && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">{filters.language}<button onClick={() => setFilters((f) => ({ ...f, language: '' }))}><X className="h-3 w-3" /></button></Badge>}
             {filters.minRating && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">⭐ {filters.minRating}+<button onClick={() => setFilters((f) => ({ ...f, minRating: '' }))}><X className="h-3 w-3" /></button></Badge>}
-            {filters.maxRate && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1">≤ ₹{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))}><X className="h-3 w-3" /></button></Badge>}
+            {filters.maxRate && <Badge variant="outline" className="border-yellow-300 text-[#4338ca] bg-yellow-50 gap-1"><span style={{fontFamily:"Roboto,Arial,sans-serif"}}>&#x2264; &#x20B9;</span>{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))}><X className="h-3 w-3" /></button></Badge>}
             {filters.onlineOnly && <Badge variant="outline" className="border-emerald-300 text-emerald-600 bg-emerald-50 gap-1">Online Now<button onClick={() => setFilters((f) => ({ ...f, onlineOnly: false }))}><X className="h-3 w-3" /></button></Badge>}
           </div>
         )}
@@ -314,7 +314,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
 
           <div className="flex items-center justify-between pt-3 mt-3 border-t border-purple-100">
             <div>
-              <span className="text-lg font-bold text-[#2d1b69]">₹{p.perMinuteRate}</span>
+              <span className="text-lg font-bold text-[#2d1b69]"><span style={{fontFamily:"Roboto,Arial,sans-serif"}}>&#x20B9;</span>{p.perMinuteRate}</span>
               <span className="text-xs text-purple-400">/min</span>
             </div>
             <div className="flex gap-2">

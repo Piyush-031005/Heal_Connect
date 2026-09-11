@@ -16,7 +16,7 @@ import OpticalWheel from '@/components/optical-wheel';
 function PrimaryHero() {
   return (
     <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 min-h-[90vh] flex items-center" style={{background:'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 30%, #C4B5FD 60%, #A78BFA 100%)',color:'#1e1b4b'}}>
-      <GhostFibers lineColor="#8345bd" glowColor="#7c41e0" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={4} waveAmplitude={0.015} waveFrequency={3} waveSpeed={0.15} layerSpeed={0.08} twist={0.1} twistFrequency={5} twistSpeed={1.2} lineFrequency={5} lineSpacing={2} lineSharpness={16} glowFalloff={10} glowIntensity={1.6} brightness={2} blueBoost={1.25} vignette={0.8} grain={0.05} dpr={1} lightMode={true} fps={60} paused={false} />
+      <GhostFibers lineColor="#8345bd" glowColor="#7c41e0" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={4} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={7} twistSpeed={1.5} lineFrequency={10} lineSpacing={1.0} lineSharpness={13} glowFalloff={7} glowIntensity={2.5} brightness={3.0} blueBoost={1.5} vignette={0.5} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
       {/* Scattered star particles ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â like ZenAuraa reference */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
         {[
@@ -41,6 +41,20 @@ function PrimaryHero() {
         <OpticalWheel />
       </div>
 
+      {/* Meditation image with gradient fade - blends into hero background */}
+      <div className="absolute right-0 top-0 bottom-0 w-[58%] pointer-events-none" style={{zIndex:5}}>
+        <div className="absolute inset-0" style={{
+          backgroundImage: "url('/final_ensights/meditation.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 8%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.9) 35%, #000 55%)",
+          maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 8%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.9) 35%, #000 55%)",
+        }} />
+        <div className="absolute inset-0" style={{
+          background: "linear-gradient(to bottom, rgba(196,181,253,0.35) 0%, transparent 12%, transparent 85%, rgba(196,181,253,0.35) 100%)"
+        }} />
+      </div>
+
 
       <div className="container mx-auto px-6 relative z-10 pointer-events-none">
         <div className="max-w-3xl pointer-events-auto">
@@ -59,7 +73,7 @@ function PrimaryHero() {
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000">
-            <span className="text-white">Zen</span>
+            <span className="text-[#7C3AED]">Zen</span>
             <span className="text-primary">Auraa.</span>
           </h1>
           <p className="text-xl lg:text-2xl text-white/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
@@ -150,7 +164,7 @@ function NewLayout1Hero() {
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000">
-            <span className="text-white">Zen</span>
+            <span className="text-[#7C3AED]">Zen</span>
             <span className="text-primary">Auraa.</span>
           </h1>
           <p className="text-xl lg:text-2xl text-white/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
@@ -891,7 +905,7 @@ function FinalHybridHero() {
               Zen<span className={`text-primary transition-colors duration-500`}>Auraa.</span>
             </motion.h1>
 
-            {/* RIGHT: Cosmic Wheel Graphic (Adapted to Half-Arc) */}
+            {/* Star particles */}
           <motion.div
             style={{ y: yImage }}
             initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
@@ -902,7 +916,7 @@ function FinalHybridHero() {
             {/* Lavender glow */}
             <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[50%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)]'}`} />
 
-            {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
+            {/* Star particles */}
             <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[75%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[400px] h-[400px] sm:w-[450px] sm:h-[450px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]' : 'w-[450px] h-[450px] sm:w-[500px] sm:h-[500px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]'}`}>
               
               {/* Outer Dashed Ring */}
@@ -1020,7 +1034,7 @@ function FinalHybridHero() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT: Cosmic Wheel Graphic (Adapted to Half-Arc) */}
+          {/* Star particles */}
           <motion.div
             style={{ y: yImage }}
             initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
@@ -1031,7 +1045,7 @@ function FinalHybridHero() {
             {/* Lavender glow */}
             <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[50%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)]'}`} />
 
-            {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
+            {/* Star particles */}
             <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[75%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[400px] h-[400px] sm:w-[450px] sm:h-[450px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]' : 'w-[450px] h-[450px] sm:w-[500px] sm:h-[500px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]'}`}>
               
               {/* Outer Dashed Ring */}

@@ -83,21 +83,21 @@ function LoginInner() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row font-sans relative overflow-hidden" style={{background:'#0F0723',color:'#fff'}}>
-      <GhostFibers lineColor="#7C3AED" glowColor="#6D28D9" speed={0.25} scale={1.8} rotation={0} rotationSpeed={0.3} layers={8} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={6} twistSpeed={1.4} lineFrequency={9} lineSpacing={1.2} lineSharpness={14} glowFalloff={8} glowIntensity={2.2} brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
+    <div className="min-h-screen flex flex-col md:flex-row font-sans relative overflow-hidden" style={{background:'linear-gradient(135deg, #0F0723 0%, #1A0942 50%, #2D1065 100%)',color:'#fff'}}>
+      <GhostFibers lineColor="#7C3AED" glowColor="#6D28D9" speed={0.25} scale={1.8} rotation={0} rotationSpeed={0.3} layers={8} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={6} twistSpeed={1.4} lineFrequency={9} lineSpacing={1.2} lineSharpness={14} glowFalloff={8} glowIntensity={2.2} brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={false} fps={60} paused={false} />
 
 
       {/* Left Branding */}
-      <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-white/5 backdrop-blur-md relative z-10 border-r border-purple-200">
+      <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-white/5 backdrop-blur-md relative z-10 border-r border-white/20">
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
             <Image src="/center_logo_final.png" alt="ZenAuraa" width={36} height={36} className="rounded-full shadow-[0_0_15px_rgba(214,80,07,0.5)]" />
-            <span className="text-2xl font-extrabold text-[#2d1b69] tracking-wide uppercase">ZenAuraa</span>
+            <span className="text-2xl font-extrabold text-white tracking-wide uppercase">ZenAuraa</span>
           </Link>
-          <h1 className="text-4xl lg:text-5xl font-extrabold text-[#2d1b69] mb-6 leading-tight">
+          <h1 className="text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">
             Begin your journey <br /> <span className="text-[#FAD058]">to inner peace.</span>
           </h1>
-          <p className="text-lg text-[#2d1b69]/80 max-w-md leading-relaxed mb-12">
+          <p className="text-lg text-white/80 max-w-md leading-relaxed mb-12">
             Join 50,000+ members receiving guidance from world-class verified practitioners.
           </p>
           <div className="space-y-8">
@@ -106,8 +106,8 @@ function LoginInner() {
                 <ShieldCheck className="w-6 h-6 text-accent" />
               </div>
               <div>
-                <p className="text-[#2d1b69] font-semibold text-lg tracking-wide">100% Private & Secure</p>
-                <p className="text-sm text-[#2d1b69]/80 mt-1">Your data and conversations are encrypted.</p>
+                <p className="text-white font-semibold text-lg tracking-wide">100% Private & Secure</p>
+                <p className="text-sm text-white/80 mt-1">Your data and conversations are encrypted.</p>
               </div>
             </div>
             <div className="flex items-center gap-5">
@@ -115,15 +115,15 @@ function LoginInner() {
                 <Star className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <p className="text-[#2d1b69] font-semibold text-lg tracking-wide">Verified Experts</p>
-                <p className="text-sm text-[#2d1b69]/80 mt-1">Rigorous 5-step background checks.</p>
+                <p className="text-white font-semibold text-lg tracking-wide">Verified Experts</p>
+                <p className="text-sm text-white/80 mt-1">Rigorous 5-step background checks.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 mt-auto pt-12 border-t border-purple-200">
-          <p className="text-[#4c1d95]/70 text-sm tracking-wider uppercase">&copy; 2026 Tara Infotech. All rights reserved.</p>
+        <div className="relative z-10 mt-auto pt-12 border-t border-white/20">
+          <p className="text-white/70 text-sm tracking-wider uppercase">&copy; 2026 Tara Infotech. All rights reserved.</p>
         </div>
       </div>
 
@@ -138,10 +138,10 @@ function LoginInner() {
 
         <Card className="w-full max-w-md bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-purple-200 shadow-2xl rounded-2xl overflow-hidden">
           <CardHeader className="space-y-2 pb-6 border-b border-purple-200 bg-black/5 dark:bg-white/5">
-            <CardTitle className="text-2xl font-bold text-[#2d1b69] tracking-wide">
+            <CardTitle className="text-2xl font-bold text-white tracking-wide">
               {mode === 'login' ? 'Log in to your account' : 'Reset your password'}
             </CardTitle>
-            <CardDescription className="text-[#4c1d95]/70 text-base">
+            <CardDescription className="text-white/70 text-base">
               {mode === 'login' ? 'Welcome back! Enter your credentials to continue.' : 'Enter your email to receive a password reset link.'}
             </CardDescription>
           </CardHeader>
@@ -152,12 +152,12 @@ function LoginInner() {
               <div className="flex rounded-xl border border-purple-200 overflow-hidden bg-black/5 dark:bg-black/50 p-1 gap-1">
                 <button type="button" onClick={() => { setRole('user'); setError(''); }}
                   className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                    role === 'user' ? 'bg-[#7C3AED] text-[#2d1b69] shadow-lg' : 'text-[#4c1d95]/70 hover:text-[#2d1b69] hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                    role === 'user' ? 'bg-[#7C3AED] text-white shadow-lg' : 'text-white/70 hover:text-white hover:bg-black/5 dark:hover:bg-white/5'}`}>
                   <User className="w-4 h-4" /> User
                 </button>
                 <button type="button" onClick={() => { setRole('expert'); setError(''); }}
                   className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                    role === 'expert' ? 'bg-[#7C3AED] text-[#2d1b69] shadow-lg' : 'text-[#4c1d95]/70 hover:text-[#2d1b69] hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                    role === 'expert' ? 'bg-[#7C3AED] text-white shadow-lg' : 'text-white/70 hover:text-white hover:bg-black/5 dark:hover:bg-white/5'}`}>
                   <Sparkles className="w-4 h-4" /> Expert
                 </button>
               </div>
@@ -169,29 +169,29 @@ function LoginInner() {
             {mode === 'login' && (
               <form onSubmit={handleLogin} className="space-y-5">
                 <div className="space-y-2">
-                  <Label className="text-[#2d1b69]">Email address</Label>
+                  <Label className="text-white">Email address</Label>
                   <div className="relative group">
-                    <Mail className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
+                    <Mail className="absolute left-3 top-3 h-5 w-5 text-white/70 group-focus-within:text-accent transition-colors" />
                     <Input type="email" required placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)}
-                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-[#2d1b69] placeholder:text-[#4c1d95]/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
+                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-white/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <Label className="text-[#2d1b69]">Password</Label>
+                    <Label className="text-white">Password</Label>
                     <button type="button" onClick={() => { setMode('forgot'); setError(''); setSuccess(''); }} className="text-sm font-semibold text-accent hover:text-accent/80 transition-colors">
                       Forgot password?
                     </button>
                   </div>
                   <div className="relative group">
-                    <Lock className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
-                    <Input type={showPassword ? 'text' : 'password'} required placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} className="pl-10 pr-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-[#2d1b69] placeholder:text-[#2d1b69]/40 focus-visible:ring-purple-400 focus-visible:border-purple-400 rounded-xl" />
-                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-[#4c1d95]/70 hover:text-[#2d1b69] transition-colors">
+                    <Lock className="absolute left-3 top-3 h-5 w-5 text-white/70 group-focus-within:text-accent transition-colors" />
+                    <Input type={showPassword ? 'text' : 'password'} required placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} className="pl-10 pr-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-white/40 focus-visible:ring-purple-400 focus-visible:border-purple-400 rounded-xl" />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-white/70 hover:text-white transition-colors">
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
                   </div>
                 </div>
-                <Button type="submit" disabled={loading} className="w-full py-6 text-base font-bold rounded-md border-0 shadow-lg transition-all duration-300 bg-[#7C3AED] hover:bg-[#6D28D9] text-[#2d1b69]">
+                <Button type="submit" disabled={loading} className="w-full py-6 text-base font-bold rounded-md border-0 shadow-lg transition-all duration-300 bg-[#7C3AED] hover:bg-[#6D28D9] text-white">
                   {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>{role === 'expert' ? 'Log in as Expert' : 'Log in'} <ArrowRight className="ml-2 h-5 w-5" /></>}
                 </Button>
               </form>
@@ -200,17 +200,17 @@ function LoginInner() {
             {mode === 'forgot' && (
               <form onSubmit={handleForgotPassword} className="space-y-5">
                 <div className="space-y-2">
-                  <Label className="text-[#2d1b69]">Email address</Label>
+                  <Label className="text-white">Email address</Label>
                   <div className="relative group">
-                    <Mail className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
+                    <Mail className="absolute left-3 top-3 h-5 w-5 text-white/70 group-focus-within:text-accent transition-colors" />
                     <Input type="email" required placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)}
-                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-[#2d1b69] placeholder:text-[#4c1d95]/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
+                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-white/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
                   </div>
                 </div>
-                <Button type="submit" disabled={loading} className="w-full py-6 rounded-xl bg-[#7C3AED] hover:bg-[#6D28D9] text-[#2d1b69] font-bold text-lg shadow-lg transition-all group">
+                <Button type="submit" disabled={loading} className="w-full py-6 rounded-xl bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-bold text-lg shadow-lg transition-all group">
                   {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Send Reset Link'}
                 </Button>
-                <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-[#4c1d95]/70 hover:text-[#2d1b69] transition-colors">
+                <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-white/70 hover:text-white transition-colors">
                   ? Back to login
                 </button>
               </form>
@@ -219,12 +219,12 @@ function LoginInner() {
             {mode === 'login' && (
               <>
                 <div className="relative flex items-center py-2">
-                  <div className="flex-grow border-t border-purple-200" />
-                  <span className="flex-shrink-0 mx-4 text-[#4c1d95]/70 text-xs uppercase tracking-widest font-semibold">Or continue with</span>
-                  <div className="flex-grow border-t border-purple-200" />
+                  <div className="flex-grow border-t border-white/20" />
+                  <span className="flex-shrink-0 mx-4 text-white/70 text-xs uppercase tracking-widest font-semibold">Or continue with</span>
+                  <div className="flex-grow border-t border-white/20" />
                 </div>
                 <div className="space-y-3">
-                  <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full py-6 bg-white/40 backdrop-blur-sm border-purple-200 hover:bg-white/40 backdrop-blur-sm border-purple-200 text-[#2d1b69] shadow-sm transition-all rounded-xl">
+                  <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full py-6 bg-white/40 backdrop-blur-sm border-purple-200 hover:bg-white/40 backdrop-blur-sm border-purple-200 text-white shadow-sm transition-all rounded-xl">
                     <svg className="mr-3 h-5 w-5" viewBox="0 0 24 24">
                       <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                       <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
@@ -233,16 +233,16 @@ function LoginInner() {
                     </svg>
                     Continue with Google
                   </Button>
-                  <Button type="button" variant="outline" onClick={handleAppleSignIn} className="w-full py-6 bg-white/40 backdrop-blur-sm border-purple-200 hover:bg-white/40 backdrop-blur-sm border-purple-200 text-[#2d1b69] shadow-sm transition-all rounded-xl">
+                  <Button type="button" variant="outline" onClick={handleAppleSignIn} className="w-full py-6 bg-white/40 backdrop-blur-sm border-purple-200 hover:bg-white/40 backdrop-blur-sm border-purple-200 text-white shadow-sm transition-all rounded-xl">
                     <svg className="mr-3 h-5 w-5 fill-current" viewBox="0 0 24 24">
                       <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.65.04 2.9.72 3.68 1.9-3.28 1.95-2.73 5.75.52 7.02-.75 1.86-1.74 3.2-2.87 3.99zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.32 2.38-2.07 4.29-3.74 4.25z" />
                     </svg>
                     Continue with Apple
                   </Button>
                 </div>
-                <p className="text-center text-sm text-[#4c1d95]/70 pt-4">
+                <p className="text-center text-sm text-white/70 pt-4">
                   Don&apos;t have an account?{' '}
-                  <Link href="/signup" className="text-primary font-semibold hover:text-[#2d1b69] transition-colors hover:underline">Sign up</Link>
+                  <Link href="/signup" className="text-primary font-semibold hover:text-white transition-colors hover:underline">Sign up</Link>
                 </p>
               </>
             )}
