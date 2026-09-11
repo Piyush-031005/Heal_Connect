@@ -42,21 +42,19 @@ function PrimaryHero() {
       </div>
 
       {/* Meditation image with gradient fade - blends into hero background */}
-      <div className="absolute right-0 top-0 bottom-0 w-[65%] lg:w-[60%] pointer-events-none" style={{zIndex:5}}>
-        <div className="absolute inset-0" style={{
-          backgroundImage: "url('/final_ensights/meditation.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-          WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.1) 10%, rgba(0,0,0,0.4) 25%, rgba(0,0,0,0.8) 40%, black 60%, black 100%)",
-          maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.1) 10%, rgba(0,0,0,0.4) 25%, rgba(0,0,0,0.8) 40%, black 60%, black 100%)",
-        }} />
-        <div className="absolute inset-0" style={{
-          background: "linear-gradient(to bottom, rgba(196,181,253,0.35) 0%, transparent 12%, transparent 85%, rgba(196,181,253,0.35) 100%)"
-        }} />
-      </div>
+        <div className="absolute right-0 top-[-10%] bottom-[-10%] w-[100%] md:w-[80%] lg:w-[75%] pointer-events-none" style={{zIndex:5}}>
+          <div className="absolute inset-0" style={{
+            backgroundImage: "url('/final_ensights/meditation.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "right center",
+            WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 85% 50%, black 25%, rgba(0,0,0,0.6) 55%, transparent 80%)",
+            maskImage: "radial-gradient(ellipse 70% 60% at 85% 50%, black 25%, rgba(0,0,0,0.6) 55%, transparent 80%)",
+            WebkitMaskRepeat: "no-repeat",
+            maskRepeat: "no-repeat"
+          }} />
+        </div>
 
-
-      <div className="container mx-auto px-6 relative z-10 pointer-events-none">
+        <div className="container mx-auto px-6 relative z-10 pointer-events-none">
         <div className="max-w-3xl pointer-events-auto">
           
           
