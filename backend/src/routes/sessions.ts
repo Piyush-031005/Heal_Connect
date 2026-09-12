@@ -1,3 +1,4 @@
+import multer from 'multer';
 import { Router, type Response } from 'express';
 import { body } from 'express-validator';
 import { prisma } from '../lib/prisma';
@@ -8,6 +9,15 @@ import { SESSION_DISCLAIMER, SESSION_SAFETY_GUIDELINES } from '../lib/safetyGuid
 import { flagContentIfNeeded } from '../lib/moderation';
 import { sendNotificationToPractitioner } from '../services/notification.service';
 import { scheduleSessionReminders } from '../services/scheduler.service';
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 50 * 1024 * 1024 }, // 50MB
+});
+
+interface MulterRequest extends AuthRequest {
+  file?: Express.Multer.File | undefined;
+}
 
 const router = Router();
 
@@ -645,6 +655,74 @@ router.post(
     });
 
     res.json({ success: true, message: 'Transcription initiated' });
+  }
+);
+
+// ─── POST /api/sessions/:id/recording — upload recorded audio from call end ──
+router.post(
+  '/:id/recording',
+  requireAuth,
+  upload.single('audio'),
+  async (req: MulterRequest, res: Response) => {
+    const sessionId = req.params.id as string;
+    const file = req.file;
+
+    if (!file) {
+      res.status(400).json({ success: false, message: 'Audio file is required' });
+      return;
+    }
+
+    const session = await prisma.session.findUnique({
+      where: { id: sessionId },
+      select: { id: true, userId: true, practitionerId: true, type: true, status: true },
+    });
+
+    if (!session) {
+      res.status(404).json({ success: false, message: 'Session not found' });
+      return;
+    }
+
+    const isParticipant =
+      session.userId === req.user!.userId ||
+      session.practitionerId === req.user!.userId ||
+      session.practitionerId === req.user!.practitionerId;
+
+    if (!isParticipant) {
+      res.status(403).json({ success: false, message: 'Unauthorized' });
+      return;
+    }
+
+    // Check if transcript already exists to avoid redundant processing
+    const existingTranscript = await prisma.callTranscript.findUnique({
+      where: { sessionId },
+    });
+    if (existingTranscript && existingTranscript.transcriptText) {
+      console.log(`[Recording] Transcript already exists for session ${sessionId}, skipping duplicate transcription`);
+      res.status(200).json({ success: true, message: 'Transcript already exists for this session' });
+      return;
+    }
+
+    console.log(`[Recording] Received audio recording for session ${sessionId} (${file.size} bytes, ${file.mimetype})`);
+
+    try {
+      const { uploadCallRecording } = await import('../lib/azure');
+      const recordingUrl = await uploadCallRecording(file.buffer, file.mimetype, sessionId);
+      console.log(`[Recording] Uploaded call recording to: ${recordingUrl}`);
+
+      // Trigger transcription pipeline async with both URL and buffer
+      const { transcribeCall } = await import('../services/transcription.service');
+      transcribeCall(recordingUrl, sessionId, session.userId, session.practitionerId, file.buffer)
+        .catch((err) => console.error('[Recording Transcription] Error:', err));
+
+      res.status(201).json({
+        success: true,
+        data: { recordingUrl },
+        message: 'Recording uploaded and transcription initiated',
+      });
+    } catch (err: any) {
+      console.error(`[Recording] Failed to upload recording for session ${sessionId}:`, err);
+      res.status(500).json({ success: false, message: 'Failed to process audio recording' });
+    }
   }
 );
 

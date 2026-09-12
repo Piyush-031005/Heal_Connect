@@ -35,3 +35,38 @@ export async function deleteProfilePhoto(url: string): Promise<void> {
     // non-fatal
   }
 }
+
+export async function uploadCallRecording(
+  buffer: Buffer,
+  mimeType: string,
+  sessionId: string
+): Promise<string> {
+  const ext = mimeType.includes('webm') ? 'webm' : mimeType.includes('mp4') ? 'mp4' : mimeType.includes('ogg') ? 'ogg' : 'wav';
+  const blobName = `recordings/${sessionId}-${uuidv4()}.${ext}`;
+
+  if (connectionString) {
+    try {
+      const containerClient = getContainerClient();
+      const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+      await blockBlobClient.uploadData(buffer, {
+        blobHTTPHeaders: { blobContentType: mimeType },
+      });
+      return blockBlobClient.url;
+    } catch (err) {
+      console.warn('[Azure Storage] Uploading call recording to Azure Blob Storage failed:', err);
+    }
+  }
+
+  // Fallback to local storage
+  const fs = await import('fs');
+  const path = await import('path');
+  const uploadDir = path.join(process.cwd(), 'public', 'recordings');
+  if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+  }
+  const filePath = path.join(uploadDir, `${sessionId}.${ext}`);
+  fs.writeFileSync(filePath, buffer);
+
+  const appUrl = process.env.APP_URL || process.env.BACKEND_URL || 'https://healconnect-backend-dqcsaqf4a6baffaz.centralindia-01.azurewebsites.net';
+  return `${appUrl}/recordings/${sessionId}.${ext}`;
+}

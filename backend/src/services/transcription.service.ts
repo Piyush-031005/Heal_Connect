@@ -3,13 +3,17 @@ import { DeepgramClient } from '@deepgram/sdk';
 import { prisma } from '../lib/prisma';
 import { flagContentIfNeeded } from '../lib/moderation';
 
-const assemblyClient = process.env.ASSEMBLYAI_API_KEY
-  ? new AssemblyAI({ apiKey: process.env.ASSEMBLYAI_API_KEY })
-  : null;
+function getAssemblyClient(): AssemblyAI | null {
+  const apiKey = process.env.ASSEMBLYAI_API_KEY;
+  if (!apiKey) return null;
+  return new AssemblyAI({ apiKey });
+}
 
-const deepgram = process.env.DEEPGRAM_API_KEY
-  ? new DeepgramClient({ apiKey: process.env.DEEPGRAM_API_KEY })
-  : null;
+function getDeepgramClient(): DeepgramClient | null {
+  const apiKey = process.env.DEEPGRAM_API_KEY;
+  if (!apiKey) return null;
+  return new DeepgramClient({ apiKey });
+}
 
 /**
  * Saves a completed transcript to the database and runs moderation
@@ -53,14 +57,15 @@ export async function autoTranscribeSession(
 }
 
 /**
- * Transcribes a call from an audio/recording URL using AssemblyAI (universal speech models, speaker labels, PII redaction)
+ * Transcribes a call from an audio URL or Buffer using AssemblyAI (speaker labels, PII redaction)
  * with Deepgram fallback.
  */
 export async function transcribeCall(
   audioUrl: string,
   sessionId: string,
   userId?: string,
-  practitionerId?: string
+  practitionerId?: string,
+  audioBuffer?: Buffer
 ) {
   console.log(`[Transcription Step 1/4] Starting transcribeCall for session ${sessionId}...`);
   console.log(`[Transcription Step 1/4] Audio URL: ${audioUrl}`);
@@ -86,11 +91,25 @@ export async function transcribeCall(
   }
 
   // 2. Primary: AssemblyAI
+  const assemblyClient = getAssemblyClient();
   if (assemblyClient) {
     try {
+      let audioToTranscribe = audioUrl;
+
+      // If buffer is available, upload directly to AssemblyAI so private URLs/network issues never block transcription
+      if (audioBuffer) {
+        try {
+          console.log(`[Transcription Step 2/4] Uploading audio buffer directly to AssemblyAI storage...`);
+          audioToTranscribe = await assemblyClient.files.upload(audioBuffer);
+          console.log(`[Transcription Step 2/4] Uploaded to AssemblyAI: ${audioToTranscribe}`);
+        } catch (uploadErr) {
+          console.warn(`[Transcription Step 2/4] Direct buffer upload to AssemblyAI failed, using audioUrl:`, uploadErr);
+        }
+      }
+
       console.log(`[Transcription Step 2/4] Transcribing via AssemblyAI with speaker labels and PII redaction...`);
       const transcript = await assemblyClient.transcripts.transcribe({
-        audio: audioUrl,
+        audio: audioToTranscribe,
         speaker_labels: true,
         redact_pii: true,
         redact_pii_policies: ['phone_number', 'email_address'],
@@ -156,6 +175,7 @@ export async function transcribeCall(
   }
 
   // 3. Fallback: Deepgram
+  const deepgram = getDeepgramClient();
   if (deepgram) {
     try {
       console.log(`[Transcription] Falling back to Deepgram for session ${sessionId}...`);

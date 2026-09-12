@@ -965,7 +965,7 @@ router.get('/sessions/:id/chat', requireAdminAuth(ALL_ROLES), async (req: Reques
   }
 });
 
-// â”€â”€â”€ 8.1 View Call Transcript â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── 8.1 View Call Transcript ────────────────────────────────────────────────
 router.get('/sessions/:id/transcript', requireAdminAuth(ALL_ROLES), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
@@ -981,7 +981,7 @@ router.get('/sessions/:id/transcript', requireAdminAuth(ALL_ROLES), async (req: 
   }
 });
 
-// â”€â”€â”€ 8.2 Scan Transcript for Flags â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── 8.2 Scan Transcript for Flags ───────────────────────────────────────────
 router.post('/sessions/:id/transcript/scan', requireAdminAuth(MOD_ROLES), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
@@ -1021,10 +1021,10 @@ router.post('/sessions/:id/transcript/scan', requireAdminAuth(MOD_ROLES), async 
 router.post('/sessions/:id/transcript/transcribe', requireAdminAuth(ALL_ROLES), async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
-    const { audioUrl, recordingUrl } = req.body as { audioUrl?: string; recordingUrl?: string };
+    const { audioUrl, recordingUrl } = (req.body || {}) as { audioUrl?: string; recordingUrl?: string };
     const url = audioUrl || recordingUrl;
     if (!url) {
-      res.status(400).json({ success: false, message: 'audioUrl or recordingUrl is required' });
+      res.status(400).json({ success: false, message: 'audioUrl or recordingUrl is required in request body.' });
       return;
     }
 
