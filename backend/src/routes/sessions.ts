@@ -501,15 +501,17 @@ router.post('/:id/end', requireAuth, async (req: AuthRequest, res: Response) => 
     data: { status: targetStatus, endTime: new Date() },
   });
 
-  // Task 2: Trigger Deepgram transcription if an Agora recording URL was provided
-  if (targetStatus === 'COMPLETED' && req.body.recordingUrl) {
-    import('../services/transcription.service').then(({ transcribeFromRecordingUrl }) => {
-      transcribeFromRecordingUrl(
+  // Trigger transcription if an audio/recording URL was provided
+  const recordingUrl = req.body?.recordingUrl || req.body?.audioUrl;
+  if (targetStatus === 'COMPLETED' && recordingUrl) {
+    console.log(`[Session End] Triggering transcription for session ${sessionId} with URL: ${recordingUrl}`);
+    import('../services/transcription.service').then(({ transcribeCall }) => {
+      transcribeCall(
+        recordingUrl,
         sessionId,
-        req.body.recordingUrl,
         session.userId,
         session.practitionerId
-      ).catch(console.error);
+      ).catch((err) => console.error('[Transcription] Error in transcribeCall:', err));
     });
   }
 
@@ -602,6 +604,47 @@ router.post(
       console.error(`[Transcript] Transcript submission error for session ${sessionId}:`, err);
       res.status(500).json({ success: false, message: 'Internal server error' });
     }
+  }
+);
+
+// ─── POST /api/sessions/:id/transcribe-recording — transcribe audio recording ──────
+router.post(
+  '/:id/transcribe-recording',
+  requireAuth,
+  async (req: AuthRequest, res: Response) => {
+    const sessionId = req.params.id as string;
+    const audioUrl = req.body?.audioUrl || req.body?.recordingUrl;
+    if (!audioUrl) {
+      res.status(400).json({ success: false, message: 'audioUrl or recordingUrl is required' });
+      return;
+    }
+
+    const session = await prisma.session.findUnique({
+      where: { id: sessionId },
+      select: { id: true, userId: true, practitionerId: true, type: true, status: true },
+    });
+
+    if (!session) {
+      res.status(404).json({ success: false, message: 'Session not found' });
+      return;
+    }
+
+    const isParticipant =
+      session.userId === req.user!.userId ||
+      session.practitionerId === req.user!.userId ||
+      session.practitionerId === req.user!.practitionerId;
+
+    if (!isParticipant) {
+      res.status(403).json({ success: false, message: 'Unauthorized' });
+      return;
+    }
+
+    import('../services/transcription.service').then(({ transcribeCall }) => {
+      transcribeCall(audioUrl, sessionId, session.userId, session.practitionerId)
+        .catch((err) => console.error('[Transcription] Error in transcribeCall:', err));
+    });
+
+    res.json({ success: true, message: 'Transcription initiated' });
   }
 );
 

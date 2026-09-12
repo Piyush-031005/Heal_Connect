@@ -281,8 +281,12 @@ export const sessionsApi = {
       { headers: authHeader(token) }
     ),
 
-  end: (token: string, sessionId: string) =>
-    request(`/api/sessions/${sessionId}/end`, { method: 'POST', headers: authHeader(token) }),
+  end: (token: string, sessionId: string, body?: { recordingUrl?: string; audioUrl?: string }) =>
+    request(`/api/sessions/${sessionId}/end`, {
+      method: 'POST',
+      headers: authHeader(token),
+      body: body ? JSON.stringify(body) : undefined,
+    }),
 
   connect: (token: string, sessionId: string) =>
     request<{ session: any }>(`/api/sessions/${sessionId}/connect`, { method: 'POST', headers: authHeader(token) }),

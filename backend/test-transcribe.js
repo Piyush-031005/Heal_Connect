@@ -1,21 +1,37 @@
-require("dotenv").config();
-const { createClient } = require("@deepgram/sdk");
+// test-transcribe.js — Standalone AssemblyAI test script
+require('dotenv').config();
+const { AssemblyAI } = require('assemblyai');
 
-const deepgram = createClient(process.env.DEEPGRAM_API_KEY);
-
-async function testTranscribe() {
-  // Use any public sample audio URL to test, e.g. Deepgram's own demo file
-  const { result, error } = await deepgram.listen.prerecorded.transcribeUrl(
-    { url: "https://static.deepgram.com/examples/Bueller-Life-moves-pretty-fast.wav" },
-    { model: "nova-2", smart_format: true }
-  );
-
-  if (error) {
-    console.error("Error:", error);
-    return;
-  }
-
-  console.log(JSON.stringify(result.results.channels[0].alternatives[0].transcript, null, 2));
+const apiKey = process.env.ASSEMBLYAI_API_KEY;
+if (!apiKey) {
+  console.error('ERROR: ASSEMBLYAI_API_KEY is not defined in environment variables.');
+  process.exit(1);
 }
 
-testTranscribe();
+const client = new AssemblyAI({ apiKey });
+
+(async () => {
+  try {
+    console.log('Testing AssemblyAI transcription with audio: https://assembly.ai/wildfires.mp3 ...');
+    const transcript = await client.transcripts.transcribe({
+      audio: 'https://assembly.ai/wildfires.mp3', // public test file
+      speaker_labels: true,
+      redact_pii: true,
+      redact_pii_policies: ['phone_number', 'email_address'],
+      redact_pii_sub: 'entity_name',
+    });
+
+    if (transcript.status === 'error') {
+      console.error('Transcription failed:', transcript.error);
+      process.exit(1);
+    }
+
+    console.log('\n--- Transcription Successful ---');
+    console.log('Status:', transcript.status);
+    console.log('Utterances:', transcript.utterances?.length || 0);
+    console.log('\nTranscript Preview:\n', transcript.text?.slice(0, 300) + '...\n');
+  } catch (err) {
+    console.error('Execution error:', err);
+    process.exit(1);
+  }
+})();

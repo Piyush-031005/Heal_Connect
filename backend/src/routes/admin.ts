@@ -1017,7 +1017,31 @@ router.post('/sessions/:id/transcript/scan', requireAdminAuth(MOD_ROLES), async 
   }
 });
 
-// â”€â”€â”€ 9. Moderation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── 8.3 Admin Trigger Call Transcription ────────────────────────────────────
+router.post('/sessions/:id/transcript/transcribe', requireAdminAuth(ALL_ROLES), async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params as { id: string };
+    const { audioUrl, recordingUrl } = req.body as { audioUrl?: string; recordingUrl?: string };
+    const url = audioUrl || recordingUrl;
+    if (!url) {
+      res.status(400).json({ success: false, message: 'audioUrl or recordingUrl is required' });
+      return;
+    }
+
+    const { transcribeCall } = await import('../services/transcription.service');
+    const result = await transcribeCall(url, id);
+    if (!result) {
+      res.status(500).json({ success: false, message: 'Transcription failed or returned no text' });
+      return;
+    }
+    res.json({ success: true, data: { transcript: result } });
+  } catch (err: any) {
+    console.error('Admin transcribe error:', err);
+    res.status(500).json({ success: false, message: err.message || 'Internal server error' });
+  }
+});
+
+// ─── 9. Moderation ──────────────────────────────────────────────────────────
 router.get('/moderation', requireAdmin, async (req: Request, res: Response) => {
   try {
     const statusParam = typeof req.query['status'] === 'string' ? req.query['status'] : undefined;

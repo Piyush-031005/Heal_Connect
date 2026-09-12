@@ -25,6 +25,7 @@
     "@types/multer": "^2.2.0",
     "@types/ws": "^8.18.1",
     "agora-token": "^2.0.5",
+    "assemblyai": "^4.41.1",
     "bcryptjs": "^3.0.3",
     "bullmq": "^6.0.10",
     "cors": "^2.8.6",
