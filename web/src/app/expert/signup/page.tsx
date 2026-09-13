@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Loader2, Eye, EyeOff, ArrowRight } from 'lucide-react';
-import { authApi, tokenStore } from '@/lib/api';
+import { astrologerAuthApi, astrologerTokenStore } from '@/lib/api';
 
 function ExpertSignupInner() {
   const router = useRouter();
@@ -34,7 +34,7 @@ function ExpertSignupInner() {
       setAlreadyRegistered(true);
     }
     // Always clear session on signup page — no backdoor access
-    tokenStore.clear();
+    astrologerTokenStore.clear();
     localStorage.removeItem('hc_role');
     localStorage.removeItem('hc_practitioner_id');
     localStorage.removeItem('hc_pid');
@@ -53,6 +53,7 @@ function ExpertSignupInner() {
     e.preventDefault();
     setError('');
 
+    if (!form.password || form.password.length < 8) { setError('Password must be at least 8 characters.'); return; }
     if (!isGoogleAuth) {
       if (!allPassed) { setError('Password does not meet the required criteria.'); return; }
       if (form.password !== form.confirm) { setError('Passwords do not match.'); return; }
@@ -69,16 +70,11 @@ function ExpertSignupInner() {
 
     setLoading(true);
     try {
-      const res = await authApi.practitionerRegister(
-        form.name, form.email, form.password, form.dob,
-        { acceptTerms: true, acceptPrivacy: true, emailMarketingOptIn: false }
-      );
+      const res = await astrologerAuthApi.register(form.name, form.email, form.password);
 
       if (!res.success || !res.data) {
-        if (res.message?.toLowerCase().includes('already registered') || res.message?.toLowerCase().includes('already exists')) {
+        if (res.message?.toLowerCase().includes('already') || res.message?.toLowerCase().includes('exists')) {
           setAlreadyRegistered(true);
-        } else if (res.errors && res.errors.length > 0) {
-          setError(res.errors.map((e: any) => e.message).join(', '));
         } else {
           setError(res.message || 'Registration failed.');
         }
@@ -88,12 +84,9 @@ function ExpertSignupInner() {
       localStorage.removeItem('hc_google_auth');
       localStorage.removeItem('hc_google_name');
       localStorage.removeItem('hc_google_email');
-      tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-      localStorage.setItem('hc_role', 'practitioner');
-      localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
-      localStorage.setItem('hc_pid', res.data.practitioner.id);
-      localStorage.setItem('hc_practitioner_name', res.data.practitioner.name ?? '');
-      router.push('/expert/dashboard');
+      astrologerTokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+      if (res.data.astrologer) astrologerTokenStore.setProfile(res.data.astrologer);
+      router.push('/astrologer/onboarding');
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -159,7 +152,7 @@ function ExpertSignupInner() {
                 <p className="text-amber-700 text-xs mb-3">An expert account with this email already exists. Please log in instead.</p>
                 <button
                   onClick={() => {
-                    tokenStore.clear();
+                    astrologerTokenStore.clear();
                     localStorage.removeItem('hc_role');
                     localStorage.removeItem('hc_practitioner_id');
                     localStorage.removeItem('hc_pid');
@@ -184,7 +177,7 @@ function ExpertSignupInner() {
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email <span className="text-red-500">*</span></label>
-                    <input className={inputCls + (isGoogleAuth ? ' bg-gray-50 text-gray-500' : '')} type="email" placeholder="you@example.com" value={form.email} onChange={e => !isGoogleAuth && set('email', e.target.value)} readOnly={isGoogleAuth} required />
+                    <input className={inputCls} type="email" placeholder="you@example.com" value={form.email} onChange={e => set('email', e.target.value)} required />
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Date of Birth <span className="text-red-500">*</span></label>
@@ -197,6 +190,25 @@ function ExpertSignupInner() {
                       max={(() => { const d = new Date(); d.setFullYear(d.getFullYear() - 18); return d.toISOString().split('T')[0]; })()}
                     />
                   </div>
+                  {isGoogleAuth && (
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">Set a Password <span className="text-red-500">*</span></label>
+                      <div className="relative">
+                        <input
+                          className={inputCls + ' pr-11'}
+                          type={showPass ? 'text' : 'password'}
+                          placeholder="Create a password for your account"
+                          value={form.password}
+                          onChange={e => set('password', e.target.value)}
+                          required
+                        />
+                        <button type="button" onClick={() => setShowPass(v => !v)} className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600">
+                          {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
+                      <p className="text-xs text-gray-400 mt-1">You&apos;ll use this to log in with email too.</p>
+                    </div>
+                  )}
                   {!isGoogleAuth && (<>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Password <span className="text-red-500">*</span></label>

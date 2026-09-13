@@ -3,21 +3,15 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useLayout } from '@/lib/layout-context';
-
-const FAQS = [
-  { q: "Why Is Astrology So Accurate?", a: "Astrology uses precise mathematical calculations of planetary positions at your exact time of birth. Our experts interpret these cosmic blueprints to provide deep, actionable insights into your life." },
-  { q: "Why Should You Choose ZenAuraa?", a: "We curate only the top 1% of authentic and verified experts globally. Every practitioner goes through a rigorous multi-step interview and testing process before joining our platform." },
-  { q: "Is my consultation completely confidential?", a: "100% yes. Your privacy is our highest priority. All chats and calls are end-to-end encrypted and we never share your personal details with third parties." },
-  { q: "What is the difference between Tarot and Vedic Astrology?", a: "Vedic Astrology uses your birth details to map out a lifelong cosmic blueprint. Tarot relies on energy, intuition, and synchronicity to provide immediate guidance and answer specific current-life questions." },
-  { q: "Can I get a refund if I'm not satisfied?", a: "Yes. We offer a 100% satisfaction guarantee for your first consultation. If you feel the connection wasn't right, our support team will refund the amount to your wallet immediately." },
-  { q: "How much does a session cost?", a: "Pricing varies per expert based on their experience and modality, typically ranging from ₹10 to ₹150 per minute. You only pay for the exact minutes you use." }
-];
+import { useLang } from '@/lib/lang-context';
 
 export default function FaqSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
   const { layout } = useLayout();
+  const { t } = useLang();
   
   const isFinalHybrid = layout === 'final-hybrid';
+  const FAQS = t.faqs;
 
   return (
     <section className={`py-24 relative bg-transparent`}>
@@ -38,13 +32,13 @@ export default function FaqSection() {
             )}
             
             <h2 className={`text-4xl md:text-5xl font-heading font-semibold not-italic leading-tight ${isFinalHybrid ? 'text-[#F8F7FA]' : 'text-[#1E2059]'}`}>
-              First time? <br/>
-              <span className={isFinalHybrid ? 'text-[#B79AE6] italic font-medium' : 'text-[#5F3BA9] font-medium'}>Read these</span> first.
+              {t.faqTitle} <br/>
+              <span className={isFinalHybrid ? 'text-[#B79AE6] italic font-medium' : 'text-[#5F3BA9] font-medium'}>{t.faqTitleEm}</span> {t.faqTitleRest}
             </h2>
           </div>
 
           <div className="md:w-2/3 flex flex-col gap-4 w-full">
-            {FAQS.map((faq, idx) => (
+            {FAQS.map((faq: { q: string; a: string }, idx: number) => (
               <div 
                 key={idx} 
                 className={`rounded-[1.5rem] transition-all duration-300 cursor-pointer overflow-hidden border ${

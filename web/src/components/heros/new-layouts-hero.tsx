@@ -1,4 +1,5 @@
 import { useLayout } from '@/lib/layout-context';
+import { useLang } from '@/lib/lang-context';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, Phone, ArrowRight } from 'lucide-react';
@@ -26,6 +27,7 @@ const MeditationMudras = dynamic(() => import('./visuals/meditation-mudras'), { 
 const PeacockBloom = dynamic(() => import('./visuals/peacock-bloom'), { ssr: false, loading: () => <LoadingVisual /> });
 export default function NewLayoutsHero() {
   const { layout } = useLayout();
+  const { t } = useLang();
 
   const renderVisual = () => {
     switch (layout) {
@@ -91,17 +93,17 @@ export default function NewLayoutsHero() {
             </h1>
             
             <p className="text-xl lg:text-2xl text-[#1E2059]/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
-              Find trusted guidance for every stage of life.<br/>Connect with verified experts instantly.
+              {t.heroDesc}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-200 pointer-events-auto">
               <button className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#FAD058] hover:bg-[#F0C240] text-[#2A1658] text-sm font-bold transition-all shadow-lg shadow-[#FAD058]/20">
                 <MessageCircle className="w-4 h-4" />
-                <span>Start Chat</span>
+                <span>{t.chatBtn}</span>
               </button>
               <button className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#FAD058] hover:bg-[#F0C240] text-[#2A1658] text-sm font-bold transition-all shadow-lg shadow-[#FAD058]/20">
                 <Phone className="w-4 h-4" />
-                <span>Start Calling</span>
+                <span>{t.callBtn}</span>
               </button>
             </div>
 

@@ -40,9 +40,32 @@ router.post(
   async (req: Request, res: Response) => {
     const { email, password, name } = req.body as { email: string; password: string; name: string };
     try {
-      const existing = await prisma.user.findUnique({ where: { email } });
+      const existing = await prisma.user.findUnique({ where: { email }, include: { astrologerProfile: true } });
       if (existing) {
-        res.status(409).json({ success: false, message: 'An account with this email already exists.', code: 'EMAIL_EXISTS' });
+        // If they already have an astrologer profile, return tokens so they can continue onboarding
+        if (existing.astrologerProfile) {
+          const bcrypt = await import('bcryptjs');
+          const valid = existing.passwordHash && await bcrypt.compare(password, existing.passwordHash);
+          if (!valid) {
+            res.status(409).json({ success: false, message: 'An expert account with this email already exists. Please log in instead.', code: 'EMAIL_EXISTS' });
+            return;
+          }
+          const profile = existing.astrologerProfile;
+          const payload = { userId: existing.id, astrologerId: profile.id, role: 'ASTROLOGER' as const };
+          const accessToken = signAccessToken(payload);
+          const refreshToken = signRefreshToken(payload);
+          res.status(200).json({
+            success: true,
+            message: 'Account already exists.',
+            data: {
+              accessToken, refreshToken,
+              astrologer: { id: profile.id, userId: existing.id, email: existing.email, name: existing.name, applicationStatus: profile.applicationStatus, accountStatus: profile.accountStatus },
+            },
+          });
+          return;
+        }
+        // Regular user trying to sign up as expert — block with clear message
+        res.status(409).json({ success: false, message: 'This email is already registered as a user account. Please use a different email for your expert account.', code: 'USER_EXISTS' });
         return;
       }
 

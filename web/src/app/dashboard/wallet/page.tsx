@@ -16,6 +16,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { walletApi, tokenStore } from '@/lib/api';
 import { RechargeModal } from '@/components/wallet/RechargeModal';
+import { convertFromINR } from '@/lib/currency';
 
 export default function WalletPage() {
   const [wallet, setWallet] = useState<{ balance: number; transactions: Array<{ id: string; type: string; status: string; amount: number; createdAt: string }> } | null>(null);
@@ -67,7 +68,7 @@ export default function WalletPage() {
                 <Wallet className="w-5 h-5" /> Current Balance
               </p>
               <h2 className="text-4xl md:text-5xl font-extrabold">
-                ₹{(wallet?.balance || 0).toFixed(2)}
+                {convertFromINR(wallet?.balance || 0).display}
               </h2>
             </div>
             <Button 
@@ -130,7 +131,7 @@ export default function WalletPage() {
                           </Badge>
                         </TableCell>
                         <TableCell className={`text-right font-bold ${isCredit ? 'text-emerald-600' : 'text-[#1a1a1a]'}`}>
-                          {isCredit ? '+' : '-'}₹{tx.amount.toFixed(2)}
+                          {isCredit ? '+' : '-'}{convertFromINR(tx.amount).display}
                         </TableCell>
                       </TableRow>
                     );

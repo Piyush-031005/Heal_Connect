@@ -23,7 +23,7 @@ import {
   Palette,
   Layout,
 } from 'lucide-react';
-import { tokenStore, authApi, practitionersApi } from '@/lib/api';
+import { tokenStore, authApi, practitionersApi, astrologerTokenStore, astrologerApi } from '@/lib/api';
 import { getAvatarUrl, getPractitionerAvatar } from '@/lib/utils';
 
 import type { ComponentType } from 'react';
@@ -72,7 +72,7 @@ export default function Navbar() {
   const themeRef = useRef<HTMLDivElement>(null);
   const layoutRef = useRef<HTMLDivElement>(null);
   const { theme, setTheme } = useTheme();
-  const { lang, setLang } = useLang();
+  const { lang, setLang } = useLang() as { lang: string; setLang: (l: string) => void; t: any };
   const { layout, setLayout } = useLayout();
   
   const isDark = (theme === 'dark' || theme === 'theme-lavender-night' || theme === 'theme-deep-forest' || theme === 'theme-royal-indigo' || layout === 'final-hybrid' || layout === 'new-layout-1') && theme !== 'theme-new-color';
@@ -81,6 +81,23 @@ export default function Navbar() {
   const [userProfile, setUserProfile] = useState<{ photoUrl: string | null; role: string; id: string; name: string | null } | null>(null);
 
   useEffect(() => {
+    // Check astrologer token first
+    const astroToken = astrologerTokenStore.getAccess();
+    if (astroToken) {
+      const profile = astrologerTokenStore.getProfile();
+      if (profile) {
+        setUserProfile({ photoUrl: profile.photoUrl ?? null, role: 'astrologer', id: profile.id, name: profile.name ?? null });
+        return;
+      }
+      astrologerApi.getApplication(astroToken).then((res) => {
+        if (res.success && res.data?.profile) {
+          const p = res.data.profile;
+          setUserProfile({ photoUrl: p.profilePhotoUrl ?? null, role: 'astrologer', id: p.id, name: p.fullLegalName ?? null });
+        }
+      });
+      return;
+    }
+    // Fall back to user token
     const token = tokenStore.getAccess();
     if (!token) return;
     const role = localStorage.getItem('hc_role');
@@ -458,8 +475,8 @@ export default function Navbar() {
               </button>
 
               {langOpen && (
-                <div className={`absolute right-0 mt-2 w-36 rounded-xl shadow-xl border overflow-hidden z-50 ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
-                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi (ÃƒÂ Ã‚Â¤Ã‚Â¹ÃƒÂ Ã‚Â¤Ã‚Â¿ÃƒÂ Ã‚Â¤Ã‚Â¨ÃƒÂ Ã‚Â¥Ã‚ÂÃƒÂ Ã‚Â¤Ã‚Â¦ÃƒÂ Ã‚Â¥Ã¢â€šÂ¬)', sub: 'HI' }, { code: 'es', label: 'Spanish (EspaÃƒÆ’Ã‚Â±ol)', sub: 'ES' }, { code: 'fr', label: 'French (FranÃƒÆ’Ã‚Â§ais)', sub: 'FR' }, { code: 'de', label: 'German (Deutsch)', sub: 'DE' }] as const).map((l) => (
+                <div className={`absolute right-0 mt-2 w-48 rounded-xl shadow-xl border overflow-hidden z-50 max-h-64 overflow-y-auto ${isDark ? 'bg-[#1a1a1a] border-white/10' : 'bg-white border-gray-100'}`}>
+                  {([{ code: 'en', label: 'English', sub: 'EN' }, { code: 'hi', label: 'Hindi', sub: 'HI' }, { code: 'es', label: 'Spanish', sub: 'ES' }, { code: 'fr', label: 'French', sub: 'FR' }, { code: 'de', label: 'German', sub: 'DE' }, { code: 'ru', label: 'Russian', sub: 'RU' }, { code: 'it', label: 'Italian', sub: 'IT' }, { code: 'ur', label: 'Urdu', sub: 'UR' }, { code: 'pa', label: 'Punjabi', sub: 'PA' }, { code: 'gu', label: 'Gujarati', sub: 'GU' }] as const).map((l) => (
                     <button
                       key={l.code}
                       onClick={() => { setLang(l.code as 'en' | 'hi'); setLangOpen(false); }}
@@ -484,7 +501,7 @@ export default function Navbar() {
 
             {/* Login / Profile */}
             {userProfile ? (
-              <Link href={userProfile.role === 'practitioner' ? '/expert/dashboard' : '/dashboard'}>
+              <Link href={userProfile.role === 'astrologer' || userProfile.role === 'practitioner' ? '/expert/onboarding' : '/dashboard'}>
                 <div className="w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer overflow-hidden border-2 border-border hover:border-primary">
                   <img
                     src={userProfile.role === 'practitioner' ? getPractitionerAvatar(userProfile.photoUrl, userProfile.id) : getAvatarUrl(userProfile.name, userProfile.photoUrl)}

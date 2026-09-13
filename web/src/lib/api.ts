@@ -75,17 +75,23 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<ApiR
     ...restOptions,
   });
 
-  if (res.status === 401 && !path.includes('/login')) {
+  if (res.status === 401 && !path.includes('/login') && !path.includes('/register')) {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('hc_access');
-      localStorage.removeItem('hc_refresh');
-      localStorage.removeItem('hc_role');
-      localStorage.removeItem('hc_practitioner_id');
-      localStorage.removeItem('hc_pid');
-      
-      // Avoid redirecting if we are already on the login page
-      if (!window.location.pathname.includes('/login')) {
-        window.location.href = '/login';
+      const hasToken = localStorage.getItem('hc_access') || localStorage.getItem('hca_access');
+      if (hasToken) {
+        const isAstrologerPath = window.location.pathname.startsWith('/expert') || window.location.pathname.startsWith('/astrologer');
+        localStorage.removeItem('hc_access');
+        localStorage.removeItem('hc_refresh');
+        localStorage.removeItem('hc_role');
+        localStorage.removeItem('hc_practitioner_id');
+        localStorage.removeItem('hc_pid');
+        localStorage.removeItem('hca_access');
+        localStorage.removeItem('hca_refresh');
+        localStorage.removeItem('hca_profile');
+
+        if (!window.location.pathname.includes('/login')) {
+          window.location.href = isAstrologerPath ? '/astrologer/login' : '/login';
+        }
       }
     }
     return { success: false, message: 'Invalid or expired token' };

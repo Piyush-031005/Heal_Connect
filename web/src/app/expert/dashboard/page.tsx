@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { tokenStore, sessionsApi, practitionersApi, type PractitionerProfile } from '@/lib/api';
+import { tokenStore, astrologerTokenStore, astrologerApi, sessionsApi, practitionersApi, availabilityApi, type PractitionerProfile } from '@/lib/api';
 import { getSocket, disconnectSocket } from '@/lib/socket';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -32,6 +32,7 @@ export default function ExpertDashboardPage() {
   const [sessionsDone, setSessionsDone] = useState(0);
   const [togglingOnline, setTogglingOnline] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
 
   const fetchSessions = useCallback(() => {
@@ -52,23 +53,59 @@ export default function ExpertDashboardPage() {
   }, []);
 
   useEffect(() => {
-    const token = tokenStore.getAccess();
+    const astroToken = astrologerTokenStore.getAccess();
+    const userToken = tokenStore.getAccess();
     const role = localStorage.getItem('hc_role');
-    const pid = localStorage.getItem('hc_practitioner_id');
 
-    if (!token || role !== 'practitioner' || !pid) {
-      router.replace('/expert/login');
+    // If no expert token at all
+    if (!astroToken && role !== 'practitioner') {
+      if (userToken) { router.replace('/dashboard'); return; }
+      router.replace('/login?role=expert');
       return;
     }
 
-    setPractitionerId(pid);
+    const token = astroToken || userToken;
+    if (!token) { router.replace('/login?role=expert'); return; }
 
-    practitionersApi.get(pid).then((res) => {
-      if (res.success && res.data) {
-        setProfile(res.data.practitioner);
-        setIsOnline(res.data.practitioner.isOnline);
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+      if (!payload.practitionerId && !payload.astrologerId) {
+        router.replace('/dashboard');
+        return;
       }
-    });
+    } catch {
+      router.replace('/login?role=expert');
+      return;
+    }
+
+    const pid = localStorage.getItem('hc_practitioner_id') || localStorage.getItem('hc_pid')
+      || astrologerTokenStore.getProfile()?.id || null;
+
+    if (!pid) { router.replace('/expert/onboarding'); return; }
+
+    setPractitionerId(pid);
+    practitionersApi.get(pid).then((res) => {
+      setAuthChecked(true);
+      if (res.success && res.data) {
+        const p = res.data.practitioner;
+        if (!p.isVerified) {
+          const astroToken = astrologerTokenStore.getAccess();
+          if (astroToken) {
+            astrologerApi.getApplication(astroToken).then((appRes) => {
+              const status = appRes.data?.profile?.applicationStatus;
+              const submitted = status && ['ADMIN_REVIEW', 'UNDER_REVIEW', 'PENDING_REVIEW', 'SUBMITTED', 'PROFILE_COMPLETED'].includes(status);
+              router.replace(submitted ? '/expert/onboarding/submitted' : '/expert/onboarding');
+            }).catch(() => router.replace('/expert/onboarding'));
+          } else {
+            router.replace('/expert/onboarding');
+          }
+          return;
+        }
+        setProfile(p);
+        setIsOnline(p.isOnline);
+        setIsBusy(p.isBusy ?? false);
+      }
+    }).catch(() => { setAuthChecked(true); router.replace('/login?role=expert'); });
 
     fetchSessions();
 
@@ -114,6 +151,12 @@ export default function ExpertDashboardPage() {
     localStorage.removeItem('hc_practitioner_name');
     router.push('/expert/login');
   };
+
+  if (!authChecked || !profile) return (
+    <div className="min-h-screen flex items-center justify-center bg-[#faf9f6]">
+      <Loader2 className="w-8 h-8 animate-spin text-indigo-400" />
+    </div>
+  );
 
   const firstName = profile?.name?.split(' ')[0] || 'Expert';
   const initials = profile?.name?.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase() || 'E';

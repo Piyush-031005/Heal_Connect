@@ -1,9 +1,11 @@
 'use client';
 
 import { useLayout } from '@/lib/layout-context';
+import { useLang } from '@/lib/lang-context';
 
 export default function Footer() {
   const { layout } = useLayout();
+  const { t } = useLang();
   const isNewDesign1 = layout === 'new-design-1';
 
   return (
@@ -14,13 +16,13 @@ export default function Footer() {
             Zen<span className={`text-[#D5B6DC]`}>Auraa.</span>
           </div>
           <div className="flex gap-6 text-sm text-white/70 font-medium">
-            <span className="hover:text-primary cursor-pointer transition-colors">Privacy Policy</span>
-            <span className="hover:text-primary cursor-pointer transition-colors">Terms of Service</span>
+            <span className="hover:text-primary cursor-pointer transition-colors">{t.privacy}</span>
+            <span className="hover:text-primary cursor-pointer transition-colors">{t.terms}</span>
             <span className="hover:text-primary cursor-pointer transition-colors">Contact</span>
           </div>
         </div>
         <div className="text-center text-white/70 text-sm border-t border-border pt-8">
-          &copy; {new Date().getFullYear()} ZenAuraa Wellness. All rights reserved.
+          {t.footerRights}
         </div>
       </div>
     </footer>

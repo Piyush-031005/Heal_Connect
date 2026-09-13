@@ -27,7 +27,7 @@ export default function AdminAstrologersPage() {
   const [pagination, setPagination] = useState({ page: 1, pages: 1, total: 0 });
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [statusFilter, setStatusFilter] = useState('ADMIN_REVIEW');
+  const [statusFilter, setStatusFilter] = useState('');
   const [selected, setSelected] = useState<any | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
   const [actionLoading, setActionLoading] = useState(false);
@@ -109,10 +109,19 @@ export default function AdminAstrologersPage() {
           />
         </div>
         <div className="flex gap-2 flex-wrap">
-          {['ADMIN_REVIEW', 'APPROVED', 'REJECTED', 'SUSPENDED', ''].map((s) => (
-            <button key={s} onClick={() => setStatusFilter(s)}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${statusFilter === s ? 'bg-indigo-500 text-white border-indigo-500' : 'border-gray-200 text-gray-600 hover:border-indigo-300'}`}>
-              {s || 'All'}
+          {[
+            { val: '', label: 'All' },
+            { val: 'ADMIN_REVIEW', label: '🔍 Pending Review' },
+            { val: 'PROFILE_COMPLETED', label: '📝 Profile Done' },
+            { val: 'PHONE_VERIFIED', label: '📱 Phone Verified' },
+            { val: 'DRAFT', label: '✏️ Draft' },
+            { val: 'APPROVED', label: '✅ Approved' },
+            { val: 'REJECTED', label: '❌ Rejected' },
+            { val: 'SUSPENDED', label: '⏸ Suspended' },
+          ].map(({ val, label }) => (
+            <button key={val} onClick={() => setStatusFilter(val)}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${statusFilter === val ? 'bg-indigo-500 text-white border-indigo-500' : 'border-gray-200 text-gray-600 hover:border-indigo-300'}`}>
+              {label}
             </button>
           ))}
         </div>
@@ -128,11 +137,12 @@ export default function AdminAstrologersPage() {
           <table className="w-full text-sm">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">Name</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">Phone</th>
+                <th className="text-left px-4 py-3 font-semibold text-gray-600">Applicant</th>
+                <th className="text-left px-4 py-3 font-semibold text-gray-600">Phone / Email</th>
                 <th className="text-left px-4 py-3 font-semibold text-gray-600">Status</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">Docs</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">Submitted</th>
+                <th className="text-left px-4 py-3 font-semibold text-gray-600">Onboarding Step</th>
+                <th className="text-left px-4 py-3 font-semibold text-gray-600">Verifications</th>
+                <th className="text-left px-4 py-3 font-semibold text-gray-600">Joined</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
@@ -140,24 +150,48 @@ export default function AdminAstrologersPage() {
               {astrologers.map((a) => (
                 <tr key={a.id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-3">
-                    <p className="font-medium text-gray-900">{a.displayName || a.fullLegalName || '—'}</p>
-                    <p className="text-xs text-gray-400">{a.fullLegalName}</p>
+                    <div className="flex items-center gap-3">
+                      {a.profilePhotoUrl ? (
+                        <img src={a.profilePhotoUrl} alt="" className="w-8 h-8 rounded-full object-cover border border-gray-200" />
+                      ) : (
+                        <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-sm">
+                          {(a.displayName || a.fullLegalName || '?')[0].toUpperCase()}
+                        </div>
+                      )}
+                      <div>
+                        <p className="font-medium text-gray-900">{a.displayName || a.fullLegalName || 'Unnamed'}</p>
+                        <p className="text-xs text-gray-400">{a.specializations?.slice(0, 2).join(', ') || 'No specializations'}</p>
+                      </div>
+                    </div>
                   </td>
-                  <td className="px-4 py-3 text-gray-600">{a.user?.phone || '—'}</td>
+                  <td className="px-4 py-3">
+                    <p className="text-gray-700 text-sm">{a.user?.phone || '—'}</p>
+                    <p className="text-xs text-gray-400">{a.user?.email || '—'}</p>
+                  </td>
                   <td className="px-4 py-3">
                     <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${STATUS_COLORS[a.applicationStatus] ?? 'bg-gray-100 text-gray-500'}`}>
                       {a.applicationStatus}
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <div className="flex gap-1">
-                      {a.identityVerified && <span className="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">ID ✓</span>}
-                      {a.professionalVerified && <span className="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">Prof ✓</span>}
-                      {!a.identityVerified && <span className="text-xs bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded">ID ?</span>}
+                    <div className="text-xs">
+                      <span className="text-gray-500">Step: </span>
+                      <span className="font-semibold text-indigo-600">{a.application?.step ?? '—'}</span>
+                      {a.application?.submittedAt && (
+                        <p className="text-gray-400 mt-0.5">Submitted: {new Date(a.application.submittedAt).toLocaleDateString('en-IN')}</p>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-4 py-3">
+                    <div className="flex flex-wrap gap-1">
+                      <span className={`text-xs px-1.5 py-0.5 rounded ${a.phoneVerified ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-400'}`}>📱{a.phoneVerified ? '✓' : '?'}</span>
+                      <span className={`text-xs px-1.5 py-0.5 rounded ${a.identityVerified ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-400'}`}>ID{a.identityVerified ? '✓' : '?'}</span>
+                      <span className={`text-xs px-1.5 py-0.5 rounded ${a.professionalVerified ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-400'}`}>Prof{a.professionalVerified ? '✓' : '?'}</span>
+                      <span className={`text-xs px-1.5 py-0.5 rounded ${a.adminVerified ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-400'}`}>Admin{a.adminVerified ? '✓' : '?'}</span>
                     </div>
                   </td>
                   <td className="px-4 py-3 text-gray-400 text-xs">
-                    {a.application?.submittedAt ? new Date(a.application.submittedAt).toLocaleDateString('en-IN') : '—'}
+                    {a.createdAt ? new Date(a.createdAt).toLocaleDateString('en-IN') : '—'}
                   </td>
                   <td className="px-4 py-3">
                     <Button size="sm" variant="outline" onClick={() => openDetail(a.id)} className="gap-1">
