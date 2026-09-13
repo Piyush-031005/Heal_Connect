@@ -11,7 +11,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import {
   MessageCircle, LogOut, Wifi, WifiOff, User, Clock,
   IndianRupee, Star, TrendingUp, Bell, ChevronRight,
-  Sparkles, HeartHandshake, Phone, FileText, LifeBuoy
+  Sparkles, HeartHandshake, Phone, FileText, LifeBuoy, Loader2
 } from 'lucide-react';
 
 interface ActiveSession {
@@ -30,6 +30,7 @@ export default function ExpertDashboardPage() {
   const [sessions, setSessions] = useState<ActiveSession[]>([]);
   const [totalEarnings, setTotalEarnings] = useState(0);
   const [sessionsDone, setSessionsDone] = useState(0);
+  const [isBusy, setIsBusy] = useState(false);
   const [togglingOnline, setTogglingOnline] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
