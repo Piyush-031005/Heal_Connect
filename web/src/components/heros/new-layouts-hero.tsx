@@ -40,7 +40,7 @@ export default function NewLayoutsHero() {
   };
 
   return (
-    <section className="relative overflow-hidden pt-8 pb-12 lg:pt-12 lg:pb-20 bg-transparent min-h-[90vh] flex items-center">
+    <section className="relative overflow-hidden pt-28 pb-12 lg:pt-32 lg:pb-20 bg-transparent min-h-[90vh] flex items-start lg:items-center">
       {/* Background Layer for layout-9 */}
       {layout === 'layout-9' && (
         <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
