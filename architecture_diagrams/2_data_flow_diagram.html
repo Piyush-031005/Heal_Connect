@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2. End-to-End Operational Flow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ 
+          startOnLoad: true, 
+          theme: 'base',
+          themeVariables: {
+              primaryColor: '#e0f2fe',
+              primaryTextColor: '#0f172a',
+              primaryBorderColor: '#7dd3fc',
+              lineColor: '#475569',
+              secondaryColor: '#f8fafc',
+              tertiaryColor: '#f1f5f9',
+              clusterBkg: '#f0fdfa',
+              clusterBorder: '#5eead4',
+              fontFamily: 'Outfit, sans-serif'
+          }
+      });
+    </script>
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #f8fafc; color: #0f172a; padding: 3rem; }
+        .header-container { text-align: center; margin-bottom: 3rem; }
+        .header-container h1 { color: #0284c7; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; }
+        .card { background-color: #ffffff; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); padding: 3rem; border: 1px solid #e2e8f0; }
+        .card h2 { color: #0f172a; border-bottom: 2px solid #e2e8f0; }
+        .mermaid { display: flex; justify-content: center; margin-top: 3rem; background-color: #ffffff; padding: 2rem; }
+        
+        /* Ensure background colors print correctly */
+        @media print {
+            body { background-color: white !important; padding: 0; }
+            .card { box-shadow: none !important; border: none !important; padding: 0 !important; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="max-w-7xl mx-auto">
+        <div class="header-container">
+            <h1 class="text-4xl">ZenAuraa Platform</h1>
+            <p class="text-slate-500 mt-3 text-lg">System Interactions & Sequences</p>
+        </div>
+        
+        <div class="card">
+            <h2 class="text-3xl font-semibold pb-4 mb-4">2. End-to-End Operational Flow</h2>
+            <p class="text-slate-600 text-lg">Sequence diagram outlining the lifecycle of a wallet recharge followed by a consultation session.</p>
+            
+            <div class="mermaid">
+sequenceDiagram
+    participant User as User (App)
+    participant Expert as Practitioner
+    participant API as Node.js API
+    participant WS as Socket.io
+    participant DB as PostgreSQL
+    participant Agora as Agora RTC
+    participant Stripe as Stripe
+
+    Note over User, Stripe: Phase 1: Wallet Funding
+    User->>API: POST /api/wallet/recharge (Amount)
+    API->>Stripe: Generate Checkout Session
+    Stripe-->>API: Returns Session URL
+    API-->>User: 200 OK (Checkout URL)
+    User->>Stripe: Completes Payment Flow
+    Stripe->>API: Webhook (checkout.session.completed)
+    API->>DB: Increment Wallet Balance
+    API->>WS: Emit 'wallet_updated'
+    WS-->>User: Balance Update Received
+    
+    Note over User, Expert: Phase 2: Consultation Initiation
+    User->>API: POST /api/sessions/initiate (ExpertID)
+    API->>DB: Verify Balance & Create Session
+    API->>WS: Emit 'incoming_call'
+    WS-->>Expert: Receives Notification
+    
+    Expert->>API: POST /api/sessions/accept (SessionID)
+    API->>Agora: Generate Secure RTC Tokens
+    API->>DB: Update Session Status
+    API-->>Expert: Return Agora Token
+    API->>WS: Emit 'call_accepted' (Token)
+    WS-->>User: Receives Token
+    
+    Note over User, Agora: Phase 3: Active Session
+    User->>Agora: Connect & Publish Stream
+    Expert->>Agora: Connect & Publish Stream
+    Agora-->>User: Route Remote Media
+    Agora-->>Expert: Route Remote Media
+    
+    Note over User, DB: Phase 4: Resolution & Billing
+    Expert->>API: POST /api/sessions/end
+    API->>DB: Calculate duration & Deduct Wallet
+    API->>DB: Mark Session COMPLETED
+    API->>WS: Emit 'call_ended'
+    WS-->>User: Terminate Call UI
+    WS-->>Expert: Terminate Call UI
+            </div>
+        </div>
+    </div>
+</body>
+</html>
