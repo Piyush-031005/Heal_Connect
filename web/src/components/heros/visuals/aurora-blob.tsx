@@ -82,7 +82,7 @@ export default function AuroraBlob() {
       <div className="absolute inset-0 z-0 pointer-events-none">
         
       </div>
-      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none -translate-y-12" style={{ animation: 'spin 80s linear infinite' }}>
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none -translate-y-8 animate-[spin_80s_linear_infinite]">
         {MODALITIES.map((mod, i) => {
           const total = MODALITIES.length;
           const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
@@ -91,10 +91,10 @@ export default function AuroraBlob() {
           const y = Math.sin(angle) * r;
           return (
             <div key={`label-${mod.id}`} className="absolute" style={{ transform: `translate(${x}px, ${y}px)` }}>
-              <div className="pointer-events-auto cursor-pointer group" style={{ animation: 'spin 80s linear infinite reverse' }} onClick={() => router.push(`/modalities/${mod.id}`)}>
+              <div className="pointer-events-auto cursor-pointer group animate-[spin_80s_linear_infinite_reverse]" onClick={() => router.push(`/modalities/${mod.id}`)}>
                 <div className="flex items-center gap-2 px-3 py-1.5 transition-all duration-300 hover:scale-110">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#1A1532]/70 group-hover:bg-[#5F3BA9] shadow-[0_0_8px_rgba(95,59,169,0.5)] transition-colors" />
-                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#1A1532] group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">{mod.name}</span>
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#3A247A]/70 group-hover:bg-[#5F3BA9] shadow-[0_0_8px_rgba(95,59,169,0.5)] transition-colors" />
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#3A247A] group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">{mod.name}</span>
                 </div>
               </div>
             </div>
@@ -121,6 +121,8 @@ export default function AuroraBlob() {
     </div>
   );
 }
+
+
 
 
 
