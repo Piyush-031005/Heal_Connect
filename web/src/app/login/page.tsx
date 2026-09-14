@@ -27,6 +27,8 @@ function LoginInner() {
   const [mode, setMode] = useState<Mode>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [countryCode, setCountryCode] = useState('+91');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -56,6 +58,37 @@ function LoginInner() {
       }
     } catch { setError('Something went wrong. Please try again.'); }
     finally { setLoading(false); }
+  }
+
+  async function handlePhoneLogin(e: React.FormEvent) {
+    e.preventDefault();
+    setError('');
+    const cleanPhone = phone.replace(/\s+/g, '');
+    if (!cleanPhone) {
+      setError('Please enter a phone number.');
+      return;
+    }
+    const fullPhone = countryCode + cleanPhone;
+    setLoading(true);
+    try {
+      if (role === 'expert') {
+        const res = await fetch('/api/auth/astrologer/send-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: fullPhone, purpose: 'login' }),
+        }).then(r => r.json());
+        if (!res.success) { setError(res.message || 'Failed to send OTP.'); return; }
+        router.push(`/verify-otp?phone=${encodeURIComponent(fullPhone)}&type=login&role=expert`);
+      } else {
+        const res = await authApi.sendOtp(fullPhone);
+        if (!res.success) { setError(res.message || 'Failed to send OTP.'); return; }
+        router.push(`/verify-otp?phone=${encodeURIComponent(fullPhone)}&type=login`);
+      }
+    } catch {
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function handleForgotPassword(e: React.FormEvent) {
@@ -217,19 +250,33 @@ function LoginInner() {
             )}
 
             {mode === 'phone' && (
-              <form className="space-y-5">
+              <form onSubmit={handlePhoneLogin} className="space-y-5">
                 <div className="space-y-2">
                   <Label className="text-[#2d1b69] font-medium">Phone Number</Label>
                   <div className="flex rounded-xl overflow-hidden border border-[#FAD058] bg-white/60 backdrop-blur-sm focus-within:ring-2 focus-within:ring-[#FAD058] transition-all shadow-sm">
-                    <div className="flex items-center justify-center pl-4 pr-3 border-r border-[#FAD058]/50 gap-2 bg-white/30">
-                      <Phone className="h-5 w-5 text-[#FAD058]" />
-                      <span className="text-[#2d1b69] font-medium">+91</span>
+                    <div className="flex items-center justify-center pl-4 pr-2 border-r border-[#FAD058]/50 gap-1 bg-white/30 relative">
+                      <Phone className="h-4 w-4 text-[#FAD058]" />
+                      <select 
+                        value={countryCode} 
+                        onChange={(e) => setCountryCode(e.target.value)}
+                        className="appearance-none bg-transparent text-[#2d1b69] font-medium text-sm focus:outline-none cursor-pointer pl-1 pr-4"
+                      >
+                        <option value="+91">🇮🇳 +91</option>
+                        <option value="+1">🇺🇸 +1</option>
+                        <option value="+44">🇬🇧 +44</option>
+                        <option value="+61">🇦🇺 +61</option>
+                        <option value="+971">🇦🇪 +971</option>
+                      </select>
+                      <div className="absolute right-1 pointer-events-none text-[#2d1b69]">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                      </div>
                     </div>
-                    <Input type="tel" placeholder="98765 43210" 
-                      className="flex-1 border-0 bg-transparent py-6 pl-3 text-[#2d1b69] placeholder:text-[#4c1d95]/50 focus-visible:ring-0 rounded-none shadow-none" />
+                    <Input type="tel" placeholder="98765 43210" value={phone} onChange={(e) => setPhone(e.target.value)}
+                      className="flex-1 border-0 bg-transparent py-6 pl-3 text-[#2d1b69] placeholder:text-[#4c1d95]/50 focus-visible:ring-0 rounded-none shadow-none" required />
                   </div>
                 </div>
-                <Button type="button" className="w-full py-6 text-base font-bold rounded-xl border-0 shadow-lg transition-all duration-300 bg-[#7C3AED] hover:bg-[#6D28D9] text-white">
+                <Button type="submit" disabled={loading} className="w-full py-6 text-base font-bold rounded-xl border-0 shadow-lg transition-all duration-300 bg-[#7C3AED] hover:bg-[#6D28D9] text-white">
+                  {loading ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : null}
                   Send OTP <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-[#4c1d95]/70 hover:text-[#2d1b69] transition-colors">
