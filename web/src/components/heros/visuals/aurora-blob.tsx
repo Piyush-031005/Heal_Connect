@@ -88,7 +88,7 @@ export default function AuroraBlob() {
           from { transform: rotate(0deg); }
           to { transform: rotate(-360deg); }
         }
-      }</style>
+      `}</style>
       <div className="absolute inset-0 z-0 pointer-events-none">
         
       </div>
@@ -131,6 +131,7 @@ export default function AuroraBlob() {
     </div>
   );
 }
+
 
 
 
