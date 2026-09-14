@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
-import { authApi, tokenStore } from '@/lib/api';
+import { authApi, tokenStore, astrologerTokenStore } from '@/lib/api';
 
 export default function GoogleCallbackPage() {
   const router = useRouter();
@@ -29,28 +29,41 @@ export default function GoogleCallbackPage() {
         setError(res.message || 'Google sign-in failed');
         return;
       }
-      tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-      
+
+      // Expert signup via Google — needs to complete registration form
+      if ((res.data as any).needsRegistration) {
+        localStorage.setItem('hc_google_auth', (res.data as any).googleAuth);
+        localStorage.setItem('hc_google_name', (res.data as any).googleName);
+        localStorage.setItem('hc_google_email', (res.data as any).googleEmail);
+        router.replace('/expert/signup');
+        return;
+      }
+
       const user = res.data.user;
-      if (user && (user.role === 'practitioner' || user.role === 'expert')) {
+
+      // Expert/Practitioner Google login — goes to astrologer login page
+      // (state=expert or expert_login means they clicked Google on /astrologer/login)
+      if (state === 'expert' || state === 'expert_login') {
+        if (!user) {
+          setError('No expert account found. Please sign up first.');
+          return;
+        }
+        // Store tokens in astrologer token store
+        astrologerTokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
         localStorage.setItem('hc_role', 'practitioner');
         localStorage.setItem('hc_practitioner_id', user.id);
         localStorage.setItem('hc_practitioner_name', user.name ?? '');
-        
-        // Handle redirect from signup state
-        if (state === 'expert_signup' && user.isNew === false) {
-           router.replace('/expert/dashboard');
-        } else if (state === 'expert_signup') {
-           router.replace('/expert/onboarding'); // Let expert finish onboarding if they just signed up
-        } else {
-           router.replace('/expert/dashboard');
-        }
-      } else {
-        localStorage.removeItem('hc_role');
-        localStorage.removeItem('hc_practitioner_id');
-        localStorage.removeItem('hc_practitioner_name');
-        router.replace('/dashboard');
+        // New expert — go to onboarding; existing — go to dashboard
+        router.replace(user.isNew ? '/astrologer/onboarding' : '/astrologer/dashboard');
+        return;
       }
+
+      // Regular user Google login/signup
+      tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+      localStorage.removeItem('hc_role');
+      localStorage.removeItem('hc_practitioner_id');
+      localStorage.removeItem('hc_practitioner_name');
+      router.replace('/dashboard');
     }).catch((err) => {
       setError(`Google sign-in failed. Please try again. [${err.message || String(err)}]`);
     });

@@ -5,12 +5,12 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Loader2, Eye, EyeOff, ArrowRight } from 'lucide-react';
-import { authApi, tokenStore } from '@/lib/api';
+import { astrologerAuthApi, astrologerTokenStore } from '@/lib/api';
 
 function ExpertSignupInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '', dob: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '' });
   const [showPass, setShowPass] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,7 @@ function ExpertSignupInner() {
       setAlreadyRegistered(true);
     }
     // Always clear session on signup page — no backdoor access
-    tokenStore.clear();
+    astrologerTokenStore.clear();
     localStorage.removeItem('hc_role');
     localStorage.removeItem('hc_practitioner_id');
     localStorage.removeItem('hc_pid');
@@ -58,21 +58,16 @@ function ExpertSignupInner() {
       if (form.password !== form.confirm) { setError('Passwords do not match.'); return; }
     }
 
-    if (!form.dob) { setError('Please enter your date of birth.'); return; }
-    const dobDate = new Date(form.dob);
-    const minBirthDate = new Date();
-    minBirthDate.setFullYear(minBirthDate.getFullYear() - 18);
-    if (isNaN(dobDate.getTime()) || dobDate > minBirthDate) {
-      setError('You must be at least 18 years old to create an account.');
-      return;
-    }
-
     setLoading(true);
     try {
-      const res = await authApi.practitionerRegister(
-        form.name, form.email, form.password, form.dob,
-        { acceptTerms: true, acceptPrivacy: true, emailMarketingOptIn: false }
-      );
+      let res;
+      if (isGoogleAuth) {
+        // Google signup — use a dummy password (user will login via Google)
+        const tempPass = `G${Math.random().toString(36).slice(2, 10)}Aa1!`;
+        res = await astrologerAuthApi.register(form.name, form.email, tempPass);
+      } else {
+        res = await astrologerAuthApi.register(form.name, form.email, form.password);
+      }
 
       if (!res.success || !res.data) {
         if (res.message?.toLowerCase().includes('already registered') || res.message?.toLowerCase().includes('already exists')) {
@@ -88,12 +83,9 @@ function ExpertSignupInner() {
       localStorage.removeItem('hc_google_auth');
       localStorage.removeItem('hc_google_name');
       localStorage.removeItem('hc_google_email');
-      tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-      localStorage.setItem('hc_role', 'practitioner');
-      localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
-      localStorage.setItem('hc_pid', res.data.practitioner.id);
-      localStorage.setItem('hc_practitioner_name', res.data.practitioner.name ?? '');
-      router.push('/expert/dashboard');
+      astrologerTokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+      if (res.data.astrologer) astrologerTokenStore.setProfile(res.data.astrologer);
+      router.push('/astrologer/onboarding');
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -159,12 +151,12 @@ function ExpertSignupInner() {
                 <p className="text-amber-700 text-xs mb-3">An expert account with this email already exists. Please log in instead.</p>
                 <button
                   onClick={() => {
-                    tokenStore.clear();
+                    astrologerTokenStore.clear();
                     localStorage.removeItem('hc_role');
                     localStorage.removeItem('hc_practitioner_id');
                     localStorage.removeItem('hc_pid');
                     localStorage.removeItem('hc_practitioner_name');
-                    router.push('/login?role=expert');
+                    router.push('/astrologer/login');
                   }}
                   className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white text-xs font-bold rounded-full transition-colors"
                 >
@@ -185,17 +177,6 @@ function ExpertSignupInner() {
                   <div>
                     <label className="block text-sm font-semibold text-purple-800 mb-1.5">Email <span className="text-red-500">*</span></label>
                     <input className={inputCls + (isGoogleAuth ? ' bg-purple-50 text-purple-500' : '')} type="email" placeholder="you@example.com" value={form.email} onChange={e => !isGoogleAuth && set('email', e.target.value)} readOnly={isGoogleAuth} required />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-purple-800 mb-1.5">Date of Birth <span className="text-red-500">*</span></label>
-                    <input
-                      className={inputCls}
-                      type="date"
-                      value={form.dob}
-                      onChange={e => set('dob', e.target.value)}
-                      required
-                      max={(() => { const d = new Date(); d.setFullYear(d.getFullYear() - 18); return d.toISOString().split('T')[0]; })()}
-                    />
                   </div>
                   {!isGoogleAuth && (<>
                   <div>

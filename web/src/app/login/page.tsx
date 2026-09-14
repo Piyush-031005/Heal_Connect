@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Mail, Lock, ArrowRight, ShieldCheck, Star, Eye, EyeOff, Loader2, User, Sparkles } from 'lucide-react';
+import { Mail, Lock, ArrowRight, ShieldCheck, Star, Eye, EyeOff, Loader2, User, Sparkles, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -15,6 +15,18 @@ import { authApi, tokenStore } from '@/lib/api';
 
 type Role = 'user' | 'expert';
 type Mode = 'login' | 'forgot';
+type LoginMethod = 'email' | 'phone';
+
+// Dial codes for currency detection
+const DIAL_CODES: Record<string, string> = {
+  '+91': 'IN', '+1': 'US', '+44': 'GB', '+971': 'AE', '+966': 'SA',
+  '+61': 'AU', '+65': 'SG', '+60': 'MY', '+92': 'PK', '+880': 'BD',
+  '+977': 'NP', '+94': 'LK', '+64': 'NZ', '+27': 'ZA', '+974': 'QA',
+  '+49': 'DE', '+33': 'FR', '+39': 'IT', '+34': 'ES', '+31': 'NL',
+  '+46': 'SE', '+41': 'CH', '+7': 'RU', '+81': 'JP', '+82': 'KR',
+  '+86': 'CN', '+55': 'BR', '+52': 'MX', '+90': 'TR', '+234': 'NG',
+  '+254': 'KE', '+62': 'ID', '+63': 'PH', '+84': 'VN', '+66': 'TH',
+};
 
 function LoginInner() {
   const router = useRouter();
@@ -25,7 +37,9 @@ function LoginInner() {
     if (searchParams.get('role') === 'expert') setRole('expert');
   }, [searchParams]);
   const [mode, setMode] = useState<Mode>('login');
+  const [loginMethod, setLoginMethod] = useState<LoginMethod>('email');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -38,22 +52,28 @@ function LoginInner() {
     setLoading(true);
     try {
       if (role === 'expert') {
-        const res = await authApi.practitionerLogin(email, password);
-        if (!res.success || !res.data) { setError(res.message || 'Login failed'); return; }
-        tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-        localStorage.setItem('hc_role', 'practitioner');
-        localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
-        localStorage.setItem('hc_practitioner_name', res.data.practitioner.name ?? '');
-        router.push('/expert/dashboard');
-      } else {
-        const res = await authApi.login({ email, password });
-        if (!res.success || !res.data) { setError(res.message || 'Login failed'); return; }
-        tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-        localStorage.removeItem('hc_role');
-        localStorage.removeItem('hc_practitioner_id');
-        localStorage.removeItem('hc_practitioner_name');
-        router.push('/dashboard');
+        router.push('/astrologer/login');
+        return;
       }
+      // Phone OTP login for users
+      if (loginMethod === 'phone') {
+        const cleanPhone = phone.replace(/\s+/g, '');
+        const res = await authApi.requestLoginOtp(cleanPhone, 'user', 'login');
+        if (!res.success) { setError((res as any).message || 'Failed to send OTP.'); return; }
+        // Save country code for currency detection
+        const dialCode = Object.keys(DIAL_CODES).sort((a, b) => b.length - a.length).find(dc => cleanPhone.startsWith(dc));
+        if (dialCode) localStorage.setItem('hc_country_code', dialCode);
+        router.push(`/verify-otp?phone=${encodeURIComponent(cleanPhone)}&type=login&role=user`);
+        return;
+      }
+      // Email/password login
+      const res = await authApi.login({ email, password });
+      if (!res.success || !res.data) { setError(res.message || 'Login failed'); return; }
+      tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+      localStorage.removeItem('hc_role');
+      localStorage.removeItem('hc_practitioner_id');
+      localStorage.removeItem('hc_practitioner_name');
+      router.push('/dashboard');
     } catch { setError('Something went wrong. Please try again.'); }
     finally { setLoading(false); }
   }
@@ -168,31 +188,68 @@ function LoginInner() {
 
             {mode === 'login' && (
               <form onSubmit={handleLogin} className="space-y-5">
-                <div className="space-y-2">
-                  <Label className="text-white">Email address</Label>
-                  <div className="relative group">
-                    <Mail className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
-                    <Input type="email" required placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)}
-                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-[#4c1d95]/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Label className="text-white">Password</Label>
-                    <button type="button" onClick={() => { setMode('forgot'); setError(''); setSuccess(''); }} className="text-sm font-semibold text-accent hover:text-accent/80 transition-colors">
-                      Forgot password?
+                {/* Email/Phone tabs — only for user role */}
+                {role === 'user' && (
+                  <div className="flex rounded-xl border border-purple-200 overflow-hidden bg-black/5 p-1 gap-1">
+                    <button type="button" onClick={() => { setLoginMethod('email'); setError(''); }}
+                      className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                        loginMethod === 'email' ? 'bg-[#7C3AED] text-white shadow' : 'text-[#4c1d95]/70 hover:text-white'}`}>
+                      <Mail className="w-4 h-4" /> Email
+                    </button>
+                    <button type="button" onClick={() => { setLoginMethod('phone'); setError(''); }}
+                      className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                        loginMethod === 'phone' ? 'bg-[#7C3AED] text-white shadow' : 'text-[#4c1d95]/70 hover:text-white'}`}>
+                      <Phone className="w-4 h-4" /> Phone
                     </button>
                   </div>
-                  <div className="relative group">
-                    <Lock className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
-                    <Input type={showPassword ? 'text' : 'password'} required placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} className="pl-10 pr-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-white/40 focus-visible:ring-purple-400 focus-visible:border-purple-400 rounded-xl" />
-                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-[#4c1d95]/70 hover:text-white transition-colors">
-                      {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                    </button>
+                )}
+
+                {(role === 'expert' || loginMethod === 'email') && (
+                  <>
+                    <div className="space-y-2">
+                      <Label className="text-white">Email address</Label>
+                      <div className="relative group">
+                        <Mail className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
+                        <Input type="email" required placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)}
+                          className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-[#4c1d95]/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
+                      </div>
+                    </div>
+                    {role === 'user' && (
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <Label className="text-white">Password</Label>
+                          <button type="button" onClick={() => { setMode('forgot'); setError(''); setSuccess(''); }} className="text-sm font-semibold text-accent hover:text-accent/80 transition-colors">
+                            Forgot password?
+                          </button>
+                        </div>
+                        <div className="relative group">
+                          <Lock className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
+                          <Input type={showPassword ? 'text' : 'password'} required placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} className="pl-10 pr-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-white/40 focus-visible:ring-purple-400 focus-visible:border-purple-400 rounded-xl" />
+                          <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-[#4c1d95]/70 hover:text-white transition-colors">
+                            {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+
+                {role === 'user' && loginMethod === 'phone' && (
+                  <div className="space-y-2">
+                    <Label className="text-white">Phone Number</Label>
+                    <div className="relative group">
+                      <Phone className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
+                      <Input type="tel" required placeholder="+919876543210" value={phone} onChange={e => setPhone(e.target.value)}
+                        className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-[#4c1d95]/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
+                    </div>
+                    <p className="text-xs text-[#4c1d95]/60">Include country code, e.g. +91 for India</p>
                   </div>
-                </div>
+                )}
+
                 <Button type="submit" disabled={loading} className="w-full py-6 text-base font-bold rounded-md border-0 shadow-lg transition-all duration-300 bg-[#7C3AED] hover:bg-[#6D28D9] text-white">
-                  {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>{role === 'expert' ? 'Log in as Expert' : 'Log in'} <ArrowRight className="ml-2 h-5 w-5" /></>}
+                  {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : (
+                    <>{role === 'expert' ? 'Go to Expert Login' : loginMethod === 'phone' ? 'Send OTP' : 'Log in'} <ArrowRight className="ml-2 h-5 w-5" /></>
+                  )}
                 </Button>
               </form>
             )}
