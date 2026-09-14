@@ -138,11 +138,11 @@ function LoginInner() {
 
         <Card className="w-full max-w-md bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-purple-200 shadow-2xl rounded-2xl overflow-hidden">
           <CardHeader className="space-y-2 pb-6 border-b border-purple-200 bg-white/50 border-b border-purple-200">
-            <CardTitle className="text-2xl font-bold text-white tracking-wide">
-              {mode === 'login' ? 'Log in to your account' : 'Reset your password'}
+            <CardTitle className="text-2xl font-bold text-[#2d1b69] tracking-wide">
+              {mode === 'login' ? 'Log in to your account' : mode === 'forgot' ? 'Reset your password' : 'Log in with Phone'}
             </CardTitle>
             <CardDescription className="text-[#4c1d95]/70 text-base">
-              {mode === 'login' ? 'Welcome back! Enter your credentials to continue.' : 'Enter your email to receive a password reset link.'}
+              {mode === 'login' ? 'Welcome back! Enter your credentials to continue.' : mode === 'forgot' ? 'Enter your email to receive a password reset link.' : 'Enter your mobile number to receive a secure OTP.'}
             </CardDescription>
           </CardHeader>
 
@@ -219,11 +219,11 @@ function LoginInner() {
             {mode === 'phone' && (
               <form className="space-y-5">
                 <div className="space-y-2">
-                  <Label className="text-[#2d1b69]">Phone Number</Label>
+                  <Label className="text-[#2d1b69] font-medium">Phone Number</Label>
                   <div className="relative group">
-                    <Phone className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
+                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-[22px] w-[22px] text-[#FAD058] transition-colors" />
                     <Input type="tel" placeholder="+91 98765 43210" 
-                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-[#2d1b69] placeholder:text-[#4c1d95]/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
+                      className="pl-12 py-6 bg-white/60 backdrop-blur-sm border-[#FAD058] text-[#2d1b69] placeholder:text-[#4c1d95]/50 focus-visible:ring-[#FAD058] focus-visible:border-[#FAD058] rounded-xl shadow-sm" />
                   </div>
                 </div>
                 <Button type="button" className="w-full py-6 text-base font-bold rounded-xl border-0 shadow-lg transition-all duration-300 bg-[#7C3AED] hover:bg-[#6D28D9] text-white">
