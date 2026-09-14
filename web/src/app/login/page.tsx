@@ -220,10 +220,13 @@ function LoginInner() {
               <form className="space-y-5">
                 <div className="space-y-2">
                   <Label className="text-[#2d1b69] font-medium">Phone Number</Label>
-                  <div className="relative group">
-                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-[22px] w-[22px] text-[#FAD058] transition-colors" />
-                    <Input type="tel" placeholder="+91 98765 43210" 
-                      className="pl-12 py-6 bg-white/60 backdrop-blur-sm border-[#FAD058] text-[#2d1b69] placeholder:text-[#4c1d95]/50 focus-visible:ring-[#FAD058] focus-visible:border-[#FAD058] rounded-xl shadow-sm" />
+                  <div className="flex rounded-xl overflow-hidden border border-[#FAD058] bg-white/60 backdrop-blur-sm focus-within:ring-2 focus-within:ring-[#FAD058] transition-all shadow-sm">
+                    <div className="flex items-center justify-center pl-4 pr-3 border-r border-[#FAD058]/50 gap-2 bg-white/30">
+                      <Phone className="h-5 w-5 text-[#FAD058]" />
+                      <span className="text-[#2d1b69] font-medium">+91</span>
+                    </div>
+                    <Input type="tel" placeholder="98765 43210" 
+                      className="flex-1 border-0 bg-transparent py-6 pl-3 text-[#2d1b69] placeholder:text-[#4c1d95]/50 focus-visible:ring-0 rounded-none shadow-none" />
                   </div>
                 </div>
                 <Button type="button" className="w-full py-6 text-base font-bold rounded-xl border-0 shadow-lg transition-all duration-300 bg-[#7C3AED] hover:bg-[#6D28D9] text-white">
