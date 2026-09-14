@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import GhostFibers from '@/components/GhostFibers';
 
 import { useEffect, useState, useCallback } from 'react';
@@ -78,8 +78,8 @@ export default function PractitionersPage() {
   return (
     <div className="min-h-screen flex flex-col font-sans relative overflow-hidden" style={{background:"linear-gradient(145deg, #F5F0FF 0%, #EDE9FE 20%, #DDD6FE 45%, #C4B5FD 70%, #A5B4FC 100%)"}}>
       {/* GhostFibers cinematic background */}
-      <div className="absolute inset-0 pointer-events-none z-0 opacity-85">
-        <GhostFibers lineColor="#8345bd" glowColor="#7c41e0" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={4} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={7} twistSpeed={1.5} lineFrequency={10} lineSpacing={1.0} lineSharpness={13} glowFalloff={7} glowIntensity={2.5} brightness={3.0} blueBoost={1.5} vignette={0.5} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-100">
+        <GhostFibers lineColor="#8345bd" glowColor="#7c41e0" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={8} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={7} twistSpeed={1.5} lineFrequency={20} lineSpacing={1.0} lineSharpness={13} glowFalloff={7} glowIntensity={3.5} brightness={3.0} blueBoost={1.5} vignette={0.5} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
       </div>
       {/* Glowing orbs for positive vibe */}
       {/* Glowing orbs for positive vibe */}
@@ -203,7 +203,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
   const avatarSrc = getPractitionerAvatar(p.photoUrl, p.id);
 
   return (
-    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-border hover:border-primary/50 hover:shadow-[0_8px_30px_rgba(214,80,07,0.15)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
+    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-white/70 backdrop-blur-2xl border border-white/60 hover:border-purple-300 hover:shadow-[0_12px_40px_rgba(124,58,237,0.25)] shadow-[0_4px_20px_rgba(124,58,237,0.12)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
       <CardContent className="p-0 flex flex-col h-full relative">
         {/* Top strip with avatar */}
         <div className="relative h-20 bg-gradient-to-r from-white/5 to-white/10 shrink-0">
