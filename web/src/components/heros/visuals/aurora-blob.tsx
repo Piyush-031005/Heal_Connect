@@ -79,10 +79,20 @@ export default function AuroraBlob() {
 
   return (
     <div className="relative w-[650px] h-[650px] flex items-center justify-center scale-85 lg:scale-100">
+            <style>{
+        @keyframes custom-spin {
+          from { transform: translateY(-32px) rotate(0deg); }
+          to { transform: translateY(-32px) rotate(360deg); }
+        }
+        @keyframes custom-spin-reverse {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(-360deg); }
+        }
+      }</style>
       <div className="absolute inset-0 z-0 pointer-events-none">
         
       </div>
-      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none -translate-y-8 animate-[spin_80s_linear_infinite]">
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none" style={{ animation: "custom-spin 80s linear infinite" }}>
         {MODALITIES.map((mod, i) => {
           const total = MODALITIES.length;
           const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
@@ -91,7 +101,7 @@ export default function AuroraBlob() {
           const y = Math.sin(angle) * r;
           return (
             <div key={`label-${mod.id}`} className="absolute" style={{ transform: `translate(${x}px, ${y}px)` }}>
-              <div className="pointer-events-auto cursor-pointer group animate-[spin_80s_linear_infinite_reverse]" onClick={() => router.push(`/modalities/${mod.id}`)}>
+              <div className="pointer-events-auto cursor-pointer group" style={{ animation: "custom-spin-reverse 80s linear infinite" }} onClick={() => router.push(`/modalities/${mod.id}`)}>
                 <div className="flex items-center gap-2 px-3 py-1.5 transition-all duration-300 hover:scale-110">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#3A247A]/70 group-hover:bg-[#5F3BA9] shadow-[0_0_8px_rgba(95,59,169,0.5)] transition-colors" />
                   <span className="text-[10px] sm:text-xs tracking-[0.2em] font-bold text-[#3A247A] group-hover:text-[#1E2059] uppercase transition-colors drop-shadow-md">{mod.name}</span>
@@ -121,6 +131,7 @@ export default function AuroraBlob() {
     </div>
   );
 }
+
 
 
 
