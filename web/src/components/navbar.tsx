@@ -86,8 +86,7 @@ export default function Navbar() {
     if (astroToken) {
       const profile = astrologerTokenStore.getProfile();
       if (profile) {
-        setUserProfile({ photoUrl: profile.photoUrl ?? null, role: 'astrologer', id: profile.id, name: profile.name ?? null });
-        return;
+        setUserProfile({ photoUrl: (profile as any).photoUrl ?? null, role: 'astrologer', id: profile.id, name: profile.displayName ?? null });
       }
       astrologerApi.getApplication(astroToken).then((res) => {
         if (res.success && res.data?.profile) {
