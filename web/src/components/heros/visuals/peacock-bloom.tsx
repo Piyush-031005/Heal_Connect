@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const MODALITIES = [
@@ -47,7 +47,7 @@ export default function PeacockBloom() {
 
         {/* Layer 11: Floor Shadow */}
         <div className="absolute bottom-[120px] w-[400px] h-[80px] blur-[30px]" style={{
-          background: 'radial-gradient(ellipse, rgba(74,45₹63,.28), transparent 70%)'
+          background: 'radial-gradient(ellipse, rgba(74,45â‚¹63,.28), transparent 70%)'
         }} />
 
         {/* Layer 4: Lotus Glow */}
@@ -95,8 +95,8 @@ export default function PeacockBloom() {
               style={{
                 opacity: 0.88,
                 filter: 'brightness(0.95) contrast(1.1) saturate(1.1) drop-shadow(0 0 40px rgba(160,20,255,0.4))',
-                WebkitMaskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0₹) 40%, rgba(0,0,0,0) 75%)',
-                maskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0₹) 40%, rgba(0,0,0,0) 75%)',
+                  WebkitMaskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%)',
+                  maskImage: 'radial-gradient(ellipse at 50% 60%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%)',
                 mixBlendMode: 'normal'
               }}
             />
@@ -119,8 +119,8 @@ export default function PeacockBloom() {
           <svg width="300" height="200" viewBox="0 0 300 200" className="opacity-80">
             {/* A couple of petals overlapping the foreground */}
             <path d="M150,200 C120,80 180,80 150,200" fill="url(#petalGradForeground1)" opacity="0.18" />
-            <path d="M150,200 C90₹10 130,50 150,200" fill="url(#petalGradForeground2)" opacity="0.15" />
-            <path d="M150,200 C210₹10 170,50 150,200" fill="url(#petalGradForeground3)" opacity="0.2" />
+            <path d="M150,200 C90â‚¹10 130,50 150,200" fill="url(#petalGradForeground2)" opacity="0.15" />
+            <path d="M150,200 C210â‚¹10 170,50 150,200" fill="url(#petalGradForeground3)" opacity="0.2" />
             
             <defs>
               <linearGradient id="petalGradForeground1" x1="0" y1="0" x2="0" y2="1">
