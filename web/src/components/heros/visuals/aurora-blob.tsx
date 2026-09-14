@@ -114,8 +114,8 @@ export default function AuroraBlob() {
             style={{
               opacity: 0.85,
               filter: 'brightness(0.9) contrast(1.15) saturate(1.2) drop-shadow(0 0 50px rgba(160,20,255,0.6))',
-              WebkitMaskImage: 'radial-gradient(circle at 50% 50%, black 55%, transparent 85%)',
-              maskImage: 'radial-gradient(circle at 50% 50%, black 55%, transparent 85%)',
+              WebkitMaskImage: 'radial-gradient(circle at 50% 50%, black 46%, transparent 75%)',
+              maskImage: 'radial-gradient(circle at 50% 50%, black 46%, transparent 75%)',
 
               mixBlendMode: 'lighten'
             }}
@@ -125,6 +125,7 @@ export default function AuroraBlob() {
     </div>
   );
 }
+
 
 
 

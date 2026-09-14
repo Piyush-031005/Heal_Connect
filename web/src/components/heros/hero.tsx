@@ -8,7 +8,8 @@ import AuroraBlob from '@/components/heros/visuals/aurora-blob';
 // --- PRIMARY LAYOUT HERO (Locked) ---
 function PrimaryHero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-32 lg:pb-32 min-h-[90vh] flex items-center" style={{ background: 'linear-gradient(135deg, #E6D5FC 0%, #D8B4FE 40%, #C084FC 70%, #A855F7 100%)', color: '#1e1b4b' }}>
+    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-32 lg:pb-32 min-h-[90vh] flex items-center" style={{ background: 'linear-gradient(135deg, #F9F5FF 0%, #E9D5FF 40%, #D8B4FE 70%, #B794F4 100%)', color: '#1e1b4b' }}>
+      <GhostFibers className="opacity-50 mix-blend-multiply" lineColor="#6B46C1" glowColor="#9F7AEA" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={4} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={7} twistSpeed={1.5} lineFrequency={10} lineSpacing={1.0} lineSharpness={13} glowFalloff={7} glowIntensity={2.5} brightness={3.0} blueBoost={1.5} vignette={0.5} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
       
 
       <div className="container mx-auto px-6 relative z-10">
@@ -79,5 +80,6 @@ function PrimaryHero() {
 export default function Hero() {
   return <PrimaryHero />;
 }
+
 
 
