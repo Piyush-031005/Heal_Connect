@@ -265,7 +265,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
             {/* Price, Chat, and Call Below */}
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-xl font-bold text-[#2d1b69]">₹{p.price}</span>
+                <span className="text-xl font-bold text-[#2d1b69]">₹{p.perMinuteRate}</span>
                 <span className="text-xs text-[#4c1d95] ml-1">/min</span>
               </div>
               <div className="flex gap-2">
