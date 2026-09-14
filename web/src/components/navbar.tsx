@@ -86,8 +86,7 @@ export default function Navbar() {
     if (astroToken) {
       const profile = astrologerTokenStore.getProfile();
       if (profile) {
-        setUserProfile({ photoUrl: profile.photoUrl ?? null, role: 'astrologer', id: profile.id, name: profile.name ?? null });
-        return;
+        setUserProfile({ photoUrl: (profile as any).photoUrl ?? null, role: 'astrologer', id: profile.id, name: profile.displayName ?? null });
       }
       astrologerApi.getApplication(astroToken).then((res) => {
         if (res.success && res.data?.profile) {
@@ -376,7 +375,7 @@ export default function Navbar() {
             )}
 
             {/* Layout Dropdown */}
-            <div className="relative" ref={layoutRef}>
+            <div className="relative hidden sm:block" ref={layoutRef}>
               <button
                 onClick={() => setLayoutOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border text-muted-foreground transition-all ${
@@ -416,8 +415,8 @@ export default function Navbar() {
               )}
             </div>
 
-                        {/* Theme Dropdown */}
-            <div className="relative" ref={themeRef}>
+            {/* Theme Dropdown */}
+            <div className="relative hidden sm:block" ref={themeRef}>
               <button
                 onClick={() => setThemeOpen((p) => !p)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all ${

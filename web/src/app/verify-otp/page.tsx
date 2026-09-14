@@ -5,21 +5,11 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Loader2, CheckCircle2, Phone, RotateCcw } from 'lucide-react';
+import { tokenStore, astrologerTokenStore } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const API_URL = '';
-
-// Dial code to country mapping for currency detection
-const DIAL_CODES: Record<string, string> = {
-  '+91': 'IN', '+1': 'US', '+44': 'GB', '+971': 'AE', '+966': 'SA',
-  '+61': 'AU', '+65': 'SG', '+60': 'MY', '+92': 'PK', '+880': 'BD',
-  '+977': 'NP', '+94': 'LK', '+64': 'NZ', '+27': 'ZA', '+974': 'QA',
-  '+49': 'DE', '+33': 'FR', '+39': 'IT', '+34': 'ES', '+31': 'NL',
-  '+46': 'SE', '+41': 'CH', '+7': 'RU', '+81': 'JP', '+82': 'KR',
-  '+86': 'CN', '+55': 'BR', '+52': 'MX', '+90': 'TR', '+234': 'NG',
-  '+254': 'KE', '+62': 'ID', '+63': 'PH', '+84': 'VN', '+66': 'TH',
-};
 
 function VerifyOtpContent() {
   const searchParams = useSearchParams();
@@ -27,8 +17,8 @@ function VerifyOtpContent() {
   const rawPhone = searchParams.get('phone') ?? '';
   // Ensure the + prefix is preserved (URL encoding can sometimes lose it)
   const phone = rawPhone && !rawPhone.startsWith('+') ? `+${rawPhone}` : rawPhone;
-  const type = searchParams.get('type') ?? 'verify'; // 'login' | 'verify'
-  const role = searchParams.get('role') ?? 'user';   // 'user' | 'expert'
+  const type = searchParams.get('type') ?? '';
+  const role = searchParams.get('role') ?? 'user';
 
   // 6 individual digit inputs
   const [digits,   setDigits]   = useState<string[]>(Array(6).fill(''));
@@ -71,66 +61,35 @@ function VerifyOtpContent() {
     setLoading(true);
 
     try {
-      // Expert OTP login — use astrologer verify-otp endpoint
+      let endpoint = `${API_URL}/api/auth/verify-otp`;
       if (role === 'expert') {
-        const res = await fetch(`${API_URL}/api/auth/astrologer/verify-otp`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phone, otp, purpose: 'login' }),
-        });
-        const data = await res.json() as { success: boolean; message: string; data?: any };
-        if (data.success && data.data) {
-          // Save country code for currency detection
-          const dialCode = Object.keys(DIAL_CODES).sort((a, b) => b.length - a.length).find(dc => phone.startsWith(dc));
-          if (dialCode) localStorage.setItem('hc_country_code', dialCode);
-          const { astrologerTokenStore } = await import('@/lib/api');
-          astrologerTokenStore.setTokens(data.data.accessToken, data.data.refreshToken);
-          if (data.data.astrologer) astrologerTokenStore.setProfile(data.data.astrologer);
-          setSuccess(true);
-          setTimeout(() => router.push(data.data.redirect || '/astrologer/onboarding'), 1500);
-        } else {
-          setError(data.message || 'Invalid OTP. Please try again.');
-          setDigits(Array(6).fill(''));
-          inputRefs.current[0]?.focus();
-        }
-        return;
+        endpoint = `${API_URL}/api/auth/astrologer/verify-otp`;
       }
 
-      // User phone OTP login
-      if (type === 'login') {
-        const res = await fetch(`${API_URL}/api/auth/login-otp/verify`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phone, otp, role: 'user' }),
-        });
-        const data = await res.json() as { success: boolean; message: string; data?: any };
-        if (data.success && data.data) {
-          // Save country code for currency detection
-          const dialCode = Object.keys(DIAL_CODES).sort((a, b) => b.length - a.length).find(dc => phone.startsWith(dc));
-          if (dialCode) localStorage.setItem('hc_country_code', dialCode);
-          const { tokenStore } = await import('@/lib/api');
-          tokenStore.setTokens(data.data.accessToken, data.data.refreshToken);
-          setSuccess(true);
-          setTimeout(() => router.push('/dashboard'), 1500);
-        } else {
-          setError(data.message || 'Invalid OTP. Please try again.');
-          setDigits(Array(6).fill(''));
-          inputRefs.current[0]?.focus();
-        }
-        return;
-      }
-
-      // Default: phone number verification flow
-      const res  = await fetch(`${API_URL}/api/auth/verify-otp`, {
+      const res  = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone, otp }),
+        body: JSON.stringify({ phone, otp, purpose: type }),
       });
-      const data = await res.json() as { success: boolean; message: string };
+      const data = await res.json() as any;
 
       if (data.success) {
         setSuccess(true);
-        setTimeout(() => router.push('/login'), 2500);
+        // Save country code for currency detection
+        const dialCode = Object.keys({'+91':'IN','+1':'US','+44':'GB','+971':'AE','+966':'SA','+61':'AU','+65':'SG','+60':'MY','+92':'PK','+880':'BD','+977':'NP','+94':'LK','+64':'NZ','+27':'ZA','+974':'QA','+49':'DE','+33':'FR','+39':'IT','+34':'ES','+31':'NL','+46':'SE','+41':'CH','+7':'RU','+81':'JP','+82':'KR','+86':'CN','+55':'BR','+52':'MX','+90':'TR','+234':'NG','+254':'KE','+62':'ID','+63':'PH','+84':'VN','+66':'TH'}).sort((a,b)=>b.length-a.length).find(dc=>phone.startsWith(dc));
+        if (dialCode) localStorage.setItem('hc_country_code', dialCode);
+        if (data.data?.accessToken) {
+          if (role === 'expert') {
+            astrologerTokenStore.setTokens(data.data.accessToken, data.data.refreshToken);
+            if (data.data.astrologer) astrologerTokenStore.setProfile(data.data.astrologer);
+            setTimeout(() => router.push(data.data.redirect || '/astrologer/onboarding'), 1500);
+          } else {
+            tokenStore.setTokens(data.data.accessToken, data.data.refreshToken);
+            setTimeout(() => router.push('/dashboard'), 1500);
+          }
+        } else {
+          setTimeout(() => router.push('/login'), 2500);
+        }
       } else {
         setError(data.message || 'Invalid OTP. Please try again.');
         setDigits(Array(6).fill(''));
@@ -149,10 +108,15 @@ function VerifyOtpContent() {
     setError('');
 
     try {
-      await fetch(`${API_URL}/api/auth/resend-otp`, {
+      let endpoint = `${API_URL}/api/auth/resend-otp`;
+      if (role === 'expert') {
+        endpoint = `${API_URL}/api/auth/astrologer/send-otp`;
+      }
+
+      await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({ phone, purpose: type }),
       });
     } catch {}
 
@@ -174,12 +138,13 @@ function VerifyOtpContent() {
     return (
       <div className="text-center max-w-md space-y-6">
         <CheckCircle2 className="h-16 w-16 text-emerald-500 mx-auto" />
-        <h1 className="text-2xl font-bold text-[#1a1a1a]">
-          {type === 'login' || role === 'expert' ? 'Login Successful!' : 'Phone Verified!'}
-        </h1>
-        <p className="text-purple-500">
-          {type === 'login' || role === 'expert' ? 'Redirecting to your dashboard...' : 'Your number has been verified. Redirecting to login...'}
-        </p>
+        <h1 className="text-2xl font-bold text-[#1a1a1a]">Phone Verified!</h1>
+        <p className="text-purple-500">Your number has been verified. Redirecting to login...</p>
+        <Link href="/login">
+          <Button className="bg-[#4f46e5] hover:bg-[#d97706] text-white border-0 rounded-full px-8">
+            Go to Login
+          </Button>
+        </Link>
       </div>
     );
   }
