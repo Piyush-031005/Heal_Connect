@@ -75,39 +75,58 @@ export default function HomeScreen() {
       <StatusBar barStyle="light-content" />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
 
-        {/* HERO SECTION with Lightfall */}
-        <View style={styles.heroContainer}>
-          <View style={StyleSheet.absoluteFillObject}>
-            <Lightfall colors={["#A6C8FF","#5227FF","#FF9FFC"]} backgroundColor="#8e6dc6" speed={0.4} streakCount={2} streakWidth={1} streakLength={1} glow={1} density={0.5} twinkle={1} zoom={3} backgroundGlow={0.5} opacity={1} mouseInteraction={true} mouseStrength={0.5} mouseRadius={1} lightMode={true} />
-          </View>
-          <SafeAreaView>
-            <Animated.View style={[styles.heroContent, animatedHero]}>
+        {/* HERO SECTION with Cinematic Lightfall */}
+          <View style={styles.heroContainer}>
+            <View style={StyleSheet.absoluteFillObject}>
+              <Lightfall 
+                colors={['#A6C8FF', '#5227FF', '#FF9FFC']}
+                backgroundColor="#0F0723" 
+                speed={0.5}
+                streakCount={2}
+                streakWidth={1}
+                streakLength={1}
+                glow={1}
+                density={0.6}
+                twinkle={1}
+                zoom={3}
+                backgroundGlow={0.5}
+                opacity={1}
+                mouseInteraction={true}
+                mouseStrength={0.5}
+                mouseRadius={1}
+                lightMode={false} 
+              />
+            </View>
+            <LinearGradient 
+              colors={["transparent", "rgba(15,7,35,0.7)", "#F5F3FF"]} 
+              style={StyleSheet.absoluteFillObject}
+              locations={[0.5, 0.9, 1]}
+              pointerEvents="none"
+            />
+            
+            <SafeAreaView style={{ flex: 1, justifyContent: 'space-between' }}>
               <View style={styles.heroHeader}>
-                <View>
-                  <Text style={styles.heroGreeting}>Good morning ✨</Text>
-                  <Text style={styles.heroTitle}>Find your guide{"\n"}to inner peace.</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                  <Text style={{ color: "#FFF", fontSize: 18, fontWeight: "700", letterSpacing: 1 }}>ZENAURAA</Text>
                 </View>
                 <TouchableOpacity style={styles.bellBtn}>
-                  <Bell size={22} color="#fff" />
+                  <Bell size={20} color="#fff" />
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity style={styles.heroSearch} onPress={() => router.push("/(tabs)/explore")} activeOpacity={0.9}>
-                <Search size={18} color={TEXT_MUTED} />
-                <Text style={styles.heroSearchText}>Search practitioners…</Text>
-              </TouchableOpacity>
-              <View style={styles.heroStats}>
-                {[["50K+","Members"],["4.9★","Rating"],["200+","Experts"]].map(([val, sub]) => (
-                  <View key={val} style={styles.heroStatChip}>
-                    <Text style={styles.heroStatVal}>{val}</Text>
-                    <Text style={styles.heroStatSub}>{sub}</Text>
-                  </View>
-                ))}
-              </View>
-            </Animated.View>
-          </SafeAreaView>
-        </View>
 
-        {/* DAILY QUOTE */}
+              <Animated.View style={[styles.heroContent, animatedHero]}>
+                <View style={styles.badgeContainer}>
+                  <Sparkles size={14} color="#FF9FFC" />
+                  <Text style={styles.badgeText}>Your Smart Guide</Text>
+                </View>
+                <Text style={styles.heroTitle}>Elevate your{"
+"}inner peace.</Text>
+                <Text style={styles.heroSubtitle}>Instant spiritual guidance, anytime. Connect with our AI or verified experts.</Text>
+              </Animated.View>
+            </SafeAreaView>
+          </View>
+
+          {/* DAILY QUOTE */}
         <Animated.View style={[styles.quoteCard, animatedCard]}>
           <LinearGradient colors={["#7C3AED","#8B5CF6"]} start={{x:0,y:0}} end={{x:1,y:1}} style={styles.quoteGradient}>
             <Text style={styles.quoteIcon}>✦</Text>
@@ -211,11 +230,13 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  heroContainer: { height: 300, overflow: "hidden" },
-  heroContent: { paddingHorizontal: 20, paddingTop: Platform.OS === "android" ? 16 : 8, paddingBottom: 24 },
-  heroHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 },
-  heroGreeting: { fontSize: 14, color: "rgba(255,255,255,0.85)", fontWeight: "500", marginBottom: 4 },
-  heroTitle: { fontSize: 26, fontWeight: "800", color: "#fff", lineHeight: 32 },
+  heroContainer: { height: 480, overflow: "hidden", backgroundColor: "#0F0723", borderBottomLeftRadius: 30, borderBottomRightRadius: 30 },
+  heroContent: { paddingHorizontal: 24, paddingBottom: 40, alignItems: "center" },
+  heroHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 24, paddingTop: Platform.OS === "android" ? 16 : 8 },
+  badgeContainer: { flexDirection: "row", alignItems: "center", gap: 6, backgroundColor: "rgba(255,255,255,0.1)", paddingHorizontal: 12, paddingVertical: 6, borderRadius: 20, marginBottom: 16, borderWidth: 1, borderColor: "rgba(255,255,255,0.15)" },
+    badgeText: { color: "#E2E8F0", fontSize: 12, fontWeight: "600", letterSpacing: 0.5 },
+  heroTitle: { fontSize: 36, fontWeight: "800", color: "#FFFFFF", textAlign: "center", lineHeight: 42, letterSpacing: -0.5, marginBottom: 12 },
+    heroSubtitle: { fontSize: 14, color: "rgba(255,255,255,0.7)", textAlign: "center", lineHeight: 22, paddingHorizontal: 10 },
   bellBtn: { width: 42, height: 42, borderRadius: 21, backgroundColor: "rgba(255,255,255,0.2)", alignItems: "center", justifyContent: "center" },
   heroSearch: { flexDirection: "row", alignItems: "center", backgroundColor: "rgba(255,255,255,0.95)", borderRadius: 16, paddingHorizontal: 16, paddingVertical: 13, gap: 10, marginBottom: 16, shadowColor: "#000", shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.1, shadowRadius: 8, elevation: 4 },
   heroSearchText: { fontSize: 14, color: TEXT_MUTED },
