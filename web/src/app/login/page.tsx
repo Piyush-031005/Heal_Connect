@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Mail, Lock, ArrowRight, ShieldCheck, Star, Eye, EyeOff, Loader2, User, Sparkles } from 'lucide-react';
+import { Mail, Lock, ArrowRight, ShieldCheck, Star, Eye, EyeOff, Loader2, User, Sparkles, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -14,7 +14,7 @@ import { Label } from '@/components/ui/label';
 import { authApi, tokenStore } from '@/lib/api';
 
 type Role = 'user' | 'expert';
-type Mode = 'login' | 'forgot';
+type Mode = 'login' | 'forgot' | 'phone';
 
 function LoginInner() {
   const router = useRouter();
@@ -211,7 +211,26 @@ function LoginInner() {
                   {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Send Reset Link'}
                 </Button>
                 <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-[#4c1d95]/70 hover:text-white transition-colors">
-                  ? Back to login
+                  ← Back to login
+                </button>
+              </form>
+            )}
+
+            {mode === 'phone' && (
+              <form className="space-y-5">
+                <div className="space-y-2">
+                  <Label className="text-white">Phone Number</Label>
+                  <div className="relative group">
+                    <Phone className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
+                    <Input type="tel" placeholder="+91 98765 43210" 
+                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-[#4c1d95]/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
+                  </div>
+                </div>
+                <Button type="button" className="w-full py-6 text-base font-bold rounded-xl border-0 shadow-lg transition-all duration-300 bg-[#7C3AED] hover:bg-[#6D28D9] text-white">
+                  Send OTP <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-[#4c1d95]/70 hover:text-white transition-colors">
+                  ← Back to login
                 </button>
               </form>
             )}
@@ -224,6 +243,10 @@ function LoginInner() {
                   <div className="flex-grow border-t border-purple-200" />
                 </div>
                 <div className="space-y-3">
+                  <Button type="button" variant="outline" onClick={() => setMode('phone')} className="w-full py-6 bg-white/40 backdrop-blur-sm border-purple-200 hover:bg-white/40 backdrop-blur-sm border-purple-200 text-white shadow-sm transition-all rounded-xl">
+                    <Phone className="mr-3 h-5 w-5 text-white" />
+                    Continue with Phone
+                  </Button>
                   <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full py-6 bg-white/40 backdrop-blur-sm border-purple-200 hover:bg-white/40 backdrop-blur-sm border-purple-200 text-white shadow-sm transition-all rounded-xl">
                     <svg className="mr-3 h-5 w-5" viewBox="0 0 24 24">
                       <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
