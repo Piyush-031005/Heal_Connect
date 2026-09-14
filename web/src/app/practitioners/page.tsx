@@ -204,7 +204,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
   const avatarSrc = getPractitionerAvatar(p.photoUrl, p.id);
 
   return (
-    <Card onClick={() => router.push(/practitioners/)} className="bg-[#A78BFA]/95 backdrop-blur-2xl border-2 border-white/20 hover:border-white/50 hover:shadow-[0_12px_40px_rgba(167,139,250,0.4)] shadow-[0_4px_20px_rgba(167,139,250,0.2)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
+    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-[#A78BFA]/95 backdrop-blur-2xl border-2 border-white/20 hover:border-white/50 hover:shadow-[0_12px_40px_rgba(167,139,250,0.4)] shadow-[0_4px_20px_rgba(167,139,250,0.2)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
       <CardContent className="p-0 flex flex-col h-full relative">
         {/* Top strip with avatar */}
         <div className="relative h-20 bg-white/10 shrink-0 border-b border-white/10">
@@ -212,8 +212,10 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
             <img src={avatarSrc} alt={p.name} className="w-16 h-16 rounded-2xl object-cover shadow-[0_4px_15px_rgba(0,0,0,0.3)] border-2 border-white transition-transform duration-300 group-hover:scale-105" />
           </div>
           <div className="absolute top-4 right-4 z-10">
-            <span className={inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full }>
-              <span className={w-1.5 h-1.5 rounded-full } />
+            <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full ${
+              p.isOnline ? 'bg-green-400 text-white shadow-[0_0_10px_rgba(74,222,128,0.4)]' : 'bg-red-400 text-white'
+            }`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${p.isOnline ? 'bg-white animate-pulse shadow-[0_0_6px_rgba(255,255,255,0.8)]' : 'bg-white'}`} />
               {p.isOnline ? 'Online' : 'Offline'}
             </span>
           </div>
