@@ -103,7 +103,7 @@ export const translations = {
     browseViewAll: 'View all',
     categories: [
       { name: 'Love', count: '4,280+' },
-      { name: 'Marriage & Kundli', count: '6,120+' },
+      { name: 'Marriage & Kundli', count: '6₹20+' },
       { name: 'Career', count: '5,840+' },
       { name: 'Women astrologers', count: '9,210+' },
       { name: 'Business & Money', count: '3,760+' },
@@ -317,7 +317,7 @@ export const translations = {
     browseViewAll: 'सभी देखें',
     categories: [
       { name: 'प्रेम', count: '4,280+' },
-      { name: 'विवाह और कुंडली', count: '6,120+' },
+      { name: 'विवाह और कुंडली', count: '6₹20+' },
       { name: 'करियर', count: '5,840+' },
       { name: 'महिला ज्योतिषी', count: '9,210+' },
       { name: 'व्यवसाय और पैसा', count: '3,760+' },

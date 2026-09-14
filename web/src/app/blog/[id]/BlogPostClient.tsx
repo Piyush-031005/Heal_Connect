@@ -63,11 +63,11 @@ export default function SingleBlogPage() {
           </Link>
 
           <header className="mb-10 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-indigo-950 mb-6 leading-tight">
               {blog.title}
             </h1>
             
-            <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-gray-500 mb-8">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-purple-500 mb-8">
               <span className="flex items-center gap-1.5 bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-medium">
                 <User className="w-4 h-4" />
                 {blog.author || 'Heal Connect Admin'}
@@ -89,11 +89,11 @@ export default function SingleBlogPage() {
             )}
           </header>
 
-          <div className="prose prose-lg prose-indigo max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-indigo-600">
+          <div className="prose prose-lg prose-indigo max-w-none prose-headings:font-bold prose-headings:text-indigo-950 prose-p:text-purple-800 prose-a:text-indigo-600">
             <ReactMarkdown>{blog.content}</ReactMarkdown>
           </div>
 
-          <hr className="my-12 border-gray-200" />
+          <hr className="my-12 border-violet-200" />
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -101,12 +101,12 @@ export default function SingleBlogPage() {
                 {(blog.author || 'H')[0].toUpperCase()}
               </div>
               <div>
-                <h4 className="font-bold text-gray-900">{blog.author || 'Heal Connect Admin'}</h4>
-                <p className="text-sm text-gray-500">Author</p>
+                <h4 className="font-bold text-indigo-950">{blog.author || 'Heal Connect Admin'}</h4>
+                <p className="text-sm text-purple-500">Author</p>
               </div>
             </div>
             
-            <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full font-medium text-gray-700 transition-colors">
+            <button className="flex items-center gap-2 px-4 py-2 bg-purple-50 hover:bg-violet-100 rounded-full font-medium text-purple-800 transition-colors">
               <Share2 className="w-4 h-4" />
               Share
             </button>

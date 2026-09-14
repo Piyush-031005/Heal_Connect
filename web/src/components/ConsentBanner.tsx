@@ -96,8 +96,8 @@ export function ConsentBanner() {
             <Cookie className="w-5 h-5 text-indigo-600" />
           </div>
           <div className="flex-1 min-w-0">
-            <h2 className="text-sm font-semibold text-gray-900">Your Privacy, Your Choice</h2>
-            <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
+            <h2 className="text-sm font-semibold text-indigo-950">Your Privacy, Your Choice</h2>
+            <p className="text-xs text-purple-500 mt-0.5 leading-relaxed">
               We use cookies to keep the site working and — with your consent — to understand how
               you use it and send relevant offers.{' '}
               <Link href="/privacy" target="_blank" className="text-indigo-600 hover:underline font-medium">
@@ -109,7 +109,7 @@ export function ConsentBanner() {
             type="button"
             onClick={() => setVisible(false)}
             aria-label="Dismiss cookie banner"
-            className="flex-shrink-0 p-1.5 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
+            className="flex-shrink-0 p-1.5 text-purple-400 hover:text-purple-700 rounded-lg hover:bg-purple-50 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -127,12 +127,12 @@ export function ConsentBanner() {
           </button>
 
           {expanded && (
-            <div className="space-y-3 mb-3 rounded-xl bg-indigo-50 p-3 text-xs text-gray-700">
+            <div className="space-y-3 mb-3 rounded-xl bg-indigo-50 p-3 text-xs text-purple-800">
               {/* Necessary */}
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="font-semibold text-gray-800">Necessary</p>
-                  <p className="text-gray-500 mt-0.5">Login sessions, payments, security. Cannot be disabled.</p>
+                  <p className="font-semibold text-purple-900">Necessary</p>
+                  <p className="text-purple-500 mt-0.5">Login sessions, payments, security. Cannot be disabled.</p>
                 </div>
                 <div className="flex-shrink-0 flex items-center gap-1 text-green-600 font-semibold text-xs">
                   <ShieldCheck className="w-4 h-4" /> Always on
@@ -142,8 +142,8 @@ export function ConsentBanner() {
               {/* Analytics toggle */}
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="font-semibold text-gray-800">Analytics</p>
-                  <p className="text-gray-500 mt-0.5">Helps us learn which features to improve.</p>
+                  <p className="font-semibold text-purple-900">Analytics</p>
+                  <p className="text-purple-500 mt-0.5">Helps us learn which features to improve.</p>
                 </div>
                 <button
                   id="consent-toggle-analytics"
@@ -151,7 +151,7 @@ export function ConsentBanner() {
                   role="switch"
                   aria-checked={analytics}
                   onClick={() => setAnalytics((v) => !v)}
-                  className={`flex-shrink-0 relative rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 ${analytics ? 'bg-indigo-500' : 'bg-gray-300'}`}
+                  className={`flex-shrink-0 relative rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 ${analytics ? 'bg-indigo-500' : 'bg-violet-200'}`}
                   style={{ height: '22px', width: '40px' }}
                 >
                   <span
@@ -163,8 +163,8 @@ export function ConsentBanner() {
               {/* Marketing toggle */}
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="font-semibold text-gray-800">Marketing</p>
-                  <p className="text-gray-500 mt-0.5">Relevant offers and updates by email or push notification.</p>
+                  <p className="font-semibold text-purple-900">Marketing</p>
+                  <p className="text-purple-500 mt-0.5">Relevant offers and updates by email or push notification.</p>
                 </div>
                 <button
                   id="consent-toggle-marketing"
@@ -172,7 +172,7 @@ export function ConsentBanner() {
                   role="switch"
                   aria-checked={marketing}
                   onClick={() => setMarketing((v) => !v)}
-                  className={`flex-shrink-0 relative rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 ${marketing ? 'bg-indigo-500' : 'bg-gray-300'}`}
+                  className={`flex-shrink-0 relative rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 ${marketing ? 'bg-indigo-500' : 'bg-violet-200'}`}
                   style={{ height: '22px', width: '40px' }}
                 >
                   <span
@@ -211,7 +211,7 @@ export function ConsentBanner() {
               type="button"
               disabled={saving}
               onClick={() => { setAnalytics(false); setMarketing(false); saveChoices(false); }}
-              className="flex-1 py-2 px-4 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-600 text-sm font-semibold transition-colors disabled:opacity-60"
+              className="flex-1 py-2 px-4 rounded-xl border border-violet-200 hover:bg-purple-50 text-purple-700 text-sm font-semibold transition-colors disabled:opacity-60"
             >
               Necessary only
             </button>

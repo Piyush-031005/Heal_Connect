@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Loader2, Eye, EyeOff, ArrowRight } from 'lucide-react';
-import { astrologerAuthApi, astrologerTokenStore } from '@/lib/api';
+import { authApi, tokenStore } from '@/lib/api';
 
 function ExpertSignupInner() {
   const router = useRouter();
@@ -34,7 +34,7 @@ function ExpertSignupInner() {
       setAlreadyRegistered(true);
     }
     // Always clear session on signup page — no backdoor access
-    astrologerTokenStore.clear();
+    tokenStore.clear();
     localStorage.removeItem('hc_role');
     localStorage.removeItem('hc_practitioner_id');
     localStorage.removeItem('hc_pid');
@@ -53,7 +53,6 @@ function ExpertSignupInner() {
     e.preventDefault();
     setError('');
 
-    if (!form.password || form.password.length < 8) { setError('Password must be at least 8 characters.'); return; }
     if (!isGoogleAuth) {
       if (!allPassed) { setError('Password does not meet the required criteria.'); return; }
       if (form.password !== form.confirm) { setError('Passwords do not match.'); return; }
@@ -70,11 +69,16 @@ function ExpertSignupInner() {
 
     setLoading(true);
     try {
-      const res = await astrologerAuthApi.register(form.name, form.email, form.password);
+      const res = await authApi.practitionerRegister(
+        form.name, form.email, form.password, form.dob,
+        { acceptTerms: true, acceptPrivacy: true, emailMarketingOptIn: false }
+      );
 
       if (!res.success || !res.data) {
-        if (res.message?.toLowerCase().includes('already') || res.message?.toLowerCase().includes('exists')) {
+        if (res.message?.toLowerCase().includes('already registered') || res.message?.toLowerCase().includes('already exists')) {
           setAlreadyRegistered(true);
+        } else if (res.errors && res.errors.length > 0) {
+          setError(res.errors.map((e: any) => e.message).join(', '));
         } else {
           setError(res.message || 'Registration failed.');
         }
@@ -84,9 +88,12 @@ function ExpertSignupInner() {
       localStorage.removeItem('hc_google_auth');
       localStorage.removeItem('hc_google_name');
       localStorage.removeItem('hc_google_email');
-      astrologerTokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-      if (res.data.astrologer) astrologerTokenStore.setProfile(res.data.astrologer);
-      router.push('/astrologer/onboarding');
+      tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+      localStorage.setItem('hc_role', 'practitioner');
+      localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
+      localStorage.setItem('hc_pid', res.data.practitioner.id);
+      localStorage.setItem('hc_practitioner_name', res.data.practitioner.name ?? '');
+      router.push('/expert/dashboard');
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -103,7 +110,7 @@ function ExpertSignupInner() {
     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&state=expert_signup&nonce=${nonce}&prompt=select_account`;
   };
 
-  const inputCls = 'w-full h-12 rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition';
+  const inputCls = 'w-full h-12 rounded-xl border border-yellow-200 bg-[#faf9f6] px-4 text-sm text-purple-900 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition';
 
   return (
     <div className="min-h-screen bg-[#faf9f6] flex flex-col md:flex-row font-sans">
@@ -143,8 +150,8 @@ function ExpertSignupInner() {
 
         <div className="w-full max-w-md">
           <div className="bg-white rounded-2xl shadow-xl border border-yellow-100 p-8">
-            <h2 className="text-xl font-extrabold text-gray-900 mb-1">Create your expert account</h2>
-            <p className="text-sm text-gray-500 mb-6">Step 1 of 2 — Account setup</p>
+            <h2 className="text-xl font-extrabold text-indigo-950 mb-1">Create your expert account</h2>
+            <p className="text-sm text-purple-500 mb-6">Step 1 of 2 — Account setup</p>
 
             {alreadyRegistered ? (
               <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl">
@@ -152,7 +159,7 @@ function ExpertSignupInner() {
                 <p className="text-amber-700 text-xs mb-3">An expert account with this email already exists. Please log in instead.</p>
                 <button
                   onClick={() => {
-                    astrologerTokenStore.clear();
+                    tokenStore.clear();
                     localStorage.removeItem('hc_role');
                     localStorage.removeItem('hc_practitioner_id');
                     localStorage.removeItem('hc_pid');
@@ -172,15 +179,15 @@ function ExpertSignupInner() {
 
                 <form onSubmit={handleEmailSignup} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name <span className="text-red-500">*</span></label>
+                    <label className="block text-sm font-semibold text-purple-800 mb-1.5">Full Name <span className="text-red-500">*</span></label>
                     <input className={inputCls} placeholder="Your full name" value={form.name} onChange={e => set('name', e.target.value)} required readOnly={isGoogleAuth} />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email <span className="text-red-500">*</span></label>
-                    <input className={inputCls} type="email" placeholder="you@example.com" value={form.email} onChange={e => set('email', e.target.value)} required />
+                    <label className="block text-sm font-semibold text-purple-800 mb-1.5">Email <span className="text-red-500">*</span></label>
+                    <input className={inputCls + (isGoogleAuth ? ' bg-purple-50 text-purple-500' : '')} type="email" placeholder="you@example.com" value={form.email} onChange={e => !isGoogleAuth && set('email', e.target.value)} readOnly={isGoogleAuth} required />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Date of Birth <span className="text-red-500">*</span></label>
+                    <label className="block text-sm font-semibold text-purple-800 mb-1.5">Date of Birth <span className="text-red-500">*</span></label>
                     <input
                       className={inputCls}
                       type="date"
@@ -190,28 +197,9 @@ function ExpertSignupInner() {
                       max={(() => { const d = new Date(); d.setFullYear(d.getFullYear() - 18); return d.toISOString().split('T')[0]; })()}
                     />
                   </div>
-                  {isGoogleAuth && (
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">Set a Password <span className="text-red-500">*</span></label>
-                      <div className="relative">
-                        <input
-                          className={inputCls + ' pr-11'}
-                          type={showPass ? 'text' : 'password'}
-                          placeholder="Create a password for your account"
-                          value={form.password}
-                          onChange={e => set('password', e.target.value)}
-                          required
-                        />
-                        <button type="button" onClick={() => setShowPass(v => !v)} className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600">
-                          {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        </button>
-                      </div>
-                      <p className="text-xs text-gray-400 mt-1">You&apos;ll use this to log in with email too.</p>
-                    </div>
-                  )}
                   {!isGoogleAuth && (<>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Password <span className="text-red-500">*</span></label>
+                    <label className="block text-sm font-semibold text-purple-800 mb-1.5">Password <span className="text-red-500">*</span></label>
                     <div className="relative">
                       <input
                         className={inputCls + ' pr-11'}
@@ -221,7 +209,7 @@ function ExpertSignupInner() {
                         onChange={e => set('password', e.target.value)}
                         required
                       />
-                      <button type="button" onClick={() => setShowPass(v => !v)} className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600">
+                      <button type="button" onClick={() => setShowPass(v => !v)} className="absolute right-3 top-3.5 text-purple-400 hover:text-purple-700">
                         {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
                     </div>
@@ -231,15 +219,15 @@ function ExpertSignupInner() {
                           {rules.map((r, i) => (
                             <div key={i} className={`h-1 flex-1 rounded-full transition-all duration-300 ${r.test(form.password)
                               ? passed <= 2 ? 'bg-red-400' : passed <= 3 ? 'bg-yellow-400' : passed <= 4 ? 'bg-blue-400' : 'bg-green-500'
-                              : 'bg-gray-200'}`} />
+                              : 'bg-violet-100'}`} />
                           ))}
                         </div>
                         <ul className="grid grid-cols-2 gap-x-3 gap-y-0.5">
                           {rules.map(r => {
                             const ok = r.test(form.password);
                             return (
-                              <li key={r.label} className={`flex items-center gap-1.5 text-xs transition-colors ${ok ? 'text-green-600' : 'text-gray-400'}`}>
-                                <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold flex-shrink-0 ${ok ? 'bg-green-500 text-white' : 'border border-gray-300'}`}>
+                              <li key={r.label} className={`flex items-center gap-1.5 text-xs transition-colors ${ok ? 'text-green-600' : 'text-purple-400'}`}>
+                                <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold flex-shrink-0 ${ok ? 'bg-green-500 text-white' : 'border border-violet-300'}`}>
                                   {ok ? '✓' : ''}
                                 </span>
                                 {r.label}
@@ -253,7 +241,7 @@ function ExpertSignupInner() {
                   </>)}
                   {!isGoogleAuth && (<>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Confirm Password <span className="text-red-500">*</span></label>
+                    <label className="block text-sm font-semibold text-purple-800 mb-1.5">Confirm Password <span className="text-red-500">*</span></label>
                     <div className="relative">
                       <input
                         className={inputCls + ' pr-11'}
@@ -263,7 +251,7 @@ function ExpertSignupInner() {
                         onChange={e => set('confirm', e.target.value)}
                         required
                       />
-                      <button type="button" onClick={() => setShowConfirm(v => !v)} className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600">
+                      <button type="button" onClick={() => setShowConfirm(v => !v)} className="absolute right-3 top-3.5 text-purple-400 hover:text-purple-700">
                         {showConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
                     </div>
@@ -279,7 +267,7 @@ function ExpertSignupInner() {
             )}
           </div>
 
-          <p className="text-center text-sm text-gray-500 mt-5">
+          <p className="text-center text-sm text-purple-500 mt-5">
             Already have an account?{' '}
             <Link href="/login?role=expert" className="text-indigo-600 font-semibold hover:underline">Sign in</Link>
           </p>

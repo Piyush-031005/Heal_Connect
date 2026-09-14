@@ -31,8 +31,8 @@ export default function NotFound() {
             <p className="text-7xl sm:text-8xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
               404
             </p>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">Page Not Found</h1>
-            <p className="text-gray-500 text-sm sm:text-base max-w-sm mx-auto">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-indigo-950">Page Not Found</h1>
+            <p className="text-purple-500 text-sm sm:text-base max-w-sm mx-auto">
               The page you&apos;re looking for doesn&apos;t exist or the URL may be incorrect.
             </p>
           </div>

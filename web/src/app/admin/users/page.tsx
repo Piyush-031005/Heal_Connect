@@ -389,11 +389,11 @@ export default function AdminUsersPage() {
         </div>
 
         {/* Tab Selector */}
-        <div className="flex gap-2 border-b border-gray-100 dark:border-white/10">
+        <div className="flex gap-2 border-b border-purple-100 dark:border-white/10">
           {([['users', `Registered Users (${totalUsers})`], ['practitioners', `Registered Practitioners (${totalPract})`], ['applications', `Onboarding Applications (${totalApps})`]] as const).map(([t, label]) => (
             <button key={t} onClick={() => setTab(t)}
               className={`px-4 py-2.5 text-sm font-extrabold transition-all border-b-2 -mb-px ${
-                tab === t ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700'
+                tab === t ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-purple-500 hover:text-purple-800'
               }`}>
               {label}
             </button>
@@ -402,18 +402,18 @@ export default function AdminUsersPage() {
 
         {/* ── USERS TAB ── */}
         {tab === 'users' && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 shadow-sm overflow-hidden">
-            <div className="flex flex-wrap items-center justify-between gap-3 p-4 border-b border-gray-100 dark:border-white/10">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 shadow-sm overflow-hidden">
+            <div className="flex flex-wrap items-center justify-between gap-3 p-4 border-b border-purple-100 dark:border-white/10">
               <SearchBar value={searchUsers} onChange={(v) => { setSearchUsers(v); setUserPage(1); }} placeholder="Search DB users by name, email, phone..." />
-              <span className="text-xs font-semibold text-gray-500 dark:text-white/50">{totalUsers} Users in Database</span>
+              <span className="text-xs font-semibold text-purple-500 dark:text-white/50">{totalUsers} Users in Database</span>
             </div>
 
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="bg-gray-50 dark:bg-white/5 border-b border-gray-100 dark:border-white/10">
+                <thead className="bg-purple-50 dark:bg-white/5 border-b border-purple-100 dark:border-white/10">
                   <tr>
                     {['User', 'Email', 'Phone', 'Provider', 'Verified', 'Sessions', 'Balance', 'Joined', 'Actions'].map((h) => (
-                      <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-gray-500 dark:text-white/50 uppercase tracking-wide whitespace-nowrap">{h}</th>
+                      <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-purple-500 dark:text-white/50 uppercase tracking-wide whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -422,7 +422,7 @@ export default function AdminUsersPage() {
                     Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} />)
                   ) : users.length === 0 ? (
                     <tr>
-                      <td colSpan={8} className="text-center py-12 text-sm text-gray-400 font-medium">No data available yet</td>
+                      <td colSpan={8} className="text-center py-12 text-sm text-purple-400 font-medium">No data available yet</td>
                     </tr>
                   ) : (
                     users.map((u) => (
@@ -433,23 +433,23 @@ export default function AdminUsersPage() {
                               {u.name.charAt(0)}
                             </div>
                             <div>
-                              <p className="font-extrabold text-gray-900 dark:text-white text-xs flex items-center gap-1.5">
+                              <p className="font-extrabold text-indigo-950 dark:text-white text-xs flex items-center gap-1.5">
                                 {u.name}
                                 {u.isBanned && (
                                   <span className="px-1.5 py-0.5 rounded-full bg-red-100 text-red-600 text-[9px] font-extrabold uppercase">Suspended</span>
                                 )}
                               </p>
-                              <p className="text-[10px] text-gray-400 font-mono">{u.id.slice(0, 8)}...</p>
+                              <p className="text-[10px] text-purple-400 font-mono">{u.id.slice(0, 8)}...</p>
                             </div>
                           </div>
                         </td>
-                        <td className="px-4 py-3 text-xs text-gray-600 dark:text-white/60">{u.email}</td>
-                        <td className="px-4 py-3 text-xs text-gray-600 dark:text-white/60">{u.phone}</td>
+                        <td className="px-4 py-3 text-xs text-purple-700 dark:text-white/60">{u.email}</td>
+                        <td className="px-4 py-3 text-xs text-purple-700 dark:text-white/60">{u.phone}</td>
                         <td className="px-4 py-3 text-xs font-bold capitalize text-indigo-700">{u.provider}</td>
                         <td className="px-4 py-3"><StatusBadge status={u.isEmailVerified || u.isPhoneVerified ? 'verified' : 'unverified'} /></td>
-                        <td className="px-4 py-3 text-xs font-extrabold text-gray-900 dark:text-white text-center">{u.sessionCount}</td>
+                        <td className="px-4 py-3 text-xs font-extrabold text-indigo-950 dark:text-white text-center">{u.sessionCount}</td>
                         <td className="px-4 py-3 text-xs font-bold text-emerald-600">£{u.balance}</td>
-                        <td className="px-4 py-3 text-xs text-gray-500">{new Date(u.createdAt).toLocaleDateString()}</td>
+                        <td className="px-4 py-3 text-xs text-purple-500">{new Date(u.createdAt).toLocaleDateString()}</td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1.5">
                             <button onClick={() => setViewUser(u)} title="View Profile" className="p-1.5 rounded-lg hover:bg-blue-50 text-blue-500"><Eye className="w-3.5 h-3.5" /></button>
@@ -477,18 +477,18 @@ export default function AdminUsersPage() {
 
         {/* ── PRACTITIONERS TAB ── */}
         {tab === 'practitioners' && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 shadow-sm overflow-hidden">
-            <div className="flex flex-wrap items-center justify-between gap-3 p-4 border-b border-gray-100 dark:border-white/10">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 shadow-sm overflow-hidden">
+            <div className="flex flex-wrap items-center justify-between gap-3 p-4 border-b border-purple-100 dark:border-white/10">
               <SearchBar value={searchPract} onChange={(v) => { setSearchPract(v); setPractPage(1); }} placeholder="Search DB practitioners by name, email..." />
-              <span className="text-xs font-semibold text-gray-500 dark:text-white/50">{totalPract} Practitioners in Database</span>
+              <span className="text-xs font-semibold text-purple-500 dark:text-white/50">{totalPract} Practitioners in Database</span>
             </div>
 
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="bg-gray-50 dark:bg-white/5 border-b border-gray-100 dark:border-white/10">
+                <thead className="bg-purple-50 dark:bg-white/5 border-b border-purple-100 dark:border-white/10">
                   <tr>
                     {['Practitioner', 'Specialties', 'Exp', 'Rate (£/m)', 'Sessions', 'Rating', 'KYC Status', 'Actions'].map((h) => (
-                      <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-gray-500 dark:text-white/50 uppercase tracking-wide whitespace-nowrap">{h}</th>
+                      <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-purple-500 dark:text-white/50 uppercase tracking-wide whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -497,7 +497,7 @@ export default function AdminUsersPage() {
                     Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} />)
                   ) : practitioners.length === 0 ? (
                     <tr>
-                      <td colSpan={8} className="text-center py-12 text-sm text-gray-400 font-medium">No data available yet</td>
+                      <td colSpan={8} className="text-center py-12 text-sm text-purple-400 font-medium">No data available yet</td>
                     </tr>
                   ) : (
                     practitioners.map((p) => (
@@ -508,22 +508,22 @@ export default function AdminUsersPage() {
                               {p.name.charAt(0)}
                             </div>
                             <div>
-                              <p className="font-extrabold text-gray-900 dark:text-white text-xs flex items-center gap-1.5">
+                              <p className="font-extrabold text-indigo-950 dark:text-white text-xs flex items-center gap-1.5">
                                 {p.name}
                                 {p.isBanned && (
                                   <span className="px-1.5 py-0.5 rounded-full bg-red-100 text-red-600 text-[9px] font-extrabold uppercase">Suspended</span>
                                 )}
                               </p>
-                              <p className="text-[10px] text-gray-400">{p.email}</p>
+                              <p className="text-[10px] text-purple-400">{p.email}</p>
                             </div>
                           </div>
                         </td>
-                        <td className="px-4 py-3 text-xs text-gray-600 dark:text-white/60 font-medium">
+                        <td className="px-4 py-3 text-xs text-purple-700 dark:text-white/60 font-medium">
                           {p.specialties.slice(0, 2).join(', ') || 'Vedic Astrology'}
                         </td>
-                        <td className="px-4 py-3 text-xs text-gray-600">{p.experienceYrs} yrs</td>
+                        <td className="px-4 py-3 text-xs text-purple-700">{p.experienceYrs} yrs</td>
                         <td className="px-4 py-3 text-xs font-bold text-emerald-600">£{p.perMinuteRate}/m</td>
-                        <td className="px-4 py-3 text-xs font-extrabold text-gray-900 dark:text-white text-center">{p.sessionCount}</td>
+                        <td className="px-4 py-3 text-xs font-extrabold text-indigo-950 dark:text-white text-center">{p.sessionCount}</td>
                         <td className="px-4 py-3 text-xs font-bold text-indigo-600">{p.avgRating > 0 ? `${p.avgRating} ★` : 'N/A'}</td>
                         <td className="px-4 py-3"><StatusBadge status={p.isVerified ? 'verified' : 'pending'} /></td>
                         <td className="px-4 py-3">
@@ -561,23 +561,23 @@ export default function AdminUsersPage() {
 
         {/* ── APPLICATIONS TAB ── */}
         {tab === 'applications' && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 shadow-sm overflow-hidden">
-            <div className="flex flex-wrap items-center justify-between gap-3 p-4 border-b border-gray-100 dark:border-white/10">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 shadow-sm overflow-hidden">
+            <div className="flex flex-wrap items-center justify-between gap-3 p-4 border-b border-purple-100 dark:border-white/10">
               <SearchBar value={searchApp} onChange={(v) => { setSearchApp(v); setAppPage(1); }} placeholder="Search applications by name, email..." />
-              <span className="text-xs font-semibold text-gray-500 dark:text-white/50">{totalApps} Applications in Database</span>
+              <span className="text-xs font-semibold text-purple-500 dark:text-white/50">{totalApps} Applications in Database</span>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="bg-gray-50 dark:bg-white/5 border-b border-gray-100 dark:border-white/10">
+                <thead className="bg-purple-50 dark:bg-white/5 border-b border-purple-100 dark:border-white/10">
                   <tr>
                     {['Applicant', 'Email', 'Specializations', 'Experience', 'Location', 'App Status', 'Submitted', 'Actions'].map(h => (
-                      <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-gray-500 dark:text-white/50 uppercase tracking-wide whitespace-nowrap">{h}</th>
+                      <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-purple-500 dark:text-white/50 uppercase tracking-wide whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-50 dark:divide-white/5">
                   {loading ? Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} />) : apps.length === 0 ? (
-                    <tr><td colSpan={8} className="text-center py-12 text-sm text-gray-400 font-medium">No applications yet</td></tr>
+                    <tr><td colSpan={8} className="text-center py-12 text-sm text-purple-400 font-medium">No applications yet</td></tr>
                   ) : apps.map(a => (
                     <tr key={a.id} className="hover:bg-indigo-50/30 dark:hover:bg-white/5 transition-colors">
                       <td className="px-4 py-3">
@@ -586,15 +586,15 @@ export default function AdminUsersPage() {
                             {(a.fullLegalName || a.displayName || '?').charAt(0)}
                           </div>
                           <div>
-                            <p className="font-extrabold text-gray-900 dark:text-white text-xs">{a.fullLegalName || '—'}</p>
-                            <p className="text-[10px] text-gray-400">{a.displayName || '—'}</p>
+                            <p className="font-extrabold text-indigo-950 dark:text-white text-xs">{a.fullLegalName || '—'}</p>
+                            <p className="text-[10px] text-purple-400">{a.displayName || '—'}</p>
                           </div>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-xs text-gray-600 dark:text-white/60">{a.email || '—'}</td>
-                      <td className="px-4 py-3 text-xs text-gray-600">{a.specializations.slice(0, 2).join(', ') || '—'}</td>
-                      <td className="px-4 py-3 text-xs text-gray-600">{a.astrologyExperienceYears} yrs</td>
-                      <td className="px-4 py-3 text-xs text-gray-500">{[a.city, a.country].filter(Boolean).join(', ') || '—'}</td>
+                      <td className="px-4 py-3 text-xs text-purple-700 dark:text-white/60">{a.email || '—'}</td>
+                      <td className="px-4 py-3 text-xs text-purple-700">{a.specializations.slice(0, 2).join(', ') || '—'}</td>
+                      <td className="px-4 py-3 text-xs text-purple-700">{a.astrologyExperienceYears} yrs</td>
+                      <td className="px-4 py-3 text-xs text-purple-500">{[a.city, a.country].filter(Boolean).join(', ') || '—'}</td>
                       <td className="px-4 py-3">
                         <div className="flex flex-col gap-1">
                           <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold w-fit ${
@@ -609,7 +609,7 @@ export default function AdminUsersPage() {
                           )}
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-xs text-gray-500">{new Date(a.createdAt).toLocaleDateString()}</td>
+                      <td className="px-4 py-3 text-xs text-purple-500">{new Date(a.createdAt).toLocaleDateString()}</td>
                       <td className="px-4 py-3">
                         <button onClick={() => openAppDetail(a)} title="View Application" className="p-1.5 rounded-lg hover:bg-blue-50 text-blue-500"><Eye className="w-3.5 h-3.5" /></button>
                       </td>
@@ -628,25 +628,25 @@ export default function AdminUsersPage() {
         <AnimatePresence>
           {(viewApp !== null || viewAppLoading) && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setViewApp(null)} />
-              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-                <div className="sticky top-0 bg-white dark:bg-slate-800 flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-white/10 z-10">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-indigo-950/40 backdrop-blur-sm" onClick={() => setViewApp(null)} />
+              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="relative bg-white dark:bg-indigo-900 rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+                <div className="sticky top-0 bg-white dark:bg-indigo-900 flex items-center justify-between px-6 py-4 border-b border-purple-100 dark:border-white/10 z-10">
                   <div className="flex items-center gap-3">
                     <div className="w-11 h-11 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-extrabold text-lg">
                       {(viewApp?.fullLegalName || '?').charAt(0)}
                     </div>
                     <div>
-                      <h2 className="text-base font-extrabold text-gray-900 dark:text-white">{viewApp?.fullLegalName || 'Loading...'}</h2>
-                      <p className="text-xs text-gray-400">{viewApp?.user?.email || ''}</p>
+                      <h2 className="text-base font-extrabold text-indigo-950 dark:text-white">{viewApp?.fullLegalName || 'Loading...'}</h2>
+                      <p className="text-xs text-purple-400">{viewApp?.user?.email || ''}</p>
                     </div>
                   </div>
-                  <button onClick={() => setViewApp(null)} className="text-gray-400 hover:text-gray-600 p-1"><X className="w-5 h-5" /></button>
+                  <button onClick={() => setViewApp(null)} className="text-purple-400 hover:text-purple-700 p-1"><X className="w-5 h-5" /></button>
                 </div>
                 <div className="p-6 space-y-5">
                   {viewAppLoading ? (
                     <div className="flex items-center justify-center py-10">
                       <div className="w-6 h-6 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-                      <span className="ml-3 text-sm text-gray-500">Loading application...</span>
+                      <span className="ml-3 text-sm text-purple-500">Loading application...</span>
                     </div>
                   ) : viewApp && (
                     <>
@@ -658,7 +658,7 @@ export default function AdminUsersPage() {
                           viewApp.applicationStatus === 'SUBMITTED' ? 'bg-blue-100 text-blue-700' :
                           'bg-indigo-100 text-indigo-700'
                         }`}>{viewApp.applicationStatus}</span>
-                        <span className="px-3 py-1 rounded-full text-xs font-bold bg-gray-100 text-gray-600">{viewApp.accountStatus}</span>
+                        <span className="px-3 py-1 rounded-full text-xs font-bold bg-purple-50 text-purple-700">{viewApp.accountStatus}</span>
                       </div>
 
                       {/* Basic info grid */}
@@ -671,9 +671,9 @@ export default function AdminUsersPage() {
                           { label: 'Chat Rate', value: viewApp.chatPricePerMin > 0 ? `£${viewApp.chatPricePerMin}/min` : '—' },
                           { label: 'Submitted', value: new Date(viewApp.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) },
                         ].map(({ label, value }) => (
-                          <div key={label} className="bg-gray-50 dark:bg-white/5 rounded-xl p-3">
-                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wide mb-0.5">{label}</p>
-                            <p className="text-sm font-bold text-gray-900 dark:text-white">{String(value)}</p>
+                          <div key={label} className="bg-purple-50 dark:bg-white/5 rounded-xl p-3">
+                            <p className="text-[10px] font-bold text-purple-400 uppercase tracking-wide mb-0.5">{label}</p>
+                            <p className="text-sm font-bold text-indigo-950 dark:text-white">{String(value)}</p>
                           </div>
                         ))}
                       </div>
@@ -681,7 +681,7 @@ export default function AdminUsersPage() {
                       {/* Specializations */}
                       {viewApp.specializations?.length > 0 && (
                         <div>
-                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Practice Areas</p>
+                          <p className="text-xs font-bold text-purple-500 uppercase tracking-wide mb-2">Practice Areas</p>
                           <div className="flex flex-wrap gap-1.5">
                             {viewApp.specializations.map((s: string) => (
                               <span key={s} className="px-2.5 py-1 bg-indigo-50 text-indigo-700 text-xs font-semibold rounded-full border border-indigo-200">{s}</span>
@@ -693,7 +693,7 @@ export default function AdminUsersPage() {
                       {/* Languages */}
                       {viewApp.languages?.length > 0 && (
                         <div>
-                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Languages</p>
+                          <p className="text-xs font-bold text-purple-500 uppercase tracking-wide mb-2">Languages</p>
                           <div className="flex flex-wrap gap-1.5">
                             {viewApp.languages.map((l: string) => (
                               <span key={l} className="px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full border border-blue-200">{l}</span>
@@ -705,24 +705,24 @@ export default function AdminUsersPage() {
                       {/* Professional Bio */}
                       {viewApp.professionalBio && (
                         <div>
-                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">About / Bio</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-white/5 rounded-xl p-3">{viewApp.professionalBio}</p>
+                          <p className="text-xs font-bold text-purple-500 uppercase tracking-wide mb-2">About / Bio</p>
+                          <p className="text-sm text-purple-700 dark:text-purple-300 leading-relaxed bg-purple-50 dark:bg-white/5 rounded-xl p-3">{viewApp.professionalBio}</p>
                         </div>
                       )}
 
                       {/* How expertise developed (consultationApproach) */}
                       {viewApp.consultationApproach && (
                         <div>
-                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">How Expertise Developed</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-white/5 rounded-xl p-3">{viewApp.consultationApproach}</p>
+                          <p className="text-xs font-bold text-purple-500 uppercase tracking-wide mb-2">How Expertise Developed</p>
+                          <p className="text-sm text-purple-700 dark:text-purple-300 leading-relaxed bg-purple-50 dark:bg-white/5 rounded-xl p-3">{viewApp.consultationApproach}</p>
                         </div>
                       )}
 
                       {/* Why ZenAuraa (previousPlatformExperience) */}
                       {viewApp.previousPlatformExperience && (
                         <div>
-                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Why ZenAuraa</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-white/5 rounded-xl p-3">{viewApp.previousPlatformExperience}</p>
+                          <p className="text-xs font-bold text-purple-500 uppercase tracking-wide mb-2">Why ZenAuraa</p>
+                          <p className="text-sm text-purple-700 dark:text-purple-300 leading-relaxed bg-purple-50 dark:bg-white/5 rounded-xl p-3">{viewApp.previousPlatformExperience}</p>
                         </div>
                       )}
 
@@ -736,7 +736,7 @@ export default function AdminUsersPage() {
 
                       {/* Actions */}
                       {['SUBMITTED', 'ADMIN_REVIEW'].includes(viewApp.applicationStatus) && (
-                        <div className="flex gap-2 pt-2 border-t border-gray-100 dark:border-white/10">
+                        <div className="flex gap-2 pt-2 border-t border-purple-100 dark:border-white/10">
                           <button onClick={() => updateAppStatus(viewApp.id, 'APPROVED')} className="flex-1 py-2.5 rounded-xl text-sm font-bold bg-green-500 text-white hover:bg-green-600">✓ Approve</button>
                           <button onClick={() => updateAppStatus(viewApp.id, 'REJECTED')} className="flex-1 py-2.5 rounded-xl text-sm font-bold bg-red-50 text-red-600 hover:bg-red-100 border border-red-200">Reject</button>
                         </div>
@@ -753,21 +753,21 @@ export default function AdminUsersPage() {
         <AnimatePresence>
           {viewPract && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => { setViewPract(null); setViewPractProfile(null); }} />
-              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-indigo-950/40 backdrop-blur-sm" onClick={() => { setViewPract(null); setViewPractProfile(null); }} />
+              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="relative bg-white dark:bg-indigo-900 rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
 
                 {/* Header */}
-                <div className="sticky top-0 bg-white dark:bg-slate-800 flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-white/10 z-10">
+                <div className="sticky top-0 bg-white dark:bg-indigo-900 flex items-center justify-between px-6 py-4 border-b border-purple-100 dark:border-white/10 z-10">
                   <div className="flex items-center gap-3">
                     <div className="w-11 h-11 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white font-extrabold text-lg">
                       {viewPract.name.charAt(0)}
                     </div>
                     <div>
-                      <h2 className="text-base font-extrabold text-gray-900 dark:text-white">{viewPract.name}</h2>
-                      <p className="text-xs text-gray-400">{viewPract.email}</p>
+                      <h2 className="text-base font-extrabold text-indigo-950 dark:text-white">{viewPract.name}</h2>
+                      <p className="text-xs text-purple-400">{viewPract.email}</p>
                     </div>
                   </div>
-                  <button onClick={() => { setViewPract(null); setViewPractProfile(null); }} className="text-gray-400 hover:text-gray-600 p-1">
+                  <button onClick={() => { setViewPract(null); setViewPractProfile(null); }} className="text-purple-400 hover:text-purple-700 p-1">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
@@ -776,7 +776,7 @@ export default function AdminUsersPage() {
                   {viewPractLoading ? (
                     <div className="flex items-center justify-center py-10">
                       <div className="w-6 h-6 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-                      <span className="ml-3 text-sm text-gray-500">Loading details...</span>
+                      <span className="ml-3 text-sm text-purple-500">Loading details...</span>
                     </div>
                   ) : (
                     <>
@@ -785,7 +785,7 @@ export default function AdminUsersPage() {
                         <span className={`px-3 py-1 rounded-full text-xs font-bold ${viewPract.isVerified ? 'bg-green-100 text-green-700' : 'bg-indigo-100 text-indigo-700'}`}>
                           {viewPract.isVerified ? '✓ Verified' : '⏳ Pending'}
                         </span>
-                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${viewPract.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'}`}>
+                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${viewPract.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-purple-50 text-purple-500'}`}>
                           {viewPract.isOnline ? '🟢 Online' : '⚫ Offline'}
                         </span>
                         {viewPractProfile?.applicationStatus && (
@@ -807,9 +807,9 @@ export default function AdminUsersPage() {
                           { label: 'Joined', value: new Date(viewPract.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) },
                           { label: 'Main Area', value: viewPractProfile?.mainArea || '—' },
                         ].map(({ label, value }) => (
-                          <div key={label} className="bg-gray-50 dark:bg-white/5 rounded-xl p-3">
-                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wide mb-0.5">{label}</p>
-                            <p className="text-sm font-bold text-gray-900 dark:text-white">{String(value)}</p>
+                          <div key={label} className="bg-purple-50 dark:bg-white/5 rounded-xl p-3">
+                            <p className="text-[10px] font-bold text-purple-400 uppercase tracking-wide mb-0.5">{label}</p>
+                            <p className="text-sm font-bold text-indigo-950 dark:text-white">{String(value)}</p>
                           </div>
                         ))}
                       </div>
@@ -817,7 +817,7 @@ export default function AdminUsersPage() {
                       {/* Specializations from AstrologerProfile */}
                       {(viewPractProfile?.specializations?.length > 0 || viewPract.specialties?.length > 0) && (
                         <div>
-                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Specializations</p>
+                          <p className="text-xs font-bold text-purple-500 uppercase tracking-wide mb-2">Specializations</p>
                           <div className="flex flex-wrap gap-1.5">
                             {(viewPractProfile?.specializations || viewPract.specialties).map((s: string) => (
                               <span key={s} className="px-2.5 py-1 bg-indigo-50 text-indigo-700 text-xs font-semibold rounded-full border border-indigo-200">{s}</span>
@@ -829,7 +829,7 @@ export default function AdminUsersPage() {
                       {/* Languages */}
                       {(viewPractProfile?.languages?.length > 0 || viewPract.languages?.length > 0) && (
                         <div>
-                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Languages</p>
+                          <p className="text-xs font-bold text-purple-500 uppercase tracking-wide mb-2">Languages</p>
                           <div className="flex flex-wrap gap-1.5">
                             {(viewPractProfile?.languages || viewPract.languages).map((l: string) => (
                               <span key={l} className="px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full border border-blue-200">{l}</span>
@@ -841,8 +841,8 @@ export default function AdminUsersPage() {
                       {/* Professional Bio */}
                       {(viewPractProfile?.professionalBio || viewPract.bio) && (
                         <div>
-                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">About / Bio</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-white/5 rounded-xl p-3">
+                          <p className="text-xs font-bold text-purple-500 uppercase tracking-wide mb-2">About / Bio</p>
+                          <p className="text-sm text-purple-700 dark:text-purple-300 leading-relaxed bg-purple-50 dark:bg-white/5 rounded-xl p-3">
                             {viewPractProfile?.professionalBio || viewPract.bio}
                           </p>
                         </div>
@@ -851,8 +851,8 @@ export default function AdminUsersPage() {
                       {/* How expertise developed */}
                       {viewPractProfile?.consultationApproach && (
                         <div>
-                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">How Expertise Developed</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-white/5 rounded-xl p-3">
+                          <p className="text-xs font-bold text-purple-500 uppercase tracking-wide mb-2">How Expertise Developed</p>
+                          <p className="text-sm text-purple-700 dark:text-purple-300 leading-relaxed bg-purple-50 dark:bg-white/5 rounded-xl p-3">
                             {viewPractProfile.consultationApproach}
                           </p>
                         </div>
@@ -861,8 +861,8 @@ export default function AdminUsersPage() {
                       {/* Why ZenAuraa */}
                       {viewPractProfile?.previousPlatformExperience && (
                         <div>
-                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Why ZenAuraa</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-white/5 rounded-xl p-3">
+                          <p className="text-xs font-bold text-purple-500 uppercase tracking-wide mb-2">Why ZenAuraa</p>
+                          <p className="text-sm text-purple-700 dark:text-purple-300 leading-relaxed bg-purple-50 dark:bg-white/5 rounded-xl p-3">
                             {viewPractProfile.previousPlatformExperience}
                           </p>
                         </div>
@@ -871,15 +871,15 @@ export default function AdminUsersPage() {
                       {/* Verification notes (Step 3) */}
                       {viewPractProfile?.adminReviews?.length > 0 && (
                         <div>
-                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Verification Notes</p>
-                          <p className="text-sm text-gray-600 bg-gray-50 rounded-xl p-3">
+                          <p className="text-xs font-bold text-purple-500 uppercase tracking-wide mb-2">Verification Notes</p>
+                          <p className="text-sm text-purple-700 bg-purple-50 rounded-xl p-3">
                             {viewPractProfile.adminReviews[0]?.notes || '—'}
                           </p>
                         </div>
                       )}
 
                       {/* Actions */}
-                      <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-100 dark:border-white/10">
+                      <div className="flex flex-wrap gap-2 pt-2 border-t border-purple-100 dark:border-white/10">
                         <button
                           onClick={() => { toggleVerification(viewPract.id, viewPract.isVerified); setViewPract(null); setViewPractProfile(null); }}
                           className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-all ${
@@ -919,40 +919,40 @@ export default function AdminUsersPage() {
         <AnimatePresence>
           {editBalanceUser && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setEditBalanceUser(null)} />
-              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-xl w-full max-w-md p-6">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-indigo-950/40 backdrop-blur-sm" onClick={() => setEditBalanceUser(null)} />
+              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="relative bg-white dark:bg-indigo-900 rounded-2xl shadow-xl w-full max-w-md p-6">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                  <h3 className="text-lg font-bold text-indigo-950 dark:text-white flex items-center gap-2">
                     <DollarSign className="w-5 h-5 text-emerald-500" />
                     Update User Balance
                   </h3>
-                  <button onClick={() => setEditBalanceUser(null)} className="text-gray-400 hover:text-gray-600 dark:hover:text-white">
+                  <button onClick={() => setEditBalanceUser(null)} className="text-purple-400 hover:text-purple-700 dark:hover:text-white">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
                 
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                <p className="text-sm text-purple-700 dark:text-purple-300 mb-4">
                   Updating balance for <strong>{editBalanceUser.name}</strong> ({editBalanceUser.email}). This will create an admin adjustment transaction.
                 </p>
 
                 <form onSubmit={handleUpdateBalance} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Wallet Balance (INR)</label>
+                    <label className="block text-xs font-bold text-purple-800 dark:text-purple-300 mb-1">Wallet Balance (INR)</label>
                     <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold">£</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-500 font-bold">£</span>
                       <input
                         type="number"
                         required
                         min="0"
                         value={balanceInput}
                         onChange={(e) => setBalanceInput(e.target.value)}
-                        className="w-full pl-8 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-white/10 dark:bg-white/5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all font-bold text-gray-900 dark:text-white"
+                        className="w-full pl-8 pr-4 py-2.5 rounded-xl border border-violet-200 dark:border-white/10 dark:bg-white/5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all font-bold text-indigo-950 dark:text-white"
                       />
                     </div>
                   </div>
                   
                   <div className="flex gap-3 pt-4">
-                    <button type="button" onClick={() => setEditBalanceUser(null)} className="flex-1 py-2.5 rounded-xl font-bold text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-white/5 transition-colors">
+                    <button type="button" onClick={() => setEditBalanceUser(null)} className="flex-1 py-2.5 rounded-xl font-bold text-purple-700 hover:bg-purple-50 dark:text-purple-300 dark:hover:bg-white/5 transition-colors">
                       Cancel
                     </button>
                     <button type="submit" className="flex-1 py-2.5 rounded-xl font-bold text-white bg-emerald-500 hover:bg-emerald-600 shadow-md shadow-emerald-500/20 transition-all">
@@ -969,35 +969,35 @@ export default function AdminUsersPage() {
         <AnimatePresence>
           {banTarget && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setBanTarget(null)} />
-              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-xl w-full max-w-sm p-5">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-indigo-950/40 backdrop-blur-sm" onClick={() => setBanTarget(null)} />
+              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="relative bg-white dark:bg-indigo-900 rounded-2xl shadow-xl w-full max-w-sm p-5">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                  <h3 className="text-base font-bold text-indigo-950 dark:text-white flex items-center gap-2">
                     <Ban className="w-4 h-4 text-red-600" /> Suspend {banTarget.type === 'user' ? 'User' : 'Practitioner'}
                   </h3>
-                  <button onClick={() => setBanTarget(null)} className="text-gray-400 hover:text-gray-600 dark:hover:text-white"><X className="w-4 h-4" /></button>
+                  <button onClick={() => setBanTarget(null)} className="text-purple-400 hover:text-purple-700 dark:hover:text-white"><X className="w-4 h-4" /></button>
                 </div>
-                <p className="text-xs text-gray-500 mb-4">
+                <p className="text-xs text-purple-500 mb-4">
                   Suspending <span className="font-bold">{banTarget.name}</span> will block them from logging in until unsuspended.
                 </p>
-                <label className="block text-xs font-bold text-gray-600 dark:text-gray-300 mb-1">Duration (days)</label>
+                <label className="block text-xs font-bold text-purple-700 dark:text-purple-300 mb-1">Duration (days)</label>
                 <input
                   type="number"
                   min={1}
                   value={banDays}
                   onChange={(e) => setBanDays(e.target.value)}
                   placeholder="Leave blank for permanent"
-                  className="w-full mb-3 px-3 py-2 rounded-lg border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900 text-sm"
+                  className="w-full mb-3 px-3 py-2 rounded-lg border border-violet-200 dark:border-white/10 bg-white dark:bg-indigo-950 text-sm"
                 />
-                <label className="block text-xs font-bold text-gray-600 dark:text-gray-300 mb-1">Reason</label>
+                <label className="block text-xs font-bold text-purple-700 dark:text-purple-300 mb-1">Reason</label>
                 <textarea
                   value={banReasonInput}
                   onChange={(e) => setBanReasonInput(e.target.value)}
                   rows={2}
-                  className="w-full mb-4 px-3 py-2 rounded-lg border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900 text-sm"
+                  className="w-full mb-4 px-3 py-2 rounded-lg border border-violet-200 dark:border-white/10 bg-white dark:bg-indigo-950 text-sm"
                 />
                 <div className="flex gap-2 justify-end">
-                  <button onClick={() => setBanTarget(null)} className="px-4 py-2 rounded-lg text-sm font-bold text-gray-600 hover:bg-gray-100 dark:hover:bg-white/5">Cancel</button>
+                  <button onClick={() => setBanTarget(null)} className="px-4 py-2 rounded-lg text-sm font-bold text-purple-700 hover:bg-purple-50 dark:hover:bg-white/5">Cancel</button>
                   <button onClick={handleConfirmBan} disabled={banSubmitting} className="px-4 py-2 rounded-lg text-sm font-bold bg-red-600 text-white hover:bg-red-700 disabled:opacity-50">
                     {banSubmitting ? 'Suspending...' : 'Suspend'}
                   </button>

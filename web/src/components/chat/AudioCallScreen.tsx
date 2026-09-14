@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useAgoraCall } from '@/hooks/useAgoraCall';
+import { useDeepgramTranscription } from '@/hooks/useDeepgramTranscription';
 
 import CallFeedbackModal from './CallFeedbackModal';
 import { Button } from '@/components/ui/button';
@@ -17,6 +18,7 @@ import {
   VolumeX,
   RotateCcw,
   MessageSquare,
+  FileText,
 } from 'lucide-react';
 
 interface Props {
@@ -49,6 +51,13 @@ export default function AudioCallScreen({
     elapsed,
   } = useAgoraCall(sessionId, isExpert);
 
+  // Live transcription — starts automatically when connected, auto-submits on call end
+  const { transcriptStatus, liveSnippet, isTranscribing } = useDeepgramTranscription({
+    sessionId,
+    callState,
+    localTrack,
+    remoteUsers,
+  });
 
   const [showFeedback, setShowFeedback] = useState(false);
 
@@ -87,7 +96,7 @@ export default function AudioCallScreen({
                 ? 'border-emerald-500 ring-4 ring-emerald-500/20'
                 : callState === 'waiting_for_accept' || callState === 'connecting'
                 ? 'border-indigo-500 ring-4 ring-indigo-500/20'
-                : 'border-gray-200 bg-white'
+                : 'border-violet-200 bg-white'
             }`}
           >
             {peerPhoto ? (
@@ -108,8 +117,8 @@ export default function AudioCallScreen({
 
         {/* Name */}
         <div>
-          <h2 className="text-xl font-bold text-gray-900">{displayName}</h2>
-          <p className="text-xs text-gray-500 mt-0.5">
+          <h2 className="text-xl font-bold text-indigo-950">{displayName}</h2>
+          <p className="text-xs text-purple-500 mt-0.5">
             {isExpert ? 'Audio Consultation' : 'Wellness Consultation'}
           </p>
         </div>
@@ -117,7 +126,7 @@ export default function AudioCallScreen({
         {/* ── Status Text & State Badges ── */}
         <div className="space-y-2">
           {callState === 'idle' && (
-            <p className="text-gray-500 text-sm font-medium">Ready to start audio call</p>
+            <p className="text-purple-500 text-sm font-medium">Ready to start audio call</p>
           )}
 
           {callState === 'initiating' && (
@@ -134,7 +143,7 @@ export default function AudioCallScreen({
                 <PhoneCall className="w-4 h-4 animate-bounce text-indigo-600" />
                 <span>Calling {displayName}...</span>
               </div>
-              <p className="text-xs text-gray-400">Waiting for expert to accept...</p>
+              <p className="text-xs text-purple-400">Waiting for expert to accept...</p>
             </div>
           )}
 
@@ -145,7 +154,7 @@ export default function AudioCallScreen({
                 <PhoneCall className="w-5 h-5 text-emerald-600 animate-bounce" />
                 <span>Incoming Audio Call</span>
               </div>
-              <p className="text-xs text-gray-500">{displayName} is requesting an audio session</p>
+              <p className="text-xs text-purple-500">{displayName} is requesting an audio session</p>
             </div>
           )}
 
@@ -169,6 +178,32 @@ export default function AudioCallScreen({
                 </span>
               </div>
 
+              {/* Recording consent notice — shown to both parties during connected call */}
+              <div className="flex items-center justify-center gap-1.5 text-xs text-purple-400 bg-purple-50 border border-purple-100 rounded-full px-3 py-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-400 shrink-0" />
+                <span>This call is being recorded &amp; transcribed for quality and safety review</span>
+              </div>
+
+              {/* Transcription status badge */}
+              {isTranscribing && (
+                <div className="flex items-center justify-center gap-1 text-xs text-indigo-600 bg-indigo-50 border border-indigo-200 rounded-full px-3 py-0.5">
+                  <FileText className="w-3 h-3" />
+                  <span>Transcribing</span>
+                  <span className="inline-flex gap-0.5">
+                    {[0, 1, 2].map((i) => (
+                      <span key={i} className="w-1 h-1 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
+                    ))}
+                  </span>
+                </div>
+              )}
+
+              {transcriptStatus === 'saved' && (
+                <div className="flex items-center justify-center gap-1 text-xs text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-0.5">
+                  <FileText className="w-3 h-3" />
+                  <span>Transcript saved</span>
+                </div>
+              )}
+
               {/* Remote Muted Notice */}
               {isRemoteMuted && (
                 <div className="flex items-center justify-center gap-1 text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-full px-3 py-0.5 max-w-xs mx-auto">
@@ -183,9 +218,9 @@ export default function AudioCallScreen({
           {/* Ended state */}
           {callState === 'ended' && (
             <div className="space-y-1">
-              <p className="text-gray-700 font-bold text-sm">Call ended</p>
+              <p className="text-purple-800 font-bold text-sm">Call ended</p>
               {elapsed > 0 && (
-                <p className="text-xs text-gray-400">Total duration: {formatTime(elapsed)}</p>
+                <p className="text-xs text-purple-400">Total duration: {formatTime(elapsed)}</p>
               )}
             </div>
           )}
@@ -194,7 +229,7 @@ export default function AudioCallScreen({
           {callState === 'rejected' && (
             <div className="space-y-1">
               <p className="text-amber-700 font-semibold text-sm">Call declined</p>
-              <p className="text-xs text-gray-400">The expert is currently unavailable to take this call.</p>
+              <p className="text-xs text-purple-400">The expert is currently unavailable to take this call.</p>
             </div>
           )}
 
@@ -263,7 +298,7 @@ export default function AudioCallScreen({
           <Button
             size="lg"
             variant="outline"
-            className="rounded-full px-5 py-2.5 text-xs text-gray-600 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-colors"
+            className="rounded-full px-5 py-2.5 text-xs text-purple-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-colors"
             onClick={endCall}
           >
             <PhoneOff className="h-4 w-4 mr-1.5" />
@@ -280,7 +315,7 @@ export default function AudioCallScreen({
               className={`rounded-full w-14 h-14 transition-all ${
                 isMuted
                   ? 'bg-red-50 border-red-300 text-red-600 hover:bg-red-100'
-                  : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-100'
+                  : 'bg-white border-violet-200 text-purple-800 hover:bg-purple-50'
               }`}
               onClick={toggleMute}
               title={isMuted ? 'Unmute microphone' : 'Mute microphone'}

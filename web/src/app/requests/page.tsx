@@ -66,7 +66,7 @@ export default function UserRequestsPage() {
       if (res.success) {
         toast((t) => (
           <div className="flex flex-col gap-2">
-            <span className="font-bold text-gray-900">Time confirmed successfully!</span>
+            <span className="font-bold text-indigo-950">Time confirmed successfully!</span>
             <div className="flex gap-2 mt-2">
               <button 
                 onClick={() => { toast.dismiss(t.id); router.push('/dashboard'); }}
@@ -76,7 +76,7 @@ export default function UserRequestsPage() {
               </button>
               <button 
                 onClick={() => toast.dismiss(t.id)}
-                className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+                className="px-3 py-1.5 bg-purple-50 text-purple-800 rounded-lg text-sm font-medium hover:bg-violet-100 transition-colors"
               >
                 Stay Here
               </button>
@@ -107,14 +107,14 @@ export default function UserRequestsPage() {
   return (
     <div className="min-h-screen bg-[#faf9f6] p-6 lg:p-12 font-sans">
       <div className="max-w-4xl mx-auto space-y-8">
-        <h1 className="text-3xl font-extrabold text-gray-900 flex items-center gap-3">
+        <h1 className="text-3xl font-extrabold text-indigo-950 flex items-center gap-3">
           <Calendar className="h-8 w-8 text-indigo-500" />
           Session Requests
         </h1>
 
         {requests.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-3xl shadow-sm border border-yellow-100">
-            <p className="text-gray-500">You have no pending session requests.</p>
+            <p className="text-purple-500">You have no pending session requests.</p>
           </div>
         ) : (
           <div className="grid gap-6">
@@ -132,14 +132,14 @@ export default function UserRequestsPage() {
                       )}
                       <div>
                         Request with <span className="text-indigo-600">{req.practitioner.name}</span>
-                        <div className="text-sm font-normal text-gray-500 mt-0.5">
+                        <div className="text-sm font-normal text-purple-500 mt-0.5">
                           Requested on {new Date(req.createdAt).toLocaleDateString()}
                         </div>
                       </div>
                     </CardTitle>
                     <div className="flex items-center gap-2">
                       {req.status === 'PENDING' && (
-                        <span className="text-xs font-bold px-3 py-1 bg-gray-100 text-gray-600 rounded-full">WAITING FOR EXPERT</span>
+                        <span className="text-xs font-bold px-3 py-1 bg-purple-50 text-purple-700 rounded-full">WAITING FOR EXPERT</span>
                       )}
                       {req.status === 'TIME_PROPOSED' && (
                         <span className="text-xs font-bold px-3 py-1 bg-blue-100 text-blue-700 rounded-full flex items-center gap-1">
@@ -151,17 +151,17 @@ export default function UserRequestsPage() {
                 </CardHeader>
                 <CardContent className="p-6">
                   {req.status === 'PENDING' ? (
-                    <p className="text-gray-600">The expert has been notified and will suggest available times soon.</p>
+                    <p className="text-purple-700">The expert has been notified and will suggest available times soon.</p>
                   ) : req.status === 'TIME_PROPOSED' ? (
                     <div className="space-y-4">
-                      <p className="font-semibold text-gray-800">Please choose one of the following proposed times:</p>
+                      <p className="font-semibold text-purple-900">Please choose one of the following proposed times:</p>
                       <div className="flex flex-col gap-3">
                         {req.timeProposals.filter(p => p.status === 'PENDING').map(proposal => {
                           const start = new Date(proposal.startTime);
                           const formatter = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
                           return (
-                            <div key={proposal.id} className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-xl hover:border-indigo-300 transition-colors">
-                              <span className="font-medium text-gray-800">{formatter.format(start)}</span>
+                            <div key={proposal.id} className="flex items-center justify-between p-4 bg-white border border-violet-200 rounded-xl hover:border-indigo-300 transition-colors">
+                              <span className="font-medium text-purple-900">{formatter.format(start)}</span>
                               <Button 
                                 onClick={() => handleSelectTime(req.id, proposal.id)}
                                 disabled={selecting !== null}

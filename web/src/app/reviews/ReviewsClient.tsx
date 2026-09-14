@@ -90,7 +90,7 @@ function StarDisplay({ rating, size = 'sm' }: { rating: number; size?: 'sm' | 'm
       {[1, 2, 3, 4, 5].map((i) => (
         <Star
           key={i}
-          className={`${cls} ${i <= rating ? 'fill-indigo-400 text-indigo-400' : 'text-gray-200 fill-gray-200'}`}
+          className={`${cls} ${i <= rating ? 'fill-indigo-400 text-indigo-400' : 'text-purple-200 fill-gray-200'}`}
         />
       ))}
     </div>
@@ -113,7 +113,7 @@ function StarPicker({ value, onChange }: { value: number; onChange: (v: number) 
         >
           <Star
             className={`w-8 h-8 transition-colors ${
-              i <= (hovered || value) ? 'fill-indigo-400 text-indigo-400' : 'text-gray-300 fill-gray-100'
+              i <= (hovered || value) ? 'fill-indigo-400 text-indigo-400' : 'text-purple-300 fill-gray-100'
             }`}
           />
         </button>
@@ -140,9 +140,9 @@ function RatingBar({ star, count, total }: { star: number; count: number; total:
   const pct = total > 0 ? Math.round((count / total) * 100) : 0;
   return (
     <div className="flex items-center gap-2">
-      <span className="text-xs font-bold text-gray-600 w-3">{star}</span>
+      <span className="text-xs font-bold text-purple-700 w-3">{star}</span>
       <Star className="w-3 h-3 fill-indigo-400 text-indigo-400 shrink-0" />
-      <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+      <div className="flex-1 h-2 bg-purple-50 rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
@@ -150,7 +150,7 @@ function RatingBar({ star, count, total }: { star: number; count: number; total:
           className="h-full bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"
         />
       </div>
-      <span className="text-xs text-gray-500 w-6 text-right">{count}</span>
+      <span className="text-xs text-purple-500 w-6 text-right">{count}</span>
     </div>
   );
 }
@@ -263,11 +263,11 @@ export default function ReviewsPage() {
           <div className="inline-flex items-center gap-2 bg-indigo-100 border border-indigo-200 text-indigo-700 text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">
             <Sparkles className="w-3.5 h-3.5" /> Community Reviews
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-4">
+          <h1 className="text-4xl md:text-5xl font-black text-indigo-950 leading-tight mb-4">
             What Our Community<br />
             <span className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">Is Saying</span>
           </h1>
-          <p className="text-gray-600 text-lg font-medium max-w-xl mx-auto">
+          <p className="text-purple-700 text-lg font-medium max-w-xl mx-auto">
             Real experiences from real people. Discover why thousands trust ZenAuraa for their spiritual journey.
           </p>
         </motion.div>
@@ -292,21 +292,21 @@ export default function ReviewsPage() {
 
           {/* Distribution */}
           <div className="md:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-indigo-100">
-            <h3 className="text-sm font-extrabold uppercase tracking-wider text-gray-500 mb-4">Rating Distribution</h3>
+            <h3 className="text-sm font-extrabold uppercase tracking-wider text-purple-500 mb-4">Rating Distribution</h3>
             <div className="space-y-3">
               {dist.map(({ star, count }) => (
                 <button
                   key={star}
                   type="button"
                   onClick={() => setFilterStar(filterStar === star ? null : star)}
-                  className={`w-full flex items-center gap-2 rounded-xl px-2 py-1 transition-all ${filterStar === star ? 'bg-indigo-50' : 'hover:bg-gray-50'}`}
+                  className={`w-full flex items-center gap-2 rounded-xl px-2 py-1 transition-all ${filterStar === star ? 'bg-indigo-50' : 'hover:bg-purple-50'}`}
                 >
                   <RatingBar star={star} count={count} total={total} />
                   {filterStar === star && <Check className="w-3.5 h-3.5 text-indigo-500 shrink-0" />}
                 </button>
               ))}
             </div>
-            <p className="text-xs text-gray-400 mt-4 font-medium">Click a row to filter reviews by that rating</p>
+            <p className="text-xs text-purple-400 mt-4 font-medium">Click a row to filter reviews by that rating</p>
           </div>
         </motion.div>
 
@@ -325,8 +325,8 @@ export default function ReviewsPage() {
               className="bg-white rounded-2xl p-4 shadow-sm border border-indigo-100 text-center"
             >
               <Icon className="w-5 h-5 text-indigo-500 mx-auto mb-1" />
-              <p className="text-xl font-black text-gray-900">{val}</p>
-              <p className="text-xs text-gray-500 font-medium">{label}</p>
+              <p className="text-xl font-black text-indigo-950">{val}</p>
+              <p className="text-xs text-purple-500 font-medium">{label}</p>
             </motion.div>
           ))}
         </div>
@@ -366,11 +366,11 @@ export default function ReviewsPage() {
                     <Edit2 className="w-4.5 h-4.5 text-white" />
                   </div>
                   <div>
-                    <h2 className="text-base font-extrabold text-gray-900">{editingId ? 'Edit Your Review' : 'Write a Review'}</h2>
-                    <p className="text-xs text-gray-500">Share your experience with our community</p>
+                    <h2 className="text-base font-extrabold text-indigo-950">{editingId ? 'Edit Your Review' : 'Write a Review'}</h2>
+                    <p className="text-xs text-purple-500">Share your experience with our community</p>
                   </div>
                 </div>
-                <button onClick={() => { setShowForm(false); setEditingId(null); }} className="p-1.5 rounded-xl hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition-colors">
+                <button onClick={() => { setShowForm(false); setEditingId(null); }} className="p-1.5 rounded-xl hover:bg-purple-50 text-purple-400 hover:text-purple-800 transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
@@ -378,7 +378,7 @@ export default function ReviewsPage() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Star Rating */}
                 <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-2">Your Rating *</label>
+                  <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-800 mb-2">Your Rating *</label>
                   <StarPicker value={formRating} onChange={setFormRating} />
                   {formRating > 0 && (
                     <p className="text-xs text-indigo-600 font-semibold mt-1">
@@ -389,39 +389,39 @@ export default function ReviewsPage() {
 
                 {/* Review Title */}
                 <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5">Review Title *</label>
+                  <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-800 mb-1.5">Review Title *</label>
                   <input
                     type="text"
                     value={formTitle}
                     onChange={(e) => setFormTitle(e.target.value)}
                     placeholder="Summarise your experience..."
                     maxLength={80}
-                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-semibold placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
+                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-indigo-950 text-sm font-semibold placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                   />
                 </div>
 
                 {/* Review Message */}
                 <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5">Your Review *</label>
+                  <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-800 mb-1.5">Your Review *</label>
                   <textarea
                     value={formBody}
                     onChange={(e) => setFormBody(e.target.value)}
                     placeholder="Describe your experience in detail... (min 20 characters)"
                     rows={4}
-                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-medium placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-indigo-950 text-sm font-medium placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all resize-none"
                   />
-                  <p className="text-xs text-gray-400 mt-1 text-right">{formBody.length}/500</p>
+                  <p className="text-xs text-purple-400 mt-1 text-right">{formBody.length}/500</p>
                 </div>
 
                 {/* Astrologer Name */}
                 <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5">Astrologer Name (Optional)</label>
+                  <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-800 mb-1.5">Astrologer Name (Optional)</label>
                   <input
                     type="text"
                     value={formAstrologer}
                     onChange={(e) => setFormAstrologer(e.target.value)}
                     placeholder="e.g. Pandit Rameshwar"
-                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-gray-900 text-sm font-semibold placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
+                    className="w-full px-4 py-3 rounded-2xl bg-indigo-50/40 border border-indigo-200 text-indigo-950 text-sm font-semibold placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                   />
                 </div>
 
@@ -442,7 +442,7 @@ export default function ReviewsPage() {
                   <button
                     type="button"
                     onClick={() => { setShowForm(false); setEditingId(null); }}
-                    className="px-6 py-3 rounded-2xl border border-gray-200 text-gray-600 font-semibold hover:bg-gray-50 transition-all"
+                    className="px-6 py-3 rounded-2xl border border-violet-200 text-purple-700 font-semibold hover:bg-purple-50 transition-all"
                   >
                     Cancel
                   </button>
@@ -456,13 +456,13 @@ export default function ReviewsPage() {
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           {/* Search */}
           <div className="relative flex-1">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search reviews, astrologers..."
-              className="w-full pl-10 pr-4 py-3 rounded-2xl bg-white border border-indigo-100 text-gray-900 text-sm font-medium placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 shadow-sm transition-all"
+              className="w-full pl-10 pr-4 py-3 rounded-2xl bg-white border border-indigo-100 text-indigo-950 text-sm font-medium placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 shadow-sm transition-all"
             />
           </div>
 
@@ -475,7 +475,7 @@ export default function ReviewsPage() {
                 className={`flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-extrabold border transition-all ${
                   filterStar === s
                     ? 'bg-indigo-500 text-white border-indigo-500 shadow-md'
-                    : 'bg-white text-gray-600 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50'
+                    : 'bg-white text-purple-700 border-violet-200 hover:border-indigo-300 hover:bg-indigo-50'
                 }`}
               >
                 <Star className="w-3 h-3 fill-current" /> {s}
@@ -487,11 +487,11 @@ export default function ReviewsPage() {
           <div className="relative">
             <button
               onClick={() => setFilterOpen((p) => !p)}
-              className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white border border-indigo-100 text-sm font-extrabold text-gray-700 shadow-sm hover:border-indigo-300 transition-all"
+              className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white border border-indigo-100 text-sm font-extrabold text-purple-800 shadow-sm hover:border-indigo-300 transition-all"
             >
               <SlidersHorizontal className="w-4 h-4 text-indigo-500" />
               {SORT_OPTIONS.find((o) => o.val === sortBy)?.label}
-              <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${filterOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-4 h-4 text-purple-400 transition-transform ${filterOpen ? 'rotate-180' : ''}`} />
             </button>
             <AnimatePresence>
               {filterOpen && (
@@ -499,14 +499,14 @@ export default function ReviewsPage() {
                   initial={{ opacity: 0, y: -6 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
-                  className="absolute right-0 top-full mt-2 w-44 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden"
+                  className="absolute right-0 top-full mt-2 w-44 bg-white rounded-2xl shadow-xl border border-purple-100 z-50 overflow-hidden"
                 >
                   {SORT_OPTIONS.map(({ val, label, icon: Icon }) => (
                     <button
                       key={val}
                       onClick={() => { setSortBy(val); setFilterOpen(false); }}
                       className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-sm font-semibold transition-colors ${
-                        sortBy === val ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50'
+                        sortBy === val ? 'bg-indigo-50 text-indigo-700' : 'text-purple-800 hover:bg-purple-50'
                       }`}
                     >
                       <Icon className="w-3.5 h-3.5 text-indigo-500" />
@@ -523,7 +523,7 @@ export default function ReviewsPage() {
         {/* ── ACTIVE FILTERS PILLS ── */}
         {(filterStar !== null || searchQuery) && (
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-xs text-gray-500 font-semibold">Active filters:</span>
+            <span className="text-xs text-purple-500 font-semibold">Active filters:</span>
             {filterStar !== null && (
               <span className="flex items-center gap-1.5 bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full">
                 <Star className="w-3 h-3 fill-indigo-500" /> {filterStar} Stars
@@ -540,7 +540,7 @@ export default function ReviewsPage() {
         )}
 
         {/* ── RESULTS COUNT ── */}
-        <p className="text-xs text-gray-500 font-semibold mb-4">
+        <p className="text-xs text-purple-500 font-semibold mb-4">
           Showing <span className="text-indigo-600 font-extrabold">{filtered.length}</span> of {total} reviews
         </p>
 
@@ -554,8 +554,8 @@ export default function ReviewsPage() {
             <div className="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-4">
               <MessageSquare className="w-8 h-8 text-indigo-400" />
             </div>
-            <h3 className="text-lg font-extrabold text-gray-800 mb-2">No reviews found</h3>
-            <p className="text-gray-500 text-sm max-w-xs mx-auto mb-6">
+            <h3 className="text-lg font-extrabold text-purple-900 mb-2">No reviews found</h3>
+            <p className="text-purple-500 text-sm max-w-xs mx-auto mb-6">
               {searchQuery || filterStar !== null
                 ? 'Try adjusting your filters or search query.'
                 : 'Be the first to share your experience with the community!'}
@@ -590,7 +590,7 @@ export default function ReviewsPage() {
                       <Avatar name={review.userName} size="md" />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="font-extrabold text-gray-900 text-sm">{review.userName}</span>
+                          <span className="font-extrabold text-indigo-950 text-sm">{review.userName}</span>
                           {review.verified && (
                             <span className="inline-flex items-center gap-0.5 text-[10px] font-bold bg-green-50 text-green-700 border border-green-200 px-1.5 py-0.5 rounded-full">
                               <Check className="w-2.5 h-2.5" /> Verified
@@ -602,7 +602,7 @@ export default function ReviewsPage() {
                         </div>
                         <div className="flex items-center gap-2 mt-1">
                           <StarDisplay rating={review.rating} size="sm" />
-                          <span className="text-xs text-gray-400 font-medium">
+                          <span className="text-xs text-purple-400 font-medium">
                             <Clock className="w-3 h-3 inline mr-0.5 -mt-px" />
                             {formatDate(review.date)}
                           </span>
@@ -638,16 +638,16 @@ export default function ReviewsPage() {
 
                     {/* Body */}
                     <div className="px-5 pb-3 flex-1">
-                      <h4 className="font-extrabold text-gray-900 text-sm mb-1.5">{review.title}</h4>
-                      <p className="text-gray-600 text-sm leading-relaxed">{review.body}</p>
+                      <h4 className="font-extrabold text-indigo-950 text-sm mb-1.5">{review.title}</h4>
+                      <p className="text-purple-700 text-sm leading-relaxed">{review.body}</p>
                     </div>
 
                     {/* Footer */}
-                    <div className="flex items-center justify-between px-5 py-3 border-t border-gray-50 mt-auto">
+                    <div className="flex items-center justify-between px-5 py-3 border-t border-purple-50 mt-auto">
                       <button
                         onClick={() => toggleLike(review.id)}
                         className={`flex items-center gap-1.5 text-xs font-bold transition-all px-3 py-1.5 rounded-xl ${
-                          review.liked ? 'bg-indigo-50 text-indigo-600' : 'text-gray-400 hover:bg-gray-50 hover:text-gray-600'
+                          review.liked ? 'bg-indigo-50 text-indigo-600' : 'text-purple-400 hover:bg-purple-50 hover:text-purple-700'
                         }`}
                       >
                         <ThumbsUp className={`w-3.5 h-3.5 ${review.liked ? 'fill-indigo-400 text-indigo-400' : ''}`} />
@@ -679,7 +679,7 @@ export default function ReviewsPage() {
                             </button>
                             <button
                               onClick={() => setDeleteConfirm(null)}
-                              className="flex-1 bg-white hover:bg-gray-50 text-gray-700 text-xs font-extrabold py-2 rounded-xl border border-gray-200 transition-all"
+                              className="flex-1 bg-white hover:bg-purple-50 text-purple-800 text-xs font-extrabold py-2 rounded-xl border border-violet-200 transition-all"
                             >
                               Cancel
                             </button>

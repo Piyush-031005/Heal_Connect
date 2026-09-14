@@ -61,7 +61,7 @@ function VerifyEmailContent() {
         {status === 'loading' && (
           <div className="space-y-4 py-4">
             <Loader2 className="h-14 w-14 animate-spin text-[#4f46e5] mx-auto" />
-            <p className="text-gray-500 text-base">Verifying your email…</p>
+            <p className="text-purple-500 text-base">Verifying your email…</p>
           </div>
         )}
 
@@ -70,8 +70,8 @@ function VerifyEmailContent() {
           <div className="space-y-4">
             <CheckCircle2 className="h-16 w-16 text-emerald-500 mx-auto" />
             <h1 className="text-2xl font-extrabold text-[#1a1a1a]">Email Verified!</h1>
-            <p className="text-gray-500">{message}</p>
-            <p className="text-sm text-gray-400">Redirecting you to login in 3 seconds…</p>
+            <p className="text-purple-500">{message}</p>
+            <p className="text-sm text-purple-400">Redirecting you to login in 3 seconds…</p>
             <Link href="/login"
               className="flex items-center justify-center w-full bg-[#4f46e5] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
               Go to Login
@@ -84,13 +84,13 @@ function VerifyEmailContent() {
           <div className="space-y-4">
             <XCircle className="h-16 w-16 text-red-400 mx-auto" />
             <h1 className="text-2xl font-extrabold text-[#1a1a1a]">Verification Failed</h1>
-            <p className="text-gray-500">{message}</p>
+            <p className="text-purple-500">{message}</p>
             <div className="space-y-2">
               <Link href="/login"
                 className="flex items-center justify-center w-full bg-[#4f46e5] hover:bg-[#d97706] text-white h-12 text-base font-bold rounded-full shadow-lg transition-colors">
                 Go to Login
               </Link>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-purple-400">
                 Need a new link?{' '}
                 <Link href="/login" className="text-[#4f46e5] hover:underline font-semibold">
                   Request from login page
@@ -111,7 +111,7 @@ export default function VerifyEmailPage() {
       <Suspense fallback={
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="h-8 w-8 animate-spin text-[#4f46e5]" />
-          <p className="text-gray-500">Loading…</p>
+          <p className="text-purple-500">Loading…</p>
         </div>
       }>
         <VerifyEmailContent />

@@ -45,7 +45,7 @@ export default function ModalityScrollGallery({ data }: Props) {
               key={i} 
               className="flex-shrink-0 w-[280px] h-[380px] md:w-[350px] md:h-[480px] rounded-2xl overflow-hidden shadow-2xl border border-primary/20 relative group"
             >
-              <Image src={img} alt={`${data.name} gallery image ${i}`} fill unoptimized sizes="350px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <Image src={img} alt={`${data.name} gallery image ${i}`} fill sizes="350px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay" />
             </div>
           ))}

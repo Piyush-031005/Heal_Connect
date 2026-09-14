@@ -83,14 +83,14 @@ function ProgressBar({ step }: { step: number }) {
           <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
             step > s ? 'bg-violet-600 text-white' :
             step === s ? 'bg-violet-600 text-white ring-4 ring-violet-100' :
-            'bg-gray-100 text-gray-400'
+            'bg-purple-50 text-purple-400'
           }`}>
             {step > s ? <CheckCircle2 className="w-4 h-4" /> : s}
           </div>
-          <span className={`text-xs font-medium hidden sm:block ${step === s ? 'text-violet-700' : 'text-gray-400'}`}>
+          <span className={`text-xs font-medium hidden sm:block ${step === s ? 'text-violet-700' : 'text-purple-400'}`}>
             {s === 1 ? 'About You' : s === 2 ? 'Your Practice' : 'Final Details'}
           </span>
-          {s < 3 && <div className={`h-0.5 w-8 sm:w-16 rounded ${step > s ? 'bg-violet-600' : 'bg-gray-200'}`} />}
+          {s < 3 && <div className={`h-0.5 w-8 sm:w-16 rounded ${step > s ? 'bg-violet-600' : 'bg-violet-100'}`} />}
         </div>
       ))}
     </div>
@@ -100,7 +100,7 @@ function ProgressBar({ step }: { step: number }) {
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
-      <label className="block text-sm font-medium text-gray-700">
+      <label className="block text-sm font-medium text-purple-800">
         {label}{required && <span className="text-rose-500 ml-0.5">*</span>}
       </label>
       {children}
@@ -108,14 +108,14 @@ function Field({ label, required, children }: { label: string; required?: boolea
   );
 }
 
-const inputCls = "w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition bg-white";
+const inputCls = "w-full rounded-xl border border-violet-200 px-4 py-2.5 text-sm text-purple-900 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition bg-white";
 const textareaCls = `${inputCls} resize-none`;
 
 function Toggle({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
     <button type="button" onClick={onClick}
       className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
-        active ? 'bg-violet-600 text-white border-violet-600 shadow-sm' : 'border-gray-200 text-gray-600 hover:border-violet-300 hover:text-violet-600'
+        active ? 'bg-violet-600 text-white border-violet-600 shadow-sm' : 'border-violet-200 text-purple-700 hover:border-violet-300 hover:text-violet-600'
       }`}>
       {label}
     </button>
@@ -128,8 +128,8 @@ function Step1({ form, set }: { form: FormData; set: (k: keyof FormData, v: stri
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">Tell us about you</h2>
-        <p className="text-sm text-gray-500 mt-1">Basic contact information so we can get in touch.</p>
+        <h2 className="text-xl font-bold text-indigo-950">Tell us about you</h2>
+        <p className="text-sm text-purple-500 mt-1">Basic contact information so we can get in touch.</p>
       </div>
       <Field label="Full Name" required>
         <input className={inputCls} placeholder="Your full name" value={form.fullName} onChange={e => set('fullName', e.target.value)} />
@@ -161,8 +161,8 @@ function Step2({ form, setField, toggleArea, toggleOffering }: {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">What do you offer?</h2>
-        <p className="text-sm text-gray-500 mt-1">Tell us about your practice and experience.</p>
+        <h2 className="text-xl font-bold text-indigo-950">What do you offer?</h2>
+        <p className="text-sm text-purple-500 mt-1">Tell us about your practice and experience.</p>
       </div>
 
       {/* Practice Areas */}
@@ -170,7 +170,7 @@ function Step2({ form, setField, toggleArea, toggleOffering }: {
         <div className="space-y-3 mt-1">
           {PRACTICE_AREAS.map(group => (
             <div key={group.group}>
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">{group.group}</p>
+              <p className="text-xs font-semibold text-purple-500 uppercase tracking-wide mb-2">{group.group}</p>
               <div className="flex flex-wrap gap-2">
                 {group.items.map(item => (
                   <Toggle key={item} label={item} active={form.selectedAreas.includes(item)} onClick={() => toggleArea(item)} />
@@ -179,7 +179,7 @@ function Step2({ form, setField, toggleArea, toggleOffering }: {
             </div>
           ))}
           <div>
-            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Other</p>
+            <p className="text-xs font-semibold text-purple-500 uppercase tracking-wide mb-2">Other</p>
             <textarea className={textareaCls} rows={2} placeholder="Please tell us about your practice..." value={form.otherPractice} onChange={e => setField('otherPractice', e.target.value)} />
           </div>
         </div>
@@ -213,7 +213,7 @@ function Step2({ form, setField, toggleArea, toggleOffering }: {
 
       {/* Offerings */}
       <Field label="How do you work with clients online?" required>
-        <p className="text-xs text-gray-400 mb-2">What would you like to offer through ZenAuraa?</p>
+        <p className="text-xs text-purple-400 mb-2">What would you like to offer through ZenAuraa?</p>
         <div className="flex flex-wrap gap-2">
           {OFFERING_OPTIONS.map(opt => (
             <Toggle key={opt} label={opt} active={form.offerings.includes(opt)} onClick={() => toggleOffering(opt)} />
@@ -242,8 +242,8 @@ function Step3({ form, setField }: { form: FormData; setField: (k: keyof FormDat
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">Final Details</h2>
-        <p className="text-sm text-gray-500 mt-1">Almost done — just a couple more things.</p>
+        <h2 className="text-xl font-bold text-indigo-950">Final Details</h2>
+        <p className="text-sm text-purple-500 mt-1">Almost done — just a couple more things.</p>
       </div>
 
       <Field label="Anything else you'd like us to know?">
@@ -251,21 +251,21 @@ function Step3({ form, setField }: { form: FormData; setField: (k: keyof FormDat
       </Field>
 
       <Field label="If we invite you to the next stage" required>
-        <p className="text-xs text-gray-500 mb-3">
+        <p className="text-xs text-purple-500 mb-3">
           Would you be comfortable taking part in a short conversation and, if you progress further, providing appropriate identification and/or supporting information about your practice?
         </p>
         <div className="space-y-2">
           {VERIFICATION_OPTIONS.map(opt => (
             <label key={opt} className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all ${
-              form.verificationComfort === opt ? 'border-violet-500 bg-violet-50' : 'border-gray-200 hover:border-violet-200'
+              form.verificationComfort === opt ? 'border-violet-500 bg-violet-50' : 'border-violet-200 hover:border-violet-200'
             }`}>
               <input type="radio" name="verification" value={opt} checked={form.verificationComfort === opt}
                 onChange={() => setField('verificationComfort', opt)} className="accent-violet-600" />
-              <span className="text-sm text-gray-700">{opt}</span>
+              <span className="text-sm text-purple-800">{opt}</span>
             </label>
           ))}
         </div>
-        <p className="text-xs text-gray-400 mt-3">
+        <p className="text-xs text-purple-400 mt-3">
           We won't ask you to upload documents at this stage. Any further verification will depend on the nature of your practice.
         </p>
       </Field>
@@ -378,8 +378,8 @@ export default function PractitionerInterestPage() {
             <CheckCircle2 className="w-10 h-10 text-violet-600" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Thank you for your interest in ZenAuraa.</h1>
-            <p className="text-gray-500 mt-3 text-sm leading-relaxed">
+            <h1 className="text-2xl font-bold text-indigo-950">Thank you for your interest in ZenAuraa.</h1>
+            <p className="text-purple-500 mt-3 text-sm leading-relaxed">
               We'll review your application and be in touch if we'd like to invite you to the next stage.
             </p>
           </div>
@@ -400,10 +400,10 @@ export default function PractitionerInterestPage() {
           <div className="inline-flex items-center gap-2 text-violet-700 font-bold text-lg mb-2">
             <Sparkles className="w-5 h-5" /> ZenAuraa
           </div>
-          <h1 className="text-3xl font-extrabold text-gray-900">Practitioner Interest Form</h1>
+          <h1 className="text-3xl font-extrabold text-indigo-950">Practitioner Interest Form</h1>
           <p className="text-violet-600 font-medium mt-1 text-sm">Discover. Connect. Thrive.</p>
           {step === 1 && (
-            <p className="text-gray-500 text-sm mt-4 max-w-lg mx-auto leading-relaxed">
+            <p className="text-purple-500 text-sm mt-4 max-w-lg mx-auto leading-relaxed">
               ZenAuraa is creating a curated online community connecting people with trusted practitioners across holistic health, astrology, spirituality, esoteric practices and personal development.
               <br /><br />
               This short form takes around 5 minutes. If we feel your practice could be a good fit, we'll be in touch.
@@ -412,7 +412,7 @@ export default function PractitionerInterestPage() {
         </div>
 
         {/* Card */}
-        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 sm:p-8">
+        <div className="bg-white rounded-3xl shadow-sm border border-purple-100 p-6 sm:p-8">
           <ProgressBar step={step} />
 
           {error && (
@@ -424,10 +424,10 @@ export default function PractitionerInterestPage() {
           {step === 3 && <Step3 form={form} setField={set} />}
 
           {/* Navigation */}
-          <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-100">
+          <div className="flex justify-between items-center mt-8 pt-6 border-t border-purple-100">
             {step > 1 ? (
               <button onClick={handleBack}
-                className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm font-medium hover:bg-gray-50 transition-colors">
+                className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-violet-200 text-purple-700 text-sm font-medium hover:bg-purple-50 transition-colors">
                 <ChevronLeft className="w-4 h-4" /> Back
               </button>
             ) : <div />}
@@ -447,7 +447,7 @@ export default function PractitionerInterestPage() {
           </div>
         </div>
 
-        <p className="text-center text-xs text-gray-400 mt-6">
+        <p className="text-center text-xs text-purple-400 mt-6">
           We welcome practitioners from all backgrounds — formal training, certification, mentorship, lineage, or years of practice.
         </p>
       </div>

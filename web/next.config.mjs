@@ -3,12 +3,16 @@ const nextConfig = {
   output: 'standalone',
   // Proxy /api/* → backend (browser calls /api/... → Next.js forwards to backend, no CORS issues)
   async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: 'https://healconnect-backend-dqcsaqf4a6baffaz.centralindia-01.azurewebsites.net/api/:path*',
-      },
-    ];
+    return {
+      beforeFiles: [],
+      afterFiles: [],
+      fallback: [
+        {
+          source: '/api/:path*',
+          destination: 'https://healconnect-backend-dqcsaqf4a6baffaz.centralindia-01.azurewebsites.net/api/:path*',
+        },
+      ],
+    };
   },
   eslint: {
     ignoreDuringBuilds: true,

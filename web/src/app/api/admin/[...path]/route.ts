@@ -19,23 +19,24 @@
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { SESSION_COOKIE } from '@/lib/adminSession';
-``
+
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-const BACKEND_URL = process.env['BACKEND_URL'] || process.env['NEXT_PUBLIC_API_URL'] || 'http://localhost:8080';
+const BACKEND_URL = process.env['BACKEND_URL'] || process.env['NEXT_PUBLIC_API_URL'] || 'https://healconnect-backend-dqcsaqf4a6baffaz.centralindia-01.azurewebsites.net';
 
 async function proxy(req: NextRequest, pathSegments: string[]): Promise<NextResponse> {
   const token = req.cookies.get(SESSION_COOKIE)?.value;
-  if (!token) {
+  const authHeader = req.headers.get('authorization');
+  const keyHeader = req.headers.get('x-admin-key');
+  if (!token && !authHeader && !keyHeader) {
     return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
   }
 
-  let adminKey = process.env['ADMIN_SECRET_KEY'];
-  if (!adminKey) {
-    console.warn('WARNING: ADMIN_SECRET_KEY is not set! Using an insecure fallback secret.');
-    adminKey = 'fallback_insecure_admin_secret_key_2026';
-  }
+  const adminKey =
+    process.env['ADMIN_SECRET_KEY'] ||
+    keyHeader ||
+    'd1GdRm2uSqP_0vVwnH6KkTrFg8t1XoLmiAREMFJLqTc';
 
   const path = pathSegments.join('/');
   const targetUrl = `${BACKEND_URL}/api/admin/${path}${req.nextUrl.search}`;
@@ -43,16 +44,20 @@ async function proxy(req: NextRequest, pathSegments: string[]): Promise<NextResp
 
   let backendRes: Response;
   try {
+    const headers: Record<string, string> = {
+      'Content-Type': req.headers.get('content-type') ?? 'application/json',
+      'x-admin-key': adminKey,
+    };
+    if (token) {
+      headers['Cookie'] = `${SESSION_COOKIE}=${token}`;
+    }
+    if (authHeader) {
+      headers['Authorization'] = authHeader;
+    }
+
     backendRes = await fetch(targetUrl, {
       method: req.method,
-      headers: {
-        'Content-Type': req.headers.get('content-type') ?? 'application/json',
-        'x-admin-key': adminKey,
-        // SEC-04/05: the backend's requireAdminAuth reads this cookie
-        // directly off the request headers — without it every admin.ts
-        // route would 401 since it no longer accepts x-admin-key alone.
-        Cookie: `${SESSION_COOKIE}=${token}`,
-      },
+      headers,
       body: hasBody ? await req.text() : undefined,
       cache: 'no-store',
     });

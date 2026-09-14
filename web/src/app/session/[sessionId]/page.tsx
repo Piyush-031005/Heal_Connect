@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { ArrowLeft, MessageSquare, Phone } from 'lucide-react';
+import { ArrowLeft, MessageSquare, Phone, PhoneOff, PhoneCall, User } from 'lucide-react';
 import ChatWindow from '@/components/chat/ChatWindow';
 import { Button } from '@/components/ui/button';
 import { tokenStore, agoraApi, sessionsApi, type PractitionerProfile } from '@/lib/api';
-
+import { getSocket } from '@/lib/socket';
 
 // Agora SDK uses `window` at import time — must never be SSR'd
 const AudioCallScreen = dynamic(() => import('@/components/chat/AudioCallScreen'), { ssr: false });
@@ -25,8 +25,7 @@ export default function SessionPage() {
   const [activeSession, setActiveSession] = useState<any>(null);
   const [tab, setTab] = useState<Tab>('chat');
   const [startingCall, setStartingCall] = useState(false);
-
-
+  const [incomingCall, setIncomingCall] = useState<any>(null);
 
   useEffect(() => {
     const token = tokenStore.getAccess();
@@ -59,10 +58,6 @@ export default function SessionPage() {
         const session = res.data.session;
         setActiveSession(session);
         
-        // If our JWT userId matches the session's practitioner's userId, we are the expert.
-        // Wait, sessions API returns practitioner { id, name ... } and user { id, name ... }
-        // The practitioner ID is NOT the user ID. But wait! The JWT payload has userId and practitionerId.
-        // It's safer to just parse practitionerId from JWT, or check if currentJwtUserId === session.userId.
         const base64Url = token.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
         const tokenPayload = JSON.parse(atob(base64));
@@ -76,18 +71,46 @@ export default function SessionPage() {
         }
       }
     });
+
+    // Listen for incoming calls if the expert is in chat
+    const socket = getSocket(token);
+    const handleIncomingCall = (data: any) => {
+      const incomingId = data.id || data.sessionId;
+      if (incomingId && incomingId !== sessionId) {
+        setIncomingCall({ ...data, sessionId: incomingId });
+      }
+    };
+    socket.on('call_incoming', handleIncomingCall);
+
+    return () => {
+      socket.off('call_incoming', handleIncomingCall);
+    };
   }, [router, sessionId]);
 
   const handleSwitchToCall = async () => {
     if (startingCall) return;
     setStartingCall(true);
-    setTab('call');
-    setStartingCall(false);
+    try {
+      const token = tokenStore.getAccess();
+      if (!token || !activeSession?.practitionerId) return;
+      // Create a new AUDIO session with the same practitioner
+      const res = await sessionsApi.create(token, activeSession.practitionerId, 'AUDIO');
+      if (res.success && res.data?.session?.id) {
+        router.push(`/session/${res.data.session.id}`);
+      }
+    } catch (err) {
+      console.error('Failed to start audio call:', err);
+    } finally {
+      setStartingCall(false);
+    }
   };
 
   if (!userId || !peer) return null;
 
-  const showCallTab = sessionType === 'AUDIO' || sessionType === 'VIDEO' || sessionType === 'CHAT';
+  // showCallTab: only true for AUDIO/VIDEO sessions — NEVER for CHAT.
+  // Mounting AudioCallScreen for a CHAT session causes useAgoraCall to auto-join
+  // the Agora channel and start billing, even when no call was requested.
+  const showCallTab = sessionType === 'AUDIO' || sessionType === 'VIDEO';
   // Chat-only session, viewed by the consumer — offer a one-tap way to escalate to a call.
   const showSwitchToCall = sessionType === 'CHAT' && !isExpert;
   const initials = peer?.name
@@ -97,10 +120,63 @@ export default function SessionPage() {
   return (
     <div className="flex flex-col h-screen bg-[#faf9f6]">
 
+      {/* ── Incoming Call Modal (for Expert) ── */}
+      {incomingCall && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+          <div className="bg-[#121420] border border-indigo-500/30 rounded-3xl shadow-2xl p-8 max-w-sm w-full text-center space-y-6 animate-in zoom-in-95 duration-200">
+            <div className="flex flex-col items-center gap-3">
+              <div className="w-20 h-20 rounded-2xl bg-gray-800 border border-gray-700 flex items-center justify-center overflow-hidden">
+                {incomingCall.user?.photoUrl
+                  ? <img src={incomingCall.user.photoUrl} alt="" className="w-full h-full object-cover" />
+                  : <User className="w-10 h-10 text-gray-400" />}
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-1">Incoming Call</p>
+                <p className="text-2xl font-extrabold text-white">{incomingCall.user?.name ?? 'Client'}</p>
+                <p className="text-sm text-gray-400 mt-1">
+                  {incomingCall.type === 'AUDIO' ? '🎙️ Audio Session Request' : '💬 Consultation Request'}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center justify-center gap-4">
+              <Button
+                variant="destructive"
+                className="rounded-full w-14 h-14 bg-red-500 hover:bg-red-600 shadow-lg"
+                title="Decline"
+                onClick={async () => {
+                  const token = tokenStore.getAccess();
+                  if (token) await sessionsApi.reject(token, incomingCall.sessionId).catch(console.error);
+                  setIncomingCall(null);
+                }}
+              >
+                <PhoneOff className="h-6 w-6 text-white" />
+              </Button>
+              <Button
+                className="rounded-full w-16 h-16 bg-emerald-500 hover:bg-emerald-600 shadow-xl animate-pulse"
+                title="Accept"
+                onClick={async () => {
+                  const currentCall = incomingCall;
+                  setIncomingCall(null);
+                  if (!currentCall) return;
+                  const token = tokenStore.getAccess();
+                  if (token) {
+                    await sessionsApi.accept(token, currentCall.sessionId).catch(console.error);
+                  }
+                  router.push(`/session/${currentCall.sessionId}`);
+                }}
+              >
+                <PhoneCall className="h-7 w-7 text-white" />
+              </Button>
+            </div>
+            <p className="text-xs text-gray-400">Tap to answer or decline</p>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className="sticky top-0 z-10 bg-white border-b border-yellow-100 px-4 py-3 flex items-center gap-3">
         <Button variant="ghost" size="icon" onClick={() => router.back()} className="rounded-full hover:bg-yellow-50 shrink-0">
-          <ArrowLeft className="h-5 w-5 text-gray-600" />
+          <ArrowLeft className="h-5 w-5 text-purple-700" />
         </Button>
 
         {/* Peer avatar */}
@@ -128,7 +204,7 @@ export default function SessionPage() {
           <p className="font-semibold text-sm text-[#1a1a1a] truncate">
             {peer?.name ?? 'Loading...'}
           </p>
-          <p className="text-xs text-gray-400 truncate">
+          <p className="text-xs text-purple-400 truncate">
             {peer?.specialties?.slice(0, 2).join(' · ') ?? sessionId.slice(0, 8) + '...'}
           </p>
         </div>
@@ -176,7 +252,7 @@ export default function SessionPage() {
         </div>
       </header>
 
-      {/* Persistent Call Banner when on Chat tab during an Audio session */}
+      {/* Persistent Call Banner — only shown when viewing chat tab during an active AUDIO/VIDEO session */}
       {showCallTab && tab === 'chat' && (
         <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-4 py-2 flex items-center justify-between text-xs shadow-md z-20">
           <div className="flex items-center gap-2">
@@ -198,7 +274,7 @@ export default function SessionPage() {
         <div className={cn('h-full', tab === 'chat' ? 'flex flex-col' : 'hidden')}>
           <ChatWindow
             sessionId={sessionId}
-            currentUserId={isExpert ? activeSession?.practitionerId : userId}
+            currentUserId={userId}
             isExpert={isExpert}
             practitionerId={activeSession?.practitionerId ?? ''}
             practitionerName={isExpert ? '' : (peer?.name ?? 'the expert')}

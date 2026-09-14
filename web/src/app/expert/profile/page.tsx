@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {
   ArrowLeft, Camera, Loader2, Check, X,
-  User, Mail, Star, IndianRupee, BookOpen, Languages, Award, Calendar,
+  User, Mail, Star, IndianRupee, BookOpen, Languages, Award, Calendar, Download,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -20,7 +20,7 @@ const SPECIALTIES = [
 const LANGUAGES = ['English', 'Hindi', 'Bengali', 'Tamil', 'Telugu', 'Marathi', 'Gujarati', 'Kannada'];
 
 const INPUT_CLS = 'w-full text-sm rounded-lg bg-purple-50/70 border border-indigo-200 px-4 py-2.5 text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-purple-300/40 focus:border-purple-300 transition-all';
-const LABEL_CLS = 'text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 block';
+const LABEL_CLS = 'text-xs font-semibold text-purple-500 uppercase tracking-wider mb-1.5 block';
 
 interface ExpertProfile {
   id: string;
@@ -51,7 +51,30 @@ export default function ExpertProfilePage() {
   const [uploading, setUploading] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState('');
+  const [exporting, setExporting] = useState(false);
   const [practitionerId, setPractitionerId] = useState<string | null>(null);
+
+  const handleExportData = async () => {
+    const token = tokenStore.getAccess();
+    if (!token) return;
+    setExporting(true);
+    try {
+      const res = await practitionersApi.exportData(token);
+      if (res.success && res.data) {
+        const blob = new Blob([JSON.stringify(res.data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `expert-data-${new Date().toISOString().slice(0, 10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+    } catch (err) {
+      console.error('Export failed:', err);
+    } finally {
+      setExporting(false);
+    }
+  };
 
   useEffect(() => {
     const token = tokenStore.getAccess();
@@ -117,7 +140,7 @@ export default function ExpertProfilePage() {
       <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <Image src="/logo.png" alt="ZenAuraa" width={48} height={48} className="rounded-full animate-pulse" />
-          <p className="text-gray-500">Loading profile...</p>
+          <p className="text-purple-500">Loading profile...</p>
         </div>
       </div>
     );
@@ -129,12 +152,12 @@ export default function ExpertProfilePage() {
     <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
       <header className="sticky top-0 z-50 w-full border-b border-indigo-100 bg-white/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/expert/dashboard" className="flex items-center gap-2 text-gray-500 hover:text-purple-400 transition-colors">
+          <Link href="/expert/dashboard" className="flex items-center gap-2 text-purple-500 hover:text-purple-400 transition-colors">
             <ArrowLeft className="h-4 w-4" />
             <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
             <span className="font-extrabold text-purple-400">ZenAuraa</span>
           </Link>
-          <div className="text-sm font-semibold text-gray-600">Expert Profile</div>
+          <div className="text-sm font-semibold text-purple-700">Expert Profile</div>
         </div>
       </header>
 
@@ -164,13 +187,13 @@ export default function ExpertProfilePage() {
             </div>
           </div>
           <div className="pt-16 px-6 pb-6">
-            <h1 className="text-xl font-extrabold text-gray-900">{profile.name}</h1>
+            <h1 className="text-xl font-extrabold text-indigo-950">{profile.name}</h1>
             <p className="text-sm text-indigo-600 font-medium">{profile.specialties.slice(0, 2).join(' · ') || 'Expert'}</p>
             <div className="flex items-center gap-3 mt-1 flex-wrap">
               {profile.email && (
                 <div className="flex items-center gap-1.5">
-                  <Mail className="w-3.5 h-3.5 text-gray-400" />
-                  <span className="text-sm text-gray-500">{profile.email}</span>
+                  <Mail className="w-3.5 h-3.5 text-purple-400" />
+                  <span className="text-sm text-purple-500">{profile.email}</span>
                 </div>
               )}
               {profile.isVerified && (
@@ -182,7 +205,7 @@ export default function ExpertProfilePage() {
                 <div className="flex items-center gap-1">
                   <Star className="w-3.5 h-3.5 text-purple-300 fill-current" />
                   <span className="text-sm font-semibold">{profile.avgRating || '—'}</span>
-                  <span className="text-xs text-gray-400">({profile.reviewCount ?? 0} reviews)</span>
+                  <span className="text-xs text-purple-400">({profile.reviewCount ?? 0} reviews)</span>
                 </div>
               )}
             </div>
@@ -193,7 +216,7 @@ export default function ExpertProfilePage() {
         <Card className="bg-white border border-indigo-100 shadow-sm rounded-2xl overflow-hidden">
           <div className="px-6 pt-5 pb-3 border-b border-purple-50 flex items-center gap-2">
             <User className="w-5 h-5 text-purple-400" />
-            <h2 className="text-lg font-bold text-gray-900">Basic Information</h2>
+            <h2 className="text-lg font-bold text-indigo-950">Basic Information</h2>
           </div>
           <div className="p-6 space-y-5">
             <div>
@@ -227,7 +250,7 @@ export default function ExpertProfilePage() {
         <Card className="bg-white border border-indigo-100 shadow-sm rounded-2xl overflow-hidden">
           <div className="px-6 pt-5 pb-3 border-b border-purple-50 flex items-center gap-2">
             <Star className="w-5 h-5 text-purple-400" />
-            <h2 className="text-lg font-bold text-gray-900">Specialties</h2>
+            <h2 className="text-lg font-bold text-indigo-950">Specialties</h2>
           </div>
           <div className="p-6 flex flex-wrap gap-2.5">
             {SPECIALTIES.map((s) => (
@@ -235,7 +258,7 @@ export default function ExpertProfilePage() {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
                   specialties.includes(s)
                     ? 'bg-purple-400 text-white border-purple-400 shadow-sm'
-                    : 'bg-white text-gray-600 border-indigo-200 hover:border-purple-300 hover:text-indigo-700 hover:bg-purple-50'
+                    : 'bg-white text-purple-700 border-indigo-200 hover:border-purple-300 hover:text-indigo-700 hover:bg-purple-50'
                 }`}>
                 {s}
               </button>
@@ -247,7 +270,7 @@ export default function ExpertProfilePage() {
         <Card className="bg-white border border-indigo-100 shadow-sm rounded-2xl overflow-hidden">
           <div className="px-6 pt-5 pb-3 border-b border-purple-50 flex items-center gap-2">
             <Languages className="w-5 h-5 text-purple-400" />
-            <h2 className="text-lg font-bold text-gray-900">Languages</h2>
+            <h2 className="text-lg font-bold text-indigo-950">Languages</h2>
           </div>
           <div className="p-6 flex flex-wrap gap-2.5">
             {LANGUAGES.map((l) => (
@@ -255,7 +278,7 @@ export default function ExpertProfilePage() {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
                   languages.includes(l)
                     ? 'bg-purple-400 text-white border-purple-400 shadow-sm'
-                    : 'bg-white text-gray-600 border-indigo-200 hover:border-purple-300 hover:text-indigo-700 hover:bg-purple-50'
+                    : 'bg-white text-purple-700 border-indigo-200 hover:border-purple-300 hover:text-indigo-700 hover:bg-purple-50'
                 }`}>
                 {l}
               </button>
@@ -267,7 +290,7 @@ export default function ExpertProfilePage() {
         <Card className="bg-white border border-indigo-100 shadow-sm rounded-2xl overflow-hidden">
           <div className="px-6 pt-5 pb-3 border-b border-purple-50 flex items-center gap-2">
             <Award className="w-5 h-5 text-purple-400" />
-            <h2 className="text-lg font-bold text-gray-900">Certifications</h2>
+            <h2 className="text-lg font-bold text-indigo-950">Certifications</h2>
           </div>
           <div className="p-6 space-y-4">
             <div className="flex gap-2">
@@ -299,13 +322,13 @@ export default function ExpertProfilePage() {
         <Card className="bg-white border border-indigo-100 shadow-sm rounded-2xl overflow-hidden">
           <div className="px-6 pt-5 pb-3 border-b border-purple-50 flex items-center gap-2">
             <Calendar className="w-5 h-5 text-purple-400" />
-            <h2 className="text-lg font-bold text-gray-900">Scheduling & Availability</h2>
+            <h2 className="text-lg font-bold text-indigo-950">Scheduling & Availability</h2>
           </div>
           <div className="p-6 space-y-4">
             <div className="flex items-center justify-between bg-purple-50/70 p-4 rounded-xl border border-indigo-200">
               <div>
-                <p className="font-semibold text-gray-900 text-sm">Enable Scheduling</p>
-                <p className="text-xs text-gray-600 mt-0.5">Allow users to book your free slots instantly</p>
+                <p className="font-semibold text-indigo-950 text-sm">Enable Scheduling</p>
+                <p className="text-xs text-purple-700 mt-0.5">Allow users to book your free slots instantly</p>
               </div>
               <Button 
                 size="sm" 
@@ -332,8 +355,8 @@ export default function ExpertProfilePage() {
               <div className="mt-6">
                 <div className="mb-4">
                   <p className="text-xs font-bold uppercase tracking-widest text-emerald-700 mb-0.5">Manage Time</p>
-                  <h3 className="text-lg font-bold text-gray-900">Your Availability Calendar</h3>
-                  <p className="text-sm text-gray-600 mt-1">Set your available slots for users to book sessions</p>
+                  <h3 className="text-lg font-bold text-indigo-950">Your Availability Calendar</h3>
+                  <p className="text-sm text-purple-700 mt-1">Set your available slots for users to book sessions</p>
                 </div>
                 <div className="border border-indigo-100 rounded-xl overflow-hidden bg-white">
                   <AvailabilityCalendar 
@@ -352,14 +375,28 @@ export default function ExpertProfilePage() {
           </div>
         )}
 
-        <div className="flex items-center gap-3 pb-8">
+        <div className="flex items-center gap-3 pb-4">
           <Button onClick={handleSave} disabled={saving}
             className="flex-1 bg-purple-400 hover:bg-indigo-600 text-white border-0 rounded-full h-12 font-bold shadow-lg shadow-indigo-200 transition-all">
             {saving ? <Loader2 className="h-5 w-5 animate-spin" /> : saved ? <><Check className="h-5 w-5 mr-2" /> Saved!</> : 'Save Changes'}
           </Button>
           <Link href="/expert/dashboard">
-            <Button variant="outline" className="border-indigo-200 text-gray-600 hover:text-indigo-700 hover:bg-purple-50 rounded-full h-12 px-6">Cancel</Button>
+            <Button variant="outline" className="border-indigo-200 text-purple-700 hover:text-indigo-700 hover:bg-purple-50 rounded-full h-12 px-6">Cancel</Button>
           </Link>
+        </div>
+
+        {/* Export Data */}
+        <div className="border-t border-indigo-100 pt-4 pb-8">
+          <p className="text-xs text-purple-400 mb-3">Download a copy of all your expert account data stored on ZenAuraa.</p>
+          <Button
+            variant="outline"
+            onClick={handleExportData}
+            disabled={exporting}
+            className="w-full border-indigo-200 text-indigo-700 hover:bg-indigo-50 rounded-full h-11 gap-2 font-semibold"
+          >
+            {exporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+            {exporting ? 'Preparing export...' : 'Download My Data'}
+          </Button>
         </div>
 
       </main>

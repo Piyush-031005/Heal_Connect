@@ -59,8 +59,8 @@ export const useFCM = () => {
         } else {
           toast.success(
             <div className="flex flex-col gap-1">
-              <span className="font-bold text-gray-900">{title}</span>
-              <span className="text-sm text-gray-600">{body}</span>
+              <span className="font-bold text-indigo-950">{title}</span>
+              <span className="text-sm text-purple-700">{body}</span>
             </div>
           );
         }
@@ -82,8 +82,8 @@ export const useFCM = () => {
     const handleSocketNotification = (data: { title: string; body: string }) => {
       toast(
         <div className="flex flex-col gap-1">
-          <span className="font-bold text-gray-900">{data.title}</span>
-          <span className="text-sm text-gray-600">{data.body}</span>
+          <span className="font-bold text-indigo-950">{data.title}</span>
+          <span className="text-sm text-purple-700">{data.body}</span>
         </div>,
         {
           icon: '🔔',

@@ -1,3 +1,4 @@
+import multer from 'multer';
 import { Router, type Response } from 'express';
 import { body } from 'express-validator';
 import { prisma } from '../lib/prisma';
@@ -8,6 +9,15 @@ import { SESSION_DISCLAIMER, SESSION_SAFETY_GUIDELINES } from '../lib/safetyGuid
 import { flagContentIfNeeded } from '../lib/moderation';
 import { sendNotificationToPractitioner } from '../services/notification.service';
 import { scheduleSessionReminders } from '../services/scheduler.service';
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 50 * 1024 * 1024 }, // 50MB
+});
+
+interface MulterRequest extends AuthRequest {
+  file?: Express.Multer.File | undefined;
+}
 
 const router = Router();
 
@@ -96,8 +106,10 @@ router.post(
         user: session.user,
       };
       getIO()?.to(`practitioner_${practitionerId}`).emit('new_session_request', sessionPayload);
+      getIO()?.to(`user_${practitionerId}`).emit('new_session_request', sessionPayload);
       if (session.type === 'AUDIO' || session.type === 'VIDEO') {
         getIO()?.to(`practitioner_${practitionerId}`).emit('call_incoming', sessionPayload);
+        getIO()?.to(`user_${practitionerId}`).emit('call_incoming', sessionPayload);
       }
 
       // Send Push Notification
@@ -206,7 +218,8 @@ router.get('/user/history', requireAuth, async (req: AuthRequest, res: Response)
   res.json({ success: true, data: { sessions, totalSpent, totalMinutes, totalSessionsCompleted } });
 });
 
-// ─── GET /api/sessions/user/transcripts — user's own call transcripts ────────
+// ─── GET /api/sessions/user/transcripts — user's call history (NO transcript text)
+// transcriptText is admin-only. This endpoint returns session metadata only.
 router.get('/user/transcripts', requireAuth, async (req: AuthRequest, res: Response) => {
   const userId = req.user!.userId;
   const page = parseInt(String(req.query.page ?? '1'));
@@ -222,7 +235,7 @@ router.get('/user/transcripts', requireAuth, async (req: AuthRequest, res: Respo
         take: limit,
         select: {
           id: true,
-          transcriptText: true,
+          // transcriptText intentionally excluded — admin-only field
           submittedAt: true,
           session: {
             select: {
@@ -245,7 +258,8 @@ router.get('/user/transcripts', requireAuth, async (req: AuthRequest, res: Respo
   }
 });
 
-// ─── GET /api/sessions/practitioner/transcripts — practitioner's own call transcripts
+// ─── GET /api/sessions/practitioner/transcripts — practitioner's call history (NO transcript text)
+// transcriptText is admin-only. This endpoint returns session metadata only.
 router.get('/practitioner/transcripts', requireAuth, async (req: AuthRequest, res: Response) => {
   const practitionerId = req.user!.practitionerId;
   if (!practitionerId) {
@@ -265,7 +279,7 @@ router.get('/practitioner/transcripts', requireAuth, async (req: AuthRequest, re
         take: limit,
         select: {
           id: true,
-          transcriptText: true,
+          // transcriptText intentionally excluded — admin-only field
           submittedAt: true,
           session: {
             select: {
@@ -286,6 +300,17 @@ router.get('/practitioner/transcripts', requireAuth, async (req: AuthRequest, re
     console.error('Practitioner transcripts fetch error:', err);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
+});
+
+// ─── GET /api/sessions/:id/transcript — explicit 403 for non-admin callers ───
+// Admin-only transcript content is served via /api/admin/sessions/:id/transcript.
+// This route exists purely to return a clear 403 (not an empty 200) if any
+// user or expert-authenticated client tries to read transcript content directly.
+router.get('/:id/transcript', requireAuth, (req: AuthRequest, res: Response) => {
+  res.status(403).json({
+    success: false,
+    message: 'Transcript content is restricted to administrators. This call may be reviewed for quality and safety purposes.',
+  });
 });
 
 // DEV TEMP: Clear stuck active sessions
@@ -486,15 +511,17 @@ router.post('/:id/end', requireAuth, async (req: AuthRequest, res: Response) => 
     data: { status: targetStatus, endTime: new Date() },
   });
 
-  // Task 2: Trigger Deepgram transcription if an Agora recording URL was provided
-  if (targetStatus === 'COMPLETED' && req.body.recordingUrl) {
-    import('../services/transcription.service').then(({ transcribeFromRecordingUrl }) => {
-      transcribeFromRecordingUrl(
+  // Trigger transcription if an audio/recording URL was provided
+  const recordingUrl = req.body?.recordingUrl || req.body?.audioUrl;
+  if (targetStatus === 'COMPLETED' && recordingUrl) {
+    console.log(`[Session End] Triggering transcription for session ${sessionId} with URL: ${recordingUrl}`);
+    import('../services/transcription.service').then(({ transcribeCall }) => {
+      transcribeCall(
+        recordingUrl,
         sessionId,
-        req.body.recordingUrl,
         session.userId,
         session.practitionerId
-      ).catch(console.error);
+      ).catch((err) => console.error('[Transcription] Error in transcribeCall:', err));
     });
   }
 
@@ -532,7 +559,9 @@ router.post(
     const { transcriptText } = req.body as { transcriptText: string };
 
     try {
-      // Verify the session belongs to this user/practitioner and is completed
+      console.log(`[Transcript] Received transcript submission for session ${sessionId} (length=${transcriptText?.length || 0})`);
+
+      // Verify the session belongs to this user/practitioner and is active or completed
       const session = await prisma.session.findFirst({
         where: {
           id: sessionId,
@@ -540,13 +569,14 @@ router.post(
             { userId },
             ...(req.user!.practitionerId ? [{ practitionerId: req.user!.practitionerId }] : [{ practitionerId: userId }]),
           ],
-          status: 'COMPLETED',
+          status: { in: ['ACTIVE', 'COMPLETED'] },
         },
-        select: { id: true, userId: true, practitionerId: true, type: true },
+        select: { id: true, userId: true, practitionerId: true, type: true, status: true },
       });
 
       if (!session) {
-        res.status(404).json({ success: false, message: 'Completed session not found' });
+        console.warn(`[Transcript] Session ${sessionId} not found or unauthorized for user ${userId}`);
+        res.status(404).json({ success: false, message: 'Active or completed session not found' });
         return;
       }
 
@@ -564,6 +594,8 @@ router.post(
         },
       });
 
+      console.log(`[Transcript] Successfully saved transcript ${transcript.id} for session ${sessionId} (status was ${session.status})`);
+
       // Task 3: scan transcript for policy violations (async, non-blocking)
       flagContentIfNeeded(transcriptText, 'CALL_TRANSCRIPT', {
         sessionId,
@@ -575,11 +607,121 @@ router.post(
       res.status(201).json({ success: true, data: { transcript } });
     } catch (err: any) {
       if (err.code === 'P2002') {
+        console.log(`[Transcript] Transcript already exists for session ${sessionId}`);
         res.status(409).json({ success: false, message: 'Transcript already submitted for this session' });
         return;
       }
-      console.error('Transcript submission error:', err);
+      console.error(`[Transcript] Transcript submission error for session ${sessionId}:`, err);
       res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+  }
+);
+
+// ─── POST /api/sessions/:id/transcribe-recording — transcribe audio recording ──────
+router.post(
+  '/:id/transcribe-recording',
+  requireAuth,
+  async (req: AuthRequest, res: Response) => {
+    const sessionId = req.params.id as string;
+    const audioUrl = req.body?.audioUrl || req.body?.recordingUrl;
+    if (!audioUrl) {
+      res.status(400).json({ success: false, message: 'audioUrl or recordingUrl is required' });
+      return;
+    }
+
+    const session = await prisma.session.findUnique({
+      where: { id: sessionId },
+      select: { id: true, userId: true, practitionerId: true, type: true, status: true },
+    });
+
+    if (!session) {
+      res.status(404).json({ success: false, message: 'Session not found' });
+      return;
+    }
+
+    const isParticipant =
+      session.userId === req.user!.userId ||
+      session.practitionerId === req.user!.userId ||
+      session.practitionerId === req.user!.practitionerId;
+
+    if (!isParticipant) {
+      res.status(403).json({ success: false, message: 'Unauthorized' });
+      return;
+    }
+
+    import('../services/transcription.service').then(({ transcribeCall }) => {
+      transcribeCall(audioUrl, sessionId, session.userId, session.practitionerId)
+        .catch((err) => console.error('[Transcription] Error in transcribeCall:', err));
+    });
+
+    res.json({ success: true, message: 'Transcription initiated' });
+  }
+);
+
+// ─── POST /api/sessions/:id/recording — upload recorded audio from call end ──
+router.post(
+  '/:id/recording',
+  requireAuth,
+  upload.single('audio'),
+  async (req: MulterRequest, res: Response) => {
+    const sessionId = req.params.id as string;
+    const file = req.file;
+
+    if (!file) {
+      res.status(400).json({ success: false, message: 'Audio file is required' });
+      return;
+    }
+
+    const session = await prisma.session.findUnique({
+      where: { id: sessionId },
+      select: { id: true, userId: true, practitionerId: true, type: true, status: true },
+    });
+
+    if (!session) {
+      res.status(404).json({ success: false, message: 'Session not found' });
+      return;
+    }
+
+    const isParticipant =
+      session.userId === req.user!.userId ||
+      session.practitionerId === req.user!.userId ||
+      session.practitionerId === req.user!.practitionerId;
+
+    if (!isParticipant) {
+      res.status(403).json({ success: false, message: 'Unauthorized' });
+      return;
+    }
+
+    // Check if transcript already exists to avoid redundant processing
+    const existingTranscript = await prisma.callTranscript.findUnique({
+      where: { sessionId },
+    });
+    if (existingTranscript && existingTranscript.transcriptText) {
+      console.log(`[Recording] Transcript already exists for session ${sessionId}, skipping duplicate transcription`);
+      res.status(200).json({ success: true, message: 'Transcript already exists for this session' });
+      return;
+    }
+
+    console.log(`[Recording] Received audio recording for session ${sessionId} (${file.size} bytes, ${file.mimetype})`);
+
+    try {
+      const { uploadCallRecording } = await import('../lib/azure');
+      const recordingUrl = await uploadCallRecording(file.buffer, file.mimetype, sessionId);
+      console.log(`[Recording] Uploaded call recording to: ${recordingUrl}`);
+
+      // Trigger transcription pipeline async with both URL and buffer
+      const { transcribeCall } = await import('../services/transcription.service');
+      transcribeCall(recordingUrl, sessionId, session.userId, session.practitionerId, file.buffer)
+        .catch((err) => console.error('[Recording Transcription] Error:', err));
+
+      res.status(201).json({
+        success: true,
+        data: { recordingUrl },
+        message: 'Recording uploaded and transcription initiated',
+      });
+    } catch (err: any) {
+      console.error(`[Recording] Failed to upload recording for session ${sessionId}:`, err);
+      res.status(500).json({ success: false, message: 'Failed to process audio recording' });
     }
   }
 );
@@ -591,7 +733,7 @@ router.get('/:id', requireAuth, async (req: AuthRequest, res: Response) => {
   const session = await prisma.session.findFirst({
     where: {
       id: req.params.id as string,
-      OR: [{ userId }, { practitionerId: userId }],
+      OR: [{ userId }, ...(req.user!.practitionerId ? [{ practitionerId: req.user!.practitionerId }] : [])],
     },
     include: {
       practitioner: {

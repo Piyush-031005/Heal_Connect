@@ -21,17 +21,17 @@ export function DailyHoroscope({ variant }: { variant: string }) {
               <h2 className="text-5xl md:text-6xl font-serif text-[#1A1A1A] tracking-tight">Cosmic Forecast</h2>
             </div>
             <div className="flex gap-4">
-              <Button variant="outline" size="icon" className="w-12 h-12 rounded-full border-gray-200 text-gray-500 hover:text-[#32CD32] hover:border-[#32CD32] transition-colors"><ChevronLeft className="w-5 h-5" /></Button>
-              <Button variant="outline" size="icon" className="w-12 h-12 rounded-full border-gray-200 text-gray-500 hover:text-[#32CD32] hover:border-[#32CD32] transition-colors"><ChevronRight className="w-5 h-5" /></Button>
+              <Button variant="outline" size="icon" className="w-12 h-12 rounded-full border-violet-200 text-purple-500 hover:text-[#32CD32] hover:border-[#32CD32] transition-colors"><ChevronLeft className="w-5 h-5" /></Button>
+              <Button variant="outline" size="icon" className="w-12 h-12 rounded-full border-violet-200 text-purple-500 hover:text-[#32CD32] hover:border-[#32CD32] transition-colors"><ChevronRight className="w-5 h-5" /></Button>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {ZODIAC_SIGNS.slice(0, 3).map((h, idx) => {
               const data = HOROSCOPE_DATA[idx];
               return (
-                <div key={idx} className="group bg-[#FDFCF8] rounded-[2rem] p-10 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_60px_rgba(50,205,50,0.08)] border border-gray-50 transition-all duration-700 hover:-translate-y-2">
+                <div key={idx} className="group bg-[#FDFCF8] rounded-[2rem] p-10 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_60px_rgba(50,205,50,0.08)] border border-purple-50 transition-all duration-700 hover:-translate-y-2">
                   <div className="flex items-center gap-6 mb-8">
-                    <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center border border-gray-100 shadow-sm group-hover:border-[#32CD32]/20 group-hover:scale-110 transition-all duration-500">
+                    <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center border border-purple-100 shadow-sm group-hover:border-[#32CD32]/20 group-hover:scale-110 transition-all duration-500">
                       <Moon className="w-6 h-6 text-[#FFC300]" />
                     </div>
                     <div>

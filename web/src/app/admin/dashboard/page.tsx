@@ -145,10 +145,10 @@ export default function AdminDashboard() {
         {loading ? (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-gray-100 dark:border-white/10 animate-pulse">
-                <div className="w-10 h-10 bg-gray-100 dark:bg-white/10 rounded-xl mb-3" />
-                <div className="h-6 bg-gray-100 dark:bg-white/10 rounded w-16 mb-2" />
-                <div className="h-3 bg-gray-100 dark:bg-white/10 rounded w-24" />
+              <div key={i} className="bg-white dark:bg-indigo-900 rounded-2xl p-5 border border-purple-100 dark:border-white/10 animate-pulse">
+                <div className="w-10 h-10 bg-purple-50 dark:bg-white/10 rounded-xl mb-3" />
+                <div className="h-6 bg-purple-50 dark:bg-white/10 rounded w-16 mb-2" />
+                <div className="h-3 bg-purple-50 dark:bg-white/10 rounded w-24" />
               </div>
             ))}
           </div>
@@ -166,30 +166,30 @@ export default function AdminDashboard() {
         <div className="grid lg:grid-cols-2 gap-5">
           {/* User Signups Trend (Last 30 Days) */}
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 p-5 shadow-sm">
+            className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 p-5 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-sm font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
+                <h3 className="text-sm font-extrabold text-indigo-950 dark:text-white flex items-center gap-2">
                   <Users className="w-4 h-4 text-blue-500" /> New Users per Day (Real PostgreSQL Data)
                 </h3>
-                <p className="text-[10px] text-gray-400 font-semibold mt-0.5">Last 30 Days daily registrations</p>
+                <p className="text-[10px] text-purple-400 font-semibold mt-0.5">Last 30 Days daily registrations</p>
               </div>
             </div>
             {chartData.length === 0 || chartData.every((d) => d.users === 0) ? (
-              <div className="h-44 flex items-center justify-center border border-dashed border-gray-200 dark:border-white/10 rounded-xl">
-                <p className="text-xs text-gray-400 font-medium">No user registration data available yet</p>
+              <div className="h-44 flex items-center justify-center border border-dashed border-violet-200 dark:border-white/10 rounded-xl">
+                <p className="text-xs text-purple-400 font-medium">No user registration data available yet</p>
               </div>
             ) : (
-              <div className="h-44 flex items-end gap-1 pt-6 border-b border-gray-100 dark:border-white/10 pb-2 overflow-x-auto">
+              <div className="h-44 flex items-end gap-1 pt-6 border-b border-purple-100 dark:border-white/10 pb-2 overflow-x-auto">
                 {chartData.slice(-14).map((d) => (
                   <div key={d.date} className="flex-1 flex flex-col items-center gap-1 group relative">
                     <div
                       style={{ height: `${(d.users / maxUsersInChart) * 120}px` }}
                       className="w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-sm group-hover:brightness-110 transition-all min-h-[4px]"
                     />
-                    <span className="text-[9px] font-bold text-gray-400 truncate">{d.date.slice(8)}</span>
+                    <span className="text-[9px] font-bold text-purple-400 truncate">{d.date.slice(8)}</span>
                     {/* Tooltip */}
-                    <div className="absolute -top-7 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 text-white text-[10px] px-2 py-0.5 rounded shadow pointer-events-none whitespace-nowrap">
+                    <div className="absolute -top-7 opacity-0 group-hover:opacity-100 transition-opacity bg-indigo-950 text-white text-[10px] px-2 py-0.5 rounded shadow pointer-events-none whitespace-nowrap">
                       {d.date}: {d.users} users
                     </div>
                   </div>
@@ -200,30 +200,30 @@ export default function AdminDashboard() {
 
           {/* Revenue Trend (Last 30 Days) */}
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 p-5 shadow-sm">
+            className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 p-5 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-sm font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
+                <h3 className="text-sm font-extrabold text-indigo-950 dark:text-white flex items-center gap-2">
                   <Wallet className="w-4 h-4 text-emerald-500" /> Revenue Trend (Real PostgreSQL Data)
                 </h3>
-                <p className="text-[10px] text-gray-400 font-semibold mt-0.5">Daily session payments (£)</p>
+                <p className="text-[10px] text-purple-400 font-semibold mt-0.5">Daily session payments (£)</p>
               </div>
             </div>
             {chartData.length === 0 || chartData.every((d) => d.revenue === 0) ? (
-              <div className="h-44 flex items-center justify-center border border-dashed border-gray-200 dark:border-white/10 rounded-xl">
-                <p className="text-xs text-gray-400 font-medium">No completed revenue transactions recorded yet</p>
+              <div className="h-44 flex items-center justify-center border border-dashed border-violet-200 dark:border-white/10 rounded-xl">
+                <p className="text-xs text-purple-400 font-medium">No completed revenue transactions recorded yet</p>
               </div>
             ) : (
-              <div className="h-44 flex items-end gap-1 pt-6 border-b border-gray-100 dark:border-white/10 pb-2 overflow-x-auto">
+              <div className="h-44 flex items-end gap-1 pt-6 border-b border-purple-100 dark:border-white/10 pb-2 overflow-x-auto">
                 {chartData.slice(-14).map((d) => (
                   <div key={d.date} className="flex-1 flex flex-col items-center gap-1 group relative">
                     <div
                       style={{ height: `${(d.revenue / maxRevenueInChart) * 120}px` }}
                       className="w-full bg-gradient-to-t from-emerald-500 to-green-400 rounded-t-sm group-hover:brightness-110 transition-all min-h-[4px]"
                     />
-                    <span className="text-[9px] font-bold text-gray-400 truncate">{d.date.slice(8)}</span>
+                    <span className="text-[9px] font-bold text-purple-400 truncate">{d.date.slice(8)}</span>
                     {/* Tooltip */}
-                    <div className="absolute -top-7 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 text-white text-[10px] px-2 py-0.5 rounded shadow pointer-events-none whitespace-nowrap">
+                    <div className="absolute -top-7 opacity-0 group-hover:opacity-100 transition-opacity bg-indigo-950 text-white text-[10px] px-2 py-0.5 rounded shadow pointer-events-none whitespace-nowrap">
                       {d.date}: £{d.revenue}
                     </div>
                   </div>
@@ -237,9 +237,9 @@ export default function AdminDashboard() {
         <div className="grid lg:grid-cols-3 gap-5">
           {/* Live Activity Feed */}
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 p-5 shadow-sm lg:col-span-2">
+            className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 p-5 shadow-sm lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
+              <h3 className="text-sm font-extrabold text-indigo-950 dark:text-white flex items-center gap-2">
                 <Activity className="w-4 h-4 text-indigo-500" /> Real-time Activity Feed
               </h3>
               <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 dark:bg-indigo-500/10 px-2 py-0.5 rounded-full">
@@ -247,19 +247,19 @@ export default function AdminDashboard() {
               </span>
             </div>
             {activities.length === 0 ? (
-              <div className="py-12 text-center text-xs text-gray-400 font-medium">No real-time activity recorded in database yet</div>
+              <div className="py-12 text-center text-xs text-purple-400 font-medium">No real-time activity recorded in database yet</div>
             ) : (
               <div className="space-y-3">
                 {activities.map((act, i) => (
-                  <div key={i} className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                  <div key={i} className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-purple-50 dark:hover:bg-white/5 transition-colors">
                     <div className="w-7 h-7 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center shrink-0">
                       <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-bold text-gray-900 dark:text-white">{act.title}</p>
-                      <p className="text-[11px] text-gray-500 dark:text-white/60 truncate">{act.description}</p>
+                      <p className="text-xs font-bold text-indigo-950 dark:text-white">{act.title}</p>
+                      <p className="text-[11px] text-purple-500 dark:text-white/60 truncate">{act.description}</p>
                     </div>
-                    <span className="text-[10px] text-gray-400 whitespace-nowrap">
+                    <span className="text-[10px] text-purple-400 whitespace-nowrap">
                       {new Date(act.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
@@ -270,23 +270,23 @@ export default function AdminDashboard() {
 
           {/* Top Booked Categories */}
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 p-5 shadow-sm">
+            className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 p-5 shadow-sm">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
+              <h3 className="text-sm font-extrabold text-indigo-950 dark:text-white flex items-center gap-2">
                 <Star className="w-4 h-4 text-purple-500" /> Practitioner Specialties
               </h3>
             </div>
             {topCategories.length === 0 ? (
-              <div className="py-12 text-center text-xs text-gray-400 font-medium">No specialty data available yet</div>
+              <div className="py-12 text-center text-xs text-purple-400 font-medium">No specialty data available yet</div>
             ) : (
               <div className="space-y-3">
                 {topCategories.map((c) => (
                   <div key={c.category} className="space-y-1">
-                    <div className="flex justify-between text-xs font-extrabold text-gray-800 dark:text-white">
+                    <div className="flex justify-between text-xs font-extrabold text-purple-900 dark:text-white">
                       <span>{c.category}</span>
                       <span className="text-indigo-600">{c.count}</span>
                     </div>
-                    <div className="w-full bg-gray-100 dark:bg-white/10 h-2 rounded-full overflow-hidden">
+                    <div className="w-full bg-purple-50 dark:bg-white/10 h-2 rounded-full overflow-hidden">
                       <div
                         className="bg-gradient-to-r from-indigo-400 to-purple-500 h-full rounded-full"
                         style={{ width: `${Math.min(100, (c.count / Math.max(...topCategories.map((t) => t.count), 1)) * 100)}%` }}

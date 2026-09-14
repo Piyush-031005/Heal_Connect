@@ -1,4 +1,6 @@
 'use client';
+import GhostFibers from '@/components/GhostFibers';
+
 import NewLayoutsHero from './new-layouts-hero';
 
 import Link from 'next/link';
@@ -13,8 +15,9 @@ import OpticalWheel from '@/components/optical-wheel';
 // --- PRIMARY LAYOUT HERO (Locked) ---
 function PrimaryHero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-background min-h-[90vh] flex items-center">
-      {/* Scattered star particles — like ZenAuraa reference */}
+    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 min-h-[90vh] flex items-center" style={{background:'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 30%, #C4B5FD 60%, #A78BFA 100%)',color:'#1e1b4b'}}>
+      <GhostFibers lineColor="#8345bd" glowColor="#7c41e0" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={4} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={7} twistSpeed={1.5} lineFrequency={10} lineSpacing={1.0} lineSharpness={13} glowFalloff={7} glowIntensity={2.5} brightness={3.0} blueBoost={1.5} vignette={0.5} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
+      {/* Scattered star particles ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â like ZenAuraa reference */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
         {[
           [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
@@ -38,8 +41,20 @@ function PrimaryHero() {
         <OpticalWheel />
       </div>
 
+      {/* Meditation image with gradient fade - blends into hero background */}
+        <div className="absolute right-0 top-[-10%] bottom-[-10%] w-[100%] md:w-[80%] lg:w-[75%] pointer-events-none" style={{zIndex:5}}>
+          <div className="absolute inset-0" style={{
+            backgroundImage: "url('/final_ensights/meditation.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "right center",
+            WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 85% 50%, black 25%, rgba(0,0,0,0.6) 55%, transparent 80%)",
+            maskImage: "radial-gradient(ellipse 70% 60% at 85% 50%, black 25%, rgba(0,0,0,0.6) 55%, transparent 80%)",
+            WebkitMaskRepeat: "no-repeat",
+            maskRepeat: "no-repeat"
+          }} />
+        </div>
 
-      <div className="container mx-auto px-6 relative z-10 pointer-events-none">
+        <div className="container mx-auto px-6 relative z-10 pointer-events-none">
         <div className="max-w-3xl pointer-events-auto">
           
           
@@ -56,10 +71,10 @@ function PrimaryHero() {
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000">
-            <span className="text-foreground">Zen</span>
+            <span className="text-[#7C3AED]">Zen</span>
             <span className="text-primary">Auraa.</span>
           </h1>
-          <p className="text-xl lg:text-2xl text-foreground/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
+          <p className="text-xl lg:text-2xl text-white/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
             Find trusted guidance for every stage of life.<br/>Connect with verified experts instantly.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-in slide-in-from-left duration-1000 delay-300 pointer-events-auto">
@@ -69,7 +84,7 @@ function PrimaryHero() {
               </Button>
             </Link>
             <Link href="/horoscope">
-              <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10 text-foreground px-10 h-14 text-lg rounded-full font-medium transition-all">
+              <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10 text-white px-10 h-14 text-lg rounded-full font-medium transition-all">
                 Today's Horoscope
               </Button>
             </Link>
@@ -78,20 +93,20 @@ function PrimaryHero() {
           {/* Subtle Trust Indicators */}
           <div className="flex items-center gap-6 animate-in fade-in duration-1000 delay-500 pt-2">
             <div className="flex flex-col mr-2">
-              <span className="text-2xl font-serif text-foreground font-bold flex items-center">4.9<Star className="w-5 h-5 ml-1 fill-primary text-primary"/></span>
-              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Rating</span>
+              <span className="text-2xl font-serif text-white font-bold flex items-center">4.9<Star className="w-5 h-5 ml-1 fill-primary text-primary"/></span>
+              <span className="text-[10px] text-white/70 uppercase tracking-widest font-semibold mt-1">Rating</span>
             </div>
             <div className="flex flex-col mr-2">
-              <span className="text-2xl font-serif text-foreground font-bold">100k+</span>
-              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Sessions</span>
+              <span className="text-2xl font-serif text-white font-bold">100k+</span>
+              <span className="text-[10px] text-white/70 uppercase tracking-widest font-semibold mt-1">Sessions</span>
             </div>
             <div className="flex flex-col mr-2">
-              <span className="text-2xl font-serif text-foreground font-bold">500+</span>
-              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Experts</span>
+              <span className="text-2xl font-serif text-white font-bold">500+</span>
+              <span className="text-[10px] text-white/70 uppercase tracking-widest font-semibold mt-1">Experts</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-serif text-foreground font-bold">24x7</span>
-              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Available</span>
+              <span className="text-2xl font-serif text-white font-bold">24x7</span>
+              <span className="text-[10px] text-white/70 uppercase tracking-widest font-semibold mt-1">Available</span>
             </div>
           </div>
         </div>
@@ -103,8 +118,9 @@ function PrimaryHero() {
 // --- NEW LAYOUT 1 HERO ---
 function NewLayout1Hero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 bg-gradient-to-b from-[#EDE5FC] via-[#EDE5FC] to-[#4E67CC]/40 min-h-[90vh] flex items-center">
-      {/* Scattered star particles — like ZenAuraa reference */}
+    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 min-h-[90vh] flex items-center" style={{background:'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 30%, #C4B5FD 60%, #A78BFA 100%)',color:'#1e1b4b'}}>
+      
+      {/* Scattered star particles ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â like ZenAuraa reference */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
         {[
           [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
@@ -146,10 +162,10 @@ function NewLayout1Hero() {
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-[1] mb-6 animate-in slide-in-from-left duration-1000">
-            <span className="text-[#1E2059]">Zen</span>
+            <span className="text-[#7C3AED]">Zen</span>
             <span className="text-primary">Auraa.</span>
           </h1>
-          <p className="text-xl lg:text-2xl text-[#1E2059]/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
+          <p className="text-xl lg:text-2xl text-white/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
             Find trusted guidance for every stage of life.<br/>Connect with verified experts instantly.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-in slide-in-from-left duration-1000 delay-300 pointer-events-auto">
@@ -159,7 +175,7 @@ function NewLayout1Hero() {
               </Button>
             </Link>
             <Link href="/horoscope">
-              <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10 text-foreground px-10 h-14 text-lg rounded-full font-medium transition-all">
+              <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10 text-white px-10 h-14 text-lg rounded-full font-medium transition-all">
                 Today's Horoscope
               </Button>
             </Link>
@@ -168,20 +184,20 @@ function NewLayout1Hero() {
           {/* Subtle Trust Indicators */}
           <div className="flex items-center gap-6 animate-in fade-in duration-1000 delay-500 pt-2">
             <div className="flex flex-col mr-2">
-              <span className="text-2xl font-serif text-[#1E2059] font-bold flex items-center">4.9<Star className="w-5 h-5 ml-1 fill-primary text-primary"/></span>
-              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Rating</span>
+              <span className="text-2xl font-serif text-white font-bold flex items-center">4.9<Star className="w-5 h-5 ml-1 fill-primary text-primary"/></span>
+              <span className="text-[10px] text-white/70 uppercase tracking-widest font-semibold mt-1">Rating</span>
             </div>
             <div className="flex flex-col mr-2">
-              <span className="text-2xl font-serif text-[#1E2059] font-bold">100k+</span>
-              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Sessions</span>
+              <span className="text-2xl font-serif text-white font-bold">100k+</span>
+              <span className="text-[10px] text-white/70 uppercase tracking-widest font-semibold mt-1">Sessions</span>
             </div>
             <div className="flex flex-col mr-2">
-              <span className="text-2xl font-serif text-[#1E2059] font-bold">500+</span>
-              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Experts</span>
+              <span className="text-2xl font-serif text-white font-bold">500+</span>
+              <span className="text-[10px] text-white/70 uppercase tracking-widest font-semibold mt-1">Experts</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-serif text-[#1E2059] font-bold">24x7</span>
-              <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-1">Available</span>
+              <span className="text-2xl font-serif text-white font-bold">24x7</span>
+              <span className="text-[10px] text-white/70 uppercase tracking-widest font-semibold mt-1">Available</span>
             </div>
           </div>
         </div>
@@ -193,33 +209,33 @@ function NewLayout1Hero() {
 // --- EDITORIAL LAYOUT HERO (Magazine) ---
 function EditorialHero() {
   return (
-    <section className="relative pt-32 pb-20 bg-background min-h-[90vh] flex flex-col justify-center border-b border-primary/10">
+    <section className="relative pt-32 pb-20 bg-transparent min-h-[90vh] flex flex-col justify-center border-b border-primary/10">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 z-10">
-            <h1 className="text-6xl md:text-8xl font-heading font-medium tracking-tight leading-[0.95] mb-8 text-foreground">
+            <h1 className="text-6xl md:text-8xl font-heading font-medium tracking-tight leading-[0.95] mb-8 text-white">
               Your Path to <br />
               <span className="italic text-primary">Wellness</span> Begins Here.
             </h1>
-            <p className="text-lg md:text-2xl text-foreground/70 mb-10 max-w-2xl font-light leading-relaxed">
-              Connect with trusted holistic health, astrological and wellness practitioners from around the world—all in one place.
+            <p className="text-lg md:text-2xl text-white/70 mb-10 max-w-2xl font-light leading-relaxed">
+              Connect with trusted holistic health, astrological and wellness practitioners from around the worldÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Âall in one place.
             </p>
             
             {/* Search Bar matching Zen Align reference */}
             <div className="flex items-center bg-card rounded-full p-2 max-w-xl shadow-lg border border-primary/10">
-              <Search className="w-5 h-5 text-muted-foreground ml-4 mr-2" />
+              <Search className="w-5 h-5 text-white/70 ml-4 mr-2" />
               <input 
                 type="text" 
                 placeholder="Search by specialty, service or name" 
-                className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-muted-foreground"
+                className="flex-1 bg-transparent border-none focus:outline-none text-white placeholder:text-white/70"
               />
               <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 h-12 font-medium">
                 Search
               </Button>
             </div>
             
-            <div className="flex items-center gap-3 mt-6 text-sm text-muted-foreground">
-              <span className="font-medium text-foreground/80">Popular:</span>
+            <div className="flex items-center gap-3 mt-6 text-sm text-white/70">
+              <span className="font-medium text-white/80">Popular:</span>
               <span className="px-3 py-1 rounded-full bg-primary/10 text-primary">Astrologers</span>
               <span className="px-3 py-1 rounded-full bg-primary/10 text-primary">Energy Healing</span>
               <span className="px-3 py-1 rounded-full bg-primary/10 text-primary">Yoga</span>
@@ -243,8 +259,8 @@ function EditorialHero() {
                 <Sparkles className="w-6 h-6" />
               </div>
               <div>
-                <p className="text-sm font-bold text-foreground">Find Clarity</p>
-                <p className="text-xs text-muted-foreground">Expert Astrologers</p>
+                <p className="text-sm font-bold text-white">Find Clarity</p>
+                <p className="text-xs text-white/70">Expert Astrologers</p>
               </div>
             </div>
           </div>
@@ -257,7 +273,7 @@ function EditorialHero() {
 // --- ORGANIC LAYOUT HERO (Flow) ---
 function OrganicHero() {
   return (
-    <section className="relative overflow-hidden pt-64 pb-24 bg-background min-h-[90vh] flex items-center">
+    <section className="relative overflow-hidden pt-64 pb-24 bg-transparent min-h-[90vh] flex items-center">
       {/* Flowing Organic Shapes */}
       <svg className="absolute bottom-0 left-0 w-full h-1/2 text-primary/10 opacity-50 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
         <path d="M0,100 Q50,0 100,100 Z" fill="currentColor" />
@@ -272,12 +288,12 @@ function OrganicHero() {
           </div>
         </div>
         
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-medium tracking-tight leading-tight mb-8 text-foreground max-w-5xl mx-auto pointer-events-auto">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-medium tracking-tight leading-tight mb-8 text-white max-w-5xl mx-auto pointer-events-auto">
           Heal your mind, body <br />
           <span className="text-primary italic">& energy.</span>
         </h1>
         
-        <p className="text-xl text-foreground/80 mb-12 max-w-2xl mx-auto font-light pointer-events-auto">
+        <p className="text-xl text-white/80 mb-12 max-w-2xl mx-auto font-light pointer-events-auto">
           Join a global community dedicated to healing, growth and transformation. Find your perfect practitioner today.
         </p>
         
@@ -296,14 +312,14 @@ function OrganicHero() {
 // --- MINIMALIST LAYOUT HERO (Clean & Imagery Focused) ---
 function MinimalistHero() {
   return (
-    <section className="relative pt-32 pb-24 bg-background min-h-[85vh] flex items-center">
+    <section className="relative pt-32 pb-24 bg-transparent min-h-[85vh] flex items-center">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="max-w-2xl">
-            <h1 className="text-5xl md:text-7xl font-sans font-light tracking-tight text-foreground mb-8 leading-[1.1]">
+            <h1 className="text-5xl md:text-7xl font-sans font-light tracking-tight text-white mb-8 leading-[1.1]">
               Healing, <br /><span className="font-semibold text-primary">Elevated.</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground font-light mb-12">
+            <p className="text-lg md:text-xl text-white/70 font-light mb-12">
               Connect with elite practitioners to heal your mind, body, and energy. Experience the power of crystals, tarot, and holistic therapies.
             </p>
             <Link href="/practitioners">
@@ -343,14 +359,14 @@ function ModernGlowHero() {
       </div>
       
       <div className="container mx-auto px-6 relative z-10 text-center">
-        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary/20 bg-background/50 backdrop-blur-md text-primary mb-8 shadow-sm">
+        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary/20 bg-transparent/50 backdrop-blur-md text-primary mb-8 shadow-sm">
           <Sparkles className="w-4 h-4" />
           <span className="text-xs uppercase tracking-widest font-bold">Unveil The Future</span>
         </div>
-        <h1 className="text-6xl md:text-8xl font-serif font-medium tracking-tight text-foreground mb-8 drop-shadow-sm">
+        <h1 className="text-6xl md:text-8xl font-serif font-medium tracking-tight text-white mb-8 drop-shadow-sm">
           Awaken Your Spirit
         </h1>
-        <p className="text-xl text-foreground/70 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+        <p className="text-xl text-white/70 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
           The most vibrant community of modern mystics, healers, and spiritual guides.
         </p>
         <Link href="/practitioners">
@@ -472,7 +488,7 @@ function ZenAlignHero() {
       {/* Constellation SVG overlay */}
       <ConstellationLines />
 
-      {/* Large radial glow — center-right */}
+      {/* Large radial glow ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â center-right */}
       <div className="absolute right-0 top-0 w-[70vw] h-full bg-[radial-gradient(ellipse_at_70%_40%,rgba(32,166,220,0.18)_0%,transparent_65%)] pointer-events-none z-0" />
       <div className="absolute left-0 bottom-0 w-[50vw] h-1/2 bg-[radial-gradient(ellipse_at_30%_80%,rgba(23,97,154,0.10)_0%,transparent_60%)] pointer-events-none z-0" />
 
@@ -503,7 +519,7 @@ function ZenAlignHero() {
               </span>
             </motion.div>
 
-            {/* Main heading — High-end elegant editorial typography */}
+            {/* Main heading ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â High-end elegant editorial typography */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -524,7 +540,7 @@ function ZenAlignHero() {
               Discover vetted astrologers, energy healers, and spiritual guides. Reconnect with the universe.
             </motion.p>
 
-            {/* Search Bar — glassmorphism */}
+            {/* Search Bar ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â glassmorphism */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -561,7 +577,7 @@ function ZenAlignHero() {
               </div>
               <div className="w-px h-8 bg-[#9FD6EE]/60" />
               <div>
-                <p className="text-2xl font-black text-[#12527F]">4.9★</p>
+                <p className="text-2xl font-black text-[#12527F]">4.9ÃƒÂ¢Ã‹Å“Ã¢â‚¬Â¦</p>
                 <p className="text-[10px] font-bold uppercase tracking-widest text-[#1A92C6]/70">Avg Rating</p>
               </div>
             </motion.div>
@@ -672,7 +688,7 @@ function Layout2Hero() {
   return (
     <section 
       ref={containerRef}
-      className="relative pt-32 pb-40 lg:pb-56 bg-background min-h-[110vh] flex flex-col items-center justify-center border-b border-border/50 overflow-hidden"
+      className="relative pt-32 pb-40 lg:pb-56 bg-transparent min-h-[110vh] flex flex-col items-center justify-center border-b border-border/50 overflow-hidden"
     >
       {/* Massive Background Parallax Text */}
       <motion.div 
@@ -749,11 +765,11 @@ function Layout2Hero() {
               transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="pointer-events-auto"
             >
-              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary/30 bg-background/40 backdrop-blur-md text-primary mb-8 shadow-sm">
+              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary/30 bg-transparent/40 backdrop-blur-md text-primary mb-8 shadow-sm">
                 <Sparkles className="w-4 h-4" />
                 <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Awaken Your Destiny</span>
               </div>
-              <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-sans font-bold tracking-tighter text-foreground mb-6 leading-[1.05] drop-shadow-lg">
+              <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-sans font-bold tracking-tighter text-white mb-6 leading-[1.05] drop-shadow-lg">
                 Discover <br />
                 <span className="text-primary font-serif font-medium">ZenAuraa.</span>
               </h1>
@@ -763,7 +779,7 @@ function Layout2Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="text-lg md:text-xl text-foreground/80 mb-12 font-medium leading-relaxed font-sans max-w-md drop-shadow-md pointer-events-auto"
+              className="text-lg md:text-xl text-white/80 mb-12 font-medium leading-relaxed font-sans max-w-md drop-shadow-md pointer-events-auto"
             >
               Connect with vetted spiritual guides, astrologers, and energy healers to align your inner world and outer reality.
             </motion.p>
@@ -780,7 +796,7 @@ function Layout2Hero() {
                 <input 
                   type="text" 
                   placeholder="Find your spiritual guide..." 
-                  className="flex-1 bg-transparent border-none focus:outline-none text-foreground placeholder:text-foreground/50 font-sans font-medium text-lg placeholder:font-light"
+                  className="flex-1 bg-transparent border-none focus:outline-none text-white placeholder:text-white/50 font-sans font-medium text-lg placeholder:font-light"
                 />
                 <Button className="bg-primary hover:bg-primary-dark text-white rounded-full px-8 h-12 lg:h-14 font-bold font-sans transition-all text-base shadow-md">
                   Search
@@ -822,7 +838,7 @@ function FinalHybridHero() {
   return (
     <section 
       ref={containerRef}
-      className={`relative pt-32 pb-24 lg:pt-48 lg:pb-32 transition-colors duration-500 min-h-[95vh] flex items-center justify-center overflow-hidden ${isNewColor ? 'bg-stats-gradient' : 'bg-background'}`}
+      className={`relative pt-32 pb-24 lg:pt-48 lg:pb-32 transition-colors duration-500 min-h-[95vh] flex items-center justify-center overflow-hidden ${isNewColor ? 'bg-stats-gradient' : 'bg-transparent'}`}
     >
       {/* Background glow effects */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#694091]/20 rounded-full blur-[150px] pointer-events-none" />
@@ -882,12 +898,12 @@ function FinalHybridHero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className={`text-6xl md:text-8xl font-serif font-medium tracking-tight mb-6 leading-[1.1] transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-foreground'}`}
+              className={`text-6xl md:text-8xl font-serif font-medium tracking-tight mb-6 leading-[1.1] transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-white'}`}
             >
               Zen<span className={`text-primary transition-colors duration-500`}>Auraa.</span>
             </motion.h1>
 
-            {/* RIGHT: Cosmic Wheel Graphic (Adapted to Half-Arc) */}
+            {/* Star particles */}
           <motion.div
             style={{ y: yImage }}
             initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
@@ -898,7 +914,7 @@ function FinalHybridHero() {
             {/* Lavender glow */}
             <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[50%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)]'}`} />
 
-            {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
+            {/* Star particles */}
             <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[75%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[400px] h-[400px] sm:w-[450px] sm:h-[450px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]' : 'w-[450px] h-[450px] sm:w-[500px] sm:h-[500px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]'}`}>
               
               {/* Outer Dashed Ring */}
@@ -907,7 +923,7 @@ function FinalHybridHero() {
               {/* Inner Thin Ring */}
               <div className={`absolute w-[75%] h-[75%] rounded-full border pointer-events-none ${isNewColor ? 'border-white/20' : 'border-[#B79AE6]/20'}`} />
 
-              {/* THE REVOLVING ORBIT — the whole ring spins, icons counter-rotate to stay upright */}
+              {/* THE REVOLVING ORBIT ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
@@ -944,7 +960,7 @@ function FinalHybridHero() {
                         <Link href={`/modalities/${mod.id}`} className="w-16 h-16 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-transparent p-1 transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)] relative overflow-hidden">
                           <img src={mod.img} alt={mod.label} className={`w-full h-full object-contain group-hover:brightness-125 transition-all ${isNewColor ? 'invert brightness-0' : ''}`} style={isNewColor ? { filter: 'brightness(0) invert(1)' } : {}} />
                         </Link>
-                        <span className={`text-[14px] md:text-[16px] font-bold mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-foreground'}`}>{mod.label}</span>
+                        <span className={`text-[14px] md:text-[16px] font-bold mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-white'}`}>{mod.label}</span>
                       </motion.div>
                     </motion.div>
                   );
@@ -995,28 +1011,28 @@ function FinalHybridHero() {
               className={`flex items-center gap-3 sm:gap-6 lg:gap-8 pt-8 border-t transition-colors duration-500 w-full overflow-x-auto scrollbar-hide pb-2 ${isNewColor ? 'border-white/30' : 'border-primary/30'}`}
             >
               <div className="shrink-0">
-                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-foreground'}`}>4.9★</p>
-                <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-muted-foreground'}`}>Rating</p>
+                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-white'}`}>4.9ÃƒÂ¢Ã‹Å“Ã¢â‚¬Â¦</p>
+                <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-white/70'}`}>Rating</p>
               </div>
               <div className={`w-px h-8 shrink-0 ${isNewColor ? 'bg-white/30' : 'bg-primary/30'}`} />
               <div className="shrink-0">
-                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-foreground'}`}>100k+</p>
-                <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-muted-foreground'}`}>Consultations</p>
+                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-white'}`}>100k+</p>
+                <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-white/70'}`}>Consultations</p>
               </div>
               <div className={`w-px h-8 shrink-0 ${isNewColor ? 'bg-white/30' : 'bg-primary/30'}`} />
               <div className="shrink-0">
-                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-foreground'}`}>500+</p>
-                <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-muted-foreground'}`}>Experts</p>
+                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-white'}`}>500+</p>
+                <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-white/70'}`}>Experts</p>
               </div>
               <div className={`w-px h-8 shrink-0 ${isNewColor ? 'bg-white/30' : 'bg-primary/30'}`} />
               <div className="shrink-0">
-                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-foreground'}`}>24x7</p>
-                <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-muted-foreground'}`}>Availability</p>
+                <p className={`text-xl md:text-2xl font-serif ${isNewColor ? 'text-white' : 'text-white'}`}>24x7</p>
+                <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${isNewColor ? 'text-white/70' : 'text-white/70'}`}>Availability</p>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* RIGHT: Cosmic Wheel Graphic (Adapted to Half-Arc) */}
+          {/* Star particles */}
           <motion.div
             style={{ y: yImage }}
             initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
@@ -1027,7 +1043,7 @@ function FinalHybridHero() {
             {/* Lavender glow */}
             <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[50%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)]'}`} />
 
-            {/* Wheel Container - Bottom Arc on Mobile, Right Arc on Desktop */}
+            {/* Star particles */}
             <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[75%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[400px] h-[400px] sm:w-[450px] sm:h-[450px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]' : 'w-[450px] h-[450px] sm:w-[500px] sm:h-[500px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]'}`}>
               
               {/* Outer Dashed Ring */}
@@ -1036,7 +1052,7 @@ function FinalHybridHero() {
               {/* Inner Thin Ring */}
               <div className={`absolute w-[75%] h-[75%] rounded-full border pointer-events-none ${isNewColor ? 'border-white/20' : 'border-[#B79AE6]/20'}`} />
 
-              {/* THE REVOLVING ORBIT — the whole ring spins, icons counter-rotate to stay upright */}
+              {/* THE REVOLVING ORBIT ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the whole ring spins, icons counter-rotate to stay upright */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
@@ -1073,7 +1089,7 @@ function FinalHybridHero() {
                         <Link href={`/modalities/${mod.id}`} className="w-16 h-16 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-transparent p-1 transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)] relative overflow-hidden">
                           <img src={mod.img} alt={mod.label} className={`w-full h-full object-contain group-hover:brightness-125 transition-all ${isNewColor ? 'invert brightness-0' : ''}`} style={isNewColor ? { filter: 'brightness(0) invert(1)' } : {}} />
                         </Link>
-                        <span className={`text-[14px] md:text-[16px] font-bold mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-foreground'}`}>{mod.label}</span>
+                        <span className={`text-[14px] md:text-[16px] font-bold mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-white'}`}>{mod.label}</span>
                       </motion.div>
                     </motion.div>
                   );

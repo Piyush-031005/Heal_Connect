@@ -15,10 +15,10 @@ const LAST_UPDATED = 'August 8, 2026';
 function Section({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
     <section className="mb-10">
-      <h2 className="text-xl font-extrabold text-gray-900 mb-3 flex items-baseline gap-2">
+      <h2 className="text-xl font-extrabold text-indigo-950 mb-3 flex items-baseline gap-2">
         <span className="text-indigo-500">{n}.</span> {title}
       </h2>
-      <div className="text-gray-700 leading-relaxed space-y-3 text-[15px]">{children}</div>
+      <div className="text-purple-800 leading-relaxed space-y-3 text-[15px]">{children}</div>
     </section>
   );
 }
@@ -34,11 +34,11 @@ export default function PrivacyPolicyPage() {
             <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <ShieldCheck className="w-8 h-8" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">Privacy Policy</h1>
-            <p className="text-gray-500">Last updated: {LAST_UPDATED}</p>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-indigo-950 mb-4 tracking-tight">Privacy Policy</h1>
+            <p className="text-purple-500">Last updated: {LAST_UPDATED}</p>
           </div>
 
-          <p className="text-gray-700 leading-relaxed mb-10 text-[15px]">
+          <p className="text-purple-800 leading-relaxed mb-10 text-[15px]">
             This policy explains how ZenAuraa ("we", "us") collects, uses, and protects your personal data when
             you use our website and app to connect with astrologers and wellness practitioners. It applies to
             registered users and practitioners (experts) alike. It is written to be read alongside applicable data
@@ -133,7 +133,7 @@ export default function PrivacyPolicyPage() {
             </p>
           </Section>
 
-          <p className="text-xs text-gray-400 mt-14 border-t border-gray-200 pt-6">
+          <p className="text-xs text-purple-400 mt-14 border-t border-violet-200 pt-6">
             This policy is provided as a good-faith summary of our data practices and is not legal advice. Contact
             details above are placeholders — please confirm the right contact address before publishing.
           </p>

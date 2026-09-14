@@ -112,7 +112,7 @@ function VerifyOtpContent() {
       <div className="text-center max-w-md space-y-6">
         <CheckCircle2 className="h-16 w-16 text-emerald-500 mx-auto" />
         <h1 className="text-2xl font-bold text-[#1a1a1a]">Phone Verified!</h1>
-        <p className="text-gray-500">Your number has been verified. Redirecting to login...</p>
+        <p className="text-purple-500">Your number has been verified. Redirecting to login...</p>
         <Link href="/login">
           <Button className="bg-[#4f46e5] hover:bg-[#d97706] text-white border-0 rounded-full px-8">
             Go to Login
@@ -133,7 +133,7 @@ function VerifyOtpContent() {
           <Phone className="h-5 w-5 text-[#4f46e5]" />
           <CardTitle className="text-2xl font-extrabold text-[#1a1a1a]">Enter your OTP</CardTitle>
         </div>
-        <CardDescription className="text-gray-500">
+        <CardDescription className="text-purple-500">
           We sent a 6-digit code to <strong>{phone || 'your phone'}</strong>.
           It expires in 5 minutes.
         </CardDescription>
@@ -176,7 +176,7 @@ function VerifyOtpContent() {
         </form>
 
         <div className="text-center space-y-2">
-          <p className="text-sm text-gray-500">Didn&apos;t receive it?</p>
+          <p className="text-sm text-purple-500">Didn&apos;t receive it?</p>
           <button
             onClick={handleResend}
             disabled={resending || cooldown > 0}
@@ -187,7 +187,7 @@ function VerifyOtpContent() {
           </button>
         </div>
 
-        <p className="text-center text-sm text-gray-500">
+        <p className="text-center text-sm text-purple-500">
           <Link href="/login" className="text-[#4f46e5] hover:underline">← Back to login</Link>
         </p>
       </CardContent>
@@ -201,7 +201,7 @@ export default function VerifyOtpPage() {
       <Suspense fallback={
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="h-8 w-8 animate-spin text-[#4f46e5]" />
-          <p className="text-gray-500">Loading...</p>
+          <p className="text-purple-500">Loading...</p>
         </div>
       }>
         <VerifyOtpContent />

@@ -77,15 +77,15 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   if (!mounted) return null;
 
   const SidebarContent = () => (
-    <div className={`flex flex-col h-full ${dark ? 'bg-slate-900' : 'bg-white'} border-r ${dark ? 'border-white/10' : 'border-gray-100'}`}>
+    <div className={`flex flex-col h-full ${dark ? 'bg-indigo-950' : 'bg-white'} border-r ${dark ? 'border-white/10' : 'border-purple-100'}`}>
       {/* Logo */}
-      <div className={`flex items-center gap-3 px-5 py-5 border-b ${dark ? 'border-white/10' : 'border-gray-100'}`}>
+      <div className={`flex items-center gap-3 px-5 py-5 border-b ${dark ? 'border-white/10' : 'border-purple-100'}`}>
         <div className="w-9 h-9 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-200/50 shrink-0">
           <Shield className="w-5 h-5 text-white" />
         </div>
         {sidebarOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="overflow-hidden">
-            <p className={`text-sm font-black leading-tight ${dark ? 'text-white' : 'text-gray-900'}`}>ZenAuraa</p>
+            <p className={`text-sm font-black leading-tight ${dark ? 'text-white' : 'text-indigo-950'}`}>ZenAuraa</p>
             <p className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest">Admin Panel</p>
           </motion.div>
         )}
@@ -105,10 +105,10 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                   ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-md shadow-indigo-200/40'
                   : dark
                   ? 'text-white/60 hover:bg-white/5 hover:text-white'
-                  : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700'
+                  : 'text-purple-700 hover:bg-indigo-50 hover:text-indigo-700'
               }`}
             >
-              <Icon className={`shrink-0 transition-all ${sidebarOpen ? 'w-4 h-4' : 'w-5 h-5'} ${active ? 'text-white' : dark ? 'text-white/50 group-hover:text-white' : 'text-gray-400 group-hover:text-indigo-600'}`} />
+              <Icon className={`shrink-0 transition-all ${sidebarOpen ? 'w-4 h-4' : 'w-5 h-5'} ${active ? 'text-white' : dark ? 'text-white/50 group-hover:text-white' : 'text-purple-400 group-hover:text-indigo-600'}`} />
               {sidebarOpen && <span className="truncate">{label}</span>}
               {active && sidebarOpen && <ChevronRight className="w-3.5 h-3.5 ml-auto text-white/70" />}
             </Link>
@@ -117,10 +117,10 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       </nav>
 
       {/* User info & Logout */}
-      <div className={`px-3 py-4 border-t ${dark ? 'border-white/10' : 'border-gray-100'} space-y-2`}>
+      <div className={`px-3 py-4 border-t ${dark ? 'border-white/10' : 'border-purple-100'} space-y-2`}>
         {sidebarOpen && adminUser?.email && (
           <div className="px-2 py-1.5 overflow-hidden">
-            <p className={`text-xs font-semibold truncate ${dark ? 'text-white' : 'text-gray-900'}`}>{adminUser.email}</p>
+            <p className={`text-xs font-semibold truncate ${dark ? 'text-white' : 'text-indigo-950'}`}>{adminUser.email}</p>
             <span className={`inline-block text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full mt-1 ${
               adminUser.role === 'SUPERADMIN' ? 'bg-indigo-500/20 text-indigo-400' : 'bg-blue-500/20 text-blue-400'
             }`}>
@@ -142,7 +142,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <div className={`min-h-screen flex ${dark ? 'bg-slate-950 text-white' : 'bg-gray-50 text-gray-900'}`}>
+    <div className={`min-h-screen flex ${dark ? 'bg-slate-950 text-white' : 'bg-purple-50 text-indigo-950'}`}>
       {/* Desktop Sidebar */}
       <motion.aside
         animate={{ width: sidebarOpen ? 220 : 64 }}
@@ -175,23 +175,23 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Bar */}
-        <header className={`sticky top-0 z-30 flex items-center justify-between px-4 lg:px-6 h-14 border-b ${dark ? 'bg-slate-900 border-white/10' : 'bg-white border-gray-100'} shadow-sm`}>
+        <header className={`sticky top-0 z-30 flex items-center justify-between px-4 lg:px-6 h-14 border-b ${dark ? 'bg-indigo-950 border-white/10' : 'bg-white border-purple-100'} shadow-sm`}>
           <div className="flex items-center gap-3">
             {/* Mobile menu toggle */}
-            <button onClick={() => setMobileSidebarOpen(true)} className="lg:hidden p-1.5 rounded-lg hover:bg-gray-100">
+            <button onClick={() => setMobileSidebarOpen(true)} className="lg:hidden p-1.5 rounded-lg hover:bg-purple-50">
               <Menu className="w-5 h-5" />
             </button>
             {/* Desktop sidebar toggle */}
-            <button onClick={() => setSidebarOpen(p => !p)} className="hidden lg:flex p-1.5 rounded-lg hover:bg-gray-100">
+            <button onClick={() => setSidebarOpen(p => !p)} className="hidden lg:flex p-1.5 rounded-lg hover:bg-purple-50">
               <Menu className="w-5 h-5" />
             </button>
             <div>
-              <h1 className={`text-base font-extrabold ${dark ? 'text-white' : 'text-gray-900'}`}>{pageTitle}</h1>
-              <p className={`text-[10px] font-medium ${dark ? 'text-white/40' : 'text-gray-400'}`}>ZenAuraa Admin Panel</p>
+              <h1 className={`text-base font-extrabold ${dark ? 'text-white' : 'text-indigo-950'}`}>{pageTitle}</h1>
+              <p className={`text-[10px] font-medium ${dark ? 'text-white/40' : 'text-purple-400'}`}>ZenAuraa Admin Panel</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <button onClick={toggleDark} className={`p-2 rounded-xl transition-colors ${dark ? 'hover:bg-white/10 text-yellow-300' : 'hover:bg-gray-100 text-gray-500'}`}>
+            <button onClick={toggleDark} className={`p-2 rounded-xl transition-colors ${dark ? 'hover:bg-white/10 text-yellow-300' : 'hover:bg-purple-50 text-purple-500'}`}>
               {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
             <div className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold ${dark ? 'border-white/10 bg-white/5 text-white' : 'border-indigo-200 bg-indigo-50 text-indigo-700'}`}>
@@ -240,7 +240,7 @@ export function StatCard({ label, value, icon: Icon, color = 'indigo', change }:
     <motion.div
       whileHover={{ y: -4, scale: 1.02 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      className="bg-white dark:bg-slate-800/90 backdrop-blur-md rounded-2xl p-5 border border-gray-100 dark:border-white/10 shadow-sm hover:shadow-xl hover:border-indigo-200 dark:hover:border-indigo-500/30 transition-all duration-300"
+      className="bg-white dark:bg-indigo-900/90 backdrop-blur-md rounded-2xl p-5 border border-purple-100 dark:border-white/10 shadow-sm hover:shadow-xl hover:border-indigo-200 dark:hover:border-indigo-500/30 transition-all duration-300"
     >
       <div className="flex items-start justify-between mb-3">
         <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${colors[color] ?? colors.indigo} flex items-center justify-center shadow-md shadow-indigo-500/10`}>
@@ -252,8 +252,8 @@ export function StatCard({ label, value, icon: Icon, color = 'indigo', change }:
           </span>
         )}
       </div>
-      <p className="text-2xl font-black tracking-tight text-gray-900 dark:text-white">{value}</p>
-      <p className="text-xs font-bold text-gray-500 dark:text-white/60 mt-0.5">{label}</p>
+      <p className="text-2xl font-black tracking-tight text-indigo-950 dark:text-white">{value}</p>
+      <p className="text-xs font-bold text-purple-500 dark:text-white/60 mt-0.5">{label}</p>
     </motion.div>
   );
 }
@@ -266,21 +266,21 @@ export function StatusBadge({ status }: { status: string }) {
     pending: 'bg-indigo-50 text-indigo-700 border-indigo-200',
     suspended: 'bg-red-50 text-red-700 border-red-200',
     blocked: 'bg-red-50 text-red-700 border-red-200',
-    cancelled: 'bg-gray-50 text-gray-700 border-gray-200',
+    cancelled: 'bg-purple-50 text-purple-800 border-violet-200',
     disputed: 'bg-purple-50 text-purple-700 border-purple-200',
     paid: 'bg-emerald-50 text-emerald-700 border-emerald-200',
     rejected: 'bg-red-50 text-red-700 border-red-200',
     flagged: 'bg-yellow-50 text-yellow-700 border-yellow-200',
     published: 'bg-green-50 text-green-700 border-green-200',
-    draft: 'bg-gray-50 text-gray-600 border-gray-200',
-    hidden: 'bg-slate-50 text-slate-600 border-slate-200',
+    draft: 'bg-purple-50 text-purple-700 border-violet-200',
+    hidden: 'bg-purple-50 text-purple-600 border-violet-200',
     verified: 'bg-blue-50 text-blue-700 border-blue-200',
-    unverified: 'bg-gray-50 text-gray-600 border-gray-200',
+    unverified: 'bg-purple-50 text-purple-700 border-violet-200',
     featured: 'bg-purple-50 text-purple-700 border-purple-200',
     processing: 'bg-cyan-50 text-cyan-700 border-cyan-200',
   };
   return (
-    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-extrabold uppercase tracking-wide border ${map[status.toLowerCase()] ?? 'bg-gray-50 text-gray-600 border-gray-200'}`}>
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-extrabold uppercase tracking-wide border ${map[status.toLowerCase()] ?? 'bg-purple-50 text-purple-700 border-violet-200'}`}>
       {status}
     </span>
   );
@@ -289,15 +289,15 @@ export function StatusBadge({ status }: { status: string }) {
 export function SearchBar({ value, onChange, placeholder = 'Search...' }: { value: string; onChange: (v: string) => void; placeholder?: string }) {
   return (
     <div className="relative flex-1 max-w-xs">
-      <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="11" cy="11" r="8"/><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35"/></svg>
+      <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="11" cy="11" r="8"/><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35"/></svg>
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-sm font-medium placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-400 transition-all"
+        className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-purple-50 dark:bg-white/5 border border-violet-200 dark:border-white/10 text-sm font-medium placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-400 transition-all"
       />
       {value && (
-        <button onClick={() => onChange('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+        <button onClick={() => onChange('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-purple-400 hover:text-purple-700">
           <X className="w-3.5 h-3.5" />
         </button>
       )}
@@ -314,15 +314,15 @@ export function ConfirmDialog({ open, title, message, onConfirm, onCancel, dange
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl p-6 max-w-sm w-full shadow-2xl border border-gray-100 dark:border-white/10"
+            className="bg-white dark:bg-indigo-900 rounded-2xl p-6 max-w-sm w-full shadow-2xl border border-purple-100 dark:border-white/10"
           >
-            <h3 className="text-base font-extrabold text-gray-900 dark:text-white mb-2">{title}</h3>
-            <p className="text-sm text-gray-500 dark:text-white/60 mb-6 leading-relaxed">{message}</p>
+            <h3 className="text-base font-extrabold text-indigo-950 dark:text-white mb-2">{title}</h3>
+            <p className="text-sm text-purple-500 dark:text-white/60 mb-6 leading-relaxed">{message}</p>
             <div className="flex gap-3">
               <button onClick={onConfirm} className={`flex-1 py-2.5 rounded-xl font-extrabold text-sm transition-all ${danger ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-indigo-500 hover:bg-indigo-600 text-white'}`}>
                 Confirm
               </button>
-              <button onClick={onCancel} className="flex-1 py-2.5 rounded-xl font-semibold text-sm bg-gray-100 hover:bg-gray-200 dark:bg-white/10 dark:hover:bg-white/20 text-gray-700 dark:text-white transition-all">
+              <button onClick={onCancel} className="flex-1 py-2.5 rounded-xl font-semibold text-sm bg-purple-50 hover:bg-violet-100 dark:bg-white/10 dark:hover:bg-white/20 text-purple-800 dark:text-white transition-all">
                 Cancel
               </button>
             </div>
@@ -357,14 +357,14 @@ export function Pagination({ page, total, perPage, onChange }: { page: number; t
   const pages = Math.ceil(total / perPage);
   if (pages <= 1) return null;
   return (
-    <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-white/10">
-      <p className="text-xs text-gray-500 dark:text-white/50">Showing {Math.min((page - 1) * perPage + 1, total)}–{Math.min(page * perPage, total)} of {total}</p>
+    <div className="flex items-center justify-between pt-4 border-t border-purple-100 dark:border-white/10">
+      <p className="text-xs text-purple-500 dark:text-white/50">Showing {Math.min((page - 1) * perPage + 1, total)}–{Math.min(page * perPage, total)} of {total}</p>
       <div className="flex gap-1">
-        <button disabled={page === 1} onClick={() => onChange(page - 1)} className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-gray-200 dark:border-white/10 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-white/5 transition-all">Prev</button>
+        <button disabled={page === 1} onClick={() => onChange(page - 1)} className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-violet-200 dark:border-white/10 disabled:opacity-40 hover:bg-purple-50 dark:hover:bg-white/5 transition-all">Prev</button>
         {Array.from({ length: Math.min(pages, 5) }, (_, i) => i + 1).map(p => (
-          <button key={p} onClick={() => onChange(p)} className={`w-8 h-8 rounded-lg text-xs font-extrabold transition-all ${p === page ? 'bg-indigo-500 text-white shadow-md' : 'border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-white/60'}`}>{p}</button>
+          <button key={p} onClick={() => onChange(p)} className={`w-8 h-8 rounded-lg text-xs font-extrabold transition-all ${p === page ? 'bg-indigo-500 text-white shadow-md' : 'border border-violet-200 dark:border-white/10 hover:bg-purple-50 dark:hover:bg-white/5 text-purple-700 dark:text-white/60'}`}>{p}</button>
         ))}
-        <button disabled={page === pages} onClick={() => onChange(page + 1)} className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-gray-200 dark:border-white/10 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-white/5 transition-all">Next</button>
+        <button disabled={page === pages} onClick={() => onChange(page + 1)} className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-violet-200 dark:border-white/10 disabled:opacity-40 hover:bg-purple-50 dark:hover:bg-white/5 transition-all">Next</button>
       </div>
     </div>
   );
@@ -374,7 +374,7 @@ export function SkeletonRow() {
   return (
     <tr>
       {Array.from({ length: 6 }).map((_, i) => (
-        <td key={i} className="px-4 py-3"><div className="h-4 bg-gray-100 dark:bg-white/10 rounded animate-pulse" /></td>
+        <td key={i} className="px-4 py-3"><div className="h-4 bg-purple-50 dark:bg-white/10 rounded animate-pulse" /></td>
       ))}
     </tr>
   );

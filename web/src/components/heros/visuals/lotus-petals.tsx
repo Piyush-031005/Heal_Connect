@@ -47,8 +47,8 @@ export default function LotusPetals() {
                     <stop offset="100%" stopColor={isAlt ? '#D5B6DC' : '#8982D0'} />
                   </linearGradient>
                 </defs>
-                <path d="M30,0 C55,35 55,105 30,140 C5,105 5,35 30,0Z" fill={`url(#lp-${i})`} opacity="0.88" />
-                <path d="M30,15 L30,125" stroke="white" strokeWidth="0.5" opacity="0.3" fill="none" />
+                <path d="M30,0 C55,35 55₹05 30₹40 C5₹05 5,35 30,0Z" fill={`url(#lp-${i})`} opacity="0.88" />
+                <path d="M30₹5 L30₹25" stroke="white" strokeWidth="0.5" opacity="0.3" fill="none" />
               </motion.svg>
             </div>
           );

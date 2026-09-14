@@ -14,7 +14,7 @@ import { decodeSessionToken, SESSION_COOKIE, SESSION_TTL_MS } from '@/lib/adminS
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-const BACKEND = process.env['BACKEND_URL'] ?? process.env['NEXT_PUBLIC_API_URL'] ?? 'http://backend:8082';
+const BACKEND = process.env['BACKEND_URL'] ?? process.env['NEXT_PUBLIC_API_URL'] ?? 'https://healconnect-backend-dqcsaqf4a6baffaz.centralindia-01.azurewebsites.net';
 
 export async function GET(req: NextRequest) {
   const token = req.cookies.get(SESSION_COOKIE)?.value;
@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
       (await cookies()).set(SESSION_COOKIE, sessionToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
+        sameSite: 'lax',
         path: '/',
         maxAge: SESSION_TTL_MS / 1000,
       });
@@ -137,7 +137,7 @@ export async function DELETE() {
   res.cookies.set(SESSION_COOKIE, '', {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: 'lax',
     path: '/',
     maxAge: 0,
   });

@@ -65,7 +65,7 @@ function PendingContent() {
         <CardTitle className="text-2xl font-extrabold text-[#1a1a1a] text-center">
           Check your inbox
         </CardTitle>
-        <CardDescription className="text-gray-500 text-center text-base">
+        <CardDescription className="text-purple-500 text-center text-base">
           We&apos;ve sent a verification link to{' '}
           <span className="font-semibold text-[#1a1a1a]">{email || 'your email'}</span>.
           <br />
@@ -75,7 +75,7 @@ function PendingContent() {
 
       <CardContent className="space-y-5">
         {/* Steps */}
-        <ol className="space-y-3 text-sm text-gray-600">
+        <ol className="space-y-3 text-sm text-purple-700">
           {[
             'Open the email from ZenAuraa.',
             'Click the "Verify Email" button in the email.',
@@ -96,7 +96,7 @@ function PendingContent() {
 
         {/* Resend */}
         <div className="text-center space-y-2">
-          <p className="text-sm text-gray-500">Didn&apos;t receive the email?</p>
+          <p className="text-sm text-purple-500">Didn&apos;t receive the email?</p>
           <button
             onClick={handleResend}
             disabled={resending || cooldown > 0}
@@ -117,7 +117,7 @@ function PendingContent() {
           Go to Login
         </Link>
 
-        <p className="text-center text-xs text-gray-400">
+        <p className="text-center text-xs text-purple-400">
           Wrong email?{' '}
           <Link href="/signup" className="text-[#4f46e5] hover:underline font-semibold">
             Sign up again
@@ -134,7 +134,7 @@ export default function VerifyEmailPendingPage() {
       <Suspense fallback={
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="h-8 w-8 animate-spin text-[#4f46e5]" />
-          <p className="text-gray-500">Loading…</p>
+          <p className="text-purple-500">Loading…</p>
         </div>
       }>
         <PendingContent />

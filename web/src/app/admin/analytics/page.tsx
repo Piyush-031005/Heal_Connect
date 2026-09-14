@@ -75,10 +75,10 @@ export default function AdminAnalyticsPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
+            <h2 className="text-xl font-extrabold text-indigo-950 dark:text-white flex items-center gap-2">
               <BarChart3 className="w-5 h-5 text-indigo-500" /> PostgreSQL Real Analytics Dashboard
             </h2>
-            <p className="text-xs text-gray-500 font-semibold mt-0.5">
+            <p className="text-xs text-purple-500 font-semibold mt-0.5">
               Every chart and metric is generated dynamically from the live PostgreSQL database.
             </p>
           </div>
@@ -100,9 +100,9 @@ export default function AdminAnalyticsPage() {
         </div>
 
         {/* 30-Day User vs Practitioner Growth Chart */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 p-5 shadow-sm space-y-4">
+        <div className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 p-5 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-extrabold text-gray-900 dark:text-white">
+            <h3 className="text-sm font-extrabold text-indigo-950 dark:text-white">
               User & Practitioner Registrations (Last 30 Days)
             </h3>
             <div className="flex items-center gap-4 text-xs font-bold">
@@ -112,11 +112,11 @@ export default function AdminAnalyticsPage() {
           </div>
 
           {chartPoints.length === 0 || chartPoints.every((d) => d.users === 0 && d.practitioners === 0) ? (
-            <div className="h-48 flex items-center justify-center border border-dashed border-gray-200 dark:border-white/10 rounded-xl">
-              <p className="text-xs text-gray-400 font-medium">No registration data available yet</p>
+            <div className="h-48 flex items-center justify-center border border-dashed border-violet-200 dark:border-white/10 rounded-xl">
+              <p className="text-xs text-purple-400 font-medium">No registration data available yet</p>
             </div>
           ) : (
-            <div className="h-48 flex items-end gap-1 pt-6 border-b border-gray-100 dark:border-white/10 pb-2 overflow-x-auto">
+            <div className="h-48 flex items-end gap-1 pt-6 border-b border-purple-100 dark:border-white/10 pb-2 overflow-x-auto">
               {chartPoints.map((d) => (
                 <div key={d.date} className="flex-1 flex flex-col items-center gap-1 group relative min-w-[12px]">
                   <div className="w-full flex items-end justify-center gap-0.5" style={{ height: '140px' }}>
@@ -129,7 +129,7 @@ export default function AdminAnalyticsPage() {
                       className="w-1.5 bg-purple-500 rounded-t-sm group-hover:brightness-110 min-h-[2px]"
                     />
                   </div>
-                  <span className="text-[8px] font-bold text-gray-400 truncate">{d.date.slice(8)}</span>
+                  <span className="text-[8px] font-bold text-purple-400 truncate">{d.date.slice(8)}</span>
                 </div>
               ))}
             </div>
@@ -139,21 +139,21 @@ export default function AdminAnalyticsPage() {
         {/* Sessions & Revenue Grid */}
         <div className="grid lg:grid-cols-2 gap-5">
           {/* Sessions per Day */}
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 p-5 shadow-sm space-y-4">
-            <h3 className="text-sm font-extrabold text-gray-900 dark:text-white">Sessions per Day</h3>
+          <div className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 p-5 shadow-sm space-y-4">
+            <h3 className="text-sm font-extrabold text-indigo-950 dark:text-white">Sessions per Day</h3>
             {chartPoints.length === 0 || chartPoints.every((d) => d.sessions === 0) ? (
-              <div className="h-40 flex items-center justify-center border border-dashed border-gray-200 dark:border-white/10 rounded-xl">
-                <p className="text-xs text-gray-400 font-medium">No session data available yet</p>
+              <div className="h-40 flex items-center justify-center border border-dashed border-violet-200 dark:border-white/10 rounded-xl">
+                <p className="text-xs text-purple-400 font-medium">No session data available yet</p>
               </div>
             ) : (
-              <div className="h-40 flex items-end gap-1 pt-4 border-b border-gray-100 dark:border-white/10 pb-2 overflow-x-auto">
+              <div className="h-40 flex items-end gap-1 pt-4 border-b border-purple-100 dark:border-white/10 pb-2 overflow-x-auto">
                 {chartPoints.slice(-14).map((d) => (
                   <div key={d.date} className="flex-1 flex flex-col items-center gap-1 group relative">
                     <div
                       style={{ height: `${(d.sessions / maxSessions) * 110}px` }}
                       className="w-full bg-gradient-to-t from-indigo-500 to-purple-400 rounded-t-sm min-h-[3px]"
                     />
-                    <span className="text-[9px] font-bold text-gray-400">{d.date.slice(8)}</span>
+                    <span className="text-[9px] font-bold text-purple-400">{d.date.slice(8)}</span>
                   </div>
                 ))}
               </div>
@@ -161,21 +161,21 @@ export default function AdminAnalyticsPage() {
           </div>
 
           {/* Revenue per Day */}
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 p-5 shadow-sm space-y-4">
-            <h3 className="text-sm font-extrabold text-gray-900 dark:text-white">Revenue Trend (£)</h3>
+          <div className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 p-5 shadow-sm space-y-4">
+            <h3 className="text-sm font-extrabold text-indigo-950 dark:text-white">Revenue Trend (£)</h3>
             {chartPoints.length === 0 || chartPoints.every((d) => d.revenue === 0) ? (
-              <div className="h-40 flex items-center justify-center border border-dashed border-gray-200 dark:border-white/10 rounded-xl">
-                <p className="text-xs text-gray-400 font-medium">No revenue data available yet</p>
+              <div className="h-40 flex items-center justify-center border border-dashed border-violet-200 dark:border-white/10 rounded-xl">
+                <p className="text-xs text-purple-400 font-medium">No revenue data available yet</p>
               </div>
             ) : (
-              <div className="h-40 flex items-end gap-1 pt-4 border-b border-gray-100 dark:border-white/10 pb-2 overflow-x-auto">
+              <div className="h-40 flex items-end gap-1 pt-4 border-b border-purple-100 dark:border-white/10 pb-2 overflow-x-auto">
                 {chartPoints.slice(-14).map((d) => (
                   <div key={d.date} className="flex-1 flex flex-col items-center gap-1 group relative">
                     <div
                       style={{ height: `${(d.revenue / maxRevenue) * 110}px` }}
                       className="w-full bg-gradient-to-t from-emerald-500 to-green-400 rounded-t-sm min-h-[3px]"
                     />
-                    <span className="text-[9px] font-bold text-gray-400">{d.date.slice(8)}</span>
+                    <span className="text-[9px] font-bold text-purple-400">{d.date.slice(8)}</span>
                   </div>
                 ))}
               </div>
@@ -186,15 +186,15 @@ export default function AdminAnalyticsPage() {
         {/* Status Breakdown & Top Booked Categories */}
         <div className="grid lg:grid-cols-2 gap-5">
           {/* Session Status Distribution */}
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 p-5 shadow-sm">
-            <h3 className="text-sm font-extrabold text-gray-900 dark:text-white mb-4">Session Status Breakdown</h3>
+          <div className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 p-5 shadow-sm">
+            <h3 className="text-sm font-extrabold text-indigo-950 dark:text-white mb-4">Session Status Breakdown</h3>
             {!data?.statusDistribution || data.statusDistribution.length === 0 ? (
-              <div className="py-10 text-center text-xs text-gray-400 font-medium">No session status data available yet</div>
+              <div className="py-10 text-center text-xs text-purple-400 font-medium">No session status data available yet</div>
             ) : (
               <div className="space-y-3">
                 {data.statusDistribution.map((s) => (
                   <div key={s.status} className="flex items-center justify-between text-xs font-bold">
-                    <span className="text-gray-700 dark:text-white/80">{s.status}</span>
+                    <span className="text-purple-800 dark:text-white/80">{s.status}</span>
                     <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-extrabold">{s.count}</span>
                   </div>
                 ))}
@@ -203,19 +203,19 @@ export default function AdminAnalyticsPage() {
           </div>
 
           {/* Chat Messages per Day */}
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 p-5 shadow-sm">
-            <h3 className="text-sm font-extrabold text-gray-900 dark:text-white mb-4">Daily Messages Sent</h3>
+          <div className="bg-white dark:bg-indigo-900 rounded-2xl border border-purple-100 dark:border-white/10 p-5 shadow-sm">
+            <h3 className="text-sm font-extrabold text-indigo-950 dark:text-white mb-4">Daily Messages Sent</h3>
             {chartPoints.length === 0 || chartPoints.every((d) => d.messages === 0) ? (
-              <div className="py-10 text-center text-xs text-gray-400 font-medium">No message data available yet</div>
+              <div className="py-10 text-center text-xs text-purple-400 font-medium">No message data available yet</div>
             ) : (
-              <div className="h-36 flex items-end gap-1 pt-4 border-b border-gray-100 dark:border-white/10 pb-2 overflow-x-auto">
+              <div className="h-36 flex items-end gap-1 pt-4 border-b border-purple-100 dark:border-white/10 pb-2 overflow-x-auto">
                 {chartPoints.slice(-14).map((d) => (
                   <div key={d.date} className="flex-1 flex flex-col items-center gap-1 group relative">
                     <div
                       style={{ height: `${(d.messages / maxMessages) * 90}px` }}
                       className="w-full bg-gradient-to-t from-indigo-500 to-purple-400 rounded-t-sm min-h-[3px]"
                     />
-                    <span className="text-[9px] font-bold text-gray-400">{d.date.slice(8)}</span>
+                    <span className="text-[9px] font-bold text-purple-400">{d.date.slice(8)}</span>
                   </div>
                 ))}
               </div>

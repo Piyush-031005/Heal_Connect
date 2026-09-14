@@ -1,336 +1,138 @@
-import React, { useState } from 'react';
-import { 
-  View, Text, TextInput, TouchableOpacity, SafeAreaView, 
-  KeyboardAvoidingView, Platform, ScrollView, Alert, ActivityIndicator
-} from 'react-native';
-import { useRouter } from 'expo-router';
-import { Shield, Mail, Lock, User, Check, Eye, EyeOff, ShieldCheck } from 'lucide-react-native';
+﻿import React, { useState } from "react";
+import {
+  Image, View, Text, TextInput, TouchableOpacity,
+  KeyboardAvoidingView, Platform, ScrollView, ActivityIndicator, StatusBar,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
+import { authApi, tokenStore } from "../../lib/api";
+import * as SecureStore from "expo-secure-store";
 
-import { authApi, tokenStore } from '../../lib/api';
-import * as SecureStore from 'expo-secure-store';
+type Role = "user" | "expert";
+
+const PURPLE = "#8B5CF6";
+const LAVENDER = "#6D28D9";
+const BG = "#F9F5FF";
+const CARD_BG = "#FFFFFF";
+const BORDER = "#E9D8FD";
+const TEXT = "#2D1B4E";
+const TEXT_MUTED = "#6B5E80";
 
 export default function SignupScreen() {
   const router = useRouter();
-  
-  const [role, setRole] = useState<'user' | 'expert'>('user');
-  const [loginMethod, setLoginMethod] = useState<'password' | 'otp'>('password');
-  
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [dob, setDob] = useState('');
-  
-  const [countryCode, setCountryCode] = useState('+91');
-  const [phone, setPhone] = useState('');
-  
-  const [acceptTerms, setAcceptTerms] = useState(false);
-  const [acceptPrivacy, setAcceptPrivacy] = useState(false);
-  
+  const [role, setRole] = useState<Role>("user");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  const validateAge = (dobString: string) => {
-    // Basic YYYY-MM-DD validation
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(dobString)) {
-      return false;
-    }
-    const dobDate = new Date(dobString);
-    const minBirthDate = new Date();
-    minBirthDate.setFullYear(minBirthDate.getFullYear() - 18);
-    return !isNaN(dobDate.getTime()) && dobDate <= minBirthDate;
-  };
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleSignup = async () => {
-    setError('');
-
-    if (!acceptTerms || !acceptPrivacy) {
-      setError('Please accept the Terms of Service and Privacy Notice.');
-      return;
-    }
-
-    if (loginMethod === 'password') {
-      if (!name || !email || !password || !dob) {
-        setError('Please fill in all fields.');
-        return;
-      }
-      if (!validateAge(dob)) {
-        setError('You must be at least 18 years old to create an account. Format: YYYY-MM-DD');
-        return;
-      }
-    } else {
-      if (!phone || !countryCode) {
-        setError('Please enter your phone number.');
-        return;
-      }
-    }
-
-    if (role === 'expert') {
-      Alert.alert('Expert Signup', 'Expert signup requires document verification. Please complete registration on our web portal.');
-      return;
-    }
-
+    if (!name || !email || !password) { setError("Please fill all fields"); return; }
+    if (password.length < 8) { setError("Password must be at least 8 characters"); return; }
+    setError("");
     setLoading(true);
-
     try {
-      if (loginMethod === 'password') {
-        const res = await authApi.register({
-          name,
-          email,
-          password,
-          dob,
-          acceptTerms,
-          acceptPrivacy,
-          emailMarketingOptIn: false
-        });
-
-        if (!res.success || !res.data) {
-          throw new Error(res.errors?.length ? res.errors.map((e: any) => e.message).join(' · ') : res.message || 'Signup failed');
-        }
-
-        await tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-        await SecureStore.setItemAsync('hc_role', 'user');
-
-        router.replace('/(tabs)');
-      } else {
-        // OTP flow
-        const cleanPhone = countryCode + phone.replace(/\s+/g, '');
-        const res = await (authApi as any).requestLoginOtp(cleanPhone, 'user');
-        
-        if (!res.success) {
-          throw new Error(res.message || 'Failed to send OTP');
-        }
-        
-        Alert.alert('Success', 'OTP sent successfully! (OTP verification screen coming soon)');
-        // router.push(`/verify-otp?phone=${encodeURIComponent(cleanPhone)}`);
+      if (role === "expert") {
+        setError("Expert registration is done via the web portal. Please visit our website.");
+        return;
       }
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong');
-    } finally {
-      setLoading(false);
-    }
+      const today = new Date();
+      const defaultDob = new Date(today.getFullYear() - 25, 0, 1).toISOString().split("T")[0];
+      const res = await authApi.register({
+        name,
+        email,
+        password,
+        dob: defaultDob,
+        acceptTerms: true,
+        acceptPrivacy: true,
+      });
+      if (!res.success) { setError(res.message || "Registration failed"); return; }
+      if (res.data?.accessToken) {
+        await tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+        await SecureStore.setItemAsync("hc_role", "user");
+        router.replace("/(tabs)");
+      } else {
+        setSuccess("Account created! Please log in.");
+        setTimeout(() => router.replace("/(auth)/login"), 1500);
+      }
+    } catch (e: any) { setError(e?.message || "Something went wrong. Please try again."); }
+    finally { setLoading(false); }
   };
 
-  const CustomCheckbox = ({ value, onValueChange, label }: { value: boolean, onValueChange: (v: boolean) => void, label: string }) => (
-    <TouchableOpacity 
-      activeOpacity={0.8}
-      onPress={() => onValueChange(!value)} 
-      className="flex-row items-start mb-3 pr-4"
-    >
-      <View className={`w-5 h-5 rounded border mt-0.5 mr-2 items-center justify-center ${value ? 'bg-[#4f46e5] border-[#4f46e5]' : 'border-gray-300 bg-white'}`}>
-        {value && <Check size={14} color="white" strokeWidth={3} />}
-      </View>
-      <Text className="text-gray-600 text-sm flex-1 leading-5">{label}</Text>
-    </TouchableOpacity>
-  );
-
   return (
-    <SafeAreaView className="flex-1 bg-[#faf9f6]">
-      <KeyboardAvoidingView 
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        className="flex-1"
-      >
-        <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 24, paddingBottom: 40 }}>
-          
-          <View className="items-center mb-6 mt-2">
-            <View className="bg-indigo-100 p-4 rounded-3xl mb-4">
-              <ShieldCheck size={40} color="#4f46e5" />
-            </View>
-            <Text className="text-3xl font-black text-[#1a1a1a] tracking-tight">Create an account</Text>
-            <Text className="text-gray-500 mt-2 font-medium">Sign up and get your first session free.</Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: BG }}>
+      <StatusBar barStyle="dark-content" backgroundColor={BG} />
+      <View style={{ position: "absolute", top: -60, right: -60, width: 250, height: 250, borderRadius: 125, backgroundColor: "rgba(124,58,237,0.12)" }} />
+      <View style={{ position: "absolute", bottom: 100, left: -40, width: 180, height: 180, borderRadius: 90, backgroundColor: "rgba(79,70,229,0.1)" }} />
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: "center", paddingHorizontal: 24, paddingVertical: 40 }} keyboardShouldPersistTaps="handled">
+          <View style={{ alignItems: "center", marginBottom: 32 }}>
+            <Image source={require("../../assets/images/main_logo.png")} style={{ width: 120, height: 60, resizeMode: "contain", marginBottom: 16 }} />
+            <Text style={{ fontSize: 26, fontWeight: "800", color: TEXT, letterSpacing: -0.5 }}>Create account</Text>
+            <Text style={{ fontSize: 14, color: TEXT_MUTED, marginTop: 4 }}>Begin your healing journey</Text>
           </View>
 
-          <View className="bg-white rounded-3xl p-6 border border-indigo-50 shadow-xl shadow-indigo-100/50 w-full max-w-md self-center">
-            
-            {error ? (
-              <View className="bg-red-50 border border-red-200 p-3 rounded-xl mb-4">
-                <Text className="text-red-700 font-semibold text-sm">{error}</Text>
-              </View>
-            ) : null}
-
-            {/* Role Toggle */}
-            <View className="mb-5">
-              <Text className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2 ml-1">Account Type</Text>
-              <View className="flex-row bg-[#faf9f6] border border-indigo-100 p-1 rounded-2xl">
-                <TouchableOpacity 
-                  onPress={() => setRole('user')}
-                  className={`flex-1 py-3 items-center justify-center rounded-xl ${role === 'user' ? 'bg-[#4f46e5] shadow-md shadow-indigo-500/30' : ''}`}
-                >
-                  <Text className={`font-bold ${role === 'user' ? 'text-white' : 'text-gray-600'}`}>User</Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                  onPress={() => setRole('expert')}
-                  className={`flex-1 py-3 items-center justify-center rounded-xl ${role === 'expert' ? 'bg-[#4f46e5] shadow-md shadow-indigo-500/30' : ''}`}
-                >
-                  <Text className={`font-bold ${role === 'expert' ? 'text-white' : 'text-gray-600'}`}>Expert</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            {/* Method Toggle */}
-            <View className="mb-6 items-center">
-              <View className="flex-row bg-gray-50 border border-gray-200 p-0.5 rounded-lg">
-                <TouchableOpacity 
-                  onPress={() => setLoginMethod('password')}
-                  className={`px-6 py-2 rounded-md ${loginMethod === 'password' ? 'bg-white shadow-sm' : ''}`}
-                >
-                  <Text className={`text-sm font-semibold ${loginMethod === 'password' ? 'text-[#1a1a1a]' : 'text-gray-500'}`}>Email</Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                  onPress={() => setLoginMethod('otp')}
-                  className={`px-6 py-2 rounded-md ${loginMethod === 'otp' ? 'bg-white shadow-sm' : ''}`}
-                >
-                  <Text className={`text-sm font-semibold ${loginMethod === 'otp' ? 'text-[#1a1a1a]' : 'text-gray-500'}`}>Phone</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <View className="space-y-4">
-              
-              {loginMethod === 'otp' ? (
-                <>
-                  <View>
-                    <Text className="text-sm font-semibold text-[#1a1a1a] mb-1.5 ml-1">Phone Number</Text>
-                    <View className="flex-row gap-2">
-                      <TextInput 
-                        value={countryCode}
-                        onChangeText={setCountryCode}
-                        className="w-20 bg-[#faf9f6] px-4 h-14 rounded-xl border border-indigo-100 text-[#1a1a1a] font-medium"
-                      />
-                      <TextInput 
-                        placeholder="9876543210"
-                        placeholderTextColor="#9ca3af"
-                        value={phone}
-                        onChangeText={setPhone}
-                        keyboardType="phone-pad"
-                        className="flex-1 bg-[#faf9f6] px-4 h-14 rounded-xl border border-indigo-100 text-[#1a1a1a] font-medium"
-                      />
-                    </View>
-                  </View>
-                </>
-              ) : (
-                <>
-                  <View>
-                    <Text className="text-sm font-semibold text-[#1a1a1a] mb-1.5 ml-1">Full Name</Text>
-                    <View className="relative justify-center">
-                      <View className="absolute left-4 z-10"><User size={20} color="#9ca3af" /></View>
-                      <TextInput 
-                        placeholder="John Doe"
-                        placeholderTextColor="#9ca3af"
-                        value={name}
-                        onChangeText={setName}
-                        className="w-full bg-[#faf9f6] pl-12 pr-4 h-14 rounded-xl border border-indigo-100 text-[#1a1a1a] font-medium"
-                      />
-                    </View>
-                  </View>
-
-                  <View>
-                    <Text className="text-sm font-semibold text-[#1a1a1a] mb-1.5 ml-1">Email</Text>
-                    <View className="relative justify-center">
-                      <View className="absolute left-4 z-10"><Mail size={20} color="#9ca3af" /></View>
-                      <TextInput 
-                        placeholder="you@example.com"
-                        placeholderTextColor="#9ca3af"
-                        value={email}
-                        onChangeText={setEmail}
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        className="w-full bg-[#faf9f6] pl-12 pr-4 h-14 rounded-xl border border-indigo-100 text-[#1a1a1a] font-medium"
-                      />
-                    </View>
-                  </View>
-
-                  <View>
-                    <Text className="text-sm font-semibold text-[#1a1a1a] mb-1.5 ml-1">Password</Text>
-                    <View className="relative justify-center">
-                      <View className="absolute left-4 z-10"><Lock size={20} color="#9ca3af" /></View>
-                      <TextInput 
-                        placeholder="Create a strong password"
-                        placeholderTextColor="#9ca3af"
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry={!showPassword}
-                        className="w-full bg-[#faf9f6] pl-12 pr-12 h-14 rounded-xl border border-indigo-100 text-[#1a1a1a] font-medium"
-                      />
-                      <TouchableOpacity 
-                        className="absolute right-4 z-10"
-                        onPress={() => setShowPassword(!showPassword)}
-                      >
-                        {showPassword ? <EyeOff size={20} color="#9ca3af" /> : <Eye size={20} color="#9ca3af" />}
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-
-                  <View>
-                    <Text className="text-sm font-semibold text-[#1a1a1a] mb-1.5 ml-1">Date of Birth <Text className="font-normal text-gray-400">(must be 18+)</Text></Text>
-                    <TextInput 
-                      placeholder="YYYY-MM-DD"
-                      placeholderTextColor="#9ca3af"
-                      value={dob}
-                      onChangeText={setDob}
-                      className="w-full bg-[#faf9f6] px-4 h-14 rounded-xl border border-indigo-100 text-[#1a1a1a] font-medium"
-                    />
-                  </View>
-                </>
-              )}
-
-              <View className="mt-2 mb-2">
-                <CustomCheckbox 
-                  value={acceptTerms} 
-                  onValueChange={setAcceptTerms} 
-                  label="I agree to the Terms of Service" 
-                />
-                <CustomCheckbox 
-                  value={acceptPrivacy} 
-                  onValueChange={setAcceptPrivacy} 
-                  label="I've read and acknowledge the Privacy Notice" 
-                />
-              </View>
-
-              <TouchableOpacity 
-                onPress={handleSignup}
-                disabled={loading || !acceptTerms || !acceptPrivacy}
-                className={`w-full h-14 rounded-full items-center justify-center mt-2 ${
-                  (!acceptTerms || !acceptPrivacy) ? 'bg-indigo-300' : 'bg-[#4f46e5] shadow-lg shadow-indigo-500/30'
-                }`}
-              >
-                {loading ? (
-                  <ActivityIndicator color="white" />
-                ) : (
-                  <Text className="text-white font-bold text-lg">
-                    {loginMethod === 'otp' ? 'Send OTP' : 'Create Account'}
-                  </Text>
-                )}
-              </TouchableOpacity>
-            </View>
-
-            <View className="flex-row items-center my-6">
-              <View className="flex-1 h-[1px] bg-indigo-50" />
-              <Text className="mx-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Or continue with</Text>
-              <View className="flex-1 h-[1px] bg-indigo-50" />
-            </View>
-
-            <View className="space-y-3">
-              <TouchableOpacity className="w-full h-14 bg-white border border-gray-200 rounded-xl items-center justify-center flex-row">
-                <Text className="text-[#1a1a1a] font-bold text-base">Continue with Google</Text>
-              </TouchableOpacity>
-              <TouchableOpacity className="w-full h-14 bg-white border border-gray-200 rounded-xl items-center justify-center flex-row">
-                <Text className="text-[#1a1a1a] font-bold text-base">Continue with Apple</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View className="items-center mt-8">
-              <Text className="text-gray-500 text-sm font-medium">
-                Already have an account?{' '}
-                <Text 
-                  onPress={() => router.push('/(auth)/login')}
-                  className="text-[#4f46e5] font-bold"
-                >
-                  Log in
+          {/* Role Toggle */}
+          <View style={{ flexDirection: "row", backgroundColor: CARD_BG, borderRadius: 16, padding: 4, marginBottom: 24, borderWidth: 1, borderColor: BORDER }}>
+            {(["user", "expert"] as Role[]).map((r) => (
+              <TouchableOpacity key={r} onPress={() => { setRole(r); setError(""); }}
+                style={{ flex: 1, paddingVertical: 12, borderRadius: 12, alignItems: "center", backgroundColor: role === r ? PURPLE : "transparent", elevation: role === r ? 6 : 0 }}>
+                <Text style={{ fontWeight: "700", fontSize: 14, color: role === r ? "#fff" : TEXT_MUTED }}>
+                  {r === "user" ? "👤 User" : "🌟 Expert"}
                 </Text>
-              </Text>
-            </View>
+              </TouchableOpacity>
+            ))}
+          </View>
 
+          {/* Error / Success */}
+          {error !== "" && (
+            <View style={{ backgroundColor: "rgba(239,68,68,0.1)", borderColor: "rgba(239,68,68,0.3)", borderWidth: 1, borderRadius: 12, padding: 12, marginBottom: 16 }}>
+              <Text style={{ color: "#DC2626", fontSize: 13, textAlign: "center" }}>{error}</Text>
+            </View>
+          )}
+          {success !== "" && (
+            <View style={{ backgroundColor: "rgba(16,185,129,0.1)", borderColor: "rgba(16,185,129,0.3)", borderWidth: 1, borderRadius: 12, padding: 12, marginBottom: 16 }}>
+              <Text style={{ color: "#059669", fontSize: 13, textAlign: "center" }}>{success}</Text>
+            </View>
+          )}
+
+          {/* Fields */}
+          <View style={{ gap: 16 }}>
+            {[
+              { label: "Full Name", placeholder: "Your name", value: name, setter: setName, type: "default", secure: false },
+              { label: "Email address", placeholder: "you@example.com", value: email, setter: setEmail, type: "email-address", secure: false },
+              { label: "Password (min 8 chars)", placeholder: "••••••••", value: password, setter: setPassword, type: "default", secure: true },
+            ].map((field) => (
+              <View key={field.label}>
+                <Text style={{ fontSize: 13, fontWeight: "600", color: TEXT_MUTED, marginBottom: 8, marginLeft: 4 }}>{field.label}</Text>
+                <TextInput
+                  placeholder={field.placeholder}
+                  placeholderTextColor={TEXT_MUTED}
+                  value={field.value}
+                  onChangeText={field.setter}
+                  keyboardType={field.type as any}
+                  autoCapitalize="none"
+                  secureTextEntry={field.secure}
+                  style={{ backgroundColor: CARD_BG, borderWidth: 1, borderColor: BORDER, borderRadius: 14, paddingHorizontal: 18, height: 56, color: TEXT, fontSize: 15 }}
+                />
+              </View>
+            ))}
+            <Text style={{ fontSize: 11, color: TEXT_MUTED, textAlign: "center", lineHeight: 16 }}>
+              By creating an account you agree to our Terms of Service and Privacy Policy
+            </Text>
+            <TouchableOpacity onPress={handleSignup} disabled={loading}
+              style={{ backgroundColor: PURPLE, borderRadius: 14, height: 56, alignItems: "center", justifyContent: "center", marginTop: 4, shadowColor: PURPLE, shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.4, shadowRadius: 16, elevation: 10 }}>
+              {loading ? <ActivityIndicator color="white" /> : <Text style={{ color: "#fff", fontWeight: "800", fontSize: 16 }}>Create Account →</Text>}
+            </TouchableOpacity>
+          </View>
+
+          <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 28 }}>
+            <Text style={{ color: TEXT_MUTED, fontSize: 14 }}>Already have an account? </Text>
+            <TouchableOpacity onPress={() => router.push("/(auth)/login")}>
+              <Text style={{ color: LAVENDER, fontWeight: "700", fontSize: 14 }}>Log in</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

@@ -287,8 +287,12 @@ export const sessionsApi = {
       { headers: authHeader(token) }
     ),
 
-  end: (token: string, sessionId: string) =>
-    request(`/api/sessions/${sessionId}/end`, { method: 'POST', headers: authHeader(token) }),
+  end: (token: string, sessionId: string, body?: { recordingUrl?: string; audioUrl?: string }) =>
+    request(`/api/sessions/${sessionId}/end`, {
+      method: 'POST',
+      headers: authHeader(token),
+      body: body ? JSON.stringify(body) : undefined,
+    }),
 
   connect: (token: string, sessionId: string) =>
     request<{ session: any }>(`/api/sessions/${sessionId}/connect`, { method: 'POST', headers: authHeader(token) }),
@@ -339,8 +343,18 @@ export const sessionsApi = {
       body: JSON.stringify({ transcriptText, recordingUrl }),
     }),
 
+  uploadRecording: (token: string, sessionId: string, audioBlob: Blob) => {
+    const form = new FormData();
+    form.append('audio', audioBlob, `call-${sessionId}.webm`);
+    return fetch(`${API_URL}/api/sessions/${sessionId}/recording`, {
+      method: 'POST',
+      headers: authHeader(token),
+      body: form,
+    }).then((r) => r.json() as Promise<ApiResponse<{ recordingUrl: string }>>);
+  },
+
   myTranscripts: (token: string, page?: number) =>
-    // Backend route is /api/sessions/user/transcripts (see backend/src/routes/sessions.ts) ΓÇö
+    // Backend route is /api/sessions/user/transcripts (see backend/src/routes/sessions.ts) —
     // this was missing the "user/" segment, so it always 404'd (or hit GET /:id with
     // id="transcripts") and the "My Call Transcripts" page always showed empty.
     request<{ transcripts: TranscriptEntry[]; pagination: Pagination }>('/api/sessions/user/transcripts' + (page ? `?page=${page}` : ''), { headers: authHeader(token) }),
@@ -390,7 +404,7 @@ export const agoraApi = {
 
 export const deepgramApi = {
   getToken: (token: string, sessionId: string) =>
-    request<{ apiKey?: string; isConfigured: boolean; isEphemeral?: boolean }>('/api/deepgram/token', {
+    request<{ apiKey?: string; isConfigured: boolean; isEphemeral?: boolean; message?: string }>('/api/deepgram/token', {
       method: 'POST',
       headers: authHeader(token),
       body: JSON.stringify({ sessionId }),

@@ -47,8 +47,8 @@ export default function ExpertVerificationPendingPage() {
 
           {/* Heading */}
           <div>
-            <h1 className="text-2xl font-extrabold text-gray-900 mb-2">Verification Pending</h1>
-            <p className="text-gray-600">Your expert account is awaiting admin verification.</p>
+            <h1 className="text-2xl font-extrabold text-indigo-950 mb-2">Verification Pending</h1>
+            <p className="text-purple-700">Your expert account is awaiting admin verification.</p>
           </div>
 
           {/* Info Box */}
@@ -71,7 +71,7 @@ export default function ExpertVerificationPendingPage() {
           </div>
 
           {/* Message */}
-          <div className="text-center text-sm text-gray-600 bg-gray-50 rounded-lg p-4">
+          <div className="text-center text-sm text-purple-700 bg-purple-50 rounded-lg p-4">
             <p>You&apos;ll receive an email notification once your account is verified. You can then access the full expert dashboard.</p>
           </div>
 
@@ -80,7 +80,7 @@ export default function ExpertVerificationPendingPage() {
             <Button
               onClick={handleLogout}
               variant="outline"
-              className="w-full h-11 border-gray-300 text-gray-700 hover:bg-gray-50"
+              className="w-full h-11 border-violet-300 text-purple-800 hover:bg-purple-50"
             >
               <LogOut className="w-4 h-4 mr-2" />
               Log Out
@@ -89,15 +89,15 @@ export default function ExpertVerificationPendingPage() {
             <Button 
               onClick={handleLogout}
               variant="outline" 
-              className="w-full h-11 border-gray-300 text-gray-700 hover:bg-gray-50"
+              className="w-full h-11 border-violet-300 text-purple-800 hover:bg-purple-50"
             >
               Back to Login
             </Button>
           </div>
 
           {/* Support */}
-          <div className="pt-4 border-t border-gray-200">
-            <p className="text-xs text-gray-500 mb-3">Need help?</p>
+          <div className="pt-4 border-t border-violet-200">
+            <p className="text-xs text-purple-500 mb-3">Need help?</p>
             <Link href="/contact">
               <Button variant="ghost" className="w-full text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50">
                 <MessageCircle className="w-4 h-4 mr-2" />

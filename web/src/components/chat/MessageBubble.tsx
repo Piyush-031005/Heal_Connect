@@ -22,7 +22,7 @@ export default function MessageBubble({ message, isMine }: Props) {
         )}
       >
         <p className="leading-relaxed break-words">{message.content}</p>
-        <div className={cn('flex items-center gap-1 mt-1 text-[10px]', isMine ? 'justify-end text-white/70' : 'justify-start text-gray-400')}>
+        <div className={cn('flex items-center gap-1 mt-1 text-[10px]', isMine ? 'justify-end text-white/70' : 'justify-start text-purple-400')}>
           <span>{time}</span>
           {isMine && (
             <span className={message.isRead ? 'text-white' : 'text-white/50'}>

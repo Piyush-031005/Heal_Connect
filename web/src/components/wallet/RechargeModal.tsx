@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input';
 import { Wallet, Loader2 } from 'lucide-react';
 import { walletApi, tokenStore } from '@/lib/api';
 import { loadRazorpay } from '@/lib/razorpay';
-import { getUserCurrency, convertFromINR } from '@/lib/currency';
 
 interface RechargeModalProps {
   isOpen: boolean;
@@ -15,19 +14,17 @@ interface RechargeModalProps {
   onSuccess: () => void;
 }
 
-const PRESET_AMOUNTS_INR = [99, 199, 499, 999];
+const PRESET_AMOUNTS = [99, 199, 499, 999];
 
 export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps) {
   const [amount, setAmount] = useState<number | ''>('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<'razorpay' | 'stripe'>('razorpay');
-  const currency = getUserCurrency();
-  const isINR = currency.code === 'INR';
 
   const handleRecharge = async (rechargeAmount: number) => {
     if (rechargeAmount < 10) {
-      setError(`Minimum recharge amount is ${convertFromINR(10).display}`);
+      setError('Minimum recharge amount is ₹10');
       return;
     }
     
@@ -108,20 +105,20 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
           <DialogTitle className="flex items-center gap-2 text-xl font-extrabold text-[#1a1a1a]">
             <Wallet className="w-5 h-5 text-[#4f46e5]" /> Recharge Wallet
           </DialogTitle>
-          <DialogDescription className="text-gray-500">
+          <DialogDescription className="text-purple-500">
             Add funds to your wallet to seamlessly connect with experts.
           </DialogDescription>
         </DialogHeader>
 
         <div className="grid grid-cols-2 gap-3 py-4">
-          {PRESET_AMOUNTS_INR.map((preset) => (
+          {PRESET_AMOUNTS.map((preset) => (
             <Button
               key={preset}
               variant="outline"
               className={`border-yellow-200 text-[#d97706] bg-yellow-50 hover:bg-yellow-100 hover:text-[#b45309] font-bold ${amount === preset ? 'ring-2 ring-[#4f46e5] border-transparent' : ''}`}
               onClick={() => setAmount(preset)}
             >
-              {convertFromINR(preset).display}
+              ₹{preset}
             </Button>
           ))}
         </div>
@@ -131,35 +128,35 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
           <div className="grid grid-cols-2 gap-3">
             <Button
               variant="outline"
-              className={`h-12 border-gray-200 font-medium ${paymentMethod === 'razorpay' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-gray-600 hover:bg-gray-50'}`}
+              className={`h-12 border-violet-200 font-medium ${paymentMethod === 'razorpay' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-purple-700 hover:bg-purple-50'}`}
               onClick={() => setPaymentMethod('razorpay')}
             >
               Domestic (INR)
             </Button>
             <Button
               variant="outline"
-              className={`h-12 border-gray-200 font-medium ${paymentMethod === 'stripe' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-gray-600 hover:bg-gray-50'}`}
+              className={`h-12 border-violet-200 font-medium ${paymentMethod === 'stripe' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-purple-700 hover:bg-purple-50'}`}
               onClick={() => setPaymentMethod('stripe')}
             >
               International (USD)
             </Button>
           </div>
           {paymentMethod === 'stripe' && (
-            <p className="text-xs text-gray-500">
-              * International payments processed via Stripe ({convertFromINR(amount as number || 0).display} {currency.code}).
+            <p className="text-xs text-purple-500">
+              * International payments are converted to USD (approx ${((amount || 0) / 83).toFixed(2)}) and processed securely via Stripe.
             </p>
           )}
         </div>
 
         <div className="space-y-3">
-          <label className="text-sm font-semibold text-[#1a1a1a]">Or enter custom amount ({currency.symbol})</label>
+          <label className="text-sm font-semibold text-[#1a1a1a]">Or enter custom amount (₹)</label>
           <Input
             type="number"
             min="10"
             placeholder="e.g. 500"
             value={amount}
             onChange={(e) => setAmount(e.target.value === '' ? '' : Number(e.target.value))}
-            className="border-gray-200 focus:ring-[#4f46e5]/40 focus:border-[#4f46e5]"
+            className="border-violet-200 focus:ring-[#4f46e5]/40 focus:border-[#4f46e5]"
           />
           {error && <p className="text-sm text-red-500 font-medium">{error}</p>}
         </div>
@@ -170,7 +167,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
             disabled={loading || !amount || amount < 10}
             onClick={() => handleRecharge(amount as number)}
           >
-            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : `Proceed to Pay ${convertFromINR(amount as number || 0).display}`}
+            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : `Proceed to Pay ₹${amount || 0}`}
           </Button>
         </div>
       </DialogContent>

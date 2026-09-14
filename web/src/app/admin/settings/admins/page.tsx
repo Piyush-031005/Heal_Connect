@@ -153,11 +153,11 @@ export default function AdminAccountsPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-2xl font-black text-gray-900 dark:text-white mb-1 flex items-center gap-3">
+            <h1 className="text-2xl font-black text-indigo-950 dark:text-white mb-1 flex items-center gap-3">
               <ShieldCheck className="w-7 h-7 text-indigo-500 dark:text-indigo-400" />
               Admin Accounts
             </h1>
-            <p className="text-gray-500 dark:text-white/50 text-sm">Manage admin users, roles, and MFA settings</p>
+            <p className="text-purple-500 dark:text-white/50 text-sm">Manage admin users, roles, and MFA settings</p>
           </div>
           <button
             onClick={() => { setShowCreate(true); setTempPassword(''); setCreateEmail(''); setCreateError(''); }}
@@ -174,36 +174,36 @@ export default function AdminAccountsPage() {
         )}
 
         {/* Table */}
-        <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-white/10 rounded-3xl overflow-hidden shadow-sm">
+        <div className="bg-white dark:bg-indigo-900 border border-violet-200 dark:border-white/10 rounded-3xl overflow-hidden shadow-sm">
           {loading ? (
             <div className="flex items-center justify-center py-16">
               <RefreshCw className="w-8 h-8 text-indigo-400 animate-spin" />
             </div>
           ) : admins.length === 0 ? (
-            <div className="text-center py-16 text-gray-400 dark:text-white/40">No admin accounts found</div>
+            <div className="text-center py-16 text-purple-400 dark:text-white/40">No admin accounts found</div>
           ) : (
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-200 dark:border-white/10">
-                  <th className="text-left px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-gray-500 dark:text-white/50">Email</th>
-                  <th className="text-left px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-gray-500 dark:text-white/50">Role</th>
-                  <th className="text-left px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-gray-500 dark:text-white/50">MFA</th>
-                  <th className="text-left px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-gray-500 dark:text-white/50">Last Login</th>
-                  <th className="text-left px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-gray-500 dark:text-white/50">Created</th>
-                  <th className="text-right px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-gray-500 dark:text-white/50">Actions</th>
+                <tr className="border-b border-violet-200 dark:border-white/10">
+                  <th className="text-left px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-purple-500 dark:text-white/50">Email</th>
+                  <th className="text-left px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-purple-500 dark:text-white/50">Role</th>
+                  <th className="text-left px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-purple-500 dark:text-white/50">MFA</th>
+                  <th className="text-left px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-purple-500 dark:text-white/50">Last Login</th>
+                  <th className="text-left px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-purple-500 dark:text-white/50">Created</th>
+                  <th className="text-right px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-purple-500 dark:text-white/50">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-white/5">
+              <tbody className="divide-y divide-purple-100 dark:divide-white/5">
                 {admins.map((admin) => (
-                  <tr key={admin.id} className="hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                  <tr key={admin.id} className="hover:bg-purple-50 dark:hover:bg-white/5 transition-colors">
                     <td className="px-6 py-4">
-                      <span className="text-gray-900 dark:text-white font-semibold text-sm">{admin.email}</span>
+                      <span className="text-indigo-950 dark:text-white font-semibold text-sm">{admin.email}</span>
                       {admin.id === myId && <span className="ml-2 text-indigo-500 dark:text-indigo-400 font-bold text-xs">(you)</span>}
                     </td>
                     <td className="px-6 py-4"><Badge role={admin.role} /></td>
                     <td className="px-6 py-4"><MfaBadge enabled={admin.mfaEnabled} /></td>
-                    <td className="px-6 py-4 text-gray-500 dark:text-white/50 text-xs">{fmt(admin.lastLoginAt)}</td>
-                    <td className="px-6 py-4 text-gray-500 dark:text-white/50 text-xs">{fmt(admin.createdAt)}</td>
+                    <td className="px-6 py-4 text-purple-500 dark:text-white/50 text-xs">{fmt(admin.lastLoginAt)}</td>
+                    <td className="px-6 py-4 text-purple-500 dark:text-white/50 text-xs">{fmt(admin.createdAt)}</td>
                     <td className="px-6 py-4">
                       <div className="flex items-center justify-end gap-2">
                         {admin.mfaEnabled && (
@@ -237,7 +237,7 @@ export default function AdminAccountsPage() {
       {/* Create admin modal */}
       {showCreate && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-white/10 rounded-3xl p-8 w-full max-w-md shadow-2xl">
+          <div className="bg-indigo-950 border border-white/10 rounded-3xl p-8 w-full max-w-md shadow-2xl">
             {tempPassword ? (
               <div className="text-center space-y-5">
                 <CheckCheck className="w-12 h-12 text-green-400 mx-auto" />
@@ -279,10 +279,10 @@ export default function AdminAccountsPage() {
                     onChange={(e) => setCreateRole(e.target.value as 'SUPERADMIN' | 'MODERATOR' | 'SUPPORT' | 'VIEWER')}
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-2xl text-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/50 appearance-none"
                   >
-                    <option value="VIEWER" className="bg-slate-900">Viewer</option>
-                    <option value="SUPPORT" className="bg-slate-900">Support</option>
-                    <option value="MODERATOR" className="bg-slate-900">Moderator</option>
-                    <option value="SUPERADMIN" className="bg-slate-900">Superadmin</option>
+                    <option value="VIEWER" className="bg-indigo-950">Viewer</option>
+                    <option value="SUPPORT" className="bg-indigo-950">Support</option>
+                    <option value="MODERATOR" className="bg-indigo-950">Moderator</option>
+                    <option value="SUPERADMIN" className="bg-indigo-950">Superadmin</option>
                   </select>
                 </div>
 
@@ -304,7 +304,7 @@ export default function AdminAccountsPage() {
       {/* Confirm action modal */}
       {actionId && actionType && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-white/10 rounded-3xl p-8 w-full max-w-sm shadow-2xl space-y-5">
+          <div className="bg-indigo-950 border border-white/10 rounded-3xl p-8 w-full max-w-sm shadow-2xl space-y-5">
             <div className="text-center">
               <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4 ${actionType === 'delete' ? 'bg-red-500/20' : 'bg-yellow-500/20'}`}>
                 {actionType === 'delete' ? <Trash2 className="w-6 h-6 text-red-400" /> : <Lock className="w-6 h-6 text-yellow-400" />}

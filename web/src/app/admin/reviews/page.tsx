@@ -106,7 +106,7 @@ export default function AdminReviewsPage() {
 
   const renderStars = (rating: number) =>
     Array.from({ length: 5 }).map((_, i) => (
-      <Star key={i} className={`h-4 w-4 ${i < rating ? 'text-indigo-500 fill-indigo-500' : 'text-gray-300 dark:text-gray-600'}`} />
+      <Star key={i} className={`h-4 w-4 ${i < rating ? 'text-indigo-500 fill-indigo-500' : 'text-purple-300 dark:text-purple-700'}`} />
     ));
 
   return (
@@ -114,12 +114,12 @@ export default function AdminReviewsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Reviews Management</h1>
-            <p className="text-gray-500 dark:text-gray-400">Monitor and moderate customer reviews</p>
+            <h1 className="text-2xl font-bold text-indigo-950 dark:text-white">Reviews Management</h1>
+            <p className="text-purple-500 dark:text-purple-400">Monitor and moderate customer reviews</p>
           </div>
           <button
             onClick={fetchReviews}
-            className="flex items-center gap-2 text-sm text-gray-500 hover:text-indigo-600 transition-colors"
+            className="flex items-center gap-2 text-sm text-purple-500 hover:text-indigo-600 transition-colors"
           >
             <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
             Refresh
@@ -134,15 +134,15 @@ export default function AdminReviewsPage() {
           <StatCard label="1 Star Reviews" value={loading ? '…' : reviews.filter(r => r.rating === 1).length} icon={Flag} color="text-red-500" />
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-          <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="bg-white dark:bg-indigo-900 rounded-lg shadow-sm border border-violet-200 dark:border-violet-700">
+          <div className="p-4 border-b border-violet-200 dark:border-violet-700 flex flex-col sm:flex-row justify-between items-center gap-4">
             <SearchBar value={search} onChange={setSearch} placeholder="Search by user, expert, or comment..." />
             <div className="flex items-center gap-2 w-full sm:w-auto">
-              <Filter className="h-5 w-5 text-gray-400" />
+              <Filter className="h-5 w-5 text-purple-400" />
               <select
                 value={ratingFilter}
                 onChange={(e) => { setRatingFilter(e.target.value); setPage(1); }}
-                className="block w-full sm:w-32 pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="block w-full sm:w-32 pl-3 pr-10 py-2 text-base border-violet-300 dark:border-violet-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-white dark:bg-violet-700 text-indigo-950 dark:text-white"
               >
                 <option value="all">All Ratings</option>
                 <option value="5">5 Stars</option>
@@ -155,28 +155,28 @@ export default function AdminReviewsPage() {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead className="bg-gray-50 dark:bg-gray-800/50">
+            <table className="min-w-full divide-y divide-violet-200 dark:divide-violet-700">
+              <thead className="bg-purple-50 dark:bg-indigo-900/50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">User / Expert</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Rating</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Comment</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Date</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-purple-500 dark:text-purple-400 uppercase tracking-wider">User / Expert</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-purple-500 dark:text-purple-400 uppercase tracking-wider">Rating</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-purple-500 dark:text-purple-400 uppercase tracking-wider">Comment</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-purple-500 dark:text-purple-400 uppercase tracking-wider">Date</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-purple-500 dark:text-purple-400 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+              <tbody className="bg-white dark:bg-indigo-900 divide-y divide-violet-200 dark:divide-violet-700">
                 {loading ? (
                   Array.from({ length: 5 }).map((_, i) => (
                     <tr key={i}>
                       <td colSpan={5} className="px-6 py-4">
-                        <div className="h-4 bg-gray-100 dark:bg-gray-700 rounded animate-pulse" />
+                        <div className="h-4 bg-purple-50 dark:bg-violet-700 rounded animate-pulse" />
                       </td>
                     </tr>
                   ))
                 ) : paginated.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center text-gray-400 text-sm">
+                    <td colSpan={5} className="px-6 py-12 text-center text-purple-400 text-sm">
                       {reviews.length === 0 ? 'No reviews yet.' : 'No reviews match your filter.'}
                     </td>
                   </tr>
@@ -184,27 +184,27 @@ export default function AdminReviewsPage() {
                   paginated.map((review) => (
                     <motion.tr key={review.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900 dark:text-white">
+                        <div className="text-sm font-medium text-indigo-950 dark:text-white">
                           {review.user.name ?? review.user.email ?? 'Unknown user'}
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">to {review.practitioner.name}</div>
+                        <div className="text-sm text-purple-500 dark:text-purple-400">to {review.practitioner.name}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center gap-1">
                           {renderStars(review.rating)}
-                          <span className="text-xs text-gray-400 ml-1">{review.rating}/5</span>
+                          <span className="text-xs text-purple-400 ml-1">{review.rating}/5</span>
                         </div>
                       </td>
                       <td className="px-6 py-4 max-w-xs">
-                        <div className="text-sm text-gray-700 dark:text-gray-300 truncate" title={review.comment ?? ''}>
-                          {review.comment ?? <span className="text-gray-400 italic">No comment</span>}
+                        <div className="text-sm text-purple-800 dark:text-purple-300 truncate" title={review.comment ?? ''}>
+                          {review.comment ?? <span className="text-purple-400 italic">No comment</span>}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-purple-500 dark:text-purple-400">
                         {new Date(review.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button onClick={() => handleDelete(review.id)} className="text-gray-400 hover:text-red-600" title="Delete Review">
+                        <button onClick={() => handleDelete(review.id)} className="text-purple-400 hover:text-red-600" title="Delete Review">
                           <Trash2 className="h-5 w-5" />
                         </button>
                       </td>
@@ -216,7 +216,7 @@ export default function AdminReviewsPage() {
           </div>
 
           {!loading && filtered.length > 0 && (
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="p-4 border-t border-violet-200 dark:border-violet-700">
               <Pagination page={page} total={totalPages} perPage={perPage} onChange={setPage} />
             </div>
           )}

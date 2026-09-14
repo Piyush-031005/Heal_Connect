@@ -36,7 +36,8 @@ export function startBillingEngine() {
       const staleSessions = await prisma.session.findMany({
         where: {
           OR: [
-            { status: 'INITIATED', createdAt: { lt: twoMinutesAgo } },
+            // Extended to 5 minutes so expert has time to navigate to session page
+            { status: 'INITIATED', createdAt: { lt: fiveMinutesAgo } },
             { status: 'ACCEPTED', createdAt: { lt: fiveMinutesAgo } },
           ],
         },
@@ -183,7 +184,7 @@ async function processSessionBilling(session: any) {
       return;
     }
 
-    // Atomically debit wallet and update session cost
+    // Atomically debit user wallet and update session total cost
     await prisma.$transaction([
       prisma.wallet.update({
         where: { id: wallet.id },

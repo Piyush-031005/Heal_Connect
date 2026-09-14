@@ -235,7 +235,17 @@ export function useAgoraCall(initialSessionId?: string, isExpert = false): UseAg
       try {
         const res = await sessionsApi.get(accessToken, sessId);
         if (res.success && res.data?.session) {
-          const status = res.data.session.status;
+          const { status, type } = res.data.session;
+
+          // CRITICAL: Never auto-join Agora for CHAT sessions.
+          // useAgoraCall is only safe to activate for AUDIO/VIDEO session types.
+          // If this hook is ever mounted for a CHAT session, bail immediately —
+          // otherwise connectAgora() runs, mic is acquired, and billing starts.
+          if (type === 'CHAT') {
+            setCallState('idle');
+            return;
+          }
+
           if (status === 'ACTIVE') {
             if (res.data.session.startTime) setStartTime(res.data.session.startTime);
             await connectAgora(sessId);
@@ -256,6 +266,7 @@ export function useAgoraCall(initialSessionId?: string, isExpert = false): UseAg
     },
     [connectAgora]
   );
+
 
   // Socket room joining and event listeners
   useEffect(() => {
@@ -282,7 +293,9 @@ export function useAgoraCall(initialSessionId?: string, isExpert = false): UseAg
 
     const handleSessionConnected = (data: { startTime?: string }) => {
       if (data?.startTime) setStartTime(data.startTime);
-      setCallState('connected');
+      if (clientRef.current && clientRef.current.remoteUsers.length > 0) {
+        setCallState('connected');
+      }
     };
 
     const handleSessionTerminated = () => {

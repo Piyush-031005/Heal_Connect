@@ -28,13 +28,13 @@ export default function ConsultationsPage() {
   return (
     <AdminShell>
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Consultation Logs</h1>
+        <h1 className="text-2xl font-bold text-indigo-950 dark:text-white">Consultation Logs</h1>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
-          <div className="p-4 border-b border-gray-100 dark:border-gray-700 flex flex-col sm:flex-row gap-4 justify-between items-center">
+        <div className="bg-white dark:bg-indigo-900 rounded-xl shadow-sm border border-purple-100 dark:border-violet-700 overflow-hidden">
+          <div className="p-4 border-b border-purple-100 dark:border-violet-700 flex flex-col sm:flex-row gap-4 justify-between items-center">
             <SearchBar value={search} onChange={setSearch} placeholder="Search user or provider..." />
             
-            <select className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white outline-none">
+            <select className="px-4 py-2 rounded-lg border border-violet-300 dark:border-violet-600 bg-white dark:bg-indigo-950 text-indigo-950 dark:text-white outline-none">
               <option value="">All Types</option>
               <option value="video">Video Call</option>
               <option value="chat">Chat</option>
@@ -44,7 +44,7 @@ export default function ConsultationsPage() {
           
           <div className="overflow-x-auto">
             <table className="w-full text-left">
-              <thead className="bg-gray-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400">
+              <thead className="bg-purple-50 dark:bg-indigo-950 text-purple-500 dark:text-purple-400">
                 <tr>
                   <th className="px-6 py-4 font-medium">ID / Type</th>
                   <th className="px-6 py-4 font-medium">User</th>
@@ -56,18 +56,18 @@ export default function ConsultationsPage() {
                   <th className="px-6 py-4 font-medium text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+              <tbody className="divide-y divide-purple-100 dark:divide-violet-700">
                 {data.map(item => (
-                  <motion.tr key={item.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                  <motion.tr key={item.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="hover:bg-purple-50 dark:hover:bg-violet-700/50">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
                         <TypeIcon type={item.type} />
                         <span className="font-medium text-indigo-600">{item.id}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{item.user}</td>
-                    <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{item.provider}</td>
-                    <td className="px-6 py-4 text-gray-500">{item.date}</td>
+                    <td className="px-6 py-4 font-semibold text-indigo-950 dark:text-white">{item.user}</td>
+                    <td className="px-6 py-4 text-purple-700 dark:text-purple-300">{item.provider}</td>
+                    <td className="px-6 py-4 text-purple-500">{item.date}</td>
                     <td className="px-6 py-4 font-medium">{item.duration}</td>
                     <td className="px-6 py-4">
                       <StatusBadge status={item.status} />
@@ -79,7 +79,7 @@ export default function ConsultationsPage() {
                           <span className="text-sm">⭐</span>
                         </div>
                       ) : (
-                        <span className="text-gray-400">-</span>
+                        <span className="text-purple-400">-</span>
                       )}
                     </td>
                     <td className="px-6 py-4">
@@ -94,7 +94,7 @@ export default function ConsultationsPage() {
               </tbody>
             </table>
           </div>
-          <div className="p-4 border-t border-gray-100 dark:border-gray-700">
+          <div className="p-4 border-t border-purple-100 dark:border-violet-700">
             <Pagination page={1} total={data.length} perPage={10} onChange={() => {}} />
           </div>
         </div>

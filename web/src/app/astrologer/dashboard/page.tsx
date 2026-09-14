@@ -48,9 +48,9 @@ export default function AstrologerDashboardPage() {
   if (!profile) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-purple-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+      <header className="bg-white border-b border-violet-200 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           {profile.profilePhotoUrl ? (
             <img src={profile.profilePhotoUrl} alt={profile.displayName} className="w-10 h-10 rounded-full object-cover" />
@@ -60,19 +60,19 @@ export default function AstrologerDashboardPage() {
             </div>
           )}
           <div>
-            <p className="font-semibold text-gray-900">{profile.displayName || 'Astrologer'}</p>
-            <p className="text-xs text-gray-500 capitalize">{profile.accountStatus.toLowerCase()}</p>
+            <p className="font-semibold text-indigo-950">{profile.displayName || 'Astrologer'}</p>
+            <p className="text-xs text-purple-500 capitalize">{profile.accountStatus.toLowerCase()}</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={handleToggleOnline}
             disabled={toggling}
-            className="flex items-center gap-2 text-sm font-medium text-gray-700"
+            className="flex items-center gap-2 text-sm font-medium text-purple-800"
           >
             {profile.isOnline
               ? <ToggleRight className="w-6 h-6 text-green-500" />
-              : <ToggleLeft className="w-6 h-6 text-gray-400" />}
+              : <ToggleLeft className="w-6 h-6 text-purple-400" />}
             {profile.isOnline ? 'Online' : 'Offline'}
           </button>
           <Button variant="ghost" size="sm" onClick={handleLogout}>
@@ -90,23 +90,23 @@ export default function AstrologerDashboardPage() {
             { label: 'Consultations', value: profile.totalConsultations ?? 0 },
             { label: 'Earnings (₹)', value: profile.totalEarnings?.toFixed(0) ?? '0' },
           ].map((s) => (
-            <div key={s.label} className="bg-white rounded-xl border border-gray-200 p-4 text-center">
-              <p className="text-2xl font-bold text-gray-900">{s.value}</p>
-              <p className="text-xs text-gray-500 mt-1">{s.label}</p>
+            <div key={s.label} className="bg-white rounded-xl border border-violet-200 p-4 text-center">
+              <p className="text-2xl font-bold text-indigo-950">{s.value}</p>
+              <p className="text-xs text-purple-500 mt-1">{s.label}</p>
             </div>
           ))}
         </div>
 
         {/* Pricing */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <h2 className="font-semibold text-gray-900 mb-4">Pricing</h2>
+        <div className="bg-white rounded-xl border border-violet-200 p-6">
+          <h2 className="font-semibold text-indigo-950 mb-4">Pricing</h2>
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-indigo-50 rounded-lg p-4">
-              <p className="text-xs text-gray-500">Chat / min</p>
+              <p className="text-xs text-purple-500">Chat / min</p>
               <p className="text-xl font-bold text-indigo-600">₹{profile.chatPricePerMin}</p>
             </div>
             <div className="bg-indigo-50 rounded-lg p-4">
-              <p className="text-xs text-gray-500">Call / min</p>
+              <p className="text-xs text-purple-500">Call / min</p>
               <p className="text-xl font-bold text-indigo-600">₹{profile.callPricePerMin}</p>
             </div>
           </div>
@@ -114,8 +114,8 @@ export default function AstrologerDashboardPage() {
 
         {/* Specializations */}
         {profile.specializations?.length > 0 && (
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 className="font-semibold text-gray-900 mb-3">Specializations</h2>
+          <div className="bg-white rounded-xl border border-violet-200 p-6">
+            <h2 className="font-semibold text-indigo-950 mb-3">Specializations</h2>
             <div className="flex flex-wrap gap-2">
               {profile.specializations.map((s) => (
                 <span key={s} className="bg-indigo-100 text-indigo-700 text-sm px-3 py-1 rounded-full">{s}</span>
@@ -125,7 +125,7 @@ export default function AstrologerDashboardPage() {
         )}
 
         {/* Contact support */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6 flex items-center gap-3 text-sm text-gray-600">
+        <div className="bg-white rounded-xl border border-violet-200 p-6 flex items-center gap-3 text-sm text-purple-700">
           <Phone className="w-4 h-4 text-indigo-500 shrink-0" />
           <span>Need help? Contact support at <strong>support@ZenAuraa.in</strong></span>
         </div>

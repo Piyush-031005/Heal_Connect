@@ -182,7 +182,7 @@ export default function PractitionerDetailPage() {
   if (!p) {
     return (
       <div className="min-h-screen bg-[#faf9f6] flex flex-col items-center justify-center gap-4 font-sans">
-        <p className="text-gray-500 font-medium">Practitioner not found.</p>
+        <p className="text-purple-500 font-medium">Practitioner not found.</p>
         <Link href="/practitioners">
           <Button variant="outline" className="border-yellow-200 text-[#4338ca] hover:bg-yellow-50 rounded-xl">
             Back to Directory
@@ -199,7 +199,7 @@ export default function PractitionerDetailPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-yellow-100/80 bg-white/80 backdrop-blur-md transition-all">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <button onClick={() => router.back()} className="flex items-center gap-2 text-gray-600 hover:text-[#4f46e5] transition-colors group bg-transparent border-none cursor-pointer">
+          <button onClick={() => router.back()} className="flex items-center gap-2 text-purple-700 hover:text-[#4f46e5] transition-colors group bg-transparent border-none cursor-pointer">
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
             <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full shadow-sm" />
             <span className="font-extrabold text-[#4f46e5] tracking-tight">ZenAuraa</span>
@@ -237,7 +237,7 @@ export default function PractitionerDetailPage() {
               <div className="flex-1 min-w-0 text-center sm:text-left space-y-2">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
-                    <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight flex items-center justify-center sm:justify-start gap-2">
+                    <h1 className="text-2xl font-extrabold text-indigo-950 tracking-tight flex items-center justify-center sm:justify-start gap-2">
                       {p.name}
                       <Sparkles className="w-5 h-5 text-indigo-400" />
                     </h1>
@@ -253,21 +253,21 @@ export default function PractitionerDetailPage() {
                 <div className="flex items-center justify-center sm:justify-start gap-3 flex-wrap text-sm pt-1">
                   <div className="flex items-center gap-1.5 bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-200/60">
                     <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                    <span className="font-extrabold text-gray-900">{p.avgRating || '5.0'}</span>
-                    <span className="text-gray-400 text-xs">({p.reviewCount || 12} reviews)</span>
+                    <span className="font-extrabold text-indigo-950">{p.avgRating || '5.0'}</span>
+                    <span className="text-purple-400 text-xs">({p.reviewCount || 12} reviews)</span>
                   </div>
-                  <span className="text-gray-300">┬╖</span>
-                  <span className="text-gray-600 font-medium">{p.experienceYrs} Years Experience</span>
+                  <span className="text-purple-300">┬╖</span>
+                  <span className="text-purple-700 font-medium">{p.experienceYrs} Years Experience</span>
                 </div>
 
                 {p.languages.length > 0 && (
-                  <p className="text-xs text-gray-500 pt-0.5">≡ƒîÉ Spoken Languages: <span className="font-semibold text-gray-700">{p.languages.join(', ')}</span></p>
+                  <p className="text-xs text-purple-500 pt-0.5">≡ƒîÉ Spoken Languages: <span className="font-semibold text-purple-800">{p.languages.join(', ')}</span></p>
                 )}
               </div>
             </div>
 
             {p.bio && (
-              <p className="text-sm text-gray-600 mt-5 pt-4 border-t border-gray-100 leading-relaxed bg-indigo-50/30 p-4 rounded-2xl border border-indigo-100/50">
+              <p className="text-sm text-purple-700 mt-5 pt-4 border-t border-purple-100 leading-relaxed bg-indigo-50/30 p-4 rounded-2xl border border-indigo-100/50">
                 {p.bio}
               </p>
             )}
@@ -276,7 +276,7 @@ export default function PractitionerDetailPage() {
             <div className="flex items-center justify-between mt-6 pt-5 border-t border-yellow-100">
               <div>
                 <span className="text-3xl font-extrabold text-[#1a1a1a]">Γé╣{p.perMinuteRate}</span>
-                <span className="text-sm text-gray-400 font-medium"> / minute</span>
+                <span className="text-sm text-purple-400 font-medium"> / minute</span>
               </div>
               <div className="flex flex-wrap gap-3 justify-end mt-4 sm:mt-0">
                 <Button 
@@ -325,7 +325,7 @@ export default function PractitionerDetailPage() {
         {p.certifications.length > 0 && (
           <Card className="bg-white border border-yellow-100/80 shadow-sm rounded-3xl">
             <CardContent className="p-6">
-              <h2 className="font-extrabold text-gray-900 mb-3 text-base flex items-center gap-2">
+              <h2 className="font-extrabold text-indigo-950 mb-3 text-base flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-emerald-500" />
                 <span>Professional Certifications</span>
               </h2>
@@ -343,7 +343,7 @@ export default function PractitionerDetailPage() {
         {/* Reviews */}
         {p.reviews.length > 0 && (
           <div className="space-y-3">
-            <h2 className="font-extrabold text-gray-900 text-base px-1">User Reviews ({p.reviewCount})</h2>
+            <h2 className="font-extrabold text-indigo-950 text-base px-1">User Reviews ({p.reviewCount})</h2>
             <div className="space-y-3">
               {p.reviews.map((r) => (
                 <Card key={r.id} className="bg-white border border-yellow-100/80 shadow-sm rounded-2xl hover:shadow transition-shadow">
@@ -355,16 +355,16 @@ export default function PractitionerDetailPage() {
                           alt={r.user.name || 'User'}
                           className="w-8 h-8 rounded-full object-cover border border-indigo-200"
                         />
-                        <p className="font-bold text-sm text-gray-900">{r.user.name || 'Anonymous User'}</p>
+                        <p className="font-bold text-sm text-indigo-950">{r.user.name || 'Anonymous User'}</p>
                       </div>
                       <div className="flex items-center gap-0.5">
                         {Array.from({ length: 5 }).map((_, i) => (
-                          <Star key={i} className={`w-3.5 h-3.5 ${i < r.rating ? 'text-indigo-400 fill-indigo-400' : 'text-gray-200'}`} />
+                          <Star key={i} className={`w-3.5 h-3.5 ${i < r.rating ? 'text-indigo-400 fill-indigo-400' : 'text-purple-200'}`} />
                         ))}
                       </div>
                     </div>
-                    {r.comment && <p className="text-sm text-gray-600 pl-10">{r.comment}</p>}
-                    <p className="text-[11px] text-gray-400 pl-10 mt-1">
+                    {r.comment && <p className="text-sm text-purple-700 pl-10">{r.comment}</p>}
+                    <p className="text-[11px] text-purple-400 pl-10 mt-1">
                       {new Date(r.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </p>
                   </CardContent>
