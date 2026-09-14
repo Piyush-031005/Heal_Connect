@@ -204,7 +204,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
   const avatarSrc = getPractitionerAvatar(p.photoUrl, p.id);
 
   return (
-    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-[#A78BFA]/95 backdrop-blur-2xl border-2 border-white/20 hover:border-white/50 hover:shadow-[0_12px_40px_rgba(167,139,250,0.4)] shadow-[0_4px_20px_rgba(167,139,250,0.2)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
+    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-[#C4B5FD]/95 backdrop-blur-2xl border-2 border-white/20 hover:border-white/50 hover:shadow-[0_12px_40px_rgba(196,181,253,0.5)] shadow-[0_4px_20px_rgba(196,181,253,0.3)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
       <CardContent className="p-0 flex flex-col h-full relative">
         {/* Top strip with avatar */}
         <div className="relative h-20 bg-white/10 shrink-0 border-b border-white/10">
@@ -225,38 +225,38 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
         <div className="pt-10 px-6 pb-6 flex flex-col flex-1 relative z-0">
           <div className="flex items-start justify-between mb-1">
             <div>
-              <p className="font-bold text-white text-lg tracking-wide group-hover:text-white/90 transition-colors">{p.name}</p>
-              <p className="text-sm text-white/90 font-medium">{p.specialties.slice(0, 2).join(', ') || ' '}</p>
+              <p className="font-bold text-[#2d1b69] text-lg tracking-wide group-hover:text-[#1e1b4b] transition-colors">{p.name}</p>
+              <p className="text-sm text-[#4c1d95] font-medium">{p.specialties.slice(0, 2).join(', ') || ' '}</p>
             </div>
             {p.isVerified && (
-              <div className="flex items-center gap-1 bg-white/20 border border-white/30 rounded-lg px-2 py-1 shrink-0 mt-1 shadow-sm">
-                <Shield className="w-3 h-3 text-white" />
-                <span className="text-[10px] font-bold text-white uppercase tracking-wider">Verified</span>
+              <div className="flex items-center gap-1 bg-white/40 border border-white/50 rounded-lg px-2 py-1 shrink-0 mt-1 shadow-sm">
+                <Shield className="w-3 h-3 text-[#4c1d95]" />
+                <span className="text-[10px] font-bold text-[#4c1d95] uppercase tracking-wider">Verified</span>
               </div>
             )}
           </div>
 
           <div className="flex flex-wrap items-center gap-3 mt-3 mb-4">
-            <div className="flex items-center gap-1 px-2 py-1 bg-white/20 rounded-lg border border-white/20">
-              <Star className="w-3.5 h-3.5 text-[#FFD700] fill-current" />
-              <span className="text-sm font-bold text-white">{p.avgRating || ' '}</span>
-              <span className="text-xs text-white/80">({p.reviewCount})</span>
+            <div className="flex items-center gap-1 px-2 py-1 bg-white/30 rounded-lg border border-white/40">
+              <Star className="w-3.5 h-3.5 text-[#FFB800] fill-current" />
+              <span className="text-sm font-bold text-[#2d1b69]">{p.avgRating || ' '}</span>
+              <span className="text-xs text-[#4c1d95]">({p.reviewCount})</span>
             </div>
-            <span className="text-white/50">|</span>
-            <span className="text-xs text-white/90 font-medium">{p.experienceYrs} yrs exp</span>
-            <span className="text-white/50 hidden sm:inline">|</span>
-            <div className="flex items-center gap-1.5 text-xs text-white/90 bg-white/20 px-2 py-1 rounded-lg border border-white/20">
-              <Globe className="w-3 h-3 text-white/80" />
+            <span className="text-[#4c1d95]/40">|</span>
+            <span className="text-xs text-[#4c1d95] font-medium">{p.experienceYrs} yrs exp</span>
+            <span className="text-[#4c1d95]/40 hidden sm:inline">|</span>
+            <div className="flex items-center gap-1.5 text-xs text-[#4c1d95] bg-white/30 px-2 py-1 rounded-lg border border-white/40">
+              <Globe className="w-3 h-3 text-[#4c1d95]" />
               <span className="truncate max-w-[80px]">{p.languages.slice(0, 2).join(', ') || ' '}</span>
             </div>
           </div>
 
           {/* Bio */}
-          <p className="text-sm text-white/80 line-clamp-2 leading-relaxed flex-1 mb-5">
+          <p className="text-sm text-[#2d1b69]/80 line-clamp-2 leading-relaxed flex-1 mb-5">
             {p.bio || ''}
           </p>
 
-          <div className="flex flex-col gap-3 pt-4 mt-auto border-t border-white/20">
+          <div className="flex flex-col gap-3 pt-4 mt-auto border-t border-white/30">
             {/* Calendar Button Above */}
             <Button size="sm" className="w-full h-9 rounded-md bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all shadow-md" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
               <CalendarDays className="h-4 w-4 mr-1.5" /> See Calendar
@@ -265,14 +265,14 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
             {/* Price, Chat, and Call Below */}
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-xl font-bold text-white">₹{p.price}</span>
-                <span className="text-xs text-white/80 ml-1">/min</span>
+                <span className="text-xl font-bold text-[#2d1b69]">₹{p.price}</span>
+                <span className="text-xs text-[#4c1d95] ml-1">/min</span>
               </div>
               <div className="flex gap-2">
                 <Button size="sm" className="h-9 rounded-md px-3 bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all shadow-md" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
                   <MessageCircle className="h-4 w-4 mr-1.5" /> Chat
                 </Button>
-                <Button size="sm" disabled={!p.isOnline} className="h-9 rounded-md px-3 bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all disabled:opacity-50 disabled:hover:opacity-50 shadow-md" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+                <Button size="sm" className="h-9 rounded-md px-3 bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all shadow-md" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
                   <Phone className="h-4 w-4 mr-1.5" /> Call
                 </Button>
               </div>
