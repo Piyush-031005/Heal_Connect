@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import GhostFibers from '@/components/GhostFibers';
 
 import { useEffect, useState, useCallback } from 'react';
@@ -78,7 +78,7 @@ export default function PractitionersPage() {
   return (
     <div className="min-h-screen flex flex-col font-sans relative overflow-hidden" style={{background:"linear-gradient(145deg, #F5F0FF 0%, #EDE9FE 20%, #DDD6FE 45%, #C4B5FD 70%, #A5B4FC 100%)"}}>
       {/* GhostFibers cinematic background */}
-      <div className="absolute inset-0 pointer-events-none z-0 opacity-50 mix-blend-multiply">
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-70">
         <GhostFibers lineColor="#8345bd" glowColor="#7c41e0" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={4} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={7} twistSpeed={1.5} lineFrequency={10} lineSpacing={1.0} lineSharpness={13} glowFalloff={7} glowIntensity={2.5} brightness={3.0} blueBoost={1.5} vignette={0.5} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
       </div>
       {/* Glowing orbs for positive vibe */}
