@@ -198,23 +198,22 @@ export default function PractitionersPage() {
   );
 }
 
+
 function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
   const router = useRouter();
   const avatarSrc = getPractitionerAvatar(p.photoUrl, p.id);
 
   return (
-    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-white/90 backdrop-blur-2xl border-2 border-purple-400 hover:border-purple-500 hover:shadow-[0_12px_40px_rgba(124,58,237,0.25)] shadow-[0_4px_20px_rgba(124,58,237,0.12)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
+    <Card onClick={() => router.push(/practitioners/${p.id})} className="bg-[#A78BFA]/95 backdrop-blur-2xl border-2 border-white/20 hover:border-white/50 hover:shadow-[0_12px_40px_rgba(167,139,250,0.4)] shadow-[0_4px_20px_rgba(167,139,250,0.2)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
       <CardContent className="p-0 flex flex-col h-full relative">
         {/* Top strip with avatar */}
-        <div className="relative h-20 bg-gradient-to-r from-white/5 to-white/10 shrink-0">
+        <div className="relative h-20 bg-white/10 shrink-0 border-b border-white/10">
           <div className="absolute -bottom-8 left-6 z-10">
-            <img src={avatarSrc} alt={p.name} className="w-16 h-16 rounded-2xl object-cover shadow-[0_4px_15px_rgba(0,0,0,0.5)] border-2 border-[#121420] transition-transform duration-300 group-hover:scale-105" />
+            <img src={avatarSrc} alt={p.name} className="w-16 h-16 rounded-2xl object-cover shadow-[0_4px_15px_rgba(0,0,0,0.3)] border-2 border-white transition-transform duration-300 group-hover:scale-105" />
           </div>
           <div className="absolute top-4 right-4 z-10">
-            <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full ${
-              p.isOnline ? 'bg-green-500/15 text-green-600 border border-green-500/30 shadow-[0_0_10px_rgba(34,197,94,0.2)]' : 'bg-red-500/15 text-red-500 border border-red-500/30'
-            }`}>
-              <span className={`w-1.5 h-1.5 rounded-full ${p.isOnline ? 'bg-green-500 animate-pulse shadow-[0_0_6px_rgba(34,197,94,0.8)]' : 'bg-red-500'}`} />
+            <span className={+"inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full "+}>
+              <span className={+"w-1.5 h-1.5 rounded-full "+} />
               {p.isOnline ? 'Online' : 'Offline'}
             </span>
           </div>
@@ -224,52 +223,57 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
         <div className="pt-10 px-6 pb-6 flex flex-col flex-1 relative z-0">
           <div className="flex items-start justify-between mb-1">
             <div>
-              <p className="font-bold text-[#2d1b69] text-lg tracking-wide group-hover:text-primary transition-colors">{p.name}</p>
-              <p className="text-sm text-primary font-medium">{p.specialties.slice(0, 2).join(' Ã‚Â· ') || '•'}</p>
+              <p className="font-bold text-white text-lg tracking-wide group-hover:text-white/90 transition-colors">{p.name}</p>
+              <p className="text-sm text-white/90 font-medium">{p.specialties.slice(0, 2).join(', ') || ' '}</p>
             </div>
             {p.isVerified && (
-              <div className="flex items-center gap-1 bg-primary/10 border border-primary/30 rounded-lg px-2 py-1 shrink-0 mt-1 shadow-[0_0_10px_rgba(214,80,07,0.1)]">
-                <Shield className="w-3 h-3 text-primary" />
-                <span className="text-[10px] font-bold text-primary uppercase tracking-wider">Verified</span>
+              <div className="flex items-center gap-1 bg-white/20 border border-white/30 rounded-lg px-2 py-1 shrink-0 mt-1 shadow-sm">
+                <Shield className="w-3 h-3 text-white" />
+                <span className="text-[10px] font-bold text-white uppercase tracking-wider">Verified</span>
               </div>
             )}
           </div>
 
           <div className="flex flex-wrap items-center gap-3 mt-3 mb-4">
-            <div className="flex items-center gap-1 px-2 py-1 bg-secondary rounded-lg border border-border">
-              <Star className="w-3.5 h-3.5 text-primary fill-current" />
-              <span className="text-sm font-bold text-[#2d1b69]">{p.avgRating || '•'}</span>
-              <span className="text-xs text-muted-foreground">({p.reviewCount})</span>
+            <div className="flex items-center gap-1 px-2 py-1 bg-white/20 rounded-lg border border-white/20">
+              <Star className="w-3.5 h-3.5 text-[#FFD700] fill-current" />
+              <span className="text-sm font-bold text-white">{p.avgRating || ' '}</span>
+              <span className="text-xs text-white/80">({p.reviewCount})</span>
             </div>
-            <span className="text-muted-foreground">|</span>
-            <span className="text-xs text-muted-foreground font-medium">{p.experienceYrs} yrs exp</span>
-            <span className="text-muted-foreground hidden sm:inline">|</span>
-            <div className="flex items-center gap-1.5 text-xs text-muted-foreground bg-secondary px-2 py-1 rounded-lg border border-border">
-              <Globe className="w-3 h-3 text-muted-foreground" />
-              <span className="truncate max-w-[80px]">{p.languages.slice(0, 2).join(', ') || '•'}</span>
+            <span className="text-white/50">|</span>
+            <span className="text-xs text-white/90 font-medium">{p.experienceYrs} yrs exp</span>
+            <span className="text-white/50 hidden sm:inline">|</span>
+            <div className="flex items-center gap-1.5 text-xs text-white/90 bg-white/20 px-2 py-1 rounded-lg border border-white/20">
+              <Globe className="w-3 h-3 text-white/80" />
+              <span className="truncate max-w-[80px]">{p.languages.slice(0, 2).join(', ') || ' '}</span>
             </div>
           </div>
 
           {/* Bio */}
-          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed flex-1 mb-5">
+          <p className="text-sm text-white/80 line-clamp-2 leading-relaxed flex-1 mb-5">
             {p.bio || ''}
           </p>
 
-          <div className="flex items-center justify-between pt-4 mt-auto border-t border-border">
-            <div>
-              <span className="text-xl font-bold text-[#2d1b69]">₹</span>
-              <span className="text-xs text-muted-foreground ml-1">/min</span>
-            </div>
-            <div className="flex gap-2">
-              <Button size="sm" className="h-9 rounded-md px-4 bg-[#5F3BA9] text-white hover:opacity-90 border-0 text-xs font-semibold transition-all" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
-                  <CalendarDays className="h-4 w-4 mr-1.5" /> See Calendar
-                </Button>
-                <Button size="sm" className="h-9 rounded-md px-4 bg-gradient-to-r from-[#5F3BA9] to-[#9B6BCA] text-white hover:opacity-90 border-0 text-xs font-semibold transition-all" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+          <div className="flex flex-col gap-3 pt-4 mt-auto border-t border-white/20">
+            {/* Calendar Button Above */}
+            <Button size="sm" className="w-full h-9 rounded-md bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all shadow-md" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+              <CalendarDays className="h-4 w-4 mr-1.5" /> See Calendar
+            </Button>
+            
+            {/* Price, Chat, and Call Below */}
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-xl font-bold text-white">₹{p.price}</span>
+                <span className="text-xs text-white/80 ml-1">/min</span>
+              </div>
+              <div className="flex gap-2">
+                <Button size="sm" className="h-9 rounded-md px-3 bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all shadow-md" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
                   <MessageCircle className="h-4 w-4 mr-1.5" /> Chat
                 </Button>
-              <Button size="sm" disabled={!p.isOnline} className="h-9 rounded-md px-4 bg-gradient-to-r from-[#5F3BA9] to-[#9B6BCA] text-white hover:opacity-90 border-0 text-xs font-bold transition-all disabled:opacity-30 disabled:hover:opacity-100" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+                <Button size="sm" disabled={!p.isOnline} className="h-9 rounded-md px-3 bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all disabled:opacity-50 disabled:hover:opacity-50 shadow-md" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
                   <Phone className="h-4 w-4 mr-1.5" /> Call
                 </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -277,6 +281,3 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
     </Card>
   );
 }
-
-
-
