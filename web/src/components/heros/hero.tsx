@@ -15,15 +15,15 @@ import OpticalWheel from '@/components/optical-wheel';
 // --- PRIMARY LAYOUT HERO (Locked) ---
 function PrimaryHero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 min-h-[90vh] flex items-center" style={{background:'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 30%, #C4B5FD 60%, #A78BFA 100%)',color:'#1e1b4b'}}>
+    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 min-h-[90vh] flex items-center" style={{ background: 'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 30%, #C4B5FD 60%, #A78BFA 100%)', color: '#1e1b4b' }}>
       <GhostFibers lineColor="#8345bd" glowColor="#7c41e0" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={4} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={7} twistSpeed={1.5} lineFrequency={10} lineSpacing={1.0} lineSharpness={13} glowFalloff={7} glowIntensity={2.5} brightness={3.0} blueBoost={1.5} vignette={0.5} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
       {/* Scattered star particles ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â like ZenAuraa reference */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
         {[
-          [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
-          [82,15],[88,60],[93,35],[5,48],[18,78],[35,5],[50,68],[65,92],[80,30],[95,80],
-          [12,25],[28,50],[42,75],[58,12],[72,55],[85,88],[3,70],[20,95],[48,35],[78,8],
-          [91,50],[25,15],[55,85],[70,22],[40,60],[10,90],[62,40],[87,68],[33,30],[16,55],
+          [8, 12], [15, 65], [22, 38], [30, 82], [38, 18], [45, 55], [52, 90], [60, 28], [68, 72], [75, 45],
+          [82, 15], [88, 60], [93, 35], [5, 48], [18, 78], [35, 5], [50, 68], [65, 92], [80, 30], [95, 80],
+          [12, 25], [28, 50], [42, 75], [58, 12], [72, 55], [85, 88], [3, 70], [20, 95], [48, 35], [78, 8],
+          [91, 50], [25, 15], [55, 85], [70, 22], [40, 60], [10, 90], [62, 40], [87, 68], [33, 30], [16, 55],
         ].map(([x, y], i) => (
           <circle
             key={i}
@@ -42,22 +42,27 @@ function PrimaryHero() {
       </div>
 
       {/* Meditation image with gradient fade - blends into hero background */}
-        <div className="absolute right-0 top-[-10%] bottom-[-10%] w-[100%] md:w-[80%] lg:w-[75%] pointer-events-none" style={{zIndex:5}}>
-          <div className="absolute inset-0" style={{
-            backgroundImage: "url('/final_ensights/meditation.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "right center",
-            WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 85% 50%, black 25%, rgba(0,0,0,0.6) 55%, transparent 80%)",
-            maskImage: "radial-gradient(ellipse 70% 60% at 85% 50%, black 25%, rgba(0,0,0,0.6) 55%, transparent 80%)",
-            WebkitMaskRepeat: "no-repeat",
-            maskRepeat: "no-repeat"
-          }} />
-        </div>
+      <div className="absolute right-0 top-[-10%] bottom-[-10%] w-[100%] md:w-[80%] lg:w-[75%] pointer-events-none" style={{ zIndex: 5 }}>
+        <div className="absolute inset-0" style={{
+          backgroundImage: "url('/final_ensights/meditation.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "right center",
+          WebkitMaskImage: "radial-gradient(ellipse 65% 65% at 78% 50%, black 15%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.4) 60%, transparent 90%)",
+          maskImage: "radial-gradient(ellipse 65% 65% at 78% 50%, black 15%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.4) 60%, transparent 90%)",
+          WebkitMaskRepeat: "no-repeat",
+          maskRepeat: "no-repeat"
+        }} />
+        {/* Extra soft glow layer to help the edge tonally match the purple bg */}
+        <div className="absolute inset-0" style={{
+          background: "radial-gradient(ellipse 70% 70% at 78% 50%, transparent 50%, rgba(167,139,250,0.35) 75%, rgba(167,139,250,0.6) 100%)",
+          mixBlendMode: "normal"
+        }} />
+      </div>
 
-        <div className="container mx-auto px-6 relative z-10 pointer-events-none">
+      <div className="container mx-auto px-6 relative z-10 pointer-events-none">
         <div className="max-w-3xl pointer-events-auto">
-          
-          
+
+
           {/* Action Buttons */}
           <div className="flex items-center gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-100">
             <Link href="/login" className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary text-sm font-medium transition-all">
@@ -75,7 +80,7 @@ function PrimaryHero() {
             <span className="text-primary">Auraa.</span>
           </h1>
           <p className="text-xl lg:text-2xl text-white/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
-            Find trusted guidance for every stage of life.<br/>Connect with verified experts instantly.
+            Find trusted guidance for every stage of life.<br />Connect with verified experts instantly.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-in slide-in-from-left duration-1000 delay-300 pointer-events-auto">
             <Link href="/practitioners">
@@ -89,11 +94,11 @@ function PrimaryHero() {
               </Button>
             </Link>
           </div>
-          
+
           {/* Subtle Trust Indicators */}
           <div className="flex items-center gap-6 animate-in fade-in duration-1000 delay-500 pt-2">
             <div className="flex flex-col mr-2">
-              <span className="text-2xl font-serif text-white font-bold flex items-center">4.9<Star className="w-5 h-5 ml-1 fill-primary text-primary"/></span>
+              <span className="text-2xl font-serif text-white font-bold flex items-center">4.9<Star className="w-5 h-5 ml-1 fill-primary text-primary" /></span>
               <span className="text-[10px] text-white/70 uppercase tracking-widest font-semibold mt-1">Rating</span>
             </div>
             <div className="flex flex-col mr-2">
@@ -118,15 +123,15 @@ function PrimaryHero() {
 // --- NEW LAYOUT 1 HERO ---
 function NewLayout1Hero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 min-h-[90vh] flex items-center" style={{background:'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 30%, #C4B5FD 60%, #A78BFA 100%)',color:'#1e1b4b'}}>
-      
+    <section className="relative overflow-hidden pt-28 pb-16 lg:pt-40 lg:pb-32 min-h-[90vh] flex items-center" style={{ background: 'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 30%, #C4B5FD 60%, #A78BFA 100%)', color: '#1e1b4b' }}>
+
       {/* Scattered star particles ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â like ZenAuraa reference */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
         {[
-          [8,12],[15,65],[22,38],[30,82],[38,18],[45,55],[52,90],[60,28],[68,72],[75,45],
-          [82,15],[88,60],[93,35],[5,48],[18,78],[35,5],[50,68],[65,92],[80,30],[95,80],
-          [12,25],[28,50],[42,75],[58,12],[72,55],[85,88],[3,70],[20,95],[48,35],[78,8],
-          [91,50],[25,15],[55,85],[70,22],[40,60],[10,90],[62,40],[87,68],[33,30],[16,55],
+          [8, 12], [15, 65], [22, 38], [30, 82], [38, 18], [45, 55], [52, 90], [60, 28], [68, 72], [75, 45],
+          [82, 15], [88, 60], [93, 35], [5, 48], [18, 78], [35, 5], [50, 68], [65, 92], [80, 30], [95, 80],
+          [12, 25], [28, 50], [42, 75], [58, 12], [72, 55], [85, 88], [3, 70], [20, 95], [48, 35], [78, 8],
+          [91, 50], [25, 15], [55, 85], [70, 22], [40, 60], [10, 90], [62, 40], [87, 68], [33, 30], [16, 55],
         ].map(([x, y], i) => (
           <circle
             key={i}
@@ -147,8 +152,8 @@ function NewLayout1Hero() {
 
       <div className="container mx-auto px-6 relative z-10 pointer-events-none">
         <div className="max-w-3xl pointer-events-auto">
-          
-          
+
+
           {/* Action Buttons */}
           <div className="flex items-center gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-100">
             <Link href="/login" className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary text-sm font-medium transition-all">
@@ -166,7 +171,7 @@ function NewLayout1Hero() {
             <span className="text-primary">Auraa.</span>
           </h1>
           <p className="text-xl lg:text-2xl text-white/80 mb-10 max-w-xl animate-in slide-in-from-left duration-1000 delay-150 font-sans font-light leading-relaxed">
-            Find trusted guidance for every stage of life.<br/>Connect with verified experts instantly.
+            Find trusted guidance for every stage of life.<br />Connect with verified experts instantly.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-in slide-in-from-left duration-1000 delay-300 pointer-events-auto">
             <Link href="/practitioners">
@@ -180,11 +185,11 @@ function NewLayout1Hero() {
               </Button>
             </Link>
           </div>
-          
+
           {/* Subtle Trust Indicators */}
           <div className="flex items-center gap-6 animate-in fade-in duration-1000 delay-500 pt-2">
             <div className="flex flex-col mr-2">
-              <span className="text-2xl font-serif text-white font-bold flex items-center">4.9<Star className="w-5 h-5 ml-1 fill-primary text-primary"/></span>
+              <span className="text-2xl font-serif text-white font-bold flex items-center">4.9<Star className="w-5 h-5 ml-1 fill-primary text-primary" /></span>
               <span className="text-[10px] text-white/70 uppercase tracking-widest font-semibold mt-1">Rating</span>
             </div>
             <div className="flex flex-col mr-2">
@@ -220,20 +225,20 @@ function EditorialHero() {
             <p className="text-lg md:text-2xl text-white/70 mb-10 max-w-2xl font-light leading-relaxed">
               Connect with trusted holistic health, astrological and wellness practitioners from around the worldÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Âall in one place.
             </p>
-            
+
             {/* Search Bar matching Zen Align reference */}
             <div className="flex items-center bg-card rounded-full p-2 max-w-xl shadow-lg border border-primary/10">
               <Search className="w-5 h-5 text-white/70 ml-4 mr-2" />
-              <input 
-                type="text" 
-                placeholder="Search by specialty, service or name" 
+              <input
+                type="text"
+                placeholder="Search by specialty, service or name"
                 className="flex-1 bg-transparent border-none focus:outline-none text-white placeholder:text-white/70"
               />
               <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 h-12 font-medium">
                 Search
               </Button>
             </div>
-            
+
             <div className="flex items-center gap-3 mt-6 text-sm text-white/70">
               <span className="font-medium text-white/80">Popular:</span>
               <span className="px-3 py-1 rounded-full bg-primary/10 text-primary">Astrologers</span>
@@ -241,18 +246,18 @@ function EditorialHero() {
               <span className="px-3 py-1 rounded-full bg-primary/10 text-primary">Yoga</span>
             </div>
           </div>
-          
+
           <div className="lg:col-span-5 relative">
             <div className="aspect-[4/5] rounded-t-full rounded-b-full overflow-hidden relative border-8 border-background shadow-2xl">
-              <Image 
-                src="https://images.unsplash.com/photo-1545389336-cf090694435e?auto=format&fit=crop&q=80" 
-                alt="Meditation and Wellness" 
-                fill 
+              <Image
+                src="https://images.unsplash.com/photo-1545389336-cf090694435e?auto=format&fit=crop&q=80"
+                alt="Meditation and Wellness"
+                fill
                 className="object-cover object-center"
               />
               <div className="absolute inset-0 bg-primary/20 mix-blend-overlay" />
             </div>
-            
+
             {/* Editorial Floating Modality Badge */}
             <div className="absolute top-12 -left-12 bg-card p-4 rounded-2xl shadow-xl border border-primary/10 flex items-center gap-4">
               <div className="w-12 h-12 bg-primary/10 text-primary flex items-center justify-center rounded-xl">
@@ -278,7 +283,7 @@ function OrganicHero() {
       <svg className="absolute bottom-0 left-0 w-full h-1/2 text-primary/10 opacity-50 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
         <path d="M0,100 Q50,0 100,100 Z" fill="currentColor" />
       </svg>
-      
+
       <div className="container mx-auto px-6 relative z-10 text-center mt-12 pointer-events-none">
         <div className="pointer-events-auto">
           <div className="flex justify-center mb-8">
@@ -287,16 +292,16 @@ function OrganicHero() {
             </div>
           </div>
         </div>
-        
+
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-medium tracking-tight leading-tight mb-8 text-white max-w-5xl mx-auto pointer-events-auto">
           Heal your mind, body <br />
           <span className="text-primary italic">& energy.</span>
         </h1>
-        
+
         <p className="text-xl text-white/80 mb-12 max-w-2xl mx-auto font-light pointer-events-auto">
           Join a global community dedicated to healing, growth and transformation. Find your perfect practitioner today.
         </p>
-        
+
         <div className="pointer-events-auto">
           <Link href="/practitioners">
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 h-14 text-lg rounded-full font-medium transition-all shadow-xl shadow-primary/20">
@@ -329,10 +334,10 @@ function MinimalistHero() {
             </Link>
           </div>
           <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
-            <Image 
-              src="https://images.unsplash.com/photo-1515023677547-593d7638cbd6?auto=format&fit=crop&q=80" 
-              alt="Healing Crystals" 
-              fill 
+            <Image
+              src="https://images.unsplash.com/photo-1515023677547-593d7638cbd6?auto=format&fit=crop&q=80"
+              alt="Healing Crystals"
+              fill
               className="object-cover hover:scale-105 transition-transform duration-1000"
             />
             <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
@@ -349,15 +354,15 @@ function ModernGlowHero() {
     <section className="relative overflow-hidden pt-32 pb-32 bg-card min-h-[90vh] flex items-center border-b border-border">
       {/* Background Image instead of neon glow */}
       <div className="absolute inset-0 z-0">
-        <Image 
-          src="https://images.unsplash.com/photo-1632516482181-427c3f3ab654?auto=format&fit=crop&q=80" 
-          alt="Tarot and Mystic Aesthetic" 
-          fill 
+        <Image
+          src="https://images.unsplash.com/photo-1632516482181-427c3f3ab654?auto=format&fit=crop&q=80"
+          alt="Tarot and Mystic Aesthetic"
+          fill
           className="object-cover opacity-20"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
       </div>
-      
+
       <div className="container mx-auto px-6 relative z-10 text-center">
         <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary/20 bg-transparent/50 backdrop-blur-md text-primary mb-8 shadow-sm">
           <Sparkles className="w-4 h-4" />
@@ -596,30 +601,30 @@ function ZenAlignHero() {
 
             {/* Wheel Container */}
             <div className="relative w-[95%] max-w-[700px] aspect-square flex items-center justify-center rounded-full z-10">
-              
+
               {/* Outer Dashed Ring 1 */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 90, ease: 'linear' }}
                 className="absolute w-full h-full rounded-full border border-dashed border-[#1A92C6]/30"
               />
-              
+
               {/* Solid Ring 2 with Nodes */}
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ repeat: Infinity, duration: 110, ease: 'linear' }}
                 className="absolute w-[82%] h-[82%] rounded-full border border-[#1A92C6]/25"
               >
-                 {/* Zodiac Nodes (CSS positioned around circle) */}
-                 {[...Array(8)].map((_, i) => (
-                    <div key={i} className="absolute inset-0 flex justify-center"
-                         style={{ transform: `rotate(${i * 45}deg)` }}>
-                       <div className="flex flex-col items-center -mt-2">
-                         <div className="w-2 h-2 bg-[#1A92C6] rounded-full shadow-[0_0_10px_#1A92C6]" />
-                         <div className="w-[1px] h-4 bg-[#1A92C6]/50 mt-1" />
-                       </div>
+                {/* Zodiac Nodes (CSS positioned around circle) */}
+                {[...Array(8)].map((_, i) => (
+                  <div key={i} className="absolute inset-0 flex justify-center"
+                    style={{ transform: `rotate(${i * 45}deg)` }}>
+                    <div className="flex flex-col items-center -mt-2">
+                      <div className="w-2 h-2 bg-[#1A92C6] rounded-full shadow-[0_0_10px_#1A92C6]" />
+                      <div className="w-[1px] h-4 bg-[#1A92C6]/50 mt-1" />
                     </div>
-                 ))}
+                  </div>
+                ))}
               </motion.div>
 
               {/* Inner Dashed Ring 3 */}
@@ -631,20 +636,20 @@ function ZenAlignHero() {
               />
 
               {/* Central Glowing Orb & Logo */}
-              <motion.div 
+              <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
                 className="absolute w-[42%] h-[42%] rounded-full flex items-center justify-center z-20"
               >
-                 {/* Main Logo */}
-                 <div className="relative w-full h-full z-10">
-                   <Image
-                     src="/new_center_logo.png"
-                     alt="ZenAuraa Logo"
-                     fill
-                     className="object-contain drop-shadow-[0_10px_30px_rgba(26,146,198,0.4)]"
-                   />
-                 </div>
+                {/* Main Logo */}
+                <div className="relative w-full h-full z-10">
+                  <Image
+                    src="/new_center_logo.png"
+                    alt="ZenAuraa Logo"
+                    fill
+                    className="object-contain drop-shadow-[0_10px_30px_rgba(26,146,198,0.4)]"
+                  />
+                </div>
               </motion.div>
 
             </div>
@@ -684,14 +689,14 @@ function Layout2Hero() {
   const yImage = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const yFloating1 = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
   const yFloating2 = useTransform(scrollYProgress, [0, 1], ["0%", "60%"]);
-  
+
   return (
-    <section 
+    <section
       ref={containerRef}
       className="relative pt-32 pb-40 lg:pb-56 bg-transparent min-h-[110vh] flex flex-col items-center justify-center border-b border-border/50 overflow-hidden"
     >
       {/* Massive Background Parallax Text */}
-      <motion.div 
+      <motion.div
         style={{ y: yText }}
         className="absolute top-20 left-1/2 -translate-x-1/2 w-full text-center z-0 pointer-events-none select-none opacity-10 mix-blend-overlay"
       >
@@ -705,10 +710,10 @@ function Layout2Hero() {
       <motion.div style={{ y: yBg }} className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(32,166,220,0.15)_0%,transparent_70%)] rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-20 mt-12 lg:mt-24">
-        
+
         {/* Asymmetrical Grid Layout */}
         <div className="grid lg:grid-cols-12 gap-8 items-center relative">
-          
+
           {/* Main Masterpiece Image (Centered / Right Bias) */}
           <motion.div
             style={{ y: yImage }}
@@ -719,15 +724,15 @@ function Layout2Hero() {
           >
             {/* Subtle glow behind image */}
             <div className="absolute inset-0 bg-primary/30 rounded-full blur-[120px] -z-10 animate-[pulse_4s_ease-in-out_infinite]" />
-            
-            <motion.div 
+
+            <motion.div
               animate={{ y: [0, -15, 0], rotate: [0, 1, 0] }}
               transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
               className="relative w-full max-w-[500px] lg:max-w-[750px] aspect-[4/5] z-10"
             >
-              <img 
-                src="/zodiac-masterpiece.png" 
-                alt="ZenAuraa Masterpiece" 
+              <img
+                src="/zodiac-masterpiece.png"
+                alt="ZenAuraa Masterpiece"
                 className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(26,146,198,0.3)] hover:scale-105 transition-transform duration-700 ease-out"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
@@ -737,7 +742,7 @@ function Layout2Hero() {
             </motion.div>
 
             {/* Floating Real-Life Glassmorphism Cards */}
-            <motion.div 
+            <motion.div
               style={{ y: yFloating1 }}
               className="absolute top-10 -left-10 lg:-left-20 w-48 h-64 rounded-3xl overflow-hidden border border-white/20 shadow-2xl backdrop-blur-xl bg-white/10 z-20 hidden md:block"
             >
@@ -747,7 +752,7 @@ function Layout2Hero() {
               </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               style={{ y: yFloating2 }}
               className="absolute bottom-20 -right-4 lg:-right-12 w-40 h-40 rounded-full overflow-hidden border border-white/20 shadow-2xl backdrop-blur-xl bg-white/10 z-20 hidden md:block"
             >
@@ -756,7 +761,7 @@ function Layout2Hero() {
           </motion.div>
 
           {/* Overlapping Typography (Left Bias) */}
-          <motion.div 
+          <motion.div
             className="lg:col-span-6 lg:col-start-1 lg:row-start-1 flex flex-col items-start text-left z-30 pt-12 lg:pt-0 pointer-events-none"
           >
             <motion.div
@@ -774,8 +779,8 @@ function Layout2Hero() {
                 <span className="text-primary font-serif font-medium">ZenAuraa.</span>
               </h1>
             </motion.div>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -785,7 +790,7 @@ function Layout2Hero() {
             </motion.p>
 
             {/* Glassmorphism Search Bar */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -793,9 +798,9 @@ function Layout2Hero() {
             >
               <div className="flex items-center bg-white/40 backdrop-blur-2xl rounded-full p-2.5 w-full shadow-[0_8px_32px_rgba(0,0,0,0.05)] border border-white/60 transition-transform duration-500 hover:shadow-[0_12px_48px_rgba(26,146,198,0.15)] hover:scale-[1.02]">
                 <Search className="w-5 h-5 text-primary ml-5 mr-3" />
-                <input 
-                  type="text" 
-                  placeholder="Find your spiritual guide..." 
+                <input
+                  type="text"
+                  placeholder="Find your spiritual guide..."
                   className="flex-1 bg-transparent border-none focus:outline-none text-white placeholder:text-white/50 font-sans font-medium text-lg placeholder:font-light"
                 />
                 <Button className="bg-primary hover:bg-primary-dark text-white rounded-full px-8 h-12 lg:h-14 font-bold font-sans transition-all text-base shadow-md">
@@ -808,7 +813,7 @@ function Layout2Hero() {
       </div>
 
       {/* Scroll Down Indicator */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
@@ -834,9 +839,9 @@ function FinalHybridHero() {
   const isNewColor = theme === 'theme-new-color';
 
   const yImage = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  
+
   return (
-    <section 
+    <section
       ref={containerRef}
       className={`relative pt-32 pb-24 lg:pt-48 lg:pb-32 transition-colors duration-500 min-h-[95vh] flex items-center justify-center overflow-hidden ${isNewColor ? 'bg-stats-gradient' : 'bg-transparent'}`}
     >
@@ -862,9 +867,9 @@ function FinalHybridHero() {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
+
           {/* LEFT: Typography & CTA */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
@@ -894,7 +899,7 @@ function FinalHybridHero() {
             </div>
 
             {/* Typography from very old layout */}
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -904,103 +909,103 @@ function FinalHybridHero() {
             </motion.h1>
 
             {/* Star particles */}
-          <motion.div
-            style={{ y: yImage }}
-            initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
-            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-            className="flex lg:hidden relative w-full items-center justify-center z-0 my-8 overflow-visible"
-          >
-            {/* Lavender glow */}
-            <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[50%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)]'}`} />
+            <motion.div
+              style={{ y: yImage }}
+              initial={{ opacity: 0, scale: 0.85, filter: 'blur(30px)' }}
+              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+              className="flex lg:hidden relative w-full items-center justify-center z-0 my-8 overflow-visible"
+            >
+              {/* Lavender glow */}
+              <div className={`absolute top-1/2 lg:right-0 lg:translate-x-[50%] -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl z-0 ${isNewColor ? 'bg-hero-glow' : 'bg-[radial-gradient(circle,rgba(183,154,230,0.15)_0%,rgba(105,64,145,0.25)_50%,transparent_70%)]'}`} />
 
-            {/* Star particles */}
-            <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[75%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[400px] h-[400px] sm:w-[450px] sm:h-[450px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]' : 'w-[450px] h-[450px] sm:w-[500px] sm:h-[500px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]'}`}>
-              
-              {/* Outer Dashed Ring */}
-              <div className={`absolute w-[95%] h-[95%] rounded-full border border-dashed pointer-events-none ${isNewColor ? 'border-white/40' : 'border-[#B79AE6]/30'}`} />
-              
-              {/* Inner Thin Ring */}
-              <div className={`absolute w-[75%] h-[75%] rounded-full border pointer-events-none ${isNewColor ? 'border-white/20' : 'border-[#B79AE6]/20'}`} />
+              {/* Star particles */}
+              <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[75%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[400px] h-[400px] sm:w-[450px] sm:h-[450px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]' : 'w-[450px] h-[450px] sm:w-[500px] sm:h-[500px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]'}`}>
 
-              {/* THE REVOLVING ORBIT ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the whole ring spins, icons counter-rotate to stay upright */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
-                className="absolute w-[95%] h-[95%] rounded-full transition-colors duration-500 pointer-events-none"
-              >
-                {[
-                  { img: '/final_ensights/astrology.png',       label: 'Astrology',     id: 'astrology' },
-                  { img: '/final_ensights/tarot.png',            label: 'Tarot',         id: 'tarot' },
-                  { img: '/12-modalities-updates/facereading.png',      label: 'Face Reading',  id: 'face-reading' },
-                  { img: '/12-modalities-updates/plamreading.png',      label: 'Palm Reading',  id: 'palm-reading' },
-                  { img: '/final_ensights/sound-healing.png',            label: 'Sound Healing', id: 'sound-healing' },
-                  { img: '/12-modalities-updates/meditation.png',       label: 'Meditation',    id: 'meditation' },
-                  { img: '/final_ensights/spiritual-guidance.png',        label: 'Spiritual',     id: 'spiritual' },
-                  { img: '/12-modalities-updates/chakrahealing.png',    label: 'Chakra',        id: 'chakra-healing' },
-                  { img: '/final_ensights/breathwork.png',       label: 'Breathwork',    id: 'breathwork' },
-                  { img: '/12-modalities-updates/dream_prediction.png', label: 'Dreams',        id: 'dreams' },
-                  { img: '/12-modalities-updates/space_harmony.png',    label: 'Space Harmony', id: 'space-harmony' },
-                  { img: '/final_ensights/numerology.png',       label: 'Numerology',    id: 'numerology' },
-                ].map((mod, i, arr) => {
-                  const angle = (i * 360) / arr.length;
-                  return (
-                    <motion.div
-                      key={i}
-                      className="absolute inset-0 flex justify-center items-start origin-center pointer-events-none"
-                      initial={{ rotate: angle }}
-                    >
-                      {/* Counter-rotate the icon so it always faces upright */}
-                      <motion.div
-                        initial={{ rotate: -angle }}
-                        animate={{ rotate: -(360 + angle) }}
-                        transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
-                        className="flex flex-col items-center -mt-8 md:-mt-10 group cursor-pointer pointer-events-auto"
-                      >
-                        <Link href={`/modalities/${mod.id}`} className="w-16 h-16 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-transparent p-1 transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)] relative overflow-hidden">
-                          <img src={mod.img} alt={mod.label} className={`w-full h-full object-contain group-hover:brightness-125 transition-all ${isNewColor ? 'invert brightness-0' : ''}`} style={isNewColor ? { filter: 'brightness(0) invert(1)' } : {}} />
-                        </Link>
-                        <span className={`text-[14px] md:text-[16px] font-bold mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-white'}`}>{mod.label}</span>
-                      </motion.div>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
+                {/* Outer Dashed Ring */}
+                <div className={`absolute w-[95%] h-[95%] rounded-full border border-dashed pointer-events-none ${isNewColor ? 'border-white/40' : 'border-[#B79AE6]/30'}`} />
 
-              {/* Central Logo Area */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-                className="absolute w-[28%] h-[28%] rounded-full flex items-center justify-center z-20 pointer-events-auto"
-              >
-                {/* Geometric Star Pattern Behind Logo */}
-                <motion.div 
+                {/* Inner Thin Ring */}
+                <div className={`absolute w-[75%] h-[75%] rounded-full border pointer-events-none ${isNewColor ? 'border-white/20' : 'border-[#B79AE6]/20'}`} />
+
+                {/* THE REVOLVING ORBIT ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the whole ring spins, icons counter-rotate to stay upright */}
+                <motion.div
                   animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: 120, ease: 'linear' }}
-                  className="absolute inset-0 w-full h-full"
+                  transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
+                  className="absolute w-[95%] h-[95%] rounded-full transition-colors duration-500 pointer-events-none"
                 >
-                  <div className={`absolute inset-0 w-full h-full border rotate-0 rounded-sm ${isNewColor ? 'border-white/30' : 'border-primary/30'}`} />
-                  <div className={`absolute inset-0 w-full h-full border rotate-[30deg] rounded-sm ${isNewColor ? 'border-white/30' : 'border-primary/30'}`} />
-                  <div className={`absolute inset-0 w-full h-full border rotate-[60deg] rounded-sm ${isNewColor ? 'border-white/30' : 'border-primary/30'}`} />
+                  {[
+                    { img: '/final_ensights/astrology.png', label: 'Astrology', id: 'astrology' },
+                    { img: '/final_ensights/tarot.png', label: 'Tarot', id: 'tarot' },
+                    { img: '/12-modalities-updates/facereading.png', label: 'Face Reading', id: 'face-reading' },
+                    { img: '/12-modalities-updates/plamreading.png', label: 'Palm Reading', id: 'palm-reading' },
+                    { img: '/final_ensights/sound-healing.png', label: 'Sound Healing', id: 'sound-healing' },
+                    { img: '/12-modalities-updates/meditation.png', label: 'Meditation', id: 'meditation' },
+                    { img: '/final_ensights/spiritual-guidance.png', label: 'Spiritual', id: 'spiritual' },
+                    { img: '/12-modalities-updates/chakrahealing.png', label: 'Chakra', id: 'chakra-healing' },
+                    { img: '/final_ensights/breathwork.png', label: 'Breathwork', id: 'breathwork' },
+                    { img: '/12-modalities-updates/dream_prediction.png', label: 'Dreams', id: 'dreams' },
+                    { img: '/12-modalities-updates/space_harmony.png', label: 'Space Harmony', id: 'space-harmony' },
+                    { img: '/final_ensights/numerology.png', label: 'Numerology', id: 'numerology' },
+                  ].map((mod, i, arr) => {
+                    const angle = (i * 360) / arr.length;
+                    return (
+                      <motion.div
+                        key={i}
+                        className="absolute inset-0 flex justify-center items-start origin-center pointer-events-none"
+                        initial={{ rotate: angle }}
+                      >
+                        {/* Counter-rotate the icon so it always faces upright */}
+                        <motion.div
+                          initial={{ rotate: -angle }}
+                          animate={{ rotate: -(360 + angle) }}
+                          transition={{ repeat: Infinity, duration: 80, ease: 'linear' }}
+                          className="flex flex-col items-center -mt-8 md:-mt-10 group cursor-pointer pointer-events-auto"
+                        >
+                          <Link href={`/modalities/${mod.id}`} className="w-16 h-16 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-transparent p-1 transition-all duration-500 hover:scale-110 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)] hover:drop-shadow-[0_0_25px_rgba(var(--primary),0.8)] relative overflow-hidden">
+                            <img src={mod.img} alt={mod.label} className={`w-full h-full object-contain group-hover:brightness-125 transition-all ${isNewColor ? 'invert brightness-0' : ''}`} style={isNewColor ? { filter: 'brightness(0) invert(1)' } : {}} />
+                          </Link>
+                          <span className={`text-[14px] md:text-[16px] font-bold mt-3 tracking-wide whitespace-nowrap drop-shadow-md transition-colors duration-500 ${isNewColor ? 'text-white' : 'text-white'}`}>{mod.label}</span>
+                        </motion.div>
+                      </motion.div>
+                    );
+                  })}
                 </motion.div>
 
-                {/* Glowing Aura without Black Ring */}
-                <div className="absolute w-[80%] h-[80%] rounded-full flex items-center justify-center">
-                  
-                  {/* The Logo */}
-                  <div className="relative w-full h-full z-10 flex items-center justify-center">
-                    <Image
-                      src={currentLogo}
-                      alt="ZenAuraa Logo"
-                      fill
-                      className="object-contain drop-shadow-[0_10px_20px_rgba(var(--primary),0.6)] hover:scale-105 hover:drop-shadow-[0_15px_30px_rgba(var(--primary),0.8)] transition-all duration-500 cursor-pointer"
-                    />
-                  </div>
-                </div>
-              </motion.div>
+                {/* Central Logo Area */}
+                <motion.div
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+                  className="absolute w-[28%] h-[28%] rounded-full flex items-center justify-center z-20 pointer-events-auto"
+                >
+                  {/* Geometric Star Pattern Behind Logo */}
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ repeat: Infinity, duration: 120, ease: 'linear' }}
+                    className="absolute inset-0 w-full h-full"
+                  >
+                    <div className={`absolute inset-0 w-full h-full border rotate-0 rounded-sm ${isNewColor ? 'border-white/30' : 'border-primary/30'}`} />
+                    <div className={`absolute inset-0 w-full h-full border rotate-[30deg] rounded-sm ${isNewColor ? 'border-white/30' : 'border-primary/30'}`} />
+                    <div className={`absolute inset-0 w-full h-full border rotate-[60deg] rounded-sm ${isNewColor ? 'border-white/30' : 'border-primary/30'}`} />
+                  </motion.div>
 
-            </div>
-          </motion.div>
+                  {/* Glowing Aura without Black Ring */}
+                  <div className="absolute w-[80%] h-[80%] rounded-full flex items-center justify-center">
+
+                    {/* The Logo */}
+                    <div className="relative w-full h-full z-10 flex items-center justify-center">
+                      <Image
+                        src={currentLogo}
+                        alt="ZenAuraa Logo"
+                        fill
+                        className="object-contain drop-shadow-[0_10px_20px_rgba(var(--primary),0.6)] hover:scale-105 hover:drop-shadow-[0_15px_30px_rgba(var(--primary),0.8)] transition-all duration-500 cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+
+              </div>
+            </motion.div>
 
 
             {/* Stats row from screenshot 2 */}
@@ -1045,10 +1050,10 @@ function FinalHybridHero() {
 
             {/* Star particles */}
             <div className={`relative lg:absolute left-1/2 -translate-x-1/2 lg:left-auto lg:top-1/2 lg:right-0 translate-y-[20%] lg:-translate-y-1/2 lg:translate-x-[75%] flex items-center justify-center rounded-full z-10 pointer-events-none mb-8 lg:mb-0 ${isNewColor ? 'w-[400px] h-[400px] sm:w-[450px] sm:h-[450px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]' : 'w-[450px] h-[450px] sm:w-[500px] sm:h-[500px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px]'}`}>
-              
+
               {/* Outer Dashed Ring */}
               <div className={`absolute w-[95%] h-[95%] rounded-full border border-dashed pointer-events-none ${isNewColor ? 'border-white/40' : 'border-[#B79AE6]/30'}`} />
-              
+
               {/* Inner Thin Ring */}
               <div className={`absolute w-[75%] h-[75%] rounded-full border pointer-events-none ${isNewColor ? 'border-white/20' : 'border-[#B79AE6]/20'}`} />
 
@@ -1059,18 +1064,18 @@ function FinalHybridHero() {
                 className="absolute w-[95%] h-[95%] rounded-full transition-colors duration-500 pointer-events-none"
               >
                 {[
-                  { img: '/final_ensights/astrology.png',       label: 'Astrology',     id: 'astrology' },
-                  { img: '/final_ensights/tarot.png',            label: 'Tarot',         id: 'tarot' },
-                  { img: '/12-modalities-updates/facereading.png',      label: 'Face Reading',  id: 'face-reading' },
-                  { img: '/12-modalities-updates/plamreading.png',      label: 'Palm Reading',  id: 'palm-reading' },
-                  { img: '/final_ensights/sound-healing.png',            label: 'Sound Healing', id: 'sound-healing' },
-                  { img: '/12-modalities-updates/meditation.png',       label: 'Meditation',    id: 'meditation' },
-                  { img: '/final_ensights/spiritual-guidance.png',        label: 'Spiritual',     id: 'spiritual' },
-                  { img: '/12-modalities-updates/chakrahealing.png',    label: 'Chakra',        id: 'chakra-healing' },
-                  { img: '/final_ensights/breathwork.png',       label: 'Breathwork',    id: 'breathwork' },
-                  { img: '/12-modalities-updates/dream_prediction.png', label: 'Dreams',        id: 'dreams' },
-                  { img: '/12-modalities-updates/space_harmony.png',    label: 'Space Harmony', id: 'space-harmony' },
-                  { img: '/final_ensights/numerology.png',       label: 'Numerology',    id: 'numerology' },
+                  { img: '/final_ensights/astrology.png', label: 'Astrology', id: 'astrology' },
+                  { img: '/final_ensights/tarot.png', label: 'Tarot', id: 'tarot' },
+                  { img: '/12-modalities-updates/facereading.png', label: 'Face Reading', id: 'face-reading' },
+                  { img: '/12-modalities-updates/plamreading.png', label: 'Palm Reading', id: 'palm-reading' },
+                  { img: '/final_ensights/sound-healing.png', label: 'Sound Healing', id: 'sound-healing' },
+                  { img: '/12-modalities-updates/meditation.png', label: 'Meditation', id: 'meditation' },
+                  { img: '/final_ensights/spiritual-guidance.png', label: 'Spiritual', id: 'spiritual' },
+                  { img: '/12-modalities-updates/chakrahealing.png', label: 'Chakra', id: 'chakra-healing' },
+                  { img: '/final_ensights/breathwork.png', label: 'Breathwork', id: 'breathwork' },
+                  { img: '/12-modalities-updates/dream_prediction.png', label: 'Dreams', id: 'dreams' },
+                  { img: '/12-modalities-updates/space_harmony.png', label: 'Space Harmony', id: 'space-harmony' },
+                  { img: '/final_ensights/numerology.png', label: 'Numerology', id: 'numerology' },
                 ].map((mod, i, arr) => {
                   const angle = (i * 360) / arr.length;
                   return (
@@ -1103,7 +1108,7 @@ function FinalHybridHero() {
                 className="absolute w-[28%] h-[28%] rounded-full flex items-center justify-center z-20 pointer-events-auto"
               >
                 {/* Geometric Star Pattern Behind Logo */}
-                <motion.div 
+                <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ repeat: Infinity, duration: 120, ease: 'linear' }}
                   className="absolute inset-0 w-full h-full"
@@ -1115,7 +1120,7 @@ function FinalHybridHero() {
 
                 {/* Glowing Aura without Black Ring */}
                 <div className="absolute w-[80%] h-[80%] rounded-full flex items-center justify-center">
-                  
+
                   {/* The Logo */}
                   <div className="relative w-full h-full z-10 flex items-center justify-center">
                     <Image
@@ -1139,7 +1144,7 @@ function FinalHybridHero() {
 // --- MAIN EXPORT ---
 export default function Hero() {
   const { layout } = useLayout();
-  
+
   if (layout === 'final-hybrid') return <PrimaryHero />;
   if (layout.startsWith('layout-')) return <NewLayoutsHero />;
   if (layout === 'layout-2') return <Layout2Hero />;
