@@ -165,7 +165,7 @@ export default function LightParticles() {
       {/* Center Logo */}
       <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
         <img 
-          src="/main centre logo/new.png" 
+          src="/main/new.png" 
           alt="ZenAuraa" 
           className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] translate-y-32"
           style={{

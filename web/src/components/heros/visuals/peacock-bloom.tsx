@@ -89,7 +89,7 @@ export default function PeacockBloom() {
           <div className="relative w-full h-full flex items-end justify-center">
             {/* Base Girl Image */}
             <img 
-              src="/main centre logo/new.png" 
+              src="/main/new.png" 
               alt="Meditating Silhouette" 
               className="absolute bottom-0 w-[420px] object-contain"
               style={{

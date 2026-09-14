@@ -108,7 +108,7 @@ export default function AuroraBlob() {
       <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
         <div className="relative w-[300px] h-[450px] flex items-end justify-center pointer-events-none mt-16 group transition-transform duration-700 hover:scale-105">
           <img 
-          src="/main centre logo/new.png" 
+          src="/main/new.png" 
           alt="ZenAuraa" 
           className="absolute w-[750px] h-[750px] max-w-none object-cover scale-[1.0] translate-y-28"
           style={{

@@ -56,9 +56,7 @@ function PrimaryHero() {
           }}
         />
       </div>
-        </div>
-      </div>
-    </section>
+    </section >
   );
 }
 
