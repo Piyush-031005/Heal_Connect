@@ -97,14 +97,14 @@ export default function NewLayoutsHero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-6 animate-in slide-in-from-left duration-1000 delay-200 pointer-events-auto">
-              <button className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#FAD058] hover:bg-[#F0C240] text-[#2A1658] text-sm font-bold transition-all shadow-lg shadow-[#FAD058]/20">
+              <Link href="/practitioners?mode=chat" className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#FAD058] hover:bg-[#F0C240] text-[#2A1658] text-sm font-bold transition-all shadow-lg shadow-[#FAD058]/20">
                 <MessageCircle className="w-4 h-4" />
                 <span>{t.chatBtn}</span>
-              </button>
-              <button className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#FAD058] hover:bg-[#F0C240] text-[#2A1658] text-sm font-bold transition-all shadow-lg shadow-[#FAD058]/20">
+              </Link>
+              <Link href="/practitioners?mode=call" className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#FAD058] hover:bg-[#F0C240] text-[#2A1658] text-sm font-bold transition-all shadow-lg shadow-[#FAD058]/20">
                 <Phone className="w-4 h-4" />
                 <span>{t.callBtn}</span>
-              </button>
+              </Link>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-in slide-in-from-left duration-1000 delay-300 pointer-events-auto">
