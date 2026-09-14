@@ -79,7 +79,7 @@ export default function AuroraBlob() {
 
   return (
     <div className="relative w-[650px] h-[650px] flex items-center justify-center scale-85 lg:scale-100">
-            <style>{
+            <style>{`
         @keyframes custom-spin {
           from { transform: translateY(-32px) rotate(0deg); }
           to { transform: translateY(-32px) rotate(360deg); }
@@ -131,6 +131,7 @@ export default function AuroraBlob() {
     </div>
   );
 }
+
 
 
 
