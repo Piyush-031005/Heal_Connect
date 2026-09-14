@@ -203,7 +203,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
   const avatarSrc = getPractitionerAvatar(p.photoUrl, p.id);
 
   return (
-    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-white/70 backdrop-blur-2xl border border-white/60 hover:border-purple-300 hover:shadow-[0_12px_40px_rgba(124,58,237,0.25)] shadow-[0_4px_20px_rgba(124,58,237,0.12)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
+    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-white/90 backdrop-blur-2xl border-2 border-purple-400 hover:border-purple-500 hover:shadow-[0_12px_40px_rgba(124,58,237,0.25)] shadow-[0_4px_20px_rgba(124,58,237,0.12)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
       <CardContent className="p-0 flex flex-col h-full relative">
         {/* Top strip with avatar */}
         <div className="relative h-20 bg-gradient-to-r from-white/5 to-white/10 shrink-0">
