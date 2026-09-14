@@ -1,7 +1,6 @@
-import { Tabs } from "expo-router";
+﻿import { Tabs } from "expo-router";
 import { View, Platform } from "react-native";
-import { Home, Compass, MessageCircle, User } from "lucide-react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { Home, Compass, User } from "lucide-react-native";
 
 const PURPLE = "#7C3AED";
 const BG = "#F5F3FF";
@@ -58,13 +57,6 @@ export default function TabLayout() {
                   <View style={{ position: "absolute", top: -8, width: 28, height: 3, borderRadius: 2, backgroundColor: PURPLE }} />
                 )}
                 <Compass color={color} size={size} strokeWidth={focused ? 2.5 : 1.8} />
-              </View>
-            ),
-          }}
-        />
-        
-                )}
-                <MessageCircle color={color} size={size} strokeWidth={focused ? 2.5 : 1.8} fill={focused ? PURPLE + "20" : "transparent"} />
               </View>
             ),
           }}
