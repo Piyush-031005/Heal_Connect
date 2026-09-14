@@ -169,24 +169,24 @@ function LoginInner() {
             {mode === 'login' && (
               <form onSubmit={handleLogin} className="space-y-5">
                 <div className="space-y-2">
-                  <Label className="text-white">Email address</Label>
+                  <Label className="text-[#2d1b69]">Email address</Label>
                   <div className="relative group">
                     <Mail className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                     <Input type="email" required placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)}
-                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-[#4c1d95]/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
+                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-[#2d1b69] placeholder:text-[#4c1d95]/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <Label className="text-white">Password</Label>
+                    <Label className="text-[#2d1b69]">Password</Label>
                     <button type="button" onClick={() => { setMode('forgot'); setError(''); setSuccess(''); }} className="text-sm font-semibold text-accent hover:text-accent/80 transition-colors">
                       Forgot password?
                     </button>
                   </div>
                   <div className="relative group">
                     <Lock className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
-                    <Input type={showPassword ? 'text' : 'password'} required placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} className="pl-10 pr-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-white/40 focus-visible:ring-purple-400 focus-visible:border-purple-400 rounded-xl" />
-                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-[#4c1d95]/70 hover:text-white transition-colors">
+                    <Input type={showPassword ? 'text' : 'password'} required placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} className="pl-10 pr-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-[#2d1b69] placeholder:text-[#4c1d95]/70 focus-visible:ring-purple-400 focus-visible:border-purple-400 rounded-xl" />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-[#4c1d95]/70 hover:text-[#2d1b69] transition-colors">
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
                   </div>
@@ -210,7 +210,7 @@ function LoginInner() {
                 <Button type="submit" disabled={loading} className="w-full py-6 rounded-xl bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-bold text-lg shadow-lg transition-all group">
                   {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Send Reset Link'}
                 </Button>
-                <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-[#4c1d95]/70 hover:text-white transition-colors">
+                <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-[#4c1d95]/70 hover:text-[#2d1b69] transition-colors">
                   ← Back to login
                 </button>
               </form>
@@ -219,17 +219,17 @@ function LoginInner() {
             {mode === 'phone' && (
               <form className="space-y-5">
                 <div className="space-y-2">
-                  <Label className="text-white">Phone Number</Label>
+                  <Label className="text-[#2d1b69]">Phone Number</Label>
                   <div className="relative group">
                     <Phone className="absolute left-3 top-3 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                     <Input type="tel" placeholder="+91 98765 43210" 
-                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-white placeholder:text-[#4c1d95]/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
+                      className="pl-10 py-6 bg-white/40 backdrop-blur-sm border-purple-200 text-[#2d1b69] placeholder:text-[#4c1d95]/70 focus-visible:ring-accent focus-visible:border-accent rounded-xl" />
                   </div>
                 </div>
                 <Button type="button" className="w-full py-6 text-base font-bold rounded-xl border-0 shadow-lg transition-all duration-300 bg-[#7C3AED] hover:bg-[#6D28D9] text-white">
                   Send OTP <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-[#4c1d95]/70 hover:text-white transition-colors">
+                <button type="button" onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="w-full text-center text-sm text-[#4c1d95]/70 hover:text-[#2d1b69] transition-colors">
                   ← Back to login
                 </button>
               </form>
@@ -243,11 +243,11 @@ function LoginInner() {
                   <div className="flex-grow border-t border-purple-200" />
                 </div>
                 <div className="space-y-3">
-                  <Button type="button" variant="outline" onClick={() => setMode('phone')} className="w-full py-6 bg-white/40 backdrop-blur-sm border-purple-200 hover:bg-white/40 backdrop-blur-sm border-purple-200 text-white shadow-sm transition-all rounded-xl">
-                    <Phone className="mr-3 h-5 w-5 text-white" />
+                  <Button type="button" variant="outline" onClick={() => setMode('phone')} className="w-full py-6 bg-white/40 backdrop-blur-sm border-purple-200 hover:bg-white/40 backdrop-blur-sm border-purple-200 text-[#2d1b69] shadow-sm transition-all rounded-xl">
+                    <Phone className="mr-3 h-5 w-5 text-[#2d1b69]" />
                     Continue with Phone
                   </Button>
-                  <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full py-6 bg-white/40 backdrop-blur-sm border-purple-200 hover:bg-white/40 backdrop-blur-sm border-purple-200 text-white shadow-sm transition-all rounded-xl">
+                  <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full py-6 bg-white/40 backdrop-blur-sm border-purple-200 hover:bg-white/40 backdrop-blur-sm border-purple-200 text-[#2d1b69] shadow-sm transition-all rounded-xl">
                     <svg className="mr-3 h-5 w-5" viewBox="0 0 24 24">
                       <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                       <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
@@ -256,7 +256,7 @@ function LoginInner() {
                     </svg>
                     Continue with Google
                   </Button>
-                  <Button type="button" variant="outline" onClick={handleAppleSignIn} className="w-full py-6 bg-white/40 backdrop-blur-sm border-purple-200 hover:bg-white/40 backdrop-blur-sm border-purple-200 text-white shadow-sm transition-all rounded-xl">
+                  <Button type="button" variant="outline" onClick={handleAppleSignIn} className="w-full py-6 bg-white/40 backdrop-blur-sm border-purple-200 hover:bg-white/40 backdrop-blur-sm border-purple-200 text-[#2d1b69] shadow-sm transition-all rounded-xl">
                     <svg className="mr-3 h-5 w-5 fill-current" viewBox="0 0 24 24">
                       <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.65.04 2.9.72 3.68 1.9-3.28 1.95-2.73 5.75.52 7.02-.75 1.86-1.74 3.2-2.87 3.99zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.32 2.38-2.07 4.29-3.74 4.25z" />
                     </svg>
@@ -265,7 +265,7 @@ function LoginInner() {
                 </div>
                 <p className="text-center text-sm text-[#4c1d95]/70 pt-4">
                   Don&apos;t have an account?{' '}
-                  <Link href="/signup" className="text-primary font-semibold hover:text-white transition-colors hover:underline">Sign up</Link>
+                  <Link href="/signup" className="text-primary font-semibold hover:text-[#2d1b69] transition-colors hover:underline">Sign up</Link>
                 </p>
               </>
             )}
