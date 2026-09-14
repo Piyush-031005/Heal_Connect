@@ -977,19 +977,22 @@ router.post(
   [body('phone').isMobilePhone('any').withMessage('Valid phone number required')],
   handleValidation,
   async (req: Request, res: Response) => {
-    const { phone } = req.body as { phone: string };
+    const { phone, purpose } = req.body as { phone: string; purpose?: string };
 
     try {
       const user = await prisma.user.findUnique({ where: { phone } });
-      if (!user) {
-        // Return success to prevent phone enumeration
-        res.json({ success: true, message: 'If this number is registered, an OTP has been sent.' });
-        return;
-      }
 
-      if (user.isPhoneVerified) {
-        res.json({ success: true, message: 'Phone already verified.' });
-        return;
+      if (purpose !== 'login') {
+        if (!user) {
+          // Return success to prevent phone enumeration
+          res.json({ success: true, message: 'If this number is registered, an OTP has been sent.' });
+          return;
+        }
+
+        if (user.isPhoneVerified) {
+          res.json({ success: true, message: 'Phone already verified.' });
+          return;
+        }
       }
 
       await sendOtpSms(phone);
@@ -1013,20 +1016,9 @@ router.post(
   ],
   handleValidation,
   async (req: Request, res: Response) => {
-    const { phone, otp } = req.body as { phone: string; otp: string };
+    const { phone, otp, purpose } = req.body as { phone: string; otp: string; purpose?: string };
 
     try {
-      const user = await prisma.user.findUnique({ where: { phone } });
-      if (!user) {
-        res.status(400).json({ success: false, message: 'Invalid phone or OTP.' });
-        return;
-      }
-
-      if (user.isPhoneVerified) {
-        res.json({ success: true, message: 'Phone already verified.' });
-        return;
-      }
-
       const isValid = await verifyOtpSms(phone, otp);
 
       if (!isValid) {
@@ -1034,11 +1026,56 @@ router.post(
         return;
       }
 
-      // Mark phone as verified in DB
-      await prisma.user.update({
-        where: { id: user.id },
-        data: { isPhoneVerified: true },
-      });
+      let user = await prisma.user.findUnique({ where: { phone } });
+
+      if (purpose === 'login') {
+        if (!user) {
+          user = await prisma.user.create({
+            data: {
+              phone,
+              name: 'New User',
+              isPhoneVerified: true,
+            }
+          });
+        } else if (!user.isPhoneVerified) {
+          user = await prisma.user.update({
+            where: { id: user.id },
+            data: { isPhoneVerified: true },
+          });
+        }
+
+        if (isActivelyBanned(user)) {
+           res.status(403).json({ success: false, message: 'Your account is banned.' });
+           return;
+        }
+
+        const accessToken = signAccessToken({ id: user.id, role: 'user', email: user.email || '' });
+        const refreshToken = signRefreshToken({ id: user.id, role: 'user', email: user.email || '' });
+
+        await prisma.refreshToken.create({
+          data: {
+            token: hashToken(refreshToken),
+            userId: user.id,
+            expiresAt: getRefreshTokenExpiry(),
+          },
+        });
+
+        res.json({ success: true, message: 'Logged in successfully.', data: { user, accessToken, refreshToken } });
+        return;
+      }
+
+      // Original verification logic
+      if (!user) {
+        res.status(400).json({ success: false, message: 'Invalid phone or OTP.' });
+        return;
+      }
+
+      if (!user.isPhoneVerified) {
+        await prisma.user.update({
+          where: { id: user.id },
+          data: { isPhoneVerified: true },
+        });
+      }
 
       res.json({ success: true, message: 'OTP verified' });
     } catch (err) {
@@ -1053,10 +1090,13 @@ router.post(
 router.post(
   '/resend-otp',
   emailLimiter,
-  [body('phone').isMobilePhone('any').withMessage('Valid phone number required')],
+  [
+    body('phone').isMobilePhone('any').withMessage('Valid phone number required'),
+    body('purpose').optional().isString()
+  ],
   handleValidation,
   async (req: Request, res: Response) => {
-    const { phone } = req.body as { phone: string };
+    const { phone, purpose } = req.body as { phone: string; purpose?: string };
 
     if (!isOtpConfigured(phone)) {
       res.status(503).json({ success: false, message: 'SMS service is not configured for this number.' });
@@ -1066,7 +1106,9 @@ router.post(
     try {
       const user = await prisma.user.findUnique({ where: { phone } });
 
-      if (user && !user.isPhoneVerified) {
+      if (purpose === 'login') {
+        await sendOtpSms(phone);
+      } else if (user && !user.isPhoneVerified) {
         await sendOtpSms(phone);
       }
 

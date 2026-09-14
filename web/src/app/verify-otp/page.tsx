@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Loader2, CheckCircle2, Phone, RotateCcw } from 'lucide-react';
+import { tokenStore } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -16,6 +17,8 @@ function VerifyOtpContent() {
   const rawPhone = searchParams.get('phone') ?? '';
   // Ensure the + prefix is preserved (URL encoding can sometimes lose it)
   const phone = rawPhone && !rawPhone.startsWith('+') ? `+${rawPhone}` : rawPhone;
+  const type = searchParams.get('type') ?? '';
+  const role = searchParams.get('role') ?? 'user';
 
   // 6 individual digit inputs
   const [digits,   setDigits]   = useState<string[]>(Array(6).fill(''));
@@ -58,16 +61,31 @@ function VerifyOtpContent() {
     setLoading(true);
 
     try {
-      const res  = await fetch(`${API_URL}/api/auth/verify-otp`, {
+      let endpoint = `${API_URL}/api/auth/verify-otp`;
+      if (role === 'expert') {
+        endpoint = `${API_URL}/api/auth/astrologer/verify-otp`;
+      }
+
+      const res  = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone, otp }),
+        body: JSON.stringify({ phone, otp, purpose: type }),
       });
-      const data = await res.json() as { success: boolean; message: string };
+      const data = await res.json() as any;
 
       if (data.success) {
         setSuccess(true);
-        setTimeout(() => router.push('/login'), 2500);
+        if (data.data?.accessToken) {
+          tokenStore.setTokens(data.data.accessToken, data.data.refreshToken);
+          if (role === 'expert') {
+            localStorage.setItem('hc_role', 'practitioner');
+            localStorage.setItem('hc_practitioner_id', data.data.astrologer?.id || '');
+            localStorage.setItem('hc_practitioner_name', data.data.astrologer?.name || '');
+          }
+          setTimeout(() => router.push(role === 'expert' ? '/expert/dashboard' : '/dashboard'), 1500);
+        } else {
+          setTimeout(() => router.push('/login'), 2500);
+        }
       } else {
         setError(data.message || 'Invalid OTP. Please try again.');
         setDigits(Array(6).fill(''));
@@ -86,10 +104,15 @@ function VerifyOtpContent() {
     setError('');
 
     try {
-      await fetch(`${API_URL}/api/auth/resend-otp`, {
+      let endpoint = `${API_URL}/api/auth/resend-otp`;
+      if (role === 'expert') {
+        endpoint = `${API_URL}/api/auth/astrologer/send-otp`;
+      }
+
+      await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({ phone, purpose: type }),
       });
     } catch {}
 
