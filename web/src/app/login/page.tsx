@@ -23,6 +23,7 @@ function LoginInner() {
 
   useEffect(() => {
     if (searchParams.get('role') === 'expert') setRole('expert');
+    if (searchParams.get('mode') === 'phone') setMode('phone');
   }, [searchParams]);
   const [mode, setMode] = useState<Mode>('login');
   const [email, setEmail] = useState('');
