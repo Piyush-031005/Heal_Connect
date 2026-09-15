@@ -44,13 +44,17 @@ export default function HomeTab() {
     <View style={{ flex: 1, backgroundColor: BACKGROUND }}>
       {/* Global ghost fibers on entire page */}
       <GhostFibers
-        lineColor="#DDD6FE"
-        glowColor="#C4B5FD"
-        speed={0.15}
-        scale={2.0}
-        brightness={1.6}
-        blueBoost={0.4}
+        lineColor="#C4B5FD"
+        glowColor="#A78BFA"
+        speed={0.2}
+        scale={0.9}
+        brightness={3.2}
+        blueBoost={0.5}
         lightMode={true}
+        layers={10}
+        lineFrequency={12}
+        lineSpacing={0.9}
+        glowIntensity={3.0}
       />
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>

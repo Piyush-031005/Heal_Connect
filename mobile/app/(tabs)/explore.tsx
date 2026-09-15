@@ -1,4 +1,5 @@
 ﻿import { SafeAreaView } from "react-native-safe-area-context";
+import GhostFibers from "../../components/GhostFibers";
 import {
   View, Text, StyleSheet, ScrollView, Image, TextInput, TouchableOpacity,
   StatusBar, Dimensions, ActivityIndicator, Platform,
@@ -85,6 +86,7 @@ export default function ExploreScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: BG }}>
+      <GhostFibers lineColor="#C4B5FD" glowColor="#A78BFA" speed={0.2} scale={0.9} brightness={3.0} blueBoost={0.5} lightMode={true} layers={10} lineFrequency={11} lineSpacing={0.9} glowIntensity={3.0} />
       <StatusBar barStyle="dark-content" backgroundColor={BG} />
       <View style={styles.container}>
 

@@ -1,4 +1,5 @@
 ﻿import { SafeAreaView } from "react-native-safe-area-context";
+import GhostFibers from "../../components/GhostFibers";
 import {
   View, Text, StyleSheet, ScrollView, Image, TouchableOpacity,
   StatusBar, Alert, ActivityIndicator,
@@ -89,6 +90,7 @@ export default function ProfileScreen() {
   if (loading) {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: BG, alignItems: "center", justifyContent: "center" }}>
+      <GhostFibers lineColor="#C4B5FD" glowColor="#A78BFA" speed={0.2} scale={0.9} brightness={3.0} blueBoost={0.5} lightMode={true} layers={10} lineFrequency={11} lineSpacing={0.9} glowIntensity={3.0} />
         <ActivityIndicator size="large" color={PURPLE} />
       </SafeAreaView>
     );
@@ -96,6 +98,7 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: BG }}>
+      <GhostFibers lineColor="#C4B5FD" glowColor="#A78BFA" speed={0.2} scale={0.9} brightness={3.0} blueBoost={0.5} lightMode={true} layers={10} lineFrequency={11} lineSpacing={0.9} glowIntensity={3.0} />
       <StatusBar barStyle="dark-content" backgroundColor={BG} />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
 
