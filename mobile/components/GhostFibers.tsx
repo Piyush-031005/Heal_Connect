@@ -147,7 +147,7 @@ export default function GhostFibers({
 
         out vec4 fragColor;
 
-        #define MAX_LAYERS 10
+        #define MAX_LAYERS 30
 
         mat2 rotate2d(float angle) {
           float sine = sin(angle);
