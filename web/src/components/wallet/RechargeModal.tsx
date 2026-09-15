@@ -128,14 +128,14 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
           <div className="grid grid-cols-2 gap-3">
             <Button
               variant="outline"
-              className={`h-12 border-violet-200 font-medium ${paymentMethod === 'razorpay' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-purple-700 hover:bg-purple-50'}`}
+              className={`h-12 border-violet-200 font-medium ${paymentMethod === 'razorpay' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'bg-white text-purple-700 hover:bg-purple-50'}`}
               onClick={() => setPaymentMethod('razorpay')}
             >
               Domestic (INR)
             </Button>
             <Button
               variant="outline"
-              className={`h-12 border-violet-200 font-medium ${paymentMethod === 'stripe' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'text-purple-700 hover:bg-purple-50'}`}
+              className={`h-12 border-violet-200 font-medium ${paymentMethod === 'stripe' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'bg-white text-purple-700 hover:bg-purple-50'}`}
               onClick={() => setPaymentMethod('stripe')}
             >
               International (USD)
