@@ -1,11 +1,12 @@
-import { create } from 'zustand';
+﻿import { create } from 'zustand';
 import { usersApi, UserProfile, tokenStore } from '../lib/api';
 import * as SecureStore from 'expo-secure-store';
+import { Platform } from 'react-native';
 import { router } from 'expo-router';
 
 interface AuthState {
   user: UserProfile | null;
-  role: 'user' | 'practitioner' | null;
+  role: 'user' | 'expert' | null;
   isLoading: boolean;
   isInitialized: boolean;
   
@@ -28,7 +29,12 @@ export const useAuth = create<AuthState>((set, get) => ({
         return;
       }
 
-      const roleStr = await SecureStore.getItemAsync('hc_role');
+      let roleStr;
+      if (Platform.OS === 'web') {
+        roleStr = localStorage.getItem('hc_role');
+      } else {
+        roleStr = await SecureStore.getItemAsync('hc_role');
+      }
       set({ role: roleStr as any });
 
       if (roleStr === 'user') {

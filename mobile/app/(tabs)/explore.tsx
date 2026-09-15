@@ -37,7 +37,7 @@ const MODALITIES_ALL = [
 
 export default function ExploreScreen() {
   const router = useRouter();
-  const [practitioners, setPractitioners] = useState([]);
+  const [practitioners, setPractitioners] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
