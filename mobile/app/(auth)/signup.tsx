@@ -6,7 +6,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { authApi, tokenStore } from "../../lib/api";
-import * as SecureStore from "expo-secure-store";
+import GhostFibers from "../../components/GhostFibers";
 
 type Role = "user" | "expert";
 
@@ -51,7 +51,7 @@ export default function SignupScreen() {
       if (!res.success) { setError(res.message || "Registration failed"); return; }
       if (res.data?.accessToken) {
         await tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
-        await SecureStore.setItemAsync("hc_role", "user");
+        await tokenStore.setRole("user");
         router.replace("/(tabs)");
       } else {
         setSuccess("Account created! Please log in.");
@@ -139,3 +139,4 @@ export default function SignupScreen() {
     </SafeAreaView>
   );
 }
+
