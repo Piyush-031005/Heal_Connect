@@ -1049,8 +1049,8 @@ router.post(
            return;
         }
 
-        const accessToken = signAccessToken({ id: user.id, role: 'user', email: user.email || '' });
-        const refreshToken = signRefreshToken({ id: user.id, role: 'user', email: user.email || '' });
+        const accessToken = signAccessToken({ userId: user.id, role: 'user', email: user.email || '' });
+        const refreshToken = signRefreshToken({ userId: user.id, role: 'user', email: user.email || '' });
 
         await prisma.refreshToken.create({
           data: {
