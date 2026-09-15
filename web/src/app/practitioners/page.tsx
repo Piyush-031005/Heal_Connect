@@ -269,7 +269,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-xl font-bold text-[#2d1b69]">
-                  {currencyCode === 'USD' ? `$${p.perMinuteRate}` : format(p.perMinuteRate)}
+                  {currencyCode === 'GBP' ? `£${p.perMinuteRate}` : format(p.perMinuteRate)}
                 </span>
                 <span className="text-xs text-[#4c1d95] ml-1">/min</span>
               </div>

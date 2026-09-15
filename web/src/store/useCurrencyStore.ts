@@ -28,7 +28,7 @@ interface CurrencyState {
   countryCode: string;
   currencyCode: string;
   currencySymbol: string;
-  exchangeRate: number; // 1 USD = X Local Currency
+  exchangeRate: number; // 1 GBP = X Local Currency
   lastUpdated: number;
   isLoading: boolean;
   initCurrency: () => Promise<void>;
@@ -40,10 +40,10 @@ const CACHE_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
 export const useCurrencyStore = create<CurrencyState>()(
   persist(
     (set, get) => ({
-      countryCode: 'US',
-      currencyCode: 'USD',
-      currencySymbol: '$',
-      exchangeRate: 1, // Base is USD
+      countryCode: 'GB',
+      currencyCode: 'GBP',
+      currencySymbol: '£',
+      exchangeRate: 1, // Base is GBP
       lastUpdated: 0,
       isLoading: false,
 
@@ -73,10 +73,10 @@ export const useCurrencyStore = create<CurrencyState>()(
 
           const currencyInfo = CURRENCY_MAP[country] || CURRENCY_MAP['US'];
           
-          // 2. Get Live Exchange Rates vs USD
+          // 2. Get Live Exchange Rates vs GBP
           let rate = 1;
           try {
-            const rateRes = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+            const rateRes = await fetch('https://api.exchangerate-api.com/v4/latest/GBP');
             const rateData = await rateRes.json();
             if (rateData && rateData.rates && rateData.rates[currencyInfo.code]) {
               rate = rateData.rates[currencyInfo.code];

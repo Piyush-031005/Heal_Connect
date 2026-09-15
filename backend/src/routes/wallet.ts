@@ -206,10 +206,10 @@ router.post(
         line_items: [
           {
             price_data: {
-              currency: 'usd',
+              currency: 'gbp',
               product_data: {
                 name: 'ZenAuraa Wallet Recharge',
-                description: `Recharge wallet with $${amount}`,
+                description: `Recharge wallet with £${amount}`,
               },
               unit_amount: amountInCents,
             },

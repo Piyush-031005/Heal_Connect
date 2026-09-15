@@ -70,15 +70,15 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
               onClick={() => setAmount(preset)}
             >
               <div className="flex flex-col items-center">
-                <span>${preset}</span>
-                {currencyCode !== 'USD' && <span className="text-xs opacity-80 font-normal mt-0.5">~{format(preset)}</span>}
+                <span>£{preset}</span>
+                {currencyCode !== 'GBP' && <span className="text-xs opacity-80 font-normal mt-0.5">~{format(preset)}</span>}
               </div>
             </Button>
           ))}
         </div>
 
         <div className="space-y-3">
-          <label className="text-sm font-semibold text-[#1a1a1a]">Or enter custom amount (USD $)</label>
+          <label className="text-sm font-semibold text-[#1a1a1a]">Or enter custom amount (GBP £)</label>
           <Input
             type="number"
             min="10"
@@ -96,7 +96,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
             disabled={loading || !amount || amount < 10}
             onClick={() => handleRecharge(amount as number)}
           >
-            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : `Proceed to Pay $${amount || 0} ${currencyCode !== 'USD' ? `(~${format(amount || 0)})` : ''}`}
+            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : `Proceed to Pay £${amount || 0} ${currencyCode !== 'GBP' ? `(~${format(amount || 0)})` : ''}`}
           </Button>
         </div>
       </DialogContent>

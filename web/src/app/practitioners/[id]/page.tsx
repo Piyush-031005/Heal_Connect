@@ -278,7 +278,7 @@ export default function PractitionerDetail() {
             <div className="flex items-center justify-between mt-6 pt-5 border-t border-yellow-100">
               <div>
                 <span className="text-3xl font-extrabold text-[#1a1a1a]">
-                  {currencyCode === 'USD' ? `$${p.perMinuteRate}` : format(p.perMinuteRate)}
+                  {currencyCode === 'GBP' ? `£${p.perMinuteRate}` : format(p.perMinuteRate)}
                 </span>
                 <span className="text-sm text-purple-400 font-medium"> / minute</span>
               </div>
