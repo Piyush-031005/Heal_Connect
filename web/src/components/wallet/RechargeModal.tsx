@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Wallet, Loader2 } from 'lucide-react';
 import { walletApi, tokenStore } from '@/lib/api';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 
 interface RechargeModalProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ interface RechargeModalProps {
 const PRESET_AMOUNTS = [10, 20, 50, 100];
 
 export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps) {
+  const { format, currencyCode } = useCurrencyStore();
   const [amount, setAmount] = useState<number | ''>('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -67,13 +69,16 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
               className={`border-yellow-200 text-[#d97706] bg-yellow-50 hover:bg-yellow-100 hover:text-[#b45309] font-bold ${amount === preset ? 'ring-2 ring-[#4f46e5] border-transparent' : ''}`}
               onClick={() => setAmount(preset)}
             >
-              ${preset}
+              <div className="flex flex-col items-center">
+                <span>${preset}</span>
+                {currencyCode !== 'USD' && <span className="text-xs opacity-80 font-normal mt-0.5">~{format(preset)}</span>}
+              </div>
             </Button>
           ))}
         </div>
 
         <div className="space-y-3">
-          <label className="text-sm font-semibold text-[#1a1a1a]">Or enter custom amount ($)</label>
+          <label className="text-sm font-semibold text-[#1a1a1a]">Or enter custom amount (USD $)</label>
           <Input
             type="number"
             min="10"
@@ -91,7 +96,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
             disabled={loading || !amount || amount < 10}
             onClick={() => handleRecharge(amount as number)}
           >
-            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : `Proceed to Pay $${amount || 0}`}
+            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : `Proceed to Pay $${amount || 0} ${currencyCode !== 'USD' ? `(~${format(amount || 0)})` : ''}`}
           </Button>
         </div>
       </DialogContent>

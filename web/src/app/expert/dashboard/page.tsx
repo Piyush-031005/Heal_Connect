@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { tokenStore, sessionsApi, practitionersApi, type PractitionerProfile } from '@/lib/api';
 import { getSocket, disconnectSocket } from '@/lib/socket';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -30,6 +31,7 @@ interface IncomingCall {
 }
 
 export default function ExpertDashboardPage() {
+  const { format, currencyCode } = useCurrencyStore();
   const router = useRouter();
   const [practitionerId, setPractitionerId] = useState<string | null>(null);
   const [profile, setProfile] = useState<PractitionerProfile | null>(null);
@@ -301,7 +303,7 @@ export default function ExpertDashboardPage() {
                 <h1 className="text-3xl md:text-4xl font-extrabold text-white">Hello, {firstName}!</h1>
                 <p className="text-white/80 text-sm mt-2 flex items-center gap-2">
                   <Sparkles className="w-3.5 h-3.5 text-accent" />
-                  {profile?.specialties?.slice(0, 2).join(' · ') || 'Wellness Expert'} <span className="text-muted-foreground">|</span> <span className="text-foreground font-semibold">${profile?.perMinuteRate}/min</span>
+                  {profile?.specialties?.slice(0, 2).join(' · ') || 'Wellness Expert'} <span className="text-muted-foreground">|</span> <span className="text-foreground font-semibold">{currencyCode === 'USD' ? `$${profile?.perMinuteRate}` : format(profile?.perMinuteRate || 0)}/min</span>
                 </p>
               </div>
             </div>
@@ -450,7 +452,7 @@ export default function ExpertDashboardPage() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-muted-foreground font-medium">Rate</span>
-                    <span className="text-sm font-bold text-foreground">${profile?.perMinuteRate}/min</span>
+                    <span className="text-sm font-bold text-foreground">{currencyCode === 'USD' ? `$${profile?.perMinuteRate}` : format(profile?.perMinuteRate || 0)}/min</span>
                   </div>
                 </div>
 
