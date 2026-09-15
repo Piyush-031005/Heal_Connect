@@ -202,6 +202,7 @@ export default function PractitionersPage() {
 
 
 function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
+  const { format, currencyCode } = useCurrencyStore();
   const router = useRouter();
   const avatarSrc = getPractitionerAvatar(p.photoUrl, p.id);
 
