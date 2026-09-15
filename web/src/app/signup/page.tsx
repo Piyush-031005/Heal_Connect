@@ -128,7 +128,7 @@ export default function SignupPage() {
 
         <Card className="w-full max-w-md bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-purple-200 shadow-2xl rounded-2xl overflow-hidden">
           <CardHeader className="space-y-2 pb-6 border-b border-purple-200 bg-white/50 border-b border-purple-200">
-            <CardTitle className="text-2xl font-bold text-white tracking-wide">Create your account</CardTitle>
+            <CardTitle className="text-2xl font-bold text-[#2d1b69] tracking-wide">Create your account</CardTitle>
             <CardDescription className="text-[#4c1d95]/70 text-base">Enter your details to get started.</CardDescription>
           </CardHeader>
 
@@ -157,27 +157,27 @@ export default function SignupPage() {
 
             <form onSubmit={handleRegister} className="space-y-5">
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-white font-medium">Full Name</Label>
+                <Label htmlFor="name" className="text-[#2d1b69] font-bold">Full Name</Label>
                 <div className="relative group">
                   <User className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                   <Input id="name" type="text" placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} required autoComplete="name" 
-                    className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
+                    className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-[#2d1b69] font-medium placeholder:text-[#4c1d95]/70 transition-all" />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-white font-medium">Email</Label>
+                <Label htmlFor="email" className="text-[#2d1b69] font-bold">Email</Label>
                 <div className="relative group">
                   <Mail className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                   <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" 
-                    className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
+                    className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-[#2d1b69] font-medium placeholder:text-[#4c1d95]/70 transition-all" />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-white font-medium">Password</Label>
+                <Label htmlFor="password" className="text-[#2d1b69] font-bold">Password</Label>
                 <div className="relative group">
                   <Lock className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                   <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="Min. 8 chars, 1 uppercase, 1 number" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="new-password" 
-                    className="pl-10 pr-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
+                    className="pl-10 pr-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-[#2d1b69] font-medium placeholder:text-[#4c1d95]/70 transition-all" />
                   <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-[#4c1d95]/70 hover:text-white transition-colors" tabIndex={-1}>
                     {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
@@ -186,7 +186,7 @@ export default function SignupPage() {
                   <p className="text-xs text-destructive mt-1">Password must be at least 8 characters</p>
                 )}
               </div>
-              <Button type="submit" disabled={loading || !!success} className="w-full py-6 text-base font-bold rounded-md border-0 shadow-lg transition-all duration-300 bg-[#FAD058] hover:bg-[#F0C240] text-white">
+              <Button type="submit" disabled={loading || !!success} className="w-full py-6 text-lg font-extrabold rounded-md border-0 shadow-lg transition-all duration-300 bg-[#FAD058] hover:bg-[#F0C240] text-[#1e1b4b]">
                 {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>{role === 'expert' ? 'Join as Expert' : 'Create Account'} <ArrowRight className="ml-2 h-5 w-5" /></>}
               </Button>
             </form>
