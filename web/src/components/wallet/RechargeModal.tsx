@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Wallet, Loader2 } from 'lucide-react';
 import { walletApi, tokenStore } from '@/lib/api';
-import { loadRazorpay } from '@/lib/razorpay';
 
 interface RechargeModalProps {
   isOpen: boolean;
@@ -14,17 +13,16 @@ interface RechargeModalProps {
   onSuccess: () => void;
 }
 
-const PRESET_AMOUNTS = [99, 199, 499, 999];
+const PRESET_AMOUNTS = [10, 20, 50, 100];
 
 export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps) {
   const [amount, setAmount] = useState<number | ''>('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState<'razorpay' | 'stripe'>('razorpay');
 
   const handleRecharge = async (rechargeAmount: number) => {
     if (rechargeAmount < 10) {
-      setError('Minimum recharge amount is ₹10');
+      setError('Minimum recharge amount is $10');
       return;
     }
     
@@ -35,62 +33,13 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
       const token = tokenStore.getAccess();
       if (!token) throw new Error('Not authenticated');
 
-      if (paymentMethod === 'stripe') {
-        const res = await walletApi.rechargeStripe(token, rechargeAmount);
-        if (!res.success || !res.data?.url) {
-          throw new Error(res.message || 'Failed to initialize Stripe checkout');
-        }
-        // Redirect to Stripe Hosted Checkout
-        window.location.href = res.data.url;
-        return; // Execution stops here due to redirect
+      const res = await walletApi.rechargeStripe(token, rechargeAmount);
+      if (!res.success || !res.data?.url) {
+        throw new Error(res.message || 'Failed to initialize Stripe checkout');
       }
-
-      // ─── Razorpay Flow ───
-      // 1. Initialize Razorpay order on backend
-      const res = await walletApi.recharge(token, rechargeAmount);
-      if (!res.success || !res.data) {
-        throw new Error(res.message || 'Failed to initialize recharge');
-      }
-
-      const { orderId } = res.data;
-
-      // 2. Load Razorpay script
-      const isLoaded = await loadRazorpay();
-      if (!isLoaded) {
-        throw new Error('Razorpay SDK failed to load. Are you online?');
-      }
-
-      // 3. Open Razorpay Popup
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'dummy_key',
-        amount: rechargeAmount * 100,
-        currency: 'INR',
-        name: 'ZenAuraa',
-        description: 'Wallet Recharge',
-        order_id: orderId,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-        handler: function (_response: any) {
-          // Payment successful! Webhook will handle the actual DB update.
-          // We can just optimistically trigger onSuccess.
-          onSuccess();
-          onClose();
-        },
-        prefill: {
-          name: 'ZenAuraa User',
-        },
-        theme: {
-          color: '#4f46e5',
-        },
-      };
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const rzp = new (window as any).Razorpay(options);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-      rzp.on('payment.failed', function (_response: any) {
-        setError('Payment failed. Please try again.');
-      });
-      rzp.open();
-
+      // Redirect to Stripe Hosted Checkout
+      window.location.href = res.data.url;
+      return; // Execution stops here due to redirect
     } catch (err: unknown) {
       setError((err as Error).message || 'An unexpected error occurred');
     } finally {
@@ -118,38 +67,13 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
               className={`border-yellow-200 text-[#d97706] bg-yellow-50 hover:bg-yellow-100 hover:text-[#b45309] font-bold ${amount === preset ? 'ring-2 ring-[#4f46e5] border-transparent' : ''}`}
               onClick={() => setAmount(preset)}
             >
-              ₹{preset}
+              ${preset}
             </Button>
           ))}
         </div>
 
-        <div className="space-y-3 pb-2">
-          <label className="text-sm font-semibold text-[#1a1a1a]">Payment Method</label>
-          <div className="grid grid-cols-2 gap-3">
-            <Button
-              variant="outline"
-              className={`h-12 border-violet-200 font-medium ${paymentMethod === 'razorpay' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'bg-white text-purple-700 hover:bg-purple-50'}`}
-              onClick={() => setPaymentMethod('razorpay')}
-            >
-              Domestic (INR)
-            </Button>
-            <Button
-              variant="outline"
-              className={`h-12 border-violet-200 font-medium ${paymentMethod === 'stripe' ? 'ring-2 ring-[#4f46e5] bg-yellow-50 text-[#d97706] border-transparent' : 'bg-white text-purple-700 hover:bg-purple-50'}`}
-              onClick={() => setPaymentMethod('stripe')}
-            >
-              International (USD)
-            </Button>
-          </div>
-          {paymentMethod === 'stripe' && (
-            <p className="text-xs text-purple-500">
-              * International payments are converted to USD (approx ${((amount || 0) / 83).toFixed(2)}) and processed securely via Stripe.
-            </p>
-          )}
-        </div>
-
         <div className="space-y-3">
-          <label className="text-sm font-semibold text-[#1a1a1a]">Or enter custom amount (₹)</label>
+          <label className="text-sm font-semibold text-[#1a1a1a]">Or enter custom amount ($)</label>
           <Input
             type="number"
             min="10"
@@ -167,7 +91,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
             disabled={loading || !amount || amount < 10}
             onClick={() => handleRecharge(amount as number)}
           >
-            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : `Proceed to Pay ₹${amount || 0}`}
+            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : `Proceed to Pay $${amount || 0}`}
           </Button>
         </div>
       </DialogContent>

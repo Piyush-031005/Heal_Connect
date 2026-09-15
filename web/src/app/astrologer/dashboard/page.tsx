@@ -88,7 +88,7 @@ export default function AstrologerDashboardPage() {
             { label: 'Avg Rating', value: profile.avgRating?.toFixed(1) ?? '0.0' },
             { label: 'Reviews', value: profile.reviewCount ?? 0 },
             { label: 'Consultations', value: profile.totalConsultations ?? 0 },
-            { label: 'Earnings (₹)', value: profile.totalEarnings?.toFixed(0) ?? '0' },
+            { label: 'Earnings ($)', value: profile.totalEarnings?.toFixed(0) ?? '0' },
           ].map((s) => (
             <div key={s.label} className="bg-white rounded-xl border border-violet-200 p-4 text-center">
               <p className="text-2xl font-bold text-indigo-950">{s.value}</p>
@@ -103,11 +103,11 @@ export default function AstrologerDashboardPage() {
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-indigo-50 rounded-lg p-4">
               <p className="text-xs text-purple-500">Chat / min</p>
-              <p className="text-xl font-bold text-indigo-600">₹{profile.chatPricePerMin}</p>
+              <p className="text-xl font-bold text-indigo-600">${profile.chatPricePerMin}</p>
             </div>
             <div className="bg-indigo-50 rounded-lg p-4">
               <p className="text-xs text-purple-500">Call / min</p>
-              <p className="text-xl font-bold text-indigo-600">₹{profile.callPricePerMin}</p>
+              <p className="text-xl font-bold text-indigo-600">${profile.callPricePerMin}</p>
             </div>
           </div>
         </div>

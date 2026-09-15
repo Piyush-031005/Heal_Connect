@@ -129,7 +129,7 @@ export default function ZodiacHoroscope() {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Button className={isNewDesign1 ? 'bg-[#1A92C6] hover:bg-[#17619A] text-white px-8 py-6 rounded-xl font-bold border-none shadow-md' : 'bg-pink-500 hover:bg-pink-600 text-white px-8 py-6 rounded-xl font-bold shadow-[0_0_20px_rgba(236,72₹53,0.3)] border-none'}>
+                <Button className={isNewDesign1 ? 'bg-[#1A92C6] hover:bg-[#17619A] text-white px-8 py-6 rounded-xl font-bold border-none shadow-md' : 'bg-pink-500 hover:bg-pink-600 text-white px-8 py-6 rounded-xl font-bold shadow-[0_0_20px_rgba(236,72$53,0.3)] border-none'}>
                   Get my detailed horoscope
                 </Button>
                 <Button variant="outline" className={isNewDesign1 ? 'text-[#1A92C6] border-[#9FD6EE] bg-white hover:bg-[#EDF8FC] px-8 py-6 rounded-xl font-bold' : 'text-indigo-300 border-indigo-500/30 bg-indigo-500/10 hover:bg-indigo-500/20 hover:text-white px-8 py-6 rounded-xl font-bold'}>

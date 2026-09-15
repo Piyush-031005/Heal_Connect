@@ -301,7 +301,7 @@ export default function ExpertDashboardPage() {
                 <h1 className="text-3xl md:text-4xl font-extrabold text-white">Hello, {firstName}!</h1>
                 <p className="text-white/80 text-sm mt-2 flex items-center gap-2">
                   <Sparkles className="w-3.5 h-3.5 text-accent" />
-                  {profile?.specialties?.slice(0, 2).join(' · ') || 'Wellness Expert'} <span className="text-muted-foreground">|</span> <span className="text-foreground font-semibold">₹{profile?.perMinuteRate}/min</span>
+                  {profile?.specialties?.slice(0, 2).join(' · ') || 'Wellness Expert'} <span className="text-muted-foreground">|</span> <span className="text-foreground font-semibold">${profile?.perMinuteRate}/min</span>
                 </p>
               </div>
             </div>
@@ -324,7 +324,7 @@ export default function ExpertDashboardPage() {
         {/* ── Stats Row ── */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: 'Total Earnings', value: `₹${totalEarnings.toFixed(2)}`, icon: IndianRupee, color: 'text-primary', bg: 'bg-primary/10', border: 'border-primary/20' },
+            { label: 'Total Earnings', value: `$${totalEarnings.toFixed(2)}`, icon: IndianRupee, color: 'text-primary', bg: 'bg-primary/10', border: 'border-primary/20' },
             { label: 'Sessions Done', value: String(sessionsDone), icon: MessageCircle, color: 'text-accent', bg: 'bg-accent/10', border: 'border-accent/20' },
             { label: 'Avg Rating', value: profile?.avgRating != null ? profile.avgRating.toFixed(1) : '—', icon: Star, color: 'text-purple-400', bg: 'bg-purple-400/10', border: 'border-purple-400/20' },
             { label: 'Active Now', value: sessions.length > 0 ? String(sessions.length) : '0', icon: TrendingUp, color: 'text-blue-400', bg: 'bg-blue-400/10', border: 'border-blue-400/20' },
@@ -450,7 +450,7 @@ export default function ExpertDashboardPage() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-muted-foreground font-medium">Rate</span>
-                    <span className="text-sm font-bold text-foreground">₹{profile?.perMinuteRate}/min</span>
+                    <span className="text-sm font-bold text-foreground">${profile?.perMinuteRate}/min</span>
                   </div>
                 </div>
 

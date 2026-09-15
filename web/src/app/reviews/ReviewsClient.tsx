@@ -59,7 +59,7 @@ const INITIAL_REVIEWS: Review[] = [
   {
     id: 'r5', userId: 'u5', userName: 'Sunita Reddy',
     rating: 5, title: 'Highly recommend Pandit Vikram!',
-    body: 'Pandit Vikram is a true master. He identified my Kaal Sarp Dosha without me even mentioning it and prescribed powerful yet simple remedies. His knowledge of Nakshatras is unparalleled. I felt deeply understood during the session. The video call quality was crystal clear. Best ₹500 I have spent in a long time!',
+    body: 'Pandit Vikram is a true master. He identified my Kaal Sarp Dosha without me even mentioning it and prescribed powerful yet simple remedies. His knowledge of Nakshatras is unparalleled. I felt deeply understood during the session. The video call quality was crystal clear. Best $500 I have spent in a long time!',
     astrologerName: 'Pandit Vikram', date: '2026-06-28', likes: 42, liked: false, verified: true
   },
   {

@@ -137,7 +137,7 @@ export default function PractitionersPage() {
               </select>
             </div>
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Max ₹/min</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Max $/min</label>
               <input type="number" min={0} placeholder="e.g. 50" value={filters.maxRate} onChange={(e) => setFilters((f) => ({ ...f, maxRate: e.target.value }))} className={SELECT_CLS} />
             </div>
             <div className="flex flex-col justify-end gap-3">
@@ -163,7 +163,7 @@ export default function PractitionersPage() {
             {filters.specialty && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">{filters.specialty}<button onClick={() => setFilters((f) => ({ ...f, specialty: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
             {filters.language && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">{filters.language}<button onClick={() => setFilters((f) => ({ ...f, language: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
             {filters.minRating && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">★ +<button onClick={() => setFilters((f) => ({ ...f, minRating: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
-            {filters.maxRate && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">Max ₹{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
+            {filters.maxRate && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">Max ${filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
             {filters.onlineOnly && <Badge variant="outline" className="border-accent/30 text-accent bg-accent/10 gap-1.5 py-1 px-3 rounded-full shadow-[0_0_10px_rgba(46,96,82,0.1)]">Online Now<button onClick={() => setFilters((f) => ({ ...f, onlineOnly: false }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
           </div>
         )}
@@ -265,7 +265,7 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
             {/* Price, Chat, and Call Below */}
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-xl font-bold text-[#2d1b69]">₹{p.perMinuteRate}</span>
+                <span className="text-xl font-bold text-[#2d1b69]">${p.perMinuteRate}</span>
                 <span className="text-xs text-[#4c1d95] ml-1">/min</span>
               </div>
               <div className="flex gap-2">

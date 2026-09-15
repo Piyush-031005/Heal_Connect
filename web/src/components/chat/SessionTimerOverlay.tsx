@@ -32,7 +32,7 @@ export default function SessionTimerOverlay({ elapsedSeconds, walletBalance, onE
       )}>
         <Wallet className={cn('h-3.5 w-3.5', isLowBalance ? 'text-red-500' : 'text-emerald-600')} />
         <span className={cn('text-xs font-semibold', isLowBalance ? 'text-red-600' : 'text-emerald-700')}>
-          {walletBalance !== null ? `₹${walletBalance.toFixed(0)}` : '...'}
+          {walletBalance !== null ? `$${walletBalance.toFixed(0)}` : '...'}
         </span>
       </div>
 

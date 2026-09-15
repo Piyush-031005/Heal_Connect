@@ -103,7 +103,7 @@ export const translations = {
     browseViewAll: 'View all',
     categories: [
       { name: 'Love', count: '4,280+' },
-      { name: 'Marriage & Kundli', count: '6₹20+' },
+      { name: 'Marriage & Kundli', count: '6$20+' },
       { name: 'Career', count: '5,840+' },
       { name: 'Women astrologers', count: '9,210+' },
       { name: 'Business & Money', count: '3,760+' },
@@ -154,9 +154,9 @@ export const translations = {
     pricingHeading: 'Simple Pricing',
     pricingSubtext: 'Choose a plan that fits your needs. All plans include first consultation free.',
     pricingPlans: [
-      { name: 'Starter', price: '₹10/min', popular: false, features: ['Chat only', 'Basic horoscope', '24/7 support'] },
-      { name: 'Pro', price: '₹25/min', popular: true, features: ['Chat + Call', 'Detailed horoscope', 'Priority support', 'Kundli access'] },
-      { name: 'Premium', price: '₹50/min', popular: false, features: ['Chat + Call + Video', 'Full horoscope', 'Dedicated astrologer', 'All reports'] },
+      { name: 'Starter', price: '$10/min', popular: false, features: ['Chat only', 'Basic horoscope', '24/7 support'] },
+      { name: 'Pro', price: '$25/min', popular: true, features: ['Chat + Call', 'Detailed horoscope', 'Priority support', 'Kundli access'] },
+      { name: 'Premium', price: '$50/min', popular: false, features: ['Chat + Call + Video', 'Full horoscope', 'Dedicated astrologer', 'All reports'] },
     ],
     pricingGetStarted: 'Get Started',
 
@@ -200,7 +200,7 @@ export const translations = {
       { q: 'Is Astrology Prediction True?', a: 'Astrology offers guidance based on planetary positions and their influences. While it provides valuable insights, it\'s a tool for self-reflection and guidance rather than absolute prediction.' },
       { q: 'How Can Online Astrology Help Me In Predicting The Future?', a: 'Online astrology connects you with expert astrologers who analyze your birth chart and current planetary transits to provide personalized guidance for life decisions.' },
       { q: 'How reliable is the ZenAuraa app?', a: 'The app is built with enterprise-grade security, verified practitioners, and transparent user reviews to ensure a reliable and trustworthy experience.' },
-      { q: 'How much does ZenAuraa cost?', a: 'Prices start from just ₹10/min for chat consultations. We offer transparent pricing with no hidden charges. Your first consultation is absolutely free.' },
+      { q: 'How much does ZenAuraa cost?', a: 'Prices start from just $10/min for chat consultations. We offer transparent pricing with no hidden charges. Your first consultation is absolutely free.' },
     ],
 
     // ─── Footer ───
@@ -317,7 +317,7 @@ export const translations = {
     browseViewAll: 'सभी देखें',
     categories: [
       { name: 'प्रेम', count: '4,280+' },
-      { name: 'विवाह और कुंडली', count: '6₹20+' },
+      { name: 'विवाह और कुंडली', count: '6$20+' },
       { name: 'करियर', count: '5,840+' },
       { name: 'महिला ज्योतिषी', count: '9,210+' },
       { name: 'व्यवसाय और पैसा', count: '3,760+' },
@@ -368,9 +368,9 @@ export const translations = {
     pricingHeading: 'सरल मूल्य निर्धारण',
     pricingSubtext: 'आपकी आवश्यकताओं के अनुरूप योजना चुनें। सभी योजनाओं में पहला परामर्श मुफ़्त है।',
     pricingPlans: [
-      { name: 'स्टार्टर', price: '₹10/मिनट', popular: false, features: ['केवल चैट', 'बेसिक राशिफल', '24/7 सहायता'] },
-      { name: 'प्रो', price: '₹25/मिनट', popular: true, features: ['चैट + कॉल', 'विस्तृत राशिफल', 'प्राथमिकता सहायता', 'कुंडली एक्सेस'] },
-      { name: 'प्रीमियम', price: '₹50/मिनट', popular: false, features: ['चैट + कॉल + वीडियो', 'पूर्ण राशिफल', 'समर्पित ज्योतिषी', 'सभी रिपोर्ट'] },
+      { name: 'स्टार्टर', price: '$10/मिनट', popular: false, features: ['केवल चैट', 'बेसिक राशिफल', '24/7 सहायता'] },
+      { name: 'प्रो', price: '$25/मिनट', popular: true, features: ['चैट + कॉल', 'विस्तृत राशिफल', 'प्राथमिकता सहायता', 'कुंडली एक्सेस'] },
+      { name: 'प्रीमियम', price: '$50/मिनट', popular: false, features: ['चैट + कॉल + वीडियो', 'पूर्ण राशिफल', 'समर्पित ज्योतिषी', 'सभी रिपोर्ट'] },
     ],
     pricingGetStarted: 'शुरू करें',
 
@@ -414,7 +414,7 @@ export const translations = {
       { q: 'क्या ज्योतिष भविष्यवाणी सच है?', a: 'ज्योतिष ग्रहों की स्थिति और उनके प्रभावों के आधार पर मार्गदर्शन प्रदान करता है। यह मूल्यवान अंतर्दृष्टि प्रदान करता है, लेकिन यह पूर्ण भविष्यवाणी के बजाय आत्म-चिंतन और मार्गदर्शन का एक उपकरण है।' },
       { q: 'ऑनलाइन ज्योतिष भविष्य की भविष्यवाणी में कैसे मदद कर सकता है?', a: 'ऑनलाइन ज्योतिष आपको विशेषज्ञ ज्योतिषियों से जोड़ता है जो जीवन के निर्णयों के लिए व्यक्तिगत मार्गदर्शन प्रदान करने के लिए आपकी जन्म कुंडली और वर्तमान ग्रह गोचर का विश्लेषण करते हैं।' },
       { q: 'ZenAuraa ऐप कितना विश्वसनीय है?', a: 'ऐप एंटरप्राइज़-ग्रेड सुरक्षा, सत्यापित प्रैक्टिशनर और पारदर्शी उपयोगकर्ता समीक्षाओं के साथ बनाया गया है ताकि एक विश्वसनीय और भरोसेमंद अनुभव सुनिश्चित हो सके।' },
-      { q: 'ZenAuraa की लागत कितनी है?', a: 'चैट परामर्श के लिए कीमतें सिर्फ ₹10/मिनट से शुरू होती हैं। हम बिना किसी छिपे शुल्क के पारदर्शी मूल्य निर्धारण प्रदान करते हैं। आपका पहला परामर्श पूरी तरह से मुफ़्त है।' },
+      { q: 'ZenAuraa की लागत कितनी है?', a: 'चैट परामर्श के लिए कीमतें सिर्फ $10/मिनट से शुरू होती हैं। हम बिना किसी छिपे शुल्क के पारदर्शी मूल्य निर्धारण प्रदान करते हैं। आपका पहला परामर्श पूरी तरह से मुफ़्त है।' },
     ],
 
     // ─── Footer ───
