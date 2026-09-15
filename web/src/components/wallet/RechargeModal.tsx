@@ -85,7 +85,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
             placeholder="e.g. 500"
             value={amount}
             onChange={(e) => setAmount(e.target.value === '' ? '' : Number(e.target.value))}
-            className="border-violet-200 focus:ring-[#4f46e5]/40 focus:border-[#4f46e5]"
+            className="border-violet-200 focus:ring-[#4f46e5]/40 focus:border-[#4f46e5] text-[#2d1b69] font-bold text-lg"
           />
           {error && <p className="text-sm text-red-500 font-medium">{error}</p>}
         </div>
