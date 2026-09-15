@@ -45,21 +45,50 @@ function PrimaryHero() {
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-col gap-6 mb-12">
+            <div className="flex flex-col gap-4 mb-12">
               <div className="flex items-center gap-4">
-                <Button size="lg" className="bg-[#FFD166] hover:bg-[#F4C456] text-[#1a1532] rounded-full px-6 py-6 text-base font-semibold shadow-md hover:shadow-lg transition-all">
-                  <MessageSquare className="w-4 h-4 mr-2" /> Start Chat
+                <Button className="bg-[#FCD34D] hover:bg-[#FBBF24] text-[#1e1b4b] rounded-[24px] px-6 py-5 text-sm font-bold shadow-sm transition-all border-none">
+                  <MessageSquare className="w-4 h-4 mr-2" /> Chat
                 </Button>
-                <Button size="lg" className="bg-[#FFD166] hover:bg-[#F4C456] text-[#1a1532] rounded-full px-6 py-6 text-base font-semibold shadow-md hover:shadow-lg transition-all">
-                  <Phone className="w-4 h-4 mr-2" /> Start Calling
+                <Button className="bg-[#FCD34D] hover:bg-[#FBBF24] text-[#1e1b4b] rounded-[24px] px-6 py-5 text-sm font-bold shadow-sm transition-all border-none">
+                  <Phone className="w-4 h-4 mr-2" /> Call
                 </Button>
               </div>
               
               <Link href="/practitioners">
-                <Button size="lg" className="bg-[#6B46C1] hover:bg-[#553C9A] text-white rounded-full px-8 py-7 text-lg font-medium shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all w-fit">
-                  Ask me Anything <ArrowRight className="w-5 h-5 ml-3" />
+                <Button className="bg-[#6B46C1] hover:bg-[#553C9A] text-white rounded-[28px] px-8 py-6 text-base font-semibold shadow-md transition-all w-fit group">
+                  Ask me Anything <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
+
+              {/* ── RATING STRIP with cartoon avatars ── */}
+              <div className="flex items-center gap-4 mt-6">
+                <div className="flex -space-x-3">
+                  {[0, 1, 2, 3].map((i) => (
+                    <div key={i} className="w-12 h-12 rounded-full border-2 border-[#F9F5FF] overflow-hidden shadow-sm bg-white" style={{ zIndex: 4 - i }}>
+                      <div className="w-full h-full relative" style={{ overflow: 'hidden' }}>
+                        <img
+                          src="/expert-avatars-cartoon.jpg"
+                          alt={`Expert ${i+1}`}
+                          className="absolute h-full max-w-none"
+                          style={{ 
+                            width: '400%', 
+                            left: `${-i * 100}%`,
+                            top: 0
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-col justify-center">
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    <span className="text-base font-bold text-[#1e1b4b]">4.9</span>
+                    <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                  </div>
+                  <p className="text-xs text-[#4A3B69] font-medium opacity-80">Based on 10,000+ reviews</p>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -80,10 +109,3 @@ function PrimaryHero() {
 export default function Hero() {
   return <PrimaryHero />;
 }
-
-
-
-
-
-
-
