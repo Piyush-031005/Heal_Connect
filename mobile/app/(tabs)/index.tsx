@@ -48,24 +48,24 @@ export default function HomeTab() {
         glowColor="#A78BFA"
         speed={0.2}
         scale={0.9}
-        brightness={3.2}
+        brightness={10.0}
         blueBoost={0.5}
         lightMode={true}
-        layers={10}
-        lineFrequency={12}
+        layers={30}
+        lineFrequency={30}
         lineSpacing={0.9}
-        glowIntensity={3.0}
+        glowIntensity={10.0}
       />
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
 
         {/* ──────────── HERO with LIGHTFALL ──────────── */}
         <View style={styles.heroContainer}>
-          <View style={[StyleSheet.absoluteFill, { backgroundColor: '#3B1FA8' }]} />
+          <View style={[StyleSheet.absoluteFill, { backgroundColor: '#5B3CC4' }]} />
 
           <Lightfall
             colors={["#C4B5FD", "#FDE047", "#F472B6"]}
-            backgroundColor="#3B1FA8"
+            backgroundColor="#5B3CC4"
             speed={0.5}
             opacity={1}
             zoom={2.0}
@@ -100,13 +100,6 @@ export default function HomeTab() {
           </View>
         </View>
 
-        {/* ──────────── QUOTE CARD ──────────── */}
-        <View style={styles.quoteCard}>
-          <LinearGradient colors={["#FFFFFF", "#F5F3FF"]} style={styles.quoteGradient}>
-            <Text style={styles.quoteText}>"The universe always supports a sincere heart."</Text>
-            <Text style={styles.quoteAuthor}>✦ Daily Wisdom</Text>
-          </LinearGradient>
-        </View>
 
         {/* ──────────── EXPERTS ──────────── */}
         <View style={styles.section}>
@@ -134,11 +127,7 @@ export default function HomeTab() {
                     <Image
                       source={require("../../assets/images/expert_avatars.jpg")}
                       style={{
-                        width: 240,
-                        height: 90,
-                        position: "absolute",
-                        left: -p.avatarX * 60,
-                        top: 0,
+                        width: 136, height: 136, position: "absolute", left: (i % 2 === 0) ? 0 : -68, top: (i < 2) ? 0 : -68,
                       }}
                       resizeMode="cover"
                     />

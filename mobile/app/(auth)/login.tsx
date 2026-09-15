@@ -73,7 +73,7 @@ export default function LoginScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#EDE9FE' }}>
       {/* Full-screen fibers — behind AND bleeding into the card */}
-      <GhostFibers lineColor="#C084FC" glowColor="#9333EA" speed={0.3} scale={0.8} brightness={3.5} blueBoost={0.6} lightMode={true} layers={12} lineFrequency={12} lineSpacing={0.8} glowIntensity={3.5} />
+      <GhostFibers lineColor="#C084FC" glowColor="#9333EA" speed={0.3} scale={0.8} brightness={10.0} blueBoost={0.6} lightMode={true} layers={40} lineFrequency={40} lineSpacing={0.8} glowIntensity={10.0} />
       
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
         <ScrollView
@@ -97,7 +97,7 @@ export default function LoginScreen() {
 
             {/* Inner fibers overlay for inside-the-card effect */}
             <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, borderRadius: 32, overflow: 'hidden' }}>
-              <GhostFibers lineColor="#DDD6FE" glowColor="#C084FC" speed={0.18} scale={0.6} brightness={4.5} blueBoost={0.3} lightMode={true} layers={10} lineFrequency={16} lineSpacing={0.6} glowIntensity={4.5} />
+              <GhostFibers lineColor="#DDD6FE" glowColor="#C084FC" speed={0.18} scale={0.6} brightness={12.0} blueBoost={0.3} lightMode={true} layers={35} lineFrequency={35} lineSpacing={0.6} glowIntensity={12.0} />
             </View>
 
             {/* Logo */}

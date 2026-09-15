@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -37,7 +37,7 @@ export function FinalHybridExperts() {
               <div className="w-8 h-[2px] bg-primary" />
               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Featured Experts</span>
             </div>
-            <h2 className={`text-4xl md:text-5xl font-serif font-medium text-foreground`}>
+            <h2 className={`text-4xl md:text-5xl font-serif font-medium text-[#7C3AED]`}>
               Connect with top-rated guides.
             </h2>
           </div>
@@ -52,7 +52,7 @@ export function FinalHybridExperts() {
             <div 
               key={idx} 
               onClick={() => router.push('/practitioners')}
-              className={`w-[260px] min-w-[260px] md:w-[320px] md:min-w-[320px] flex-shrink-0 snap-start rounded-[2rem] p-6 relative group transition-all hover:-translate-y-1 shadow-lg cursor-pointer border ${isZenAlign ? "bg-[#1E2059] border-[#4E67CC] hover:shadow-[0_10px_30px_rgba(78,03,204,0.3)] hover:border-[#4E67CC]" : "bg-[#2D1B54] border-[#4B2F6E] hover:shadow-[0_10px_30px_rgba(183,54,230,0.15)] hover:border-primary/50"}`}
+              className={`w-[260px] min-w-[260px] md:w-[320px] md:min-w-[320px] flex-shrink-0 snap-start rounded-[2rem] p-6 relative group transition-all hover:-translate-y-1 shadow-lg cursor-pointer border ${isZenAlign ? "bg-[#FFF7ED] border-[#FDE68A] hover:shadow-lg hover:border-[#FBBF24]" : "bg-[#FFF7ED] border-[#FDE68A] hover:shadow-lg hover:border-[#FBBF24]"}`}
             >
               {/* Badges */}
               {expert.badge && (
@@ -64,38 +64,50 @@ export function FinalHybridExperts() {
               {/* Avatar + Info */}
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative">
-                  <div className="w-20 h-20 rounded-full border-2 border-primary/40 p-1 overflow-hidden group-hover:border-[#B79AE6] transition-colors">
-                    <img src={expert.img} alt={expert.name} className="w-full h-full object-cover rounded-full" />
+                                    <div className="w-20 h-20 rounded-full border-[3px] border-[#DDD6FE] bg-[#EDE9FE] overflow-hidden flex-shrink-0">
+                    <div className="w-full h-full relative" style={{ overflow: 'hidden' }}>
+                      <img
+                        src="/expert-avatars-cartoon.jpg"
+                        alt={expert.name}
+                        className="absolute max-w-none"
+                        style={{ 
+                          width: '200%',
+                          height: '200%',
+                          left: ((idx % 4) % 2 === 0) ? '0%' : '-100%',
+                          top: ((idx % 4) < 2) ? '0%' : '-100%'
+                        }}
+                      />
+                    </div>
                   </div>
                   {expert.available && (
                     <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-[#4D316B] rounded-full animate-pulse" />
                   )}
                 </div>
                 <div>
-                  <h3 className="text-xl font-serif font-bold text-foreground">{expert.name}</h3>
-                  <p className="text-xs font-semibold text-primary bg-primary/20 inline-block px-2 py-0.5 rounded mt-1">{expert.role}</p>
+                  <h3 className="text-xl font-serif font-bold text-[#7C3AED]">{expert.name}</h3>
+                  <p className="text-xs font-semibold text-[#6D28D9] bg-[#EDE9FE] inline-block px-2 py-0.5 rounded mt-1">{expert.role}</p>
                 </div>
               </div>
 
               {/* Stats */}
               <div className="flex items-center gap-2 mb-6">
                 <Star className="w-4 h-4 text-primary" fill="#B79AE6" />
-                <span className="text-sm font-bold text-foreground">{expert.rating}</span>
+                <span className="text-sm font-bold text-[#7C3AED]">{expert.rating}</span>
                 <span className="text-xs text-primary">({expert.reviews} orders)</span>
               </div>
 
               {/* Details */}
               <div className="space-y-2 mb-6 border-t border-primary/30 pt-4">
                 <div className="flex justify-between text-xs">
-                  <span className="text-primary">Languages</span>
-                  <span className="text-foreground font-medium">{expert.langs}</span>
+                  <span className="text-[#4A3B69]">Languages</span>
+                  <span className="text-[#7C3AED] font-medium">{expert.langs}</span>
                 </div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-primary">Experience</span>
-                  <span className="text-foreground font-medium">{expert.exp}</span>
+                  <span className="text-[#4A3B69]">Experience</span>
+                  <span className="text-[#7C3AED] font-medium">{expert.exp}</span>
                 </div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-primary">Price</span>
+                  <span className="text-[#4A3B69]">Price</span>
                   <span className="text-primary font-bold">{expert.price} / min</span>
                 </div>
               </div>
@@ -104,14 +116,14 @@ export function FinalHybridExperts() {
               <div className="flex items-center gap-3">
                 <button 
                   onClick={(e) => { e.stopPropagation(); router.push('/login'); }}
-                  className="flex-1 bg-transparent border border-primary text-foreground py-2.5 rounded-xl text-xs font-bold hover:bg-primary hover:text-[#2D1B54] hover:border-[#B79AE6] transition-colors flex items-center justify-center gap-1.5"
+                  className="flex-1 bg-transparent border border-primary text-[#7C3AED] py-2.5 rounded-xl text-xs font-bold hover:bg-primary hover:text-[#2D1B54] hover:border-[#B79AE6] transition-colors flex items-center justify-center gap-1.5"
                 >
                   <MessageCircle className="w-3.5 h-3.5" />
                   Chat
                 </button>
                 <button 
                   onClick={(e) => { e.stopPropagation(); router.push('/login'); }}
-                  className="flex-1 bg-transparent border border-primary text-foreground py-2.5 rounded-xl text-xs font-bold hover:bg-primary hover:text-[#2D1B54] hover:border-[#B79AE6] transition-colors flex items-center justify-center gap-1.5"
+                  className="flex-1 bg-transparent border border-primary text-[#7C3AED] py-2.5 rounded-xl text-xs font-bold hover:bg-primary hover:text-[#2D1B54] hover:border-[#B79AE6] transition-colors flex items-center justify-center gap-1.5"
                 >
                   <Phone className="w-3.5 h-3.5" />
                   Call
