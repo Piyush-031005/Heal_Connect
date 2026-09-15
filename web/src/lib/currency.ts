@@ -1,6 +1,6 @@
 // Detect currency from browser locale/timezone — no API call needed
 const LOCALE_CURRENCY: Record<string, { code: string; symbol: string; rate: number }> = {
-  IN: { code: 'INR', symbol: '₹', rate: 1 },
+  IN: { code: 'USD', symbol: '$', rate: 1 },
   US: { code: 'USD', symbol: '$', rate: 0.012 },
   GB: { code: 'GBP', symbol: '£', rate: 0.0095 },
   EU: { code: 'EUR', symbol: '€', rate: 0.011 },
@@ -70,7 +70,7 @@ export function convertFromINR(inrAmount: number) {
   // Round nicely
   return {
     ...currency,
-    amount: currency.code === 'INR' ? inrAmount : parseFloat(converted.toFixed(2)),
-    display: `${currency.symbol}${currency.code === 'INR' ? inrAmount : converted.toFixed(2)}`,
+    amount: currency.code === 'USD' ? inrAmount : parseFloat(converted.toFixed(2)),
+    display: `${currency.symbol}${currency.code === 'USD' ? inrAmount : converted.toFixed(2)}`,
   };
 }

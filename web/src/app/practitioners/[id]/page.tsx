@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, Star, MessageCircle, Phone, Shield, Loader2, Sparkles, CheckCircle2, Share } from 'lucide-react';
+import { ArrowLeft, Clock, MessageCircle, Phone, Star, Shield, Languages, BookOpen, Loader2, Sparkles, CheckCircle2, Share } from 'lucide-react';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -36,7 +37,8 @@ interface PractitionerDetail {
   reviews: Review[];
 }
 
-export default function PractitionerDetailPage() {
+export default function PractitionerDetail() {
+  const { format, currencyCode } = useCurrencyStore();
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
 
@@ -275,7 +277,9 @@ export default function PractitionerDetailPage() {
             {/* Price & Call Buttons */}
             <div className="flex items-center justify-between mt-6 pt-5 border-t border-yellow-100">
               <div>
-                <span className="text-3xl font-extrabold text-[#1a1a1a]">₹{p.perMinuteRate}</span>
+                <span className="text-3xl font-extrabold text-[#1a1a1a]">
+                  {currencyCode === 'GBP' ? `£${p.perMinuteRate}` : format(p.perMinuteRate)}
+                </span>
                 <span className="text-sm text-purple-400 font-medium"> / minute</span>
               </div>
               <div className="flex gap-3">

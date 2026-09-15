@@ -17,6 +17,7 @@ import { authApi, practitionersApi, walletApi, sessionsApi, tokenStore, type Pra
 import { getSocket } from '@/lib/socket';
 import { RechargeModal } from '@/components/wallet/RechargeModal';
 import { getPractitionerAvatar } from '@/lib/utils';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 
 interface UserData {
   id: string;
@@ -27,6 +28,7 @@ interface UserData {
 }
 
 export default function DashboardPage() {
+  const { format, currencyCode } = useCurrencyStore();
   const router = useRouter();
   const [user, setUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -191,7 +193,7 @@ export default function DashboardPage() {
               <div className="hidden sm:flex items-center gap-2 bg-purple-50 border border-indigo-200 rounded-full px-3 py-1.5 cursor-pointer hover:bg-indigo-100 transition-colors">
                 <Wallet className="h-4 w-4 text-purple-400" />
                 <span className="text-sm font-semibold text-indigo-700">
-                  {walletBalance !== null ? `₹${walletBalance.toFixed(2)}` : '...'}
+                  {walletBalance !== null ? (currencyCode === 'GBP' ? `£${walletBalance.toFixed(2)}` : format(walletBalance)) : '...'}
                 </span>
               </div>
             </Link>
@@ -277,7 +279,7 @@ export default function DashboardPage() {
         {/* ═══ STATS ROW ═══ */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: 'Wallet Balance', value: walletBalance !== null ? `₹${walletBalance.toFixed(2)}` : '...', icon: Wallet, color: 'text-purple-400', bg: 'bg-purple-50', shadow: 'shadow-indigo-200/30' },
+            { label: 'Wallet Balance', value: walletBalance !== null ? (currencyCode === 'GBP' ? `£${walletBalance.toFixed(2)}` : format(walletBalance)) : '...', icon: Wallet, color: 'text-purple-400', bg: 'bg-purple-50', shadow: 'shadow-indigo-200/30' },
             { label: 'Sessions Done', value: '0', icon: MessageCircle, color: 'text-emerald-600', bg: 'bg-emerald-50', shadow: 'shadow-emerald-200/30' },
             { label: 'Minutes Used', value: '0 min', icon: Clock, color: 'text-purple-500', bg: 'bg-purple-50', shadow: 'shadow-purple-200/30' },
             { label: 'Experts Online', value: onlineCount > 0 ? String(onlineCount) : '—', icon: TrendingUp, color: 'text-blue-500', bg: 'bg-blue-50', shadow: 'shadow-blue-200/30' },
@@ -394,7 +396,7 @@ export default function DashboardPage() {
 
                           <div className="flex items-center justify-between pt-3 mt-3 border-t border-purple-100">
                             <div>
-                              <span className="text-lg font-bold text-indigo-950">₹{expert.perMinuteRate}</span>
+                              <span className="text-lg font-bold text-indigo-950">{currencyCode === 'GBP' ? `£${expert.perMinuteRate}` : format(expert.perMinuteRate)}</span>
                               <span className="text-xs text-muted-foreground">/min</span>
                             </div>
                             <div className="flex gap-2">

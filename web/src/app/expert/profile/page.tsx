@@ -235,7 +235,7 @@ export default function ExpertProfilePage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className={LABEL_CLS}><IndianRupee className="w-3 h-3 inline mr-1 text-purple-400" /> Rate (₹/min)</label>
+                <label className={LABEL_CLS}><IndianRupee className="w-3 h-3 inline mr-1 text-purple-400" /> Rate ($/min)</label>
                 <input type="number" min="0" value={form.perMinuteRate} onChange={(e) => setForm((f) => ({ ...f, perMinuteRate: e.target.value }))} className={INPUT_CLS} />
               </div>
               <div>

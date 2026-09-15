@@ -185,7 +185,7 @@ export default function OpticalWheel() {
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {/* Removed the large yellowish radial gradient background */}
             <img
-              src="/main centre logo/finall.png"
+              src="/main/finall.png"
               alt="ZenAuraa"
               style={{
                 width: '150px', height: '150px', objectFit: 'contain',

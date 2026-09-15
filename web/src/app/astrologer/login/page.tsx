@@ -114,7 +114,7 @@ export default function AstrologerLoginPage() {
           <div className="space-y-6">
             {[
               { icon: Users, title: '50,000+ Active Users', desc: 'Clients waiting for guidance right now.' },
-              { icon: TrendingUp, title: 'Earn ₹500–₹5000/day', desc: 'Set your own rates, work anytime.' },
+              { icon: TrendingUp, title: 'Earn $500–$5000/day', desc: 'Set your own rates, work anytime.' },
               { icon: Sparkles, title: 'Verified & Trusted', desc: 'Our badge builds client confidence.' },
             ].map(({ icon: Icon, title, desc }) => (
               <div key={title} className="flex items-center gap-4">

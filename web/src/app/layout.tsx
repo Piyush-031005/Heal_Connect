@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 };
 
 import SmoothScroll from "@/components/smooth-scroll";
+import { CurrencyInit } from "@/components/CurrencyInit";
 
 export default function RootLayout({
   children,
@@ -37,6 +38,7 @@ export default function RootLayout({
         <Script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" strategy="afterInteractive" />
       </head>
       <body className={`${inter.variable} ${playfair.variable} ${cormorant.variable} font-sans antialiased theme`}>
+        <CurrencyInit />
         <div id="google_translate_element" style={{ display: 'none' }} />
           <ThemeProvider
             attribute="class"

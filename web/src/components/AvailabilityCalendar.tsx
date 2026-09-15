@@ -254,7 +254,7 @@ export default function AvailabilityCalendar({ practitionerId, isExpertMode = fa
         </div>
         
         <div className="flex items-center justify-center gap-6 text-xs text-purple-500 mt-4 px-2 border-t border-purple-50 pt-4">
-          <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-pink-500 shadow-[0_0_8px_rgba(236,72₹53,0.4)]"></span> <span className="font-medium text-purple-700">Available</span></div>
+          <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-pink-500 shadow-[0_0_8px_rgba(236,72$53,0.4)]"></span> <span className="font-medium text-purple-700">Available</span></div>
           <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-red-400 opacity-70"></span> <span className="font-medium text-purple-700">Booked</span></div>
         </div>
       </div>

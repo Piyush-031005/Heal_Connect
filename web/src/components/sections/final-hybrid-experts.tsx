@@ -9,11 +9,11 @@ import { useLayout } from '@/lib/layout-context';
 import { useRouter } from 'next/navigation';
 
 const EXPERTS = [
-  { name: 'Maya Sharma', role: 'Vedic Astrologer', rating: '4.9', reviews: '128k+', langs: 'English, Hindi', exp: '15+ Years', price: '₹120', available: true, img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop', badge: 'Celebrity' },
-  { name: 'Arun Nair', role: 'Tarot & Crystals', rating: '5.0', reviews: '342k+', langs: 'English, Malayalam', exp: '20+ Years', price: '₹150', available: true, img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop', badge: 'Top Choice' },
-  { name: 'Dr. Elena Rossi', role: 'Energy Healer', rating: '4.8', reviews: '89k+', langs: 'English, Italian', exp: '8+ Years', price: '₹90', available: false, img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop', badge: 'Celebrity' },
-  { name: 'Chen Wei', role: 'Numerologist', rating: '5.0', reviews: '412k+', langs: 'English, Mandarin', exp: '30+ Years', price: '₹80', available: true, img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop', badge: 'Top Choice' },
-  { name: 'Luna Vega', role: 'Tarot Reader', rating: '4.9', reviews: '11k+', langs: 'English, Spanish', exp: '6+ Years', price: '₹100', available: true, img: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=400&auto=format&fit=crop', badge: '' },
+  { name: 'Maya Sharma', role: 'Vedic Astrologer', rating: '4.9', reviews: '128k+', langs: 'English, Hindi', exp: '15+ Years', price: '$120', available: true, img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop', badge: 'Celebrity' },
+  { name: 'Arun Nair', role: 'Tarot & Crystals', rating: '5.0', reviews: '342k+', langs: 'English, Malayalam', exp: '20+ Years', price: '$150', available: true, img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop', badge: 'Top Choice' },
+  { name: 'Dr. Elena Rossi', role: 'Energy Healer', rating: '4.8', reviews: '89k+', langs: 'English, Italian', exp: '8+ Years', price: '$90', available: false, img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop', badge: 'Celebrity' },
+  { name: 'Chen Wei', role: 'Numerologist', rating: '5.0', reviews: '412k+', langs: 'English, Mandarin', exp: '30+ Years', price: '$80', available: true, img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop', badge: 'Top Choice' },
+  { name: 'Luna Vega', role: 'Tarot Reader', rating: '4.9', reviews: '11k+', langs: 'English, Spanish', exp: '6+ Years', price: '$100', available: true, img: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=400&auto=format&fit=crop', badge: '' },
 ];
 
 export function FinalHybridExperts() {

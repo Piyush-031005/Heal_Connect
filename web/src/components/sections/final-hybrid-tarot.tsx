@@ -144,14 +144,14 @@ export function FinalHybridTarot() {
                 style={{
                   transform: `translateX(${xOffset}px) rotate(${rot}deg) translateY(${yOffset}px) scale(${isSelected ? 1.15 : 1})`,
                   zIndex: isSelected ? 50 + selectionIndex : i + 1,
-                  transition: 'all 0.6s cubic-bezier(0.34₹.56,0.64₹)',
+                  transition: 'all 0.6s cubic-bezier(0.34$.56,0.64$)',
                   margin: '0 -20px' // Negative margin to overlap cards like a spread deck
                 }}>
                 <div className="w-[110px] h-[190px] md:w-[150px] md:h-[250px] relative cursor-pointer"
                   style={{ perspective: '1200px' }}
                   onClick={() => handleSelect(i)}>
                   <div className="relative w-full h-full shadow-2xl rounded-xl group-hover:-translate-y-4 transition-transform duration-500"
-                    style={{ transformStyle: 'preserve-3d', transform: (isReadingReady && isSelected) ? 'rotateY(180deg)' : 'rotateY(0deg)', transition: 'transform 0.8s cubic-bezier(0.34₹.56,0.64₹)' }}>
+                    style={{ transformStyle: 'preserve-3d', transform: (isReadingReady && isSelected) ? 'rotateY(180deg)' : 'rotateY(0deg)', transition: 'transform 0.8s cubic-bezier(0.34$.56,0.64$)' }}>
 
                     {/* ── Card Back (Static 0deg) ── */}
                     <div className="absolute inset-0 w-full h-full rounded-xl flex items-center justify-center p-2"

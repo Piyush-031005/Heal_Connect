@@ -5,6 +5,7 @@ import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 import { Search, Star, MessageCircle, Phone, SlidersHorizontal, X, Shield, Globe, CalendarDays } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -44,6 +45,7 @@ const API_URL = '';
 const SELECT_CLS = 'w-full text-sm rounded-xl bg-card/80 dark:bg-card/80 border border-border px-4 py-2.5 text-[#2d1b69] focus:outline-none focus:ring-1 focus:ring-primary transition-all hover:bg-secondary';
 
 export default function PractitionersPage() {
+  const { format, currencySymbol, currencyCode } = useCurrencyStore();
   const [practitioners, setPractitioners] = useState<Practitioner[]>([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
@@ -77,6 +79,11 @@ export default function PractitionersPage() {
 
   return (
     <div className="min-h-screen flex flex-col font-sans relative overflow-hidden" style={{background:"linear-gradient(145deg, #F5F0FF 0%, #EDE9FE 20%, #DDD6FE 45%, #C4B5FD 70%, #A5B4FC 100%)"}}>
+      {/* GhostFibers cinematic background */}
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-100">
+        <GhostFibers lineColor="#8345bd" glowColor="#7c41e0" speed={0.2} scale={2} rotation={0} rotationSpeed={0.25} layers={8} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={7} twistSpeed={1.5} lineFrequency={20} lineSpacing={1.0} lineSharpness={13} glowFalloff={7} glowIntensity={3.5} brightness={3.0} blueBoost={1.5} vignette={0.5} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
+      </div>
+      {/* Glowing orbs for positive vibe */}
       {/* Glowing orbs for positive vibe */}
       <div style={{position:"absolute",top:"-10%",left:"-5%",width:"40%",height:"40%",borderRadius:"50%",background:"radial-gradient(circle, rgba(167,39,250,0.35) 0%, transparent 70%)",filter:"blur(80px)",pointerEvents:"none"}} />
       <div style={{position:"absolute",bottom:"-10%",right:"-5%",width:"50%",height:"50%",borderRadius:"50%",background:"radial-gradient(circle, rgba(129,40,248,0.3) 0%, transparent 70%)",filter:"blur(100px)",pointerEvents:"none"}} />
@@ -128,11 +135,11 @@ export default function PractitionersPage() {
               <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Min Rating</label>
               <select value={filters.minRating} onChange={(e) => setFilters((f) => ({ ...f, minRating: e.target.value }))} className={SELECT_CLS}>
                 <option value="" className="bg-card">Any</option>
-                {['3', '3.5', '4', '4.5'].map((r) => <option key={r} value={r} className="bg-card">⭐ {r}+</option>)}
+                {['3', '3.5', '4', '4.5'].map((r) => <option key={r} value={r} className="bg-card">Ã¢Â­Â {r}+</option>)}
               </select>
             </div>
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Max ┚¹/min</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Max {currencySymbol}/min</label>
               <input type="number" min={0} placeholder="e.g. 50" value={filters.maxRate} onChange={(e) => setFilters((f) => ({ ...f, maxRate: e.target.value }))} className={SELECT_CLS} />
             </div>
             <div className="flex flex-col justify-end gap-3">
@@ -157,8 +164,8 @@ export default function PractitionersPage() {
           <div className="flex flex-wrap gap-3 mb-8">
             {filters.specialty && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">{filters.specialty}<button onClick={() => setFilters((f) => ({ ...f, specialty: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
             {filters.language && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">{filters.language}<button onClick={() => setFilters((f) => ({ ...f, language: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
-            {filters.minRating && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">⭐ {filters.minRating}+<button onClick={() => setFilters((f) => ({ ...f, minRating: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
-            {filters.maxRate && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">┰¤ ┚¹{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
+            {filters.minRating && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">★ +<button onClick={() => setFilters((f) => ({ ...f, minRating: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
+            {filters.maxRate && <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 gap-1.5 py-1 px-3 rounded-full">Max {currencySymbol}{filters.maxRate}/min<button onClick={() => setFilters((f) => ({ ...f, maxRate: '' }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
             {filters.onlineOnly && <Badge variant="outline" className="border-accent/30 text-accent bg-accent/10 gap-1.5 py-1 px-3 rounded-full shadow-[0_0_10px_rgba(46,96,82,0.1)]">Online Now<button onClick={() => setFilters((f) => ({ ...f, onlineOnly: false }))} className="hover:bg-white/20 dark:bg-black/20 rounded-full p-0.5 transition-colors"><X className="h-3 w-3" /></button></Badge>}
           </div>
         )}
@@ -193,23 +200,25 @@ export default function PractitionersPage() {
   );
 }
 
+
 function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
+  const { format, currencyCode } = useCurrencyStore();
   const router = useRouter();
   const avatarSrc = getPractitionerAvatar(p.photoUrl, p.id);
 
   return (
-    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-border hover:border-primary/50 hover:shadow-[0_8px_30px_rgba(214,80,07,0.15)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
+    <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-[#C4B5FD]/95 backdrop-blur-2xl border-2 border-white/20 hover:border-white/50 hover:shadow-[0_12px_40px_rgba(196,181,253,0.5)] shadow-[0_4px_20px_rgba(196,181,253,0.3)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
       <CardContent className="p-0 flex flex-col h-full relative">
         {/* Top strip with avatar */}
-        <div className="relative h-20 bg-gradient-to-r from-white/5 to-white/10 shrink-0">
+        <div className="relative h-20 bg-white/10 shrink-0 border-b border-white/10">
           <div className="absolute -bottom-8 left-6 z-10">
-            <img src={avatarSrc} alt={p.name} className="w-16 h-16 rounded-2xl object-cover shadow-[0_4px_15px_rgba(0,0,0,0.5)] border-2 border-[#121420] transition-transform duration-300 group-hover:scale-105" />
+            <img src={avatarSrc} alt={p.name} className="w-16 h-16 rounded-2xl object-cover shadow-[0_4px_15px_rgba(0,0,0,0.3)] border-2 border-white transition-transform duration-300 group-hover:scale-105" />
           </div>
           <div className="absolute top-4 right-4 z-10">
             <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full ${
-              p.isOnline ? 'bg-accent/20 text-accent border border-accent/30 shadow-[0_0_10px_rgba(46,96,82,0.2)]' : 'bg-secondary text-secondary-foreground border border-border'
+              p.isOnline ? 'bg-green-400 text-white shadow-[0_0_10px_rgba(74,222,128,0.4)]' : 'bg-red-400 text-white'
             }`}>
-              <span className={`w-1.5 h-1.5 rounded-full ${p.isOnline ? 'bg-accent animate-pulse' : 'bg-muted-foreground'}`} />
+              <span className={`w-1.5 h-1.5 rounded-full ${p.isOnline ? 'bg-white animate-pulse shadow-[0_0_6px_rgba(255,255,255,0.8)]' : 'bg-white'}`} />
               {p.isOnline ? 'Online' : 'Offline'}
             </span>
           </div>
@@ -219,52 +228,59 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
         <div className="pt-10 px-6 pb-6 flex flex-col flex-1 relative z-0">
           <div className="flex items-start justify-between mb-1">
             <div>
-              <p className="font-bold text-[#2d1b69] text-lg tracking-wide group-hover:text-primary transition-colors">{p.name}</p>
-              <p className="text-sm text-primary font-medium">{p.specialties.slice(0, 2).join(' · ') || '—'}</p>
+              <p className="font-bold text-[#2d1b69] text-lg tracking-wide group-hover:text-[#1e1b4b] transition-colors">{p.name}</p>
+              <p className="text-sm text-[#4c1d95] font-medium">{p.specialties.slice(0, 2).join(', ') || ' '}</p>
             </div>
             {p.isVerified && (
-              <div className="flex items-center gap-1 bg-primary/10 border border-primary/30 rounded-lg px-2 py-1 shrink-0 mt-1 shadow-[0_0_10px_rgba(214,80,07,0.1)]">
-                <Shield className="w-3 h-3 text-primary" />
-                <span className="text-[10px] font-bold text-primary uppercase tracking-wider">Verified</span>
+              <div className="flex items-center gap-1 bg-white/40 border border-white/50 rounded-lg px-2 py-1 shrink-0 mt-1 shadow-sm">
+                <Shield className="w-3 h-3 text-[#4c1d95]" />
+                <span className="text-[10px] font-bold text-[#4c1d95] uppercase tracking-wider">Verified</span>
               </div>
             )}
           </div>
 
           <div className="flex flex-wrap items-center gap-3 mt-3 mb-4">
-            <div className="flex items-center gap-1 px-2 py-1 bg-secondary rounded-lg border border-border">
-              <Star className="w-3.5 h-3.5 text-primary fill-current" />
-              <span className="text-sm font-bold text-[#2d1b69]">{p.avgRating || '—'}</span>
-              <span className="text-xs text-muted-foreground">({p.reviewCount})</span>
+            <div className="flex items-center gap-1 px-2 py-1 bg-white/30 rounded-lg border border-white/40">
+              <Star className="w-3.5 h-3.5 text-[#FFB800] fill-current" />
+              <span className="text-sm font-bold text-[#2d1b69]">{p.avgRating || ' '}</span>
+              <span className="text-xs text-[#4c1d95]">({p.reviewCount})</span>
             </div>
-            <span className="text-muted-foreground">|</span>
-            <span className="text-xs text-muted-foreground font-medium">{p.experienceYrs} yrs exp</span>
-            <span className="text-muted-foreground hidden sm:inline">|</span>
-            <div className="flex items-center gap-1.5 text-xs text-muted-foreground bg-secondary px-2 py-1 rounded-lg border border-border">
-              <Globe className="w-3 h-3 text-muted-foreground" />
-              <span className="truncate max-w-[80px]">{p.languages.slice(0, 2).join(', ') || '—'}</span>
+            <span className="text-[#4c1d95]/40">|</span>
+            <span className="text-xs text-[#4c1d95] font-medium">{p.experienceYrs} yrs exp</span>
+            <span className="text-[#4c1d95]/40 hidden sm:inline">|</span>
+            <div className="flex items-center gap-1.5 text-xs text-[#4c1d95] bg-white/30 px-2 py-1 rounded-lg border border-white/40">
+              <Globe className="w-3 h-3 text-[#4c1d95]" />
+              <span className="truncate max-w-[80px]">{p.languages.slice(0, 2).join(', ') || ' '}</span>
             </div>
           </div>
 
           {/* Bio */}
-          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed flex-1 mb-5">
+          <p className="text-sm text-[#2d1b69]/80 line-clamp-2 leading-relaxed flex-1 mb-5">
             {p.bio || ''}
           </p>
 
-          <div className="flex items-center justify-between pt-4 mt-auto border-t border-border">
-            <div>
-              <span className="text-xl font-bold text-[#2d1b69]">┚¹{p.perMinuteRate}</span>
-              <span className="text-xs text-muted-foreground ml-1">/min</span>
-            </div>
-            <div className="flex gap-2">
-              <Button size="sm" className="h-9 rounded-md px-4 bg-[#5F3BA9] text-white hover:opacity-90 border-0 text-xs font-semibold transition-all" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
-                  <CalendarDays className="h-4 w-4 mr-1.5" /> See Calendar
-                </Button>
-                <Button size="sm" className="h-9 rounded-md px-4 bg-gradient-to-r from-[#5F3BA9] to-[#9B6BCA] text-white hover:opacity-90 border-0 text-xs font-semibold transition-all" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+          <div className="flex flex-col gap-3 pt-4 mt-auto border-t border-white/30">
+            {/* Calendar Button Above */}
+            <Button size="sm" className="w-full h-9 rounded-md bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all shadow-md" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+              <CalendarDays className="h-4 w-4 mr-1.5" /> See Calendar
+            </Button>
+            
+            {/* Price, Chat, and Call Below */}
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-xl font-bold text-[#2d1b69]">
+                  {currencyCode === 'GBP' ? `£${p.perMinuteRate}` : format(p.perMinuteRate)}
+                </span>
+                <span className="text-xs text-[#4c1d95] ml-1">/min</span>
+              </div>
+              <div className="flex gap-2">
+                <Button size="sm" className="h-9 rounded-md px-3 bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all shadow-md" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
                   <MessageCircle className="h-4 w-4 mr-1.5" /> Chat
                 </Button>
-              <Button size="sm" disabled={!p.isOnline} className="h-9 rounded-md px-4 bg-gradient-to-r from-[#5F3BA9] to-[#9B6BCA] text-white hover:opacity-90 border-0 text-xs font-bold transition-all disabled:opacity-30 disabled:hover:opacity-100" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+                <Button size="sm" className="h-9 rounded-md px-3 bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all shadow-md" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
                   <Phone className="h-4 w-4 mr-1.5" /> Call
                 </Button>
+              </div>
             </div>
           </div>
         </div>

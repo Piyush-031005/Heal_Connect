@@ -1041,6 +1041,26 @@ router.post('/sessions/:id/transcript/transcribe', requireAdminAuth(ALL_ROLES), 
   }
 });
 
+// ─── 4.0 Verify User ────────────────────────────────────────────────────────
+router.patch('/users/:id/verify', requireAdminAuth(WRITE_ROLES), async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params as { id: string };
+    const { isVerified } = req.body;
+    
+    const user = await prisma.user.update({
+      where: { id },
+      data: { isEmailVerified: Boolean(isVerified) },
+      select: { id: true, name: true, isEmailVerified: true, isPhoneVerified: true }
+    });
+
+    await writeAuditLog(req, 'UPDATE_USER_VERIFICATION', 'USER', id, { isVerified });
+
+    res.json({ success: true, user });
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 // ─── 9. Moderation ──────────────────────────────────────────────────────────
 router.get('/moderation', requireAdmin, async (req: Request, res: Response) => {
   try {

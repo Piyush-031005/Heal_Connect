@@ -263,7 +263,7 @@ export function FeaturedExperts() {
                   <span className="text-xs font-medium text-green-600">Online</span>
                 </div>
                 <div className="text-right">
-                  <span className="text-sm font-bold text-foreground">{expert.price.replace('$', '₹')}</span>
+                  <span className="text-sm font-bold text-foreground">{expert.price.replace('$', '$')}</span>
                   <span className="text-xs text-muted-foreground">/min</span>
                 </div>
               </div>

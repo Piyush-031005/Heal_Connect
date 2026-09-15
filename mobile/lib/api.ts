@@ -1,4 +1,5 @@
 ﻿import * as SecureStore from 'expo-secure-store';
+import { Platform } from 'react-native';
 import { router } from 'expo-router';
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL || '';
@@ -45,19 +46,36 @@ export interface PractitionerProfile {
 
 export const tokenStore = {
   async setTokens(access: string, refresh: string) {
-    await SecureStore.setItemAsync('hc_access', access);
-    await SecureStore.setItemAsync('hc_refresh', refresh);
+    if (Platform.OS === 'web') {
+      localStorage.setItem('hc_access', access);
+      localStorage.setItem('hc_refresh', refresh);
+    } else {
+      await SecureStore.setItemAsync('hc_access', access);
+      await SecureStore.setItemAsync('hc_refresh', refresh);
+    }
   },
   async getAccess() {
+    if (Platform.OS === 'web') return localStorage.getItem('hc_access');
     return await SecureStore.getItemAsync('hc_access');
   },
   async getRefresh() {
+    if (Platform.OS === 'web') return localStorage.getItem('hc_refresh');
     return await SecureStore.getItemAsync('hc_refresh');
   },
+  async setRole(role: string) {
+    if (Platform.OS === 'web') localStorage.setItem('hc_role', role);
+    else await SecureStore.setItemAsync('hc_role', role);
+  },
   async clear() {
-    await SecureStore.deleteItemAsync('hc_access');
-    await SecureStore.deleteItemAsync('hc_refresh');
-    await SecureStore.deleteItemAsync('hc_role');
+    if (Platform.OS === 'web') {
+      localStorage.removeItem('hc_access');
+      localStorage.removeItem('hc_refresh');
+      localStorage.removeItem('hc_role');
+    } else {
+      await SecureStore.deleteItemAsync('hc_access');
+      await SecureStore.deleteItemAsync('hc_refresh');
+      await SecureStore.deleteItemAsync('hc_role');
+    }
   },
 };
 

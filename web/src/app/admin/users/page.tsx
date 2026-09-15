@@ -354,6 +354,25 @@ export default function AdminUsersPage() {
     }
   };
 
+  const toggleUserVerification = async (uid: string, currentStatus: boolean) => {
+    try {
+      const res = await fetch(`/api/admin/users/${uid}/verify`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isVerified: !currentStatus }),
+      }).then((r) => r.json());
+
+      if (res.success) {
+        showToast(`User ${currentStatus ? 'unverified' : 'verified'} successfully!`);
+        fetchUsers();
+      } else {
+        showToast(res.message || 'Failed to update verification', 'error');
+      }
+    } catch {
+      showToast('An error occurred', 'error');
+    }
+  };
+
   const handleUpdateBalance = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editBalanceUser) return;
@@ -452,6 +471,15 @@ export default function AdminUsersPage() {
                         <td className="px-4 py-3 text-xs text-purple-500">{new Date(u.createdAt).toLocaleDateString()}</td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1.5">
+                            <button
+                              onClick={() => toggleUserVerification(u.id, u.isEmailVerified || u.isPhoneVerified)}
+                              title={u.isEmailVerified || u.isPhoneVerified ? 'Mark Pending' : 'Verify User'}
+                              className={`px-2.5 py-1 rounded-lg text-xs font-extrabold transition-all ${
+                                u.isEmailVerified || u.isPhoneVerified ? 'bg-purple-50 text-purple-600 hover:bg-purple-100' : 'bg-green-50 text-green-600 hover:bg-green-100'
+                              }`}
+                            >
+                              {u.isEmailVerified || u.isPhoneVerified ? 'Unverify' : '✓ Verify'}
+                            </button>
                             <button onClick={() => setViewUser(u)} title="View Profile" className="p-1.5 rounded-lg hover:bg-blue-50 text-blue-500"><Eye className="w-3.5 h-3.5" /></button>
                             <button onClick={() => { setEditBalanceUser(u); setBalanceInput(u.balance.toString()); }} title="Edit Balance" className="p-1.5 rounded-lg hover:bg-emerald-50 text-emerald-600"><DollarSign className="w-3.5 h-3.5" /></button>
                             {u.isBanned ? (
