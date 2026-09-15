@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import GhostFibers from '@/components/GhostFibers';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -67,7 +67,7 @@ function PrimaryHero() {
                   {[0,1,2,3].map((i) => (
                     <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden shadow-md" style={{ zIndex: 4 - i }}>
                       <img
-                        src="/expert-avatars.jpg"
+                        src="/expert-avatars-cartoon.jpg"
                         alt="expert"
                         className="h-full object-cover"
                         style={{ width: "400%", objectPosition: `${-i * 25}% center`, transform: `translateX(${i * 25}%)` }}
