@@ -173,7 +173,7 @@ router.post(
 router.post(
   '/recharge/stripe',
   requireAuth,
-  [body('amount').isNumeric().custom((val) => val >= 10).withMessage('Amount must be at least ₹10 (equivalent)')],
+  [body('amount').isNumeric().custom((val) => val >= 2).withMessage('Amount must be at least £2')],
   handleValidation,
   async (req: AuthRequest, res: Response) => {
     const { amount } = req.body as { amount: number };
