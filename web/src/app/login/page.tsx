@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -6,7 +6,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Mail, Lock, ArrowRight, ShieldCheck, Star, Eye, EyeOff, Loader2, User, Sparkles } from 'lucide-react';
-import GhostFibers from '@/components/GhostFibers';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -222,49 +221,67 @@ function LoginInner() {
     setError('Apple Sign-In requires native SDK configuration.');
   }
 
-    return (
-    <div className="relative min-h-screen w-full font-sans overflow-hidden bg-[#0C0514] flex items-center justify-center p-4">
-      <div className="absolute inset-0 z-0">
-        <GhostFibers
-          lineColor="#885dd1"
-          glowColor="#9465c2"
-          speed={0.2}
-          scale={1.58}
-          rotation={-32}
-          rotationSpeed={0.25}
-          layers={6}
-          waveAmplitude={0.015}
-          waveFrequency={2}
-          waveSpeed={-1.15}
-          layerSpeed={-0.04}
-          twist={0.1}
-          twistFrequency={6.8}
-          twistSpeed={1.2}
-          lineFrequency={5}
-          lineSpacing={2.65}
-          lineSharpness={16}
-          glowFalloff={10}
-          glowIntensity={1.6}
-          brightness={2}
-          blueBoost={1.25}
-          lightMode={false}
-        />
+  return (
+    <div className="min-h-screen bg-[#faf9f6] flex flex-col md:flex-row font-sans">
+
+      {/* Left — Branding */}
+      <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-gradient-to-br from-[#4f46e5] via-[#4338ca] to-[#b45309] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-900/20 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative z-10">
+          <Link href="/" className="flex items-center gap-2 mb-16">
+            <Image src="/logo.png" alt="ZenAuraa" width={36} height={36} className="rounded-full" />
+            <span className="text-2xl font-extrabold text-white">ZenAuraa</span>
+          </Link>
+          <h1 className="text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">
+            Begin your journey <br /> to inner peace.
+          </h1>
+          <p className="text-lg text-yellow-100 max-w-md leading-relaxed mb-12">
+            Join 50,000+ members receiving guidance from world-class verified practitioners.
+          </p>
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                <ShieldCheck className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className="text-white font-semibold">100% Private & Secure</p>
+                <p className="text-sm text-yellow-100">Your data and conversations are encrypted.</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                <Star className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className="text-white font-semibold">Verified Experts</p>
+                <p className="text-sm text-yellow-100">Rigorous 5-step background checks.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative z-10 mt-auto pt-12 border-t border-white/20">
+          <p className="text-yellow-100 text-sm">© 2026 Tara Infotech. All rights reserved.</p>
+        </div>
       </div>
 
-      <div className="relative z-10 w-full max-w-md">
-        <div className="flex justify-center mb-8">
+      {/* Right — Form */}
+      <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative">
+        <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="ZenAuraa" width={42} height={42} className="rounded-full shadow-lg" />
-            <span className="text-3xl font-extrabold text-white tracking-wide">ZenAuraa</span>
+            <Image src="/logo.png" alt="ZenAuraa" width={28} height={28} className="rounded-full" />
+            <span className="text-xl font-extrabold text-[#4f46e5]">ZenAuraa</span>
           </Link>
         </div>
 
-        <Card className="w-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl">
+        <Card className="w-full max-w-md bg-white border border-yellow-100 shadow-xl">
           <CardHeader className="space-y-2 pb-6">
-            <CardTitle className="text-2xl font-extrabold text-white">
+            <CardTitle className="text-2xl font-extrabold text-[#1a1a1a]">
               {mode === 'login' ? 'Log in to your account' : 'Reset your password'}
             </CardTitle>
-            <CardDescription className="text-gray-300 text-base">
+            <CardDescription className="text-gray-500 text-base">
               {mode === 'login' ? 'Welcome back! Enter your credentials to continue.' : 'Enter your email to receive a password reset link.'}
             </CardDescription>
           </CardHeader>
@@ -289,15 +306,15 @@ function LoginInner() {
               <>
                 {/* User/Expert Toggle - Bold & Prominent */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs font-medium text-gray-300 uppercase tracking-wide">Account Type</label>
-                  <div className="flex rounded-2xl border-2 border-[#4f46e5]/20 overflow-hidden bg-white/5 p-1.5 gap-2 shadow-sm">
+                  <label className="block text-xs font-medium text-gray-500 uppercase tracking-wide">Account Type</label>
+                  <div className="flex rounded-2xl border-2 border-[#4f46e5]/20 overflow-hidden bg-gradient-to-br from-[#faf9f6] to-white p-1.5 gap-2 shadow-sm">
                     <button
                       type="button"
                       onClick={() => setRole('user')}
                       className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-base font-bold transition-all ${
                         role === 'user' 
                           ? 'bg-gradient-to-br from-[#4f46e5] to-[#4338ca] text-white shadow-lg scale-[1.02]' 
-                          : 'text-gray-300 hover:text-[#4f46e5] hover:bg-white/50'
+                          : 'text-gray-600 hover:text-[#4f46e5] hover:bg-white/50'
                       }`}
                     >
                       {role === 'user' && '✦ '}User
@@ -308,7 +325,7 @@ function LoginInner() {
                       className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-base font-bold transition-all ${
                         role === 'expert' 
                           ? 'bg-gradient-to-br from-[#4f46e5] to-[#4338ca] text-white shadow-lg scale-[1.02]' 
-                          : 'text-gray-300 hover:text-[#4f46e5] hover:bg-white/50'
+                          : 'text-gray-600 hover:text-[#4f46e5] hover:bg-white/50'
                       }`}
                     >
                       {role === 'expert' && '✦ '}Expert
@@ -318,15 +335,15 @@ function LoginInner() {
 
                 {/* Email/Phone Toggle - Subtle & Clean */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs font-medium text-gray-300">Login Method</label>
+                  <label className="block text-xs font-medium text-gray-500">Login Method</label>
                   <div className="inline-flex rounded-lg border border-gray-200 overflow-hidden bg-gray-50 p-0.5 gap-0.5">
                     <button 
                       type="button" 
                       onClick={() => { setLoginMethod('password'); setError(''); setSuccess(''); }}
                       className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
                         loginMethod === 'password' 
-                          ? 'bg-white/20 text-white shadow-sm' 
-                          : 'text-gray-300 hover:text-gray-700'
+                          ? 'bg-white text-gray-900 shadow-sm' 
+                          : 'text-gray-500 hover:text-gray-700'
                       }`}
                     >
                       Email
@@ -336,8 +353,8 @@ function LoginInner() {
                       onClick={() => { setLoginMethod('otp'); setError(''); setSuccess(''); }}
                       className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
                         loginMethod === 'otp' 
-                          ? 'bg-white/20 text-white shadow-sm' 
-                          : 'text-gray-300 hover:text-gray-700'
+                          ? 'bg-white text-gray-900 shadow-sm' 
+                          : 'text-gray-500 hover:text-gray-700'
                       }`}
                     >
                       Phone
@@ -350,21 +367,21 @@ function LoginInner() {
             {mode === 'login' && loginMethod === 'password' && (
               <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-white">Email</Label>
+                  <Label htmlFor="email" className="text-[#1a1a1a]">Email</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
-                    <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" className="pl-10 h-12 border-white/20 focus-visible:ring-[#4f46e5] bg-white/10 text-white" />
+                    <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" className="pl-10 h-12 border-yellow-200 focus-visible:ring-[#4f46e5] bg-[#faf9f6] text-[#1a1a1a]" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <Label htmlFor="password" className="text-white">Password</Label>
+                    <Label htmlFor="password" className="text-[#1a1a1a]">Password</Label>
                     <button type="button" onClick={() => { setMode('forgot'); setError(''); setSuccess(''); }} className="text-sm text-[#4f46e5] hover:underline">Forgot password?</button>
                   </div>
                   <div className="relative">
                     <Lock className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
-                    <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password" className="pl-10 pr-10 h-12 border-white/20 focus-visible:ring-[#4f46e5] bg-white/10 text-white" />
-                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-300" tabIndex={-1}>
+                    <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password" className="pl-10 pr-10 h-12 border-yellow-200 focus-visible:ring-[#4f46e5] bg-[#faf9f6] text-[#1a1a1a]" />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600" tabIndex={-1}>
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
                   </div>
@@ -378,14 +395,14 @@ function LoginInner() {
             {mode === 'login' && loginMethod === 'otp' && (
               <form onSubmit={handleSendOtp} className="space-y-4">
                 <div className="space-y-2">
-                  <Label className="text-white">Phone Number</Label>
+                  <Label className="text-[#1a1a1a]">Phone Number</Label>
                   <div className="flex gap-2">
                     <CountryCodeSelect
                       value={countryCode}
                       onChange={setCountryCode}
                       className="w-[125px] sm:w-[135px] flex-shrink-0"
                     />
-                    <Input id="phone" type="tel" placeholder="9876543210" value={phone} onChange={(e) => setPhone(e.target.value)} required className="flex-1 h-12 border-white/20 focus-visible:ring-[#4f46e5] bg-white/10 text-white" />
+                    <Input id="phone" type="tel" placeholder="9876543210" value={phone} onChange={(e) => setPhone(e.target.value)} required className="flex-1 h-12 border-yellow-200 focus-visible:ring-[#4f46e5] bg-[#faf9f6] text-[#1a1a1a]" />
                   </div>
                 </div>
                 <Button type="submit" disabled={loading} className="w-full bg-[#4f46e5] hover:bg-[#4338ca] text-white h-12 text-base font-bold rounded-full border-0 shadow-lg">
@@ -397,10 +414,10 @@ function LoginInner() {
             {mode === 'forgot' && (
               <form onSubmit={handleForgotPassword} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="reset-email" className="text-white">Email</Label>
+                  <Label htmlFor="reset-email" className="text-[#1a1a1a]">Email</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
-                    <Input id="reset-email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required className="pl-10 h-12 border-white/20 focus-visible:ring-[#4f46e5] bg-white/10 text-white" />
+                    <Input id="reset-email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required className="pl-10 h-12 border-yellow-200 focus-visible:ring-[#4f46e5] bg-[#faf9f6] text-[#1a1a1a]" />
                   </div>
                 </div>
                 <Button type="submit" disabled={loading} className="w-full bg-[#4f46e5] hover:bg-[#4338ca] text-white h-12 text-base font-bold rounded-full border-0">
@@ -415,12 +432,12 @@ function LoginInner() {
             {mode === 'login' && (
               <>
                 <div className="relative flex items-center py-1">
-                  <div className="flex-grow border-t border-white/20" />
+                  <div className="flex-grow border-t border-yellow-100" />
                   <span className="flex-shrink-0 mx-4 text-gray-400 text-sm uppercase tracking-wider">Or continue with</span>
-                  <div className="flex-grow border-t border-white/20" />
+                  <div className="flex-grow border-t border-yellow-100" />
                 </div>
                 <div className="space-y-3">
-                  <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full h-12 bg-white/10 border border-white/20 text-white hover:bg-white/20 text-white shadow-sm">
+                  <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full h-12 bg-white border border-gray-200 hover:bg-gray-50 text-[#1a1a1a] shadow-sm">
                     <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
                       <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                       <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
@@ -429,14 +446,14 @@ function LoginInner() {
                     </svg>
                     Continue with Google
                   </Button>
-                  <Button type="button" variant="outline" onClick={handleAppleSignIn} className="w-full h-12 bg-white/10 border border-white/20 text-white hover:bg-white/20 text-white shadow-sm">
+                  <Button type="button" variant="outline" onClick={handleAppleSignIn} className="w-full h-12 bg-white border border-gray-200 hover:bg-gray-50 text-[#1a1a1a] shadow-sm">
                     <svg className="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.65.04 2.9.72 3.68 1.9-3.28 1.95-2.73 5.75.52 7.02-.75 1.86-1.74 3.2-2.87 3.99zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.32 2.38-2.07 4.29-3.74 4.25z" />
                     </svg>
                     Continue with Apple
                   </Button>
                 </div>
-                <p className="text-center text-sm text-gray-300 pt-1">
+                <p className="text-center text-sm text-gray-500 pt-1">
                   Don&apos;t have an account?{' '}
                   <Link href="/signup" className="text-[#4f46e5] font-semibold hover:underline">Sign up</Link>
                 </p>
