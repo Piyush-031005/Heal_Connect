@@ -1,6 +1,7 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import GhostFibers from '@/components/GhostFibers';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -154,7 +155,13 @@ export default function DashboardPage() {
   const firstName = user?.name?.split(' ')[0] || 'there';
 
   return (
-    <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans">
+        <div className="min-h-screen bg-transparent text-[#1a1a1a] flex flex-col font-sans relative overflow-hidden" style={{background:'linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 40%, #DDD6FE 100%)'}}>
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <GhostFibers lineColor="#7C3AED" glowColor="#6D28D9" speed={0.25} scale={1.8} rotation={0} rotationSpeed={0.3} 
+layers={12} waveAmplitude={0.022} waveFrequency={5} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={6} 
+twistSpeed={1.4} lineFrequency={12} lineSpacing={1.2} lineSharpness={14} glowFalloff={8} glowIntensity={2.2} 
+brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
+      </div>
 
       {/* Top Nav */}
       <header className="sticky top-0 z-50 w-full border-b border-indigo-100 bg-white/80 backdrop-blur">
@@ -244,7 +251,7 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      <main className="flex-1 container mx-auto px-4 py-8 space-y-8">
+      <main className="flex-1 container mx-auto px-4 py-8 space-y-8 relative z-10">
 
         {/* ═══ WELCOME BANNER ═══ */}
         <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-purple-400 via-purple-500 to-indigo-600 p-6 md:p-8">
