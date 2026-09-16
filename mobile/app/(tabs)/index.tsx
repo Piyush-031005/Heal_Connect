@@ -5,9 +5,8 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import {
-  Search, Bell, Star, MessageCircle, Phone, ArrowRight, Check, Calendar, Sun, Hash
+  Search, Bell, Star, MessageCircle, Phone, ArrowRight, Calendar, Sun, Hash, BookOpen, ShoppingBag
 } from "lucide-react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import Lightfall from "../../components/Lightfall";
 import GhostFibers from "../../components/GhostFibers";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -17,16 +16,14 @@ const { width } = Dimensions.get("window");
 const PURPLE   = "#7C3AED";
 const LAVENDER = "#A78BFA";
 const BG       = "#F5F3FF";
-const DARK_BG  = "#2D1B54";
 const TEXT     = "#1E1B4B";
-const TEXT_MUTED = "#6B5E80";
 const YELLOW   = "#F59E0B";
 
 const EXPERTS = [
-  { name: "Maya Sharma",   role: "Vedic Astrologer", rating: "4.9", exp: "15 Yrs", price: "$1", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" },
-  { name: "Arun Nair",     role: "Tarot Reader",      rating: "5.0", exp: "20 Yrs", price: "$2", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" },
-  { name: "Dr. Elena",     role: "Healer",            rating: "4.8", exp: "8 Yrs",  price: "$1", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" },
-  { name: "Chen Wei",      role: "Numerologist",      rating: "5.0", exp: "30 Yrs", price: "$1", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" },
+  { name: "Maya Sharma",   role: "Vedic Astrologer", rating: "4.9", exp: "15 Yrs", price: "$1/min", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" },
+  { name: "Arun Nair",     role: "Tarot Reader",      rating: "5.0", exp: "20 Yrs", price: "$2/min", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" },
+  { name: "Dr. Elena",     role: "Healer",            rating: "4.8", exp: "8 Yrs",  price: "$1/min", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" },
+  { name: "Chen Wei",      role: "Numerologist",      rating: "5.0", exp: "30 Yrs", price: "$1/min", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" },
 ];
 
 const MODALITIES = [
@@ -34,45 +31,36 @@ const MODALITIES = [
   { id: "tarot", name: "Tarot", image: "https://zenauraa.com/final_ensights/tarot.png" },
   { id: "face", name: "Face Reading", image: "https://zenauraa.com/final_ensights/face-reading.png" },
   { id: "palm", name: "Palm Reading", image: "https://zenauraa.com/final_ensights/palm-reading.png" },
+  { id: "numerology", name: "Numerology", image: "https://zenauraa.com/final_ensights/numerology.png" },
+  { id: "vastu", name: "Vastu", image: "https://zenauraa.com/final_ensights/vastu.png" },
 ];
 
-const PATHS = [
-  { label: "KNOW",    title: "Know Yourself",      desc: "Discover your cosmic blueprint.", features: ["Birth chart", "Numerology"], color: "#B79AE6" },
-  { label: "EXPLORE", title: "Explore Your World", desc: "Navigate love, career, and life.", features: ["Tarot Cards", "Zodiac Match"], color: "#7EDEA0", popular: true },
-];
+const ZODIACS = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"];
 
 export default function HomeTab() {
   const router = useRouter();
 
   return (
     <View style={{ flex: 1, backgroundColor: BG }}>
-      {/* Increased fiber density */}
       <GhostFibers
-        lineColor="#C4B5FD"
-        glowColor="#A78BFA"
-        speed={0.2}
-        scale={0.9}
-        brightness={25.0}
-        blueBoost={0.8}
-        lightMode={true}
-        layers={50}
-        lineFrequency={60}
-        lineSpacing={0.3}
-        glowIntensity={25.0}
+        lineColor="#C4B5FD" glowColor="#A78BFA" speed={0.2} scale={0.9}
+        brightness={25.0} blueBoost={0.8} lightMode={true} layers={50}
+        lineFrequency={60} lineSpacing={0.3} glowIntensity={25.0}
       />
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 120 }}>
         
-        {/* HERO SECTION AT THE TOP */}
+        {/* HERO SECTION */}
         <View style={styles.heroContainer}>
           <View style={[StyleSheet.absoluteFill, { backgroundColor: "#6B46C1" }]} />
           <Lightfall colors={["#DDD6FE", "#FDE68A", "#F9A8D4"]} backgroundColor="#6B46C1" speed={0.4} opacity={0.75} zoom={1.8} density={0.5} />
           
           <SafeAreaView style={StyleSheet.absoluteFill} edges={['top']}>
             <View style={styles.heroHeader}>
-              <View />
+              <View style={{ width: 40 }} />
+              {/* Centered and Bigger Logo */}
               <View style={styles.logoBubble}>
-                <Image source={require("../../assets/images/main_logo.png")} style={{ width: 60, height: 60, resizeMode: "contain", tintColor: "#fff" }} />
+                <Image source={require("../../assets/images/main_logo.png")} style={{ width: 80, height: 80, resizeMode: "contain", tintColor: "#fff" }} />
               </View>
               <TouchableOpacity style={styles.iconBtn} onPress={() => router.push("/(tabs)/notifications")}><Bell size={20} color="#fff" /></TouchableOpacity>
             </View>
@@ -109,9 +97,7 @@ export default function HomeTab() {
         {/* EXPERTS SECTION */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <View>
-              <Text style={[styles.sectionTitle, { maxWidth: width - 100 }]} numberOfLines={2}>Connect with top-rated guides.</Text>
-            </View>
+            <Text style={[styles.sectionTitle, { maxWidth: width - 100 }]} numberOfLines={2}>Connect with top guides.</Text>
             <TouchableOpacity onPress={() => router.push("/(tabs)/explore")}><Text style={styles.seeAllText}>View All</Text></TouchableOpacity>
           </View>
 
@@ -124,9 +110,12 @@ export default function HomeTab() {
                 <Text style={styles.expertNameSmall} numberOfLines={1}>{expert.name}</Text>
                 <Text style={styles.expertRoleSmall} numberOfLines={1}>{expert.role}</Text>
                 
-                <View style={{ flexDirection: "row", alignItems: "center", gap: 4, marginTop: 4 }}>
-                  <Star size={11} fill={YELLOW} color={YELLOW} />
-                  <Text style={{ fontSize: 11, fontWeight: "800", color: TEXT }}>{expert.rating}</Text>
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%", marginTop: 4 }}>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+                    <Star size={11} fill={YELLOW} color={YELLOW} />
+                    <Text style={{ fontSize: 11, fontWeight: "800", color: TEXT }}>{expert.rating}</Text>
+                  </View>
+                  <Text style={{ fontSize: 11, fontWeight: "800", color: "#6B46C1" }}>{expert.price}</Text>
                 </View>
                 
                 <View style={{ flexDirection: "row", gap: 6, marginTop: 10, width: "100%" }}>
@@ -142,7 +131,7 @@ export default function HomeTab() {
           </ScrollView>
         </View>
 
-        {/* FREE SESSIONS (NEW SECTION) */}
+        {/* FREE SESSIONS */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Free Live Sessions</Text>
@@ -165,7 +154,61 @@ export default function HomeTab() {
           </ScrollView>
         </View>
 
-        {/* EXPLORE CATEGORIES */}
+        {/* DAILY HOROSCOPE (New AstroTalk Feature) */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Daily Horoscope</Text>
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 12 }}>
+            {ZODIACS.map((zodiac, i) => (
+              <TouchableOpacity key={i} style={styles.zodiacCard}>
+                <View style={styles.zodiacIconWrap}>
+                  <Text style={{ fontSize: 24 }}>✨</Text>
+                </View>
+                <Text style={styles.zodiacName}>{zodiac}</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+
+        {/* ASTROMALL / SHOP (New AstroTalk Feature) */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>AstroMall & Shop</Text>
+            <Text style={styles.seeAllText}>View All</Text>
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 12 }}>
+            {[1, 2, 3].map((i) => (
+              <TouchableOpacity key={i} style={styles.shopCard}>
+                <View style={styles.shopImgWrap}>
+                  <ShoppingBag size={24} color="#A78BFA" />
+                </View>
+                <Text style={styles.shopTitle}>Crystal Gemstone</Text>
+                <Text style={styles.shopPrice}>$45.00</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+
+        {/* LATEST ARTICLES (New AstroTalk Feature) */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Latest Articles</Text>
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 12 }}>
+            {[1, 2, 3].map((i) => (
+              <TouchableOpacity key={i} style={styles.articleCard}>
+                <View style={styles.articleImgWrap}><BookOpen size={24} color="#fff" /></View>
+                <View style={styles.articleContent}>
+                  <Text style={styles.articleTitle} numberOfLines={2}>How Saturn's Transit Affects Your Zodiac Sign in 2026</Text>
+                  <Text style={styles.articleDate}>2 mins read</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+
+        {/* EXPLORE CATEGORIES (6 items + View All) */}
         <View style={{ backgroundColor: "rgba(45,27,84,0.95)", paddingVertical: 24, marginTop: 24 }}>
           <Text style={{ fontSize: 20, fontWeight: "700", color: "#F8F7FA", textAlign: "center", marginBottom: 16 }}>Explore by Category</Text>
           <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "center", gap: 12, paddingHorizontal: 20 }}>
@@ -176,6 +219,9 @@ export default function HomeTab() {
               </TouchableOpacity>
             ))}
           </View>
+          <TouchableOpacity style={styles.viewAllBtn} onPress={() => router.push("/(tabs)/explore")}>
+            <Text style={styles.viewAllBtnText}>View All Categories</Text>
+          </TouchableOpacity>
         </View>
 
       </ScrollView>
@@ -187,7 +233,7 @@ const styles = StyleSheet.create({
   heroContainer: { height: 350, overflow: "hidden", borderBottomLeftRadius: 30, borderBottomRightRadius: 30 },
   heroHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 24, paddingTop: 10 },
   iconBtn: { width: 40, height: 40, borderRadius: 20, backgroundColor: "rgba(255,255,255,0.15)", alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "rgba(255,255,255,0.2)" },
-  logoBubble: { width: 60, height: 60, borderRadius: 30, backgroundColor: "rgba(255,255,255,0.15)", alignItems: "center", justifyContent: "center", borderWidth: 2, borderColor: "rgba(255,255,255,0.3)" },
+  logoBubble: { alignItems: "center", justifyContent: "center" },
   heroContent: { paddingHorizontal: 24, paddingTop: 30, alignItems: "center" },
   heroTitle: { fontSize: 32, fontWeight: "900", color: "#fff", textAlign: "center", marginBottom: 8 },
   heroSubtitle: { fontSize: 13, color: "rgba(255,255,255,0.85)", textAlign: "center" },
@@ -207,7 +253,6 @@ const styles = StyleSheet.create({
   sectionTitle: { fontSize: 18, fontWeight: "800", color: TEXT },
   seeAllText: { fontSize: 12, color: PURPLE, fontWeight: "700" },
   
-  // SMALLER EXPERT CARD (Width approx 45% of screen to fit 2 items)
   expertCardSmall: { width: width * 0.44, borderRadius: 20, backgroundColor: "#EDE9FE", borderWidth: 1, borderColor: "#C4B5FD", padding: 12, alignItems: "center" },
   expertAvatarWrapSmall: { width: 56, height: 56, borderRadius: 28, overflow: "hidden", borderWidth: 2, borderColor: "#A78BFA", marginBottom: 8 },
   expertNameSmall: { fontSize: 13, fontWeight: "800", color: PURPLE, textAlign: "center" },
@@ -215,7 +260,6 @@ const styles = StyleSheet.create({
   expertActionBtnSmall: { flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 4, backgroundColor: "#DDD6FE", borderRadius: 10, paddingVertical: 6, borderWidth: 1, borderColor: "#C4B5FD" },
   expertActionTextSmall: { fontSize: 10, fontWeight: "800", color: PURPLE },
 
-  // FREE SESSIONS CARD
   freeCard: { width: width * 0.38, borderRadius: 20, backgroundColor: "#FFF7ED", borderWidth: 1, borderColor: "#FDE68A", padding: 12, alignItems: "center" },
   freeAvatarWrap: { width: 64, height: 64, borderRadius: 32, overflow: "hidden", position: "relative", marginBottom: 8 },
   freeBadge: { position: "absolute", bottom: 0, alignSelf: "center", backgroundColor: "#EF4444", paddingHorizontal: 6, paddingVertical: 2, borderRadius: 8 },
@@ -223,6 +267,23 @@ const styles = StyleSheet.create({
   freeActionBtn: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 4, backgroundColor: "#10B981", borderRadius: 12, paddingVertical: 8, paddingHorizontal: 12, marginTop: 10, width: "100%" },
   freeActionText: { fontSize: 11, fontWeight: "800", color: "#fff" },
 
+  zodiacCard: { width: 80, alignItems: "center" },
+  zodiacIconWrap: { width: 64, height: 64, borderRadius: 32, backgroundColor: "#fff", borderWidth: 1, borderColor: "#E5E7EB", alignItems: "center", justifyContent: "center", marginBottom: 8, shadowColor: PURPLE, shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 6 },
+  zodiacName: { fontSize: 12, fontWeight: "600", color: TEXT },
+
+  shopCard: { width: 140, borderRadius: 16, backgroundColor: "#fff", borderWidth: 1, borderColor: "#E5E7EB", padding: 12, shadowColor: PURPLE, shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 6 },
+  shopImgWrap: { height: 100, backgroundColor: "#F3F4F6", borderRadius: 12, alignItems: "center", justifyContent: "center", marginBottom: 10 },
+  shopTitle: { fontSize: 12, fontWeight: "700", color: TEXT, marginBottom: 4 },
+  shopPrice: { fontSize: 14, fontWeight: "800", color: PURPLE },
+
+  articleCard: { width: width * 0.7, borderRadius: 16, backgroundColor: "#fff", borderWidth: 1, borderColor: "#E5E7EB", overflow: "hidden", flexDirection: "row" },
+  articleImgWrap: { width: 80, backgroundColor: "#A78BFA", alignItems: "center", justifyContent: "center" },
+  articleContent: { flex: 1, padding: 12 },
+  articleTitle: { fontSize: 13, fontWeight: "700", color: TEXT, marginBottom: 8, lineHeight: 18 },
+  articleDate: { fontSize: 11, color: "#9CA3AF", fontWeight: "500" },
+
   modalityCardSmall: { width: (width - 60) / 3, backgroundColor: "rgba(255,255,255,0.1)", borderRadius: 16, padding: 12, alignItems: "center" },
   modalityNameSmall: { fontSize: 11, fontWeight: "700", color: "#F8F7FA", textAlign: "center" },
+  viewAllBtn: { marginHorizontal: 20, marginTop: 16, backgroundColor: "rgba(255,255,255,0.15)", borderRadius: 20, paddingVertical: 14, alignItems: "center", borderWidth: 1, borderColor: "rgba(255,255,255,0.2)" },
+  viewAllBtnText: { color: "#fff", fontWeight: "700", fontSize: 14 },
 });

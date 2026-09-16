@@ -1,4 +1,4 @@
-import '../global.css';
+﻿import '../global.css';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -11,7 +11,7 @@ export {
 } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: '(auth)/login',
+  initialRouteName: 'splash',
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -49,6 +49,7 @@ export default function RootLayout() {
 function RootLayoutNav() {
   return (
     <Stack>
+      <Stack.Screen name="splash" options={{ headerShown: false }} />
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
