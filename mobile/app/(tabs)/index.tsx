@@ -20,10 +20,9 @@ const TEXT     = "#1E1B4B";
 const YELLOW   = "#F59E0B";
 
 const EXPERTS = [
-  { name: "Maya Sharma",   role: "Vedic Astrologer", rating: "4.9", exp: "15 Yrs", price: "$1/min", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" },
-  { name: "Arun Nair",     role: "Tarot Reader",      rating: "5.0", exp: "20 Yrs", price: "$2/min", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" },
-  { name: "Dr. Elena",     role: "Healer",            rating: "4.8", exp: "8 Yrs",  price: "$1/min", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" },
-  { name: "Chen Wei",      role: "Numerologist",      rating: "5.0", exp: "30 Yrs", price: "$1/min", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" },
+  { name: "Abhishek Giri", role: "Vedic Astrologer", rating: "5.0", exp: "10 Yrs", price: "₹25/min", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" },
+  { name: "Pooja",         role: "Tarot Reader",      rating: "4.9", exp: "8 Yrs", price: "₹20/min", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" },
+  { name: "Deepak",        role: "Numerologist",      rating: "4.8", exp: "12 Yrs",  price: "₹30/min", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" },
 ];
 
 const MODALITIES = [

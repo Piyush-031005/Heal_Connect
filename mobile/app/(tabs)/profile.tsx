@@ -17,7 +17,7 @@ const MENU_ITEMS = [
 
 export default function ProfileScreen() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#0F0726" }} edges={['top']}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#F5F3FF" }} edges={['top']}>
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false}>
         
         {/* PREMIUM IRIDESCENT HEADER */}
@@ -61,7 +61,7 @@ export default function ProfileScreen() {
                 <item.icon size={20} color={item.color} />
               </View>
               <Text style={styles.menuLabel}>{item.label}</Text>
-              <ChevronRight size={18} color="rgba(255,255,255,0.3)" />
+              <ChevronRight size={18} color="rgba(0,0,0,0.3)" />
             </TouchableOpacity>
           ))}
         </View>
@@ -79,23 +79,23 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
   headerWrap: { height: 260, position: "relative", overflow: "hidden", borderBottomLeftRadius: 40, borderBottomRightRadius: 40 },
-  headerContent: { ...StyleSheet.absoluteFillObject, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(15,7,38,0.3)" },
+  headerContent: { ...StyleSheet.absoluteFillObject, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(0,0,0,0.1)" },
   avatarWrap: { width: 100, height: 100, borderRadius: 50, backgroundColor: "#fff", padding: 4, position: "relative", marginBottom: 16, shadowColor: "#000", shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.3, shadowRadius: 20 },
   avatar: { width: "100%", height: "100%", borderRadius: 46 },
   editBadge: { position: "absolute", bottom: 0, right: 0, width: 32, height: 32, borderRadius: 16, backgroundColor: PURPLE, alignItems: "center", justifyContent: "center", borderWidth: 3, borderColor: "#fff" },
   userName: { fontSize: 24, fontWeight: "800", color: "#fff", marginBottom: 4 },
   userPhone: { fontSize: 14, color: "rgba(255,255,255,0.8)", fontWeight: "500" },
   
-  statsContainer: { flexDirection: "row", backgroundColor: "rgba(255,255,255,0.05)", marginHorizontal: 20, marginTop: -30, borderRadius: 20, paddingVertical: 20, borderWidth: 1, borderColor: "rgba(167,139,250,0.2)" },
+  statsContainer: { flexDirection: "row", backgroundColor: "#FFFFFF", shadowColor: "#7C3AED", shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.1, shadowRadius: 10, elevation: 5, marginHorizontal: 20, marginTop: -30, borderRadius: 20, paddingVertical: 20, borderWidth: 1, borderColor: "rgba(167,139,250,0.2)" },
   statBox: { flex: 1, alignItems: "center" },
-  statValue: { fontSize: 20, fontWeight: "800", color: "#fff", marginBottom: 4 },
-  statLabel: { fontSize: 12, color: "#A78BFA", textTransform: "uppercase", letterSpacing: 1 },
+  statValue: { fontSize: 20, fontWeight: "800", color: "#1a1a1a", marginBottom: 4 },
+  statLabel: { fontSize: 12, color: "#7C3AED", textTransform: "uppercase", letterSpacing: 1 },
   statDivider: { width: 1, height: "100%", backgroundColor: "rgba(167,139,250,0.2)" },
 
   menuContainer: { paddingHorizontal: 20, marginTop: 30, gap: 12 },
-  menuItem: { flexDirection: "row", alignItems: "center", backgroundColor: "rgba(255,255,255,0.03)", padding: 16, borderRadius: 16, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" },
+  menuItem: { flexDirection: "row", alignItems: "center", backgroundColor: "#FFFFFF", padding: 16, borderRadius: 16, borderWidth: 1, borderColor: "rgba(124,58,237,0.1)", shadowColor: "#7C3AED", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 5, elevation: 2 },
   menuIconWrap: { width: 40, height: 40, borderRadius: 20, alignItems: "center", justifyContent: "center", marginRight: 16 },
-  menuLabel: { flex: 1, fontSize: 16, fontWeight: "600", color: "#fff" },
+  menuLabel: { flex: 1, fontSize: 16, fontWeight: "600", color: "#1a1a1a" },
 
   logoutBtn: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 10, marginHorizontal: 20, marginTop: 30, paddingVertical: 16, borderRadius: 16, backgroundColor: "rgba(248,113,113,0.1)", borderWidth: 1, borderColor: "rgba(248,113,113,0.3)" },
   logoutText: { fontSize: 16, fontWeight: "700", color: "#F87171" }
