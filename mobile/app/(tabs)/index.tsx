@@ -20,9 +20,10 @@ const TEXT     = "#1E1B4B";
 const YELLOW   = "#F59E0B";
 
 const EXPERTS = [
-  { name: "Abhishek Giri", role: "Vedic Astrologer", rating: "5.0", exp: "10 Yrs", price: "₹25/min", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" },
-  { name: "Pooja",         role: "Tarot Reader",      rating: "4.9", exp: "8 Yrs", price: "₹20/min", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" },
-  { name: "Deepak",        role: "Numerologist",      rating: "4.8", exp: "12 Yrs",  price: "₹30/min", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" },
+  { name: "piyush", role: "Wellness Expert", rating: "0.0", exp: "New Expert", price: "₹100/min", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" },
+  { name: "Abhishek Giri", role: "Wellness Expert", rating: "0.0", exp: "New Expert", price: "₹0/min", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" },
+  { name: "Pooja", role: "Wellness Expert", rating: "0.0", exp: "New Expert", price: "₹0/min", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" },
+  { name: "Deepak's Expert", role: "Tarot • Astrology", rating: "4.5", exp: "New Expert", price: "₹100/min", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" },
 ];
 
 const MODALITIES = [
@@ -91,6 +92,15 @@ export default function HomeTab() {
             <TouchableOpacity style={styles.servicePill}><Sun size={18} color={PURPLE} /><Text style={styles.serviceText}>Horoscope</Text></TouchableOpacity>
             <TouchableOpacity style={styles.servicePill}><Hash size={18} color={PURPLE} /><Text style={styles.serviceText}>Numerology</Text></TouchableOpacity>
           </ScrollView>
+        </View>
+
+                {/* BANNER */}
+        <View style={{ backgroundColor: "#5B21B6", padding: 20, borderRadius: 16, marginHorizontal: 20, marginTop: 24, marginBottom: 12, alignItems: "center" }}>
+          <Text style={{ color: "#fff", fontSize: 22, fontWeight: "800", marginBottom: 6 }}>Your First Session Free</Text>
+          <Text style={{ color: "rgba(255,255,255,0.8)", fontSize: 14, fontWeight: "500", marginBottom: 18 }}>Talk to an expert and get instant clarity</Text>
+          <TouchableOpacity onPress={() => router.push("/(tabs)/explore")} style={{ backgroundColor: "#F59E0B", paddingHorizontal: 24, paddingVertical: 12, borderRadius: 24, width: "100%", alignItems: "center" }}>
+            <Text style={{ color: "#fff", fontWeight: "700", fontSize: 16 }}>Explore Experts →</Text>
+          </TouchableOpacity>
         </View>
 
         {/* EXPERTS SECTION */}

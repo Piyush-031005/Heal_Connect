@@ -81,6 +81,6 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#0C0514" },
   content: { flex: 1, alignItems: "center", justifyContent: "center", zIndex: 10 },
   
-  logo: { width: 140, height: 140, resizeMode: "contain", marginBottom: 20 },
+  logo: { width: 140, height: 140, resizeMode: "contain", marginBottom: 20, tintColor: "#ffffff" },
   title: { fontSize: 46, fontWeight: "800", color: "#ffffff", letterSpacing: 2 },
 });
