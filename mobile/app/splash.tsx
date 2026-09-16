@@ -66,7 +66,7 @@ export default function SplashScreen() {
       />
       
       <View style={styles.content}>
-        <Animated.View style={[styles.logoWrap, logoAnimatedStyle]}>
+        <Animated.View style={logoAnimatedStyle}>
           <Image source={require("../assets/images/main_logo.png")} style={styles.logo} />
         </Animated.View>
         <Animated.Text style={[styles.title, textAnimatedStyle]}>
@@ -80,7 +80,7 @@ export default function SplashScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#0C0514" },
   content: { flex: 1, alignItems: "center", justifyContent: "center", zIndex: 10 },
-  logoWrap: { width: 160, height: 160, borderRadius: 80, backgroundColor: "rgba(255,255,255,0.05)", alignItems: "center", justifyContent: "center", borderWidth: 2, borderColor: "rgba(255,255,255,0.2)", marginBottom: 24, shadowColor: "#fff", shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.3, shadowRadius: 20 },
-  logo: { width: 100, height: 100, resizeMode: "contain", tintColor: "#ffffff" },
+  
+  logo: { width: 140, height: 140, resizeMode: "contain", marginBottom: 20 },
   title: { fontSize: 46, fontWeight: "800", color: "#ffffff", letterSpacing: 2 },
 });
