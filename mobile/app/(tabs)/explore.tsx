@@ -1,250 +1,123 @@
-﻿import { SafeAreaView } from "react-native-safe-area-context";
+﻿import React, { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 import GhostFibers from "../../components/GhostFibers";
 import {
-  View, Text, StyleSheet, ScrollView, Image, TextInput, TouchableOpacity,
-  StatusBar, Dimensions, ActivityIndicator, Platform,
+  View, Text, StyleSheet, ScrollView, Image, TouchableOpacity,
+  Dimensions, TextInput
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import Colors from "@/constants/Colors";
-import { Search, Star, Filter, X, ChevronRight, Sun, Moon, Eye, Hand, Wind, Heart, Music, Hash, Brain, Zap, Flame, Globe } from "lucide-react-native";
-import { useEffect, useState, useCallback } from "react";
+import { Search, Filter, Star, Phone, MessageCircle } from "lucide-react-native";
 import { useRouter } from "expo-router";
-import { practitionersApi } from "../../lib/api";
-import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from "react-native-reanimated";
 
 const { width } = Dimensions.get("window");
 const PURPLE = "#7C3AED";
 const BG = "#F5F3FF";
 const TEXT = "#1E1035";
-const TEXT_MUTED = "#6B5E80";
-const CARD = "#FFFFFF";
-const GOLD = "#F59E0B";
-const LAVENDER = "#EDE9FE";
 
-const MODALITIES_ALL = [
-  { id:"all", name:"All" },
-  { id:"astrology", name:"Astrology" },
-  { id:"tarot", name:"Tarot" },
-  { id:"face-reading", name:"Face Reading" },
-  { id:"palmistry", name:"Palm Reading" },
-  { id:"breathwork", name:"Breathwork" },
-  { id:"chakra-healing", name:"Chakra" },
-  { id:"sound-healing", name:"Sound Healing" },
-  { id:"numerology", name:"Numerology" },
-  { id:"meditation", name:"Meditation" },
-  { id:"reiki", name:"Reiki" },
-  { id:"vastu", name:"Vastu" },
+const CATEGORIES = ["All", "Astrology", "Tarot", "Palmistry", "Numerology", "Vastu"];
+
+const EXPERTS = [
+  { name: "Maya Sharma",   role: "Vedic Astrologer", rating: "4.9", exp: "15 Yrs", price: "$1/min", lang: "English, Hindi", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" },
+  { name: "Arun Nair",     role: "Tarot Reader",      rating: "5.0", exp: "20 Yrs", price: "$2/min", lang: "English", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" },
+  { name: "Dr. Elena",     role: "Healer",            rating: "4.8", exp: "8 Yrs",  price: "$1/min", lang: "Spanish, English", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" },
+  { name: "Chen Wei",      role: "Numerologist",      rating: "5.0", exp: "30 Yrs", price: "$1/min", lang: "Mandarin, English", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" },
 ];
 
 export default function ExploreScreen() {
   const router = useRouter();
-  const [practitioners, setPractitioners] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [showOnlineOnly, setShowOnlineOnly] = useState(false);
-
-  const contentOpacity = useSharedValue(0);
-  const contentTranslate = useSharedValue(20);
-
-  useEffect(() => {
-    contentOpacity.value = withTiming(1, { duration: 600 });
-    contentTranslate.value = withTiming(0, { duration: 600, easing: Easing.out(Easing.cubic) });
-    fetchPractitioners();
-  }, []);
-
-  const fetchPractitioners = async (searchTerm = "", specialty = "") => {
-    setLoading(true);
-    try {
-      const params: any = { limit: 30 };
-      if (searchTerm) params.search = searchTerm;
-      if (specialty && specialty !== "all") params.specialty = specialty;
-      const res = await practitionersApi.list(params);
-      if (res.success && res.data?.practitioners) {
-        setPractitioners(res.data.practitioners);
-      }
-    } catch (e) { console.error(e); }
-    finally { setLoading(false); }
-  };
-
-  const handleSearch = useCallback((text: string) => {
-    setSearch(text);
-    fetchPractitioners(text, selectedCategory);
-  }, [selectedCategory]);
-
-  const handleCategory = (cat: string) => {
-    setSelectedCategory(cat);
-    fetchPractitioners(search, cat);
-  };
-
-  const animatedContent = useAnimatedStyle(() => ({
-    opacity: contentOpacity.value,
-    transform: [{ translateY: contentTranslate.value }],
-  }));
-
-  const filtered = showOnlineOnly ? practitioners.filter((p: any) => p.isOnline) : practitioners;
+  const [activeCat, setActiveCat] = useState("All");
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: BG }}>
-      <GhostFibers lineColor="#C4B5FD" glowColor="#A78BFA" speed={0.2} scale={0.9} brightness={3.0} blueBoost={0.5} lightMode={true} layers={10} lineFrequency={11} lineSpacing={0.9} glowIntensity={3.0} />
-      <StatusBar barStyle="dark-content" backgroundColor={BG} />
-      <View style={styles.container}>
-
-        {/* HEADER */}
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Explore</Text>
-          <Text style={styles.headerSub}>Find your perfect guide</Text>
-        </View>
-
-        {/* SEARCH BAR */}
-        <View style={styles.searchContainer}>
-          <Search size={18} color={TEXT_MUTED} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search by name or specialty…"
-            placeholderTextColor={TEXT_MUTED}
-            value={search}
-            onChangeText={handleSearch}
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#1A0B2E" }} edges={['top']}>
+      <GhostFibers
+        lineColor="#A78BFA" glowColor="#7C3AED" speed={0.15} scale={1.2}
+        brightness={12.0} blueBoost={0.8} layers={35}
+        lineFrequency={35} lineSpacing={0.8} glowIntensity={12.0}
+      />
+      
+      {/* HEADER & SEARCH */}
+      <View style={styles.header}>
+        <View style={styles.searchBar}>
+          <Search size={18} color="#A78BFA" />
+          <TextInput 
+            placeholder="Search experts..." 
+            placeholderTextColor="rgba(167,139,250,0.6)" 
+            style={styles.searchInput} 
           />
-          {search.length > 0 && (
-            <TouchableOpacity onPress={() => handleSearch("")}>
-              <X size={16} color={TEXT_MUTED} />
-            </TouchableOpacity>
-          )}
         </View>
+        <TouchableOpacity style={styles.filterBtn}>
+          <Filter size={18} color="#fff" />
+        </TouchableOpacity>
+      </View>
 
-        {/* CATEGORY PILLS */}
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.categoryRow}>
-          {MODALITIES_ALL.map((m) => (
-            <TouchableOpacity
-              key={m.id}
-              style={[styles.categoryPill, selectedCategory === m.id && styles.categoryPillActive]}
-              onPress={() => handleCategory(m.id)}
+      {/* CATEGORIES */}
+      <View style={{ marginBottom: 16 }}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 10 }}>
+          {CATEGORIES.map(cat => (
+            <TouchableOpacity 
+              key={cat} 
+              onPress={() => setActiveCat(cat)}
+              style={[styles.catChip, activeCat === cat && styles.catChipActive]}
             >
-              <Text style={[styles.categoryPillText, selectedCategory === m.id && styles.categoryPillTextActive]}>
-                {m.name}
-              </Text>
+              <Text style={[styles.catText, activeCat === cat && styles.catTextActive]}>{cat}</Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
-
-        {/* ONLINE TOGGLE + COUNT */}
-        <View style={styles.filterRow}>
-          <Text style={styles.resultCount}>{filtered.length} practitioners found</Text>
-          <TouchableOpacity
-            style={[styles.onlineToggle, showOnlineOnly && styles.onlineToggleActive]}
-            onPress={() => setShowOnlineOnly(!showOnlineOnly)}
-          >
-            <View style={[styles.onlineDotSmall, { backgroundColor: showOnlineOnly ? "#10B981" : "#CBD5E1" }]} />
-            <Text style={[styles.onlineToggleText, showOnlineOnly && { color: "#10B981" }]}>Online Only</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* PRACTITIONERS LIST */}
-        {loading ? (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color={PURPLE} />
-            <Text style={styles.loadingText}>Finding your guides…</Text>
-          </View>
-        ) : (
-          <Animated.ScrollView
-            style={animatedContent}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 32, gap: 12 }}
-          >
-            {filtered.length === 0 ? (
-              <View style={styles.emptyState}>
-                <Text style={{ fontSize: 40, marginBottom: 12 }}>🔍</Text>
-                <Text style={styles.emptyTitle}>No results found</Text>
-                <Text style={styles.emptyDesc}>Try a different search or category</Text>
-              </View>
-            ) : filtered.map((p: any) => (
-              <TouchableOpacity key={p.id} style={styles.practCard} activeOpacity={0.88}>
-                <View style={styles.practCardLeft}>
-                  {p.photoUrl ? (
-                    <Image source={{ uri: p.photoUrl }} style={styles.practPhoto} />
-                  ) : (
-                    <View style={[styles.practPhoto, styles.practPhotoPlaceholder]}>
-                      <Text style={{ fontSize: 24, fontWeight: "700", color: PURPLE }}>{(p.name || "E")[0].toUpperCase()}</Text>
-                    </View>
-                  )}
-                  <View style={[styles.onlineBadge, { backgroundColor: p.isOnline ? "#10B981" : "#9CA3AF" }]}>
-                    <Text style={styles.onlineBadgeText}>{p.isOnline ? "Online" : "Offline"}</Text>
-                  </View>
-                </View>
-                <View style={styles.practCardRight}>
-                  <View style={styles.practCardTop}>
-                    <Text style={styles.practName}>{p.name}</Text>
-                    <View style={styles.ratingChip}>
-                      <Star size={12} color={GOLD} fill={GOLD} />
-                      <Text style={styles.ratingText}>{p.avgRating?.toFixed(1) || "—"}</Text>
-                    </View>
-                  </View>
-                  <Text style={styles.practSpec} numberOfLines={1}>
-                    {p.specialties?.slice(0, 2).join(" · ") || "Wellness Expert"}
-                  </Text>
-                  <Text style={styles.practExp}>{p.experienceYrs > 0 ? `${p.experienceYrs} yrs exp` : "New Expert"}</Text>
-                  <View style={styles.practCardBottom}>
-                    <Text style={styles.practLang} numberOfLines={1}>
-                      {p.languages?.slice(0, 2).join(", ") || "English"}
-                    </Text>
-                    <View style={styles.bookRow}>
-                      <Text style={styles.practRate}>₹{p.perMinuteRate}/min</Text>
-                      <TouchableOpacity style={styles.bookBtn}>
-                        <Text style={styles.bookBtnText}>Connect</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </Animated.ScrollView>
-        )}
       </View>
+      
+      {/* EXPERT LIST */}
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 120, gap: 14 }}>
+        {EXPERTS.map((expert, i) => (
+          <TouchableOpacity key={i} style={styles.expertCard} activeOpacity={0.88}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 14, marginBottom: 12 }}>
+              <View style={styles.expertAvatarWrap}>
+                <Image source={{ uri: expert.img }} style={{ width: "100%", height: "100%" }} resizeMode="cover" />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.expertName}>{expert.name}</Text>
+                <Text style={styles.expertRole}>{expert.role}</Text>
+                <View style={{ flexDirection: "row", alignItems: "center", gap: 4, marginTop: 4 }}>
+                  <Star size={12} fill="#F59E0B" color="#F59E0B" />
+                  <Text style={{ fontSize: 12, fontWeight: "700", color: "#F8F7FA" }}>{expert.rating}</Text>
+                  <Text style={{ fontSize: 11, color: "#A78BFA" }}> • {expert.exp}</Text>
+                </View>
+              </View>
+              <View style={{ alignItems: "flex-end" }}>
+                <Text style={{ fontSize: 16, fontWeight: "800", color: "#FDE68A" }}>{expert.price}</Text>
+              </View>
+            </View>
+            
+            <Text style={{ fontSize: 12, color: "rgba(248,247,250,0.7)", marginBottom: 12 }}>{expert.lang}</Text>
+
+            <View style={{ flexDirection: "row", gap: 10 }}>
+              <TouchableOpacity style={styles.expertActionBtn} onPress={() => router.push("/(tabs)/history")}>
+                <MessageCircle size={14} color="#1E1035" /><Text style={styles.expertActionText}>Chat</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.expertActionBtn, { backgroundColor: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.2)" }]}>
+                <Phone size={14} color="#fff" /><Text style={[styles.expertActionText, { color: "#fff" }]}>Call</Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, paddingHorizontal: 16 },
-  header: { paddingTop: 8, paddingBottom: 16 },
-  headerTitle: { fontSize: 28, fontWeight: "800", color: TEXT },
-  headerSub: { fontSize: 14, color: TEXT_MUTED, marginTop: 2 },
-  searchContainer: { flexDirection: "row", alignItems: "center", backgroundColor: CARD, borderRadius: 16, paddingHorizontal: 16, paddingVertical: 13, gap: 10, marginBottom: 14, shadowColor: "#7C3AED", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.08, shadowRadius: 8, elevation: 3, borderWidth: 1, borderColor: LAVENDER },
-  searchInput: { flex: 1, fontSize: 14, color: TEXT },
-  categoryRow: { paddingBottom: 14, gap: 8 },
-  categoryPill: { paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20, backgroundColor: CARD, borderWidth: 1, borderColor: LAVENDER },
-  categoryPillActive: { backgroundColor: PURPLE, borderColor: PURPLE },
-  categoryPillText: { fontSize: 13, fontWeight: "600", color: TEXT_MUTED },
-  categoryPillTextActive: { color: "#fff" },
-  filterRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 14 },
-  resultCount: { fontSize: 13, color: TEXT_MUTED, fontWeight: "500" },
-  onlineToggle: { flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 12, backgroundColor: CARD, borderWidth: 1, borderColor: LAVENDER },
-  onlineToggleActive: { borderColor: "#10B981", backgroundColor: "#F0FDF4" },
-  onlineDotSmall: { width: 8, height: 8, borderRadius: 4 },
-  onlineToggleText: { fontSize: 12, color: TEXT_MUTED, fontWeight: "600" },
-  loadingContainer: { flex: 1, alignItems: "center", justifyContent: "center", gap: 12 },
-  loadingText: { color: TEXT_MUTED, fontSize: 14 },
-  emptyState: { alignItems: "center", paddingTop: 60 },
-  emptyTitle: { fontSize: 18, fontWeight: "700", color: TEXT, marginBottom: 6 },
-  emptyDesc: { fontSize: 14, color: TEXT_MUTED },
-  practCard: { flexDirection: "row", backgroundColor: CARD, borderRadius: 20, padding: 14, shadowColor: "#7C3AED", shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.08, shadowRadius: 12, elevation: 4, gap: 14, borderWidth: 1, borderColor: "rgba(124,58,237,0.06)" },
-  practCardLeft: { alignItems: "center", gap: 6 },
-  practPhoto: { width: 68, height: 68, borderRadius: 34, borderWidth: 2, borderColor: LAVENDER },
-  practPhotoPlaceholder: { backgroundColor: LAVENDER, alignItems: "center", justifyContent: "center" },
-  onlineBadge: { paddingHorizontal: 8, paddingVertical: 2, borderRadius: 8 },
-  onlineBadgeText: { fontSize: 9, color: "#fff", fontWeight: "700" },
-  practCardRight: { flex: 1 },
-  practCardTop: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 4 },
-  practName: { fontSize: 16, fontWeight: "700", color: TEXT, flex: 1 },
-  ratingChip: { flexDirection: "row", alignItems: "center", gap: 3, backgroundColor: "#FEF3C7", paddingHorizontal: 8, paddingVertical: 3, borderRadius: 8 },
-  ratingText: { fontSize: 12, color: GOLD, fontWeight: "700" },
-  practSpec: { fontSize: 13, color: PURPLE, fontWeight: "600", marginBottom: 2 },
-  practExp: { fontSize: 12, color: TEXT_MUTED, marginBottom: 8 },
-  practCardBottom: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  practLang: { fontSize: 11, color: TEXT_MUTED, flex: 1 },
-  bookRow: { flexDirection: "row", alignItems: "center", gap: 10 },
-  practRate: { fontSize: 13, fontWeight: "800", color: TEXT },
-  bookBtn: { backgroundColor: PURPLE, paddingHorizontal: 14, paddingVertical: 8, borderRadius: 10 },
-  bookBtnText: { color: "#fff", fontSize: 12, fontWeight: "700" },
+  header: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20, paddingVertical: 15, gap: 12 },
+  searchBar: { flex: 1, flexDirection: "row", alignItems: "center", backgroundColor: "rgba(255,255,255,0.08)", borderRadius: 20, paddingHorizontal: 16, height: 44, borderWidth: 1, borderColor: "rgba(167,139,250,0.2)" },
+  searchInput: { flex: 1, fontSize: 14, color: "#fff", marginLeft: 8 },
+  filterBtn: { width: 44, height: 44, borderRadius: 22, backgroundColor: "rgba(255,255,255,0.08)", alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "rgba(167,139,250,0.2)" },
+  
+  catChip: { paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20, backgroundColor: "rgba(255,255,255,0.05)", borderWidth: 1, borderColor: "rgba(167,139,250,0.2)" },
+  catChipActive: { backgroundColor: PURPLE, borderColor: PURPLE },
+  catText: { fontSize: 13, color: "#A78BFA", fontWeight: "600" },
+  catTextActive: { color: "#fff", fontWeight: "800" },
+
+  expertCard: { backgroundColor: "rgba(255,255,255,0.05)", borderRadius: 20, borderWidth: 1, borderColor: "rgba(167,139,250,0.2)", padding: 16 },
+  expertAvatarWrap: { width: 64, height: 64, borderRadius: 32, overflow: "hidden", borderWidth: 2, borderColor: PURPLE },
+  expertName: { fontSize: 16, fontWeight: "800", color: "#F8F7FA" },
+  expertRole: { fontSize: 12, color: "#A78BFA", marginTop: 2 },
+  expertActionBtn: { flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, backgroundColor: "#FDE68A", borderRadius: 12, paddingVertical: 10, borderWidth: 1, borderColor: "#F59E0B" },
+  expertActionText: { fontSize: 13, fontWeight: "800", color: "#1E1035" },
 });

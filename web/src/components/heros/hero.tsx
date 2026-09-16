@@ -61,23 +61,21 @@ function PrimaryHero() {
                 </Button>
               </Link>
 
-              {/* ── RATING STRIP with cartoon avatars ── */}
+              {/* RATING STRIP with real avatars */}
               <div className="flex items-center gap-4 mt-6">
                 <div className="flex -space-x-3">
-                  {[0, 1, 2, 3].map((i) => (
+                  {[
+                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop"
+                  ].map((url, i) => (
                     <div key={i} className="w-12 h-12 rounded-full border-2 border-[#F9F5FF] overflow-hidden shadow-sm bg-white" style={{ zIndex: 4 - i }}>
-                      <div className="w-full h-full relative" style={{ overflow: 'hidden' }}>
-                        <img
-                          src="/expert-avatars-cartoon.jpg"
-                          alt={`Expert ${i+1}`}
-                          className="absolute h-full max-w-none"
-                          style={{ 
-                            width: '400%', 
-                            left: `${-i * 100}%`,
-                            top: 0
-                          }}
-                        />
-                      </div>
+                      <img
+                        src={url}
+                        alt={`Expert ${i+1}`}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                   ))}
                 </div>

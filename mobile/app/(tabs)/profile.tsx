@@ -1,169 +1,76 @@
 ﻿import { SafeAreaView } from "react-native-safe-area-context";
-import GhostFibers from "../../components/GhostFibers";
-import {
-  View, Text, StyleSheet, ScrollView, Image, TouchableOpacity,
-  StatusBar, Alert, ActivityIndicator,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import Colors from "@/constants/Colors";
-import {
-  Settings, Calendar, Heart, Wallet, Bell, HelpCircle,
-  ChevronRight, LogOut, User, Clock, Star, Shield,
-} from "lucide-react-native";
-import { useEffect, useState } from "react";
-import { useRouter } from "expo-router";
-import { usersApi, tokenStore } from "../../lib/api";
-import * as SecureStore from "expo-secure-store";
-import Animated, { useSharedValue, useAnimatedStyle, withTiming, withDelay, Easing } from "react-native-reanimated";
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Dimensions } from "react-native";
+import { Settings, LogOut, ChevronRight, HelpCircle, Shield, CreditCard, Heart } from "lucide-react-native";
+import Iridescence from "../../components/Iridescence";
 
+const { width } = Dimensions.get("window");
 const PURPLE = "#7C3AED";
-const PURPLE_LIGHT = "#8B5CF6";
-const BG = "#F5F3FF";
-const TEXT = "#1E1035";
-const TEXT_MUTED = "#6B5E80";
-const CARD = "#FFFFFF";
 const LAVENDER = "#EDE9FE";
 
+const MENU_ITEMS = [
+  { icon: CreditCard, label: "Wallet & Payments", color: "#10B981" },
+  { icon: Heart, label: "Favorite Experts", color: "#F43F5E" },
+  { icon: Shield, label: "Privacy & Security", color: "#3B82F6" },
+  { icon: HelpCircle, label: "Help & Support", color: "#F59E0B" },
+  { icon: Settings, label: "Settings", color: "#8B5CF6" },
+];
+
 export default function ProfileScreen() {
-  const router = useRouter();
-  const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  const headerOpacity = useSharedValue(0);
-  const contentOpacity = useSharedValue(0);
-  const contentTranslate = useSharedValue(30);
-
-  useEffect(() => {
-    headerOpacity.value = withTiming(1, { duration: 600 });
-    contentOpacity.value = withDelay(200, withTiming(1, { duration: 600 }));
-    contentTranslate.value = withDelay(200, withTiming(0, { duration: 600, easing: Easing.out(Easing.cubic) }));
-    loadProfile();
-  }, []);
-
-  const loadProfile = async () => {
-    try {
-      const res = await usersApi.getProfile();
-      if (res.success && res.data?.user) setUser(res.data.user);
-    } catch (e) { console.error(e); }
-    finally { setLoading(false); }
-  };
-
-  const handleLogout = async () => {
-    Alert.alert("Sign Out", "Are you sure you want to sign out?", [
-      { text: "Cancel", style: "cancel" },
-      {
-        text: "Sign Out", style: "destructive",
-        onPress: async () => {
-          await tokenStore.clear();
-          router.replace("/(auth)/login");
-        },
-      },
-    ]);
-  };
-
-  const animatedHeader = useAnimatedStyle(() => ({ opacity: headerOpacity.value }));
-  const animatedContent = useAnimatedStyle(() => ({
-    opacity: contentOpacity.value,
-    transform: [{ translateY: contentTranslate.value }],
-  }));
-
-  const menuSections = [
-    {
-      title: "Account",
-      items: [
-        { icon: Calendar, label: "My Sessions", desc: "View session history", color: PURPLE },
-        { icon: Heart, label: "Saved Experts", desc: "Your favourite practitioners", color: "#EC4899" },
-        { icon: Wallet, label: "My Wallet", desc: "Balance & transactions", color: "#10B981" },
-      ],
-    },
-    {
-      title: "App",
-      items: [
-        { icon: Bell, label: "Notifications", desc: "Manage your alerts", color: "#F59E0B" },
-        { icon: Shield, label: "Privacy", desc: "Data & security", color: "#6366F1" },
-        { icon: HelpCircle, label: "Help & Support", desc: "Get assistance", color: "#06B6D4" },
-        { icon: Settings, label: "Settings", desc: "App preferences", color: TEXT_MUTED },
-      ],
-    },
-  ];
-
-  if (loading) {
-    return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: BG, alignItems: "center", justifyContent: "center" }}>
-      <GhostFibers lineColor="#C4B5FD" glowColor="#A78BFA" speed={0.2} scale={0.9} brightness={3.0} blueBoost={0.5} lightMode={true} layers={10} lineFrequency={11} lineSpacing={0.9} glowIntensity={3.0} />
-        <ActivityIndicator size="large" color={PURPLE} />
-      </SafeAreaView>
-    );
-  }
-
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: BG }}>
-      <GhostFibers lineColor="#C4B5FD" glowColor="#A78BFA" speed={0.2} scale={0.9} brightness={3.0} blueBoost={0.5} lightMode={true} layers={10} lineFrequency={11} lineSpacing={0.9} glowIntensity={3.0} />
-      <StatusBar barStyle="dark-content" backgroundColor={BG} />
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
-
-        {/* PROFILE HEADER */}
-        <Animated.View style={animatedHeader}>
-          <LinearGradient
-            colors={["#7C3AED", "#9333EA", "#A855F7"]}
-            start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
-            style={styles.profileGradient}
-          >
-            {/* Avatar */}
-            {user?.photoUrl ? (
-              <Image source={{ uri: user.photoUrl }} style={styles.avatar} />
-            ) : (
-              <View style={styles.avatarPlaceholder}>
-                <Text style={styles.avatarInitial}>{(user?.name || user?.email || "U")[0].toUpperCase()}</Text>
-              </View>
-            )}
-            <Text style={styles.userName}>{user?.name || "ZenAuraa User"}</Text>
-            <Text style={styles.userEmail}>{user?.email || user?.phone || ""}</Text>
-            <View style={styles.statsRow}>
-              {[["0","Sessions"],["0","Reviews"],["₹0","Balance"]].map(([val, label]) => (
-                <View key={label} style={styles.statItem}>
-                  <Text style={styles.statVal}>{val}</Text>
-                  <Text style={styles.statLabel}>{label}</Text>
-                </View>
-              ))}
-            </View>
-          </LinearGradient>
-        </Animated.View>
-
-        {/* MENU SECTIONS */}
-        <Animated.View style={[{ paddingHorizontal: 16, paddingTop: 20 }, animatedContent]}>
-          {menuSections.map((section) => (
-            <View key={section.title} style={{ marginBottom: 24 }}>
-              <Text style={styles.sectionTitle}>{section.title}</Text>
-              <View style={styles.menuCard}>
-                {section.items.map((item, idx) => {
-                  const IconComp = item.icon;
-                  return (
-                    <TouchableOpacity key={item.label} style={[styles.menuItem, idx < section.items.length - 1 && styles.menuItemBorder]} activeOpacity={0.7}>
-                      <View style={[styles.menuIconBg, { backgroundColor: item.color + "15" }]}>
-                        <IconComp size={20} color={item.color} />
-                      </View>
-                      <View style={styles.menuItemContent}>
-                        <Text style={styles.menuItemLabel}>{item.label}</Text>
-                        <Text style={styles.menuItemDesc}>{item.desc}</Text>
-                      </View>
-                      <ChevronRight size={16} color={TEXT_MUTED} />
-                    </TouchableOpacity>
-                  );
-                })}
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#0F0726" }} edges={['top']}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false}>
+        
+        {/* PREMIUM IRIDESCENT HEADER */}
+        <View style={styles.headerWrap}>
+          <Iridescence color={[0.49, 0.23, 0.93]} speed={0.4} amplitude={0.2} />
+          <View style={styles.headerContent}>
+            <View style={styles.avatarWrap}>
+              <Image source={require("../../assets/images/expert_avatars.jpg")} style={styles.avatar} />
+              <View style={styles.editBadge}>
+                <Settings size={14} color="#fff" />
               </View>
             </View>
+            <Text style={styles.userName}>Piyush Punera</Text>
+            <Text style={styles.userPhone}>+91 9876543210</Text>
+          </View>
+        </View>
+
+        {/* STATS */}
+        <View style={styles.statsContainer}>
+          <View style={styles.statBox}>
+            <Text style={styles.statValue}>12</Text>
+            <Text style={styles.statLabel}>Sessions</Text>
+          </View>
+          <View style={styles.statDivider} />
+          <View style={styles.statBox}>
+            <Text style={styles.statValue}>5</Text>
+            <Text style={styles.statLabel}>Experts</Text>
+          </View>
+          <View style={styles.statDivider} />
+          <View style={styles.statBox}>
+            <Text style={styles.statValue}>$45</Text>
+            <Text style={styles.statLabel}>Balance</Text>
+          </View>
+        </View>
+
+        {/* MENU */}
+        <View style={styles.menuContainer}>
+          {MENU_ITEMS.map((item, index) => (
+            <TouchableOpacity key={index} style={styles.menuItem} activeOpacity={0.8}>
+              <View style={[styles.menuIconWrap, { backgroundColor: item.color + "20" }]}>
+                <item.icon size={20} color={item.color} />
+              </View>
+              <Text style={styles.menuLabel}>{item.label}</Text>
+              <ChevronRight size={18} color="rgba(255,255,255,0.3)" />
+            </TouchableOpacity>
           ))}
+        </View>
 
-          {/* SIGN OUT */}
-          <TouchableOpacity style={styles.signOutBtn} onPress={handleLogout} activeOpacity={0.8}>
-            <LogOut size={18} color="#EF4444" />
-            <Text style={styles.signOutText}>Sign Out</Text>
-          </TouchableOpacity>
-
-          {/* VERSION */}
-          <Text style={styles.versionText}>ZenAuraa v1.0.0 · Powered by Tara Infotech</Text>
-        </Animated.View>
+        {/* LOGOUT */}
+        <TouchableOpacity style={styles.logoutBtn} activeOpacity={0.8}>
+          <LogOut size={20} color="#F87171" />
+          <Text style={styles.logoutText}>Log Out</Text>
+        </TouchableOpacity>
 
       </ScrollView>
     </SafeAreaView>
@@ -171,25 +78,25 @@ export default function ProfileScreen() {
 }
 
 const styles = StyleSheet.create({
-  profileGradient: { padding: 24, paddingTop: 32, paddingBottom: 40, alignItems: "center" },
-  avatar: { width: 88, height: 88, borderRadius: 44, borderWidth: 3, borderColor: "rgba(255,255,255,0.5)", marginBottom: 12 },
-  avatarPlaceholder: { width: 88, height: 88, borderRadius: 44, backgroundColor: "rgba(255,255,255,0.2)", alignItems: "center", justifyContent: "center", marginBottom: 12, borderWidth: 3, borderColor: "rgba(255,255,255,0.4)" },
-  avatarInitial: { fontSize: 36, fontWeight: "800", color: "#fff" },
-  userName: { fontSize: 22, fontWeight: "800", color: "#fff", marginBottom: 4 },
-  userEmail: { fontSize: 14, color: "rgba(255,255,255,0.8)", marginBottom: 20 },
-  statsRow: { flexDirection: "row", gap: 24 },
-  statItem: { alignItems: "center" },
-  statVal: { fontSize: 20, fontWeight: "800", color: "#fff" },
-  statLabel: { fontSize: 11, color: "rgba(255,255,255,0.75)" },
-  sectionTitle: { fontSize: 12, fontWeight: "700", color: TEXT_MUTED, letterSpacing: 1, textTransform: "uppercase", marginBottom: 10, marginLeft: 4 },
-  menuCard: { backgroundColor: CARD, borderRadius: 20, shadowColor: "#7C3AED", shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.08, shadowRadius: 12, elevation: 4, overflow: "hidden", borderWidth: 1, borderColor: "rgba(124,58,237,0.06)" },
-  menuItem: { flexDirection: "row", alignItems: "center", padding: 16, gap: 14 },
-  menuItemBorder: { borderBottomWidth: 1, borderBottomColor: "#F5F3FF" },
-  menuIconBg: { width: 40, height: 40, borderRadius: 12, alignItems: "center", justifyContent: "center" },
-  menuItemContent: { flex: 1 },
-  menuItemLabel: { fontSize: 15, fontWeight: "700", color: TEXT },
-  menuItemDesc: { fontSize: 12, color: TEXT_MUTED, marginTop: 1 },
-  signOutBtn: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 10, backgroundColor: "#FEF2F2", borderRadius: 16, padding: 16, marginBottom: 24, borderWidth: 1, borderColor: "#FECACA" },
-  signOutText: { fontSize: 15, fontWeight: "700", color: "#EF4444" },
-  versionText: { textAlign: "center", fontSize: 11, color: TEXT_MUTED, marginBottom: 8 },
+  headerWrap: { height: 260, position: "relative", overflow: "hidden", borderBottomLeftRadius: 40, borderBottomRightRadius: 40 },
+  headerContent: { ...StyleSheet.absoluteFillObject, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(15,7,38,0.3)" },
+  avatarWrap: { width: 100, height: 100, borderRadius: 50, backgroundColor: "#fff", padding: 4, position: "relative", marginBottom: 16, shadowColor: "#000", shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.3, shadowRadius: 20 },
+  avatar: { width: "100%", height: "100%", borderRadius: 46 },
+  editBadge: { position: "absolute", bottom: 0, right: 0, width: 32, height: 32, borderRadius: 16, backgroundColor: PURPLE, alignItems: "center", justifyContent: "center", borderWidth: 3, borderColor: "#fff" },
+  userName: { fontSize: 24, fontWeight: "800", color: "#fff", marginBottom: 4 },
+  userPhone: { fontSize: 14, color: "rgba(255,255,255,0.8)", fontWeight: "500" },
+  
+  statsContainer: { flexDirection: "row", backgroundColor: "rgba(255,255,255,0.05)", marginHorizontal: 20, marginTop: -30, borderRadius: 20, paddingVertical: 20, borderWidth: 1, borderColor: "rgba(167,139,250,0.2)" },
+  statBox: { flex: 1, alignItems: "center" },
+  statValue: { fontSize: 20, fontWeight: "800", color: "#fff", marginBottom: 4 },
+  statLabel: { fontSize: 12, color: "#A78BFA", textTransform: "uppercase", letterSpacing: 1 },
+  statDivider: { width: 1, height: "100%", backgroundColor: "rgba(167,139,250,0.2)" },
+
+  menuContainer: { paddingHorizontal: 20, marginTop: 30, gap: 12 },
+  menuItem: { flexDirection: "row", alignItems: "center", backgroundColor: "rgba(255,255,255,0.03)", padding: 16, borderRadius: 16, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" },
+  menuIconWrap: { width: 40, height: 40, borderRadius: 20, alignItems: "center", justifyContent: "center", marginRight: 16 },
+  menuLabel: { flex: 1, fontSize: 16, fontWeight: "600", color: "#fff" },
+
+  logoutBtn: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 10, marginHorizontal: 20, marginTop: 30, paddingVertical: 16, borderRadius: 16, backgroundColor: "rgba(248,113,113,0.1)", borderWidth: 1, borderColor: "rgba(248,113,113,0.3)" },
+  logoutText: { fontSize: 16, fontWeight: "700", color: "#F87171" }
 });
