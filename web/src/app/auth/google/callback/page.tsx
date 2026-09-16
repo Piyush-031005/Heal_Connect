@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
-import { authApi, tokenStore, astrologerTokenStore } from '@/lib/api';
+import { authApi, tokenStore } from '@/lib/api';
 
 export default function GoogleCallbackPage() {
   const router = useRouter();
@@ -41,20 +41,20 @@ export default function GoogleCallbackPage() {
 
       const user = res.data.user;
 
-      // Expert/Practitioner Google login — goes to astrologer login page
-      // (state=expert or expert_login means they clicked Google on /astrologer/login)
+      // Expert/Practitioner Google login
+      // (state=expert or expert_login means they clicked Google on expert login)
       if (state === 'expert' || state === 'expert_login') {
         if (!user) {
           setError('No expert account found. Please sign up first.');
           return;
         }
-        // Store tokens in astrologer token store
-        astrologerTokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
+        // Store tokens in main token store (new practitioner system)
+        tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
         localStorage.setItem('hc_role', 'practitioner');
         localStorage.setItem('hc_practitioner_id', user.id);
         localStorage.setItem('hc_practitioner_name', user.name ?? '');
         // New expert — go to onboarding; existing — go to dashboard
-        router.replace(user.isNew ? '/astrologer/onboarding' : '/astrologer/dashboard');
+        router.replace(user.isNew ? '/expert/onboarding' : '/expert/dashboard');
         return;
       }
 
