@@ -27,10 +27,10 @@ const MODALITIES = [
 ];
 
 const EXPERTS = [
-  { name: "piyush", role: "Wellness Expert", rating: "4.9", exp: "New Expert", price: "₹100/min", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" },
-  { name: "Abhishek Giri", role: "Wellness Expert", rating: "4.8", exp: "New Expert", price: "₹0/min", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" },
-  { name: "Pooja", role: "Wellness Expert", rating: "5.0", exp: "New Expert", price: "₹0/min", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" },
-  { name: "Deepak's Expert", role: "Tarot • Astrology", rating: "4.5", exp: "New Expert", price: "₹100/min", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" },
+  { name: "piyush", role: "Wellness Expert", rating: "4.9", exp: "New Expert", price: "₹100/min", img: "https://i.pravatar.cc/150" },
+  { name: "Abhishek Giri", role: "Wellness Expert", rating: "4.8", exp: "New Expert", price: "₹0/min", img: "https://i.pravatar.cc/150" },
+  { name: "Pooja", role: "Wellness Expert", rating: "5.0", exp: "New Expert", price: "₹0/min", img: "https://i.pravatar.cc/150" },
+  { name: "Deepak's Expert", role: "Tarot • Astrology", rating: "4.5", exp: "New Expert", price: "₹100/min", img: "https://i.pravatar.cc/150" },
 ];
 
 export default function ExploreTab() {
