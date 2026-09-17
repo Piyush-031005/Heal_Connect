@@ -7,16 +7,16 @@ import { useLayout } from '@/lib/layout-context';
 
 const MODALITIES = [
   { id: 'astrology',      name: 'Astrology',        image: '/final_ensights/astrology.png' },
-  { id: 'tarot',          name: 'Tarot, Psychic & Divination',            image: '/final_ensights/tarot.png' },
-  { id: 'face-reading',   name: 'Palmistry, Face & Personality Reading',     image: '/final_ensights/face-reading.png' },
-  { id: 'palm-reading',   name: 'Palmistry, Face & Personality Reading',     image: '/final_ensights/palm-reading.png' },
-  { id: 'sound-healing',  name: 'Energy & Spiritual Healing',    image: '/final_ensights/sound-healing.png' },
-  { id: 'meditation',     name: 'Meditation & Mindfulness',       image: '/final_ensights/meditation.png' },
-  { id: 'spiritual',      name: 'Akashic & Spiritual Guidance',        image: '/final_ensights/spiritual-guidance.png' },
+  { id: 'tarot',          name: 'Tarot & Psychic',            image: '/final_ensights/tarot.png' },
+  { id: 'face-reading',   name: 'Face & Personality',     image: '/final_ensights/face-reading.png' },
+  { id: 'palm-reading',   name: 'Face & Personality',     image: '/final_ensights/palm-reading.png' },
+  { id: 'sound-healing',  name: 'Energy Healing',    image: '/final_ensights/sound-healing.png' },
+  { id: 'meditation',     name: 'Mindful Meditation',       image: '/final_ensights/meditation.png' },
+  { id: 'spiritual',      name: 'Spiritual Guidance',        image: '/final_ensights/spiritual-guidance.png' },
   { id: 'chakra-healing', name: 'Energy Healing',   image: '/final_ensights/chakra-healing.png' },
-  { id: 'breathwork',     name: 'Yoga & Breath Practices',       image: '/final_ensights/breathwork.png' },
-  { id: 'dreams',         name: 'Akashic & Spiritual Guidance',    image: '/final_ensights/dream-interpretation.png' },
-  { id: 'space-harmony',  name: 'Vastu & Space Harmony',    image: '/final_ensights/space-harmony.png' },
+  { id: 'breathwork',     name: 'Yoga & Breath',       image: '/final_ensights/breathwork.png' },
+  { id: 'dreams',         name: 'Spiritual Guidance',    image: '/final_ensights/dream-interpretation.png' },
+  { id: 'space-harmony',  name: 'Vastu & Space',    image: '/final_ensights/space-harmony.png' },
   { id: 'numerology',     name: 'Numerology',       image: '/final_ensights/numerology.png' },
 ];
 

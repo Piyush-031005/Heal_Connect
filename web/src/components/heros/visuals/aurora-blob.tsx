@@ -6,12 +6,12 @@ import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 const MODALITIES = [
-  { id: 'astrology', name: 'Astrology' }, { id: 'tarot', name: 'Tarot, Psychic & Divination' },
-  { id: 'face-reading', name: 'Palmistry, Face & Personality Reading' }, { id: 'palm-reading', name: 'Palmistry, Face & Personality Reading' },
-  { id: 'sound-healing', name: 'Energy & Spiritual Healing' }, { id: 'meditation', name: 'Meditation & Mindfulness' },
-  { id: 'spiritual', name: 'Akashic & Spiritual Guidance' }, { id: 'chakra-healing', name: 'Energy & Spiritual Healing' },
-  { id: 'breathwork', name: 'Yoga & Breath Practices' }, { id: 'dreams', name: 'Akashic & Spiritual Guidance' },
-  { id: 'space-harmony', name: 'Vastu & Space Harmony' }, { id: 'numerology', name: 'Numerology' },
+  { id: 'astrology', name: 'Astrology' }, { id: 'tarot', name: 'Tarot & Psychic' },
+  { id: 'face-reading', name: 'Face & Personality' }, { id: 'palm-reading', name: 'Palmistry' },
+  { id: 'sound-healing', name: 'Sound & Energy' }, { id: 'meditation', name: 'Mindful Meditation' },
+  { id: 'spiritual', name: 'Akashic Guidance' }, { id: 'chakra-healing', name: 'Energy Healing' },
+  { id: 'breathwork', name: 'Yoga & Breath' }, { id: 'dreams', name: 'Spiritual Guidance' },
+  { id: 'space-harmony', name: 'Vastu & Space' }, { id: 'numerology', name: 'Numerology' },
 ];
 
 function EtherealFeather({ rotation, position, color, scale }: any) {

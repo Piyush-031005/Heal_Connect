@@ -222,11 +222,11 @@ export default function GhostFibers({
             float edgeFade = mix(1.0 - uVignette, 1.0, vignette);
             float fibers = pow(smoothstep(0.12, 1.05, fiberField) * edgeFade, 1.5);
             float atmosphere = (center * 0.025 + cloud * 0.015) * edgeFade;
-            vec3 fiberInk = mix(backdrop, uLineColor, 0.52);
-            vec3 airColor = mix(backdrop, uGlowColor, 0.16);
+            vec3 fiberInk = mix(backdrop, uLineColor, 0.95);
+            vec3 airColor = mix(backdrop, uGlowColor, 0.45);
 
-            outputColor = mix(backdrop, airColor, atmosphere);
-            outputColor = mix(outputColor, fiberInk, fibers * 0.3);
+            outputColor = mix(backdrop, airColor, atmosphere * 1.5);
+            outputColor = mix(outputColor, fiberInk, fibers * 0.85);
           } else {
             outputColor = backdrop + color;
           }
