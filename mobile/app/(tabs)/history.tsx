@@ -14,7 +14,7 @@ export default function HistoryScreen() {
         locations={[0, 0.25, 0.5, 0.7, 0.85, 0.95, 1]}
         style={StyleSheet.absoluteFill}
       />
-<View style={StyleSheet.absoluteFillObject}>
+<View style={[StyleSheet.absoluteFillObject, { zIndex: 1, elevation: 1 }]}>
         <GhostFibers
           lineColor="#ffffff"
           glowColor="#f0e6f5"
@@ -47,7 +47,7 @@ export default function HistoryScreen() {
         <Text style={styles.headerTitle}>Past Sessions</Text>
       </View>
 
-      <ScrollView contentContainerStyle={{ padding: 20, gap: 16, paddingBottom: 100 }}>
+      <ScrollView style={{ zIndex: 2, elevation: 2 }} contentContainerStyle={{ padding: 20, gap: 16, paddingBottom: 100 }}>
         {[1, 2, 3].map((item) => (
           <View key={item} style={styles.card}>
             <View style={styles.cardHeader}>

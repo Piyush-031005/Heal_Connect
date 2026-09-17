@@ -322,6 +322,7 @@ export default function GhostFibers({
         javaScriptEnabled={true}
         domStorageEnabled={true}
         androidHardwareAccelerationDisabled={false}
+        androidLayerType="hardware"
         mixedContentMode="always"
       />
     </View>

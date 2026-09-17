@@ -329,7 +329,8 @@ export default function Lightfall({
         }
         requestAnimationFrame(render);
       } catch(e) {
-        window.ReactNativeWebView.postMessage(e.message);
+        document.body.innerHTML = "<h1 style='color:red; font-size:40px; margin-top:100px; text-align:center;'>Lightfall Error: " + e.message + "</h1>";
+          window.ReactNativeWebView.postMessage(e.message);
       }
     };
   </script>
@@ -347,6 +348,11 @@ export default function Lightfall({
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         bounces={false}
+        opaque={false}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
+        androidHardwareAccelerationDisabled={false}
+        androidLayerType="hardware"
         pointerEvents="none"
         onMessage={(event) => console.error("Lightfall WebGL Error:", event.nativeEvent.data)}
       />

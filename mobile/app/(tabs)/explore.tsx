@@ -41,7 +41,7 @@ export default function ExploreTab() {
 
   return (
     <View style={styles.container}>
-      <View style={StyleSheet.absoluteFillObject}>
+      <View style={[StyleSheet.absoluteFillObject, { zIndex: 1, elevation: 1 }]}>
         <Lightfall
             colors={['#A6C8FF', '#5227FF', '#FF9FFC']}
             backgroundColor="#0A29FF"
@@ -65,7 +65,7 @@ export default function ExploreTab() {
 
       <WebReplicaHeader />
 
-      <ScrollView contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ zIndex: 2, elevation: 2 }} contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
           <Text style={styles.pageTitle}>Explore Modalities</Text>
           <Text style={styles.pageDesc}>Discover ancient wisdom tailored for you.</Text>
