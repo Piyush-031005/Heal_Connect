@@ -6,6 +6,7 @@ import {
 import { Search, Filter, Star, Phone, MessageCircle } from "lucide-react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Lightfall from '../../components/Lightfall';
 import GhostFibers from "../../components/GhostFibers";
 import WebReplicaHeader from "../../components/WebReplicaHeader";
 
@@ -40,6 +41,26 @@ export default function ExploreTab() {
 
   return (
     <View style={styles.container}>
+      <View style={StyleSheet.absoluteFillObject}>
+        <Lightfall
+            colors={['#A6C8FF', '#5227FF', '#FF9FFC']}
+            backgroundColor="#ffffff"
+            speed={0.5}
+            streakCount={2}
+            streakWidth={1}
+            streakLength={1}
+            glow={1}
+            density={0.6}
+            twinkle={1}
+            zoom={3}
+            backgroundGlow={0.5}
+            opacity={1}
+            mouseInteraction={true}
+            mouseStrength={0.5}
+            mouseRadius={1}
+            lightMode={true}
+        />
+      </View>
       
 
       <WebReplicaHeader />
@@ -52,22 +73,7 @@ export default function ExploreTab() {
           <View style={styles.modalityGrid}>
             {MODALITIES.map((mod, i) => (
               <TouchableOpacity key={i} style={styles.modCard}>
-                <View style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0, borderRadius: 16, overflow: "hidden" }}>
-                  <GhostFibers
-                    lineColor="#6D28D9"
-                    glowColor="#8B5CF6"
-                    speed={0.2}
-                    scale={1.5}
-                    layers={3}
-                    waveAmplitude={0.015}
-                    waveFrequency={2}
-                    waveSpeed={0.2}
-                    layerSpeed={0.08}
-                    brightness={1.5}
-                    blueBoost={1.2}
-                    lightMode={true}
-                  />
-                </View>
+                
                 <View style={styles.modIconWrap}>
                   <Image source={mod.img} style={styles.modIcon} />
                 </View>
@@ -134,7 +140,7 @@ const styles = StyleSheet.create({
   pageDesc: { fontFamily: 'Inter_400Regular', fontSize: 14, color: '#6b7280', marginBottom: 20 },
   
   modalityGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
-  modCard: { width: (width - 50) / 2, backgroundColor: 'rgba(255,255,255,0.8)', padding: 16, borderRadius: 16, alignItems: 'center', marginBottom: 16, borderWidth: 1, borderColor: '#f3f4f6' },
+  modCard: { width: (width - 50) / 2, backgroundColor: 'rgba(255,255,255,0.95)', shadowColor: '#000', shadowOffset: {width:0, height:2}, shadowOpacity: 0.1, shadowRadius: 4, elevation: 3, padding: 16, borderRadius: 16, alignItems: 'center', marginBottom: 16, borderWidth: 1, borderColor: '#f3f4f6' },
   modIconWrap: { width: 60, height: 60, borderRadius: 30, marginBottom: 10, backgroundColor: '#f9fafb' },
   modIcon: { width: '100%', height: '100%', resizeMode: 'contain' },
   modName: { fontFamily: 'Inter_600SemiBold', fontSize: 14, color: '#111827', marginBottom: 4, textAlign: 'center' },
