@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
 
@@ -245,7 +245,7 @@ export default function Lightfall({
             chroma = pow(chroma, vec3(1.35));
             float chromaPeak = max(chroma.r, max(chroma.g, chroma.b));
             chroma /= max(chromaPeak, 1e-4);
-            fragColor = vec4(mix(vec3(1.0), chroma, coverage * 0.94), 1.0);
+            fragColor = vec4(chroma, coverage * 0.94);
           } else {
             fragColor = vec4(colr, uOpacity);
           }

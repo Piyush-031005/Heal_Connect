@@ -65,14 +65,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logoImage: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     marginRight: 6,
   },
   logoText: {
     fontFamily: 'PlayfairDisplay_700Bold',
-    fontSize: 22,
+    fontSize: 26,
     color: '#2d1b69',
   },
   rightSection: {

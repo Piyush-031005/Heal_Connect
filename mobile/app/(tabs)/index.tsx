@@ -72,6 +72,11 @@ export default function HomeTab() {
             source={require('../../assets/images/main_hero.png')} 
             style={styles.heroImage}
           />
+            {/* Gradient fade at the top to blend into the purple background smoothly */}
+            <LinearGradient
+              colors={['#F0E6F5', 'rgba(240, 230, 245, 0.8)', 'transparent']}
+              style={styles.heroImageGradientTop}
+            />
           {/* Gradient fade at the bottom to blend into the purple background seamlessly */}
           <LinearGradient
             colors={['transparent', 'rgba(213, 182, 220, 0.8)', '#D5B6DC']}
@@ -263,7 +268,15 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
   },
-  heroImageGradient: {
+      heroImageGradientTop: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      height: 120,
+    },
+
+    heroImageGradient: {
     position: 'absolute',
     bottom: 0,
     left: 0,
