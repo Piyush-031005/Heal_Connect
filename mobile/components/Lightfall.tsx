@@ -245,9 +245,9 @@ export default function Lightfall({
             chroma = pow(chroma, vec3(1.35));
             float chromaPeak = max(chroma.r, max(chroma.g, chroma.b));
             chroma /= max(chromaPeak, 1e-4);
-            fragColor = vec4(chroma, coverage * 0.94);
+            o = vec4(chroma, coverage * 0.94);
           } else {
-            fragColor = vec4(colr, uOpacity);
+            o = vec4(colr, uOpacity);
           }
         }
 

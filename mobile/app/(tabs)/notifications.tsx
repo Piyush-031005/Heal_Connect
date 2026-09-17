@@ -16,16 +16,16 @@ export default function NotificationsScreen() {
       />
 <View style={StyleSheet.absoluteFillObject}>
         <GhostFibers
-          lineColor="#6D28D9"
-          glowColor="#8B5CF6"
-          speed={0.2}
+          lineColor="#ffffff"
+          glowColor="#f0e6f5"
+          speed={0.4}
           scale={1.5}
           rotation={0}
           rotationSpeed={0.1}
           layers={6}
           waveAmplitude={0.015}
           waveFrequency={2}
-          waveSpeed={0.2}
+          wavespeed={0.4}
           layerSpeed={0.08}
           twist={0.1}
           twistFrequency={5}
