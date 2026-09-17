@@ -12,12 +12,18 @@ import WebReplicaHeader from "../../components/WebReplicaHeader";
 const { width } = Dimensions.get("window");
 
 const MODALITIES = [
-  { name: "Astrology", desc: "Cosmic insights", img: require("../../assets/images/astrology.png") },
-  { name: "Tarot", desc: "Unveil truths", img: require("../../assets/images/tarot.png") },
-  { name: "Vastu", desc: "Space harmony", img: require("../../assets/images/space-harmony.png") },
-  { name: "Numerology", desc: "Number paths", img: require("../../assets/images/numerology.png") },
-  { name: "Palm Reading", desc: "Life lines", img: require("../../assets/images/astrology.png") },
-  { name: "Face Reading", desc: "Hidden traits", img: require("../../assets/images/tarot.png") },
+  { name: "Astrology", desc: "Cosmic insights", img: require("../../assets/images/astrology.png"), route: "astrology" },
+  { name: "Tarot, Psychic & Divination", desc: "Unveil truths", img: require("../../assets/images/tarot.png"), route: "tarot" },
+  { name: "Vastu & Space Harmony", desc: "Space harmony", img: require("../../assets/images/space-harmony.png"), route: "vastu" },
+  { name: "Numerology", desc: "Number paths", img: require("../../assets/images/numerology.png"), route: "numerology" },
+  { name: "Akashic & Spiritual Guidance", desc: "Spiritual insights", img: require("../../assets/images/tarot.png"), route: "spiritual" },
+  { name: "Palmistry, Face & Personality Reading", desc: "Hidden traits", img: require("../../assets/images/astrology.png"), route: "palm" },
+  { name: "Yoga & Breath Practices", desc: "Inner peace", img: require("../../assets/images/meditation.png"), route: "breathwork" },
+  { name: "Energy & Spiritual Healing", desc: "Energy flow", img: require("../../assets/images/meditation.png"), route: "healing" },
+  { name: "Meditation & Mindfulness", desc: "Calm mind", img: require("../../assets/images/meditation.png"), route: "meditation" },
+  { name: "Palmistry, Face & Personality Reading", desc: "Face reading", img: require("../../assets/images/astrology.png"), route: "face" },
+  { name: "Energy & Spiritual Healing", desc: "Sound healing", img: require("../../assets/images/space-harmony.png"), route: "sound" },
+  { name: "Akashic & Spiritual Guidance", desc: "Dream reading", img: require("../../assets/images/tarot.png"), route: "dreams" },
 ];
 
 const EXPERTS = [

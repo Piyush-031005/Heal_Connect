@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState, useRef, type ElementType } from 'react';
 import Link from 'next/link';
@@ -325,7 +325,7 @@ export default function Navbar() {
                     Free Insights
                     <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </span>
-                  <div className="absolute top-full left-0 mt-2 w-56 bg-[#7A48AB] border border-[#694091] rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2">
+                  <div className="absolute top-full left-0 mt-2 w-64 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-4 px-2" style={{ backgroundColor: "#E6E6FA", borderRadius: "30px 40px 30px 50px", border: "2px solid #D8BFD8" }}>
                     <Link href="/modalities/numerology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Numerology</Link>
                     <Link href="/modalities/astrology" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Astrology</Link>
                     <Link href="/modalities/space-harmony" className="block px-4 py-2 text-sm text-[#F8F7FA] hover:bg-[#694091]/50 hover:text-[#5F3BA9]">Space Harmony</Link>
