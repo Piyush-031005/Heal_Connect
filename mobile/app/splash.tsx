@@ -11,10 +11,15 @@ export default function SplashScreen() {
   
   const logoScale = useSharedValue(0.4);
   const logoOpacity = useSharedValue(0);
+  const textOpacity = useSharedValue(0);
+  const textTranslateY = useSharedValue(30);
 
   useEffect(() => {
     logoOpacity.value = withTiming(1, { duration: 1000, easing: Easing.out(Easing.ease) });
     logoScale.value = withTiming(1, { duration: 1200, easing: Easing.out(Easing.cubic) });
+
+    textOpacity.value = withDelay(800, withTiming(1, { duration: 1000 }));
+    textTranslateY.value = withDelay(800, withTiming(0, { duration: 1000, easing: Easing.out(Easing.ease) }));
 
     setTimeout(() => {
       router.replace("/(auth)/login");
@@ -24,6 +29,11 @@ export default function SplashScreen() {
   const logoAnimatedStyle = useAnimatedStyle(() => ({
     opacity: logoOpacity.value,
     transform: [{ scale: logoScale.value }],
+  }));
+
+  const textAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: textOpacity.value,
+    transform: [{ translateY: textTranslateY.value }],
   }));
 
   return (
@@ -53,9 +63,12 @@ export default function SplashScreen() {
       />
       
       <View style={styles.content}>
-        <Animated.View style={[styles.logoContainer, logoAnimatedStyle]}>
+        <Animated.View style={[logoAnimatedStyle]}>
           <Image source={require("../assets/images/main_logo.png")} style={styles.logo} />
         </Animated.View>
+        <Animated.Text style={[styles.title, textAnimatedStyle]}>
+          ZenAuraa
+        </Animated.Text>
       </View>
     </View>
   );
@@ -64,18 +77,6 @@ export default function SplashScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#0C0514" },
   content: { flex: 1, alignItems: "center", justifyContent: "center", zIndex: 10 },
-  logoContainer: { 
-    width: 160, 
-    height: 160, 
-    backgroundColor: '#ffffff', 
-    borderRadius: 80, 
-    alignItems: 'center', 
-    justifyContent: 'center',
-    shadowColor: '#9465c2',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 30,
-    elevation: 10
-  },
-  logo: { width: 100, height: 100, resizeMode: "contain" },
+  logo: { width: 140, height: 140, resizeMode: "contain", marginBottom: 20, tintColor: "#ffffff" },
+  title: { fontSize: 46, fontFamily: 'PlayfairDisplay_700Bold', color: "#ffffff", letterSpacing: 2 },
 });

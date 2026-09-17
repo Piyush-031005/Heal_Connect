@@ -21,10 +21,10 @@ const EXPERTS = [
 ];
 
 const MODALITIES = [
-  { name: "Astrology", desc: "Cosmic insights", img: "https://zenauraa.com/final_ensights/astrology.png" },
-  { name: "Tarot", desc: "Unveil truths", img: "https://zenauraa.com/final_ensights/tarot.png" },
-  { name: "Vastu", desc: "Space harmony", img: "https://zenauraa.com/final_ensights/space.png" },
-  { name: "Numerology", desc: "Number paths", img: "https://zenauraa.com/final_ensights/numerology.png" },
+  { name: "Astrology", desc: "Cosmic insights", img: require("../../assets/images/astrology.png"), route: "astrology" },
+  { name: "Tarot", desc: "Unveil truths", img: require("../../assets/images/tarot.png"), route: "tarot" },
+  { name: "Vastu", desc: "Space harmony", img: require("../../assets/images/space-harmony.png"), route: "vastu" },
+  { name: "Numerology", desc: "Number paths", img: require("../../assets/images/numerology.png"), route: "numerology" },
 ];
 
 const REVIEWS = [
@@ -60,9 +60,9 @@ export default function HomeTab() {
       >
         {/* HERO SECTION WITH MEDITATING LADY */}
         <ImageBackground 
-          source={{ uri: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2094&auto=format&fit=crop" }} 
+          source={require('../../assets/images/meditation.png')} 
           style={styles.heroBackground}
-          imageStyle={{ opacity: 0.15 }}
+          imageStyle={{ opacity: 0.2, resizeMode: 'cover' }}
         >
           <View style={styles.heroSection}>
             <Text style={styles.heroTitle}>ZenAuraa.</Text>
@@ -184,16 +184,16 @@ export default function HomeTab() {
 
           <View style={styles.modalityGrid}>
             {MODALITIES.map((mod, i) => (
-              <TouchableOpacity key={i} style={styles.categoryCardHalf}>
+              <TouchableOpacity key={i} style={styles.categoryCardHalf} onPress={() => router.push("/(tabs)/explore")}>
                 <View style={styles.categoryIconWrapHalf}>
-                  <Image source={{ uri: mod.img }} style={styles.categoryIconHalf} />
+                  <Image source={mod.img} style={styles.categoryIconHalf} />
                 </View>
                 <Text style={styles.categoryNameHalf}>{mod.name}</Text>
                 <Text style={styles.categoryDescHalf}>{mod.desc}</Text>
               </TouchableOpacity>
             ))}
           </View>
-          <TouchableOpacity style={styles.seeMoreBtn}>
+          <TouchableOpacity style={styles.seeMoreBtn} onPress={() => router.push("/(tabs)/explore")}>
             <Text style={styles.seeMoreText}>See More Modalities →</Text>
           </TouchableOpacity>
         </View>
@@ -236,8 +236,8 @@ export default function HomeTab() {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  heroBackground: { width: '100%' },
-  heroSection: { padding: 20, paddingTop: 20, paddingBottom: 30 },
+  heroBackground: { width: '100%', minHeight: 400 },
+  heroSection: { padding: 20, paddingTop: 180, paddingBottom: 30 },
   heroTitle: { fontFamily: 'PlayfairDisplay_700Bold', fontSize: 42, color: '#2d1b69', marginBottom: 10 },
   heroSubtitle: { fontFamily: 'Inter_400Regular', fontSize: 16, color: '#2d1b69', opacity: 0.9, lineHeight: 22, marginBottom: 20, maxWidth: '95%' },
   heroButtonsRow: { flexDirection: 'row', gap: 10, marginBottom: 14 },

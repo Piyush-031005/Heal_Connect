@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 import { useColorScheme } from '@/components/useColorScheme';
 
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs(true);
 export {
   ErrorBoundary,
 } from 'expo-router';

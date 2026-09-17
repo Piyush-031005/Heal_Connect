@@ -1,20 +1,45 @@
-﻿import { SafeAreaView } from "react-native-safe-area-context";
-import GhostFibers from "../../components/GhostFibers";
+﻿import React from "react";
 import { View, Text, StyleSheet, ScrollView, Image, Dimensions } from "react-native";
 import { Clock, Phone, MessageCircle } from "lucide-react-native";
-
-const PURPLE = "#7C3AED";
+import GhostFibers from "../../components/GhostFibers";
+import WebReplicaHeader from "../../components/WebReplicaHeader";
 
 export default function HistoryScreen() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#1A0B2E" }} edges={['top']}>
-      <GhostFibers lineColor="#A78BFA" glowColor="#7C3AED" speed={0.15} scale={1.2} brightness={12.0} layers={30} />
+    <View style={styles.container}>
+      <View style={StyleSheet.absoluteFillObject}>
+        <GhostFibers
+          lineColor="#A78BFA"
+          glowColor="#E5D9F2"
+          speed={0.1}
+          scale={2}
+          rotation={0}
+          rotationSpeed={0.1}
+          layers={3}
+          waveAmplitude={0.01}
+          waveFrequency={2}
+          waveSpeed={0.1}
+          layerSpeed={0.05}
+          twist={0.1}
+          twistFrequency={3}
+          twistSpeed={1}
+          lineFrequency={3}
+          lineSpacing={2}
+          lineSharpness={10}
+          glowFalloff={5}
+          glowIntensity={1}
+          brightness={1}
+          blueBoost={1}
+        />
+      </View>
       
+      <WebReplicaHeader />
+
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Past Sessions</Text>
       </View>
 
-      <ScrollView contentContainerStyle={{ padding: 20, gap: 16 }}>
+      <ScrollView contentContainerStyle={{ padding: 20, gap: 16, paddingBottom: 100 }}>
         {[1, 2, 3].map((item) => (
           <View key={item} style={styles.card}>
             <View style={styles.cardHeader}>
@@ -34,28 +59,29 @@ export default function HistoryScreen() {
             
             <View style={styles.cardFooter}>
               <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
-                <Clock size={14} color="#A78BFA" />
+                <Clock size={14} color="#6b7280" />
                 <Text style={styles.dateText}>12 Aug 2026 • 15 mins</Text>
               </View>
-              <Text style={styles.price}>$24.00</Text>
+              <Text style={styles.price}>₹400.00</Text>
             </View>
           </View>
         ))}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#ffffff" },
   header: { padding: 20 },
-  headerTitle: { fontSize: 28, fontWeight: "800", color: "#fff" },
-  card: { backgroundColor: "rgba(255,255,255,0.05)", borderRadius: 20, padding: 16, borderWidth: 1, borderColor: "rgba(167,139,250,0.2)" },
+  headerTitle: { fontFamily: 'PlayfairDisplay_700Bold', fontSize: 32, color: "#1a1a1a" },
+  card: { backgroundColor: "rgba(255,255,255,0.9)", borderRadius: 20, padding: 16, borderWidth: 1, borderColor: "#f3f4f6" },
   cardHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 },
-  avatar: { width: 44, height: 44, borderRadius: 22, overflow: "hidden", backgroundColor: "#2D1B54" },
-  name: { fontSize: 16, fontWeight: "700", color: "#fff" },
-  role: { fontSize: 13, color: "#A78BFA" },
-  iconBadge: { width: 32, height: 32, borderRadius: 16, backgroundColor: PURPLE, alignItems: "center", justifyContent: "center" },
-  cardFooter: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingTop: 16, borderTopWidth: 1, borderTopColor: "rgba(255,255,255,0.1)" },
-  dateText: { fontSize: 13, color: "#A78BFA" },
-  price: { fontSize: 16, fontWeight: "700", color: "#FCD34D" },
+  avatar: { width: 44, height: 44, borderRadius: 22, overflow: "hidden", backgroundColor: "#f9fafb" },
+  name: { fontFamily: 'Inter_700Bold', fontSize: 16, color: "#111827" },
+  role: { fontFamily: 'Inter_400Regular', fontSize: 13, color: "#6b7280" },
+  iconBadge: { width: 32, height: 32, borderRadius: 16, backgroundColor: "#7C3AED", alignItems: "center", justifyContent: "center" },
+  cardFooter: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingTop: 16, borderTopWidth: 1, borderTopColor: "#e5e7eb" },
+  dateText: { fontFamily: 'Inter_400Regular', fontSize: 13, color: "#6b7280" },
+  price: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: "#7C3AED" },
 });
