@@ -1,4 +1,5 @@
-﻿import React, { useState } from "react";
+﻿import { LinearGradient } from 'expo-linear-gradient';
+import React, { useState } from "react";
 import {
   View, Text, StyleSheet, ScrollView, Image, TouchableOpacity,
   Dimensions, TextInput
@@ -6,8 +7,6 @@ import {
 import { Search, Filter, Star, Phone, MessageCircle } from "lucide-react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Lightfall from '../../components/Lightfall';
-import GhostFibers from "../../components/GhostFibers";
 import WebReplicaHeader from "../../components/WebReplicaHeader";
 
 const { width } = Dimensions.get("window");
@@ -41,26 +40,12 @@ export default function ExploreTab() {
 
   return (
     <View style={styles.container}>
-      <View style={[StyleSheet.absoluteFillObject, { zIndex: 1, elevation: 1 }]}>
-        <Lightfall
-            colors={['#A6C8FF', '#5227FF', '#FF9FFC']}
-            backgroundColor="#0A29FF"
-            speed={0.5}
-            streakCount={2}
-            streakWidth={1}
-            streakLength={1}
-            glow={1}
-            density={0.6}
-            twinkle={1}
-            zoom={3}
-            backgroundGlow={0.5}
-            opacity={1}
-            mouseInteraction={true}
-            mouseStrength={0.5}
-            mouseRadius={1}
-            
-        />
-      </View>
+      <LinearGradient
+        colors={['#F0E6F5', '#E5D9F2', '#D5B6DC', '#C2AEE8', '#D5B6DC', '#8982D0', '#5F3BA9']}
+        locations={[0, 0.25, 0.5, 0.7, 0.85, 0.95, 1]}
+        style={StyleSheet.absoluteFill}
+      />
+      
       
 
       <WebReplicaHeader />
@@ -140,7 +125,7 @@ const styles = StyleSheet.create({
   pageDesc: { fontFamily: 'Inter_400Regular', fontSize: 14, color: '#6b7280', marginBottom: 20 },
   
   modalityGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
-  modCard: { width: (width - 50) / 2, backgroundColor: 'rgba(255,255,255,0.95)', shadowColor: '#000', shadowOffset: {width:0, height:2}, shadowOpacity: 0.1, shadowRadius: 4, elevation: 3, padding: 16, borderRadius: 16, alignItems: 'center', marginBottom: 16, borderWidth: 1, borderColor: '#f3f4f6' },
+  modCard: { width: (width - 50) / 2, backgroundColor: '#ffffff', shadowColor: '#000', shadowOffset: {width:0, height:2}, shadowOpacity: 0.1, shadowRadius: 4, elevation: 3, padding: 16, borderRadius: 16, alignItems: 'center', marginBottom: 16, borderWidth: 1, borderColor: '#f3f4f6' },
   modIconWrap: { width: 60, height: 60, borderRadius: 30, marginBottom: 10, backgroundColor: '#f9fafb' },
   modIcon: { width: '100%', height: '100%', resizeMode: 'contain' },
   modName: { fontFamily: 'Inter_600SemiBold', fontSize: 14, color: '#111827', marginBottom: 4, textAlign: 'center' },

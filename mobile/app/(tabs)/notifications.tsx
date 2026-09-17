@@ -2,7 +2,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Bell, Wallet, CalendarHeart } from "lucide-react-native";
-import GhostFibers from "../../components/GhostFibers";
 import WebReplicaHeader from "../../components/WebReplicaHeader";
 
 export default function NotificationsScreen() {
@@ -14,32 +13,7 @@ export default function NotificationsScreen() {
         locations={[0, 0.25, 0.5, 0.7, 0.85, 0.95, 1]}
         style={StyleSheet.absoluteFill}
       />
-<View style={[StyleSheet.absoluteFillObject, { zIndex: 1, elevation: 1 }]}>
-        <GhostFibers
-          lineColor="#ffffff"
-          glowColor="#f0e6f5"
-          speed={0.4}
-          scale={1.5}
-          rotation={0}
-          rotationSpeed={0.1}
-          layers={6}
-          waveAmplitude={0.015}
-          waveFrequency={2}
-          wavespeed={0.4}
-          layerSpeed={0.08}
-          twist={0.1}
-          twistFrequency={5}
-          twistSpeed={1.5}
-          lineFrequency={5}
-          lineSpacing={2}
-          lineSharpness={16}
-          glowFalloff={8}
-          glowIntensity={2}
-          brightness={1.5}
-          blueBoost={1.2}
-          lightMode={true}
-        />
-      </View>
+
       
       <WebReplicaHeader />
 
