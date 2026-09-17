@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -7,16 +7,16 @@ import { useLayout } from '@/lib/layout-context';
 
 const MODALITIES = [
   { id: 'astrology',      name: 'Astrology',        image: '/final_ensights/astrology.png' },
-  { id: 'tarot',          name: 'Tarot',            image: '/final_ensights/tarot.png' },
-  { id: 'face-reading',   name: 'Face Reading',     image: '/final_ensights/face-reading.png' },
-  { id: 'palm-reading',   name: 'Palm Reading',     image: '/final_ensights/palm-reading.png' },
-  { id: 'sound-healing',  name: 'Sound Healing',    image: '/final_ensights/sound-healing.png' },
-  { id: 'meditation',     name: 'Meditation',       image: '/final_ensights/meditation.png' },
+  { id: 'tarot',          name: 'Tarot & Psychic',            image: '/final_ensights/tarot.png' },
+  { id: 'face-reading',   name: 'Face & Personality',     image: '/final_ensights/face-reading.png' },
+  { id: 'palm-reading',   name: 'Face & Personality',     image: '/final_ensights/palm-reading.png' },
+  { id: 'sound-healing',  name: 'Energy Healing',    image: '/final_ensights/sound-healing.png' },
+  { id: 'meditation',     name: 'Mindful Meditation',       image: '/final_ensights/meditation.png' },
   { id: 'spiritual',      name: 'Spiritual Guidance',        image: '/final_ensights/spiritual-guidance.png' },
-  { id: 'chakra-healing', name: 'Chakra Healing',   image: '/final_ensights/chakra-healing.png' },
-  { id: 'breathwork',     name: 'Breathwork',       image: '/final_ensights/breathwork.png' },
-  { id: 'dreams',         name: 'Dream Prediction',    image: '/final_ensights/dream-interpretation.png' },
-  { id: 'space-harmony',  name: 'Space Harmony',    image: '/final_ensights/space-harmony.png' },
+  { id: 'chakra-healing', name: 'Energy Healing',   image: '/final_ensights/chakra-healing.png' },
+  { id: 'breathwork',     name: 'Yoga & Breath',       image: '/final_ensights/breathwork.png' },
+  { id: 'dreams',         name: 'Spiritual Guidance',    image: '/final_ensights/dream-interpretation.png' },
+  { id: 'space-harmony',  name: 'Vastu & Space',    image: '/final_ensights/space-harmony.png' },
   { id: 'numerology',     name: 'Numerology',       image: '/final_ensights/numerology.png' },
 ];
 
@@ -69,7 +69,7 @@ export default function OpticalWheel() {
           {/* Ambient glow */}
           <circle cx={cx} cy={cy} r="580" fill="url(#outerGlowWhl)" />
 
-          {/* ── WHEEL PATTERN ── */}
+          {/* â”€â”€ WHEEL PATTERN â”€â”€ */}
           <g style={{ animation: 'spin 180s linear infinite reverse', transformOrigin: '600px 600px', animationPlayState: playState }}>
             
             {/* Primary thin gold ring */}
@@ -103,7 +103,7 @@ export default function OpticalWheel() {
               transform={`translate(${cx}, ${cy})`}
             />
 
-            {/* ── THE 12 MODALITY NODES ── */}
+            {/* â”€â”€ THE 12 MODALITY NODES â”€â”€ */}
             {MODALITIES.map((mod, idx) => {
               const angle = (idx * 30 - 90) * (Math.PI / 180);
               const nx = cx + outerR * Math.cos(angle);
@@ -127,7 +127,7 @@ export default function OpticalWheel() {
                         href="/pebbles/pebbel1.png"
                         x={-imgH} y={-imgH}
                         width={imgH * 2} height={imgH * 2}
-                        preserveAspectRatio="xMi✨Mid meet"
+                        preserveAspectRatio="xMiâœ¨Mid meet"
                         style={{
                           filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))',
                           transition: 'filter 0.3s ease',
@@ -152,7 +152,7 @@ export default function OpticalWheel() {
                         href={`${mod.image}?v=16`}
                         x={-imgH} y={-imgH}
                         width={imgH * 2} height={imgH * 2}
-                        preserveAspectRatio="xMi✨Mid meet"
+                        preserveAspectRatio="xMiâœ¨Mid meet"
                         style={{
                           filter: isHovered ? `drop-shadow(0 0 10px ${GOLD})` : 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))',
                           transition: 'filter 0.3s ease',
@@ -180,7 +180,7 @@ export default function OpticalWheel() {
           </g>
         </svg>
 
-        {/* ── CENTER MEDALLION (No outer dark concentric rings, just the logo) ── */}
+        {/* â”€â”€ CENTER MEDALLION (No outer dark concentric rings, just the logo) â”€â”€ */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {/* Removed the large yellowish radial gradient background */}

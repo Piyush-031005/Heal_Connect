@@ -1,46 +1,92 @@
-﻿import { SafeAreaView } from "react-native-safe-area-context";
-import GhostFibers from "../../components/GhostFibers";
+﻿import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { Bell, Star, Wallet } from "lucide-react-native";
+import { Bell, Wallet, CalendarHeart } from "lucide-react-native";
+import GhostFibers from "../../components/GhostFibers";
+import WebReplicaHeader from "../../components/WebReplicaHeader";
 
 export default function NotificationsScreen() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#1A0B2E" }} edges={['top']}>
-      <GhostFibers lineColor="#A78BFA" glowColor="#7C3AED" speed={0.15} scale={1.2} brightness={12.0} layers={30} />
+    <View style={styles.container}>
+      <View style={StyleSheet.absoluteFillObject}>
+        <GhostFibers
+          lineColor="#6D28D9"
+          glowColor="#8B5CF6"
+          speed={0.2}
+          scale={1.5}
+          rotation={0}
+          rotationSpeed={0.1}
+          layers={6}
+          waveAmplitude={0.015}
+          waveFrequency={2}
+          waveSpeed={0.2}
+          layerSpeed={0.08}
+          twist={0.1}
+          twistFrequency={5}
+          twistSpeed={1.5}
+          lineFrequency={5}
+          lineSpacing={2}
+          lineSharpness={16}
+          glowFalloff={8}
+          glowIntensity={2}
+          brightness={1.5}
+          blueBoost={1.2}
+          lightMode={true}
+        />
+      </View>
       
+      <WebReplicaHeader />
+
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Alerts</Text>
+        <Text style={styles.headerTitle}>Notifications</Text>
       </View>
 
-      <ScrollView contentContainerStyle={{ padding: 20, gap: 12 }}>
-        <View style={styles.card}>
-          <View style={[styles.iconWrap, { backgroundColor: "#F59E0B" }]}><Star size={16} color="#fff" /></View>
-          <View style={styles.content}>
-            <Text style={styles.title}>Special Offer 🔮</Text>
-            <Text style={styles.desc}>Get 50% off on your first Tarot reading!</Text>
-            <Text style={styles.time}>2 hours ago</Text>
+      <ScrollView contentContainerStyle={{ padding: 20, gap: 16, paddingBottom: 100 }}>
+        
+        <View style={styles.notificationCard}>
+          <View style={[styles.iconWrap, { backgroundColor: "#EEF2FF" }]}>
+            <CalendarHeart size={20} color="#4F46E5" />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.notifTitle}>Upcoming Session</Text>
+            <Text style={styles.notifDesc}>Your session with Maya starts in 10 minutes.</Text>
+            <Text style={styles.notifTime}>Just now</Text>
           </View>
         </View>
-        <View style={styles.card}>
-          <View style={[styles.iconWrap, { backgroundColor: "#10B981" }]}><Wallet size={16} color="#fff" /></View>
-          <View style={styles.content}>
-            <Text style={styles.title}>Wallet Top-up Successful</Text>
-            <Text style={styles.desc}>$50 has been added to your ZenAuraa wallet.</Text>
-            <Text style={styles.time}>Yesterday</Text>
+
+        <View style={[styles.notificationCard, { opacity: 0.7 }]}>
+          <View style={[styles.iconWrap, { backgroundColor: "#FEF3C7" }]}>
+            <Wallet size={20} color="#D97706" />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.notifTitle}>Recharge Successful</Text>
+            <Text style={styles.notifDesc}>₹500 has been added to your wallet.</Text>
+            <Text style={styles.notifTime}>2 hours ago</Text>
           </View>
         </View>
+
+        <View style={[styles.notificationCard, { opacity: 0.7 }]}>
+          <View style={[styles.iconWrap, { backgroundColor: "#F5F3FF" }]}>
+            <Bell size={20} color="#7C3AED" />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.notifTitle}>New Expert Available</Text>
+            <Text style={styles.notifDesc}>Arun is now online for Tarot readings.</Text>
+            <Text style={styles.notifTime}>Yesterday</Text>
+          </View>
+        </View>
+
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#ffffff" },
   header: { padding: 20 },
-  headerTitle: { fontSize: 28, fontWeight: "800", color: "#fff" },
-  card: { flexDirection: "row", alignItems: "flex-start", backgroundColor: "rgba(255,255,255,0.05)", borderRadius: 16, padding: 16, borderWidth: 1, borderColor: "rgba(167,139,250,0.2)" },
-  iconWrap: { width: 36, height: 36, borderRadius: 18, alignItems: "center", justifyContent: "center", marginRight: 14 },
-  content: { flex: 1 },
-  title: { fontSize: 15, fontWeight: "700", color: "#fff", marginBottom: 4 },
-  desc: { fontSize: 13, color: "#A78BFA", lineHeight: 18, marginBottom: 8 },
-  time: { fontSize: 11, color: "rgba(167,139,250,0.6)" },
+  headerTitle: { fontFamily: 'PlayfairDisplay_700Bold', fontSize: 32, color: "#1a1a1a" },
+  notificationCard: { flexDirection: "row", backgroundColor: "rgba(255,255,255,0.9)", borderRadius: 16, padding: 16, borderWidth: 1, borderColor: "#f3f4f6", alignItems: "center", gap: 16 },
+  iconWrap: { width: 48, height: 48, borderRadius: 24, alignItems: "center", justifyContent: "center" },
+  notifTitle: { fontFamily: 'Inter_600SemiBold', fontSize: 15, color: "#111827", marginBottom: 4 },
+  notifDesc: { fontFamily: 'Inter_400Regular', fontSize: 13, color: "#4b5563", marginBottom: 6 },
+  notifTime: { fontFamily: 'Inter_400Regular', fontSize: 11, color: "#9ca3af" },
 });

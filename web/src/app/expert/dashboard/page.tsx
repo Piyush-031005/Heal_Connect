@@ -154,21 +154,21 @@ export default function ExpertDashboardPage() {
   const initials = profile?.name?.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase() || 'E';
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] flex flex-col font-sans relative overflow-hidden">
 
       {/* ── Incoming Call Modal ── */}
       {incomingCall && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-          <div className="bg-[#121420] border border-primary/30 rounded-3xl shadow-2xl p-8 max-w-sm w-full text-center space-y-6 animate-in zoom-in-95 duration-200">
+          <div className="bg-white border border-border rounded-3xl shadow-2xl p-8 max-w-sm w-full text-center space-y-6 animate-in zoom-in-95 duration-200">
             <div className="flex flex-col items-center gap-3">
-              <div className="w-20 h-20 rounded-2xl bg-secondary border border-border flex items-center justify-center overflow-hidden">
+              <div className="w-20 h-20 rounded-2xl bg-gray-100 border border-border flex items-center justify-center overflow-hidden">
                 {incomingCall.user.photoUrl
                   ? <img src={incomingCall.user.photoUrl} alt="" className="w-full h-full object-cover" />
                   : <User className="w-10 h-10 text-muted-foreground" />}
               </div>
               <div>
                 <p className="text-xs font-bold uppercase tracking-widest text-accent mb-1">Incoming Call</p>
-                <p className="text-2xl font-extrabold text-white">{incomingCall.user.name ?? 'A User'}</p>
+                <p className="text-2xl font-extrabold text-[#1a1a1a]">{incomingCall.user.name ?? 'A User'}</p>
                 <p className="text-sm text-muted-foreground mt-1">
                   {incomingCall.type === 'AUDIO' ? '🎙️ Audio Session Request' : '💬 Chat Session Request'}
                 </p>
@@ -215,7 +215,7 @@ export default function ExpertDashboardPage() {
       </div>
 
       {/* ── Navbar ── */}
-      <header className="sticky top-0 z-50 w-full border-b border-border bg-white/40 dark:bg-black/40 backdrop-blur-md">
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-white/80 backdrop-blur-md">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/center_logo_final.png" alt="ZenAuraa" width={32} height={32} className="rounded-full shadow-[0_0_10px_rgba(214,80,07,0.5)]" />
@@ -251,9 +251,9 @@ export default function ExpertDashboardPage() {
                   : initials}
               </button>
               {showProfileMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-[#121420] border border-border rounded-2xl shadow-2xl overflow-hidden z-50">
-                  <div className="px-4 py-3 border-b border-border bg-secondary">
-                    <p className="text-sm font-bold text-foreground truncate tracking-wide">{profile?.name}</p>
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-border rounded-2xl shadow-xl overflow-hidden z-50">
+                  <div className="px-4 py-3 border-b border-border bg-gray-50">
+                    <p className="text-sm font-bold text-[#1a1a1a] truncate tracking-wide">{profile?.name}</p>
                     <p className="text-xs text-primary truncate">{profile?.specialties?.[0] || 'Expert'}</p>
                   </div>
                   <Link href="/expert/profile" onClick={() => setShowProfileMenu(false)} className="w-full px-4 py-3 hover:bg-secondary transition-colors flex items-center gap-3">
@@ -290,7 +290,7 @@ export default function ExpertDashboardPage() {
           <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex items-center gap-5">
-              <div className="w-20 h-20 rounded-2xl bg-secondary border border-border flex items-center justify-center text-foreground text-3xl font-extrabold overflow-hidden shrink-0 shadow-[0_0_20px_rgba(214,80,07,0.2)]">
+              <div className="w-20 h-20 rounded-2xl bg-white border border-border flex items-center justify-center text-[#1a1a1a] text-3xl font-extrabold overflow-hidden shrink-0 shadow-md">
                 {profile?.photoUrl
                   ? <img src={profile.photoUrl} alt={profile.name} className="w-full h-full object-cover" />
                   : initials}
@@ -331,13 +331,13 @@ export default function ExpertDashboardPage() {
             { label: 'Avg Rating', value: profile?.avgRating != null ? profile.avgRating.toFixed(1) : '—', icon: Star, color: 'text-purple-400', bg: 'bg-purple-400/10', border: 'border-purple-400/20' },
             { label: 'Active Now', value: sessions.length > 0 ? String(sessions.length) : '0', icon: TrendingUp, color: 'text-blue-400', bg: 'bg-blue-400/10', border: 'border-blue-400/20' },
           ].map((stat) => (
-            <Card key={stat.label} className="bg-secondary border border-border shadow-lg backdrop-blur-sm rounded-2xl overflow-hidden hover:bg-white/10 transition-colors">
+            <Card key={stat.label} className="bg-white border border-border shadow-sm rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
               <CardContent className="p-5 flex items-center gap-4">
                 <div className={`w-12 h-12 rounded-xl ${stat.bg} ${stat.border} border flex items-center justify-center shrink-0`}>
                   <stat.icon className={`w-6 h-6 ${stat.color}`} />
                 </div>
                 <div>
-                  <p className="text-xl font-bold text-foreground">{stat.value}</p>
+                  <p className="text-xl font-bold text-[#1a1a1a]">{stat.value}</p>
                   <p className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</p>
                 </div>
               </CardContent>
@@ -352,7 +352,7 @@ export default function ExpertDashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">Incoming</p>
-                <h2 className="text-2xl font-extrabold text-foreground">Active Sessions</h2>
+                <h2 className="text-2xl font-extrabold text-[#1a1a1a]">Active Sessions</h2>
               </div>
               {sessions.length > 0 && (
                 <span className="flex items-center gap-2 text-xs font-bold text-accent bg-accent/10 border border-accent/30 rounded-full px-4 py-1.5 shadow-[0_0_10px_rgba(46,96,82,0.1)]">
@@ -363,8 +363,8 @@ export default function ExpertDashboardPage() {
             </div>
 
             {sessions.length === 0 ? (
-              <div className="bg-secondary rounded-3xl border border-dashed border-border p-16 text-center backdrop-blur-sm">
-                <div className="w-20 h-20 rounded-full bg-secondary border border-border flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(214,80,07,0.05)]">
+              <div className="bg-white rounded-3xl border border-dashed border-border p-16 text-center shadow-sm">
+                <div className="w-20 h-20 rounded-full bg-gray-50 border border-border flex items-center justify-center mx-auto mb-6">
                   <MessageCircle className="w-10 h-10 text-muted-foreground" />
                 </div>
                 <p className="text-lg font-bold text-muted-foreground mb-2">No active sessions</p>
@@ -385,15 +385,15 @@ export default function ExpertDashboardPage() {
                 {sessions.map((session) => (
                   <div
                     key={session.id}
-                    className="bg-white/40 dark:bg-black/40 backdrop-blur-xl rounded-2xl border border-border p-5 flex flex-col sm:flex-row sm:items-center gap-5 shadow-lg hover:border-primary/50 transition-all group"
+                    className="bg-white rounded-2xl border border-border p-5 flex flex-col sm:flex-row sm:items-center gap-5 shadow-sm hover:shadow-md transition-all group"
                   >
-                    <div className="w-14 h-14 rounded-2xl bg-[#121420] border border-border flex items-center justify-center text-foreground font-bold text-xl shrink-0 overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.3)]">
+                    <div className="w-14 h-14 rounded-2xl bg-gray-50 border border-border flex items-center justify-center text-[#1a1a1a] font-bold text-xl shrink-0 overflow-hidden">
                       {session.user.photoUrl
                         ? <img src={session.user.photoUrl} alt={session.user.name ?? ''} className="w-full h-full object-cover" />
                         : <User className="w-6 h-6 text-muted-foreground" />}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-bold text-foreground text-lg tracking-wide">{session.user.name ?? 'Anonymous User'}</p>
+                      <p className="font-bold text-[#1a1a1a] text-lg tracking-wide">{session.user.name ?? 'Anonymous User'}</p>
                       <div className="flex flex-wrap items-center gap-3 mt-2">
                         <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-lg border ${
                           session.type === 'CHAT' ? 'bg-blue-400/10 text-blue-400 border-blue-400/20' : 'bg-purple-400/10 text-purple-400 border-purple-400/20'
@@ -424,20 +424,20 @@ export default function ExpertDashboardPage() {
           <div className="space-y-6">
             <div>
               <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">Your Profile</p>
-              <h2 className="text-2xl font-extrabold text-foreground">Overview</h2>
+              <h2 className="text-2xl font-extrabold text-[#1a1a1a]">Overview</h2>
             </div>
 
-            <Card className="bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-border shadow-2xl rounded-2xl overflow-hidden relative z-10">
+            <Card className="bg-white border border-border shadow-sm rounded-2xl overflow-hidden relative z-10">
               <div className="h-24 bg-gradient-to-r from-[#301368] via-[#5F3BA9] to-[#D5B6DC] border-b border-border relative">
                  <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(214,80,07,0.2)_0%,rgba(0,0,0,0)_60%)]" />
               </div>
               <CardContent className="px-6 pb-6 -mt-10 relative z-10">
-                <div className="w-20 h-20 rounded-2xl bg-[#121420] border-2 border-border flex items-center justify-center text-foreground text-2xl font-extrabold overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] mb-4">
+                <div className="w-20 h-20 rounded-2xl bg-white border-2 border-border flex items-center justify-center text-[#1a1a1a] text-2xl font-extrabold overflow-hidden shadow-sm mb-4">
                   {profile?.photoUrl
                     ? <img src={profile.photoUrl} alt={profile?.name} className="w-full h-full object-cover" />
                     : initials}
                 </div>
-                <p className="font-bold text-foreground text-xl tracking-wide">{profile?.name}</p>
+                <p className="font-bold text-[#1a1a1a] text-xl tracking-wide">{profile?.name}</p>
                 <p className="text-sm text-primary font-medium mt-1 mb-5">{profile?.specialties?.slice(0, 2).join(' · ') || '—'}</p>
 
                 <div className="space-y-3 pt-5 border-t border-border">
@@ -452,17 +452,17 @@ export default function ExpertDashboardPage() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-muted-foreground font-medium">Rate</span>
-                    <span className="text-sm font-bold text-foreground">{currencyCode === 'GBP' ? `£${profile?.perMinuteRate}` : format(profile?.perMinuteRate || 0)}/min</span>
+                    <span className="text-sm font-bold text-[#1a1a1a]">{currencyCode === 'GBP' ? `£${profile?.perMinuteRate}` : format(profile?.perMinuteRate || 0)}/min</span>
                   </div>
                 </div>
 
                 <button
                   onClick={toggleOnline}
                   disabled={togglingOnline}
-                  className={`w-full mt-6 py-3.5 rounded-xl text-sm font-bold transition-all shadow-lg border-0 ${
+                  className={`w-full mt-6 py-3.5 rounded-xl text-sm font-bold transition-all shadow-md border-0 ${
                     isOnline
-                      ? 'bg-white/10 text-foreground hover:bg-white/20'
-                      : 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_20px_rgba(214,80,07,0.3)]'
+                      ? 'bg-gray-100 text-[#1a1a1a] hover:bg-gray-200'
+                      : 'bg-primary text-primary-foreground hover:bg-primary/90'
                   }`}
                 >
                   {isOnline ? 'Go Offline' : 'Go Online'}

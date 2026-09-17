@@ -1,131 +1,160 @@
 ﻿import React, { useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import GhostFibers from "../../components/GhostFibers";
 import {
   View, Text, StyleSheet, ScrollView, Image, TouchableOpacity,
   Dimensions, TextInput
 } from "react-native";
 import { Search, Filter, Star, Phone, MessageCircle } from "lucide-react-native";
 import { useRouter } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import GhostFibers from "../../components/GhostFibers";
+import WebReplicaHeader from "../../components/WebReplicaHeader";
 
 const { width } = Dimensions.get("window");
-const PURPLE = "#7C3AED";
-const TEXT = "#1E1035";
 
-const CATEGORIES = ["All", "Astrology", "Tarot", "Palmistry", "Numerology", "Vastu"];
-
-const EXPERTS = [
-  { name: "Maya Sharma",   role: "Vedic Astrologer", rating: "4.9", exp: "15 Yrs", price: "$1/min", lang: "English, Hindi", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" },
-  { name: "Arun Nair",     role: "Tarot Reader",      rating: "5.0", exp: "20 Yrs", price: "$2/min", lang: "English", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" },
-  { name: "Dr. Elena",     role: "Healer",            rating: "4.8", exp: "8 Yrs",  price: "$1/min", lang: "Spanish, English", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" },
-  { name: "Chen Wei",      role: "Numerologist",      rating: "5.0", exp: "30 Yrs", price: "$1/min", lang: "Mandarin, English", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" },
+const MODALITIES = [
+  { name: "Astrology", desc: "Cosmic insights", img: require("../../assets/images/astrology.png"), route: "astrology" },
+  { name: "Tarot, Psychic & Divination", desc: "Unveil truths", img: require("../../assets/images/tarot.png"), route: "tarot" },
+  { name: "Vastu & Space Harmony", desc: "Space harmony", img: require("../../assets/images/space-harmony.png"), route: "vastu" },
+  { name: "Numerology", desc: "Number paths", img: require("../../assets/images/numerology.png"), route: "numerology" },
+  { name: "Akashic & Spiritual Guidance", desc: "Spiritual insights", img: require("../../assets/images/tarot.png"), route: "spiritual" },
+  { name: "Palmistry, Face & Personality Reading", desc: "Hidden traits", img: require("../../assets/images/astrology.png"), route: "palm" },
+  { name: "Yoga & Breath Practices", desc: "Inner peace", img: require("../../assets/images/meditation.png"), route: "breathwork" },
+  { name: "Energy & Spiritual Healing", desc: "Energy flow", img: require("../../assets/images/meditation.png"), route: "healing" },
+  { name: "Meditation & Mindfulness", desc: "Calm mind", img: require("../../assets/images/meditation.png"), route: "meditation" },
+  { name: "Palmistry, Face & Personality Reading", desc: "Face reading", img: require("../../assets/images/astrology.png"), route: "face" },
+  { name: "Energy & Spiritual Healing", desc: "Sound healing", img: require("../../assets/images/space-harmony.png"), route: "sound" },
+  { name: "Akashic & Spiritual Guidance", desc: "Dream reading", img: require("../../assets/images/tarot.png"), route: "dreams" },
 ];
 
-export default function ExploreScreen() {
+const EXPERTS = [
+  { name: "piyush", role: "Wellness Expert", rating: "4.9", exp: "New Expert", price: "₹100/min", img: "https://i.pravatar.cc/150" },
+  { name: "Abhishek Giri", role: "Wellness Expert", rating: "4.8", exp: "New Expert", price: "₹0/min", img: "https://i.pravatar.cc/150" },
+  { name: "Pooja", role: "Wellness Expert", rating: "5.0", exp: "New Expert", price: "₹0/min", img: "https://i.pravatar.cc/150" },
+  { name: "Deepak's Expert", role: "Tarot • Astrology", rating: "4.5", exp: "New Expert", price: "₹100/min", img: "https://i.pravatar.cc/150" },
+];
+
+export default function ExploreTab() {
   const router = useRouter();
-  const [activeCat, setActiveCat] = useState("All");
+  const insets = useSafeAreaInsets();
+  const [search, setSearch] = useState("");
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#0F0B1E" }} edges={['top']}>
-      {/* Purplish/Bluish Fibers Background */}
-      <GhostFibers
-        lineColor="#818CF8" glowColor="#6366F1" speed={0.15} scale={1.2}
-        brightness={15.0} blueBoost={1.5} layers={35}
-        lineFrequency={35} lineSpacing={0.8} glowIntensity={15.0}
-      />
+    <View style={styles.container}>
       
-      {/* HEADER & SEARCH */}
-      <View style={styles.header}>
-        <View style={styles.searchBar}>
-          <Search size={18} color="#818CF8" />
-          <TextInput 
-            placeholder="Search experts..." 
-            placeholderTextColor="rgba(129,140,248,0.6)" 
-            style={styles.searchInput} 
-          />
-        </View>
-        <TouchableOpacity style={styles.filterBtn}>
-          <Filter size={18} color="#fff" />
-        </TouchableOpacity>
-      </View>
 
-      {/* CATEGORIES */}
-      <View style={{ marginBottom: 16 }}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 10 }}>
-          {CATEGORIES.map(cat => (
-            <TouchableOpacity 
-              key={cat} 
-              onPress={() => setActiveCat(cat)}
-              style={[styles.catChip, activeCat === cat && styles.catChipActive]}
-            >
-              <Text style={[styles.catText, activeCat === cat && styles.catTextActive]}>{cat}</Text>
+      <WebReplicaHeader />
+
+      <ScrollView contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false}>
+        <View style={styles.content}>
+          <Text style={styles.pageTitle}>Explore Modalities</Text>
+          <Text style={styles.pageDesc}>Discover ancient wisdom tailored for you.</Text>
+
+          <View style={styles.modalityGrid}>
+            {MODALITIES.map((mod, i) => (
+              <TouchableOpacity key={i} style={styles.modCard}>
+                <View style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0, borderRadius: 16, overflow: "hidden" }}>
+                  <GhostFibers
+                    lineColor="#6D28D9"
+                    glowColor="#8B5CF6"
+                    speed={0.2}
+                    scale={1.5}
+                    layers={3}
+                    waveAmplitude={0.015}
+                    waveFrequency={2}
+                    waveSpeed={0.2}
+                    layerSpeed={0.08}
+                    brightness={1.5}
+                    blueBoost={1.2}
+                    lightMode={true}
+                  />
+                </View>
+                <View style={styles.modIconWrap}>
+                  <Image source={mod.img} style={styles.modIcon} />
+                </View>
+                <Text style={styles.modName}>{mod.name}</Text>
+                <Text style={styles.modDesc}>{mod.desc}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          <View style={styles.divider} />
+
+          <Text style={styles.pageTitle}>Find an Expert</Text>
+          <View style={styles.searchRow}>
+            <View style={styles.searchBar}>
+              <Search color="#6b7280" size={20} />
+              <TextInput
+                style={styles.searchInput}
+                placeholder="Search experts..."
+                placeholderTextColor="#9ca3af"
+                value={search}
+                onChangeText={setSearch}
+              />
+            </View>
+            <TouchableOpacity style={styles.filterBtn}>
+              <Filter color="#fff" size={20} />
             </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
-      
-      {/* EXPERT LIST */}
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 120, gap: 14 }}>
-        {EXPERTS.map((expert, i) => (
-          <TouchableOpacity key={i} style={styles.expertCard} activeOpacity={0.88}>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 14, marginBottom: 12 }}>
-              <View style={styles.expertAvatarWrap}>
-                <Image source={{ uri: expert.img }} style={{ width: "100%", height: "100%" }} resizeMode="cover" />
-              </View>
-              <View style={{ flex: 1 }}>
-                <Text style={styles.expertName}>{expert.name}</Text>
-                <Text style={styles.expertRole}>{expert.role}</Text>
-                <View style={{ flexDirection: "row", alignItems: "center", gap: 4, marginTop: 4 }}>
-                  <Star size={12} fill="#FCD34D" color="#FCD34D" />
-                  <Text style={{ fontSize: 12, fontWeight: "700", color: "#F8F7FA" }}>{expert.rating}</Text>
-                  <Text style={{ fontSize: 11, color: "#818CF8" }}> • {expert.exp}</Text>
-                </View>
-              </View>
-              <View style={{ alignItems: "flex-end" }}>
-                <Text style={{ fontSize: 16, fontWeight: "800", color: "#818CF8" }}>{expert.price}</Text>
-              </View>
-            </View>
-            
-            <Text style={{ fontSize: 12, color: "rgba(248,247,250,0.7)", marginBottom: 12 }}>{expert.lang}</Text>
+          </View>
 
-            <View style={{ flexDirection: "row", gap: 10 }}>
-              <TouchableOpacity style={styles.expertActionBtnWrapper} onPress={() => router.push("/(tabs)/history")}>
-                <LinearGradient colors={["#6366F1", "#8B5CF6"]} style={styles.expertActionBtnGrad} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
-                  <MessageCircle size={14} color="#fff" /><Text style={styles.expertActionText}>Chat</Text>
-                </LinearGradient>
-              </TouchableOpacity>
-              
-              <TouchableOpacity style={[styles.expertActionBtnWrapper, { backgroundColor: "rgba(255,255,255,0.1)", borderWidth: 1, borderColor: "rgba(255,255,255,0.2)" }]}>
-                <View style={styles.expertActionBtnGrad}>
-                  <Phone size={14} color="#fff" /><Text style={styles.expertActionText}>Call</Text>
+          <View style={styles.expertList}>
+            {EXPERTS.map((exp, i) => (
+              <View key={i} style={styles.expertCard}>
+                <Image source={{ uri: exp.img }} style={styles.expertImg} />
+                <View style={styles.expertInfo}>
+                  <Text style={styles.expertName}>{exp.name}</Text>
+                  <Text style={styles.expertRole}>{exp.role}</Text>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 4 }}>
+                    <Star size={14} color="#F59E0B" fill="#F59E0B" />
+                    <Text style={styles.expertRating}>{exp.rating}</Text>
+                  </View>
+                  <Text style={styles.expertPrice}>{exp.price}</Text>
                 </View>
-              </TouchableOpacity>
-            </View>
-          </TouchableOpacity>
-        ))}
+                <View style={styles.expertActions}>
+                  <TouchableOpacity style={styles.actionBtn}>
+                    <MessageCircle size={16} color="#7C3AED" />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.actionBtn}>
+                    <Phone size={16} color="#7C3AED" />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            ))}
+          </View>
+
+        </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  header: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20, paddingVertical: 15, gap: 12 },
-  searchBar: { flex: 1, flexDirection: "row", alignItems: "center", backgroundColor: "rgba(255,255,255,0.08)", borderRadius: 20, paddingHorizontal: 16, height: 44, borderWidth: 1, borderColor: "rgba(99,102,241,0.3)" },
-  searchInput: { flex: 1, fontSize: 14, color: "#fff", marginLeft: 8 },
-  filterBtn: { width: 44, height: 44, borderRadius: 22, backgroundColor: "rgba(255,255,255,0.08)", alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "rgba(99,102,241,0.3)" },
+  container: { flex: 1, backgroundColor: "#ffffff" },
+  content: { padding: 20 },
+  pageTitle: { fontFamily: 'PlayfairDisplay_700Bold', fontSize: 32, color: '#1a1a1a', marginBottom: 4 },
+  pageDesc: { fontFamily: 'Inter_400Regular', fontSize: 14, color: '#6b7280', marginBottom: 20 },
   
-  catChip: { paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20, backgroundColor: "rgba(255,255,255,0.05)", borderWidth: 1, borderColor: "rgba(99,102,241,0.3)" },
-  catChipActive: { backgroundColor: "#6366F1", borderColor: "#6366F1" },
-  catText: { fontSize: 13, color: "#818CF8", fontWeight: "600" },
-  catTextActive: { color: "#fff", fontWeight: "800" },
+  modalityGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
+  modCard: { width: (width - 50) / 2, backgroundColor: 'rgba(255,255,255,0.8)', padding: 16, borderRadius: 16, alignItems: 'center', marginBottom: 16, borderWidth: 1, borderColor: '#f3f4f6' },
+  modIconWrap: { width: 60, height: 60, borderRadius: 30, marginBottom: 10, backgroundColor: '#f9fafb' },
+  modIcon: { width: '100%', height: '100%', resizeMode: 'contain' },
+  modName: { fontFamily: 'Inter_600SemiBold', fontSize: 14, color: '#111827', marginBottom: 4, textAlign: 'center' },
+  modDesc: { fontFamily: 'Inter_400Regular', fontSize: 12, color: '#6b7280', textAlign: 'center' },
 
-  expertCard: { backgroundColor: "rgba(255,255,255,0.05)", borderRadius: 20, borderWidth: 1, borderColor: "rgba(99,102,241,0.2)", padding: 16 },
-  expertAvatarWrap: { width: 64, height: 64, borderRadius: 32, overflow: "hidden", borderWidth: 2, borderColor: "#818CF8" },
-  expertName: { fontSize: 16, fontWeight: "800", color: "#F8F7FA" },
-  expertRole: { fontSize: 12, color: "#818CF8", marginTop: 2 },
-  
-  expertActionBtnWrapper: { flex: 1, borderRadius: 12, overflow: "hidden" },
-  expertActionBtnGrad: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, paddingVertical: 10 },
-  expertActionText: { fontSize: 13, fontWeight: "800", color: "#fff" },
+  divider: { height: 1, backgroundColor: '#e5e7eb', marginVertical: 30 },
+
+  searchRow: { flexDirection: 'row', gap: 12, marginBottom: 24 },
+  searchBar: { flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor: '#f3f4f6', paddingHorizontal: 16, borderRadius: 12, height: 48 },
+  searchInput: { flex: 1, marginLeft: 8, fontFamily: 'Inter_400Regular', fontSize: 15, color: '#111827' },
+  filterBtn: { width: 48, height: 48, backgroundColor: '#7C3AED', borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
+
+  expertList: { gap: 16 },
+  expertCard: { flexDirection: 'row', backgroundColor: 'rgba(255,255,255,0.9)', padding: 16, borderRadius: 16, borderWidth: 1, borderColor: '#f3f4f6', alignItems: 'center' },
+  expertImg: { width: 60, height: 60, borderRadius: 30, marginRight: 16 },
+  expertInfo: { flex: 1 },
+  expertName: { fontFamily: 'Inter_700Bold', fontSize: 16, color: '#111827' },
+  expertRole: { fontFamily: 'Inter_400Regular', fontSize: 13, color: '#6b7280' },
+  expertRating: { fontFamily: 'Inter_600SemiBold', fontSize: 13, color: '#111827', marginLeft: 4 },
+  expertPrice: { fontFamily: 'Inter_600SemiBold', fontSize: 14, color: '#7C3AED', marginTop: 4 },
+  expertActions: { flexDirection: 'row', gap: 8 },
+  actionBtn: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#F5F3FF', alignItems: 'center', justifyContent: 'center' },
 });

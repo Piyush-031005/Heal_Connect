@@ -73,7 +73,30 @@ export default function LoginScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#EDE9FE' }}>
       {/* Full-screen fibers — behind AND bleeding into the card */}
-      <GhostFibers lineColor="#C084FC" glowColor="#9333EA" speed={0.3} scale={0.8} brightness={25.0} blueBoost={0.6} lightMode={true} layers={50} lineFrequency={60} lineSpacing={0.3} glowIntensity={25.0} />
+      <GhostFibers
+          lineColor="#6D28D9"
+          glowColor="#8B5CF6"
+          speed={0.2}
+          scale={1.5}
+          rotation={0}
+          rotationSpeed={0.1}
+          layers={6}
+          waveAmplitude={0.015}
+          waveFrequency={2}
+          waveSpeed={0.2}
+          layerSpeed={0.08}
+          twist={0.1}
+          twistFrequency={5}
+          twistSpeed={1.5}
+          lineFrequency={5}
+          lineSpacing={2}
+          lineSharpness={16}
+          glowFalloff={8}
+          glowIntensity={2}
+          brightness={1.5}
+          blueBoost={1.2}
+          lightMode={true}
+        />
       
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
         <ScrollView
@@ -97,7 +120,30 @@ export default function LoginScreen() {
 
             {/* Inner fibers overlay for inside-the-card effect */}
             <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, borderRadius: 32, overflow: 'hidden' }}>
-              <GhostFibers lineColor="#DDD6FE" glowColor="#C084FC" speed={0.18} scale={0.6} brightness={25.0} blueBoost={0.3} lightMode={true} layers={50} lineFrequency={60} lineSpacing={0.3} glowIntensity={25.0} />
+              <GhostFibers
+          lineColor="#6D28D9"
+          glowColor="#8B5CF6"
+          speed={0.2}
+          scale={1.5}
+          rotation={0}
+          rotationSpeed={0.1}
+          layers={6}
+          waveAmplitude={0.015}
+          waveFrequency={2}
+          waveSpeed={0.2}
+          layerSpeed={0.08}
+          twist={0.1}
+          twistFrequency={5}
+          twistSpeed={1.5}
+          lineFrequency={5}
+          lineSpacing={2}
+          lineSharpness={16}
+          glowFalloff={8}
+          glowIntensity={2}
+          brightness={1.5}
+          blueBoost={1.2}
+          lightMode={true}
+        />
             </View>
 
             {/* Logo */}
@@ -159,7 +205,7 @@ export default function LoginScreen() {
                     onChangeText={setEmail}
                     keyboardType="email-address"
                     autoCapitalize="none"
-                    style={{ backgroundColor: 'rgba(255,255,255,0.75)', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, paddingHorizontal: 18, height: 54, color: '#1E1035', fontSize: 15, fontWeight: '500' }}
+                    style={{ backgroundColor: 'rgba(255,255,255,0.35)', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, paddingHorizontal: 18, height: 54, color: '#1E1035', fontSize: 15, fontWeight: '500' }}
                   />
                 </View>
                 <View>
@@ -175,7 +221,7 @@ export default function LoginScreen() {
                     value={password}
                     onChangeText={setPassword}
                     secureTextEntry
-                    style={{ backgroundColor: 'rgba(255,255,255,0.75)', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, paddingHorizontal: 18, height: 54, color: '#1E1035', fontSize: 15, fontWeight: '500' }}
+                    style={{ backgroundColor: 'rgba(255,255,255,0.35)', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, paddingHorizontal: 18, height: 54, color: '#1E1035', fontSize: 15, fontWeight: '500' }}
                   />
                 </View>
                 <TouchableOpacity
@@ -204,7 +250,7 @@ export default function LoginScreen() {
                     onChangeText={setEmail}
                     keyboardType="email-address"
                     autoCapitalize="none"
-                    style={{ backgroundColor: 'rgba(255,255,255,0.75)', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, paddingHorizontal: 18, height: 54, color: '#1E1035', fontSize: 15, fontWeight: '500' }}
+                    style={{ backgroundColor: 'rgba(255,255,255,0.35)', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, paddingHorizontal: 18, height: 54, color: '#1E1035', fontSize: 15, fontWeight: '500' }}
                   />
                 </View>
                 <TouchableOpacity

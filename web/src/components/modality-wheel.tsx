@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { 
@@ -18,20 +18,20 @@ import {
 
 const MODALITIES = [
   { id: 'astrology', name: 'Astrology', image: '/12-modalities-updates/astrology.png' },
-  { id: 'tarot', name: 'Tarot', image: '/12-modalities-updates/tarot.png' },
-  { id: 'palm-reading', name: 'Palm Reading', image: '/12-modalities-updates/plamreading.png' },
-  { id: 'face-reading', name: 'Face Reading', image: '/12-modalities-updates/facereading.png' },
+  { id: 'tarot', name: 'Tarot & Psychic', image: '/12-modalities-updates/tarot.png' },
+  { id: 'palm-reading', name: 'Palmistry', image: '/12-modalities-updates/plamreading.png' },
+  { id: 'face-reading', name: 'Face & Personality', image: '/12-modalities-updates/facereading.png' },
   { id: 'numerology', name: 'Numerology', image: '/12-modalities-updates/numeriology.png' },
   { id: 'energy-healing', name: 'Energy Healing', image: '/12-modalities-updates/energy healing.png' },
-  { id: 'meditation', name: 'Meditation', image: '/12-modalities-updates/meditation.png' },
+  { id: 'meditation', name: 'Mindful Meditation', image: '/12-modalities-updates/meditation.png' },
   { id: 'yoga', name: 'Yoga', image: '/12-modalities-updates/yoga.png' },
-  { id: 'chakra-healing', name: 'Chakra', image: '/12-modalities-updates/chakrahealing.png' },
+  { id: 'chakra-healing', name: 'Energy Healing', image: '/12-modalities-updates/chakrahealing.png' },
   { id: 'eft', name: 'EFT Tapping', image: '/12-modalities-updates/eft.png' },
-  { id: 'spiritual', name: 'Spiritual Guide', image: '/12-modalities-updates/spiritual.png' },
-  { id: 'sound-healing', name: 'Sound Healing', image: '/12-modalities-updates/sound.png' },
-  { id: 'breathwork', name: 'Breathwork', image: '/12-modalities-updates/breathwork.png' },
-  { id: 'dreams', name: 'Dreams', image: '/12-modalities-updates/dream_prediction.png' },
-  { id: 'space-harmony', name: 'Space Harmony', image: '/12-modalities-updates/space_harmony.png' },
+  { id: 'spiritual', name: 'Akashic Guidance', image: '/12-modalities-updates/spiritual.png' },
+  { id: 'sound-healing', name: 'Sound & Energy', image: '/12-modalities-updates/sound.png' },
+  { id: 'breathwork', name: 'Yoga & Breath', image: '/12-modalities-updates/breathwork.png' },
+  { id: 'dreams', name: 'Spiritual Guidance', image: '/12-modalities-updates/dream_prediction.png' },
+  { id: 'space-harmony', name: 'Vastu & Space', image: '/12-modalities-updates/space_harmony.png' },
 ];
 
 export default function ModalityWheel() {

@@ -9,7 +9,7 @@ const { width } = Dimensions.get('window');
 
 function TabIcon({ focused, icon: Icon, color, size }) {
   return (
-    <View style={{ alignItems: "center", justifyContent: "center", width: 48, height: 48, borderRadius: 24, backgroundColor: focused ? "#EDE9FE" : "transparent" }}>
+    <View style={{ alignItems: "center", justifyContent: "center", width: 48, height: 48, marginTop: 12, borderRadius: 24, backgroundColor: focused ? "#EDE9FE" : "transparent" }}>
       <Icon color={focused ? PURPLE : INACTIVE} size={focused ? 22 : 24} strokeWidth={focused ? 2.5 : 2} />
     </View>
   );

@@ -23,8 +23,8 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
   const [error, setError] = useState('');
 
   const handleRecharge = async (rechargeAmount: number) => {
-    if (rechargeAmount < 10) {
-      setError('Minimum recharge amount is $10');
+    if (rechargeAmount < 2) {
+      setError('Minimum recharge amount is £2');
       return;
     }
     
@@ -81,7 +81,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
           <label className="text-sm font-semibold text-[#1a1a1a]">Or enter custom amount (GBP £)</label>
           <Input
             type="number"
-            min="10"
+            min="2"
             placeholder="e.g. 500"
             value={amount}
             onChange={(e) => setAmount(e.target.value === '' ? '' : Number(e.target.value))}
@@ -93,7 +93,7 @@ export function RechargeModal({ isOpen, onClose, onSuccess }: RechargeModalProps
         <div className="pt-2">
           <Button
             className="w-full bg-[#4f46e5] hover:bg-[#d97706] text-white font-bold h-12 rounded-xl"
-            disabled={loading || !amount || amount < 10}
+            disabled={loading || !amount || amount < 2}
             onClick={() => handleRecharge(amount as number)}
           >
             {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : `Proceed to Pay £${amount || 0} ${currencyCode !== 'GBP' ? `(~${format(amount || 0)})` : ''}`}
