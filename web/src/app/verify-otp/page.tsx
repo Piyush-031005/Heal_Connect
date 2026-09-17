@@ -17,7 +17,7 @@ function VerifyOtpContent() {
   const rawPhone = searchParams.get('phone') ?? '';
   // Ensure the + prefix is preserved (URL encoding can sometimes lose it)
   const phone = rawPhone && !rawPhone.startsWith('+') ? `+${rawPhone}` : rawPhone;
-  const type = searchParams.get('type') ?? '';
+  const type = searchParams.get('intent') || searchParams.get('type') || 'login';
   const role = searchParams.get('role') ?? 'user';
 
   // 6 individual digit inputs

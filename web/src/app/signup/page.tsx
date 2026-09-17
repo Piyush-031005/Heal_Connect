@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { authApi, tokenStore } from '@/lib/api';
+import { CountryCodeSelect } from '@/components/ui/country-code-select';
 
 type Role = 'user' | 'expert';
 
@@ -24,28 +25,55 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  
+  const [phone, setPhone] = useState('');
+  const [countryCode, setCountryCode] = useState('+91');
+  const [dob, setDob] = useState('');
+  const [loginMethod, setLoginMethod] = useState<'password' | 'otp'>('password');
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [acceptPrivacy, setAcceptPrivacy] = useState(false);
+  const [emailMarketingOptIn, setEmailMarketingOptIn] = useState(false);
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
     setError('');
+    if (!acceptTerms || !acceptPrivacy) {
+      setError('Please accept the Terms of Service and Privacy Notice to continue.');
+      return;
+    }
+    if (!dob) {
+      setError('Please enter your date of birth.');
+      return;
+    }
+    const dobDate = new Date(dob);
+    const minBirthDate = new Date();
+    minBirthDate.setFullYear(minBirthDate.getFullYear() - 18);
+    if (isNaN(dobDate.getTime()) || dobDate > minBirthDate) {
+      setError('You must be at least 18 years old to create an account.');
+      return;
+    }
     setLoading(true);
     const pwdOk = /^(?=.*[A-Z])(?=.*\d).{8,}$/.test(password);
     if (!pwdOk) { setError('Password must be min. 8 chars, 1 uppercase, 1 number.'); setLoading(false); return; }
     try {
       if (role === 'expert') {
-        const res = await authApi.practitionerRegister(name, email, password);
+        const res = await authApi.practitionerRegister(name, email, password, dob, {
+          acceptTerms: true,
+          acceptPrivacy: true,
+          emailMarketingOptIn: false
+        });
         if (!res.success || !res.data) {
           setError(res.message || 'Registration failed');
           return;
         }
         tokenStore.setTokens(res.data.accessToken, res.data.refreshToken);
         localStorage.setItem('hc_role', 'practitioner');
-        localStorage.setItem('hc_practitioner_id', res.data.practitioner.id);
-        localStorage.setItem('hc_practitioner_name', res.data.practitioner.name ?? '');
+        localStorage.setItem('hc_practitioner_id', res.data.practitioner?.id || '');
+        localStorage.setItem('hc_practitioner_name', res.data.practitioner?.name ?? '');
         setSuccess('Expert account created!');
         setTimeout(() => router.push('/expert/dashboard'), 1500);
       } else {
-        const res = await authApi.register({ name, email, password });
+        const res = await authApi.register({ name, email, password, dob, acceptTerms, acceptPrivacy, emailMarketingOptIn });
         if (!res.success || !res.data) {
           setError(res.errors?.length ? res.errors.map((e) => e.message).join(' · ') : res.message || 'Registration failed');
           return;
@@ -57,6 +85,47 @@ export default function SignupPage() {
       }
     } catch { setError('Something went wrong. Please try again.'); }
     finally { setLoading(false); }
+  }
+
+  async function handleSendOtp(e: React.FormEvent) {
+    e.preventDefault();
+    if (!phone) return setError('Please enter a phone number.');
+    if (!countryCode) return setError('Please select a country code.');
+    if (!acceptTerms || !acceptPrivacy) return setError('Please accept the Terms of Service and Privacy Notice to continue.');
+    setLoading(true);
+    setError('');
+    try {
+      let rawNumber = phone.replace(/\s+/g, '');
+      if (rawNumber.startsWith('+')) {
+        rawNumber = rawNumber.replace(/^\+/, '');
+        const codeDigits = countryCode.replace('+', '');
+        if (rawNumber.startsWith(codeDigits)) {
+          rawNumber = rawNumber.slice(codeDigits.length);
+        }
+      } else if (rawNumber.length > 10 && rawNumber.startsWith(countryCode.replace('+', ''))) {
+        rawNumber = rawNumber.slice(countryCode.replace('+', '').length);
+      }
+      const cleanPhone = `${countryCode}${rawNumber}`;
+      
+      if (role === 'expert') {
+        router.push('/expert/signup');
+        return;
+      }
+      
+      const res = await authApi.requestLoginOtp(cleanPhone, 'user', 'signup');
+      if (res.success) {
+        localStorage.setItem('hc_pending_phone', cleanPhone);
+        localStorage.setItem('hc_role', 'user');
+        // We pass intent=login here so the verify-otp page issues an access token and goes to dashboard
+        window.location.href = `/verify-otp?phone=${encodeURIComponent(cleanPhone)}&intent=login`;
+      } else {
+        setError(res.message || 'Failed to send OTP.');
+      }
+    } catch (err) {
+      setError('Something went wrong sending OTP.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   function handleGoogleSignIn() {
@@ -74,10 +143,8 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen flex flex-col md:flex-row font-sans relative overflow-hidden" style={{background:'linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 40%, #DDD6FE 100%)',color:'#1e1b4b'}}>
       <GhostFibers lineColor="#7C3AED" glowColor="#6D28D9" speed={0.25} scale={1.8} rotation={0} rotationSpeed={0.3} layers={8} waveAmplitude={0.022} waveFrequency={4} waveSpeed={0.18} layerSpeed={0.1} twist={0.15} twistFrequency={6} twistSpeed={1.4} lineFrequency={9} lineSpacing={1.2} lineSharpness={14} glowFalloff={8} glowIntensity={2.2} brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={true} fps={60} paused={false} />
-      {/* Background Ambience */}
       
-
-      {/* Left íƒƒ픠’탔 í¢┚¬┞¢íƒƒí¢┚¬ íƒ¢í¢‚¬í¢„¢íƒƒ픠’íƒ¢í¢‚¬픚 íƒƒ픚¢íƒ¢í¢┚¬š픚¬íƒ¢í¢┚¬ž픚¢íƒƒ픠’탔 í¢┚¬┞¢íƒƒ픚¢íƒ¢í¢┚¬š픚¬탔¦픚¡íƒƒ픠’íƒ¢í¢‚¬픦¡íƒƒí¢┚¬šíƒ‚픚¢íƒƒ픠’탔 í¢┚¬┞¢íƒƒí¢┚¬ íƒ¢í¢‚¬í¢„¢íƒƒ픠’íƒ¢í¢‚¬픦¡íƒƒí¢┚¬šíƒ‚픚¢íƒƒ픠’탔 í¢┚¬┞¢íƒƒí¢┚¬šíƒ‚픚¢íƒƒ픠’íƒ‚픚¢íƒƒ픚¢íƒ¢í¢┚¬š픚¬탔¦픚¡íƒƒí¢┚¬šíƒ‚픚¬íƒƒ픠’íƒ¢í¢‚¬픚¦íƒƒí¢┚¬šíƒ‚픚¡íƒƒ픠’탔 í¢┚¬┞¢íƒƒ픚¢íƒ¢í¢┚¬š픚¬탔¦픚¡íƒƒ픠’íƒ¢í¢‚¬픦¡íƒƒí¢┚¬šíƒ‚픚¬íƒƒ픠’탔 í¢┚¬┞¢íƒƒí¢┚¬ íƒ¢í¢‚¬í¢„¢íƒƒ픠’íƒ¢í¢‚¬픦¡íƒƒí¢┚¬šíƒ‚픚¢íƒƒ픠’탔 í¢┚¬┞¢íƒƒí¢┚¬šíƒ‚픚¢íƒƒ픠’íƒ‚픚¢íƒƒ픚¢íƒ¢í¢‚¬픦¡íƒ‚픚¬íƒƒí¢┚¬¦íƒ‚픚¡íƒƒ픠’íƒ¢í¢‚¬픦¡íƒƒí¢┚¬šíƒ‚픚¬íƒƒ픠’탔 í¢┚¬┞¢íƒƒ픚¢íƒ¢í¢┚¬š픚¬탔¦픚¡íƒƒ픠’íƒ¢í¢‚¬픦¡íƒƒí¢┚¬šíƒ‚픚 Branding */}
+      {/* Left Branding */}
       <div className="hidden md:flex flex-col justify-between w-1/2 p-12 bg-white/60 backdrop-blur-md relative z-10 border-r border-purple-200">
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-2 mb-16">
@@ -117,7 +184,6 @@ export default function SignupPage() {
         </div>
       </div>
 
-      {}
       <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative z-10">
         <div className="absolute top-6 left-6 md:hidden">
           <Link href="/" className="flex items-center gap-2">
@@ -154,42 +220,99 @@ export default function SignupPage() {
                 <p className="text-green-500/80 mt-1 pl-4">Please verify your email. Redirecting...</p>
               </div>
             )}
+            
+            {loginMethod === 'otp' && (
+              <form onSubmit={handleSendOtp} className="space-y-5">
+                <div className="space-y-2">
+                  <Label className="text-white font-medium">Phone Number</Label>
+                  <div className="flex gap-2">
+                    <CountryCodeSelect
+                      value={countryCode}
+                      onChange={setCountryCode}
+                      className="w-[125px] sm:w-[135px] flex-shrink-0 bg-white/40 backdrop-blur-md text-white border-purple-200"
+                    />
+                    <Input id="phone" type="tel" placeholder="9876543210" value={phone} onChange={(e) => setPhone(e.target.value)} required className="flex-1 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
+                  </div>
+                </div>
+                <div className="space-y-2 pt-1">
+                  <label className="flex items-start gap-2 text-xs text-[#4c1d95]/80">
+                    <input type="checkbox" checked={acceptTerms} onChange={(e) => setAcceptTerms(e.target.checked)} required className="mt-0.5 rounded border-purple-300 text-primary focus:ring-primary" />
+                    <span>I agree to the <Link href="/terms" target="_blank" className="text-primary font-semibold hover:underline">Terms of Service</Link></span>
+                  </label>
+                  <label className="flex items-start gap-2 text-xs text-[#4c1d95]/80">
+                    <input type="checkbox" checked={acceptPrivacy} onChange={(e) => setAcceptPrivacy(e.target.checked)} required className="mt-0.5 rounded border-purple-300 text-primary focus:ring-primary" />
+                    <span>I've read and acknowledge the <Link href="/privacy" target="_blank" className="text-primary font-semibold hover:underline">Privacy Notice</Link></span>
+                  </label>
+                </div>
+                <Button type="submit" disabled={loading || !acceptTerms || !acceptPrivacy} className="w-full py-6 text-base font-bold rounded-md border-0 shadow-lg transition-all duration-300 bg-[#FAD058] hover:bg-[#F0C240] text-white">
+                  {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>Send OTP <ArrowRight className="ml-2 h-5 w-5" /></>}
+                </Button>
+              </form>
+            )}
 
-            <form onSubmit={handleRegister} className="space-y-5">
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-white font-medium">Full Name</Label>
-                <div className="relative group">
-                  <User className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
-                  <Input id="name" type="text" placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} required autoComplete="name" 
-                    className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
+            {loginMethod === 'password' && (
+              <form onSubmit={handleRegister} className="space-y-5">
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="text-white font-medium">Full Name</Label>
+                  <div className="relative group">
+                    <User className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
+                    <Input id="name" type="text" placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} required autoComplete="name" 
+                      className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
+                  </div>
                 </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-white font-medium">Email</Label>
-                <div className="relative group">
-                  <Mail className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
-                  <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" 
-                    className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-white font-medium">Email</Label>
+                  <div className="relative group">
+                    <Mail className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
+                    <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" 
+                      className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
+                  </div>
                 </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-white font-medium">Password</Label>
-                <div className="relative group">
-                  <Lock className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
-                  <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="Min. 8 chars, 1 uppercase, 1 number" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="new-password" 
-                    className="pl-10 pr-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
-                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-[#4c1d95]/70 hover:text-white transition-colors" tabIndex={-1}>
-                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                  </button>
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-white font-medium">Password</Label>
+                  <div className="relative group">
+                    <Lock className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
+                    <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="Min. 8 chars, 1 uppercase, 1 number" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="new-password" 
+                      className="pl-10 pr-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-[#4c1d95]/70 hover:text-white transition-colors" tabIndex={-1}>
+                      {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                    </button>
+                  </div>
+                  {password.length > 0 && password.length < 8 && (
+                    <p className="text-xs text-destructive mt-1">Password must be at least 8 characters</p>
+                  )}
                 </div>
-                {password.length > 0 && password.length < 8 && (
-                  <p className="text-xs text-destructive mt-1">Password must be at least 8 characters</p>
-                )}
-              </div>
-              <Button type="submit" disabled={loading || !!success} className="w-full py-6 text-base font-bold rounded-md border-0 shadow-lg transition-all duration-300 bg-[#FAD058] hover:bg-[#F0C240] text-white">
-                {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>{role === 'expert' ? 'Join as Expert' : 'Create Account'} <ArrowRight className="ml-2 h-5 w-5" /></>}
-              </Button>
-            </form>
+                <div className="space-y-2">
+                  <Label htmlFor="dob" className="text-white font-medium">Date of Birth <span className="text-[#4c1d95]/70 font-normal">(must be 18+)</span></Label>
+                  <Input
+                    id="dob"
+                    type="date"
+                    value={dob}
+                    onChange={(e) => setDob(e.target.value)}
+                    required
+                    max={(() => { const d = new Date(); d.setFullYear(d.getFullYear() - 18); return d.toISOString().split('T')[0]; })()}
+                    className="h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all"
+                  />
+                </div>
+                <div className="space-y-2 pt-1">
+                  <label className="flex items-start gap-2 text-xs text-[#4c1d95]/80">
+                    <input type="checkbox" checked={acceptTerms} onChange={(e) => setAcceptTerms(e.target.checked)} required className="mt-0.5 rounded border-purple-300 text-primary focus:ring-primary" />
+                    <span>I agree to the <Link href="/terms" target="_blank" className="text-primary font-semibold hover:underline">Terms of Service</Link></span>
+                  </label>
+                  <label className="flex items-start gap-2 text-xs text-[#4c1d95]/80">
+                    <input type="checkbox" checked={acceptPrivacy} onChange={(e) => setAcceptPrivacy(e.target.checked)} required className="mt-0.5 rounded border-purple-300 text-primary focus:ring-primary" />
+                    <span>I've read and acknowledge the <Link href="/privacy" target="_blank" className="text-primary font-semibold hover:underline">Privacy Notice</Link></span>
+                  </label>
+                  <label className="flex items-start gap-2 text-xs text-[#4c1d95]/80">
+                    <input type="checkbox" checked={emailMarketingOptIn} onChange={(e) => setEmailMarketingOptIn(e.target.checked)} className="mt-0.5 rounded border-purple-300 text-primary focus:ring-primary" />
+                    <span>Email me updates and offers (optional)</span>
+                  </label>
+                </div>
+                <Button type="submit" disabled={loading || !!success || !acceptTerms || !acceptPrivacy} className="w-full py-6 text-base font-bold rounded-md border-0 shadow-lg transition-all duration-300 bg-[#FAD058] hover:bg-[#F0C240] text-white">
+                  {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>{role === 'expert' ? 'Join as Expert' : 'Create Account'} <ArrowRight className="ml-2 h-5 w-5" /></>}
+                </Button>
+              </form>
+            )}
 
             <div className="relative flex items-center py-2">
               <div className="flex-grow border-t border-purple-200" />
@@ -198,11 +321,18 @@ export default function SignupPage() {
             </div>
 
             <div className="space-y-3">
-              <Button type="button" variant="outline" onClick={() => window.location.href = '/login?mode=phone'} className="w-full h-12 bg-white/60 backdrop-blur-sm border-purple-200 hover:bg-accent/10 text-white shadow-sm transition-all rounded-xl">
-                <Phone className="mr-3 h-5 w-5 text-current" />
-                Continue with Phone
-              </Button>
-              <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full h-12 bg-white/60 backdrop-blur-sm border-purple-200 hover:bg-accent/10 text-white shadow-sm transition-all rounded-xl">
+              {loginMethod === 'password' ? (
+                <Button type="button" variant="outline" onClick={() => { setLoginMethod('otp'); setError(''); setSuccess(''); }} className="w-full h-12 bg-white/60 backdrop-blur-sm border-purple-200 hover:bg-accent/10 text-[#2d1b69] shadow-sm transition-all rounded-xl hover:text-[#2d1b69]">
+                  <Phone className="mr-3 h-5 w-5 text-current" />
+                  Continue with Phone
+                </Button>
+              ) : (
+                <Button type="button" variant="outline" onClick={() => { setLoginMethod('password'); setError(''); setSuccess(''); }} className="w-full h-12 bg-white/60 backdrop-blur-sm border-purple-200 hover:bg-accent/10 text-[#2d1b69] shadow-sm transition-all rounded-xl hover:text-[#2d1b69]">
+                  <Mail className="mr-3 h-5 w-5 text-current" />
+                  Continue with Email
+                </Button>
+              )}
+              <Button type="button" variant="outline" onClick={handleGoogleSignIn} className="w-full h-12 bg-white/60 backdrop-blur-sm border-purple-200 hover:bg-accent/10 text-[#2d1b69] shadow-sm transition-all rounded-xl hover:text-[#2d1b69]">
                 <svg className="mr-3 h-5 w-5" viewBox="0 0 24 24">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                   <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
@@ -211,7 +341,7 @@ export default function SignupPage() {
                 </svg>
                 Continue with Google
               </Button>
-              <Button type="button" variant="outline" onClick={handleAppleSignIn} className="w-full h-12 bg-white/60 backdrop-blur-sm border-purple-200 hover:bg-accent/10 text-white shadow-sm transition-all rounded-xl">
+              <Button type="button" variant="outline" onClick={handleAppleSignIn} className="w-full h-12 bg-white/60 backdrop-blur-sm border-purple-200 hover:bg-accent/10 text-[#2d1b69] shadow-sm transition-all rounded-xl hover:text-[#2d1b69]">
                 <svg className="mr-3 h-5 w-5 fill-current" viewBox="0 0 24 24">
                   <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.65.04 2.9.72 3.68 1.9-3.28 1.95-2.73 5.75.52 7.02-.75 1.86-1.74 3.2-2.87 3.99zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.32 2.38-2.07 4.29-3.74 4.25z" />
                 </svg>
