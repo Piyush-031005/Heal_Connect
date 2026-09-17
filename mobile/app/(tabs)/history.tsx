@@ -1,4 +1,5 @@
 ﻿import React from "react";
+import { LinearGradient } from 'expo-linear-gradient';
 import { View, Text, StyleSheet, ScrollView, Image, Dimensions } from "react-native";
 import { Clock, Phone, MessageCircle } from "lucide-react-native";
 import GhostFibers from "../../components/GhostFibers";
@@ -7,7 +8,13 @@ import WebReplicaHeader from "../../components/WebReplicaHeader";
 export default function HistoryScreen() {
   return (
     <View style={styles.container}>
-      <View style={StyleSheet.absoluteFillObject}>
+      
+      <LinearGradient
+        colors={['#F0E6F5', '#E5D9F2', '#D5B6DC', '#C2AEE8', '#D5B6DC', '#8982D0', '#5F3BA9']}
+        locations={[0, 0.25, 0.5, 0.7, 0.85, 0.95, 1]}
+        style={StyleSheet.absoluteFill}
+      />
+<View style={StyleSheet.absoluteFillObject}>
         <GhostFibers
           lineColor="#6D28D9"
           glowColor="#8B5CF6"

@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Platform } from 'react-native';
-import { Menu, ChevronDown, Bell } from 'lucide-react-native';
+import { Bell, Wallet } from 'lucide-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 
@@ -23,23 +23,17 @@ export default function WebReplicaHeader() {
       {/* Center: Logo */}
       <View style={styles.centerSection}>
         <Image 
-          source={require('../assets/images/center_logo_final.png')} 
+          source={require('../assets/images/main_logo.png')} 
           style={styles.logoImage} 
         />
         <Text style={styles.logoText}>ZenAuraa</Text>
       </View>
-
       {/* Right: Actions */}
       <View style={styles.rightSection}>
-        <TouchableOpacity style={styles.freeInsightsPill}>
-          <Text style={styles.freeInsightsText}>Free Insights</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.langSelector}>
-          <Text style={styles.langText}>文A</Text>
-          <Text style={styles.langCode}>EN</Text>
-          <ChevronDown size={14} color="#2d1b69" />
-        </TouchableOpacity>
+        <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: "rgba(45, 27, 105, 0.1)", paddingHorizontal: 12, paddingVertical: 6, borderRadius: 16, borderWidth: 1, borderColor: "rgba(45, 27, 105, 0.2)", gap: 6 }}>
+          <Wallet size={16} color="#2d1b69" />
+          <Text style={{ fontFamily: "Inter_600SemiBold", fontSize: 13, color: "#2d1b69" }}>₹150</Text>
+        </View>
       </View>
     </View>
   );

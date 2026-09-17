@@ -19,7 +19,6 @@ const MENU_ITEMS = [
   { id: 2, title: "My Sessions", subtitle: "Check your session status", icon: BookOpen, route: "sessions" },
   { id: 3, title: "My Wallet", subtitle: "Recharge for quick connections", icon: MapPin, route: "wallet" },
   { id: 4, title: "Need Help? We're here for you", subtitle: "Get instant query assistance", icon: MessageCircle, route: "help" },
-  { id: 5, title: "ZenAuraa Premium", isNew: true, icon: Crown, route: "premium" },
   { id: 6, title: "Reviews", subtitle: "", icon: Star, route: "reviews" },
   { id: 7, title: "Cashback & Rewards", subtitle: "", icon: Gift, route: "rewards" },
 ];
