@@ -9,27 +9,27 @@ export default function NotificationsScreen() {
     <View style={styles.container}>
       <View style={StyleSheet.absoluteFillObject}>
         <GhostFibers
-          lineColor="#A78BFA"
-          glowColor="#E5D9F2"
-          speed={0.1}
-          scale={2}
+          lineColor="#6D28D9"
+          glowColor="#8B5CF6"
+          speed={0.2}
+          scale={1.5}
           rotation={0}
           rotationSpeed={0.1}
-          layers={3}
-          waveAmplitude={0.01}
+          layers={6}
+          waveAmplitude={0.015}
           waveFrequency={2}
-          waveSpeed={0.1}
-          layerSpeed={0.05}
+          waveSpeed={0.2}
+          layerSpeed={0.08}
           twist={0.1}
-          twistFrequency={3}
-          twistSpeed={1}
-          lineFrequency={3}
+          twistFrequency={5}
+          twistSpeed={1.5}
+          lineFrequency={5}
           lineSpacing={2}
-          lineSharpness={10}
-          glowFalloff={5}
-          glowIntensity={1}
-          brightness={1}
-          blueBoost={1}
+          lineSharpness={16}
+          glowFalloff={8}
+          glowIntensity={2}
+          brightness={1.5}
+          blueBoost={1.2}
         />
       </View>
       
