@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from 'next-themes';
@@ -6,9 +6,9 @@ import { useLayout } from '@/lib/layout-context';
 import { Star, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
-// ─────────────────────────────────────────────────────────────────────────
-// 01. WHY YOU ARE HERE — Life intention star clusters
-// ─────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// 01. WHY YOU ARE HERE â€” Life intention star clusters
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const INTENTION_STARS = [
   { id: 1, name: 'Find Love', x: 16, y: 32, cluster: 'love', tip: 'Love & Relationships' },
   { id: 2, name: 'Heal a Relationship', x: 24, y: 50, cluster: 'love', tip: 'Love & Relationships' },
@@ -159,22 +159,22 @@ export function WhyYouHere() {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────
-// 02. ZODIAC ORBIT RING — Interactive rotating orbital
-// ─────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// 02. ZODIAC ORBIT RING â€” Interactive rotating orbital
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const ZODIACS = [
-  { id: 'aries', name: 'Aries', img: '/new-zodiacs/aries_new.png', element: 'Fire', quality: 'Cardinal', trait: 'Bold, ambitious, passionate leader.', date: 'Mar 21–Apr 19', color: '#FF6B6B' },
-  { id: 'taurus', name: 'Taurus', img: '/new-zodiacs/taurus.png', element: 'Earth', quality: 'Fixed', trait: 'Patient, reliable, sensual, determined.', date: 'Apr 20–May 20', color: '#7EDEA0' },
-  { id: 'gemini', name: 'Gemini', img: '/new-zodiacs/gemini_new.png', element: 'Air', quality: 'Mutable', trait: 'Curious, communicative, adaptable, witty.', date: 'May 21–Jun 20', color: '#F4D58D' },
-  { id: 'cancer', name: 'Cancer', img: '/new-zodiacs/cancer.png', element: 'Water', quality: 'Cardinal', trait: 'Nurturing, intuitive, protective, empathic.', date: 'Jun 21–Jul 22', color: '#9FD6EE' },
-  { id: 'leo', name: 'Leo', img: '/new-zodiacs/leo_new.png', element: 'Fire', quality: 'Fixed', trait: 'Magnetic, generous, creative, warmhearted.', date: 'Jul 23–Aug 22', color: '#FFB347' },
-  { id: 'virgo', name: 'Virgo', img: '/new-zodiacs/virgo_new.png', element: 'Earth', quality: 'Mutable', trait: 'Analytical, detail-oriented, service-driven.', date: 'Aug 23–Sep 22', color: '#98E6A2' },
-  { id: 'libra', name: 'Libra', img: '/new-zodiacs/libra_new.png', element: 'Air', quality: 'Cardinal', trait: 'Balanced, harmonious, fair, socially gifted.', date: 'Sep 23–Oct 22', color: '#C9A0DC' },
-  { id: 'scorpio', name: 'Scorpio', img: '/new-zodiacs/scorpio_new.png', element: 'Water', quality: 'Fixed', trait: 'Intense, perceptive, transformative, deep.', date: 'Oct 23–Nov 21', color: '#7B6CF6' },
-  { id: 'sagittarius', name: 'Sagittarius', img: '/new-zodiacs/saggitarius.png', element: 'Fire', quality: 'Mutable', trait: 'Adventurous, philosophical, free-spirited.', date: 'Nov 22–Dec 21', color: '#F4A261' },
-  { id: 'capricorn', name: 'Capricorn', img: '/new-zodiacs/capricon_new.png', element: 'Earth', quality: 'Cardinal', trait: 'Disciplined, responsible, ambitious, wise.', date: 'Dec 22–Jan 19', color: '#A0AEC0' },
-  { id: 'aquarius', name: 'Aquarius', img: '/new-zodiacs/aqarius.png', element: 'Air', quality: 'Fixed', trait: 'Innovative, humanitarian, eccentric, visionary.', date: 'Jan 20–Feb 18', color: '#63BFE4' },
-  { id: 'pisces', name: 'Pisces', img: '/new-zodiacs/pices.png', element: 'Water', quality: 'Mutable', trait: 'Dreamy, compassionate, mystical, creative.', date: 'Feb 19–Mar 20', color: '#9B8FFF' },
+  { id: 'aries', name: 'Aries', img: '/new-zodiacs/aries_new.png', element: 'Fire', quality: 'Cardinal', trait: 'Bold, ambitious, passionate leader.', date: 'Mar 21â€“Apr 19', color: '#FF6B6B' },
+  { id: 'taurus', name: 'Taurus', img: '/new-zodiacs/taurus.png', element: 'Earth', quality: 'Fixed', trait: 'Patient, reliable, sensual, determined.', date: 'Apr 20â€“May 20', color: '#7EDEA0' },
+  { id: 'gemini', name: 'Gemini', img: '/new-zodiacs/gemini_new.png', element: 'Air', quality: 'Mutable', trait: 'Curious, communicative, adaptable, witty.', date: 'May 21â€“Jun 20', color: '#F4D58D' },
+  { id: 'cancer', name: 'Cancer', img: '/new-zodiacs/cancer.png', element: 'Water', quality: 'Cardinal', trait: 'Nurturing, intuitive, protective, empathic.', date: 'Jun 21â€“Jul 22', color: '#9FD6EE' },
+  { id: 'leo', name: 'Leo', img: '/new-zodiacs/leo_new.png', element: 'Fire', quality: 'Fixed', trait: 'Magnetic, generous, creative, warmhearted.', date: 'Jul 23â€“Aug 22', color: '#FFB347' },
+  { id: 'virgo', name: 'Virgo', img: '/new-zodiacs/virgo_new.png', element: 'Earth', quality: 'Mutable', trait: 'Analytical, detail-oriented, service-driven.', date: 'Aug 23â€“Sep 22', color: '#98E6A2' },
+  { id: 'libra', name: 'Libra', img: '/new-zodiacs/libra_new.png', element: 'Air', quality: 'Cardinal', trait: 'Balanced, harmonious, fair, socially gifted.', date: 'Sep 23â€“Oct 22', color: '#C9A0DC' },
+  { id: 'scorpio', name: 'Scorpio', img: '/new-zodiacs/scorpio_new.png', element: 'Water', quality: 'Fixed', trait: 'Intense, perceptive, transformative, deep.', date: 'Oct 23â€“Nov 21', color: '#7B6CF6' },
+  { id: 'sagittarius', name: 'Sagittarius', img: '/new-zodiacs/saggitarius.png', element: 'Fire', quality: 'Mutable', trait: 'Adventurous, philosophical, free-spirited.', date: 'Nov 22â€“Dec 21', color: '#F4A261' },
+  { id: 'capricorn', name: 'Capricorn', img: '/new-zodiacs/capricon_new.png', element: 'Earth', quality: 'Cardinal', trait: 'Disciplined, responsible, ambitious, wise.', date: 'Dec 22â€“Jan 19', color: '#A0AEC0' },
+  { id: 'aquarius', name: 'Aquarius', img: '/new-zodiacs/aqarius.png', element: 'Air', quality: 'Fixed', trait: 'Innovative, humanitarian, eccentric, visionary.', date: 'Jan 20â€“Feb 18', color: '#63BFE4' },
+  { id: 'pisces', name: 'Pisces', img: '/new-zodiacs/pices.png', element: 'Water', quality: 'Mutable', trait: 'Dreamy, compassionate, mystical, creative.', date: 'Feb 19â€“Mar 20', color: '#9B8FFF' },
 ];
 
 const ELEMENT_BG: Record<string, string> = {
@@ -279,42 +279,42 @@ export function ZodiacOrbitRing() {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────
-// 03. TAROT TABLE — Premium zodiac-art card reading
-// ─────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// 03. TAROT TABLE â€” Premium zodiac-art card reading
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const TAROT_CARDS = [
   {
-    name: 'The Fool', roman: '0', subtitle: 'New Beginnings · Spontaneity',
+    name: 'The Fool', roman: '0', subtitle: 'New Beginnings Â· Spontaneity',
     message: 'A blank slate lies before you. Take the leap of faith without fear, trusting that the universe will catch you. Embrace the unknown with childlike wonder.',
     cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
-    name: 'The High Priestess', roman: 'II', subtitle: 'Intuition · Inner Voice · Mystery',
-    message: 'Your subconscious holds truths the waking mind has yet to hear. Honour the cycles within you — your intuition is your most sacred compass right now.',
+    name: 'The High Priestess', roman: 'II', subtitle: 'Intuition Â· Inner Voice Â· Mystery',
+    message: 'Your subconscious holds truths the waking mind has yet to hear. Honour the cycles within you â€” your intuition is your most sacred compass right now.',
     cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
-    name: 'The Sun', roman: 'XIX', subtitle: 'Joy · Vitality · Success',
+    name: 'The Sun', roman: 'XIX', subtitle: 'Joy Â· Vitality Â· Success',
     message: 'Radiant golden energy courses through every opportunity before you. A magnificent chapter of abundance, creative power, and warmth is beautifully unfolding.',
     cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
-    name: 'The World', roman: 'XXI', subtitle: 'Completion · Wholeness · Triumph',
-    message: 'You stand at the sacred culmination of an extraordinary cycle. Embrace the beautiful wholeness you have earned — a glorious new chapter awaits your first step.',
+    name: 'The World', roman: 'XXI', subtitle: 'Completion Â· Wholeness Â· Triumph',
+    message: 'You stand at the sacred culmination of an extraordinary cycle. Embrace the beautiful wholeness you have earned â€” a glorious new chapter awaits your first step.',
     cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
-    name: 'The Tower', roman: 'XVI', subtitle: 'Revelation · Transformation · Truth',
-    message: 'A powerful revelation shakes what was never truly stable. What crumbles was built on illusion — what remains is the indestructible core of your true self.',
+    name: 'The Tower', roman: 'XVI', subtitle: 'Revelation Â· Transformation Â· Truth',
+    message: 'A powerful revelation shakes what was never truly stable. What crumbles was built on illusion â€” what remains is the indestructible core of your true self.',
     cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
-    name: 'The Star', roman: 'XVII', subtitle: 'Hope · Inspiration · Serenity',
+    name: 'The Star', roman: 'XVII', subtitle: 'Hope Â· Inspiration Â· Serenity',
     message: 'After the storm comes clear, starlit skies. A time of deep spiritual healing and renewed hope is upon you. Trust in the quiet guidance of the universe.',
     cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   },
   {
-    name: 'The Magician', roman: 'I', subtitle: 'Manifestation · Power · Action',
+    name: 'The Magician', roman: 'I', subtitle: 'Manifestation Â· Power Â· Action',
     message: 'You possess all the tools needed to manifest your desires. Align your thoughts, words, and actions, and watch the universe bend to your will.',
     cardBg: '#F9F9F6', border: '#7A8B76', accent: '#7A8B76', color: '#7A8B76', backBg: '#F9F9F6'
   }
@@ -344,7 +344,7 @@ export function TarotTable() {
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#F8F7FA] mb-3">Draw Your Card</h2>
         <p className="text-[#1A92C6] text-sm font-bold mb-3">Set your intention. Choose a card. Receive your message.</p>
         <div className="inline-flex items-center gap-3 rounded-2xl px-6 py-3 mb-14 border border-[#1A92C6]/20 bg-white shadow-sm">
-          <span className="text-[#1A92C6] text-sm">✦</span>
+          <span className="text-[#1A92C6] text-sm">âœ¦</span>
           <span className="text-[#F8F7FA]/70 text-sm font-medium italic">&ldquo;What energy should I honour today?&rdquo;</span>
         </div>
 
@@ -368,7 +368,7 @@ export function TarotTable() {
                   <div className="relative w-full h-full shadow-2xl rounded-xl group-hover:-translate-y-4 transition-transform duration-500"
                     style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', transition: 'transform 0.8s cubic-bezier(0.34$.56,0.64$)' }}>
 
-                    {/* ── Card Back (Static 0deg) ── */}
+                    {/* â”€â”€ Card Back (Static 0deg) â”€â”€ */}
                     <div className="absolute inset-0 w-full h-full rounded-xl flex items-center justify-center p-2"
                       style={{
                         background: card.backBg, border: `1px solid #E5E5E0`,
@@ -386,14 +386,14 @@ export function TarotTable() {
                           <circle cx="12" cy="85" r="4" stroke={card.border} strokeWidth="1" strokeDasharray="1 1" />
                         </svg>
                         {/* Little stars */}
-                        <div className="absolute top-4 left-4 text-[8px]" style={{ color: card.border }}>✦</div>
-                        <div className="absolute bottom-4 right-4 text-[8px]" style={{ color: card.border }}>✦</div>
-                        <div className="absolute top-1/4 right-3 text-[6px]" style={{ color: card.border }}>✧</div>
-                        <div className="absolute bottom-1/4 left-3 text-[6px]" style={{ color: card.border }}>✧</div>
+                        <div className="absolute top-4 left-4 text-[8px]" style={{ color: card.border }}>âœ¦</div>
+                        <div className="absolute bottom-4 right-4 text-[8px]" style={{ color: card.border }}>âœ¦</div>
+                        <div className="absolute top-1/4 right-3 text-[6px]" style={{ color: card.border }}>âœ§</div>
+                        <div className="absolute bottom-1/4 left-3 text-[6px]" style={{ color: card.border }}>âœ§</div>
                       </div>
                     </div>
 
-                    {/* ── Card Front (Static 180deg) ── */}
+                    {/* â”€â”€ Card Front (Static 180deg) â”€â”€ */}
                     <div className="absolute inset-0 w-full h-full rounded-xl flex flex-col items-center justify-center p-2"
                       style={{
                         background: card.cardBg, border: `1px solid #E5E5E0`,
@@ -405,7 +405,7 @@ export function TarotTable() {
                         
                         <div className="my-auto w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center border" style={{ borderColor: card.border }}>
                            <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border border-dashed flex items-center justify-center" style={{ borderColor: card.accent }}>
-                             <span className="text-2xl md:text-3xl" style={{ color: card.border }}>✦</span>
+                             <span className="text-2xl md:text-3xl" style={{ color: card.border }}>âœ¦</span>
                            </div>
                         </div>
 
@@ -426,7 +426,7 @@ export function TarotTable() {
         {flipped !== null && (
           <div className="max-w-xl mx-auto rounded-3xl p-8 text-center shadow-xl border border-[#CDE9F4]"
             style={{ animation: 'zen-fade 0.5s ease', background: `linear-gradient(135deg, #FFFFFF 0%, #F6FBFC 100%)` }}>
-            <div className="text-xs font-black uppercase tracking-[0.3em] mb-3" style={{ color: TAROT_CARDS[flipped].color }}>{TAROT_CARDS[flipped].roman} · {TAROT_CARDS[flipped].name}</div>
+            <div className="text-xs font-black uppercase tracking-[0.3em] mb-3" style={{ color: TAROT_CARDS[flipped].color }}>{TAROT_CARDS[flipped].roman} Â· {TAROT_CARDS[flipped].name}</div>
             <h3 className="text-2xl font-serif font-medium text-[#F8F7FA] mb-2">{TAROT_CARDS[flipped].subtitle}</h3>
             <div className="w-16 h-[2px] mx-auto mb-5" style={{ backgroundColor: TAROT_CARDS[flipped].color }} />
             <p className="text-sm text-[#1A92C6] leading-relaxed mb-7 font-bold max-w-md mx-auto">{TAROT_CARDS[flipped].message}</p>
@@ -442,16 +442,16 @@ export function TarotTable() {
           </div>
         )}
         {flipped === null && (
-          <p className="text-[#3A247A]/25 text-xs font-medium" style={{ letterSpacing: '0.2em' }}>✦ SELECT A CARD ✦</p>
+          <p className="text-[#3A247A]/25 text-xs font-medium" style={{ letterSpacing: '0.2em' }}>âœ¦ SELECT A CARD âœ¦</p>
         )}
       </div>
     </section>
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────
-// 04. MODALITY UNIVERSE — Pixel-perfect node map with readable labels
-// ─────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// 04. MODALITY UNIVERSE â€” Pixel-perfect node map with readable labels
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const MOD_NODES = [
   { id: 'astrology', label: 'Astrology', cx: 450, cy: 260, r: 75, color: '#63BFE4', center: true, count: '320 guides' },
   { id: 'tarot', label: 'Tarot', cx: 240, cy: 190, r: 54, color: '#C9A0DC', count: '240 guides' },
@@ -462,8 +462,8 @@ const MOD_NODES = [
   { id: 'yoga', label: 'Yoga', cx: 180, cy: 90, r: 44, color: '#7EDEA0', count: '95 guides' },
   { id: 'eft', label: 'EFT Tapping', cx: 750, cy: 170, r: 48, color: '#9B8FFF', count: '35 guides' },
   { id: 'coaching', label: 'Life Coaching', cx: 720, cy: 280, r: 55, color: '#F4D58D', count: '110 guides' },
-  { id: 'spiritual', label: 'Spiritual Guide', cx: 140, cy: 300, r: 58, color: '#C9A0DC', count: '180 guides' },
-  { id: 'face', label: 'Face Reading', cx: 360, cy: 80, r: 46, color: '#FF6B6B', count: '30 guides' },
+  { id: 'spiritual', label: 'Akashic & Spiritual Guidance', cx: 140, cy: 300, r: 58, color: '#C9A0DC', count: '180 guides' },
+  { id: 'face', label: 'Palmistry, Face & Personality Reading', cx: 360, cy: 80, r: 46, color: '#FF6B6B', count: '30 guides' },
 ];
 
 export function ModalityUniverse() {
@@ -492,7 +492,7 @@ export function ModalityUniverse() {
 
       {/* SVG with fixed viewBox for readable text */}
       <div className="relative w-full max-w-5xl mx-auto px-4" style={{ height: '500px' }}>
-        <svg viewBox="0 0 900 500" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMi✨Mid meet">
+        <svg viewBox="0 0 900 500" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMiâœ¨Mid meet">
           <defs>
             {MOD_NODES.map(node => (
               <radialGradient key={`grad-${node.id}`} id={`grad-${node.id}`} cx="30%" cy="30%" r="70%">
@@ -555,9 +555,9 @@ export function ModalityUniverse() {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────
-// 05. EXPERT STORIES DECK — Horizontal premium portrait stack
-// ─────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// 05. EXPERT STORIES DECK â€” Horizontal premium portrait stack
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const STORY_EXPERTS = [
   { name: 'Maya Sharma', role: 'Vedic Astrologer', years: '12 yrs', style: ['Intuitive', 'Spiritual'], langs: ['English', 'Hindi'], available: true, color: '#63BFE4', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop', quote: 'I guide souls through life transitions with cosmic clarity.' },
   { name: 'Arun Nair', role: 'Tarot & Crystals', years: '8 yrs', style: ['Creative', 'Warm'], langs: ['English', 'Malayalam'], available: true, color: '#C9A0DC', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop', quote: 'Every card tells a story; every story holds your truth.' },
@@ -651,7 +651,7 @@ export function ExpertStoriesDeck() {
             <h2 className="text-5xl md:text-7xl font-serif font-medium mb-2" style={{ color: '#111', transition: 'color 0.5s ease' }}>
               {expert.name}
             </h2>
-            <p className="text-base text-[#B79AE6] mb-6 font-medium">{expert.role} · {expert.years}</p>
+            <p className="text-base text-[#B79AE6] mb-6 font-medium">{expert.role} Â· {expert.years}</p>
             <blockquote className="text-xl font-light text-purple-800 mb-8 leading-relaxed border-l-4 pl-6 italic"
               style={{ borderColor: expert.color }}>
               &ldquo;{expert.quote}&rdquo;
@@ -685,20 +685,20 @@ export function ExpertStoriesDeck() {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────
-// 06. GLOBAL GUIDANCE MAP — Dark world map with glow cities
-// ─────────────────────────────────────────────────────────────────────────
-// 06. ZenAuraa GLOBAL DISTRIBUTION — Platform reach visualised
-// ─────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// 06. GLOBAL GUIDANCE MAP â€” Dark world map with glow cities
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// 06. ZenAuraa GLOBAL DISTRIBUTION â€” Platform reach visualised
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const HC_NODES = [
   { name: 'India', x: 71, y: 41, users: '3.2M+', guides: '4,200+', top: 'Vedic Astrology', color: '#63BFE4', size: 'lg' },
-  { name: 'USA', x: 21, y: 35, users: '820K+', guides: '1$00+', top: 'Life Coaching · Tarot', color: '#C9A0DC', size: 'md' },
-  { name: 'UK', x: 47, y: 24, users: '420K+', guides: '820+', top: 'Tarot · Astrology', color: '#7EDEA0', size: 'sm' },
+  { name: 'USA', x: 21, y: 35, users: '820K+', guides: '1$00+', top: 'Life Coaching Â· Tarot', color: '#C9A0DC', size: 'md' },
+  { name: 'UK', x: 47, y: 24, users: '420K+', guides: '820+', top: 'Tarot Â· Astrology', color: '#7EDEA0', size: 'sm' },
   { name: 'UAE', x: 64, y: 42, users: '310K+', guides: '650+', top: 'Spiritual Guidance', color: '#F4D58D', size: 'sm' },
   { name: 'Singapore', x: 78, y: 56, users: '180K+', guides: '480+', top: 'Energy Healing', color: '#98E6F4', size: 'sm' },
-  { name: 'Australia', x: 85, y: 75, users: '150K+', guides: '390+', top: 'Meditation · Tarot', color: '#9B8FFF', size: 'sm' },
+  { name: 'Australia', x: 85, y: 75, users: '150K+', guides: '390+', top: 'Meditation Â· Tarot', color: '#9B8FFF', size: 'sm' },
   { name: 'Brazil', x: 32, y: 65, users: '90K+', guides: '290+', top: 'Astrology', color: '#FF6B9D', size: 'xs' },
-  { name: 'Japan', x: 86, y: 33, users: '110K+', guides: '310+', top: 'Numerology · Reiki', color: '#F4A261', size: 'xs' },
+  { name: 'Japan', x: 86, y: 33, users: '110K+', guides: '310+', top: 'Numerology Â· Reiki', color: '#F4A261', size: 'xs' },
 ];
 
 const GROWTH_STATS = [
@@ -816,27 +816,27 @@ export function GlobalGuidanceMap() {
 // backward-compat alias so old imports still work
 export { GlobalGuidanceMap as GlobalDistributionMap };
 
-// ─────────────────────────────────────────────────────────────────────────
-// 07. YOUR NEXT DISCOVERY — Animated 3-path journey CTA
-// ─────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// 07. YOUR NEXT DISCOVERY â€” Animated 3-path journey CTA
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const JOURNEY_PATHS = [
   {
     id: 'know', label: 'KNOW', title: 'Know Yourself',
     desc: 'Discover your cosmic blueprint through birth chart, numerology, and personality mapping.',
     items: ['Birth Chart Reading', 'Numerology Profile', 'Element & Sign Analysis'],
-    color: '#63BFE4', icon: '✦',
+    color: '#63BFE4', icon: 'âœ¦',
   },
   {
     id: 'explore', label: 'EXPLORE', title: 'Explore Your World',
     desc: 'Navigate love, career, and life transitions through tarot, zodiac readings, and guided sessions.',
     items: ['Tarot Card Reading', 'Zodiac Compatibility', 'Monthly Forecasts'],
-    color: '#C9A0DC', icon: '◉', featured: true,
+    color: '#C9A0DC', icon: 'â—‰', featured: true,
   },
   {
     id: 'connect', label: 'CONNECT', title: 'Connect With Guides',
     desc: 'Meet verified practitioners matched to your exact needs, available 24/7 worldwide.',
     items: ['AI-Matched Experts', 'Live 1-on-1 Sessions', 'Ongoing Journey Support'],
-    color: '#7EDEA0', icon: '◈',
+    color: '#7EDEA0', icon: 'â—ˆ',
   },
 ];
 
@@ -859,7 +859,7 @@ export function YourNextDiscovery() {
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <div className="text-center mb-20">
-          <div className={`text-5xl mb-4 text-[#1E2059]/10`}>✦ YOU ✦</div>
+          <div className={`text-5xl mb-4 text-[#1E2059]/10`}>âœ¦ YOU âœ¦</div>
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-8 h-[2px] bg-primary" />
             <span className={`text-[10px] font-black uppercase tracking-[0.3em] text-primary`}>Your Next Discovery</span>
@@ -920,7 +920,7 @@ export function YourNextDiscovery() {
               <ArrowRight className="w-5 h-5" />
             </div>
           </Link>
-          <p className="text-[#3730A3]/60 text-xs mt-4 font-medium">Free to explore · No credit card required</p>
+          <p className="text-[#3730A3]/60 text-xs mt-4 font-medium">Free to explore Â· No credit card required</p>
         </div>
       </div>
     </section>
