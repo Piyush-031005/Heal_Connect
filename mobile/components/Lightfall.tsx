@@ -341,7 +341,7 @@ export default function Lightfall({
     <View style={StyleSheet.absoluteFillObject} pointerEvents="none">
       <WebView
         originWhitelist={['*']}
-        source={{ html: htmlContent }}
+        source={{ html: htmlContent, baseUrl: 'https://healconnect.com' }}
         style={{ flex: 1, backgroundColor: 'transparent' }}
         scrollEnabled={false}
         showsHorizontalScrollIndicator={false}

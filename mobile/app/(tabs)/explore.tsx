@@ -44,7 +44,7 @@ export default function ExploreTab() {
       <View style={StyleSheet.absoluteFillObject}>
         <Lightfall
             colors={['#A6C8FF', '#5227FF', '#FF9FFC']}
-            backgroundColor="#ffffff"
+            backgroundColor="#0A29FF"
             speed={0.5}
             streakCount={2}
             streakWidth={1}
@@ -58,7 +58,7 @@ export default function ExploreTab() {
             mouseInteraction={true}
             mouseStrength={0.5}
             mouseRadius={1}
-            lightMode={true}
+            
         />
       </View>
       
