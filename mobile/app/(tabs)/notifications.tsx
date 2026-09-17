@@ -30,6 +30,7 @@ export default function NotificationsScreen() {
           glowIntensity={2}
           brightness={1.5}
           blueBoost={1.2}
+          lightMode={true}
         />
       </View>
       

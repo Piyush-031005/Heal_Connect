@@ -95,6 +95,7 @@ export default function LoginScreen() {
           glowIntensity={2}
           brightness={1.5}
           blueBoost={1.2}
+          lightMode={true}
         />
       
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
@@ -141,6 +142,7 @@ export default function LoginScreen() {
           glowIntensity={2}
           brightness={1.5}
           blueBoost={1.2}
+          lightMode={true}
         />
             </View>
 
