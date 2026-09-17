@@ -198,7 +198,7 @@ export default function HomeTab() {
           <Text style={styles.exploreSubtitle}>Find the perfect practitioner for your unique journey.</Text>
 
           <View style={styles.modalityGrid}>
-            {MODALITIES.map((mod, i) => (
+            {MODALITIES.slice(0, 4).map((mod, i) => (
               <TouchableOpacity key={i} style={styles.categoryCardHalf} onPress={() => router.push("/(tabs)/explore")}>
                 <View style={styles.categoryIconWrapHalf}>
                   <Image source={mod.img} style={styles.categoryIconHalf} />
@@ -328,7 +328,7 @@ const styles = StyleSheet.create({
   categoryCardHalf: { width: (width - 48) / 2, backgroundColor: '#1a103c', borderRadius: 20, padding: 16, alignItems: 'center', marginBottom: 16 },
   categoryIconWrapHalf: { width: 70, height: 70, borderRadius: 35, marginBottom: 12 },
   categoryIconHalf: { width: '100%', height: '100%', resizeMode: 'contain' },
-  categoryNameHalf: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: '#fff', marginBottom: 6 },
+  categoryNameHalf: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: '#fff', marginBottom: 6, textAlign: 'center' },
   categoryDescHalf: { fontFamily: 'Inter_400Regular', fontSize: 11, color: '#A78BFA', textAlign: 'center' },
   seeMoreBtn: { alignItems: 'center', marginTop: 10 },
   seeMoreText: { fontFamily: 'Inter_700Bold', fontSize: 13, color: '#2d1b69' },

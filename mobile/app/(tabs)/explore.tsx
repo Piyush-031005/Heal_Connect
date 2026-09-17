@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   modCard: { width: (width - 50) / 2, backgroundColor: 'rgba(255,255,255,0.8)', padding: 16, borderRadius: 16, alignItems: 'center', marginBottom: 16, borderWidth: 1, borderColor: '#f3f4f6' },
   modIconWrap: { width: 60, height: 60, borderRadius: 30, marginBottom: 10, backgroundColor: '#f9fafb' },
   modIcon: { width: '100%', height: '100%', resizeMode: 'contain' },
-  modName: { fontFamily: 'Inter_600SemiBold', fontSize: 14, color: '#111827', marginBottom: 4 },
+  modName: { fontFamily: 'Inter_600SemiBold', fontSize: 14, color: '#111827', marginBottom: 4, textAlign: 'center' },
   modDesc: { fontFamily: 'Inter_400Regular', fontSize: 12, color: '#6b7280', textAlign: 'center' },
 
   divider: { height: 1, backgroundColor: '#e5e7eb', marginVertical: 30 },

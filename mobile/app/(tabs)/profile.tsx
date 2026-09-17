@@ -33,7 +33,7 @@ export default function ProfileScreen() {
         
         {/* Mountain Hero Section */}
         <ImageBackground 
-          source={{ uri: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop" }} 
+          source={require("../../assets/images/mountain.png")} 
           style={styles.heroBackground}
           resizeMode="cover"
         >
