@@ -9,12 +9,17 @@ export default function WebReplicaHeader() {
   const router = useRouter();
 
   return (
-    <View style={[styles.headerContainer, { paddingTop: Math.max(insets.top, 16) }]}>
+    <View style={[styles.headerContainer, { paddingTop: Math.max(insets.top, 20) + 10 }]}>
       
-      {/* Left: Hamburger Menu */}
+      {/* Left: Hamburger Menu & Notifications */}
       <View style={styles.leftSection}>
         <TouchableOpacity style={styles.iconButton}>
           <Menu size={24} color="#2d1b69" />
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.notificationButton} onPress={() => router.push('/(tabs)/notifications')}>
+          <Bell size={20} color="#2d1b69" />
+          <View style={styles.notificationBadge} />
         </TouchableOpacity>
       </View>
 
@@ -29,11 +34,6 @@ export default function WebReplicaHeader() {
 
       {/* Right: Actions */}
       <View style={styles.rightSection}>
-        <TouchableOpacity style={styles.notificationButton} onPress={() => router.push('/(tabs)/notifications')}>
-          <Bell size={20} color="#2d1b69" />
-          <View style={styles.notificationBadge} />
-        </TouchableOpacity>
-
         <TouchableOpacity style={styles.freeInsightsPill}>
           <Text style={styles.freeInsightsText}>Free Insights</Text>
         </TouchableOpacity>
@@ -61,7 +61,9 @@ const styles = StyleSheet.create({
   },
   leftSection: {
     flex: 1,
-    alignItems: 'flex-start',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
   },
   iconButton: {
     padding: 4,
@@ -92,7 +94,6 @@ const styles = StyleSheet.create({
   notificationButton: {
     padding: 4,
     position: 'relative',
-    marginRight: 4,
   },
   notificationBadge: {
     position: 'absolute',
