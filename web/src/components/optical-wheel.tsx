@@ -13,7 +13,7 @@ const MODALITIES = [
   { id: 'sound-healing',  name: 'Energy & Spiritual Healing',    image: '/final_ensights/sound-healing.png' },
   { id: 'meditation',     name: 'Meditation & Mindfulness',       image: '/final_ensights/meditation.png' },
   { id: 'spiritual',      name: 'Akashic & Spiritual Guidance',        image: '/final_ensights/spiritual-guidance.png' },
-  { id: 'chakra-healing', name: 'Energy & Spiritual Healing',   image: '/final_ensights/chakra-healing.png' },
+  { id: 'chakra-healing', name: 'Energy Healing',   image: '/final_ensights/chakra-healing.png' },
   { id: 'breathwork',     name: 'Yoga & Breath Practices',       image: '/final_ensights/breathwork.png' },
   { id: 'dreams',         name: 'Akashic & Spiritual Guidance',    image: '/final_ensights/dream-interpretation.png' },
   { id: 'space-harmony',  name: 'Vastu & Space Harmony',    image: '/final_ensights/space-harmony.png' },
