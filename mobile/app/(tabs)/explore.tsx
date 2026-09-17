@@ -40,32 +40,7 @@ export default function ExploreTab() {
 
   return (
     <View style={styles.container}>
-      <View style={StyleSheet.absoluteFillObject}>
-        <GhostFibers
-          lineColor="#6D28D9"
-          glowColor="#8B5CF6"
-          speed={0.2}
-          scale={1.5}
-          rotation={0}
-          rotationSpeed={0.1}
-          layers={6}
-          waveAmplitude={0.015}
-          waveFrequency={2}
-          waveSpeed={0.2}
-          layerSpeed={0.08}
-          twist={0.1}
-          twistFrequency={5}
-          twistSpeed={1.5}
-          lineFrequency={5}
-          lineSpacing={2}
-          lineSharpness={16}
-          glowFalloff={8}
-          glowIntensity={2}
-          brightness={1.5}
-          blueBoost={1.2}
-          lightMode={true}
-        />
-      </View>
+      
 
       <WebReplicaHeader />
 
@@ -77,6 +52,22 @@ export default function ExploreTab() {
           <View style={styles.modalityGrid}>
             {MODALITIES.map((mod, i) => (
               <TouchableOpacity key={i} style={styles.modCard}>
+                <View style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0, borderRadius: 16, overflow: "hidden" }}>
+                  <GhostFibers
+                    lineColor="#6D28D9"
+                    glowColor="#8B5CF6"
+                    speed={0.2}
+                    scale={1.5}
+                    layers={3}
+                    waveAmplitude={0.015}
+                    waveFrequency={2}
+                    waveSpeed={0.2}
+                    layerSpeed={0.08}
+                    brightness={1.5}
+                    blueBoost={1.2}
+                    lightMode={true}
+                  />
+                </View>
                 <View style={styles.modIconWrap}>
                   <Image source={mod.img} style={styles.modIcon} />
                 </View>
