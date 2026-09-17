@@ -1,7 +1,7 @@
 ﻿import React, { useState } from "react";
 import {
   View, Text, ScrollView, TouchableOpacity, Image, Dimensions,
-  StyleSheet, ImageBackground, FlatList
+  StyleSheet, ImageBackground
 } from "react-native";
 import { useRouter } from "expo-router";
 import {
@@ -58,46 +58,72 @@ export default function HomeTab() {
         contentContainerStyle={{ paddingBottom: 120 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* HERO SECTION */}
-        <View style={styles.heroSection}>
-          <Text style={styles.heroTitle}>ZenAuraa.</Text>
-          <Text style={styles.heroSubtitle}>
-            Find trusted guidance for every stage of life. Connect with verified experts instantly.
-          </Text>
+        {/* HERO SECTION WITH MEDITATING LADY */}
+        <ImageBackground 
+          source={{ uri: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2094&auto=format&fit=crop" }} 
+          style={styles.heroBackground}
+          imageStyle={{ opacity: 0.15 }}
+        >
+          <View style={styles.heroSection}>
+            <Text style={styles.heroTitle}>ZenAuraa.</Text>
+            <Text style={styles.heroSubtitle}>
+              Find trusted guidance for every stage of life. Connect with verified experts instantly.
+            </Text>
 
-          <View style={styles.heroButtonsRow}>
-            <TouchableOpacity style={styles.yellowBtn}>
-              <MessageCircle size={16} color="#1a1a1a" style={{ marginRight: 6 }} />
-              <Text style={styles.yellowBtnText}>Chat</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.yellowBtn}>
-              <Phone size={16} color="#1a1a1a" style={{ marginRight: 6 }} />
-              <Text style={styles.yellowBtnText}>Call</Text>
-            </TouchableOpacity>
-          </View>
-          
-          <TouchableOpacity style={styles.purpleBtn}>
-            <Text style={styles.purpleBtnText}>Ask me Anything</Text>
-            <ArrowRight size={16} color="#fff" />
-          </TouchableOpacity>
-
-          <View style={styles.trustIndicator}>
-            <View style={styles.avatarPile}>
-              {EXPERTS.slice(0,3).map((exp, i) => (
-                <Image key={i} source={{ uri: exp.img }} style={[styles.pileAvatar, { left: i * 20, zIndex: 10 - i }]} />
-              ))}
+            <View style={styles.heroButtonsRow}>
+              <TouchableOpacity style={styles.yellowBtn}>
+                <MessageCircle size={16} color="#1a1a1a" style={{ marginRight: 6 }} />
+                <Text style={styles.yellowBtnText}>Free Chat</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.yellowBtn}>
+                <Phone size={16} color="#1a1a1a" style={{ marginRight: 6 }} />
+                <Text style={styles.yellowBtnText}>Free Call</Text>
+              </TouchableOpacity>
             </View>
-            <View style={{ marginLeft: 80 }}>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={styles.trustScore}>4.9</Text>
-                <Star size={14} color="#F59E0B" fill="#F59E0B" style={{ marginLeft: 4 }} />
+            
+            <TouchableOpacity style={styles.purpleBtn}>
+              <Text style={styles.purpleBtnText}>Ask me Anything</Text>
+              <ArrowRight size={16} color="#fff" />
+            </TouchableOpacity>
+
+            <View style={styles.trustIndicator}>
+              <View style={styles.avatarPile}>
+                {EXPERTS.slice(0,3).map((exp, i) => (
+                  <Image key={i} source={{ uri: exp.img }} style={[styles.pileAvatar, { left: i * 20, zIndex: 10 - i }]} />
+                ))}
               </View>
-              <Text style={styles.trustText}>Based on 10,000+ reviews</Text>
+              <View style={{ marginLeft: 80 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Text style={styles.trustScore}>4.9</Text>
+                  <Star size={14} color="#F59E0B" fill="#F59E0B" style={{ marginLeft: 4 }} />
+                </View>
+                <Text style={styles.trustText}>Based on 10,000+ reviews</Text>
+              </View>
             </View>
           </View>
+        </ImageBackground>
+
+        {/* LIVE SESSIONS SECTION */}
+        <View style={styles.liveSection}>
+          <View style={styles.liveHeader}>
+            <View style={styles.livePulse} />
+            <Text style={styles.liveTitle}>Live Sessions</Text>
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 16 }}>
+            {EXPERTS.map((expert, i) => (
+              <View key={`live-${i}`} style={styles.liveCard}>
+                <View style={styles.liveAvatarWrap}>
+                  <Image source={{ uri: expert.img }} style={styles.liveAvatar} />
+                  <View style={styles.liveBadge}><Text style={styles.liveBadgeText}>LIVE</Text></View>
+                </View>
+                <Text style={styles.liveName} numberOfLines={1}>{expert.name}</Text>
+                <Text style={styles.liveRole} numberOfLines={1}>{expert.role}</Text>
+              </View>
+            ))}
+          </ScrollView>
         </View>
 
-        {/* FEATURED EXPERTS (RESIZED) */}
+        {/* FEATURED EXPERTS */}
         <View style={styles.featuredSection}>
           <Text style={styles.sectionSubtitle}>FEATURED EXPERTS</Text>
           <Text style={styles.sectionTitle}>Connect with top-rated guides.</Text>
@@ -133,13 +159,13 @@ export default function HomeTab() {
                 </View>
 
                 <View style={styles.expertButtonsRow}>
-                  <TouchableOpacity style={styles.expertBtn}>
-                    <MessageCircle size={12} color="#A78BFA" style={{ marginRight: 4 }} />
-                    <Text style={styles.expertBtnText}>Chat</Text>
+                  <TouchableOpacity style={styles.expertBtnYellow}>
+                    <MessageCircle size={12} color="#1a1a1a" style={{ marginRight: 4 }} />
+                    <Text style={styles.expertBtnTextDark}>Chat</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.expertBtn}>
-                    <Phone size={12} color="#A78BFA" style={{ marginRight: 4 }} />
-                    <Text style={styles.expertBtnText}>Call</Text>
+                  <TouchableOpacity style={styles.expertBtnYellow}>
+                    <Phone size={12} color="#1a1a1a" style={{ marginRight: 4 }} />
+                    <Text style={styles.expertBtnTextDark}>Call</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -151,7 +177,7 @@ export default function HomeTab() {
           </TouchableOpacity>
         </View>
 
-        {/* EXPLORE CATEGORY (2x2 GRID) */}
+        {/* EXPLORE CATEGORY */}
         <View style={styles.exploreSection}>
           <Text style={styles.exploreTitle}>Explore by Category</Text>
           <Text style={styles.exploreSubtitle}>Find the perfect practitioner for your unique journey.</Text>
@@ -187,23 +213,6 @@ export default function HomeTab() {
           </ScrollView>
         </View>
 
-        {/* TAROT DRAW */}
-        <View style={styles.tarotSection}>
-          <Text style={styles.tarotSubtitle}>TAROT READING</Text>
-          <Text style={styles.tarotTitle}>Draw 3 Cards</Text>
-          <Text style={styles.tarotDesc}>Set your intention. Choose 3 cards to reveal your Past, Present, and Future.</Text>
-          
-          <View style={styles.tarotCounter}>
-            <Text style={styles.tarotCounterText}>✨ "0/3 cards selected"</Text>
-          </View>
-          
-          <View style={styles.tarotDeck}>
-            {[...Array(6)].map((_, i) => (
-              <View key={i} style={[styles.tarotCardMock, { transform: [{ rotate: `${(i - 2.5) * 8}deg` }, { translateY: Math.abs(i - 2.5) * 5 }] }]} />
-            ))}
-          </View>
-        </View>
-
         {/* FAQ SECTION */}
         <View style={styles.faqSection}>
           <Text style={styles.reviewsTitle}>Frequently Asked Questions</Text>
@@ -227,7 +236,8 @@ export default function HomeTab() {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  heroSection: { padding: 20, paddingTop: 20 },
+  heroBackground: { width: '100%' },
+  heroSection: { padding: 20, paddingTop: 20, paddingBottom: 30 },
   heroTitle: { fontFamily: 'PlayfairDisplay_700Bold', fontSize: 42, color: '#2d1b69', marginBottom: 10 },
   heroSubtitle: { fontFamily: 'Inter_400Regular', fontSize: 16, color: '#2d1b69', opacity: 0.9, lineHeight: 22, marginBottom: 20, maxWidth: '95%' },
   heroButtonsRow: { flexDirection: 'row', gap: 10, marginBottom: 14 },
@@ -241,6 +251,18 @@ const styles = StyleSheet.create({
   trustScore: { fontFamily: 'Inter_600SemiBold', fontSize: 15, color: '#2d1b69' },
   trustText: { fontFamily: 'Inter_400Regular', fontSize: 11, color: '#2d1b69', opacity: 0.8 },
   
+  liveSection: { marginTop: 10 },
+  liveHeader: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, marginBottom: 12 },
+  livePulse: { width: 8, height: 8, borderRadius: 4, backgroundColor: '#EF4444', marginRight: 8 },
+  liveTitle: { fontFamily: 'Inter_700Bold', fontSize: 16, color: '#2d1b69' },
+  liveCard: { alignItems: 'center', width: 70 },
+  liveAvatarWrap: { position: 'relative', marginBottom: 8 },
+  liveAvatar: { width: 60, height: 60, borderRadius: 30, borderWidth: 2, borderColor: '#EF4444' },
+  liveBadge: { position: 'absolute', bottom: -6, alignSelf: 'center', backgroundColor: '#EF4444', paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6, borderWidth: 1, borderColor: '#fff' },
+  liveBadgeText: { fontFamily: 'Inter_700Bold', fontSize: 8, color: '#fff' },
+  liveName: { fontFamily: 'Inter_600SemiBold', fontSize: 12, color: '#2d1b69', textAlign: 'center' },
+  liveRole: { fontFamily: 'Inter_400Regular', fontSize: 10, color: '#4c1d95', textAlign: 'center' },
+
   featuredSection: { marginTop: 30 },
   sectionSubtitle: { fontFamily: 'Inter_600SemiBold', fontSize: 11, color: '#D97706', letterSpacing: 1.2, paddingHorizontal: 20, marginBottom: 6, textTransform: 'uppercase' },
   sectionTitle: { fontFamily: 'PlayfairDisplay_600SemiBold', fontSize: 28, color: '#fff', paddingHorizontal: 20, marginBottom: 20, lineHeight: 34 },
@@ -261,8 +283,8 @@ const styles = StyleSheet.create({
   expertDetailValue: { fontFamily: 'Inter_600SemiBold', fontSize: 11, color: '#fff' },
   expertDetailValueGold: { fontFamily: 'Inter_700Bold', fontSize: 12, color: '#FCD34D' },
   expertButtonsRow: { flexDirection: 'row', gap: 6, marginTop: 12 },
-  expertBtn: { flex: 1, borderColor: 'rgba(167,139,250,0.4)', borderWidth: 1, borderRadius: 12, paddingVertical: 8, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
-  expertBtnText: { fontFamily: 'Inter_600SemiBold', color: '#A78BFA', fontSize: 11 },
+  expertBtnYellow: { flex: 1, backgroundColor: '#FCD34D', borderRadius: 12, paddingVertical: 8, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
+  expertBtnTextDark: { fontFamily: 'Inter_700Bold', color: '#1a1a1a', fontSize: 11 },
   viewAllText: { fontFamily: 'Inter_600SemiBold', color: '#FCD34D', fontSize: 13 },
 
   exploreSection: { marginTop: 40 },
@@ -282,15 +304,7 @@ const styles = StyleSheet.create({
   reviewCard: { width: 280, backgroundColor: 'rgba(255,255,255,0.6)', padding: 20, borderRadius: 16, borderWidth: 1, borderColor: 'rgba(45,27,105,0.1)' },
   reviewText: { fontFamily: 'Inter_400Regular', fontSize: 14, color: '#2d1b69', fontStyle: 'italic', marginBottom: 12, lineHeight: 20 },
   reviewAuthor: { fontFamily: 'Inter_600SemiBold', fontSize: 13, color: '#4c1d95' },
-
-  tarotSection: { marginTop: 50, paddingHorizontal: 20, alignItems: 'center' },
-  tarotSubtitle: { fontFamily: 'Inter_600SemiBold', fontSize: 11, color: '#4c1d95', letterSpacing: 1.2, marginBottom: 6 },
-  tarotTitle: { fontFamily: 'PlayfairDisplay_600SemiBold', fontSize: 32, color: '#fff', marginBottom: 12 },
-  tarotDesc: { fontFamily: 'Inter_400Regular', fontSize: 14, color: '#4c1d95', textAlign: 'center', marginBottom: 20, lineHeight: 22, paddingHorizontal: 10 },
-  tarotCounter: { backgroundColor: '#8B5CF6', paddingHorizontal: 16, paddingVertical: 8, borderRadius: 16, marginBottom: 30 },
-  tarotCounterText: { fontFamily: 'Inter_600SemiBold', color: '#fff', fontSize: 12 },
-  tarotDeck: { flexDirection: 'row', justifyContent: 'center', height: 130, width: '100%', position: 'relative' },
-  tarotCardMock: { width: 50, height: 80, backgroundColor: '#F0E6F5', borderRadius: 8, borderWidth: 1, borderColor: '#A78BFA', position: 'absolute', shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 5, shadowOffset: { width: 0, height: 2 } },
+  tarotSubtitle: { fontFamily: 'Inter_600SemiBold', fontSize: 11, color: '#4c1d95', letterSpacing: 1.2, marginBottom: 6, paddingHorizontal: 20 },
 
   faqSection: { marginTop: 50, paddingHorizontal: 20 },
   faqContainer: { marginTop: 16, gap: 12 },
