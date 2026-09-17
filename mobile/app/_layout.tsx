@@ -16,11 +16,17 @@ export const unstable_settings = {
 
 SplashScreen.preventAutoHideAsync();
 
+import { useFonts as usePlayfair, PlayfairDisplay_400Regular, PlayfairDisplay_600SemiBold, PlayfairDisplay_700Bold } from '@expo-google-fonts/playfair-display';
+import { useFonts as useInter, Inter_400Regular, Inter_600SemiBold } from '@expo-google-fonts/inter';
 import { useAuth } from '../hooks/useAuth';
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+  const [loaded, error] = useFonts({ SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf') });
+  const [loadedPlayfair, errorPlayfair] = usePlayfair({
+    PlayfairDisplay_400Regular, PlayfairDisplay_600SemiBold, PlayfairDisplay_700Bold
+  });
+  const [loadedInter, errorInter] = useInter({
+    Inter_400Regular, Inter_600SemiBold
   });
 
   const { initialize, isInitialized } = useAuth();
@@ -34,12 +40,12 @@ export default function RootLayout() {
   }, [error]);
 
   useEffect(() => {
-    if (loaded && isInitialized) {
+    if (loaded && loadedPlayfair && loadedInter && isInitialized) {
       SplashScreen.hideAsync();
     }
-  }, [loaded, isInitialized]);
+  }, [loaded, loadedPlayfair, loadedInter, isInitialized]);
 
-  if (!loaded || !isInitialized) {
+  if (!loaded || !loadedPlayfair || !loadedInter || !isInitialized) {
     return null;
   }
 

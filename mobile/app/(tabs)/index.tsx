@@ -1,298 +1,245 @@
 ﻿import React, { useState } from "react";
 import {
   View, Text, ScrollView, TouchableOpacity, Image, Dimensions,
-  Platform, StyleSheet, TextInput, Linking
+  StyleSheet, ImageBackground, FlatList
 } from "react-native";
 import { useRouter } from "expo-router";
 import {
-  Search, Bell, Star, MessageCircle, Phone, ArrowRight, Calendar, Sun, Hash, BookOpen, ShoppingBag
+  MessageCircle, Phone, ArrowRight, Star
 } from "lucide-react-native";
-import Lightfall from "../../components/Lightfall";
-import GhostFibers from "../../components/GhostFibers";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
+import WebReplicaHeader from "../../components/WebReplicaHeader";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
 
-const PURPLE   = "#7C3AED";
-const LAVENDER = "#A78BFA";
-const BG       = "#F5F3FF";
-const TEXT     = "#1E1B4B";
-const YELLOW   = "#F59E0B";
-
 const EXPERTS = [
-  { name: "piyush", role: "Wellness Expert", rating: "0.0", exp: "New Expert", price: "₹100/min", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" },
-  { name: "Abhishek Giri", role: "Wellness Expert", rating: "0.0", exp: "New Expert", price: "₹0/min", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" },
-  { name: "Pooja", role: "Wellness Expert", rating: "0.0", exp: "New Expert", price: "₹0/min", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" },
-  { name: "Deepak's Expert", role: "Tarot • Astrology", rating: "4.5", exp: "New Expert", price: "₹100/min", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" },
+  { name: "piyush", role: "Wellness Expert", rating: "0.0", exp: "New Expert", price: "₹100 / min", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" },
+  { name: "Abhishek Giri", role: "Wellness Expert", rating: "0.0", exp: "New Expert", price: "₹0 / min", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" },
+  { name: "Pooja", role: "Wellness Expert", rating: "0.0", exp: "New Expert", price: "₹0 / min", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" },
+  { name: "Deepak's Expert", role: "Tarot • Astrology", rating: "4.5", exp: "New Expert", price: "₹100 / min", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" },
 ];
-
-const MODALITIES = [
-  { id: "astrology", name: "Astrology", image: "https://zenauraa.com/final_ensights/astrology.png" },
-  { id: "tarot", name: "Tarot", image: "https://zenauraa.com/final_ensights/tarot.png" },
-  { id: "face", name: "Face Reading", image: "https://zenauraa.com/final_ensights/face-reading.png" },
-  { id: "palm", name: "Palm Reading", image: "https://zenauraa.com/final_ensights/palm-reading.png" },
-  { id: "numerology", name: "Numerology", image: "https://zenauraa.com/final_ensights/numerology.png" },
-  { id: "vastu", name: "Vastu", image: "https://zenauraa.com/final_ensights/vastu.png" },
-];
-
-const ZODIACS = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"];
 
 export default function HomeTab() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
 
   return (
-    <View style={{ flex: 1, backgroundColor: BG }}>
-      <GhostFibers
-        lineColor="#C4B5FD" glowColor="#A78BFA" speed={0.2} scale={0.9}
-        brightness={25.0} blueBoost={0.8} lightMode={true} layers={50}
-        lineFrequency={60} lineSpacing={0.3} glowIntensity={25.0}
+    <View style={styles.container}>
+      <LinearGradient
+        colors={['#F0E6F5', '#E5D9F2', '#D5B6DC', '#C2AEE8', '#D5B6DC', '#8982D0', '#5F3BA9']}
+        locations={[0, 0.25, 0.5, 0.7, 0.85, 0.95, 1]}
+        style={StyleSheet.absoluteFill}
       />
+      
+      <WebReplicaHeader />
 
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 120 }}>
-        
+      <ScrollView 
+        contentContainerStyle={{ paddingBottom: 100 }}
+        showsVerticalScrollIndicator={false}
+      >
         {/* HERO SECTION */}
-        <View style={styles.heroContainer}>
-          <View style={[StyleSheet.absoluteFill, { backgroundColor: "#6B46C1" }]} />
-          <Lightfall colors={["#DDD6FE", "#FDE68A", "#F9A8D4"]} backgroundColor="#6B46C1" speed={0.4} opacity={0.75} zoom={1.8} density={0.5} />
+        <View style={styles.heroSection}>
+          <Text style={styles.heroTitle}>ZenAuraa.</Text>
+          <Text style={styles.heroSubtitle}>
+            Find trusted guidance for every stage of life. Connect with verified experts instantly.
+          </Text>
+
+          <View style={styles.heroButtonsRow}>
+            <TouchableOpacity style={styles.yellowBtn}>
+              <MessageCircle size={18} color="#1a1a1a" style={{ marginRight: 6 }} />
+              <Text style={styles.yellowBtnText}>Chat</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.yellowBtn}>
+              <Phone size={18} color="#1a1a1a" style={{ marginRight: 6 }} />
+              <Text style={styles.yellowBtnText}>Call</Text>
+            </TouchableOpacity>
+          </View>
           
-          <SafeAreaView style={StyleSheet.absoluteFill} edges={['top']}>
-            <View style={styles.heroHeader}>
-              <View style={{ width: 40 }} />
-              {/* Centered and Bigger Logo */}
-              <View style={styles.logoBubble}>
-                <Image source={require("../../assets/images/main_logo.png")} style={{ width: 80, height: 80, resizeMode: "contain", tintColor: "#fff" }} />
+          <TouchableOpacity style={styles.purpleBtn}>
+            <Text style={styles.purpleBtnText}>Ask me Anything</Text>
+            <ArrowRight size={18} color="#fff" />
+          </TouchableOpacity>
+
+          <View style={styles.trustIndicator}>
+            <View style={styles.avatarPile}>
+              {EXPERTS.slice(0,3).map((exp, i) => (
+                <Image key={i} source={{ uri: exp.img }} style={[styles.pileAvatar, { left: i * 20, zIndex: 10 - i }]} />
+              ))}
+            </View>
+            <View style={{ marginLeft: 80 }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text style={styles.trustScore}>4.9</Text>
+                <Star size={14} color="#F59E0B" fill="#F59E0B" style={{ marginLeft: 4 }} />
               </View>
-              <TouchableOpacity style={styles.iconBtn} onPress={() => router.push("/(tabs)/notifications")}><Bell size={20} color="#fff" /></TouchableOpacity>
+              <Text style={styles.trustText}>Based on 10,000+ reviews</Text>
             </View>
-
-            <View style={styles.heroContent}>
-              <Text style={styles.heroTitle}>ZenAuraa</Text>
-              <Text style={styles.heroSubtitle}>Find trusted guidance for every stage of life.</Text>
-
-              <TouchableOpacity style={styles.heroBtnPurple} onPress={() => router.push("/(tabs)/explore")}>
-                <Text style={styles.heroBtnPurpleText}>Ask me Anything</Text>
-                <ArrowRight size={16} color="#fff" />
-              </TouchableOpacity>
-            </View>
-          </SafeAreaView>
-        </View>
-
-        {/* SEARCH BAR BELOW HERO */}
-        <View style={styles.searchContainer}>
-          <View style={styles.searchBar}>
-            <Search size={18} color={PURPLE} />
-            <TextInput placeholder="Search experts or topics..." placeholderTextColor="#9CA3AF" style={styles.searchInput} />
           </View>
         </View>
 
-        {/* QUICK ACCESS SERVICES */}
-        <View style={styles.servicesContainer}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 12 }}>
-            <TouchableOpacity style={styles.servicePill}><Calendar size={18} color={PURPLE} /><Text style={styles.serviceText}>Calendar</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.servicePill}><Sun size={18} color={PURPLE} /><Text style={styles.serviceText}>Horoscope</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.servicePill}><Hash size={18} color={PURPLE} /><Text style={styles.serviceText}>Numerology</Text></TouchableOpacity>
-          </ScrollView>
-        </View>
+        {/* FEATURED EXPERTS */}
+        <View style={styles.featuredSection}>
+          <Text style={styles.sectionSubtitle}>FEATURED EXPERTS</Text>
+          <Text style={styles.sectionTitle}>Connect with top-rated guides.</Text>
 
-                {/* BANNER */}
-        <View style={{ backgroundColor: "#5B21B6", padding: 20, borderRadius: 16, marginHorizontal: 20, marginTop: 24, marginBottom: 12, alignItems: "center" }}>
-          <Text style={{ color: "#fff", fontSize: 22, fontWeight: "800", marginBottom: 6 }}>Your First Session Free</Text>
-          <Text style={{ color: "rgba(255,255,255,0.8)", fontSize: 14, fontWeight: "500", marginBottom: 18 }}>Talk to an expert and get instant clarity</Text>
-          <TouchableOpacity onPress={() => router.push("/(tabs)/explore")} style={{ backgroundColor: "#F59E0B", paddingHorizontal: 24, paddingVertical: 12, borderRadius: 24, width: "100%", alignItems: "center" }}>
-            <Text style={{ color: "#fff", fontWeight: "700", fontSize: 16 }}>Explore Experts →</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 16 }}>
+            {EXPERTS.map((expert, i) => (
+              <View key={i} style={styles.expertCard}>
+                <View style={styles.celebrityBadge}>
+                  <Text style={styles.celebrityText}>CELEBRITY</Text>
+                </View>
+                
+                <Image source={{ uri: expert.img }} style={styles.expertAvatar} />
+                <View style={styles.onlineDot} />
+
+                <Text style={styles.expertName}>{expert.name}</Text>
+                <Text style={styles.expertRole}>{expert.role}</Text>
+                
+                <View style={styles.expertRatingRow}>
+                  <Star size={14} color="#F59E0B" fill="#F59E0B" />
+                  <Text style={styles.expertRating}>{expert.rating}</Text>
+                  <Text style={styles.expertOrders}>(128k+ orders)</Text>
+                </View>
+
+                <View style={styles.expertDivider} />
+                
+                <View style={styles.expertDetailRow}>
+                  <Text style={styles.expertDetailLabel}>Languages</Text>
+                  <Text style={styles.expertDetailValue}>English, Hindi</Text>
+                </View>
+                <View style={styles.expertDetailRow}>
+                  <Text style={styles.expertDetailLabel}>Experience</Text>
+                  <Text style={styles.expertDetailValue}>{expert.exp}</Text>
+                </View>
+                <View style={styles.expertDetailRow}>
+                  <Text style={styles.expertDetailLabel}>Price</Text>
+                  <Text style={styles.expertDetailValueGold}>{expert.price}</Text>
+                </View>
+
+                <View style={styles.expertButtonsRow}>
+                  <TouchableOpacity style={styles.expertBtn}>
+                    <MessageCircle size={14} color="#A78BFA" style={{ marginRight: 6 }} />
+                    <Text style={styles.expertBtnText}>Chat</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.expertBtn}>
+                    <Phone size={14} color="#A78BFA" style={{ marginRight: 6 }} />
+                    <Text style={styles.expertBtnText}>Call</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            ))}
+          </ScrollView>
+
+          <TouchableOpacity style={{ alignItems: 'center', marginTop: 24 }}>
+            <Text style={styles.viewAllText}>View All Experts →</Text>
           </TouchableOpacity>
         </View>
 
-        {/* EXPERTS SECTION */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={[styles.sectionTitle, { maxWidth: width - 100 }]} numberOfLines={2}>Connect with top guides.</Text>
-            <TouchableOpacity onPress={() => router.push("/(tabs)/explore")}><Text style={styles.seeAllText}>View All</Text></TouchableOpacity>
-          </View>
+        {/* EXPLORE CATEGORY */}
+        <View style={styles.exploreSection}>
+          <Text style={styles.exploreTitle}>Explore by Category</Text>
+          <Text style={styles.exploreSubtitle}>Find the perfect practitioner for your unique journey.</Text>
 
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 12 }}>
-            {EXPERTS.map((expert, i) => (
-              <TouchableOpacity key={i} style={styles.expertCardSmall} activeOpacity={0.88}>
-                <View style={styles.expertAvatarWrapSmall}>
-                  <Image source={{ uri: expert.img }} style={{ width: "100%", height: "100%" }} resizeMode="cover" />
-                </View>
-                <Text style={styles.expertNameSmall} numberOfLines={1}>{expert.name}</Text>
-                <Text style={styles.expertRoleSmall} numberOfLines={1}>{expert.role}</Text>
-                
-                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%", marginTop: 4 }}>
-                  <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
-                    <Star size={11} fill={YELLOW} color={YELLOW} />
-                    <Text style={{ fontSize: 11, fontWeight: "800", color: TEXT }}>{expert.rating}</Text>
-                  </View>
-                  <Text style={{ fontSize: 11, fontWeight: "800", color: "#6B46C1" }}>{expert.price}</Text>
-                </View>
-                
-                <View style={{ flexDirection: "row", gap: 6, marginTop: 10, width: "100%" }}>
-                  <TouchableOpacity style={styles.expertActionBtnSmall} onPress={() => router.push("/(tabs)/history")}>
-                    <MessageCircle size={11} color={PURPLE} /><Text style={styles.expertActionTextSmall}>Chat</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.expertActionBtnSmall}>
-                    <Phone size={11} color={PURPLE} /><Text style={styles.expertActionTextSmall}>Call</Text>
-                  </TouchableOpacity>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+          <View style={{ paddingHorizontal: 20, gap: 16, marginTop: 20 }}>
+            {/* Astrology Card */}
+            <TouchableOpacity style={styles.categoryCard}>
+              <View style={styles.categoryIconWrap}>
+                <Image source={{ uri: "https://zenauraa.com/final_ensights/astrology.png" }} style={styles.categoryIcon} />
+              </View>
+              <Text style={styles.categoryName}>Astrology</Text>
+              <Text style={styles.categoryDesc}>Gain cosmic insights and life path guidance.</Text>
+              <Text style={styles.categoryExplore}>EXPLORE →</Text>
+            </TouchableOpacity>
+            
+            {/* Tarot Card */}
+            <TouchableOpacity style={styles.categoryCard}>
+              <View style={styles.categoryIconWrap}>
+                <Image source={{ uri: "https://zenauraa.com/final_ensights/tarot.png" }} style={styles.categoryIcon} />
+              </View>
+              <Text style={styles.categoryName}>Tarot</Text>
+              <Text style={styles.categoryDesc}>Unveil hidden truths through symbolic cards.</Text>
+              <Text style={styles.categoryExplore}>EXPLORE →</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
-        {/* FREE SESSIONS */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Free Live Sessions</Text>
+        {/* TAROT DRAW */}
+        <View style={styles.tarotSection}>
+          <Text style={styles.tarotSubtitle}>TAROT READING</Text>
+          <Text style={styles.tarotTitle}>Draw 3 Cards</Text>
+          <Text style={styles.tarotDesc}>Set your intention. Choose 3 cards to reveal your Past, Present, and Future.</Text>
+          
+          <View style={styles.tarotCounter}>
+            <Text style={styles.tarotCounterText}>✨ "0/3 cards selected"</Text>
           </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 12 }}>
-            {EXPERTS.map((expert, i) => (
-              <TouchableOpacity key={`free-${i}`} style={styles.freeCard} activeOpacity={0.88}>
-                <View style={styles.freeAvatarWrap}>
-                  <Image source={{ uri: expert.img }} style={{ width: "100%", height: "100%" }} resizeMode="cover" />
-                  <View style={styles.freeBadge}><Text style={styles.freeBadgeText}>FREE</Text></View>
-                </View>
-                <Text style={styles.expertNameSmall}>{expert.name}</Text>
-                <Text style={styles.expertRoleSmall}>Free Astrologer</Text>
-                <TouchableOpacity style={styles.freeActionBtn}>
-                  <Phone size={12} color="#fff" />
-                  <Text style={styles.freeActionText}>Free Call</Text>
-                </TouchableOpacity>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-
-        {/* DAILY HOROSCOPE (New AstroTalk Feature) */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Daily Horoscope</Text>
-          </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 12 }}>
-            {ZODIACS.map((zodiac, i) => (
-              <TouchableOpacity key={i} style={styles.zodiacCard}>
-                <View style={styles.zodiacIconWrap}>
-                  <Text style={{ fontSize: 24 }}>✨</Text>
-                </View>
-                <Text style={styles.zodiacName}>{zodiac}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-
-        {/* ASTROMALL / SHOP (New AstroTalk Feature) */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>AstroMall & Shop</Text>
-            <Text style={styles.seeAllText}>View All</Text>
-          </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 12 }}>
-            {[1, 2, 3].map((i) => (
-              <TouchableOpacity key={i} style={styles.shopCard}>
-                <View style={styles.shopImgWrap}>
-                  <ShoppingBag size={24} color="#A78BFA" />
-                </View>
-                <Text style={styles.shopTitle}>Crystal Gemstone</Text>
-                <Text style={styles.shopPrice}>$45.00</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-
-        {/* LATEST ARTICLES (New AstroTalk Feature) */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Latest Articles</Text>
-          </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 12 }}>
-            {[1, 2, 3].map((i) => (
-              <TouchableOpacity key={i} style={styles.articleCard}>
-                <View style={styles.articleImgWrap}><BookOpen size={24} color="#fff" /></View>
-                <View style={styles.articleContent}>
-                  <Text style={styles.articleTitle} numberOfLines={2}>How Saturn's Transit Affects Your Zodiac Sign in 2026</Text>
-                  <Text style={styles.articleDate}>2 mins read</Text>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-
-        {/* EXPLORE CATEGORIES (6 items + View All) */}
-        <View style={{ backgroundColor: "rgba(45,27,84,0.95)", paddingVertical: 24, marginTop: 24 }}>
-          <Text style={{ fontSize: 20, fontWeight: "700", color: "#F8F7FA", textAlign: "center", marginBottom: 16 }}>Explore by Category</Text>
-          <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "center", gap: 12, paddingHorizontal: 20 }}>
-            {MODALITIES.map((mod) => (
-              <TouchableOpacity key={mod.id} style={styles.modalityCardSmall}>
-                <Image source={{ uri: mod.image }} style={{ width: 40, height: 40, marginBottom: 8 }} resizeMode="contain" />
-                <Text style={styles.modalityNameSmall}>{mod.name}</Text>
-              </TouchableOpacity>
+          
+          {/* Faux Tarot Deck */}
+          <View style={styles.tarotDeck}>
+            {[...Array(6)].map((_, i) => (
+              <View key={i} style={[styles.tarotCardMock, { transform: [{ rotate: `${(i - 2.5) * 8}deg` }, { translateY: Math.abs(i - 2.5) * 5 }] }]} />
             ))}
           </View>
-          <TouchableOpacity style={styles.viewAllBtn} onPress={() => router.push("/(tabs)/explore")}>
-            <Text style={styles.viewAllBtnText}>View All Categories</Text>
-          </TouchableOpacity>
         </View>
-
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  heroContainer: { height: 350, overflow: "hidden", borderBottomLeftRadius: 30, borderBottomRightRadius: 30 },
-  heroHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 24, paddingTop: 10 },
-  iconBtn: { width: 40, height: 40, borderRadius: 20, backgroundColor: "rgba(255,255,255,0.15)", alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "rgba(255,255,255,0.2)" },
-  logoBubble: { alignItems: "center", justifyContent: "center" },
-  heroContent: { paddingHorizontal: 24, paddingTop: 30, alignItems: "center" },
-  heroTitle: { fontSize: 32, fontWeight: "900", color: "#fff", textAlign: "center", marginBottom: 8 },
-  heroSubtitle: { fontSize: 13, color: "rgba(255,255,255,0.85)", textAlign: "center" },
-  heroBtnPurple: { flexDirection: "row", alignItems: "center", gap: 8, backgroundColor: "#6B46C1", borderRadius: 28, paddingHorizontal: 24, paddingVertical: 14, marginTop: 20 },
-  heroBtnPurpleText: { fontSize: 15, fontWeight: "700", color: "#fff" },
+  container: { flex: 1 },
+  heroSection: { padding: 20, paddingTop: 30 },
+  heroTitle: { fontFamily: 'PlayfairDisplay_700Bold', fontSize: 48, color: '#2d1b69', marginBottom: 12 },
+  heroSubtitle: { fontFamily: 'Inter_400Regular', fontSize: 18, color: '#2d1b69', opacity: 0.9, lineHeight: 26, marginBottom: 24, maxWidth: '90%' },
+  heroButtonsRow: { flexDirection: 'row', gap: 12, marginBottom: 16 },
+  yellowBtn: { flex: 1, backgroundColor: '#FCD34D', paddingVertical: 14, borderRadius: 24, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
+  yellowBtnText: { fontFamily: 'Inter_600SemiBold', color: '#1a1a1a', fontSize: 16 },
+  purpleBtn: { backgroundColor: '#6D28D9', paddingVertical: 16, borderRadius: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10 },
+  purpleBtnText: { fontFamily: 'Inter_600SemiBold', color: '#fff', fontSize: 16 },
+  trustIndicator: { flexDirection: 'row', alignItems: 'center', marginTop: 24, position: 'relative' },
+  avatarPile: { position: 'absolute', top: 0, left: 0, flexDirection: 'row' },
+  pileAvatar: { width: 36, height: 36, borderRadius: 18, borderWidth: 2, borderColor: '#F0E6F5', position: 'absolute' },
+  trustScore: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: '#2d1b69' },
+  trustText: { fontFamily: 'Inter_400Regular', fontSize: 12, color: '#2d1b69', opacity: 0.8 },
   
-  searchContainer: { paddingHorizontal: 20, marginTop: -24, zIndex: 10 },
-  searchBar: { flexDirection: "row", alignItems: "center", backgroundColor: "#fff", borderRadius: 24, paddingHorizontal: 16, height: 48, shadowColor: PURPLE, shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.15, shadowRadius: 12, elevation: 6, gap: 10 },
-  searchInput: { flex: 1, fontSize: 14, color: TEXT, fontWeight: "500", height: "100%" },
-  
-  servicesContainer: { marginTop: 24, marginBottom: 10 },
-  servicePill: { flexDirection: "row", alignItems: "center", gap: 8, backgroundColor: "#fff", paddingHorizontal: 14, paddingVertical: 10, borderRadius: 20, shadowColor: PURPLE, shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.08, shadowRadius: 6, elevation: 2 },
-  serviceText: { fontSize: 12, fontWeight: "700", color: TEXT },
-  
-  section: { paddingTop: 24 },
-  sectionHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 16, paddingHorizontal: 20 },
-  sectionTitle: { fontSize: 18, fontWeight: "800", color: TEXT },
-  seeAllText: { fontSize: 12, color: PURPLE, fontWeight: "700" },
-  
-  expertCardSmall: { width: width * 0.44, borderRadius: 20, backgroundColor: "#EDE9FE", borderWidth: 1, borderColor: "#C4B5FD", padding: 12, alignItems: "center" },
-  expertAvatarWrapSmall: { width: 56, height: 56, borderRadius: 28, overflow: "hidden", borderWidth: 2, borderColor: "#A78BFA", marginBottom: 8 },
-  expertNameSmall: { fontSize: 13, fontWeight: "800", color: PURPLE, textAlign: "center" },
-  expertRoleSmall: { fontSize: 10, color: "#6D28D9", fontWeight: "600", textAlign: "center", marginTop: 2 },
-  expertActionBtnSmall: { flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 4, backgroundColor: "#DDD6FE", borderRadius: 10, paddingVertical: 6, borderWidth: 1, borderColor: "#C4B5FD" },
-  expertActionTextSmall: { fontSize: 10, fontWeight: "800", color: PURPLE },
+  featuredSection: { marginTop: 40 },
+  sectionSubtitle: { fontFamily: 'Inter_600SemiBold', fontSize: 12, color: '#D97706', letterSpacing: 1.5, paddingHorizontal: 20, marginBottom: 8, textTransform: 'uppercase' },
+  sectionTitle: { fontFamily: 'PlayfairDisplay_600SemiBold', fontSize: 32, color: '#fff', paddingHorizontal: 20, marginBottom: 24, lineHeight: 40 },
+  expertCard: { backgroundColor: '#2d1b69', borderRadius: 24, width: 260, padding: 24, position: 'relative', shadowColor: '#000', shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.2, shadowRadius: 15, elevation: 5 },
+  celebrityBadge: { position: 'absolute', top: 16, right: 16, backgroundColor: '#FCD34D', paddingHorizontal: 10, paddingVertical: 4, borderRadius: 12, zIndex: 10 },
+  celebrityText: { fontFamily: 'Inter_600SemiBold', fontSize: 9, color: '#1a1a1a' },
+  expertAvatar: { width: 80, height: 80, borderRadius: 40, borderWidth: 2, borderColor: '#4c1d95', alignSelf: 'center', marginBottom: 16 },
+  onlineDot: { width: 14, height: 14, borderRadius: 7, backgroundColor: '#10B981', position: 'absolute', top: 80, right: 90, borderWidth: 2, borderColor: '#2d1b69' },
+  expertName: { fontFamily: 'PlayfairDisplay_600SemiBold', fontSize: 22, color: '#fff', textAlign: 'center', marginBottom: 4 },
+  expertRole: { fontFamily: 'Inter_600SemiBold', fontSize: 13, color: '#FCD34D', textAlign: 'center', marginBottom: 16 },
+  expertRatingRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginBottom: 16 },
+  expertRating: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: '#fff' },
+  expertOrders: { fontFamily: 'Inter_400Regular', fontSize: 12, color: '#A78BFA' },
+  expertDivider: { height: 1, backgroundColor: 'rgba(255,255,255,0.1)', marginBottom: 16 },
+  expertDetailRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 },
+  expertDetailLabel: { fontFamily: 'Inter_400Regular', fontSize: 13, color: '#A78BFA' },
+  expertDetailValue: { fontFamily: 'Inter_600SemiBold', fontSize: 13, color: '#fff' },
+  expertDetailValueGold: { fontFamily: 'Inter_700Bold', fontSize: 14, color: '#FCD34D' },
+  expertButtonsRow: { flexDirection: 'row', gap: 10, marginTop: 16 },
+  expertBtn: { flex: 1, borderColor: 'rgba(167,139,250,0.4)', borderWidth: 1, borderRadius: 16, paddingVertical: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
+  expertBtnText: { fontFamily: 'Inter_600SemiBold', color: '#A78BFA', fontSize: 13 },
+  viewAllText: { fontFamily: 'Inter_600SemiBold', color: '#FCD34D', fontSize: 14 },
 
-  freeCard: { width: width * 0.38, borderRadius: 20, backgroundColor: "#FFF7ED", borderWidth: 1, borderColor: "#FDE68A", padding: 12, alignItems: "center" },
-  freeAvatarWrap: { width: 64, height: 64, borderRadius: 32, overflow: "hidden", position: "relative", marginBottom: 8 },
-  freeBadge: { position: "absolute", bottom: 0, alignSelf: "center", backgroundColor: "#EF4444", paddingHorizontal: 6, paddingVertical: 2, borderRadius: 8 },
-  freeBadgeText: { fontSize: 8, fontWeight: "900", color: "#fff" },
-  freeActionBtn: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 4, backgroundColor: "#10B981", borderRadius: 12, paddingVertical: 8, paddingHorizontal: 12, marginTop: 10, width: "100%" },
-  freeActionText: { fontSize: 11, fontWeight: "800", color: "#fff" },
+  exploreSection: { marginTop: 50 },
+  exploreTitle: { fontFamily: 'PlayfairDisplay_600SemiBold', fontSize: 32, color: '#2d1b69', textAlign: 'center', marginBottom: 8 },
+  exploreSubtitle: { fontFamily: 'Inter_400Regular', fontSize: 16, color: '#4c1d95', textAlign: 'center', paddingHorizontal: 40, lineHeight: 22 },
+  categoryCard: { backgroundColor: '#1a103c', borderRadius: 24, padding: 30, alignItems: 'center' },
+  categoryIconWrap: { width: 120, height: 120, borderRadius: 60, marginBottom: 20 },
+  categoryIcon: { width: '100%', height: '100%', resizeMode: 'contain' },
+  categoryName: { fontFamily: 'Inter_600SemiBold', fontSize: 22, color: '#fff', marginBottom: 10 },
+  categoryDesc: { fontFamily: 'Inter_400Regular', fontSize: 14, color: '#A78BFA', textAlign: 'center', marginBottom: 20, paddingHorizontal: 20 },
+  categoryExplore: { fontFamily: 'Inter_700Bold', fontSize: 12, color: '#FCD34D', letterSpacing: 1 },
 
-  zodiacCard: { width: 80, alignItems: "center" },
-  zodiacIconWrap: { width: 64, height: 64, borderRadius: 32, backgroundColor: "#fff", borderWidth: 1, borderColor: "#E5E7EB", alignItems: "center", justifyContent: "center", marginBottom: 8, shadowColor: PURPLE, shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 6 },
-  zodiacName: { fontSize: 12, fontWeight: "600", color: TEXT },
-
-  shopCard: { width: 140, borderRadius: 16, backgroundColor: "#fff", borderWidth: 1, borderColor: "#E5E7EB", padding: 12, shadowColor: PURPLE, shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 6 },
-  shopImgWrap: { height: 100, backgroundColor: "#F3F4F6", borderRadius: 12, alignItems: "center", justifyContent: "center", marginBottom: 10 },
-  shopTitle: { fontSize: 12, fontWeight: "700", color: TEXT, marginBottom: 4 },
-  shopPrice: { fontSize: 14, fontWeight: "800", color: PURPLE },
-
-  articleCard: { width: width * 0.7, borderRadius: 16, backgroundColor: "#fff", borderWidth: 1, borderColor: "#E5E7EB", overflow: "hidden", flexDirection: "row" },
-  articleImgWrap: { width: 80, backgroundColor: "#A78BFA", alignItems: "center", justifyContent: "center" },
-  articleContent: { flex: 1, padding: 12 },
-  articleTitle: { fontSize: 13, fontWeight: "700", color: TEXT, marginBottom: 8, lineHeight: 18 },
-  articleDate: { fontSize: 11, color: "#9CA3AF", fontWeight: "500" },
-
-  modalityCardSmall: { width: (width - 60) / 3, backgroundColor: "rgba(255,255,255,0.1)", borderRadius: 16, padding: 12, alignItems: "center" },
-  modalityNameSmall: { fontSize: 11, fontWeight: "700", color: "#F8F7FA", textAlign: "center" },
-  viewAllBtn: { marginHorizontal: 20, marginTop: 16, backgroundColor: "rgba(255,255,255,0.15)", borderRadius: 20, paddingVertical: 14, alignItems: "center", borderWidth: 1, borderColor: "rgba(255,255,255,0.2)" },
-  viewAllBtnText: { color: "#fff", fontWeight: "700", fontSize: 14 },
+  tarotSection: { marginTop: 50, paddingHorizontal: 20, alignItems: 'center' },
+  tarotSubtitle: { fontFamily: 'Inter_600SemiBold', fontSize: 12, color: '#4c1d95', letterSpacing: 1.5, marginBottom: 8 },
+  tarotTitle: { fontFamily: 'PlayfairDisplay_600SemiBold', fontSize: 36, color: '#fff', marginBottom: 16 },
+  tarotDesc: { fontFamily: 'Inter_400Regular', fontSize: 16, color: '#4c1d95', textAlign: 'center', marginBottom: 24, lineHeight: 24, paddingHorizontal: 20 },
+  tarotCounter: { backgroundColor: '#8B5CF6', paddingHorizontal: 20, paddingVertical: 10, borderRadius: 20, marginBottom: 40 },
+  tarotCounterText: { fontFamily: 'Inter_600SemiBold', color: '#fff', fontSize: 14 },
+  tarotDeck: { flexDirection: 'row', justifyContent: 'center', height: 150, width: '100%', position: 'relative' },
+  tarotCardMock: { width: 60, height: 100, backgroundColor: '#F0E6F5', borderRadius: 8, borderWidth: 1, borderColor: '#A78BFA', position: 'absolute', shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 5, shadowOffset: { width: 0, height: 2 } }
 });
