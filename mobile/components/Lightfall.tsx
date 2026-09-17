@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
 
@@ -42,7 +42,7 @@ export default function Lightfall({
   
   const colorsJson = JSON.stringify(colors);
 
-  const htmlContent = 
+  const htmlContent = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,35 +89,35 @@ export default function Lightfall({
         };
 
         const config = {
-          colors: ,
-          backgroundColor: '',
-          speed: ,
-          streakCount: ,
-          streakWidth: ,
-          streakLength: ,
-          glow: ,
-          density: ,
-          twinkle: ,
-          zoom: ,
-          backgroundGlow: ,
-          opacity: ,
-          mouseInteraction: ,
-          mouseStrength: ,
-          mouseRadius: ,
-          lightMode: 
+          colors: ${colorsJson},
+          backgroundColor: '${backgroundColor}',
+          speed: ${speed},
+          streakCount: ${streakCount},
+          streakWidth: ${streakWidth},
+          streakLength: ${streakLength},
+          glow: ${glow},
+          density: ${density},
+          twinkle: ${twinkle},
+          zoom: ${zoom},
+          backgroundGlow: ${backgroundGlow},
+          opacity: ${opacity},
+          mouseInteraction: ${mouseInteraction ? 1.0 : 0.0},
+          mouseStrength: ${mouseStrength},
+          mouseRadius: ${mouseRadius},
+          lightMode: ${lightMode ? 1.0 : 0.0}
         };
 
         const { arr, count, avg } = prepColors(config.colors);
 
-        const vertex = \#version 300 es
+        const vertex = \`#version 300 es
         in vec2 position;
         out vec2 vUv;
         void main() {
           vUv = position * 0.5 + 0.5;
           gl_Position = vec4(position, 0.0, 1.0);
-        }\;
+        }\`;
 
-        const fragment = \#version 300 es
+        const fragment = \`#version 300 es
         precision highp float;
 
         uniform vec3  iResolution;
@@ -253,7 +253,7 @@ export default function Lightfall({
 
         void main() {
           mainImage(fragColor, vUv * iResolution.xy);
-        }\;
+        }\`;
 
         const container = document.getElementById('container');
         const renderer = new Renderer({ alpha: true, antialias: true, dpr: window.devicePixelRatio || 1 });
@@ -335,7 +335,7 @@ export default function Lightfall({
   </script>
 </body>
 </html>
-\;
+`;
 
   return (
     <View style={StyleSheet.absoluteFillObject} pointerEvents="none">
