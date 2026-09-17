@@ -58,50 +58,57 @@ export default function HomeTab() {
         contentContainerStyle={{ paddingBottom: 120 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* HERO SECTION WITH MEDITATING LADY */}
-        <ImageBackground 
-          source={require('../../assets/images/meditation.png')} 
-          style={styles.heroBackground}
-          imageStyle={{ opacity: 0.2, resizeMode: 'cover' }}
-        >
-          <View style={styles.heroSection}>
-            <Text style={styles.heroTitle}>ZenAuraa.</Text>
-            <Text style={styles.heroSubtitle}>
-              Find trusted guidance for every stage of life. Connect with verified experts instantly.
-            </Text>
+        {/* TOP HERO IMAGE (Meditating lady with Zodiac wheel) */}
+        <View style={styles.heroImageContainer}>
+          <Image 
+            source={require('../../assets/images/main_hero.png')} 
+            style={styles.heroImage}
+          />
+          {/* Gradient fade at the bottom to blend into the purple background seamlessly */}
+          <LinearGradient
+            colors={['transparent', 'rgba(213, 182, 220, 0.8)', '#D5B6DC']}
+            style={styles.heroImageGradient}
+          />
+        </View>
 
-            <View style={styles.heroButtonsRow}>
-              <TouchableOpacity style={styles.yellowBtn}>
-                <MessageCircle size={16} color="#1a1a1a" style={{ marginRight: 6 }} />
-                <Text style={styles.yellowBtnText}>Free Chat</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.yellowBtn}>
-                <Phone size={16} color="#1a1a1a" style={{ marginRight: 6 }} />
-                <Text style={styles.yellowBtnText}>Free Call</Text>
-              </TouchableOpacity>
-            </View>
-            
-            <TouchableOpacity style={styles.purpleBtn}>
-              <Text style={styles.purpleBtnText}>Ask me Anything</Text>
-              <ArrowRight size={16} color="#fff" />
+        {/* HERO CONTENT SECTION */}
+        <View style={styles.heroSection}>
+          <Text style={styles.heroTitle}>ZenAuraa.</Text>
+          <Text style={styles.heroSubtitle}>
+            Find trusted guidance for every stage of life. Connect with verified experts instantly.
+          </Text>
+
+          <View style={styles.heroButtonsRow}>
+            <TouchableOpacity style={styles.yellowBtn}>
+              <MessageCircle size={16} color="#1a1a1a" style={{ marginRight: 6 }} />
+              <Text style={styles.yellowBtnText}>Free Chat</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.yellowBtn}>
+              <Phone size={16} color="#1a1a1a" style={{ marginRight: 6 }} />
+              <Text style={styles.yellowBtnText}>Free Call</Text>
+            </TouchableOpacity>
+          </View>
+          
+          <TouchableOpacity style={styles.purpleBtn}>
+            <Text style={styles.purpleBtnText}>Ask me Anything</Text>
+            <ArrowRight size={16} color="#fff" />
+          </TouchableOpacity>
 
-            <View style={styles.trustIndicator}>
-              <View style={styles.avatarPile}>
-                {EXPERTS.slice(0,3).map((exp, i) => (
-                  <Image key={i} source={{ uri: exp.img }} style={[styles.pileAvatar, { left: i * 20, zIndex: 10 - i }]} />
-                ))}
+          <View style={styles.trustIndicator}>
+            <View style={styles.avatarPile}>
+              {EXPERTS.slice(0,3).map((exp, i) => (
+                <Image key={i} source={{ uri: exp.img }} style={[styles.pileAvatar, { left: i * 20, zIndex: 10 - i }]} />
+              ))}
+            </View>
+            <View style={{ marginLeft: 80 }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text style={styles.trustScore}>4.9</Text>
+                <Star size={14} color="#F59E0B" fill="#F59E0B" style={{ marginLeft: 4 }} />
               </View>
-              <View style={{ marginLeft: 80 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Text style={styles.trustScore}>4.9</Text>
-                  <Star size={14} color="#F59E0B" fill="#F59E0B" style={{ marginLeft: 4 }} />
-                </View>
-                <Text style={styles.trustText}>Based on 10,000+ reviews</Text>
-              </View>
+              <Text style={styles.trustText}>Based on 10,000+ reviews</Text>
             </View>
           </View>
-        </ImageBackground>
+        </View>
 
         {/* LIVE SESSIONS SECTION */}
         <View style={styles.liveSection}>
@@ -236,12 +243,31 @@ export default function HomeTab() {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  heroBackground: { width: '100%', minHeight: 400 },
-  heroSection: { padding: 20, paddingTop: 180, paddingBottom: 30 },
+  
+  heroImageContainer: {
+    width: '100%',
+    height: 450,
+    position: 'relative',
+    marginTop: -20, // Pull up slightly to blend with header if needed
+  },
+  heroImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  heroImageGradient: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 150,
+  },
+
+  heroSection: { padding: 20, paddingTop: 0, paddingBottom: 30 },
   heroTitle: { fontFamily: 'PlayfairDisplay_700Bold', fontSize: 42, color: '#2d1b69', marginBottom: 10 },
   heroSubtitle: { fontFamily: 'Inter_400Regular', fontSize: 16, color: '#2d1b69', opacity: 0.9, lineHeight: 22, marginBottom: 20, maxWidth: '95%' },
   heroButtonsRow: { flexDirection: 'row', gap: 10, marginBottom: 14 },
-  yellowBtn: { flex: 1, backgroundColor: '#FCD34D', paddingVertical: 12, borderRadius: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
+  yellowBtn: { flex: 1, backgroundColor: '#FCD34D', paddingVertical: 12, borderRadius: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.1, shadowRadius: 6, elevation: 3 },
   yellowBtnText: { fontFamily: 'Inter_600SemiBold', color: '#1a1a1a', fontSize: 15 },
   purpleBtn: { backgroundColor: '#6D28D9', paddingVertical: 14, borderRadius: 24, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
   purpleBtnText: { fontFamily: 'Inter_600SemiBold', color: '#fff', fontSize: 15 },
