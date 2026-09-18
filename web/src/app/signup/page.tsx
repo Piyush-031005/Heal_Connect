@@ -32,7 +32,6 @@ export default function SignupPage() {
   const [loginMethod, setLoginMethod] = useState<'password' | 'otp'>('password');
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [acceptPrivacy, setAcceptPrivacy] = useState(false);
-  const [emailMarketingOptIn, setEmailMarketingOptIn] = useState(false);
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
@@ -73,7 +72,7 @@ export default function SignupPage() {
         setSuccess('Expert account created!');
         setTimeout(() => router.push('/expert/dashboard'), 1500);
       } else {
-        const res = await authApi.register({ name, email, password, dob, acceptTerms, acceptPrivacy, emailMarketingOptIn });
+        const res = await authApi.register({ name, email, password, dob, acceptTerms, acceptPrivacy, emailMarketingOptIn: false });
         if (!res.success || !res.data) {
           setError(res.errors?.length ? res.errors.map((e) => e.message).join(' · ') : res.message || 'Registration failed');
           return;
@@ -154,7 +153,7 @@ export default function SignupPage() {
           <h1 className="text-4xl lg:text-5xl font-extrabold text-[#2d1b69] mb-6 leading-tight">
             Create your space <br /> <span className="text-primary">for healing.</span>
           </h1>
-          <p className="text-lg text-white/90 max-w-md leading-relaxed mb-12">
+          <p className="text-lg text-[#2d1b69]/90 max-w-md leading-relaxed mb-12">
             Join 50,000+ members receiving guidance from world-class verified practitioners.
           </p>
           <div className="space-y-8">
@@ -194,7 +193,7 @@ export default function SignupPage() {
 
         <Card className="w-full max-w-md bg-card/80 dark:bg-card/80 backdrop-blur-xl border border-purple-200 shadow-2xl rounded-2xl overflow-hidden">
           <CardHeader className="space-y-2 pb-6 border-b border-purple-200 bg-white/50 border-b border-purple-200">
-            <CardTitle className="text-2xl font-bold text-white tracking-wide">Create your account</CardTitle>
+            <CardTitle className="text-2xl font-bold text-[#2d1b69] tracking-wide">Create your account</CardTitle>
             <CardDescription className="text-[#4c1d95]/70 text-base">Enter your details to get started.</CardDescription>
           </CardHeader>
 
@@ -203,12 +202,12 @@ export default function SignupPage() {
             <div className="flex rounded-xl border border-purple-200 overflow-hidden bg-black/5 dark:bg-black/50 p-1 gap-1">
               <button type="button" onClick={() => { setRole('user'); setError(''); }}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                  role === 'user' ? 'bg-[#5F3BA9] text-white shadow-lg' : 'text-[#4c1d95]/70 hover:text-white hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                  role === 'user' ? 'bg-[#5F3BA9] text-white shadow-lg' : 'text-[#4c1d95]/70 hover:text-[#2d1b69] hover:bg-black/5 dark:hover:bg-white/5'}`}>
                 <User className="w-4 h-4" /> User
               </button>
               <button type="button" onClick={() => { setRole('expert'); setError(''); }}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                  role === 'expert' ? 'bg-[#5F3BA9] text-white shadow-lg' : 'text-[#4c1d95]/70 hover:text-white hover:bg-black/5 dark:hover:bg-white/5'}`}>
+                  role === 'expert' ? 'bg-[#5F3BA9] text-white shadow-lg' : 'text-[#4c1d95]/70 hover:text-[#2d1b69] hover:bg-black/5 dark:hover:bg-white/5'}`}>
                 <Sparkles className="w-4 h-4" /> Expert
               </button>
             </div>
@@ -224,14 +223,14 @@ export default function SignupPage() {
             {loginMethod === 'otp' && (
               <form onSubmit={handleSendOtp} className="space-y-5">
                 <div className="space-y-2">
-                  <Label className="text-white font-medium">Phone Number</Label>
+                  <Label className="text-[#2d1b69] font-medium">Phone Number</Label>
                   <div className="flex gap-2">
                     <CountryCodeSelect
                       value={countryCode}
                       onChange={setCountryCode}
-                      className="w-[125px] sm:w-[135px] flex-shrink-0 bg-white/40 backdrop-blur-md text-white border-purple-200"
+                      className="w-[125px] sm:w-[135px] flex-shrink-0 bg-white/40 backdrop-blur-md text-[#2d1b69] border-purple-200"
                     />
-                    <Input id="phone" type="tel" placeholder="9876543210" value={phone} onChange={(e) => setPhone(e.target.value)} required className="flex-1 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
+                    <Input id="phone" type="tel" placeholder="9876543210" value={phone} onChange={(e) => setPhone(e.target.value)} required className="flex-1 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-[#2d1b69] placeholder:text-[#4c1d95]/70 transition-all" />
                   </div>
                 </div>
                 <div className="space-y-2 pt-1">
@@ -244,7 +243,7 @@ export default function SignupPage() {
                     <span>I've read and acknowledge the <Link href="/privacy" target="_blank" className="text-primary font-semibold hover:underline">Privacy Notice</Link></span>
                   </label>
                 </div>
-                <Button type="submit" disabled={loading || !acceptTerms || !acceptPrivacy} className="w-full py-6 text-base font-bold rounded-md border-0 shadow-lg transition-all duration-300 bg-[#FAD058] hover:bg-[#F0C240] text-white">
+                <Button type="submit" disabled={loading || !acceptTerms || !acceptPrivacy} className="w-full py-6 text-base font-bold rounded-md border-0 shadow-lg transition-all duration-300 bg-[#FAD058] hover:bg-[#F0C240] text-[#2d1b69]">
                   {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>Send OTP <ArrowRight className="ml-2 h-5 w-5" /></>}
                 </Button>
               </form>
@@ -253,28 +252,28 @@ export default function SignupPage() {
             {loginMethod === 'password' && (
               <form onSubmit={handleRegister} className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-white font-medium">Full Name</Label>
+                  <Label htmlFor="name" className="text-[#2d1b69] font-medium">Full Name</Label>
                   <div className="relative group">
                     <User className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                     <Input id="name" type="text" placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} required autoComplete="name" 
-                      className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
+                      className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-[#2d1b69] placeholder:text-[#4c1d95]/70 transition-all" />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-white font-medium">Email</Label>
+                  <Label htmlFor="email" className="text-[#2d1b69] font-medium">Email</Label>
                   <div className="relative group">
                     <Mail className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                     <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" 
-                      className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
+                      className="pl-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-[#2d1b69] placeholder:text-[#4c1d95]/70 transition-all" />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-white font-medium">Password</Label>
+                  <Label htmlFor="password" className="text-[#2d1b69] font-medium">Password</Label>
                   <div className="relative group">
                     <Lock className="absolute left-3 top-3.5 h-5 w-5 text-[#4c1d95]/70 group-focus-within:text-accent transition-colors" />
                     <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="Min. 8 chars, 1 uppercase, 1 number" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="new-password" 
-                      className="pl-10 pr-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all" />
-                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-[#4c1d95]/70 hover:text-white transition-colors" tabIndex={-1}>
+                      className="pl-10 pr-10 h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-[#2d1b69] placeholder:text-[#4c1d95]/70 transition-all" />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3.5 text-[#4c1d95]/70 hover:text-[#2d1b69] transition-colors" tabIndex={-1}>
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
                   </div>
@@ -283,7 +282,7 @@ export default function SignupPage() {
                   )}
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="dob" className="text-white font-medium">Date of Birth <span className="text-[#4c1d95]/70 font-normal">(must be 18+)</span></Label>
+                  <Label htmlFor="dob" className="text-[#2d1b69] font-medium">Date of Birth <span className="text-[#4c1d95]/70 font-normal">(must be 18+)</span></Label>
                   <Input
                     id="dob"
                     type="date"
@@ -291,7 +290,7 @@ export default function SignupPage() {
                     onChange={(e) => setDob(e.target.value)}
                     required
                     max={(() => { const d = new Date(); d.setFullYear(d.getFullYear() - 18); return d.toISOString().split('T')[0]; })()}
-                    className="h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-white placeholder:text-[#4c1d95]/70 transition-all"
+                    className="h-12 border-purple-200 focus-visible:ring-accent focus-visible:border-accent bg-white/40 backdrop-blur-md text-[#2d1b69] placeholder:text-[#4c1d95]/70 transition-all [color-scheme:light]"
                   />
                 </div>
                 <div className="space-y-2 pt-1">
@@ -303,12 +302,8 @@ export default function SignupPage() {
                     <input type="checkbox" checked={acceptPrivacy} onChange={(e) => setAcceptPrivacy(e.target.checked)} required className="mt-0.5 rounded border-purple-300 text-primary focus:ring-primary" />
                     <span>I've read and acknowledge the <Link href="/privacy" target="_blank" className="text-primary font-semibold hover:underline">Privacy Notice</Link></span>
                   </label>
-                  <label className="flex items-start gap-2 text-xs text-[#4c1d95]/80">
-                    <input type="checkbox" checked={emailMarketingOptIn} onChange={(e) => setEmailMarketingOptIn(e.target.checked)} className="mt-0.5 rounded border-purple-300 text-primary focus:ring-primary" />
-                    <span>Email me updates and offers (optional)</span>
-                  </label>
                 </div>
-                <Button type="submit" disabled={loading || !!success || !acceptTerms || !acceptPrivacy} className="w-full py-6 text-base font-bold rounded-md border-0 shadow-lg transition-all duration-300 bg-[#FAD058] hover:bg-[#F0C240] text-white">
+                <Button type="submit" disabled={loading || !!success || !acceptTerms || !acceptPrivacy} className="w-full py-6 text-base font-bold rounded-md border-0 shadow-lg transition-all duration-300 bg-[#FAD058] hover:bg-[#F0C240] text-[#2d1b69]">
                   {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>{role === 'expert' ? 'Join as Expert' : 'Create Account'} <ArrowRight className="ml-2 h-5 w-5" /></>}
                 </Button>
               </form>
@@ -355,8 +350,8 @@ export default function SignupPage() {
             </p>
             <p className="text-center text-xs text-[#4c1d95]/70">
               By continuing, you agree to our{' '}
-              <Link href="#" className="hover:text-white hover:underline">Terms of Service</Link>{' '}and{' '}
-              <Link href="#" className="hover:text-white hover:underline">Privacy Policy</Link>.
+              <Link href="#" className="hover:text-primary hover:underline">Terms of Service</Link>{' '}and{' '}
+              <Link href="#" className="hover:text-primary hover:underline">Privacy Policy</Link>.
             </p>
           </CardContent>
         </Card>
