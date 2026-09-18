@@ -10,6 +10,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/navbar';
 import { getPractitionerAvatar } from '@/lib/utils';
+import { authApi, tokenStore } from '@/lib/api';
 
 interface Practitioner {
   id: string;
@@ -54,6 +55,18 @@ export default function PractitionersPage() {
   const [suggestions, setSuggestions] = useState<Practitioner[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchBoxRef = useRef<HTMLDivElement>(null);
+  const [isEmailVerified, setIsEmailVerified] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const token = tokenStore.getAccess();
+    if (token) {
+      authApi.me(token).then((res) => {
+        if (res.success && res.data) {
+          setIsEmailVerified((res.data as any).user?.isEmailVerified ?? false);
+        }
+      });
+    }
+  }, []);
 
   // Close suggestions when clicking outside
   useEffect(() => {
@@ -231,7 +244,7 @@ export default function PractitionersPage() {
         ) : (
           <>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
-              {practitioners.map((p) => <PractitionerCard key={p.id} practitioner={p} />)}
+              {practitioners.map((p) => <PractitionerCard key={p.id} practitioner={p} isEmailVerified={isEmailVerified} />)}
             </div>
             {practitioners.length < total && (
               <div className="text-center mt-8">
@@ -247,7 +260,7 @@ export default function PractitionersPage() {
   );
 }
 
-function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
+function PractitionerCard({ practitioner: p, isEmailVerified }: { practitioner: Practitioner, isEmailVerified?: boolean | null }) {
   const router = useRouter();
   const avatarSrc = getPractitionerAvatar(p.photoUrl, p.name);
 
@@ -318,10 +331,24 @@ function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
               <span className="text-xs text-purple-400">/min</span>
             </div>
             <div className="flex gap-2">
-              <Button size="sm" variant="outline" className="h-8 px-3 border-purple-200 hover:border-indigo-300 hover:text-indigo-700 text-xs gap-1" disabled={!p.isOnline || p.isBusy} onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+              <Button size="sm" variant="outline" className="h-8 px-3 border-purple-200 hover:border-indigo-300 hover:text-indigo-700 text-xs gap-1" disabled={!p.isOnline || p.isBusy} onClick={(e) => { 
+                e.stopPropagation(); 
+                if (isEmailVerified === false) {
+                  alert('Please verify your email to unlock all features.');
+                  return;
+                }
+                router.push('/login'); 
+              }}>
                 <MessageCircle className="h-3.5 w-3.5" /> Chat
               </Button>
-              <Button size="sm" disabled={!p.isOnline || p.isBusy} className="h-8 px-3 bg-indigo-500 hover:bg-indigo-600 text-white border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => { e.stopPropagation(); router.push('/login'); }}>
+              <Button size="sm" disabled={!p.isOnline || p.isBusy} className="h-8 px-3 bg-indigo-500 hover:bg-indigo-600 text-white border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => { 
+                e.stopPropagation(); 
+                if (isEmailVerified === false) {
+                  alert('Please verify your email to unlock all features.');
+                  return;
+                }
+                router.push('/login'); 
+              }}>
                 <Phone className="h-3.5 w-3.5" /> Call
               </Button>
             </div>

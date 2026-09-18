@@ -50,6 +50,16 @@ router.post(
       return;
     }
 
+    const currentUser = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { isEmailVerified: true }
+    });
+
+    if (!currentUser?.isEmailVerified) {
+      res.status(403).json({ success: false, message: 'Please verify your email to unlock all features.' });
+      return;
+    }
+
     // Wrap practitioner lookup + wallet check + session creation in a single
     // atomic transaction to prevent race conditions (Tasks 8/9)
     try {

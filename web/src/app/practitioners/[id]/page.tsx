@@ -9,7 +9,7 @@ import { useCurrencyStore } from '@/store/useCurrencyStore';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { practitionersApi, sessionsApi, tokenStore } from '@/lib/api';
+import { practitionersApi, sessionsApi, tokenStore, authApi } from '@/lib/api';
 import { getAvatarUrl } from '@/lib/utils';
 
 interface Review {
@@ -46,6 +46,7 @@ export default function PractitionerDetail() {
   const [loading, setLoading] = useState(true);
   const [calling, setCalling] = useState(false);
   const [chatting, setChatting] = useState(false);
+  const [isEmailVerified, setIsEmailVerified] = useState<boolean | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -59,6 +60,12 @@ export default function PractitionerDetail() {
     // Listen for real-time status updates
     const token = tokenStore.getAccess();
     if (token) {
+      authApi.me(token).then((res) => {
+        if (res.success && res.data) {
+          setIsEmailVerified((res.data as any).user?.isEmailVerified ?? false);
+        }
+      });
+
       import('@/lib/socket').then(({ getSocket }) => {
         const socket = getSocket(token);
         socket.on('practitioner_status', ({ practitionerId, isOnline }: { practitionerId: string; isOnline: boolean }) => {
@@ -90,6 +97,11 @@ export default function PractitionerDetail() {
       return;
     }
 
+    if (isEmailVerified === false) {
+      alert('Please verify your email to unlock all features.');
+      return;
+    }
+
     setCalling(true);
 
     try {
@@ -118,6 +130,11 @@ export default function PractitionerDetail() {
 
     if (!token) {
       router.push(`/login?returnUrl=/practitioners/${p.id}`);
+      return;
+    }
+
+    if (isEmailVerified === false) {
+      alert('Please verify your email to unlock all features.');
       return;
     }
 

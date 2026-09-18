@@ -22,6 +22,7 @@ type UserRecord = {
   isEmailVerified: boolean;
   isPhoneVerified: boolean;
   createdAt: string;
+  updatedAt: string;
   photoUrl?: string;
   sessionCount: number;
   reviewCount: number;
@@ -431,7 +432,7 @@ export default function AdminUsersPage() {
               <table className="w-full text-sm">
                 <thead className="bg-purple-50 dark:bg-white/5 border-b border-purple-100 dark:border-white/10">
                   <tr>
-                    {['User', 'Email', 'Phone', 'Provider', 'Verified', 'Sessions', 'Balance', 'Joined', 'Actions'].map((h) => (
+                    {['User', 'Email', 'Phone', 'Provider', 'Verified', 'Sessions', 'Balance', 'Joined', 'Last Active', 'Actions'].map((h) => (
                       <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-purple-500 dark:text-white/50 uppercase tracking-wide whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
@@ -469,6 +470,7 @@ export default function AdminUsersPage() {
                         <td className="px-4 py-3 text-xs font-extrabold text-indigo-950 dark:text-white text-center">{u.sessionCount}</td>
                         <td className="px-4 py-3 text-xs font-bold text-emerald-600">£{u.balance}</td>
                         <td className="px-4 py-3 text-xs text-purple-500">{new Date(u.createdAt).toLocaleDateString()}</td>
+                        <td className="px-4 py-3 text-xs text-purple-500">{new Date(u.updatedAt).toLocaleDateString()}</td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1.5">
                             <button
@@ -515,7 +517,7 @@ export default function AdminUsersPage() {
               <table className="w-full text-sm">
                 <thead className="bg-purple-50 dark:bg-white/5 border-b border-purple-100 dark:border-white/10">
                   <tr>
-                    {['Practitioner', 'Specialties', 'Exp', 'Rate (£/m)', 'Sessions', 'Rating', 'KYC Status', 'Actions'].map((h) => (
+                    {['Practitioner', 'Specialties', 'Exp', 'Rate (£/m)', 'Sessions', 'Rating', 'KYC Status', 'Online', 'Joined', 'Actions'].map((h) => (
                       <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-purple-500 dark:text-white/50 uppercase tracking-wide whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
@@ -554,6 +556,12 @@ export default function AdminUsersPage() {
                         <td className="px-4 py-3 text-xs font-extrabold text-indigo-950 dark:text-white text-center">{p.sessionCount}</td>
                         <td className="px-4 py-3 text-xs font-bold text-indigo-600">{p.avgRating > 0 ? `${p.avgRating} ★` : 'N/A'}</td>
                         <td className="px-4 py-3"><StatusBadge status={p.isVerified ? 'verified' : 'pending'} /></td>
+                        <td className="px-4 py-3">
+                          <span className={`px-2 py-1 rounded-full text-[10px] font-bold ${p.isOnline ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                            {p.isOnline ? 'Online' : 'Offline'}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-xs text-purple-500">{new Date(p.createdAt).toLocaleDateString()}</td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1.5">
                             <button
@@ -598,7 +606,7 @@ export default function AdminUsersPage() {
               <table className="w-full text-sm">
                 <thead className="bg-purple-50 dark:bg-white/5 border-b border-purple-100 dark:border-white/10">
                   <tr>
-                    {['Applicant', 'Email', 'Specializations', 'Experience', 'Location', 'App Status', 'Submitted', 'Actions'].map(h => (
+                    {['Applicant', 'Email', 'Phone', 'Specializations', 'Experience', 'Location', 'App Status', 'Submitted', 'Actions'].map(h => (
                       <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-purple-500 dark:text-white/50 uppercase tracking-wide whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
@@ -620,6 +628,7 @@ export default function AdminUsersPage() {
                         </div>
                       </td>
                       <td className="px-4 py-3 text-xs text-purple-700 dark:text-white/60">{a.email || '—'}</td>
+                      <td className="px-4 py-3 text-xs text-purple-700 dark:text-white/60">{a.phone || '—'}</td>
                       <td className="px-4 py-3 text-xs text-purple-700">{a.specializations.slice(0, 2).join(', ') || '—'}</td>
                       <td className="px-4 py-3 text-xs text-purple-700">{a.astrologyExperienceYears} yrs</td>
                       <td className="px-4 py-3 text-xs text-purple-500">{[a.city, a.country].filter(Boolean).join(', ') || '—'}</td>

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useState, useRef } from 'react';
 import GhostFibers from '@/components/GhostFibers';
@@ -71,6 +71,12 @@ export default function DashboardPage() {
     e.preventDefault();
     const token = tokenStore.getAccess();
     if (!token) { router.push('/login'); return; }
+    
+    if (!user?.isEmailVerified) {
+      alert('Please verify your email to unlock all features.');
+      return;
+    }
+
     setStartingSession(practitionerId);
     const res = await sessionsApi.create(token, practitionerId, 'CHAT');
     setStartingSession(null);
@@ -410,7 +416,10 @@ brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={
                               <Button size="sm" variant="outline" className="h-8 px-3 border-violet-200 hover:border-indigo-300 hover:text-indigo-700 text-xs gap-1" onClick={(e) => { e.preventDefault(); startChatSession(expert.id, e); }} disabled={startingSession === expert.id}>
                                 <MessageCircle className="h-3.5 w-3.5" /> Chat
                               </Button>
-                              <Button size="sm" disabled={!expert.isOnline} className="h-8 px-3 bg-purple-400 hover:bg-indigo-600 text-foreground border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => e.preventDefault()}>
+                              <Button size="sm" disabled={!expert.isOnline} className="h-8 px-3 bg-purple-400 hover:bg-indigo-600 text-foreground border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => {
+                                e.preventDefault();
+                                if (!user?.isEmailVerified) alert('Please verify your email to unlock all features.');
+                              }}>
                                 <Phone className="h-3.5 w-3.5" /> Call
                               </Button>
                             </div>
