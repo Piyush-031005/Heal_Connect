@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
   sectionSubtitle: { fontFamily: 'Inter_600SemiBold', fontSize: 11, color: '#D97706', letterSpacing: 1.2, paddingHorizontal: 20, marginBottom: 6, textTransform: 'uppercase' },
   sectionTitle: { fontFamily: 'PlayfairDisplay_600SemiBold', fontSize: 28, color: '#fff', paddingHorizontal: 20, marginBottom: 20, lineHeight: 34 },
   
-  expertCard: { backgroundColor: '#2d1b69', borderRadius: 20, width: 170, padding: 16, position: 'relative', shadowColor: '#000', shadowOffset: { width: 0, height: 6 }, shadowOpacity: 0.15, shadowRadius: 10, elevation: 4 },
+  expertCard: { backgroundColor: '#2d1b69', borderRadius: 20, width: (width - 44) / 2, padding: 16, position: 'relative', shadowColor: '#000', shadowOffset: { width: 0, height: 6 }, shadowOpacity: 0.15, shadowRadius: 10, elevation: 4 },
   celebrityBadge: { position: 'absolute', top: 10, right: 10, backgroundColor: '#FCD34D', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 10, zIndex: 10 },
   celebrityText: { fontFamily: 'Inter_600SemiBold', fontSize: 8, color: '#1a1a1a' },
   expertAvatar: { width: 64, height: 64, borderRadius: 32, borderWidth: 2, borderColor: '#4c1d95', alignSelf: 'center', marginBottom: 12 },
