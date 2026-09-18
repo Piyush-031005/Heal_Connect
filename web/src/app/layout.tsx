@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 
 import SmoothScroll from "@/components/smooth-scroll";
 import { CurrencyInit } from "@/components/CurrencyInit";
+import { ConsentBanner } from "@/components/ConsentBanner";
 
 export default function RootLayout({
   children,
@@ -55,6 +56,7 @@ export default function RootLayout({
             </LayoutProvider>
           </LangProvider>
         </ThemeProvider>
+        <ConsentBanner />
       </body>
     </html>
   );

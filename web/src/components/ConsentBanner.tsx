@@ -7,7 +7,7 @@ import { Cookie, X, ChevronDown, ChevronUp, ShieldCheck } from 'lucide-react';
 // Bump this whenever the Privacy Notice or Cookie policy wording changes
 // materially — the banner will re-appear for any visitor whose stored version
 // doesn't match this value.
-const CURRENT_POLICY_VERSION = '2026-08-17';
+const CURRENT_POLICY_VERSION = '2026-09-18'; // Bumped version to force display
 const VISITOR_ID_KEY = 'hc_visitor_id';
 const CONSENT_KEY    = 'hc_consent_state';
 const VERSION_KEY    = 'hc_consent_version';
@@ -83,141 +83,145 @@ export function ConsentBanner() {
   }
 
   return (
-    <div
-      role="dialog"
-      aria-modal="false"
-      aria-label="Cookie preferences"
-      className="fixed bottom-0 left-0 right-0 z-[9999] p-3 sm:p-5 pointer-events-none"
-    >
-      <div className="pointer-events-auto max-w-2xl mx-auto bg-white border border-indigo-200 rounded-2xl shadow-2xl">
-        {/* Header */}
-        <div className="flex items-start gap-3 px-5 pt-5 pb-2">
-          <div className="flex-shrink-0 w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center">
-            <Cookie className="w-5 h-5 text-indigo-600" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <h2 className="text-sm font-semibold text-indigo-950">Your Privacy, Your Choice</h2>
-            <p className="text-xs text-purple-500 mt-0.5 leading-relaxed">
-              We use cookies to keep the site working and — with your consent — to understand how
-              you use it and send relevant offers.{' '}
-              <Link href="/privacy" target="_blank" className="text-indigo-600 hover:underline font-medium">
-                Privacy Notice
+    <>
+      {/* Simple Bottom Banner */}
+      {!expanded && (
+        <div
+          role="dialog"
+          aria-modal="false"
+          aria-label="Cookie preferences"
+          className="fixed bottom-0 left-0 right-0 z-[9999] bg-[#3b3b3b] shadow-2xl"
+        >
+          <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="text-[13px] text-white/90 text-center md:text-left flex-1">
+              We use cookies to give you the best experience on our website. If you continue, we will assume you are OK with this.{' '}
+              <Link href="/privacy" target="_blank" className="text-[#d97757] hover:underline ml-1">
+                More details
               </Link>
-            </p>
+            </div>
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <button
+                id="consent-accept-all"
+                type="button"
+                disabled={saving}
+                onClick={() => saveChoices(true)}
+                className="px-6 py-2 bg-[#00b894] hover:bg-[#00a383] text-white text-sm font-semibold transition-colors disabled:opacity-60"
+              >
+                {saving ? 'Saving…' : 'Accept'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setExpanded(true)}
+                className="px-4 py-2 bg-white hover:bg-gray-100 text-[#3b3b3b] text-sm font-semibold transition-colors border border-transparent"
+              >
+                Cookie settings
+              </button>
+            </div>
           </div>
-          <button
-            type="button"
-            onClick={() => setVisible(false)}
-            aria-label="Dismiss cookie banner"
-            className="flex-shrink-0 p-1.5 text-purple-400 hover:text-purple-700 rounded-lg hover:bg-purple-50 transition-colors"
-          >
-            <X className="w-4 h-4" />
-          </button>
         </div>
+      )}
 
-        {/* Expandable detail */}
-        <div className="px-5">
-          <button
-            type="button"
-            onClick={() => setExpanded((v) => !v)}
-            className="flex items-center gap-1 text-xs text-indigo-700 hover:text-indigo-900 font-medium mb-2"
-          >
-            {expanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-            {expanded ? 'Hide options' : 'Customise'}
-          </button>
+      {/* Expanded Settings Modal */}
+      {expanded && (
+        <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm pointer-events-auto">
+          <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-gray-100">
+              <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                <Cookie className="w-5 h-5 text-indigo-500" />
+                Cookie Settings
+              </h2>
+              <button
+                type="button"
+                onClick={() => setExpanded(false)}
+                className="p-1.5 text-gray-400 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-          {expanded && (
-            <div className="space-y-3 mb-3 rounded-xl bg-indigo-50 p-3 text-xs text-purple-800">
-              {/* Necessary */}
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="font-semibold text-purple-900">Necessary</p>
-                  <p className="text-purple-500 mt-0.5">Login sessions, payments, security. Cannot be disabled.</p>
-                </div>
-                <div className="flex-shrink-0 flex items-center gap-1 text-green-600 font-semibold text-xs">
-                  <ShieldCheck className="w-4 h-4" /> Always on
-                </div>
-              </div>
+            <div className="px-5 py-4 space-y-4">
+              <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                We use cookies to keep the site working and — with your consent — to understand how
+                you use it and send relevant offers.
+              </p>
 
-              {/* Analytics toggle */}
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="font-semibold text-purple-900">Analytics</p>
-                  <p className="text-purple-500 mt-0.5">Helps us learn which features to improve.</p>
+              <div className="space-y-4 bg-gray-50 rounded-xl p-4">
+                {/* Necessary */}
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm">Necessary</p>
+                    <p className="text-gray-500 text-xs mt-0.5">Login sessions, payments, security. Cannot be disabled.</p>
+                  </div>
+                  <div className="flex-shrink-0 flex items-center gap-1 text-green-600 font-semibold text-xs mt-1">
+                    <ShieldCheck className="w-4 h-4" /> Always on
+                  </div>
                 </div>
-                <button
-                  id="consent-toggle-analytics"
-                  type="button"
-                  role="switch"
-                  aria-checked={analytics}
-                  onClick={() => setAnalytics((v) => !v)}
-                  className={`flex-shrink-0 relative rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 ${analytics ? 'bg-indigo-500' : 'bg-violet-200'}`}
-                  style={{ height: '22px', width: '40px' }}
-                >
-                  <span
-                    className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${analytics ? 'translate-x-[18px]' : 'translate-x-0'}`}
-                  />
-                </button>
-              </div>
 
-              {/* Marketing toggle */}
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="font-semibold text-purple-900">Marketing</p>
-                  <p className="text-purple-500 mt-0.5">Relevant offers and updates by email or push notification.</p>
+                {/* Analytics toggle */}
+                <div className="flex items-start justify-between gap-3 pt-3 border-t border-gray-200">
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm">Analytics</p>
+                    <p className="text-gray-500 text-xs mt-0.5">Helps us learn which features to improve.</p>
+                  </div>
+                  <button
+                    id="consent-toggle-analytics"
+                    type="button"
+                    role="switch"
+                    aria-checked={analytics}
+                    onClick={() => setAnalytics((v) => !v)}
+                    className={`flex-shrink-0 relative rounded-full transition-colors mt-1 focus:outline-none focus:ring-2 focus:ring-indigo-400 ${analytics ? 'bg-[#00b894]' : 'bg-gray-300'}`}
+                    style={{ height: '22px', width: '40px' }}
+                  >
+                    <span
+                      className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${analytics ? 'translate-x-[18px]' : 'translate-x-0'}`}
+                    />
+                  </button>
                 </div>
-                <button
-                  id="consent-toggle-marketing"
-                  type="button"
-                  role="switch"
-                  aria-checked={marketing}
-                  onClick={() => setMarketing((v) => !v)}
-                  className={`flex-shrink-0 relative rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 ${marketing ? 'bg-indigo-500' : 'bg-violet-200'}`}
-                  style={{ height: '22px', width: '40px' }}
-                >
-                  <span
-                    className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${marketing ? 'translate-x-[18px]' : 'translate-x-0'}`}
-                  />
-                </button>
+
+                {/* Marketing toggle */}
+                <div className="flex items-start justify-between gap-3 pt-3 border-t border-gray-200">
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm">Marketing</p>
+                    <p className="text-gray-500 text-xs mt-0.5">Relevant offers and updates by email or push notification.</p>
+                  </div>
+                  <button
+                    id="consent-toggle-marketing"
+                    type="button"
+                    role="switch"
+                    aria-checked={marketing}
+                    onClick={() => setMarketing((v) => !v)}
+                    className={`flex-shrink-0 relative rounded-full transition-colors mt-1 focus:outline-none focus:ring-2 focus:ring-indigo-400 ${marketing ? 'bg-[#00b894]' : 'bg-gray-300'}`}
+                    style={{ height: '22px', width: '40px' }}
+                  >
+                    <span
+                      className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${marketing ? 'translate-x-[18px]' : 'translate-x-0'}`}
+                    />
+                  </button>
+                </div>
               </div>
             </div>
-          )}
-        </div>
 
-        {/* CTA row */}
-        <div className="flex flex-col sm:flex-row gap-2 px-5 pb-4">
-          <button
-            id="consent-accept-all"
-            type="button"
-            disabled={saving}
-            onClick={() => saveChoices(true)}
-            className="flex-1 py-2 px-4 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-semibold transition-colors disabled:opacity-60"
-          >
-            {saving ? 'Saving…' : 'Accept all'}
-          </button>
-          {expanded ? (
-            <button
-              id="consent-save-choices"
-              type="button"
-              disabled={saving}
-              onClick={() => saveChoices(false)}
-              className="flex-1 py-2 px-4 rounded-xl border border-indigo-300 hover:bg-indigo-50 text-indigo-800 text-sm font-semibold transition-colors disabled:opacity-60"
-            >
-              Save my choices
-            </button>
-          ) : (
-            <button
-              id="consent-necessary-only"
-              type="button"
-              disabled={saving}
-              onClick={() => { setAnalytics(false); setMarketing(false); saveChoices(false); }}
-              className="flex-1 py-2 px-4 rounded-xl border border-violet-200 hover:bg-purple-50 text-purple-700 text-sm font-semibold transition-colors disabled:opacity-60"
-            >
-              Necessary only
-            </button>
-          )}
+            <div className="flex flex-col sm:flex-row gap-3 px-5 pb-5 pt-2">
+              <button
+                type="button"
+                disabled={saving}
+                onClick={() => saveChoices(true)}
+                className="flex-1 py-2.5 px-4 rounded-lg bg-[#00b894] hover:bg-[#00a383] text-white text-sm font-semibold transition-colors disabled:opacity-60"
+              >
+                {saving ? 'Saving…' : 'Accept all'}
+              </button>
+              <button
+                type="button"
+                disabled={saving}
+                onClick={() => saveChoices(false)}
+                className="flex-1 py-2.5 px-4 rounded-lg border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-semibold transition-colors disabled:opacity-60"
+              >
+                Save my choices
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
