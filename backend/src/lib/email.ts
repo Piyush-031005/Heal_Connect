@@ -85,8 +85,11 @@ async function sendEmail({ to, subject, html, textFallback }: { to: string; subj
 
 // ─── Welcome Email ─────────────────────────────────────────────────────────────
 
-export async function sendWelcomeEmail(to: string, name: string): Promise<void> {
+export async function sendWelcomeEmail(to: string, name: string, verifyUrl?: string): Promise<void> {
   const dashboardUrl = `${FRONTEND_URL}/dashboard`;
+  const primaryUrl = verifyUrl || dashboardUrl;
+  const primaryText = verifyUrl ? 'Verify Email Address' : 'Go to Dashboard';
+  
   const html = wrap(`
     <tr>
       <td style="padding:40px;">
@@ -98,10 +101,12 @@ export async function sendWelcomeEmail(to: string, name: string): Promise<void> 
         <p style="color:#6b7280;font-size:16px;line-height:1.7;margin:0 0 32px;">
           Your <strong style="color:#d97706;">first session is completely free</strong>. No credit card needed.
         </p>
-        <p style="text-align:center;">${btn(dashboardUrl, 'Go to Dashboard')}</p>
+        <p style="text-align:center;">${btn(primaryUrl, primaryText)}</p>
+        ${verifyUrl ? '' : `
         <p style="color:#9ca3af;font-size:13px;margin:28px 0 0;">
           Please verify your email to unlock all features.
         </p>
+        `}
       </td>
     </tr>`);
 
@@ -109,7 +114,7 @@ export async function sendWelcomeEmail(to: string, name: string): Promise<void> 
     to,
     subject: 'Welcome to Zenauraa 🌟',
     html,
-    textFallback: `Welcome email for ${name}. Dashboard link: ${dashboardUrl}`,
+    textFallback: `Welcome email for ${name}. Link: ${primaryUrl}`,
   });
 }
 

@@ -187,16 +187,18 @@ router.post(
         return created;
       });
 
-      // Send welcome email (non-blocking — never crash registration)
-      void sendWelcomeEmail(email, name).catch((e) => console.error('Welcome email failed:', e));
-
       if (useEmail) {
-        console.log(`\n✉️  [VERIFICATION LINK FOR ${email}]: https://blue-plant-0d21bc900.7.azurestaticapps.net/verify-email?token=${rawEmailToken}\n`);
-        void sendVerificationEmail(email, rawEmailToken).catch((e) =>
-          console.error('Verification email failed:', e)
-        );
-      } else if (phone) {
-        void sendOtpSms(phone).catch((e) => console.error('OTP SMS failed:', e));
+        const verifyUrl = `${FRONTEND_URL}/verify-email?token=${rawEmailToken}`;
+        console.log(`\n✉️  [VERIFICATION LINK FOR ${email}]: ${verifyUrl}\n`);
+        
+        // Send a combined Welcome + Verification email
+        void sendWelcomeEmail(email, name, verifyUrl).catch((e) => console.error('Welcome email failed:', e));
+      } else {
+        // Send normal welcome email for phone users
+        void sendWelcomeEmail(email, name).catch((e) => console.error('Welcome email failed:', e));
+        if (phone) {
+          void sendOtpSms(phone).catch((e) => console.error('OTP SMS failed:', e));
+        }
       }
 
       const { accessToken, refreshToken } = await issueTokens(user.id, user.email);
