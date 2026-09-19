@@ -9,10 +9,28 @@ const PHONE_PATTERNS = [
   /\b\d[\d\s\-().]{8,}\d\b/,                               // generic 8+ digit number
 ];
 
+// Redaction placeholder tokens inserted by transcription services (e.g. AssemblyAI, Whisper)
+// when they mask PII before returning the transcript text.
+const PHONE_PLACEHOLDERS = [
+  /\[PHONE_NUMBER\]/i,
+  /\[PHONE\]/i,
+  /\[NUMBER\]/i,
+  /\[TEL\]/i,
+  /\[MOBILE\]/i,
+  /\bPHONE_NUMBER\b/,   // without brackets (some services omit them)
+];
+
 // Email: standard + obfuscated ("at", "dot", "[at]", "(at)", spaced chars)
 const EMAIL_PATTERNS = [
   /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/,
   /[a-zA-Z0-9._%+\-]+\s*[\[(]?at[\])]?\s*[a-zA-Z0-9.\-]+\s*[\[(]?dot[\])]?\s*[a-zA-Z]{2,}/i,
+];
+
+// Email redaction placeholders
+const EMAIL_PLACEHOLDERS = [
+  /\[EMAIL(_ADDRESS)?\]/i,
+  /\[EMAIL\]/i,
+  /\bEMAIL_ADDRESS\b/,
 ];
 
 // Generic flagged keywords (abuse, fraud, etc.)
@@ -34,13 +52,19 @@ export function scanContent(text: string): {
   const keywordHits = FLAGGED_KEYWORDS.filter((kw) => lower.includes(kw));
   reasons.push(...keywordHits);
 
-  // Phone detection
-  if (PHONE_PATTERNS.some((re) => re.test(text))) {
+  // Phone detection — raw digits OR redaction placeholders (e.g. [PHONE_NUMBER])
+  if (
+    PHONE_PATTERNS.some((re) => re.test(text)) ||
+    PHONE_PLACEHOLDERS.some((re) => re.test(text))
+  ) {
     reasons.push('phone_number_detected');
   }
 
-  // Email detection
-  if (EMAIL_PATTERNS.some((re) => re.test(text))) {
+  // Email detection — raw address OR redaction placeholders (e.g. [EMAIL])
+  if (
+    EMAIL_PATTERNS.some((re) => re.test(text)) ||
+    EMAIL_PLACEHOLDERS.some((re) => re.test(text))
+  ) {
     reasons.push('email_detected');
   }
 
