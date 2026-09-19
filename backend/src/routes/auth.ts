@@ -188,7 +188,7 @@ router.post(
       });
 
       if (useEmail) {
-        const verifyUrl = `${FRONTEND_URL}/verify-email?token=${rawEmailToken}`;
+        const verifyUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/verify-email?token=${rawEmailToken}`;
         console.log(`\n✉️  [VERIFICATION LINK FOR ${email}]: ${verifyUrl}\n`);
         
         // Send a combined Welcome + Verification email
