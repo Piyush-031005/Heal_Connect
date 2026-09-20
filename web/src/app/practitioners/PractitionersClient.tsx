@@ -10,7 +10,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/navbar';
 import { getPractitionerAvatar } from '@/lib/utils';
-import { authApi, tokenStore } from '@/lib/api';
+import { authApi, tokenStore, sessionsApi } from '@/lib/api';
 
 interface Practitioner {
   id: string;
@@ -262,7 +262,46 @@ export default function PractitionersPage() {
 
 function PractitionerCard({ practitioner: p, isEmailVerified }: { practitioner: Practitioner, isEmailVerified?: boolean | null }) {
   const router = useRouter();
+  const [calling, setCalling] = useState(false);
+  const [chatting, setChatting] = useState(false);
   const avatarSrc = getPractitionerAvatar(p.photoUrl, p.name);
+
+  const handleStartSession = async (type: 'AUDIO' | 'CHAT', e: React.MouseEvent) => {
+    e.stopPropagation();
+    const token = tokenStore.getAccess();
+    if (!token) {
+      router.push(`/login?returnUrl=/practitioners`);
+      return;
+    }
+    if (isEmailVerified === false) {
+      alert('Please verify your email to unlock all features.');
+      return;
+    }
+
+    if (type === 'AUDIO') setCalling(true);
+    else setChatting(true);
+
+    try {
+      const res = await sessionsApi.create(token, p.id, type);
+      if (res.success && res.data?.session) {
+        router.push(`/session/${res.data.session.id}`);
+      } else if (res.message === 'Invalid or expired token' || res.message === 'No token provided') {
+        tokenStore.clear();
+        router.push(`/login?returnUrl=/practitioners`);
+      } else {
+        const errorDetail = res.errors?.length
+          ? res.errors.map((err) => err.message).join(' · ')
+          : res.message || `Failed to start ${type.toLowerCase()}. Please try again.`;
+        alert(errorDetail);
+      }
+    } catch {
+      alert('Unable to connect to consultation service. Please try again.');
+    } finally {
+      if (type === 'AUDIO') setCalling(false);
+      else setChatting(false);
+    }
+  };
+
 
   return (
     <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-white/80 backdrop-blur-sm border border-purple-100 hover:border-indigo-200 hover:shadow-lg transition-all cursor-pointer rounded-2xl overflow-hidden group h-full">
@@ -331,25 +370,13 @@ function PractitionerCard({ practitioner: p, isEmailVerified }: { practitioner: 
               <span className="text-xs text-purple-400">/min</span>
             </div>
             <div className="flex gap-2">
-              <Button size="sm" variant="outline" className="h-8 px-3 border-purple-200 hover:border-indigo-300 hover:text-indigo-700 text-xs gap-1" disabled={!p.isOnline || p.isBusy} onClick={(e) => { 
-                e.stopPropagation(); 
-                if (isEmailVerified === false) {
-                  alert('Please verify your email to unlock all features.');
-                  return;
-                }
-                router.push('/login'); 
-              }}>
-                <MessageCircle className="h-3.5 w-3.5" /> Chat
+              <Button size="sm" variant="outline" className="h-8 px-3 border-purple-200 hover:border-indigo-300 hover:text-indigo-700 text-xs gap-1" disabled={!p.isOnline || p.isBusy || chatting || calling} onClick={(e) => handleStartSession('CHAT', e)}>
+                {chatting ? <span className="animate-spin text-lg">↻</span> : <MessageCircle className="h-3.5 w-3.5" />}
+                {chatting ? 'Starting...' : 'Chat'}
               </Button>
-              <Button size="sm" disabled={!p.isOnline || p.isBusy} className="h-8 px-3 bg-indigo-500 hover:bg-indigo-600 text-white border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => { 
-                e.stopPropagation(); 
-                if (isEmailVerified === false) {
-                  alert('Please verify your email to unlock all features.');
-                  return;
-                }
-                router.push('/login'); 
-              }}>
-                <Phone className="h-3.5 w-3.5" /> Call
+              <Button size="sm" disabled={!p.isOnline || p.isBusy || calling || chatting} className="h-8 px-3 bg-indigo-500 hover:bg-indigo-600 text-white border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => handleStartSession('AUDIO', e)}>
+                {calling ? <span className="animate-spin text-lg">↻</span> : <Phone className="h-3.5 w-3.5" />}
+                {calling ? 'Starting...' : 'Call'}
               </Button>
             </div>
           </div>
