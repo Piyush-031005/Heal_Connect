@@ -32,6 +32,7 @@ export default function DashboardPage() {
   const { format, currencyCode } = useCurrencyStore();
   const router = useRouter();
   const [user, setUser] = useState<UserData | null>(null);
+  const [userStats, setUserStats] = useState({ sessionsDone: 0, minutesUsed: 0 });
   const [loading, setLoading] = useState(true);
   const [experts, setExperts] = useState<PractitionerProfile[]>([]);
   const [onlineCount, setOnlineCount] = useState(0);
@@ -108,7 +109,11 @@ export default function DashboardPage() {
 
     authApi.me(token).then((res) => {
       if (!res.success) { tokenStore.clear(); router.replace('/login'); return; }
-      setUser((res.data as { user: UserData }).user);
+      const responseData = res.data as { user: UserData; stats?: { sessionsDone: number; minutesUsed: number } };
+      setUser(responseData.user);
+      if (responseData.stats) {
+        setUserStats(responseData.stats);
+      }
     }).catch(() => { tokenStore.clear(); router.replace('/login'); })
       .finally(() => setLoading(false));
 
@@ -293,8 +298,8 @@ brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             { label: 'Wallet Balance', value: walletBalance !== null ? (currencyCode === 'GBP' ? `£${walletBalance.toFixed(2)}` : format(walletBalance)) : '...', icon: Wallet, color: 'text-purple-400', bg: 'bg-purple-50', shadow: 'shadow-indigo-200/30' },
-            { label: 'Sessions Done', value: '0', icon: MessageCircle, color: 'text-emerald-600', bg: 'bg-emerald-50', shadow: 'shadow-emerald-200/30' },
-            { label: 'Minutes Used', value: '0 min', icon: Clock, color: 'text-purple-500', bg: 'bg-purple-50', shadow: 'shadow-purple-200/30' },
+            { label: 'Sessions Done', value: String(userStats.sessionsDone), icon: MessageCircle, color: 'text-emerald-600', bg: 'bg-emerald-50', shadow: 'shadow-emerald-200/30' },
+            { label: 'Minutes Used', value: `${userStats.minutesUsed} min`, icon: Clock, color: 'text-purple-500', bg: 'bg-purple-50', shadow: 'shadow-purple-200/30' },
             { label: 'Experts Online', value: onlineCount > 0 ? String(onlineCount) : '—', icon: TrendingUp, color: 'text-blue-500', bg: 'bg-blue-50', shadow: 'shadow-blue-200/30' },
           ].map((stat) => (
             <Card key={stat.label} className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 rounded-2xl overflow-hidden">

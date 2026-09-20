@@ -25,7 +25,20 @@ router.get('/me', requireAuth, async (req: AuthRequest, res: Response) => {
       },
     });
     if (!user) { res.status(404).json({ success: false, message: 'User not found' }); return; }
-    res.json({ success: true, data: { user } });
+
+    const sessionStats = await prisma.session.aggregate({
+      where: {
+        userId: req.user!.userId,
+        status: { in: ['COMPLETED', 'RATING_PENDING', 'ENDED'] },
+      },
+      _count: { id: true },
+      _sum: { duration: true },
+    });
+
+    const sessionsDone = sessionStats._count.id;
+    const minutesUsed = Math.ceil((sessionStats._sum.duration || 0) / 60);
+
+    res.json({ success: true, data: { user, stats: { sessionsDone, minutesUsed } } });
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, message: 'Internal server error' });
