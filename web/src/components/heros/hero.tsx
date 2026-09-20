@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import GhostFibers from '@/components/GhostFibers';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -47,12 +47,16 @@ function PrimaryHero() {
             {/* Action Buttons */}
             <div className="flex flex-col gap-4 mb-12">
               <div className="flex items-center gap-4">
-                <Button className="bg-[#FCD34D] hover:bg-[#FBBF24] text-[#1e1b4b] rounded-[24px] px-6 py-5 text-sm font-bold shadow-sm transition-all border-none">
-                  <MessageSquare className="w-4 h-4 mr-2" /> Chat
-                </Button>
-                <Button className="bg-[#FCD34D] hover:bg-[#FBBF24] text-[#1e1b4b] rounded-[24px] px-6 py-5 text-sm font-bold shadow-sm transition-all border-none">
-                  <Phone className="w-4 h-4 mr-2" /> Call
-                </Button>
+                <Link href="/practitioners">
+                  <Button className="bg-[#FCD34D] hover:bg-[#FBBF24] text-[#1e1b4b] rounded-[24px] px-6 py-5 text-sm font-bold shadow-sm transition-all border-none">
+                    <MessageSquare className="w-4 h-4 mr-2" /> Chat
+                  </Button>
+                </Link>
+                <Link href="/practitioners">
+                  <Button className="bg-[#FCD34D] hover:bg-[#FBBF24] text-[#1e1b4b] rounded-[24px] px-6 py-5 text-sm font-bold shadow-sm transition-all border-none">
+                    <Phone className="w-4 h-4 mr-2" /> Call
+                  </Button>
+                </Link>
               </div>
               
               <Link href="/practitioners">
