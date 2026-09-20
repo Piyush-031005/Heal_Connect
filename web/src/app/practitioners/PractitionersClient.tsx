@@ -308,8 +308,8 @@ function PractitionerCard({ practitioner: p, isEmailVerified }: { practitioner: 
           <div className="flex items-center gap-3 mt-2 mb-3">
             <div className="flex items-center gap-1">
               <Star className="w-3.5 h-3.5 text-indigo-400 fill-current" />
-              <span className="text-sm font-semibold text-[#2d1b69]">{p.avgRating || '—'}</span>
-              <span className="text-xs text-purple-400">({p.reviewCount})</span>
+              <span className="text-sm font-semibold text-[#2d1b69]">{p.avgRating != null ? p.avgRating.toFixed(1) : '0.0'}</span>
+              <span className="text-xs text-purple-400">({p.reviewCount ?? 0})</span>
             </div>
             <span className="text-purple-200">|</span>
             <span className="text-xs text-[#6d28d9]/70">{p.experienceYrs} yrs exp</span>

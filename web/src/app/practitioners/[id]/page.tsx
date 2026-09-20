@@ -163,7 +163,7 @@ export default function PractitionerDetail() {
   const handleShare = async () => {
     if (!p) return;
     const url = `${window.location.origin}/practitioners/${p.id}`;
-    const text = `Consult with ${p.name}, Expert in ${p.specialties.join(', ')}.\nRating: ${p.avgRating || '5.0'} ⭐\n\n${p.bio ? p.bio.slice(0, 100) + '...' : ''}`;
+    const text = `Consult with ${p.name}, Expert in ${p.specialties.join(', ')}.\nRating: ${p.avgRating != null ? p.avgRating.toFixed(1) : '0.0'} ⭐\n\n${p.bio ? p.bio.slice(0, 100) + '...' : ''}`;
 
     if (navigator.share) {
       try {
@@ -272,8 +272,8 @@ export default function PractitionerDetail() {
                 <div className="flex items-center justify-center sm:justify-start gap-3 flex-wrap text-sm pt-1">
                   <div className="flex items-center gap-1.5 bg-purple-50 px-2.5 py-1 rounded-full border border-indigo-200/60">
                     <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                    <span className="font-extrabold text-indigo-950">{p.avgRating || '5.0'}</span>
-                    <span className="text-purple-400 text-xs">({p.reviewCount || 12} reviews)</span>
+                    <span className="font-extrabold text-indigo-950">{p.avgRating != null ? p.avgRating.toFixed(1) : '0.0'}</span>
+                    <span className="text-purple-400 text-xs">({p.reviewCount ?? 0} reviews)</span>
                   </div>
                   <span className="text-purple-300">·</span>
                   <span className="text-purple-700 font-medium">{p.experienceYrs} Years Experience</span>
