@@ -374,58 +374,59 @@ brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={
                 const avatarSrc = getPractitionerAvatar(expert.photoUrl, expert.id);
                 return (
                   <Link key={expert.id} href={`/practitioners/${expert.id}`} className="h-full">
-                    <Card className="bg-white border border-purple-100 hover:border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 cursor-pointer rounded-2xl overflow-hidden group h-full">
-                      <CardContent className="p-0 flex flex-col h-full">
+                    <Card className="bg-[#C4B5FD]/95 backdrop-blur-2xl border-2 border-white/20 hover:border-white/50 hover:shadow-[0_12px_40px_rgba(196,181,253,0.5)] shadow-[0_4px_20px_rgba(196,181,253,0.3)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
+                      <CardContent className="p-0 flex flex-col h-full relative">
                         {/* Top strip with avatar */}
-                        <div className="relative h-14 bg-gradient-to-r from-purple-50 to-purple-50">
-                          <div className="absolute -bottom-6 left-5">
-                            <img src={avatarSrc} alt={expert.name} className="w-12 h-12 rounded-xl object-cover shadow-md border-2 border-white" />
+                        <div className="relative h-16 bg-white/10 shrink-0 border-b border-white/10">
+                          <div className="absolute -bottom-6 left-5 z-10">
+                            <img src={avatarSrc} alt={expert.name} className="w-14 h-14 rounded-2xl object-cover shadow-[0_4px_15px_rgba(0,0,0,0.3)] border-2 border-white transition-transform duration-300 group-hover:scale-105" />
                           </div>
-                          <div className="absolute top-3 right-4">
-                            <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
-                              expert.isOnline ? 'bg-emerald-100 text-emerald-700' : 'bg-purple-50 text-muted-foreground'
+                          <div className="absolute top-3 right-4 z-10">
+                            <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-full ${
+                              expert.isOnline ? 'bg-green-400 text-white shadow-[0_0_10px_rgba(74,222,128,0.4)]' : 'bg-red-400 text-white'
                             }`}>
-                              <span className={`w-1.5 h-1.5 rounded-full ${expert.isOnline ? 'bg-emerald-500' : 'bg-violet-300'}`} />
+                              <span className={`w-1.5 h-1.5 rounded-full ${expert.isOnline ? 'bg-white animate-pulse shadow-[0_0_6px_rgba(255,255,255,0.8)]' : 'bg-white'}`} />
                               {expert.isOnline ? 'Online' : 'Offline'}
                             </span>
                           </div>
                         </div>
 
                         {/* Content */}
-                        <div className="pt-8 px-5 pb-5 flex flex-col flex-1">
+                        <div className="pt-8 px-5 pb-5 flex flex-col flex-1 relative z-0">
                           <div className="flex items-start justify-between mb-1">
                             <div>
-                              <p className="font-bold text-indigo-950 text-base">{expert.name}</p>
-                              <p className="text-sm text-indigo-600 font-medium">{expert.specialties.slice(0, 2).join(' · ') || '—'}</p>
+                              <p className="font-bold text-[#2d1b69] text-base tracking-wide group-hover:text-[#1e1b4b] transition-colors">{expert.name}</p>
+                              <p className="text-xs text-[#4c1d95] font-medium">{expert.specialties.slice(0, 2).join(', ') || '—'}</p>
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-3 mt-2 mb-3">
-                            <div className="flex items-center gap-1">
-                              <Star className="w-3.5 h-3.5 text-purple-300 fill-current" />
-                              <span className="text-sm font-semibold text-indigo-950">{expert.avgRating || '—'}</span>
-                              <span className="text-xs text-muted-foreground">({expert.reviewCount})</span>
+                          <div className="flex flex-wrap items-center gap-2 mt-2 mb-3">
+                            <div className="flex items-center gap-1 px-1.5 py-0.5 bg-white/30 rounded border border-white/40">
+                              <Star className="w-3 h-3 text-[#FFB800] fill-current" />
+                              <span className="text-xs font-bold text-[#2d1b69]">{expert.avgRating || '—'}</span>
+                              <span className="text-[10px] text-[#4c1d95]">({expert.reviewCount})</span>
                             </div>
-                            <span className="text-purple-200">|</span>
-                            <span className="text-xs text-muted-foreground">{expert.experienceYrs} yrs exp</span>
+                            <span className="text-[#4c1d95]/40 text-xs">|</span>
+                            <span className="text-xs text-[#4c1d95] font-medium">{expert.experienceYrs} yrs exp</span>
                           </div>
 
-                          <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed flex-1">{expert.bio || ''}</p>
+                          <p className="text-xs text-[#2d1b69]/80 line-clamp-2 leading-relaxed flex-1 mb-4">{expert.bio || ''}</p>
 
-                          <div className="flex items-center justify-between pt-3 mt-3 border-t border-purple-100">
+                          <div className="flex items-center justify-between pt-3 mt-auto border-t border-white/30">
                             <div>
-                              <span className="text-lg font-bold text-indigo-950">{currencyCode === 'GBP' ? `£${expert.perMinuteRate}` : format(expert.perMinuteRate)}</span>
-                              <span className="text-xs text-muted-foreground">/min</span>
+                              <span className="text-lg font-bold text-[#2d1b69]">{currencyCode === 'GBP' ? `£${expert.perMinuteRate}` : format(expert.perMinuteRate)}</span>
+                              <span className="text-xs text-[#4c1d95] ml-1">/min</span>
                             </div>
                             <div className="flex gap-2">
-                              <Button size="sm" variant="outline" className="h-8 px-3 border-violet-200 hover:border-indigo-300 hover:text-indigo-700 text-xs gap-1" onClick={(e) => { e.preventDefault(); startChatSession(expert.id, e); }} disabled={startingSession === expert.id}>
-                                <MessageCircle className="h-3.5 w-3.5" /> Chat
+                              <Button size="sm" className="h-8 rounded-md px-3 bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all shadow-md" onClick={(e) => { e.preventDefault(); startChatSession(expert.id, e); }} disabled={startingSession === expert.id}>
+                                {startingSession === expert.id ? <span className="animate-spin mr-1 text-sm">↻</span> : <MessageCircle className="h-3.5 w-3.5 mr-1" />}
+                                Chat
                               </Button>
-                              <Button size="sm" disabled={!expert.isOnline} className="h-8 px-3 bg-purple-400 hover:bg-indigo-600 text-foreground border-0 text-xs gap-1 disabled:opacity-40" onClick={(e) => {
+                              <Button size="sm" disabled={!expert.isOnline} className="h-8 rounded-md px-3 bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all shadow-md disabled:opacity-40" onClick={(e) => {
                                 e.preventDefault();
                                 if (!user?.isEmailVerified) alert('Please verify your email to unlock all features.');
                               }}>
-                                <Phone className="h-3.5 w-3.5" /> Call
+                                <Phone className="h-3.5 w-3.5 mr-1" /> Call
                               </Button>
                             </div>
                           </div>
