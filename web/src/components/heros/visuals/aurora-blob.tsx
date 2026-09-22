@@ -102,7 +102,7 @@ export default function AuroraBlob() {
         {MODALITIES.map((mod, i) => {
           const total = MODALITIES.length;
           const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
-          const r = 260;
+          const r = 320;
           const x = Math.cos(angle) * r;
           const y = Math.sin(angle) * r;
           return (
