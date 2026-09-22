@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useEffect, useState, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { Canvas, useFrame } from '@react-three/fiber';
@@ -6,19 +6,19 @@ import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 const MODALITIES = [
-  { id: 'astrology', line1: '01 — Astrology' },
-  { id: 'breathwork', line1: '02 — Yoga & Breath' },
-  { id: 'chakra-healing', line1: '03 — Energy Healing' },
-  { id: 'dreams', line1: '04 — Dream &', line2: 'Spiritual' },
-  { id: 'face-reading', line1: '05 — Face &', line2: 'Personality' },
-  { id: 'meditation', line1: '06 — Meditation &', line2: 'Mindfulness' },
-  { id: 'numerology', line1: '07 — Numerology' },
-  { id: 'palm-reading', line1: '08 — Palmistry' },
-  { id: 'sound-healing', line1: '09 — Sound &', line2: 'Energy' },
-  { id: 'space-harmony', line1: '10 — Vastu & Space' },
-  { id: 'spiritual', line1: '11 — Akashic', line2: 'Guidance' },
-  { id: 'tarot', line1: '12 — Tarot &', line2: 'Psychic' },
-];
+    { id: 'astrology', line1: 'Astrology' },
+    { id: 'breathwork', line1: 'Yoga & Breath' },
+    { id: 'chakra-healing', line1: 'Energy Healing' },
+    { id: 'dreams', line1: 'Dream &', line2: 'Spiritual' },
+    { id: 'face-reading', line1: 'Face &', line2: 'Personality' },
+    { id: 'meditation', line1: 'Meditation &', line2: 'Mindfulness' },
+    { id: 'numerology', line1: 'Numerology' },
+    { id: 'palm-reading', line1: 'Palmistry' },
+    { id: 'sound-healing', line1: 'Sound &', line2: 'Energy' },
+    { id: 'space-harmony', line1: 'Vastu & Space' },
+    { id: 'spiritual', line1: 'Akashic', line2: 'Guidance' },
+    { id: 'tarot', line1: 'Tarot &', line2: 'Psychic' },
+  ];
 
 function EtherealFeather({ rotation, position, color, scale }: any) {
   const meshRef = useRef<THREE.Group>(null);
