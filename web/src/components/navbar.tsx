@@ -33,23 +33,20 @@ const MENU_SECTIONS: { title: string; items: MenuItem[] }[] = [
   {
     title: 'Consult',
     items: [
-      { label: 'Consultations', href: '/login', Icon: Sparkles },
-      { label: 'Horoscope', href: '/signup', Icon: Star },
+      { label: 'Consultations', href: '/practitioners', Icon: Sparkles },
     ],
   },
   {
     title: 'Free Tools',
     items: [
-      { label: 'Free Services', href: '/signup', Icon: Wand2 },
-      { label: 'Calculators', href: '/signup', Icon: Calculator },
-      { label: 'Panchang', href: '/signup', Icon: CalendarDays },
+      { label: 'Free Services', href: '/free-services', Icon: Wand2 },
     ],
   },
   {
     title: 'More',
     items: [
-      { label: 'Shop', href: '/signup', Icon: ShoppingBag },
-      { label: 'Blog', href: '/signup', Icon: BookOpen },
+      { label: 'Shop', href: '/shop', Icon: ShoppingBag },
+      { label: 'Blog', href: '/blog', Icon: BookOpen },
     ],
   },
 ];
@@ -242,7 +239,7 @@ export default function Navbar() {
               <div className="flex-1">
                 <p className="text-sm font-bold text-gray-900">Sign In / Sign Up</p>
                 <p className="text-[11px] text-gray-700">
-                  Your 1st Chat is <strong className="text-indigo-600">100% Free</strong>
+                  Connect with <strong className="text-indigo-600">Top Experts</strong>
                 </p>
               </div>
               <svg className="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">

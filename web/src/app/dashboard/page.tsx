@@ -277,7 +277,7 @@ brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={
               <h1 className="text-2xl md:text-3xl font-extrabold text-foreground mb-2">Hello, {firstName}!</h1>
               <p className="text-indigo-100 max-w-md flex items-start gap-2">
                 <Sparkles className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>Your first session is free. Connect with a verified expert and start your healing journey today.</span>
+                <span>Connect with a verified expert and start your healing journey today.</span>
               </p>
               {!user?.isEmailVerified && (
                 <div className="mt-3 flex items-center gap-2 text-foreground text-sm bg-white/20 border border-border rounded-lg px-3 py-2 w-fit">
@@ -288,7 +288,7 @@ brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={
             </div>
             <Link href="/practitioners">
               <Button className="bg-white text-indigo-700 hover:bg-purple-50 border-0 rounded-full px-6 shrink-0 font-bold shadow-lg shadow-indigo-900/20">
-                <Zap className="h-4 w-4 mr-2" /> Start Free Session
+                <Zap className="h-4 w-4 mr-2" /> Find an Expert
               </Button>
             </Link>
           </div>

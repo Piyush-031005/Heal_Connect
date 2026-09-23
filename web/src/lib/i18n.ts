@@ -1,11 +1,11 @@
 export const translations = {
   en: {
     // ─── Existing keys ───
-    badge: '✨ Your 1st Chat is 100% Free',
+    badge: '✨ Connect with Top Experts Instantly',
     heroTitle1: 'Professional Wellness,',
     heroTitle2: 'Anytime, Anywhere.',
     heroDesc: 'Connect with verified energy healers, Vastu experts, numerologists, and tarot readers instantly via chat or audio call.',
-    claimBtn: 'Claim Free Session Now',
+    claimBtn: 'Connect with an Expert Now',
     browseBtn: 'Browse Experts',
     stat1Label: 'Happy Users',
     stat2Label: 'Verified Experts',
@@ -49,11 +49,11 @@ export const translations = {
     navExperts: 'Our Experts',
 
     // ─── Hero Section (new) ───
-    heroBadge: 'Your 1st Chat is 100% Free',
+    heroBadge: 'Connect with Top Experts Instantly',
     heroTitle: "India's most accurate\nastrology platform",
     heroKundliText: 'Get Free detailed kundli',
     heroAvgReply: 'Average reply under 12 seconds',
-    heroCta: 'Start Free Chat',
+    heroCta: 'Start a Session',
     heroStats: [
       { value: '5Cr+', label: 'Users guided' },
       { value: '50,000+', label: 'Verified astrologers' },
