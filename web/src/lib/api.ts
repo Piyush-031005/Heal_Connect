@@ -294,6 +294,13 @@ export const sessionsApi = {
       body: body ? JSON.stringify(body) : undefined,
     }),
 
+  submitReview: (token: string, sessionId: string, rating: number, comment: string) =>
+    request(`/api/sessions/${sessionId}/review`, {
+      method: 'POST',
+      headers: authHeader(token),
+      body: JSON.stringify({ rating, comment }),
+    }),
+
   connect: (token: string, sessionId: string) =>
     request<{ session: any }>(`/api/sessions/${sessionId}/connect`, { method: 'POST', headers: authHeader(token) }),
 
