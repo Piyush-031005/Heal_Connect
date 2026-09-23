@@ -412,7 +412,7 @@ export default function Navbar() {
               <Link href={userProfile.role === 'astrologer' || userProfile.role === 'practitioner' ? '/expert/onboarding' : '/dashboard'}>
                 <div className="w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer overflow-hidden border-2 border-border hover:border-primary">
                   <img
-                    src={userProfile.role === 'practitioner' ? getPractitionerAvatar(userProfile.photoUrl, userProfile.id) : getAvatarUrl(userProfile.name, userProfile.photoUrl)}
+                    src={userProfile.role === 'practitioner' ? getPractitionerAvatar(userProfile.photoUrl, userProfile.name || '') : getAvatarUrl(userProfile.name, userProfile.photoUrl)}
                     alt="Profile"
                     className="w-full h-full object-cover"
                   />

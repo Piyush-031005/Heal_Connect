@@ -204,7 +204,7 @@ export default function PractitionersPage() {
 function PractitionerCard({ practitioner: p }: { practitioner: Practitioner }) {
   const { format, currencyCode } = useCurrencyStore();
   const router = useRouter();
-  const avatarSrc = getPractitionerAvatar(p.photoUrl, p.id);
+  const avatarSrc = getPractitionerAvatar(p.photoUrl, p.name);
 
   return (
     <Card onClick={() => router.push(`/practitioners/${p.id}`)} className="bg-[#C4B5FD]/95 backdrop-blur-2xl border-2 border-white/20 hover:border-white/50 hover:shadow-[0_12px_40px_rgba(196,181,253,0.5)] shadow-[0_4px_20px_rgba(196,181,253,0.3)] transition-all duration-300 cursor-pointer rounded-2xl overflow-hidden group h-full flex flex-col hover:-translate-y-1">
