@@ -329,7 +329,7 @@ export default function ExpertDashboardPage() {
             { label: 'Total Earnings', value: `$${totalEarnings.toFixed(2)}`, icon: IndianRupee, color: 'text-primary', bg: 'bg-primary/10', border: 'border-primary/20' },
             { label: 'Sessions Done', value: String(sessionsDone), icon: MessageCircle, color: 'text-accent', bg: 'bg-accent/10', border: 'border-accent/20' },
             { label: 'Avg Rating', value: profile?.reviewCount === 0 ? 'New' : (profile?.avgRating != null ? profile.avgRating.toFixed(1) : '—'), icon: Star, color: 'text-purple-400', bg: 'bg-purple-400/10', border: 'border-purple-400/20' },
-            { label: 'Active Now', value: sessions.length > 0 ? String(sessions.length) : '0', icon: TrendingUp, color: 'text-blue-400', bg: 'bg-blue-400/10', border: 'border-blue-400/20' },
+            { label: 'Total Reviews', value: String(profile?.reviewCount || 0), icon: HeartHandshake, color: 'text-rose-400', bg: 'bg-rose-400/10', border: 'border-rose-400/20' },
           ].map((stat) => (
             <Card key={stat.label} className="bg-white border border-border shadow-sm rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
               <CardContent className="p-5 flex items-center gap-4">
