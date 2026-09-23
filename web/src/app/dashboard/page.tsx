@@ -41,6 +41,7 @@ export default function DashboardPage() {
   // Wallet State
   const [walletBalance, setWalletBalance] = useState<number | null>(null);
   const [isRechargeModalOpen, setIsRechargeModalOpen] = useState(false);
+  const [showInsufficientBalance, setShowInsufficientBalance] = useState(false);
   const [startingSession, setStartingSession] = useState<string | null>(null);
   const [showNotification, setShowNotification] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -84,7 +85,11 @@ export default function DashboardPage() {
     if (res.success && res.data) {
       router.push(`/session/${res.data.session.id}`);
     } else {
-      alert(res.message || 'Could not start session. Please recharge your wallet.');
+      if (res.message?.toLowerCase().includes('balance') || res.message?.toLowerCase().includes('recharge') || res.message?.toLowerCase().includes('funds')) {
+        setShowInsufficientBalance(true);
+      } else {
+        alert(res.message || 'Could not start session. Please recharge your wallet.');
+      }
     }
   };
 
@@ -104,7 +109,11 @@ export default function DashboardPage() {
     if (res.success && res.data) {
       router.push(`/session/${res.data.session.id}`);
     } else {
-      alert(res.message || 'Could not start session. Please recharge your wallet.');
+      if (res.message?.toLowerCase().includes('balance') || res.message?.toLowerCase().includes('recharge') || res.message?.toLowerCase().includes('funds')) {
+        setShowInsufficientBalance(true);
+      } else {
+        alert(res.message || 'Could not start session. Please recharge your wallet.');
+      }
     }
   };
 
@@ -492,6 +501,27 @@ brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={
         </div>
 
       </main>
+
+      {showInsufficientBalance && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
+            <div className="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4 mx-auto">
+              <Wallet className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-center text-[#2d1b69] mb-2">Insufficient Balance</h3>
+            <p className="text-center text-[#4c1d95]/70 text-sm mb-6">
+              Your wallet balance is too low to start this session. Please add funds to continue connecting with experts.
+            </p>
+            <div className="flex gap-3">
+              <Button variant="outline" className="flex-1 border-[#4c1d95]/20 text-[#4c1d95]" onClick={() => setShowInsufficientBalance(false)}>Cancel</Button>
+              <Button className="flex-1 bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 font-bold border-0 shadow-md" onClick={() => {
+                setShowInsufficientBalance(false);
+                setIsRechargeModalOpen(true);
+              }}>Add Funds</Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <RechargeModal 
         isOpen={isRechargeModalOpen} 
