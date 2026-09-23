@@ -53,11 +53,11 @@ export default function ReviewModal({ open, practitionerId, practitionerName, se
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] bg-[#faf9f6] text-[#1a1a1a] border-border shadow-xl">
         <div className="p-4 text-center">
-          <h2 className="text-2xl font-bold mb-2">Leave a Review</h2>
+          <h2 className="text-2xl font-extrabold mb-2 text-[#1a1a1a]">Leave a Review</h2>
           {practitionerName && (
-            <p className="text-muted-foreground mb-6">
+            <p className="text-muted-foreground mb-6 font-medium">
               How was your session with {practitionerName}?
             </p>
           )}
@@ -85,7 +85,7 @@ export default function ReviewModal({ open, practitionerId, practitionerName, se
 
           <div className="mb-6">
             <textarea
-              className="w-full min-h-[100px] p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none bg-background text-foreground"
+              className="w-full min-h-[100px] p-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary resize-none bg-white text-[#1a1a1a] shadow-sm"
               placeholder="Share your experience (optional)..."
               value={comment}
               onChange={(e) => setComment(e.target.value)}
@@ -97,14 +97,14 @@ export default function ReviewModal({ open, practitionerId, practitionerName, se
             <button
               onClick={onClose}
               disabled={isSubmitting}
-              className="px-4 py-2 border rounded-lg hover:bg-accent disabled:opacity-50"
+              className="px-5 py-2.5 border border-border bg-white rounded-xl hover:bg-gray-50 disabled:opacity-50 font-semibold shadow-sm transition-colors text-[#1a1a1a]"
             >
               Cancel
             </button>
             <button
               onClick={handleSubmit}
               disabled={isSubmitting || rating === 0}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 flex items-center gap-2"
+              className="px-5 py-2.5 bg-accent text-primary-foreground font-bold rounded-xl hover:bg-accent/90 disabled:opacity-50 flex items-center gap-2 shadow-md transition-all hover:-translate-y-0.5"
             >
               {isSubmitting ? 'Submitting...' : 'Submit Review'}
             </button>
