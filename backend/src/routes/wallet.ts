@@ -217,8 +217,8 @@ router.post(
           },
         ],
         mode: 'payment',
-        success_url: `${frontendUrl}/dashboard/wallet?recharge=success`,
-        cancel_url: `${frontendUrl}/dashboard/wallet?recharge=cancel`,
+        success_url: `${frontendUrl}/dashboard?recharge=success`,
+        cancel_url: `${frontendUrl}/dashboard?recharge=cancel`,
         client_reference_id: transaction.id,
       });
 
