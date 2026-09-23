@@ -88,6 +88,26 @@ export default function DashboardPage() {
     }
   };
 
+  const startCallSession = async (practitionerId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    const token = tokenStore.getAccess();
+    if (!token) { router.push('/login'); return; }
+    
+    if (!user?.isEmailVerified) {
+      alert('Please verify your email to unlock all features.');
+      return;
+    }
+
+    setStartingSession(practitionerId);
+    const res = await sessionsApi.create(token, practitionerId, 'CALL');
+    setStartingSession(null);
+    if (res.success && res.data) {
+      router.push(`/session/${res.data.session.id}`);
+    } else {
+      alert(res.message || 'Could not start session. Please recharge your wallet.');
+    }
+  };
+
   const fetchWallet = () => {
     const token = tokenStore.getAccess();
     if (token) {
@@ -422,11 +442,9 @@ brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={
                                 {startingSession === expert.id ? <span className="animate-spin mr-1 text-sm">↻</span> : <MessageCircle className="h-3.5 w-3.5 mr-1" />}
                                 Chat
                               </Button>
-                              <Button size="sm" disabled={!expert.isOnline} className="h-8 rounded-md px-3 bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all shadow-md disabled:opacity-40" onClick={(e) => {
-                                e.preventDefault();
-                                if (!user?.isEmailVerified) alert('Please verify your email to unlock all features.');
-                              }}>
-                                <Phone className="h-3.5 w-3.5 mr-1" /> Call
+                              <Button size="sm" disabled={!expert.isOnline || startingSession === expert.id} className="h-8 rounded-md px-3 bg-[#FFB800] text-[#1e1b4b] hover:bg-[#FFB800]/90 border-0 text-xs font-bold transition-all shadow-md disabled:opacity-40" onClick={(e) => startCallSession(expert.id, e)}>
+                                {startingSession === expert.id ? <span className="animate-spin mr-1 text-sm">↻</span> : <Phone className="h-3.5 w-3.5 mr-1" />}
+                                Call
                               </Button>
                             </div>
                           </div>
