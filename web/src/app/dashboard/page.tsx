@@ -14,7 +14,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { authApi, practitionersApi, walletApi, sessionsApi, tokenStore, type PractitionerProfile } from '@/lib/api';
+import { usersApi, practitionersApi, walletApi, sessionsApi, tokenStore, type PractitionerProfile } from '@/lib/api';
 import { getSocket } from '@/lib/socket';
 import { RechargeModal } from '@/components/wallet/RechargeModal';
 import { getPractitionerAvatar } from '@/lib/utils';
@@ -107,7 +107,7 @@ export default function DashboardPage() {
       return;
     }
 
-    authApi.me(token).then((res) => {
+    usersApi.getProfile(token).then((res) => {
       if (!res.success) { tokenStore.clear(); router.replace('/login'); return; }
       const responseData = res.data as { user: UserData; stats?: { sessionsDone: number; minutesUsed: number } };
       setUser(responseData.user);
