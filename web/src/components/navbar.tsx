@@ -22,6 +22,7 @@ import {
   Users,
   Palette,
   Layout,
+  User,
 } from 'lucide-react';
 import { tokenStore, authApi, practitionersApi, astrologerTokenStore, astrologerApi } from '@/lib/api';
 import { getAvatarUrl, getPractitionerAvatar } from '@/lib/utils';
@@ -211,9 +212,9 @@ export default function Navbar() {
           {/* Avatar row */}
           <div className="flex items-center gap-1 mb-4">
             <div className="flex -space-x-2">
-              {['/avatars/astrologer_1.jpg', '/avatars/astrologer_4.jpg', '/avatars/astrologer_6.jpg'].map((src, i) => (
-                <div key={i} className="w-7 h-7 rounded-full border-2 border-white/60 overflow-hidden">
-                  <img src={src} alt="" className="w-full h-full object-cover" />
+              {[1, 2, 3].map((_, i) => (
+                <div key={i} className="w-7 h-7 rounded-full border-2 border-white/60 bg-[#E0D4F5] flex items-center justify-center overflow-hidden">
+                  <User className="w-4 h-4 text-[#5F3BA9]" />
                 </div>
               ))}
               <div className="w-7 h-7 rounded-full border-2 border-white/60 bg-white/20 flex items-center justify-center">
