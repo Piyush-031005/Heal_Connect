@@ -104,7 +104,7 @@ export default function DashboardPage() {
     }
 
     setStartingSession(practitionerId);
-    const res = await sessionsApi.create(token, practitionerId, 'CALL');
+    const res = await sessionsApi.create(token, practitionerId, 'AUDIO');
     setStartingSession(null);
     if (res.success && res.data) {
       router.push(`/session/${res.data.session.id}`);
