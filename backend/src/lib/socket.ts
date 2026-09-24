@@ -171,9 +171,9 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
       const senderType = practitionerId && session.practitionerId === practitionerId ? 'PRACTITIONER' : 'USER';
       const senderId = senderType === 'PRACTITIONER' ? practitionerId! : userId;
 
-      // ── Contact-info moderation: run BEFORE saving ──────────────────────────
-      // If a phone number or email is detected, block the message, flag the session,
-      // and apply a temporary ban — without storing the content.
+      // ── Contact-info & Abuse moderation: run BEFORE saving ──────────────────
+      // If a phone number, email/Gmail, Instagram, Facebook, or abusive language is detected,
+      // block the message, flag the session for admin review, and alert the sender.
       const modResult = await flagContentIfNeeded(content.trim(), 'CHAT', {
         sessionId,
         userId: senderId,
@@ -185,20 +185,12 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
           sessionId,
           reason: modResult.reason ?? 'Message blocked by moderation.',
         });
-        return; // Do NOT save or broadcast the message
+        return; // Do NOT save or broadcast the prohibited message
       }
 
       const message = await prisma.chatMessage.create({
         data: { sessionId, senderId, senderType, content: content.trim() },
       });
-
-      // Non-blocking async scan for other keyword violations (abuse, fraud, etc.)
-      flagContentIfNeeded(content.trim(), 'CHAT', {
-        sessionId,
-        userId: senderId,
-        practitionerId: senderType === 'PRACTITIONER' ? senderId : session.practitionerId,
-        chatMessageId: message.id,
-      }).catch((err) => console.error('[moderation] chat scan error:', err));
 
       io!.to(`room:${sessionId}`).emit('new_message', { message });
     });
@@ -220,6 +212,37 @@ export function initSocketServer(server: HttpServer): SocketIOServer {
 
     socket.on('end_call', async ({ sessionId }: { sessionId: string }) => {
       io!.to(`room:${sessionId}`).emit('session_terminated', { sessionId, reason: 'ended_by_user' });
+    });
+
+    // ── Live call speech monitoring & guardrails ───────────────────────────
+    socket.on('call_transcript_chunk', async ({ sessionId, text, speaker }: { sessionId: string; text: string; speaker?: string }) => {
+      if (!text || !sessionId) return;
+      try {
+        const { scanContent, flagContentIfNeeded } = await import('./moderation');
+        const scanResult = scanContent(text);
+        if (scanResult.flagged) {
+          console.warn(`[Live Call Moderation] Violation detected in session ${sessionId}:`, scanResult.reasons);
+          const session = await prisma.session.findUnique({
+            where: { id: sessionId },
+            select: { userId: true, practitionerId: true },
+          });
+          if (session) {
+            await flagContentIfNeeded(text.trim(), 'CALL_TRANSCRIPT', {
+              sessionId,
+              userId: session.userId,
+              practitionerId: session.practitionerId,
+            }).catch(console.error);
+          }
+
+          io!.to(`room:${sessionId}`).emit('call_moderation_warning', {
+            sessionId,
+            reasons: scanResult.reasons,
+            message: 'Warning: Sharing contact details (phone, Gmail, Instagram, Facebook) or abusive language violates platform policies and has been flagged for admin review.',
+          });
+        }
+      } catch (err) {
+        console.error('[Live Call Moderation] Error handling transcript chunk:', err);
+      }
     });
     // ── Read receipts ────────────────────────────────────────────────────────
     socket.on('message_read', async ({ sessionId, messageId }: { sessionId: string; messageId: string }) => {

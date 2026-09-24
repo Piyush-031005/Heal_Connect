@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import {
-  ShieldAlert, UserX, CheckCircle, AlertTriangle, MessageSquare, Trash2, X
+  ShieldAlert, UserX, CheckCircle, AlertTriangle, MessageSquare, Trash2, X, Phone
 } from 'lucide-react';
 import {
   AdminShell, StatCard, StatusBadge, Toast, Pagination, SkeletonRow
@@ -160,7 +160,7 @@ export default function AdminModerationPage() {
           <table className="w-full text-sm">
             <thead className="bg-purple-50 dark:bg-white/5 border-b border-purple-100 dark:border-white/10">
               <tr>
-                {['Date', 'Reporter', 'Target', 'Reason', 'Snippet', 'Status', 'Actions'].map((h) => (
+                {['Date', 'Source', 'Target', 'Violations Detected', 'Snippet', 'Status', 'Actions'].map((h) => (
                   <th key={h} className="text-left px-4 py-3 text-xs font-extrabold text-purple-500 uppercase tracking-wide">{h}</th>
                 ))}
               </tr>
@@ -175,8 +175,18 @@ export default function AdminModerationPage() {
               ) : (
                 flags.map((flag) => (
                   <tr key={flag.id} className="hover:bg-indigo-50/30 dark:hover:bg-white/5 transition-colors">
-                    <td className="px-4 py-3 text-xs text-purple-500">{new Date(flag.createdAt).toLocaleDateString()}</td>
-                    <td className="px-4 py-3 text-xs font-bold text-indigo-950 dark:text-white">System Auto-Flag</td>
+                    <td className="px-4 py-3 text-xs text-purple-500 whitespace-nowrap">{new Date(flag.createdAt).toLocaleDateString()}</td>
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      {flag.source === 'CALL_TRANSCRIPT' ? (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+                          <Phone className="w-3 h-3" /> Call Transcript
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                          <MessageSquare className="w-3 h-3" /> Chat Message
+                        </span>
+                      )}
+                    </td>
                     <td className="px-4 py-3">
                       {flag.user ? (
                         <div className="text-xs font-bold text-blue-600">User: {flag.user.name}</div>
@@ -184,7 +194,32 @@ export default function AdminModerationPage() {
                         <div className="text-xs font-bold text-purple-600">Expert: {flag.practitioner.name}</div>
                       ) : <span className="text-xs text-purple-500">Unknown</span>}
                     </td>
-                    <td className="px-4 py-3 text-xs font-bold text-red-600">{flag.reason.replace(/_/g, ' ')}</td>
+                    <td className="px-4 py-3">
+                      <div className="flex flex-wrap gap-1 max-w-xs">
+                        {flag.reason.split(',').map((r) => {
+                          const clean = r.trim().toLowerCase();
+                          if (clean.includes('phone')) {
+                            return <span key={clean} className="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-200">Phone</span>;
+                          }
+                          if (clean.includes('gmail')) {
+                            return <span key={clean} className="px-2 py-0.5 rounded text-[11px] font-bold bg-red-100 text-red-800 border border-red-200">Gmail</span>;
+                          }
+                          if (clean.includes('email')) {
+                            return <span key={clean} className="px-2 py-0.5 rounded text-[11px] font-bold bg-orange-100 text-orange-800 border border-orange-200">Email</span>;
+                          }
+                          if (clean.includes('instagram')) {
+                            return <span key={clean} className="px-2 py-0.5 rounded text-[11px] font-bold bg-pink-100 text-pink-800 border border-pink-200">Instagram</span>;
+                          }
+                          if (clean.includes('facebook')) {
+                            return <span key={clean} className="px-2 py-0.5 rounded text-[11px] font-bold bg-blue-100 text-blue-800 border border-blue-200">Facebook</span>;
+                          }
+                          if (clean.includes('abusive')) {
+                            return <span key={clean} className="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200">Abusive Language</span>;
+                          }
+                          return <span key={clean} className="px-2 py-0.5 rounded text-[11px] font-bold bg-purple-100 text-purple-800 border border-purple-200">{clean.replace(/_/g, ' ')}</span>;
+                        })}
+                      </div>
+                    </td>
                     <td className="px-4 py-3 text-xs italic text-purple-800 dark:text-purple-300 max-w-xs truncate">"{flag.contentSnippet}"</td>
                     <td className="px-4 py-3"><StatusBadge status={flag.status} /></td>
                     <td className="px-4 py-3 flex gap-2">

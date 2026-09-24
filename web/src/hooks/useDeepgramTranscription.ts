@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import type { IMicrophoneAudioTrack, IAgoraRTCRemoteUser } from 'agora-rtc-sdk-ng';
 import { deepgramApi, sessionsApi, tokenStore } from '@/lib/api';
+import { getSocket } from '@/lib/socket';
 import type { CallState } from './useAgoraCall';
 
 export type TranscriptStatus = 'idle' | 'transcribing' | 'saved' | 'failed' | 'unavailable';
@@ -309,6 +310,23 @@ export function useDeepgramTranscription({
                 setTranscriptCount(transcriptEntriesRef.current.length);
                 setLiveSnippet(transcript);
                 console.log(`[STT] Captured final entry #${transcriptEntriesRef.current.length}: ${formatted}`);
+
+                // Real-time call guardrail scan via backend socket
+                try {
+                  const token = tokenStore.getAccess();
+                  if (token) {
+                    const appSocket = getSocket(token);
+                    if (appSocket && appSocket.connected) {
+                      appSocket.emit('call_transcript_chunk', {
+                        sessionId,
+                        text: transcript,
+                        speaker: speakerLabel,
+                      });
+                    }
+                  }
+                } catch (emitErr) {
+                  console.warn('[STT] Failed to emit call_transcript_chunk:', emitErr);
+                }
               } else {
                 setLiveSnippet(transcript);
               }

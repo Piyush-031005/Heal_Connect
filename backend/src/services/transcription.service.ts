@@ -40,8 +40,8 @@ export async function autoTranscribeSession(
       },
     });
 
-    // Run moderation scan async
-    flagContentIfNeeded(transcriptText, 'CALL_TRANSCRIPT', {
+    // Run moderation scan
+    await flagContentIfNeeded(transcriptText, 'CALL_TRANSCRIPT', {
       sessionId,
       userId,
       practitionerId,
@@ -147,27 +147,7 @@ export async function transcribeCall(
         sessionPractitionerId
       );
 
-      // 4. Check if any PII redactions occurred and flag for moderation
-      console.log(`[Transcription Step 4/4] Checking PII redactions for session ${sessionId}...`);
-      const hadPiiRedactions =
-        formattedText.includes('[PHONE_NUMBER]') ||
-        formattedText.includes('[EMAIL_ADDRESS]') ||
-        Boolean(transcript.text?.includes('[PHONE_NUMBER]') || transcript.text?.includes('[EMAIL_ADDRESS]'));
-
-      if (hadPiiRedactions && savedTranscript) {
-        console.warn(`[Transcription Moderation] PII detected in call transcript for session ${sessionId}. Flagging for moderation review.`);
-        await flagContentIfNeeded(
-          formattedText,
-          'CALL_TRANSCRIPT',
-          {
-            sessionId,
-            userId: sessionUserId,
-            practitionerId: sessionPractitionerId,
-            transcriptId: savedTranscript.id,
-          }
-        ).catch((err) => console.error('[Transcription Moderation] Error flagging PII:', err));
-      }
-
+      console.log(`[Transcription Step 4/4] Moderation scan completed for session ${sessionId}.`);
       return savedTranscript;
     } catch (err) {
       console.error(`[Transcription] AssemblyAI error for session ${sessionId}:`, err);

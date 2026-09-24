@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useAgoraCall } from '@/hooks/useAgoraCall';
 import { useDeepgramTranscription } from '@/hooks/useDeepgramTranscription';
+import { getSocket } from '@/lib/socket';
+import { tokenStore } from '@/lib/api';
+import { toast } from 'react-hot-toast';
 
 import CallFeedbackModal from './CallFeedbackModal';
 import { Button } from '@/components/ui/button';
@@ -19,6 +22,7 @@ import {
   RotateCcw,
   MessageSquare,
   FileText,
+  AlertTriangle,
 } from 'lucide-react';
 
 interface Props {
@@ -60,6 +64,22 @@ export default function AudioCallScreen({
   });
 
   const [showFeedback, setShowFeedback] = useState(false);
+  const [callWarning, setCallWarning] = useState<string | null>(null);
+
+  useEffect(() => {
+    const token = tokenStore.getAccess();
+    if (!token) return;
+    const socket = getSocket(token);
+    const handleModerationWarning = (data: { message?: string }) => {
+      const msg = data.message || 'Warning: Prohibited contact details or abusive language detected.';
+      setCallWarning(msg);
+      toast.error(msg, { duration: 6000 });
+    };
+    socket.on('call_moderation_warning', handleModerationWarning);
+    return () => {
+      socket.off('call_moderation_warning', handleModerationWarning);
+    };
+  }, [sessionId]);
 
   useEffect(() => {
     if (callState === 'ended') {
@@ -238,6 +258,15 @@ export default function AudioCallScreen({
             <div className="bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl p-3 max-w-xs mx-auto">
               <p className="font-semibold">Unable to connect</p>
               <p className="mt-0.5">{error || 'Failed to establish call connection.'}</p>
+            </div>
+          )}
+
+          {/* Active Moderation Warning Banner */}
+          {callWarning && (
+            <div className="w-full max-w-sm mx-auto p-3 rounded-2xl bg-red-50 border border-red-200 text-red-700 flex items-start gap-2.5 text-xs animate-in fade-in duration-200 text-left shadow-sm">
+              <AlertTriangle className="w-4 h-4 shrink-0 text-red-600 mt-0.5" />
+              <span className="flex-1 font-medium">{callWarning}</span>
+              <button onClick={() => setCallWarning(null)} className="shrink-0 text-red-400 hover:text-red-600 font-bold ml-1">✕</button>
             </div>
           )}
         </div>
