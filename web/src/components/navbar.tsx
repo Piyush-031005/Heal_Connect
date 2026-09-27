@@ -38,9 +38,9 @@ const MENU_SECTIONS: { title: string; items: MenuItem[] }[] = [
     ],
   },
   {
-    title: 'Free Tools',
+    title: 'Tools',
     items: [
-      { label: 'Free Services', href: '/free-services', Icon: Wand2 },
+      { label: 'Services', href: '/services', Icon: Wand2 },
     ],
   },
   {
@@ -54,7 +54,7 @@ const MENU_SECTIONS: { title: string; items: MenuItem[] }[] = [
 
 const NAV_SECTIONS = [
   { id: 'find-expert', label: 'Find Expert', href: '/practitioners' },
-  { id: 'free-services', label: 'Free Services', href: '#free-services' },
+  { id: 'services', label: 'Services', href: '#services' },
   { id: 'about', label: 'About', href: '#about' },
 ];
 
@@ -309,12 +309,12 @@ export default function Navbar() {
                 <Link href="/practitioners" className="text-sm font-semibold text-[#1C0D40] hover:text-[#5F3BA9] transition-colors">
                   Find Expert
                 </Link>
-                <Link href="#free-services" className="text-sm font-semibold text-[#1C0D40] hover:text-[#5F3BA9] transition-colors">
-                  Free Services
+                <Link href="#services" className="text-sm font-semibold text-[#1C0D40] hover:text-[#5F3BA9] transition-colors">
+                  Services
                 </Link>
                   <div className="relative group cursor-pointer">
                   <span className="text-sm font-semibold text-[#1C0D40] group-hover:text-[#5F3BA9] transition-colors flex items-center gap-1">
-                    Free Insights
+                    Insights
                     <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </span>
                   <div className="absolute top-full left-0 mt-2 w-64 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-4 px-2" style={{ backgroundColor: "#E6E6FA", borderRadius: "30px 40px 30px 50px", border: "2px solid #D8BFD8" }}>
@@ -362,7 +362,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             {isFinalHybrid && (
               <Link href="/modalities/astrology" className="md:hidden text-[10px] sm:text-xs font-semibold text-[#1C0D40] border border-border rounded-full px-2.5 py-1 whitespace-nowrap bg-[#694091]/30">
-                Free Insights
+                Insights
               </Link>
             )}
 

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from 'next-themes';
@@ -920,7 +920,7 @@ export function YourNextDiscovery() {
               <ArrowRight className="w-5 h-5" />
             </div>
           </Link>
-          <p className="text-[#3730A3]/60 text-xs mt-4 font-medium">Free to explore Â· No credit card required</p>
+          <p className="text-[#3730A3]/60 text-xs mt-4 font-medium">Ready to explore</p>
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { 
   Star, 
@@ -51,10 +51,10 @@ export default function ExploreModalities() {
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="w-8 h-[2px] bg-primary" />
-              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-primary transition-colors duration-500">Explore Free Insights</span>
+              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-primary transition-colors duration-500">Explore Insights</span>
               <div className="w-8 h-[2px] bg-primary" />
             </div>
-            <h2 className="text-4xl md:text-5xl font-serif font-medium text-[#1E2059] mb-6 transition-colors duration-500">Free Insights</h2>
+            <h2 className="text-4xl md:text-5xl font-serif font-medium text-[#1E2059] mb-6 transition-colors duration-500">Insights</h2>
             <p className="text-muted-foreground font-medium max-w-md mx-auto transition-colors duration-500">Browse 12 ancient and modern insights to find the exact guidance your soul seeks.</p>
           </div>
 

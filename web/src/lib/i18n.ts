@@ -38,8 +38,8 @@ export const translations = {
       { title: 'Master Healers', desc: 'Renowned industry veterans and celebrity healers.', perks: ['Celebrity experts', 'Exclusive sessions', 'VIP support'] },
     ],
     ctaTitle: 'Ready to start your healing journey?',
-    ctaDesc: 'Join thousands of others who have found clarity and peace. Your first 5-minute consultation is completely free.',
-    ctaBtn: 'Create Free Account',
+    ctaDesc: 'Join thousands of others who have found clarity and peace. Connect with our expert practitioners today.',
+    ctaBtn: 'Create Account',
     footerRights: '© 2026 Tara Infotech. All rights reserved.',
     privacy: 'Privacy Policy',
     terms: 'Terms of Service',
@@ -51,7 +51,7 @@ export const translations = {
     // ─── Hero Section (new) ───
     heroBadge: 'Connect with Top Experts Instantly',
     heroTitle: "India's most accurate\nastrology platform",
-    heroKundliText: 'Get Free detailed kundli',
+    heroKundliText: 'Get detailed kundli',
     heroAvgReply: 'Average reply under 12 seconds',
     heroCta: 'Start a Session',
     heroStats: [
@@ -74,7 +74,7 @@ export const translations = {
       { title: 'Chat with Astrologer', desc: 'Instant text consultation' },
       { title: 'Call Astrologer', desc: 'One-on-one voice call in seconds' },
       { title: 'Daily Horoscope', desc: 'Your personalized daily reading' },
-      { title: 'Get Free Kundli', desc: 'Detailed birth chart analysis' },
+      { title: 'Get Kundli', desc: 'Detailed birth chart analysis' },
     ],
 
     // ─── Live Count ───
@@ -116,7 +116,7 @@ export const translations = {
     servicesHeadingEm: 'offer',
     servicesViewAll: 'View all',
     servicesList: [
-      { name: 'Free Kundli', desc: 'Detailed birth chart in 60 sec' },
+      { name: 'Kundli', desc: 'Detailed birth chart in 60 sec' },
       { name: 'Daily Horoscope', desc: 'For all 12 raashis' },
       { name: 'Tarot Reading', desc: '3-card, love, career, finance' },
       { name: 'Book a Pooja', desc: 'Live pooja, verified pandits' },
@@ -152,7 +152,7 @@ export const translations = {
 
     // ─── Pricing (new specific keys) ───
     pricingHeading: 'Simple Pricing',
-    pricingSubtext: 'Choose a plan that fits your needs. All plans include first consultation free.',
+    pricingSubtext: 'Choose a plan that fits your needs. All plans offer premium access to our top experts.',
     pricingPlans: [
       { name: 'Starter', price: '$10/min', popular: false, features: ['Chat only', 'Basic horoscope', '24/7 support'] },
       { name: 'Pro', price: '$25/min', popular: true, features: ['Chat + Call', 'Detailed horoscope', 'Priority support', 'Kundli access'] },
@@ -200,14 +200,14 @@ export const translations = {
       { q: 'Is Astrology Prediction True?', a: 'Astrology offers guidance based on planetary positions and their influences. While it provides valuable insights, it\'s a tool for self-reflection and guidance rather than absolute prediction.' },
       { q: 'How Can Online Astrology Help Me In Predicting The Future?', a: 'Online astrology connects you with expert astrologers who analyze your birth chart and current planetary transits to provide personalized guidance for life decisions.' },
       { q: 'How reliable is the ZenAuraa app?', a: 'The app is built with enterprise-grade security, verified practitioners, and transparent user reviews to ensure a reliable and trustworthy experience.' },
-      { q: 'How much does ZenAuraa cost?', a: 'Prices start from just $10/min for chat consultations. We offer transparent pricing with no hidden charges. Your first consultation is absolutely free.' },
+      { q: 'How much does ZenAuraa cost?', a: 'Prices start from just $10/min for chat consultations. We offer transparent pricing with no hidden charges.' },
     ],
 
     // ─── Footer ───
     footerBrandDesc: 'ZenAuraa is the best astrology website for online Astrology predictions. Talk to Astrologer on call and get answers to all your worries by seeing the future life through Astrology Kundli Predictions from the best Astrologers from India.',
     footerColumns: [
       { title: 'Horoscope', links: ['Daily Horoscope', 'Weekly Horoscope', 'Monthly Horoscope', 'Yearly Horoscope'] },
-      { title: 'Free Services', links: ['Free Kundli', 'Kundli Matching', 'Love Calculator'] },
+      { title: 'Services', links: ['Kundli', 'Kundli Matching', 'Love Calculator'] },
       { title: 'Consultations', links: ['Chat with Astrologer', 'Talk to Astrologer'] },
       { title: 'Important Links', links: ['About Us', 'Privacy Policy', 'Refund Policy', 'Terms & Conditions'] },
     ],

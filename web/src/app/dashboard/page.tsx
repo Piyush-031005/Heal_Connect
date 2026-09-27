@@ -175,7 +175,7 @@ export default function DashboardPage() {
 
   const handleTabChange = (tab: typeof activeTab) => {
     setActiveTab(tab);
-    const specialty = tab !== 'all' ? tab : undefined;
+    const specialty = tab !== 'all' ? tab.charAt(0).toUpperCase() + tab.slice(1) : undefined;
     practitionersApi.list({ limit: 6, ...(specialty ? { specialty } : {}) }).then((res) => {
       if (res.success && res.data) setExperts(res.data.practitioners);
     });

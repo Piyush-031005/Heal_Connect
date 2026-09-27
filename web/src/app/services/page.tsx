@@ -1,7 +1,7 @@
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 
-export default function FreeServicesPage() {
+export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-[#faf9f6] flex flex-col">
       <Navbar />
@@ -11,7 +11,7 @@ export default function FreeServicesPage() {
             COMING SOON
           </h1>
           <p className="text-xl text-muted-foreground font-medium max-w-2xl mx-auto">
-            We are building amazing free services like horoscopes, tarot reading, and numerology calculators. Stay tuned!
+            We are building amazing services like horoscopes, tarot reading, and numerology calculators. Stay tuned!
           </p>
         </div>
       </main>
