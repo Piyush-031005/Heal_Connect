@@ -199,7 +199,7 @@ router.post(
         },
       });
 
-      const frontendUrl = process.env.APP_URL || (process.env.NODE_ENV === 'production' ? 'https://blue-plant-0d21bc900.7.azurestaticapps.net' : 'http://localhost:3000');
+      const frontendUrl = process.env.FRONTEND_URL || process.env.APP_URL || (process.env.NODE_ENV === 'production' ? 'https://zenauraa.com' : 'http://localhost:3000');
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
