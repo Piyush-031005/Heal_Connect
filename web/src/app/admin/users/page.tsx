@@ -974,7 +974,7 @@ export default function AdminUsersPage() {
 
                 <form onSubmit={handleUpdateBalance} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-bold text-purple-800 dark:text-purple-300 mb-1">Wallet Balance (INR)</label>
+                    <label className="block text-xs font-bold text-purple-800 dark:text-purple-300 mb-1">Wallet Balance (GBP)</label>
                     <div className="relative">
                       <span className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-500 font-bold">£</span>
                       <input

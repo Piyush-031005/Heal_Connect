@@ -16,9 +16,10 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { walletApi, tokenStore } from '@/lib/api';
 import { RechargeModal } from '@/components/wallet/RechargeModal';
-import { convertFromINR } from '@/lib/currency';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 
 export default function WalletPage() {
+  const { format, currencyCode } = useCurrencyStore();
   const [wallet, setWallet] = useState<{ balance: number; transactions: Array<{ id: string; type: string; status: string; amount: number; createdAt: string }> } | null>(null);
   const [loading, setLoading] = useState(true);
   const [isRechargeModalOpen, setIsRechargeModalOpen] = useState(false);
@@ -68,7 +69,7 @@ export default function WalletPage() {
                 <Wallet className="w-5 h-5" /> Current Balance
               </p>
               <h2 className="text-4xl md:text-5xl font-extrabold">
-                {convertFromINR(wallet?.balance || 0).display}
+                {wallet?.balance !== undefined ? (currencyCode === 'GBP' ? `£${wallet.balance.toFixed(2)}` : format(wallet.balance)) : '...'}
               </h2>
             </div>
             <Button 
@@ -131,7 +132,7 @@ export default function WalletPage() {
                           </Badge>
                         </TableCell>
                         <TableCell className={`text-right font-bold ${isCredit ? 'text-emerald-600' : 'text-[#1a1a1a]'}`}>
-                          {isCredit ? '+' : '-'}{convertFromINR(tx.amount).display}
+                          {isCredit ? '+' : '-'}{currencyCode === 'GBP' ? `£${tx.amount.toFixed(2)}` : format(tx.amount)}
                         </TableCell>
                       </TableRow>
                     );

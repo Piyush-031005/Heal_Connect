@@ -432,7 +432,7 @@ router.patch('/users/:id/balance', requireAdminAuth(SA_ONLY), async (req: Reques
     // Upsert wallet
     const updatedWallet = await prisma.wallet.upsert({
       where: { userId: id },
-      create: { userId: id, balance, currency: 'INR' },
+      create: { userId: id, balance, currency: 'GBP' },
       update: { balance },
     });
 
@@ -535,7 +535,7 @@ router.get('/users/:id', async (req: Request, res: Response) => {
       data: {
         user,
         sessionCount,
-        wallet: wallet ?? { balance: 0, currency: 'INR' },
+        wallet: wallet ?? { balance: 0, currency: 'GBP' },
       },
     });
   } catch (err) {

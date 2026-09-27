@@ -197,9 +197,9 @@ async function processSessionBilling(session: any) {
     ]);
 
     const remainingBalance = wallet.balance - ratePerMinute;
-    console.log(`Billed ₹${ratePerMinute} for session ${session.id}. Remaining balance: ₹${remainingBalance}`);
+    console.log(`Billed £${ratePerMinute} for session ${session.id}. Remaining balance: £${remainingBalance}`);
     
-    // Check Low Balance Threshold (e.g. INR 50) and notify once per session
+    // Check Low Balance Threshold (e.g. GBP 50) and notify once per session
     if (remainingBalance < 50) {
       const lowBalanceKey = `low_balance_notified:${session.id}`;
       let alreadyNotified = false;
@@ -215,7 +215,7 @@ async function processSessionBilling(session: any) {
         await sendNotificationToUser(session.userId, {
           type: 'WALLET_LOW',
           title: 'Wallet Balance Low',
-          body: `Your wallet balance is below ₹50. Please recharge soon to avoid session disconnection.`,
+          body: `Your wallet balance is below £50. Please recharge soon to avoid session disconnection.`,
           entityId: wallet.id
         });
       }

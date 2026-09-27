@@ -59,7 +59,7 @@ router.get('/', requireAuth, async (req: AuthRequest, res: Response) => {
           wallet: {
             id: practitioner.id,
             balance: earnings,
-            currency: 'INR',
+            currency: 'GBP',
             totalEarnings: earnings,
             totalSessionsCompleted: aggregations._count._all,
             transactions,
@@ -87,7 +87,7 @@ router.get('/', requireAuth, async (req: AuthRequest, res: Response) => {
           data: {
             userId: req.user!.userId,
             balance: 0,
-            currency: 'INR',
+            currency: 'GBP',
           },
           include: {
             transactions: true,
@@ -101,7 +101,7 @@ router.get('/', requireAuth, async (req: AuthRequest, res: Response) => {
             wallet: {
               id: req.user!.userId,
               balance: 0,
-              currency: 'INR',
+              currency: 'GBP',
               transactions: [],
             },
           },
@@ -199,7 +199,8 @@ router.post(
         },
       });
 
-      const frontendUrl = process.env.FRONTEND_URL || process.env.APP_URL || (process.env.NODE_ENV === 'production' ? 'https://zenauraa.com' : 'http://localhost:3000');
+      // Use the request Origin so Stripe redirects back to wherever the user is (ngrok, production, etc.)
+      const frontendUrl = req.headers.origin || process.env.FRONTEND_URL || process.env.APP_URL || (process.env.NODE_ENV === 'production' ? 'https://zenauraa.com' : 'http://localhost:3000');
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -217,8 +218,8 @@ router.post(
           },
         ],
         mode: 'payment',
-        success_url: `${frontendUrl}/dashboard?recharge=success`,
-        cancel_url: `${frontendUrl}/dashboard?recharge=cancel`,
+        success_url: `${frontendUrl}/dashboard/wallet?recharge=success`,
+        cancel_url: `${frontendUrl}/dashboard/wallet?recharge=cancel`,
         client_reference_id: transaction.id,
       });
 
