@@ -66,7 +66,24 @@ router.get(
 
     try {
       const where: Record<string, unknown> = {};
-      if (specialty != null) where['specialties'] = { has: specialty };
+      
+      if (specialty != null) {
+        const matchingSpecialties = await prisma.practitioner.findMany({
+          where: {},
+          select: { specialties: true },
+        }).then((rows) => {
+          const all = new Set<string>();
+          for (const r of rows) for (const s of r.specialties) all.add(s);
+          const term = specialty.toLowerCase();
+          return [...all].filter((s) => s.toLowerCase().includes(term));
+        });
+        if (matchingSpecialties.length > 0) {
+          where['specialties'] = { hasSome: matchingSpecialties };
+        } else {
+          where['specialties'] = { has: specialty };
+        }
+      }
+
       if (language != null) where['languages'] = { has: language };
       if (maxRate != null) where['perMinuteRate'] = { lte: parseFloat(maxRate) };
       if (onlineOnly === 'true') where['isOnline'] = true;

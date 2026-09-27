@@ -315,11 +315,18 @@ brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={
                 </div>
               )}
             </div>
-            <Link href="/practitioners">
-              <Button className="bg-white text-indigo-700 hover:bg-purple-50 border-0 rounded-full px-6 shrink-0 font-bold shadow-lg shadow-indigo-900/20">
-                <Zap className="h-4 w-4 mr-2" /> Find an Expert
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link href="/practitioners">
+                <Button className="bg-white text-indigo-700 hover:bg-purple-50 border-0 rounded-full px-6 shrink-0 font-bold shadow-lg shadow-indigo-900/20 w-full sm:w-auto">
+                  <Phone className="h-4 w-4 mr-2" /> Start calling
+                </Button>
+              </Link>
+              <Link href="/practitioners">
+                <Button className="bg-white text-indigo-700 hover:bg-purple-50 border-0 rounded-full px-6 shrink-0 font-bold shadow-lg shadow-indigo-900/20 w-full sm:w-auto">
+                  <MessageCircle className="h-4 w-4 mr-2" /> Start chatting
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
 
