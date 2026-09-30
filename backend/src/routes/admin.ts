@@ -144,7 +144,7 @@ router.get('/stats', async (_req: Request, res: Response) => {
       prisma.session.count({ where: { status: { in: ['CANCELLED', 'REJECTED'] } } }),
       prisma.session.count({ where: { type: 'CHAT' } }),
       prisma.chatMessage.count(),
-      prisma.session.aggregate({ _sum: { totalCost: true }, where: { status: 'COMPLETED' } }),
+      prisma.session.aggregate({ _sum: { totalCost: true, platformFee: true }, where: { status: 'COMPLETED' } }),
       prisma.session.aggregate({ _avg: { duration: true }, where: { status: 'COMPLETED' } }),
       prisma.review.aggregate({ _avg: { rating: true } }),
       prisma.user.count({ where: { createdAt: { gte: oneDayAgo } } }),
@@ -152,7 +152,7 @@ router.get('/stats', async (_req: Request, res: Response) => {
       prisma.user.count({ where: { createdAt: { gte: thirtyDaysAgo } } }),
     ]);
 
-    const totalRevenue = Math.round((revenueAgg._sum.totalCost ?? 0) * 100) / 100;
+    const totalRevenue = Math.round((revenueAgg._sum.platformFee ?? 0) * 100) / 100;
     const avgSessionDuration = durationAgg._avg.duration ? Math.round(durationAgg._avg.duration / 60 * 10) / 10 : 0; // in minutes
     const avgRating = ratingAgg._avg.rating ? Math.round(ratingAgg._avg.rating * 10) / 10 : 0;
 
@@ -206,7 +206,7 @@ router.get('/analytics/charts', async (_req: Request, res: Response) => {
     ] = await Promise.all([
       prisma.user.findMany({ where: { createdAt: { gte: thirtyDaysAgo } }, select: { createdAt: true } }),
       prisma.practitioner.findMany({ where: { createdAt: { gte: thirtyDaysAgo } }, select: { createdAt: true } }),
-      prisma.session.findMany({ where: { createdAt: { gte: thirtyDaysAgo } }, select: { createdAt: true, status: true, totalCost: true, duration: true } }),
+      prisma.session.findMany({ where: { createdAt: { gte: thirtyDaysAgo } }, select: { createdAt: true, status: true, totalCost: true, platformFee: true, duration: true } }),
       prisma.chatMessage.findMany({ where: { createdAt: { gte: thirtyDaysAgo } }, select: { createdAt: true } }),
       prisma.session.groupBy({ by: ['status'], _count: { status: true } }),
       prisma.practitioner.findMany({ select: { specialties: true } }),
@@ -230,7 +230,7 @@ router.get('/analytics/charts', async (_req: Request, res: Response) => {
       if (datesMap[key]) {
         datesMap[key].sessions += 1;
         if (s.status === 'COMPLETED') {
-          datesMap[key].revenue += s.totalCost;
+          datesMap[key].revenue += s.platformFee || 0;
         }
       }
     }

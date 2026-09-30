@@ -32,7 +32,7 @@ router.get('/', requireAuth, async (req: AuthRequest, res: Response) => {
       const [aggregations, recentSessions] = await Promise.all([
         prisma.session.aggregate({
           where: { practitionerId: practitioner.id, status: 'COMPLETED' },
-          _sum: { totalCost: true },
+          _sum: { expertEarnings: true },
           _count: { _all: true },
         }),
         prisma.session.findMany({
@@ -43,10 +43,10 @@ router.get('/', requireAuth, async (req: AuthRequest, res: Response) => {
         }),
       ]);
 
-      const earnings = aggregations._sum.totalCost || 0;
+      const earnings = aggregations._sum.expertEarnings || 0;
       const transactions = recentSessions.map((s) => ({
         id: s.id,
-        amount: s.totalCost,
+        amount: s.expertEarnings,
         type: 'EARNING',
         status: 'SUCCESS',
         description: `${s.type} session with ${s.user.name || 'Client'}`,

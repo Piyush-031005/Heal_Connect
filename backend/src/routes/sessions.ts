@@ -180,12 +180,12 @@ router.get('/practitioner/history', requireAuth, async (req: AuthRequest, res: R
     }),
     prisma.session.aggregate({
       where: { practitionerId, status: 'COMPLETED' },
-      _sum: { totalCost: true },
+      _sum: { expertEarnings: true },
       _count: { _all: true },
     })
   ]);
 
-  const totalEarnings = aggregations._sum.totalCost || 0;
+  const totalEarnings = aggregations._sum.expertEarnings || 0;
   // Real lifetime count, not sessions.length — that list is capped at the
   // last 20 (take: 20 above), so the expert dashboard's "Sessions Done" stat
   // was silently stuck at a max of 20 for any practitioner past that point.

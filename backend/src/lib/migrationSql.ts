@@ -214,6 +214,10 @@ CREATE UNIQUE INDEX IF NOT EXISTS "AdminUser_email_key" ON "AdminUser"("email");
 CREATE INDEX IF NOT EXISTS "AdminUser_email_idx" ON "AdminUser"("email");
 
 ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "timeOfBirth" TEXT;
+
+-- Commission split: 15% platform fee, 85% expert earnings
+ALTER TABLE "Session" ADD COLUMN IF NOT EXISTS "platformFee" DOUBLE PRECISION NOT NULL DEFAULT 0;
+ALTER TABLE "Session" ADD COLUMN IF NOT EXISTS "expertEarnings" DOUBLE PRECISION NOT NULL DEFAULT 0;
 `;
 
 /**

@@ -170,6 +170,8 @@ model Session {
   scheduledStartTime DateTime?
   scheduledEndTime   DateTime?
   totalCost          Float        @default(0)
+  platformFee        Float        @default(0)
+  expertEarnings     Float        @default(0)
   createdAt          DateTime     @default(now())
   updatedAt          DateTime     @updatedAt
 

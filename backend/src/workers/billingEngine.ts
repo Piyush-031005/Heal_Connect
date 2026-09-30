@@ -7,6 +7,7 @@ import { sendNotificationToUser } from '../services/notification.service';
 const BILLING_INTERVAL_MS = 10000; // Check every 10 seconds
 const BILLING_CYCLE_MS = 60000; // Bill every 60 seconds
 const GRACE_PERIOD_MS = 60000; // 60 seconds grace period before termination
+const COMMISSION_RATE = 0.15; // 15% platform fee
 
 // Backoff state for DB connection errors
 let _consecutiveDbErrors = 0;
@@ -184,7 +185,10 @@ async function processSessionBilling(session: any) {
       return;
     }
 
-    // Atomically debit user wallet and update session total cost
+    const platformFeeIncrement = ratePerMinute * COMMISSION_RATE;
+    const expertEarningsIncrement = ratePerMinute * (1 - COMMISSION_RATE);
+
+    // Atomically debit user wallet and update session total cost & splits
     await prisma.$transaction([
       prisma.wallet.update({
         where: { id: wallet.id },
@@ -192,7 +196,11 @@ async function processSessionBilling(session: any) {
       }),
       prisma.session.update({
         where: { id: session.id },
-        data: { totalCost: { increment: ratePerMinute } },
+        data: { 
+          totalCost: { increment: ratePerMinute },
+          platformFee: { increment: platformFeeIncrement },
+          expertEarnings: { increment: expertEarningsIncrement }
+        },
       }),
     ]);
 
