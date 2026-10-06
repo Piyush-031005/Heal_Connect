@@ -7,7 +7,7 @@ import { sendNotificationToUser } from '../services/notification.service';
 const BILLING_INTERVAL_MS = 10000; // Check every 10 seconds
 const BILLING_CYCLE_MS = 60000; // Bill every 60 seconds
 const GRACE_PERIOD_MS = 60000; // 60 seconds grace period before termination
-const COMMISSION_RATE = 0.15; // 15% platform fee
+const COMMISSION_RATE = 0.18; // 18% platform fee
 
 // Backoff state for DB connection errors
 let _consecutiveDbErrors = 0;
