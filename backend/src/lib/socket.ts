@@ -9,7 +9,11 @@ let io: SocketIOServer | null = null;
 export function initSocketServer(server: HttpServer): SocketIOServer {
   io = new SocketIOServer(server, {
     cors: {
-      origin: [process.env.FRONTEND_URL || 'http://localhost:3000', 'http://localhost:3000'],
+      origin: [
+        process.env.FRONTEND_URL || 'https://zenauraa.com',
+        'https://zenauraa.com',
+        'http://localhost:3000'
+      ],
       credentials: true,
       methods: ['GET', 'POST'],
     },

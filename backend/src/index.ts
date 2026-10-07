@@ -47,7 +47,8 @@ app.use(helmet({
 
 app.use(cors({
   origin: [
-    process.env.FRONTEND_URL || 'http://localhost:3000',
+    process.env.FRONTEND_URL || 'https://zenauraa.com',
+    'https://zenauraa.com',
     'http://localhost:3000',
   ],
   credentials: true,
