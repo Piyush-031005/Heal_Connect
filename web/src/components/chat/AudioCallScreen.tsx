@@ -369,7 +369,7 @@ export default function AudioCallScreen({
             {onReturnToChat && (
               <Button
                 variant="outline"
-                className="rounded-full px-8 py-3.5 text-sm font-semibold gap-2 border-indigo-200 text-indigo-700 hover:bg-indigo-50"
+                className="rounded-full h-14 px-10 text-base font-bold gap-2 bg-white text-[#2d1b69] border border-purple-200 hover:bg-purple-50 transition-all shadow-sm"
                 onClick={onReturnToChat}
               >
                 <MessageSquare className="w-5 h-5" />
@@ -377,7 +377,7 @@ export default function AudioCallScreen({
               </Button>
             )}
             <Button
-              className="rounded-full px-8 py-3.5 text-sm font-semibold gap-2 bg-[#4f46e5] hover:bg-[#4338ca] text-white"
+              className="rounded-full h-14 px-10 text-base font-bold gap-2 bg-[#FAD058] hover:bg-[#F0C240] text-[#2d1b69] transition-all shadow-sm border-0"
               onClick={startCall}
             >
               <RotateCcw className="w-5 h-5" />
