@@ -178,7 +178,7 @@ export const authApi = {
     }),
 
   me: (accessToken: string) =>
-    request('/api/auth/me', { headers: authHeader(accessToken) }),
+    request<{ user: { id: string; email: string | null; isEmailVerified?: boolean; isPhoneVerified?: boolean; role?: string; isVerified?: boolean } }>('/api/auth/me', { headers: authHeader(accessToken) }),
 };
 
 export const usersApi = {
