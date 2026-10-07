@@ -5,7 +5,6 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { agoraApi, tokenStore } from '@/lib/api';
 
-const ISSUES = ['Echo', 'Lag', 'Dropped call', 'Low volume', 'Background noise'];
 
 interface Props {
   sessionId: string;
@@ -16,15 +15,10 @@ interface Props {
 export default function CallFeedbackModal({ sessionId, open, onClose }: Props) {
   const [audioQuality, setAudioQuality] = useState(0);
   const [overallRating, setOverallRating] = useState(0);
-  const [selectedIssues, setSelectedIssues] = useState<string[]>([]);
   const [comment, setComment] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
 
-  const toggleIssue = (issue: string) =>
-    setSelectedIssues((prev) =>
-      prev.includes(issue) ? prev.filter((i) => i !== issue) : [...prev, issue]
-    );
 
   const submit = async () => {
     if (!audioQuality || !overallRating) return;
@@ -35,7 +29,7 @@ export default function CallFeedbackModal({ sessionId, open, onClose }: Props) {
         sessionId,
         audioQuality,
         overallRating,
-        issues: selectedIssues,
+        issues: [],
         comment: comment.trim() || undefined,
       });
     }
@@ -62,25 +56,6 @@ export default function CallFeedbackModal({ sessionId, open, onClose }: Props) {
             <div>
               <p className="font-semibold text-sm mb-1">Audio quality?</p>
               <StarRow value={audioQuality} onChange={setAudioQuality} />
-            </div>
-
-            <div>
-              <p className="text-sm text-muted-foreground mb-2">Any issues? (optional)</p>
-              <div className="flex flex-wrap gap-2">
-                {ISSUES.map((issue) => (
-                  <button
-                    key={issue}
-                    onClick={() => toggleIssue(issue)}
-                    className={`text-xs px-3 py-1 rounded-full border transition-colors ${
-                      selectedIssues.includes(issue)
-                        ? 'bg-primary text-primary-foreground border-primary'
-                        : 'border-border hover:bg-muted'
-                    }`}
-                  >
-                    {issue}
-                  </button>
-                ))}
-              </div>
             </div>
 
             <textarea
