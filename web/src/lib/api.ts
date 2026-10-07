@@ -46,6 +46,7 @@ export interface UserProfile {
   wellnessInterests: string[];
   photoUrl: string | null;
   isEmailVerified: boolean;
+  isPhoneVerified: boolean;
 }
 
 export interface PractitionerProfile {
@@ -184,7 +185,7 @@ export const usersApi = {
   getProfile: (token: string) =>
     request<{ user: UserProfile }>('/api/users/me', { headers: authHeader(token) }),
 
-  updateProfile: (token: string, body: Partial<Omit<UserProfile, 'id' | 'email' | 'isEmailVerified' | 'photoUrl'>>) =>
+  updateProfile: (token: string, body: Partial<Omit<UserProfile, 'id' | 'email' | 'isEmailVerified' | 'isPhoneVerified' | 'photoUrl'>>) =>
     request<{ user: UserProfile }>('/api/users/me', {
       method: 'PATCH',
       headers: authHeader(token),

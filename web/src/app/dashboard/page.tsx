@@ -25,6 +25,7 @@ interface UserData {
   name: string | null;
   email: string | null;
   isEmailVerified: boolean;
+  isPhoneVerified: boolean;
   photoUrl?: string | null;
 }
 
@@ -74,8 +75,8 @@ export default function DashboardPage() {
     const token = tokenStore.getAccess();
     if (!token) { router.push('/login'); return; }
     
-    if (!user?.isEmailVerified) {
-      alert('Please verify your email to unlock all features.');
+    if (!user?.isEmailVerified && !user?.isPhoneVerified) {
+      alert('Please verify your account to unlock all features.');
       return;
     }
 
@@ -98,8 +99,8 @@ export default function DashboardPage() {
     const token = tokenStore.getAccess();
     if (!token) { router.push('/login'); return; }
     
-    if (!user?.isEmailVerified) {
-      alert('Please verify your email to unlock all features.');
+    if (!user?.isEmailVerified && !user?.isPhoneVerified) {
+      alert('Please verify your account to unlock all features.');
       return;
     }
 
@@ -308,10 +309,10 @@ brightness={2.8} blueBoost={1.4} vignette={0.6} grain={0.04} dpr={1} lightMode={
                 <Sparkles className="w-4 h-4 mt-0.5 shrink-0" />
                 <span>Connect with a verified expert and start your healing journey today.</span>
               </p>
-              {!user?.isEmailVerified && (
+              {(!user?.isEmailVerified && !user?.isPhoneVerified) && (
                 <div className="mt-3 flex items-center gap-2 text-foreground text-sm bg-white/20 border border-border rounded-lg px-3 py-2 w-fit">
                   <Shield className="h-4 w-4 flex-shrink-0" />
-                  Please verify your email to unlock all features.
+                  Please verify your account to unlock all features.
                 </div>
               )}
             </div>

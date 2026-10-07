@@ -55,14 +55,14 @@ export default function PractitionersPage() {
   const [suggestions, setSuggestions] = useState<Practitioner[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchBoxRef = useRef<HTMLDivElement>(null);
-  const [isEmailVerified, setIsEmailVerified] = useState<boolean | null>(null);
+  const [isVerified, setIsVerified] = useState<boolean | null>(null);
 
   useEffect(() => {
     const token = tokenStore.getAccess();
     if (token) {
       authApi.me(token).then((res) => {
         if (res.success && res.data) {
-          setIsEmailVerified((res.data as any).user?.isEmailVerified ?? false);
+          setIsVerified(res.data?.user?.isEmailVerified || res.data?.user?.isPhoneVerified || false);
         }
       });
     }
@@ -244,7 +244,7 @@ export default function PractitionersPage() {
         ) : (
           <>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
-              {practitioners.map((p) => <PractitionerCard key={p.id} practitioner={p} isEmailVerified={isEmailVerified} />)}
+              {practitioners.map((p) => <PractitionerCard key={p.id} practitioner={p} isVerified={isVerified} />)}
             </div>
             {practitioners.length < total && (
               <div className="text-center mt-8">
@@ -260,7 +260,7 @@ export default function PractitionersPage() {
   );
 }
 
-function PractitionerCard({ practitioner: p, isEmailVerified }: { practitioner: Practitioner, isEmailVerified?: boolean | null }) {
+function PractitionerCard({ practitioner: p, isVerified }: { practitioner: Practitioner, isVerified?: boolean | null }) {
   const router = useRouter();
   const [calling, setCalling] = useState(false);
   const [chatting, setChatting] = useState(false);
@@ -273,7 +273,7 @@ function PractitionerCard({ practitioner: p, isEmailVerified }: { practitioner: 
       router.push(`/login?returnUrl=/practitioners`);
       return;
     }
-    if (isEmailVerified === false) {
+    if (isVerified === false) {
       alert('Please verify your email to unlock all features.');
       return;
     }

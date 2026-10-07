@@ -21,7 +21,7 @@ router.get('/me', requireAuth, async (req: AuthRequest, res: Response) => {
       select: {
         id: true, email: true, name: true, phone: true, dob: true,
         birthPlace: true, timeOfBirth: true, gender: true, wellnessInterests: true,
-        photoUrl: true, isEmailVerified: true, provider: true, createdAt: true,
+        photoUrl: true, isEmailVerified: true, isPhoneVerified: true, provider: true, createdAt: true,
       },
     });
     if (!user) { res.status(404).json({ success: false, message: 'User not found' }); return; }

@@ -166,7 +166,7 @@ export default function ProfilePage() {
                 <div className="flex items-center gap-2 mt-1">
                   <Mail className="w-4 h-4 text-purple-400" />
                   <span className="text-sm text-purple-500">{profile.email}</span>
-                  {profile.isEmailVerified && (
+                  {(profile.isEmailVerified || profile.isPhoneVerified) && (
                     <Badge className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold gap-1 rounded-full px-2">
                       <Check className="w-3 h-3" /> Verified
                     </Badge>
@@ -179,9 +179,9 @@ export default function ProfilePage() {
                   </div>
                 )}
               </div>
-              {!profile.isEmailVerified && (
+              {(!profile.isEmailVerified && !profile.isPhoneVerified) && (
                 <Badge variant="outline" className="border-indigo-300 text-indigo-700 bg-purple-50 gap-1">
-                  <Shield className="w-3 h-3" /> Verify Email
+                  <Shield className="w-3 h-3" /> Verify Account
                 </Badge>
               )}
             </div>

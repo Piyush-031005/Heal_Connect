@@ -46,7 +46,7 @@ export default function PractitionerDetail() {
   const [loading, setLoading] = useState(true);
   const [calling, setCalling] = useState(false);
   const [chatting, setChatting] = useState(false);
-  const [isEmailVerified, setIsEmailVerified] = useState<boolean | null>(null);
+  const [isVerified, setIsVerified] = useState<boolean | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -62,7 +62,7 @@ export default function PractitionerDetail() {
     if (token) {
       authApi.me(token).then((res) => {
         if (res.success && res.data) {
-          setIsEmailVerified((res.data as any).user?.isEmailVerified ?? false);
+          setIsVerified(res.data?.user?.isEmailVerified || res.data?.user?.isPhoneVerified || false);
         }
       });
 
@@ -97,8 +97,8 @@ export default function PractitionerDetail() {
       return;
     }
 
-    if (isEmailVerified === false) {
-      alert('Please verify your email to unlock all features.');
+    if (isVerified === false) {
+      alert('Please verify your account to unlock all features.');
       return;
     }
 
@@ -133,8 +133,8 @@ export default function PractitionerDetail() {
       return;
     }
 
-    if (isEmailVerified === false) {
-      alert('Please verify your email to unlock all features.');
+    if (isVerified === false) {
+      alert('Please verify your account to unlock all features.');
       return;
     }
 
