@@ -9,6 +9,7 @@ import ChatWindow from '@/components/chat/ChatWindow';
 import { Button } from '@/components/ui/button';
 import { tokenStore, agoraApi, sessionsApi, type PractitionerProfile } from '@/lib/api';
 import { getSocket } from '@/lib/socket';
+import { toast } from 'react-hot-toast';
 
 // Agora SDK uses `window` at import time — must never be SSR'd
 const AudioCallScreen = dynamic(() => import('@/components/chat/AudioCallScreen'), { ssr: false });
@@ -57,6 +58,11 @@ export default function SessionPage() {
       if (res.success && res.data) {
         const session = res.data.session;
         setActiveSession(session);
+        
+        toast('This session is being recorded and transcribed for quality and safety purposes.', {
+          icon: '🔴',
+          duration: 5000,
+        });
         
         const base64Url = token.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
