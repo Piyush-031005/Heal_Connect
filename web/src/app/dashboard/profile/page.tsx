@@ -31,6 +31,7 @@ interface UserProfile {
   wellnessInterests: string[];
   photoUrl: string | null;
   isEmailVerified: boolean;
+  isPhoneVerified: boolean;
 }
 
 export default function ProfilePage() {
