@@ -313,7 +313,7 @@ export default function ProfilePage() {
           <Button
             onClick={handleSave}
             disabled={saving}
-            className="flex-1 bg-purple-400 hover:bg-indigo-600 text-white border-0 rounded-full h-12 font-bold shadow-lg shadow-indigo-200 transition-all"
+            className="flex-1 bg-[#FAD058] hover:bg-[#F0C240] text-[#2d1b69] border-0 rounded-full h-12 font-bold shadow-lg shadow-[#FAD058]/20 transition-all"
           >
             {saving ? (
               <Loader2 className="h-5 w-5 animate-spin" />
@@ -324,7 +324,7 @@ export default function ProfilePage() {
             )}
           </Button>
           <Link href="/dashboard">
-            <Button variant="outline" className="border-indigo-200 text-purple-700 hover:text-indigo-700 hover:bg-purple-50 rounded-full h-12 px-6">
+            <Button type="button" className="bg-white border border-purple-200 text-[#2d1b69] hover:text-[#1a0b2e] hover:bg-purple-50 rounded-full h-12 px-6 shadow-sm transition-all">
               Cancel
             </Button>
           </Link>
@@ -334,10 +334,10 @@ export default function ProfilePage() {
         <div className="border-t border-indigo-100 pt-4">
           <p className="text-xs text-purple-400 mb-3">You can download a copy of all your data stored on ZenAuraa.</p>
           <Button
-            variant="outline"
+            type="button"
             onClick={handleExportData}
             disabled={exporting}
-            className="w-full border-indigo-200 text-indigo-700 hover:bg-indigo-50 rounded-full h-11 gap-2 font-semibold"
+            className="w-full bg-white border border-purple-200 text-[#2d1b69] hover:bg-purple-50 rounded-full h-11 gap-2 font-semibold shadow-sm transition-all"
           >
             {exporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
             {exporting ? 'Preparing export...' : 'Download My Data'}
