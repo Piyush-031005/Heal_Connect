@@ -42,7 +42,7 @@ const SPECIALTIES = ['Vedic Astrology', 'Tarot', 'Reiki', 'Vastu', 'Numerology',
 const LANGUAGES = ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Bengali', 'Marathi'];
 const API_URL = '';
 
-const SELECT_CLS = 'w-full text-sm rounded-xl bg-card/80 dark:bg-card/80 border border-border px-4 py-2.5 text-[#2d1b69] focus:outline-none focus:ring-1 focus:ring-primary transition-all hover:bg-secondary';
+const SELECT_CLS = 'w-full text-sm rounded-xl bg-white border border-border px-4 py-2.5 text-[#2d1b69] focus:outline-none focus:ring-1 focus:ring-primary transition-all hover:bg-secondary [color-scheme:light]';
 
 export default function PractitionersPage() {
   const { format, currencySymbol, currencyCode } = useCurrencyStore();
@@ -105,7 +105,7 @@ export default function PractitionersPage() {
         <div className="flex gap-4 mb-8">
           <div className="relative flex-1">
             <Search className="absolute left-4 top-3.5 h-5 w-5 text-muted-foreground" />
-            <input type="text" placeholder="Search by name or specialty..." value={filters.search} onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))} className="w-full pl-12 pr-4 py-3 text-base rounded-2xl bg-card/80 dark:bg-card/80 border border-border focus:outline-none focus:ring-1 focus:ring-primary text-[#2d1b69] placeholder:text-muted-foreground transition-all backdrop-blur-sm" />
+            <input type="text" placeholder="Search by name or specialty..." value={filters.search} onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))} className="w-full pl-12 pr-4 py-3 text-base rounded-2xl bg-white border border-border focus:outline-none focus:ring-1 focus:ring-primary text-[#2d1b69] placeholder:text-muted-foreground transition-all backdrop-blur-sm" />
           </div>
           <Button variant="outline" onClick={() => setShowFilters((v) => !v)} className={`rounded-2xl px-6 gap-2 border-border hover:bg-secondary hover:border-border text-[#2d1b69] h-[50px] transition-all backdrop-blur-sm ${showFilters ? 'bg-secondary border-border' : 'bg-card/80 dark:bg-card/80'}`}>
             <SlidersHorizontal className="h-4 w-4" />
@@ -120,15 +120,15 @@ export default function PractitionersPage() {
             <div>
               <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Specialty</label>
               <select value={filters.specialty} onChange={(e) => setFilters((f) => ({ ...f, specialty: e.target.value }))} className={SELECT_CLS}>
-                <option value="" className="bg-card">All</option>
-                {SPECIALTIES.map((s) => <option key={s} value={s} className="bg-card">{s}</option>)}
+                <option value="" className="bg-white text-[#2d1b69]">All</option>
+                {SPECIALTIES.map((s) => <option key={s} value={s} className="bg-white text-[#2d1b69]">{s}</option>)}
               </select>
             </div>
             <div>
               <label className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Language</label>
               <select value={filters.language} onChange={(e) => setFilters((f) => ({ ...f, language: e.target.value }))} className={SELECT_CLS}>
-                <option value="" className="bg-card">All</option>
-                {LANGUAGES.map((l) => <option key={l} value={l} className="bg-card">{l}</option>)}
+                <option value="" className="bg-white text-[#2d1b69]">All</option>
+                {LANGUAGES.map((l) => <option key={l} value={l} className="bg-white text-[#2d1b69]">{l}</option>)}
               </select>
             </div>
             <div>
