@@ -369,18 +369,18 @@ export default function AudioCallScreen({
             {onReturnToChat && (
               <Button
                 variant="outline"
-                className="rounded-full px-5 py-2.5 text-xs font-semibold gap-2 border-indigo-200 text-indigo-700 hover:bg-indigo-50"
+                className="rounded-full px-8 py-3.5 text-sm font-semibold gap-2 border-indigo-200 text-indigo-700 hover:bg-indigo-50"
                 onClick={onReturnToChat}
               >
-                <MessageSquare className="w-4 h-4" />
+                <MessageSquare className="w-5 h-5" />
                 <span>Return to Chat</span>
               </Button>
             )}
             <Button
-              className="rounded-full px-5 py-2.5 text-xs font-semibold gap-2 bg-[#4f46e5] hover:bg-[#4338ca] text-white"
+              className="rounded-full px-8 py-3.5 text-sm font-semibold gap-2 bg-[#4f46e5] hover:bg-[#4338ca] text-white"
               onClick={startCall}
             >
-              <RotateCcw className="w-4 h-4" />
+              <RotateCcw className="w-5 h-5" />
               <span>{callState === 'ended' ? 'Call Again' : 'Try Again'}</span>
             </Button>
           </div>
