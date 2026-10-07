@@ -99,7 +99,7 @@ export async function sendWelcomeEmail(to: string, name: string, verifyUrl?: str
           experts for astrology, tarot, vastu, and more.
         </p>
         <p style="color:#6b7280;font-size:16px;line-height:1.7;margin:0 0 32px;">
-          Your <strong style="color:#d97706;">first session is completely free</strong>. No credit card needed.
+          Explore our directory of experts and <strong style="color:#d97706;">start your journey toward inner peace</strong> today.
         </p>
         <p style="text-align:center;">${btn(primaryUrl, primaryText)}</p>
         ${verifyUrl ? '' : `
