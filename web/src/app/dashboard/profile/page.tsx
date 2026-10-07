@@ -80,11 +80,15 @@ export default function ProfilePage() {
   }, [router]);
 
   const handleSave = async () => {
+    if (!form.name || form.name.trim() === '') {
+      setError('Full Name is a required field.');
+      return;
+    }
     const token = tokenStore.getAccess();
     if (!token) return;
     setSaving(true); setError('');
     const res = await usersApi.updateProfile(token, {
-      name: form.name || undefined, dob: form.dob || undefined,
+      name: form.name.trim(), dob: form.dob || undefined,
       birthPlace: form.birthPlace || undefined, timeOfBirth: form.timeOfBirth || undefined, gender: form.gender || undefined,
       phone: form.phone || undefined, wellnessInterests: interests,
     });
