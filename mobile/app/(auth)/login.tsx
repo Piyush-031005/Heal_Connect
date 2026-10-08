@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, Image, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, Image, ActivityIndicator, Modal, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useAuth } from '../../hooks/useAuth';
@@ -24,6 +24,21 @@ const TEXT = '#1E1035';
 const TEXT_LIGHT = '#ffffff';
 const TEXT_MUTED = 'rgba(255,255,255,0.7)';
 
+const COUNTRIES = [
+  { name: 'India', code: '+91', flag: '🇮🇳' },
+  { name: 'United States', code: '+1', flag: '🇺🇸' },
+  { name: 'United Kingdom', code: '+44', flag: '🇬🇧' },
+  { name: 'Canada', code: '+1', flag: '🇨🇦' },
+  { name: 'Australia', code: '+61', flag: '🇦🇺' },
+  { name: 'Germany', code: '+49', flag: '🇩🇪' },
+  { name: 'France', code: '+33', flag: '🇫🇷' },
+  { name: 'United Arab Emirates', code: '+971', flag: '🇦🇪' },
+  { name: 'Singapore', code: '+65', flag: '🇸🇬' },
+  { name: 'South Africa', code: '+27', flag: '🇿🇦' },
+  { name: 'Brazil', code: '+55', flag: '🇧🇷' },
+  { name: 'Mexico', code: '+52', flag: '🇲🇽' },
+];
+
 export default function LoginScreen() {
   const router = useRouter();
   const { initialize } = useAuth();
@@ -33,6 +48,8 @@ export default function LoginScreen() {
   
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
+  const [showCountryPicker, setShowCountryPicker] = useState(false);
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -79,7 +96,7 @@ export default function LoginScreen() {
     if (!phone) { setError('Please enter a phone number'); return; }
     setError('');
     setLoading(true);
-    const fullPhone = phone.startsWith('+') ? phone : '+91' + phone.trim();
+    const fullPhone = phone.startsWith('+') ? phone : selectedCountry.code + phone.trim();
     try {
       if (role === 'expert') {
         const res = await authApi.practitionerSendOtp(fullPhone);
@@ -321,13 +338,16 @@ export default function LoginScreen() {
                 <View>
                   <Text style={{ fontSize: 13, fontWeight: '700', color: '#4C1D95', marginBottom: 8, marginLeft: 4 }}>Phone Number</Text>
                   <View style={{ flexDirection: 'row', gap: 8 }}>
-                    <View style={{ 
-                      backgroundColor: 'rgba(255,255,255,0.35)', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, 
-                      paddingHorizontal: 16, height: 54, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', gap: 6
-                    }}>
-                      <Text style={{ fontSize: 18 }}>🇮🇳</Text>
-                      <Text style={{ color: '#1E1035', fontSize: 15, fontWeight: '700' }}>+91</Text>
-                    </View>
+                    <TouchableOpacity 
+                      onPress={() => setShowCountryPicker(true)}
+                      style={{ 
+                        backgroundColor: 'rgba(255,255,255,0.35)', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, 
+                        paddingHorizontal: 16, height: 54, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', gap: 6
+                      }}>
+                      <Text style={{ fontSize: 18 }}>{selectedCountry.flag}</Text>
+                      <Text style={{ color: '#1E1035', fontSize: 15, fontWeight: '700' }}>{selectedCountry.code}</Text>
+                      <Text style={{ color: '#6D28D9', fontSize: 10, marginLeft: 2 }}>▼</Text>
+                    </TouchableOpacity>
                     <TextInput
                       placeholder="9876543210"
                       placeholderTextColor="rgba(109,40,217,0.4)"
@@ -398,6 +418,36 @@ export default function LoginScreen() {
                 </View>
               </>
             )}
+            {/* Country Picker Modal */}
+            <Modal visible={showCountryPicker} animationType="slide" transparent={true} onRequestClose={() => setShowCountryPicker(false)}>
+              <View style={{ flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                <View style={{ backgroundColor: '#fff', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, height: '70%' }}>
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                    <Text style={{ fontSize: 20, fontWeight: '800', color: '#1E1035' }}>Select Country</Text>
+                    <TouchableOpacity onPress={() => setShowCountryPicker(false)}>
+                      <Text style={{ fontSize: 20, color: '#6b7280', padding: 8 }}>✕</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <FlatList
+                    data={COUNTRIES}
+                    keyExtractor={(item) => item.code + item.name}
+                    renderItem={({ item }) => (
+                      <TouchableOpacity 
+                        style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 16, borderBottomWidth: 1, borderBottomColor: '#f3f4f6' }}
+                        onPress={() => { setSelectedCountry(item); setShowCountryPicker(false); }}
+                      >
+                        <Text style={{ fontSize: 24, marginRight: 16 }}>{item.flag}</Text>
+                        <Text style={{ flex: 1, fontSize: 16, color: '#1E1035', fontWeight: '500' }}>{item.name}</Text>
+                        <Text style={{ fontSize: 16, color: '#6b7280', fontWeight: '600' }}>{item.code}</Text>
+                      </TouchableOpacity>
+                    )}
+                  />
+                </View>
+              </View>
+            </Modal>
+
+
+
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
