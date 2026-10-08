@@ -122,14 +122,19 @@ export default function WalletScreen() {
           ) : (
             transactions.map((tx) => (
               <View key={tx.id} style={styles.txRow}>
-                <View style={styles.txIconWrap}>
+                <View style={[styles.txIconWrap, tx.status === 'PENDING' && { opacity: 0.5 }]}>
                   {tx.type === 'RECHARGE' ? <CheckCircle2 color="#10B981" size={24}/> : <Wallet color="#6366f1" size={24}/>}
                 </View>
                 <View style={styles.txInfo}>
-                  <Text style={styles.txType}>{tx.type}</Text>
+                  <Text style={[styles.txType, tx.status === 'PENDING' && { color: '#9ca3af' }]}>
+                    {tx.type} {tx.status === 'PENDING' ? '(Pending)' : ''}
+                  </Text>
                   <Text style={styles.txDate}>{new Date(tx.createdAt).toLocaleDateString()}</Text>
                 </View>
-                <Text style={[styles.txAmount, tx.type === 'RECHARGE' ? {color: '#10B981'} : {color: TEXT}]}>
+                <Text style={[
+                  styles.txAmount, 
+                  tx.status === 'PENDING' ? { color: '#9ca3af' } : tx.type === 'RECHARGE' ? { color: '#10B981' } : { color: TEXT }
+                ]}>
                   {tx.type === 'RECHARGE' ? '+' : '-'}{symbol}{tx.amount}
                 </Text>
               </View>

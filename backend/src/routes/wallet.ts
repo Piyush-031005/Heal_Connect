@@ -59,7 +59,7 @@ router.get('/', requireAuth, async (req: AuthRequest, res: Response) => {
           wallet: {
             id: practitioner.id,
             balance: earnings,
-            currency: 'GBP',
+            currency: 'INR',
             totalEarnings: earnings,
             totalSessionsCompleted: aggregations._count._all,
             transactions,
@@ -87,7 +87,7 @@ router.get('/', requireAuth, async (req: AuthRequest, res: Response) => {
           data: {
             userId: req.user!.userId,
             balance: 0,
-            currency: 'GBP',
+            currency: 'INR',
           },
           include: {
             transactions: true,
@@ -101,13 +101,17 @@ router.get('/', requireAuth, async (req: AuthRequest, res: Response) => {
             wallet: {
               id: req.user!.userId,
               balance: 0,
-              currency: 'GBP',
+              currency: 'INR',
               transactions: [],
             },
           },
         });
         return;
       }
+    }
+
+    if (wallet) {
+      wallet.currency = 'INR';
     }
 
     res.json({ success: true, data: { wallet } });
@@ -207,7 +211,7 @@ router.post(
         line_items: [
           {
             price_data: {
-              currency: 'gbp',
+              currency: 'inr',
               product_data: {
                 name: 'ZenAuraa Wallet Recharge',
                 description: `Recharge wallet with £${amount}`,
