@@ -147,12 +147,7 @@ export default function DashboardPage() {
     }).catch(() => { tokenStore.clear(); router.replace('/login'); })
       .finally(() => setLoading(false));
 
-    practitionersApi.list({ limit: 6 }).then((res) => {
-      if (res.success && res.data) {
-        setExperts(res.data.practitioners);
-        setOnlineCount(res.data.practitioners.filter((p) => p.isOnline).length);
-      }
-    });
+
 
     fetchWallet();
 
@@ -176,11 +171,25 @@ export default function DashboardPage() {
 
   const handleTabChange = (tab: typeof activeTab) => {
     setActiveTab(tab);
-    const specialty = tab !== 'all' ? tab.charAt(0).toUpperCase() + tab.slice(1) : undefined;
-    practitionersApi.list({ limit: 6, ...(specialty ? { specialty } : {}) }).then((res) => {
-      if (res.success && res.data) setExperts(res.data.practitioners);
-    });
   };
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      const specialty = activeTab !== 'all' ? activeTab.charAt(0).toUpperCase() + activeTab.slice(1) : undefined;
+      const params: any = { limit: 6 };
+      if (specialty) params.specialty = specialty;
+      if (searchQuery.trim()) params.search = searchQuery.trim();
+
+      practitionersApi.list(params).then((res) => {
+        if (res.success && res.data) {
+          setExperts(res.data.practitioners);
+          setOnlineCount(res.data.practitioners.filter((p) => p.isOnline).length);
+        }
+      });
+    }, 400);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchQuery, activeTab]);
 
   if (loading) {
     return (
