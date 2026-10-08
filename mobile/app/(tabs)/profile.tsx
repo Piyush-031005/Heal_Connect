@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ImageBackground } from "react-native";
 import { 
   User, 
@@ -13,6 +13,8 @@ import {
   ChevronDown
 } from "lucide-react-native";
 import { useRouter } from "expo-router";
+import { tokenStore } from "../../lib/api";
+import { useEffect, useState } from "react";
 
 const MENU_ITEMS = [
   { id: 1, title: "My Profile", subtitle: "Change your profile details", icon: User, route: "profile" },
@@ -25,6 +27,15 @@ const MENU_ITEMS = [
 
 export default function ProfileScreen() {
   const router = useRouter();
+  const [role, setRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    tokenStore.getRole().then(r => setRole(r));
+  }, []);
+
+  const items = role === 'expert' 
+    ? [{ id: 0, title: "Expert Dashboard", subtitle: "Manage your sessions and earnings", icon: Crown, route: "dashboard" }, ...MENU_ITEMS]
+    : MENU_ITEMS;
 
   return (
     <View style={styles.container}>
@@ -45,19 +56,18 @@ export default function ProfileScreen() {
 
         {/* Menu List */}
         <View style={styles.menuContainer}>
-          {MENU_ITEMS.map((item, index) => (
-            <TouchableOpacity key={item.id} style={styles.menuItem}>
+          {items.map((item, index) => (
+            <TouchableOpacity 
+              key={item.id} 
+              style={styles.menuItem}
+              onPress={() => router.push(`/${item.route}` as any)}
+            >
               <View style={styles.menuIconWrap}>
                 <item.icon size={22} color="#1a1a1a" strokeWidth={1.5} />
               </View>
               <View style={styles.menuTextContent}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Text style={styles.menuTitle}>{item.title}</Text>
-                  {item.isNew && (
-                    <View style={styles.newBadge}>
-                      <Text style={styles.newBadgeText}>New</Text>
-                    </View>
-                  )}
                 </View>
                 {!!item.subtitle && <Text style={styles.menuSubtitle}>{item.subtitle}</Text>}
               </View>

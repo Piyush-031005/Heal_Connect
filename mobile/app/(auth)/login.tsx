@@ -1,10 +1,14 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, Image, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useAuth } from '../../hooks/useAuth';
 import { authApi, tokenStore } from '../../lib/api';
 import GhostFibers from '../../components/GhostFibers';
+import * as WebBrowser from 'expo-web-browser';
+import * as AuthSession from 'expo-auth-session';
+
+WebBrowser.maybeCompleteAuthSession();
 
 type Role = 'user' | 'expert';
 
@@ -25,9 +29,10 @@ export default function LoginScreen() {
   const { initialize } = useAuth();
   
   const [role, setRole] = useState<Role>('user');
-  const [mode, setMode] = useState<'login' | 'forgot'>('login');
+  const [mode, setMode] = useState<'login' | 'forgot' | 'phone'>('login');
   
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -68,6 +73,75 @@ export default function LoginScreen() {
     setError('');
     setLoading(true);
     setTimeout(() => { setLoading(false); setSuccess('Reset link sent to your email.'); }, 1500);
+  };
+
+  const handlePhoneLogin = async () => {
+    if (!phone) { setError('Please enter a phone number'); return; }
+    setError('');
+    setLoading(true);
+    const fullPhone = phone.startsWith('+') ? phone : '+91' + phone.trim();
+    try {
+      if (role === 'expert') {
+        const res = await authApi.practitionerSendOtp(fullPhone);
+        if (res.success || (res as any).code === 200 || !res.message) {
+          router.push(`/(auth)/verify-otp?phone=${encodeURIComponent(fullPhone)}&type=login&role=expert`);
+        } else {
+          setError(res.message || 'Failed to send OTP');
+        }
+      } else {
+        const res = await authApi.sendOtp(fullPhone);
+        if (res.success || (res as any).code === 200 || !res.message) {
+          router.push(`/(auth)/verify-otp?phone=${encodeURIComponent(fullPhone)}&type=login&role=user`);
+        } else {
+          setError(res.message || 'Failed to send OTP');
+        }
+      }
+    } catch (e: any) {
+      setError(e.message || 'Error sending OTP');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      setLoading(true);
+      setError('');
+      const clientId = process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID || 'dummy';
+      
+      const redirectUri = AuthSession.makeRedirectUri();
+      const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=id_token&scope=${encodeURIComponent('openid email profile')}&state=${role === 'expert' ? 'expert_login' : 'user_login'}&nonce=expo123`;
+      
+      const result = await WebBrowser.openAuthSessionAsync(authUrl, redirectUri);
+      
+      if (result.type === 'success' && result.url) {
+        const urlObj = new URL(result.url.replace('#', '?'));
+        const idToken = urlObj.searchParams.get('id_token') || urlObj.searchParams.get('access_token');
+        
+        if (idToken) {
+          const res = await fetch(`${process.env.EXPO_PUBLIC_API_URL || ''}/api/auth/google`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ idToken, state: role === 'expert' ? 'expert_login' : 'user_login' })
+          });
+          const data = await res.json();
+          if (data.success && data.data) {
+            await tokenStore.setTokens(data.data.accessToken, data.data.refreshToken);
+            await tokenStore.setRole(data.data.role || role);
+            await initialize();
+            router.replace('/(tabs)');
+          } else {
+            setError(data.message || 'Google login failed');
+          }
+        } else {
+           setError('Failed to extract Google ID token');
+        }
+      }
+    } catch (e: any) {
+      setError('Google sign in error: ' + e.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -235,6 +309,36 @@ export default function LoginScreen() {
                     </Text>
                   )}
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => { setMode('phone'); setError(''); setSuccess(''); }} style={{ alignItems: 'center', paddingVertical: 8 }}>
+                  <Text style={{ color: PURPLE, fontWeight: '700', fontSize: 14 }}>Log in with Phone Number</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+
+            {/* Phone login */}
+            {mode === 'phone' && (
+              <View style={{ gap: 16 }}>
+                <View>
+                  <Text style={{ fontSize: 13, fontWeight: '700', color: '#4C1D95', marginBottom: 8, marginLeft: 4 }}>Phone Number</Text>
+                  <TextInput
+                    placeholder="9876543210"
+                    placeholderTextColor="rgba(109,40,217,0.4)"
+                    value={phone}
+                    onChangeText={setPhone}
+                    keyboardType="phone-pad"
+                    style={{ backgroundColor: 'rgba(255,255,255,0.35)', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, paddingHorizontal: 18, height: 54, color: '#1E1035', fontSize: 15, fontWeight: '500' }}
+                  />
+                </View>
+                <TouchableOpacity
+                  onPress={handlePhoneLogin}
+                  disabled={loading}
+                  style={{ backgroundColor: PURPLE, borderRadius: 14, height: 56, alignItems: 'center', justifyContent: 'center', shadowColor: PURPLE, shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.6, shadowRadius: 20, elevation: 12 }}
+                >
+                  {loading ? <ActivityIndicator color="white" /> : <Text style={{ color: '#fff', fontWeight: '900', fontSize: 16 }}>Send OTP</Text>}
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => { setMode('login'); setError(''); setSuccess(''); }} style={{ alignItems: 'center', paddingVertical: 8 }}>
+                  <Text style={{ color: PURPLE, fontWeight: '700', fontSize: 14 }}>← Back to Email Login</Text>
+                </TouchableOpacity>
               </View>
             )}
 
@@ -274,8 +378,8 @@ export default function LoginScreen() {
                   <Text style={{ marginHorizontal: 16, color: '#6D28D9', fontSize: 12, fontWeight: '700', letterSpacing: 1, opacity: 0.7 }}>OR</Text>
                   <View style={{ flex: 1, height: 1, backgroundColor: 'rgba(109,40,217,0.15)' }} />
                 </View>
-                <TouchableOpacity style={{ backgroundColor: 'rgba(255,255,255,0.7)', borderWidth: 1.5, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, height: 54, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                  <Text style={{ color: '#1E1035', fontWeight: '800', fontSize: 15 }}>Continue with Google</Text>
+                <TouchableOpacity onPress={handleGoogleSignIn} disabled={loading} style={{ backgroundColor: 'rgba(255,255,255,0.7)', borderWidth: 1.5, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, height: 54, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                  {loading ? <ActivityIndicator color={PURPLE} /> : <Text style={{ color: '#1E1035', fontWeight: '800', fontSize: 15 }}>Continue with Google</Text>}
                 </TouchableOpacity>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 28 }}>
                   <Text style={{ color: '#6D28D9', fontSize: 14, fontWeight: '500', opacity: 0.8 }}>Don't have an account? </Text>

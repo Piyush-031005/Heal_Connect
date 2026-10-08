@@ -1,4 +1,4 @@
-﻿import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from 'expo-secure-store';
 import { Platform } from 'react-native';
 import { router } from 'expo-router';
 
@@ -124,6 +124,21 @@ export const authApi = {
       '/api/auth/practitioner/login',
       { method: 'POST', body: JSON.stringify({ email, password }) }
     ),
+
+  sendOtp: (phone: string) =>
+    request<void>('/api/auth/send-otp', { method: 'POST', body: JSON.stringify({ phone, purpose: 'login' }) }),
+
+  loginWithOtp: (body: { phone: string; otp: string }) =>
+    request<AuthData>('/api/auth/login-otp', { method: 'POST', body: JSON.stringify(body) }),
+
+  practitionerSendOtp: (phone: string) =>
+    request<void>('/api/auth/astrologer/send-otp', { method: 'POST', body: JSON.stringify({ phone, purpose: 'login' }) }),
+
+  practitionerLoginWithOtp: (phone: string, otp: string) =>
+    request<{ practitioner: any; accessToken: string; refreshToken: string; role: string }>(
+      '/api/auth/astrologer/login-otp',
+      { method: 'POST', body: JSON.stringify({ phone, otp }) }
+    ),
 };
 
 export const usersApi = {
@@ -145,4 +160,18 @@ export const practitionersApi = {
 export const sessionsApi = {
   userHistory: () =>
     request<{ sessions: any[] }>('/api/sessions/user/history'),
+    
+  createSession: (body: { practitionerId: string; type: 'chat' | 'call' | 'video' }) =>
+    request<{ session: { id: string } }>('/api/sessions', { method: 'POST', body: JSON.stringify(body) }),
+};
+
+export const walletApi = {
+  get: () => 
+    request<{ wallet: { balance: number; currency: string; transactions: any[] } }>('/api/wallet'),
+    
+  rechargeStripe: (amount: number) =>
+    request<{ url: string; sessionId: string }>('/api/wallet/recharge/stripe', { 
+      method: 'POST', 
+      body: JSON.stringify({ amount }) 
+    }),
 };

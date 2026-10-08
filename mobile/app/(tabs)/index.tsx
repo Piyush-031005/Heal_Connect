@@ -55,11 +55,13 @@ export default function HomeTab() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [experts, setExperts] = useState<PractitionerProfile[]>([]);
   const [loadingExperts, setLoadingExperts] = useState(true);
+  const [selectedModality, setSelectedModality] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchExperts() {
+      setLoadingExperts(true);
       try {
-        const res = await practitionersApi.list({ limit: 6 });
+        const res = await practitionersApi.list({ limit: 6, specialty: selectedModality || undefined });
         if (res.success && res.data?.practitioners) {
           setExperts(res.data.practitioners);
         }
@@ -70,7 +72,7 @@ export default function HomeTab() {
       }
     }
     fetchExperts();
-  }, []);
+  }, [selectedModality]);
 
   return (
     <View style={styles.container}>
@@ -233,7 +235,7 @@ export default function HomeTab() {
 
           <View style={styles.modalityGrid}>
             {MODALITIES.slice(0, 4).map((mod, i) => (
-              <TouchableOpacity key={i} style={styles.categoryCardHalf} onPress={() => router.push("/(tabs)/explore")}>
+              <TouchableOpacity key={i} style={styles.categoryCardHalf} onPress={() => router.push({ pathname: "/(tabs)/explore", params: { category: mod.name } } as any)}>
                 <View style={styles.categoryIconWrapHalf}>
                   <Image source={mod.img} style={styles.categoryIconHalf} />
                 </View>

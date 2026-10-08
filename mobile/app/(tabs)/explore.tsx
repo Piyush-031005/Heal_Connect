@@ -1,13 +1,14 @@
-﻿import { LinearGradient } from 'expo-linear-gradient';
-import React, { useState } from "react";
+import { LinearGradient } from 'expo-linear-gradient';
+import React, { useState, useEffect } from "react";
 import {
   View, Text, StyleSheet, ScrollView, Image, TouchableOpacity,
   Dimensions, TextInput
 } from "react-native";
 import { Search, Filter, Star, Phone, MessageCircle } from "lucide-react-native";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import WebReplicaHeader from "../../components/WebReplicaHeader";
+import { practitionersApi, PractitionerProfile } from "../../lib/api";
 
 const { width } = Dimensions.get("window");
 
@@ -26,17 +27,42 @@ const MODALITIES = [
   { name: "Akashic & Spiritual Guidance", desc: "Dream reading", img: require("../../assets/images/tarot.png"), route: "dreams" },
 ];
 
-const EXPERTS = [
-  { name: "piyush", role: "Wellness Expert", rating: "4.9", exp: "New Expert", price: "₹100/min", img: "https://i.pravatar.cc/150" },
-  { name: "Abhishek Giri", role: "Wellness Expert", rating: "4.8", exp: "New Expert", price: "₹0/min", img: "https://i.pravatar.cc/150" },
-  { name: "Pooja", role: "Wellness Expert", rating: "5.0", exp: "New Expert", price: "₹0/min", img: "https://i.pravatar.cc/150" },
-  { name: "Deepak's Expert", role: "Tarot • Astrology", rating: "4.5", exp: "New Expert", price: "₹100/min", img: "https://i.pravatar.cc/150" },
-];
+
 
 export default function ExploreTab() {
   const router = useRouter();
+  const params = useLocalSearchParams();
   const insets = useSafeAreaInsets();
   const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>((params.category as string) || null);
+  const [experts, setExperts] = useState<PractitionerProfile[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchExperts = async () => {
+      setLoading(true);
+      try {
+        const res = await practitionersApi.list({ 
+          search: search || undefined, 
+          specialty: selectedCategory || undefined 
+        });
+        if (res.success && res.data?.practitioners) {
+          setExperts(res.data.practitioners);
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    // Simple debounce
+    const timeout = setTimeout(() => {
+      fetchExperts();
+    }, 500);
+    
+    return () => clearTimeout(timeout);
+  }, [search, selectedCategory]);
 
   return (
     <View style={styles.container}>
@@ -57,12 +83,16 @@ export default function ExploreTab() {
 
           <View style={styles.modalityGrid}>
             {MODALITIES.map((mod, i) => (
-              <TouchableOpacity key={i} style={styles.modCard}>
+              <TouchableOpacity 
+                key={i} 
+                style={[styles.modCard, selectedCategory === mod.name && { borderColor: '#6D28D9', borderWidth: 2, backgroundColor: '#F3E8FF' }]}
+                onPress={() => setSelectedCategory(selectedCategory === mod.name ? null : mod.name)}
+              >
                 
                 <View style={styles.modIconWrap}>
                   <Image source={mod.img} style={styles.modIcon} />
                 </View>
-                <Text style={styles.modName}>{mod.name}</Text>
+                <Text style={[styles.modName, selectedCategory === mod.name && { color: '#6D28D9' }]}>{mod.name}</Text>
                 <Text style={styles.modDesc}>{mod.desc}</Text>
               </TouchableOpacity>
             ))}
@@ -88,29 +118,34 @@ export default function ExploreTab() {
           </View>
 
           <View style={styles.expertList}>
-            {EXPERTS.map((exp, i) => (
-              <View key={i} style={styles.expertCard}>
-                <Image source={{ uri: exp.img }} style={styles.expertImg} />
-                <View style={styles.expertInfo}>
-                  <Text style={styles.expertName}>{exp.name}</Text>
-                  <Text style={styles.expertRole}>{exp.role}</Text>
-                  <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 4 }}>
-                    <Star size={14} color="#F59E0B" fill="#F59E0B" />
-                    <Text style={styles.expertRating}>{exp.rating}</Text>
+            {loading ? (
+              <Text style={{ textAlign: 'center', marginTop: 20, color: '#6b7280' }}>Loading experts...</Text>
+            ) : experts.length === 0 ? (
+              <Text style={{ textAlign: 'center', marginTop: 20, color: '#6b7280' }}>No experts found.</Text>
+            ) : (
+              experts.map((exp, i) => (
+                <View key={exp.id} style={styles.expertCard}>
+                  <Image source={{ uri: exp.photoUrl || "https://i.pravatar.cc/150?img=47" }} style={styles.expertImg} />
+                  <View style={styles.expertInfo}>
+                    <Text style={styles.expertName}>{exp.name}</Text>
+                    <Text style={styles.expertRole}>{exp.specialties?.[0] || 'Wellness Expert'}</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 4 }}>
+                      <Star size={14} color="#F59E0B" fill="#F59E0B" />
+                      <Text style={styles.expertRating}>{exp.avgRating?.toFixed(1) || 'New'}</Text>
+                    </View>
+                    <Text style={styles.expertPrice}>₹{exp.perMinuteRate}/min</Text>
                   </View>
-                  <Text style={styles.expertPrice}>{exp.price}</Text>
+                  <View style={styles.actionBtns}>
+                    <TouchableOpacity style={styles.actionBtnCall} onPress={() => router.push(`/practitioner/${exp.id}`)}>
+                      <Phone color="#fff" size={14} />
+                      <Text style={styles.actionBtnText}>Call</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-                <View style={styles.expertActions}>
-                  <TouchableOpacity style={styles.actionBtn}>
-                    <MessageCircle size={16} color="#7C3AED" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.actionBtn}>
-                    <Phone size={16} color="#7C3AED" />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            ))}
+              ))
+            )}
           </View>
+
 
         </View>
       </ScrollView>

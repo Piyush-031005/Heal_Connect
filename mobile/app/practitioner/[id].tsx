@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Image } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ArrowLeft } from "lucide-react-native";
-import { practitionersApi, PractitionerProfile } from "../../lib/api";
+import { practitionersApi, PractitionerProfile, sessionsApi } from "../../lib/api";
 
 export default function PractitionerDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
   const [practitioner, setPractitioner] = useState<PractitionerProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [calling, setCalling] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -40,6 +41,38 @@ export default function PractitionerDetail() {
     );
   }
 
+  const handleCall = async () => {
+    try {
+      setCalling(true);
+      const res = await sessionsApi.createSession({ practitionerId: id, type: 'call' });
+      if (res.success && res.data) {
+        router.push(`/call/${res.data.session.id}`);
+      } else {
+        alert(res.message || 'Failed to initiate call');
+      }
+    } catch (e: any) {
+      alert(e.message || 'Error starting call');
+    } finally {
+      setCalling(false);
+    }
+  };
+
+  const handleChat = async () => {
+    try {
+      setCalling(true);
+      const res = await sessionsApi.createSession({ practitionerId: id, type: 'chat' });
+      if (res.success && res.data) {
+        router.push(`/call/${res.data.session.id}`); // This is our WebView screen
+      } else {
+        alert(res.message || 'Failed to initiate chat');
+      }
+    } catch (e: any) {
+      alert(e.message || 'Error starting chat');
+    } finally {
+      setCalling(false);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -61,11 +94,11 @@ export default function PractitionerDetail() {
         <Text style={styles.bio}>{practitioner.bio || "No bio available."}</Text>
 
         <View style={styles.btnRow}>
-          <TouchableOpacity style={styles.callBtn} onPress={() => alert("Calling is available on the Web App for now.")}>
-            <Text style={styles.callBtnText}>Call</Text>
+          <TouchableOpacity style={styles.callBtn} onPress={handleCall} disabled={calling}>
+            {calling ? <ActivityIndicator color="#fff" /> : <Text style={styles.callBtnText}>Call</Text>}
           </TouchableOpacity>
-          <TouchableOpacity style={styles.chatBtn} onPress={() => alert("Chat is available on the Web App for now.")}>
-            <Text style={styles.chatBtnText}>Chat</Text>
+          <TouchableOpacity style={styles.chatBtn} onPress={handleChat} disabled={calling}>
+            {calling ? <ActivityIndicator color="#1a1a1a" /> : <Text style={styles.chatBtnText}>Chat</Text>}
           </TouchableOpacity>
         </View>
       </View>

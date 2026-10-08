@@ -1,10 +1,20 @@
-﻿import '../global.css';
+import '../global.css';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 import { useColorScheme } from '@/components/useColorScheme';
+import * as Notifications from 'expo-notifications';
+import * as Device from 'expo-device';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 import { LogBox } from 'react-native';
 LogBox.ignoreAllLogs(true);
@@ -35,6 +45,27 @@ export default function RootLayout() {
 
   useEffect(() => {
     initialize();
+    
+    // Register for push notifications
+    const registerForPushNotificationsAsync = async () => {
+      if (Device.isDevice) {
+        const { status: existingStatus } = await Notifications.getPermissionsAsync();
+        let finalStatus = existingStatus;
+        if (existingStatus !== 'granted') {
+          const { status } = await Notifications.requestPermissionsAsync();
+          finalStatus = status;
+        }
+        if (finalStatus !== 'granted') {
+          console.log('Failed to get push token for push notification!');
+          return;
+        }
+        // In a real app, send this token to your backend
+        // const token = (await Notifications.getExpoPushTokenAsync()).data;
+        // console.log("Push token:", token);
+      }
+    };
+    
+    registerForPushNotificationsAsync();
   }, []);
 
   useEffect(() => {

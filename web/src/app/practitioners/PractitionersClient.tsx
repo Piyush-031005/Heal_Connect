@@ -42,7 +42,7 @@ const SPECIALTIES = ['Vedic Astrology', 'Tarot', 'Reiki', 'Vastu', 'Numerology',
 const LANGUAGES = ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Bengali', 'Marathi'];
 const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
-const SELECT_CLS = 'w-full text-sm rounded-lg bg-yellow-50 border border-yellow-200 px-3 py-2 text-[#2d1b69] focus:outline-none focus:ring-2 focus:ring-[#4f46e5]/40';
+const SELECT_CLS = 'w-full text-sm rounded-lg bg-yellow-50 border border-yellow-200 px-3 py-2 text-[#2d1b69] focus:outline-none focus:ring-2 focus:ring-[#4f46e5]/40 [color-scheme:light]';
 
 export default function PractitionersPage() {
   const router = useRouter();
