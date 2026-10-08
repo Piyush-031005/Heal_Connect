@@ -9,6 +9,7 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.zenauraa.healconnect",
       "infoPlist": {
         "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access your camera for video calls.",
         "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone for audio/video calls."
@@ -28,7 +29,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.deepak_sharma_2026.mobile"
+      "package": "com.zenauraa.healconnect"
     },
     "web": {
       "output": "static",
