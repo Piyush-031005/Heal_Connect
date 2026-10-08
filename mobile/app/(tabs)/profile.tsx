@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ImageBackground, Alert } from "react-native";
 import { 
   User, 
   BookOpen, 
@@ -37,22 +37,32 @@ export default function ProfileScreen() {
     ? [{ id: 0, title: "Expert Dashboard", subtitle: "Manage your sessions and earnings", icon: Crown, route: "dashboard" }, ...MENU_ITEMS]
     : MENU_ITEMS;
 
+  const handleNavigation = (route: string) => {
+    if (route === 'wallet') {
+      router.push('/wallet');
+    } else {
+      Alert.alert('Coming Soon', `The ${route} screen is currently under construction.`);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
         
         {/* Mountain Hero Section */}
-        <ImageBackground 
-          source={require("../../assets/images/mountain.png")} 
-          style={styles.heroBackground}
-          resizeMode="cover"
-        >
-          {/* Gradient Overlay for better text readability */}
-          <View style={styles.heroOverlay}>
-            <Text style={styles.greetingTitle}>Hello, Piyush</Text>
-            <Text style={styles.greetingSubtitle}>"Style is how you express who you are without saying a word"</Text>
-          </View>
-        </ImageBackground>
+        <TouchableOpacity activeOpacity={0.9} onPress={() => handleNavigation('profile-settings')}>
+          <ImageBackground 
+            source={require("../../assets/images/mountain.png")} 
+            style={styles.heroBackground}
+            resizeMode="cover"
+          >
+            {/* Gradient Overlay for better text readability */}
+            <View style={styles.heroOverlay}>
+              <Text style={styles.greetingTitle}>Hello, Piyush</Text>
+              <Text style={styles.greetingSubtitle}>"Style is how you express who you are without saying a word"</Text>
+            </View>
+          </ImageBackground>
+        </TouchableOpacity>
 
         {/* Menu List */}
         <View style={styles.menuContainer}>
@@ -60,7 +70,7 @@ export default function ProfileScreen() {
             <TouchableOpacity 
               key={item.id} 
               style={styles.menuItem}
-              onPress={() => router.push(`/${item.route}` as any)}
+              onPress={() => handleNavigation(item.route)}
             >
               <View style={styles.menuIconWrap}>
                 <item.icon size={22} color="#1a1a1a" strokeWidth={1.5} />
@@ -76,7 +86,7 @@ export default function ProfileScreen() {
           ))}
 
           {/* FAQ Item (has down chevron in screenshot) */}
-          <TouchableOpacity style={[styles.menuItem, { borderBottomWidth: 0 }]}>
+          <TouchableOpacity style={[styles.menuItem, { borderBottomWidth: 0 }]} onPress={() => handleNavigation('faq')}>
             <View style={styles.menuIconWrap}>
               <HelpCircle size={22} color="#1a1a1a" strokeWidth={1.5} />
             </View>
