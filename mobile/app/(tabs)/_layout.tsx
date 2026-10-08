@@ -1,4 +1,4 @@
-﻿import { Tabs } from "expo-router";
+import { Tabs } from "expo-router";
 import { View, Platform, Dimensions } from "react-native";
 import { Home, Compass, User, Clock, Bell } from "lucide-react-native";
 
@@ -7,7 +7,7 @@ const BG = "#F5F3FF";
 const INACTIVE = "#9CA3AF";
 const { width } = Dimensions.get('window');
 
-function TabIcon({ focused, icon: Icon, color, size }) {
+function TabIcon({ focused, icon: Icon, color, size }: { focused: boolean, icon: any, color: any, size: number }) {
   return (
     <View style={{ alignItems: "center", justifyContent: "center", width: 48, height: 48, marginTop: 12, borderRadius: 24, backgroundColor: focused ? "#EDE9FE" : "transparent" }}>
       <Icon color={focused ? PURPLE : INACTIVE} size={focused ? 22 : 24} strokeWidth={focused ? 2.5 : 2} />

@@ -131,16 +131,16 @@ export function useAgoraCall(initialSessionId?: string, isExpert = false): UseAg
       engineRef.current = engine;
       engine.initialize({ appId });
       engine.registerEventHandler({
-        onJoinChannelSuccess: (_connection, _elapsed) => {
+        onJoinChannelSuccess: (_connection: any, _elapsed: any) => {
           setCallState('connected');
         },
-        onUserJoined: (_connection, remoteUid, _elapsed) => {
+        onUserJoined: (_connection: any, remoteUid: any, _elapsed: any) => {
           setRemoteUsers((prev) => [...prev, remoteUid]);
         },
-        onUserOffline: (_connection, remoteUid, _reason) => {
+        onUserOffline: (_connection: any, remoteUid: any, _reason: any) => {
           setRemoteUsers((prev) => prev.filter((id) => id !== remoteUid));
         },
-        onUserMuteAudio: (_connection, remoteUid, muted) => {
+        onUserMuteAudio: (_connection: any, remoteUid: any, muted: any) => {
           setIsRemoteMuted(muted);
         },
       });

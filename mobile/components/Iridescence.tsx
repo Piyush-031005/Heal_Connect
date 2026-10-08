@@ -1,4 +1,4 @@
-﻿import React, { useRef } from 'react';
+import React, { useRef } from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
 
@@ -125,7 +125,7 @@ export default function Iridescence({
   `;
 
   return (
-    <View style={StyleSheet.absoluteFillObject} pointerEvents="none">
+    <View style={StyleSheet.absoluteFill} pointerEvents="none">
       <WebView
         source={{ html: htmlContent }}
         style={{ flex: 1, backgroundColor: 'transparent' }}

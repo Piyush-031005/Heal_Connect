@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
 
@@ -339,7 +339,7 @@ export default function Lightfall({
 `;
 
   return (
-    <View style={StyleSheet.absoluteFillObject} pointerEvents="none">
+    <View style={StyleSheet.absoluteFill} pointerEvents="none">
       <WebView
         originWhitelist={['*']}
         source={{ html: htmlContent, baseUrl: 'https://healconnect.com' }}
