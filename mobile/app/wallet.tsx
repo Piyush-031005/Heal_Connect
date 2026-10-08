@@ -5,6 +5,7 @@ import { walletApi } from '../lib/api';
 import { ArrowLeft, Wallet, CreditCard, ChevronRight, CheckCircle2 } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as WebBrowser from 'expo-web-browser';
+import { useCurrencyStore } from '../store/useCurrencyStore';
 
 const RECHARGE_AMOUNTS = [10, 20, 50, 100, 200];
 const PURPLE = "#8B5CF6";
@@ -34,7 +35,10 @@ export default function WalletScreen() {
     }
   };
 
+  const { format, currencyCode, initCurrency } = useCurrencyStore();
+
   useEffect(() => {
+    initCurrency();
     fetchWallet();
   }, []);
 
@@ -65,8 +69,6 @@ export default function WalletScreen() {
     );
   }
 
-  const symbol = currency === 'USD' ? '$' : currency === 'GBP' ? '£' : '₹';
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -82,7 +84,7 @@ export default function WalletScreen() {
         {/* Balance Card */}
         <View style={styles.balanceCard}>
           <Text style={styles.balanceLabel}>Available Balance</Text>
-          <Text style={styles.balanceAmount}>{symbol}{balance.toFixed(2)}</Text>
+          <Text style={styles.balanceAmount}>{currencyCode === 'GBP' ? `£${balance.toFixed(2)}` : format(balance)}</Text>
         </View>
 
         {/* Add Funds Section */}
@@ -98,7 +100,7 @@ export default function WalletScreen() {
                 onPress={() => setSelectedAmount(amt)}
               >
                 <Text style={[styles.amountText, selectedAmount === amt && styles.amountTextSelected]}>
-                  {symbol}{amt}
+                  £{amt} {currencyCode !== 'GBP' && <Text style={{fontSize: 12}}>~{format(amt)}</Text>}
                 </Text>
               </TouchableOpacity>
             ))}
@@ -108,7 +110,7 @@ export default function WalletScreen() {
             {recharging ? <ActivityIndicator color="#fff" /> : (
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <CreditCard size={20} color="#fff" style={{ marginRight: 8 }} />
-                <Text style={styles.rechargeBtnText}>Proceed to Pay {symbol}{selectedAmount}</Text>
+                <Text style={styles.rechargeBtnText}>Proceed to Pay £{selectedAmount} {currencyCode !== 'GBP' ? `(~${format(selectedAmount)})` : ''}</Text>
               </View>
             )}
           </TouchableOpacity>
@@ -135,7 +137,7 @@ export default function WalletScreen() {
                   styles.txAmount, 
                   tx.status === 'PENDING' ? { color: '#9ca3af' } : tx.type === 'RECHARGE' ? { color: '#10B981' } : { color: TEXT }
                 ]}>
-                  {tx.type === 'RECHARGE' ? '+' : '-'}{symbol}{tx.amount}
+                  {tx.type === 'RECHARGE' ? '+' : '-'}{currencyCode === 'GBP' ? `£${tx.amount}` : format(tx.amount)}
                 </Text>
               </View>
             ))
