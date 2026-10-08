@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon",
-      "bundleIdentifier": "com.zenauraa.healconnect",
+      "bundleIdentifier": "com.zenauraa",
       "infoPlist": {
         "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access your camera for video calls.",
         "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone for audio/video calls."
@@ -29,7 +29,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.zenauraa.healconnect"
+      "package": "com.zenauraa"
     },
     "web": {
       "output": "static",
