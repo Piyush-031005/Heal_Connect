@@ -1,9 +1,10 @@
-﻿import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View, Text, ScrollView, TouchableOpacity, Image, Dimensions,
-  StyleSheet, ImageBackground
+  StyleSheet, ImageBackground, ActivityIndicator
 } from "react-native";
 import { useRouter } from "expo-router";
+import { practitionersApi, PractitionerProfile } from "../../lib/api";
 import {
   MessageCircle, Phone, ArrowRight, Star, ChevronDown, ChevronUp
 } from "lucide-react-native";
@@ -13,11 +14,12 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
 
-const EXPERTS = [
-  { name: "piyush", role: "Wellness Expert", rating: "0.0", exp: "New Expert", price: "₹100 / min", img: "https://i.pravatar.cc/150?img=47" },
-  { name: "Abhishek Giri", role: "Wellness Expert", rating: "0.0", exp: "New Expert", price: "₹0 / min", img: "https://i.pravatar.cc/150?img=11" },
-  { name: "Pooja", role: "Wellness Expert", rating: "0.0", exp: "New Expert", price: "₹0 / min", img: "https://i.pravatar.cc/150?img=5" },
-  { name: "Deepak's Expert", role: "Tarot • Astrology", rating: "4.5", exp: "New Expert", price: "₹100 / min", img: "https://i.pravatar.cc/150?img=8" },
+// Fallback profile images if none provided
+const DUMMY_IMAGES = [
+  "https://i.pravatar.cc/150?img=47",
+  "https://i.pravatar.cc/150?img=11",
+  "https://i.pravatar.cc/150?img=5",
+  "https://i.pravatar.cc/150?img=8",
 ];
 
 const MODALITIES = [
@@ -51,6 +53,24 @@ export default function HomeTab() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [experts, setExperts] = useState<PractitionerProfile[]>([]);
+  const [loadingExperts, setLoadingExperts] = useState(true);
+
+  useEffect(() => {
+    async function fetchExperts() {
+      try {
+        const res = await practitionersApi.list({ limit: 6 });
+        if (res.success && res.data?.practitioners) {
+          setExperts(res.data.practitioners);
+        }
+      } catch (err) {
+        console.error("Failed to fetch experts:", err);
+      } finally {
+        setLoadingExperts(false);
+      }
+    }
+    fetchExperts();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -92,26 +112,28 @@ export default function HomeTab() {
           </Text>
 
           <View style={styles.heroButtonsRow}>
-            <TouchableOpacity style={styles.yellowBtn}>
+            <TouchableOpacity style={styles.yellowBtn} onPress={() => router.push("/(tabs)/explore")}>
               <MessageCircle size={16} color="#1a1a1a" style={{ marginRight: 6 }} />
               <Text style={styles.yellowBtnText}>Free Chat</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.yellowBtn}>
+            <TouchableOpacity style={styles.yellowBtn} onPress={() => router.push("/(tabs)/explore")}>
               <Phone size={16} color="#1a1a1a" style={{ marginRight: 6 }} />
               <Text style={styles.yellowBtnText}>Free Call</Text>
             </TouchableOpacity>
           </View>
           
-          <TouchableOpacity style={styles.purpleBtn}>
+          <TouchableOpacity style={styles.purpleBtn} onPress={() => router.push("/(tabs)/explore")}>
             <Text style={styles.purpleBtnText}>Ask me Anything</Text>
             <ArrowRight size={16} color="#fff" />
           </TouchableOpacity>
 
           <View style={styles.trustIndicator}>
             <View style={styles.avatarPile}>
-              {EXPERTS.slice(0,3).map((exp, i) => (
-                <Image key={i} source={{ uri: exp.img }} style={[styles.pileAvatar, { left: i * 20, zIndex: 10 - i }]} />
-              ))}
+              {experts.length > 0 ? experts.slice(0,3).map((exp, i) => (
+                <Image key={i} source={{ uri: exp.photoUrl || DUMMY_IMAGES[i % DUMMY_IMAGES.length] }} style={[styles.pileAvatar, { left: i * 20, zIndex: 10 - i }]} />
+              )) : (
+                <View style={[styles.pileAvatar, { backgroundColor: '#ccc' }]} />
+              )}
             </View>
             <View style={{ marginLeft: 80 }}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -130,16 +152,19 @@ export default function HomeTab() {
             <Text style={styles.liveTitle}>Live Sessions</Text>
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 16 }}>
-            {EXPERTS.map((expert, i) => (
+            {experts.filter(e => e.isOnline).map((expert, i) => (
               <View key={`live-${i}`} style={styles.liveCard}>
                 <View style={styles.liveAvatarWrap}>
-                  <Image source={{ uri: expert.img }} style={styles.liveAvatar} />
+                  <Image source={{ uri: expert.photoUrl || DUMMY_IMAGES[i % DUMMY_IMAGES.length] }} style={styles.liveAvatar} />
                   <View style={styles.liveBadge}><Text style={styles.liveBadgeText}>LIVE</Text></View>
                 </View>
                 <Text style={styles.liveName} numberOfLines={1}>{expert.name}</Text>
-                <Text style={styles.liveRole} numberOfLines={1}>{expert.role}</Text>
+                <Text style={styles.liveRole} numberOfLines={1}>{expert.specialties?.[0] || 'Wellness Expert'}</Text>
               </View>
             ))}
+            {experts.filter(e => e.isOnline).length === 0 && (
+              <Text style={{ color: '#6D28D9', fontStyle: 'italic', fontSize: 12 }}>No experts currently live.</Text>
+            )}
           </ScrollView>
         </View>
 
@@ -149,41 +174,45 @@ export default function HomeTab() {
           <Text style={styles.sectionTitle}>Connect with top-rated guides.</Text>
 
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 12 }}>
-            {EXPERTS.map((expert, i) => (
+            {loadingExperts ? (
+              <ActivityIndicator color="#FCD34D" />
+            ) : experts.map((expert, i) => (
               <View key={i} style={styles.expertCard}>
-                <View style={styles.celebrityBadge}>
-                  <Text style={styles.celebrityText}>CELEBRITY</Text>
-                </View>
+                {expert.avgRating && expert.avgRating > 4.8 && (
+                  <View style={styles.celebrityBadge}>
+                    <Text style={styles.celebrityText}>CELEBRITY</Text>
+                  </View>
+                )}
                 
-                <Image source={{ uri: expert.img }} style={styles.expertAvatar} />
-                <View style={styles.onlineDot} />
+                <Image source={{ uri: expert.photoUrl || DUMMY_IMAGES[i % DUMMY_IMAGES.length] }} style={styles.expertAvatar} />
+                {expert.isOnline && <View style={styles.onlineDot} />}
 
                 <Text style={styles.expertName} numberOfLines={1}>{expert.name}</Text>
-                <Text style={styles.expertRole}>{expert.role}</Text>
+                <Text style={styles.expertRole}>{expert.specialties?.[0] || 'Spiritual Guide'}</Text>
                 
                 <View style={styles.expertRatingRow}>
                   <Star size={12} color="#F59E0B" fill="#F59E0B" />
-                  <Text style={styles.expertRating}>{expert.rating}</Text>
-                  <Text style={styles.expertOrders}>(128k+)</Text>
+                  <Text style={styles.expertRating}>{expert.avgRating?.toFixed(1) || 'New'}</Text>
+                  {expert.avgRating ? <Text style={styles.expertOrders}>(1k+)</Text> : null}
                 </View>
 
                 <View style={styles.expertDivider} />
                 
                 <View style={styles.expertDetailRow}>
                   <Text style={styles.expertDetailLabel}>Exp</Text>
-                  <Text style={styles.expertDetailValue}>{expert.exp}</Text>
+                  <Text style={styles.expertDetailValue}>{expert.experienceYrs > 0 ? `${expert.experienceYrs} Yrs` : 'New Expert'}</Text>
                 </View>
                 <View style={styles.expertDetailRow}>
                   <Text style={styles.expertDetailLabel}>Price</Text>
-                  <Text style={styles.expertDetailValueGold}>{expert.price}</Text>
+                  <Text style={styles.expertDetailValueGold}>₹{expert.perMinuteRate} / min</Text>
                 </View>
 
                 <View style={styles.expertButtonsRow}>
-                  <TouchableOpacity style={styles.expertBtnYellow}>
+                  <TouchableOpacity style={styles.expertBtnYellow} onPress={() => router.push(`/practitioner/${expert.id}`)}>
                     <MessageCircle size={12} color="#1a1a1a" style={{ marginRight: 4 }} />
                     <Text style={styles.expertBtnTextDark}>Chat</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.expertBtnYellow}>
+                  <TouchableOpacity style={styles.expertBtnYellow} onPress={() => router.push(`/practitioner/${expert.id}`)}>
                     <Phone size={12} color="#1a1a1a" style={{ marginRight: 4 }} />
                     <Text style={styles.expertBtnTextDark}>Call</Text>
                   </TouchableOpacity>
@@ -192,7 +221,7 @@ export default function HomeTab() {
             ))}
           </ScrollView>
 
-          <TouchableOpacity style={{ alignItems: 'center', marginTop: 20 }}>
+          <TouchableOpacity style={{ alignItems: 'center', marginTop: 20 }} onPress={() => router.push("/(tabs)/explore")}>
             <Text style={styles.viewAllText}>View All Experts →</Text>
           </TouchableOpacity>
         </View>
