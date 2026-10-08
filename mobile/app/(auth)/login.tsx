@@ -320,14 +320,23 @@ export default function LoginScreen() {
               <View style={{ gap: 16 }}>
                 <View>
                   <Text style={{ fontSize: 13, fontWeight: '700', color: '#4C1D95', marginBottom: 8, marginLeft: 4 }}>Phone Number</Text>
-                  <TextInput
-                    placeholder="9876543210"
-                    placeholderTextColor="rgba(109,40,217,0.4)"
-                    value={phone}
-                    onChangeText={setPhone}
-                    keyboardType="phone-pad"
-                    style={{ backgroundColor: 'rgba(255,255,255,0.35)', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, paddingHorizontal: 18, height: 54, color: '#1E1035', fontSize: 15, fontWeight: '500' }}
-                  />
+                  <View style={{ flexDirection: 'row', gap: 8 }}>
+                    <View style={{ 
+                      backgroundColor: 'rgba(255,255,255,0.35)', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, 
+                      paddingHorizontal: 16, height: 54, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', gap: 6
+                    }}>
+                      <Text style={{ fontSize: 18 }}>🇮🇳</Text>
+                      <Text style={{ color: '#1E1035', fontSize: 15, fontWeight: '700' }}>+91</Text>
+                    </View>
+                    <TextInput
+                      placeholder="9876543210"
+                      placeholderTextColor="rgba(109,40,217,0.4)"
+                      value={phone}
+                      onChangeText={setPhone}
+                      keyboardType="phone-pad"
+                      style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.35)', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, paddingHorizontal: 18, height: 54, color: '#1E1035', fontSize: 15, fontWeight: '500' }}
+                    />
+                  </View>
                 </View>
                 <TouchableOpacity
                   onPress={handlePhoneLogin}
