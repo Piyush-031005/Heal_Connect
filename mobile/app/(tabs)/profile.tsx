@@ -13,7 +13,7 @@ import {
   ChevronDown
 } from "lucide-react-native";
 import { useRouter } from "expo-router";
-import { tokenStore } from "../../lib/api";
+import { tokenStore, usersApi } from "../../lib/api";
 import { useEffect, useState } from "react";
 
 const MENU_ITEMS = [
@@ -28,9 +28,15 @@ const MENU_ITEMS = [
 export default function ProfileScreen() {
   const router = useRouter();
   const [role, setRole] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string>("User");
 
   useEffect(() => {
     tokenStore.getRole().then((r: string | null) => setRole(r));
+    usersApi.getProfile().then(res => {
+      if (res.success && res.data?.user) {
+        setUserName(res.data.user.name || "User");
+      }
+    });
   }, []);
 
   const items = role === 'expert' 
@@ -58,7 +64,7 @@ export default function ProfileScreen() {
           >
             {/* Gradient Overlay for better text readability */}
             <View style={styles.heroOverlay}>
-              <Text style={styles.greetingTitle}>Hello, Piyush</Text>
+              <Text style={styles.greetingTitle}>Hello, {userName}</Text>
               <Text style={styles.greetingSubtitle}>"Style is how you express who you are without saying a word"</Text>
             </View>
           </ImageBackground>
