@@ -66,6 +66,10 @@ export const tokenStore = {
     if (Platform.OS === 'web') localStorage.setItem('hc_role', role);
     else await SecureStore.setItemAsync('hc_role', role);
   },
+  async getRole() {
+    if (Platform.OS === 'web') return localStorage.getItem('hc_role');
+    return await SecureStore.getItemAsync('hc_role');
+  },
   async clear() {
     if (Platform.OS === 'web') {
       localStorage.removeItem('hc_access');

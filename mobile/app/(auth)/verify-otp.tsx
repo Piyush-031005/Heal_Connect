@@ -29,16 +29,16 @@ export default function VerifyOtpScreen() {
     
     try {
       let endpoint = '';
-      if (type === 'login') {
-        endpoint = role === 'expert' ? '/api/auth/astrologer/login-otp' : '/api/auth/login-otp';
+      if (role === 'expert') {
+        endpoint = '/api/auth/astrologer/verify-otp';
       } else {
-        endpoint = '/api/auth/verify-phone';
+        endpoint = '/api/auth/verify-otp';
       }
 
       const res = await fetch(`${API_URL}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone, otp }),
+        body: JSON.stringify({ phone, otp, purpose: type }),
       });
       const data = await res.json();
 

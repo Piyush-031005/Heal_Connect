@@ -30,7 +30,7 @@ export default function ProfileScreen() {
   const [role, setRole] = useState<string | null>(null);
 
   useEffect(() => {
-    tokenStore.getRole().then(r => setRole(r));
+    tokenStore.getRole().then((r: string | null) => setRole(r));
   }, []);
 
   const items = role === 'expert' 
