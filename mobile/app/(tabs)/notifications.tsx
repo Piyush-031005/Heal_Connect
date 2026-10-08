@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Bell, Wallet, CalendarHeart } from "lucide-react-native";
@@ -21,42 +21,13 @@ export default function NotificationsScreen() {
         <Text style={styles.headerTitle}>Notifications</Text>
       </View>
 
-      <ScrollView style={{ zIndex: 2, elevation: 2 }} contentContainerStyle={{ padding: 20, gap: 16, paddingBottom: 100 }}>
-        
-        <View style={styles.notificationCard}>
-          <View style={[styles.iconWrap, { backgroundColor: "#EEF2FF" }]}>
-            <CalendarHeart size={20} color="#4F46E5" />
-          </View>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.notifTitle}>Upcoming Session</Text>
-            <Text style={styles.notifDesc}>Your session with Maya starts in 10 minutes.</Text>
-            <Text style={styles.notifTime}>Just now</Text>
-          </View>
-        </View>
-
-        <View style={[styles.notificationCard, { opacity: 0.7 }]}>
-          <View style={[styles.iconWrap, { backgroundColor: "#FEF3C7" }]}>
-            <Wallet size={20} color="#D97706" />
-          </View>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.notifTitle}>Recharge Successful</Text>
-            <Text style={styles.notifDesc}>₹500 has been added to your wallet.</Text>
-            <Text style={styles.notifTime}>2 hours ago</Text>
-          </View>
-        </View>
-
-        <View style={[styles.notificationCard, { opacity: 0.7 }]}>
-          <View style={[styles.iconWrap, { backgroundColor: "#F5F3FF" }]}>
-            <Bell size={20} color="#7C3AED" />
-          </View>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.notifTitle}>New Expert Available</Text>
-            <Text style={styles.notifDesc}>Arun is now online for Tarot readings.</Text>
-            <Text style={styles.notifTime}>Yesterday</Text>
-          </View>
-        </View>
-
-      </ScrollView>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingBottom: 100 }}>
+        <Bell size={48} color="#C2AEE8" style={{ marginBottom: 16 }} />
+        <Text style={{ fontFamily: 'Inter_600SemiBold', fontSize: 18, color: '#4b5563', marginBottom: 8 }}>No new notifications</Text>
+        <Text style={{ fontFamily: 'Inter_400Regular', fontSize: 14, color: '#9ca3af', textAlign: 'center', paddingHorizontal: 40 }}>
+          When you get session updates or recharge alerts, they will appear here.
+        </Text>
+      </View>
     </View>
   );
 }
