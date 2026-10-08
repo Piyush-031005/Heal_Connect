@@ -27,7 +27,13 @@ export interface UserProfile {
   email: string | null;
   name: string | null;
   phone: string | null;
+  dob?: string | null;
+  birthPlace?: string | null;
+  timeOfBirth?: string | null;
+  gender?: string | null;
+  wellnessInterests?: string[];
   photoUrl: string | null;
+  isEmailVerified?: boolean;
 }
 
 export interface PractitionerProfile {
@@ -87,9 +93,10 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<ApiR
   const { headers, ...restOptions } = options;
   const token = await tokenStore.getAccess();
 
-  const defaultHeaders: any = {
-    'Content-Type': 'application/json',
-  };
+  const defaultHeaders: any = {};
+  if (!(options.body instanceof FormData)) {
+    defaultHeaders['Content-Type'] = 'application/json';
+  }
   if (token) {
     defaultHeaders['Authorization'] = `Bearer ${token}`;
   }
@@ -148,6 +155,21 @@ export const authApi = {
 export const usersApi = {
   getProfile: () =>
     request<{ user: UserProfile }>('/api/users/me'),
+    
+  updateProfile: (data: Partial<UserProfile>) =>
+    request<{ user: UserProfile }>('/api/users/me', {
+      method: 'PUT',
+      body: JSON.stringify(data)
+    }),
+
+  uploadPhoto: (formData: FormData) =>
+    request<{ photoUrl: string }>('/api/users/photo', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json',
+      },
+    }),
 };
 
 export const practitionersApi = {

@@ -17,7 +17,7 @@ import { tokenStore, usersApi } from "../../lib/api";
 import { useEffect, useState } from "react";
 
 const MENU_ITEMS = [
-  { id: 1, title: "My Profile", subtitle: "Change your profile details", icon: User, route: "profile" },
+  { id: 1, title: "My Profile", subtitle: "Change your profile details", icon: User, route: "profile-settings" },
   { id: 2, title: "My Sessions", subtitle: "Check your session status", icon: BookOpen, route: "sessions" },
   { id: 3, title: "My Wallet", subtitle: "Recharge for quick connections", icon: MapPin, route: "wallet" },
   { id: 4, title: "Need Help? We're here for you", subtitle: "Get instant query assistance", icon: MessageCircle, route: "help" },
@@ -44,11 +44,7 @@ export default function ProfileScreen() {
     : MENU_ITEMS;
 
   const handleNavigation = (route: string) => {
-    if (route === 'wallet') {
-      router.push('/wallet');
-    } else {
-      Alert.alert('Coming Soon', `The ${route} screen is currently under construction.`);
-    }
+    router.push(`/${route}` as any);
   };
 
   return (

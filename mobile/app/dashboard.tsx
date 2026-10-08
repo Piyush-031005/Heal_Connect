@@ -1,84 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ActivityIndicator, TouchableOpacity, Text } from 'react-native';
+﻿import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { WebView } from 'react-native-webview';
-import { tokenStore } from '../lib/api';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft } from 'lucide-react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const WEB_URL = process.env.EXPO_PUBLIC_WEB_URL || 'http://10.0.2.2:3000'; 
-
-export default function ExpertDashboardScreen() {
+export default function PlaceholderScreen() {
   const router = useRouter();
-  const [token, setToken] = useState<string | null>(null);
-
-  useEffect(() => {
-    tokenStore.getAccess().then(t => setToken(t));
-  }, []);
-
-  if (!token) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" color="#6D28D9" />
-      </View>
-    );
-  }
-
-  // Inject script to set localStorage BEFORE the web app loads, so it bypasses login!
-  const injectedScript = `
-    try {
-      localStorage.setItem('hc_access', '${token}');
-      localStorage.setItem('hc_role', 'expert');
-      window.isReactNative = true;
-    } catch(e) {}
-    true;
-  `;
-
+  
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-          <ArrowLeft size={24} color="#1a1a1a" />
-          <Text style={styles.headerTitle}>Expert Dashboard</Text>
+        <TouchableOpacity onPress={() => router.back()}>
+          <ArrowLeft size={24} color="#1E1035" />
         </TouchableOpacity>
+        <Text style={styles.title}>Coming Soon</Text>
+        <View style={{ width: 24 }} />
       </View>
-      <WebView 
-        source={{ uri: `${WEB_URL}/dashboard` }}
-        style={{ flex: 1 }}
-        injectedJavaScriptBeforeContentLoaded={injectedScript}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-      />
+      <View style={styles.content}>
+        <Text style={styles.text}>This section is currently being built.</Text>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  center: {
-    flex: 1, 
-    justifyContent: 'center', 
-    alignItems: 'center'
-  },
-  header: {
-    height: 56,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-    justifyContent: 'center',
-    paddingHorizontal: 16,
-  },
-  backBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  headerTitle: {
-    marginLeft: 16,
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#1a1a1a'
-  }
+  container: { flex: 1, backgroundColor: '#FAF9F6' },
+  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 16, backgroundColor: '#fff', borderBottomWidth: 1, borderBottomColor: '#f3f4f6' },
+  title: { fontSize: 18, fontWeight: '700', color: '#1E1035' },
+  content: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 },
+  text: { fontSize: 16, color: '#6b7280', textAlign: 'center' }
 });
