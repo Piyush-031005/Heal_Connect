@@ -90,14 +90,14 @@ export default function ExploreTab() {
             {MODALITIES.map((mod, i) => (
               <TouchableOpacity 
                 key={i} 
-                style={[styles.modCard, selectedCategory === mod.name && { borderColor: '#6D28D9', borderWidth: 2, backgroundColor: '#F3E8FF' }]}
-                onPress={() => setSelectedCategory(selectedCategory === mod.name ? null : mod.name)}
+                style={styles.modCard}
+                onPress={() => router.push(`/modalities/${mod.route}` as any)}
               >
                 
                 <View style={styles.modIconWrap}>
                   <Image source={mod.img} style={styles.modIcon} />
                 </View>
-                <Text style={[styles.modName, selectedCategory === mod.name && { color: '#6D28D9' }]}>{mod.name}</Text>
+                <Text style={styles.modName}>{mod.name}</Text>
                 <Text style={styles.modDesc}>{mod.desc}</Text>
               </TouchableOpacity>
             ))}
