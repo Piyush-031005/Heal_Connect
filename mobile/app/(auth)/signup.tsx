@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Image, View, Text, TextInput, TouchableOpacity,
   KeyboardAvoidingView, Platform, ScrollView, ActivityIndicator, StatusBar,
@@ -10,6 +10,7 @@ import { useAuth } from "../../hooks/useAuth";
 import GhostFibers from "../../components/GhostFibers";
 import * as WebBrowser from 'expo-web-browser';
 import * as AuthSession from 'expo-auth-session';
+import * as Google from 'expo-auth-session/providers/google';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -67,44 +68,49 @@ export default function SignupScreen() {
     finally { setLoading(false); }
   };
 
-  const handleGoogleSignIn = async () => {
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    webClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
+    androidClientId: process.env.EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID,
+  });
+
+  useEffect(() => {
+    if (response?.type === 'success' && response.params.id_token) {
+      handleGoogleSuccess(response.params.id_token);
+    } else if (response?.type === 'error') {
+      setError(response.error?.message || 'Google sign in failed');
+    }
+  }, [response]);
+
+  const handleGoogleSuccess = async (idToken: string) => {
     try {
       setLoading(true);
       setError('');
-      const clientId = process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID || 'dummy';
-      
-      const redirectUri = AuthSession.makeRedirectUri();
-      const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=id_token&scope=${encodeURIComponent('openid email profile')}&state=${role === 'expert' ? 'expert_login' : 'user_login'}&nonce=expo123`;
-      
-      const result = await WebBrowser.openAuthSessionAsync(authUrl, redirectUri);
-      
-      if (result.type === 'success' && result.url) {
-        const urlObj = new URL(result.url.replace('#', '?'));
-        const idToken = urlObj.searchParams.get('id_token') || urlObj.searchParams.get('access_token');
-        
-        if (idToken) {
-          const res = await fetch(`${process.env.EXPO_PUBLIC_API_URL || ''}/api/auth/google`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ idToken, state: role === 'expert' ? 'expert_login' : 'user_login' })
-          });
-          const data = await res.json();
-          if (data.success && data.data) {
-            await tokenStore.setTokens(data.data.accessToken, data.data.refreshToken);
-            await tokenStore.setRole(data.data.role || role);
-            await initialize();
-            router.replace('/(tabs)');
-          } else {
-            setError(data.message || 'Google sign up failed');
-          }
-        } else {
-           setError('Failed to extract Google ID token');
-        }
+      const res = await fetch(`${process.env.EXPO_PUBLIC_API_URL || ''}/api/auth/google`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken, state: role === 'expert' ? 'expert_login' : 'user_login' })
+      });
+      const data = await res.json();
+      if (data.success && data.data) {
+        await tokenStore.setTokens(data.data.accessToken, data.data.refreshToken);
+        await tokenStore.setRole(data.data.role || role);
+        await initialize();
+        router.replace('/(tabs)');
+      } else {
+        setError(data.message || 'Google sign up failed');
       }
     } catch (e: any) {
       setError('Google sign in error: ' + e.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    if (request) {
+      promptAsync();
+    } else {
+      setError('Google Sign-In is initializing...');
     }
   };
 
