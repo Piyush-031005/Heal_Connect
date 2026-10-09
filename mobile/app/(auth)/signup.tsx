@@ -10,7 +10,12 @@ import { useAuth } from "../../hooks/useAuth";
 import GhostFibers from "../../components/GhostFibers";
 import * as WebBrowser from 'expo-web-browser';
 import * as AuthSession from 'expo-auth-session';
-import * as Google from 'expo-auth-session/providers/google';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+
+GoogleSignin.configure({
+  webClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
+  iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
+});
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -68,19 +73,7 @@ export default function SignupScreen() {
     finally { setLoading(false); }
   };
 
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    webClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
-    androidClientId: process.env.EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID,
-    iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
-  });
 
-  useEffect(() => {
-    if (response?.type === 'success' && response.params.id_token) {
-      handleGoogleSuccess(response.params.id_token);
-    } else if (response?.type === 'error') {
-      setError(response.error?.message || 'Google sign in failed');
-    }
-  }, [response]);
 
   const handleGoogleSuccess = async (idToken: string) => {
     try {
@@ -108,10 +101,26 @@ export default function SignupScreen() {
   };
 
   const handleGoogleSignIn = async () => {
-    if (request) {
-      promptAsync();
-    } else {
-      setError('Google Sign-In is initializing...');
+    try {
+      setLoading(true);
+      setError('');
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      if (userInfo?.idToken) {
+        await handleGoogleSuccess(userInfo.idToken);
+      } else {
+        setError('Failed to get ID token from Google');
+      }
+    } catch (error: any) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        setError('Google sign-in cancelled');
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        setError('Sign-in already in progress');
+      } else {
+        setError(error.message || 'Google sign-in failed');
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
