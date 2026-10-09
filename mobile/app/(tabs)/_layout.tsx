@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
 import { View, Platform, Dimensions } from "react-native";
-import { Home, Compass, User, Clock, Bell } from "lucide-react-native";
+import { Home, Compass, User, Clock, Users } from "lucide-react-native";
 
 const PURPLE = "#7C3AED";
 const BG = "#F5F3FF";
@@ -63,10 +63,10 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="notifications"
+          name="practitioners"
           options={{
-            title: "Alerts",
-            tabBarIcon: ({ color, size, focused }) => <TabIcon focused={focused} icon={Bell} color={color} size={size} />,
+            title: "Experts",
+            tabBarIcon: ({ color, size, focused }) => <TabIcon focused={focused} icon={Users} color={color} size={size} />,
           }}
         />
         <Tabs.Screen

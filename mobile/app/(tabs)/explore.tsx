@@ -29,6 +29,11 @@ const MODALITIES = [
 
 
 
+const getAvatar = (expert: PractitionerProfile) => {
+  if (expert.photoUrl) return { uri: expert.photoUrl };
+  return { uri: `https://ui-avatars.com/api/?name=${encodeURIComponent(expert.name || 'Expert')}&background=5F3BA9&color=fff&size=150` };
+};
+
 export default function ExploreTab() {
   const router = useRouter();
   const params = useLocalSearchParams();
@@ -124,8 +129,12 @@ export default function ExploreTab() {
               <Text style={{ textAlign: 'center', marginTop: 20, color: '#6b7280' }}>No experts found.</Text>
             ) : (
               experts.map((exp, i) => (
-                <View key={exp.id} style={styles.expertCard}>
-                  <Image source={{ uri: exp.photoUrl || "https://i.pravatar.cc/150?img=47" }} style={styles.expertImg} />
+                <TouchableOpacity 
+                  key={exp.id} 
+                  style={styles.expertCard}
+                  onPress={() => router.push(`/practitioner/${exp.id}` as any)}
+                >
+                  <Image source={getAvatar(exp)} style={styles.expertImg} />
                   <View style={styles.expertInfo}>
                     <Text style={styles.expertName}>{exp.name}</Text>
                     <Text style={styles.expertRole}>{exp.specialties?.[0] || 'Wellness Expert'}</Text>
@@ -136,12 +145,12 @@ export default function ExploreTab() {
                     <Text style={styles.expertPrice}>₹{exp.perMinuteRate}/min</Text>
                   </View>
                   <View style={{ flexDirection: 'row', marginTop: 12, gap: 8 }}>
-                    <TouchableOpacity style={{ flex: 1, backgroundColor: '#6D28D9', paddingVertical: 8, borderRadius: 8, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 6 }} onPress={() => router.push(`/practitioner/${exp.id}`)}>
+                    <TouchableOpacity style={{ flex: 1, backgroundColor: '#6D28D9', paddingVertical: 8, borderRadius: 8, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 6 }} onPress={() => router.push(`/practitioner/${exp.id}` as any)}>
                       <Phone color="#fff" size={14} />
                       <Text style={{ color: '#fff', fontSize: 13, fontWeight: '700' }}>Call</Text>
                     </TouchableOpacity>
                   </View>
-                </View>
+                </TouchableOpacity>
               ))
             )}
           </View>

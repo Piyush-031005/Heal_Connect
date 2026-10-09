@@ -14,13 +14,10 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
 
-// Fallback profile images if none provided
-const DUMMY_IMAGES = [
-  "https://i.pravatar.cc/150?img=47",
-  "https://i.pravatar.cc/150?img=11",
-  "https://i.pravatar.cc/150?img=5",
-  "https://i.pravatar.cc/150?img=8",
-];
+const getAvatar = (expert: PractitionerProfile) => {
+  if (expert.photoUrl) return { uri: expert.photoUrl };
+  return { uri: `https://ui-avatars.com/api/?name=${encodeURIComponent(expert.name || 'Expert')}&background=5F3BA9&color=fff&size=150` };
+};
 
 const MODALITIES = [
   { name: "Astrology", desc: "Cosmic insights", img: require("../../assets/images/astrology.png"), route: "astrology" },
@@ -132,7 +129,7 @@ export default function HomeTab() {
           <View style={styles.trustIndicator}>
             <View style={styles.avatarPile}>
               {experts.length > 0 ? experts.slice(0,3).map((exp, i) => (
-                <Image key={i} source={{ uri: exp.photoUrl || DUMMY_IMAGES[i % DUMMY_IMAGES.length] }} style={[styles.pileAvatar, { left: i * 20, zIndex: 10 - i }]} />
+                <Image key={i} source={getAvatar(exp)} style={[styles.pileAvatar, { left: i * 20, zIndex: 10 - i }]} />
               )) : (
                 <View style={[styles.pileAvatar, { backgroundColor: '#ccc' }]} />
               )}
@@ -155,14 +152,18 @@ export default function HomeTab() {
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, gap: 16 }}>
             {experts.filter(e => e.isOnline).map((expert, i) => (
-              <View key={`live-${i}`} style={styles.liveCard}>
+              <TouchableOpacity 
+                key={`live-${i}`} 
+                style={styles.liveCard}
+                onPress={() => router.push(`/practitioner/${expert.id}` as any)}
+              >
                 <View style={styles.liveAvatarWrap}>
-                  <Image source={{ uri: expert.photoUrl || DUMMY_IMAGES[i % DUMMY_IMAGES.length] }} style={styles.liveAvatar} />
+                  <Image source={getAvatar(expert)} style={styles.liveAvatar} />
                   <View style={styles.liveBadge}><Text style={styles.liveBadgeText}>LIVE</Text></View>
                 </View>
                 <Text style={styles.liveName} numberOfLines={1}>{expert.name}</Text>
                 <Text style={styles.liveRole} numberOfLines={1}>{expert.specialties?.[0] || 'Wellness Expert'}</Text>
-              </View>
+              </TouchableOpacity>
             ))}
             {experts.filter(e => e.isOnline).length === 0 && (
               <Text style={{ color: '#6D28D9', fontStyle: 'italic', fontSize: 12 }}>No experts currently live.</Text>
@@ -179,14 +180,18 @@ export default function HomeTab() {
             {loadingExperts ? (
               <ActivityIndicator color="#FCD34D" />
             ) : experts.map((expert, i) => (
-              <View key={i} style={styles.expertCard}>
+              <TouchableOpacity 
+                key={i} 
+                style={styles.expertCard}
+                onPress={() => router.push(`/practitioner/${expert.id}` as any)}
+              >
                 {expert.avgRating && expert.avgRating > 4.8 && (
                   <View style={styles.celebrityBadge}>
                     <Text style={styles.celebrityText}>CELEBRITY</Text>
                   </View>
                 )}
                 
-                <Image source={{ uri: expert.photoUrl || DUMMY_IMAGES[i % DUMMY_IMAGES.length] }} style={styles.expertAvatar} />
+                <Image source={getAvatar(expert)} style={styles.expertAvatar} />
                 {expert.isOnline && <View style={styles.onlineDot} />}
 
                 <Text style={styles.expertName} numberOfLines={1}>{expert.name}</Text>
@@ -219,7 +224,7 @@ export default function HomeTab() {
                     <Text style={styles.expertBtnTextDark}>Call</Text>
                   </TouchableOpacity>
                 </View>
-              </View>
+              </TouchableOpacity>
             ))}
           </ScrollView>
 
