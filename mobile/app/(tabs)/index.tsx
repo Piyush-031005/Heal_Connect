@@ -113,11 +113,11 @@ export default function HomeTab() {
           <View style={styles.heroButtonsRow}>
             <TouchableOpacity style={styles.yellowBtn} onPress={() => router.push("/(tabs)/explore")}>
               <MessageCircle size={16} color="#1a1a1a" style={{ marginRight: 6 }} />
-              <Text style={styles.yellowBtnText}>Free Chat</Text>
+              <Text style={styles.yellowBtnText}>Start Chatting</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.yellowBtn} onPress={() => router.push("/(tabs)/explore")}>
               <Phone size={16} color="#1a1a1a" style={{ marginRight: 6 }} />
-              <Text style={styles.yellowBtnText}>Free Call</Text>
+              <Text style={styles.yellowBtnText}>Start Calling</Text>
             </TouchableOpacity>
           </View>
           
