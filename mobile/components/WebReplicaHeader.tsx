@@ -28,7 +28,7 @@ export default function WebReplicaHeader() {
       {/* Left: Hamburger Menu & Notifications */}
       <View style={styles.leftSection}>
         
-        <TouchableOpacity style={styles.notificationButton} onPress={() => router.push('/(tabs)/notifications')}>
+        <TouchableOpacity style={styles.notificationButton} onPress={() => router.push('/notifications')}>
           <Bell size={20} color="#2d1b69" />
           <View style={styles.notificationBadge} />
         </TouchableOpacity>
