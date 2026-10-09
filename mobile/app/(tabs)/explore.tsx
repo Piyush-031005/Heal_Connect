@@ -144,8 +144,8 @@ export default function ExploreTab() {
                     </View>
                     <Text style={styles.expertPrice}>₹{exp.perMinuteRate}/min</Text>
                   </View>
-                  <View style={{ flexDirection: 'row', marginTop: 12, gap: 8 }}>
-                    <TouchableOpacity style={{ flex: 1, backgroundColor: '#6D28D9', paddingVertical: 8, borderRadius: 8, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 6 }} onPress={() => router.push(`/practitioner/${exp.id}` as any)}>
+                  <View style={{ justifyContent: 'center' }}>
+                    <TouchableOpacity style={{ backgroundColor: '#6D28D9', paddingVertical: 8, paddingHorizontal: 16, borderRadius: 8, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 6 }} onPress={() => router.push(`/practitioner/${exp.id}` as any)}>
                       <Phone color="#fff" size={14} />
                       <Text style={{ color: '#fff', fontSize: 13, fontWeight: '700' }}>Call</Text>
                     </TouchableOpacity>
