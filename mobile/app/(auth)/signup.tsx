@@ -170,23 +170,46 @@ export default function SignupScreen() {
               By creating an account you agree to our Terms of Service and Privacy Policy
             </Text>
             <TouchableOpacity onPress={handleSignup} disabled={loading}
-              style={{ backgroundColor: PURPLE, borderRadius: 14, height: 56, alignItems: "center", justifyContent: "center", marginTop: 4, shadowColor: PURPLE, shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.4, shadowRadius: 16, elevation: 10 }}>
-              {loading ? <ActivityIndicator color="white" /> : <Text style={{ color: "#fff", fontWeight: "800", fontSize: 16 }}>Create Account →</Text>}
+              style={{ backgroundColor: PURPLE, borderRadius: 12, height: 52, flexDirection: 'row', alignItems: "center", justifyContent: "center", marginTop: 4 }}>
+              {loading ? <ActivityIndicator color="white" /> : (
+                <>
+                  <Text style={{ color: "#fff", fontWeight: "700", fontSize: 16, marginRight: 8 }}>Create Account</Text>
+                  <Text style={{ color: '#fff', fontSize: 16 }}>→</Text>
+                </>
+              )}
             </TouchableOpacity>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 24 }}>
-            <View style={{ flex: 1, height: 1, backgroundColor: 'rgba(109,40,217,0.15)' }} />
-            <Text style={{ marginHorizontal: 16, color: '#6D28D9', fontSize: 12, fontWeight: '700', letterSpacing: 1, opacity: 0.7 }}>OR</Text>
-            <View style={{ flex: 1, height: 1, backgroundColor: 'rgba(109,40,217,0.15)' }} />
+            <View style={{ flex: 1, height: 1, backgroundColor: 'rgba(124,58,237,0.2)' }} />
+            <Text style={{ marginHorizontal: 16, color: '#7C3AED', fontSize: 12, fontWeight: '700', letterSpacing: 1, opacity: 0.8 }}>OR CONTINUE WITH</Text>
+            <View style={{ flex: 1, height: 1, backgroundColor: 'rgba(124,58,237,0.2)' }} />
           </View>
-          <TouchableOpacity onPress={handleGoogleSignIn} disabled={loading} style={{ backgroundColor: 'rgba(255,255,255,0.7)', borderWidth: 1.5, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, height: 54, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-            {loading ? <ActivityIndicator color={PURPLE} /> : <Text style={{ color: '#1E1035', fontWeight: '800', fontSize: 15 }}>Continue with Google</Text>}
-          </TouchableOpacity>
+          
+          <View style={{ gap: 12 }}>
+            <TouchableOpacity style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 52, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+              <Text style={{ fontSize: 18, marginRight: 12 }}>📞</Text>
+              <Text style={{ color: '#1E1035', fontWeight: '600', fontSize: 15 }}>Continue with Phone</Text>
+            </TouchableOpacity>
 
-          <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 28 }}>
-            <Text style={{ color: TEXT_MUTED, fontSize: 14 }}>Already have an account? </Text>
+            <TouchableOpacity onPress={handleGoogleSignIn} disabled={loading} style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 52, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+              {loading ? <ActivityIndicator color={PURPLE} /> : (
+                <>
+                  <Text style={{ fontSize: 18, marginRight: 12 }}>G</Text>
+                  <Text style={{ color: '#1E1035', fontWeight: '600', fontSize: 15 }}>Continue with Google</Text>
+                </>
+              )}
+            </TouchableOpacity>
+
+            <TouchableOpacity style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 52, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+              <Text style={{ fontSize: 18, marginRight: 12 }}></Text>
+              <Text style={{ color: '#1E1035', fontWeight: '600', fontSize: 15 }}>Continue with Apple</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 32 }}>
+            <Text style={{ color: '#6D28D9', fontSize: 14, fontWeight: '500', opacity: 0.8 }}>Already have an account? </Text>
             <TouchableOpacity onPress={() => router.push("/(auth)/login")}>
-              <Text style={{ color: LAVENDER, fontWeight: "700", fontSize: 14 }}>Log in</Text>
+              <Text style={{ color: '#F59E0B', fontWeight: "800", fontSize: 14 }}>Log in</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

@@ -318,16 +318,16 @@ export default function LoginScreen() {
                 <TouchableOpacity
                   onPress={handleLogin}
                   disabled={loading}
-                  style={{ backgroundColor: PURPLE, borderRadius: 14, height: 56, alignItems: 'center', justifyContent: 'center', marginTop: 8, shadowColor: PURPLE, shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.6, shadowRadius: 20, elevation: 12 }}
+                  style={{ backgroundColor: PURPLE, borderRadius: 12, height: 52, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 8 }}
                 >
                   {loading ? <ActivityIndicator color="white" /> : (
-                    <Text style={{ color: '#fff', fontWeight: '900', fontSize: 16, letterSpacing: 0.5 }}>
-                      {role === 'expert' ? 'Log in as Expert' : 'Log in'}
-                    </Text>
+                    <>
+                      <Text style={{ color: '#fff', fontWeight: '700', fontSize: 16, marginRight: 8 }}>
+                        {role === 'expert' ? 'Log in as Expert' : 'Log in'}
+                      </Text>
+                      <Text style={{ color: '#fff', fontSize: 16 }}>→</Text>
+                    </>
                   )}
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { setMode('phone'); setError(''); setSuccess(''); }} style={{ alignItems: 'center', paddingVertical: 8 }}>
-                  <Text style={{ color: PURPLE, fontWeight: '700', fontSize: 14 }}>Log in with Phone Number</Text>
                 </TouchableOpacity>
               </View>
             )}
@@ -403,17 +403,36 @@ export default function LoginScreen() {
             {mode === 'login' && (
               <>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 24 }}>
-                  <View style={{ flex: 1, height: 1, backgroundColor: 'rgba(109,40,217,0.15)' }} />
-                  <Text style={{ marginHorizontal: 16, color: '#6D28D9', fontSize: 12, fontWeight: '700', letterSpacing: 1, opacity: 0.7 }}>OR</Text>
-                  <View style={{ flex: 1, height: 1, backgroundColor: 'rgba(109,40,217,0.15)' }} />
+                  <View style={{ flex: 1, height: 1, backgroundColor: 'rgba(124,58,237,0.2)' }} />
+                  <Text style={{ marginHorizontal: 16, color: '#7C3AED', fontSize: 12, fontWeight: '700', letterSpacing: 1, opacity: 0.8 }}>OR CONTINUE WITH</Text>
+                  <View style={{ flex: 1, height: 1, backgroundColor: 'rgba(124,58,237,0.2)' }} />
                 </View>
-                <TouchableOpacity onPress={handleGoogleSignIn} disabled={loading} style={{ backgroundColor: 'rgba(255,255,255,0.7)', borderWidth: 1.5, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 14, height: 54, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                  {loading ? <ActivityIndicator color={PURPLE} /> : <Text style={{ color: '#1E1035', fontWeight: '800', fontSize: 15 }}>Continue with Google</Text>}
-                </TouchableOpacity>
-                <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 28 }}>
+                
+                <View style={{ gap: 12 }}>
+                  <TouchableOpacity onPress={() => { setMode('phone'); setError(''); setSuccess(''); }} style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 52, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                    <Text style={{ fontSize: 18, marginRight: 12 }}>📞</Text>
+                    <Text style={{ color: '#1E1035', fontWeight: '600', fontSize: 15 }}>Continue with Phone</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity onPress={handleGoogleSignIn} disabled={loading} style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 52, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                    {loading ? <ActivityIndicator color={PURPLE} /> : (
+                      <>
+                        <Text style={{ fontSize: 18, marginRight: 12 }}>G</Text>
+                        <Text style={{ color: '#1E1035', fontWeight: '600', fontSize: 15 }}>Continue with Google</Text>
+                      </>
+                    )}
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 52, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                    <Text style={{ fontSize: 18, marginRight: 12 }}></Text>
+                    <Text style={{ color: '#1E1035', fontWeight: '600', fontSize: 15 }}>Continue with Apple</Text>
+                  </TouchableOpacity>
+                </View>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 32 }}>
                   <Text style={{ color: '#6D28D9', fontSize: 14, fontWeight: '500', opacity: 0.8 }}>Don't have an account? </Text>
                   <TouchableOpacity onPress={() => router.push('/(auth)/signup')}>
-                    <Text style={{ color: PURPLE, fontWeight: '900', fontSize: 14 }}>Sign up</Text>
+                    <Text style={{ color: '#F59E0B', fontWeight: '800', fontSize: 14 }}>Sign up</Text>
                   </TouchableOpacity>
                 </View>
               </>
