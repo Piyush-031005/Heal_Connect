@@ -49,7 +49,7 @@ export default function PractitionerDetail() {
   const handleCall = async () => {
     try {
       setCalling(true);
-      const res = await sessionsApi.createSession({ practitionerId: id, type: 'call' });
+      const res = await sessionsApi.createSession({ practitionerId: id, type: 'AUDIO' });
       if (res.success && res.data) {
         router.push(`/call/${res.data.session.id}`);
       } else {
@@ -65,7 +65,7 @@ export default function PractitionerDetail() {
   const handleChat = async () => {
     try {
       setCalling(true);
-      const res = await sessionsApi.createSession({ practitionerId: id, type: 'chat' });
+      const res = await sessionsApi.createSession({ practitionerId: id, type: 'CHAT' });
       if (res.success && res.data) {
         router.push(`/call/${res.data.session.id}`);
       } else {
@@ -116,10 +116,15 @@ export default function PractitionerDetail() {
           <View style={styles.heroHeader}>
             <View style={styles.avatarWrap}>
               <Image source={{ uri: practitioner.photoUrl || "https://i.pravatar.cc/150?img=47" }} style={styles.avatar} />
-              {(practitioner as any).isOnline && (
+              {(practitioner as any).isOnline ? (
                 <View style={styles.onlineBadge}>
                   <View style={styles.onlineDot} />
                   <Text style={styles.onlineText}>Online</Text>
+                </View>
+              ) : (
+                <View style={[styles.onlineBadge, { backgroundColor: '#64748b' }]}>
+                  <View style={styles.onlineDot} />
+                  <Text style={styles.onlineText}>Offline</Text>
                 </View>
               )}
             </View>

@@ -187,7 +187,7 @@ export const sessionsApi = {
   userHistory: () =>
     request<{ sessions: any[] }>('/api/sessions/user/history'),
     
-  createSession: (body: { practitionerId: string; type: 'chat' | 'call' | 'video' }) =>
+  createSession: (body: { practitionerId: string; type: 'CHAT' | 'AUDIO' | 'VIDEO' }) =>
     request<{ session: { id: string } }>('/api/sessions', { method: 'POST', body: JSON.stringify(body) }),
 };
 
