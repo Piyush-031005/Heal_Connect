@@ -197,7 +197,7 @@ export default function LoginScreen() {
           {/* Glassmorphism card — transparent enough for fibers to show through */}
           <View style={{
             backgroundColor: 'rgba(255, 255, 255, 0.25)',
-            padding: 32,
+            padding: 24,
             borderRadius: 32,
             borderWidth: 1.5,
             borderColor: 'rgba(255, 255, 255, 0.5)',
@@ -238,8 +238,8 @@ export default function LoginScreen() {
             </View>
 
             {/* Logo */}
-            <View style={{ alignItems: 'center', marginBottom: 32 }}>
-              <View style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: 'rgba(255,255,255,0.6)', alignItems: 'center', justifyContent: 'center', marginBottom: 16, borderWidth: 2, borderColor: 'rgba(124, 58, 237, 0.3)' }}>
+            <View style={{ alignItems: 'center', marginBottom: 20 }}>
+              <View style={{ width: 70, height: 70, borderRadius: 35, backgroundColor: 'rgba(255,255,255,0.6)', alignItems: 'center', justifyContent: 'center', marginBottom: 12, borderWidth: 2, borderColor: 'rgba(124, 58, 237, 0.3)' }}>
                 <Image source={require('../../assets/images/main_logo.png')} style={{ width: 54, height: 54, resizeMode: 'contain', tintColor: PURPLE }} />
               </View>
               <Text style={{ fontSize: 30, fontWeight: '900', color: PURPLE, letterSpacing: -0.5 }}>ZenAuraa</Text>
@@ -402,34 +402,34 @@ export default function LoginScreen() {
             {/* OR + Google */}
             {mode === 'login' && (
               <>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 24 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 16 }}>
                   <View style={{ flex: 1, height: 1, backgroundColor: 'rgba(124,58,237,0.2)' }} />
                   <Text style={{ marginHorizontal: 16, color: '#7C3AED', fontSize: 12, fontWeight: '700', letterSpacing: 1, opacity: 0.8 }}>OR CONTINUE WITH</Text>
                   <View style={{ flex: 1, height: 1, backgroundColor: 'rgba(124,58,237,0.2)' }} />
                 </View>
                 
-                <View style={{ gap: 12 }}>
-                  <TouchableOpacity onPress={() => { setMode('phone'); setError(''); setSuccess(''); }} style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 52, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                <View style={{ gap: 10 }}>
+                  <TouchableOpacity onPress={() => { setMode('phone'); setError(''); setSuccess(''); }} style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 48, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                     <Text style={{ fontSize: 18, marginRight: 12 }}>📞</Text>
                     <Text style={{ color: '#1E1035', fontWeight: '600', fontSize: 15 }}>Continue with Phone</Text>
                   </TouchableOpacity>
 
-                  <TouchableOpacity onPress={handleGoogleSignIn} disabled={loading} style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 52, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                  <TouchableOpacity onPress={handleGoogleSignIn} disabled={loading} style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 48, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                     {loading ? <ActivityIndicator color={PURPLE} /> : (
                       <>
-                        <Text style={{ fontSize: 18, marginRight: 12 }}>G</Text>
+                        <Image source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1024px-Google_%22G%22_logo.svg.png" }} style={{ width: 20, height: 20, marginRight: 12 }} />
                         <Text style={{ color: '#1E1035', fontWeight: '600', fontSize: 15 }}>Continue with Google</Text>
                       </>
                     )}
                   </TouchableOpacity>
 
-                  <TouchableOpacity style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 52, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                    <Text style={{ fontSize: 18, marginRight: 12 }}></Text>
+                  <TouchableOpacity style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 48, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                    <Image source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1024px-Apple_logo_black.svg.png" }} style={{ width: 20, height: 20, marginRight: 12, resizeMode: 'contain' }} />
                     <Text style={{ color: '#1E1035', fontWeight: '600', fontSize: 15 }}>Continue with Apple</Text>
                   </TouchableOpacity>
                 </View>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 32 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 24 }}>
                   <Text style={{ color: '#6D28D9', fontSize: 14, fontWeight: '500', opacity: 0.8 }}>Don't have an account? </Text>
                   <TouchableOpacity onPress={() => router.push('/(auth)/signup')}>
                     <Text style={{ color: '#F59E0B', fontWeight: '800', fontSize: 14 }}>Sign up</Text>
