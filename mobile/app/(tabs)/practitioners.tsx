@@ -4,7 +4,8 @@ import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Dimensions
 import { Search, Filter, Star, Phone, MessageCircle, X, Check } from "lucide-react-native";
 import WebReplicaHeader from "../../components/WebReplicaHeader";
 import { useRouter } from "expo-router";
-import { practitionersApi, PractitionerProfile } from "../../lib/api";
+import { practitionersApi, PractitionerProfile, tokenStore } from "../../lib/api";
+import { getSocket } from "../../lib/socket";
 import { useCurrencyStore } from "../../store/useCurrencyStore";
 
 const { width } = Dimensions.get("window");
@@ -56,6 +57,23 @@ export default function PractitionersScreen() {
     
     return () => clearTimeout(timeout);
   }, [search, selectedSpecialty, selectedMinRating, onlineOnly]);
+
+  useEffect(() => {
+    let socket: any = null;
+    tokenStore.getAccess().then(token => {
+      if (token) {
+        socket = getSocket(token);
+        socket.on('practitioner_status', (data: any) => {
+          setExperts(prev => prev.map(p => 
+            p.id === data.practitionerId ? { ...p, isOnline: data.isOnline } : p
+          ));
+        });
+      }
+    });
+    return () => {
+      if (socket) socket.off('practitioner_status');
+    };
+  }, []);
 
   return (
     <View style={styles.container}>

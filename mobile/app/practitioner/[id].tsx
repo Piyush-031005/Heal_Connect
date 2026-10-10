@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Image, ScrollView, Dimensions, Share } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ArrowLeft, Star, Shield, Languages, Clock, Phone, MessageCircle, Share2, Sparkles, CheckCircle2 } from "lucide-react-native";
-import { practitionersApi, PractitionerProfile, sessionsApi } from "../../lib/api";
+import { practitionersApi, PractitionerProfile, sessionsApi, tokenStore } from "../../lib/api";
+import { getSocket } from "../../lib/socket";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import Toast from 'react-native-toast-message';
@@ -18,6 +19,8 @@ export default function PractitionerDetail() {
   const [callingType, setCallingType] = useState<'AUDIO' | 'CHAT' | null>(null);
 
   useEffect(() => {
+    let socket: any = null;
+    
     if (id) {
       practitionersApi.get(id).then(res => {
         if (res.success && res.data) {
@@ -25,7 +28,25 @@ export default function PractitionerDetail() {
         }
         setLoading(false);
       }).catch(() => setLoading(false));
+      
+      // Socket for real-time status updates
+      tokenStore.getAccess().then(token => {
+        if (token) {
+          socket = getSocket(token);
+          socket.on('practitioner_status', (data: any) => {
+            if (data.practitionerId === id) {
+              setPractitioner(prev => prev ? { ...prev, isOnline: data.isOnline } : null);
+            }
+          });
+        }
+      });
     }
+    
+    return () => {
+      if (socket) {
+        socket.off('practitioner_status');
+      }
+    };
   }, [id]);
 
   if (loading) {
