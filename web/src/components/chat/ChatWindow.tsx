@@ -156,8 +156,12 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
               )}
               <button
                 onClick={() => {
-                  if (typeof window !== 'undefined' && (window as any).isReactNative && (window as any).ReactNativeWebView) {
-                    (window as any).ReactNativeWebView.postMessage('END_CALL');
+                  if (typeof window !== 'undefined' && (window as any).isReactNative) {
+                    if ((window as any).ReactNativeWebView) {
+                      (window as any).ReactNativeWebView.postMessage('END_CALL');
+                    } else {
+                      window.postMessage('END_CALL', '*');
+                    }
                   } else {
                     window.location.href = '/practitioners';
                   }
@@ -168,8 +172,12 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
               </button>
               <button
                 onClick={() => {
-                  if (typeof window !== 'undefined' && (window as any).isReactNative && (window as any).ReactNativeWebView) {
-                    (window as any).ReactNativeWebView.postMessage('END_CALL');
+                  if (typeof window !== 'undefined' && (window as any).isReactNative) {
+                    if ((window as any).ReactNativeWebView) {
+                      (window as any).ReactNativeWebView.postMessage('END_CALL');
+                    } else {
+                      window.postMessage('END_CALL', '*');
+                    }
                   } else {
                     window.location.href = '/dashboard';
                   }
