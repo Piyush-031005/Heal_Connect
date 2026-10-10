@@ -11,6 +11,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import WebReplicaHeader from "../../components/WebReplicaHeader";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useCurrencyStore } from "../../store/useCurrencyStore";
 
 const { width } = Dimensions.get("window");
 
@@ -49,6 +50,7 @@ const FAQS = [
 export default function HomeTab() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { format } = useCurrencyStore();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [experts, setExperts] = useState<PractitionerProfile[]>([]);
   const [loadingExperts, setLoadingExperts] = useState(true);
@@ -185,7 +187,7 @@ export default function HomeTab() {
                 style={styles.expertCard}
                 onPress={() => router.push(`/practitioner/${expert.id}` as any)}
               >
-                {expert.avgRating && expert.avgRating > 4.8 && (
+                {(expert.avgRating || 0) > 4.8 && (
                   <View style={styles.celebrityBadge}>
                     <Text style={styles.celebrityText}>CELEBRITY</Text>
                   </View>
@@ -211,7 +213,7 @@ export default function HomeTab() {
                 </View>
                 <View style={styles.expertDetailRow}>
                   <Text style={styles.expertDetailLabel}>Price</Text>
-                  <Text style={styles.expertDetailValueGold}>₹{expert.perMinuteRate} / min</Text>
+                  <Text style={styles.expertDetailValueGold}>{format(expert.perMinuteRate || 0)} / min</Text>
                 </View>
 
                 <View style={styles.expertButtonsRow}>

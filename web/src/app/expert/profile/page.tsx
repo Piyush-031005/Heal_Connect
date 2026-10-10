@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {
   ArrowLeft, Camera, Loader2, Check, X,
-  User, Mail, Star, IndianRupee, BookOpen, Languages, Award, Calendar, Download,
+  User, Mail, Star, Coins, BookOpen, Languages, Award, Calendar, Download,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -235,7 +235,7 @@ export default function ExpertProfilePage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className={LABEL_CLS}><IndianRupee className="w-3 h-3 inline mr-1 text-purple-400" /> Rate ($/min)</label>
+                <label className={LABEL_CLS}><Coins className="w-3 h-3 inline mr-1 text-purple-400" /> Base Rate/min</label>
                 <input type="number" min="0" value={form.perMinuteRate} onChange={(e) => setForm((f) => ({ ...f, perMinuteRate: e.target.value }))} className={INPUT_CLS} />
               </div>
               <div>
@@ -381,7 +381,7 @@ export default function ExpertProfilePage() {
             {saving ? <Loader2 className="h-5 w-5 animate-spin" /> : saved ? <><Check className="h-5 w-5 mr-2" /> Saved!</> : 'Save Changes'}
           </Button>
           <Link href="/expert/dashboard">
-            <Button variant="outline" className="border-indigo-200 text-purple-700 hover:text-indigo-700 hover:bg-purple-50 rounded-full h-12 px-6">Cancel</Button>
+            <Button variant="outline" className="bg-transparent border-indigo-200 text-purple-700 hover:text-indigo-700 hover:bg-purple-50 rounded-full h-12 px-6">Cancel</Button>
           </Link>
         </div>
 
@@ -392,7 +392,7 @@ export default function ExpertProfilePage() {
             variant="outline"
             onClick={handleExportData}
             disabled={exporting}
-            className="w-full border-indigo-200 text-indigo-700 hover:bg-indigo-50 rounded-full h-11 gap-2 font-semibold"
+            className="w-full bg-white border-indigo-200 text-indigo-700 hover:bg-indigo-50 rounded-full h-11 gap-2 font-semibold"
           >
             {exporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
             {exporting ? 'Preparing export...' : 'Download My Data'}

@@ -5,22 +5,21 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { walletApi } from '../lib/api';
 
+import { useCurrencyStore } from '../store/useCurrencyStore';
+
 export default function WebReplicaHeader() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const [balance, setBalance] = React.useState<number>(0);
-  const [currency, setCurrency] = React.useState<string>('INR');
+  const { format } = useCurrencyStore();
 
   React.useEffect(() => {
     walletApi.get().then(res => {
       if (res.success && res.data?.wallet) {
         setBalance(res.data.wallet.balance);
-        setCurrency(res.data.wallet.currency);
       }
     }).catch(() => {});
   }, []);
-
-  const symbol = currency === 'USD' ? '$' : currency === 'GBP' ? '£' : '₹';
 
   return (
     <View style={[styles.headerContainer, { paddingTop: Math.max(insets.top, 20) + 10 }]}>
@@ -46,7 +45,7 @@ export default function WebReplicaHeader() {
       <View style={styles.rightSection}>
         <TouchableOpacity onPress={() => router.push('/wallet')} style={{ flexDirection: "row", alignItems: "center", backgroundColor: "rgba(45, 27, 105, 0.1)", paddingHorizontal: 12, paddingVertical: 6, borderRadius: 16, borderWidth: 1, borderColor: "rgba(45, 27, 105, 0.2)", gap: 6 }}>
           <Wallet size={16} color="#2d1b69" />
-          <Text style={{ fontFamily: "Inter_600SemiBold", fontSize: 13, color: "#2d1b69" }}>{symbol}{balance.toFixed(0)}</Text>
+          <Text style={{ fontFamily: "Inter_600SemiBold", fontSize: 13, color: "#2d1b69" }}>{format(balance)}</Text>
         </TouchableOpacity>
       </View>
     </View>

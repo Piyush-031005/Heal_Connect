@@ -31,6 +31,7 @@ interface Props {
   peerName?: string;
   peerPhoto?: string;
   onReturnToChat?: () => void;
+  onCallStateChange?: (state: string) => void;
 }
 
 export default function AudioCallScreen({
@@ -39,6 +40,7 @@ export default function AudioCallScreen({
   peerName,
   peerPhoto,
   onReturnToChat,
+  onCallStateChange,
 }: Props) {
   const {
     callState,
@@ -85,7 +87,8 @@ export default function AudioCallScreen({
     if (callState === 'ended') {
       setShowFeedback(true);
     }
-  }, [callState]);
+    onCallStateChange?.(callState);
+  }, [callState, onCallStateChange]);
 
   const formatTime = (s: number) =>
     `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;

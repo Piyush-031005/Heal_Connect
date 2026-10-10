@@ -7,7 +7,7 @@ import { handleValidation } from '../middleware/validate';
 import { getIO } from '../lib/socket';
 import { SESSION_DISCLAIMER, SESSION_SAFETY_GUIDELINES } from '../lib/safetyGuidelines';
 import { flagContentIfNeeded } from '../lib/moderation';
-import { sendNotificationToPractitioner } from '../services/notification.service';
+import { sendNotificationToPractitioner, sendNotificationToUser } from '../services/notification.service';
 import { scheduleSessionReminders } from '../services/scheduler.service';
 
 const upload = multer({
@@ -382,6 +382,13 @@ router.post('/:id/accept', requireAuth, async (req: AuthRequest, res: Response) 
         practitionerId,
       });
     });
+    
+    await sendNotificationToUser(session.userId, {
+      type: 'SESSION_ACCEPTED',
+      title: 'Session Accepted',
+      body: 'The expert has accepted your session request. You can now connect.',
+      entityId: sessionId
+    });
 
     res.json({ success: true, data: { session: updated } });
   } catch (err) {
@@ -420,6 +427,13 @@ router.post('/:id/reject', requireAuth, async (req: AuthRequest, res: Response) 
         userId: session.userId,
         practitionerId,
       });
+    });
+
+    await sendNotificationToUser(session.userId, {
+      type: 'SESSION_REJECTED',
+      title: 'Session Declined',
+      body: 'The expert is currently unavailable to take this session.',
+      entityId: sessionId
     });
 
     res.json({ success: true, data: { session: updated } });
@@ -553,6 +567,15 @@ router.post('/:id/end', requireAuth, async (req: AuthRequest, res: Response) => 
       io.emit('practitioner_status', { practitionerId: session.practitionerId, isOnline: true, isBusy: false });
     }
   });
+
+  if (targetStatus === 'COMPLETED') {
+    await sendNotificationToUser(session.userId, {
+      type: 'SESSION_COMPLETED',
+      title: 'Session Completed',
+      body: 'Your session has ended. Please leave a review for the expert.',
+      entityId: sessionId
+    });
+  }
 
   res.json({ success: true, data: { session: updated } });
 });

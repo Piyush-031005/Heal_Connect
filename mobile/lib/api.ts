@@ -94,7 +94,8 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<ApiR
   const token = await tokenStore.getAccess();
 
   const defaultHeaders: any = {};
-  if (!(options.body instanceof FormData)) {
+  const isFormData = options.body && (options.body instanceof FormData || typeof (options.body as any).append === 'function');
+  if (!isFormData) {
     defaultHeaders['Content-Type'] = 'application/json';
   }
   if (token) {
@@ -158,12 +159,12 @@ export const usersApi = {
     
   updateProfile: (data: Partial<UserProfile>) =>
     request<{ user: UserProfile }>('/api/users/me', {
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(data)
     }),
 
   uploadPhoto: (formData: FormData) =>
-    request<{ photoUrl: string }>('/api/users/photo', {
+    request<{ photoUrl: string }>('/api/users/me/photo', {
       method: 'POST',
       body: formData,
       headers: {

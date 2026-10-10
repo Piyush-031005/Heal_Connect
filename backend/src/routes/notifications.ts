@@ -3,8 +3,33 @@ import { body } from 'express-validator';
 import { requireAuth, requireAdmin } from '../middleware/auth';
 import { handleValidation } from '../middleware/validate';
 import { registerDeviceToken, removeDeviceToken } from '../services/notification.service';
+import { prisma } from '../lib/prisma';
 
 const router = Router();
+
+// Get all notifications for current user/practitioner
+router.get(
+  '/',
+  requireAuth,
+  async (req: any, res: any) => {
+    try {
+      const isPractitioner = Boolean(req.user.practitionerId);
+      const recipientId = isPractitioner ? req.user.practitionerId : req.user.userId;
+      const recipientType = isPractitioner ? 'PRACTITIONER' : 'USER';
+
+      const notifications = await prisma.notificationLog.findMany({
+        where: { recipientId, recipientType },
+        orderBy: { createdAt: 'desc' },
+        take: 50,
+      });
+
+      res.json({ success: true, data: notifications });
+    } catch (err) {
+      console.error('Fetch notifications error:', err);
+      res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+  }
+);
 
 // Register a device token for push notifications
 router.post(

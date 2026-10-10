@@ -447,6 +447,18 @@ router.patch('/users/:id/balance', requireAdminAuth(SA_ONLY), async (req: Reques
       },
     });
 
+    if (diff !== 0) {
+      const { sendNotificationToUser } = await import('../services/notification.service');
+      await sendNotificationToUser(id, {
+        type: diff > 0 ? 'RECHARGE' : 'SYSTEM',
+        title: diff > 0 ? 'Wallet Recharged' : 'Wallet Debited',
+        body: diff > 0 
+          ? `Your wallet was successfully recharged with £${diff} from the admin panel.`
+          : `Your wallet was debited by £${Math.abs(diff)}.`,
+        entityId: updatedWallet.id,
+      });
+    }
+
     // SEC-10: audit trail
     await writeAuditLog(req, 'ADJUST_WALLET', 'WALLET', id, {
       previousBalance: currentBalance,

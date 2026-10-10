@@ -30,20 +30,7 @@ const TEXT = '#1E1035';
 const TEXT_LIGHT = '#ffffff';
 const TEXT_MUTED = 'rgba(255,255,255,0.7)';
 
-const COUNTRIES = [
-  { name: 'India', code: '+91', flag: '🇮🇳' },
-  { name: 'United States', code: '+1', flag: '🇺🇸' },
-  { name: 'United Kingdom', code: '+44', flag: '🇬🇧' },
-  { name: 'Canada', code: '+1', flag: '🇨🇦' },
-  { name: 'Australia', code: '+61', flag: '🇦🇺' },
-  { name: 'Germany', code: '+49', flag: '🇩🇪' },
-  { name: 'France', code: '+33', flag: '🇫🇷' },
-  { name: 'United Arab Emirates', code: '+971', flag: '🇦🇪' },
-  { name: 'Singapore', code: '+65', flag: '🇸🇬' },
-  { name: 'South Africa', code: '+27', flag: '🇿🇦' },
-  { name: 'Brazil', code: '+55', flag: '🇧🇷' },
-  { name: 'Mexico', code: '+52', flag: '🇲🇽' },
-];
+import { COUNTRIES } from '../../lib/countries';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -58,6 +45,7 @@ export default function LoginScreen() {
   const [showCountryPicker, setShowCountryPicker] = useState(false);
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -130,7 +118,7 @@ export default function LoginScreen() {
 
   const handleGoogleSuccess = async (idToken: string) => {
     try {
-      setLoading(true);
+      setGoogleLoading(true);
       setError('');
       const res = await fetch(`${process.env.EXPO_PUBLIC_API_URL || ''}/api/auth/google`, {
         method: 'POST',
@@ -149,18 +137,30 @@ export default function LoginScreen() {
     } catch (e: any) {
       setError('Google sign in error: ' + e.message);
     } finally {
-      setLoading(false);
+      setGoogleLoading(false);
     }
   };
 
   const handleGoogleSignIn = async () => {
     try {
-      setLoading(true);
+      setGoogleLoading(true);
       setError('');
       await GoogleSignin.hasPlayServices();
+      
+      try {
+        // Force the account picker to show every time they explicitly click the button
+        await GoogleSignin.signOut();
+      } catch (e) {
+        // Ignore if already signed out
+      }
+
       const userInfo = await GoogleSignin.signIn();
-      if (userInfo?.idToken) {
-        await handleGoogleSuccess(userInfo.idToken);
+      
+      // In version 16+, the structure is userInfo.data.idToken
+      const idToken = userInfo?.data?.idToken || (userInfo as any)?.idToken;
+      
+      if (idToken) {
+        await handleGoogleSuccess(idToken);
       } else {
         setError('Failed to get ID token from Google');
       }
@@ -173,7 +173,7 @@ export default function LoginScreen() {
         setError(error.message || 'Google sign-in failed');
       }
     } finally {
-      setLoading(false);
+      setGoogleLoading(false);
     }
   };
 
@@ -430,17 +430,17 @@ export default function LoginScreen() {
                     <Text style={{ color: '#1E1035', fontWeight: '600', fontSize: 15 }}>Continue with Phone</Text>
                   </TouchableOpacity>
 
-                  <TouchableOpacity onPress={handleGoogleSignIn} disabled={loading} style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 48, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                    {loading ? <ActivityIndicator color={PURPLE} /> : (
+                  <TouchableOpacity onPress={handleGoogleSignIn} disabled={loading || googleLoading} style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 48, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                    {googleLoading ? <ActivityIndicator color={PURPLE} /> : (
                       <>
-                        <Image source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1024px-Google_%22G%22_logo.svg.png" }} style={{ width: 20, height: 20, marginRight: 12 }} />
+                        <Image source={{ uri: "https://img.icons8.com/color/48/000000/google-logo.png" }} style={{ width: 20, height: 20, marginRight: 12 }} />
                         <Text style={{ color: '#1E1035', fontWeight: '600', fontSize: 15 }}>Continue with Google</Text>
                       </>
                     )}
                   </TouchableOpacity>
 
                   <TouchableOpacity style={{ backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(124,58,237,0.2)', borderRadius: 12, height: 48, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                    <Image source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1024px-Apple_logo_black.svg.png" }} style={{ width: 20, height: 20, marginRight: 12, resizeMode: 'contain' }} />
+                    <Image source={{ uri: "https://img.icons8.com/ios-filled/50/000000/mac-os.png" }} style={{ width: 20, height: 20, marginRight: 12, resizeMode: 'contain', tintColor: '#1E1035' }} />
                     <Text style={{ color: '#1E1035', fontWeight: '600', fontSize: 15 }}>Continue with Apple</Text>
                   </TouchableOpacity>
                 </View>

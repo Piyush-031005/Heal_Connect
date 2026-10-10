@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ActivityIndicator, TouchableOpacity, Text } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { WebView } from 'react-native-webview';
+import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { tokenStore } from '../../lib/api';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft } from 'lucide-react-native';
@@ -37,6 +37,12 @@ export default function CallScreen() {
     true;
   `;
 
+  const handleMessage = (event: WebViewMessageEvent) => {
+    if (event.nativeEvent.data === 'END_CALL') {
+      router.back();
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -54,6 +60,7 @@ export default function CallScreen() {
         allowsInlineMediaPlayback={true}
         mediaPlaybackRequiresUserAction={false}
         originWhitelist={['*']}
+        onMessage={handleMessage}
       />
     </SafeAreaView>
   );

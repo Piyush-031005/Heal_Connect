@@ -43,7 +43,7 @@ export default function HistoryScreen() {
             <View style={styles.cardHeader}>
               <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
                 <View style={styles.avatar}>
-                  <Image source={{ uri: item.practitioner?.photoUrl || "https://i.pravatar.cc/150?img=47" }} style={{ width: 80, height: 80, marginLeft: -20, marginTop: -20 }} />
+                  <Image source={{ uri: item.practitioner?.photoUrl || "https://i.pravatar.cc/150?img=47" }} style={{ width: "100%", height: "100%" }} />
                 </View>
                 <View>
                   <Text style={styles.name}>{item.practitioner?.name || 'Expert'}</Text>
@@ -51,7 +51,7 @@ export default function HistoryScreen() {
                 </View>
               </View>
               <View style={styles.iconBadge}>
-                {item.type === 'call' ? <Phone size={14} color="#fff" /> : <MessageCircle size={14} color="#fff" />}
+                {(item.type === 'AUDIO' || item.type === 'VIDEO') ? <Phone size={14} color="#fff" /> : <MessageCircle size={14} color="#fff" />}
               </View>
             </View>
             
@@ -59,10 +59,14 @@ export default function HistoryScreen() {
               <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
                 <Clock size={14} color="#6b7280" />
                 <Text style={styles.dateText}>
-                  {new Date(item.startTime || item.createdAt).toLocaleDateString()} • {Math.round((item.durationSeconds || 0) / 60)} mins
+                  {new Date(item.startTime || item.createdAt).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })} • {
+                    item.startTime && item.endTime 
+                      ? Math.round((new Date(item.endTime).getTime() - new Date(item.startTime).getTime()) / 60000) 
+                      : 0
+                  } mins
                 </Text>
               </View>
-              <Text style={styles.price}>₹{item.cost?.toFixed(2) || '0.00'}</Text>
+              <Text style={styles.price}>£{(item.totalCost || 0).toFixed(2)}</Text>
             </View>
           </View>
         ))}

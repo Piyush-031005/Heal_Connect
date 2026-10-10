@@ -1,20 +1,26 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import { ArrowLeft, PhoneCall, MessageCircle, Calendar, Clock, ChevronRight } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
+import { sessionsApi } from '../lib/api';
 
 const { width } = Dimensions.get('window');
 
-const dummySessions = [
-  { id: '1', expert: 'Dr. Sarah Wellness', type: 'call', date: 'Oct 12, 2026', time: '10:00 AM', status: 'Upcoming', duration: '30 min' },
-  { id: '2', expert: 'Guru Ananda', type: 'chat', date: 'Oct 05, 2026', time: '02:30 PM', status: 'Completed', duration: '45 min' },
-  { id: '3', expert: 'Jane Doe Therapist', type: 'call', date: 'Sep 28, 2026', time: '11:15 AM', status: 'Completed', duration: '15 min' },
-];
-
 export default function SessionsScreen() {
   const router = useRouter();
+  const [sessions, setSessions] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    sessionsApi.userHistory().then(res => {
+      if (res.success && res.data) {
+        setSessions(res.data.sessions || []);
+      }
+      setLoading(false);
+    }).catch(() => setLoading(false));
+  }, []);
   
   return (
     <View style={styles.container}>
@@ -28,40 +34,56 @@ export default function SessionsScreen() {
           <View style={{ width: 40 }} />
         </View>
 
-        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-          {dummySessions.map((s, index) => (
-            <TouchableOpacity key={s.id} style={styles.card} activeOpacity={0.7}>
-              <View style={styles.cardHeader}>
-                <View style={styles.expertInfo}>
-                  <View style={[styles.iconWrap, { backgroundColor: s.type === 'call' ? '#e0e7ff' : '#fef3c7' }]}>
-                    {s.type === 'call' ? <PhoneCall size={20} color="#4f46e5" /> : <MessageCircle size={20} color="#d97706" />}
+        {loading ? (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator size="large" color="#4f46e5" />
+          </View>
+        ) : sessions.length === 0 ? (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={{ fontSize: 16, color: '#64748b' }}>No sessions found.</Text>
+          </View>
+        ) : (
+          <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+            {sessions.map((s, index) => {
+              const dateObj = new Date(s.createdAt);
+              const dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: '2 numeric', year: 'numeric' });
+              const timeStr = dateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+              return (
+                <TouchableOpacity key={s.id} style={styles.card} activeOpacity={0.7}>
+                  <View style={styles.cardHeader}>
+                    <View style={styles.expertInfo}>
+                      <View style={[styles.iconWrap, { backgroundColor: s.type === 'AUDIO' ? '#e0e7ff' : '#fef3c7' }]}>
+                        {s.type === 'AUDIO' ? <PhoneCall size={20} color="#4f46e5" /> : <MessageCircle size={20} color="#d97706" />}
+                      </View>
+                      <View style={{ marginLeft: 12 }}>
+                        <Text style={styles.expertName}>{s.practitioner?.name || 'Unknown Expert'}</Text>
+                        <View style={styles.statusRow}>
+                          <View style={[styles.statusDot, { backgroundColor: s.status === 'COMPLETED' ? '#94a3b8' : '#10b981' }]} />
+                          <Text style={styles.statusText}>{s.status}</Text>
+                        </View>
+                      </View>
+                    </View>
+                    <ChevronRight size={20} color="#cbd5e1" />
                   </View>
-                  <View style={{ marginLeft: 12 }}>
-                    <Text style={styles.expertName}>{s.expert}</Text>
-                    <View style={styles.statusRow}>
-                      <View style={[styles.statusDot, { backgroundColor: s.status === 'Upcoming' ? '#10b981' : '#94a3b8' }]} />
-                      <Text style={styles.statusText}>{s.status}</Text>
+
+                  <View style={styles.divider} />
+
+                  <View style={styles.cardFooter}>
+                    <View style={styles.detailItem}>
+                      <Calendar size={14} color="#64748b" />
+                      <Text style={styles.detailText}>{dateStr}</Text>
+                    </View>
+                    <View style={styles.detailItem}>
+                      <Clock size={14} color="#64748b" />
+                      <Text style={styles.detailText}>{timeStr} ({Math.round(s.duration / 60)} min)</Text>
                     </View>
                   </View>
-                </View>
-                <ChevronRight size={20} color="#cbd5e1" />
-              </View>
-
-              <View style={styles.divider} />
-
-              <View style={styles.cardFooter}>
-                <View style={styles.detailItem}>
-                  <Calendar size={14} color="#64748b" />
-                  <Text style={styles.detailText}>{s.date}</Text>
-                </View>
-                <View style={styles.detailItem}>
-                  <Clock size={14} color="#64748b" />
-                  <Text style={styles.detailText}>{s.time} ({s.duration})</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
+        )}
       </SafeAreaView>
     </View>
   );

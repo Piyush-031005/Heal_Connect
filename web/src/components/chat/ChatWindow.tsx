@@ -154,18 +154,30 @@ export default function ChatWindow({ sessionId, currentUserId, isExpert = false,
                   ⭐ Rate this Session
                 </button>
               )}
-              <a
-                href="/practitioners"
+              <button
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).isReactNative && (window as any).ReactNativeWebView) {
+                    (window as any).ReactNativeWebView.postMessage('END_CALL');
+                  } else {
+                    window.location.href = '/practitioners';
+                  }
+                }}
                 className="w-full text-center bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-semibold py-2.5 rounded-full text-sm transition-colors"
               >
                 Book Another Session
-              </a>
-              <a
-                href="/dashboard"
+              </button>
+              <button
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).isReactNative && (window as any).ReactNativeWebView) {
+                    (window as any).ReactNativeWebView.postMessage('END_CALL');
+                  } else {
+                    window.location.href = '/dashboard';
+                  }
+                }}
                 className="w-full text-center text-purple-500 hover:text-purple-800 font-medium py-2 text-sm transition-colors"
               >
                 Back to Dashboard
-              </a>
+              </button>
             </div>
           </div>
 

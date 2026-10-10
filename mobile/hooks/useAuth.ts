@@ -1,4 +1,5 @@
-﻿import { create } from 'zustand';
+import { create } from 'zustand';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { usersApi, UserProfile, tokenStore } from '../lib/api';
 import * as SecureStore from 'expo-secure-store';
 import { Platform } from 'react-native';
@@ -68,6 +69,11 @@ export const useAuth = create<AuthState>((set, get) => ({
 
   logout: async () => {
     await tokenStore.clear();
+    try {
+      await GoogleSignin.signOut();
+    } catch (e) {
+      // Ignore if not signed in with Google
+    }
     set({ user: null, role: null });
     router.replace('/(auth)/login');
   }

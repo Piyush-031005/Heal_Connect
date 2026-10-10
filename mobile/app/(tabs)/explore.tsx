@@ -29,45 +29,12 @@ const MODALITIES = [
 
 
 
-const getAvatar = (expert: PractitionerProfile) => {
-  if (expert.photoUrl) return { uri: expert.photoUrl };
-  return { uri: `https://ui-avatars.com/api/?name=${encodeURIComponent(expert.name || 'Expert')}&background=5F3BA9&color=fff&size=150` };
-};
 
 export default function ExploreTab() {
   const router = useRouter();
   const params = useLocalSearchParams();
   const insets = useSafeAreaInsets();
-  const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>((params.category as string) || null);
-  const [experts, setExperts] = useState<PractitionerProfile[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchExperts = async () => {
-      setLoading(true);
-      try {
-        const res = await practitionersApi.list({ 
-          search: search || undefined, 
-          specialty: selectedCategory || undefined 
-        });
-        if (res.success && res.data?.practitioners) {
-          setExperts(res.data.practitioners);
-        }
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    // Simple debounce
-    const timeout = setTimeout(() => {
-      fetchExperts();
-    }, 500);
-    
-    return () => clearTimeout(timeout);
-  }, [search, selectedCategory]);
 
   return (
     <View style={styles.container}>
@@ -101,58 +68,6 @@ export default function ExploreTab() {
                 <Text style={styles.modDesc}>{mod.desc}</Text>
               </TouchableOpacity>
             ))}
-          </View>
-
-          <View style={styles.divider} />
-
-          <Text style={styles.pageTitle}>Find an Expert</Text>
-          <View style={styles.searchRow}>
-            <View style={styles.searchBar}>
-              <Search color="#6b7280" size={20} />
-              <TextInput
-                style={styles.searchInput}
-                placeholder="Search experts..."
-                placeholderTextColor="#9ca3af"
-                value={search}
-                onChangeText={setSearch}
-              />
-            </View>
-            <TouchableOpacity style={styles.filterBtn}>
-              <Filter color="#fff" size={20} />
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.expertList}>
-            {loading ? (
-              <Text style={{ textAlign: 'center', marginTop: 20, color: '#6b7280' }}>Loading experts...</Text>
-            ) : experts.length === 0 ? (
-              <Text style={{ textAlign: 'center', marginTop: 20, color: '#6b7280' }}>No experts found.</Text>
-            ) : (
-              experts.map((exp, i) => (
-                <TouchableOpacity 
-                  key={exp.id} 
-                  style={styles.expertCard}
-                  onPress={() => router.push(`/practitioner/${exp.id}` as any)}
-                >
-                  <Image source={getAvatar(exp)} style={styles.expertImg} />
-                  <View style={styles.expertInfo}>
-                    <Text style={styles.expertName}>{exp.name}</Text>
-                    <Text style={styles.expertRole}>{exp.specialties?.[0] || 'Wellness Expert'}</Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 4 }}>
-                      <Star size={14} color="#F59E0B" fill="#F59E0B" />
-                      <Text style={styles.expertRating}>{exp.avgRating?.toFixed(1) || 'New'}</Text>
-                    </View>
-                    <Text style={styles.expertPrice}>₹{exp.perMinuteRate}/min</Text>
-                  </View>
-                  <View style={{ justifyContent: 'center' }}>
-                    <TouchableOpacity style={{ backgroundColor: '#6D28D9', paddingVertical: 8, paddingHorizontal: 16, borderRadius: 8, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 6 }} onPress={() => router.push(`/practitioner/${exp.id}` as any)}>
-                      <Phone color="#fff" size={14} />
-                      <Text style={{ color: '#fff', fontSize: 13, fontWeight: '700' }}>Call</Text>
-                    </TouchableOpacity>
-                  </View>
-                </TouchableOpacity>
-              ))
-            )}
           </View>
 
 

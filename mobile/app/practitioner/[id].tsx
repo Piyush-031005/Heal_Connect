@@ -5,6 +5,7 @@ import { ArrowLeft, Star, Shield, Languages, Clock, Phone, MessageCircle, Share2
 import { practitionersApi, PractitionerProfile, sessionsApi } from "../../lib/api";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
+import Toast from 'react-native-toast-message';
 
 const { width } = Dimensions.get("window");
 
@@ -14,7 +15,7 @@ export default function PractitionerDetail() {
   const insets = useSafeAreaInsets();
   const [practitioner, setPractitioner] = useState<PractitionerProfile | null>(null);
   const [loading, setLoading] = useState(true);
-  const [calling, setCalling] = useState(false);
+  const [callingType, setCallingType] = useState<'AUDIO' | 'CHAT' | null>(null);
 
   useEffect(() => {
     if (id) {
@@ -48,33 +49,57 @@ export default function PractitionerDetail() {
 
   const handleCall = async () => {
     try {
-      setCalling(true);
+      setCallingType('AUDIO');
       const res = await sessionsApi.createSession({ practitionerId: id, type: 'AUDIO' });
       if (res.success && res.data) {
         router.push(`/call/${res.data.session.id}`);
       } else {
-        alert(res.message || 'Failed to initiate call');
+        Toast.show({
+          type: 'centerError',
+          text1: 'Oops!',
+          text2: res.message || 'Failed to initiate call',
+          position: 'top',
+          topOffset: 350
+        });
       }
     } catch (e: any) {
-      alert(e.message || 'Error starting call');
+      Toast.show({
+        type: 'centerError',
+        text1: 'Oops!',
+        text2: e.message || 'Error starting call',
+        position: 'top',
+        topOffset: 350
+      });
     } finally {
-      setCalling(false);
+      setCallingType(null);
     }
   };
 
   const handleChat = async () => {
     try {
-      setCalling(true);
+      setCallingType('CHAT');
       const res = await sessionsApi.createSession({ practitionerId: id, type: 'CHAT' });
       if (res.success && res.data) {
         router.push(`/call/${res.data.session.id}`);
       } else {
-        alert(res.message || 'Failed to initiate chat');
+        Toast.show({
+          type: 'centerError',
+          text1: 'Oops!',
+          text2: res.message || 'Failed to initiate chat',
+          position: 'top',
+          topOffset: 350
+        });
       }
     } catch (e: any) {
-      alert(e.message || 'Error starting chat');
+      Toast.show({
+        type: 'centerError',
+        text1: 'Oops!',
+        text2: e.message || 'Error starting chat',
+        position: 'top',
+        topOffset: 350
+      });
     } finally {
-      setCalling(false);
+      setCallingType(null);
     }
   };
 
@@ -84,7 +109,12 @@ export default function PractitionerDetail() {
         message: `Consult with ${practitioner.name}, Expert in ${practitioner.specialties?.join(', ') || 'Wellness'}. Download ZenAuraa today!`,
       });
     } catch (error: any) {
-      alert(error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: error.message,
+        position: 'bottom'
+      });
     }
   };
 
@@ -115,7 +145,7 @@ export default function PractitionerDetail() {
         <View style={styles.heroCard}>
           <View style={styles.heroHeader}>
             <View style={styles.avatarWrap}>
-              <Image source={{ uri: practitioner.photoUrl || "https://i.pravatar.cc/150?img=47" }} style={styles.avatar} />
+              <Image source={{ uri: practitioner.photoUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(practitioner.name || 'Expert')}&background=8B5CF6&color=fff&size=150` }} style={styles.avatar} />
               {(practitioner as any).isOnline ? (
                 <View style={styles.onlineBadge}>
                   <View style={styles.onlineDot} />
@@ -215,8 +245,8 @@ export default function PractitionerDetail() {
 
       {/* Floating Bottom Action Bar */}
       <View style={[styles.bottomBar, { paddingBottom: Math.max(insets.bottom, 16) }]}>
-        <TouchableOpacity style={styles.actionBtnCall} onPress={handleCall} disabled={calling}>
-          {calling ? <ActivityIndicator color="#6D28D9" /> : (
+        <TouchableOpacity style={styles.actionBtnCall} onPress={handleCall} disabled={callingType !== null}>
+          {callingType === 'AUDIO' ? <ActivityIndicator color="#6D28D9" /> : (
             <>
               <Phone size={20} color="#6D28D9" fill="#ede9fe" />
               <View style={styles.actionBtnTextWrap}>
@@ -227,8 +257,8 @@ export default function PractitionerDetail() {
           )}
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.actionBtnChat} onPress={handleChat} disabled={calling}>
-          {calling ? <ActivityIndicator color="#fff" /> : (
+        <TouchableOpacity style={styles.actionBtnChat} onPress={handleChat} disabled={callingType !== null}>
+          {callingType === 'CHAT' ? <ActivityIndicator color="#fff" /> : (
             <>
               <MessageCircle size={20} color="#fff" fill="rgba(255,255,255,0.2)" />
               <View style={styles.actionBtnTextWrap}>

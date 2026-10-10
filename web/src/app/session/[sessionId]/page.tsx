@@ -27,6 +27,7 @@ export default function SessionPage() {
   const [tab, setTab] = useState<Tab>('chat');
   const [startingCall, setStartingCall] = useState(false);
   const [incomingCall, setIncomingCall] = useState<any>(null);
+  const [callState, setCallState] = useState<string>('idle');
 
   useEffect(() => {
     const token = tokenStore.getAccess();
@@ -259,7 +260,7 @@ export default function SessionPage() {
       </header>
 
       {/* Persistent Call Banner — only shown when viewing chat tab during an active AUDIO/VIDEO session */}
-      {showCallTab && tab === 'chat' && (
+      {showCallTab && tab === 'chat' && ['initiating', 'connecting', 'waiting_for_accept', 'accepted', 'connected'].includes(callState) && (
         <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-4 py-2 flex items-center justify-between text-xs shadow-md z-20">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
@@ -295,6 +296,7 @@ export default function SessionPage() {
               peerName={peer?.name}
               peerPhoto={peer?.photoUrl}
               onReturnToChat={() => setTab('chat')}
+              onCallStateChange={setCallState}
             />
           </div>
         )}

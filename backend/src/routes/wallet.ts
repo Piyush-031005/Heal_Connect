@@ -4,6 +4,7 @@ import Stripe from 'stripe';
 import { prisma } from '../lib/prisma';
 import { requireAuth, requireAdmin, type AuthRequest } from '../middleware/auth';
 import { handleValidation } from '../middleware/validate';
+import { sendNotificationToUser } from '../services/notification.service';
 
 const router = Router();
 
@@ -159,6 +160,13 @@ router.post(
         return;
       }
 
+      await sendNotificationToUser(req.user!.userId, {
+        type: 'RECHARGE',
+        title: 'Wallet Recharged',
+        body: `Your wallet was successfully recharged with £${amount}.`,
+        entityId: updatedWallet.id,
+      });
+
       res.json({ success: true, message: 'Dev recharge successful', data: { balance: updatedWallet.balance } });
     } catch (err) {
       console.error('Dev recharge error:', err);
@@ -291,6 +299,22 @@ router.post('/stripe-webhook', async (req: Request, res: Response) => {
             data: { balance: { increment: transaction.amount } },
           });
         });
+        
+        // Find the wallet to get the userId for the notification
+        const txRec = await prisma.transaction.findUnique({
+          where: { id: transactionId },
+          include: { wallet: true }
+        });
+        
+        if (txRec && txRec.wallet) {
+          await sendNotificationToUser(txRec.wallet.userId, {
+            type: 'RECHARGE',
+            title: 'Wallet Recharged',
+            body: `Your wallet was successfully recharged with £${txRec.amount}.`,
+            entityId: txRec.wallet.id,
+          });
+        }
+        
         console.log(`Stripe recharge successful for transaction: ${transactionId}`);
       } catch (dbErr) {
         console.error('Failed to process Stripe transaction in DB:', dbErr);
