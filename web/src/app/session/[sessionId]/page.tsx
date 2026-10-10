@@ -28,8 +28,13 @@ export default function SessionPage() {
   const [startingCall, setStartingCall] = useState(false);
   const [incomingCall, setIncomingCall] = useState<any>(null);
   const [callState, setCallState] = useState<string>('idle');
+  const [isNative, setIsNative] = useState(false);
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).isReactNative) {
+      setIsNative(true);
+    }
+    
     const token = tokenStore.getAccess();
     if (!token) { router.push('/login'); return; }
 
@@ -182,9 +187,11 @@ export default function SessionPage() {
 
       {/* Header */}
       <header className="sticky top-0 z-10 bg-white border-b border-yellow-100 px-4 py-3 flex items-center gap-3">
-        <Button variant="ghost" size="icon" onClick={() => router.back()} className="rounded-full hover:bg-yellow-50 shrink-0">
-          <ArrowLeft className="h-5 w-5 text-purple-700" />
-        </Button>
+        {!isNative && (
+          <Button variant="ghost" size="icon" onClick={() => router.back()} className="rounded-full hover:bg-yellow-50 shrink-0">
+            <ArrowLeft className="h-5 w-5 text-purple-700" />
+          </Button>
+        )}
 
         {/* Peer avatar */}
         <div className="relative shrink-0">
