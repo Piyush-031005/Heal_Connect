@@ -1,4 +1,4 @@
-import rateLimit from 'express-rate-limit';
+﻿import rateLimit from 'express-rate-limit';
 import { Request } from 'express';
 
 const extractIp = (req: Request): string => {
@@ -19,6 +19,7 @@ const extractIp = (req: Request): string => {
 };
 
 const IS_DEV = process.env.NODE_ENV !== 'production';
+const IS_LOAD_TEST = process.env.LOAD_TEST === 'true';
 
 const base = {
   keyGenerator: extractIp,
@@ -27,23 +28,23 @@ const base = {
   legacyHeaders: false,
 };
 
-// General API rate limiter — 100 requests per 15 min (10000 in dev)
+// General API rate limiter â€” 100 requests per 15 min (10000 in dev)
 export const generalLimiter = rateLimit({
   ...base,
   windowMs: 15 * 60 * 1000,
-  max: IS_DEV ? 10000 : 100,
+  max: (IS_DEV || IS_LOAD_TEST) ? 100000 : 100,
   message: { success: false, message: 'Too many requests, please try again later.' },
 });
 
-// Auth routes — 10 requests per 15 min (1000 in dev)
+// Auth routes â€” 10 requests per 15 min (1000 in dev)
 export const authLimiter = rateLimit({
   ...base,
   windowMs: 15 * 60 * 1000,
-  max: IS_DEV ? 1000 : 10,
+  max: (IS_DEV || IS_LOAD_TEST) ? 100000 : 10,
   message: { success: false, message: 'Too many auth attempts, please try again in 15 minutes.' },
 });
 
-// Email verification — 5 requests per hour (50 in dev)
+// Email verification â€” 5 requests per hour (50 in dev)
 export const emailLimiter = rateLimit({
   ...base,
   windowMs: 60 * 60 * 1000,
