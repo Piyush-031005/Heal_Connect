@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from "react-native";
 import { Bell, ArrowLeft, Wallet, CalendarClock, Info } from "lucide-react-native";
-import { useRouter } from "expo-router";
+import { useRouter, useFocusEffect } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useCallback } from "react";
 import { api } from "../lib/api";
 
 export default function NotificationsScreen() {
@@ -12,14 +13,16 @@ export default function NotificationsScreen() {
   const [notifications, setNotifications] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchNotifications();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchNotifications();
+    }, [])
+  );
 
   const fetchNotifications = async () => {
     try {
       setLoading(true);
-      const res = await api.get('/notifications');
+      const res = await api.get('/api/notifications');
       if (res.success) {
         setNotifications(res.data);
       }
